@@ -1,0 +1,15 @@
+<View>
+  <Header value="Sense choice per token (Monier‑Williams / Heritage)" />
+  <Text name="text" value="$text" />
+  <Table name="sense_table">
+    <Column value="Token" />
+    <Column value="Lemma" />
+    <Column value="Sense (choose)" />
+  </Table>
+  <Labels name="ner" toName="text">
+    <Label value="PERSON" background="#f39c12" />
+    <Label value="LOC" background="#3498db" />
+    <Label value="TRIBE" background="#e74c3c" />
+    <Label value="DEITY" background="#9b59b6" />
+  </Labels>
+</View>

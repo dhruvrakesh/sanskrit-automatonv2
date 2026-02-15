@@ -1,0 +1,34 @@
+$env:TESS_LANGS="san"       # adjust for language; keep 'san' for Sanskrit
+$env:SA_OCR_DPI="400"       # use 400 if it improved results
+$ts = Get-Date -Format "yyyyMMddHHmmss"
+
+Get-ChildItem .\inbox\Bodhicaryavatara_*.pdf | ForEach-Object {
+  python .\scripts\ingest_pdf.py `
+    --pdf $_.FullName `
+    --doc Bodhicaryavatara `
+    --run-id ("Bodhicaryavatara-"+$_.BaseName+"-"+$ts) `
+    --resume
+}
+
+
+
+
+_____________________________________________________________________________________________________________________________
+
+
+
+
+python .\scripts\post_normalize_ocr.py --in data\raw --out data\clean --glob "Bodhicaryavatara_*.jsonl"
+python .\scripts\ingest_jsonl_fast.py --doc Bodhicaryavatara --glob "data\clean\Bodhicaryavatara_*.jsonl"
+
+
+
+
+_____________________________________________________________________________________________________________________________
+
+
+
+# ensure OPENAI_API_KEY is set; SA_GPT_MODEL used under the hood
+python .\scripts\translate_passages.py --doc Bodhicaryavatara --since-page 1 --until-page 9999 --sleep 0.6
+
+_____________________________________________________________________________________________________________________________

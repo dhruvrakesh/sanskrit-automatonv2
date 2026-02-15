@@ -1,0 +1,15 @@
+<View>
+  <Header value="Entity correction (tribes, geographies, clans)" />
+  <Text name="text" value="$text" />
+  <Labels name="labels" toName="text">
+    <Label value="PERSON" background="#f39c12" />
+    <Label value="LOC" background="#3498db" />
+    <Label value="TRIBE" background="#e74c3c" />
+    <Label value="DEITY" background="#9b59b6" />
+    <Label value="CLAN" background="#1abc9c" />
+    <Label value="RIVER" background="#2980b9" />
+    <Label value="MOUNTAIN" background="#2ecc71" />
+  </Labels>
+  <Textarea name="canonical_form" toName="text" placeholder="Canonical form / edition form" />
+  <Textarea name="notes" toName="text" placeholder="Citations, edition notes (BORI, etc.)" />
+</View>

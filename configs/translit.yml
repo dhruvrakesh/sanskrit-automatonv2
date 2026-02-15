@@ -1,0 +1,8 @@
+default_from: DEVANAGARI
+default_to: SLP1
+normalize:
+  unify_danda: true
+  strip_zwj_zwnj: true
+  collapse_spaces: true
+segmenters:
+  break_on_danda: true

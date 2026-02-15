@@ -1,0 +1,11 @@
+<View>
+  <Header value="Segmentation approval (sandhi viccheda)" />
+  <Text name="text" value="$text" />
+  <Choices name="segmentation" toName="text" choice="single" showInLine="true">
+    <Choice value="Split 1" />
+    <Choice value="Split 2" />
+    <Choice value="Split 3" />
+  </Choices>
+  <Header value="Notes" />
+  <Textarea name="notes" toName="text" />
+</View>

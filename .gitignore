@@ -1,0 +1,32 @@
+# DB backups (keep locally, don’t commit)
+data/*_backup_*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Script backup / archives
+scripts/scripts.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.env
+.env.local
+.env.*.local
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Main DB (recreate locally; don’t commit)
+data/context.db

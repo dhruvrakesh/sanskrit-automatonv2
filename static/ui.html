@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Export Sanskrit ↔ English</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+  :root { --fg:#111; --muted:#6b7280; --bg:#f7f9fb; --card:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans","Noto Sans Devanagari",sans-serif}
+  .wrap{max-width:1200px;margin:0 auto;padding:24px}
+  h1{margin:0 0 16px;font-size:24px}
+  .grid{display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start}
+  .card{background:var(--card);border:1px solid #e5e7eb;border-radius:12px;padding:18px}
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+  select,input[type="text"],input[type="number"]{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;outline:none}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .chk{display:flex;gap:10px;align-items:center;margin:8px 0}
+  button{padding:10px 14px;border-radius:10px;border:1px solid #d1d5db;background:#fff;cursor:pointer}
+  button.primary{background:#111827;color:#fff;border-color:#111827}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;border:1px solid #d1d5db;background:#f3f4f6;margin-left:8px}
+  .status{margin-top:8px;font-size:12px;color:#6b7280}
+  .note{margin-top:10px;font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:10px 12px;border-radius:10px}
+  iframe{width:100%;height:calc(100vh - 180px);border:1px solid #e5e7eb;border-radius:12px;background:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Export Sanskrit ↔ English</h1>
+  <div class="grid">
+    <div class="card">
+      <div class="row">
+        <div>
+          <label>DB file (in <code>data/</code>)</label>
+          <select id="db"></select>
+        </div>
+        <div style="display:flex;align-items:flex-end">
+          <div id="mode" class="badge">…</div>
+        </div>
+      </div>
+
+      <label>Doc code</label>
+      <select id="doc"></select>
+
+      <div class="row" style="margin-top:10px">
+        <div>
+          <label>Page from</label>
+          <input id="from" type="number" min="1" value="1"/>
+        </div>
+        <div>
+          <label>Page to</label>
+          <input id="to" type="number" min="1" value="1"/>
+        </div>
+      </div>
+
+      <div style="margin-top:10px">
+        <label>Title</label>
+        <input id="title" type="text" placeholder="Title for export"/>
+      </div>
+
+      <div class="chk"><input id="incSan" type="checkbox" checked/><span>Include Sanskrit</span></div>
+      <div class="chk"><input id="incEn" type="checkbox" checked/><span>Include English</span></div>
+      <div class="chk"><input id="side" type="checkbox" checked/><span>Side by side</span></div>
+      <div class="chk"><input id="pnums" type="checkbox" checked/><span>Show page numbers</span></div>
+
+      <div class="btns">
+        <button id="preview" class="primary">Load &amp; preview</button>
+        <button id="dl">Download HTML</button>
+        <button id="print">Print / Save PDF</button>
+        <button id="srvpdf">Server PDF</button>
+        <button id="reload">Reload docs</button>
+      </div>
+
+      <div id="status" class="status"></div>
+      <div id="note" class="note" style="display:none"></div>
+
+      <div class="status" style="margin-top:10px">Tip: you can also open <code>/api/export/html?...</code> directly in a new tab.</div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:14px;color:#374151;margin-bottom:8px">Preview</div>
+      <iframe id="frame" title="Preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const S = { db: "context.db", mode: "compat", docs: [], ranges: {} };
+
+function qs(o){return new URLSearchParams(o).toString()}
+function setStatus(s){$("status").textContent = s || ""}
+
+async function jget(url){
+  const r = await fetch(url);
+  if(!r.ok) throw new Error(await r.text());
+  return await r.json();
+}
+async function tget(url){
+  const r = await fetch(url);
+  if(!r.ok) throw new Error(await r.text());
+  return await r.text();
+}
+
+async function loadDBs(){
+  const data = await jget("/api/meta/dbs");
+  const sel = $("db"); sel.innerHTML="";
+  (data.dbs||[]).forEach(n=>{
+    const o=document.createElement("option"); o.value=o.textContent=n; sel.appendChild(o);
+  });
+  sel.value = data.dbs.includes("context.db") ? "context.db" : (data.dbs[0]||"context.db");
+  S.db = sel.value;
+}
+
+function applyDocs(data){
+  S.mode = data.mode;
+  S.docs = data.docs || [];
+  S.ranges = data.ranges || {};
+  $("mode").textContent = `DB: ${data.db} • mode: ${S.mode}`;
+  const note = $("note");
+  if(data.note){ note.style.display="block"; note.textContent=data.note; } else { note.style.display="none"; }
+
+  const docSel = $("doc");
+  docSel.innerHTML="";
+  if(S.docs.length===0){
+    const o=document.createElement("option"); o.value=""; o.textContent="(no doc mapping – compat mode)"; docSel.appendChild(o);
+    docSel.disabled = true;
+  }else{
+    S.docs.forEach(code=>{ const o=document.createElement("option"); o.value=o.textContent=code; docSel.appendChild(o); });
+    docSel.disabled = false;
+    docSel.value = S.docs[0];
+    setRangeForDoc(docSel.value);
+  }
+}
+
+function setRangeForDoc(code){
+  const rng = S.ranges?.[code];
+  if(Array.isArray(rng) && rng.length===2){
+    $("from").value = rng[0];
+    $("to").value = rng[1];
+    if(!$("title").value) $("title").value = code;
+  }
+}
+
+async function loadDocs(){
+  const data = await jget("/api/meta/docs?"+qs({db:S.db}));
+  applyDocs(data);
+}
+
+function params(){
+  const docSel = $("doc");
+  const p = {
+    db: $("db").value,
+    page_from: $("from").value || 1,
+    page_to: $("to").value || 1,
+    title: $("title").value || "Export Sanskrit ↔ English",
+    include_san: $("incSan").checked,
+    include_en: $("incEn").checked,
+    side_by_side: $("side").checked,
+    number_pages: $("pnums").checked,
+  };
+  if(!docSel.disabled && docSel.value) p.doc = docSel.value;
+  return p;
+}
+
+async function doPreview(){
+  setStatus("Loading preview…");
+  const html = await tget("/api/export/html?"+qs(params()));
+  const fr = $("frame").contentWindow.document;
+  fr.open(); fr.write(html); fr.close();
+  setStatus("Preview loaded.");
+}
+async function dl(){
+  setStatus("Generating HTML…");
+  const html = await tget("/api/export/html?"+qs(params()));
+  const a=document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([html],{type:"text/html"}));
+  a.download="export.html"; a.click(); URL.revokeObjectURL(a.href);
+  setStatus("Downloaded export.html");
+}
+function printClient(){
+  const w=$("frame").contentWindow; if(!w){ setStatus("Load preview first."); return; }
+  w.focus(); w.print();
+}
+async function serverPDF(){
+  setStatus("Creating server PDF…");
+  const r = await fetch("/api/export/pdf?"+qs(params()));
+  if(r.status===501){ const j=await r.json(); setStatus(j.detail); return; }
+  if(!r.ok){ setStatus("Server PDF failed."); return; }
+  const blob = await r.blob(); const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="export.pdf"; a.click(); URL.revokeObjectURL(a.href);
+  setStatus("Downloaded export.pdf");
+}
+
+$("db").addEventListener("change", async ()=>{ S.db=$("db").value; await loadDocs(); });
+$("doc").addEventListener("change", ()=> setRangeForDoc($("doc").value));
+$("reload").addEventListener("click", loadDocs);
+$("preview").addEventListener("click", ()=>doPreview().catch(e=>setStatus(String(e))));
+$("dl").addEventListener("click", ()=>dl().catch(e=>setStatus(String(e))));
+$("print").addEventListener("click", printClient);
+$("srvpdf").addEventListener("click", ()=>serverPDF().catch(e=>setStatus(String(e))));
+
+(async()=>{ try{ await loadDBs(); await loadDocs(); }catch(e){ setStatus(String(e)); }})();
+</script>
+</body>
+</html>

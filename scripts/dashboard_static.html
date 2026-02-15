@@ -1,0 +1,113 @@
+
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Inbox Dashboard</title>
+<style>
+  :root{--ink:#111;--mut:#6b7280;--bar:#e5e7eb;--ok:#6366f1}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);margin:24px}
+  h1{font-size:28px;margin:0 0 16px 0}
+  small{color:var(--mut)}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  th,td{padding:10px;border-bottom:1px solid #f0f0f0;text-align:left;font-size:14px}
+  .bar{height:8px;background:var(--bar);border-radius:999px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:var(--ok)}
+  button{padding:6px 10px;border:1px solid #ddd;border-radius:7px;background:#fff;cursor:pointer}
+  button:hover{background:#f9fafb}
+  .row-actions button{margin-right:6px}
+  #toast{position:fixed;right:14px;bottom:14px;background:#111;color:#fff;padding:10px 12px;border-radius:8px;opacity:.95;display:none}
+</style>
+</head><body>
+<h1>Inbox Dashboard</h1>
+<div id="meta" class="mut"></div>
+<table id="grid"><thead><tr>
+  <th>Doc</th><th>PDFs</th><th>JSONL</th><th>Ingested pages</th><th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>
+</tr></thead><tbody></tbody></table>
+<div id="toast"></div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const cfg = {
+  inbox:   params.get("inbox")   || "inbox",
+  raw:     params.get("raw")     || "data/raw",
+  db:      params.get("db")      || "data/context.db",
+  exports: params.get("exports") || "exports",
+}
+document.getElementById("meta").textContent =
+  `${cfg.inbox} | raw=${cfg.raw} | db=${cfg.db} | exports=${cfg.exports}`;
+
+function pct(a,b){return b?Math.round(100*a/b):0;}
+function bar(a,b){return `<div class="bar"><i style="width:${pct(a,b)}%"></i></div><small>${a}/${b} (${pct(a,b)}%)</small>`}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
+
+async function refresh(){
+  const r = await fetch(`/api/status?inbox=${encodeURIComponent(cfg.inbox)}&raw=${encodeURIComponent(cfg.raw)}&db=${encodeURIComponent(cfg.db)}&exports=${encodeURIComponent(cfg.exports)}`);
+  const data = await r.json();
+  const tb = document.querySelector("#grid tbody"); tb.innerHTML = "";
+  for(const row of data){
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><b>${row.doc}</b></td>
+      <td>${row.pdf_count}</td>
+      <td>${bar(row.jsonl_count,row.pdf_count)}</td>
+      <td>${bar(row.ingested_pages,row.pdf_count)}</td>
+      <td>${row.total_lines}</td>
+      <td>${bar(row.translated_lines,row.total_lines)}</td>
+      <td>${row.exports}</td>
+      <td class="row-actions">
+        <button data-act="ocr" data-doc="${row.doc}">OCR</button>
+        <button data-act="ingest" data-doc="${row.doc}">Ingest</button>
+        <button data-act="translate" data-doc="${row.doc}">Translate (50)</button>
+        <button data-act="export" data-doc="${row.doc}">Export</button>
+      </td>`;
+    tb.appendChild(tr);
+  }
+}
+
+async function poll(jid,label){
+  let tries=0;
+  while(true){
+    const r = await fetch(`/api/job/${jid}`);
+    const j = await r.json();
+    if(!j.running){ toast(`${label}: ${j.ok ? "done" : "failed"}`); console.log(j.out, j.err); refresh(); return; }
+    await new Promise(r=>setTimeout(r, 1200));
+    if(++tries%5===0) toast(`${label}: working…`);
+  }
+}
+
+document.addEventListener("click", async ev=>{
+  const b = ev.target.closest("button[data-act]");
+  if(!b) return;
+  const doc = b.dataset.doc;
+  const act = b.dataset.act;
+
+  if(act==="ocr"){
+    const dpi = prompt("DPI?", "400") || "400";
+    const langs = prompt("Tesseract langs? (e.g. san+hin+eng)", "san+hin+eng") || "san+hin+eng";
+    const r = await fetch("/api/ocr",{method:"POST",headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, dpi, langs, inbox:cfg.inbox, raw:cfg.raw})});
+    const j = await r.json(); if(j.job){ poll(j.job, `OCR ${doc}`); }
+    else toast(j.message||"No work");
+  }
+  if(act==="ingest"){
+    const r = await fetch("/api/ingest",{method:"POST",headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, db:cfg.db, raw:cfg.raw})});
+    const j = await r.json(); if(j.job) poll(j.job, `Ingest ${doc}`);
+  }
+  if(act==="translate"){
+    const engine = prompt("Engine?", "openai:gpt-4o-mini") || "openai:gpt-4o-mini";
+    const limit = prompt("Limit (rows)?", "50") || "50";
+    const r = await fetch("/api/translate",{method:"POST",headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, db:cfg.db, engine, limit})});
+    const j = await r.json(); if(j.job) poll(j.job, `Translate ${doc}`);
+  }
+  if(act==="export"){
+    const title = `${doc} — English Translation`;
+    const r = await fetch("/api/export",{method:"POST",headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, db:cfg.db, out:cfg.exports, title})});
+    const j = await r.json(); if(j.job) poll(j.job, `Export ${doc}`);
+  }
+});
+
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body></html>

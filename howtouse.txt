@@ -1,0 +1,100 @@
+# Render page to PNG at 400 dpi
+pdftoppm -r 400 -png .\inbox\panchatantra_0001.pdf panch-0001
+
+# Run Tesseract with LSTM engine and a text-block page model
+tesseract .\panch-0001.png stdout -l san --oem 1 --psm 6 -c preserve_interword_spaces=1 | more
+
+
+$env:TESS_LANGS="san"                 # keep Sanskrit-only for this session
+$env:SA_OCR_DPI="400"                 # keep higher DPI if it helped
+$ts = Get-Date -Format "yyyyMMddHHmmss"
+
+Get-ChildItem .\inbox\panchatantra_*.pdf | ForEach-Object {
+  $base = $_.BaseName
+  python .\scripts\ingest_pdf.py `
+    --pdf $_.FullName `
+    --doc panchatantra `
+    --run-id ("panch-"+$base+"-"+$ts) `
+    --resume
+}
+
+Great—if only ~5 pages are <300 chars (likely page nos/ads/plates), don’t re-OCR everything. Here’s the **best-results path** and exactly how to do it:
+
+---
+
+## ✅ Recommended path (minimal + clean)
+
+1. **Keep your OCR as-is.**
+   You’ve already got `data/raw/panchatantra_XXXX.jsonl` and rows in `passages`. The ingest script is fine for new pages. 
+
+2. **Light-clean only the noisy pages, then overwrite those pages in DB.**
+   This removes ZW chars, normalizes, and drops digit-only lines (great for page-number noise):
+
+   ```powershell
+   # choose a clean output folder
+   python .\scripts\post_normalize_ocr.py --in data\raw --out data\clean --glob "panchatantra_*.jsonl"
+
+   # overwrite DB text for all pages from the cleaned files
+   python .\scripts\ingest_jsonl_fast.py --doc panchatantra --glob "data\clean\panchatantra_*.jsonl"
+   ```
+
+   (You can also run only for the 5 weak pages by specifying those filenames.)  
+
+3. **Backfill English translations only where missing.**
+   Use the translator that skips headings/TOC/junk automatically:
+
+   ```powershell
+   python .\scripts\translate_passages.py --doc panchatantra --since-page 1 --until-page 9999 --sleep 0.6
+   ```
+
+   (It calls the MT engine under the hood; make sure `OPENAI_API_KEY` is set.)  
+
+---
+
+## 🧭 When to use each script (and why)
+
+* **`ingest_pdf.py`** – Use for **new PDFs** you drop into `inbox/`. It does OCR → sentence split → normalize → (optionally) MT and writes to DB. Honor envs like `TESS_LANGS`, `SA_OCR_DPI`. For your next book, keep `TESS_LANGS=san` and (if needed) `SA_OCR_DPI=400`. 
+* **`post_normalize_ocr.py`** – Best post-OCR cleanup: NFC, strip zero-width/PUA, unify danda/hyphen, **drop digit-only lines**. Use this on raw JSONL before re-ingesting those pages. 
+* **`ingest_jsonl_fast.py`** – Fast **DB overwrite/upsert** of page text (and translation if present) from cleaned JSONL; perfect for fixing a handful of pages without rerunning OCR. 
+* **`translate_passages.py`** – Preferred **backfill** for missing translations; skips headings/very low-Devanagari noise and pages you specify by range. 
+* **`infer_mt.py`** – The translator itself (called by the above); it **skips junk/headings** and uses your `SA_GPT_MODEL`. You usually don’t run this directly. 
+* **`norm_pass.py`** – Older/simpler normalizer (NFC, danda→`|`, hyphen unify). Use `post_normalize_ocr.py` instead unless you specifically want this lighter pass. 
+* **`backfill_missing.py`** – Legacy backfill example that’s **hard-coded to `DOC="MBh-01"`**; prefer `translate_passages.py` where you can pass `--doc panchatantra`. 
+
+---
+
+## 🔧 Copy-paste commands for your case
+
+```powershell
+# Clean all pages (or run on just the 5 low pages by changing the glob)
+python .\scripts\post_normalize_ocr.py --in data\raw --out data\clean --glob "panchatantra_*.jsonl"
+
+# Upsert cleaned pages into DB
+python .\scripts\ingest_jsonl_fast.py --doc panchatantra --glob "data\clean\panchatantra_*.jsonl"
+
+# Backfill English where missing
+python .\scripts\translate_passages.py --doc panchatantra --since-page 1 --until-page 9999 --sleep 0.6
+```
+
+  
+
+That’s it. Since only ~5 pages are thin, this gives you the **cleanest DB** with minimal rework. If you want, I can show a one-liner to **target only those 5 filenames** in the clean+fast-ingest step.
+
+6) For your next book (repeatable playbook)
+
+Drop page PDFs into inbox\ named like mybook_0001.pdf, mybook_0002.pdf, …
+
+Ingest:
+
+$ts = Get-Date -Format "yyyyMMddHHmmss"
+Get-ChildItem .\inbox\mybook_*.pdf | ForEach-Object {
+  python .\scripts\ingest_pdf.py --pdf $_.FullName --doc mybook --run-id ("mybook-"+$_.BaseName+"-"+$ts) --resume
+}
+
+
+Normalize → upsert → translate:
+
+python .\scripts\post_normalize_ocr.py --in data\raw --out data\clean --glob "mybook_*.jsonl"
+python .\scripts\ingest_jsonl_fast.py --doc mybook --glob "data\clean\mybook_*.jsonl"
+python .\scripts\translate_passages.py --doc mybook --since-page 1 --until-page 9999 --sleep 0.6
+python .\scripts\fts_hotfix.py

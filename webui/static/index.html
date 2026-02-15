@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sanskrit Automaton</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🕉️ Sanskrit Automaton</h1>
+    <p>Normalize → Analyze → Entities → Translate (with evidence)</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Analyze & Translate</h2>
+      <textarea id="input" rows="4" placeholder="धर्मक्षेत्रे कुरुक्षेत्रे..."></textarea>
+      <div class="actions">
+        <button id="btnAnalyze">Analyze</button>
+        <button id="btnTranslate">Translate (explain)</button>
+      </div>
+    </section>
+
+	<section class="card" id="translation-card" style="display:none;margin-top:12px;">
+	  <h2>Translation</h2>
+	  <div id="translation-text" style="font-size:1.2rem; line-height:1.6;"></div>
+	  <div id="translation-meta" style="opacity:.8; margin-top:.5rem;"></div>
+	  <button id="copy-translation" class="btn" style="margin-top:.75rem;">Copy</button>
+	</section>
+
+    <section class="grid">
+      <div class="panel">
+        <h3>Normalization</h3>
+        <pre id="norm"></pre>
+      </div>
+      <div class="panel">
+        <h3>Sandhi (top splits)</h3>
+        <pre id="sandhi"></pre>
+      </div>
+      <div class="panel">
+        <h3>Morphology</h3>
+        <pre id="morph"></pre>
+      </div>
+      <div class="panel">
+        <h3>Entities</h3>
+        <pre id="entities"></pre>
+      </div>
+      <div class="panel wide">
+        <h3>Translation + Evidence</h3>
+        <pre id="translation"></pre>
+      </div>
+    </section>
+	
+	<section class="card" style="margin-top:12px;">
+  <h2>Search</h2>
+  <div class="row">
+    <input id="q" placeholder="Search Sanskrit or English…" style="padding:6px 10px;border-radius:8px;background:#0b1220;color:#e5e7eb;border:1px solid #1f2937">
+    <button id="go">Search</button>
+  </div>
+  <div id="hits" style="margin-top:10px"></div>
+  <script>
+    document.getElementById('go').onclick=async()=>{
+      const q=document.getElementById('q').value.trim();
+      if(!q) return;
+      const r=await fetch('/api/search?q='+encodeURIComponent(q));
+      const d=await r.json();
+      const html = d.results.map(x=>`
+        <div style="padding:8px;border-bottom:1px solid #1f2937">
+          <div class="mono muted">#${x.id} • ${x.title} p.${x.page}.${x.sent_index} • ${x.engine}</div>
+          <div>${x.text}</div>
+          <div style="opacity:.8">→ ${x.translation||''}</div>
+          <a href="/compare.html?id=${x.id}">Compare variants</a>
+        </div>`).join('');
+      document.getElementById('hits').innerHTML = html || '<i class="muted">No results.</i>';
+    };
+  </script>
+</section>
+
+	
+	
+  </main>
+
+  <footer>
+    <small>References: BORI, Debroy, Manmatha Nath Dutt; Sanskrit Heritage; Cologne MW. Use critical editions where possible.</small>
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

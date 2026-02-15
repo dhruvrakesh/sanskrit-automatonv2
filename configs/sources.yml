@@ -1,0 +1,13 @@
+# Declare text sources and edition preferences
+preferred_editions:
+  MBH: BORI
+  RAM: Baroda Critical
+sources:
+  - id: sarit
+    kind: tei
+    license: CC-BY-SA-3.0
+    notes: Import TEI and retain xml:id and pb refs.
+  - id: gretil
+    kind: plaintext
+    license: Mixed
+    notes: Check per-text license before reuse.

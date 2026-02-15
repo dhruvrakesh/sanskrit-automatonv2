@@ -1,0 +1,9 @@
+model:
+  name: ai4bharat/indictrans2-en-indic-1B
+  # Replace with your fine-tuned checkpoint path
+  ckpt_path: models/indictrans2-san-en
+decode:
+  max_new_tokens: 256
+  num_beams: 4
+  temperature: 0.7
+  explain: true

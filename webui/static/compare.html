@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Sanskrit Automaton — Compare Variants</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <style>
+    body{max-width:1100px;margin:24px auto;font-family:system-ui,Segoe UI,Roboto,Arial}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{background:#111827;border:1px solid #1f2937;border-radius:14px;padding:14px;color:#e5e7eb}
+    h1{font-size:1.3rem;margin:0 0 12px}
+    h2{font-size:1.0rem;margin:0 0 8px;color:#a7f3d0}
+    .skt{font-size:1.2rem;line-height:1.8}
+    code, .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .muted{opacity:.7}
+    button{background:#3b82f6;border:0;color:#fff;padding:6px 10px;border-radius:8px;cursor:pointer}
+    .row{display:flex;gap:8px;align-items:center}
+    textarea{width:100%;min-height:110px}
+    .src{color:#93c5fd}
+  </style>
+</head>
+<body>
+  <h1>Compare Variants</h1>
+  <div class="row">
+    <input id="pid" placeholder="Passage ID" style="padding:6px 10px;border-radius:8px;background:#0b1220;color:#e5e7eb;border:1px solid #1f2937">
+    <button id="load">Load</button>
+    <span class="muted">Tip: open /api/search?q=... to discover IDs</span>
+  </div>
+
+  <div id="view" style="margin-top:16px;display:none">
+    <div class="card">
+      <h2>Original</h2>
+      <div id="skt" class="skt"></div>
+      <div class="muted mono" id="norm"></div>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div class="card">
+        <h2>Pipeline <span class="src">(engine)</span></h2>
+        <div id="pipe"></div>
+        <div class="muted mono" id="rat"></div>
+      </div>
+      <div class="card">
+        <h2>References</h2>
+        <div id="refs"></div>
+        <div class="muted">If empty, import via <code>scripts/import_references.py</code>.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/compare.js"></script>
+</body>
+</html>
