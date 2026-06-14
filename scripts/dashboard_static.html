@@ -748,9 +748,18 @@ async function pollRunningJobs() {
     if (d.count > 0) {
       btn.style.display = 'inline-block';
       cnt.textContent = d.count + ' job(s) running';
+      // While jobs are running: refresh pipeline status every 5s for live progress bars
+      if (!window._fastRefresh) {
+        window._fastRefresh = setInterval(refresh, 5000);
+      }
     } else {
       btn.style.display = 'none';
       cnt.textContent = '';
+      // Back to 15s when idle
+      if (window._fastRefresh) {
+        clearInterval(window._fastRefresh);
+        window._fastRefresh = null;
+      }
     }
   } catch(e) {}
 }
@@ -762,6 +771,7 @@ setInterval(refresh, 15000);
 setInterval(renderBadges, 2000);
 setInterval(pollRunningJobs, 3000);
 pollRunningJobs();
+
 </script>
 </body>
 </html>

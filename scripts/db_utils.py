@@ -99,10 +99,12 @@ CREATE TABLE IF NOT EXISTS sources(
 # ── New columns added in Phase 1 — for existing DBs that predate this schema ─
 _MIGRATIONS = [
     # table,            column,              type + default
+    # NOTE: ALTER TABLE ADD COLUMN only allows constant defaults (NULL, integer, string literal).
+    # Never use DEFAULT (strftime(...)) here — use NULL and set value in application code.
     ("docs",     "category",          "TEXT"),
     ("docs",     "src_path",          "TEXT"),
     ("docs",     "glossary",          "TEXT"),
-    ("docs",     "created_at",        "TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))"),
+    ("docs",     "created_at",        "TEXT"),  # was: DEFAULT (strftime...) — not allowed in ALTER TABLE
     ("passages", "iast",              "TEXT"),
     ("passages", "verse_ref",         "TEXT"),
     ("passages", "chapter",           "TEXT"),
@@ -162,9 +164,22 @@ def migrate_schema(con: sqlite3.Connection) -> None:
                 con.execute(f"ALTER TABLE {table} ADD COLUMN {col} {typedef}")
                 table_cols.pop(table, None)  # invalidate cache
                 changed = True
-                print(f"[migrate_schema] Added {table}.{col} ({typedef})")
+                print(f"[migrate_schema] Added {table}.{col}")
             except sqlite3.OperationalError as e:
-                if "duplicate column" not in str(e).lower():
+                msg = str(e).lower()
+                if "duplicate column" in msg or "already exists" in msg:
+                    pass  # column is already there — silent
+                elif "non-constant" in msg or "default" in msg:
+                    # SQLite rejected function-based default — try without default
+                    bare = typedef.split(" DEFAULT")[0].strip()
+                    try:
+                        con.execute(f"ALTER TABLE {table} ADD COLUMN {col} {bare}")
+                        table_cols.pop(table, None)
+                        changed = True
+                        print(f"[migrate_schema] Added {table}.{col} (no default)")
+                    except sqlite3.OperationalError:
+                        pass  # truly already exists
+                else:
                     print(f"[migrate_schema] WARNING: {e}")
     if changed:
         con.commit()

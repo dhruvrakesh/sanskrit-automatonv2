@@ -243,17 +243,49 @@ def _gemini_translate(
         for attempt in range(RETRIES):
             try:
                 resp = gm.generate_content(msgs_to_use[i].strip())
-                out = (resp.text or "").strip() if resp.text else ""
+
+                # ── Safe text extraction (handles finish_reason=2 SAFETY blocks) ──
+                out = ""
+                try:
+                    out = (resp.text or "").strip()
+                except Exception:
+                    # finish_reason=2 (SAFETY) or finish_reason=3 (RECITATION)
+                    # resp.text raises ValueError when there are no valid parts.
+                    # Check candidates for finish reason
+                    finish = None
+                    try:
+                        finish = resp.candidates[0].finish_reason if resp.candidates else None
+                    except Exception:
+                        pass
+                    if finish == 2:
+                        print(f"[gemini] SAFETY BLOCK p{i} — Gemini refused this text. "
+                              f"Returning empty (will be skipped).")
+                    elif finish == 3:
+                        print(f"[gemini] RECITATION BLOCK p{i} — treating as empty.")
+                    else:
+                        print(f"[gemini] No text in response (finish_reason={finish}), returning empty.")
+                    out = ""  # don't retry a safety block — it won't change
+
                 outs.append(out)
                 break
+
             except Exception as exc:
+                err_str = str(exc)
+                # Detect safety block masquerading as generic exception
+                if "finish_reason" in err_str and ("is 2" in err_str or "is 3" in err_str):
+                    print(f"[gemini] SAFETY/RECITATION block on attempt {attempt+1} — skipping verse.")
+                    outs.append("")
+                    break  # no point retrying safety blocks
                 if attempt + 1 >= RETRIES:
-                    raise
+                    outs.append("")  # don't crash whole batch on one bad verse
+                    print(f"[gemini] FAILED after {RETRIES} attempts: {exc}")
+                    break
                 wait = SLEEP * (2 ** attempt)
                 print(f"[gemini] retry {attempt+1}/{RETRIES} after {wait:.1f}s: {exc}")
                 time.sleep(wait)
         time.sleep(SLEEP)
     return outs
+
 
 
 # ── Echo (test) engine ────────────────────────────────────────────────────────
