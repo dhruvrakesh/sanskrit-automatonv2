@@ -576,18 +576,20 @@ def api_ingest():
 
 @app.post("/api/translate")
 def api_translate():
-    data   = request.get_json(force=True) or {}
-    doc    = _validate_doc(data.get("doc"))
+    data    = request.get_json(force=True) or {}
+    doc     = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    db     = data.get("db")     or "data/context.db"
-    engine = data.get("engine") or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
-    limit  = str(data.get("limit") or 50)
-    sleep  = str(data.get("sleep") or 0.6)
+    db      = data.get("db")      or "data/context.db"
+    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+    limit   = str(data.get("limit")   or 50)
+    sleep   = str(data.get("sleep")   or 0.8)
+    context = str(data.get("context") or 5)   # 5-verse sliding context window
     cmd = py(script("translate_passages.py"),
              "--db", db, "--doc", doc, "--engine", engine,
-             "--sleep", sleep, "--limit", limit)
+             "--sleep", sleep, "--limit", limit, "--context", context)
     return jsonify({"job": launch("translate", doc, cmd)})
+
 
 @app.post("/api/export")
 def api_export():
