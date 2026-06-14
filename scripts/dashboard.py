@@ -144,11 +144,43 @@ def _run_job(job: Job):
         job.proc = None  # clear reference
         _persist_job(job)  # write to disk immediately
 
+# ── Job concurrency limits ───────────────────────────────────────────────────
+# Max parallel OCR jobs (Tesseract is RAM/CPU heavy — 2 is the safe max on most machines)
+_OCR_SEM       = threading.Semaphore(2)
+# Max parallel translation jobs (API rate limit protection)
+_TRANSLATE_SEM = threading.Semaphore(1)
+# General semaphore for other jobs
+_GENERAL_SEM   = threading.Semaphore(3)
+
+_KIND_SEM = {
+    "ocr":              _OCR_SEM,
+    "translate":        _TRANSLATE_SEM,
+    "advance_pipeline": _TRANSLATE_SEM,
+    "pipeline":         _TRANSLATE_SEM,
+}
+
 def launch(kind: str, doc: str, argv: List[str]) -> str:
+    # ── Duplicate job prevention ──────────────────────────────────────────────
+    with JOBS_LOCK:
+        for j in JOBS.values():
+            if j.ok is None and j.kind == kind and j.doc == doc:
+                print(f"[launch] SKIPPED duplicate: kind={kind} doc={doc} (job {j.id} still running)")
+                return j.id  # Return existing job ID
+
     job = Job(id=str(uuid.uuid4()), kind=kind, doc=doc, cmd=argv)
     with JOBS_LOCK:
         JOBS[job.id] = job
-    threading.Thread(target=_run_job, args=(job,), daemon=True).start()
+
+    sem = _KIND_SEM.get(kind, _GENERAL_SEM)
+
+    def run_with_sem():
+        sem.acquire()
+        try:
+            _run_job(job)
+        finally:
+            sem.release()
+
+    threading.Thread(target=run_with_sem, daemon=True).start()
     return job.id
 
 
@@ -490,42 +522,125 @@ def api_jobs_history():
 
 @app.get("/api/usage")
 def api_usage():
-    """Return translation usage stats from the mt_cache table."""
+    """Return real cost tracking data: usage_log totals, budget state, per-engine breakdown."""
     db_path = request.args.get("db", "data/context.db")
     try:
+        import sys as _sys
+        _sys.path.insert(0, str(SCRIPTS))
+        try:
+            from cost_tracker import get_summary, ensure_usage_schema, migrate_cache_costs
+            with sqlite3.connect(db_path) as con:
+                ensure_usage_schema(con)
+                # Backfill from mt_cache on first call (idempotent)
+                totals = con.execute("SELECT SUM(total_calls) FROM usage_totals").fetchone()[0] or 0
+                cache_entries = con.execute("SELECT COUNT(*) FROM mt_cache").fetchone()[0]
+                if totals == 0 and cache_entries > 0:
+                    migrate_cache_costs(con)
+                return jsonify(get_summary(con))
+        except ImportError:
+            pass  # fall through to legacy estimation
+
+        # ── Legacy fallback: estimate from mt_cache ──────────────────────────
+        # FIXED: column is 'output' not 'translation'
         con = sqlite3.connect(db_path)
         con.row_factory = sqlite3.Row
-        # mt_cache schema: engine, src, tgt, src_hash, translation, ts
         tables = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
         if "mt_cache" not in tables:
-            return jsonify({"error": "mt_cache table not found", "stats": {}})
+            return jsonify({"error": "mt_cache table not found"})
+
+        # Pricing: (in_usd_per_M_tokens, out_usd_per_M_tokens), 4 chars ≈ 1 token
+        PRICING = {
+            "gemini:gemini-2.5-pro":   (1.25,  10.00),
+            "gemini:gemini-2.0-flash": (0.075,  0.30),
+            "openai:gpt-4o-mini":      (0.15,   0.60),
+            "openai:gpt-4o":           (2.50,  10.00),
+        }
+
         rows = con.execute(
-            "SELECT engine, COUNT(*) as calls, SUM(LENGTH(translation)) as out_chars "
+            # mt_cache real schema: engine, lang_in, lang_out, text_hash, text, output, context_hash, created_at
+            "SELECT engine, COUNT(*) as calls, "
+            "SUM(LENGTH(text)) as in_chars, SUM(LENGTH(output)) as out_chars "
             "FROM mt_cache GROUP BY engine ORDER BY calls DESC"
         ).fetchall()
         total_calls = con.execute("SELECT COUNT(*) FROM mt_cache").fetchone()[0]
-        total_chars = con.execute("SELECT SUM(LENGTH(COALESCE(translation,''))) FROM mt_cache").fetchone()[0] or 0
-        # Estimate cost: Gemini 2.5 Pro ~$0.000010/char, OpenAI gpt-4o-mini ~$0.000015/char
         cost_estimate = 0.0
         by_engine = []
         for r in rows:
             eng = r["engine"] or "unknown"
             calls = r["calls"]
-            chars = r["out_chars"] or 0
-            rate = 0.000010 if "gemini" in eng.lower() else 0.000015
-            cost = chars * rate
+            in_chars  = r["in_chars"]  or 0
+            out_chars = r["out_chars"] or 0
+            in_tok  = in_chars  / 4 / 1_000_000
+            out_tok = out_chars / 4 / 1_000_000
+            # Match engine string to pricing
+            in_p, out_p = (1.25, 10.00)  # default: Gemini 2.5 Pro
+            for k, (ip, op) in PRICING.items():
+                if k in eng or eng in k:
+                    in_p, out_p = ip, op
+                    break
+            cost = in_p * in_tok + out_p * out_tok
             cost_estimate += cost
-            by_engine.append({"engine": eng, "calls": calls, "out_chars": chars, "cost_usd": round(cost, 4)})
+            by_engine.append({
+                "engine": eng, "calls": calls,
+                "in_chars": in_chars, "out_chars": out_chars,
+                "cost_usd": round(cost, 6),
+            })
+        budget_usd = float(os.environ.get("SA_GPT_BUDGET_USD", "8.0"))
         con.close()
         return jsonify({
+            "budget": {"budget_usd": budget_usd, "spent_usd": round(cost_estimate, 6), "paused": False},
+            "by_engine": {r["engine"]: {
+                "calls": r["calls"], "cost_usd": r["cost_usd"],
+                "in_chars": r["in_chars"], "out_chars": r["out_chars"]
+            } for r in by_engine},
+            "recent": [],
             "total_calls": total_calls,
-            "total_out_chars": total_chars,
-            "cost_estimate_usd": round(cost_estimate, 4),
-            "by_engine": by_engine,
-            "note": "Cost estimate: Gemini ~$0.01/1k chars, OpenAI ~$0.015/1k chars (output only, rough)"
+            "note": "Legacy estimate from mt_cache (install cost_tracker.py for real tracking)"
         })
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
+
+
+@app.get("/api/budget")
+def api_budget_get():
+    """Get current budget state: {budget_usd, spent_usd, paused, remaining_usd}."""
+    db_path = request.args.get("db", "data/context.db")
+    try:
+        import sys as _sys; _sys.path.insert(0, str(SCRIPTS))
+        from cost_tracker import ensure_usage_schema, get_summary
+        con = sqlite3.connect(db_path)
+        ensure_usage_schema(con)
+        s = get_summary(con)
+        b = s["budget"]
+        b["remaining_usd"] = round(b["budget_usd"] - b["spent_usd"], 6)
+        con.close()
+        return jsonify(b)
+    except Exception as e:
+        return jsonify({"error": str(e), "budget_usd": 8.0, "spent_usd": 0.0, "paused": False})
+
+
+@app.post("/api/budget")
+def api_budget_set():
+    """Set/resume budget. Body: {budget_usd: 15.0} or {resume: true}."""
+    db_path = request.args.get("db", "data/context.db")
+    data = request.get_json(force=True) or {}
+    try:
+        import sys as _sys; _sys.path.insert(0, str(SCRIPTS))
+        from cost_tracker import ensure_usage_schema, set_budget, resume_budget
+        con = sqlite3.connect(db_path)
+        ensure_usage_schema(con)
+        if data.get("resume"):
+            resume_budget(con)
+            return jsonify({"resumed": True})
+        if "budget_usd" in data:
+            set_budget(con, float(data["budget_usd"]))
+            return jsonify({"budget_usd": float(data["budget_usd"]), "set": True})
+        con.close()
+        return jsonify({"error": "specify budget_usd or resume:true"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 @app.post("/api/ocr")
 def api_ocr():

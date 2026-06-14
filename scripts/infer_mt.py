@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-infer_mt.py — Context-aware Sanskrit→English translation engine.
+infer_mt.py — Context-aware Sanskrit→English translation engine with cost tracking.
 
 Phase 3 upgrade:
 - Document-aware system prompt (text name, chapter, verse ref, chandas)
@@ -22,8 +22,16 @@ import os, time, sqlite3, hashlib, json
 from typing import List, Tuple, Dict, Optional
 
 DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
-SLEEP  = float(os.environ.get("MT_SLEEP",   "0.6"))
+SLEEP  = float(os.environ.get("MT_SLEEP",   "0.8"))
 RETRIES = 3
+
+# Cost tracking (imported lazily to avoid circular deps)
+_cost_tracker_ok = False
+try:
+    from cost_tracker import log_translation_call, check_budget, ensure_usage_schema
+    _cost_tracker_ok = True
+except ImportError:
+    pass  # graceful degradation if module missing
 
 # ── System prompt templates ──────────────────────────────────────────────────
 
@@ -305,6 +313,91 @@ def translate_batch(
             iast_str  = iast_list[i]  if iast_list  and i < len(iast_list)  else None
             ctx_verses = context_list[i] if context_list and i < len(context_list) else None
             missing_msgs.append(_build_user_message(t, iast_str, ctx_verses))
+
+    # Build context-rich system prompt
+    chapter   = chapters[missing_idx[0]]    if chapters    and missing_idx else None
+    verse_ref = verse_refs[missing_idx[0]]  if verse_refs  and missing_idx else None
+    chandas   = chandas_list[missing_idx[0]] if chandas_list and missing_idx else None
+    text_type = text_types[missing_idx[0]]  if text_types  and missing_idx else None
+
+    system_prompt = _build_system_prompt(
+        doc_code=doc_code,
+        category=category,
+        chapter=chapter,
+        verse_ref=verse_ref,
+        chandas=chandas,
+        text_type=text_type,
+    ) if (doc_code or missing_idx) else _SYSTEM_PROMPT_BASE
+
+    generated: List[str] = []
+    if missing_texts:
+        # ── Budget gate ──────────────────────────────────────────────────────
+        if _cost_tracker_ok:
+            # Estimate cost of this batch before proceeding
+            total_in  = sum(len(m) for m in missing_msgs) + len(system_prompt) * len(missing_msgs)
+            total_out = total_in * 2  # conservative estimate: output ~ 2× input for translations
+            from cost_tracker import estimate_cost_usd as _est
+            est_cost = _est(engine, total_in, total_out)
+            can_proceed, spent, budget = check_budget(con, est_cost)
+            if not can_proceed:
+                print(f"[BUDGET] BLOCKED — spent ${spent:.4f} of ${budget:.2f}. "
+                      f"Estimated next batch: ${est_cost:.4f}. "
+                      f"Call resume_budget() or increase budget to continue.")
+                # Return empty strings for uncached — don't call API
+                return [outs[i] or "" for i in range(len(texts))]
+
+        t_start = time.time()
+
+        if engine.startswith("openai:"):
+            model = engine.split(":", 1)[1]
+            generated = _openai_translate(
+                missing_texts, model=model,
+                system_prompt=system_prompt,
+                user_messages=missing_msgs,
+            )
+        elif engine.startswith("gemini:"):
+            model = engine.split(":", 1)[1]
+            generated = _gemini_translate(
+                missing_texts, model=model,
+                system_prompt=system_prompt,
+                user_messages=missing_msgs,
+            )
+        elif engine.startswith("echo"):
+            generated = _echo_translate(missing_texts)
+        else:
+            print(f"[infer_mt] WARNING: unknown engine '{engine}', using echo")
+            generated = _echo_translate(missing_texts)
+
+        duration = time.time() - t_start
+
+        # ── Log actual cost ──────────────────────────────────────────────────
+        if _cost_tracker_ok and not engine.startswith("echo"):
+            actual_in  = sum(len(m) for m in missing_msgs) + len(system_prompt) * len(missing_msgs)
+            actual_out = sum(len(g) for g in generated)
+            cost = log_translation_call(
+                con, doc_code, engine,
+                in_chars=actual_in,
+                out_chars=actual_out,
+                duration_s=duration,
+                passages=len(missing_texts),
+                ok=True,
+            )
+            rate = len(missing_texts) / max(0.01, duration) * 3600
+            print(f"[COST] {len(missing_texts)} passages | {duration:.1f}s | "
+                  f"${cost:.5f} | {rate:.0f} passages/hr | engine={engine}")
+
+        _cache_insert_many(con, engine, src, tgt, list(zip(missing_texts, generated)))
+
+    # Stitch back in original order
+    it = iter(generated)
+    final: List[str] = []
+    for i, t in enumerate(texts):
+        if outs[i]:
+            final.append(outs[i])
+        else:
+            final.append(next(it))
+    return final
+
 
     # Build context-rich system prompt (use first item's metadata for batch)
     # For per-passage accuracy, translate_passages.py should send batches of 1
