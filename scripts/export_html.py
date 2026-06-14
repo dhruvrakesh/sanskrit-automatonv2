@@ -60,7 +60,7 @@ def _and(where: str) -> str:  # help build WHERE ... AND ...
 _SAN_HINTS = {"san","sanskrit","sa","orig","text","ocr"}
 _EN_HINTS  = {"en","english","eng","tr","translation","mt","mt_en","gpt","eng_text","translation_en","en_text"}
 # exclude from candidate sets entirely
-_STRUCT    = {"id","rowid","doc_id","doc","doc_code","hash","bbox","conf","lang","created_at","updated_at",
+_STRUCT    = {"id","rowid","doc_id","doc","doc_code","hash","bbox","conf","lang","source","engine","meta_json","created_at","updated_at",
               # structural/order columns
               "idx","i","line","line_no","lineno","page","pageno","page_no","page_num","pageNumber"}
 # strongly penalize as EN (NER/JSON-ish)
@@ -132,6 +132,14 @@ def _detect_cols(con: sqlite3.Connection, doc: Optional[str], force_san: Optiona
     # choose
     san_guess = max(s_san, key=s_san.get) if s_san else '""'
     en_guess  = max(s_en,  key=s_en.get)  if s_en  else '""'
+
+    # The automaton's canonical columns are p.text and p.translation. Prefer
+    # them over content-ratio guesses so short English-heavy samples do not
+    # accidentally export source/engine/text as the translation column.
+    if not force_san and "text" in pc:
+        san_guess = "text"
+    if not force_en and "translation" in pc:
+        en_guess = "translation"
 
     # if user forced one
     if force_en:

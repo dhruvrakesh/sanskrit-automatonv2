@@ -1,10 +1,9 @@
-﻿# api.py — run:  uvicorn api:app --reload --port 8000
-from __future__ import annotations
+# api.py — run:  uvicorn api:app --reload --port 8000
 
 import os
 import sqlite3
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Union
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -128,11 +127,23 @@ def _fetch_passages(
     if page_to < page_from:
         page_from, page_to = page_to, page_from
 
+    # Column name helpers — schema uses 'text' + 'translation'; old DBs may use 'san'+'en'
+    def _san_col(c: set) -> str:
+        if "san" in c: return "san"
+        if "text" in c: return "text"
+        return "''"
+    def _en_col(c: set) -> str:
+        if "en" in c: return "en"
+        if "translation" in c: return "translation"
+        return "''"
+
     if mode == "new":
         if not doc:
             raise HTTPException(status_code=400, detail="doc is required for this DB schema")
-        q = """
-        SELECT pg.page_no, pa.idx, IFNULL(pa.san,''), IFNULL(pa.en,'')
+        pc = _cols(con, "passages")
+        sc, ec = _san_col(pc), _en_col(pc)
+        q = f"""
+        SELECT pg.page_no, pa.idx, IFNULL(pa.{sc},''), IFNULL(pa.{ec},'')
         FROM passages pa
         JOIN pages pg ON pa.page_id = pg.id
         JOIN docs d  ON pg.doc_id = d.id
@@ -146,8 +157,10 @@ def _fetch_passages(
             raise HTTPException(status_code=400, detail="doc is required for this DB schema")
         pg = _page_col(con)
         idx_sel, idx_order = _idx_expr(con)
+        pc = _cols(con, "passages")
+        sc, ec = _san_col(pc), _en_col(pc)
         q = f"""
-        SELECT {pg} AS page_no, {idx_sel}, IFNULL(san,''), IFNULL(en,'')
+        SELECT {pg} AS page_no, {idx_sel}, IFNULL({sc},''), IFNULL({ec},'')
         FROM passages
         WHERE doc = ? AND {pg} BETWEEN ? AND ?
         ORDER BY {pg}, {idx_order}
@@ -157,13 +170,15 @@ def _fetch_passages(
     if mode == "runs":
         pg = _page_col(con)
         idx_sel, idx_order = _idx_expr(con)
+        pc = _cols(con, "passages")
+        sc, ec = _san_col(pc), _en_col(pc)
         rows: List[Tuple[int, int, str, str]] = []
         ranges = _runs_for_doc(con, doc) if doc else [(page_from, page_to)]
         if doc and not ranges:
             ranges = [(page_from, page_to)]
         for lo, hi in ranges:
             q = f"""
-            SELECT {pg} AS page_no, {idx_sel}, IFNULL(san,''), IFNULL(en,'')
+            SELECT {pg} AS page_no, {idx_sel}, IFNULL({sc},''), IFNULL({ec},'')
             FROM passages
             WHERE {pg} BETWEEN ? AND ?
             ORDER BY {pg}, {idx_order}
@@ -174,8 +189,10 @@ def _fetch_passages(
     # compat
     pg = _page_col(con)
     idx_sel, idx_order = _idx_expr(con)
+    pc = _cols(con, "passages")
+    sc, ec = _san_col(pc), _en_col(pc)
     q = f"""
-    SELECT {pg} AS page_no, {idx_sel}, IFNULL(san,''), IFNULL(en,'')
+    SELECT {pg} AS page_no, {idx_sel}, IFNULL({sc},''), IFNULL({ec},'')
     FROM passages
     WHERE {pg} BETWEEN ? AND ?
     ORDER BY {pg}, {idx_order}
@@ -240,7 +257,7 @@ class DocsResp(BaseModel):
     mode: str
     note: Optional[str] = None
     docs: List[str]
-    ranges: Dict[str, List[int]] | None = None  # {doc:[min,max]}
+    ranges: Optional[Dict[str, List[int]]] = None  # {doc:[min,max]}
 
 @app.get("/api/meta/dbs")
 def list_dbs():

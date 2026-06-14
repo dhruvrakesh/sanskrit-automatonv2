@@ -1,113 +1,565 @@
-
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Inbox Dashboard</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Sanskrit Automaton — Pipeline Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root{--ink:#111;--mut:#6b7280;--bar:#e5e7eb;--ok:#6366f1}
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);margin:24px}
-  h1{font-size:28px;margin:0 0 16px 0}
-  small{color:var(--mut)}
-  table{width:100%;border-collapse:collapse;margin-top:12px}
-  th,td{padding:10px;border-bottom:1px solid #f0f0f0;text-align:left;font-size:14px}
-  .bar{height:8px;background:var(--bar);border-radius:999px;overflow:hidden}
-  .bar>i{display:block;height:100%;background:var(--ok)}
-  button{padding:6px 10px;border:1px solid #ddd;border-radius:7px;background:#fff;cursor:pointer}
-  button:hover{background:#f9fafb}
-  .row-actions button{margin-right:6px}
-  #toast{position:fixed;right:14px;bottom:14px;background:#111;color:#fff;padding:10px 12px;border-radius:8px;opacity:.95;display:none}
+:root {
+  --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
+  --border-v:#35302680; --gold:#d4a017; --gold-dim:#9a721080;
+  --saffron:#f47c20; --cream:#f0e6cc; --muted:#8a7d67; --ink:#e8dcc8;
+  --green:#4caf7d; --red:#e05f5f; --blue:#6b9bd2; --purple:#a07dd6;
+  --r:10px; --r-sm:6px; --shadow:0 4px 24px #00000060;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;overflow:hidden}
+
+/* Layout */
+.app{display:grid;grid-template-columns:320px 1fr 340px;grid-template-rows:56px 1fr;height:100vh}
+.top-bar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px;background:var(--bg2);border-bottom:1px solid var(--border-v)}
+.sidebar{grid-row:2;background:var(--bg2);border-right:1px solid var(--border-v);display:flex;flex-direction:column;overflow:hidden}
+.main{grid-row:2;overflow-y:auto;padding:20px}
+.log-panel{grid-row:2;background:var(--bg2);border-left:1px solid var(--border-v);display:flex;flex-direction:column;overflow:hidden}
+
+/* Top bar */
+.brand-deva{font-family:"Noto Serif Devanagari",serif;font-size:22px;color:var(--gold)}
+.brand-sub{font-size:11px;color:var(--muted);font-weight:500}
+.top-bar-spacer{flex:1}
+.engine-label{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+select.engine-select{background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);padding:6px 10px;border-radius:var(--r-sm);font-size:12px;cursor:pointer;font-family:"JetBrains Mono",monospace}
+select.engine-select:focus{outline:none;border-color:var(--gold)}
+.btn-refresh{padding:7px 14px;background:transparent;border:1px solid var(--border-v);border-radius:var(--r-sm);color:var(--muted);font-size:12px;cursor:pointer;transition:all .2s}
+.btn-refresh:hover{border-color:var(--gold);color:var(--gold)}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Sidebar */
+.sidebar-header{padding:14px 16px 10px;border-bottom:1px solid var(--border-v)}
+.sidebar-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.corpus-path{font-size:10px;color:var(--muted);font-family:"JetBrains Mono",monospace;word-break:break-all}
+.sidebar-search{margin:10px 12px 0;position:relative}
+.sidebar-search input{width:100%;background:var(--bg3);border:1px solid var(--border-v);border-radius:var(--r-sm);padding:7px 10px 7px 30px;color:var(--ink);font-size:12px}
+.sidebar-search input:focus{outline:none;border-color:var(--gold-dim)}
+.sidebar-search .si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none}
+.corpus-tree{flex:1;overflow-y:auto;padding:8px 0}
+.cat-header{display:flex;align-items:center;gap:8px;padding:7px 16px;cursor:pointer;transition:background .15s;user-select:none}
+.cat-header:hover{background:var(--bg3)}
+.cat-arrow{font-size:9px;color:var(--muted);transition:transform .2s;display:inline-block}
+.cat-item.open .cat-arrow{transform:rotate(90deg)}
+.cat-name{font-size:12px;font-weight:600;color:var(--cream);flex:1}
+.cat-count{font-size:10px;color:var(--muted);font-family:"JetBrains Mono",monospace}
+.cat-pdfs{display:none;padding:0 0 4px 16px}
+.cat-item.open .cat-pdfs{display:block}
+.pdf-item{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 20px;border-radius:var(--r-sm);transition:background .12s}
+.pdf-item:hover{background:var(--bg3)}
+.pdf-cb{accent-color:var(--gold);cursor:pointer;flex-shrink:0;width:14px;height:14px}
+.pdf-name{font-size:11px;color:var(--ink);flex:1;font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdf-size{font-size:10px;color:var(--muted);white-space:nowrap}
+.sidebar-actions{padding:12px;border-top:1px solid var(--border-v);display:flex;flex-direction:column;gap:8px}
+.sel-count{font-size:11px;color:var(--muted);text-align:center}
+.btn-import{width:100%;padding:9px;background:linear-gradient(135deg,var(--saffron),var(--gold));border:none;border-radius:var(--r-sm);color:#0e0d0b;font-weight:700;font-size:12px;cursor:pointer;transition:opacity .2s,transform .15s;letter-spacing:.03em}
+.btn-import:hover{opacity:.9;transform:translateY(-1px)}
+.btn-import:active{transform:translateY(0)}
+.import-split-row{display:flex;align-items:center;gap:8px}
+.import-split-row label{font-size:11px;color:var(--muted)}
+.import-split-row input{accent-color:var(--gold)}
+
+/* Main */
+.section-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:"";flex:1;height:1px;background:var(--border-v)}
+.batch-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.btn-batch{padding:6px 12px;background:var(--bg3);border:1px solid var(--border-v);border-radius:var(--r-sm);color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-batch:hover{border-color:var(--gold-dim);color:var(--cream)}
+.pipeline-table{width:100%;border-collapse:collapse}
+.pipeline-table th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border-v)}
+.pipeline-table td{padding:10px 12px;border-bottom:1px solid #ffffff08;vertical-align:middle}
+.pipeline-table tr:last-child td{border-bottom:none}
+.pipeline-table tr:hover td{background:var(--bg3)}
+.doc-name{font-weight:600;color:var(--cream);font-size:13px;font-family:"JetBrains Mono",monospace}
+.num-cell{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)}
+.prog-wrap{display:flex;flex-direction:column;gap:3px}
+.prog-bar{height:6px;background:var(--bg4);border-radius:999px;overflow:hidden;width:80px}
+.prog-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--saffron));transition:width .4s ease}
+.prog-bar.tr i{background:linear-gradient(90deg,var(--green),#6dd4a0)}
+.prog-pct{font-size:10px;color:var(--muted);font-family:"JetBrains Mono",monospace}
+.actions-cell{display:flex;gap:6px;flex-wrap:wrap}
+.btn-act{padding:5px 10px;border:1px solid var(--border-v);border-radius:var(--r-sm);background:var(--bg3);color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-act:hover{background:var(--bg4);color:var(--cream);border-color:var(--gold-dim)}
+.btn-act.ocr:hover{color:var(--blue);border-color:var(--blue)}
+.btn-act.tr:hover{color:var(--green);border-color:var(--green)}
+.btn-act.exp:hover{color:var(--purple);border-color:var(--purple)}
+.btn-act.ing:hover{color:var(--saffron);border-color:var(--saffron)}
+
+/* Log panel */
+.log-header{padding:14px 16px 10px;border-bottom:1px solid var(--border-v);display:flex;align-items:center;gap:10px}
+.log-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex:1}
+.job-badges{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--border-v);min-height:36px}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;border:1px solid}
+.badge.running{border-color:var(--gold-dim);color:var(--gold);background:#d4a01715}
+.badge.ok{border-color:#4caf7d50;color:var(--green);background:#4caf7d10}
+.badge.fail{border-color:#e05f5f50;color:var(--red);background:#e05f5f10}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.running .badge-dot{animation:pulse 1s infinite}
+.log-body{flex:1;overflow-y:auto;padding:10px 14px;font-family:"JetBrains Mono",monospace;font-size:11px;color:#9a8f7a;line-height:1.6;white-space:pre-wrap;word-break:break-all}
+.log-line-ok{color:var(--green)}
+.log-line-err{color:var(--red)}
+.log-line-info{color:var(--gold)}
+.log-clear{padding:8px 12px;border-top:1px solid var(--border-v)}
+.btn-clear{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer}
+.btn-clear:hover{color:var(--red)}
+
+/* Toast */
+#toast{position:fixed;right:20px;bottom:20px;background:var(--bg3);color:var(--ink);padding:10px 16px;border-radius:var(--r);border:1px solid var(--border-v);font-size:13px;box-shadow:var(--shadow);display:none;z-index:9999}
+#toast.ok{border-color:var(--green)}
+#toast.fail{border-color:var(--red)}
+
+/* Scrollbars */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:999px}
+
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .e-icon{font-size:40px;margin-bottom:12px}
+.empty-state h3{font-size:16px;color:var(--cream);margin-bottom:8px}
+.empty-state p{font-size:13px;line-height:1.6;max-width:360px;margin:0 auto}
 </style>
-</head><body>
-<h1>Inbox Dashboard</h1>
-<div id="meta" class="mut"></div>
-<table id="grid"><thead><tr>
-  <th>Doc</th><th>PDFs</th><th>JSONL</th><th>Ingested pages</th><th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>
-</tr></thead><tbody></tbody></table>
+</head>
+<body>
+<div class="app">
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="brand-deva">&#2360;&#2306;&#2360;&#2381;&#2325;&#2371;&#2340;</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--cream)">Sanskrit Automaton</div>
+        <div class="brand-sub">OCR &middot; Normalize &middot; Translate &middot; Export</div>
+      </div>
+    </div>
+    <div class="top-bar-spacer"></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="engine-label">Engine</span>
+      <select id="engineSelect" class="engine-select">
+        <option value="gemini:gemini-2.5-pro">&#x2726; Gemini 2.5 Pro (highest quality)</option>
+        <option value="gemini:gemini-2.0-flash">&#x26A1; Gemini 2.0 Flash (fast)</option>
+        <option value="openai:gpt-4o">&#x1F535; GPT-4o</option>
+        <option value="openai:gpt-4o-mini">&#x1F535; GPT-4o-mini (cheap)</option>
+        <option value="echo">&#x1F501; Echo (test)</option>
+      </select>
+    </div>
+    <div class="status-dot" title="Server running"></div>
+    <button class="btn-refresh" onclick="refresh()">&#x27F3; Refresh</button>
+  </header>
+
+  <!-- Corpus browser sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">&#x1F4DA; Scripture Corpus</div>
+      <div class="corpus-path" id="corpusPath">Loading&hellip;</div>
+    </div>
+    <div class="sidebar-search">
+      <span class="si">&#x1F50D;</span>
+      <input type="text" id="corpusSearch" placeholder="Search scriptures&hellip;" oninput="filterCorpus(this.value)"/>
+    </div>
+    <div class="corpus-tree" id="corpusTree">
+      <div class="empty-state"><div class="e-icon">&#x1F504;</div><p>Loading corpus&hellip;</p></div>
+    </div>
+    <div class="sidebar-actions">
+      <div class="sel-count" id="selCount">No files selected</div>
+      <div class="import-split-row">
+        <input type="checkbox" id="autoSplit" checked/>
+        <label for="autoSplit">Auto-split multi-page PDFs</label>
+      </div>
+      <button class="btn-import" id="importBtn" onclick="importSelected()">&#x2B07; Import to Inbox</button>
+    </div>
+  </aside>
+
+  <!-- Pipeline dashboard -->
+  <main class="main">
+    <div class="section-title">Pipeline Status</div>
+    <div class="batch-bar">
+      <button class="btn-batch" onclick="batchAction('ocr')">&#x25B6; OCR All</button>
+      <button class="btn-batch" onclick="batchAction('ingest')">&#x2B06; Ingest All</button>
+      <button class="btn-batch" onclick="batchAction('translate')">&#x2726; Translate All</button>
+      <button class="btn-batch" onclick="batchAction('export')">&#x2913; Export All</button>
+    </div>
+    <div id="pipelineWrap">
+      <div class="empty-state">
+        <div class="e-icon">&#x1F4C2;</div>
+        <h3>No documents in inbox</h3>
+        <p>Use the corpus browser on the left to select scriptures from the D: drive and import them.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Job log -->
+  <aside class="log-panel">
+    <div class="log-header">
+      <span class="log-title">Job Log</span>
+      <span id="runningCount" style="font-size:10px;color:var(--muted)">idle</span>
+    </div>
+    <div class="job-badges" id="jobBadges"></div>
+    <div class="log-body" id="logBody"><span style="color:var(--muted)">Awaiting jobs&hellip;</span></div>
+    <div class="log-clear"><button class="btn-clear" onclick="clearLog()">&#x2715; Clear log</button></div>
+  </aside>
+</div>
 <div id="toast"></div>
+
 <script>
+// ── Config ─────────────────────────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const cfg = {
-  inbox:   params.get("inbox")   || "inbox",
-  raw:     params.get("raw")     || "data/raw",
-  db:      params.get("db")      || "data/context.db",
-  exports: params.get("exports") || "exports",
+  inbox:   params.get('inbox')   || 'inbox',
+  raw:     params.get('raw')     || 'data/raw',
+  db:      params.get('db')      || 'data/context.db',
+  exports: params.get('exports') || 'exports',
+};
+
+// ── State ──────────────────────────────────────────────────────────────────
+let corpusData  = [];      // raw API response
+let pdfReg      = {};      // numericId -> {path, doc, name}
+let pidCounter  = 0;
+let selIds      = new Set(); // selected numeric IDs — avoids JSON-in-HTML bugs
+let activeJobs  = {};
+let logLines    = [];
+
+// ── Utils ──────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-document.getElementById("meta").textContent =
-  `${cfg.inbox} | raw=${cfg.raw} | db=${cfg.db} | exports=${cfg.exports}`;
+function fmtSize(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b/1024).toFixed(0) + ' KB';
+  return (b/1048576).toFixed(1) + ' MB';
+}
+function pct(a,b) { return b ? Math.round(100*a/b) : 0; }
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.className = type || '';
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2800);
+}
+function addLog(line, cls) {
+  logLines.push({line, cls: cls || ''});
+  if (logLines.length > 600) logLines.shift();
+  renderLog();
+}
+function renderLog() {
+  const el = document.getElementById('logBody');
+  el.innerHTML = logLines.map(function(l) {
+    return '<span' + (l.cls ? ' class="' + l.cls + '"' : '') + '>' + esc(l.line) + '</span>\n';
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+function clearLog() { logLines = []; renderLog(); }
+function getEngine() { return document.getElementById('engineSelect').value; }
 
-function pct(a,b){return b?Math.round(100*a/b):0;}
-function bar(a,b){return `<div class="bar"><i style="width:${pct(a,b)}%"></i></div><small>${a}/${b} (${pct(a,b)}%)</small>`}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
-
-async function refresh(){
-  const r = await fetch(`/api/status?inbox=${encodeURIComponent(cfg.inbox)}&raw=${encodeURIComponent(cfg.raw)}&db=${encodeURIComponent(cfg.db)}&exports=${encodeURIComponent(cfg.exports)}`);
-  const data = await r.json();
-  const tb = document.querySelector("#grid tbody"); tb.innerHTML = "";
-  for(const row of data){
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td><b>${row.doc}</b></td>
-      <td>${row.pdf_count}</td>
-      <td>${bar(row.jsonl_count,row.pdf_count)}</td>
-      <td>${bar(row.ingested_pages,row.pdf_count)}</td>
-      <td>${row.total_lines}</td>
-      <td>${bar(row.translated_lines,row.total_lines)}</td>
-      <td>${row.exports}</td>
-      <td class="row-actions">
-        <button data-act="ocr" data-doc="${row.doc}">OCR</button>
-        <button data-act="ingest" data-doc="${row.doc}">Ingest</button>
-        <button data-act="translate" data-doc="${row.doc}">Translate (50)</button>
-        <button data-act="export" data-doc="${row.doc}">Export</button>
-      </td>`;
-    tb.appendChild(tr);
-  }
+// ── Pipeline status ────────────────────────────────────────────────────────
+async function refresh() {
+  try {
+    const r = await fetch('/api/status?inbox=' + encodeURIComponent(cfg.inbox) +
+      '&raw=' + encodeURIComponent(cfg.raw) +
+      '&db=' + encodeURIComponent(cfg.db) +
+      '&exports=' + encodeURIComponent(cfg.exports));
+    renderPipeline(await r.json());
+  } catch(e) { toast('Refresh failed: ' + e, 'fail'); }
 }
 
-async function poll(jid,label){
-  let tries=0;
-  while(true){
-    const r = await fetch(`/api/job/${jid}`);
-    const j = await r.json();
-    if(!j.running){ toast(`${label}: ${j.ok ? "done" : "failed"}`); console.log(j.out, j.err); refresh(); return; }
-    await new Promise(r=>setTimeout(r, 1200));
-    if(++tries%5===0) toast(`${label}: working…`);
+function renderPipeline(rows) {
+  const wrap = document.getElementById('pipelineWrap');
+  if (!rows.length) {
+    wrap.innerHTML = '<div class="empty-state"><div class="e-icon">&#x1F4C2;</div><h3>No documents in inbox</h3><p>Use the corpus browser to import scriptures.</p></div>';
+    return;
   }
+  let html = '<table class="pipeline-table"><thead><tr>' +
+    '<th>Document</th><th>PDFs</th><th>JSONL</th><th>Ingested</th>' +
+    '<th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>' +
+    '</tr></thead><tbody>';
+  rows.forEach(function(r) {
+    html += '<tr>' +
+      '<td><div class="doc-name">' + esc(r.doc) + '</div></td>' +
+      '<td><span class="num-cell">' + r.pdf_count + '</span></td>' +
+      '<td>' + progBar(r.jsonl_count, r.pdf_count, false) + '</td>' +
+      '<td>' + progBar(r.ingested_pages, r.pdf_count, false) + '</td>' +
+      '<td><span class="num-cell">' + r.total_lines + '</span></td>' +
+      '<td>' + progBar(r.translated_lines, r.total_lines, true) + '</td>' +
+      '<td><span class="num-cell">' + r.exports + '</span></td>' +
+      '<td class="actions-cell">' +
+        '<button class="btn-act ocr" data-act="ocr" data-doc="' + esc(r.doc) + '">OCR</button>' +
+        '<button class="btn-act ing" data-act="ingest" data-doc="' + esc(r.doc) + '">Ingest</button>' +
+        '<button class="btn-act tr" data-act="translate" data-doc="' + esc(r.doc) + '">Translate</button>' +
+        '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '">Export</button>' +
+      '</td></tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
 }
 
-document.addEventListener("click", async ev=>{
-  const b = ev.target.closest("button[data-act]");
-  if(!b) return;
-  const doc = b.dataset.doc;
-  const act = b.dataset.act;
+function progBar(a, b, green) {
+  const p = pct(a, b);
+  return '<div class="prog-wrap"><div class="prog-bar' + (green ? ' tr' : '') + '"><i style="width:' + p + '%"></i></div>' +
+    '<span class="prog-pct">' + a + '/' + (b || '?') + ' (' + p + '%)</span></div>';
+}
 
-  if(act==="ocr"){
-    const dpi = prompt("DPI?", "400") || "400";
-    const langs = prompt("Tesseract langs? (e.g. san+hin+eng)", "san+hin+eng") || "san+hin+eng";
-    const r = await fetch("/api/ocr",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, dpi, langs, inbox:cfg.inbox, raw:cfg.raw})});
-    const j = await r.json(); if(j.job){ poll(j.job, `OCR ${doc}`); }
-    else toast(j.message||"No work");
-  }
-  if(act==="ingest"){
-    const r = await fetch("/api/ingest",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db:cfg.db, raw:cfg.raw})});
-    const j = await r.json(); if(j.job) poll(j.job, `Ingest ${doc}`);
-  }
-  if(act==="translate"){
-    const engine = prompt("Engine?", "openai:gpt-4o-mini") || "openai:gpt-4o-mini";
-    const limit = prompt("Limit (rows)?", "50") || "50";
-    const r = await fetch("/api/translate",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db:cfg.db, engine, limit})});
-    const j = await r.json(); if(j.job) poll(j.job, `Translate ${doc}`);
-  }
-  if(act==="export"){
-    const title = `${doc} — English Translation`;
-    const r = await fetch("/api/export",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db:cfg.db, out:cfg.exports, title})});
-    const j = await r.json(); if(j.job) poll(j.job, `Export ${doc}`);
-  }
+// ── Pipeline actions ───────────────────────────────────────────────────────
+document.getElementById('pipelineWrap').addEventListener('click', async function(ev) {
+  const b = ev.target.closest('button[data-act]');
+  if (!b) return;
+  await doAction(b.dataset.act, b.dataset.doc);
 });
 
+async function doAction(act, doc) {
+  if (act === 'ocr') {
+    const dpi = prompt('DPI for OCR?', '400') || '400';
+    const langs = prompt('Tesseract lang string?', 'san+hin+eng') || 'san+hin+eng';
+    const r = await fetch('/api/ocr', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, dpi, langs, inbox: cfg.inbox, raw: cfg.raw})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'OCR ' + doc, 'ocr', doc); toast('OCR started for ' + doc); }
+    else toast(j.message || 'Nothing to OCR', 'ok');
+  }
+  if (act === 'ingest') {
+    const r = await fetch('/api/ingest', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db, raw: cfg.raw})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'Ingest ' + doc, 'ingest', doc); toast('Ingest started for ' + doc); }
+  }
+  if (act === 'translate') {
+    const eng = getEngine();
+    const limit = prompt('Max passages per run?', '100') || '100';
+    const r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db, engine: eng, limit})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'Translate ' + doc, 'translate', doc); toast('Translation started (' + eng + ')'); }
+  }
+  if (act === 'export') {
+    const r = await fetch('/api/export', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db, out: cfg.exports})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'Export ' + doc, 'export', doc); toast('Export started for ' + doc); }
+  }
+}
+
+async function batchAction(act) {
+  document.querySelectorAll('button[data-act="' + act + '"]').forEach(async function(b) {
+    await doAction(act, b.dataset.doc);
+  });
+}
+
+// ── Job tracking ───────────────────────────────────────────────────────────
+function trackJob(jid, label, kind, doc) {
+  activeJobs[jid] = {label, kind, doc, done: false, ok: null};
+  addLog('> ' + label, 'log-line-info');
+  renderBadges();
+  pollJob(jid, label);
+}
+
+async function pollJob(jid, label) {
+  let lastOutLen = 0;
+  while (true) {
+    await new Promise(function(res) { setTimeout(res, 1400); });
+    try {
+      const r = await fetch('/api/job/' + jid);
+      const j = await r.json();
+      // Only show new output lines
+      if (j.out && j.out.length > lastOutLen) {
+        const newText = j.out.slice(lastOutLen);
+        lastOutLen = j.out.length;
+        newText.split('\n').filter(function(l) { return l.trim(); }).slice(-6)
+          .forEach(function(l) { addLog('  ' + l); });
+      }
+      if (!j.running) {
+        activeJobs[jid].done = true;
+        activeJobs[jid].ok   = j.ok;
+        addLog((j.ok ? '[OK] ' : '[FAIL] ') + label, j.ok ? 'log-line-ok' : 'log-line-err');
+        if (j.err && !j.ok) addLog(j.err.slice(0, 400), 'log-line-err');
+        toast(label + ': ' + (j.ok ? 'done' : 'FAILED'), j.ok ? 'ok' : 'fail');
+        renderBadges();
+        refresh();
+        return;
+      }
+    } catch(e) { addLog('[poll error] ' + e, 'log-line-err'); }
+  }
+}
+
+function renderBadges() {
+  const el = document.getElementById('jobBadges');
+  const running = Object.values(activeJobs).filter(function(j) { return !j.done; });
+  const recent  = Object.values(activeJobs).filter(function(j) { return j.done; }).slice(-4);
+  document.getElementById('runningCount').textContent = running.length ? running.length + ' running' : 'idle';
+  el.innerHTML = running.map(function(j) {
+    return '<span class="badge running"><span class="badge-dot"></span>' + esc(j.label) + '</span>';
+  }).concat(recent.map(function(j) {
+    return '<span class="badge ' + (j.ok ? 'ok' : 'fail') + '"><span class="badge-dot"></span>' + esc(j.label) + '</span>';
+  })).join('');
+}
+
+// ── Corpus browser ─────────────────────────────────────────────────────────
+async function loadCorpus() {
+  try {
+    const r = await fetch('/api/corpus');
+    const d = await r.json();
+    corpusData = d.categories || [];
+    document.getElementById('corpusPath').textContent = d.corpus_root || '';
+    renderCorpus(corpusData);
+  } catch(e) {
+    document.getElementById('corpusTree').innerHTML =
+      '<div class="empty-state"><div class="e-icon">&#x26A0;</div><p>Could not load corpus.<br><small>' + esc(String(e)) + '</small></p></div>';
+  }
+}
+
+function guessDoc(filename, category) {
+  const stem = filename.replace(/\.pdf$/i, '');
+  const m = stem.match(/^([A-Za-z0-9_]+?)_?(\d{1,6})$/);
+  if (m) return m[1].toLowerCase().replace(/[^a-z0-9]/g, '_');
+  return (category + '_' + stem).toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/__+/g, '_').slice(0, 40);
+}
+
+function renderCorpus(cats) {
+  const tree = document.getElementById('corpusTree');
+  if (!cats.length) {
+    tree.innerHTML = '<div class="empty-state"><div class="e-icon">&#x1F4ED;</div><p>No PDFs found.</p></div>';
+    return;
+  }
+  // Rebuild registry — numeric IDs only, no JSON embedded in HTML
+  const prevPaths = new Set(Array.from(selIds).map(function(id) {
+    return pdfReg[id] ? pdfReg[id].path : null;
+  }).filter(Boolean));
+  pdfReg = {};
+  pidCounter = 0;
+  selIds.clear();
+
+  let html = '';
+  cats.forEach(function(cat) {
+    let rows = '';
+    cat.pdfs.forEach(function(pdf) {
+      const id  = ++pidCounter;
+      const doc = guessDoc(pdf.name, cat.category);
+      pdfReg[id] = {path: pdf.path, doc: doc, name: pdf.name};
+      const chk  = prevPaths.has(pdf.path) ? ' checked' : '';
+      if (chk) selIds.add(id);
+      rows += '<div class="pdf-item">' +
+        '<input type="checkbox" class="pdf-cb" data-pid="' + id + '"' + chk + '/>' +
+        '<span class="pdf-name" title="' + esc(pdf.name) + '">' + esc(pdf.name) + '</span>' +
+        '<span class="pdf-size">' + fmtSize(pdf.size) + '</span>' +
+        '</div>';
+    });
+    html += '<div class="cat-item" data-cat="' + esc(cat.category) + '">' +
+      '<div class="cat-header">' +
+        '<span class="cat-arrow">&#x25B6;</span>' +
+        '<span class="cat-name">' + esc(cat.category.replace(/_/g, ' ')) + '</span>' +
+        '<span class="cat-count">' + cat.pdfs.length + '</span>' +
+      '</div>' +
+      '<div class="cat-pdfs">' + rows + '</div>' +
+      '</div>';
+  });
+  tree.innerHTML = html;
+  updateSelCount();
+}
+
+// ── FIXED: event delegation — no inline handlers, no JSON in HTML attrs ────
+var corpusTree = document.getElementById('corpusTree');
+
+// Checkbox changes
+corpusTree.addEventListener('change', function(ev) {
+  var cb = ev.target;
+  if (!cb || !cb.classList.contains('pdf-cb')) return;
+  var id = parseInt(cb.getAttribute('data-pid'), 10);
+  if (isNaN(id)) return;
+  if (cb.checked) {
+    selIds.add(id);
+  } else {
+    selIds.delete(id);
+  }
+  updateSelCount();
+});
+
+// Category header expand/collapse
+corpusTree.addEventListener('click', function(ev) {
+  var hdr = ev.target.closest('.cat-header');
+  if (!hdr) return;
+  hdr.closest('.cat-item').classList.toggle('open');
+});
+
+function updateSelCount() {
+  var n = selIds.size;
+  document.getElementById('selCount').textContent = n
+    ? n + ' file' + (n > 1 ? 's' : '') + ' selected'
+    : 'No files selected';
+}
+
+function filterCorpus(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { renderCorpus(corpusData); return; }
+  var filtered = corpusData.map(function(cat) {
+    return {
+      category: cat.category,
+      pdfs: cat.pdfs.filter(function(p) {
+        return p.name.toLowerCase().includes(q) || cat.category.toLowerCase().includes(q);
+      })
+    };
+  }).filter(function(cat) { return cat.pdfs.length > 0; });
+  renderCorpus(filtered);
+}
+
+async function importSelected() {
+  if (selIds.size === 0) { toast('Select files first'); return; }
+  const autoSplit = document.getElementById('autoSplit').checked;
+  const files = Array.from(selIds).map(function(id) {
+    var r = pdfReg[id];
+    return {path: r.path, doc: r.doc};
+  });
+  const btn = document.getElementById('importBtn');
+  btn.disabled = true;
+  btn.textContent = 'Importing...';
+  toast('Importing ' + files.length + ' file(s)...');
+  try {
+    const r = await fetch('/api/corpus/import', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({inbox: cfg.inbox, files: files, auto_split: autoSplit})
+    });
+    const d = await r.json();
+    if (d.error) { toast('Error: ' + d.error, 'fail'); return; }
+    const splitting = (d.imported || []).filter(function(i) { return i.action === 'splitting'; });
+    const copied    = (d.imported || []).filter(function(i) { return i.action === 'copied'; });
+    const errors    = (d.imported || []).filter(function(i) { return i.error; });
+    var msg = 'Imported: ' + copied.length + ' copied';
+    if (splitting.length) {
+      msg += ', ' + splitting.length + ' splitting (multi-page)';
+      splitting.forEach(function(s) {
+        if (s.job) trackJob(s.job, 'Split ' + s.doc, 'import_split', s.doc);
+      });
+    }
+    if (errors.length) msg += ', ' + errors.length + ' errors';
+    toast(msg, 'ok');
+    addLog('[OK] ' + msg, 'log-line-ok');
+    errors.forEach(function(e) { addLog('[ERR] ' + e.path + ': ' + e.error, 'log-line-err'); });
+    // Clear selections
+    selIds.clear();
+    document.querySelectorAll('.pdf-cb:checked').forEach(function(cb) { cb.checked = false; });
+    updateSelCount();
+    setTimeout(refresh, 1500);
+  } catch(e) {
+    toast('Import failed: ' + e, 'fail');
+    addLog('[ERR] ' + e, 'log-line-err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '\u2B07 Import to Inbox';
+  }
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+loadCorpus();
 refresh();
-setInterval(refresh, 10000);
+setInterval(refresh, 15000);
+setInterval(renderBadges, 2000);
 </script>
-</body></html>
+</body>
+</html>

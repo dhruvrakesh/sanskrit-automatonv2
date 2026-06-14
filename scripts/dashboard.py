@@ -1,28 +1,51 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Simple inbox dashboard (Flask) for Sanskrit Automaton
+Sanskrit Automaton v2 — Enhanced Dashboard (Flask)
 
-- Shows per-doc progress: PDFs, JSONL, ingested pages, total lines, translated lines, exports
-- Never dies on a single bad doc/file (errors are logged & surfaced)
-- Launch OCR / Ingest / Translate / Export as background jobs (threaded)
-- Windows-safe subprocess calls (no shell=True, proper argv lists)
+Features:
+- Rich dark-mode UI with Sanskrit-inspired gold/saffron palette
+- Corpus Browser: browse D: drive categories, select & import PDFs
+- Per-doc pipeline progress (OCR → Ingest → Translate → Export)
+- Engine selector: OpenAI / Gemini (configurable per run)
+- Auto-split multi-page PDFs on import
+- Live job log with stdout/stderr streaming
+- Batch actions: OCR All, Ingest All, Translate All
 
 Run:
-  python scripts/dashboard.py --inbox inbox --raw data/raw --db data/context.db --exports exports --host 127.0.0.1 --port 5057
+  python scripts/dashboard.py --inbox inbox --db data/context.db --raw data/raw --exports exports --host 127.0.0.1 --port 5057
 """
 from __future__ import annotations
-import os, sys, re, json, time, threading, uuid, pathlib, subprocess, sqlite3, traceback
+import os, sys, re, json, time, threading, uuid, pathlib, subprocess, sqlite3, traceback, shutil
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple, Optional
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory, Response
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT   = pathlib.Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
+
+# Load .env early so CORPUS_ROOT etc. are available
+def _load_env():
+    env_path = ROOT / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        s = line.strip()
+        if not s or s.startswith("#"):
+            continue
+        k, sep, v = s.partition("=")
+        if sep:
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+_load_env()
+
+CORPUS_ROOT = pathlib.Path(os.environ.get("CORPUS_ROOT", r"D:\hindu.holy.scriptures.all.sanskrit.pdf.entIDity"))
 
 app = Flask("dashboard")
 
-# ---------------- Job runner ----------------
+# ──────────────────────────────────────────────────────────────────────────────
+# Job runner
+# ──────────────────────────────────────────────────────────────────────────────
 
 @dataclass
 class Job:
@@ -41,14 +64,16 @@ JOBS_LOCK = threading.Lock()
 
 def _run_job(job: Job):
     try:
-        proc = subprocess.Popen(job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=str(ROOT))
+        proc = subprocess.Popen(
+            job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=str(ROOT)
+        )
         out, err = proc.communicate()
-        job.ok = (proc.returncode == 0)
+        job.ok  = proc.returncode == 0
         job.out = (out or b"").decode("utf-8", "replace")
         job.err = (err or b"").decode("utf-8", "replace")
     except Exception as e:
-        job.ok = False
-        job.err = f"{type(e).__name__}: {e}\n" + traceback.format_exc()
+        job.ok  = False
+        job.err = f"{type(e).__name__}: {e}\n{traceback.format_exc()}"
     finally:
         job.end = time.time()
 
@@ -56,13 +81,15 @@ def launch(kind: str, doc: str, argv: List[str]) -> str:
     job = Job(id=str(uuid.uuid4()), kind=kind, doc=doc, cmd=argv)
     with JOBS_LOCK:
         JOBS[job.id] = job
-    t = threading.Thread(target=_run_job, args=(job,), daemon=True)
-    t.start()
+    threading.Thread(target=_run_job, args=(job,), daemon=True).start()
     return job.id
 
-# -------------- utils ----------------
 
-PDF_RE = re.compile(r"^([A-Za-z0-9_]+)_(\d{4})\.pdf$", re.IGNORECASE)
+# ──────────────────────────────────────────────────────────────────────────────
+# Inbox / JSONL scanner
+# ──────────────────────────────────────────────────────────────────────────────
+
+PDF_RE  = re.compile(r"^([A-Za-z0-9_]+)_(\d{4})\.pdf$",           re.IGNORECASE)
 JSONL_RE = re.compile(r"^([A-Za-z0-9_]+)_(\d{4})(?:_norm)?\.jsonl$", re.IGNORECASE)
 
 def scan_inbox(inbox: pathlib.Path) -> Dict[str, List[int]]:
@@ -71,7 +98,7 @@ def scan_inbox(inbox: pathlib.Path) -> Dict[str, List[int]]:
         return docs
     for p in inbox.iterdir():
         m = PDF_RE.match(p.name)
-        if not m: 
+        if not m:
             continue
         doc, pg = m.group(1), int(m.group(2))
         docs.setdefault(doc, []).append(pg)
@@ -85,7 +112,7 @@ def scan_jsonl(raw: pathlib.Path) -> Dict[str, List[int]]:
         return docs
     for p in raw.iterdir():
         m = JSONL_RE.match(p.name)
-        if not m: 
+        if not m:
             continue
         doc, pg = m.group(1), int(m.group(2))
         docs.setdefault(doc, []).append(pg)
@@ -98,7 +125,7 @@ def connect(db_path: pathlib.Path) -> sqlite3.Connection:
     con.row_factory = sqlite3.Row
     return con
 
-def _tables(con): 
+def _tables(con):
     return {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
 
 def _cols(con, t):
@@ -108,15 +135,11 @@ def _cols(con, t):
         return set()
 
 def detect_schema(con):
-    """Return a dict with keys:
-       {'pg_col','idx_col','doc_mode'} 
-       doc_mode ∈ {'join_docs', 'passages_doc', 'passages_doc_code'}
-    """
     pc = _cols(con, "passages")
-    pg_col = "page_no" if "page_no" in pc else ( "pageno" if "pageno" in pc else ( "page" if "page" in pc else "rowid"))
+    pg_col  = "page_no" if "page_no" in pc else ("pageno" if "pageno" in pc else ("page" if "page" in pc else "rowid"))
     idx_col = "idx" if "idx" in pc else "rowid"
     tset = _tables(con)
-    if "docs" in tset and {"id","code"}.issubset(_cols(con, "docs")) and "doc_id" in pc:
+    if "docs" in tset and {"id", "code"}.issubset(_cols(con, "docs")) and "doc_id" in pc:
         doc_mode = "join_docs"
     elif "doc" in pc:
         doc_mode = "passages_doc"
@@ -124,7 +147,7 @@ def detect_schema(con):
         doc_mode = "passages_doc_code"
     else:
         doc_mode = "unknown"
-    return {"pg_col":pg_col, "idx_col":idx_col, "doc_mode":doc_mode}
+    return {"pg_col": pg_col, "idx_col": idx_col, "doc_mode": doc_mode}
 
 def count_ingested(con, schema, doc):
     pg = schema["pg_col"]
@@ -136,10 +159,8 @@ def count_ingested(con, schema, doc):
     elif dm == "passages_doc_code":
         sql = f"SELECT COUNT(DISTINCT {pg}) FROM passages WHERE doc_code=?"
     else:
-        return 0, 0
-    pages = int(con.execute(sql,(doc,)).fetchone()[0] or 0)
-
-    # total lines & translated lines
+        return 0, 0, 0
+    pages = int(con.execute(sql, (doc,)).fetchone()[0] or 0)
     if dm == "join_docs":
         sql_tot = "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?"
         sql_tr  = "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''"
@@ -149,70 +170,21 @@ def count_ingested(con, schema, doc):
     else:
         sql_tot = "SELECT COUNT(*) FROM passages WHERE doc_code=?"
         sql_tr  = "SELECT COUNT(*) FROM passages WHERE doc_code=? AND TRIM(COALESCE(translation,''))<>''"
-    total = int(con.execute(sql_tot,(doc,)).fetchone()[0] or 0)
-    trans = int(con.execute(sql_tr,(doc,)).fetchone()[0] or 0)
+    total = int(con.execute(sql_tot, (doc,)).fetchone()[0] or 0)
+    trans = int(con.execute(sql_tr,  (doc,)).fetchone()[0] or 0)
     return pages, total, trans
 
 def count_exports(exports_dir: pathlib.Path, doc: str) -> int:
-    if not exports_dir.exists(): return 0
+    if not exports_dir.exists():
+        return 0
     pref = f"{doc}_"
-    return sum(1 for p in exports_dir.iterdir() if p.suffix.lower()==".html" and p.name.startswith(pref))
+    return sum(1 for p in exports_dir.iterdir() if p.suffix.lower() == ".html" and p.name.startswith(pref))
 
-# -------------- API ----------------
 
-def build_status(inbox: pathlib.Path, raw: pathlib.Path, dbp: pathlib.Path, exports: pathlib.Path):
-    # never raise – return empty list on failure and log
-    try:
-        inbox_map = scan_inbox(inbox)
-        raw_map   = scan_jsonl(raw)
-        rows = []
-        with connect(dbp) as con:
-            schema = detect_schema(con)
-            for doc, pdf_pages in sorted(inbox_map.items()):
-                jsonl_pages = set(raw_map.get(doc, []))
-                ing_pages, total_lines, trans_lines = count_ingested(con, schema, doc)
-                rows.append({
-                    "doc": doc,
-                    "pdf_count": len(pdf_pages),
-                    "jsonl_count": len(jsonl_pages),
-                    "ingested_pages": int(ing_pages),
-                    "total_lines": int(total_lines),
-                    "translated_lines": int(trans_lines),
-                    "exports": count_exports(exports, doc),
-                })
-        return rows
-    except Exception as e:
-        traceback.print_exc()
-        return []
+# ──────────────────────────────────────────────────────────────────────────────
+# Doc name validation
+# ──────────────────────────────────────────────────────────────────────────────
 
-@app.get("/")
-def index():
-    return send_from_directory(str(SCRIPTS), "dashboard_static.html")
-
-@app.get("/api/status")
-def api_status():
-    inbox = pathlib.Path(request.args.get("inbox") or "inbox")
-    raw = pathlib.Path(request.args.get("raw") or "data/raw")
-    dbp = pathlib.Path(request.args.get("db") or "data/context.db")
-    exports = pathlib.Path(request.args.get("exports") or "exports")
-    return jsonify(build_status(inbox, raw, dbp, exports))
-
-@app.get("/api/job/<jid>")
-def api_job(jid):
-    with JOBS_LOCK:
-        job = JOBS.get(jid)
-    if not job:
-        return jsonify({"error":"unknown job"}), 404
-    return jsonify({
-        "id": job.id, "kind": job.kind, "doc": job.doc,
-        "ok": job.ok, "start": job.start, "end": job.end,
-        "out": job.out[-4000:], "err": job.err[-4000:],  # tail
-        "running": job.ok is None
-    })
-
-# -------- action endpoints (background) --------
-
-# Doc codes must be safe for paths and CLI (no path traversal, no shell metachars)
 DOC_RE = re.compile(r"^[A-Za-z0-9_\-]+$")
 
 def _validate_doc(doc) -> Optional[str]:
@@ -226,49 +198,224 @@ def py(*args: str) -> List[str]:
 def script(name: str) -> str:
     return str(SCRIPTS / name)
 
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Status API
+# ──────────────────────────────────────────────────────────────────────────────
+
+def build_status(inbox, raw, dbp, exports):
+    try:
+        inbox_map = scan_inbox(inbox)
+        raw_map   = scan_jsonl(raw)
+        rows = []
+        with connect(dbp) as con:
+            schema = detect_schema(con)
+            for doc, pdf_pages in sorted(inbox_map.items()):
+                jsonl_pages = set(raw_map.get(doc, []))
+                ing_pages, total_lines, trans_lines = count_ingested(con, schema, doc)
+                rows.append({
+                    "doc":              doc,
+                    "pdf_count":        len(pdf_pages),
+                    "jsonl_count":      len(jsonl_pages),
+                    "ingested_pages":   int(ing_pages),
+                    "total_lines":      int(total_lines),
+                    "translated_lines": int(trans_lines),
+                    "exports":          count_exports(exports, doc),
+                })
+        return rows
+    except Exception:
+        traceback.print_exc()
+        return []
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Corpus Browser API
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _corpus_tree() -> List[dict]:
+    """Return list of {category, pdfs:[{name, size, path}]} from CORPUS_ROOT."""
+    if not CORPUS_ROOT.exists():
+        return []
+    categories = []
+    for cat_dir in sorted(CORPUS_ROOT.iterdir()):
+        if not cat_dir.is_dir():
+            continue
+        pdfs = sorted(
+            [
+                {"name": p.name, "size": p.stat().st_size, "path": str(p)}
+                for p in cat_dir.glob("*.pdf")
+            ],
+            key=lambda x: x["name"],
+        )
+        if pdfs:
+            categories.append({"category": cat_dir.name, "pdfs": pdfs})
+    return categories
+
+
+def _sanitize_doc_name(stem: str) -> str:
+    """Convert a raw filename stem to a safe doc code."""
+    s = re.sub(r"[^A-Za-z0-9_\-]", "_", stem)
+    s = re.sub(r"_+", "_", s).strip("_")
+    return s or "unknown"
+
+
+def _count_pdf_pages(pdf_path: pathlib.Path) -> int:
+    """Count pages in a PDF using pypdf (fast, no rendering needed)."""
+    try:
+        from pypdf import PdfReader
+        return len(PdfReader(str(pdf_path)).pages)
+    except Exception:
+        return 1
+
+
+@app.get("/api/corpus")
+def api_corpus():
+    return jsonify({"corpus_root": str(CORPUS_ROOT), "categories": _corpus_tree()})
+
+
+@app.post("/api/corpus/import")
+def api_corpus_import():
+    """
+    Copy selected PDFs from D: drive into inbox/.
+    Body: {inbox: str, files: [{path: str, doc: str}], auto_split: bool}
+    - If auto_split=true and PDF has >1 page → split into per-page PDFs
+    - Otherwise copy/rename as DocName_0001.pdf
+    """
+    data       = request.get_json(force=True) or {}
+    inbox_dir  = pathlib.Path(data.get("inbox") or "inbox")
+    auto_split = bool(data.get("auto_split", True))
+    files      = data.get("files", [])
+
+    if not files:
+        return jsonify({"error": "no files specified"}), 400
+
+    inbox_dir.mkdir(parents=True, exist_ok=True)
+    results = []
+
+    for item in files:
+        src_path = pathlib.Path(item.get("path", ""))
+        doc_name = _sanitize_doc_name(item.get("doc") or src_path.stem)
+
+        if not src_path.exists():
+            results.append({"path": str(src_path), "error": "file not found"})
+            continue
+
+        try:
+            n_pages = _count_pdf_pages(src_path)
+        except Exception:
+            n_pages = 1
+
+        if auto_split and n_pages > 1:
+            # Launch split job
+            split_script = str(ROOT / "tools" / "split_pdf_pages.py")
+            if not pathlib.Path(split_script).exists():
+                # Also try inbox/ (original location)
+                split_script = str(ROOT / "inbox" / "split_pdf_pages.py")
+            if not pathlib.Path(split_script).exists():
+                # fallback: copy as _0001.pdf
+                dest = inbox_dir / f"{doc_name}_0001.pdf"
+                shutil.copy2(str(src_path), str(dest))
+                results.append({"doc": doc_name, "pages": 1, "action": "copied"})
+            else:
+                # split_pdf_pages.py uses positional input_pdf, -o output_dir, -p prefix
+                cmd = py(split_script,
+                         str(src_path),
+                         "-o", str(inbox_dir),
+                         "-p", doc_name)
+                jid = launch("import_split", doc_name, cmd)
+                results.append({"doc": doc_name, "pages": n_pages, "action": "splitting", "job": jid})
+        else:
+            # Single-page or no split: copy as _0001.pdf (or keep existing naming)
+            stem = src_path.stem
+            if PDF_RE.match(src_path.name):
+                # Already in DocName_NNNN format — copy as-is with sanitized name
+                m = re.match(r"^([A-Za-z0-9_]+)_(\d+)$", stem, re.I)
+                if m:
+                    d, pg = _sanitize_doc_name(m.group(1)), m.group(2).zfill(4)
+                    dest = inbox_dir / f"{d}_{pg}.pdf"
+                else:
+                    dest = inbox_dir / f"{doc_name}_0001.pdf"
+            else:
+                dest = inbox_dir / f"{doc_name}_0001.pdf"
+            shutil.copy2(str(src_path), str(dest))
+            results.append({"doc": doc_name, "pages": n_pages, "action": "copied", "dest": dest.name})
+
+    return jsonify({"imported": results})
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Pipeline Action Endpoints
+# ──────────────────────────────────────────────────────────────────────────────
+
+@app.get("/")
+def index():
+    return send_from_directory(str(SCRIPTS), "dashboard_static.html")
+
+@app.get("/api/status")
+def api_status():
+    inbox   = pathlib.Path(request.args.get("inbox")   or "inbox")
+    raw     = pathlib.Path(request.args.get("raw")     or "data/raw")
+    dbp     = pathlib.Path(request.args.get("db")      or "data/context.db")
+    exports = pathlib.Path(request.args.get("exports") or "exports")
+    return jsonify(build_status(inbox, raw, dbp, exports))
+
+@app.get("/api/job/<jid>")
+def api_job(jid):
+    with JOBS_LOCK:
+        job = JOBS.get(jid)
+    if not job:
+        return jsonify({"error": "unknown job"}), 404
+    return jsonify({
+        "id": job.id, "kind": job.kind, "doc": job.doc,
+        "ok": job.ok, "start": job.start, "end": job.end,
+        "out": job.out[-6000:], "err": job.err[-2000:],
+        "running": job.ok is None,
+    })
+
 @app.post("/api/ocr")
 def api_ocr():
-    data = request.get_json(force=True) or {}
+    data  = request.get_json(force=True) or {}
     doc   = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    dpi   = str(data.get("dpi") or 400)
-    langs = str(data.get("langs") or "san+hin+eng")
-
-    # find missing PDFs → OCR each (creates data/raw/<doc>_<pg>.jsonl)
+    dpi        = str(data.get("dpi") or 400)
+    langs      = str(data.get("langs") or "san+hin+eng").strip()
+    lang_tries = [langs]
+    for fb in ("san", "hin", "eng"):
+        if fb not in lang_tries:
+            lang_tries.append(fb)
     inbox = pathlib.Path(data.get("inbox") or "inbox")
-    raw   = pathlib.Path(data.get("raw") or "data/raw")
+    raw   = pathlib.Path(data.get("raw")   or "data/raw")
     missing: List[pathlib.Path] = []
     for p in inbox.glob(f"{doc}_*.pdf"):
-        m = PDF_RE.match(p.name); 
-        if not m: continue
+        m = PDF_RE.match(p.name)
+        if not m:
+            continue
         pg = m.group(2)
-        j1 = raw / f"{doc}_{pg}.jsonl"
-        j2 = raw / f"{doc}_{pg}_norm.jsonl"
-        if not j1.exists() and not j2.exists():
+        if not (raw / f"{doc}_{pg}.jsonl").exists() and not (raw / f"{doc}_{pg}_norm.jsonl").exists():
             missing.append(p)
     if not missing:
-        return jsonify({"message":"Nothing to OCR"}), 200
-
-    # Create one big job that loops inside a Python runner
+        return jsonify({"message": "Nothing to OCR"}), 200
     runner = [
         sys.executable, "-u", "-c",
         (
-            "import sys,subprocess,pathlib,os;"
+            "import sys,subprocess,pathlib;"
             f"pdfs={json.dumps([str(p) for p in missing])};"
             f"outdir={json.dumps(str(raw))};"
-            f"dpi={json.dumps(dpi)};langs={json.dumps(langs)};"
-            "root=str(pathlib.Path(sys.argv[0]).resolve().parents[2]);"
+            f"dpi={json.dumps(dpi)};"
+            f"lang_tries={json.dumps(lang_tries)};"
+            f"root={json.dumps(str(ROOT))};"
             "scr=str(pathlib.Path(root)/'scripts'/'ocr_pdf.py');"
             "ok=0;"
-            "import shutil;"
             "for i,p in enumerate(pdfs,1):\n"
-            "  cmd=[sys.executable,scr,'--pdf',p,'--out',str(pathlib.Path(outdir)/ (pathlib.Path(p).stem+'.jsonl')),'--dpi',dpi,'--langs',langs];\n"
-            "  pr=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE);\n"
+            "  outpath=str(pathlib.Path(outdir)/(pathlib.Path(p).stem+'.jsonl'));\n"
+            "  cmd=[sys.executable,scr,'--pdf',p,'--out',outpath,'--dpi',dpi,'--max-dpi','600','--lang-tries']+lang_tries;\n"
+            "  pr=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,cwd=root);\n"
+            "  sys.stdout.write(pr.stdout.decode('utf-8','replace'));\n"
             "  sys.stdout.write(f'[{i}/{len(pdfs)}] {pathlib.Path(p).name} -> {pr.returncode}\\n'); sys.stdout.flush();\n"
-            "  ok+= (pr.returncode==0)\n"
+            "  ok+=(pr.returncode==0)\n"
             "print(f'Done: {ok}/{len(pdfs)} ok');"
-        )
+        ),
     ]
     jid = launch("ocr", doc, runner)
     return jsonify({"job": jid})
@@ -279,176 +426,651 @@ def api_ingest():
     doc  = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    db   = data.get("db") or "data/context.db"
+    db   = data.get("db")  or "data/context.db"
     raw  = data.get("raw") or "data/raw"
     glob = str(pathlib.Path(raw) / f"{doc}_*.jsonl")
-    cmd = py(script("ingest_jsonl_fast.py"),
-             "--doc", doc, "--glob", glob, "--db", db)
-    jid = launch("ingest", doc, cmd)
-    return jsonify({"job": jid})
+    cmd = py(script("ingest_jsonl_fast.py"), "--doc", doc, "--glob", glob, "--db", db)
+    return jsonify({"job": launch("ingest", doc, cmd)})
 
 @app.post("/api/translate")
 def api_translate():
-    data = request.get_json(force=True) or {}
-    doc = _validate_doc(data.get("doc"))
+    data   = request.get_json(force=True) or {}
+    doc    = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    db  = data.get("db") or "data/context.db"
-    engine = data.get("engine") or "openai:gpt-4o-mini"
+    db     = data.get("db")     or "data/context.db"
+    engine = data.get("engine") or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
     limit  = str(data.get("limit") or 50)
     sleep  = str(data.get("sleep") or 0.6)
     cmd = py(script("translate_passages.py"),
-             "--db", db, "--doc", doc, "--engine", engine, "--sleep", sleep, "--limit", limit)
-    jid = launch("translate", doc, cmd)
-    return jsonify({"job": jid})
+             "--db", db, "--doc", doc, "--engine", engine,
+             "--sleep", sleep, "--limit", limit)
+    return jsonify({"job": launch("translate", doc, cmd)})
 
 @app.post("/api/export")
 def api_export():
-    data = request.get_json(force=True) or {}
-    doc = _validate_doc(data.get("doc"))
+    data  = request.get_json(force=True) or {}
+    doc   = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    db  = data.get("db") or "data/context.db"
-    out = data.get("out") or "exports"
+    db    = data.get("db")  or "data/context.db"
+    out   = data.get("out") or "exports"
     title = data.get("title") or f"{doc} — English Translation"
     cmd = py(script("export_html.py"),
              "--db", db, "--doc", doc, "--out", out, "--title", title, "--no-sanskrit")
-    jid = launch("export", doc, cmd)
-    return jsonify({"job": jid})
+    return jsonify({"job": launch("export", doc, cmd)})
 
-# -------------- static HTML (1 file) --------------
 
-# Written next to this script so Flask can serve it easily
-(SCRIPTS / "dashboard_static.html").write_text(r"""
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Inbox Dashboard</title>
+# ──────────────────────────────────────────────────────────────────────────────
+# Static Dashboard HTML — rich, dark-mode, Sanskrit-inspired
+# ──────────────────────────────────────────────────────────────────────────────
+
+_DASHBOARD_HTML = r"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Sanskrit Automaton — Pipeline Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root{--ink:#111;--mut:#6b7280;--bar:#e5e7eb;--ok:#6366f1}
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);margin:24px}
-  h1{font-size:28px;margin:0 0 16px 0}
-  small{color:var(--mut)}
-  table{width:100%;border-collapse:collapse;margin-top:12px}
-  th,td{padding:10px;border-bottom:1px solid #f0f0f0;text-align:left;font-size:14px}
-  .bar{height:8px;background:var(--bar);border-radius:999px;overflow:hidden}
-  .bar>i{display:block;height:100%;background:var(--ok)}
-  button{padding:6px 10px;border:1px solid #ddd;border-radius:7px;background:#fff;cursor:pointer}
-  button:hover{background:#f9fafb}
-  .row-actions button{margin-right:6px}
-  #toast{position:fixed;right:14px;bottom:14px;background:#111;color:#fff;padding:10px 12px;border-radius:8px;opacity:.95;display:none}
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  --bg:        #0e0d0b;
+  --bg2:       #161411;
+  --bg3:       #1e1b16;
+  --bg4:       #28231b;
+  --border:    #35302600;
+  --border-v:  #35302680;
+  --gold:      #d4a017;
+  --gold-dim:  #9a721080;
+  --saffron:   #f47c20;
+  --cream:     #f0e6cc;
+  --muted:     #8a7d67;
+  --ink:       #e8dcc8;
+  --green:     #4caf7d;
+  --red:       #e05f5f;
+  --blue:      #6b9bd2;
+  --purple:    #a07dd6;
+  --r:         10px;
+  --r-sm:      6px;
+  --shadow:    0 4px 24px #00000060;
+  --glow:      0 0 20px #d4a01730;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; overflow: hidden; }
+
+/* ─── Layout ────────────────────────────────────────────────────────────── */
+.app { display: grid; grid-template-columns: 320px 1fr 340px; grid-template-rows: 56px 1fr; height: 100vh; }
+.top-bar { grid-column: 1/-1; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: var(--bg2); border-bottom: 1px solid var(--border-v); }
+.sidebar  { grid-row: 2; background: var(--bg2); border-right: 1px solid var(--border-v); display: flex; flex-direction: column; overflow: hidden; }
+.main     { grid-row: 2; overflow-y: auto; padding: 20px; }
+.log-panel { grid-row: 2; background: var(--bg2); border-left: 1px solid var(--border-v); display: flex; flex-direction: column; overflow: hidden; }
+
+/* ─── Top bar ────────────────────────────────────────────────────────────── */
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-deva { font-family: "Noto Serif Devanagari", serif; font-size: 22px; color: var(--gold); letter-spacing: 0.02em; }
+.brand-sub  { font-size: 11px; color: var(--muted); font-weight: 500; }
+.top-bar-spacer { flex: 1; }
+.engine-wrap { display: flex; align-items: center; gap: 8px; }
+.engine-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+select.engine-select {
+  background: var(--bg3); border: 1px solid var(--border-v); color: var(--ink);
+  padding: 6px 10px; border-radius: var(--r-sm); font-size: 12px; cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+}
+select.engine-select:focus { outline: none; border-color: var(--gold); }
+.btn-refresh { padding: 7px 14px; background: transparent; border: 1px solid var(--border-v); border-radius: var(--r-sm); color: var(--muted); font-size: 12px; cursor: pointer; transition: all .2s; }
+.btn-refresh:hover { border-color: var(--gold); color: var(--gold); }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ─── Sidebar: corpus browser ────────────────────────────────────────────── */
+.sidebar-header { padding: 14px 16px 10px; border-bottom: 1px solid var(--border-v); }
+.sidebar-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.corpus-path   { font-size: 10px; color: var(--muted); font-family: "JetBrains Mono", monospace; word-break: break-all; }
+.sidebar-search { margin: 10px 12px 0; position: relative; }
+.sidebar-search input { width: 100%; background: var(--bg3); border: 1px solid var(--border-v); border-radius: var(--r-sm); padding: 7px 10px 7px 30px; color: var(--ink); font-size: 12px; }
+.sidebar-search input:focus { outline: none; border-color: var(--gold-dim); }
+.sidebar-search .si { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; }
+.corpus-tree { flex: 1; overflow-y: auto; padding: 8px 0; }
+.cat-item { }
+.cat-header {
+  display: flex; align-items: center; gap: 8px; padding: 7px 16px;
+  cursor: pointer; transition: background .15s; user-select: none;
+}
+.cat-header:hover { background: var(--bg3); }
+.cat-arrow { font-size: 9px; color: var(--muted); transition: transform .2s; display: inline-block; }
+.cat-item.open .cat-arrow { transform: rotate(90deg); }
+.cat-name { font-size: 12px; font-weight: 600; color: var(--cream); flex: 1; }
+.cat-count { font-size: 10px; color: var(--muted); font-family: "JetBrains Mono", monospace; }
+.cat-pdfs { display: none; padding: 0 0 4px 16px; }
+.cat-item.open .cat-pdfs { display: block; }
+.pdf-item { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 20px; border-radius: var(--r-sm); cursor: pointer; transition: background .12s; }
+.pdf-item:hover { background: var(--bg3); }
+.pdf-item input[type=checkbox] { accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
+.pdf-name { font-size: 11px; color: var(--ink); flex: 1; font-family: "JetBrains Mono", monospace; }
+.pdf-size { font-size: 10px; color: var(--muted); white-space: nowrap; }
+.sidebar-actions { padding: 12px; border-top: 1px solid var(--border-v); display: flex; flex-direction: column; gap: 8px; }
+.sel-count { font-size: 11px; color: var(--muted); text-align: center; }
+.btn-import { width: 100%; padding: 9px; background: linear-gradient(135deg, var(--saffron), var(--gold)); border: none; border-radius: var(--r-sm); color: #0e0d0b; font-weight: 700; font-size: 12px; cursor: pointer; transition: opacity .2s, transform .15s; letter-spacing: .03em; }
+.btn-import:hover { opacity: .9; transform: translateY(-1px); }
+.btn-import:active { transform: translateY(0); }
+.import-split-row { display: flex; align-items: center; gap: 8px; }
+.import-split-row label { font-size: 11px; color: var(--muted); }
+.import-split-row input { accent-color: var(--gold); }
+
+/* ─── Main: pipeline table ───────────────────────────────────────────────── */
+.section-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.section-title::after { content:""; flex:1; height:1px; background: var(--border-v); }
+.batch-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.btn-batch { padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border-v); border-radius: var(--r-sm); color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; transition: all .15s; letter-spacing: .02em; }
+.btn-batch:hover { border-color: var(--gold-dim); color: var(--cream); }
+.pipeline-table { width: 100%; border-collapse: collapse; }
+.pipeline-table th { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border-v); }
+.pipeline-table td { padding: 10px 12px; border-bottom: 1px solid #ffffff08; vertical-align: middle; }
+.pipeline-table tr:last-child td { border-bottom: none; }
+.pipeline-table tr:hover td { background: var(--bg3); }
+.doc-name { font-weight: 600; color: var(--cream); font-size: 13px; font-family: "JetBrains Mono", monospace; }
+.num-cell { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); }
+.prog-wrap { display: flex; flex-direction: column; gap: 3px; }
+.prog-bar { height: 6px; background: var(--bg4); border-radius: 999px; overflow: hidden; width: 80px; }
+.prog-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold), var(--saffron)); transition: width .4s ease; }
+.prog-bar.tr i { background: linear-gradient(90deg, var(--green), #6dd4a0); }
+.prog-pct { font-size: 10px; color: var(--muted); font-family: "JetBrains Mono", monospace; }
+.actions-cell { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn-act { padding: 5px 10px; border: 1px solid var(--border-v); border-radius: var(--r-sm); background: var(--bg3); color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.btn-act:hover { background: var(--bg4); color: var(--cream); border-color: var(--gold-dim); }
+.btn-act.ocr  :hover, .btn-act:hover.ocr   { color: var(--blue); border-color: var(--blue); }
+.btn-act.tr   { }
+.btn-act.tr:hover { color: var(--green); border-color: var(--green); }
+.btn-act.exp:hover { color: var(--purple); border-color: var(--purple); }
+.btn-act.ing:hover { color: var(--saffron); border-color: var(--saffron); }
+
+/* ─── Log panel ──────────────────────────────────────────────────────────── */
+.log-header { padding: 14px 16px 10px; border-bottom: 1px solid var(--border-v); display: flex; align-items: center; gap: 10px; }
+.log-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); flex: 1; }
+.job-badges { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 12px; border-bottom: 1px solid var(--border-v); min-height: 36px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 600; border: 1px solid; animation: fadeIn .3s; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+.badge.running { border-color: var(--gold-dim); color: var(--gold); background: #d4a01715; }
+.badge.ok      { border-color: #4caf7d50; color: var(--green); background: #4caf7d10; }
+.badge.fail    { border-color: #e05f5f50; color: var(--red); background: #e05f5f10; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge.running .badge-dot { animation: pulse 1s infinite; }
+.log-body { flex: 1; overflow-y: auto; padding: 10px 14px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: #9a8f7a; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+.log-line-ok  { color: var(--green); }
+.log-line-err { color: var(--red); }
+.log-line-info { color: var(--gold); }
+.log-clear { padding: 8px 12px; border-top: 1px solid var(--border-v); }
+.btn-clear { background: none; border: none; color: var(--muted); font-size: 11px; cursor: pointer; }
+.btn-clear:hover { color: var(--red); }
+
+/* ─── Toast ──────────────────────────────────────────────────────────────── */
+#toast { position: fixed; right: 20px; bottom: 20px; background: var(--bg3); color: var(--ink); padding: 10px 16px; border-radius: var(--r); border: 1px solid var(--border-v); font-size: 13px; box-shadow: var(--shadow); display: none; z-index: 9999; animation: slideIn .25s; }
+@keyframes slideIn { from{transform:translateX(30px);opacity:0} to{transform:none;opacity:1} }
+#toast.ok   { border-color: var(--green); }
+#toast.fail { border-color: var(--red); }
+
+/* ─── Scrollbars ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 999px; }
+
+/* ─── Empty state ────────────────────────────────────────────────────────── */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty-state .e-icon { font-size: 40px; margin-bottom: 12px; }
+.empty-state h3 { font-size: 16px; color: var(--cream); margin-bottom: 8px; }
+.empty-state p  { font-size: 13px; line-height: 1.6; max-width: 360px; margin: 0 auto; }
 </style>
-</head><body>
-<h1>Inbox Dashboard</h1>
-<div id="meta" class="mut"></div>
-<table id="grid"><thead><tr>
-  <th>Doc</th><th>PDFs</th><th>JSONL</th><th>Ingested pages</th><th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>
-</tr></thead><tbody></tbody></table>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── Top bar ──────────────────────────────────────── -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-deva">संस्कृत</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--cream)">Sanskrit Automaton</div>
+        <div class="brand-sub">OCR · Normalize · Translate · Export</div>
+      </div>
+    </div>
+    <div class="top-bar-spacer"></div>
+    <div class="engine-wrap">
+      <span class="engine-label">Engine</span>
+      <select id="engineSelect" class="engine-select" title="Translation engine">
+        <option value="gemini:gemini-2.5-pro">✦ Gemini 2.5 Pro (highest quality)</option>
+        <option value="gemini:gemini-2.0-flash">⚡ Gemini 2.0 Flash (fast)</option>
+        <option value="openai:gpt-4o">🔵 GPT-4o</option>
+        <option value="openai:gpt-4o-mini">🔵 GPT-4o-mini (cheap)</option>
+        <option value="echo">🔁 Echo (test)</option>
+      </select>
+    </div>
+    <div class="status-dot" title="Server running"></div>
+    <button class="btn-refresh" onclick="refresh()">⟳ Refresh</button>
+  </header>
+
+  <!-- ── Corpus browser sidebar ────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">📚 Scripture Corpus</div>
+      <div class="corpus-path" id="corpusPath">Loading…</div>
+    </div>
+    <div class="sidebar-search">
+      <span class="si">🔍</span>
+      <input type="text" id="corpusSearch" placeholder="Search scriptures…" oninput="filterCorpus(this.value)"/>
+    </div>
+    <div class="corpus-tree" id="corpusTree">
+      <div class="empty-state"><div class="e-icon">🔄</div><p>Loading corpus…</p></div>
+    </div>
+    <div class="sidebar-actions">
+      <div class="sel-count" id="selCount">No files selected</div>
+      <div class="import-split-row">
+        <input type="checkbox" id="autoSplit" checked/>
+        <label for="autoSplit">Auto-split multi-page PDFs</label>
+      </div>
+      <button class="btn-import" onclick="importSelected()">⬇ Import to Inbox</button>
+    </div>
+  </aside>
+
+  <!-- ── Pipeline dashboard main ───────────────────────── -->
+  <main class="main">
+    <div class="section-title">Pipeline Status</div>
+    <div class="batch-bar">
+      <button class="btn-batch" onclick="batchAction('ocr')">▶ OCR All</button>
+      <button class="btn-batch" onclick="batchAction('ingest')">⬆ Ingest All</button>
+      <button class="btn-batch" onclick="batchAction('translate')">✦ Translate All</button>
+      <button class="btn-batch" onclick="batchAction('export')">⤓ Export All</button>
+    </div>
+    <div id="pipelineWrap">
+      <div class="empty-state">
+        <div class="e-icon">📂</div>
+        <h3>No documents in inbox</h3>
+        <p>Use the corpus browser on the left to select scriptures from the D: drive and import them into the inbox.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Job log panel ─────────────────────────────────── -->
+  <aside class="log-panel">
+    <div class="log-header">
+      <span class="log-title">Job Log</span>
+      <span id="runningCount" style="font-size:10px;color:var(--muted)">idle</span>
+    </div>
+    <div class="job-badges" id="jobBadges"></div>
+    <div class="log-body" id="logBody"><span style="color:var(--muted)">Awaiting jobs…</span></div>
+    <div class="log-clear"><button class="btn-clear" onclick="clearLog()">✕ Clear log</button></div>
+  </aside>
+
+</div>
 <div id="toast"></div>
+
 <script>
+// ── Config ─────────────────────────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const cfg = {
   inbox:   params.get("inbox")   || "inbox",
   raw:     params.get("raw")     || "data/raw",
   db:      params.get("db")      || "data/context.db",
   exports: params.get("exports") || "exports",
+};
+
+// ── State ───────────────────────────────────────────────────────────────────
+let corpusData    = [];
+let pdfRegistry   = {};  // id -> {path, doc, name}  — avoids JSON-in-HTML-attr bugs
+let pdfIdCounter  = 0;
+let selectedIds   = new Set();   // Set of numeric registry IDs
+let activeJobs    = {};          // jid -> {kind, doc, label}
+let logLines      = [];
+
+// ── Utilities ───────────────────────────────────────────────────────────────
+function fmtSize(b) {
+  if (b < 1024) return b + " B";
+  if (b < 1024*1024) return (b/1024).toFixed(0) + " KB";
+  return (b/(1024*1024)).toFixed(1) + " MB";
 }
-document.getElementById("meta").textContent =
-  `${cfg.inbox} | raw=${cfg.raw} | db=${cfg.db} | exports=${cfg.exports}`;
+function pct(a, b) { return b ? Math.round(100*a/b) : 0; }
+function toast(msg, type="") {
+  const t = document.getElementById("toast");
+  t.className = type;
+  t.textContent = msg;
+  t.style.display = "block";
+  setTimeout(() => t.style.display = "none", 2800);
+}
+function addLog(line, cls="") {
+  logLines.push({line, cls});
+  if (logLines.length > 600) logLines.shift();
+  renderLog();
+}
+function renderLog() {
+  const el = document.getElementById("logBody");
+  el.innerHTML = logLines.map(({line,cls}) =>
+    `<span${cls ? ` class="${cls}"` : ""}>${escHtml(line)}</span>\n`
+  ).join("");
+  el.scrollTop = el.scrollHeight;
+}
+function clearLog() { logLines = []; renderLog(); }
+function escHtml(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function engine() { return document.getElementById("engineSelect").value; }
 
-function pct(a,b){return b?Math.round(100*a/b):0;}
-function bar(a,b){return `<div class="bar"><i style="width:${pct(a,b)}%"></i></div><small>${a}/${b} (${pct(a,b)}%)</small>`}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
+// ── Pipeline status ─────────────────────────────────────────────────────────
+async function refresh() {
+  try {
+    const r = await fetch(`/api/status?inbox=${encodeURIComponent(cfg.inbox)}&raw=${encodeURIComponent(cfg.raw)}&db=${encodeURIComponent(cfg.db)}&exports=${encodeURIComponent(cfg.exports)}`);
+    const data = await r.json();
+    renderPipeline(data);
+  } catch(e) { toast("Refresh failed: " + e, "fail"); }
+}
 
-async function refresh(){
-  const r = await fetch(`/api/status?inbox=${encodeURIComponent(cfg.inbox)}&raw=${encodeURIComponent(cfg.raw)}&db=${encodeURIComponent(cfg.db)}&exports=${encodeURIComponent(cfg.exports)}`);
-  const data = await r.json();
-  const tb = document.querySelector("#grid tbody"); tb.innerHTML = "";
-  for(const row of data){
+function renderPipeline(rows) {
+  const wrap = document.getElementById("pipelineWrap");
+  if (!rows.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="e-icon">📂</div><h3>No documents in inbox</h3><p>Use the corpus browser to import scriptures.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <table class="pipeline-table">
+      <thead><tr>
+        <th>Document</th><th>PDFs</th><th>JSONL</th><th>Ingested</th>
+        <th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>
+      </tr></thead>
+      <tbody id="pipelineTbody"></tbody>
+    </table>`;
+  const tb = document.getElementById("pipelineTbody");
+  for (const r of rows) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td><b>${row.doc}</b></td>
-      <td>${row.pdf_count}</td>
-      <td>${bar(row.jsonl_count,row.pdf_count)}</td>
-      <td>${bar(row.ingested_pages,row.pdf_count)}</td>
-      <td>${row.total_lines}</td>
-      <td>${bar(row.translated_lines,row.total_lines)}</td>
-      <td>${row.exports}</td>
-      <td class="row-actions">
-        <button data-act="ocr" data-doc="${row.doc}">OCR</button>
-        <button data-act="ingest" data-doc="${row.doc}">Ingest</button>
-        <button data-act="translate" data-doc="${row.doc}">Translate (50)</button>
-        <button data-act="export" data-doc="${row.doc}">Export</button>
+      <td><div class="doc-name">${escHtml(r.doc)}</div></td>
+      <td><span class="num-cell">${r.pdf_count}</span></td>
+      <td>${progCell(r.jsonl_count, r.pdf_count)}</td>
+      <td>${progCell(r.ingested_pages, r.pdf_count)}</td>
+      <td><span class="num-cell">${r.total_lines}</span></td>
+      <td>${progCell(r.translated_lines, r.total_lines, true)}</td>
+      <td><span class="num-cell">${r.exports}</span></td>
+      <td class="actions-cell">
+        <button class="btn-act ocr"  data-act="ocr"       data-doc="${escHtml(r.doc)}">OCR</button>
+        <button class="btn-act ing"  data-act="ingest"    data-doc="${escHtml(r.doc)}">Ingest</button>
+        <button class="btn-act tr"   data-act="translate" data-doc="${escHtml(r.doc)}">Translate</button>
+        <button class="btn-act exp"  data-act="export"    data-doc="${escHtml(r.doc)}">Export</button>
       </td>`;
     tb.appendChild(tr);
   }
 }
 
-async function poll(jid,label){
-  let tries=0;
-  while(true){
-    const r = await fetch(`/api/job/${jid}`);
+function progCell(a, b, green=false) {
+  const p = pct(a, b);
+  return `<div class="prog-wrap">
+    <div class="prog-bar${green?" tr":""}"><i style="width:${p}%"></i></div>
+    <span class="prog-pct">${a}/${b || "?"} (${p}%)</span>
+  </div>`;
+}
+
+// ── Action buttons ──────────────────────────────────────────────────────────
+document.addEventListener("click", async ev => {
+  const b = ev.target.closest("button[data-act]");
+  if (!b) return;
+  const doc = b.dataset.doc;
+  const act = b.dataset.act;
+  await triggerAction(act, doc);
+});
+
+async function triggerAction(act, doc) {
+  if (act === "ocr") {
+    const dpi  = prompt("DPI for OCR? (Higher = better but slower)", "400") || "400";
+    const langs = prompt("Tesseract language string?", "san+hin+eng") || "san+hin+eng";
+    const r = await fetch("/api/ocr", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, dpi, langs, inbox: cfg.inbox, raw: cfg.raw})});
     const j = await r.json();
-    if(!j.running){ toast(`${label}: ${j.ok ? "done" : "failed"}`); console.log(j.out, j.err); refresh(); return; }
-    await new Promise(r=>setTimeout(r, 1200));
-    if(++tries%5===0) toast(`${label}: working…`);
+    if (j.job) { trackJob(j.job, `OCR ${doc}`, "ocr", doc); toast(`OCR started for ${doc}`); }
+    else toast(j.message || "No OCR work needed", "ok");
+  }
+  if (act === "ingest") {
+    const r = await fetch("/api/ingest", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, db: cfg.db, raw: cfg.raw})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, `Ingest ${doc}`, "ingest", doc); toast(`Ingest started for ${doc}`); }
+  }
+  if (act === "translate") {
+    const eng   = engine();
+    const limit = prompt("Max passages per run?", "100") || "100";
+    const r = await fetch("/api/translate", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, db: cfg.db, engine: eng, limit})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, `Translate ${doc}`, "translate", doc); toast(`Translation started (${eng})`); }
+  }
+  if (act === "export") {
+    const r = await fetch("/api/export", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({doc, db: cfg.db, out: cfg.exports})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, `Export ${doc}`, "export", doc); toast(`Export started for ${doc}`); }
   }
 }
 
-document.addEventListener("click", async ev=>{
-  const b = ev.target.closest("button[data-act]");
-  if(!b) return;
-  const doc = b.dataset.doc;
-  const act = b.dataset.act;
+async function batchAction(act) {
+  const rows = document.querySelectorAll("button[data-act='" + act + "']");
+  for (const b of rows) { await triggerAction(act, b.dataset.doc); }
+}
 
-  if(act==="ocr"){
-    const dpi = prompt("DPI?", "400") || "400";
-    const langs = prompt("Tesseract langs? (e.g. san+hin+eng)", "san+hin+eng") || "san+hin+eng";
-    const r = await fetch("/api/ocr",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, dpi, langs, inbox:cfg.inbox, raw:cfg.raw})});
-    const j = await r.json(); if(j.job){ poll(j.job, `OCR ${doc}`); }
-    else toast(j.message||"No work");
+// ── Job tracking ────────────────────────────────────────────────────────────
+function trackJob(jid, label, kind, doc) {
+  activeJobs[jid] = {label, kind, doc, done: false};
+  addLog(`▶ ${label}`, "log-line-info");
+  reasync function importSelected() {
+  if (!selectedIds.size) { toast("Select files first"); return; }
+  const autoSplit = document.getElementById("autoSplit").checked;
+  const files = [...selectedIds].map(id => {
+    const r = pdfRegistry[id];
+    return {path: r.path, doc: r.doc};
+  });
+  toast(`Importing ${files.length} file(s)…`);
+  try {
+    const r = await fetch("/api/corpus/import", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({inbox: cfg.inbox, files, auto_split: autoSplit})
+    });
+    const d = await r.json();
+    const splitting = (d.imported || []).filter(i => i.action === "splitting");
+    const copied    = (d.imported || []).filter(i => i.action === "copied");
+    let msg = `Imported: ${copied.length} copied`;
+    if (splitting.length) {
+      msg += `, ${splitting.length} splitting (multi-page)`;
+      for (const s of splitting) {
+        if (s.job) trackJob(s.job, `Split ${s.doc}`, "import_split", s.doc);
+      }
+    }
+    toast(msg, "ok");
+    addLog(`[OK] ${msg}`, "log-line-ok");
+    // Uncheck all
+    selectedIds.clear();
+    document.querySelectorAll(".pdf-cb:checked").forEach(cb => cb.checked = false);
+    updateSelCount();
+    setTimeout(refresh, 1500);
+  } catch(e) {
+    toast("Import failed: " + e, "fail");
+    addLog(`[ERR] Import error: ${e}`, "log-line-err");
   }
-  if(act==="ingest"){
-    const r = await fetch("/api/ingest",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db:cfg.db, raw:cfg.raw})});
-    const j = await r.json(); if(j.job) poll(j.job, `Ingest ${doc}`);
+}
+etElementById("runningCount").textContent =
+    running.length ? `${running.length} running` : "idle";
+  el.innerHTML = [...running.map(j =>
+    `<span class="badge running"><span class="badge-dot"></span>${escHtml(j.label)}</span>`
+  ), ...recent.map(j =>
+    `<span class="badge ${j.ok?"ok":"fail"}"><span class="badge-dot"></span>${escHtml(j.label)}</span>`
+  )].join("");
+}
+
+// ── Corpus browser ──────────────────────────────────────────────────────────
+async function loadCorpus() {
+  try {
+    const r = await fetch("/api/corpus");
+    const d = await r.json();
+    corpusData = d.categories || [];
+    document.getElementById("corpusPath").textContent = d.corpus_root || "";
+    renderCorpus(corpusData);
+  } catch(e) {
+    document.getElementById("corpusTree").innerHTML =
+      `<div class="empty-state"><div class="e-icon">⚠️</div><p>Could not load corpus from D: drive.<br/><small>${e}</small></p></div>`;
   }
-  if(act==="translate"){
-    const engine = prompt("Engine?", "openai:gpt-4o-mini") || "openai:gpt-4o-mini";
-    const limit = prompt("Limit (rows)?", "50") || "50";
-    const r = await fetch("/api/translate",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db:cfg.db, engine, limit})});
-    const j = await r.json(); if(j.job) poll(j.job, `Translate ${doc}`);
+}
+
+function renderCorpus(cats) {
+  const tree = document.getElementById("corpusTree");
+  if (!cats.length) {
+    tree.innerHTML = `<div class="empty-state"><div class="e-icon">📭</div><p>No PDFs found in corpus root.</p></div>`;
+    return;
   }
-  if(act==="export"){
-    const title = `${doc} — English Translation`;
-    const r = await fetch("/api/export",{method:"POST",headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db:cfg.db, out:cfg.exports, title})});
-    const j = await r.json(); if(j.job) poll(j.job, `Export ${doc}`);
-  }
+  // Rebuild registry for the visible set
+  pdfRegistry  = {};
+  pdfIdCounter = 0;
+  // Preserve previous selections by path
+  const prevSelected = new Set(
+    [...selectedIds].map(id => pdfRegistry[id] ? pdfRegistry[id].path : null).filter(Boolean)
+  );
+  selectedIds.clear();
+
+  const html = cats.map(cat => {
+    const rows = cat.pdfs.map(pdf => {
+      const id  = ++pdfIdCounter;
+      const doc = guessDoc(pdf.name, cat.category);
+      pdfRegistry[id] = {path: pdf.path, doc, name: pdf.name};
+      // Re-check if this path was previously selected
+      const chk = prevSelected.has(pdf.path) ? ' checked' : '';
+      if (chk) selectedIds.add(id);
+      return `<div class="pdf-item">
+        <input type="checkbox" class="pdf-cb" data-pid="${id}"${chk}/>
+        <span class="pdf-name">${escHtml(pdf.name)}</span>
+        <span class="pdf-size">${fmtSize(pdf.size)}</span>
+      </div>`;
+    }).join("");
+    return `<div class="cat-item" data-cat="${escHtml(cat.category)}">
+      <div class="cat-header">
+        <span class="cat-arrow">▶</span>
+        <span class="cat-name">${escHtml(cat.category.replace(/_/g," "))}</span>
+        <span class="cat-count">${cat.pdfs.length}</span>
+      </div>
+      <div class="cat-pdfs">${rows}</div>
+    </div>`;
+  }).join("");
+  tree.innerHTML = html;
+  updateSelCount();
+}
+
+// Single delegated listener on the corpus tree handles both cat-header clicks
+// and checkbox changes — no more inline handlers that break on JSON strings
+document.getElementById("corpusTree").addEventListener("change", ev => {
+  const cb = ev.target.closest(".pdf-cb");
+  if (!cb) return;
+  const id = parseInt(cb.dataset.pid, 10);
+  if (cb.checked) selectedIds.add(id);
+  else            selectedIds.delete(id);
+  updateSelCount();
 });
 
-refresh();
-setInterval(refresh, 10000);
-</script>
-</body></html>
-""", encoding="utf-8")
+document.getElementById("corpusTree").addEventListener("click", ev => {
+  const hdr = ev.target.closest(".cat-header");
+  if (!hdr) return;
+  hdr.closest(".cat-item").classList.toggle("open");
+});
 
-# -------------- CLI --------------
+function guessDoc(filename, category) {
+  const stem = filename.replace(/\.pdf$/i, "");
+  const m = stem.match(/^([A-Za-z0-9_]+?)_?(\d{1,6})$/);
+  if (m) return m[1].toLowerCase().replace(/[^a-z0-9]/g, "_");
+  return (category + "_" + stem).toLowerCase().replace(/[^a-z0-9]/g, "_").replace(/__+/g, "_").slice(0, 40);
+}
+
+function updateSelCount() {
+  const n = selectedIds.size;
+  document.getElementById("selCount").textContent =
+    n ? `${n} file${n > 1 ? "s" : ""} selected` : "No files selected";
+}
+
+function filterCorpus(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { renderCorpus(corpusData); return; }
+  const filtered = corpusData.map(cat => ({
+    ...cat,
+    pdfs: cat.pdfs.filter(p => p.name.toLowerCase().includes(q) || cat.category.toLowerCase().includes(q))
+  })).filter(cat => cat.pdfs.length);
+  renderCorpus(filtered);
+}
+
+async function importSelected() {
+  if (!selectedFiles.size) { toast("Select files first"); return; }
+  const autoSplit = document.getElementById("autoSplit").checked;
+  const files = [...selectedFiles].map(k => JSON.parse(k));
+  toast(`Importing ${files.length} file(s)…`);
+  try {
+    const r = await fetch("/api/corpus/import", {
+      method: "POST", headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({inbox: cfg.inbox, files, auto_split: autoSplit})
+    });
+    const d = await r.json();
+    const splitting = (d.imported||[]).filter(i => i.action === "splitting");
+    const copied    = (d.imported||[]).filter(i => i.action === "copied");
+    let msg = `Imported: ${copied.length} copied`;
+    if (splitting.length) {
+      msg += `, ${splitting.length} splitting (multi-page)`;
+      for (const s of splitting) {
+        if (s.job) trackJob(s.job, `Split ${s.doc}`, "import_split", s.doc);
+      }
+    }
+    toast(msg, "ok");
+    addLog(`✓ ${msg}`, "log-line-ok");
+    selectedFiles.clear();
+    updateSelCount();
+    setTimeout(refresh, 1500);
+  } catch(e) {
+    toast("Import failed: " + e, "fail");
+    addLog(`✗ Import error: ${e}`, "log-line-err");
+  }
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadCorpus();
+refresh();
+setInterval(refresh, 15000);
+setInterval(renderBadges, 2000);
+</script>
+</body>
+</html>"""
+
+# Write the static HTML to disk only if it doesn't already exist
+# (dashboard_static.html is maintained separately; don't overwrite it on startup)
+_static_html = SCRIPTS / "dashboard_static.html"
+if not _static_html.exists():
+    _static_html.write_text(_DASHBOARD_HTML, encoding="utf-8")
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# CLI entry point
+# ──────────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--inbox", default="inbox")
-    ap.add_argument("--raw", default="data/raw")
-    ap.add_argument("--db", default="data/context.db")
+    ap.add_argument("--inbox",   default="inbox")
+    ap.add_argument("--raw",     default="data/raw")
+    ap.add_argument("--db",      default="data/context.db")
     ap.add_argument("--exports", default="exports")
-    ap.add_argument("--host", default="127.0.0.1")
-    ap.add_argument("--port", type=int, default=5057)
+    ap.add_argument("--host",    default="127.0.0.1")
+    ap.add_argument("--port",    type=int, default=5057)
     args = ap.parse_args()
-    print(f"Dashboard on http://{args.host}:{args.port}/")
-    print("inbox=", pathlib.Path(args.inbox).resolve())
-    print("raw=", pathlib.Path(args.raw).resolve())
-    print("db=", pathlib.Path(args.db).resolve())
-    print("exports=", pathlib.Path(args.exports).resolve())
+
+    # Ensure required dirs exist
+    for d in [args.inbox, args.raw, args.exports]:
+        pathlib.Path(d).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(args.db).parent.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n{'─'*60}")
+    print(f"  Sanskrit Automaton v2 — Dashboard")
+    print(f"  URL:     http://{args.host}:{args.port}/")
+    print(f"  Inbox:   {pathlib.Path(args.inbox).resolve()}")
+    print(f"  DB:      {pathlib.Path(args.db).resolve()}")
+    print(f"  Corpus:  {CORPUS_ROOT}")
+    print(f"  Engine:  {os.environ.get('MT_ENGINE','gemini:gemini-2.5-pro')}")
+    print(f"{'─'*60}\n")
+
     app.run(host=args.host, port=args.port, debug=False)

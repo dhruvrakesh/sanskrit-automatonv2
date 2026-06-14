@@ -13,7 +13,7 @@ Serves /compare.html (variants view)
 """
 import os, json, subprocess, sys, sqlite3
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from fastapi import FastAPI, Body, Query, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse
@@ -117,58 +117,94 @@ def api_translate(payload: Dict[str, Any] = Body(...), explain: bool = Query(Fal
 
 # ---- new: /api/search (fts or fallback like) ----
 @app.get("/api/search")
-def api_search(q: str = Query(..., min_length=1), limit: int = 20, offset: int = 0, doc: int | None = None):
-    sql_fts = """
-    SELECT p.id, d.title, p.page, p.sent_index, p.text, p.translation, p.engine
-    FROM passages_fts f
-    JOIN passages p ON p.id=f.rowid
-    JOIN documents d ON d.id=p.doc_id
-    WHERE passages_fts MATCH ? {doc_filter}
-    ORDER BY p.id LIMIT ? OFFSET ?
-    """
-    sql_like = """
-    SELECT p.id, d.title, p.page, p.sent_index, p.text, p.translation, p.engine
-    FROM passages p JOIN documents d ON d.id=p.doc_id
-    WHERE (p.text LIKE ? OR p.translation LIKE ?) {doc_filter}
-    ORDER BY p.id LIMIT ? OFFSET ?
-    """
-    doc_filter = "AND p.doc_id=?" if doc else ""
+def api_search(q: str = Query(..., min_length=1), limit: int = 20, offset: int = 0, doc: Optional[str] = None):
+    """Full-text search over passages (text + translation)."""
     with db_conn() as db:
-        cur = db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='passages_fts'")
-        has_fts = cur.fetchone() is not None
-        if has_fts:
-            params = [q, limit, offset] if not doc else [q, doc, limit, offset]
-            rows = db.execute(sql_fts.format(doc_filter=doc_filter), params).fetchall()
+        tables = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        cols_p  = {r[1] for r in db.execute("PRAGMA table_info(passages)")}
+
+        # Detect doc join mode
+        if "doc_id" in cols_p and "docs" in tables:
+            doc_join   = "LEFT JOIN docs d ON d.id=p.doc_id"
+            doc_title  = "COALESCE(d.code,'(unknown)')"
+            doc_filter = "AND d.code=?" if doc else ""
+        elif "doc" in cols_p:
+            doc_join   = ""
+            doc_title  = "COALESCE(p.doc,'(unknown)')"
+            doc_filter = "AND p.doc=?" if doc else ""
         else:
-            like = f"%{q}%"
-            params = [like, like, limit, offset] if not doc else [like, like, doc, limit, offset]
-            rows = db.execute(sql_like.format(doc_filter=doc_filter), params).fetchall()
-        results = [
-            dict(id=r[0], title=r[1], page=r[2], sent_index=r[3], text=r[4], translation=r[5], engine=r[6])
-            for r in rows
-        ]
+            doc_join, doc_title, doc_filter = "", "'(unknown)'", ""
+
+        pg_col = next((c for c in ("page_no","pageno","page") if c in cols_p), "rowid")
+        ix_col = "idx" if "idx" in cols_p else "rowid"
+        tr_col = "translation" if "translation" in cols_p else ("en" if "en" in cols_p else "NULL")
+        tx_col = "text" if "text" in cols_p else ("san" if "san" in cols_p else "NULL")
+
+        has_fts = "passages_fts" in tables
+        results = []
+        try:
+            if has_fts:
+                fts_sql = f"""
+                    SELECT p.id, {doc_title} AS title, p.{pg_col}, p.{ix_col}, p.{tx_col}, p.{tr_col}
+                    FROM passages_fts f
+                    JOIN passages p ON p.id=f.rowid
+                    {doc_join}
+                    WHERE passages_fts MATCH ? {doc_filter}
+                    ORDER BY p.id LIMIT ? OFFSET ?
+                """
+                params = [q] + ([doc] if doc else []) + [limit, offset]
+                rows = db.execute(fts_sql, params).fetchall()
+            else:
+                like = f"%{q}%"
+                like_sql = f"""
+                    SELECT p.id, {doc_title} AS title, p.{pg_col}, p.{ix_col}, p.{tx_col}, p.{tr_col}
+                    FROM passages p {doc_join}
+                    WHERE (p.{tx_col} LIKE ? OR p.{tr_col} LIKE ?) {doc_filter}
+                    ORDER BY p.id LIMIT ? OFFSET ?
+                """
+                params = [like, like] + ([doc] if doc else []) + [limit, offset]
+                rows = db.execute(like_sql, params).fetchall()
+            results = [
+                {"id": r[0], "doc": r[1], "page": r[2], "idx": r[3], "text": r[4] or "", "translation": r[5] or ""}
+                for r in rows
+            ]
+        except Exception as e:
+            return {"results": [], "error": str(e), "limit": limit, "offset": offset}
     return {"results": results, "limit": limit, "offset": offset}
 
 # ---- new: /api/passage/{id} ----
 @app.get("/api/passage/{pid}")
 def api_get_passage(pid: int):
-    sql = """
-    SELECT p.id, d.title, p.doc_id, p.page, p.sent_index, p.text, p.normalized, p.transliterated,
-           p.translation, p.engine, p.rationale, p.analysis_json
-    FROM passages p JOIN documents d ON d.id=p.doc_id WHERE p.id=?
-    """
+    """Fetch a single passage by its integer id."""
     with db_conn() as db:
+        cols_p = {r[1] for r in db.execute("PRAGMA table_info(passages)")}
+        tables = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+
+        if "doc_id" in cols_p and "docs" in tables:
+            doc_expr = "COALESCE(d.code,'(unknown)')"
+            join_doc = "LEFT JOIN docs d ON d.id=p.doc_id"
+        elif "doc" in cols_p:
+            doc_expr = "p.doc"
+            join_doc = ""
+        else:
+            doc_expr, join_doc = "'(unknown)'", ""
+
+        pg_col = next((c for c in ("page_no","pageno","page") if c in cols_p), "rowid")
+        ix_col = "idx" if "idx" in cols_p else "rowid"
+        tr_col = "translation" if "translation" in cols_p else ("en" if "en" in cols_p else "NULL")
+        tx_col = "text" if "text" in cols_p else ("san" if "san" in cols_p else "NULL")
+        nm_col = "norm" if "norm" in cols_p else "NULL"
+
+        sql = f"""
+            SELECT p.id, {doc_expr} AS doc, p.{pg_col}, p.{ix_col}, p.{tx_col}, p.{nm_col}, p.{tr_col}
+            FROM passages p {join_doc} WHERE p.id=?
+        """
         r = db.execute(sql, (pid,)).fetchone()
-        if not r: raise HTTPException(404, "passage not found")
-        try:
-            analysis = json.loads(r[11]) if r[11] else {}
-        except Exception:
-            analysis = {}
+        if not r:
+            raise HTTPException(404, "passage not found")
         return {
-            "id": r[0], "title": r[1], "doc_id": r[2], "page": r[3], "sent_index": r[4],
-            "text": r[5], "normalized": r[6], "transliterated": r[7],
-            "translation": r[8], "engine": r[9], "rationale": r[10],
-            "analysis": analysis
+            "id": r[0], "doc": r[1], "page": r[2], "idx": r[3],
+            "text": r[4] or "", "normalized": r[5] or "", "translation": r[6] or ""
         }
 
 # ---- new: /api/passage/{id}/variants (pipeline + reference_translations) ----

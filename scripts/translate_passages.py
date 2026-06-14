@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 import argparse, sqlite3, time
+try:
+    from env_loader import load_env
+    load_env()
+except Exception:
+    pass
 from normalize_text import normalize_sanskrit
 from text_filters import should_translate, clean_for_mt
 from infer_mt import translate_batch
@@ -53,9 +58,6 @@ def main():
         ORDER BY {pg}, {ix}
     """, (args.doc, args.since_page, args.until_page)))
 
-    if args.limit:
-        rows = rows[:args.limit]
-
     if not rows:
         print("todo = 0 rows"); return
 
@@ -64,6 +66,9 @@ def main():
         s = normalize_sanskrit(text or "")
         if args.no_skip or should_translate(s, min_dev=args.min_dev):
             todo.append((rowid, clean_for_mt(s)))
+
+    if args.limit:
+        todo = todo[:args.limit]
 
     print(f"todo = {len(todo)} rows")
     if not todo: return
@@ -77,7 +82,7 @@ def main():
             con.execute("UPDATE passages SET translation=? WHERE rowid=?", (out, rowid))
         con.commit()
         lo = (i+1); hi = (i+len(batch))
-        print(f"[{lo}:{hi}] ✓")
+        print(f"[{lo}:{hi}] OK")
         time.sleep(args.sleep)
 
 if __name__ == "__main__":
