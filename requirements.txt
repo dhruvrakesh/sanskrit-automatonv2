@@ -21,6 +21,9 @@ watchdog
 pypdf
 
 # ── Dashboard (Flask) ──────────────────────────────
+# werkzeug pin overrides sanskrit-parser's stale werkzeug==2.1.2 requirement
+# (sanskrit-parser does not use werkzeug at runtime -- it's a stale dep pin)
+werkzeug>=3.1.0
 flask>=3.0.3
 
 # ── Translation APIs ────────────────────────────────
