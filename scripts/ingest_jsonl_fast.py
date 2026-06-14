@@ -206,7 +206,7 @@ def main():
             do_iast=not args.no_iast,
         )
         total += n
-        print(f"  {path.name}  →  {n} segment(s)  (page {page_no})")
+        print(f"  {path.name}  =>  {n} segment(s)  (page {page_no})")
 
     print(f"\nDone. Total passages upserted: {total}")
 
