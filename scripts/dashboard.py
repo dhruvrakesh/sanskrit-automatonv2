@@ -537,6 +537,202 @@ def api_export():
     return jsonify({"job": launch("export", doc, cmd)})
 
 
+@app.post("/api/queue/run")
+def api_queue_run():
+    """Run the full pipeline (OCR→Ingest→Translate→Export) for one doc serially."""
+    data   = request.get_json(force=True) or {}
+    doc    = _validate_doc(data.get("doc"))
+    if not doc:
+        return jsonify({"error": "invalid or missing doc"}), 400
+    db      = data.get("db")      or "data/context.db"
+    inbox   = data.get("inbox")   or "inbox"
+    raw     = data.get("raw")     or "data/raw"
+    exports = data.get("exports") or "exports"
+    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+    dpi     = str(data.get("dpi") or 400)
+    sleep   = str(data.get("sleep") or 0.6)
+    skip_ocr       = bool(data.get("skip_ocr"))
+    skip_ingest    = bool(data.get("skip_ingest"))
+    skip_translate = bool(data.get("skip_translate"))
+    skip_export    = bool(data.get("skip_export"))
+
+    cmd = py(script("pipeline_queue.py"),
+             "--doc",     doc,
+             "--inbox",   inbox,
+             "--raw",     raw,
+             "--db",      db,
+             "--exports", exports,
+             "--engine",  engine,
+             "--dpi",     dpi,
+             "--sleep",   sleep)
+    if skip_ocr:       cmd.append("--skip-ocr")
+    if skip_ingest:    cmd.append("--skip-ingest")
+    if skip_translate: cmd.append("--skip-translate")
+    if skip_export:    cmd.append("--skip-export")
+
+    jid = launch("pipeline", doc, cmd)
+    return jsonify({"job": jid})
+
+
+@app.get("/api/passages/<doc>")
+def api_passages(doc):
+    """Live JSON feed of passages for the reader page."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return jsonify({"error": "invalid doc"}), 400
+    db_path = request.args.get("db", "data/context.db")
+    page    = int(request.args.get("page", 1))
+    limit   = min(int(request.args.get("limit", 50)), 200)
+    offset  = (page - 1) * limit
+    try:
+        con = sqlite3.connect(db_path)
+        total = con.execute(
+            "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?",
+            (doc,)
+        ).fetchone()[0]
+        translated = con.execute(
+            "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id "
+            "WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''",
+            (doc,)
+        ).fetchone()[0]
+        rows = con.execute(
+            "SELECT p.page_no, p.idx, p.text, p.translation "
+            "FROM passages p JOIN docs d ON d.id=p.doc_id "
+            "WHERE d.code=? ORDER BY p.page_no, p.idx LIMIT ? OFFSET ?",
+            (doc, limit, offset)
+        ).fetchall()
+        con.close()
+        return jsonify({
+            "doc": doc,
+            "total": total,
+            "translated": translated,
+            "page": page,
+            "limit": limit,
+            "passages": [
+                {"page_no": r[0], "idx": r[1], "text": r[2] or "", "translation": r[3] or ""}
+                for r in rows
+            ]
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.get("/reader/<doc>")
+def reader(doc):
+    """Live bilingual reader — Sanskrit + English side by side."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return "Invalid document name", 400
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>{doc} — Sanskrit Reader</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{{--bg:#0e0d0b;--card:#1a1915;--border:#2d2b25;--gold:#d4a843;--text:#e8e0d0;--muted:#6b6456;--tr:#4ade80;--un:#444038}}
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}}
+header{{background:var(--card);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}}
+h1{{font-size:18px;color:var(--gold);font-weight:600}}
+.sub{{font-size:11px;color:var(--muted)}}
+.prog-wrap{{flex:1;max-width:300px}}
+.prog-bar{{background:var(--border);border-radius:8px;height:6px;overflow:hidden}}
+.prog-bar i{{display:block;height:100%;background:var(--gold);border-radius:8px;transition:width .5s}}
+.prog-pct{{font-size:10px;color:var(--muted);margin-top:2px}}
+.back{{color:var(--muted);font-size:12px;text-decoration:none}}
+.back:hover{{color:var(--gold)}}
+main{{max-width:1200px;margin:0 auto;padding:24px}}
+.page-group{{margin-bottom:32px}}
+.page-label{{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:12px}}
+.passage{{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:8px;transition:border-color .2s}}
+.passage:hover{{border-color:var(--gold)}}
+.sanskrit{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:1.8;color:#e8e0d0}}
+.english{{font-size:13px;line-height:1.7;color:#b0a898}}
+.empty-tr{{color:var(--un);font-style:italic;font-size:12px}}
+.idx{{font-size:9px;color:var(--muted);margin-bottom:6px}}
+footer{{text-align:center;padding:24px;color:var(--muted);font-size:11px}}
+.loading{{text-align:center;padding:48px;color:var(--muted)}}
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="back">&#8592; Dashboard</a>
+  <h1 id="docTitle">{doc}</h1>
+  <div class="prog-wrap">
+    <div class="prog-bar"><i id="progBar" style="width:0%"></i></div>
+    <div class="prog-pct"><span id="progText">Loading&hellip;</span></div>
+  </div>
+  <span class="sub" id="autoRefreshLabel">Auto-refresh: ON</span>
+</header>
+<main id="main"><div class="loading">Loading passages&hellip;</div></main>
+<footer>Sanskrit Automaton v2 &mdash; Live Reader &mdash; {doc}</footer>
+<script>
+const DOC = {json.dumps(doc)};
+let currentPage = 1; const LIMIT = 50;
+let refreshTimer = null; let autoRefresh = true;
+
+function esc(s){{ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }}
+
+async function loadPage(p){{
+  currentPage = p;
+  try{{
+    const r = await fetch('/api/passages/' + DOC + '?page=' + p + '&limit=' + LIMIT);
+    const d = await r.json();
+    if (d.error){{ document.getElementById('main').innerHTML='<div class="loading">Error: '+esc(d.error)+'</div>'; return; }}
+    const pct = d.total ? Math.round(100*d.translated/d.total) : 0;
+    document.getElementById('progBar').style.width = pct + '%';
+    document.getElementById('progText').textContent = d.translated + '/' + d.total + ' translated (' + pct + '%)';
+
+    let html = '';
+    let curPage = null;
+    d.passages.forEach(function(p){{
+      if (p.page_no !== curPage){{
+        if (curPage !== null) html += '</div>';
+        html += '<div class="page-group"><div class="page-label">Page ' + p.page_no + '</div>';
+        curPage = p.page_no;
+      }}
+      const hasTr = p.translation && p.translation.trim();
+      html += '<div class="passage">' +
+        '<div><div class="idx">&#2380; ' + p.page_no + '.' + p.idx + '</div>' +
+        '<div class="sanskrit">' + esc(p.text) + '</div></div>' +
+        '<div><div class="idx">English</div>' +
+        (hasTr ? '<div class="english">' + esc(p.translation) + '</div>'
+                : '<div class="empty-tr">&#x231B; Awaiting translation&hellip;</div>') +
+        '</div></div>';
+    }});
+    if (curPage !== null) html += '</div>';
+    if (d.passages.length === 0) html = '<div class="loading">No passages ingested yet. Run Ingest first.</div>';
+
+    // Pagination
+    const totalPages = Math.ceil(d.total / LIMIT);
+    if (totalPages > 1){{
+      html += '<div style="display:flex;gap:8px;justify-content:center;padding:16px">';
+      if (currentPage > 1) html += '<button onclick="loadPage(' + (currentPage-1) + ')" style="background:var(--card);color:var(--gold);border:1px solid var(--border);padding:6px 14px;border-radius:4px;cursor:pointer">&#8592; Prev</button>';
+      html += '<span style="color:var(--muted);padding:6px 14px">Page ' + currentPage + ' / ' + totalPages + '</span>';
+      if (currentPage < totalPages) html += '<button onclick="loadPage(' + (currentPage+1) + ')" style="background:var(--card);color:var(--gold);border:1px solid var(--border);padding:6px 14px;border-radius:4px;cursor:pointer">Next &#8594;</button>';
+      html += '</div>';
+    }}
+    document.getElementById('main').innerHTML = html;
+  }} catch(e){{
+    document.getElementById('main').innerHTML = '<div class="loading">Error: ' + esc(String(e)) + '</div>';
+  }}
+}}
+
+function scheduleRefresh(){{
+  if (refreshTimer) clearTimeout(refreshTimer);
+  if (autoRefresh) refreshTimer = setTimeout(function(){{ loadPage(currentPage); scheduleRefresh(); }}, 30000);
+}}
+
+loadPage(1);
+scheduleRefresh();
+</script>
+</body>
+</html>"""
+
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Static Dashboard HTML — rich, dark-mode, Sanskrit-inspired
 # ──────────────────────────────────────────────────────────────────────────────

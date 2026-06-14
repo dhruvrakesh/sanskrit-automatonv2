@@ -314,6 +314,8 @@ function renderPipeline(rows) {
         '<button class="btn-act ing" data-act="ingest" data-doc="' + esc(r.doc) + '">Ingest</button>' +
         '<button class="btn-act tr" data-act="translate" data-doc="' + esc(r.doc) + '">Translate</button>' +
         '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '">Export</button>' +
+        '<button class="btn-act" style="background:var(--gold);color:#000" data-act="pipeline" data-doc="' + esc(r.doc) + '">&#9654; Full Pipeline</button>' +
+        '<a href="/reader/' + esc(r.doc) + '" target="_blank" style="display:inline-block;padding:3px 8px;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:3px;font-size:10px;text-decoration:none;margin-left:2px">&#128214; Read</a>' +
       '</td></tr>';
   });
   html += '</tbody></table>';
@@ -363,9 +365,24 @@ async function doAction(act, doc) {
     const j = await r.json();
     if (j.job) { trackJob(j.job, 'Export ' + doc, 'export', doc); toast('Export started for ' + doc); }
   }
+  if (act === 'pipeline') {
+    const eng = getEngine();
+    if (!confirm('Run FULL pipeline for "' + doc + '"?\n\nThis will serially run:\n  OCR → Ingest → Translate → Export\n\nThis may take a long time for large documents.\nOnly run ONE doc at a time!')) return;
+    const r = await fetch('/api/queue/run', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db, inbox: cfg.inbox, raw: cfg.raw,
+                            exports: cfg.exports, engine: eng})});
+    const j = await r.json();
+    if (j.job) {
+      trackJob(j.job, 'Pipeline ' + doc, 'pipeline', doc);
+      toast('Full pipeline started for ' + doc + '. Watch job log for progress.');
+    }
+  }
 }
 
 async function batchAction(act) {
+  if (act === 'ocr') {
+    if (!confirm('WARNING: Running OCR on ALL docs at once will spawn many parallel Tesseract processes.\n\nRecommended: Use the "Full Pipeline" button per doc instead.\n\nContinue anyway?')) return;
+  }
   document.querySelectorAll('button[data-act="' + act + '"]').forEach(async function(b) {
     await doAction(act, b.dataset.doc);
   });
