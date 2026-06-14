@@ -182,11 +182,14 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
   <!-- Pipeline dashboard -->
   <main class="main">
     <div class="section-title">Pipeline Status</div>
-    <div class="batch-bar">
+    <div class="batch-bar" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <button class="btn-batch" onclick="batchAction('ocr')">&#x25B6; OCR All</button>
       <button class="btn-batch" onclick="batchAction('ingest')">&#x2B06; Ingest All</button>
       <button class="btn-batch" onclick="batchAction('translate')">&#x2726; Translate All</button>
       <button class="btn-batch" onclick="batchAction('export')">&#x2913; Export All</button>
+      <div style="flex:1"></div>
+      <span id="runningJobsCount" style="font-size:10px;color:var(--muted)"></span>
+      <button id="pauseAllBtn" onclick="pauseAll()" style="background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;border-radius:4px;padding:5px 14px;font-size:11px;cursor:pointer;font-weight:600;display:none">&#9646;&#9646; Pause All Jobs</button>
     </div>
     <div id="pipelineWrap">
       <div class="empty-state">
@@ -660,11 +663,45 @@ async function loadUsage() {
     el.innerHTML = html;
   } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
 }
+// ── Pause / Kill All ───────────────────────────────────────────────────────
+async function pauseAll() {
+  const r = await fetch('/api/jobs/running');
+  const d = await r.json();
+  if (!d.count) { toast('No running jobs', 'ok'); return; }
+  const names = d.running.map(function(j){ return j.kind + ':' + j.doc; }).join('\n');
+  if (!confirm('Stop ALL ' + d.count + ' running jobs?\n\n' + names + '\n\nThis will terminate their processes immediately.\nOCR/translation progress on the current page will be lost.')) return;
+  const r2 = await fetch('/api/jobs/kill_all', {method:'POST'});
+  const d2 = await r2.json();
+  toast('Stopped ' + d2.stopped + ' job(s)', d2.stopped > 0 ? 'ok' : 'fail');
+  addLog('[PAUSE] Stopped ' + d2.stopped + ' job(s)', 'log-line-err');
+  d2.jobs.forEach(function(j){ addLog('  killed: ' + j.kind + ' ' + j.doc, 'log-line-err'); });
+  renderBadges();
+  refresh();
+}
+
+async function pollRunningJobs() {
+  try {
+    const r = await fetch('/api/jobs/running');
+    const d = await r.json();
+    const btn = document.getElementById('pauseAllBtn');
+    const cnt = document.getElementById('runningJobsCount');
+    if (d.count > 0) {
+      btn.style.display = 'inline-block';
+      cnt.textContent = d.count + ' job(s) running';
+    } else {
+      btn.style.display = 'none';
+      cnt.textContent = '';
+    }
+  } catch(e) {}
+}
+
 // ── Init ───────────────────────────────────────────────────────────────────
 loadCorpus();
 refresh();
 setInterval(refresh, 15000);
 setInterval(renderBadges, 2000);
+setInterval(pollRunningJobs, 3000);
+pollRunningJobs();
 </script>
 </body>
 </html>

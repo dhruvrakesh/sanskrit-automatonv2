@@ -58,6 +58,8 @@ class Job:
     ok: Optional[bool] = None
     out: str = ""
     err: str = ""
+    proc: Optional[object] = field(default=None, repr=False)  # subprocess.Popen, not serialized
+    killed: bool = False
 
 JOBS: Dict[str, Job] = {}
 JOBS_LOCK = threading.Lock()
@@ -98,20 +100,48 @@ def _load_job_history(limit: int = 200) -> List[dict]:
             pass
     return records
 
+def _kill_proc(proc) -> bool:
+    """Kill a subprocess and its entire process tree (Windows-safe)."""
+    if proc is None:
+        return False
+    try:
+        import signal
+        pid = proc.pid
+        # On Windows use taskkill /F /T to kill the whole tree
+        if sys.platform == "win32":
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(pid)],
+                           capture_output=True, timeout=10)
+        else:
+            import os, signal
+            os.killpg(os.getpgid(pid), signal.SIGTERM)
+        return True
+    except Exception:
+        try:
+            proc.kill()
+        except Exception:
+            pass
+        return False
+
 def _run_job(job: Job):
     try:
         proc = subprocess.Popen(
             job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=str(ROOT)
         )
+        job.proc = proc  # store so it can be killed
         out, err = proc.communicate()
-        job.ok  = proc.returncode == 0
-        job.out = (out or b"").decode("utf-8", "replace")
-        job.err = (err or b"").decode("utf-8", "replace")
+        if job.killed:
+            job.ok  = False
+            job.err = "[KILLED by user]"
+        else:
+            job.ok  = proc.returncode == 0
+            job.out = (out or b"").decode("utf-8", "replace")
+            job.err = (err or b"").decode("utf-8", "replace")
     except Exception as e:
         job.ok  = False
         job.err = f"{type(e).__name__}: {e}\n{traceback.format_exc()}"
     finally:
-        job.end = time.time()
+        job.end  = time.time()
+        job.proc = None  # clear reference
         _persist_job(job)  # write to disk immediately
 
 def launch(kind: str, doc: str, argv: List[str]) -> str:
@@ -406,8 +436,44 @@ def api_job(jid):
         "id": job.id, "kind": job.kind, "doc": job.doc,
         "ok": job.ok, "start": job.start, "end": job.end,
         "out": job.out[-6000:], "err": job.err[-2000:],
-        "running": job.ok is None,
+        "running": job.ok is None, "killed": job.killed,
     })
+
+@app.post("/api/job/<jid>/kill")
+def api_job_kill(jid):
+    """Kill a single running job."""
+    with JOBS_LOCK:
+        job = JOBS.get(jid)
+    if not job:
+        return jsonify({"error": "unknown job"}), 404
+    if job.ok is not None:
+        return jsonify({"message": "job already finished", "ok": job.ok})
+    job.killed = True
+    killed = _kill_proc(job.proc)
+    return jsonify({"killed": killed, "jid": jid, "doc": job.doc, "kind": job.kind})
+
+@app.post("/api/jobs/kill_all")
+def api_jobs_kill_all():
+    """Pause/stop ALL currently running jobs."""
+    killed = []
+    with JOBS_LOCK:
+        running = [j for j in JOBS.values() if j.ok is None]
+    for job in running:
+        job.killed = True
+        ok = _kill_proc(job.proc)
+        killed.append({"jid": job.id, "doc": job.doc, "kind": job.kind, "killed": ok})
+    return jsonify({"stopped": len(killed), "jobs": killed})
+
+@app.get("/api/jobs/running")
+def api_jobs_running():
+    """List all currently running jobs."""
+    with JOBS_LOCK:
+        running = [
+            {"id": j.id, "kind": j.kind, "doc": j.doc,
+             "start": j.start, "elapsed_s": round(time.time() - j.start, 1)}
+            for j in JOBS.values() if j.ok is None
+        ]
+    return jsonify({"running": running, "count": len(running)})
 
 @app.get("/api/jobs/history")
 def api_jobs_history():
