@@ -8,7 +8,10 @@ beautifulsoup4==4.12.3
 lxml==5.3.0
 regex==2024.9.11
 indic-transliteration==2.3.55
-sanskrit_parser==0.2.6
+# sanskrit_parser==0.2.6  <-- REMOVED: its werkzeug==2.1.2 pin conflicts with
+#   flask>=3.0.3 (needs werkzeug>=3.1). It is pre-installed system-wide and
+#   not imported directly by any pipeline script. Install manually if needed:
+#   pip install sanskrit_parser==0.2.6 --no-deps
 networkx==3.3
 rapidfuzz==3.9.7
 pandas==2.2.3
@@ -21,8 +24,6 @@ watchdog
 pypdf
 
 # ── Dashboard (Flask) ──────────────────────────────
-# werkzeug pin overrides sanskrit-parser's stale werkzeug==2.1.2 requirement
-# (sanskrit-parser does not use werkzeug at runtime -- it's a stale dep pin)
 werkzeug>=3.1.0
 flask>=3.0.3
 
@@ -36,5 +37,5 @@ python-dotenv>=1.0.1
 # ── OCR preprocessing (optional but recommended) ────
 opencv-python-headless>=4.10.0.84
 
-# ── PDF export (optional — for server-side PDF) ─────
+# ── PDF export (optional -- for server-side PDF) ────
 # playwright  # uncomment and run: playwright install chromium
