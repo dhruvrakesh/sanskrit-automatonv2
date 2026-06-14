@@ -187,6 +187,9 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       <button class="btn-batch" onclick="batchAction('ingest')">&#x2B06; Ingest All</button>
       <button class="btn-batch" onclick="batchAction('translate')">&#x2726; Translate All</button>
       <button class="btn-batch" onclick="batchAction('export')">&#x2913; Export All</button>
+      <button class="btn-batch" id="advanceBtn" onclick="advancePipeline()" style="background:linear-gradient(135deg,#1a3a1a,#0f2a0f);color:#5aaa7a;border:1px solid #2d6a2d;font-weight:700" title="Translate all already-OCRd docs in priority order (no new OCR)">
+        &#x26A1; Translate All OCR'd
+      </button>
       <div style="flex:1"></div>
       <span id="runningJobsCount" style="font-size:10px;color:var(--muted)"></span>
       <button id="pauseAllBtn" onclick="pauseAll()" style="background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;border-radius:4px;padding:5px 14px;font-size:11px;cursor:pointer;font-weight:600;display:none">&#9646;&#9646; Pause All Jobs</button>
@@ -664,7 +667,64 @@ async function loadUsage() {
   } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
 }
 // ── Pause / Kill All ───────────────────────────────────────────────────────
+// ── Advance Pipeline — translate all OCR'd docs ────────────────────────────
+async function advancePipeline() {
+  const confirmed = confirm(
+    'This will translate ALL already-OCRd docs in priority order:\n\n' +
+    'nirukta -> shiksha_* -> puranas -> vedas -> bodhyana -> Bodhicaryavatara -> LalitaVistara\n\n' +
+    'Uses Gemini 2.5 Pro with 5-verse context window.\n' +
+    'The job runs in the background — you can monitor it in the Job Log.\n\n' +
+    'Already-translated passages will be skipped.\n' +
+    'Use "Pause All Jobs" to stop at any time.\n\n' +
+    'Start now?'
+  );
+  if (!confirmed) return;
+
+  const btn = document.getElementById('advanceBtn');
+  btn.textContent = 'Starting...';
+  btn.disabled = true;
+
+  try {
+    const r = await fetch('/api/pipeline/advance', {method: 'POST'});
+    const d = await r.json();
+    if (d.error) {
+      toast('Error: ' + d.error, 'fail');
+    } else {
+      toast('Advance pipeline started! Job: ' + d.job, 'ok');
+      addLog('[ADVANCE] All OCRd docs queued for translation', 'log-line-ok');
+      addLog('  Priority: nirukta -> shiksha -> puranas -> vedas -> bauddha', 'log-line-ok');
+    }
+  } catch(e) {
+    toast('Failed to start: ' + e, 'fail');
+  } finally {
+    btn.textContent = '\u26A1 Translate All OCR\'d';
+    btn.disabled = false;
+  }
+  renderBadges();
+  refresh();
+}
+
+// ── Translate a single doc (already ingested) ──────────────────────────────
+async function translateDoc(doc) {
+  const r = await fetch('/api/pipeline/translate-doc', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({doc: doc, context: 5, sleep: 0.8})
+  });
+  const d = await r.json();
+  if (d.error) { toast('Error: ' + d.error, 'fail'); return; }
+  toast('Translating ' + doc + ' (job ' + d.job + ')', 'ok');
+  addLog('[TRANSLATE] ' + doc + ' started (context-window mode)', 'log-line-ok');
+  renderBadges();
+}
+
+// ── Open scholarly reader for a doc ───────────────────────────────────────
+function readDoc(doc) {
+  window.open('/reader/' + encodeURIComponent(doc), '_blank');
+}
+
 async function pauseAll() {
+
   const r = await fetch('/api/jobs/running');
   const d = await r.json();
   if (!d.count) { toast('No running jobs', 'ok'); return; }

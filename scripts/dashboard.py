@@ -640,6 +640,42 @@ def api_queue_run():
     return jsonify({"job": jid})
 
 
+@app.post("/api/pipeline/translate-doc")
+def api_translate_doc():
+    """Translate a single already-ingested doc. Skips OCR — DB passages only.
+    
+    POST body: {"doc": "nirukta", "engine": "gemini:gemini-2.5-pro", "context": 5}
+    """
+    data    = request.get_json(force=True) or {}
+    doc     = _validate_doc(data.get("doc"))
+    if not doc:
+        return jsonify({"error": "invalid or missing doc"}), 400
+    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+    context = str(data.get("context", 5))
+    sleep_s = str(data.get("sleep", 0.8))
+    db      = data.get("db") or "data/context.db"
+    cmd = py(script("translate_passages.py"),
+             "--doc",     doc,
+             "--db",      db,
+             "--engine",  engine,
+             "--context", context,
+             "--sleep",   sleep_s)
+    jid = launch("translate", doc, cmd)
+    return jsonify({"job": jid, "doc": doc, "engine": engine})
+
+
+@app.post("/api/pipeline/advance")
+def api_pipeline_advance():
+    """Run advance_pipeline.py — translate ALL OCR'd docs in priority order.
+    
+    Runs Re-ingest (safe) -> Translate -> Export for all 22 docs.
+    Does NOT trigger new OCR. Already-translated passages are skipped.
+    """
+    cmd = py(script("advance_pipeline.py"))
+    jid = launch("advance_pipeline", "all_docs", cmd)
+    return jsonify({"job": jid, "message": "Advancing all OCRd docs through pipeline"})
+
+
 @app.get("/api/passages/<doc>")
 def api_passages(doc):
     """Live JSON feed of passages for the reader page. Returns all verse metadata."""
