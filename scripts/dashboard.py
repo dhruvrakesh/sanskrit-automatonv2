@@ -396,29 +396,16 @@ def api_ocr():
             missing.append(p)
     if not missing:
         return jsonify({"message": "Nothing to OCR"}), 200
-    runner = [
-        sys.executable, "-u", "-c",
-        (
-            "import sys,subprocess,pathlib;"
-            f"pdfs={json.dumps([str(p) for p in missing])};"
-            f"outdir={json.dumps(str(raw))};"
-            f"dpi={json.dumps(dpi)};"
-            f"lang_tries={json.dumps(lang_tries)};"
-            f"root={json.dumps(str(ROOT))};"
-            "scr=str(pathlib.Path(root)/'scripts'/'ocr_pdf.py');"
-            "ok=0;"
-            "for i,p in enumerate(pdfs,1):\n"
-            "  outpath=str(pathlib.Path(outdir)/(pathlib.Path(p).stem+'.jsonl'));\n"
-            "  cmd=[sys.executable,scr,'--pdf',p,'--out',outpath,'--dpi',dpi,'--max-dpi','600','--lang-tries']+lang_tries;\n"
-            "  pr=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,cwd=root);\n"
-            "  sys.stdout.write(pr.stdout.decode('utf-8','replace'));\n"
-            "  sys.stdout.write(f'[{i}/{len(pdfs)}] {pathlib.Path(p).name} -> {pr.returncode}\\n'); sys.stdout.flush();\n"
-            "  ok+=(pr.returncode==0)\n"
-            "print(f'Done: {ok}/{len(pdfs)} ok');"
-        ),
-    ]
-    jid = launch("ocr", doc, runner)
+    batch_script = str(SCRIPTS / "ocr_batch.py")
+    cmd = py(batch_script,
+             "--pdfs",      *[str(p) for p in sorted(missing)],
+             "--outdir",    str(raw.resolve()),
+             "--dpi",       dpi,
+             "--max-dpi",   "600",
+             "--lang-tries", *lang_tries)
+    jid = launch("ocr", doc, cmd)
     return jsonify({"job": jid})
+
 
 @app.post("/api/ingest")
 def api_ingest():
