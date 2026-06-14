@@ -642,7 +642,7 @@ def api_queue_run():
 
 @app.get("/api/passages/<doc>")
 def api_passages(doc):
-    """Live JSON feed of passages for the reader page."""
+    """Live JSON feed of passages for the reader page. Returns all verse metadata."""
     doc = _validate_doc(doc)
     if not doc:
         return jsonify({"error": "invalid doc"}), 400
@@ -650,34 +650,67 @@ def api_passages(doc):
     page    = int(request.args.get("page", 1))
     limit   = min(int(request.args.get("limit", 50)), 200)
     offset  = (page - 1) * limit
+    text_type_filter = request.args.get("text_type", "")  # e.g. "mula" to see only root text
     try:
         con = sqlite3.connect(db_path)
+        # Dynamically detect which columns exist (handles old DBs)
+        cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        extra_selects = ", ".join([
+            f"p.{c}" for c in
+            ["verse_ref", "chapter", "text_type", "chandas", "iast", "quality_score", "translation_score"]
+            if c in cols
+        ])
+        if extra_selects:
+            extra_selects = ", " + extra_selects
+
+        type_clause = ""
+        type_params = []
+        if text_type_filter:
+            type_clause = " AND COALESCE(p.text_type,'mula')=?"
+            type_params = [text_type_filter]
+
         total = con.execute(
-            "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?",
-            (doc,)
+            f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?{type_clause}",
+            (doc, *type_params)
         ).fetchone()[0]
         translated = con.execute(
-            "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id "
-            "WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''",
-            (doc,)
+            f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id "
+            f"WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''{type_clause}",
+            (doc, *type_params)
         ).fetchone()[0]
+        # Count by text_type
+        type_counts = {}
+        if "text_type" in cols:
+            for row in con.execute(
+                "SELECT COALESCE(text_type,'mula'), COUNT(*) FROM passages p "
+                "JOIN docs d ON d.id=p.doc_id WHERE d.code=? GROUP BY text_type", (doc,)
+            ):
+                type_counts[row[0]] = row[1]
+
         rows = con.execute(
-            "SELECT p.page_no, p.idx, p.text, p.translation "
-            "FROM passages p JOIN docs d ON d.id=p.doc_id "
-            "WHERE d.code=? ORDER BY p.page_no, p.idx LIMIT ? OFFSET ?",
-            (doc, limit, offset)
+            f"SELECT p.page_no, p.idx, p.text, p.translation{extra_selects} "
+            f"FROM passages p JOIN docs d ON d.id=p.doc_id "
+            f"WHERE d.code=?{type_clause} ORDER BY p.page_no, p.idx LIMIT ? OFFSET ?",
+            (doc, *type_params, limit, offset)
         ).fetchall()
         con.close()
+
+        def row_to_dict(r):
+            d = {"page_no": r[0], "idx": r[1], "text": r[2] or "", "translation": r[3] or ""}
+            col_names = ["verse_ref","chapter","text_type","chandas","iast","quality_score","translation_score"]
+            for i, c in enumerate(col_names):
+                if c in cols and 4 + i < len(r):
+                    d[c] = r[4 + i]
+            return d
+
         return jsonify({
             "doc": doc,
             "total": total,
             "translated": translated,
+            "type_counts": type_counts,
             "page": page,
             "limit": limit,
-            "passages": [
-                {"page_no": r[0], "idx": r[1], "text": r[2] or "", "translation": r[3] or ""}
-                for r in rows
-            ]
+            "passages": [row_to_dict(r) for r in rows]
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -685,7 +718,7 @@ def api_passages(doc):
 
 @app.get("/reader/<doc>")
 def reader(doc):
-    """Live bilingual reader — Sanskrit + English side by side."""
+    """Scholarly three-column reader: Sanskrit | English | Footnotes/Metadata."""
     doc = _validate_doc(doc)
     if not doc:
         return "Invalid document name", 400
@@ -695,56 +728,148 @@ def reader(doc):
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>{doc} — Sanskrit Reader</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{{--bg:#0e0d0b;--card:#1a1915;--border:#2d2b25;--gold:#d4a843;--text:#e8e0d0;--muted:#6b6456;--tr:#4ade80;--un:#444038}}
+:root{{
+  --bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;
+  --gold:#c9952a;--gold-dim:#c9952a50;--cream:#ede4cc;--muted:#7a6d58;
+  --green:#5aaa7a;--blue:#5b9bd5;--red:#c06060;--amber:#d4852a;
+  --dev-col:#e8dcc8;--en-col:#c8d4e8;--meta-col:#9aaa8a;
+}}
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}}
-header{{background:var(--card);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}}
-h1{{font-size:18px;color:var(--gold);font-weight:600}}
-.sub{{font-size:11px;color:var(--muted)}}
-.prog-wrap{{flex:1;max-width:300px}}
-.prog-bar{{background:var(--border);border-radius:8px;height:6px;overflow:hidden}}
-.prog-bar i{{display:block;height:100%;background:var(--gold);border-radius:8px;transition:width .5s}}
-.prog-pct{{font-size:10px;color:var(--muted);margin-top:2px}}
-.back{{color:var(--muted);font-size:12px;text-decoration:none}}
+body{{background:var(--bg);color:var(--cream);font-family:'EB Garamond',Georgia,serif;min-height:100vh;font-size:16px}}
+/* ── Header ── */
+header{{background:var(--card);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}}
+.back{{color:var(--muted);font-size:12px;text-decoration:none;font-family:'Inter',sans-serif}}
 .back:hover{{color:var(--gold)}}
-main{{max-width:1200px;margin:0 auto;padding:24px}}
-.page-group{{margin-bottom:32px}}
-.page-label{{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:12px}}
-.passage{{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:8px;transition:border-color .2s}}
-.passage:hover{{border-color:var(--gold)}}
-.sanskrit{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:1.8;color:#e8e0d0}}
-.english{{font-size:13px;line-height:1.7;color:#b0a898}}
-.empty-tr{{color:var(--un);font-style:italic;font-size:12px}}
-.idx{{font-size:9px;color:var(--muted);margin-bottom:6px}}
-footer{{text-align:center;padding:24px;color:var(--muted);font-size:11px}}
-.loading{{text-align:center;padding:48px;color:var(--muted)}}
+h1{{font-size:17px;color:var(--gold);font-weight:600;font-family:'Inter',sans-serif;letter-spacing:.5px}}
+.prog-wrap{{flex:1;max-width:240px}}
+.prog-bar{{background:var(--border);border-radius:8px;height:4px;overflow:hidden}}
+.prog-bar i{{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--amber));border-radius:8px;transition:width .6s ease}}
+.prog-pct{{font-size:10px;color:var(--muted);margin-top:3px;font-family:'Inter',sans-serif}}
+.filter-bar{{display:flex;gap:6px;align-items:center}}
+.filter-btn{{background:var(--card2);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}}
+.filter-btn.active{{background:var(--gold-dim);color:var(--gold);border-color:var(--gold)}}
+.refresh-label{{font-size:10px;color:var(--muted);font-family:'Inter',sans-serif}}
+/* ── Main ── */
+main{{max-width:1400px;margin:0 auto;padding:20px 16px 48px}}
+/* ── Page group ── */
+.page-group{{margin-bottom:40px}}
+.page-label{{
+  font-family:'Inter',sans-serif;font-size:10px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:2px;
+  border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:14px;
+  display:flex;gap:12px;align-items:center
+}}
+.chapter-badge{{background:var(--gold-dim);color:var(--gold);border-radius:10px;padding:1px 8px;font-size:9px}}
+/* ── Three-column verse card ── */
+.verse-card{{
+  display:grid;grid-template-columns:2fr 2fr 1fr;gap:0;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  margin-bottom:10px;overflow:hidden;transition:border-color .2s;
+}}
+.verse-card:hover{{border-color:var(--gold-dim)}}
+.col-dev,.col-en,.col-meta{{padding:14px 16px}}
+.col-dev{{border-right:1px solid var(--border);background:linear-gradient(135deg,var(--card),#1a1710)}}
+.col-en{{border-right:1px solid var(--border)}}
+.col-meta{{background:var(--card2);font-family:'Inter',sans-serif}}
+/* ── Column labels ── */
+.col-label{{font-family:'Inter',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}}
+.col-label-dev{{color:var(--gold)}}
+.col-label-en{{color:var(--blue)}}
+.col-label-meta{{color:var(--meta-col)}}
+/* ── Sanskrit text ── */
+.dev-text{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:2.0;color:var(--dev-col);white-space:pre-wrap}}
+/* ── English text ── */
+.en-text{{font-size:15px;line-height:1.75;color:var(--en-col);font-style:italic}}
+.en-text em{{font-style:normal;color:var(--cream)}}
+.en-pending{{color:var(--muted);font-style:italic;font-size:13px;font-family:'Inter',sans-serif}}
+/* ── Metadata column ── */
+.meta-row{{display:flex;flex-direction:column;gap:8px}}
+.meta-item{{font-size:11px;line-height:1.4}}
+.meta-key{{color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:1px}}
+.meta-val{{color:var(--meta-col)}}
+.verse-ref-badge{{
+  display:inline-block;background:var(--gold-dim);color:var(--gold);
+  border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600;margin-bottom:6px
+}}
+.type-badge{{display:inline-block;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}}
+.type-mula{{background:#5aaa7a20;color:var(--green)}}
+.type-tika{{background:#5b9bd520;color:var(--blue)}}
+.type-prose{{background:#c0606020;color:var(--red)}}
+.type-colophon{{background:#d4852a20;color:var(--amber)}}
+.type-noise{{background:#44444420;color:#666}}
+.quality-bar{{height:3px;border-radius:2px;background:var(--border);overflow:hidden;margin-top:3px}}
+.quality-bar i{{display:block;height:100%;border-radius:2px}}
+.iast-text{{font-family:'EB Garamond',serif;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5;word-break:break-all}}
+/* ── Loading / Empty ── */
+.loading{{text-align:center;padding:60px;color:var(--muted);font-family:'Inter',sans-serif;font-size:14px}}
+/* ── Pagination ── */
+.pagination{{display:flex;gap:8px;justify-content:center;padding:20px;align-items:center}}
+.pag-btn{{background:var(--card);color:var(--gold);border:1px solid var(--border);padding:6px 18px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;transition:all .2s}}
+.pag-btn:hover{{border-color:var(--gold);background:var(--gold-dim)}}
+.pag-label{{color:var(--muted);font-family:'Inter',sans-serif;font-size:12px}}
+footer{{text-align:center;padding:20px;color:var(--muted);font-size:12px;font-family:'Inter',sans-serif;border-top:1px solid var(--border)}}
 </style>
 </head>
 <body>
 <header>
   <a href="/" class="back">&#8592; Dashboard</a>
-  <h1 id="docTitle">{doc}</h1>
+  <h1 id="docTitle">{doc.replace('_',' ').title()}</h1>
   <div class="prog-wrap">
     <div class="prog-bar"><i id="progBar" style="width:0%"></i></div>
     <div class="prog-pct"><span id="progText">Loading&hellip;</span></div>
   </div>
-  <span class="sub" id="autoRefreshLabel">Auto-refresh: ON</span>
+  <div class="filter-bar">
+    <button class="filter-btn active" id="filter-all"    onclick="setFilter('')">All</button>
+    <button class="filter-btn"        id="filter-mula"   onclick="setFilter('mula')">M&#363;la</button>
+    <button class="filter-btn"        id="filter-tika"   onclick="setFilter('tika')">&#7788;&#299;k&#257;</button>
+    <button class="filter-btn"        id="filter-prose"  onclick="setFilter('prose')">Prose</button>
+  </div>
+  <span class="refresh-label" id="refreshLabel">Auto &#8635;</span>
 </header>
 <main id="main"><div class="loading">Loading passages&hellip;</div></main>
-<footer>Sanskrit Automaton v2 &mdash; Live Reader &mdash; {doc}</footer>
+<footer>Sanskrit Automaton v2 &mdash; Scholarly Reader &mdash; {doc}</footer>
 <script>
 const DOC = {json.dumps(doc)};
 let currentPage = 1; const LIMIT = 50;
-let refreshTimer = null; let autoRefresh = true;
+let refreshTimer = null; let activeFilter = '';
 
 function esc(s){{ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }}
+
+function chandas_display(c){{
+  const map = {{
+    anustubh:'Anu&#7779;&#7789;ubh (8&#215;4)',
+    tristubh:'Tri&#7779;&#7789;ubh (11&#215;4)',
+    jagati:'Jagat&#299; (12&#215;4)',
+    sardula_vikridata:'&#346;&#257;rd&#363;lavikr&#299;&#7693;ita',
+    malini:'M&#257;lin&#299;',
+    vasantatilaka:'Vasantatilak&#257;',
+    sloka:'&#346;loka',
+  }};
+  return map[c] || c || '';
+}}
+
+function quality_color(q){{
+  if (!q && q!==0) return '#444';
+  if (q >= 0.7) return '#5aaa7a';
+  if (q >= 0.4) return '#d4852a';
+  return '#c06060';
+}}
+
+function setFilter(f){{
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){{ b.classList.remove('active'); }});
+  document.getElementById('filter-' + (f||'all')).classList.add('active');
+  loadPage(1);
+}}
 
 async function loadPage(p){{
   currentPage = p;
   try{{
-    const r = await fetch('/api/passages/' + DOC + '?page=' + p + '&limit=' + LIMIT);
+    let url = '/api/passages/' + DOC + '?page=' + p + '&limit=' + LIMIT;
+    if (activeFilter) url += '&text_type=' + activeFilter;
+    const r = await fetch(url);
     const d = await r.json();
     if (d.error){{ document.getElementById('main').innerHTML='<div class="loading">Error: '+esc(d.error)+'</div>'; return; }}
     const pct = d.total ? Math.round(100*d.translated/d.total) : 0;
@@ -752,32 +877,80 @@ async function loadPage(p){{
     document.getElementById('progText').textContent = d.translated + '/' + d.total + ' translated (' + pct + '%)';
 
     let html = '';
-    let curPage = null;
+    let curPage = null; let curChapter = null;
     d.passages.forEach(function(p){{
+      // Page group header
       if (p.page_no !== curPage){{
         if (curPage !== null) html += '</div>';
-        html += '<div class="page-group"><div class="page-label">Page ' + p.page_no + '</div>';
+        let chBadge = '';
+        if (p.chapter && p.chapter !== curChapter){{
+          curChapter = p.chapter;
+          chBadge = '<span class="chapter-badge">Adhy&#257;ya ' + esc(p.chapter) + '</span>';
+        }}
+        html += '<div class="page-group"><div class="page-label">Page ' + p.page_no + chBadge + '</div>';
         curPage = p.page_no;
       }}
+
       const hasTr = p.translation && p.translation.trim();
-      html += '<div class="passage">' +
-        '<div><div class="idx">&#2380; ' + p.page_no + '.' + p.idx + '</div>' +
-        '<div class="sanskrit">' + esc(p.text) + '</div></div>' +
-        '<div><div class="idx">English</div>' +
-        (hasTr ? '<div class="english">' + esc(p.translation) + '</div>'
-                : '<div class="empty-tr">&#x231B; Awaiting translation&hellip;</div>') +
-        '</div></div>';
+      const ttype = p.text_type || 'mula';
+      const ref   = p.verse_ref;
+      const chan  = p.chandas;
+      const qual  = p.quality_score;
+      const iast  = p.iast;
+
+      // Type badge
+      const typeBadge = '<span class="type-badge type-' + esc(ttype) + '">' + esc(ttype) + '</span>';
+
+      // Quality bar
+      const qPct = qual ? Math.round(qual * 100) : 0;
+      const qColor = quality_color(qual);
+      const qBar = '<div class="quality-bar"><i style="width:'+qPct+'%;background:'+qColor+'"></i></div>';
+
+      // Build metadata column
+      let metaHtml = '<div class="meta-row">';
+      if (ref) metaHtml += '<div class="verse-ref-badge">&#2383; ' + esc(ref) + '</div>';
+      metaHtml += typeBadge;
+      if (chan){{
+        metaHtml += '<div class="meta-item"><span class="meta-key">Chandas</span><span class="meta-val">' + chandas_display(chan) + '</span></div>';
+      }}
+      if (qual !== null && qual !== undefined){{
+        metaHtml += '<div class="meta-item"><span class="meta-key">Quality ' + qPct + '%</span>' + qBar + '</div>';
+      }}
+      if (iast && iast.trim()){{
+        metaHtml += '<div class="iast-text">' + esc(iast.substring(0,120)) + (iast.length>120?'&hellip;':'') + '</div>';
+      }}
+      metaHtml += '</div>';
+
+      html += '<div class="verse-card">' +
+        // Column 1: Sanskrit Devanagari
+        '<div class="col-dev">' +
+          '<div class="col-label col-label-dev">&#2344;&#2350;&#2307; Sanskrit</div>' +
+          '<div class="dev-text">' + esc(p.text) + '</div>' +
+        '</div>' +
+        // Column 2: English translation
+        '<div class="col-en">' +
+          '<div class="col-label col-label-en">&#x1F4DC; English</div>' +
+          (hasTr
+            ? '<div class="en-text">' + esc(p.translation) + '</div>'
+            : '<div class="en-pending">&#x231B; Awaiting translation&hellip;</div>') +
+        '</div>' +
+        // Column 3: Metadata / Footnotes
+        '<div class="col-meta">' +
+          '<div class="col-label col-label-meta">&#x1F4CC; Notes</div>' +
+          metaHtml +
+        '</div>' +
+      '</div>';
     }});
     if (curPage !== null) html += '</div>';
-    if (d.passages.length === 0) html = '<div class="loading">No passages ingested yet. Run Ingest first.</div>';
+    if (d.passages.length === 0) html = '<div class="loading">No passages found for this filter. Try "All".</div>';
 
     // Pagination
     const totalPages = Math.ceil(d.total / LIMIT);
     if (totalPages > 1){{
-      html += '<div style="display:flex;gap:8px;justify-content:center;padding:16px">';
-      if (currentPage > 1) html += '<button onclick="loadPage(' + (currentPage-1) + ')" style="background:var(--card);color:var(--gold);border:1px solid var(--border);padding:6px 14px;border-radius:4px;cursor:pointer">&#8592; Prev</button>';
-      html += '<span style="color:var(--muted);padding:6px 14px">Page ' + currentPage + ' / ' + totalPages + '</span>';
-      if (currentPage < totalPages) html += '<button onclick="loadPage(' + (currentPage+1) + ')" style="background:var(--card);color:var(--gold);border:1px solid var(--border);padding:6px 14px;border-radius:4px;cursor:pointer">Next &#8594;</button>';
+      html += '<div class="pagination">';
+      if (currentPage > 1) html += '<button class="pag-btn" onclick="loadPage('+(currentPage-1)+')">&#8592; Prev</button>';
+      html += '<span class="pag-label">Page ' + currentPage + ' / ' + totalPages + '</span>';
+      if (currentPage < totalPages) html += '<button class="pag-btn" onclick="loadPage('+(currentPage+1)+')">Next &#8594;</button>';
       html += '</div>';
     }}
     document.getElementById('main').innerHTML = html;
@@ -788,7 +961,7 @@ async function loadPage(p){{
 
 function scheduleRefresh(){{
   if (refreshTimer) clearTimeout(refreshTimer);
-  if (autoRefresh) refreshTimer = setTimeout(function(){{ loadPage(currentPage); scheduleRefresh(); }}, 30000);
+  refreshTimer = setTimeout(function(){{ loadPage(currentPage); scheduleRefresh(); }}, 30000);
 }}
 
 loadPage(1);
@@ -796,6 +969,8 @@ scheduleRefresh();
 </script>
 </body>
 </html>"""
+
+
 
 
 
