@@ -62,6 +62,42 @@ class Job:
 JOBS: Dict[str, Job] = {}
 JOBS_LOCK = threading.Lock()
 
+# ── Persistent job log (survives restarts) ────────────────────────────────────
+JOBS_LOG_PATH = ROOT / "data" / "jobs.jsonl"
+
+def _persist_job(job: Job):
+    """Append a completed job record to data/jobs.jsonl."""
+    try:
+        JOBS_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        record = {
+            "id":    job.id,
+            "kind":  job.kind,
+            "doc":   job.doc,
+            "start": job.start,
+            "end":   job.end,
+            "ok":    job.ok,
+            "duration_s": round((job.end or job.start) - job.start, 1),
+            "out_lines": len((job.out or "").splitlines()),
+            "err_preview": (job.err or "")[:300],
+        }
+        with open(JOBS_LOG_PATH, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except Exception:
+        pass  # never let logging crash the server
+
+def _load_job_history(limit: int = 200) -> List[dict]:
+    """Read last N records from jobs.jsonl."""
+    if not JOBS_LOG_PATH.exists():
+        return []
+    lines = JOBS_LOG_PATH.read_text(encoding="utf-8", errors="replace").splitlines()
+    records = []
+    for line in reversed(lines[-limit:]):
+        try:
+            records.append(json.loads(line))
+        except Exception:
+            pass
+    return records
+
 def _run_job(job: Job):
     try:
         proc = subprocess.Popen(
@@ -76,6 +112,7 @@ def _run_job(job: Job):
         job.err = f"{type(e).__name__}: {e}\n{traceback.format_exc()}"
     finally:
         job.end = time.time()
+        _persist_job(job)  # write to disk immediately
 
 def launch(kind: str, doc: str, argv: List[str]) -> str:
     job = Job(id=str(uuid.uuid4()), kind=kind, doc=doc, cmd=argv)
@@ -371,6 +408,58 @@ def api_job(jid):
         "out": job.out[-6000:], "err": job.err[-2000:],
         "running": job.ok is None,
     })
+
+@app.get("/api/jobs/history")
+def api_jobs_history():
+    """Return persistent job history from data/jobs.jsonl (survives restarts)."""
+    limit = int(request.args.get("limit", 200))
+    doc   = request.args.get("doc", "").strip()
+    kind  = request.args.get("kind", "").strip()
+    records = _load_job_history(limit=limit * 4)   # load extra, then filter
+    if doc:
+        records = [r for r in records if r.get("doc") == doc]
+    if kind:
+        records = [r for r in records if r.get("kind") == kind]
+    return jsonify(records[:limit])
+
+@app.get("/api/usage")
+def api_usage():
+    """Return translation usage stats from the mt_cache table."""
+    db_path = request.args.get("db", "data/context.db")
+    try:
+        con = sqlite3.connect(db_path)
+        con.row_factory = sqlite3.Row
+        # mt_cache schema: engine, src, tgt, src_hash, translation, ts
+        tables = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if "mt_cache" not in tables:
+            return jsonify({"error": "mt_cache table not found", "stats": {}})
+        rows = con.execute(
+            "SELECT engine, COUNT(*) as calls, SUM(LENGTH(translation)) as out_chars "
+            "FROM mt_cache GROUP BY engine ORDER BY calls DESC"
+        ).fetchall()
+        total_calls = con.execute("SELECT COUNT(*) FROM mt_cache").fetchone()[0]
+        total_chars = con.execute("SELECT SUM(LENGTH(COALESCE(translation,''))) FROM mt_cache").fetchone()[0] or 0
+        # Estimate cost: Gemini 2.5 Pro ~$0.000010/char, OpenAI gpt-4o-mini ~$0.000015/char
+        cost_estimate = 0.0
+        by_engine = []
+        for r in rows:
+            eng = r["engine"] or "unknown"
+            calls = r["calls"]
+            chars = r["out_chars"] or 0
+            rate = 0.000010 if "gemini" in eng.lower() else 0.000015
+            cost = chars * rate
+            cost_estimate += cost
+            by_engine.append({"engine": eng, "calls": calls, "out_chars": chars, "cost_usd": round(cost, 4)})
+        con.close()
+        return jsonify({
+            "total_calls": total_calls,
+            "total_out_chars": total_chars,
+            "cost_estimate_usd": round(cost_estimate, 4),
+            "by_engine": by_engine,
+            "note": "Cost estimate: Gemini ~$0.01/1k chars, OpenAI ~$0.015/1k chars (output only, rough)"
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.post("/api/ocr")
 def api_ocr():

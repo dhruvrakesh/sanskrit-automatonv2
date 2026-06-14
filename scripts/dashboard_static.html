@@ -197,15 +197,34 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     </div>
   </main>
 
-  <!-- Job log -->
+  <!-- Job log with History and Usage tabs -->
   <aside class="log-panel">
     <div class="log-header">
       <span class="log-title">Job Log</span>
       <span id="runningCount" style="font-size:10px;color:var(--muted)">idle</span>
     </div>
     <div class="job-badges" id="jobBadges"></div>
-    <div class="log-body" id="logBody"><span style="color:var(--muted)">Awaiting jobs&hellip;</span></div>
-    <div class="log-clear"><button class="btn-clear" onclick="clearLog()">&#x2715; Clear log</button></div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:4px;padding:4px 8px;border-bottom:1px solid var(--border)">
+      <button id="tabLive"    onclick="switchTab('live')"    style="flex:1;background:var(--gold);color:#000;border:none;border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer;font-weight:600">Live Log</button>
+      <button id="tabHistory" onclick="switchTab('history')" style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer">History</button>
+      <button id="tabUsage"   onclick="switchTab('usage')"   style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer">Usage</button>
+    </div>
+    <!-- Live tab -->
+    <div id="paneLive">
+      <div class="log-body" id="logBody"><span style="color:var(--muted)">Awaiting jobs&hellip;</span></div>
+      <div class="log-clear"><button class="btn-clear" onclick="clearLog()">&#x2715; Clear log</button></div>
+    </div>
+    <!-- History tab -->
+    <div id="paneHistory" style="display:none;overflow-y:auto;flex:1;padding:8px;font-size:10px">
+      <button onclick="loadHistory()" style="margin-bottom:6px;background:var(--gold);color:#000;border:none;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:10px">&#x21BA; Reload</button>
+      <div id="historyBody"><span style="color:var(--muted)">Click Reload to load job history&hellip;</span></div>
+    </div>
+    <!-- Usage tab -->
+    <div id="paneUsage" style="display:none;overflow-y:auto;flex:1;padding:8px;font-size:10px">
+      <button onclick="loadUsage()" style="margin-bottom:6px;background:var(--gold);color:#000;border:none;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:10px">&#x21BA; Reload</button>
+      <div id="usageBody"><span style="color:var(--muted)">Click Reload to load usage stats&hellip;</span></div>
+    </div>
   </aside>
 </div>
 <div id="toast"></div>
@@ -555,6 +574,75 @@ async function importSelected() {
   }
 }
 
+// ── Tab switching ──────────────────────────────────────────────────────────
+function switchTab(name) {
+  ['live','history','usage'].forEach(function(t) {
+    document.getElementById('pane' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t === name ? 'flex' : 'none';
+    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    btn.style.background = t === name ? 'var(--gold)' : 'transparent';
+    btn.style.color      = t === name ? '#000'        : 'var(--muted)';
+    btn.style.border     = t === name ? 'none'        : '1px solid var(--border)';
+    btn.style.fontWeight = t === name ? '600'         : '400';
+  });
+  document.getElementById('paneLive').style.flexDirection    = 'column';
+  document.getElementById('paneHistory').style.flexDirection = 'column';
+  document.getElementById('paneUsage').style.flexDirection   = 'column';
+}
+
+// ── Job history ────────────────────────────────────────────────────────────
+async function loadHistory() {
+  const el = document.getElementById('historyBody');
+  el.innerHTML = '<span style="color:var(--muted)">Loading&hellip;</span>';
+  try {
+    const r = await fetch('/api/jobs/history?limit=100');
+    const rows = await r.json();
+    if (!rows.length) { el.innerHTML = '<span style="color:var(--muted)">No job history yet.</span>'; return; }
+    let html = '<table style="width:100%;border-collapse:collapse">' +
+      '<tr style="color:var(--muted);border-bottom:1px solid var(--border)"><th style="text-align:left;padding:2px 4px">Kind</th><th style="text-align:left;padding:2px 4px">Doc</th><th style="padding:2px 4px">Status</th><th style="padding:2px 4px">Duration</th><th style="padding:2px 4px">When</th></tr>';
+    rows.forEach(function(j) {
+      const when = j.start ? new Date(j.start * 1000).toLocaleString('en-IN', {hour12:false,month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+      const dur  = j.duration_s ? (j.duration_s >= 60 ? Math.round(j.duration_s/60) + 'm' : j.duration_s + 's') : '';
+      const ok   = j.ok === true ? '<span style="color:#4ade80">&#x2713; ok</span>' : j.ok === false ? '<span style="color:#f87171">&#x2717; fail</span>' : '<span style="color:var(--muted)">?</span>';
+      html += '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">' +
+        '<td style="padding:3px 4px;color:var(--gold)">' + esc(j.kind||'') + '</td>' +
+        '<td style="padding:3px 4px;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(j.doc||'') + '</td>' +
+        '<td style="padding:3px 4px;text-align:center">' + ok + '</td>' +
+        '<td style="padding:3px 4px;text-align:center;color:var(--muted)">' + dur + '</td>' +
+        '<td style="padding:3px 4px;color:var(--muted)">' + when + '</td></tr>';
+    });
+    html += '</table>';
+    el.innerHTML = html;
+  } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
+}
+
+// ── Usage stats ────────────────────────────────────────────────────────────
+async function loadUsage() {
+  const el = document.getElementById('usageBody');
+  el.innerHTML = '<span style="color:var(--muted)">Loading&hellip;</span>';
+  try {
+    const r = await fetch('/api/usage');
+    const d = await r.json();
+    if (d.error) { el.innerHTML = '<span style="color:var(--muted)">' + esc(d.error) + '</span>'; return; }
+    let html = '<div style="margin-bottom:8px">' +
+      '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">Translation Cache</div>' +
+      '<div>Total API calls: <b>' + d.total_calls + '</b></div>' +
+      '<div>Total output chars: <b>' + (d.total_out_chars||0).toLocaleString() + '</b></div>' +
+      '<div style="margin-top:4px;color:var(--gold)">Est. cost: <b>$' + d.cost_estimate_usd + '</b></div>' +
+      '<div style="color:var(--muted);font-size:9px;margin-top:2px">' + esc(d.note||'') + '</div></div>';
+    if (d.by_engine && d.by_engine.length) {
+      html += '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Engine</th><th>Calls</th><th>Chars</th><th>Cost</th></tr>';
+      d.by_engine.forEach(function(e) {
+        html += '<tr style="border-top:1px solid rgba(255,255,255,.05)">' +
+          '<td style="color:var(--gold);padding:3px 0">' + esc(e.engine) + '</td>' +
+          '<td style="text-align:center">' + e.calls + '</td>' +
+          '<td style="text-align:center">' + (e.out_chars||0).toLocaleString() + '</td>' +
+          '<td style="text-align:center">$' + e.cost_usd + '</td></tr>';
+      });
+      html += '</table>';
+    }
+    el.innerHTML = html;
+  } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
+}
 // ── Init ───────────────────────────────────────────────────────────────────
 loadCorpus();
 refresh();
