@@ -696,7 +696,7 @@ def api_translate():
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
     db      = data.get("db")      or "data/context.db"
-    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
     limit   = str(data.get("limit")   or 50)
     sleep   = str(data.get("sleep")   or 0.8)
     context = str(data.get("context") or 5)   # 5-verse sliding context window
@@ -731,7 +731,7 @@ def api_queue_run():
     inbox   = data.get("inbox")   or "inbox"
     raw     = data.get("raw")     or "data/raw"
     exports = data.get("exports") or "exports"
-    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
     dpi     = str(data.get("dpi") or 400)
     sleep   = str(data.get("sleep") or 0.6)
     skip_ocr       = bool(data.get("skip_ocr"))
@@ -767,7 +767,7 @@ def api_translate_doc():
     doc     = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
     context = str(data.get("context", 5))
     sleep_s = str(data.get("sleep", 0.8))
     db      = data.get("db") or "data/context.db"
@@ -1307,6 +1307,7 @@ select.engine-select:focus { outline: none; border-color: var(--gold); }
     <div class="engine-wrap">
       <span class="engine-label">Engine</span>
       <select id="engineSelect" class="engine-select" title="Translation engine">
+        <option value="gemini:gemini-2.5-flash" selected>⚡ Gemini 2.5 Flash (default)</option>
         <option value="gemini:gemini-2.5-pro">✦ Gemini 2.5 Pro (highest quality)</option>
         <option value="gemini:gemini-2.0-flash">⚡ Gemini 2.0 Flash (fast)</option>
         <option value="openai:gpt-4o">🔵 GPT-4o</option>
