@@ -642,6 +642,18 @@ def api_budget_set():
         return jsonify({"error": str(e)}), 500
 
 
+
+@app.get("/api/progress")
+def api_progress():
+    """Return live translation progress from data/translation_progress.json."""
+    prog_path = ROOT / "data" / "translation_progress.json"
+    try:
+        if prog_path.exists():
+            return jsonify(json.loads(prog_path.read_text(encoding="utf-8")))
+        return jsonify({"status": "idle"})
+    except Exception as e:
+        return jsonify({"status": "idle", "error": str(e)})
+
 @app.post("/api/ocr")
 def api_ocr():
     data  = request.get_json(force=True) or {}
@@ -872,6 +884,71 @@ def api_passages(doc):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+
+@app.get("/api/queue/<doc>")
+def api_queue_passages(doc):
+    """Return pending untranslated passages with quality scores for a doc."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return jsonify({"error": "invalid doc"}), 400
+    db_path = request.args.get("db", "data/context.db")
+    limit = int(request.args.get("limit", 200))
+    try:
+        con = sqlite3.connect(db_path)
+        cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        extra_sel = []
+        if "quality_score" in cols: extra_sel.append("p.quality_score")
+        if "verse_ref"     in cols: extra_sel.append("p.verse_ref")
+        if "text_type"     in cols: extra_sel.append("p.text_type")
+        extra_sql = (", " + ", ".join(extra_sel)) if extra_sel else ""
+        rows = con.execute(
+            f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_sql}
+                FROM passages p JOIN docs d ON d.id=p.doc_id
+                WHERE d.code=?
+                  AND COALESCE(TRIM(p.translation),'')=''
+                  AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')
+                ORDER BY p.page_no, p.idx LIMIT ?""",
+            (doc, limit)
+        ).fetchall()
+        con.close()
+        extra_names = []
+        if "quality_score" in cols: extra_names.append("quality_score")
+        if "verse_ref"     in cols: extra_names.append("verse_ref")
+        if "text_type"     in cols: extra_names.append("text_type")
+        def row_to_dict(r):
+            d = {"rowid": r[0], "page_no": r[1], "idx": r[2], "text": (r[3] or "")[:200]}
+            for i, c in enumerate(extra_names):
+                if 4 + i < len(r):
+                    d[c] = r[4 + i]
+            return d
+        return jsonify({"doc": doc, "pending": [row_to_dict(r) for r in rows], "count": len(rows)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.post("/api/queue/<doc>/skip")
+def api_queue_skip(doc):
+    """Add rowids to skip_rowids in translation_config.json."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return jsonify({"error": "invalid doc"}), 400
+    data = request.get_json(force=True) or {}
+    rowids_raw = data.get("rowids", [])
+    rowids = [int(r) for r in rowids_raw if str(r).isdigit() or (isinstance(r, int))]
+    if not rowids:
+        return jsonify({"error": "no valid rowids"}), 400
+    config_path = ROOT / "data" / "translation_config.json"
+    try:
+        cfg = json.loads(config_path.read_text(encoding="utf-8")) if config_path.exists() else {}
+        existing = set(cfg.get("skip_rowids", []))
+        existing.update(rowids)
+        cfg["skip_rowids"] = sorted(existing)
+        config_path.parent.mkdir(parents=True, exist_ok=True)
+        config_path.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
+        return jsonify({"skipped": len(rowids), "total_skipped": len(existing)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.get("/reader/<doc>")
 def reader(doc):

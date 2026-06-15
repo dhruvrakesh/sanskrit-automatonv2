@@ -127,6 +127,28 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .empty-state .e-icon{font-size:40px;margin-bottom:12px}
 .empty-state h3{font-size:16px;color:var(--cream);margin-bottom:8px}
 .empty-state p{font-size:13px;line-height:1.6;max-width:360px;margin:0 auto}
+
+/* ── Live progress panel ─────────────────────────────────────────────────── */
+.san-text{font-family:"Noto Serif Devanagari",serif;font-size:13px;line-height:1.9;color:#e8dcc8;background:var(--bg3);padding:8px 10px;border-radius:6px;border-left:3px solid var(--gold)}
+.en-text-p{font-size:12px;line-height:1.6;color:#c8d4e8;background:var(--bg3);padding:8px 10px;border-radius:6px;border-left:3px solid var(--blue);font-style:italic}
+.pstat-run{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;background:#d4a01715;color:var(--gold);border:1px solid var(--gold-dim)}
+.pstat-done{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;background:#4caf7d15;color:var(--green);border:1px solid #4caf7d40}
+.pstat-idle{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;background:var(--bg3);color:var(--muted);border:1px solid var(--border-v)}
+.recent-v{border-bottom:1px solid #ffffff08;cursor:pointer}
+.recent-v summary{padding:4px 6px;list-style:none}
+.recent-v summary::-webkit-details-marker{display:none}
+.recent-v summary:hover{background:var(--bg3)}
+.recent-v-ref{font-size:9px;color:var(--gold);font-family:"JetBrains Mono",monospace;margin-bottom:1px}
+.recent-v-san{font-family:"Noto Serif Devanagari",serif;font-size:10px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recent-v-en{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
+/* ── Queue panel ─────────────────────────────────────────────────────────── */
+.q-row{display:flex;align-items:center;gap:6px;padding:4px 6px;border-bottom:1px solid #ffffff06;font-size:10px}
+.q-row:hover{background:var(--bg3)}
+.q-ref{font-family:"JetBrains Mono",monospace;font-size:9px;color:var(--gold);white-space:nowrap;min-width:52px}
+.q-text{flex:1;font-family:"Noto Serif Devanagari",serif;font-size:10px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.q-qual{font-size:9px;font-family:"JetBrains Mono",monospace;white-space:nowrap;min-width:28px;text-align:right}
+.q-skip{background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:3px;padding:1px 5px;font-size:9px;cursor:pointer;white-space:nowrap}
+.q-skip:hover{border-color:var(--red);color:var(--red)}
 </style>
 </head>
 <body>
@@ -145,7 +167,8 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <div style="display:flex;align-items:center;gap:8px">
       <span class="engine-label">Engine</span>
       <select id="engineSelect" class="engine-select">
-        <option value="gemini:gemini-2.5-pro">&#x2726; Gemini 2.5 Pro (highest quality)</option>
+        <option value="gemini:gemini-2.5-flash" selected>&#x26A1; Gemini 2.5 Flash (default)</option>
+        <option value="gemini:gemini-2.5-pro">&#x2726; Gemini 2.5 Pro (high quality)</option>
         <option value="gemini:gemini-2.0-flash">&#x26A1; Gemini 2.0 Flash (fast)</option>
         <option value="openai:gpt-4o">&#x1F535; GPT-4o</option>
         <option value="openai:gpt-4o-mini">&#x1F535; GPT-4o-mini (cheap)</option>
@@ -211,10 +234,12 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     </div>
     <div class="job-badges" id="jobBadges"></div>
     <!-- Tabs -->
-    <div style="display:flex;gap:4px;padding:4px 8px;border-bottom:1px solid var(--border)">
-      <button id="tabLive"    onclick="switchTab('live')"    style="flex:1;background:var(--gold);color:#000;border:none;border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer;font-weight:600">Live Log</button>
-      <button id="tabHistory" onclick="switchTab('history')" style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer">History</button>
-      <button id="tabUsage"   onclick="switchTab('usage')"   style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:10px;cursor:pointer">Usage</button>
+    <div style="display:flex;gap:3px;padding:4px 8px;border-bottom:1px solid var(--border)">
+      <button id="tabLive"     onclick="switchTab('live')"     style="flex:1;background:var(--gold);color:#000;border:none;border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer;font-weight:600">Log</button>
+      <button id="tabHistory"  onclick="switchTab('history')"  style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">History</button>
+      <button id="tabUsage"    onclick="switchTab('usage')"    style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">Usage</button>
+      <button id="tabProgress" onclick="switchTab('progress')" style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">Live&#x25B6;</button>
+      <button id="tabQueue"    onclick="switchTab('queue')"    style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">Queue</button>
     </div>
     <!-- Live tab -->
     <div id="paneLive">
@@ -230,6 +255,22 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <div id="paneUsage" style="display:none;overflow-y:auto;flex:1;padding:8px;font-size:10px">
       <button onclick="loadUsage()" style="margin-bottom:6px;background:var(--gold);color:#000;border:none;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:10px">&#x21BA; Reload</button>
       <div id="usageBody"><span style="color:var(--muted)">Click Reload to load usage stats&hellip;</span></div>
+    </div>
+    <!-- Progress tab -->
+    <div id="paneProgress" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+      <div id="progressContent" style="flex:1;overflow-y:auto;padding:10px;font-size:11px">
+        <div style="color:var(--muted);text-align:center;padding:30px 10px">No translation running.<br><span style="font-size:10px">Start a Translate job to see live verse-by-verse progress.</span></div>
+      </div>
+    </div>
+    <!-- Queue tab -->
+    <div id="paneQueue" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+      <div style="padding:6px 8px;border-bottom:1px solid var(--border-v);display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <select id="queueDocSelect" onchange="loadQueue()" style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);padding:3px 6px;border-radius:4px;font-size:10px;flex:1;font-family:'JetBrains Mono',monospace"><option value="">-- select doc --</option></select>
+        <button onclick="bulkSkipLowQuality()" style="background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:4px;padding:3px 7px;font-size:9px;cursor:pointer" title="Skip all passages with quality &lt; 0.25">Skip &lt;25%</button>
+        <button onclick="loadQueue()" style="background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:4px;padding:3px 7px;font-size:9px;cursor:pointer">&#x21BA;</button>
+      </div>
+      <div style="padding:4px 8px;border-bottom:1px solid var(--border-v);display:flex;gap:10px;font-size:9px;color:var(--muted)" id="queueStats"></div>
+      <div id="queueBody" style="flex:1;overflow-y:auto"></div>
     </div>
   </aside>
 </div>
@@ -599,17 +640,17 @@ async function importSelected() {
 
 // ── Tab switching ──────────────────────────────────────────────────────────
 function switchTab(name) {
-  ['live','history','usage'].forEach(function(t) {
-    document.getElementById('pane' + t.charAt(0).toUpperCase() + t.slice(1)).style.display = t === name ? 'flex' : 'none';
-    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
-    btn.style.background = t === name ? 'var(--gold)' : 'transparent';
-    btn.style.color      = t === name ? '#000'        : 'var(--muted)';
-    btn.style.border     = t === name ? 'none'        : '1px solid var(--border)';
-    btn.style.fontWeight = t === name ? '600'         : '400';
+  ['live','history','usage','progress','queue'].forEach(function(t) {
+    const pane = document.getElementById('pane' + t.charAt(0).toUpperCase() + t.slice(1));
+    const btn  = document.getElementById('tab'  + t.charAt(0).toUpperCase() + t.slice(1));
+    if (pane) pane.style.display    = t === name ? 'flex' : 'none';
+    if (pane) pane.style.flexDirection = 'column';
+    if (btn)  btn.style.background  = t === name ? 'var(--gold)' : 'transparent';
+    if (btn)  btn.style.color       = t === name ? '#000'        : 'var(--muted)';
+    if (btn)  btn.style.border      = t === name ? 'none'        : '1px solid var(--border)';
+    if (btn)  btn.style.fontWeight  = t === name ? '600'         : '400';
   });
-  document.getElementById('paneLive').style.flexDirection    = 'column';
-  document.getElementById('paneHistory').style.flexDirection = 'column';
-  document.getElementById('paneUsage').style.flexDirection   = 'column';
+  if (name === 'queue') populateQueueDocSelect();
 }
 
 // ── Job history ────────────────────────────────────────────────────────────
@@ -666,13 +707,213 @@ async function loadUsage() {
     el.innerHTML = html;
   } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
 }
+// ── Live translation progress ──────────────────────────────────────────────
+async function pollProgress() {
+  try {
+    const r = await fetch('/api/progress');
+    if (!r.ok) return;
+    renderProgress(await r.json());
+  } catch(e) {}
+}
+
+function renderProgress(d) {
+  const el = document.getElementById('progressContent');
+  if (!d || !d.status || d.status === 'idle' || !d.doc) {
+    el.innerHTML = '<div style="color:var(--muted);text-align:center;padding:30px 10px;font-size:11px">No translation running.<br><span style="font-size:10px">Start a Translate job to see live verse-by-verse progress.</span></div>';
+    return;
+  }
+  const done  = d.verses_done  || 0;
+  const total = d.verses_total || 0;
+  const p     = total ? Math.round(100 * done / total) : 0;
+  const isRun = d.status === 'running';
+  const isPause = d.status === 'paused';
+  const isDone  = d.status === 'done';
+  const statBadge = isRun   ? '<span class="pstat-run">&#9654; running</span>'
+                  : isPause ? '<span class="pstat-idle">&#9646;&#9646; paused</span>'
+                  : isDone  ? '<span class="pstat-done">&#10003; done</span>'
+                  : '<span class="pstat-idle">' + esc(d.status) + '</span>';
+  let elapsed = '';
+  if (d.started_at) {
+    const s = Math.round((Date.now() - new Date(d.started_at + 'Z').getTime()) / 1000);
+    elapsed = s < 60 ? s + 's' : Math.floor(s/60) + 'm ' + (s%60) + 's';
+  }
+  let html = '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap">'
+    + statBadge
+    + '<span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px">' + esc(d.doc||'') + '</span>'
+    + (elapsed ? '<span style="font-size:9px;color:var(--muted)">&#x23F1;' + elapsed + '</span>' : '')
+    + '</div>';
+  // Progress bar
+  html += '<div style="margin-bottom:10px">'
+    + '<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:3px">'
+    + '<span>' + done + '/' + total + ' verses</span><span>' + p + '%</span></div>'
+    + '<div style="height:5px;background:var(--bg4);border-radius:999px;overflow:hidden">'
+    + '<div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--saffron));border-radius:999px;width:' + p + '%;transition:width .4s ease"></div>'
+    + '</div>'
+    + '<div style="margin-top:3px;display:flex;gap:10px;font-size:9px;color:var(--muted)">'
+    + '<span>&#x26A0; skip:' + (d.skipped_quality||0) + '</span>'
+    + '<span>&#x274C; err:' + (d.errors||0) + '</span>'
+    + '<span style="color:var(--gold)">' + esc((d.engine||'').split(':').pop()) + '</span>'
+    + '</div></div>';
+  // Current verse
+  if (isRun && d.current_text) {
+    const q = d.current_quality != null ? Math.round(d.current_quality * 100) : null;
+    const qc = q == null ? 'var(--muted)' : q >= 70 ? 'var(--green)' : q >= 40 ? 'var(--gold)' : 'var(--red)';
+    html += '<div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">'
+      + '&#9654; now translating'
+      + (d.current_page != null ? ' &middot; p' + d.current_page + '.' + (d.current_idx||'') : '')
+      + (q != null ? ' <span style="color:' + qc + '">&middot; q:' + q + '%</span>' : '')
+      + '</div>'
+      + '<div class="san-text">' + esc(d.current_text) + '</div>';
+    if (d.current_translation && d.current_translation !== 'translating...') {
+      html += '<div class="en-text-p" style="margin-top:5px">' + esc(d.current_translation) + '</div>';
+    } else if (d.current_translation === 'translating...') {
+      html += '<div style="color:var(--gold);font-size:11px;margin-top:5px;animation:pulse 1s infinite">&#9679; Calling API&hellip;</div>';
+    }
+  }
+  // Recent translations
+  const recent = (d.recent || []).slice().reverse().slice(0, 8);
+  if (recent.length) {
+    html += '<div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:10px 0 4px">Recent</div>'
+      + '<div style="border:1px solid var(--border-v);border-radius:5px;overflow:hidden">';
+    recent.forEach(function(v, i) {
+      const ref = v.verse_ref ? v.verse_ref : ('p' + v.page + '.' + v.idx);
+      const vq  = v.quality != null ? Math.round(v.quality * 100) : null;
+      html += '<details class="recent-v" style="border-bottom:' + (i < recent.length-1 ? '1px solid #ffffff07' : 'none') + '">'
+        + '<summary><div class="recent-v-ref">' + esc(ref) + (vq!=null?' · q:'+vq+'%':'') + '</div>'
+        + '<div class="recent-v-san">' + esc((v.text||'').slice(0,70)) + '</div>'
+        + '<div class="recent-v-en">' + esc((v.translation||'[empty]').slice(0,90)) + '</div></summary>'
+        + '<div style="padding:6px 8px;background:var(--bg3)">'
+        + '<div class="san-text" style="font-size:11px;margin-bottom:4px">' + esc(v.text||'') + '</div>'
+        + '<div class="en-text-p" style="font-size:11px">' + esc(v.translation||'[empty]') + '</div>'
+        + '</div></details>';
+    });
+    html += '</div>';
+  }
+  el.innerHTML = html;
+  // Auto-switch to progress tab if translation just started
+  if (isRun && !window._wasRunning) {
+    switchTab('progress');
+  }
+  window._wasRunning = isRun;
+}
+
+// ── Queue panel ────────────────────────────────────────────────────────────
+let _queueData = [];
+
+function populateQueueDocSelect() {
+  const sel = document.getElementById('queueDocSelect');
+  if (sel.options.length > 1) return; // already populated
+  // Pull from pipeline table rows
+  document.querySelectorAll('.pipeline-table tr[data-doc]').forEach(function(tr) {
+    const doc = tr.getAttribute('data-doc');
+    if (doc) {
+      const opt = document.createElement('option');
+      opt.value = doc;
+      opt.textContent = doc;
+      sel.appendChild(opt);
+    }
+  });
+  // Also try from corpusData
+  if (window.corpusData) {
+    const existing = new Set(Array.from(sel.options).map(function(o){ return o.value; }));
+    (window.corpusData.docs || []).forEach(function(d) {
+      if (d.code && !existing.has(d.code)) {
+        const opt = document.createElement('option');
+        opt.value = d.code; opt.textContent = d.code;
+        sel.appendChild(opt);
+      }
+    });
+  }
+}
+
+async function loadQueue() {
+  const doc = document.getElementById('queueDocSelect').value;
+  const body = document.getElementById('queueBody');
+  const stats = document.getElementById('queueStats');
+  if (!doc) { body.innerHTML = ''; stats.innerHTML = ''; return; }
+  body.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:10px;text-align:center">Loading&hellip;</div>';
+  try {
+    const r = await fetch('/api/queue/' + encodeURIComponent(doc) + '?db=' + encodeURIComponent(cfg.db) + '&limit=200');
+    const d = await r.json();
+    if (d.error) { body.innerHTML = '<div style="color:var(--red);padding:10px;font-size:10px">' + esc(d.error) + '</div>'; return; }
+    _queueData = d.pending || [];
+    stats.innerHTML = '<span>' + d.count + ' pending</span>'
+      + '<span style="margin-left:10px;color:var(--gold)">' + esc(doc) + '</span>';
+    renderQueue();
+  } catch(e) {
+    body.innerHTML = '<div style="color:var(--red);padding:10px;font-size:10px">' + esc(String(e)) + '</div>';
+  }
+}
+
+function renderQueue() {
+  const body = document.getElementById('queueBody');
+  if (!_queueData.length) {
+    body.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:10px;text-align:center">All passages translated! &#x2714;</div>';
+    return;
+  }
+  let html = '';
+  _queueData.forEach(function(v) {
+    const q = v.quality_score != null ? v.quality_score : null;
+    const qPct = q != null ? Math.round(q * 100) : null;
+    const qColor = q == null ? 'var(--muted)' : q >= 0.7 ? 'var(--green)' : q >= 0.4 ? 'var(--gold)' : 'var(--red)';
+    const ref = v.verse_ref ? v.verse_ref : ('p' + v.page_no + '.' + v.idx);
+    html += '<div class="q-row" data-rowid="' + v.rowid + '">'
+      + '<span class="q-ref">' + esc(ref) + '</span>'
+      + '<span class="q-text">' + esc((v.text||'').slice(0,60)) + '</span>'
+      + '<span class="q-qual" style="color:' + qColor + '">' + (qPct!=null ? qPct+'%' : '-') + '</span>'
+      + '<button class="q-skip" onclick="skipRow(' + v.rowid + ', this)">skip</button>'
+      + '</div>';
+  });
+  body.innerHTML = html;
+}
+
+async function skipRow(rowid, btn) {
+  const doc = document.getElementById('queueDocSelect').value;
+  if (!doc) return;
+  btn.disabled = true; btn.textContent = '...';
+  try {
+    const r = await fetch('/api/queue/' + encodeURIComponent(doc) + '/skip', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({rowids: [rowid]})
+    });
+    const d = await r.json();
+    if (d.error) { btn.textContent = 'err'; return; }
+    // Remove row from local data and re-render
+    _queueData = _queueData.filter(function(v){ return v.rowid !== rowid; });
+    document.getElementById('queueStats').innerHTML = '<span>' + _queueData.length + ' pending</span>'
+      + '<span style="margin-left:10px;color:var(--gold)">' + esc(doc) + '</span>';
+    renderQueue();
+    toast('Row ' + rowid + ' added to skip list', 'ok');
+  } catch(e) { btn.disabled=false; btn.textContent='skip'; toast('Skip error: '+e,'fail'); }
+}
+
+async function bulkSkipLowQuality() {
+  const doc = document.getElementById('queueDocSelect').value;
+  if (!doc || !_queueData.length) { toast('Load a queue first', 'fail'); return; }
+  const low = _queueData.filter(function(v){ return v.quality_score != null && v.quality_score < 0.25; });
+  if (!low.length) { toast('No passages below 25% quality', 'ok'); return; }
+  if (!confirm('Skip ' + low.length + ' passages with quality < 25%?
+
+They will be added to skip_rowids in translation_config.json.')) return;
+  const rowids = low.map(function(v){ return v.rowid; });
+  try {
+    const r = await fetch('/api/queue/' + encodeURIComponent(doc) + '/skip', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({rowids: rowids})
+    });
+    const d = await r.json();
+    toast('Skipped ' + (d.skipped||0) + ' passages (total: ' + (d.total_skipped||0) + ' in skip list)', 'ok');
+    await loadQueue();
+  } catch(e) { toast('Bulk skip error: '+e,'fail'); }
+}
+
 // ── Pause / Kill All ───────────────────────────────────────────────────────
 // ── Advance Pipeline — translate all OCR'd docs ────────────────────────────
 async function advancePipeline() {
   const confirmed = confirm(
     'This will translate ALL already-OCRd docs in priority order:\n\n' +
     'nirukta -> shiksha_* -> puranas -> vedas -> bodhyana -> Bodhicaryavatara -> LalitaVistara\n\n' +
-    'Uses Gemini 2.5 Pro with 5-verse context window.\n' +
+    'Uses Gemini 2.5 Flash with 5-verse context window.\n' +
     'The job runs in the background — you can monitor it in the Job Log.\n\n' +
     'Already-translated passages will be skipped.\n' +
     'Use "Pause All Jobs" to stop at any time.\n\n' +
@@ -770,7 +1011,9 @@ refresh();
 setInterval(refresh, 15000);
 setInterval(renderBadges, 2000);
 setInterval(pollRunningJobs, 3000);
+setInterval(pollProgress, 2000);
 pollRunningJobs();
+pollProgress();
 
 </script>
 </body>
