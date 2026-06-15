@@ -21,7 +21,7 @@ from __future__ import annotations
 import os, time, sqlite3, hashlib, json
 from typing import List, Tuple, Dict, Optional
 
-DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro")
+DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
 SLEEP  = float(os.environ.get("MT_SLEEP",   "0.8"))
 RETRIES = 3
 
