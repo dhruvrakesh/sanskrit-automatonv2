@@ -8,7 +8,7 @@ Called by dashboard's /api/queue/run endpoint.
 
 Usage:
   python scripts/pipeline_queue.py --doc nirukta --inbox inbox --raw data/raw
-      --db data/context.db --exports exports --engine gemini:gemini-2.5-pro
+      --db data/context.db --exports exports --engine gemini:gemini-2.5-flash
 """
 import argparse, subprocess, sys, pathlib, time, os, re
 
@@ -108,7 +108,7 @@ def main():
     ap.add_argument("--raw",      default="data/raw")
     ap.add_argument("--db",       default="data/context.db")
     ap.add_argument("--exports",  default="exports")
-    ap.add_argument("--engine",   default=os.environ.get("MT_ENGINE", "gemini:gemini-2.5-pro"))
+    ap.add_argument("--engine",   default=os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash"))
     ap.add_argument("--dpi",      default="400")
     ap.add_argument("--langs",    default="san+hin+eng")
     ap.add_argument("--sleep",    default="0.6",  help="seconds between translation API calls")
@@ -156,4 +156,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    mai

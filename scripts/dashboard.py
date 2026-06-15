@@ -530,6 +530,22 @@ def api_jobs_running():
         ]
     return jsonify({"running": running, "count": len(running)})
 
+@app.post("/api/doc/<doc>/stop")
+def api_doc_stop(doc):
+    """Kill all running jobs for a specific doc (translate, pipeline, etc.)."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return jsonify({"error": "invalid doc"}), 400
+    killed = []
+    with JOBS_LOCK:
+        running = [j for j in JOBS.values() if j.ok is None and j.doc == doc]
+    for job in running:
+        job.killed = True
+        ok = _kill_proc(job.proc)
+        killed.append({"jid": job.id, "kind": job.kind, "killed": ok})
+    return jsonify({"doc": doc, "stopped": len(killed), "jobs": killed})
+
+
 @app.get("/api/jobs/history")
 def api_jobs_history():
     """Return persistent job history from data/jobs.jsonl (survives restarts)."""
@@ -1832,16 +1848,4 @@ if __name__ == "__main__":
 
     # Ensure required dirs exist
     for d in [args.inbox, args.raw, args.exports]:
-        pathlib.Path(d).mkdir(parents=True, exist_ok=True)
-    pathlib.Path(args.db).parent.mkdir(parents=True, exist_ok=True)
-
-    print(f"\n{'─'*60}")
-    print(f"  Sanskrit Automaton v2 — Dashboard")
-    print(f"  URL:     http://{args.host}:{args.port}/")
-    print(f"  Inbox:   {pathlib.Path(args.inbox).resolve()}")
-    print(f"  DB:      {pathlib.Path(args.db).resolve()}")
-    print(f"  Corpus:  {CORPUS_ROOT}")
-    print(f"  Engine:  {os.environ.get('MT_ENGINE','gemini:gemini-2.5-flash')}")
-    print(f"{'─'*60}\n")
-
-    app.run(host=args.host, port=args.port, debug=False)
+        pat
