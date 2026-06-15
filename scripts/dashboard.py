@@ -307,8 +307,10 @@ def build_status(inbox, raw, dbp, exports):
         inbox_map = scan_inbox(inbox)
         raw_map   = scan_jsonl(raw)
         rows = []
+        seen = set()
         with connect(dbp) as con:
             schema = detect_schema(con)
+            # Docs with PDFs in inbox (primary — being actively processed)
             for doc, pdf_pages in sorted(inbox_map.items()):
                 jsonl_pages = set(raw_map.get(doc, []))
                 ing_pages, total_lines, trans_lines = count_ingested(con, schema, doc)
@@ -321,6 +323,27 @@ def build_status(inbox, raw, dbp, exports):
                     "translated_lines": int(trans_lines),
                     "exports":          count_exports(exports, doc),
                 })
+                seen.add(doc)
+            # Docs already in DB (inbox empty after prior import — show them too)
+            try:
+                db_docs = [r[0] for r in con.execute("SELECT code FROM docs ORDER BY code")]
+            except Exception:
+                db_docs = []
+            for doc in db_docs:
+                if doc in seen:
+                    continue
+                jsonl_pages = set(raw_map.get(doc, []))
+                ing_pages, total_lines, trans_lines = count_ingested(con, schema, doc)
+                rows.append({
+                    "doc":              doc,
+                    "pdf_count":        0,          # not in inbox — already imported
+                    "jsonl_count":      len(jsonl_pages),
+                    "ingested_pages":   int(ing_pages),
+                    "total_lines":      int(total_lines),
+                    "translated_lines": int(trans_lines),
+                    "exports":          count_exports(exports, doc),
+                })
+        rows.sort(key=lambda r: r["doc"])
         return rows
     except Exception:
         traceback.print_exc()
