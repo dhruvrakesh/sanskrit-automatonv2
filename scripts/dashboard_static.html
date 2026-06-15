@@ -149,6 +149,13 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .q-qual{font-size:9px;font-family:"JetBrains Mono",monospace;white-space:nowrap;min-width:28px;text-align:right}
 .q-skip{background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:3px;padding:1px 5px;font-size:9px;cursor:pointer;white-space:nowrap}
 .q-skip:hover{border-color:var(--red);color:var(--red)}
+/* ── Per-doc status chips & stop button ──────────────────────────────────── */
+.doc-status-chip{font-size:9px;margin-top:2px;min-height:14px}
+.chip-run{display:inline-flex;align-items:center;gap:3px;color:var(--gold);animation:pulse 1.5s infinite}
+.btn-doc-stop{padding:4px 9px;background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;border-radius:var(--r-sm);font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-doc-stop:hover{background:#991b1b;color:#fff}
+.btn-doc-start{padding:4px 9px;background:#1a3a1a;color:#5aaa7a;border:1px solid #2d6a2d;border-radius:var(--r-sm);font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-doc-start:hover{background:#2d6a2d;color:#fff}
 </style>
 </head>
 <body>
@@ -343,26 +350,40 @@ function renderPipeline(rows) {
     wrap.innerHTML = '<div class="empty-state"><div class="e-icon">&#x1F4C2;</div><h3>No documents in inbox</h3><p>Use the corpus browser to import scriptures.</p></div>';
     return;
   }
+  // Build set of currently-running docs from activeJobs
+  const runningDocs = new Set();
+  Object.values(activeJobs).forEach(function(j) { if (!j.done) runningDocs.add(j.doc); });
+
   let html = '<table class="pipeline-table"><thead><tr>' +
-    '<th>Document</th><th>PDFs</th><th>JSONL</th><th>Ingested</th>' +
+    '<th>Document</th><th>PDFs</th><th>Ingested</th>' +
     '<th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>' +
     '</tr></thead><tbody>';
   rows.forEach(function(r) {
-    html += '<tr>' +
-      '<td><div class="doc-name">' + esc(r.doc) + '</div></td>' +
+    const isRun = runningDocs.has(r.doc);
+    const docCell =
+      '<div class="doc-name">' + esc(r.doc) + '</div>' +
+      '<div class="doc-status-chip">' +
+        (isRun ? '<span class="chip-run">&#9898; running</span>' : '') +
+      '</div>';
+    // Progress denominator: use ingested_pages when pdf_count is 0 (doc already in DB)
+    const ingestDenom = r.pdf_count || r.ingested_pages || 0;
+    html += '<tr data-doc="' + esc(r.doc) + '">' +
+      '<td>' + docCell + '</td>' +
       '<td><span class="num-cell">' + r.pdf_count + '</span></td>' +
-      '<td>' + progBar(r.jsonl_count, r.pdf_count, false) + '</td>' +
-      '<td>' + progBar(r.ingested_pages, r.pdf_count, false) + '</td>' +
+      '<td>' + progBar(r.ingested_pages, ingestDenom, false) + '</td>' +
       '<td><span class="num-cell">' + r.total_lines + '</span></td>' +
       '<td>' + progBar(r.translated_lines, r.total_lines, true) + '</td>' +
       '<td><span class="num-cell">' + r.exports + '</span></td>' +
       '<td class="actions-cell">' +
         '<button class="btn-act ocr" data-act="ocr" data-doc="' + esc(r.doc) + '">OCR</button>' +
         '<button class="btn-act ing" data-act="ingest" data-doc="' + esc(r.doc) + '">Ingest</button>' +
-        '<button class="btn-act tr" data-act="translate" data-doc="' + esc(r.doc) + '">Translate</button>' +
+        '<button class="btn-doc-start"' + (isRun ? ' style="display:none"' : '') +
+          ' onclick="startDoc(\'' + esc(r.doc) + '\')">&#9654; Start</button>' +
+        '<button class="btn-doc-stop"' + (isRun ? '' : ' style="display:none"') +
+          ' onclick="stopDoc(\'' + esc(r.doc) + '\')">&#9646;&#9646; Stop</button>' +
         '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '">Export</button>' +
-        '<button class="btn-act" style="background:var(--gold);color:#000" data-act="pipeline" data-doc="' + esc(r.doc) + '">&#9654; Full Pipeline</button>' +
-        '<a href="/reader/' + esc(r.doc) + '" target="_blank" style="display:inline-block;padding:3px 8px;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:3px;font-size:10px;text-decoration:none;margin-left:2px">&#128214; Read</a>' +
+        '<button class="btn-act" style="background:var(--gold);color:#000;font-size:10px" data-act="pipeline" data-doc="' + esc(r.doc) + '">&#9654; Full</button>' +
+        '<a href="/reader/' + esc(r.doc) + '" target="_blank" style="display:inline-block;padding:4px 8px;background:transparent;color:var(--gold);border:1px solid var(--gold-dim);border-radius:3px;font-size:10px;text-decoration:none">&#128214;</a>' +
       '</td></tr>';
   });
   html += '</tbody></table>';
@@ -440,6 +461,7 @@ function trackJob(jid, label, kind, doc) {
   activeJobs[jid] = {label, kind, doc, done: false, ok: null};
   addLog('> ' + label, 'log-line-info');
   renderBadges();
+  updateDocChips();
   pollJob(jid, label);
 }
 
@@ -464,6 +486,7 @@ async function pollJob(jid, label) {
         if (j.err && !j.ok) addLog(j.err.slice(0, 400), 'log-line-err');
         toast(label + ': ' + (j.ok ? 'done' : 'FAILED'), j.ok ? 'ok' : 'fail');
         renderBadges();
+        updateDocChips();
         refresh();
         return;
       }
@@ -945,19 +968,61 @@ async function advancePipeline() {
   refresh();
 }
 
-// ── Translate a single doc (already ingested) ──────────────────────────────
-async function translateDoc(doc) {
-  const r = await fetch('/api/pipeline/translate-doc', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({doc: doc, context: 5, sleep: 0.8})
-  });
-  const d = await r.json();
-  if (d.error) { toast('Error: ' + d.error, 'fail'); return; }
-  toast('Translating ' + doc + ' (job ' + d.job + ')', 'ok');
-  addLog('[TRANSLATE] ' + doc + ' started (context-window mode)', 'log-line-ok');
-  renderBadges();
+// ── Per-doc enterprise start / stop ───────────────────────────────────────
+async function startDoc(doc) {
+  const eng = getEngine();
+  try {
+    const r = await fetch('/api/pipeline/translate-doc', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({doc: doc, engine: eng, context: 5, sleep: 0.8, db: cfg.db})
+    });
+    const d = await r.json();
+    if (d.error) { toast('Error: ' + d.error, 'fail'); return; }
+    trackJob(d.job, 'Translate ' + doc, 'translate', doc);
+    toast('&#9654; Started: ' + doc, 'ok');
+    switchTab('progress');
+  } catch(e) { toast('Start failed: ' + e, 'fail'); }
 }
+
+async function stopDoc(doc) {
+  if (!confirm('Stop translation of "' + doc + '"?\n\nThe current page will be lost.')) return;
+  try {
+    const r = await fetch('/api/doc/' + encodeURIComponent(doc) + '/stop', {method: 'POST'});
+    const d = await r.json();
+    if (d.stopped > 0) {
+      toast('&#9646;&#9646; Stopped: ' + doc, 'ok');
+      addLog('[STOP] ' + doc + ' stopped by user', 'log-line-err');
+      // Mark active jobs for this doc as done
+      Object.values(activeJobs).forEach(function(j) {
+        if (j.doc === doc && !j.done) { j.done = true; j.ok = false; }
+      });
+      renderBadges();
+      updateDocChips();
+    } else {
+      toast('No running jobs for ' + doc, 'fail');
+    }
+  } catch(e) { toast('Stop failed: ' + e, 'fail'); }
+}
+
+function updateDocChips() {
+  const runningDocs = new Set();
+  Object.values(activeJobs).forEach(function(j) { if (!j.done) runningDocs.add(j.doc); });
+  document.querySelectorAll('tr[data-doc]').forEach(function(tr) {
+    const doc = tr.getAttribute('data-doc');
+    const chip     = tr.querySelector('.doc-status-chip');
+    const startBtn = tr.querySelector('.btn-doc-start');
+    const stopBtn  = tr.querySelector('.btn-doc-stop');
+    if (!chip) return;
+    const isRun = runningDocs.has(doc);
+    chip.innerHTML = isRun ? '<span class="chip-run">&#9898; running</span>' : '';
+    if (startBtn) startBtn.style.display = isRun ? 'none' : 'inline-block';
+    if (stopBtn)  stopBtn.style.display  = isRun ? 'inline-block' : 'none';
+  });
+}
+
+// ── Translate a single doc (already ingested) — legacy alias ──────────────
+async function translateDoc(doc) { return startDoc(doc); }
 
 // ── Open scholarly reader for a doc ───────────────────────────────────────
 function readDoc(doc) {
@@ -965,7 +1030,6 @@ function readDoc(doc) {
 }
 
 async function pauseAll() {
-
   const r = await fetch('/api/jobs/running');
   const d = await r.json();
   if (!d.count) { toast('No running jobs', 'ok'); return; }
@@ -989,18 +1053,25 @@ async function pollRunningJobs() {
     if (d.count > 0) {
       btn.style.display = 'inline-block';
       cnt.textContent = d.count + ' job(s) running';
-      // While jobs are running: refresh pipeline status every 5s for live progress bars
       if (!window._fastRefresh) {
         window._fastRefresh = setInterval(refresh, 5000);
       }
+      // Sync server-side running jobs into activeJobs so chips stay accurate across reloads
+      d.running.forEach(function(sj) {
+        const found = Object.values(activeJobs).find(function(j) { return j.doc === sj.doc && !j.done; });
+        if (!found) {
+          activeJobs[sj.id] = {label: sj.kind + ' ' + sj.doc, kind: sj.kind, doc: sj.doc, done: false, ok: null};
+        }
+      });
+      updateDocChips();
     } else {
       btn.style.display = 'none';
       cnt.textContent = '';
-      // Back to 15s when idle
       if (window._fastRefresh) {
         clearInterval(window._fastRefresh);
         window._fastRefresh = null;
       }
+      updateDocChips();
     }
   } catch(e) {}
 }
