@@ -700,9 +700,11 @@ def api_translate():
     limit   = str(data.get("limit")   or 50)
     sleep   = str(data.get("sleep")   or 0.8)
     context = str(data.get("context") or 5)   # 5-verse sliding context window
+    min_quality = str(data.get("min_quality") or 0.25)
     cmd = py(script("translate_passages.py"),
              "--db", db, "--doc", doc, "--engine", engine,
-             "--sleep", sleep, "--limit", limit, "--context", context)
+             "--sleep", sleep, "--limit", limit, "--context", context,
+             "--min-quality", min_quality)
     return jsonify({"job": launch("translate", doc, cmd)})
 
 
@@ -767,16 +769,18 @@ def api_translate_doc():
     doc     = _validate_doc(data.get("doc"))
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
-    engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
-    context = str(data.get("context", 5))
-    sleep_s = str(data.get("sleep", 0.8))
-    db      = data.get("db") or "data/context.db"
+    engine      = data.get("engine")      or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
+    context     = str(data.get("context", 5))
+    sleep_s     = str(data.get("sleep", 0.8))
+    min_quality = str(data.get("min_quality") or 0.25)
+    db          = data.get("db") or "data/context.db"
     cmd = py(script("translate_passages.py"),
-             "--doc",     doc,
-             "--db",      db,
-             "--engine",  engine,
-             "--context", context,
-             "--sleep",   sleep_s)
+             "--doc",         doc,
+             "--db",          db,
+             "--engine",      engine,
+             "--context",     context,
+             "--sleep",       sleep_s,
+             "--min-quality", min_quality)
     jid = launch("translate", doc, cmd)
     return jsonify({"job": jid, "doc": doc, "engine": engine})
 
@@ -1737,7 +1741,7 @@ if __name__ == "__main__":
     print(f"  Inbox:   {pathlib.Path(args.inbox).resolve()}")
     print(f"  DB:      {pathlib.Path(args.db).resolve()}")
     print(f"  Corpus:  {CORPUS_ROOT}")
-    print(f"  Engine:  {os.environ.get('MT_ENGINE','gemini:gemini-2.5-pro')}")
+    print(f"  Engine:  {os.environ.get('MT_ENGINE','gemini:gemini-2.5-flash')}")
     print(f"{'─'*60}\n")
 
     app.run(host=args.host, port=args.port, debug=False)

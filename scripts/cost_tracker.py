@@ -42,8 +42,8 @@ def _get_pricing(engine: str) -> tuple[float, float]:
     for k, v in _PRICING.items():
         if k in engine or engine in k:
             return v
-    # Default: assume Gemini 2.5 Pro
-    return (1.25, 10.00)
+    # Default: assume Gemini 2.5 Flash (the project default engine)
+    return (0.15, 0.60)
 
 
 def chars_to_tokens(chars: int) -> float:

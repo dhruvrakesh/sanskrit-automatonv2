@@ -94,9 +94,10 @@ def main():
             PY, "scripts/translate_passages.py",
             "--doc", doc,
             "--db", DB,
-            "--engine", "gemini:gemini-2.5-pro",
-            "--context", "5",    # 5-verse context window
-            "--sleep", "0.8",    # 0.8s between API calls
+            "--engine", "gemini:gemini-2.5-flash",
+            "--context", "5",        # 5-verse context window
+            "--sleep", "0.8",        # 0.8s between API calls
+            "--min-quality", "0.25", # skip passages with bad OCR quality
         ]
         ok = run(translate_cmd, "TRANSLATE")
         if not ok:
