@@ -325,6 +325,7 @@ let pdfReg      = {};      // numericId -> {path, doc, name}
 let pidCounter  = 0;
 let selIds      = new Set(); // selected numeric IDs — avoids JSON-in-HTML bugs
 let activeJobs  = {};
+let docEngines  = {};  // per-doc engine override; '' = use global engineSelect
 let logLines    = [];
 
 // ── Utils ──────────────────────────────────────────────────────────────────
@@ -357,7 +358,10 @@ function renderLog() {
   el.scrollTop = el.scrollHeight;
 }
 function clearLog() { logLines = []; renderLog(); }
-function getEngine() { return document.getElementById('engineSelect').value; }
+function getEngine(doc) {
+  if (doc && docEngines[doc]) return docEngines[doc];
+  return document.getElementById('engineSelect').value;
+}
 
 // ── Pipeline status ────────────────────────────────────────────────────────
 async function refresh() {
@@ -410,10 +414,21 @@ function renderPipeline(rows) {
         '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '">Export</button>' +
         '<button class="btn-act" style="background:var(--gold);color:#000;font-size:10px" data-act="pipeline" data-doc="' + esc(r.doc) + '">&#9654; Full</button>' +
         '<a href="/reader/' + esc(r.doc) + '" target="_blank" style="display:inline-block;padding:4px 8px;background:transparent;color:var(--gold);border:1px solid var(--gold-dim);border-radius:3px;font-size:10px;text-decoration:none">&#128214;</a>' +
+        '<select class="doc-engine-sel" data-doc="' + esc(r.doc) + '" title="Engine override (overrides global for this doc)" onchange="docEngines[this.dataset.doc]=this.value" style="background:var(--bg3);border:1px solid var(--border-v);color:var(--muted);border-radius:3px;font-size:9px;padding:2px 4px;cursor:pointer;max-width:90px">' +
+          '<option value="">global</option>' +
+          '<option value="gemini:gemini-2.5-flash">⚡ Flash</option>' +
+          '<option value="gemini:gemini-2.5-pro">✦ Pro</option>' +
+          '<option value="openai:gpt-4o-mini">🔵 4o-mini</option>' +
+          '<option value="openai:gpt-4o">🔵 4o</option>' +
+        '</select>' +
       '</td></tr>';
   });
   html += '</tbody></table>';
   wrap.innerHTML = html;
+  // Restore per-doc engine overrides in newly-rendered selects
+  document.querySelectorAll('select.doc-engine-sel').forEach(function(sel) {
+    if (docEngines[sel.dataset.doc]) sel.value = docEngines[sel.dataset.doc];
+  });
 }
 
 function progBar(a, b, green) {
@@ -446,7 +461,7 @@ async function doAction(act, doc) {
     if (j.job) { trackJob(j.job, 'Ingest ' + doc, 'ingest', doc); toast('Ingest started for ' + doc); }
   }
   if (act === 'translate') {
-    const eng   = getEngine();
+    const eng   = getEngine(doc);
     const limit = (document.getElementById('xlateLimit') || {}).value || '100';
     const r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({doc, db: cfg.db, engine: eng, limit})});
@@ -460,7 +475,7 @@ async function doAction(act, doc) {
     if (j.job) { trackJob(j.job, 'Export ' + doc, 'export', doc); toast('Export started for ' + doc); }
   }
   if (act === 'pipeline') {
-    const eng = getEngine();
+    const eng = getEngine(doc);
     if (!confirm('Run FULL pipeline for "' + doc + '"?\n\nThis will serially run:\n  OCR → Ingest → Translate → Export\n\nThis may take a long time for large documents.\nOnly run ONE doc at a time!')) return;
     const r = await fetch('/api/queue/run', {method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({doc, db: cfg.db, inbox: cfg.inbox, raw: cfg.raw,
@@ -1007,7 +1022,7 @@ async function advancePipeline() {
 
 // ── Per-doc enterprise start / stop ───────────────────────────────────────
 async function startDoc(doc) {
-  const eng = getEngine();
+  const eng = getEngine(doc);
   try {
     const r = await fetch('/api/pipeline/translate-doc', {
       method: 'POST',
