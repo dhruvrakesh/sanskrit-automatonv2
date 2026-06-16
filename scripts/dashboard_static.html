@@ -156,6 +156,14 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .btn-doc-stop:hover{background:#991b1b;color:#fff}
 .btn-doc-start{padding:4px 9px;background:#1a3a1a;color:#5aaa7a;border:1px solid #2d6a2d;border-radius:var(--r-sm);font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn-doc-start:hover{background:#2d6a2d;color:#fff}
+/* ── Import & Run progress card ──────────────────────────────────────────── */
+.btn-import-run{width:100%;padding:9px;background:linear-gradient(135deg,#1a4a2a,var(--green));border:none;border-radius:var(--r-sm);color:#fff;font-weight:700;font-size:12px;cursor:pointer;transition:opacity .2s,transform .15s;letter-spacing:.03em;margin-top:5px}
+.btn-import-run:hover{opacity:.9;transform:translateY(-1px)}
+.btn-import-run:active{transform:translateY(0)}
+.import-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #ffffff08;font-size:11px}
+.import-item:last-child{border-bottom:none}
+.iitem-doc{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--cream);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iitem-status{font-size:10px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -206,12 +214,15 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
         <label for="autoSplit">Auto-split multi-page PDFs</label>
       </div>
       <button class="btn-import" id="importBtn" onclick="importSelected()">&#x2B07; Import to Inbox</button>
+      <button class="btn-import-run" id="importRunBtn" onclick="importAndRun()">&#x26A1; Import &amp; Run Pipeline</button>
     </div>
   </aside>
 
   <!-- Pipeline dashboard -->
   <main class="main">
     <div class="section-title">Pipeline Status</div>
+    <!-- Import & Run progress card (hidden until import starts) -->
+    <div id="importStatus" style="display:none;background:var(--bg2);border:1px solid var(--border-v);border-radius:var(--r);padding:12px 14px;margin-bottom:14px;max-height:220px;overflow-y:auto"></div>
     <div class="batch-bar" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <button class="btn-batch" onclick="batchAction('ocr')">&#x25B6; OCR All</button>
       <button class="btn-batch" onclick="batchAction('ingest')">&#x2B06; Ingest All</button>
@@ -1056,7 +1067,6 @@ async function pollRunningJobs() {
       if (!window._fastRefresh) {
         window._fastRefresh = setInterval(refresh, 5000);
       }
-      // Sync server-side running jobs into activeJobs so chips stay accurate across reloads
       d.running.forEach(function(sj) {
         const found = Object.values(activeJobs).find(function(j) { return j.doc === sj.doc && !j.done; });
         if (!found) {
@@ -1076,7 +1086,125 @@ async function pollRunningJobs() {
   } catch(e) {}
 }
 
-// ── Init ───────────────────────────────────────────────────────────────────
+// ── Import & Run Pipeline ──────────────────────────────────────────────────
+async function importAndRun() {
+  if (selIds.size === 0) { toast('Select files first'); return; }
+  const autoSplit = document.getElementById('autoSplit').checked;
+  const eng = getEngine();
+  const files = Array.from(selIds).map(function(id) {
+    var entry = pdfReg[id];
+    return {path: entry.path, doc: entry.doc};
+  });
+  const runBtn = document.getElementById('importRunBtn');
+  const impBtn = document.getElementById('importBtn');
+  runBtn.disabled = true; impBtn.disabled = true;
+  runBtn.textContent = 'Importing…';
+  const statusEl = document.getElementById('importStatus');
+  statusEl.style.display = 'block';
+  statusEl.innerHTML =
+    '<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">&#x26A1; Import &amp; Run Progress</div>' +
+    files.map(function(f) {
+      return '<div class="import-item"><span class="iitem-doc">' + esc(f.doc) + '</span>' +
+        '<span class="iitem-status" id="istatus-' + esc(f.doc) + '" style="color:var(--muted)">&#x1F4CB; queued</span></div>';
+    }).join('');
+  addLog('[IMPORT&RUN] Importing ' + files.length + ' file(s)…', 'log-line-info');
+  try {
+    const resp = await fetch('/api/corpus/import', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({inbox: cfg.inbox, files: files, auto_split: autoSplit})
+    });
+    const d = await resp.json();
+    if (d.error) { toast('Import error: ' + d.error, 'fail'); return; }
+    for (var item of (d.imported || [])) {
+      var stel = document.getElementById('istatus-' + item.doc);
+      if (item.error) {
+        if (stel) stel.innerHTML = '<span style="color:var(--red)">&#x274C; ' + esc(item.error) + '</span>';
+        addLog('[ERR] ' + item.doc + ': ' + item.error, 'log-line-err');
+        continue;
+      }
+      if (item.action === 'splitting' && item.job) {
+        if (stel) stel.innerHTML = '<span style="color:var(--gold)">&#x2702; splitting ' + item.pages + ' pages…</span>';
+        addLog('[SPLIT] ' + item.doc + ' → splitting ' + item.pages + ' pages', 'log-line-info');
+        trackJob(item.job, 'Split ' + item.doc, 'import_split', item.doc);
+        _waitSplitThenRun(item.job, item.doc, eng, stel);
+      } else {
+        if (stel) stel.innerHTML = '<span style="color:var(--saffron)">&#x25B6; starting pipeline…</span>';
+        addLog('[RUN] ' + item.doc + ' copied → launching pipeline', 'log-line-info');
+        _startImportPipeline(item.doc, eng, stel);
+      }
+    }
+    selIds.clear();
+    document.querySelectorAll('.pdf-cb:checked').forEach(function(cb) { cb.checked = false; });
+    updateSelCount();
+    setTimeout(refresh, 2000);
+  } catch(e) {
+    toast('Import & Run failed: ' + e, 'fail');
+    addLog('[ERR] Import & Run: ' + e, 'log-line-err');
+  } finally {
+    runBtn.disabled = false; impBtn.disabled = false;
+    runBtn.textContent = '⚡ Import & Run Pipeline';
+  }
+}
+
+async function _startImportPipeline(doc, engine, stel) {
+  try {
+    const r = await fetch('/api/queue/run', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({doc: doc, db: cfg.db, inbox: cfg.inbox, raw: cfg.raw,
+                            exports: cfg.exports, engine: engine})
+    });
+    const d = await r.json();
+    if (d.error) {
+      if (stel) stel.innerHTML = '<span style="color:var(--red)">&#x274C; ' + esc(d.error) + '</span>';
+      return;
+    }
+    if (stel) stel.innerHTML = '<span style="color:var(--green)">&#x25B6; pipeline running</span>';
+    trackJob(d.job, 'Pipeline ' + doc, 'pipeline', doc);
+    addLog('[RUN] ' + doc + ' pipeline started (job ' + d.job + ')', 'log-line-ok');
+    _watchImportPipeline(d.job, doc, stel);
+  } catch(e) {
+    if (stel) stel.innerHTML = '<span style="color:var(--red)">&#x274C; ' + esc(String(e)) + '</span>';
+  }
+}
+
+async function _waitSplitThenRun(splitJobId, doc, engine, stel) {
+  while (true) {
+    await new Promise(function(res) { setTimeout(res, 2000); });
+    try {
+      const j = await (await fetch('/api/job/' + splitJobId)).json();
+      if (!j.running) {
+        if (!j.ok) {
+          if (stel) stel.innerHTML = '<span style="color:var(--red)">&#x274C; split failed</span>';
+          addLog('[ERR] Split failed for ' + doc, 'log-line-err');
+          return;
+        }
+        if (stel) stel.innerHTML = '<span style="color:var(--saffron)">&#x25B6; starting pipeline…</span>';
+        addLog('[RUN] ' + doc + ' split done → launching pipeline', 'log-line-info');
+        _startImportPipeline(doc, engine, stel);
+        return;
+      }
+    } catch(e) {}
+  }
+}
+
+async function _watchImportPipeline(jid, doc, stel) {
+  while (true) {
+    await new Promise(function(res) { setTimeout(res, 3000); });
+    try {
+      const j = await (await fetch('/api/job/' + jid)).json();
+      if (!j.running) {
+        if (stel) stel.innerHTML = j.ok
+          ? '<span style="color:var(--green)">&#x2705; done</span>'
+          : '<span style="color:var(--red)">&#x274C; pipeline failed</span>';
+        refresh();
+        return;
+      }
+    } catch(e) {}
+  }
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────────────
 loadCorpus();
 refresh();
 setInterval(refresh, 15000);
