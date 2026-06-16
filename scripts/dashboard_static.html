@@ -501,9 +501,13 @@ function trackJob(jid, label, kind, doc) {
 }
 
 async function pollJob(jid, label) {
+  // Adaptive backoff: fast (1.4s) for first 20s, medium (4s) up to 2min, slow (8s) thereafter
   let lastOutLen = 0;
+  let elapsed    = 0;
   while (true) {
-    await new Promise(function(res) { setTimeout(res, 1400); });
+    const delay = elapsed < 20000 ? 1400 : elapsed < 120000 ? 4000 : 8000;
+    await new Promise(function(res) { setTimeout(res, delay); });
+    elapsed += delay;
     try {
       const r = await fetch('/api/job/' + jid);
       const j = await r.json();
