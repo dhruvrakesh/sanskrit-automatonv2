@@ -85,6 +85,7 @@ def _update_fts(cur, rowid, text, iast, translation):
 
 
 def main():
+    global _PROGRESS_PATH, _CONFIG_PATH  # declared before first use (Python 3.12+)
     ap = argparse.ArgumentParser(description="Translate Sanskrit passages")
     ap.add_argument("--db",           default="data/context.db")
     ap.add_argument("--doc",          required=True)
@@ -105,7 +106,6 @@ def main():
     ap.add_argument("--config",       default=str(_CONFIG_PATH))
     args = ap.parse_args()
 
-    global _PROGRESS_PATH, _CONFIG_PATH
     _PROGRESS_PATH = Path(args.progress)
     _CONFIG_PATH   = Path(args.config)
 
