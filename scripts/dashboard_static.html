@@ -10,7 +10,7 @@
 <style>
 :root {
   --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
-  --border-v:#35302680; --gold:#d4a017; --gold-dim:#9a721080;
+  --border:#35302640; --border-v:#35302680; --gold:#d4a017; --gold-dim:#9a721080;
   --saffron:#f47c20; --cream:#f0e6cc; --muted:#8a7d67; --ink:#e8dcc8;
   --green:#4caf7d; --red:#e05f5f; --blue:#6b9bd2; --purple:#a07dd6;
   --r:10px; --r-sm:6px; --shadow:0 4px 24px #00000060;
@@ -215,6 +215,21 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       </div>
       <button class="btn-import" id="importBtn" onclick="importSelected()">&#x2B07; Import to Inbox</button>
       <button class="btn-import-run" id="importRunBtn" onclick="importAndRun()">&#x26A1; Import &amp; Run Pipeline</button>
+      <!-- Persistent OCR / translate settings (replaces browser prompt() calls) -->
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-v);display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:center">
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">OCR DPI</label>
+        <input id="ocrDpi" type="number" min="72" max="1200" value="400"
+               style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
+               oninput="localStorage.setItem('ocrDpi',this.value)"/>
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">OCR Langs</label>
+        <input id="ocrLangs" type="text" value="san+hin+eng"
+               style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
+               oninput="localStorage.setItem('ocrLangs',this.value)"/>
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Translate Limit</label>
+        <input id="xlateLimit" type="number" min="1" max="5000" value="100"
+               style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
+               oninput="localStorage.setItem('xlateLimit',this.value)"/>
+      </div>
     </div>
   </aside>
 
@@ -416,8 +431,8 @@ document.getElementById('pipelineWrap').addEventListener('click', async function
 
 async function doAction(act, doc) {
   if (act === 'ocr') {
-    const dpi = prompt('DPI for OCR?', '400') || '400';
-    const langs = prompt('Tesseract lang string?', 'san+hin+eng') || 'san+hin+eng';
+    const dpi   = (document.getElementById('ocrDpi')  || {}).value  || '400';
+    const langs = (document.getElementById('ocrLangs') || {}).value || 'san+hin+eng';
     const r = await fetch('/api/ocr', {method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({doc, dpi, langs, inbox: cfg.inbox, raw: cfg.raw})});
     const j = await r.json();
@@ -431,8 +446,8 @@ async function doAction(act, doc) {
     if (j.job) { trackJob(j.job, 'Ingest ' + doc, 'ingest', doc); toast('Ingest started for ' + doc); }
   }
   if (act === 'translate') {
-    const eng = getEngine();
-    const limit = prompt('Max passages per run?', '100') || '100';
+    const eng   = getEngine();
+    const limit = (document.getElementById('xlateLimit') || {}).value || '100';
     const r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({doc, db: cfg.db, engine: eng, limit})});
     const j = await r.json();
@@ -461,6 +476,15 @@ async function doAction(act, doc) {
 async function batchAction(act) {
   if (act === 'ocr') {
     if (!confirm('WARNING: Running OCR on ALL docs at once will spawn many parallel Tesseract processes.\n\nRecommended: Use the "Full Pipeline" button per doc instead.\n\nContinue anyway?')) return;
+  }
+  if (act === 'translate') {
+    const docs = Array.from(document.querySelectorAll('tr[data-doc]')).map(function(tr) {
+      return tr.getAttribute('data-doc');
+    }).filter(Boolean);
+    if (!docs.length) { toast('No documents loaded', 'fail'); return; }
+    if (!confirm('Start translation for ALL ' + docs.length + ' docs?\n\nJobs are rate-limited to 1 at a time. Each will queue behind the previous.')) return;
+    for (var i = 0; i < docs.length; i++) { await startDoc(docs[i]); }
+    return;
   }
   document.querySelectorAll('button[data-act="' + act + '"]').forEach(async function(b) {
     await doAction(act, b.dataset.doc);
@@ -725,7 +749,7 @@ async function loadUsage() {
       '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">Translation Cache</div>' +
       '<div>Total API calls: <b>' + d.total_calls + '</b></div>' +
       '<div>Total output chars: <b>' + (d.total_out_chars||0).toLocaleString() + '</b></div>' +
-      '<div style="margin-top:4px;color:var(--gold)">Est. cost: <b>$' + d.cost_estimate_usd + '</b></div>' +
+      '<div style="margin-top:4px;color:var(--gold)">Est. cost: <b>$' + (d.budget && d.budget.spent_usd != null ? d.budget.spent_usd : d.cost_estimate_usd) + '</b></div>' +
       '<div style="color:var(--muted);font-size:9px;margin-top:2px">' + esc(d.note||'') + '</div></div>';
     if (d.by_engine && d.by_engine.length) {
       html += '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Engine</th><th>Calls</th><th>Chars</th><th>Cost</th></tr>';
@@ -1203,6 +1227,14 @@ async function _watchImportPipeline(jid, doc, stel) {
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────────────
+// Restore persistent settings from localStorage (survives page reload)
+(function restoreSettings() {
+  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '100'};
+  Object.keys(map).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = localStorage.getItem(id) || map[id];
+  });
+})();
 loadCorpus();
 refresh();
 setInterval(refresh, 15000);

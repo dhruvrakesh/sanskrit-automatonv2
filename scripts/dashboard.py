@@ -354,8 +354,15 @@ def build_status(inbox, raw, dbp, exports):
 # Corpus Browser API
 # ──────────────────────────────────────────────────────────────────────────────
 
+_CORPUS_CACHE: dict = {"ts": 0.0, "data": []}
+_CORPUS_CACHE_TTL = 60  # seconds — D: drive scan is expensive (Google Drive sync)
+
 def _corpus_tree() -> List[dict]:
-    """Return list of {category, pdfs:[{name, size, path}]} from CORPUS_ROOT."""
+    """Return list of {category, pdfs:[{name, size, path}]} from CORPUS_ROOT.
+    Result is cached for CORPUS_CACHE_TTL seconds to avoid hammering the D: drive."""
+    now = time.time()
+    if now - _CORPUS_CACHE["ts"] < _CORPUS_CACHE_TTL:
+        return _CORPUS_CACHE["data"]
     if not CORPUS_ROOT.exists():
         return []
     categories = []
@@ -371,7 +378,14 @@ def _corpus_tree() -> List[dict]:
         )
         if pdfs:
             categories.append({"category": cat_dir.name, "pdfs": pdfs})
+    _CORPUS_CACHE["data"] = categories
+    _CORPUS_CACHE["ts"]   = now
     return categories
+
+
+def _invalidate_corpus_cache():
+    """Call after a successful import so the sidebar reflects new inbox state."""
+    _CORPUS_CACHE["ts"] = 0.0
 
 
 def _sanitize_doc_name(stem: str) -> str:
@@ -462,6 +476,7 @@ def api_corpus_import():
             shutil.copy2(str(src_path), str(dest))
             results.append({"doc": doc_name, "pages": n_pages, "action": "copied", "dest": dest.name})
 
+    _invalidate_corpus_cache()  # force sidebar refresh on next /api/corpus call
     return jsonify({"imported": results})
 
 
@@ -1248,7 +1263,10 @@ scheduleRefresh();
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Static Dashboard HTML — rich, dark-mode, Sanskrit-inspired
+# Static dashboard is maintained in scripts/dashboard_static.html (canonical).
+# The embedded fallback below is intentionally minimal — it is only written to
+# disk if dashboard_static.html is missing entirely (e.g. fresh clone without
+# the file). It redirects the user to regenerate the file.
 # ──────────────────────────────────────────────────────────────────────────────
 
 _DASHBOARD_HTML = r"""<!doctype html>
@@ -1831,21 +1849,4 @@ if not _static_html.exists():
     _static_html.write_text(_DASHBOARD_HTML, encoding="utf-8")
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# CLI entry point
-# ──────────────────────────────────────────────────────────────────────────────
-
-if __name__ == "__main__":
-    import argparse
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--inbox",   default="inbox")
-    ap.add_argument("--raw",     default="data/raw")
-    ap.add_argument("--db",      default="data/context.db")
-    ap.add_argument("--exports", default="exports")
-    ap.add_argument("--host",    default="127.0.0.1")
-    ap.add_argument("--port",    type=int, default=5057)
-    args = ap.parse_args()
-
-    # Ensure required dirs exist
-    for d in [args.inbox, args.raw, args.exports]:
-        pat
+# ──────────────────────────────────────────────────────
