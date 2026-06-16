@@ -773,7 +773,7 @@ function renderProgress(d) {
   }
   let html = '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap">'
     + statBadge
-    + '<span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px">' + esc(d.doc||'') + '</span>'
+    + '<span style="font-size:10px;color:var(--muted);font-family:JetBrains Mono,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px">' + esc(d.doc||'') + '</span>'
     + (elapsed ? '<span style="font-size:9px;color:var(--muted)">&#x23F1;' + elapsed + '</span>' : '')
     + '</div>';
   // Progress bar
@@ -926,9 +926,7 @@ async function bulkSkipLowQuality() {
   if (!doc || !_queueData.length) { toast('Load a queue first', 'fail'); return; }
   const low = _queueData.filter(function(v){ return v.quality_score != null && v.quality_score < 0.25; });
   if (!low.length) { toast('No passages below 25% quality', 'ok'); return; }
-  if (!confirm('Skip ' + low.length + ' passages with quality < 25%?
-
-They will be added to skip_rowids in translation_config.json.')) return;
+  if (!confirm('Skip ' + low.length + ' passages with quality < 25%?\n\nThey will be added to skip_rowids in translation_config.json.')) return;
   const rowids = low.map(function(v){ return v.rowid; });
   try {
     const r = await fetch('/api/queue/' + encodeURIComponent(doc) + '/skip', {
