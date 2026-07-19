@@ -1849,4 +1849,33 @@ if not _static_html.exists():
     _static_html.write_text(_DASHBOARD_HTML, encoding="utf-8")
 
 
-# ──────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# CLI entry point
+# ──────────────────────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--inbox",   default="inbox")
+    ap.add_argument("--raw",     default="data/raw")
+    ap.add_argument("--db",      default="data/context.db")
+    ap.add_argument("--exports", default="exports")
+    ap.add_argument("--host",    default="127.0.0.1")
+    ap.add_argument("--port",    type=int, default=5057)
+    args = ap.parse_args()
+
+    # Ensure required dirs exist
+    for d in [args.inbox, args.raw, args.exports]:
+        pathlib.Path(d).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(args.db).parent.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n{'─'*60}")
+    print(f"  Sanskrit Automaton v2 — Dashboard")
+    print(f"  URL:     http://{args.host}:{args.port}/")
+    print(f"  Inbox:   {pathlib.Path(args.inbox).resolve()}")
+    print(f"  DB:      {pathlib.Path(args.db).resolve()}")
+    print(f"  Corpus:  {CORPUS_ROOT}")
+    print(f"  Engine:  {os.environ.get('MT_ENGINE','gemini:gemini-2.5-flash')}")
+    print(f"{'─'*60}\n")
+
+    app.run(host=args.host, port=args.port, debug=False)

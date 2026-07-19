@@ -45,3 +45,17 @@ AUDIT_BUGS_AND_CLEANUP.md
 exports/*.html
 exports/*.tsv
 out/
+
+data/raw/
+exports/
+inbox/
+out/
+__pycache__/
+.fuse_hidden*
+
+data/raw/
+exports/
+inbox/
+out/
+__pycache__/
+.fuse_hidden*

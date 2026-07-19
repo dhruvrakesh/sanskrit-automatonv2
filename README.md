@@ -1,107 +1,112 @@
-# sanskrit-automaton
+# Sanskrit Automaton v2
 
-A grow‑as‑you‑go pipeline for **Sanskrit analysis, entity extraction, and explainable translation**, 
-inspired by the spirit of critical editions (e.g., **BORI**), translators like **Bibek Debroy** and **Manmatha Nath Dutt**, 
-and grounded in **Pāṇini’s grammatical insights** through analyzers such as Sanskrit Heritage and `sanskrit_parser`.
+Local-first pipeline for Sanskrit OCR, normalization, and AI-assisted translation.
+Processes scanned PDFs → Sanskrit text → English translation → HTML export.
 
-> Goal: ingest Sanskrit texts; normalize → sandhi‑split → morphologically parse; identify **tribes/clans/places**; 
-> translate with evidence; and continually improve via human review.
+> See [ARCHITECTURE.md](ARCHITECTURE.md) for system design, API reference, and DB schema.
 
 ---
 
-## Project layout
+## Quick Start
+
+```bat
+REM 1. Copy .env.example to .env and fill in API keys
+copy .env.example .env
+
+REM 2. Install dependencies
+pip install -r requirements.txt
+
+REM 3. Start the dashboard
+run.bat
+```
+
+Open **http://localhost:5057** in your browser.
+
+---
+
+## Prerequisites
+
+- Python 3.10+
+- Tesseract OCR (`tesseract` on PATH) with Sanskrit + Hindi language packs
+- Gemini API key (`GEMINI_API_KEY`) and/or OpenAI API key (`OPENAI_API_KEY`) in `.env`
+- `SA_SAFE_MODE=1` in `.env` (must remain set)
+
+---
+
+## Project Layout
 
 ```
-sanskrit-automaton/
-├── README.md
+sanskrit-automatonv2/
+├── run.bat                          # Start Flask server
+├── .env                             # API keys (never committed)
+├── .env.example                     # Template
 ├── requirements.txt
-├── pyproject.toml            # optional, for poetry/pip if desired
-├── LICENSE
-├── configs/
-│   ├── sources.yml
-│   ├── translit.yml
-│   └── mt.yml
-├── data/
-│   ├── raw/
-│   ├── interim/
-│   ├── processed/
-│   └── seeds/seed_tribes_regions.jsonl
+├── ARCHITECTURE.md                  # System design, API routes, DB schema
+│
 ├── scripts/
-│   ├── normalize_text.py         # danda/diacritics cleanup + transliteration
-│   ├── sandhi_split.py           # sandhi splitting using sanskrit_parser
-│   ├── morph_parse.py            # morphology; Heritage API (if set) or sanskrit_parser
-│   ├── build_gazetteer.py        # scrape+merge proper names (MW/Heritage) → JSONL + GraphML
-│   ├── ner_tag.py                # gazetteer-based NER (tribe/loc/etc.)
-│   ├── infer_mt.py               # /translate backend with "explain" evidence (stub until model fine-tuned)
-│   ├── train_mt.py               # IndicTrans2 fine-tune hooks (instructions + skeleton)
-│   └── publish_api.py            # FastAPI: /analyze /entities /translate?explain=true + tiny web UI
-├── webui/
-│   └── static/ (index.html, app.js, style.css)
-├── labelstudio_templates/
-│   ├── segmentation_approval.xml
-│   ├── sense_choice.xml
-│   └── entity_correction.xml
-└── tests/
-    ├── test_normalize.py
-    ├── test_sandhi_split.py
-    └── test_morph_parse.py
+│   ├── dashboard.py                 # Flask server (port 5057) — all API routes
+│   ├── dashboard_static.html        # Single-file SPA (the UI)
+│   ├── pipeline_queue.py            # Full pipeline runner (OCR→Ingest→Translate→Export)
+│   ├── advance_pipeline.py          # Batch translate all OCR'd docs
+│   ├── ocr_pdf.py                   # Tesseract OCR → JSONL
+│   ├── ingest_jsonl_fast.py         # JSONL → SQLite passages
+│   ├── translate_passages.py        # Translate passages via LLM
+│   ├── infer_mt.py                  # LLM inference (Gemini / OpenAI)
+│   ├── export_html.py               # passages → HTML translation
+│   ├── cost_tracker.py              # Budget tracking
+│   └── …                           # Other utilities
+│
+├── data/
+│   ├── context.db                   # SQLite — docs + passages + translations
+│   ├── jobs.jsonl                   # Job history (append-only)
+│   ├── translation_progress.json    # Live progress (written during translate runs)
+│   ├── raw/                         # OCR output (*.jsonl)
+│   └── exports/                     # HTML translation outputs
+│
+└── inbox/                           # PDFs staged for processing (DocName_NNNN.pdf)
 ```
 
-### Upstream inspirations & sources
+---
 
-- **Sanskrit Heritage** (Gérard Huet): morphological analyzer & reader.  
-- **sanskrit_parser** (Python): sandhi split + sentence/karaka analysis.  
-- **Cologne Sanskrit Lexicon – Monier‑Williams**: https://www.sanskrit-lexicon.uni-koeln.de/  
-- **BORI critical edition** references for Mahābhārata; **Debroy** and **Manmatha Nath Dutt** translations for cross‑checking renderings.  
-- **Itihāsa parallel corpus** for Sanskrit↔English verse pairs (for fine‑tuning).  
-- **IndicTrans2** model family for Indic MT with `san_Deva` support.
+## Pipeline
 
-> ⚖️ **Licensing & ethics**: respect terms of each corpus/site (Cologne, Heritage, BORI, etc.). 
-> The included scrapers are rate‑limited and optional; prefer using local, licensed dumps if available.
+```
+PDF corpus (D: drive)
+      ↓  [Import via corpus browser]
+inbox/DocName_NNNN.pdf
+      ↓  [OCR]
+data/raw/DocName_NNNN.jsonl
+      ↓  [Ingest]
+context.db → passages table
+      ↓  [Translate]
+passages.translation (Gemini 2.5 Flash by default)
+      ↓  [Export]
+data/exports/DocName_translation.html
+```
+
+Use the **⚡ Import & Run Pipeline** button in the corpus browser sidebar to run all steps
+for a new document in one click.
 
 ---
 
-## Quickstart
+## Translation Engines
 
-1. **Install deps** (Python 3.10+ recommended):
-   ```bash
-   python -m venv .venv && source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
+Select globally in the top-bar engine dropdown, or per-document via the row-level dropdown
+in the pipeline table:
 
-2. **Run the API + tiny UI**:
-   ```bash
-   uvicorn scripts.publish_api:app --reload --port 8000
-   # open http://localhost:8000
-   ```
+| Engine | Speed | Quality | Cost |
+|---|---|---|---|
+| Gemini 2.5 Flash | Fast | Good | Cheapest |
+| Gemini 2.5 Pro | Slow | Excellent | ~10× Flash |
+| GPT-4o-mini | Fast | Good | Low |
+| GPT-4o | Slow | Excellent | High |
 
-3. **CLI examples**:
-   ```bash
-   echo "धर्मक्षेत्रे कुरुक्षेत्रे..." | python scripts/normalize_text.py --from-script DEVANAGARI --to-script SLP1
-   echo "धर्मक्षेत्रे कुरुक्षेत्रे..." | python scripts/sandhi_split.py
-   echo "धर्मक्षेत्रे कुरुक्षेत्रे..." | python scripts/morph_parse.py
-   ```
-
-4. **Gazetteer build** (optional web fetch; see script header for notes):  
-   ```bash
-   python scripts/build_gazetteer.py --seed data/seeds/seed_tribes_regions.jsonl --out data/processed/gazetteer.jsonl
-   ```
-
-5. **Label Studio** templates are in `labelstudio_templates/` (import them in your LS project).
-
-6. **Training MT** (instructions in `scripts/train_mt.py`): clone IndicTrans2 & prepare Itihāsa pairs, then run fine‑tuning. 
-   The API will use your fine‑tuned checkpoint when placed as configured in `configs/mt.yml`.
+**Recommended**: Flash for bulk corpus; Pro for priority texts set via per-doc dropdown.
 
 ---
 
-## Paninian grounding & critical‑edition mindset
+## Security Notes
 
-- Parsers are configured to **prefer grammatical well‑formedness** (Pāṇinian cues) and to expose **explanations** (chosen split, morphology, karaka edges).
-- When translations are produced, the UI/API returns **evidence**: parse summary, glossary choices, and “near‑parallel” references if available.
-- Where possible, cite **critical editions** (BORI for MBh etc.); the repo is structured to keep edition metadata alongside each text chunk (TEI/XML encouraged).
-
----
-
-## Minimal warranty
-
-This is a **starter**. Some functionality is stubbed (e.g., MT fine‑tune hooks) until you attach your models and datasets.
+- `.env` is in `.gitignore` — never commit API keys
+- `SA_SAFE_MODE=1` must remain set to prevent destructive bulk operations
+- The server binds to `127.0.0.1:5057` (localhost only)

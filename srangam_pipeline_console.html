@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srangam Pipeline Console — guided actions</title>
+<style>
+  :root{
+    --bg:#faf7f2; --card:#ffffff; --ink:#2a2118; --muted:#7a6f61;
+    --accent:#b3541e; --accent2:#1e6f5c; --line:#e8e0d4; --code-bg:#2d2a24;
+    --code-ink:#f3ede2; --done:#1e6f5c; --warn:#a33; --chip:#f0e9dd;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#171410; --card:#211d17; --ink:#efe8dc; --muted:#a2988a;
+      --accent:#e08a4e; --accent2:#4dbfa3; --line:#37312a;
+      --code-bg:#0f0d0a; --code-ink:#e8e0d2; --chip:#2c261f;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Georgia,'Noto Serif',serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  header{padding:28px 20px 18px;max-width:980px;margin:0 auto}
+  h1{font-size:1.6rem;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:.95rem}
+  main{max-width:980px;margin:0 auto;padding:0 20px 80px}
+  .progressbar{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+  .bar{height:8px;background:var(--chip);border-radius:4px;overflow:hidden}
+  .bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
+  .bartext{font-size:.8rem;color:var(--muted);margin-top:4px}
+  .phase{margin-top:34px}
+  .phase>h2{font-size:1.15rem;border-bottom:2px solid var(--accent);padding-bottom:6px;display:flex;align-items:center;gap:10px}
+  .phase>h2 .tag{font-size:.7rem;background:var(--chip);color:var(--muted);padding:2px 8px;border-radius:10px;font-family:sans-serif;letter-spacing:.5px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+  .step.done{border-color:var(--done);opacity:.75}
+  .stephead{display:flex;gap:10px;align-items:flex-start}
+  .stephead input[type=checkbox]{margin-top:5px;width:16px;height:16px;accent-color:var(--accent2)}
+  .stephead b{font-size:1rem}
+  .why{color:var(--muted);font-size:.9rem;margin:6px 0 8px 26px}
+  .gate{margin:8px 0 0 26px;font-size:.85rem;color:var(--accent2);font-family:sans-serif}
+  .gate::before{content:"⛩ gate: ";font-weight:bold}
+  .warn{margin:8px 0 0 26px;font-size:.85rem;color:var(--warn);font-family:sans-serif}
+  .cmd{position:relative;margin:8px 0 0 26px}
+  .cmd pre{background:var(--code-bg);color:var(--code-ink);padding:10px 84px 10px 12px;border-radius:8px;overflow-x:auto;font-size:.85rem;font-family:Consolas,'Courier New',monospace;white-space:pre-wrap;word-break:break-all;margin:0}
+  .cmd button{position:absolute;top:6px;right:6px;background:var(--accent);color:#fff;border:0;border-radius:6px;padding:4px 10px;font-size:.75rem;cursor:pointer;font-family:sans-serif}
+  .cmd button:active{transform:scale(.96)}
+  .docbox{background:var(--card);border:2px solid var(--accent);border-radius:10px;padding:14px 16px;margin:18px 0}
+  .docbox label{font-family:sans-serif;font-size:.85rem;color:var(--muted)}
+  .docbox input{width:100%;padding:8px 10px;font-size:1rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-family:Consolas,monospace;margin-top:6px}
+  a{color:var(--accent)}
+  .note{font-size:.8rem;color:var(--muted);margin-top:30px;border-top:1px solid var(--line);padding-top:12px;font-family:sans-serif}
+  .pill{display:inline-block;background:var(--chip);border-radius:8px;padding:1px 8px;font-size:.78rem;font-family:sans-serif;color:var(--muted);margin-left:6px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🕉 Srangam Pipeline Console</h1>
+  <div class="sub">Guided actions for the wisdomlib → Sanskrit Automaton translation pipeline.
+  <b>Current scope (decided 2026-07-18): phases 0–4 — a fully local affair.</b> Phases 5–8 are the future
+  public window into the honed corpus and apps; they stay parked until you reopen them.
+  Companion to <i>docs/APPS_AND_CORPUS_INTEGRATION_2026-07-18.md</i>. Every command is copy-ready; checkboxes track your run.</div>
+</header>
+<main>
+  <div class="progressbar"><div class="bar"><div id="prog"></div></div><div class="bartext" id="progtext">0 of 0 steps checked (progress resets when the page reloads)</div></div>
+
+  <div class="docbox">
+    <label>Working doc code — typing here updates every command below (get codes from the adapter's <code>--list-books</code> / publisher's <code>--list</code>):</label>
+    <input id="doccode" value="wl_buddha_carita_sanskrit" spellcheck="false">
+  </div>
+
+  <!-- ═══════════ PHASE 0 ═══════════ -->
+  <section class="phase"><h2>0 · Prerequisites <span class="tag">ONE-TIME</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Automaton venv has the adapter's dependency</b></div>
+      <div class="why">beautifulsoup4 is already in requirements.txt — verify it's installed in the venv the automaton uses.</div>
+      <div class="cmd"><pre>cd /d "D:\Sanksrit Automatons\sanskrit-automatonv2"
+.venv\Scripts\activate 2>nul & python -c "import bs4, requests; print('deps OK')"</pre><button>Copy</button></div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════ PHASE 1 ═══════════ -->
+  <section class="phase"><h2>1 · Crawl wisdomlib, source-texts first <span class="tag">TRACK C1</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Preview the queue reorder (writes nothing)</b></div>
+      <div class="why">Measured 2026-07-18: 67% of the 158,536-URL queue is dictionary /definition/ pages. The reorder puts ~5,900 Sanskrit source-text chapters first.</div>
+      <div class="cmd"><pre>cd /d D:\wisdomlib
+python reprioritize_crawl.py --dry-run</pre><button>Copy</button></div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Apply the reorder (auto-backup)</b></div>
+      <div class="cmd"><pre>cd /d D:\wisdomlib
+python reprioritize_crawl.py</pre><button>Copy</button></div>
+      <div class="gate">output shows "Queue reordered in place. Backup: crawl_state.backup-…json"</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Run crawl bursts (500 pages/run, ~15 min each)</b></div>
+      <div class="why">Repeat whenever you like; it resumes automatically. Re-run the reprioritizer occasionally as new links get discovered. Keep the polite 1.5 s delay.</div>
+      <div class="cmd"><pre>cd /d D:\wisdomlib
+python scraper.py</pre><button>Copy</button></div>
+      <div class="warn">Optional: bump a favourite book to the very front first — python reprioritize_crawl.py --focus buddha-carita</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 2 ═══════════ -->
+  <section class="phase"><h2>2 · Convert archive → ingest JSONL <span class="tag">TRACK C2</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>See which books the archive holds</b></div>
+      <div class="cmd"><pre>cd /d "D:\Sanksrit Automatons\sanskrit-automatonv2"
+python scripts\wisdomlib_to_jsonl.py --archive D:\wisdomlib\wisdomlib_archive --list-books</pre><button>Copy</button></div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Dry-run the conversion</b></div>
+      <div class="why">Shows doc codes, page and record counts. Only Devanagari/IAST source blocks are extracted — wisdomlib's own English translations are excluded by design (copyright bright line).</div>
+      <div class="cmd"><pre>python scripts\wisdomlib_to_jsonl.py --archive D:\wisdomlib\wisdomlib_archive --dry-run</pre><button>Copy</button></div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Write the JSONL files</b></div>
+      <div class="why">Add --book &lt;substring&gt; to scope to one book. Output lands in data\raw\ alongside OCR output; existing files for other docs are untouched.</div>
+      <div class="cmd"><pre>python scripts\wisdomlib_to_jsonl.py --archive D:\wisdomlib\wisdomlib_archive</pre><button>Copy</button></div>
+      <div class="gate">summary table lists your doc codes; spot-open one data\raw\wl_*.jsonl — records are clean Devanagari</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 3 ═══════════ -->
+  <section class="phase"><h2>3 · Ingest into context.db <span class="tag">TRACK C3</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Ingest the working doc</b></div>
+      <div class="why">Existing script, unchanged: verse segmentation + IAST + quality scores happen here. Safe to re-run — translations are never overwritten.</div>
+      <div class="cmd"><pre>python scripts\ingest_jsonl_fast.py --doc <span class="doc">wl_buddha_carita_sanskrit</span> --glob "data/raw/<span class="doc">wl_buddha_carita_sanskrit</span>_*.jsonl" --category wisdomlib</pre><button>Copy</button></div>
+      <div class="gate">"Total passages upserted: N" with N &gt; 0</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 4 ═══════════ -->
+  <section class="phase"><h2>4 · Translate, review &amp; hone (existing dashboard) <span class="tag">TRACK C3 · THE LOCAL LOOP</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Start the dashboard and translate</b></div>
+      <div class="why">Use the normal UI: engine <b>gemini:gemini-2.5-flash</b> for bulk (~$0.05/1K passages), Pro per-doc for priority texts. Budget cap applies as always.</div>
+      <div class="cmd"><pre>cd /d "D:\Sanksrit Automatons\sanskrit-automatonv2"
+run.bat</pre><button>Copy</button></div>
+      <div class="why">Then open <a href="http://127.0.0.1:5057" target="_blank">http://127.0.0.1:5057</a> → your doc's row → Translate.</div>
+      <div class="gate">/reader/<span class="doc">wl_buddha_carita_sanskrit</span> shows side-by-side Sanskrit + English you're happy with</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Hone: review in the local reader, skip the junk, re-run priority texts on Pro</b></div>
+      <div class="why">This is where the contextual translator earns its keep: use the queue view's skip for low-quality passages, flip a favourite doc's row-level engine to gemini-2.5-pro, and export HTML when a text reads well. Repeat phases 1–4 per book — the whole loop is local, no cloud state.</div>
+      <div class="gate">an exported exports\<span class="doc">wl_buddha_carita_sanskrit</span>_translation.html you'd show a fellow scholar</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PARKED: PUBLIC WINDOW (phases 5–8) ═══════════ -->
+  <section class="phase"><h2>⏸ Parked until the corpus &amp; apps are honed <span class="tag">DEFERRED BY DECISION 2026-07-18</span></h2>
+    <div class="step"><div class="stephead"><input type="checkbox" disabled><b>Everything below waits</b></div>
+      <div class="why">Phases 5–8 open the window for srangam users — Supabase corpus tables, the publisher push,
+      the /texts reader, and the panchang/automaton tool pages going live. The migration file and
+      scripts\publish_srangam.py already sit on disk, inert and ready. Reopen when the local loop
+      produces texts you're proud of; nothing above depends on anything below.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 5 ═══════════ -->
+  <section class="phase"><h2>5 · Apply the B1 migration <span class="tag">LATER · TRACK B1 · ONE-TIME</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Add Supabase keys to the automaton's .env (needed only from here on)</b></div>
+      <div class="why">Service-role key stays server-side: never commit it, never put it in frontend code. Find both in Lovable → your project → Cloud/Supabase settings → API.</div>
+      <div class="cmd"><pre>SUPABASE_URL=https://&lt;project-ref&gt;.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=&lt;service role key&gt;</pre><button>Copy</button></div>
+      <div class="warn">Append to D:\Sanksrit Automatons\sanskrit-automatonv2\.env — keep SA_SAFE_MODE=1 as is.</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Review the migration file</b></div>
+      <div class="why">supabase\migrations\20260718120000_srangam_texts_corpus.sql — two new tables, RLS (public sees only published), reuses existing trigger + has_role. Nothing existing is altered. Rollback = two DROP TABLEs.</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Apply it</b></div>
+      <div class="why">Easiest: Lovable → your project → Cloud → Database → SQL, paste the file's contents, run. (Committing the file to the repo also keeps migration history in sync when pushed.)</div>
+      <div class="gate">SELECT count(*) FROM srangam_texts; returns 0 rows without error</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Verify RLS from the public side</b></div>
+      <div class="why">With the anon key (NOT service role), an unpublished text must be invisible.</div>
+      <div class="cmd"><pre>curl -s "https://&lt;project-ref&gt;.supabase.co/rest/v1/srangam_texts?select=doc_code" -H "apikey: &lt;anon key&gt;"</pre><button>Copy</button></div>
+      <div class="gate">returns [] until you flip something live in step 7</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 6 ═══════════ -->
+  <section class="phase"><h2>6 · Push translations to Supabase <span class="tag">LATER · TRACK B2</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>See what's ready to publish</b></div>
+      <div class="cmd"><pre>cd /d "D:\Sanksrit Automatons\sanskrit-automatonv2"
+python scripts\publish_srangam.py --list</pre><button>Copy</button></div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Dry-run the working doc</b></div>
+      <div class="cmd"><pre>python scripts\publish_srangam.py --doc <span class="doc">wl_buddha_carita_sanskrit</span> --dry-run</pre><button>Copy</button></div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Push it (lands hidden/unpublished)</b></div>
+      <div class="why">Idempotent: re-running updates passages in place and never re-flips your publish decision. context.db is opened read-only — the publisher cannot modify local data.</div>
+      <div class="cmd"><pre>python scripts\publish_srangam.py --doc <span class="doc">wl_buddha_carita_sanskrit</span></pre><button>Copy</button></div>
+      <div class="gate">"pushed N/N passages … uploaded"</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 7 ═══════════ -->
+  <section class="phase"><h2>7 · Review, then go live <span class="tag">LATER · TRACK B2 · HUMAN GATE</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Review the uploaded rows</b></div>
+      <div class="why">In Lovable's database view (or SQL) read a sample of srangam_text_passages for the doc — source, IAST, translation quality. This is the "no unreviewed content goes live" agreement.</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Flip it live</b></div>
+      <div class="cmd"><pre>python scripts\publish_srangam.py --doc <span class="doc">wl_buddha_carita_sanskrit</span> --publish</pre><button>Copy</button></div>
+      <div class="why">Change of heart? <code>--unpublish</code> hides it again instantly.</div>
+      <div class="gate">the anon-key curl from step 5 now returns the doc_code</div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PHASE 8 ═══════════ -->
+  <section class="phase"><h2>8 · Site &amp; apps go-live <span class="tag">LATER · TRACKS B3 / A1 / A2 · GATED COMMITS</span></h2>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Reader page (/texts) — next build</b></div>
+      <div class="why">Lazy route + list/reader components over the two new tables, "AI-assisted translation, under review" note displayed. I build it as one reviewed commit when you say go; you run the Windows gate before committing.</div>
+      <div class="cmd"><pre>npm run build && npm run test</pre><button>Copy</button></div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Panchang: deploy the Streamlit app as-is</b></div>
+      <div class="why">Streamlit Community Cloud or HF Spaces; put OPENAI_API_KEY in the host's secrets. Then one surgical commit swaps the two mailto CTAs in JyotishHoroscope.tsx to the live URL.</div>
+      <div class="gate">deployed app computes a known test chart correctly before the CTA swap lands</div>
+    </div>
+
+    <div class="step"><div class="stephead"><input type="checkbox"><b>Sanskrit Translator page: point CTA at /texts</b></div>
+      <div class="why">"Browse translated texts" beats "email us" — real output, no new server surface. The live analyze endpoint (sanskrit-analyze edge function) stays deferred until demand shows.</div>
+      <div class="cmd"><pre>npm run build && npm run test</pre><button>Copy</button></div>
+    </div>
+  </section>
+
+  <div class="note">
+    Sources of truth: docs/APPS_AND_CORPUS_INTEGRATION_2026-07-18.md (this pipeline) ·
+    docs/ENTERPRISE_MASTER_PLAN_2026-07-12.md (site phases 1–6) ·
+    sanskrit-automatonv2/ARCHITECTURE.md (automaton internals).
+    Checkbox state lives in memory only — it resets on reload by design (each run of the pipeline is a fresh pass).
+  </div>
+</main>
+
+<script>
+  // doc-code live substitution
+  const input = document.getElementById('doccode');
+  function refresh(){
+    const v = (input.value.trim() || 'wl_doc_code').replace(/[^A-Za-z0-9_\-]/g,'');
+    document.querySelectorAll('span.doc').forEach(s => s.textContent = v);
+  }
+  input.addEventListener('input', refresh); refresh();
+
+  // copy buttons
+  document.querySelectorAll('.cmd button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.parentElement.querySelector('pre').innerText;
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+        .then(()=>{ btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy',1400); })
+        .catch(()=>{ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+                     ta.select(); document.execCommand('copy'); ta.remove();
+                     btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy',1400); });
+    });
+  });
+
+  // progress (in-memory only)
+  const boxes = [...document.querySelectorAll('.step input[type=checkbox]')];
+  const prog = document.getElementById('prog'), progtext = document.getElementById('progtext');
+  function update(){
+    const done = boxes.filter(b=>b.checked).length;
+    prog.style.width = (100*done/boxes.length)+'%';
+    progtext.textContent = `${done} of ${boxes.length} steps checked (progress resets when the page reloads)`;
+    boxes.forEach(b => b.closest('.step').classList.toggle('done', b.checked));
+  }
+  boxes.forEach(b=>b.addEventListener('change',update)); update();
+</script>
+</body>
+</html>
