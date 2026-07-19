@@ -214,7 +214,12 @@ def _gemini_client(model: str, system_prompt: str):
     genai.configure(api_key=key)
     generation_config = genai.GenerationConfig(
         temperature=0.1,
-        max_output_tokens=2048,   # Raised from 1024 to handle long commentary passages
+        # 8192 (was 2048; fix 2026-07-19): thinking models (gemini-2.5-pro)
+        # spend internal reasoning tokens AGAINST this budget — 2048 could be
+        # fully consumed by thoughts, yielding finish_reason=2 (MAX_TOKENS)
+        # with zero text parts, which was being mislabelled as a safety block.
+        # Cost impact nil: billing is for tokens actually produced.
+        max_output_tokens=8192,
     )
     safety = [
         {"category": "HARM_CATEGORY_HARASSMENT",       "threshold": "BLOCK_NONE"},
@@ -244,27 +249,31 @@ def _gemini_translate(
             try:
                 resp = gm.generate_content(msgs_to_use[i].strip())
 
-                # ── Safe text extraction (handles finish_reason=2 SAFETY blocks) ──
+                # ── Safe text extraction (no valid parts → inspect finish_reason) ──
+                # FinishReason enum: 1=STOP, 2=MAX_TOKENS, 3=SAFETY, 4=RECITATION.
+                # (Fix 2026-07-19: 2 was mislabelled as SAFETY. On thinking
+                # models the reasoning budget can exhaust max_output_tokens,
+                # returning finish_reason=2 with no text parts.)
                 out = ""
                 try:
                     out = (resp.text or "").strip()
                 except Exception:
-                    # finish_reason=2 (SAFETY) or finish_reason=3 (RECITATION)
-                    # resp.text raises ValueError when there are no valid parts.
-                    # Check candidates for finish reason
                     finish = None
                     try:
                         finish = resp.candidates[0].finish_reason if resp.candidates else None
                     except Exception:
                         pass
                     if finish == 2:
+                        print(f"[gemini] MAX_TOKENS p{i} — output budget exhausted "
+                              f"before any text (thinking model); returning empty.")
+                    elif finish == 3:
                         print(f"[gemini] SAFETY BLOCK p{i} — Gemini refused this text. "
                               f"Returning empty (will be skipped).")
-                    elif finish == 3:
+                    elif finish == 4:
                         print(f"[gemini] RECITATION BLOCK p{i} — treating as empty.")
                     else:
                         print(f"[gemini] No text in response (finish_reason={finish}), returning empty.")
-                    out = ""  # don't retry a safety block — it won't change
+                    out = ""  # none of these improve on a same-config retry
 
                 outs.append(out)
                 break
