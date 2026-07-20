@@ -8,8 +8,12 @@ Phase 3 upgrade:
 - Sliding context window (5 preceding verses passed to LLM)
 - IAST alongside Devanagari in prompt
 - Scholarly output: Bibek Debroy style with bracketed clarifications
-- max_output_tokens raised to 2048
 - Improved model refusal detection
+
+Prompt v2 (2026-07-20): verse-fluency rules added after the MBh01 benchmark —
+whole-verse English sentences, particle omission, absolutive agreement,
+name consistency, no demonstrative calques. PROMPT_VERSION now keys the
+translation cache so v1 outputs are never served for v2 requests.
 
 Supported engine strings:
   openai:<model>      e.g.  openai:gpt-4o-mini
@@ -24,6 +28,12 @@ from typing import List, Tuple, Dict, Optional
 DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
 SLEEP  = float(os.environ.get("MT_SLEEP",   "0.8"))
 RETRIES = 3
+
+# Bump whenever _SYSTEM_PROMPT_BASE changes materially. This string is mixed
+# into the cache key so outputs produced under an older prompt are never
+# served for requests made under a newer one. (Old cache rows are retained
+# for reference; they simply stop matching.)
+PROMPT_VERSION = "v2-2026-07-20"
 
 # Cost tracking (imported lazily to avoid circular deps)
 _cost_tracker_ok = False
@@ -40,12 +50,16 @@ _SYSTEM_PROMPT_BASE = """You are a Sanskrit scholar producing an authoritative E
 Your translation principles:
 1. FIDELITY: Translate what is written, not what you expect. Do not paraphrase.
 2. PROPER NOUNS: Keep all Sanskrit proper nouns in IAST romanization — never translate names of persons, places, rivers, deities, or epithets. E.g.: Arjuna, Dharmarāja, Kurukṣetra, Gaṅgā.
-3. VERSE STRUCTURE: For metrical verses (ślokas), reproduce the pāda structure with " / " between half-verses. Mark the full verse end with " //" if clearly a complete śloka.
+3. VERSE FLUENCY: Render each complete verse as one or two fluent English sentences in natural English word order. NEVER mirror the Sanskrit pāda order at the cost of English grammar — reorder freely so the sentence parses. Mark the end of each complete śloka with " //". Do not insert " / " mid-sentence.
 4. BRACKETED ADDITIONS: Use [brackets] sparingly for essential clarifications only — e.g. "[i.e., Yudhiṣṭhira]" or "[referring to the Pāṇḍavas]".
 5. TECHNICAL TERMS: For key Sanskrit philosophical/technical terms where no English equivalent exists, give the IAST term + a brief gloss on first use in the passage, e.g. "dharma (sacred duty)". Do not repeat the gloss.
 6. EPITHETS: Translate epithets into English where they illuminate meaning: e.g. "Dhanañjaya (Winner of Wealth)" — but only on first occurrence.
 7. CHANDAS: If the verse is metrical, your translation should reflect the dignity and rhythm of the original without being a forced metrical translation.
-8. OUTPUT: Produce ONLY the English translation — no preamble, no "Translation:", no meta-commentary. If the text is illegible OCR noise, output exactly: [ILLEGIBLE]"""
+8. PARTICLES: Omit purely emphatic particles (eva, hi, vai, ha, khalu, filler tu; punar eva) rather than rendering them "indeed"/"verily" — include them only where the emphasis is semantically essential.
+9. AGREEMENT: Every clause must have an explicit grammatical subject, and absolutive (gerund) constructions must be resolved to their true agent so that subject and main verb always agree. Never produce "X-plural having seen..., then Y-singular addressed...".
+10. NAME CONSISTENCY: Use exactly one IAST spelling for each proper noun throughout (e.g. always Śārṅgaka — never Śārṅgaka and Śārṅga in alternation).
+11. DEMONSTRATIVES: Do not calque tad/te as "that/those" by default; use English articles unless the demonstrative is genuinely deictic.
+12. OUTPUT: Produce ONLY the English translation — no preamble, no "Translation:", no meta-commentary. If the text is illegible OCR noise, output exactly: [ILLEGIBLE]"""
 
 
 def _build_system_prompt(
@@ -121,7 +135,10 @@ def _build_user_message(
 # ── Cache helpers ─────────────────────────────────────────────────────────────
 
 def _hash(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    # PROMPT_VERSION is part of the key: a prompt change invalidates the cache
+    # without deleting old rows (fix 2026-07-20 — previously v1-style outputs
+    # would be served forever regardless of prompt improvements).
+    return hashlib.sha256((PROMPT_VERSION + "\x00" + text).encode("utf-8")).hexdigest()
 
 def _cache_lookup(
     con: sqlite3.Connection,
@@ -323,15 +340,16 @@ def translate_batch(
     text_types:       List[Optional[str]] = None,
 ) -> List[str]:
     """Translate a list of Sanskrit strings → English.
-    
+
     New in Phase 3:
     - iast_list: parallel IAST strings for each text
     - context_list: parallel lists of preceding verse dicts for each text
     - doc_code, category, chapters, verse_refs, chandas_list, text_types:
       parallel metadata for building context-rich system prompts
-    
-    Cache key is still the Sanskrit text hash (context is passed but not cached per-context,
-    since caching with full context would have near-zero hit rates).
+
+    Cache key is the Sanskrit text hash + PROMPT_VERSION (context is passed but
+    not cached per-context, since caching with full context would have
+    near-zero hit rates).
     """
     engine = (engine or DEFAULT_ENGINE).strip()
     cached = _cache_lookup(con, engine, src, tgt, texts)
