@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 text_filters.py — Pre/post translation filters for Sanskrit passages.
+
+Phase Q (2026-07-20): adds score_translation_quality() — a free (no-API)
+heuristic QA score for stored translations, used by qa_scan.py, retranslate.py
+and the translate write-path.
 """
 from __future__ import annotations
 import re
 
-DEV_RE = re.compile(r"[\u0900-\u097F]")          # Devanagari block
-ONLY_PUNCT_RE = re.compile(r"^[\W_·•\-—–\*'\"` ~^=\u0964\u0965]+$")
+DEV_RE = re.compile(r"[ऀ-ॿ]")          # Devanagari block
+ONLY_PUNCT_RE = re.compile(r"^[\W_·•\-—–\*'\"` ~^=।॥]+$")
 MQQ_RE = re.compile(r"^[\"']{1,4}$")
+LATIN_RE = re.compile(r"[A-Za-z]")
 
 # Model refusal / boilerplate strings — anything containing these → junk
 JUNK_PHRASES = tuple(s.lower() for s in [
@@ -111,7 +116,7 @@ def is_translation_boilerplate(en: str) -> bool:
 
 def should_translate(s: str, *, min_dev: float = 0.05) -> bool:
     """Return True if this passage contains enough Sanskrit to warrant translation.
-    
+
     Lowered default min_dev from 0.08 → 0.05 to catch mixed Sanskrit-English commentary.
     """
     if is_noise(s): return False
@@ -144,3 +149,68 @@ def score_passage_quality(s: str) -> float:
     # Weight: 60% Devanagari density + 40% danda presence (capped)
     danda_score = min(1.0, (single_d + double_d * 2) / 5.0)
     return round(0.6 * dev_frac + 0.4 * danda_score, 3)
+
+
+# ── Phase Q: translation QA (heuristic, no API calls) ────────────────────────
+
+_GLOSS_PAIR_RE = re.compile(r"^\s*([^|/\n]{2,60})\s*\|\s*([^|/\n]{2,60})\s*$")
+
+def score_translation_quality(src: str, translation: str) -> float:
+    """Heuristic QA score 0.0–1.0 for a stored translation against its source.
+
+    Free — no API calls. Deductive scoring from 1.0:
+      hard zeros : empty / [ILLEGIBLE] / model boilerplate
+      length band: translation-chars / source-chars expected ~1.0–3.5 for
+                   Devanagari→English; far outside → truncation or ramble
+      residue    : Devanagari left in the output (untranslated fragments)
+      gloss pair : "X | X" repeated-gloss signature (the nirukta failure mode)
+      pāda slash : high " / " density mid-sentence (v1 pāda-literalism
+                   artifact — flags style-stale rows for prompt-v2 upgrade)
+      englishness: output must contain Latin letters at all
+
+    Calibration notes (2026-07-20): thresholds set from observed MBh01 v1
+    output and nirukta gloss failures. Tune against Q4 judge scores over time.
+    """
+    if not translation:
+        return 0.0
+    t = translation.strip()
+    if not t or t == "[ILLEGIBLE]":
+        return 0.0
+    if is_translation_boilerplate(t):
+        return 0.0
+
+    score = 1.0
+    src_len = max(1, len((src or "").strip()))
+    ratio = len(t) / src_len
+
+    if ratio < 0.6:
+        score -= 0.4          # suspiciously short → likely truncation
+    elif ratio < 1.0:
+        score -= 0.15
+    elif ratio > 5.0:
+        score -= 0.3          # ramble / meta-commentary
+    elif ratio > 3.5:
+        score -= 0.1
+
+    dev = frac_devanagari(t)
+    if dev > 0.30:
+        score -= 0.5          # mostly untranslated
+    elif dev > 0.05:
+        score -= 0.2
+
+    m = _GLOSS_PAIR_RE.match(t)
+    if m and m.group(1).strip().lower() == m.group(2).strip().lower():
+        score -= 0.6          # "Ornament | Ornament"
+
+    n_slash = t.count(" / ")
+    words = max(1, len(t.split()))
+    slash_density = n_slash / words
+    if slash_density > 0.08:
+        score -= 0.2          # heavy pāda-literalism (v1 style artifact)
+    elif slash_density > 0.04:
+        score -= 0.1
+
+    if not LATIN_RE.search(t):
+        score -= 0.5          # no English letters at all
+
+    return round(max(0.0, min(1.0, score)), 3)

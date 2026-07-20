@@ -5,6 +5,11 @@ db_utils.py — Single source of truth for SQLite schema.
 
 All other scripts import ensure_schema and migrate_schema from here.
 Never define schema in any other file.
+
+Phase Q (2026-07-20): translation provenance + quality loop.
+- passages gains mt_prompt_version, translated_at, translation_qa
+- new table translation_history: superseded translations are archived here,
+  never deleted — every retranslation keeps its predecessor comparable.
 """
 from __future__ import annotations
 import sqlite3, os, datetime, shutil, pathlib
@@ -54,8 +59,13 @@ CREATE TABLE IF NOT EXISTS passages(
 
   -- Translation
   translation      TEXT,     -- English translation
-  translation_score REAL,    -- 0.0–1.0 quality score of translation
+  translation_score REAL,    -- 0.0–1.0 length-ratio score (legacy)
   engine           TEXT,     -- e.g. gemini:gemini-2.5-pro
+
+  -- Phase Q: translation provenance + quality
+  mt_prompt_version TEXT,    -- infer_mt.PROMPT_VERSION at translation time
+  translated_at    TEXT,     -- ISO timestamp of translation write
+  translation_qa   REAL,     -- 0.0–1.0 heuristic QA (text_filters.score_translation_quality)
 
   -- Provenance
   source           TEXT,
@@ -94,9 +104,28 @@ CREATE TABLE IF NOT EXISTS sources(
   created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   FOREIGN KEY(doc_id) REFERENCES docs(id) ON DELETE CASCADE
 );
+
+-- Phase Q: superseded translations are archived, never deleted.
+-- Every retranslation writes its predecessor here first with a reason,
+-- giving before/after pairs for measuring each prompt/engine iteration.
+CREATE TABLE IF NOT EXISTS translation_history(
+  id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+  passage_id         INTEGER NOT NULL,
+  translation        TEXT,
+  engine             TEXT,
+  mt_prompt_version  TEXT,
+  translation_score  REAL,
+  translation_qa     REAL,
+  translated_at      TEXT,
+  superseded_at      TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
+  reason             TEXT,   -- 'qa<0.6' | 'prompt-upgrade' | 'retranslate-overwrite' | ...
+  FOREIGN KEY(passage_id) REFERENCES passages(id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS idx_translation_history_passage
+  ON translation_history(passage_id);
 """
 
-# ── New columns added in Phase 1 — for existing DBs that predate this schema ─
+# ── New columns added over time — for existing DBs that predate this schema ──
 _MIGRATIONS = [
     # table,            column,              type + default
     # NOTE: ALTER TABLE ADD COLUMN only allows constant defaults (NULL, integer, string literal).
@@ -120,6 +149,10 @@ _MIGRATIONS = [
     ("passages", "ents",              "TEXT"),
     ("passages", "source",            "TEXT"),
     ("mt_cache", "context_hash",      "TEXT"),
+    # Phase Q (2026-07-20)
+    ("passages", "mt_prompt_version", "TEXT"),
+    ("passages", "translated_at",     "TEXT"),
+    ("passages", "translation_qa",    "REAL"),
 ]
 
 
@@ -142,7 +175,7 @@ def ensure_schema(con: sqlite3.Connection) -> None:
 
 def migrate_schema(con: sqlite3.Connection) -> None:
     """Safely add any columns that exist in the canonical schema but not in the DB.
-    
+
     This handles DBs created by older versions of this code.
     ALTER TABLE ADD COLUMN is safe — it never drops data.
     """
