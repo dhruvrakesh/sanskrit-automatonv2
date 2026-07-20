@@ -8,6 +8,17 @@ Each JSONL file (one OCR page) is now split into individual ślokas before stora
 Each śloka gets its own row with: verse_ref, chapter, text_type, chandas, padas,
 quality_score, iast.
 
+Fix 2026-07-20 (idx collision): the per-page passage index previously restarted
+at 1 for EVERY JSONL record, so multi-record files (e.g. MBh01: one record per
+verse, 31 verses per adhyāya) collided on (doc_id, page_no, 1) and each record
+silently overwrote the previous — only the LAST verse of each page survived
+(225 of 6,957 for MBh01). The index is now a page-wide counter. Single-record
+pages (standard OCR flow) produce identical idx values as before, so existing
+docs and their translations are unaffected by re-ingest.
+
+Also fixed: FTS rowid was taken from cur.lastrowid, which is unreliable after
+ON CONFLICT DO UPDATE — the passage id is now looked up explicitly.
+
 Usage:
   python scripts/ingest_jsonl_fast.py --doc nirukta --glob data/raw/nirukta_*.jsonl
 """
@@ -71,15 +82,19 @@ def upsert_passages(
     do_iast: bool = True,
 ) -> int:
     """Ingest JSONL records into passages table.
-    
+
     Args:
         do_segment: Split page blob into individual ślokas using segment_verses
         do_iast: Generate IAST transliteration for each passage
-    
+
     Returns number of rows inserted/updated.
     """
     cur = con.cursor()
     n_inserted = 0
+    # Page-wide passage index. MUST be unique per (doc_id, page_no) across ALL
+    # records in this file — a per-record enumerate() here collapsed
+    # multi-record JSONL files to their last record (fix 2026-07-20).
+    seg_counter = 0
 
     for rec in items:
         raw_text = (rec.get("text") or "").strip()
@@ -105,6 +120,17 @@ def upsert_passages(
                     "quality_score": score_passage_quality(normed),
                 }]
         else:
+            # E-text quality handling (2026-07-20): score_passage_quality() is
+            # calibrated for OCR dandas and under-scores danda-less clean
+            # e-texts (GRETIL MBh01 measured ~0.52). Honor an explicit
+            # quality_score from the record, else trust the e-text engine
+            # marker, else fall back to the OCR-calibrated scorer.
+            if rec.get("quality_score") is not None:
+                q = float(rec["quality_score"])
+            elif str(rec.get("engine", "")).startswith("gretil"):
+                q = 0.98
+            else:
+                q = score_passage_quality(normed)
             segments = [{
                 "text": normed,
                 "verse_ref": rec.get("verse_ref"),
@@ -112,13 +138,14 @@ def upsert_passages(
                 "text_type": rec.get("text_type", "prose"),
                 "chandas": rec.get("chandas"),
                 "padas": rec.get("padas", 0),
-                "quality_score": score_passage_quality(normed),
+                "quality_score": q,
             }]
 
-        for seg_idx, seg in enumerate(segments, 1):
+        for seg in segments:
             text = seg["text"].strip()
             if not text:
                 continue
+            seg_counter += 1
 
             # Generate IAST transliteration
             iast = ""
@@ -148,7 +175,7 @@ def upsert_passages(
                     -- NOTE: translation is NOT overwritten on re-ingest
                 """,
                 (
-                    doc_id, page_no, seg_idx,
+                    doc_id, page_no, seg_counter,
                     text, normed, iast,
                     seg.get("verse_ref"), seg.get("chapter"),
                     seg.get("text_type", "prose"),
@@ -157,7 +184,12 @@ def upsert_passages(
                     "",  # translation starts empty
                 )
             )
-            rid = cur.lastrowid
+            # cur.lastrowid is unreliable after ON CONFLICT DO UPDATE —
+            # look the row id up explicitly so FTS stays aligned (fix 2026-07-20).
+            rid = cur.execute(
+                "SELECT id FROM passages WHERE doc_id=? AND page_no=? AND idx=?",
+                (doc_id, page_no, seg_counter),
+            ).fetchone()[0]
             # Update FTS (trigram tokenizer handles Devanagari partial matching)
             cur.execute("DELETE FROM passages_fts WHERE rowid=?", (rid,))
             cur.execute(
