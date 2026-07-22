@@ -29,6 +29,13 @@ DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
 SLEEP  = float(os.environ.get("MT_SLEEP",   "0.8"))
 RETRIES = 3
 
+
+class QuotaExhausted(RuntimeError):
+    """Raised when the API reports quota/rate exhaustion and retries with long
+    backoff still fail. Callers should ABORT the run (and resume later) rather
+    than grind on — continuing produces empty results for every verse."""
+    pass
+
 # Bump whenever _SYSTEM_PROMPT_BASE changes materially. This string is mixed
 # into the cache key so outputs produced under an older prompt are never
 # served for requests made under a newer one. (Old cache rows are retained
@@ -161,8 +168,24 @@ def _cache_insert_many(
     engine: str, src: str, tgt: str,
     pairs: List[Tuple[str, str]],
 ) -> None:
+    """Cache successful outputs ONLY.
+
+    Fix 2026-07-20: empty and refusal outputs were previously cached, so one
+    transient failure (quota exhaustion, rate limit, safety block) poisoned
+    the cache for that verse permanently — every re-run got the empty back
+    instantly. Measured before this guard: 4,895 empty + 1,004 boilerplate
+    rows = ~60% of mt_cache. Use scripts/purge_empty_cache.py to clean up.
+    """
+    try:
+        from text_filters import is_translation_boilerplate as _is_junk
+    except ImportError:
+        _is_junk = None
     cur = con.cursor()
     for t, out in pairs:
+        if not out or not out.strip():
+            continue  # never cache empties
+        if _is_junk is not None and _is_junk(out):
+            continue  # never cache refusals/boilerplate
         cur.execute(
             """INSERT OR IGNORE INTO mt_cache(engine,lang_in,lang_out,text_hash,text,output)
                VALUES(?,?,?,?,?,?)""",
@@ -297,17 +320,29 @@ def _gemini_translate(
 
             except Exception as exc:
                 err_str = str(exc)
+                low = err_str.lower()
                 # Detect safety block masquerading as generic exception
                 if "finish_reason" in err_str and ("is 2" in err_str or "is 3" in err_str):
                     print(f"[gemini] SAFETY/RECITATION block on attempt {attempt+1} — skipping verse.")
                     outs.append("")
                     break  # no point retrying safety blocks
+                # Quota / rate-limit detection (fix 2026-07-20): these need LONG
+                # backoff, and if they persist the run must ABORT — grinding on
+                # yields an empty result for every remaining verse.
+                is_quota = ("429" in err_str or "quota" in low
+                            or "resource_exhausted" in low or "rate limit" in low
+                            or "resource has been exhausted" in low)
                 if attempt + 1 >= RETRIES:
+                    if is_quota:
+                        raise QuotaExhausted(
+                            f"Gemini quota/rate limit persists after {RETRIES} "
+                            f"attempts with long backoff: {exc}")
                     outs.append("")  # don't crash whole batch on one bad verse
                     print(f"[gemini] FAILED after {RETRIES} attempts: {exc}")
                     break
-                wait = SLEEP * (2 ** attempt)
-                print(f"[gemini] retry {attempt+1}/{RETRIES} after {wait:.1f}s: {exc}")
+                wait = (30.0 * (attempt + 1)) if is_quota else SLEEP * (2 ** attempt)
+                tag = "QUOTA/RATE " if is_quota else ""
+                print(f"[gemini] {tag}retry {attempt+1}/{RETRIES} after {wait:.1f}s: {exc}")
                 time.sleep(wait)
         time.sleep(SLEEP)
     return outs

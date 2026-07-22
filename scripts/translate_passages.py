@@ -20,7 +20,7 @@ Phase Q (2026-07-20):
 from __future__ import annotations
 import argparse, sqlite3, time, sys, json, os
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 try:
     from env_loader import load_env
@@ -31,7 +31,7 @@ except Exception:
 from normalize_text import normalize_sanskrit
 from text_filters import (should_translate, clean_for_mt,
                           is_translation_boilerplate, score_translation_quality)
-from infer_mt import translate_batch, PROMPT_VERSION
+from infer_mt import translate_batch, PROMPT_VERSION, QuotaExhausted
 from db_utils import ensure_schema, migrate_schema
 
 CONTEXT_WINDOW = 5
@@ -134,6 +134,11 @@ def main():
                     help="Also process passages that already have a translation. "
                          "The old translation is archived to translation_history "
                          "before being replaced (Phase Q).")
+    ap.add_argument("--max-consecutive-failures", type=int, default=15,
+                    help="Abort the run after this many consecutive empty/"
+                         "failed translations (0 = never abort). Catches "
+                         "quota exhaustion and bad-source docs instead of "
+                         "grinding through hundreds of doomed calls.")
     ap.add_argument("--progress",     default=str(_PROGRESS_PATH))
     ap.add_argument("--config",       default=str(_CONFIG_PATH))
     args = ap.parse_args()
@@ -226,11 +231,13 @@ def main():
         })
         return
 
-    started_at   = datetime.utcnow().isoformat()
+    started_at   = datetime.now(timezone.utc).isoformat()
     cur          = con.cursor()
     ok_count     = 0
     skip_quality = 0
     err_count    = 0
+    consec_fail  = 0   # consecutive empty/failed results (streak breaker)
+    aborted      = None
     recent       = []
 
     _write_progress({
@@ -263,7 +270,7 @@ def main():
                 _write_progress({
                     "status": "paused", "doc": args.doc,
                     "engine": cfg.get("engine", base_engine or ""),
-                    "updated_at": datetime.utcnow().isoformat(),
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
                     "verses_done": ok_count, "verses_total": len(todo),
                     "skipped_quality": skip_quality, "errors": err_count,
                     "current_page": page_no, "current_idx": idx,
@@ -300,7 +307,7 @@ def main():
                 _write_progress({
                     "status": "running", "doc": args.doc,
                     "engine": active_engine or "",
-                    "updated_at": datetime.utcnow().isoformat(),
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
                     "verses_done": ok_count, "verses_total": len(todo),
                     "skipped_quality": skip_quality, "errors": err_count,
                     "current_page": page_no, "current_idx": idx,
@@ -319,7 +326,7 @@ def main():
             _write_progress({
                 "status": "running", "doc": args.doc,
                 "engine": active_engine or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash"),
-                "updated_at": datetime.utcnow().isoformat(),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
                 "verses_done": ok_count, "verses_total": len(todo),
                 "skipped_quality": skip_quality, "errors": err_count,
                 "current_page": page_no, "current_idx": idx,
@@ -371,7 +378,7 @@ def main():
                             "translated_at=?", "translation_qa=?"]
             update_vals  = [translation,
                             PROMPT_VERSION if translation else None,
-                            datetime.utcnow().isoformat() if translation else None,
+                            datetime.now(timezone.utc).isoformat() if translation else None,
                             tr_qa]
             if has_eng_col and active_engine:
                 update_parts.append("engine=?")
@@ -388,6 +395,10 @@ def main():
             _update_fts(cur, rowid, cleaned, iast_val, translation or "")
             con.commit()
             ok_count += 1
+            if translation:
+                consec_fail = 0
+            else:
+                consec_fail += 1
 
             # Update recent ring buffer
             recent.append({
@@ -401,7 +412,7 @@ def main():
                 "tr_qa":       tr_qa,
                 "engine":      active_engine or "",
                 "skipped":     False,
-                "ts":          datetime.utcnow().isoformat(),
+                "ts":          datetime.now(timezone.utc).isoformat(),
             })
             if len(recent) > RECENT_MAX:
                 recent.pop(0)
@@ -416,7 +427,7 @@ def main():
             _write_progress({
                 "status": "running", "doc": args.doc,
                 "engine": active_engine or "",
-                "updated_at": datetime.utcnow().isoformat(),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
                 "verses_done": ok_count, "verses_total": len(todo),
                 "skipped_quality": skip_quality, "errors": err_count,
                 "current_page": page_no, "current_idx": idx,
@@ -428,15 +439,31 @@ def main():
                 "recent": recent,
             })
 
+            if (args.max_consecutive_failures
+                    and consec_fail >= args.max_consecutive_failures):
+                aborted = (f"{consec_fail} consecutive empty/failed translations "
+                           f"— suspected quota exhaustion or unreadable source. "
+                           f"Fix the cause, then re-run to resume (translated "
+                           f"rows are never re-billed).")
+                print(f"\n[ABORT] {aborted}")
+                break
+
             time.sleep(args.sleep)
+
+        except QuotaExhausted as exc:
+            err_count += 1
+            aborted = f"API quota/rate limit exhausted: {exc}"
+            print(f"\n[ABORT] {aborted}")
+            break
 
         except Exception as exc:
             err_count += 1
+            consec_fail += 1
             print(f"  [ERR] p{page_no}.{idx}: {exc}")
             _write_progress({
                 "status": "running", "doc": args.doc,
                 "engine": cfg.get("engine", base_engine or ""),
-                "updated_at": datetime.utcnow().isoformat(),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
                 "verses_done": ok_count, "verses_total": len(todo),
                 "skipped_quality": skip_quality, "errors": err_count,
                 "current_page": page_no, "current_idx": idx,
@@ -446,15 +473,23 @@ def main():
                 "min_quality": args.min_quality,
                 "recent": recent,
             })
+            if (args.max_consecutive_failures
+                    and consec_fail >= args.max_consecutive_failures):
+                aborted = (f"{consec_fail} consecutive failures — aborting; "
+                           f"see errors above.")
+                print(f"\n[ABORT] {aborted}")
+                break
             time.sleep(args.sleep)
 
     print(f"\nDone. {ok_count}/{len(todo)} translated | "
           f"{skip_quality} quality-skipped | {err_count} errors")
     _write_progress({
-        "status": "done", "doc": args.doc,
+        "status": "aborted" if aborted else "done",
+        "abort_reason": aborted,
+        "doc": args.doc,
         "engine": base_engine or "",
         "started_at": started_at,
-        "updated_at": datetime.utcnow().isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
         "verses_done": ok_count, "verses_total": len(todo),
         "skipped_quality": skip_quality, "errors": err_count,
         "current_page": None, "current_idx": None,
