@@ -83,8 +83,22 @@ def looks_like_table_fragment(s: str) -> bool:
     return bool(re.search(r"\b[ivxlcdm]+\b\s*[.)]", s, flags=re.I)) \
         or bool(re.search(r"^\s*[\-•*]\s+\w+", s))
 
+# Publisher/collection banners that appear ON text pages (mixed with
+# Devanagari), so they must be checked BEFORE the Devanagari guard below.
+# Observed 2026-08-01: "VEDIC LITERATURECOLLECTION नीलमतपुराणम् ..." (q:0.27)
+# slipped through and produced a nonsense "translation" of a header page.
+_PUBLISHER_BANNERS = (
+    "vedic literature", "literaturecollection", "digital library",
+    "gretil", "www.", "http://", "https://", "sanskritdocuments",
+    "all rights reserved", "e-text", "input by",
+)
+
 def looks_like_frontmatter(s: str) -> bool:
-    """Detect English-only preface/intro/TOC pages that should not be translated."""
+    """Detect preface/intro/TOC/publisher-header content that should not be
+    translated. Publisher banners are caught even when Devanagari is present."""
+    lower_all = s.lower()
+    if any(sig in lower_all for sig in _PUBLISHER_BANNERS):
+        return True
     if frac_devanagari(s) > 0.05:
         return False  # has significant Devanagari — not frontmatter
     lower = s.lower()
