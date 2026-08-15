@@ -60,6 +60,11 @@ def main():
                          "Phase Q but whose prompt was already newer (e.g. the "
                          "2026-07-20 MBh01 run: --doc MBh01 "
                          "--tag-prompt-version v2-2026-07-20 --write).")
+    ap.add_argument("--lang", default="en",
+                    help="Which translations to score. 'en' (default) scores "
+                         "passages.translation with the English scorer. Any "
+                         "other code (e.g. 'hi') scores translations_l10n rows "
+                         "of that language with the language-aware scorer.")
     args = ap.parse_args()
 
     if args.tag_prompt_version and not args.doc:
@@ -69,23 +74,36 @@ def main():
     ensure_schema(con)
     migrate_schema(con)
 
-    where = "TRIM(COALESCE(p.translation,'')) <> ''"
-    params: list = []
-    if args.doc:
-        where += " AND d.code = ?"
-        params.append(args.doc)
+    LANG = (args.lang or "en").strip()
+    IS_L10N = LANG != "en"
 
-    rows = con.execute(
-        f"""SELECT p.id, d.code, p.page_no, p.idx, p.text, p.translation,
-                   p.mt_prompt_version
-            FROM passages p JOIN docs d ON d.id = p.doc_id
-            WHERE {where}
-            ORDER BY d.code, p.page_no, p.idx""",
-        params,
-    ).fetchall()
+    where_doc = "AND d.code = ?" if args.doc else ""
+    params: list = [args.doc] if args.doc else []
+
+    if IS_L10N:
+        rows = con.execute(
+            f"""SELECT l.id, d.code, p.page_no, p.idx, p.text, l.translation,
+                       l.mt_prompt_version
+                FROM translations_l10n l
+                JOIN passages p ON p.id = l.passage_id
+                JOIN docs d ON d.id = p.doc_id
+                WHERE l.lang = ? AND TRIM(COALESCE(l.translation,'')) <> ''
+                  {where_doc}
+                ORDER BY d.code, p.page_no, p.idx""",
+            [LANG] + params,
+        ).fetchall()
+    else:
+        rows = con.execute(
+            f"""SELECT p.id, d.code, p.page_no, p.idx, p.text, p.translation,
+                       p.mt_prompt_version
+                FROM passages p JOIN docs d ON d.id = p.doc_id
+                WHERE TRIM(COALESCE(p.translation,'')) <> '' {where_doc}
+                ORDER BY d.code, p.page_no, p.idx""",
+            params,
+        ).fetchall()
 
     if not rows:
-        print("No translated passages found.")
+        print(f"No translated passages found (lang={LANG}).")
         return
 
     per_doc: dict[str, list[float]] = {}
@@ -94,7 +112,7 @@ def main():
     low: list[tuple[str, int, int, float, str]] = []
 
     for pid, code, page_no, idx, text, translation, pv in rows:
-        qa = score_translation_quality(text or "", translation or "")
+        qa = score_translation_quality(text or "", translation or "", lang=LANG)
         per_doc.setdefault(code, []).append(qa)
         updates.append((qa, pid))
         if not (pv or "").strip():
@@ -102,7 +120,7 @@ def main():
         if args.below is not None and qa < args.below:
             low.append((code, page_no, idx, qa, (translation or "")[:70]))
 
-    print(f"Scanned {len(rows)} translated passages "
+    print(f"Scanned {len(rows)} translated passages (lang={LANG}) "
           f"across {len(per_doc)} doc(s).\n")
 
     for code in sorted(per_doc):
@@ -124,12 +142,13 @@ def main():
 
     if args.write:
         cur = con.cursor()
-        cur.executemany("UPDATE passages SET translation_qa=? WHERE id=?", updates)
+        table = "translations_l10n" if IS_L10N else "passages"
+        cur.executemany(f"UPDATE {table} SET translation_qa=? WHERE id=?", updates)
         n_backfill = 0
         if backfills:
             version = args.tag_prompt_version or "v1-legacy"
             cur.executemany(
-                f"UPDATE passages SET mt_prompt_version=? WHERE id=?",
+                f"UPDATE {table} SET mt_prompt_version=? WHERE id=?",
                 [(version, pid) for pid in backfills],
             )
             n_backfill = len(backfills)

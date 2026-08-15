@@ -54,6 +54,10 @@ def main():
                     help="select rows translated under this prompt version "
                          "(e.g. v1-legacy)")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--lang", default="en",
+                    help="'en' (default) operates on passages.translation. Any "
+                         "other code (e.g. 'hi') operates on translations_l10n "
+                         "rows of that language — history-preserving per language.")
     ap.add_argument("--yes", action="store_true",
                     help="actually archive+clear (default: dry run)")
     args = ap.parse_args()
@@ -67,27 +71,37 @@ def main():
     ensure_schema(con)
     migrate_schema(con)
 
-    where = ["TRIM(COALESCE(p.translation,'')) <> ''"]
-    params: list = []
+    LANG = (args.lang or "en").strip()
+    IS_L10N = LANG != "en"
+    # Column source: passages (English) or translations_l10n (other langs).
+    tcol = "l.translation" if IS_L10N else "p.translation"
+    qcol = "l.translation_qa" if IS_L10N else "p.translation_qa"
+    vcol = "l.mt_prompt_version" if IS_L10N else "p.mt_prompt_version"
+    join_l10n = ("JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = ?"
+                 if IS_L10N else "")
+
+    where = [f"TRIM(COALESCE({tcol},'')) <> ''"]
+    params: list = [LANG] if IS_L10N else []
     reasons: list[str] = []
     if args.doc:
         where.append("d.code = ?")
         params.append(args.doc)
     if args.below_qa is not None:
-        where.append("p.translation_qa IS NOT NULL AND p.translation_qa < ?")
+        where.append(f"{qcol} IS NOT NULL AND {qcol} < ?")
         params.append(args.below_qa)
         reasons.append(f"qa<{args.below_qa}")
     if args.prompt_version is not None:
-        where.append("COALESCE(p.mt_prompt_version,'') = ?")
+        where.append(f"COALESCE({vcol},'') = ?")
         params.append(args.prompt_version)
         reasons.append(f"prompt-upgrade:{args.prompt_version}")
     reason = ";".join(reasons)
 
     limit_sql = f"LIMIT {int(args.limit)}" if args.limit else ""
     rows = con.execute(
-        f"""SELECT p.id, d.code, p.page_no, p.idx, p.translation_qa,
-                   p.mt_prompt_version, substr(p.translation,1,60)
+        f"""SELECT p.id, d.code, p.page_no, p.idx, {qcol},
+                   {vcol}, substr({tcol},1,60)
             FROM passages p JOIN docs d ON d.id = p.doc_id
+            {join_l10n}
             WHERE {' AND '.join(where)}
             ORDER BY d.code, p.page_no, p.idx
             {limit_sql}""",
@@ -116,39 +130,58 @@ def main():
         return
 
     cur = con.cursor()
-    ids = [r[0] for r in rows]
+    ids = [r[0] for r in rows]   # passages.id in both modes
     n_archived = 0
     for pid in ids:
-        cur.execute(
-            """INSERT INTO translation_history(passage_id, translation, engine,
-                   mt_prompt_version, translation_score, translation_qa,
-                   translated_at, reason)
-               SELECT id, translation, engine, mt_prompt_version,
-                      translation_score, translation_qa, translated_at, ?
-               FROM passages WHERE id=?""",
-            (reason, pid),
-        )
-        n_archived += cur.rowcount
-        cur.execute(
-            """UPDATE passages
-               SET translation='', translation_score=NULL, translation_qa=NULL,
-                   mt_prompt_version=NULL, translated_at=NULL
-               WHERE id=?""",
-            (pid,),
-        )
-        # Keep FTS consistent: re-index this row with an empty translation.
-        row = cur.execute(
-            "SELECT text, iast FROM passages WHERE id=?", (pid,)
-        ).fetchone()
-        cur.execute("DELETE FROM passages_fts WHERE rowid=?", (pid,))
-        cur.execute(
-            "INSERT INTO passages_fts(rowid, text, iast, translation) VALUES(?,?,?,?)",
-            (pid, (row[0] or "") if row else "", (row[1] or "") if row else "", ""),
-        )
+        if IS_L10N:
+            # Archive the target-language row (lang-tagged), then delete it so
+            # the next --lang run genuinely regenerates it. English is untouched.
+            cur.execute(
+                """INSERT INTO translation_history(passage_id, translation, engine,
+                       mt_prompt_version, translation_score, translation_qa,
+                       translated_at, reason, lang)
+                   SELECT passage_id, translation, engine, mt_prompt_version,
+                          translation_score, translation_qa, translated_at, ?, lang
+                   FROM translations_l10n WHERE passage_id=? AND lang=?""",
+                (reason, pid, LANG),
+            )
+            n_archived += cur.rowcount
+            cur.execute(
+                "DELETE FROM translations_l10n WHERE passage_id=? AND lang=?",
+                (pid, LANG),
+            )
+        else:
+            cur.execute(
+                """INSERT INTO translation_history(passage_id, translation, engine,
+                       mt_prompt_version, translation_score, translation_qa,
+                       translated_at, reason, lang)
+                   SELECT id, translation, engine, mt_prompt_version,
+                          translation_score, translation_qa, translated_at, ?, 'en'
+                   FROM passages WHERE id=?""",
+                (reason, pid),
+            )
+            n_archived += cur.rowcount
+            cur.execute(
+                """UPDATE passages
+                   SET translation='', translation_score=NULL, translation_qa=NULL,
+                       mt_prompt_version=NULL, translated_at=NULL
+                   WHERE id=?""",
+                (pid,),
+            )
+            # Keep FTS consistent: re-index this row with an empty translation.
+            row = cur.execute(
+                "SELECT text, iast FROM passages WHERE id=?", (pid,)
+            ).fetchone()
+            cur.execute("DELETE FROM passages_fts WHERE rowid=?", (pid,))
+            cur.execute(
+                "INSERT INTO passages_fts(rowid, text, iast, translation) VALUES(?,?,?,?)",
+                (pid, (row[0] or "") if row else "", (row[1] or "") if row else "", ""),
+            )
     con.commit()
+    _refill_lang = f" --lang {LANG}" if IS_L10N else ""
     print(f"\nArchived {n_archived} translations to translation_history and "
           f"cleared them. Refill with:\n"
-          f"  python scripts/translate_passages.py --doc <CODE> "
+          f"  python scripts/translate_passages.py --doc <CODE>{_refill_lang} "
           f"--engine gemini:gemini-2.5-flash")
 
 

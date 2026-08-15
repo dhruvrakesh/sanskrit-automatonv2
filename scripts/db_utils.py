@@ -123,6 +123,28 @@ CREATE TABLE IF NOT EXISTS translation_history(
 );
 CREATE INDEX IF NOT EXISTS idx_translation_history_passage
   ON translation_history(passage_id);
+
+-- Phase HI (2026-08-01): additional-language translations (Hindi first).
+-- English stays in passages.translation (load-bearing across dashboard, FTS,
+-- exports, context windows). Other languages live here, one row per
+-- (passage, lang), anchored by the verified English at generation time.
+CREATE TABLE IF NOT EXISTS translations_l10n(
+  id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+  passage_id         INTEGER NOT NULL,
+  lang               TEXT NOT NULL,          -- 'hi', extensible
+  translation        TEXT,
+  engine             TEXT,
+  mt_prompt_version  TEXT,
+  translation_score  REAL,                   -- length-ratio (legacy-style)
+  translation_qa     REAL,                   -- lang-aware heuristic QA
+  translated_at      TEXT,
+  UNIQUE(passage_id, lang),
+  FOREIGN KEY(passage_id) REFERENCES passages(id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS idx_translations_l10n_passage
+  ON translations_l10n(passage_id);
+CREATE INDEX IF NOT EXISTS idx_translations_l10n_lang
+  ON translations_l10n(lang);
 """
 
 # ── New columns added over time — for existing DBs that predate this schema ──
@@ -153,6 +175,8 @@ _MIGRATIONS = [
     ("passages", "mt_prompt_version", "TEXT"),
     ("passages", "translated_at",     "TEXT"),
     ("passages", "translation_qa",    "REAL"),
+    # Phase HI (2026-08-01): tag which language a history row superseded.
+    ("translation_history", "lang",   "TEXT"),
 ]
 
 

@@ -118,15 +118,30 @@ def is_noise(s: str) -> bool:
     if MQQ_RE.match(t): return True
     return False
 
-def is_translation_boilerplate(en: str) -> bool:
-    """Return True if the translation string is a model refusal or garbage."""
+# Hindi-side refusal boilerplate (Phase HI). The model may refuse in Hindi;
+# these must be caught so a Hindi refusal is stored empty, not as a "translation".
+JUNK_PHRASES_HI = tuple([
+    "अनुवाद नहीं", "अनुवाद करने में असमर्थ", "यह पाठ",
+    "स्पष्ट नहीं", "संस्कृत नहीं", "प्रदान नहीं कर",
+    "क्षमा कर", "मैं असमर्थ", "पठनीय नहीं",
+])
+
+def is_translation_boilerplate(en: str, lang: str = "en") -> bool:
+    """Return True if the translation string is a model refusal or garbage.
+
+    lang='hi' also screens the Hindi refusal phrases (Phase HI). The English
+    phrase list is always applied too, since the model sometimes refuses in
+    English even when asked for Hindi.
+    """
     if not en: return True
     t = en.strip().lower()
     if not t: return True
     if ONLY_PUNCT_RE.match(t): return True
     if MQQ_RE.match(t): return True
     if len(t) < 4: return True
-    return any(x in t for x in JUNK_PHRASES)
+    if any(x in t for x in JUNK_PHRASES): return True
+    if lang == "hi" and any(x in en for x in JUNK_PHRASES_HI): return True
+    return False
 
 def should_translate(s: str, *, min_dev: float = 0.05) -> bool:
     """Return True if this passage contains enough Sanskrit to warrant translation.
@@ -169,34 +184,65 @@ def score_passage_quality(s: str) -> float:
 
 _GLOSS_PAIR_RE = re.compile(r"^\s*([^|/\n]{2,60})\s*\|\s*([^|/\n]{2,60})\s*$")
 
-def score_translation_quality(src: str, translation: str) -> float:
+def score_translation_quality(src: str, translation: str, lang: str = "en") -> float:
     """Heuristic QA score 0.0–1.0 for a stored translation against its source.
 
-    Free — no API calls. Deductive scoring from 1.0:
-      hard zeros : empty / [ILLEGIBLE] / model boilerplate
-      length band: translation-chars / source-chars expected ~1.0–3.5 for
-                   Devanagari→English; far outside → truncation or ramble
-      residue    : Devanagari left in the output (untranslated fragments)
-      gloss pair : "X | X" repeated-gloss signature (the nirukta failure mode)
-      pāda slash : high " / " density mid-sentence (v1 pāda-literalism
-                   artifact — flags style-stale rows for prompt-v2 upgrade)
-      englishness: output must contain Latin letters at all
+    Free — no API calls. Deductive scoring from 1.0.
 
-    Calibration notes (2026-07-20): thresholds set from observed MBh01 v1
-    output and nirukta gloss failures. Tune against Q4 judge scores over time.
+    lang='en' (default): expects Latin-script English output; Devanagari in the
+    output is untranslated residue (penalty); no Latin letters at all is fatal.
+
+    lang='hi' (Phase HI): polarity INVERTS — the output must be Devanagari-
+    dominant; Latin-script residue is the penalty, and absence of Devanagari is
+    fatal. Length band recalibrated (hi/sa char ratio ~0.9–2.5 vs en/sa 1.0–3.5,
+    because Hindi tatsama vocabulary tracks the Sanskrit closely). The gloss-pair
+    and empty/boilerplate checks are shared; the " / " pāda-slash artifact check
+    is English-specific and skipped for Hindi.
     """
     if not translation:
         return 0.0
     t = translation.strip()
-    if not t or t == "[ILLEGIBLE]":
+    # Honest-refusal tokens: [ILLEGIBLE] (en) and [अस्पष्ट] (hi)
+    if not t or t in ("[ILLEGIBLE]", "[अस्पष्ट]"):
         return 0.0
-    if is_translation_boilerplate(t):
+    if is_translation_boilerplate(t, lang=lang):
         return 0.0
 
     score = 1.0
     src_len = max(1, len((src or "").strip()))
     ratio = len(t) / src_len
+    dev = frac_devanagari(t)
 
+    # Shared: repeated gloss-pair ("X | X")
+    m = _GLOSS_PAIR_RE.match(t)
+    if m and m.group(1).strip().lower() == m.group(2).strip().lower():
+        score -= 0.6
+
+    if lang == "hi":
+        # Length band for Sanskrit→Hindi
+        if ratio < 0.5:
+            score -= 0.4          # truncation
+        elif ratio < 0.8:
+            score -= 0.15
+        elif ratio > 3.5:
+            score -= 0.3          # ramble
+        elif ratio > 2.5:
+            score -= 0.1
+        # Hindi output MUST be Devanagari-dominant
+        if dev < 0.30:
+            score -= 0.5          # not actually Hindi
+        elif dev < 0.55:
+            score -= 0.2
+        # Latin residue is the penalty here (proper nouns in IAST are a few
+        # chars; a wall of Latin means untranslated English leaked in)
+        latin = len(LATIN_RE.findall(t)) / max(1, len(t))
+        if latin > 0.25:
+            score -= 0.3
+        elif latin > 0.12:
+            score -= 0.1
+        return round(max(0.0, min(1.0, score)), 3)
+
+    # ── English (default) ──
     if ratio < 0.6:
         score -= 0.4          # suspiciously short → likely truncation
     elif ratio < 1.0:
@@ -206,15 +252,10 @@ def score_translation_quality(src: str, translation: str) -> float:
     elif ratio > 3.5:
         score -= 0.1
 
-    dev = frac_devanagari(t)
     if dev > 0.30:
         score -= 0.5          # mostly untranslated
     elif dev > 0.05:
         score -= 0.2
-
-    m = _GLOSS_PAIR_RE.match(t)
-    if m and m.group(1).strip().lower() == m.group(2).strip().lower():
-        score -= 0.6          # "Ornament | Ornament"
 
     n_slash = t.count(" / ")
     words = max(1, len(t.split()))

@@ -31,7 +31,7 @@ except Exception:
 from normalize_text import normalize_sanskrit
 from text_filters import (should_translate, clean_for_mt,
                           is_translation_boilerplate, score_translation_quality)
-from infer_mt import translate_batch, PROMPT_VERSION, QuotaExhausted
+from infer_mt import translate_batch, PROMPT_VERSION, PROMPT_VERSIONS, QuotaExhausted
 from db_utils import ensure_schema, migrate_schema
 
 CONTEXT_WINDOW = 5
@@ -78,6 +78,27 @@ def _fetch_context(con, doc, page_no, idx, n=CONTEXT_WINDOW):
         ORDER BY p.page_no DESC, p.idx DESC
         LIMIT ?
     """, (doc, page_no, page_no, idx, n)).fetchall()
+    return [
+        {"verse_ref": r[0], "text": r[1], "translation": r[2],
+         "page_no": r[3], "idx": r[4]}
+        for r in reversed(rows)
+    ]
+
+
+def _fetch_context_l10n(con, doc, lang, page_no, idx, n=CONTEXT_WINDOW):
+    """Phase HI: preceding TARGET-language rows for the context window, so Hindi
+    reads Hindi context (name/register consistency), not English."""
+    rows = con.execute("""
+        SELECT p.verse_ref, p.text, l.translation, p.page_no, p.idx
+        FROM passages p
+        JOIN docs d ON d.id = p.doc_id
+        JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = ?
+        WHERE d.code = ?
+          AND TRIM(COALESCE(l.translation, '')) <> ''
+          AND (p.page_no < ? OR (p.page_no = ? AND p.idx < ?))
+        ORDER BY p.page_no DESC, p.idx DESC
+        LIMIT ?
+    """, (lang, doc, page_no, page_no, idx, n)).fetchall()
     return [
         {"verse_ref": r[0], "text": r[1], "translation": r[2],
          "page_no": r[3], "idx": r[4]}
@@ -139,6 +160,16 @@ def main():
                          "failed translations (0 = never abort). Catches "
                          "quota exhaustion and bad-source docs instead of "
                          "grinding through hundreds of doomed calls.")
+    ap.add_argument("--lang", default="en",
+                    help="Target language. 'en' (default) writes passages."
+                         "translation as always. 'hi' (Phase HI) translates "
+                         "Sanskrit→Hindi, anchored by the verified English, and "
+                         "writes translations_l10n — only for passages whose "
+                         "English exists and passed QA (>= --anchor-min-qa).")
+    ap.add_argument("--anchor-min-qa", type=float, default=0.6,
+                    help="For --lang != en: only translate passages whose "
+                         "English translation_qa is at least this (the English "
+                         "pass is the scout; Hindi never walks unscouted ground).")
     ap.add_argument("--progress",     default=str(_PROGRESS_PATH))
     ap.add_argument("--config",       default=str(_CONFIG_PATH))
     args = ap.parse_args()
@@ -166,8 +197,8 @@ def main():
     has_eng_col   = "engine"             in cols
     has_tr_score  = "translation_score"  in cols
 
-    translation_filter = ("" if args.retranslate
-                          else "AND COALESCE(TRIM(p.translation),'')=''")
+    TGT = (args.lang or "en").strip()
+    IS_L10N = TGT != "en"   # Phase HI: additional-language mode → translations_l10n
 
     extra_cols = ", ".join([
         c for c in
@@ -177,17 +208,44 @@ def main():
     if extra_cols:
         extra_cols = ", " + extra_cols
 
-    rows = list(con.execute(
-        f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols}
-            FROM passages p
-            JOIN docs d ON d.id = p.doc_id
-            WHERE d.code = ?
-              {translation_filter}
-              AND p.page_no BETWEEN ? AND ?
-              AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')
-            ORDER BY p.page_no, p.idx""",
-        (args.doc, args.since_page, args.until_page),
-    ))
+    if IS_L10N:
+        # Select passages with a QA-passed English translation that lack a
+        # target-language row (or ALL such rows with --retranslate). The English
+        # is carried as the anchor (last selected column).
+        l10n_filter = ("" if args.retranslate else
+                       "AND NOT EXISTS (SELECT 1 FROM translations_l10n l "
+                       "WHERE l.passage_id=p.id AND l.lang=?) ")
+        params = [args.doc, args.anchor_min_qa]
+        if not args.retranslate:
+            params.append(TGT)
+        params += [args.since_page, args.until_page]
+        rows = list(con.execute(
+            f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols}, p.translation
+                FROM passages p
+                JOIN docs d ON d.id = p.doc_id
+                WHERE d.code = ?
+                  AND TRIM(COALESCE(p.translation,'')) <> ''
+                  AND COALESCE(p.translation_qa, 1.0) >= ?
+                  {l10n_filter}
+                  AND p.page_no BETWEEN ? AND ?
+                  AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')
+                ORDER BY p.page_no, p.idx""",
+            params,
+        ))
+    else:
+        translation_filter = ("" if args.retranslate
+                              else "AND COALESCE(TRIM(p.translation),'')=''")
+        rows = list(con.execute(
+            f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols}
+                FROM passages p
+                JOIN docs d ON d.id = p.doc_id
+                WHERE d.code = ?
+                  {translation_filter}
+                  AND p.page_no BETWEEN ? AND ?
+                  AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')
+                ORDER BY p.page_no, p.idx""",
+            (args.doc, args.since_page, args.until_page),
+        ))
 
     if not rows:
         print("todo = 0 rows")
@@ -201,13 +259,17 @@ def main():
     todo = []
     for row in rows:
         rowid, page_no, idx, text = row[0], row[1], row[2], row[3]
+        # In l10n mode the English anchor is the last selected column.
+        eng_ref = row[-1] if IS_L10N else None
+        meta_row_end = (len(row) - 1) if IS_L10N else len(row)
         rest = {
-            "verse_ref":     row[4]  if has_verse_ref and len(row) > 4 else None,
-            "chapter":       row[5]  if has_chapter   and len(row) > 5 else None,
-            "chandas":       row[6]  if has_chandas   and len(row) > 6 else None,
-            "text_type":     row[7]  if has_text_type and len(row) > 7 else None,
-            "iast":          row[8]  if has_iast      and len(row) > 8 else None,
-            "quality_score": row[9]  if len(row) > 9  else 0.0,
+            "verse_ref":     row[4]  if has_verse_ref and meta_row_end > 4 else None,
+            "chapter":       row[5]  if has_chapter   and meta_row_end > 5 else None,
+            "chandas":       row[6]  if has_chandas   and meta_row_end > 6 else None,
+            "text_type":     row[7]  if has_text_type and meta_row_end > 7 else None,
+            "iast":          row[8]  if has_iast      and meta_row_end > 8 else None,
+            "quality_score": row[9]  if meta_row_end > 9  else 0.0,
+            "eng_ref":       eng_ref,
         }
         normed  = normalize_sanskrit(text or "")
         if not args.no_skip and not should_translate(normed, min_dev=args.min_dev):
@@ -220,9 +282,10 @@ def main():
     if args.limit:
         todo = todo[:args.limit]
 
-    print(f"doc={args.doc!r}  engine={base_engine or 'default'}  "
+    print(f"doc={args.doc!r}  engine={base_engine or 'default'}  lang={TGT}  "
           f"todo={len(todo)} verses  min_quality={args.min_quality}  "
-          f"prompt={PROMPT_VERSION}")
+          f"prompt={PROMPT_VERSIONS.get(TGT, PROMPT_VERSION)}"
+          + ("  [anchored by verified English]" if IS_L10N else ""))
     if not todo:
         _write_progress({
             "status": "done", "doc": args.doc,
@@ -338,15 +401,22 @@ def main():
                 "recent": recent,
             })
 
-            # Fetch context + translate
-            context_verses = _fetch_context(con, args.doc, page_no, idx, n=args.context)
+            # Fetch context + translate. In l10n mode the context window is the
+            # preceding TARGET-language rows (Hindi context for Hindi
+            # consistency), and the verified English is passed as the anchor.
+            if IS_L10N:
+                context_verses = _fetch_context_l10n(con, args.doc, TGT, page_no, idx, n=args.context)
+            else:
+                context_verses = _fetch_context(con, args.doc, page_no, idx, n=args.context)
 
             outs = translate_batch(
                 con,
                 [cleaned],
                 engine=active_engine,
+                src="sa", tgt=TGT,
                 iast_list=[meta_row.get("iast") or ""],
                 context_list=[context_verses] if context_verses else None,
+                reference_list=[meta_row.get("eng_ref")] if IS_L10N else None,
                 doc_code=args.doc,
                 category=doc_meta["category"],
                 chapters=[meta_row.get("chapter")],
@@ -359,41 +429,77 @@ def main():
             tr_score = None
             tr_qa    = None
             if translation:
-                if is_translation_boilerplate(translation):
+                if is_translation_boilerplate(translation, lang=TGT):
                     print(f"  [SKIP-JUNK] p{page_no}.{idx}: {translation[:60]!r}")
                     translation = ""
                 else:
                     ratio    = len(translation) / max(1, len(cleaned))
                     tr_score = round(min(1.0, max(0.0, ratio / 5.0)), 3)
-                    tr_qa    = score_translation_quality(cleaned, translation)
+                    tr_qa    = score_translation_quality(cleaned, translation, lang=TGT)
 
-            # Phase Q: archive any existing translation before overwriting.
-            # In default runs the SQL filter guarantees empties, so this is a
-            # no-op; with --retranslate it preserves the superseded version.
-            if translation:
-                _archive_previous_translation(con, cur, rowid)
+            ver = PROMPT_VERSIONS.get(TGT, PROMPT_VERSION)
+            now_iso = datetime.now(timezone.utc).isoformat()
 
-            # Write to DB (provenance: engine + prompt version + timestamp + QA)
-            update_parts = ["translation=?", "mt_prompt_version=?",
-                            "translated_at=?", "translation_qa=?"]
-            update_vals  = [translation,
-                            PROMPT_VERSION if translation else None,
-                            datetime.now(timezone.utc).isoformat() if translation else None,
-                            tr_qa]
-            if has_eng_col and active_engine:
-                update_parts.append("engine=?")
-                update_vals.append(active_engine)
-            if has_tr_score and tr_score is not None:
-                update_parts.append("translation_score=?")
-                update_vals.append(tr_score)
-            update_vals.append(rowid)
-            cur.execute(
-                f"UPDATE passages SET {', '.join(update_parts)} WHERE rowid=?",
-                update_vals,
-            )
-            iast_val = meta_row.get("iast") or ""
-            _update_fts(cur, rowid, cleaned, iast_val, translation or "")
-            con.commit()
+            if IS_L10N:
+                # Phase HI: write/replace the target-language row; archive the
+                # prior one to translation_history (lang-tagged) if present.
+                prev = con.execute(
+                    "SELECT translation, engine, mt_prompt_version, "
+                    "translation_score, translation_qa, translated_at "
+                    "FROM translations_l10n WHERE passage_id=? AND lang=?",
+                    (rowid, TGT),
+                ).fetchone()
+                if translation and prev and (prev[0] or "").strip():
+                    cur.execute(
+                        "INSERT INTO translation_history(passage_id, translation, "
+                        "engine, mt_prompt_version, translation_score, "
+                        "translation_qa, translated_at, reason, lang) "
+                        "VALUES(?,?,?,?,?,?,?,?,?)",
+                        (rowid, prev[0], prev[1], prev[2], prev[3], prev[4],
+                         prev[5], "retranslate-overwrite", TGT),
+                    )
+                if translation:
+                    cur.execute(
+                        "INSERT INTO translations_l10n(passage_id, lang, translation, "
+                        "engine, mt_prompt_version, translation_score, translation_qa, "
+                        "translated_at) VALUES(?,?,?,?,?,?,?,?) "
+                        "ON CONFLICT(passage_id, lang) DO UPDATE SET "
+                        "translation=excluded.translation, engine=excluded.engine, "
+                        "mt_prompt_version=excluded.mt_prompt_version, "
+                        "translation_score=excluded.translation_score, "
+                        "translation_qa=excluded.translation_qa, "
+                        "translated_at=excluded.translated_at",
+                        (rowid, TGT, translation, active_engine, ver,
+                         tr_score, tr_qa, now_iso),
+                    )
+                # l10n rows are not in passages_fts (English FTS is unchanged).
+                con.commit()
+            else:
+                # Phase Q: archive any existing English translation before
+                # overwriting (no-op in default runs; preserves on --retranslate).
+                if translation:
+                    _archive_previous_translation(con, cur, rowid)
+
+                update_parts = ["translation=?", "mt_prompt_version=?",
+                                "translated_at=?", "translation_qa=?"]
+                update_vals  = [translation,
+                                ver if translation else None,
+                                now_iso if translation else None,
+                                tr_qa]
+                if has_eng_col and active_engine:
+                    update_parts.append("engine=?")
+                    update_vals.append(active_engine)
+                if has_tr_score and tr_score is not None:
+                    update_parts.append("translation_score=?")
+                    update_vals.append(tr_score)
+                update_vals.append(rowid)
+                cur.execute(
+                    f"UPDATE passages SET {', '.join(update_parts)} WHERE rowid=?",
+                    update_vals,
+                )
+                iast_val = meta_row.get("iast") or ""
+                _update_fts(cur, rowid, cleaned, iast_val, translation or "")
+                con.commit()
             ok_count += 1
             if translation:
                 consec_fail = 0

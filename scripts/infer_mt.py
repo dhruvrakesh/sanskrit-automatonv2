@@ -36,11 +36,18 @@ class QuotaExhausted(RuntimeError):
     than grind on — continuing produces empty results for every verse."""
     pass
 
-# Bump whenever _SYSTEM_PROMPT_BASE changes materially. This string is mixed
-# into the cache key so outputs produced under an older prompt are never
-# served for requests made under a newer one. (Old cache rows are retained
-# for reference; they simply stop matching.)
-PROMPT_VERSION = "v2-2026-07-20"
+# Per-target prompt versions. Mixed into the cache key so outputs produced
+# under an older prompt are never served for requests made under a newer one,
+# AND so iterating the Hindi prompt never invalidates the English cache (or
+# vice versa). Bump the relevant entry whenever that language's system prompt
+# changes materially. (Old cache rows are retained; they simply stop matching.)
+PROMPT_VERSIONS = {
+    "en": "v2-2026-07-20",
+    "hi": "hi-v1-2026-08-01",
+}
+# Backward-compat alias: existing English callers/imports still see the same
+# string, so English cache hashes are byte-identical to what is already stored.
+PROMPT_VERSION = PROMPT_VERSIONS["en"]
 
 # Cost tracking (imported lazily to avoid circular deps)
 _cost_tracker_ok = False
@@ -69,6 +76,25 @@ Your translation principles:
 12. OUTPUT: Produce ONLY the English translation — no preamble, no "Translation:", no meta-commentary. If the text is illegible OCR noise, output exactly: [ILLEGIBLE]"""
 
 
+# ── Hindi system prompt (Phase HI, hi-v1) ────────────────────────────────────
+# Śuddha Hindi in the Debroy discipline. Proper nouns stay in Devanagari (no
+# IAST apparatus — Hindi's structural advantage). The verified English is
+# supplied as a meaning reference and must NOT itself be translated.
+_SYSTEM_PROMPT_HI = """आप एक संस्कृत विद्वान् हैं जो बिबेक देबरॉय, मन्मथनाथ दत्त तथा BORI समीक्षित संस्करण की परम्परा में प्रामाणिक हिन्दी अनुवाद प्रस्तुत करते हैं।
+
+अनुवाद के सिद्धान्त:
+1. निष्ठा: जो लिखा है वही अनुवाद करें, अपनी कल्पना नहीं। व्याख्या न जोड़ें।
+2. भाषा: शुद्ध, प्रवाहमयी खड़ीबोली हिन्दी। तत्सम शब्दावली को वरीयता दें, किन्तु पठनीयता की कीमत पर नहीं। अनावश्यक उर्दू-फ़ारसी शब्दों से बचें।
+3. संज्ञाएँ: सभी संस्कृत विशेषनाम (व्यक्ति, स्थान, नदी, देवता, उपाधि) देवनागरी में यथावत् रखें — अर्जुन, कुरुक्षेत्र, गङ्गा। रोमन लिप्यन्तरण न करें।
+4. श्लोक-प्रवाह: पूरे श्लोक का एक या दो प्रवाहमयी वाक्यों में अनुवाद करें; पाद-क्रम की नकल न करें। पूर्ण श्लोक के अन्त में " //" लगाएँ।
+5. निपात: केवल-बलसूचक निपात (एव, हि, वै, ह, खलु, पूरक तु) प्रायः छोड़ दें, जब तक बल अर्थतः आवश्यक न हो।
+6. पारिभाषिक शब्द: धर्म, कर्म, यज्ञ आदि हिन्दी में स्वयं स्पष्ट हैं — उनकी व्याख्या न दें। केवल वास्तविक रूप से तकनीकी अनुष्ठान/दार्शनिक शब्दों का प्रथम बार संक्षिप्त अर्थ कोष्ठक में दें।
+7. वक्ता-सूचना: "वैशम्पायन ने कहा —" इस शैली में वक्ता-पंक्तियाँ रखें।
+8. कर्ता-संगति: प्रत्येक उपवाक्य का स्पष्ट कर्ता हो; प्रत्येक विशेषनाम की एक ही वर्तनी सर्वत्र प्रयुक्त हो।
+9. सन्दर्भ: नीचे दिया गया अंग्रेज़ी अनुवाद केवल अर्थ के सत्यापित सन्दर्भ हेतु है — उसका अनुवाद न करें, केवल संस्कृत का अनुवाद करें।
+10. निर्गम: केवल हिन्दी अनुवाद दें — कोई भूमिका, "अनुवाद:" शीर्षक या टिप्पणी नहीं। यदि पाठ अपठनीय OCR कोलाहल है तो ठीक यही लिखें: [अस्पष्ट]"""
+
+
 def _build_system_prompt(
     doc_code: str,
     category: str = None,
@@ -76,9 +102,15 @@ def _build_system_prompt(
     verse_ref: str = None,
     chandas: str = None,
     text_type: str = None,
+    tgt: str = "en",
 ) -> str:
-    """Build a context-rich system prompt for a specific passage."""
-    lines = [_SYSTEM_PROMPT_BASE, ""]
+    """Build a context-rich system prompt for a specific passage.
+
+    tgt selects the base prompt: 'en' (default) or 'hi' (Phase HI). Document
+    context lines are appended identically for both.
+    """
+    base = _SYSTEM_PROMPT_HI if tgt == "hi" else _SYSTEM_PROMPT_BASE
+    lines = [base, ""]
 
     # Document context
     ctx_parts = [f"Text: {doc_code.replace('_', ' ').title()}"]
@@ -115,8 +147,14 @@ def _build_user_message(
     devanagari: str,
     iast: str = None,
     context_verses: list[dict] = None,
+    reference_en: str = None,
 ) -> str:
-    """Build the user message for translation."""
+    """Build the user message for translation.
+
+    reference_en (Phase HI): the verified English translation of THIS verse,
+    supplied as a meaning anchor for Hindi generation. The system prompt
+    instructs the model not to translate it. Omitted for English runs.
+    """
     parts = []
 
     # Preceding context (sliding window)
@@ -136,16 +174,23 @@ def _build_user_message(
     if iast and iast.strip():
         parts.append(f"\n[IAST aid: {iast.strip()}]")
 
+    # Verified English anchor (Phase HI) — meaning reference, not to be translated
+    if reference_en and reference_en.strip():
+        parts.append(f"\n[Verified English reference — for meaning only, DO NOT translate this: {reference_en.strip()}]")
+
     return "\n".join(parts)
 
 
 # ── Cache helpers ─────────────────────────────────────────────────────────────
 
-def _hash(text: str) -> str:
-    # PROMPT_VERSION is part of the key: a prompt change invalidates the cache
-    # without deleting old rows (fix 2026-07-20 — previously v1-style outputs
-    # would be served forever regardless of prompt improvements).
-    return hashlib.sha256((PROMPT_VERSION + "\x00" + text).encode("utf-8")).hexdigest()
+def _hash(text: str, tgt: str = "en") -> str:
+    # The target-language prompt version is part of the key: a prompt change
+    # invalidates that language's cache without deleting old rows, and the two
+    # languages never collide (fix 2026-07-20; per-language 2026-08-01). English
+    # keeps PROMPT_VERSIONS['en'] == 'v2-2026-07-20', so existing sa→en hashes
+    # are byte-identical to what is already stored.
+    ver = PROMPT_VERSIONS.get(tgt, PROMPT_VERSIONS["en"])
+    return hashlib.sha256((ver + "\x00" + text).encode("utf-8")).hexdigest()
 
 def _cache_lookup(
     con: sqlite3.Connection,
@@ -155,7 +200,7 @@ def _cache_lookup(
     if not texts:
         return {}
     q_marks = ",".join("?" for _ in texts)
-    hashes = [_hash(t) for t in texts]
+    hashes = [_hash(t, tgt) for t in texts]
     rows = con.execute(
         f"""SELECT text_hash, output FROM mt_cache
             WHERE engine=? AND lang_in=? AND lang_out=? AND text_hash IN ({q_marks})""",
@@ -184,12 +229,12 @@ def _cache_insert_many(
     for t, out in pairs:
         if not out or not out.strip():
             continue  # never cache empties
-        if _is_junk is not None and _is_junk(out):
-            continue  # never cache refusals/boilerplate
+        if _is_junk is not None and _is_junk(out, lang=tgt):
+            continue  # never cache refusals/boilerplate (lang-aware)
         cur.execute(
             """INSERT OR IGNORE INTO mt_cache(engine,lang_in,lang_out,text_hash,text,output)
                VALUES(?,?,?,?,?,?)""",
-            (engine, src, tgt, _hash(t), t, out),
+            (engine, src, tgt, _hash(t, tgt), t, out),
         )
     con.commit()
 
@@ -373,8 +418,9 @@ def translate_batch(
     verse_refs:       List[Optional[str]] = None,
     chandas_list:     List[Optional[str]] = None,
     text_types:       List[Optional[str]] = None,
+    reference_list:   List[Optional[str]] = None,
 ) -> List[str]:
-    """Translate a list of Sanskrit strings → English.
+    """Translate a list of Sanskrit strings → English (tgt='en') or Hindi ('hi').
 
     New in Phase 3:
     - iast_list: parallel IAST strings for each text
@@ -382,9 +428,14 @@ def translate_batch(
     - doc_code, category, chapters, verse_refs, chandas_list, text_types:
       parallel metadata for building context-rich system prompts
 
-    Cache key is the Sanskrit text hash + PROMPT_VERSION (context is passed but
-    not cached per-context, since caching with full context would have
-    near-zero hit rates).
+    New in Phase HI (2026-08-01):
+    - tgt='hi' selects the Hindi system prompt and a per-language cache key.
+    - reference_list: parallel verified-English strings; when tgt='hi' each is
+      supplied as a meaning anchor (the model is told not to translate it).
+
+    Cache key is the Sanskrit text hash + the target-language prompt version
+    (context/reference are passed but not part of the key, since caching per
+    full context would have near-zero hit rates).
     """
     engine = (engine or DEFAULT_ENGINE).strip()
     cached = _cache_lookup(con, engine, src, tgt, texts)
@@ -395,7 +446,7 @@ def translate_batch(
     missing_msgs: List[str] = []
 
     for i, t in enumerate(texts):
-        h = _hash(t)
+        h = _hash(t, tgt)
         if h in cached:
             outs.append(cached[h])
         else:
@@ -406,7 +457,8 @@ def translate_batch(
             # Build context-rich user message
             iast_str  = iast_list[i]  if iast_list  and i < len(iast_list)  else None
             ctx_verses = context_list[i] if context_list and i < len(context_list) else None
-            missing_msgs.append(_build_user_message(t, iast_str, ctx_verses))
+            ref_en    = reference_list[i] if reference_list and i < len(reference_list) else None
+            missing_msgs.append(_build_user_message(t, iast_str, ctx_verses, ref_en))
 
     # Build context-rich system prompt
     chapter   = chapters[missing_idx[0]]    if chapters    and missing_idx else None
@@ -421,7 +473,8 @@ def translate_batch(
         verse_ref=verse_ref,
         chandas=chandas,
         text_type=text_type,
-    ) if (doc_code or missing_idx) else _SYSTEM_PROMPT_BASE
+        tgt=tgt,
+    ) if (doc_code or missing_idx) else (_SYSTEM_PROMPT_HI if tgt == "hi" else _SYSTEM_PROMPT_BASE)
 
     generated: List[str] = []
     if missing_texts:
