@@ -238,6 +238,22 @@ def _is_junk_en(s: str) -> bool:
 _BRACKET_RE = re.compile(r"\[([^\]]+)\]")
 _SKIP_BRACKET = {"illegible", "अस्पष्ट"}
 
+# Debroy-style inline formatting (2026-08-02): the model marks untranslated
+# technical terms with markdown *asterisks* (e.g. *parva*, *nirveda*) — render
+# them as italics, exactly as Debroy italicizes such terms, instead of showing
+# raw asterisks. And drop the śloka-end "//" / pāda "/" structural markers,
+# which are not printed in a reading edition.
+_EM_RE = re.compile(r"\*(?!\s)([^*\n]+?)(?<!\s)\*")
+_VERSE_END_RE = re.compile(r"\s*//+\s*$")
+
+def _inline_format(escaped: str) -> str:
+    """Apply to HTML-escaped translation text. Order matters: strip verse
+    markers, then italicize *terms* (footnote [brackets] are handled separately)."""
+    s = _VERSE_END_RE.sub("", escaped)          # trailing "//"
+    s = s.replace(" // ", " — ").replace(" / ", " — ")  # internal half-verse breaks (rare post-v2)
+    s = _EM_RE.sub(r"<em>\1</em>", s)            # *term* -> italics
+    return s.strip()
+
 def _extract_footnotes(text_escaped: str, counter: List[int], notes: List[Tuple[int,str]]):
     """text_escaped is HTML-escaped. Replace [notes] with <sup> markers and
     append (n, note) to notes. Returns the rewritten HTML."""
@@ -353,9 +369,13 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
     if pv:
         out.append("<div class='prov'>" + "<br/>".join(pv) + "</div>")
     out.append("<div class='methodology'>Machine translation produced by the Sanskrit "
-               "Automaton pipeline (context-aware, verse-by-verse). Bracketed notes are "
-               "editorial clarifications rendered as footnotes. This is a scholar's "
-               "reading edition, not a substitute for the critical text.</div>")
+               "Automaton pipeline (context-aware, verse-by-verse) in the tradition of "
+               "Bibek Debroy's critical-edition renderings. Italicized words are "
+               "untranslated Sanskrit technical terms; bracketed clarifications appear "
+               "as numbered footnotes. Verse references follow the source numbering "
+               "(e.g. 1.1.0 is the benedictory maṅgala verse; star-passages excluded by "
+               "the critical edition are omitted). A scholar's reading edition, not a "
+               "substitute for the critical text.</div>")
     out.append("</div>")
 
     # ── TOC ──
@@ -388,14 +408,18 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
             if not has_any: continue
             vref = r.get("vref")
             vlabel = html.escape(str(vref)) if vref not in (None,"","None") else ""
+            def _en_html():
+                base = _inline_format(html.escape(en))
+                return _extract_footnotes(base, fn_counter, fn_notes) if want_footnotes else base
+            def _hi_html():
+                return _inline_format(html.escape(loc))
             if side_by_side:
                 cols = []
                 if include_san and san: cols.append(("Sanskrit",
                     f"<p class='sa'>{html.escape(san)}</p>" + (f"<p class='iast'>{html.escape(iast)}</p>" if iast else "")))
                 if include_en and en:
-                    en_html = _extract_footnotes(html.escape(en), fn_counter, fn_notes) if want_footnotes else html.escape(en)
-                    cols.append(("English", f"<p class='en'>{en_html}</p>"))
-                if include_hi and loc: cols.append((hi_label, f"<p class='hi'>{html.escape(loc)}</p>"))
+                    cols.append(("English", f"<p class='en'>{_en_html()}</p>"))
+                if include_hi and loc: cols.append((hi_label, f"<p class='hi'>{_hi_html()}</p>"))
                 if not cols: continue
                 out.append(f"<div class='verse'>")
                 if vlabel: out.append(f"<span class='vref'>{vlabel}</span>")
@@ -407,10 +431,9 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                 out.append("<div class='verse'>")
                 if vlabel: out.append(f"<span class='vref'>{vlabel}</span>")
                 if include_en and en:
-                    en_html = _extract_footnotes(html.escape(en), fn_counter, fn_notes) if want_footnotes else html.escape(en)
-                    out.append(f"<p class='en'>{en_html}</p>")
+                    out.append(f"<p class='en'>{_en_html()}</p>")
                 if include_hi and loc:
-                    out.append(f"<p class='hi'>{html.escape(loc)}</p>")
+                    out.append(f"<p class='hi'>{_hi_html()}</p>")
                 if include_san and san:
                     out.append(f"<p class='sa'>{html.escape(san)}</p>")
                     if iast: out.append(f"<p class='iast'>{html.escape(iast)}</p>")
