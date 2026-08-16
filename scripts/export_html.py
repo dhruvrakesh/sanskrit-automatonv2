@@ -247,11 +247,14 @@ _EM_RE = re.compile(r"\*(?!\s)([^*\n]+?)(?<!\s)\*")
 _VERSE_END_RE = re.compile(r"\s*//+\s*$")
 
 def _inline_format(escaped: str) -> str:
-    """Apply to HTML-escaped translation text. Order matters: strip verse
-    markers, then italicize *terms* (footnote [brackets] are handled separately)."""
-    s = _VERSE_END_RE.sub("", escaped)          # trailing "//"
-    s = s.replace(" // ", " — ").replace(" / ", " — ")  # internal half-verse breaks (rare post-v2)
-    s = _EM_RE.sub(r"<em>\1</em>", s)            # *term* -> italics
+    """Apply to HTML-escaped translation text. The śloka/pāda markers may be
+    followed by a NEWLINE (multi-śloka passages store "//\\nText"), so use
+    whitespace-tolerant regexes rather than literal " // "."""
+    s = re.sub(r"\s*//+\s*$", "", escaped)      # trailing "//"
+    s = re.sub(r"\s*//+\s*", " — ", s)           # internal half-verse breaks (any whitespace)
+    s = re.sub(r"\s+/\s+", " — ", s)             # single pāda slash (spaced; leaves and/or intact)
+    s = re.sub(r"\s+", " ", s)                   # collapse newlines/runs to single spaces
+    s = _EM_RE.sub(r"<em>\1</em>", s)            # *term* -> italics (Debroy convention)
     return s.strip()
 
 def _extract_footnotes(text_escaped: str, counter: List[int], notes: List[Tuple[int,str]]):
@@ -412,7 +415,10 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                 base = _inline_format(html.escape(en))
                 return _extract_footnotes(base, fn_counter, fn_notes) if want_footnotes else base
             def _hi_html():
-                return _inline_format(html.escape(loc))
+                base = _inline_format(html.escape(loc))
+                # Hindi bracket-notes get footnoted too (36 such rows in MBh01);
+                # they share the section's footnote numbering with English.
+                return _extract_footnotes(base, fn_counter, fn_notes) if want_footnotes else base
             if side_by_side:
                 cols = []
                 if include_san and san: cols.append(("Sanskrit",
