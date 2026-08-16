@@ -134,6 +134,67 @@ JUNK_PHRASES_HI = tuple([
     "क्षमा कर", "मैं असमर्थ", "पठनीय नहीं",
 ])
 
+_SENT_END_RE = re.compile(r"[.।॥!?](?:\s|$)|//")
+
+# Trailing OCR/meta caveat phrases the model appends after faithfully
+# translating the legible part of a partly-garbled verse. Curated
+# conservatively — clear source/translation-quality meta only, so salvage
+# never strips legitimate content. Union of the hard refusals (JUNK_PHRASES)
+# plus a few partial phrasings the refusal list misses.
+_CAVEAT_EXTRA = (
+    "appears to be a mix", "the rest is unclear", "the rest of the text",
+    "the remaining text", "the remainder of", "the provided text",
+    "unclear due to", "due to ocr", "due to the ocr", "the ocr",
+    "illegible portion", "difficult to render", "cannot be reliably",
+    "translator's note", "the sanskrit here is",
+)
+_CAVEAT_HI_EXTRA = (
+    "शेष पाठ", "शेष भाग", "अस्पष्ट है", "ओसीआर", "पाठ अस्पष्ट",
+)
+
+def salvage_translation(out: str, lang: str = "en") -> str:
+    """Fidelity guard (2026-08-02). Three outcomes:
+
+      * no caveat present            -> the input is returned UNCHANGED
+      * legible translation + caveat -> the faithful part is kept, the trailing
+                                        OCR/meta caveat dropped, and a " […]"
+                                        lacuna marker appended (Debroy convention)
+      * pure refusal / nothing before the caveat -> "" (empty)
+
+    This keeps the original thought when the model translates the readable part
+    of a partly-garbled verse and then comments on the illegible remainder,
+    instead of emptying the whole verse and losing a faithful rendering.
+    Errs toward UNDER-stripping: only a complete sentence before a clear caveat
+    is salvaged.
+    """
+    if not out or not out.strip():
+        return ""
+    t = out.strip()
+    low = t.lower()
+    cut = len(t); found = False
+    for ph in JUNK_PHRASES + _CAVEAT_EXTRA:
+        i = low.find(ph)
+        if 0 <= i < cut:
+            cut = i; found = True
+    if lang == "hi":
+        for ph in JUNK_PHRASES_HI + _CAVEAT_HI_EXTRA:
+            i = t.find(ph)
+            if 0 <= i < cut:
+                cut = i; found = True
+    if not found:
+        return t  # no caveat — unchanged
+    head = t[:cut]
+    ends = list(_SENT_END_RE.finditer(head))
+    if not ends:
+        return ""  # no complete sentence before the caveat — do not salvage
+    salvaged = head[:ends[-1].end()].strip()
+    if (len(salvaged) >= 15
+            and not is_translation_boilerplate(salvaged, lang=lang)
+            and not is_source_echo("", salvaged, lang)):
+        return salvaged + " […]"
+    return ""
+
+
 def is_translation_boilerplate(en: str, lang: str = "en") -> bool:
     """Return True if the translation string is a model refusal or garbage.
 

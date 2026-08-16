@@ -31,7 +31,7 @@ except Exception:
 from normalize_text import normalize_sanskrit
 from text_filters import (should_translate, clean_for_mt,
                           is_translation_boilerplate, score_translation_quality,
-                          is_source_echo)
+                          is_source_echo, salvage_translation)
 from infer_mt import translate_batch, PROMPT_VERSION, PROMPT_VERSIONS, QuotaExhausted
 from db_utils import ensure_schema, migrate_schema
 
@@ -450,15 +450,23 @@ def main():
             tr_score = None
             tr_qa    = None
             if translation:
-                if is_translation_boilerplate(translation, lang=TGT):
-                    print(f"  [SKIP-JUNK] p{page_no}.{idx}: {translation[:60]!r}")
-                    translation = ""
-                elif is_source_echo(cleaned, translation, TGT):
+                # Fidelity guard: keep the faithful translation of a partly-
+                # garbled verse and drop the trailing OCR caveat, instead of
+                # emptying the whole verse. Returns unchanged if no caveat, the
+                # salvaged text (+ […]) if caveat-after-good, "" if pure refusal.
+                salvaged = salvage_translation(translation, lang=TGT)
+                if salvaged != translation:
+                    if salvaged:
+                        print(f"  [SALVAGE] p{page_no}.{idx}: kept faithful part, dropped OCR caveat")
+                    else:
+                        print(f"  [SKIP-JUNK] p{page_no}.{idx}: {translation[:60]!r}")
+                    translation = salvaged
+                if translation and is_source_echo(cleaned, translation, TGT):
                     # Model echoed the (garbled) source instead of translating —
                     # store empty so it is genuinely re-attempted, never shown.
                     print(f"  [SKIP-ECHO] p{page_no}.{idx}: source echoed, not translated")
                     translation = ""
-                else:
+                if translation:
                     ratio    = len(translation) / max(1, len(cleaned))
                     tr_score = round(min(1.0, max(0.0, ratio / 5.0)), 3)
                     tr_qa    = score_translation_quality(cleaned, translation, lang=TGT)
