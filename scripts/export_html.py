@@ -258,12 +258,19 @@ def _inline_format(escaped: str) -> str:
     return s.strip()
 
 def _extract_footnotes(text_escaped: str, counter: List[int], notes: List[Tuple[int,str]]):
-    """text_escaped is HTML-escaped. Replace [notes] with <sup> markers and
-    append (n, note) to notes. Returns the rewritten HTML."""
+    """text_escaped is HTML-escaped. Replace substantive [notes] with numbered
+    <sup> markers; keep trivial single-word glosses inline as (parentheticals).
+
+    Debroy reserves footnotes for editorial clarifications, not one-word
+    synonyms. Observed noise (2026-08-02): single-word bracket-glosses like
+    [lake], [current], [तीर्थ] were flooding the apparatus — those now render
+    inline, and only multi-word notes become footnotes."""
     def repl(m):
         inner = m.group(1).strip()
         if inner.lower() in _SKIP_BRACKET:
             return m.group(0)  # keep [ILLEGIBLE]/[अस्पष्ट] literal
+        if len(inner.split()) < 2:
+            return f"({inner})"   # trivial gloss stays inline, not a footnote
         counter[0] += 1
         n = counter[0]
         notes.append((n, inner))
@@ -329,11 +336,18 @@ def _safe_filename(s: str) -> str:
 
 # --- scholarly render --------------------------------------------------------
 
+_NUMERIC_CH_RE = re.compile(r"^[0-9]+([.\-–][0-9]+)*$")
+
 def _section_key(rec):
-    """Group by chapter when present, else by page."""
+    """Group by chapter ONLY when the chapter value is a clean numeric label.
+    OCR-sourced docs sometimes carry a garbage chapter value (e.g. "पर्व"),
+    which must never become an "Adhyāya <garbage>" heading — fall back to page
+    grouping in that case (2026-08-02)."""
     ch = rec.get("chap")
     if ch not in (None, "", "None"):
-        return ("chapter", str(ch))
+        chs = str(ch).strip()
+        if _NUMERIC_CH_RE.match(chs):
+            return ("chapter", chs)
     return ("page", str(rec.get("page")))
 
 def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
