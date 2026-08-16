@@ -223,14 +223,17 @@ def _cache_insert_many(
     """
     try:
         from text_filters import is_translation_boilerplate as _is_junk
+        from text_filters import is_source_echo as _is_echo
     except ImportError:
-        _is_junk = None
+        _is_junk = None; _is_echo = None
     cur = con.cursor()
     for t, out in pairs:
         if not out or not out.strip():
             continue  # never cache empties
         if _is_junk is not None and _is_junk(out, lang=tgt):
             continue  # never cache refusals/boilerplate (lang-aware)
+        if _is_echo is not None and _is_echo(t, out, tgt):
+            continue  # never cache source-echoes (2026-08-02)
         cur.execute(
             """INSERT OR IGNORE INTO mt_cache(engine,lang_in,lang_out,text_hash,text,output)
                VALUES(?,?,?,?,?,?)""",
