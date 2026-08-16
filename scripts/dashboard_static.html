@@ -288,6 +288,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       <button id="tabUsage"    onclick="switchTab('usage')"    style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">Usage</button>
       <button id="tabProgress" onclick="switchTab('progress')" style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">Live&#x25B6;</button>
       <button id="tabQueue"    onclick="switchTab('queue')"    style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">Queue</button>
+      <button id="tabQa"       onclick="switchTab('qa')"       style="flex:1;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 3px;font-size:9px;cursor:pointer">QA</button>
     </div>
     <!-- Live tab -->
     <div id="paneLive">
@@ -319,6 +320,24 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       </div>
       <div style="padding:4px 8px;border-bottom:1px solid var(--border-v);display:flex;gap:10px;font-size:9px;color:var(--muted)" id="queueStats"></div>
       <div id="queueBody" style="flex:1;overflow-y:auto"></div>
+    </div>
+    <!-- QA tab -->
+    <div id="paneQa" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+      <div style="padding:6px 8px;border-bottom:1px solid var(--border-v);display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <select id="qaLang" onchange="localStorage.setItem('qaLang',this.value);loadQa()" title="Which translation track to score" style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);padding:3px 6px;border-radius:4px;font-size:10px;font-family:'JetBrains Mono',monospace">
+          <option value="en">English QA</option>
+          <option value="hi">Hindi QA</option>
+        </select>
+        <select id="qaThresh" onchange="localStorage.setItem('qaThresh',this.value);loadQa()" title="Heal / inspect rows scoring below this QA" style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);padding:3px 6px;border-radius:4px;font-size:10px;font-family:'JetBrains Mono',monospace">
+          <option value="0.2">heal &lt;0.2</option>
+          <option value="0.4">heal &lt;0.4</option>
+          <option value="0.6">heal &lt;0.6</option>
+        </select>
+        <button onclick="qaScan('')" title="Re-score every doc for this language (writes translation_qa; safe, idempotent)" style="background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:4px;padding:3px 7px;font-size:9px;cursor:pointer">Scan all</button>
+        <button onclick="loadQa()" title="Reload QA summary" style="background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:4px;padding:3px 7px;font-size:9px;cursor:pointer">&#x21BA;</button>
+      </div>
+      <div id="qaTotals" style="padding:4px 8px;border-bottom:1px solid var(--border-v);font-size:9px;color:var(--muted)"></div>
+      <div id="qaBody" style="flex:1;overflow-y:auto;padding:8px;font-size:10px"><span style="color:var(--muted)">Open this tab to load QA scores&hellip;</span></div>
     </div>
   </aside>
 </div>
@@ -742,7 +761,7 @@ async function importSelected() {
 
 // ── Tab switching ──────────────────────────────────────────────────────────
 function switchTab(name) {
-  ['live','history','usage','progress','queue'].forEach(function(t) {
+  ['live','history','usage','progress','queue','qa'].forEach(function(t) {
     const pane = document.getElementById('pane' + t.charAt(0).toUpperCase() + t.slice(1));
     const btn  = document.getElementById('tab'  + t.charAt(0).toUpperCase() + t.slice(1));
     if (pane) pane.style.display    = t === name ? 'flex' : 'none';
@@ -753,6 +772,7 @@ function switchTab(name) {
     if (btn)  btn.style.fontWeight  = t === name ? '600'         : '400';
   });
   if (name === 'queue') populateQueueDocSelect();
+  if (name === 'qa') loadQa();
 }
 
 // ── Job history ────────────────────────────────────────────────────────────
@@ -809,6 +829,156 @@ async function loadUsage() {
     el.innerHTML = html;
   } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
 }
+// ── QA panel ────────────────────────────────────────────────────────────────
+var QA_BUCKET_COLORS = ['#f87171','#fb923c','#fbbf24','#a3e635','#4ade80'];
+var QA_BUCKET_LABELS = ['0-.2','.2-.4','.4-.6','.6-.8','.8-1'];
+
+function getQaLang() { var el = document.getElementById('qaLang'); return (el && el.value) || 'en'; }
+function getQaThreshold() { var el = document.getElementById('qaThresh'); return (el && el.value) || '0.2'; }
+
+function qaColor(v) {
+  if (v == null) return 'var(--muted)';
+  if (v < 0.2) return QA_BUCKET_COLORS[0];
+  if (v < 0.4) return QA_BUCKET_COLORS[1];
+  if (v < 0.6) return QA_BUCKET_COLORS[2];
+  if (v < 0.8) return QA_BUCKET_COLORS[3];
+  return QA_BUCKET_COLORS[4];
+}
+
+async function loadQa() {
+  var el = document.getElementById('qaBody');
+  var lang = getQaLang();
+  el.innerHTML = '<span style="color:var(--muted)">Loading QA&hellip;</span>';
+  try {
+    var r = await fetch('/api/qa/summary?db=' + encodeURIComponent(cfg.db) + '&lang=' + encodeURIComponent(lang));
+    renderQa(await r.json());
+  } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
+}
+
+function renderQa(d) {
+  var el = document.getElementById('qaBody');
+  var tt = document.getElementById('qaTotals');
+  if (d.error) { el.innerHTML = '<span style="color:#f87171">' + esc(d.error) + '</span>'; tt.innerHTML = ''; return; }
+  var thr = getQaThreshold();
+  if (d.note) {
+    tt.innerHTML = '<span style="color:var(--muted)">' + esc(d.note) + '</span>';
+  } else if (d.totals) {
+    var T = d.totals;
+    tt.innerHTML = 'corpus: <b style="color:var(--ink)">' + (T.translated||0).toLocaleString() + '</b> translated &middot; '
+      + '<b style="color:#fbbf24">' + (T.pending||0).toLocaleString() + '</b> pending &middot; '
+      + '<b style="color:#f87171">' + (T.low||0).toLocaleString() + '</b> low &middot; '
+      + '<b style="color:var(--muted)">' + (T.unscored||0).toLocaleString() + '</b> unscored';
+  }
+  if (!d.docs || !d.docs.length) { el.innerHTML = '<span style="color:var(--muted)">No translated passages for this language yet.</span>'; return; }
+  var html = '';
+  d.docs.forEach(function(doc) {
+    var scored = doc.scored || 0;
+    var bar = '';
+    if (scored > 0) {
+      for (var i = 0; i < 5; i++) {
+        var w = 100 * doc.buckets[i] / scored;
+        if (w > 0) bar += '<span title="' + QA_BUCKET_LABELS[i] + ': ' + doc.buckets[i] + '" style="height:100%;width:' + w.toFixed(2) + '%;background:' + QA_BUCKET_COLORS[i] + '"></span>';
+      }
+    } else {
+      bar = '<span style="height:100%;width:100%;background:var(--border)"></span>';
+    }
+    var mean = doc.mean_qa != null ? doc.mean_qa.toFixed(3) : '&mdash;';
+    html += '<div style="background:var(--bg3);border:1px solid var(--border-v);border-radius:6px;padding:7px 8px;margin-bottom:7px">'
+      + '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">'
+      +   '<span style="color:var(--gold);font-weight:600;font-family:\'JetBrains Mono\',monospace">' + esc(doc.doc) + '</span>'
+      +   '<span style="font-size:9px;color:' + qaColor(doc.mean_qa) + '">mean ' + mean + '</span>'
+      + '</div>'
+      + '<div style="height:9px;border-radius:3px;overflow:hidden;background:var(--bg2);display:flex;margin-bottom:5px">' + bar + '</div>'
+      + '<div style="font-size:9px;color:var(--muted);margin-bottom:6px">'
+      +   '<span style="color:#4ade80">&#x2713; ' + (doc.translated||0).toLocaleString() + '</span> &middot; '
+      +   '<span style="color:#fbbf24">' + (doc.pending||0).toLocaleString() + ' pending</span> &middot; '
+      +   '<span style="color:#f87171">&#x26A0; ' + (doc.low||0).toLocaleString() + ' low</span>'
+      +   (doc.unscored ? ' &middot; <span>? ' + doc.unscored.toLocaleString() + ' unscored</span>' : '')
+      + '</div>'
+      + '<div style="display:flex;gap:5px;flex-wrap:wrap">'
+      +   '<button onclick="qaScan(\'' + esc(doc.doc) + '\')" title="Re-score this doc (writes translation_qa)" style="background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:4px;padding:2px 7px;font-size:9px;cursor:pointer">Scan</button>'
+      +   '<button onclick="qaHeal(\'' + esc(doc.doc) + '\')" title="Archive+clear+refill rows below ' + thr + ' (non-destructive)" style="background:#3a2a0f;border:1px solid #7a5a1a;color:#e0b050;border-radius:4px;padding:2px 7px;font-size:9px;cursor:pointer;font-weight:600">&#x2728; Heal &lt;' + thr + '</button>'
+      +   '<button onclick="qaInspect(\'' + esc(doc.doc) + '\')" title="Show weakest verses" style="background:var(--bg4);border:1px solid var(--border-v);color:var(--muted);border-radius:4px;padding:2px 7px;font-size:9px;cursor:pointer">Inspect &#x25B8;</button>'
+      + '</div>'
+      + '<div id="qa-insp-' + esc(doc.doc) + '" style="display:none;margin-top:6px"></div>'
+      + '</div>';
+  });
+  el.innerHTML = html;
+}
+
+async function qaScan(doc) {
+  var lang = getQaLang();
+  try {
+    var r = await fetch('/api/qa/scan', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc: doc || undefined, lang: lang, db: cfg.db})});
+    var j = await r.json();
+    if (j.error) { toast('Scan: ' + j.error, 'fail'); return; }
+    switchTab('live');
+    trackJob(j.job, 'qa_scan ' + (doc || 'all') + ' [' + lang + ']', 'qa_scan', doc || 'all_docs');
+    watchThenReloadQa(j.job);
+  } catch(e) { toast('Scan failed: ' + e, 'fail'); }
+}
+
+async function qaHeal(doc) {
+  var lang = getQaLang();
+  var thr  = getQaThreshold();
+  if (!confirm('Heal ' + doc + ' [' + lang + '] below ' + thr + '?\n\n'
+    + 'Every translation scoring under ' + thr + ' is archived to translation_history, '
+    + 'cleared, and re-translated under the current prompt/engine. Nothing is destroyed, '
+    + 'but the refill uses API tokens.')) return;
+  try {
+    var r = await fetch('/api/qa/heal', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc: doc, lang: lang, below_qa: parseFloat(thr), engine: getEngine(doc), db: cfg.db})});
+    var j = await r.json();
+    if (j.error) { toast('Heal: ' + j.error, 'fail'); return; }
+    switchTab('live');
+    trackJob(j.job, 'heal ' + doc + ' <' + thr + ' [' + lang + ']', 'qa_heal', doc);
+    watchThenReloadQa(j.job);
+  } catch(e) { toast('Heal failed: ' + e, 'fail'); }
+}
+
+async function qaInspect(doc) {
+  var box = document.getElementById('qa-insp-' + doc);
+  if (!box) return;
+  if (box.style.display === 'block') { box.style.display = 'none'; return; }
+  box.style.display = 'block';
+  box.innerHTML = '<span style="color:var(--muted);font-size:9px">Loading weakest verses&hellip;</span>';
+  var lang = getQaLang();
+  var thr  = getQaThreshold();
+  try {
+    var r = await fetch('/api/qa/passages/' + encodeURIComponent(doc) + '?db=' + encodeURIComponent(cfg.db)
+      + '&lang=' + encodeURIComponent(lang) + '&below=' + encodeURIComponent(thr) + '&limit=40');
+    var d = await r.json();
+    if (d.error) { box.innerHTML = '<span style="color:#f87171;font-size:9px">' + esc(d.error) + '</span>'; return; }
+    if (!d.rows || !d.rows.length) { box.innerHTML = '<span style="color:var(--muted);font-size:9px">No rows below ' + esc(thr) + '.</span>'; return; }
+    var h = '';
+    d.rows.forEach(function(v) {
+      var ref = v.verse_ref ? (' ' + esc(String(v.verse_ref))) : (' p' + v.page_no + '.' + v.idx);
+      h += '<div style="border-top:1px solid rgba(255,255,255,.05);padding:4px 0;font-size:9px">'
+        + '<span style="color:' + qaColor(v.qa) + '">' + (v.qa != null ? v.qa.toFixed(2) : '&mdash;') + '</span>'
+        + '<span style="color:var(--gold)">' + ref + '</span><br>'
+        + '<span style="color:var(--ink);font-family:\'Noto Serif Devanagari\',serif">' + esc(v.text) + '</span><br>'
+        + '<span style="color:var(--muted)">' + (v.translation ? esc(v.translation) : '<i>(empty)</i>') + '</span>'
+        + '</div>';
+    });
+    box.innerHTML = h;
+  } catch(e) { box.innerHTML = '<span style="color:#f87171;font-size:9px">Error: ' + esc(String(e)) + '</span>'; }
+}
+
+async function watchThenReloadQa(jid) {
+  while (true) {
+    await new Promise(function(res) { setTimeout(res, 3000); });
+    try {
+      var j = await (await fetch('/api/job/' + jid)).json();
+      if (!j.running) {
+        var pane = document.getElementById('paneQa');
+        if (pane && pane.style.display !== 'none') loadQa();
+        return;
+      }
+    } catch(e) { return; }
+  }
+}
+
 // ── Live translation progress ──────────────────────────────────────────────
 async function pollProgress() {
   try {
@@ -1274,7 +1444,7 @@ async function _watchImportPipeline(jid, doc, stel) {
 // ── Init ────────────────────────────────────────────────────────────────────────────
 // Restore persistent settings from localStorage (survives page reload)
 (function restoreSettings() {
-  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '100', xlateLang: 'en', exportMode: 'en'};
+  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '100', xlateLang: 'en', exportMode: 'en', qaLang: 'en', qaThresh: '0.2'};
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.value = localStorage.getItem(id) || map[id];

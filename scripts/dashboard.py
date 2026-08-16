@@ -174,8 +174,12 @@ def launch(kind: str, doc: str, argv: List[str]) -> str:
     # Any translation-family kind (translate, translate_hi, advance_pipeline,
     # pipeline) shares the single translate semaphore so DB writers serialize —
     # even across languages. This is what keeps English and Hindi jobs from
-    # writing concurrently (2026-08-02).
-    if kind.startswith("translate") or kind in ("advance_pipeline", "pipeline"):
+    # writing concurrently (2026-08-02). The QA-panel writers (qa_scan, qa_heal)
+    # also mutate the DB (translation_qa / archive+clear+refill) so they share
+    # the same semaphore — a heal can never run while a translate is writing,
+    # and vice versa (2026-08-16).
+    if (kind.startswith("translate")
+            or kind in ("advance_pipeline", "pipeline", "qa_scan", "qa_heal")):
         sem = _TRANSLATE_SEM
     else:
         sem = _KIND_SEM.get(kind, _GENERAL_SEM)
@@ -889,6 +893,191 @@ def api_pipeline_advance():
     cmd = py(script("advance_pipeline.py"))
     jid = launch("advance_pipeline", "all_docs", cmd)
     return jsonify({"job": jid, "message": "Advancing all OCRd docs through pipeline"})
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# QA panel API (Phase Q UI — 2026-08-16)
+# Surfaces the CLI QA runbook (qa_scan / retranslate / refill) into the
+# dashboard. /api/qa/summary and /api/qa/passages are READ-ONLY. The two writer
+# actions (scan, heal) go through launch() so they serialize on the single
+# translate semaphore and stream into the job log like every other job.
+# ──────────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/qa/summary")
+def api_qa_summary():
+    """Per-doc QA histogram for a language, computed from stored translation_qa.
+
+    lang='en' (default) aggregates passages.translation_qa; any other code
+    aggregates translations_l10n rows of that language. Read-only — never writes.
+    """
+    db_path = request.args.get("db", "data/context.db")
+    lang    = (request.args.get("lang") or "en").strip()
+    is_l10n = lang != "en"
+    try:
+        con   = sqlite3.connect(db_path)
+        tset  = _tables(con)
+        pcols = _cols(con, "passages")
+        # Only count real verse rows when the schema records text_type.
+        noise = ""
+        if "text_type" in pcols:
+            noise = "AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
+
+        if is_l10n and "translations_l10n" not in tset:
+            con.close()
+            return jsonify({"lang": lang, "docs": [], "totals": {},
+                            "note": "translations_l10n table not present — "
+                                    "no target-language track yet."})
+
+        if is_l10n:
+            tcol, qcol = "l.translation", "l.translation_qa"
+            join   = "LEFT JOIN translations_l10n l ON l.passage_id=p.id AND l.lang=?"
+            params = [lang]
+        else:
+            tcol, qcol = "p.translation", "p.translation_qa"
+            join, params = "", []
+
+        sql = f"""
+            SELECT d.code AS doc,
+              COUNT(*) AS total,
+              SUM(CASE WHEN TRIM(COALESCE({tcol},'')) <> '' THEN 1 ELSE 0 END) AS translated,
+              SUM(CASE WHEN TRIM(COALESCE({tcol},'')) <> '' AND {qcol} IS NULL THEN 1 ELSE 0 END) AS unscored,
+              AVG(CASE WHEN {qcol} IS NOT NULL THEN {qcol} END) AS mean_qa,
+              SUM(CASE WHEN {qcol} IS NOT NULL AND {qcol} <  0.2 THEN 1 ELSE 0 END) AS b0,
+              SUM(CASE WHEN {qcol} >= 0.2 AND {qcol} < 0.4 THEN 1 ELSE 0 END) AS b1,
+              SUM(CASE WHEN {qcol} >= 0.4 AND {qcol} < 0.6 THEN 1 ELSE 0 END) AS b2,
+              SUM(CASE WHEN {qcol} >= 0.6 AND {qcol} < 0.8 THEN 1 ELSE 0 END) AS b3,
+              SUM(CASE WHEN {qcol} >= 0.8 THEN 1 ELSE 0 END) AS b4
+            FROM passages p JOIN docs d ON d.id=p.doc_id
+            {join}
+            WHERE 1=1 {noise}
+            GROUP BY d.code
+            ORDER BY d.code
+        """
+        rows = con.execute(sql, params).fetchall()
+        con.close()
+
+        docs = []
+        tot  = {"total": 0, "translated": 0, "pending": 0, "low": 0, "unscored": 0}
+        for r in rows:
+            doc, total, translated, unscored, mean_qa, b0, b1, b2, b3, b4 = r
+            total      = int(total or 0)
+            translated = int(translated or 0)
+            unscored   = int(unscored or 0)
+            buckets    = [int(b0 or 0), int(b1 or 0), int(b2 or 0), int(b3 or 0), int(b4 or 0)]
+            scored     = sum(buckets)
+            pending    = max(0, total - translated)
+            docs.append({
+                "doc": doc, "total": total, "translated": translated,
+                "pending": pending, "scored": scored, "unscored": unscored,
+                "low": buckets[0],
+                "mean_qa": round(mean_qa, 3) if mean_qa is not None else None,
+                "buckets": buckets,
+            })
+            tot["total"]      += total
+            tot["translated"] += translated
+            tot["pending"]    += pending
+            tot["low"]        += buckets[0]
+            tot["unscored"]   += unscored
+        return jsonify({"lang": lang, "docs": docs, "totals": tot})
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.get("/api/qa/passages/<doc>")
+def api_qa_passages(doc):
+    """List the weakest rows for a doc/lang (for inspection in the QA panel)."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return jsonify({"error": "invalid doc"}), 400
+    db_path = request.args.get("db", "data/context.db")
+    lang    = (request.args.get("lang") or "en").strip()
+    below   = float(request.args.get("below", 0.6))
+    limit   = min(int(request.args.get("limit", 40)), 200)
+    is_l10n = lang != "en"
+    try:
+        con   = sqlite3.connect(db_path)
+        pcols = _cols(con, "passages")
+        vref  = "p.verse_ref" if "verse_ref" in pcols else "NULL"
+        # Same real-verse filter the summary uses, so the inspector never lists a
+        # noise/frontmatter row the histogram already excluded.
+        noise = ("AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
+                 if "text_type" in pcols else "")
+        if is_l10n:
+            sql = f"""SELECT p.page_no, p.idx, {vref}, l.translation_qa,
+                             substr(p.text,1,140), substr(l.translation,1,180)
+                      FROM translations_l10n l
+                      JOIN passages p ON p.id=l.passage_id
+                      JOIN docs d ON d.id=p.doc_id
+                      WHERE d.code=? AND l.lang=? AND l.translation_qa IS NOT NULL
+                            AND l.translation_qa < ? {noise}
+                      ORDER BY l.translation_qa ASC, p.page_no, p.idx LIMIT ?"""
+            params = (doc, lang, below, limit)
+        else:
+            sql = f"""SELECT p.page_no, p.idx, {vref}, p.translation_qa,
+                             substr(p.text,1,140), substr(p.translation,1,180)
+                      FROM passages p JOIN docs d ON d.id=p.doc_id
+                      WHERE d.code=? AND p.translation_qa IS NOT NULL
+                            AND p.translation_qa < ? {noise}
+                      ORDER BY p.translation_qa ASC, p.page_no, p.idx LIMIT ?"""
+            params = (doc, below, limit)
+        rows = con.execute(sql, params).fetchall()
+        con.close()
+        return jsonify({
+            "doc": doc, "lang": lang, "below": below,
+            "rows": [{"page_no": r[0], "idx": r[1], "verse_ref": r[2], "qa": r[3],
+                      "text": r[4] or "", "translation": r[5] or ""} for r in rows],
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.post("/api/qa/scan")
+def api_qa_scan():
+    """Run qa_scan.py --write to (re)score stored translations. Idempotent.
+
+    Body: {doc?: str, lang?: 'en'|'hi', db?: str}. Omit doc to scan the whole
+    corpus. Shares the translate semaphore (it writes translation_qa)."""
+    data = request.get_json(force=True) or {}
+    db   = data.get("db") or "data/context.db"
+    lang = (data.get("lang") or "en").strip()
+    doc  = data.get("doc")
+    argv = py(script("qa_scan.py"), "--db", db, "--lang", lang, "--write")
+    label_doc = "all_docs"
+    if doc:
+        doc = _validate_doc(doc)
+        if not doc:
+            return jsonify({"error": "invalid doc"}), 400
+        argv += ["--doc", doc]
+        label_doc = doc
+    jid = launch("qa_scan", label_doc, argv)
+    return jsonify({"job": jid, "doc": label_doc, "lang": lang})
+
+
+@app.post("/api/qa/heal")
+def api_qa_heal():
+    """One-click heal for a doc: qa_scan -> retranslate(below-qa) -> refill.
+
+    Body: {doc: str, lang?: 'en'|'hi', below_qa?: float, engine?: str,
+           limit?: int, skip_scan?: bool}. Non-destructive (archives every
+           superseded translation to translation_history). Shares the translate
+           semaphore, so it never writes concurrently with a translate job."""
+    data = request.get_json(force=True) or {}
+    doc  = _validate_doc(data.get("doc"))
+    if not doc:
+        return jsonify({"error": "invalid or missing doc"}), 400
+    db     = data.get("db") or "data/context.db"
+    lang   = (data.get("lang") or "en").strip()
+    below  = str(data.get("below_qa") or 0.2)
+    engine = data.get("engine") or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
+    argv = py(script("heal_lowqa.py"), "--db", db, "--doc", doc,
+              "--below-qa", below, "--lang", lang, "--engine", engine)
+    if data.get("limit"):
+        argv += ["--limit", str(int(data["limit"]))]
+    if data.get("skip_scan"):
+        argv += ["--skip-scan"]
+    jid = launch("qa_heal", doc, argv)
+    return jsonify({"job": jid, "doc": doc, "lang": lang, "below_qa": below, "engine": engine})
 
 
 @app.get("/api/passages/<doc>")
