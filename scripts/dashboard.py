@@ -171,7 +171,14 @@ def launch(kind: str, doc: str, argv: List[str]) -> str:
     with JOBS_LOCK:
         JOBS[job.id] = job
 
-    sem = _KIND_SEM.get(kind, _GENERAL_SEM)
+    # Any translation-family kind (translate, translate_hi, advance_pipeline,
+    # pipeline) shares the single translate semaphore so DB writers serialize —
+    # even across languages. This is what keeps English and Hindi jobs from
+    # writing concurrently (2026-08-02).
+    if kind.startswith("translate") or kind in ("advance_pipeline", "pipeline"):
+        sem = _TRANSLATE_SEM
+    else:
+        sem = _KIND_SEM.get(kind, _GENERAL_SEM)
 
     def run_with_sem():
         sem.acquire()
@@ -767,11 +774,16 @@ def api_translate():
     sleep   = str(data.get("sleep")   or 0.8)
     context = str(data.get("context") or 5)   # 5-verse sliding context window
     min_quality = str(data.get("min_quality") or 0.35)  # Phase Q default (was 0.25)
+    lang    = (data.get("lang") or "en").strip()   # Phase HI
     cmd = py(script("translate_passages.py"),
              "--db", db, "--doc", doc, "--engine", engine,
              "--sleep", sleep, "--limit", limit, "--context", context,
              "--min-quality", min_quality)
-    return jsonify({"job": launch("translate", doc, cmd)})
+    kind = "translate"
+    if lang != "en":
+        cmd += ["--lang", lang]
+        kind = f"translate_{lang}"   # distinct dedup identity; shares translate sem
+    return jsonify({"job": launch(kind, doc, cmd), "lang": lang})
 
 
 @app.post("/api/export")
@@ -782,10 +794,21 @@ def api_export():
         return jsonify({"error": "invalid or missing doc"}), 400
     db    = data.get("db")  or "data/context.db"
     out   = data.get("out") or "exports"
-    title = data.get("title") or f"{doc} — English Translation"
-    cmd = py(script("export_html.py"),
-             "--db", db, "--doc", doc, "--out", out, "--title", title, "--no-sanskrit")
-    return jsonify({"job": launch("export", doc, cmd)})
+    # Phase HI export modes:
+    #   mode 'en'  (default) → English only (unchanged)
+    #   mode 'hi'            → Hindi only
+    #   mode 'tri'           → Sanskrit + English + Hindi, side by side
+    mode  = (data.get("mode") or ("hi" if data.get("hindi_only")
+             else "tri" if data.get("hindi") else "en")).strip()
+    cmd = py(script("export_html.py"), "--db", db, "--doc", doc, "--out", out)
+    if mode == "hi":
+        cmd += ["--hindi-only", "--title", data.get("title") or f"{doc} — Hindi Translation"]
+    elif mode == "tri":
+        cmd += ["--sanskrit", "--hindi", "--side-by-side",
+                "--title", data.get("title") or f"{doc} — Sanskrit / English / Hindi"]
+    else:
+        cmd += ["--no-sanskrit", "--title", data.get("title") or f"{doc} — English Translation"]
+    return jsonify({"job": launch("export", doc, cmd), "mode": mode})
 
 
 @app.post("/api/queue/run")
@@ -840,6 +863,7 @@ def api_translate_doc():
     sleep_s     = str(data.get("sleep", 0.8))
     min_quality = str(data.get("min_quality") or 0.35)  # Phase Q default (was 0.25)
     db          = data.get("db") or "data/context.db"
+    lang        = (data.get("lang") or "en").strip()   # Phase HI
     cmd = py(script("translate_passages.py"),
              "--doc",         doc,
              "--db",          db,
@@ -847,8 +871,12 @@ def api_translate_doc():
              "--context",     context,
              "--sleep",       sleep_s,
              "--min-quality", min_quality)
-    jid = launch("translate", doc, cmd)
-    return jsonify({"job": jid, "doc": doc, "engine": engine})
+    kind = "translate"
+    if lang != "en":
+        cmd += ["--lang", lang]
+        kind = f"translate_{lang}"
+    jid = launch(kind, doc, cmd)
+    return jsonify({"job": jid, "doc": doc, "engine": engine, "lang": lang})
 
 
 @app.post("/api/pipeline/advance")

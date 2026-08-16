@@ -167,9 +167,16 @@ def main():
                          "writes translations_l10n — only for passages whose "
                          "English exists and passed QA (>= --anchor-min-qa).")
     ap.add_argument("--anchor-min-qa", type=float, default=0.6,
-                    help="For --lang != en: only translate passages whose "
-                         "English translation_qa is at least this (the English "
-                         "pass is the scout; Hindi never walks unscouted ground).")
+                    help="For --lang != en: when a QA-passed English translation "
+                         "exists (translation_qa >= this), pass it to the model "
+                         "as a meaning reference. English is an OPTIONAL aid, not "
+                         "a prerequisite — Sanskrit is translated directly.")
+    ap.add_argument("--require-anchor", action="store_true",
+                    help="For --lang != en: STRICT mode — only translate passages "
+                         "that already have a QA-passed English translation "
+                         "(>= --anchor-min-qa). Use when you want Hindi gated to "
+                         "English-validated passages only. Default: translate all "
+                         "translatable Sanskrit directly, English used when present.")
     ap.add_argument("--progress",     default=str(_PROGRESS_PATH))
     ap.add_argument("--config",       default=str(_CONFIG_PATH))
     args = ap.parse_args()
@@ -209,24 +216,30 @@ def main():
         extra_cols = ", " + extra_cols
 
     if IS_L10N:
-        # Select passages with a QA-passed English translation that lack a
-        # target-language row (or ALL such rows with --retranslate). The English
-        # is carried as the anchor (last selected column).
-        l10n_filter = ("" if args.retranslate else
-                       "AND NOT EXISTS (SELECT 1 FROM translations_l10n l "
-                       "WHERE l.passage_id=p.id AND l.lang=?) ")
-        params = [args.doc, args.anchor_min_qa]
+        # Translate Sanskrit DIRECTLY to the target language. Hindi is closer to
+        # Sanskrit than English, so no English detour is needed. A QA-passed
+        # English translation, WHEN it exists, is carried as an optional meaning
+        # reference (last selected column) — but its absence never blocks a verse.
+        # --require-anchor restores the strict "only where good English exists" gate.
+        params = [args.doc]
+        where_extra = []
+        if args.require_anchor:
+            where_extra.append("TRIM(COALESCE(p.translation,'')) <> ''")
+            where_extra.append("COALESCE(p.translation_qa, 1.0) >= ?")
+            params.append(args.anchor_min_qa)
         if not args.retranslate:
+            where_extra.append("NOT EXISTS (SELECT 1 FROM translations_l10n l "
+                               "WHERE l.passage_id=p.id AND l.lang=?)")
             params.append(TGT)
         params += [args.since_page, args.until_page]
+        where_extra_sql = ("AND " + " AND ".join(where_extra) + " ") if where_extra else ""
         rows = list(con.execute(
-            f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols}, p.translation
+            f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols},
+                       COALESCE(p.translation_qa, 0.0) AS eng_qa, p.translation AS eng_ref
                 FROM passages p
                 JOIN docs d ON d.id = p.doc_id
                 WHERE d.code = ?
-                  AND TRIM(COALESCE(p.translation,'')) <> ''
-                  AND COALESCE(p.translation_qa, 1.0) >= ?
-                  {l10n_filter}
+                  {where_extra_sql}
                   AND p.page_no BETWEEN ? AND ?
                   AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')
                 ORDER BY p.page_no, p.idx""",
@@ -259,9 +272,14 @@ def main():
     todo = []
     for row in rows:
         rowid, page_no, idx, text = row[0], row[1], row[2], row[3]
-        # In l10n mode the English anchor is the last selected column.
+        # In l10n mode the last two selected columns are the English anchor's
+        # QA score and text. English is used as a reference ONLY when QA-passed;
+        # its absence never blocks the verse (direct Sanskrit→target translation).
         eng_ref = row[-1] if IS_L10N else None
-        meta_row_end = (len(row) - 1) if IS_L10N else len(row)
+        eng_qa  = row[-2] if IS_L10N else None
+        use_ref = bool(IS_L10N and eng_ref and str(eng_ref).strip()
+                       and (eng_qa or 0.0) >= args.anchor_min_qa)
+        meta_row_end = (len(row) - 2) if IS_L10N else len(row)
         rest = {
             "verse_ref":     row[4]  if has_verse_ref and meta_row_end > 4 else None,
             "chapter":       row[5]  if has_chapter   and meta_row_end > 5 else None,
@@ -269,7 +287,7 @@ def main():
             "text_type":     row[7]  if has_text_type and meta_row_end > 7 else None,
             "iast":          row[8]  if has_iast      and meta_row_end > 8 else None,
             "quality_score": row[9]  if meta_row_end > 9  else 0.0,
-            "eng_ref":       eng_ref,
+            "eng_ref":       eng_ref if use_ref else None,
         }
         normed  = normalize_sanskrit(text or "")
         if not args.no_skip and not should_translate(normed, min_dev=args.min_dev):
@@ -285,7 +303,9 @@ def main():
     print(f"doc={args.doc!r}  engine={base_engine or 'default'}  lang={TGT}  "
           f"todo={len(todo)} verses  min_quality={args.min_quality}  "
           f"prompt={PROMPT_VERSIONS.get(TGT, PROMPT_VERSION)}"
-          + ("  [anchored by verified English]" if IS_L10N else ""))
+          + (("  [strict: English-gated]" if args.require_anchor
+              else "  [direct Sa->{}, English used as reference when present]".format(TGT))
+             if IS_L10N else ""))
     if not todo:
         _write_progress({
             "status": "done", "doc": args.doc,

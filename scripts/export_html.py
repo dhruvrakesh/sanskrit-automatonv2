@@ -161,14 +161,49 @@ def _detect_cols(con: sqlite3.Connection, doc: Optional[str], force_san: Optiona
 
 # --- fetch -------------------------------------------------------------------
 
-def _fetch(con: sqlite3.Connection, doc: Optional[str], lo: int, hi: int, san_col: str, en_col: str):
+def _has_l10n(con: sqlite3.Connection, lang: str) -> bool:
+    """True if translations_l10n exists and holds rows for this language."""
+    if "translations_l10n" not in _tables(con):
+        return False
+    try:
+        return bool(con.execute(
+            "SELECT 1 FROM translations_l10n WHERE lang=? AND "
+            "TRIM(COALESCE(translation,''))<>'' LIMIT 1", (lang,)).fetchone())
+    except sqlite3.OperationalError:
+        return False
+
+
+def _fetch(con: sqlite3.Connection, doc: Optional[str], lo: int, hi: int,
+           san_col: str, en_col: str, hi_lang: Optional[str] = None):
+    """Fetch (page, idx, san, en, l10n) rows. When hi_lang is set, LEFT JOIN
+    translations_l10n for that language so the extra column is the localized
+    translation (empty string where none exists). Phase HI."""
     pg = _page_col(con); idx_sel, idx_order = _idx_expr(con)
     where, prm = _doc_where(con, doc)
     where = _and(where) + f" {pg} BETWEEN ? AND ?"; prm = prm + (lo,hi)
+    if hi_lang:
+        # p.id is the l10n foreign key. join is additive: rows without a
+        # localized translation still appear (english/sanskrit intact).
+        # Qualify bare passages columns with p. so they don't collide with
+        # translations_l10n.translation after the join.
+        def _q(c):
+            return f"p.{c}" if re.fullmatch(r"\w+", c or "") else (c or "''")
+        sql = f"""
+        SELECT {pg} AS page_no, {idx_sel} AS idx,
+               COALESCE({_q(san_col)},'') AS san,
+               COALESCE({_q(en_col)},'') AS en,
+               COALESCE(l.translation,'') AS loc
+        FROM passages p
+        LEFT JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = ?
+        {where}
+        ORDER BY {pg}, {idx_order}
+        """
+        return list(con.execute(sql, (hi_lang,) + prm).fetchall())
     sql = f"""
     SELECT {pg} AS page_no, {idx_sel} AS idx,
            COALESCE({san_col},'') AS san,
-           COALESCE({en_col},'') AS en
+           COALESCE({en_col},'') AS en,
+           '' AS loc
     FROM passages p
     {where}
     ORDER BY {pg}, {idx_order}
@@ -213,12 +248,16 @@ h1 { font-size: 2.2rem; margin-bottom: 1.0rem; }
 h2 { font-size: 1.05rem; color: #666; margin-top: 1.4rem; margin-bottom: 0.6rem; }
 .page { margin-bottom: 1.2rem; }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
+.pair.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
 .col h3 { margin: 0 0 .5rem 0; font-size: 1rem; color: #333; }
 .col p { margin: 0 0 .6rem 0; line-height: 1.6; }
 .stacked p { margin: 0 0 .8rem 0; line-height: 1.65; }
 .note { color: #888; font-style: italic; }
 .small { font-size: .95rem; color: #333; }
+/* Hindi renders in a Devanagari-friendly stack at comfortable reading size */
+.hi { font-family: 'Noto Sans Devanagari','Nirmala UI','Mangal',serif; line-height: 1.9; color: #1a1a2e; }
 hr { border: none; border-top: 1px solid #eee; margin: 1.0rem 0; }
+@media (max-width: 800px) { .pair, .pair.cols-3 { grid-template-columns: 1fr; } }
 """
 
 def _html(title: str, body_html: str) -> str:
@@ -234,39 +273,58 @@ def _safe_filename(s: str) -> str:
 
 # --- export core -------------------------------------------------------------
 
-def _group(rows: Sequence[Tuple[int,int,str,str]]):
+def _group(rows):
     pages = defaultdict(list)
-    for pg, _i, san, en in rows:
-        pages[int(pg)].append((san or "", en or ""))
+    for row in rows:
+        pg, _i, san, en = row[0], row[1], row[2], row[3]
+        loc = row[4] if len(row) > 4 else ""
+        pages[int(pg)].append((san or "", en or "", loc or ""))
     return pages
 
-def _render(title: str, pages, *, include_san=False, include_en=True, side_by_side=False, number_pages=True, drop_junk_en=True):
+def _render(title: str, pages, *, include_san=False, include_en=True,
+            include_hi=False, hi_label="Hindi", side_by_side=False,
+            number_pages=True, drop_junk_en=True):
     out = []; kept = 0
     out.append(f"<h1>{html.escape(title)}</h1>")
     for pg in sorted(pages.keys()):
-        san_lines = []; en_lines = []
-        for san, en in pages[pg]:
+        san_lines = []; en_lines = []; hi_lines = []
+        for san, en, loc in pages[pg]:
             if include_san and san.strip(): san_lines.append(html.escape(san.strip()))
             if include_en and en is not None:
                 if drop_junk_en and _is_junk_en(en):
-                    continue
-                t = en.strip()
-                if t: en_lines.append(html.escape(t))
-        if not (san_lines or en_lines):
+                    pass
+                else:
+                    t = en.strip()
+                    if t: en_lines.append(html.escape(t))
+            if include_hi and loc and loc.strip():
+                hi_lines.append(html.escape(loc.strip()))
+        if not (san_lines or en_lines or hi_lines):
             continue
-        kept += len(en_lines)
+        kept += len(hi_lines) if (include_hi and not include_en) else len(en_lines) or len(hi_lines)
         out.append("<div class='page'>")
         if number_pages: out.append(f"<h2>Page {pg}</h2>")
-        if side_by_side and include_san and include_en:
-            out.append("<div class='pair'>")
-            out.append("<div class='col'><h3>Original</h3>" + "".join(f"<p>{t}</p>" for t in san_lines) + "</div>")
-            out.append("<div class='col'><h3>English</h3>"  + "".join(f"<p>{t}</p>" for t in en_lines)  + "</div>")
+        # Multi-column side-by-side when more than one column is requested.
+        cols = []
+        if side_by_side:
+            if include_san: cols.append(("Original", san_lines, "small"))
+            if include_en:  cols.append(("English", en_lines, ""))
+            if include_hi:  cols.append((hi_label, hi_lines, "hi"))
+        if side_by_side and len(cols) >= 2:
+            out.append(f"<div class='pair cols-{len(cols)}'>")
+            for label, lines, cls in cols:
+                clsattr = f" class='{cls}'" if cls else ""
+                out.append(f"<div class='col'><h3>{html.escape(label)}</h3>" +
+                           "".join(f"<p{clsattr}>{t}</p>" for t in lines) + "</div>")
             out.append("</div>")
         else:
             out.append("<div class='stacked'>")
+            # Stacked order: English, then Hindi, then Sanskrit source.
             for t in en_lines: out.append(f"<p>{t}</p>")
-            if include_san:
-                if en_lines and san_lines: out.append("<hr/>")
+            if include_hi and hi_lines:
+                if en_lines: out.append("<hr/>")
+                for t in hi_lines: out.append(f"<p class='hi'>{t}</p>")
+            if include_san and san_lines:
+                if en_lines or hi_lines: out.append("<hr/>")
                 for t in san_lines: out.append(f"<p class='small'>{t}</p>")
             out.append("</div>")
         out.append("</div>")
@@ -276,19 +334,24 @@ def _render(title: str, pages, *, include_san=False, include_en=True, side_by_si
 
 # --- CLI ---------------------------------------------------------------------
 
-def _export_one(con: sqlite3.Connection, *, doc: Optional[str], lo: int, hi: int, title: Optional[str], dest: str, include_san: bool, include_en: bool, side_by_side: bool, number_pages: bool, drop_junk_en: bool, force_san: Optional[str], force_en: Optional[str], debug=False) -> str:
+def _export_one(con: sqlite3.Connection, *, doc: Optional[str], lo: int, hi: int, title: Optional[str], dest: str, include_san: bool, include_en: bool, side_by_side: bool, number_pages: bool, drop_junk_en: bool, force_san: Optional[str], force_en: Optional[str], hi_lang: Optional[str] = None, hi_label: str = "Hindi", debug=False) -> str:
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
-    rows = _fetch(con, doc, lo, hi, san_col, en_col); pages = _group(rows)
+    include_hi = bool(hi_lang)
+    rows = _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=hi_lang); pages = _group(rows)
     if not title:
-        title = (doc or "Export") + (" — English Translation" if include_en and not include_san else "")
-    body, kept = _render(title, pages, include_san=include_san, include_en=include_en, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=drop_junk_en)
+        parts = []
+        if include_en: parts.append("English")
+        if include_hi: parts.append(hi_label)
+        title = (doc or "Export") + (f" — {' + '.join(parts)} Translation" if parts and not include_san else "")
+    body, kept = _render(title, pages, include_san=include_san, include_en=include_en, include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=drop_junk_en)
     if kept == 0 and include_en and not include_san and drop_junk_en:
         if debug: print("[export] 0 lines kept after cleaning; retrying with --keep-junk…")
-        body, _ = _render(title, pages, include_san=include_san, include_en=include_en, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=False)
+        body, _ = _render(title, pages, include_san=include_san, include_en=include_en, include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=False)
     os.makedirs(dest, exist_ok=True)
-    out_path = os.path.join(dest, f"{_safe_filename(doc or 'export')}_{lo}-{hi}.html")
+    suffix = f"_{hi_lang}" if (include_hi and not include_en) else ("_tri" if include_hi else "")
+    out_path = os.path.join(dest, f"{_safe_filename(doc or 'export')}_{lo}-{hi}{suffix}.html")
     with open(out_path, "w", encoding="utf-8") as f: f.write(_html(title, body))
-    if debug: print(f"[export] wrote {out_path} | rows={len(rows)} | pages={len(pages)} | san='{san_col}' en='{en_col}'")
+    if debug: print(f"[export] wrote {out_path} | rows={len(rows)} | pages={len(pages)} | san='{san_col}' en='{en_col}' hi_lang='{hi_lang}'")
     return out_path
 
 
@@ -320,12 +383,25 @@ def main():
     ap.add_argument("--en-col")
     ap.add_argument("--san-col")
     ap.add_argument("--title-from-doc", action="store_true")
+    ap.add_argument("--hindi", action="store_true",
+                    help="Include the Hindi (translations_l10n lang='hi') column.")
+    ap.add_argument("--hindi-only", action="store_true",
+                    help="Export Hindi only (no English column).")
+    ap.add_argument("--lang", default=None,
+                    help="Localized language code for --hindi/--hindi-only "
+                         "(default 'hi'). Any code present in translations_l10n.")
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
 
+    hi_lang = None
+    hi_label = "Hindi"
+    if args.hindi or args.hindi_only:
+        hi_lang = (args.lang or "hi").strip()
+        hi_label = "हिन्दी" if hi_lang == "hi" else hi_lang
     include_san = bool(args.sanskrit and not args.no_sanskrit)
-    include_en  = True
-    side_by_side = bool(args.side_by_side and include_san)
+    include_en  = not args.hindi_only
+    # side-by-side is meaningful whenever >=2 columns are present
+    side_by_side = bool(args.side_by_side and (include_san or (hi_lang and include_en)))
     number_pages = not args.no_pagenum
     drop_junk_en = not args.keep_junk
 
@@ -340,7 +416,7 @@ def main():
             for code in docs:
                 lo,hi = _page_span(con, code)
                 title = (f"{code} — English Translation" if args.title_from_doc and (include_en and not include_san) else code)
-                _export_one(con, doc=code, lo=lo, hi=hi, title=title or args.title, dest=args.out, include_san=include_san, include_en=include_en, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=drop_junk_en, force_san=args.san_col, force_en=args.en_col, debug=args.debug)
+                _export_one(con, doc=code, lo=lo, hi=hi, title=title or args.title, dest=args.out, include_san=include_san, include_en=include_en, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=drop_junk_en, force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang, hi_label=hi_label, debug=args.debug)
         else:
             if args.doc:
                 lo,hi = (_page_span(con, args.doc) if (args.pg_from is None or args.pg_to is None) else (args.pg_from, args.pg_to))
@@ -348,7 +424,7 @@ def main():
                 pg = _page_col(con); row = con.execute(f"SELECT MIN({pg}), MAX({pg}) FROM passages").fetchone()
                 lo = int(row[0]) if row and row[0] is not None else 1
                 hi = int(row[1]) if row and row[1] is not None else lo
-            _export_one(con, doc=args.doc, lo=lo, hi=hi, title=args.title, dest=args.out, include_san=include_san, include_en=include_en, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=drop_junk_en, force_san=args.san_col, force_en=args.en_col, debug=args.debug)
+            _export_one(con, doc=args.doc, lo=lo, hi=hi, title=args.title, dest=args.out, include_san=include_san, include_en=include_en, side_by_side=side_by_side, number_pages=number_pages, drop_junk_en=drop_junk_en, force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang, hi_label=hi_label, debug=args.debug)
 
 if __name__ == "__main__":
     main()

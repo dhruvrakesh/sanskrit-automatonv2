@@ -20,6 +20,12 @@ PRAGMAS = [
     ("synchronous",  "NORMAL"),
     ("temp_store",   "MEMORY"),
     ("cache_size",   "-32000"),   # 32 MB page cache
+    # busy_timeout (2026-08-02): a second writer WAITS up to 30s for the lock
+    # instead of failing instantly with SQLITE_BUSY. WAL already allows 1 writer
+    # + N readers; this makes a dashboard job and a CLI job that happen to write
+    # at the same moment queue politely rather than erroring. Translations are
+    # never overwritten, so a brief serialization is harmless.
+    ("busy_timeout", "30000"),
 ]
 
 # ── Canonical base schema ────────────────────────────────────────────────────

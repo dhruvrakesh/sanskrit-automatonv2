@@ -229,6 +229,21 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
         <input id="xlateLimit" type="number" min="1" max="5000" value="100"
                style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
                oninput="localStorage.setItem('xlateLimit',this.value)"/>
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="Sanskrit → this language. Hindi is anchored by the verified English (translate English first).">Translate Lang</label>
+        <select id="xlateLang"
+               style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
+               onchange="localStorage.setItem('xlateLang',this.value)">
+          <option value="en">English (from Sanskrit)</option>
+          <option value="hi">हिन्दी Hindi (anchored by English)</option>
+        </select>
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="What the Export button produces.">Export As</label>
+        <select id="exportMode"
+               style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
+               onchange="localStorage.setItem('exportMode',this.value)">
+          <option value="en">English only</option>
+          <option value="hi">हिन्दी Hindi only</option>
+          <option value="tri">Trilingual (Sa/En/Hi)</option>
+        </select>
       </div>
     </div>
   </aside>
@@ -358,6 +373,14 @@ function renderLog() {
   el.scrollTop = el.scrollHeight;
 }
 function clearLog() { logLines = []; renderLog(); }
+function getLang() {
+  const el = document.getElementById('xlateLang');
+  return (el && el.value) || 'en';
+}
+function getExportMode() {
+  const el = document.getElementById('exportMode');
+  return (el && el.value) || 'en';
+}
 function getEngine(doc) {
   if (doc && docEngines[doc]) return docEngines[doc];
   return document.getElementById('engineSelect').value;
@@ -463,16 +486,18 @@ async function doAction(act, doc) {
   if (act === 'translate') {
     const eng   = getEngine(doc);
     const limit = (document.getElementById('xlateLimit') || {}).value || '100';
+    const lang  = getLang();
     const r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({doc, db: cfg.db, engine: eng, limit})});
+      body: JSON.stringify({doc, db: cfg.db, engine: eng, limit, lang})});
     const j = await r.json();
-    if (j.job) { trackJob(j.job, 'Translate ' + doc, 'translate', doc); toast('Translation started (' + eng + ')'); }
+    if (j.job) { trackJob(j.job, 'Translate ' + doc + (lang!=='en'?' ['+lang+']':''), 'translate', doc); toast('Translation started (' + eng + ', ' + lang + ')'); }
   }
   if (act === 'export') {
+    const mode = getExportMode();
     const r = await fetch('/api/export', {method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({doc, db: cfg.db, out: cfg.exports})});
+      body: JSON.stringify({doc, db: cfg.db, out: cfg.exports, mode})});
     const j = await r.json();
-    if (j.job) { trackJob(j.job, 'Export ' + doc, 'export', doc); toast('Export started for ' + doc); }
+    if (j.job) { trackJob(j.job, 'Export ' + doc + (mode!=='en'?' ['+mode+']':''), 'export', doc); toast('Export started for ' + doc + ' (' + mode + ')'); }
   }
   if (act === 'pipeline') {
     const eng = getEngine(doc);
@@ -1023,16 +1048,17 @@ async function advancePipeline() {
 // ── Per-doc enterprise start / stop ───────────────────────────────────────
 async function startDoc(doc) {
   const eng = getEngine(doc);
+  const lang = getLang();
   try {
     const r = await fetch('/api/pipeline/translate-doc', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({doc: doc, engine: eng, context: 5, sleep: 0.8, db: cfg.db})
+      body: JSON.stringify({doc: doc, engine: eng, context: 5, sleep: 0.8, db: cfg.db, lang: lang})
     });
     const d = await r.json();
     if (d.error) { toast('Error: ' + d.error, 'fail'); return; }
-    trackJob(d.job, 'Translate ' + doc, 'translate', doc);
-    toast('&#9654; Started: ' + doc, 'ok');
+    trackJob(d.job, 'Translate ' + doc + (lang!=='en'?' ['+lang+']':''), 'translate', doc);
+    toast('&#9654; Started: ' + doc + ' (' + lang + ')', 'ok');
     switchTab('progress');
   } catch(e) { toast('Start failed: ' + e, 'fail'); }
 }
@@ -1248,7 +1274,7 @@ async function _watchImportPipeline(jid, doc, stel) {
 // ── Init ────────────────────────────────────────────────────────────────────────────
 // Restore persistent settings from localStorage (survives page reload)
 (function restoreSettings() {
-  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '100'};
+  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '100', xlateLang: 'en', exportMode: 'en'};
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.value = localStorage.getItem(id) || map[id];
