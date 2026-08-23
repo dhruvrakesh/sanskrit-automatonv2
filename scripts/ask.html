@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ask the Corpus — Srangam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#100e0b; --bg2:#17140f; --bg3:#1e1a14; --bg4:#26211a;
+    --ink:#ece4d4; --muted:#9b8f7a; --faint:#6b6151;
+    --gold:#e0b062; --gold-dim:#7a5f2e; --border:#2a241b; --border-v:#332c22;
+    --green:#7bbf6a; --red:#d98b6a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.6}
+  a{color:var(--gold);text-decoration:none}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px 80px}
+  header{display:flex;align-items:center;gap:14px;padding:22px 0 14px;flex-wrap:wrap}
+  .om{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--gold);font-weight:600}
+  .title{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;color:var(--gold)}
+  .sub{color:var(--muted);font-size:12.5px}
+  .nav{margin-left:auto;display:flex;gap:6px}
+  .nav a{font-size:12.5px;color:var(--muted);border:1px solid var(--border-v);
+    padding:5px 11px;border-radius:7px}
+  .nav a:hover{color:var(--gold);border-color:var(--gold-dim)}
+  .askbox{background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;
+    padding:16px;margin-top:8px}
+  textarea{width:100%;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);
+    border-radius:10px;padding:12px 14px;font-family:inherit;font-size:15px;resize:vertical;
+    min-height:70px;line-height:1.5}
+  textarea:focus{outline:none;border-color:var(--gold-dim)}
+  .controls{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+  select,.kwrap{background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);
+    border-radius:8px;padding:8px 10px;font-family:"JetBrains Mono",monospace;font-size:12.5px}
+  .kwrap{display:flex;align-items:center;gap:8px;color:var(--muted)}
+  .kwrap input{accent-color:var(--gold)}
+  label.lbl{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
+    font-weight:600;margin-right:2px}
+  .ask-btn{margin-left:auto;background:linear-gradient(135deg,var(--gold),#c8922f);
+    color:#1a1509;border:none;border-radius:9px;padding:10px 22px;font-weight:700;font-size:14px;
+    cursor:pointer;font-family:inherit}
+  .ask-btn:hover{filter:brightness(1.06)}
+  .ask-btn:disabled{opacity:.5;cursor:default}
+  .hint{color:var(--faint);font-size:12px;margin-top:10px}
+  .hint b{color:var(--muted);font-weight:600}
+  .chip{display:inline-block;background:var(--bg3);border:1px solid var(--border-v);
+    color:var(--muted);border-radius:20px;padding:3px 11px;font-size:12px;cursor:pointer;
+    margin:4px 6px 0 0}
+  .chip:hover{color:var(--gold);border-color:var(--gold-dim)}
+  #status{margin-top:18px;color:var(--muted);font-size:13.5px;display:none}
+  .spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--border-v);
+    border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;
+    vertical-align:-2px;margin-right:8px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .answer{margin-top:22px;display:none}
+  .answer-body{background:var(--bg2);border:1px solid var(--border-v);border-left:3px solid var(--gold);
+    border-radius:12px;padding:18px 20px;font-size:15.5px;line-height:1.72;white-space:pre-wrap}
+  .answer-body .cite{color:var(--gold);background:rgba(224,176,98,.11);border:1px solid var(--gold-dim);
+    border-radius:5px;padding:0 5px;font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    cursor:pointer;white-space:nowrap}
+  .meta{color:var(--faint);font-size:11.5px;margin-top:8px;font-family:"JetBrains Mono",monospace}
+  h3.srch{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    font-weight:600;margin:26px 0 10px}
+  .src{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;
+    margin-bottom:9px;display:block;transition:border-color .15s}
+  .src:target,.src.flash{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-dim)}
+  .src:hover{border-color:var(--border-v)}
+  .src .tag{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--gold);font-weight:500}
+  .src .num{color:var(--faint);font-family:"JetBrains Mono",monospace;font-size:11px;margin-right:8px}
+  .src .en{color:var(--ink);font-size:14px;margin-top:5px;font-family:"Cormorant Garamond",serif;
+    font-size:16px;line-height:1.5}
+  .src .open{float:right;color:var(--muted);font-size:11px}
+  .err{color:var(--red);background:rgba(217,139,106,.08);border:1px solid #6b3a2a;
+    border-radius:8px;padding:12px 14px;margin-top:16px;font-size:13.5px}
+  footer{color:var(--faint);font-size:11.5px;margin-top:40px;text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="om">&#x0950;</span>
+    <div>
+      <div class="title">Ask the Corpus</div>
+      <div class="sub">Retrieval-augmented Q&amp;A over the translated Sanskrit corpus &mdash; grounded in verses, cited by reference</div>
+    </div>
+    <nav class="nav">
+      <a href="/">&#8592; Dashboard</a>
+      <a href="/library">&#128218; Library</a>
+    </nav>
+  </header>
+
+  <div class="askbox">
+    <textarea id="q" placeholder="Ask a question about the scriptures&hellip;  e.g.  What does the corpus say about the origin of the river Gaṅgā?"></textarea>
+    <div class="controls">
+      <label class="lbl">Engine</label>
+      <select id="engine">
+        <option value="gemini:gemini-2.5-flash" selected>&#x26A1; 2.5 Flash</option>
+        <option value="gemini:gemini-2.5-pro">&#x2726; 2.5 Pro (deeper)</option>
+        <option value="gemini:gemini-2.0-flash">&#x26A1; 2.0 Flash</option>
+      </select>
+      <span class="kwrap"><label class="lbl">Passages</label>
+        <input type="range" id="k" min="4" max="24" value="12" oninput="kv.textContent=this.value"/>
+        <b id="kv" style="color:var(--gold)">12</b></span>
+      <button class="ask-btn" id="askBtn" onclick="ask()">Ask &#8594;</button>
+    </div>
+    <div class="hint">
+      <b>How it works:</b> full-text search finds the most relevant translated verses, then the model answers
+      <b>using only those verses</b> and cites each one. It will say when the corpus doesn&rsquo;t contain the answer &mdash; it does not invent.
+      <div>
+        <span class="chip" onclick="setQ(this)">the duties of a king toward his subjects</span>
+        <span class="chip" onclick="setQ(this)">what is said about Naimiṣāraṇya</span>
+        <span class="chip" onclick="setQ(this)">how did the rivers become goddesses</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="status"></div>
+  <div id="errBox"></div>
+
+  <div class="answer" id="answer">
+    <div class="answer-body" id="answerBody"></div>
+    <div class="meta" id="answerMeta"></div>
+    <h3 class="srch">Sources &mdash; the verses this answer is grounded in</h3>
+    <div id="sources"></div>
+  </div>
+
+  <footer>
+    Answers are generated from the corpus translations and may reflect their limits.<br/>
+    Always verify against the cited verses in the reader.
+  </footer>
+</div>
+
+<script>
+  var LAST_SOURCES = [];
+  try { var e = localStorage.getItem('askEngine'); if (e) document.getElementById('engine').value = e; } catch(_){}
+  document.getElementById('engine').addEventListener('change', function(){
+    try { localStorage.setItem('askEngine', this.value); } catch(_){}
+  });
+  document.getElementById('q').addEventListener('keydown', function(ev){
+    if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); ask(); }
+  });
+  function setQ(el){ document.getElementById('q').value = el.textContent; document.getElementById('q').focus(); }
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function renderAnswer(text){
+    // Highlight [tag] citations and make them jump to the matching source card.
+    var html = esc(text).replace(/\[([^\]]+)\]/g, function(m, tag){
+      var idx = LAST_SOURCES.findIndex(function(s){ return s.tag === tag.trim(); });
+      if (idx >= 0) return '<span class="cite" onclick="jumpSrc('+(idx+1)+')">['+esc(tag)+']</span>';
+      return '<span class="cite">['+esc(tag)+']</span>';
+    });
+    document.getElementById('answerBody').innerHTML = html;
+  }
+  function jumpSrc(n){
+    var el = document.getElementById('src-'+n);
+    if (!el) return;
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    el.classList.add('flash'); setTimeout(function(){ el.classList.remove('flash'); }, 1400);
+  }
+  function renderSources(sources){
+    LAST_SOURCES = sources || [];
+    var html = '';
+    (sources||[]).forEach(function(s){
+      html += '<a class="src" id="src-'+s.n+'" href="/reader/'+encodeURIComponent(s.doc)+'" target="_blank">'
+            + '<span class="open">open in reader &#8599;</span>'
+            + '<span class="num">'+s.n+'</span><span class="tag">['+esc(s.tag)+']</span>'
+            + '<div class="en">'+esc(s.english||'')+'</div></a>';
+    });
+    document.getElementById('sources').innerHTML = html;
+  }
+
+  async function ask(){
+    var q = document.getElementById('q').value.trim();
+    var errBox = document.getElementById('errBox'); errBox.innerHTML = '';
+    if (!q){ document.getElementById('q').focus(); return; }
+    var btn = document.getElementById('askBtn'); btn.disabled = true;
+    var st = document.getElementById('status'); st.style.display = 'block';
+    st.innerHTML = '<span class="spinner"></span>Searching the corpus and composing a grounded answer&hellip;';
+    document.getElementById('answer').style.display = 'none';
+    try{
+      var r = await fetch('/api/ask', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ q: q, engine: document.getElementById('engine').value,
+                               k: parseInt(document.getElementById('k').value,10) })
+      });
+      var d = await r.json();
+      st.style.display = 'none';
+      if (!r.ok || d.error){
+        errBox.innerHTML = '<div class="err"><b>Could not answer:</b> '+esc(d.error||('HTTP '+r.status))
+          + (d.error && d.error.indexOf('GEMINI_API_KEY')>=0
+             ? '<br/>Set <code>GEMINI_API_KEY</code> in the project <code>.env</code> and restart the dashboard.' : '')
+          +'</div>';
+        if (d.sources && d.sources.length){ renderSources(d.sources);
+          document.getElementById('answerBody').innerHTML = '<i style="color:var(--muted)">Retrieved passages are shown below.</i>';
+          document.getElementById('answerMeta').textContent = '';
+          document.getElementById('answer').style.display = 'block'; }
+        return;
+      }
+      renderSources(d.sources);
+      renderAnswer(d.answer||'');
+      document.getElementById('answerMeta').textContent =
+        (d.sources? d.sources.length : 0) + ' passages retrieved · engine ' + (d.engine||'');
+      document.getElementById('answer').style.display = 'block';
+      document.getElementById('answer').scrollIntoView({behavior:'smooth', block:'start'});
+    }catch(e){
+      st.style.display = 'none';
+      errBox.innerHTML = '<div class="err">Request failed: '+esc(e.message||e)+'</div>';
+    }finally{ btn.disabled = false; }
+  }
+</script>
+</body>
+</html>

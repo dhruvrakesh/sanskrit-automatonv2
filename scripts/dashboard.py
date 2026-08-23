@@ -1313,8 +1313,13 @@ def library():
     try:
         con = sqlite3.connect(db_path)
         tset = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        # docs has no 'title' column in this schema (id, code, category, src_path,
+        # glossary, created_at) — referencing it crashed /library. Detect it so the
+        # page works whether or not a future migration adds a title (2026-08-23).
+        dcols = {r[1] for r in con.execute("PRAGMA table_info(docs)")}
+        title_expr = "COALESCE(d.title, d.code)" if "title" in dcols else "d.code"
         rows = con.execute(
-            "SELECT d.code, COALESCE(d.title,d.code), COALESCE(d.category,'other'), "
+            f"SELECT d.code, {title_expr}, COALESCE(d.category,'other'), "
             "COUNT(p.id), "
             "SUM(CASE WHEN TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END) "
             "FROM docs d LEFT JOIN passages p ON p.doc_id=d.id "
@@ -1351,13 +1356,25 @@ def library():
         for code, title, total, en, h in docs:
             pct = round(100 * en / total) if total else 0
             hi_badge = f'<span class="badge hi">&#2361;&#2367; {h}</span>' if h else ''
+            # "Proceed with pending translation" affordance: offer to finish the
+            # English, and to add Hindi wherever English exists but Hindi does not.
+            acts = ''
+            if pct < 100:
+                acts += (f'<button class="tr-rest" title="Translate the remaining English verses"'
+                         f' onclick="translateRest(\'{code}\',\'en\',this)">&#9889; Finish EN</button>')
+            if h < en:
+                acts += (f'<button class="tr-rest hi" title="Translate Hindi for verses that have English but no Hindi"'
+                         f' onclick="translateRest(\'{code}\',\'hi\',this)">&#2361;&#2367; Add Hindi</button>')
+            acts_html = f'<div class="cardacts">{acts}</div>' if acts else ''
             body += (
+                f'<div class="card-wrap">'
                 f'<a class="card" href="/reader/{code}">'
                 f'<div class="ttl">{_html.escape(title)}</div>'
                 f'<div class="code">{_html.escape(code)}</div>'
                 f'<div class="bar"><i style="width:{pct}%"></i></div>'
                 f'<div class="meta"><span class="badge en">EN {en}/{total}</span>{hi_badge}'
                 f'<span class="pct">{pct}%</span></div></a>'
+                f'{acts_html}</div>'
             )
         body += '</div>'
 
@@ -1389,13 +1406,34 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 .badge.hi{{background:#3a2a0f;color:var(--gold);font-family:'Noto Serif Devanagari',serif}}
 .pct{{margin-left:auto;color:var(--muted)}}
 .empty{{color:var(--muted);text-align:center;padding:60px 20px;font-family:'Inter',sans-serif}}
+.card-wrap{{display:flex;flex-direction:column}}
+.cardacts{{display:flex;gap:6px;margin-top:6px}}
+.tr-rest{{flex:1;background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 8px;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .15s}}
+.tr-rest:hover{{border-color:var(--gold);color:var(--gold)}}
+.tr-rest.hi{{font-family:'Noto Serif Devanagari',serif}}
+.tr-rest:disabled{{opacity:.6;cursor:default}}
 </style></head><body>
 <header>
   <a class="back" href="/">&#8592; Dashboard</a>
   <h1>&#2384; Srangam Library</h1>
   <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses</span>
+  <a class="back" href="/ask" style="margin-left:auto;color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
 </header>
 <main>{body}</main>
+<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;display:none;z-index:50"></div>
+<script>
+function _toast(m){{var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){{t.style.display='none';}},4200);}}
+async function translateRest(doc, lang, btn){{
+  btn.disabled=true; var orig=btn.textContent; btn.textContent='starting…';
+  try{{
+    var r=await fetch('/api/translate',{{method:'POST',headers:{{'Content-Type':'application/json'}},
+      body:JSON.stringify({{doc:doc,lang:lang,limit:100000}})}});
+    var d=await r.json();
+    if(d.job){{ _toast('Translating '+(lang==='both'?'EN+हि':lang.toUpperCase())+' for '+doc+' — watch the Dashboard for progress.'); btn.textContent='queued ✓'; }}
+    else{{ _toast('Could not start: '+(d.error||'unknown')); btn.textContent=orig; btn.disabled=false; }}
+  }}catch(e){{ _toast('Request failed: '+e); btn.textContent=orig; btn.disabled=false; }}
+}}
+</script>
 </body></html>"""
 
 
@@ -1868,6 +1906,117 @@ scheduleRefresh();
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# Ask the Corpus — retrieval-augmented Q&A over the growing translations.
+# FTS retrieves the most relevant translated verses; the chosen Gemini model
+# answers USING ONLY those verses and cites each with a [doc verse_ref] tag.
+# Read-only on the DB (safe while jobs write); the translation engine is untouched.
+# ──────────────────────────────────────────────────────────────────────────────
+_ASK_STOP = set(
+    "the a an of to and or in on at for with is are was were be by that this those "
+    "these he she it they his her its their who whom which what when where why how "
+    "did do does said say once also then thus there here into from as not but".split()
+)
+try:                                   # reuse the engine's safety config if importable
+    from infer_mt import _GEMINI_SAFETY as _ASK_SAFETY
+except Exception:
+    _ASK_SAFETY = None
+
+_ASK_TOKEN_RE = re.compile(r"[A-Za-zÀ-ɏḀ-ỿ'ऀ-ॿ]+")
+
+def _ask_fts_query(q: str):
+    toks = [t for t in _ASK_TOKEN_RE.findall((q or "").lower())
+            if len(t) >= 3 and t not in _ASK_STOP]
+    if not toks:
+        return None
+    return " OR ".join('"%s"' % t.replace('"', '') for t in toks[:12])
+
+def _ask_retrieve(con, q, k=12):
+    m = _ask_fts_query(q)
+    if not m:
+        return []
+    try:
+        return con.execute(
+            """SELECT d.code, p.verse_ref, p.page_no, p.idx, p.translation
+               FROM passages_fts f
+               JOIN passages p ON p.rowid = f.rowid
+               JOIN docs d ON d.id = p.doc_id
+               WHERE passages_fts MATCH ?
+                 AND TRIM(COALESCE(p.translation,'')) <> ''
+                 AND d.code NOT LIKE '%-RETIRED'
+               ORDER BY bm25(passages_fts) LIMIT ?""",
+            (m, k),
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return []
+
+_ASK_SYSTEM = (
+    "You are a careful scholar of Sanskrit scripture. Answer the user's question "
+    "USING ONLY the numbered passages provided, which are English translations of "
+    "verses from a Sanskrit corpus. Cite every claim with the passage's bracket tag "
+    "exactly as given, e.g. [MBh01 1.1.0]. If the passages do not contain the answer, "
+    "say so plainly instead of inventing one. Be concise, precise, and scholarly; do "
+    "not add outside knowledge unless you clearly label it as background context."
+)
+
+@app.post("/api/ask")
+def api_ask():
+    data = request.get_json(force=True) or {}
+    q = (data.get("q") or "").strip()
+    if not q:
+        return jsonify({"error": "empty question"}), 400
+    db = data.get("db") or "data/context.db"
+    try:
+        k = max(3, min(24, int(data.get("k") or 12)))
+    except (TypeError, ValueError):
+        k = 12
+    engine = data.get("engine") or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
+    model = engine.split(":", 1)[1] if ":" in engine else engine
+    # 1. Retrieve (read-only — never contends with the writer lock)
+    try:
+        con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    except Exception as e:
+        return jsonify({"error": f"cannot open db: {e}"}), 500
+    try:
+        rows = _ask_retrieve(con, q, k)
+    finally:
+        con.close()
+    if not rows:
+        return jsonify({"answer": "No matching passages were found in the corpus for that "
+                        "question. Try different or more specific wording.", "sources": []})
+    sources, ctx = [], []
+    for i, (code, vref, page, idx, tr) in enumerate(rows, 1):
+        tag = f"{code} {vref}" if vref else f"{code} p{page}.{idx}"
+        sources.append({"n": i, "tag": tag, "doc": code, "verse_ref": vref,
+                        "page_no": page, "idx": idx, "english": tr})
+        ctx.append(f"[{i}] [{tag}] {(tr or '')[:600]}")
+    user_msg = "PASSAGES:\n" + "\n".join(ctx) + f"\n\nQUESTION: {q}\n\nAnswer, citing [tags]:"
+    # 2. LLM answer — self-contained Gemini config so the translation engine is untouched
+    try:
+        import google.generativeai as genai
+        key = os.environ.get("GEMINI_API_KEY")
+        if not key:
+            return jsonify({"error": "GEMINI_API_KEY not set in .env", "sources": sources}), 500
+        genai.configure(api_key=key)
+        kwargs = dict(model_name=model,
+                      generation_config=genai.GenerationConfig(temperature=0.2,
+                                                               max_output_tokens=2048),
+                      system_instruction=_ASK_SYSTEM)
+        if _ASK_SAFETY is not None:
+            kwargs["safety_settings"] = _ASK_SAFETY
+        resp = genai.GenerativeModel(**kwargs).generate_content(user_msg)
+        answer = (getattr(resp, "text", "") or "").strip() or \
+                 "(The model returned no text — try rephrasing or a smaller k.)"
+    except Exception as e:
+        return jsonify({"error": f"LLM error: {e}", "sources": sources}), 500
+    return jsonify({"answer": answer, "sources": sources, "engine": engine, "k": k})
+
+
+@app.get("/ask")
+def ask_page():
+    return send_from_directory(str(SCRIPTS), "ask.html")
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # Static dashboard is maintained in scripts/dashboard_static.html (canonical).
 # The embedded fallback below is intentionally minimal — it is only written to
 # disk if dashboard_static.html is missing entirely (e.g. fresh clone without
@@ -1875,577 +2024,27 @@ scheduleRefresh();
 # ──────────────────────────────────────────────────────────────────────────────
 
 _DASHBOARD_HTML = r"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
+<html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Sanskrit Automaton — Pipeline Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>Sanskrit Automaton \u2014 dashboard file missing</title>
 <style>
-/* ─── Design tokens ─────────────────────────────────────────────────────── */
-:root {
-  --bg:        #0e0d0b;
-  --bg2:       #161411;
-  --bg3:       #1e1b16;
-  --bg4:       #28231b;
-  --border:    #35302600;
-  --border-v:  #35302680;
-  --gold:      #d4a017;
-  --gold-dim:  #9a721080;
-  --saffron:   #f47c20;
-  --cream:     #f0e6cc;
-  --muted:     #8a7d67;
-  --ink:       #e8dcc8;
-  --green:     #4caf7d;
-  --red:       #e05f5f;
-  --blue:      #6b9bd2;
-  --purple:    #a07dd6;
-  --r:         10px;
-  --r-sm:      6px;
-  --shadow:    0 4px 24px #00000060;
-  --glow:      0 0 20px #d4a01730;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; overflow: hidden; }
-
-/* ─── Layout ────────────────────────────────────────────────────────────── */
-.app { display: grid; grid-template-columns: 320px 1fr 340px; grid-template-rows: 56px 1fr; height: 100vh; }
-.top-bar { grid-column: 1/-1; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: var(--bg2); border-bottom: 1px solid var(--border-v); }
-.sidebar  { grid-row: 2; background: var(--bg2); border-right: 1px solid var(--border-v); display: flex; flex-direction: column; overflow: hidden; }
-.main     { grid-row: 2; overflow-y: auto; padding: 20px; }
-.log-panel { grid-row: 2; background: var(--bg2); border-left: 1px solid var(--border-v); display: flex; flex-direction: column; overflow: hidden; }
-
-/* ─── Top bar ────────────────────────────────────────────────────────────── */
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand-deva { font-family: "Noto Serif Devanagari", serif; font-size: 22px; color: var(--gold); letter-spacing: 0.02em; }
-.brand-sub  { font-size: 11px; color: var(--muted); font-weight: 500; }
-.top-bar-spacer { flex: 1; }
-.engine-wrap { display: flex; align-items: center; gap: 8px; }
-.engine-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
-select.engine-select {
-  background: var(--bg3); border: 1px solid var(--border-v); color: var(--ink);
-  padding: 6px 10px; border-radius: var(--r-sm); font-size: 12px; cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
-}
-select.engine-select:focus { outline: none; border-color: var(--gold); }
-.btn-refresh { padding: 7px 14px; background: transparent; border: 1px solid var(--border-v); border-radius: var(--r-sm); color: var(--muted); font-size: 12px; cursor: pointer; transition: all .2s; }
-.btn-refresh:hover { border-color: var(--gold); color: var(--gold); }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-/* ─── Sidebar: corpus browser ────────────────────────────────────────────── */
-.sidebar-header { padding: 14px 16px 10px; border-bottom: 1px solid var(--border-v); }
-.sidebar-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.corpus-path   { font-size: 10px; color: var(--muted); font-family: "JetBrains Mono", monospace; word-break: break-all; }
-.sidebar-search { margin: 10px 12px 0; position: relative; }
-.sidebar-search input { width: 100%; background: var(--bg3); border: 1px solid var(--border-v); border-radius: var(--r-sm); padding: 7px 10px 7px 30px; color: var(--ink); font-size: 12px; }
-.sidebar-search input:focus { outline: none; border-color: var(--gold-dim); }
-.sidebar-search .si { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; }
-.corpus-tree { flex: 1; overflow-y: auto; padding: 8px 0; }
-.cat-item { }
-.cat-header {
-  display: flex; align-items: center; gap: 8px; padding: 7px 16px;
-  cursor: pointer; transition: background .15s; user-select: none;
-}
-.cat-header:hover { background: var(--bg3); }
-.cat-arrow { font-size: 9px; color: var(--muted); transition: transform .2s; display: inline-block; }
-.cat-item.open .cat-arrow { transform: rotate(90deg); }
-.cat-name { font-size: 12px; font-weight: 600; color: var(--cream); flex: 1; }
-.cat-count { font-size: 10px; color: var(--muted); font-family: "JetBrains Mono", monospace; }
-.cat-pdfs { display: none; padding: 0 0 4px 16px; }
-.cat-item.open .cat-pdfs { display: block; }
-.pdf-item { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 20px; border-radius: var(--r-sm); cursor: pointer; transition: background .12s; }
-.pdf-item:hover { background: var(--bg3); }
-.pdf-item input[type=checkbox] { accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
-.pdf-name { font-size: 11px; color: var(--ink); flex: 1; font-family: "JetBrains Mono", monospace; }
-.pdf-size { font-size: 10px; color: var(--muted); white-space: nowrap; }
-.sidebar-actions { padding: 12px; border-top: 1px solid var(--border-v); display: flex; flex-direction: column; gap: 8px; }
-.sel-count { font-size: 11px; color: var(--muted); text-align: center; }
-.btn-import { width: 100%; padding: 9px; background: linear-gradient(135deg, var(--saffron), var(--gold)); border: none; border-radius: var(--r-sm); color: #0e0d0b; font-weight: 700; font-size: 12px; cursor: pointer; transition: opacity .2s, transform .15s; letter-spacing: .03em; }
-.btn-import:hover { opacity: .9; transform: translateY(-1px); }
-.btn-import:active { transform: translateY(0); }
-.import-split-row { display: flex; align-items: center; gap: 8px; }
-.import-split-row label { font-size: 11px; color: var(--muted); }
-.import-split-row input { accent-color: var(--gold); }
-
-/* ─── Main: pipeline table ───────────────────────────────────────────────── */
-.section-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-.section-title::after { content:""; flex:1; height:1px; background: var(--border-v); }
-.batch-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-.btn-batch { padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border-v); border-radius: var(--r-sm); color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; transition: all .15s; letter-spacing: .02em; }
-.btn-batch:hover { border-color: var(--gold-dim); color: var(--cream); }
-.pipeline-table { width: 100%; border-collapse: collapse; }
-.pipeline-table th { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border-v); }
-.pipeline-table td { padding: 10px 12px; border-bottom: 1px solid #ffffff08; vertical-align: middle; }
-.pipeline-table tr:last-child td { border-bottom: none; }
-.pipeline-table tr:hover td { background: var(--bg3); }
-.doc-name { font-weight: 600; color: var(--cream); font-size: 13px; font-family: "JetBrains Mono", monospace; }
-.num-cell { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); }
-.prog-wrap { display: flex; flex-direction: column; gap: 3px; }
-.prog-bar { height: 6px; background: var(--bg4); border-radius: 999px; overflow: hidden; width: 80px; }
-.prog-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold), var(--saffron)); transition: width .4s ease; }
-.prog-bar.tr i { background: linear-gradient(90deg, var(--green), #6dd4a0); }
-.prog-pct { font-size: 10px; color: var(--muted); font-family: "JetBrains Mono", monospace; }
-.actions-cell { display: flex; gap: 6px; flex-wrap: wrap; }
-.btn-act { padding: 5px 10px; border: 1px solid var(--border-v); border-radius: var(--r-sm); background: var(--bg3); color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; transition: all .15s; white-space: nowrap; }
-.btn-act:hover { background: var(--bg4); color: var(--cream); border-color: var(--gold-dim); }
-.btn-act.ocr  :hover, .btn-act:hover.ocr   { color: var(--blue); border-color: var(--blue); }
-.btn-act.tr   { }
-.btn-act.tr:hover { color: var(--green); border-color: var(--green); }
-.btn-act.exp:hover { color: var(--purple); border-color: var(--purple); }
-.btn-act.ing:hover { color: var(--saffron); border-color: var(--saffron); }
-
-/* ─── Log panel ──────────────────────────────────────────────────────────── */
-.log-header { padding: 14px 16px 10px; border-bottom: 1px solid var(--border-v); display: flex; align-items: center; gap: 10px; }
-.log-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); flex: 1; }
-.job-badges { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 12px; border-bottom: 1px solid var(--border-v); min-height: 36px; }
-.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 600; border: 1px solid; animation: fadeIn .3s; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
-.badge.running { border-color: var(--gold-dim); color: var(--gold); background: #d4a01715; }
-.badge.ok      { border-color: #4caf7d50; color: var(--green); background: #4caf7d10; }
-.badge.fail    { border-color: #e05f5f50; color: var(--red); background: #e05f5f10; }
-.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.badge.running .badge-dot { animation: pulse 1s infinite; }
-.log-body { flex: 1; overflow-y: auto; padding: 10px 14px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: #9a8f7a; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
-.log-line-ok  { color: var(--green); }
-.log-line-err { color: var(--red); }
-.log-line-info { color: var(--gold); }
-.log-clear { padding: 8px 12px; border-top: 1px solid var(--border-v); }
-.btn-clear { background: none; border: none; color: var(--muted); font-size: 11px; cursor: pointer; }
-.btn-clear:hover { color: var(--red); }
-
-/* ─── Toast ──────────────────────────────────────────────────────────────── */
-#toast { position: fixed; right: 20px; bottom: 20px; background: var(--bg3); color: var(--ink); padding: 10px 16px; border-radius: var(--r); border: 1px solid var(--border-v); font-size: 13px; box-shadow: var(--shadow); display: none; z-index: 9999; animation: slideIn .25s; }
-@keyframes slideIn { from{transform:translateX(30px);opacity:0} to{transform:none;opacity:1} }
-#toast.ok   { border-color: var(--green); }
-#toast.fail { border-color: var(--red); }
-
-/* ─── Scrollbars ─────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 999px; }
-
-/* ─── Empty state ────────────────────────────────────────────────────────── */
-.empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
-.empty-state .e-icon { font-size: 40px; margin-bottom: 12px; }
-.empty-state h3 { font-size: 16px; color: var(--cream); margin-bottom: 8px; }
-.empty-state p  { font-size: 13px; line-height: 1.6; max-width: 360px; margin: 0 auto; }
-</style>
-</head>
+ body{font-family:system-ui,-apple-system,sans-serif;background:#12100e;color:#e8e0d0;
+      max-width:640px;margin:60px auto;padding:0 22px;line-height:1.65}
+ h1{color:#e0b062;font-size:20px;font-weight:600}
+ code{background:#221e18;padding:2px 7px;border-radius:5px;color:#e0b062;
+      font-family:ui-monospace,Consolas,monospace}
+ p{margin:14px 0}
+</style></head>
 <body>
-<div class="app">
-
-  <!-- ── Top bar ──────────────────────────────────────── -->
-  <header class="top-bar">
-    <div class="brand">
-      <div class="brand-deva">संस्कृत</div>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--cream)">Sanskrit Automaton</div>
-        <div class="brand-sub">OCR · Normalize · Translate · Export</div>
-      </div>
-    </div>
-    <div class="top-bar-spacer"></div>
-    <div class="engine-wrap">
-      <span class="engine-label">Engine</span>
-      <select id="engineSelect" class="engine-select" title="Translation engine">
-        <option value="gemini:gemini-2.5-flash" selected>⚡ Gemini 2.5 Flash (default)</option>
-        <option value="gemini:gemini-2.5-pro">✦ Gemini 2.5 Pro (highest quality)</option>
-        <option value="gemini:gemini-2.0-flash">⚡ Gemini 2.0 Flash (fast)</option>
-        <option value="openai:gpt-4o">🔵 GPT-4o</option>
-        <option value="openai:gpt-4o-mini">🔵 GPT-4o-mini (cheap)</option>
-        <option value="echo">🔁 Echo (test)</option>
-      </select>
-    </div>
-    <div class="status-dot" title="Server running"></div>
-    <button class="btn-refresh" onclick="refresh()">⟳ Refresh</button>
-  </header>
-
-  <!-- ── Corpus browser sidebar ────────────────────────── -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-title">📚 Scripture Corpus</div>
-      <div class="corpus-path" id="corpusPath">Loading…</div>
-    </div>
-    <div class="sidebar-search">
-      <span class="si">🔍</span>
-      <input type="text" id="corpusSearch" placeholder="Search scriptures…" oninput="filterCorpus(this.value)"/>
-    </div>
-    <div class="corpus-tree" id="corpusTree">
-      <div class="empty-state"><div class="e-icon">🔄</div><p>Loading corpus…</p></div>
-    </div>
-    <div class="sidebar-actions">
-      <div class="sel-count" id="selCount">No files selected</div>
-      <div class="import-split-row">
-        <input type="checkbox" id="autoSplit" checked/>
-        <label for="autoSplit">Auto-split multi-page PDFs</label>
-      </div>
-      <button class="btn-import" onclick="importSelected()">⬇ Import to Inbox</button>
-    </div>
-  </aside>
-
-  <!-- ── Pipeline dashboard main ───────────────────────── -->
-  <main class="main">
-    <div class="section-title">Pipeline Status</div>
-    <div class="batch-bar">
-      <button class="btn-batch" onclick="batchAction('ocr')">▶ OCR All</button>
-      <button class="btn-batch" onclick="batchAction('ingest')">⬆ Ingest All</button>
-      <button class="btn-batch" onclick="batchAction('translate')">✦ Translate All</button>
-      <button class="btn-batch" onclick="batchAction('export')">⤓ Export All</button>
-    </div>
-    <div id="pipelineWrap">
-      <div class="empty-state">
-        <div class="e-icon">📂</div>
-        <h3>No documents in inbox</h3>
-        <p>Use the corpus browser on the left to select scriptures from the D: drive and import them into the inbox.</p>
-      </div>
-    </div>
-  </main>
-
-  <!-- ── Job log panel ─────────────────────────────────── -->
-  <aside class="log-panel">
-    <div class="log-header">
-      <span class="log-title">Job Log</span>
-      <span id="runningCount" style="font-size:10px;color:var(--muted)">idle</span>
-    </div>
-    <div class="job-badges" id="jobBadges"></div>
-    <div class="log-body" id="logBody"><span style="color:var(--muted)">Awaiting jobs…</span></div>
-    <div class="log-clear"><button class="btn-clear" onclick="clearLog()">✕ Clear log</button></div>
-  </aside>
-
-</div>
-<div id="toast"></div>
-
-<script>
-// ── Config ─────────────────────────────────────────────────────────────────
-const params = new URLSearchParams(window.location.search);
-const cfg = {
-  inbox:   params.get("inbox")   || "inbox",
-  raw:     params.get("raw")     || "data/raw",
-  db:      params.get("db")      || "data/context.db",
-  exports: params.get("exports") || "exports",
-};
-
-// ── State ───────────────────────────────────────────────────────────────────
-let corpusData    = [];
-let pdfRegistry   = {};  // id -> {path, doc, name}  — avoids JSON-in-HTML-attr bugs
-let pdfIdCounter  = 0;
-let selectedIds   = new Set();   // Set of numeric registry IDs
-let activeJobs    = {};          // jid -> {kind, doc, label}
-let logLines      = [];
-
-// ── Utilities ───────────────────────────────────────────────────────────────
-function fmtSize(b) {
-  if (b < 1024) return b + " B";
-  if (b < 1024*1024) return (b/1024).toFixed(0) + " KB";
-  return (b/(1024*1024)).toFixed(1) + " MB";
-}
-function pct(a, b) { return b ? Math.round(100*a/b) : 0; }
-function toast(msg, type="") {
-  const t = document.getElementById("toast");
-  t.className = type;
-  t.textContent = msg;
-  t.style.display = "block";
-  setTimeout(() => t.style.display = "none", 2800);
-}
-function addLog(line, cls="") {
-  logLines.push({line, cls});
-  if (logLines.length > 600) logLines.shift();
-  renderLog();
-}
-function renderLog() {
-  const el = document.getElementById("logBody");
-  el.innerHTML = logLines.map(({line,cls}) =>
-    `<span${cls ? ` class="${cls}"` : ""}>${escHtml(line)}</span>\n`
-  ).join("");
-  el.scrollTop = el.scrollHeight;
-}
-function clearLog() { logLines = []; renderLog(); }
-function escHtml(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-function engine() { return document.getElementById("engineSelect").value; }
-
-// ── Pipeline status ─────────────────────────────────────────────────────────
-async function refresh() {
-  try {
-    const r = await fetch(`/api/status?inbox=${encodeURIComponent(cfg.inbox)}&raw=${encodeURIComponent(cfg.raw)}&db=${encodeURIComponent(cfg.db)}&exports=${encodeURIComponent(cfg.exports)}`);
-    const data = await r.json();
-    renderPipeline(data);
-  } catch(e) { toast("Refresh failed: " + e, "fail"); }
-}
-
-function renderPipeline(rows) {
-  const wrap = document.getElementById("pipelineWrap");
-  if (!rows.length) {
-    wrap.innerHTML = `<div class="empty-state"><div class="e-icon">📂</div><h3>No documents in inbox</h3><p>Use the corpus browser to import scriptures.</p></div>`;
-    return;
-  }
-  wrap.innerHTML = `
-    <table class="pipeline-table">
-      <thead><tr>
-        <th>Document</th><th>PDFs</th><th>JSONL</th><th>Ingested</th>
-        <th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>
-      </tr></thead>
-      <tbody id="pipelineTbody"></tbody>
-    </table>`;
-  const tb = document.getElementById("pipelineTbody");
-  for (const r of rows) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td><div class="doc-name">${escHtml(r.doc)}</div></td>
-      <td><span class="num-cell">${r.pdf_count}</span></td>
-      <td>${progCell(r.jsonl_count, r.pdf_count)}</td>
-      <td>${progCell(r.ingested_pages, r.pdf_count)}</td>
-      <td><span class="num-cell">${r.total_lines}</span></td>
-      <td>${progCell(r.translated_lines, r.total_lines, true)}</td>
-      <td><span class="num-cell">${r.exports}</span></td>
-      <td class="actions-cell">
-        <button class="btn-act ocr"  data-act="ocr"       data-doc="${escHtml(r.doc)}">OCR</button>
-        <button class="btn-act ing"  data-act="ingest"    data-doc="${escHtml(r.doc)}">Ingest</button>
-        <button class="btn-act tr"   data-act="translate" data-doc="${escHtml(r.doc)}">Translate</button>
-        <button class="btn-act exp"  data-act="export"    data-doc="${escHtml(r.doc)}">Export</button>
-      </td>`;
-    tb.appendChild(tr);
-  }
-}
-
-function progCell(a, b, green=false) {
-  const p = pct(a, b);
-  return `<div class="prog-wrap">
-    <div class="prog-bar${green?" tr":""}"><i style="width:${p}%"></i></div>
-    <span class="prog-pct">${a}/${b || "?"} (${p}%)</span>
-  </div>`;
-}
-
-// ── Action buttons ──────────────────────────────────────────────────────────
-document.addEventListener("click", async ev => {
-  const b = ev.target.closest("button[data-act]");
-  if (!b) return;
-  const doc = b.dataset.doc;
-  const act = b.dataset.act;
-  await triggerAction(act, doc);
-});
-
-async function triggerAction(act, doc) {
-  if (act === "ocr") {
-    const dpi  = prompt("DPI for OCR? (Higher = better but slower)", "400") || "400";
-    const langs = prompt("Tesseract language string?", "san+hin+eng") || "san+hin+eng";
-    const r = await fetch("/api/ocr", {method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, dpi, langs, inbox: cfg.inbox, raw: cfg.raw})});
-    const j = await r.json();
-    if (j.job) { trackJob(j.job, `OCR ${doc}`, "ocr", doc); toast(`OCR started for ${doc}`); }
-    else toast(j.message || "No OCR work needed", "ok");
-  }
-  if (act === "ingest") {
-    const r = await fetch("/api/ingest", {method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db: cfg.db, raw: cfg.raw})});
-    const j = await r.json();
-    if (j.job) { trackJob(j.job, `Ingest ${doc}`, "ingest", doc); toast(`Ingest started for ${doc}`); }
-  }
-  if (act === "translate") {
-    const eng   = engine();
-    const limit = prompt("Max passages per run?", "100") || "100";
-    const r = await fetch("/api/translate", {method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db: cfg.db, engine: eng, limit})});
-    const j = await r.json();
-    if (j.job) { trackJob(j.job, `Translate ${doc}`, "translate", doc); toast(`Translation started (${eng})`); }
-  }
-  if (act === "export") {
-    const r = await fetch("/api/export", {method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({doc, db: cfg.db, out: cfg.exports})});
-    const j = await r.json();
-    if (j.job) { trackJob(j.job, `Export ${doc}`, "export", doc); toast(`Export started for ${doc}`); }
-  }
-}
-
-async function batchAction(act) {
-  const rows = document.querySelectorAll("button[data-act='" + act + "']");
-  for (const b of rows) { await triggerAction(act, b.dataset.doc); }
-}
-
-// ── Job tracking ────────────────────────────────────────────────────────────
-function trackJob(jid, label, kind, doc) {
-  activeJobs[jid] = {label, kind, doc, done: false};
-  addLog(`▶ ${label}`, "log-line-info");
-  reasync function importSelected() {
-  if (!selectedIds.size) { toast("Select files first"); return; }
-  const autoSplit = document.getElementById("autoSplit").checked;
-  const files = [...selectedIds].map(id => {
-    const r = pdfRegistry[id];
-    return {path: r.path, doc: r.doc};
-  });
-  toast(`Importing ${files.length} file(s)…`);
-  try {
-    const r = await fetch("/api/corpus/import", {
-      method: "POST", headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({inbox: cfg.inbox, files, auto_split: autoSplit})
-    });
-    const d = await r.json();
-    const splitting = (d.imported || []).filter(i => i.action === "splitting");
-    const copied    = (d.imported || []).filter(i => i.action === "copied");
-    let msg = `Imported: ${copied.length} copied`;
-    if (splitting.length) {
-      msg += `, ${splitting.length} splitting (multi-page)`;
-      for (const s of splitting) {
-        if (s.job) trackJob(s.job, `Split ${s.doc}`, "import_split", s.doc);
-      }
-    }
-    toast(msg, "ok");
-    addLog(`[OK] ${msg}`, "log-line-ok");
-    // Uncheck all
-    selectedIds.clear();
-    document.querySelectorAll(".pdf-cb:checked").forEach(cb => cb.checked = false);
-    updateSelCount();
-    setTimeout(refresh, 1500);
-  } catch(e) {
-    toast("Import failed: " + e, "fail");
-    addLog(`[ERR] Import error: ${e}`, "log-line-err");
-  }
-}
-etElementById("runningCount").textContent =
-    running.length ? `${running.length} running` : "idle";
-  el.innerHTML = [...running.map(j =>
-    `<span class="badge running"><span class="badge-dot"></span>${escHtml(j.label)}</span>`
-  ), ...recent.map(j =>
-    `<span class="badge ${j.ok?"ok":"fail"}"><span class="badge-dot"></span>${escHtml(j.label)}</span>`
-  )].join("");
-}
-
-// ── Corpus browser ──────────────────────────────────────────────────────────
-async function loadCorpus() {
-  try {
-    const r = await fetch("/api/corpus");
-    const d = await r.json();
-    corpusData = d.categories || [];
-    document.getElementById("corpusPath").textContent = d.corpus_root || "";
-    renderCorpus(corpusData);
-  } catch(e) {
-    document.getElementById("corpusTree").innerHTML =
-      `<div class="empty-state"><div class="e-icon">⚠️</div><p>Could not load corpus from D: drive.<br/><small>${e}</small></p></div>`;
-  }
-}
-
-function renderCorpus(cats) {
-  const tree = document.getElementById("corpusTree");
-  if (!cats.length) {
-    tree.innerHTML = `<div class="empty-state"><div class="e-icon">📭</div><p>No PDFs found in corpus root.</p></div>`;
-    return;
-  }
-  // Rebuild registry for the visible set
-  pdfRegistry  = {};
-  pdfIdCounter = 0;
-  // Preserve previous selections by path
-  const prevSelected = new Set(
-    [...selectedIds].map(id => pdfRegistry[id] ? pdfRegistry[id].path : null).filter(Boolean)
-  );
-  selectedIds.clear();
-
-  const html = cats.map(cat => {
-    const rows = cat.pdfs.map(pdf => {
-      const id  = ++pdfIdCounter;
-      const doc = guessDoc(pdf.name, cat.category);
-      pdfRegistry[id] = {path: pdf.path, doc, name: pdf.name};
-      // Re-check if this path was previously selected
-      const chk = prevSelected.has(pdf.path) ? ' checked' : '';
-      if (chk) selectedIds.add(id);
-      return `<div class="pdf-item">
-        <input type="checkbox" class="pdf-cb" data-pid="${id}"${chk}/>
-        <span class="pdf-name">${escHtml(pdf.name)}</span>
-        <span class="pdf-size">${fmtSize(pdf.size)}</span>
-      </div>`;
-    }).join("");
-    return `<div class="cat-item" data-cat="${escHtml(cat.category)}">
-      <div class="cat-header">
-        <span class="cat-arrow">▶</span>
-        <span class="cat-name">${escHtml(cat.category.replace(/_/g," "))}</span>
-        <span class="cat-count">${cat.pdfs.length}</span>
-      </div>
-      <div class="cat-pdfs">${rows}</div>
-    </div>`;
-  }).join("");
-  tree.innerHTML = html;
-  updateSelCount();
-}
-
-// Single delegated listener on the corpus tree handles both cat-header clicks
-// and checkbox changes — no more inline handlers that break on JSON strings
-document.getElementById("corpusTree").addEventListener("change", ev => {
-  const cb = ev.target.closest(".pdf-cb");
-  if (!cb) return;
-  const id = parseInt(cb.dataset.pid, 10);
-  if (cb.checked) selectedIds.add(id);
-  else            selectedIds.delete(id);
-  updateSelCount();
-});
-
-document.getElementById("corpusTree").addEventListener("click", ev => {
-  const hdr = ev.target.closest(".cat-header");
-  if (!hdr) return;
-  hdr.closest(".cat-item").classList.toggle("open");
-});
-
-function guessDoc(filename, category) {
-  const stem = filename.replace(/\.pdf$/i, "");
-  const m = stem.match(/^([A-Za-z0-9_]+?)_?(\d{1,6})$/);
-  if (m) return m[1].toLowerCase().replace(/[^a-z0-9]/g, "_");
-  return (category + "_" + stem).toLowerCase().replace(/[^a-z0-9]/g, "_").replace(/__+/g, "_").slice(0, 40);
-}
-
-function updateSelCount() {
-  const n = selectedIds.size;
-  document.getElementById("selCount").textContent =
-    n ? `${n} file${n > 1 ? "s" : ""} selected` : "No files selected";
-}
-
-function filterCorpus(q) {
-  q = q.trim().toLowerCase();
-  if (!q) { renderCorpus(corpusData); return; }
-  const filtered = corpusData.map(cat => ({
-    ...cat,
-    pdfs: cat.pdfs.filter(p => p.name.toLowerCase().includes(q) || cat.category.toLowerCase().includes(q))
-  })).filter(cat => cat.pdfs.length);
-  renderCorpus(filtered);
-}
-
-async function importSelected() {
-  if (!selectedFiles.size) { toast("Select files first"); return; }
-  const autoSplit = document.getElementById("autoSplit").checked;
-  const files = [...selectedFiles].map(k => JSON.parse(k));
-  toast(`Importing ${files.length} file(s)…`);
-  try {
-    const r = await fetch("/api/corpus/import", {
-      method: "POST", headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({inbox: cfg.inbox, files, auto_split: autoSplit})
-    });
-    const d = await r.json();
-    const splitting = (d.imported||[]).filter(i => i.action === "splitting");
-    const copied    = (d.imported||[]).filter(i => i.action === "copied");
-    let msg = `Imported: ${copied.length} copied`;
-    if (splitting.length) {
-      msg += `, ${splitting.length} splitting (multi-page)`;
-      for (const s of splitting) {
-        if (s.job) trackJob(s.job, `Split ${s.doc}`, "import_split", s.doc);
-      }
-    }
-    toast(msg, "ok");
-    addLog(`✓ ${msg}`, "log-line-ok");
-    selectedFiles.clear();
-    updateSelCount();
-    setTimeout(refresh, 1500);
-  } catch(e) {
-    toast("Import failed: " + e, "fail");
-    addLog(`✗ Import error: ${e}`, "log-line-err");
-  }
-}
-
-// ── Init ─────────────────────────────────────────────────────────────────────
-loadCorpus();
-refresh();
-setInterval(refresh, 15000);
-setInterval(renderBadges, 2000);
-</script>
-</body>
-</html>"""
+<h1>\u0938\u0902\u0938\u094d\u0915\u0943\u0924 \u00b7 Dashboard file not found</h1>
+<p>The canonical UI file <code>scripts/dashboard_static.html</code> is missing, so this
+minimal placeholder is served in its place. The full dashboard cannot render without it.</p>
+<p>Restore it from version control and restart the dashboard:</p>
+<p><code>git checkout -- scripts/dashboard_static.html</code></p>
+<p>The API (<code>/api/status</code>, <code>/api/translate</code>, \u2026), the reader
+(<code>/reader/&lt;doc&gt;</code>), the library (<code>/library</code>) and Ask
+(<code>/ask</code>) pages keep working \u2014 only this landing page is degraded.</p>
+</body></html>"""
 
 # Write the static HTML to disk only if it doesn't already exist
 # (dashboard_static.html is maintained separately; don't overwrite it on startup)

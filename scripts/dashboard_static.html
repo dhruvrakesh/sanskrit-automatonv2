@@ -193,6 +193,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <div class="status-dot" title="Server running"></div>
     <a class="btn-refresh" href="/translate" target="_blank" style="text-decoration:none;margin-right:6px" title="Translate any Sanskrit into English + Hindi on demand">&#9889; Translate</a>
     <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
+    <a class="btn-refresh" href="/ask" target="_blank" style="text-decoration:none;margin-right:6px" title="Ask questions answered from the corpus, with cited verses">&#128172; Ask the Corpus</a>
     <button class="btn-refresh" onclick="refresh()">&#x27F3; Refresh</button>
   </header>
 
@@ -205,6 +206,10 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <div class="sidebar-search">
       <span class="si">&#x1F50D;</span>
       <input type="text" id="corpusSearch" placeholder="Search scriptures&hellip;" oninput="filterCorpus(this.value)"/>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 16px 4px;font-size:10.5px;color:var(--muted)">
+      <span>&#x1F449; Click a category to pick PDFs</span>
+      <a id="expandToggle" href="javascript:void(0)" onclick="toggleAllCats()" style="color:var(--gold);text-decoration:none;font-weight:600">Expand all</a>
     </div>
     <div class="corpus-tree" id="corpusTree">
       <div class="empty-state"><div class="e-icon">&#x1F504;</div><p>Loading corpus&hellip;</p></div>
@@ -667,7 +672,19 @@ function renderCorpus(cats) {
       '</div>';
   });
   tree.innerHTML = html;
+  // Discoverability: open the first category so selectable PDFs are visible
+  // immediately, instead of an all-collapsed tree that looks unclickable.
+  var first = tree.querySelector('.cat-item');
+  if (first) first.classList.add('open');
   updateSelCount();
+}
+
+// Expand / collapse every category at once.
+function toggleAllCats(){
+  var items = document.querySelectorAll('#corpusTree .cat-item');
+  var anyClosed = Array.prototype.some.call(items, function(it){ return !it.classList.contains('open'); });
+  items.forEach(function(it){ it.classList.toggle('open', anyClosed); });
+  var t = document.getElementById('expandToggle'); if (t) t.textContent = anyClosed ? 'Collapse all' : 'Expand all';
 }
 
 // ── FIXED: event delegation — no inline handlers, no JSON in HTML attrs ────
