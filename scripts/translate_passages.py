@@ -151,6 +151,11 @@ def main():
                          "Default 0.35 (Phase Q) — skips bad OCR. "
                          "Pass 0 to disable the gate entirely.")
     ap.add_argument("--limit",        type=int,   default=None)
+    ap.add_argument("--only-page",    type=int,   default=None,
+                    help="restrict to a single page_no (used by the reader's "
+                         "per-verse on-demand translate)")
+    ap.add_argument("--only-idx",     type=int,   default=None,
+                    help="with --only-page, restrict to that single verse's idx")
     ap.add_argument("--context",      type=int,   default=CONTEXT_WINDOW)
     ap.add_argument("--retranslate",  action="store_true",
                     help="Also process passages that already have a translation. "
@@ -208,6 +213,12 @@ def main():
     TGT = (args.lang or "en").strip()
     IS_L10N = TGT != "en"   # Phase HI: additional-language mode → translations_l10n
 
+    # Single-verse mode (reader's on-demand translate): pin the page range to the
+    # one page and add an idx filter used by both the en and l10n selects below.
+    if args.only_page is not None:
+        args.since_page = args.until_page = args.only_page
+    _idx_sql = "AND p.idx = ?" if args.only_idx is not None else ""
+
     extra_cols = ", ".join([
         c for c in
         ["p.verse_ref", "p.chapter", "p.chandas", "p.text_type", "p.iast", "p.quality_score"]
@@ -233,6 +244,8 @@ def main():
                                "WHERE l.passage_id=p.id AND l.lang=?)")
             params.append(TGT)
         params += [args.since_page, args.until_page]
+        if args.only_idx is not None:
+            params.append(args.only_idx)
         where_extra_sql = ("AND " + " AND ".join(where_extra) + " ") if where_extra else ""
         rows = list(con.execute(
             f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols},
@@ -242,6 +255,7 @@ def main():
                 WHERE d.code = ?
                   {where_extra_sql}
                   AND p.page_no BETWEEN ? AND ?
+                  {_idx_sql}
                   AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')
                 ORDER BY p.page_no, p.idx""",
             params,
@@ -249,6 +263,9 @@ def main():
     else:
         translation_filter = ("" if args.retranslate
                               else "AND COALESCE(TRIM(p.translation),'')=''")
+        en_params = [args.doc, args.since_page, args.until_page]
+        if args.only_idx is not None:
+            en_params.append(args.only_idx)
         rows = list(con.execute(
             f"""SELECT p.rowid, p.page_no, p.idx, p.text{extra_cols}
                 FROM passages p
@@ -256,9 +273,10 @@ def main():
                 WHERE d.code = ?
                   {translation_filter}
                   AND p.page_no BETWEEN ? AND ?
+                  {_idx_sql}
                   AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')
                 ORDER BY p.page_no, p.idx""",
-            (args.doc, args.since_page, args.until_page),
+            en_params,
         ))
 
     if not rows:

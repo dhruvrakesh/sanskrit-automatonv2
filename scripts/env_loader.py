@@ -13,12 +13,24 @@ def _load_dotenv():
     # load repo .env first, then system env
     load_dotenv(dotenv_path=root / ".env", override=False)
 
+def _force_utf8_io() -> None:
+    """Make stdout/stderr UTF-8 so printing Devanagari / IAST never raises
+    UnicodeEncodeError('charmap') on a Windows console or a captured pipe
+    (cp1252). Idempotent and safe to call every load_env()."""
+    import sys
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def load_env() -> None:
     """Load .env once per process (no-op if python-dotenv isn't installed)."""
+    _force_utf8_io()
     _load_dotenv()
 
 def find_tesseract_and_tessdata():
-    """
+    r"""
     Return (tesseract_cmd, tessdata_dir_candidates[list]).
     Accept both styles:
       TESSDATA_PREFIX = C:\Program Files\Tesseract-OCR

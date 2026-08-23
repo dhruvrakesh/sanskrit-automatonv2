@@ -122,10 +122,21 @@ def _kill_proc(proc) -> bool:
             pass
         return False
 
+def _child_env() -> dict:
+    """Child processes inherit our env plus a hard UTF-8 stdio guarantee.
+    Without this, a child printing Devanagari/IAST to its captured pipe on
+    Windows encodes as cp1252 and raises UnicodeEncodeError('charmap'), which
+    shows up as spurious per-verse errors (the infamous err:NNN counter)."""
+    env = dict(os.environ)
+    env["PYTHONUTF8"] = "1"                 # interpreter-wide UTF-8 mode
+    env["PYTHONIOENCODING"] = "utf-8:replace"
+    return env
+
 def _run_job(job: Job):
     try:
         proc = subprocess.Popen(
-            job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=str(ROOT)
+            job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            cwd=str(ROOT), env=_child_env()
         )
         job.proc = proc  # store so it can be killed
         out, err = proc.communicate()
@@ -337,7 +348,10 @@ def build_status(inbox, raw, dbp, exports):
                 seen.add(doc)
             # Docs already in DB (inbox empty after prior import — show them too)
             try:
-                db_docs = [r[0] for r in con.execute("SELECT code FROM docs ORDER BY code")]
+                # Retired docs (code suffixed '-RETIRED') are hidden from the
+                # sidebar but never deleted — fully reversible by renaming back.
+                db_docs = [r[0] for r in con.execute(
+                    "SELECT code FROM docs WHERE code NOT LIKE '%-RETIRED' ORDER BY code")]
             except Exception:
                 db_docs = []
             for doc in db_docs:
@@ -778,7 +792,21 @@ def api_translate():
     sleep   = str(data.get("sleep")   or 0.8)
     context = str(data.get("context") or 5)   # 5-verse sliding context window
     min_quality = str(data.get("min_quality") or 0.35)  # Phase Q default (was 0.25)
-    lang    = (data.get("lang") or "en").strip()   # Phase HI
+    lang    = (data.get("lang") or "en").strip()   # Phase HI ('both' => EN then HI)
+
+    # One-job EN+HI: run the English pass then the Hindi pass back to back via the
+    # translate_both.py orchestrator. Each pass is the UNCHANGED translate_passages.py
+    # (Hindi is translated directly from Sanskrit, English used only as an optional
+    # reference). Shares the translate semaphore, so it serializes with other jobs.
+    if lang == "both":
+        cmd = py(script("translate_both.py"),
+                 "--db", db, "--doc", doc, "--engine", engine,
+                 "--sleep", sleep, "--limit", limit, "--context", context,
+                 "--min-quality", min_quality)
+        if data.get("hi_pure"):
+            cmd += ["--hi-pure"]
+        return jsonify({"job": launch("translate_both", doc, cmd), "lang": "both"})
+
     cmd = py(script("translate_passages.py"),
              "--db", db, "--doc", doc, "--engine", engine,
              "--sleep", sleep, "--limit", limit, "--context", context,
@@ -788,6 +816,33 @@ def api_translate():
         cmd += ["--lang", lang]
         kind = f"translate_{lang}"   # distinct dedup identity; shares translate sem
     return jsonify({"job": launch(kind, doc, cmd), "lang": lang})
+
+
+@app.post("/api/translate-one")
+def api_translate_one():
+    """Translate a SINGLE verse on demand (the reader's per-verse button). Fills
+    doc/page_no/idx in the requested language and saves it to the corpus. Shares
+    the translate semaphore, so it serializes safely with any running job."""
+    data = request.get_json(force=True) or {}
+    doc  = _validate_doc(data.get("doc"))
+    if not doc:
+        return jsonify({"error": "invalid or missing doc"}), 400
+    try:
+        page_no = int(data.get("page_no"))
+        idx     = int(data.get("idx"))
+    except (TypeError, ValueError):
+        return jsonify({"error": "page_no and idx must be integers"}), 400
+    db     = data.get("db") or "data/context.db"
+    engine = data.get("engine") or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
+    lang   = (data.get("lang") or "en").strip()
+    argv = py(script("translate_passages.py"),
+              "--db", db, "--doc", doc, "--engine", engine,
+              "--only-page", str(page_no), "--only-idx", str(idx), "--limit", "1")
+    if lang != "en":
+        argv += ["--lang", lang]
+    # Unique label per (verse, lang) so the dup-guard never collapses two verses.
+    jid = launch("translate_one", f"{doc}:{page_no}.{idx}:{lang}", argv)
+    return jsonify({"job": jid, "doc": doc, "page_no": page_no, "idx": idx, "lang": lang})
 
 
 @app.post("/api/export")
@@ -1095,6 +1150,7 @@ def api_passages(doc):
         con = sqlite3.connect(db_path)
         # Dynamically detect which columns exist (handles old DBs)
         cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        tset = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
         extra_selects = ", ".join([
             f"p.{c}" for c in
             ["verse_ref", "chapter", "text_type", "chandas", "iast", "quality_score", "translation_score"]
@@ -1102,6 +1158,30 @@ def api_passages(doc):
         ])
         if extra_selects:
             extra_selects = ", " + extra_selects
+
+        # Language-aware translation source: 'en' reads passages.translation; any
+        # other code reads translations_l10n for that language (Phase HI). This is
+        # what makes the /reader page multilingual.
+        lang = (request.args.get("lang") or "en").strip()
+        if lang != "en" and "translations_l10n" in tset:
+            join_l10n  = "LEFT JOIN translations_l10n l ON l.passage_id=p.id AND l.lang=?"
+            trans_col  = "l.translation"
+            l10n_param = [lang]
+        else:
+            lang = "en"
+            join_l10n, trans_col, l10n_param = "", "p.translation", []
+
+        # Which languages actually have content for this doc (drives the switcher).
+        available_langs = ["en"]
+        if "translations_l10n" in tset:
+            for (lg,) in con.execute(
+                "SELECT DISTINCT l.lang FROM translations_l10n l "
+                "JOIN passages p ON p.id=l.passage_id JOIN docs d ON d.id=p.doc_id "
+                "WHERE d.code=? AND TRIM(COALESCE(l.translation,''))<>'' ORDER BY l.lang",
+                (doc,)
+            ):
+                if lg and lg not in available_langs:
+                    available_langs.append(lg)
 
         type_clause = ""
         type_params = []
@@ -1114,9 +1194,9 @@ def api_passages(doc):
             (doc, *type_params)
         ).fetchone()[0]
         translated = con.execute(
-            f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id "
-            f"WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''{type_clause}",
-            (doc, *type_params)
+            f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id {join_l10n} "
+            f"WHERE d.code=? AND TRIM(COALESCE({trans_col},''))<>''{type_clause}",
+            (*l10n_param, doc, *type_params)
         ).fetchone()[0]
         # Count by text_type
         type_counts = {}
@@ -1128,10 +1208,10 @@ def api_passages(doc):
                 type_counts[row[0]] = row[1]
 
         rows = con.execute(
-            f"SELECT p.page_no, p.idx, p.text, p.translation{extra_selects} "
-            f"FROM passages p JOIN docs d ON d.id=p.doc_id "
+            f"SELECT p.page_no, p.idx, p.text, {trans_col}{extra_selects} "
+            f"FROM passages p JOIN docs d ON d.id=p.doc_id {join_l10n} "
             f"WHERE d.code=?{type_clause} ORDER BY p.page_no, p.idx LIMIT ? OFFSET ?",
-            (doc, *type_params, limit, offset)
+            (*l10n_param, doc, *type_params, limit, offset)
         ).fetchall()
         con.close()
 
@@ -1147,6 +1227,8 @@ def api_passages(doc):
             "doc": doc,
             "total": total,
             "translated": translated,
+            "lang": lang,
+            "available_langs": available_langs,
             "type_counts": type_counts,
             "page": page,
             "limit": limit,
@@ -1221,6 +1303,243 @@ def api_queue_skip(doc):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.get("/library")
+def library():
+    """Reader front door: every translated text, grouped by category, with
+    EN/HI availability and a Read link into the multilingual reader."""
+    import html as _html
+    from collections import OrderedDict
+    db_path = request.args.get("db", "data/context.db")
+    try:
+        con = sqlite3.connect(db_path)
+        tset = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        rows = con.execute(
+            "SELECT d.code, COALESCE(d.title,d.code), COALESCE(d.category,'other'), "
+            "COUNT(p.id), "
+            "SUM(CASE WHEN TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END) "
+            "FROM docs d LEFT JOIN passages p ON p.doc_id=d.id "
+            "WHERE d.code NOT LIKE '%-RETIRED' "        # hide retired docs (reversible)
+            "GROUP BY d.id ORDER BY COALESCE(d.category,'other'), d.code"
+        ).fetchall()
+        hi = {}
+        if "translations_l10n" in tset:
+            for code, n in con.execute(
+                "SELECT d.code, COUNT(*) FROM translations_l10n l "
+                "JOIN passages p ON p.id=l.passage_id JOIN docs d ON d.id=p.doc_id "
+                "WHERE l.lang='hi' AND TRIM(COALESCE(l.translation,''))<>'' GROUP BY d.code"):
+                hi[code] = n
+        con.close()
+    except Exception as e:
+        return f"<pre>Library error: {_html.escape(str(e))}</pre>", 500
+
+    cats = OrderedDict()
+    total_docs = total_en = total_hi = 0
+    for code, title, cat, total, en in rows:
+        en = int(en or 0)
+        if en == 0:
+            continue  # only list readable texts
+        total_docs += 1; total_en += en
+        h = int(hi.get(code, 0) or 0); total_hi += h
+        cats.setdefault(cat, []).append((code, title, int(total or 0), en, h))
+
+    body = ""
+    if not cats:
+        body = ('<div class="empty">No translated texts yet. '
+                'Translate a document, then it appears here.</div>')
+    for cat, docs in cats.items():
+        body += f'<h2 class="cat">{_html.escape(cat)}</h2><div class="grid">'
+        for code, title, total, en, h in docs:
+            pct = round(100 * en / total) if total else 0
+            hi_badge = f'<span class="badge hi">&#2361;&#2367; {h}</span>' if h else ''
+            body += (
+                f'<a class="card" href="/reader/{code}">'
+                f'<div class="ttl">{_html.escape(title)}</div>'
+                f'<div class="code">{_html.escape(code)}</div>'
+                f'<div class="bar"><i style="width:{pct}%"></i></div>'
+                f'<div class="meta"><span class="badge en">EN {en}/{total}</span>{hi_badge}'
+                f'<span class="pct">{pct}%</span></div></a>'
+            )
+        body += '</div>'
+
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Srangam &mdash; Corpus Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;700&family=EB+Garamond&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{{--bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58;--green:#5aaa7a;--blue:#5b9bd5}}
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{background:var(--bg);color:var(--cream);font-family:'EB Garamond',Georgia,serif;min-height:100vh}}
+header{{background:var(--card);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}}
+header .back{{color:var(--muted);font-size:12px;text-decoration:none;font-family:'Inter',sans-serif}}
+header .back:hover{{color:var(--gold)}}
+header h1{{font-size:20px;color:var(--gold);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:.5px}}
+header .sub{{color:var(--muted);font-size:12px;font-family:'Inter',sans-serif}}
+main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
+.cat{{font-family:'Inter',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin:26px 0 12px;border-bottom:1px solid var(--border);padding-bottom:6px}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}}
+.card{{display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit;transition:all .15s}}
+.card:hover{{border-color:var(--gold);background:var(--card2);transform:translateY(-2px)}}
+.ttl{{font-size:17px;color:var(--cream);margin-bottom:2px;font-weight:500}}
+.code{{font-family:'Inter',monospace;font-size:10px;color:var(--muted);margin-bottom:10px}}
+.bar{{height:5px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:8px}}
+.bar i{{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--green))}}
+.meta{{display:flex;gap:6px;align-items:center;font-family:'Inter',sans-serif;font-size:10px}}
+.badge{{border-radius:20px;padding:2px 8px;font-weight:600}}
+.badge.en{{background:#22304a;color:var(--blue)}}
+.badge.hi{{background:#3a2a0f;color:var(--gold);font-family:'Noto Serif Devanagari',serif}}
+.pct{{margin-left:auto;color:var(--muted)}}
+.empty{{color:var(--muted);text-align:center;padding:60px 20px;font-family:'Inter',sans-serif}}
+</style></head><body>
+<header>
+  <a class="back" href="/">&#8592; Dashboard</a>
+  <h1>&#2384; Srangam Library</h1>
+  <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses</span>
+</header>
+<main>{body}</main>
+</body></html>"""
+
+
+@app.post("/api/quick_translate")
+def api_quick_translate():
+    """Ad-hoc, on-demand translation of arbitrary Sanskrit into English + Hindi.
+
+    Synchronous (the caller clicked and waits a few seconds). Uses a THROWAWAY
+    in-memory DB so it never contends with the live context.db — safe to use
+    even while translate/heal jobs are writing. No corpus row is touched."""
+    data   = request.get_json(force=True) or {}
+    text   = (data.get("text") or "").strip()
+    engine = data.get("engine") or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
+    want   = data.get("langs") or ["en", "hi"]
+    if not text:
+        return jsonify({"error": "no text supplied"}), 400
+    if len(text) > 8000:
+        return jsonify({"error": "text too long (max 8000 chars) — translate in parts"}), 400
+    try:
+        import sys as _sys
+        _sys.path.insert(0, str(SCRIPTS))
+        from infer_mt import translate_batch
+        from db_utils import ensure_schema, migrate_schema
+        mem = sqlite3.connect(":memory:")
+        ensure_schema(mem)
+        try:
+            migrate_schema(mem)
+        except Exception:
+            pass
+        out = {}
+        for lg in want:
+            if lg not in ("en", "hi"):
+                continue
+            try:
+                res = translate_batch(mem, [text], engine=engine, tgt=lg)
+                out[lg] = (res[0] if res else "") or ""
+            except Exception as e:
+                out[lg] = f"[error: {type(e).__name__}: {e}]"
+        mem.close()
+        return jsonify({"engine": engine, "text": text, "translations": out})
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.get("/translate")
+def quick_translate_page():
+    """On-demand translator: paste any Sanskrit, get English + Hindi right now."""
+    return """<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Srangam &mdash; Quick Translate</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;600&family=EB+Garamond:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58;--green:#5aaa7a;--blue:#5b9bd5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:'EB Garamond',Georgia,serif;min-height:100vh}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
+header a.back{color:var(--muted);font-size:12px;text-decoration:none;font-family:'Inter',sans-serif}
+header a.back:hover{color:var(--gold)}
+header h1{font-size:20px;color:var(--gold);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:.5px}
+main{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-family:'Inter',sans-serif;font-size:12px}
+select,textarea{background:var(--card2);border:1px solid var(--border);color:var(--cream);border-radius:8px;font-size:15px}
+select{padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px}
+textarea{width:100%;min-height:120px;padding:14px 16px;font-family:'Noto Serif Devanagari',serif;line-height:1.9;resize:vertical}
+.langs{display:flex;gap:6px}
+.chip{border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;color:var(--muted);font-weight:600;user-select:none}
+.chip.on{background:var(--gold);color:#000;border-color:var(--gold)}
+.btn{background:linear-gradient(135deg,#3a2a0f,#2a1f0a);color:var(--gold);border:1px solid var(--gold);border-radius:8px;padding:9px 22px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.btn:hover{background:var(--gold);color:#000}
+.btn:disabled{opacity:.5;cursor:wait}
+.results{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+@media(max-width:720px){.results{grid-template-columns:1fr}}
+.rescard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;min-height:80px}
+.rescard h3{font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.rescard .en{color:var(--blue)} .rescard .hi{color:var(--gold)}
+.res-en{font-size:16px;line-height:1.7;color:var(--cream)}
+.res-hi{font-family:'Noto Serif Devanagari',serif;font-size:16px;line-height:1.95;color:var(--cream)}
+.copy{font-family:'Inter',sans-serif;font-size:10px;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:2px 8px;cursor:pointer;background:transparent}
+.copy:hover{color:var(--gold);border-color:var(--gold)}
+.muted{color:var(--muted);font-family:'Inter',sans-serif;font-size:12px}
+</style></head><body>
+<header>
+  <a class="back" href="/">&#8592; Dashboard</a>
+  <h1>&#9889; Quick Translate</h1>
+  <span class="muted">paste Sanskrit &rarr; get English + Hindi, on demand</span>
+</header>
+<main>
+  <div class="row">
+    <span class="muted">Engine</span>
+    <select id="engine">
+      <option value="gemini:gemini-2.5-flash">Gemini 2.5 Flash (default)</option>
+      <option value="gemini:gemini-2.5-pro">Gemini 2.5 Pro (higher quality)</option>
+      <option value="openai:gpt-4o">GPT-4o</option>
+    </select>
+    <span class="muted" style="margin-left:12px">Into</span>
+    <div class="langs">
+      <span class="chip on" id="chip-en" onclick="toggleLang('en')">English</span>
+      <span class="chip on" id="chip-hi" onclick="toggleLang('hi')">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</span>
+    </div>
+  </div>
+  <textarea id="src" placeholder="Paste Devanagari Sanskrit here (a verse, a line, a paragraph)&hellip;"></textarea>
+  <div class="row" style="margin-top:12px">
+    <button class="btn" id="go" onclick="run()">&#9889; Translate</button>
+    <span class="muted" id="status"></span>
+  </div>
+  <div class="results" id="results" style="display:none">
+    <div class="rescard" id="card-en"><h3><span class="en">&#x1F4DC; English</span><button class="copy" onclick="copyRes('en')">copy</button></h3><div class="res-en" id="out-en"></div></div>
+    <div class="rescard" id="card-hi"><h3><span class="hi">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368; Hindi</span><button class="copy" onclick="copyRes('hi')">copy</button></h3><div class="res-hi" id="out-hi"></div></div>
+  </div>
+</main>
+<script>
+var LANGS = {en:true, hi:true};
+function toggleLang(l){ LANGS[l]=!LANGS[l]; document.getElementById('chip-'+l).classList.toggle('on',LANGS[l]); }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function copyRes(l){ var t=document.getElementById('out-'+l).textContent||''; navigator.clipboard && navigator.clipboard.writeText(t); }
+async function run(){
+  var text=document.getElementById('src').value.trim();
+  var want=Object.keys(LANGS).filter(function(k){return LANGS[k];});
+  if(!text){ document.getElementById('status').textContent='Enter some Sanskrit first.'; return; }
+  if(!want.length){ document.getElementById('status').textContent='Pick at least one language.'; return; }
+  var btn=document.getElementById('go'); btn.disabled=true;
+  document.getElementById('status').textContent='Translating… (a few seconds)';
+  document.getElementById('results').style.display='grid';
+  document.getElementById('card-en').style.display = LANGS.en?'block':'none';
+  document.getElementById('card-hi').style.display = LANGS.hi?'block':'none';
+  document.getElementById('out-en').textContent=''; document.getElementById('out-hi').textContent='';
+  try{
+    var r=await fetch('/api/quick_translate',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({text:text,engine:document.getElementById('engine').value,langs:want})});
+    var d=await r.json();
+    if(d.error){ document.getElementById('status').textContent='Error: '+d.error; btn.disabled=false; return; }
+    var tr=d.translations||{};
+    if('en' in tr) document.getElementById('out-en').textContent = tr.en || '(empty — source may be illegible)';
+    if('hi' in tr) document.getElementById('out-hi').textContent = tr.hi || '(empty — source may be illegible)';
+    document.getElementById('status').textContent='Done · engine '+esc(d.engine);
+  }catch(e){ document.getElementById('status').textContent='Failed: '+e; }
+  btn.disabled=false;
+}
+document.getElementById('src').addEventListener('keydown',function(e){ if((e.ctrlKey||e.metaKey)&&e.key==='Enter') run(); });
+</script>
+</body></html>"""
+
+
 @app.get("/reader/<doc>")
 def reader(doc):
     """Scholarly three-column reader: Sanskrit | English | Footnotes/Metadata."""
@@ -1255,6 +1574,9 @@ h1{{font-size:17px;color:var(--gold);font-weight:600;font-family:'Inter',sans-se
 .filter-bar{{display:flex;gap:6px;align-items:center}}
 .filter-btn{{background:var(--card2);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}}
 .filter-btn.active{{background:var(--gold-dim);color:var(--gold);border-color:var(--gold)}}
+.lang-bar{{display:flex;gap:6px;align-items:center}}
+.lang-btn{{background:var(--card2);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:3px 12px;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;font-weight:600}}
+.lang-btn.active{{background:var(--gold);color:#000;border-color:var(--gold)}}
 .refresh-label{{font-size:10px;color:var(--muted);font-family:'Inter',sans-serif}}
 /* ── Main ── */
 main{{max-width:1400px;margin:0 auto;padding:20px 16px 48px}}
@@ -1288,7 +1610,13 @@ main{{max-width:1400px;margin:0 auto;padding:20px 16px 48px}}
 /* ── English text ── */
 .en-text{{font-size:15px;line-height:1.75;color:var(--en-col);font-style:italic}}
 .en-text em{{font-style:normal;color:var(--cream)}}
+/* Localized (e.g. Hindi) translation: Devanagari face, upright, not italic. */
+.hi-text{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:1.9;color:var(--cream)}}
 .en-pending{{color:var(--muted);font-style:italic;font-size:13px;font-family:'Inter',sans-serif}}
+.en-illegible{{color:#c06060;font-style:italic;font-size:12px;font-family:'Inter',sans-serif}}
+.tr-one-btn{{margin-top:8px;background:#3a2a0f;border:1px solid #7a5a1a;color:#e0b050;border-radius:5px;padding:4px 11px;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}}
+.tr-one-btn:hover{{background:var(--gold);color:#000}}
+.tr-one-btn:disabled{{opacity:.6;cursor:wait}}
 /* ── Metadata column ── */
 .meta-row{{display:flex;flex-direction:column;gap:8px}}
 .meta-item{{font-size:11px;line-height:1.4}}
@@ -1331,6 +1659,7 @@ footer{{text-align:center;padding:20px;color:var(--muted);font-size:12px;font-fa
     <button class="filter-btn"        id="filter-tika"   onclick="setFilter('tika')">&#7788;&#299;k&#257;</button>
     <button class="filter-btn"        id="filter-prose"  onclick="setFilter('prose')">Prose</button>
   </div>
+  <div class="lang-bar" id="langBar" title="Translation language"></div>
   <span class="refresh-label" id="refreshLabel">Auto &#8635;</span>
 </header>
 <main id="main"><div class="loading">Loading passages&hellip;</div></main>
@@ -1339,6 +1668,58 @@ footer{{text-align:center;padding:20px;color:var(--muted);font-size:12px;font-fa
 const DOC = {json.dumps(doc)};
 let currentPage = 1; const LIMIT = 50;
 let refreshTimer = null; let activeFilter = '';
+let activeLang = 'en';
+const LANG_LABELS = {{ en: '&#x1F4DC; English', hi: '&#2361;&#2367;&#2344;&#2381;&#2342;&#2368; Hindi', sa: '&#2360;&#2306;&#2360;&#2381;&#2325;&#2371;&#2340;' }};
+const LANG_SHORT  = {{ en: 'EN', hi: '&#2361;&#2367;', sa: 'SA' }};
+
+function renderLangBar(available, current){{
+  const bar = document.getElementById('langBar');
+  if (!available || available.length <= 1){{ bar.innerHTML=''; return; }}
+  bar.innerHTML = available.map(function(l){{
+    const cls = 'lang-btn' + (l === current ? ' active' : '');
+    const lab = LANG_SHORT[l] || String(l).toUpperCase();
+    return '<button class="'+cls+'" onclick="setLang(\\''+l+'\\')" title="'+(LANG_LABELS[l]||l)+'">'+lab+'</button>';
+  }}).join('');
+}}
+
+function setLang(l){{
+  if (l === activeLang) return;
+  activeLang = l;
+  loadPage(1);
+}}
+
+// Garbage-OCR heuristic: low Devanagari density with notable Latin noise means
+// the SOURCE is unreadable, so an empty translation is correct — the fix is
+// re-OCR, not re-translation. We surface that instead of offering a translate.
+function looksIllegible(t){{
+  if (!t) return false;
+  var s = String(t);
+  var dev = (s.match(/[ऀ-ॿ]/g) || []).length;
+  var lat = (s.match(/[A-Za-z]/g) || []).length;
+  var tot = s.replace(/\\s/g,'').length || 1;
+  return (dev / tot) < 0.45 && lat > 6;
+}}
+
+// On-demand translate of ONE verse into the active language; saves to the corpus.
+async function translateVerse(page, idx, btn){{
+  btn.disabled = true; var old = btn.innerHTML; btn.innerHTML = '&#8987; translating&hellip;';
+  try{{
+    var r = await fetch('/api/translate-one', {{method:'POST', headers:{{'Content-Type':'application/json'}},
+      body: JSON.stringify({{doc: DOC, page_no: page, idx: idx, lang: activeLang}})}});
+    var j = await r.json();
+    if (j.error){{ btn.innerHTML = old; btn.disabled = false; alert('Translate: ' + j.error); return; }}
+    await pollOne(j.job);
+    loadPage(currentPage);
+  }} catch(e){{ btn.innerHTML = old; btn.disabled = false; }}
+}}
+
+async function pollOne(jid){{
+  for (var i = 0; i < 150; i++){{
+    await new Promise(function(res){{ setTimeout(res, 2000); }});
+    try{{ var j = await (await fetch('/api/job/' + jid)).json(); if (!j.running) return; }}
+    catch(e){{ return; }}
+  }}
+}}
 
 function esc(s){{ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }}
 
@@ -1372,11 +1753,15 @@ function setFilter(f){{
 async function loadPage(p){{
   currentPage = p;
   try{{
-    let url = '/api/passages/' + DOC + '?page=' + p + '&limit=' + LIMIT;
+    let url = '/api/passages/' + DOC + '?page=' + p + '&limit=' + LIMIT + '&lang=' + activeLang;
     if (activeFilter) url += '&text_type=' + activeFilter;
     const r = await fetch(url);
     const d = await r.json();
     if (d.error){{ document.getElementById('main').innerHTML='<div class="loading">Error: '+esc(d.error)+'</div>'; return; }}
+    // Sync to the language the server actually served (falls back to 'en' if the
+    // requested track has no rows) and (re)draw the switcher from availability.
+    activeLang = d.lang || 'en';
+    renderLangBar(d.available_langs || ['en'], activeLang);
     const pct = d.total ? Math.round(100*d.translated/d.total) : 0;
     document.getElementById('progBar').style.width = pct + '%';
     document.getElementById('progText').textContent = d.translated + '/' + d.total + ' translated (' + pct + '%)';
@@ -1432,12 +1817,15 @@ async function loadPage(p){{
           '<div class="col-label col-label-dev">&#2344;&#2350;&#2307; Sanskrit</div>' +
           '<div class="dev-text">' + esc(p.text) + '</div>' +
         '</div>' +
-        // Column 2: English translation
+        // Column 2: translation (English or localized, e.g. Hindi)
         '<div class="col-en">' +
-          '<div class="col-label col-label-en">&#x1F4DC; English</div>' +
+          '<div class="col-label col-label-en">' + (LANG_LABELS[activeLang] || activeLang) + '</div>' +
           (hasTr
-            ? '<div class="en-text">' + esc(p.translation) + '</div>'
-            : '<div class="en-pending">&#x231B; Awaiting translation&hellip;</div>') +
+            ? '<div class="' + (activeLang === 'en' ? 'en-text' : 'hi-text') + '">' + esc(p.translation) + '</div>'
+            : (looksIllegible(p.text)
+                ? '<div class="en-illegible">&#9888; Source illegible &mdash; needs re-OCR, not translation</div>'
+                : '<div class="en-pending">&#x231B; Not yet translated</div>'
+                  + '<button class="tr-one-btn" onclick="translateVerse(' + p.page_no + ',' + p.idx + ',this)">&#9889; Translate to ' + (LANG_SHORT[activeLang] || String(activeLang).toUpperCase()) + '</button>')) +
         '</div>' +
         // Column 3: Metadata / Footnotes
         '<div class="col-meta">' +

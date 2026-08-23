@@ -191,6 +191,8 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       </select>
     </div>
     <div class="status-dot" title="Server running"></div>
+    <a class="btn-refresh" href="/translate" target="_blank" style="text-decoration:none;margin-right:6px" title="Translate any Sanskrit into English + Hindi on demand">&#9889; Translate</a>
+    <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
     <button class="btn-refresh" onclick="refresh()">&#x27F3; Refresh</button>
   </header>
 
@@ -229,12 +231,13 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
         <input id="xlateLimit" type="number" min="1" max="5000" value="100"
                style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
                oninput="localStorage.setItem('xlateLimit',this.value)"/>
-        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="Sanskrit → this language. Hindi is anchored by the verified English (translate English first).">Translate Lang</label>
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="Sanskrit → this language. Hindi is translated DIRECTLY from Sanskrit (never pivoted through English); a QA-passed English translation, when present, is offered only as an optional meaning reference. 'Both' runs English then Hindi in one job.">Translate Lang</label>
         <select id="xlateLang"
                style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
                onchange="localStorage.setItem('xlateLang',this.value)">
           <option value="en">English (from Sanskrit)</option>
-          <option value="hi">हिन्दी Hindi (anchored by English)</option>
+          <option value="hi">हिन्दी Hindi (direct from Sanskrit)</option>
+          <option value="both">English + हिन्दी (both, one job)</option>
         </select>
         <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="What the Export button produces.">Export As</label>
         <select id="exportMode"

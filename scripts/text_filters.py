@@ -12,6 +12,9 @@ import re
 
 DEV_RE = re.compile(r"[ऀ-ॿ]")          # Devanagari block
 DEV_DIGIT_RE = re.compile(r"[०-९]")     # Devanagari digits (verse-numbers in raw OCR)
+# A trailing verse number after a daṇḍa/slash marks a COMPLETE verse ("…// 41",
+# "…॥ ४१") — used to keep the truncation heuristic from false-flagging it.
+_VERSENUM_TAIL_RE = re.compile(r"(?://|/|।|॥)\s*[\d०-९]+\s*$")
 ONLY_PUNCT_RE = re.compile(r"^[\W_·•\-—–\*'\"` ~^=।॥]+$")
 MQQ_RE = re.compile(r"^[\"']{1,4}$")
 LATIN_RE = re.compile(r"[A-Za-z]")
@@ -334,6 +337,29 @@ def score_translation_quality(src: str, translation: str, lang: str = "en") -> f
     m = _GLOSS_PAIR_RE.match(t)
     if m and m.group(1).strip().lower() == m.group(2).strip().lower():
         score -= 0.6
+
+    # Shared: mid-sentence cutoff (MAX_TOKENS truncation). A substantial
+    # translation that does not end on a sentence terminator was almost
+    # certainly cut off — the p41 Nilamata case, where a fluent-but-truncated
+    # English passage slipped past the length-ratio penalty (2026-08-20).
+    # A complete ending is any sentence terminator, a closing quote/bracket,
+    # the salvage lacuna marker "[…]" (ends in ']'), OR the pāda/verse marker
+    # "//" (ends in '/'). Verses legitimately end "…, //" or "…— //", so the
+    # slash must count as terminal — else 27 good MBh01 verses false-flag
+    # (verified 2026-08-20). Ends mid-word (…and Ś / …Manvant) still flag.
+    _tail = t.rstrip()
+    _END_OK = ('.', '!', '?', '।', '॥', '…', ']', '"', "'", '”', '’', ')', '/')
+    # A verse that ends with its NUMBER after a daṇḍa/slash — "…(fee). // 41",
+    # "…rises. // 40", "…karma ॥ ४१" — is COMPLETE, not truncated. The trailing
+    # digit fooled the endswith() test into a false truncation (smriti_02vyasa,
+    # 2026-08-23). Whitelist a verse-number tail; a mid-sentence cut that merely
+    # happens to contain "// 40\nHaving seen…" still fails (its true end is a
+    # word, not the number), so real truncations are unaffected.
+    if _VERSENUM_TAIL_RE.search(_tail):
+        pass                  # ends in a verse number → complete verse, no penalty
+    elif len(t) > 40 and _tail and not _tail.endswith(_END_OK):
+        score -= 0.85         # ends mid-sentence/word → truncated; lands <0.2 so
+                              # heal_lowqa --below-qa 0.2 catches it deterministically
 
     if lang == "hi":
         # Length band for Sanskrit→Hindi

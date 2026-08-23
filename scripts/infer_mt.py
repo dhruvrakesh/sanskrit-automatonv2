@@ -22,7 +22,7 @@ Supported engine strings:
   echo                passthrough for testing
 """
 from __future__ import annotations
-import os, time, sqlite3, hashlib, json
+import os, re, time, sqlite3, hashlib, json
 from typing import List, Tuple, Dict, Optional
 
 DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
@@ -288,6 +288,113 @@ def _openai_translate(
 
 # ── Gemini engine ─────────────────────────────────────────────────────────────
 
+_GEMINI_SAFETY = [
+    {"category": "HARM_CATEGORY_HARASSMENT",        "threshold": "BLOCK_NONE"},
+    {"category": "HARM_CATEGORY_HATE_SPEECH",       "threshold": "BLOCK_NONE"},
+    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+]
+
+# MAX_TOKENS recovery is a robustness ladder, not a single retry (2026-08-20):
+#   1. escalate the SAME model's output budget — dynamic "thinking" tokens on
+#      gemini-2.5-* count against max_output_tokens, so a long page can truncate
+#      even though the translation itself is short; more headroom fixes most.
+#   2. fall back to a NON-thinking model whose whole budget goes to output.
+#   3. deterministically chunk the source at daṇḍa/newline boundaries.
+# Both the fallback model and the ladder are env-overridable.
+_MAXTOK_LADDER = tuple(int(x) for x in
+                       os.environ.get("MT_MAXTOK_LADDER", "16384,32768").split(","))
+_FALLBACK_MODEL = os.environ.get("MT_FALLBACK_MODEL", "gemini-2.0-flash").strip()
+_CHUNK_SPLIT_RE = re.compile(r"[।॥\n]")
+
+
+def _gemini_generate(model_name: str, system_prompt: str, msg: str, max_tokens: int):
+    """One generation attempt with a given model + output budget.
+    Returns (text, finish_reason)."""
+    import google.generativeai as genai
+    cfg = genai.GenerationConfig(temperature=0.1, max_output_tokens=max_tokens)
+    gm = genai.GenerativeModel(model_name=model_name, generation_config=cfg,
+                               safety_settings=_GEMINI_SAFETY,
+                               system_instruction=system_prompt)
+    resp = gm.generate_content(msg)
+    try:
+        text = (resp.text or "").strip()
+    except Exception:
+        text = ""
+    finish = None
+    try:
+        finish = resp.candidates[0].finish_reason if resp.candidates else None
+    except Exception:
+        pass
+    return text, finish
+
+
+def _split_point(s: str):
+    """Index near the middle of s at a daṇḍa/newline boundary, or None."""
+    if len(s) < 80:
+        return None
+    mid = len(s) // 2
+    best = None
+    for m in _CHUNK_SPLIT_RE.finditer(s):
+        if best is None or abs(m.end() - mid) < abs(best - mid):
+            best = m.end()
+    if best is None or best < 20 or best > len(s) - 20:
+        return None
+    return best
+
+
+def _translate_chunked(model_name: str, system_prompt: str, src: str,
+                       max_tokens: int = 16384, depth: int = 0) -> str:
+    """Split an over-long source at a boundary near the middle and translate each
+    half, recursing until pieces fit. Model-agnostic and deterministic. A piece
+    that still won't fit after the depth cap keeps its partial + ' […]' lacuna
+    rather than a silent truncation."""
+    src = (src or "").strip()
+    if not src:
+        return ""
+    text, finish = _gemini_generate(model_name, system_prompt, src, max_tokens)
+    if finish != 2:
+        return text
+    if depth >= 3:
+        return (text + " […]").strip() if text else ""
+    idx = _split_point(src)
+    if idx is None:
+        return (text + " […]").strip() if text else ""
+    left  = _translate_chunked(model_name, system_prompt, src[:idx], max_tokens, depth + 1)
+    right = _translate_chunked(model_name, system_prompt, src[idx:], max_tokens, depth + 1)
+    return " ".join(p for p in (left, right) if p).strip()
+
+
+def _gemini_escalate(base_model: str, system_prompt: str, msg: str,
+                     raw_src: str, i: int) -> str:
+    """MAX_TOKENS recovery ladder: bigger budget → non-thinking fallback model →
+    chunk the source. Returns the best COMPLETE text, or '' if truly impossible
+    (an honest gap beats a silent mid-sentence cut)."""
+    # 1. same model, escalating output budget (headroom for dynamic thinking)
+    for mt in _MAXTOK_LADDER:
+        text, finish = _gemini_generate(base_model, system_prompt, msg, mt)
+        if finish != 2 and text:
+            print(f"[gemini] recovered p{i} @ {mt} tokens ({base_model})")
+            return text
+    # 2. non-thinking fallback model (its whole budget goes to output)
+    if _FALLBACK_MODEL and _FALLBACK_MODEL != base_model:
+        try:
+            text, finish = _gemini_generate(_FALLBACK_MODEL, system_prompt, msg, 16384)
+            if finish != 2 and text:
+                print(f"[gemini] recovered p{i} via fallback model {_FALLBACK_MODEL}")
+                return text
+        except Exception as _e:
+            print(f"[gemini] fallback model {_FALLBACK_MODEL} failed p{i}: {_e}")
+    # 3. deterministic chunking of the raw source
+    print(f"[gemini] chunking p{i} (source {len(raw_src)} chars)")
+    chunked = _translate_chunked(base_model, system_prompt, raw_src, 16384)
+    if chunked:
+        return chunked
+    print(f"[gemini] p{i} unrecoverable even after chunking — leaving untranslated "
+          f"(segment this doc).")
+    return ""
+
+
 def _gemini_client(model: str, system_prompt: str):
     """Return a configured GenerativeModel instance."""
     try:
@@ -309,16 +416,10 @@ def _gemini_client(model: str, system_prompt: str):
         # Cost impact nil: billing is for tokens actually produced.
         max_output_tokens=8192,
     )
-    safety = [
-        {"category": "HARM_CATEGORY_HARASSMENT",       "threshold": "BLOCK_NONE"},
-        {"category": "HARM_CATEGORY_HATE_SPEECH",       "threshold": "BLOCK_NONE"},
-        {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
-    ]
     return genai.GenerativeModel(
         model_name=model,
         generation_config=generation_config,
-        safety_settings=safety,
+        safety_settings=_GEMINI_SAFETY,
         system_instruction=system_prompt,
     )
 
@@ -342,26 +443,37 @@ def _gemini_translate(
                 # (Fix 2026-07-19: 2 was mislabelled as SAFETY. On thinking
                 # models the reasoning budget can exhaust max_output_tokens,
                 # returning finish_reason=2 with no text parts.)
-                out = ""
+                # Extract text if any, THEN always inspect finish_reason. A
+                # MAX_TOKENS truncation returns PARTIAL text (resp.text succeeds),
+                # so checking finish only in the no-text path silently stored
+                # mid-sentence cut-offs — the p41 Nilamata bug (2026-08-20).
                 try:
                     out = (resp.text or "").strip()
                 except Exception:
-                    finish = None
-                    try:
-                        finish = resp.candidates[0].finish_reason if resp.candidates else None
-                    except Exception:
-                        pass
-                    if finish == 2:
-                        print(f"[gemini] MAX_TOKENS p{i} — output budget exhausted "
-                              f"before any text (thinking model); returning empty.")
-                    elif finish == 3:
-                        print(f"[gemini] SAFETY BLOCK p{i} — Gemini refused this text. "
-                              f"Returning empty (will be skipped).")
-                    elif finish == 4:
-                        print(f"[gemini] RECITATION BLOCK p{i} — treating as empty.")
-                    else:
-                        print(f"[gemini] No text in response (finish_reason={finish}), returning empty.")
-                    out = ""  # none of these improve on a same-config retry
+                    out = ""
+                finish = None
+                try:
+                    finish = resp.candidates[0].finish_reason if resp.candidates else None
+                except Exception:
+                    pass
+
+                # FinishReason: 1=STOP(ok) 2=MAX_TOKENS 3=SAFETY 4=RECITATION.
+                if finish == 2:
+                    # Truncated (any partial text is mid-sentence and must NOT be
+                    # stored). Hand off to the robustness ladder: bigger budget ->
+                    # non-thinking fallback model -> chunk the source. Returns a
+                    # complete translation, or '' if genuinely impossible.
+                    print(f"[gemini] MAX_TOKENS p{i} (partial {len(out)} chars) — escalating")
+                    out = _gemini_escalate(model, system_prompt,
+                                           msgs_to_use[i].strip(), t, i)
+                elif finish == 3:
+                    print(f"[gemini] SAFETY BLOCK p{i} — returning empty (will be skipped).")
+                    out = ""
+                elif finish == 4:
+                    print(f"[gemini] RECITATION BLOCK p{i} — treating as empty.")
+                    out = ""
+                elif not out:
+                    print(f"[gemini] No text (finish_reason={finish}) p{i} — returning empty.")
 
                 outs.append(out)
                 break
