@@ -205,7 +205,23 @@ def _extract_chunk(con, cur, genai, model, chunk):
         src = (f"IAST: {iast.strip()}\n" if iast else "") + f"EN: {(tr or '').strip()[:700]}"
         lines.append(f"[verse {i}]\n{src}")
     prompt = "Verses:\n\n" + "\n\n".join(lines)
-    reply = _gemini_extract(genai, model, prompt)
+    # Transient API errors (504 deadline, 503 unavailable, 429 rate) are common on
+    # a long run — retry with exponential backoff instead of stopping the whole job.
+    reply, _tries = None, 5
+    for attempt in range(_tries):
+        try:
+            reply = _gemini_extract(genai, model, prompt)
+            break
+        except Exception as exc:
+            msg = str(exc).lower()
+            transient = any(s in msg for s in
+                            ("504", "503", "429", "deadline", "unavailable", "timeout", "rate limit"))
+            if transient and attempt < _tries - 1:
+                wait = 2 ** attempt
+                print(f"    [retry {attempt+1}/{_tries-1}] {str(exc)[:70]} — waiting {wait}s", flush=True)
+                time.sleep(wait)
+                continue
+            raise
     parsed = _parse_json(reply)
     if parsed is not None:
         m, mm = _apply_extraction(con, cur, batch, parsed)
