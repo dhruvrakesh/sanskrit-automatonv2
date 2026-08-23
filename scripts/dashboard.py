@@ -1949,6 +1949,68 @@ def _ask_retrieve(con, q, k=12):
     except sqlite3.OperationalError:
         return []
 
+
+def _ask_semantic_retrieve(con, q, k=12):
+    """Vector (meaning-based) retrieval using passage_embeddings, if it exists
+    and is populated. Returns a list of (code, verse_ref, page, idx, translation)
+    ranked by cosine similarity, or None to signal 'fall back to keyword FTS'.
+    Read-only; brute-force cosine over ~10^4 vectors is a few ms."""
+    try:
+        if not con.execute("SELECT COUNT(*) FROM passage_embeddings").fetchone()[0]:
+            return None
+    except sqlite3.OperationalError:
+        return None                      # table not built yet → FTS fallback
+    try:
+        import numpy as np
+        import google.generativeai as genai
+    except Exception:
+        return None
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key:
+        return None
+    row = con.execute("SELECT model, dim FROM passage_embeddings "
+                      "GROUP BY model ORDER BY COUNT(*) DESC LIMIT 1").fetchone()
+    if not row:
+        return None
+    model, dim = row[0], int(row[1] or 0)
+    try:
+        genai.configure(api_key=key)
+        res = genai.embed_content(model=model, content=q, task_type="retrieval_query")
+        qv = np.asarray(res["embedding"] if isinstance(res, dict) else res.embedding,
+                        dtype="float32")
+    except Exception:
+        return None                      # query-embed failed → FTS fallback
+    n = float(np.linalg.norm(qv))
+    if n > 0:
+        qv = qv / n
+    ids, mats = [], []
+    for pid, blob in con.execute(
+            "SELECT passage_id, vec FROM passage_embeddings WHERE model=?", (model,)):
+        v = np.frombuffer(blob, dtype="float32")
+        if dim and v.shape[0] != dim:
+            continue
+        ids.append(pid); mats.append(v)
+    if not ids:
+        return None
+    sims = np.vstack(mats) @ qv          # both L2-normalised → dot == cosine
+    order = np.argsort(-sims)[: max(k * 3, k)]   # over-fetch, then filter retired
+    top_ids = [ids[j] for j in order]
+    ph = ",".join("?" * len(top_ids))
+    got = {r[0]: r for r in con.execute(
+        f"""SELECT p.id, d.code, p.verse_ref, p.page_no, p.idx, p.translation
+            FROM passages p JOIN docs d ON d.id = p.doc_id
+            WHERE p.id IN ({ph}) AND d.code NOT LIKE '%-RETIRED'
+              AND TRIM(COALESCE(p.translation,'')) <> ''""", top_ids)}
+    out = []
+    for pid in top_ids:
+        r = got.get(pid)
+        if r:
+            out.append((r[1], r[2], r[3], r[4], r[5]))
+        if len(out) >= k:
+            break
+    return out or None
+
+
 _ASK_SYSTEM = (
     "You are a careful scholar of Sanskrit scripture. Answer the user's question "
     "USING ONLY the numbered passages provided, which are English translations of "
@@ -1976,8 +2038,13 @@ def api_ask():
         con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
     except Exception as e:
         return jsonify({"error": f"cannot open db: {e}"}), 500
+    mode = "keyword"
     try:
-        rows = _ask_retrieve(con, q, k)
+        rows = _ask_semantic_retrieve(con, q, k)   # meaning-based if embeddings built
+        if rows:
+            mode = "semantic"
+        else:
+            rows = _ask_retrieve(con, q, k)        # else keyword FTS
     finally:
         con.close()
     if not rows:
@@ -2008,7 +2075,8 @@ def api_ask():
                  "(The model returned no text — try rephrasing or a smaller k.)"
     except Exception as e:
         return jsonify({"error": f"LLM error: {e}", "sources": sources}), 500
-    return jsonify({"answer": answer, "sources": sources, "engine": engine, "k": k})
+    return jsonify({"answer": answer, "sources": sources, "engine": engine,
+                    "k": k, "mode": mode})
 
 
 @app.get("/ask")

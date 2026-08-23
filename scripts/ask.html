@@ -203,8 +203,10 @@
       }
       renderSources(d.sources);
       renderAnswer(d.answer||'');
+      var modeLabel = d.mode === 'semantic' ? '◉ semantic (meaning) search'
+                     : '○ keyword search';
       document.getElementById('answerMeta').textContent =
-        (d.sources? d.sources.length : 0) + ' passages retrieved · engine ' + (d.engine||'');
+        (d.sources? d.sources.length : 0) + ' passages retrieved · ' + modeLabel + ' · engine ' + (d.engine||'');
       document.getElementById('answer').style.display = 'block';
       document.getElementById('answer').scrollIntoView({behavior:'smooth', block:'start'});
     }catch(e){
