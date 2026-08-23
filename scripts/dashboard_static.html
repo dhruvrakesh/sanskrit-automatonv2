@@ -194,6 +194,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <a class="btn-refresh" href="/translate" target="_blank" style="text-decoration:none;margin-right:6px" title="Translate any Sanskrit into English + Hindi on demand">&#9889; Translate</a>
     <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
     <a class="btn-refresh" href="/ask" target="_blank" style="text-decoration:none;margin-right:6px" title="Ask questions answered from the corpus, with cited verses">&#128172; Ask the Corpus</a>
+    <button class="btn-refresh" onclick="openDatabase(this)" style="margin-right:6px" title="Open the corpus in Datasette for SQL querying (snapshots first, then launches)">&#128190; Database</button>
     <button class="btn-refresh" onclick="refresh()">&#x27F3; Refresh</button>
   </header>
 
@@ -407,6 +408,22 @@ function getLang() {
 function getExportMode() {
   const el = document.getElementById('exportMode');
   return (el && el.value) || 'en';
+}
+async function openDatabase(el) {
+  var orig = el.innerHTML; el.disabled = true; el.innerHTML = 'preparing&hellip;';
+  try {
+    var r = await fetch('/api/db/open', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({db: cfg.db})});
+    var d = await r.json();
+    if (d.url) {
+      var running = d.status === 'already-running';
+      toast(running ? 'Opening database…' : 'Snapshotting + starting Datasette (a few seconds)…');
+      setTimeout(function(){ window.open(d.url, '_blank'); }, running ? 250 : 3200);
+    } else {
+      toast('Database: ' + (d.error || 'failed'));
+    }
+  } catch(e) { toast('Database error: ' + e); }
+  finally { el.disabled = false; el.innerHTML = orig; }
 }
 function getEngine(doc) {
   if (doc && docEngines[doc]) return docEngines[doc];

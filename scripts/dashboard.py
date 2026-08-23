@@ -2084,6 +2084,54 @@ def ask_page():
     return send_from_directory(str(SCRIPTS), "ask.html")
 
 
+# ── Launch Datasette (SQL explorer) on a consistent snapshot, from the UI ──────
+_DATASETTE = {"proc": None, "port": 8001}
+
+def _port_serving(host, port):
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.settimeout(0.4)
+    try:
+        s.connect((host, int(port))); return True
+    except Exception:
+        return False
+    finally:
+        try: s.close()
+        except Exception: pass
+
+@app.post("/api/db/open")
+def api_db_open():
+    """Open the corpus in Datasette for SQL querying. Snapshots the live DB
+    (consistent copy — never opens the writable DB in a GUI), then launches
+    Datasette read-only on the snapshot. Idempotent: if something is already
+    serving the port, just returns its URL."""
+    import shutil, subprocess as sp
+    data = request.get_json(force=True) or {}
+    db   = data.get("db") or "data/context.db"
+    port = int(_DATASETTE["port"])
+    url  = f"http://127.0.0.1:{port}"
+    if _port_serving("127.0.0.1", port):
+        return jsonify({"url": url, "status": "already-running"})
+    if not shutil.which("datasette"):
+        return jsonify({"error": "Datasette is not installed. Run:  pip install datasette"}), 500
+    snap = str((ROOT / "query_snapshot.db").resolve())
+    try:
+        r = sp.run(py(script("db_backup.py"), db, snap),
+                   capture_output=True, text=True, timeout=600)
+        if r.returncode != 0:
+            tail = (r.stderr or r.stdout or "")[-300:]
+            return jsonify({"error": f"snapshot failed (is a job writing the DB?): {tail}"}), 500
+    except Exception as e:
+        return jsonify({"error": f"snapshot error: {e}"}), 500
+    try:
+        _DATASETTE["proc"] = sp.Popen(
+            ["datasette", snap, "-h", "127.0.0.1", "--port", str(port),
+             "--setting", "sql_time_limit_ms", "8000"],
+            stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+    except Exception as e:
+        return jsonify({"error": f"could not launch Datasette: {e}"}), 500
+    return jsonify({"url": url, "status": "starting", "snapshot": snap})
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Static dashboard is maintained in scripts/dashboard_static.html (canonical).
 # The embedded fallback below is intentionally minimal — it is only written to

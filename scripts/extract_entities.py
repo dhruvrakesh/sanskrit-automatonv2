@@ -172,20 +172,53 @@ def _apply_extraction(con, cur, batch, parsed):
     return marked, mentions
 
 
-def _gemini_extract(genai, model, prompt):
-    cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=4096,
-                                 response_mime_type="application/json")
-    kwargs = dict(model_name=model, generation_config=cfg, system_instruction=_SYSTEM)
-    if _SAFETY is not None:
-        kwargs["safety_settings"] = _SAFETY
+def _gemini_extract(genai, model, prompt, max_tokens=8192):
+    # 8192 (was 4096): a 10-verse batch rich in names can exceed 4096 output
+    # tokens and truncate the JSON mid-object, which then fails to parse and
+    # (previously) silently dropped the whole batch. More headroom + the
+    # split-on-failure retry below make batches self-healing.
     try:
+        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=max_tokens,
+                                     response_mime_type="application/json")
+        kwargs = dict(model_name=model, generation_config=cfg, system_instruction=_SYSTEM)
+        if _SAFETY is not None:
+            kwargs["safety_settings"] = _SAFETY
         gm = genai.GenerativeModel(**kwargs)
     except TypeError:
-        # older client without response_mime_type support
-        cfg2 = genai.GenerationConfig(temperature=0.0, max_output_tokens=4096)
-        kwargs["generation_config"] = cfg2
+        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=max_tokens)
+        kwargs = dict(model_name=model, generation_config=cfg, system_instruction=_SYSTEM)
+        if _SAFETY is not None:
+            kwargs["safety_settings"] = _SAFETY
         gm = genai.GenerativeModel(**kwargs)
     return (getattr(gm.generate_content(prompt), "text", "") or "").strip()
+
+
+def _extract_chunk(con, cur, genai, model, chunk):
+    """Extract one chunk = list of (pid, iast, tr). On a JSON-parse failure,
+    recursively SPLIT the chunk and retry each half, so a single problematic
+    verse can never sink its neighbours. A lone verse that still won't parse is
+    left UNMARKED (ents stays NULL) so a later run retries it — never silently
+    dropped. Returns (verses_marked, mentions_added)."""
+    lines, batch = [], []
+    for i, (pid, iast, tr) in enumerate(chunk):
+        batch.append((i, pid))
+        src = (f"IAST: {iast.strip()}\n" if iast else "") + f"EN: {(tr or '').strip()[:700]}"
+        lines.append(f"[verse {i}]\n{src}")
+    prompt = "Verses:\n\n" + "\n\n".join(lines)
+    reply = _gemini_extract(genai, model, prompt)
+    parsed = _parse_json(reply)
+    if parsed is not None:
+        m, mm = _apply_extraction(con, cur, batch, parsed)
+        con.commit()
+        return m, mm
+    if len(chunk) > 1:                              # split and retry each half
+        mid = len(chunk) // 2
+        a = _extract_chunk(con, cur, genai, model, chunk[:mid])
+        b = _extract_chunk(con, cur, genai, model, chunk[mid:])
+        return a[0] + b[0], a[1] + b[1]
+    # single verse still unparseable → leave ents NULL (retryable next run)
+    print(f"    [skip] passage {chunk[0][0]}: unparseable, left for a later run.")
+    return 0, 0
 
 
 def main():
@@ -197,6 +230,9 @@ def main():
     ap.add_argument("--limit", type=int, default=None, help="cap verses this run")
     ap.add_argument("--sleep", type=float, default=0.6)
     ap.add_argument("--refresh", action="store_true", help="re-extract even verses already done")
+    ap.add_argument("--retry-empty", action="store_true",
+                    help="also re-process verses whose ents is '[]' (e.g. left empty by an "
+                         "earlier JSON-parse failure) — recovers dropped verses")
     args = ap.parse_args()
 
     try:
@@ -220,7 +256,11 @@ def main():
              "COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')",
              "d.code NOT LIKE '%-RETIRED'"]
     params = []
-    if not args.refresh:
+    if args.refresh:
+        pass                                         # re-do everything
+    elif args.retry_empty:
+        where.append("(p.ents IS NULL OR TRIM(p.ents) IN ('', '[]'))")
+    else:
         where.append("(p.ents IS NULL OR TRIM(p.ents) = '')")
     if args.doc:
         where.append("d.code = ?"); params.append(args.doc)
@@ -241,26 +281,15 @@ def main():
     cur = con.cursor()
     done = ment_total = 0
     for start in range(0, total, args.batch):
-        chunk = rows[start : start + args.batch]
-        lines, batch = [], []
-        for i, (pid, iast, tr) in enumerate(chunk):
-            batch.append((i, pid))
-            src = (f"IAST: {iast.strip()}\n" if iast else "") + f"EN: {(tr or '').strip()[:700]}"
-            lines.append(f"[verse {i}]\n{src}")
-        prompt = "Verses:\n\n" + "\n\n".join(lines)
+        chunk = rows[start : start + args.batch]     # already (pid, iast, tr)
         try:
-            reply = _gemini_extract(genai, model, prompt)
-            parsed = _parse_json(reply)
+            m, mm = _extract_chunk(con, cur, genai, model, chunk)
         except Exception as exc:
             print(f"  [ERR] batch at {start}: {exc} — stopping; re-run to resume.")
             break
-        if parsed is None:
-            print(f"  [WARN] batch at {start}: could not parse JSON; marking as processed-empty.")
-            parsed = {"verses": [{"i": i, "ents": []} for i, _ in batch]}
-        m, mm = _apply_extraction(con, cur, batch, parsed)
-        con.commit()
         done += m; ment_total += mm
-        print(f"  {done}/{total} verses  ({100*done//total}%)  +{mm} mentions", flush=True)
+        print(f"  {min(start+len(chunk),total)}/{total} seen · {done} marked · "
+              f"+{ment_total} mentions", flush=True)
         time.sleep(args.sleep)
 
     n_ent = con.execute("SELECT COUNT(*) FROM entities").fetchone()[0]
