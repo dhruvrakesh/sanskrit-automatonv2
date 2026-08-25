@@ -418,6 +418,14 @@ function getExportMode() {
   const el = document.getElementById('exportMode');
   return (el && el.value) || 'en';
 }
+function flashDoc(doc) {
+  var tr = document.querySelector('tr[data-doc="' + (window.CSS && CSS.escape ? CSS.escape(doc) : doc) + '"]');
+  if (!tr) return;
+  tr.scrollIntoView({behavior:'smooth', block:'center'});
+  var prev = tr.style.boxShadow;
+  tr.style.transition = 'box-shadow .2s'; tr.style.boxShadow = 'inset 0 0 0 2px var(--gold)';
+  setTimeout(function(){ tr.style.boxShadow = prev; }, 1800);
+}
 async function importFromDisk() {
   var el = document.getElementById('diskPath');
   var path = (el.value || '').trim();
@@ -429,12 +437,20 @@ async function importFromDisk() {
       body: JSON.stringify({path: path, inbox: cfg.inbox, auto_split: autoSplit})});
     var d = await r.json();
     if (d.error) { toast('Import failed: ' + d.error); return; }
-    var splitting = (d.imported||[]).filter(function(i){return i.action==='splitting';});
-    var copied    = (d.imported||[]).filter(function(i){return i.action==='copied';});
+    var imported  = d.imported || [];
+    var splitting = imported.filter(function(i){return i.action==='splitting';});
+    var copied    = imported.filter(function(i){return i.action==='copied';});
+    var already   = imported.filter(function(i){return i.action==='already-in-inbox';});
     splitting.forEach(function(s){ if (s.job) trackJob(s.job, 'Split '+s.doc, 'import_split', s.doc); });
-    toast('Imported ' + (d.count||d.imported.length) + ' PDF(s): ' + copied.length + ' copied, ' + splitting.length + ' splitting. Refreshing…');
+    var msg = [];
+    if (splitting.length) msg.push(splitting.length+' splitting into pages (watch Job Log; appears when done)');
+    if (copied.length)    msg.push(copied.length+' added');
+    if (already.length)   msg.push(already.length+' already in inbox');
+    toast(msg.length ? msg.join(' · ') : 'Nothing to import');
     el.value = '';
-    setTimeout(refresh, 1500);
+    // For a doc that landed immediately (single-page copy), jump to & flash its row.
+    var jumpDoc = (copied[0] && copied[0].doc);
+    setTimeout(function(){ refresh(); if (jumpDoc) setTimeout(function(){ flashDoc(jumpDoc); }, 900); }, 1200);
   } catch(e) { toast('Import error: ' + e); }
 }
 async function openDatabase(el) {

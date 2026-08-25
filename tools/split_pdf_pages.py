@@ -50,7 +50,7 @@ def split_pdf(
 
     # Load PDF
     try:
-        reader = PdfReader(input_pdf)
+        reader = PdfReader(input_pdf, strict=False)  # tolerate large/malformed scans
     except Exception as e:
         print(f"ERROR: Failed to read PDF '{input_pdf}': {e}", file=sys.stderr)
         traceback.print_exc(file=sys.stderr)

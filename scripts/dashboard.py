@@ -421,12 +421,32 @@ def _sanitize_doc_name(stem: str) -> str:
 
 
 def _count_pdf_pages(pdf_path: pathlib.Path) -> int:
-    """Count pages in a PDF using pypdf (fast, no rendering needed)."""
+    """Count pages in a PDF. Tries pypdf in tolerant mode, then Poppler's pdfinfo
+    (reliable on large/linearised/slightly-malformed scans where pypdf throws).
+    Returns 0 when the count truly can't be determined — callers must NOT treat 0
+    as '1 page' (that silently dumps a whole book as one un-OCRable blob)."""
     try:
         from pypdf import PdfReader
-        return len(PdfReader(str(pdf_path)).pages)
+        n = len(PdfReader(str(pdf_path), strict=False).pages)
+        if n > 0:
+            return n
     except Exception:
-        return 1
+        pass
+    try:
+        import subprocess
+        try:
+            from env_loader import poppler_path as _pp
+            pp = _pp()
+        except Exception:
+            pp = ""
+        exe = str(pathlib.Path(pp) / "pdfinfo") if pp else "pdfinfo"
+        out = subprocess.run([exe, str(pdf_path)], capture_output=True, text=True, timeout=90)
+        for line in (out.stdout or "").splitlines():
+            if line.lower().startswith("pages:"):
+                return int(line.split(":", 1)[1].strip())
+    except Exception:
+        pass
+    return 0
 
 
 @app.get("/api/corpus")
@@ -435,9 +455,18 @@ def api_corpus():
 
 
 def _do_import(inbox_dir, files, auto_split):
-    """Copy a list of {path, doc} PDFs into the inbox (splitting multi-page PDFs
-    when auto_split). Shared by the corpus browser and the from-disk importer."""
+    """Copy a list of {path, doc} PDFs into the inbox, splitting multi-page PDFs.
+    Shared by the corpus browser and the from-disk importer."""
     inbox_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        inbox_resolved = inbox_dir.resolve()
+    except Exception:
+        inbox_resolved = inbox_dir
+    split_script = ROOT / "tools" / "split_pdf_pages.py"
+    if not split_script.exists():
+        split_script = ROOT / "inbox" / "split_pdf_pages.py"
+    have_splitter = split_script.exists()
+
     results = []
     for item in files:
         src_path = pathlib.Path(item.get("path", ""))
@@ -445,35 +474,39 @@ def _do_import(inbox_dir, files, auto_split):
         if not src_path.exists():
             results.append({"path": str(src_path), "error": "file not found"})
             continue
+        # Already an inbox page (X_NNNN.pdf living in the inbox)? Leave it — importing
+        # the inbox folder must not re-copy the thousands of pages already there.
         try:
-            n_pages = _count_pdf_pages(src_path)
+            already = (src_path.resolve().parent == inbox_resolved) and bool(PDF_RE.match(src_path.name))
         except Exception:
-            n_pages = 1
-        if auto_split and n_pages > 1:
-            split_script = str(ROOT / "tools" / "split_pdf_pages.py")
-            if not pathlib.Path(split_script).exists():
-                split_script = str(ROOT / "inbox" / "split_pdf_pages.py")
-            if not pathlib.Path(split_script).exists():
-                dest = inbox_dir / f"{doc_name}_0001.pdf"
-                shutil.copy2(str(src_path), str(dest))
-                results.append({"doc": doc_name, "pages": 1, "action": "copied"})
-            else:
-                cmd = py(split_script, str(src_path), "-o", str(inbox_dir), "-p", doc_name)
-                jid = launch("import_split", doc_name, cmd)
-                results.append({"doc": doc_name, "pages": n_pages, "action": "splitting", "job": jid})
+            already = False
+        if already:
+            results.append({"doc": doc_name, "action": "already-in-inbox"})
+            continue
+
+        n_pages = _count_pdf_pages(src_path)          # 0 when unknown
+        is_pdf  = src_path.suffix.lower() == ".pdf"
+        # Split when auto_split is on AND the file is a PDF that is NOT definitively
+        # single-page (n_pages != 1). Unknown count (0, e.g. a big scan pypdf can't
+        # parse) routes to the splitter too — the splitter reports a real error in
+        # the job log instead of silently dumping the whole book as one blob.
+        if auto_split and is_pdf and have_splitter and n_pages != 1:
+            cmd = py(str(split_script), str(src_path), "-o", str(inbox_dir), "-p", doc_name)
+            jid = launch("import_split", doc_name, cmd)
+            results.append({"doc": doc_name, "pages": (n_pages or "?"),
+                            "action": "splitting", "job": jid})
         else:
+            # Definitely single page, or splitting off/unavailable → copy as _0001
             stem = src_path.stem
-            if PDF_RE.match(src_path.name):
-                m = re.match(r"^([A-Za-z0-9_]+)_(\d+)$", stem, re.I)
-                if m:
-                    d, pg = _sanitize_doc_name(m.group(1)), m.group(2).zfill(4)
-                    dest = inbox_dir / f"{d}_{pg}.pdf"
-                else:
-                    dest = inbox_dir / f"{doc_name}_0001.pdf"
+            m = re.match(r"^([A-Za-z0-9_]+)_(\d+)$", stem, re.I) if PDF_RE.match(src_path.name) else None
+            if m:
+                d, pg = _sanitize_doc_name(m.group(1)), m.group(2).zfill(4)
+                dest = inbox_dir / f"{d}_{pg}.pdf"
             else:
                 dest = inbox_dir / f"{doc_name}_0001.pdf"
             shutil.copy2(str(src_path), str(dest))
-            results.append({"doc": doc_name, "pages": n_pages, "action": "copied", "dest": dest.name})
+            results.append({"doc": doc_name, "pages": (n_pages or 1),
+                            "action": "copied", "dest": dest.name})
     _invalidate_corpus_cache()
     return results
 
