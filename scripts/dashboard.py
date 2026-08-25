@@ -434,62 +434,36 @@ def api_corpus():
     return jsonify({"corpus_root": str(CORPUS_ROOT), "categories": _corpus_tree()})
 
 
-@app.post("/api/corpus/import")
-def api_corpus_import():
-    """
-    Copy selected PDFs from D: drive into inbox/.
-    Body: {inbox: str, files: [{path: str, doc: str}], auto_split: bool}
-    - If auto_split=true and PDF has >1 page → split into per-page PDFs
-    - Otherwise copy/rename as DocName_0001.pdf
-    """
-    data       = request.get_json(force=True) or {}
-    inbox_dir  = pathlib.Path(data.get("inbox") or "inbox")
-    auto_split = bool(data.get("auto_split", True))
-    files      = data.get("files", [])
-
-    if not files:
-        return jsonify({"error": "no files specified"}), 400
-
+def _do_import(inbox_dir, files, auto_split):
+    """Copy a list of {path, doc} PDFs into the inbox (splitting multi-page PDFs
+    when auto_split). Shared by the corpus browser and the from-disk importer."""
     inbox_dir.mkdir(parents=True, exist_ok=True)
     results = []
-
     for item in files:
         src_path = pathlib.Path(item.get("path", ""))
         doc_name = _sanitize_doc_name(item.get("doc") or src_path.stem)
-
         if not src_path.exists():
             results.append({"path": str(src_path), "error": "file not found"})
             continue
-
         try:
             n_pages = _count_pdf_pages(src_path)
         except Exception:
             n_pages = 1
-
         if auto_split and n_pages > 1:
-            # Launch split job
             split_script = str(ROOT / "tools" / "split_pdf_pages.py")
             if not pathlib.Path(split_script).exists():
-                # Also try inbox/ (original location)
                 split_script = str(ROOT / "inbox" / "split_pdf_pages.py")
             if not pathlib.Path(split_script).exists():
-                # fallback: copy as _0001.pdf
                 dest = inbox_dir / f"{doc_name}_0001.pdf"
                 shutil.copy2(str(src_path), str(dest))
                 results.append({"doc": doc_name, "pages": 1, "action": "copied"})
             else:
-                # split_pdf_pages.py uses positional input_pdf, -o output_dir, -p prefix
-                cmd = py(split_script,
-                         str(src_path),
-                         "-o", str(inbox_dir),
-                         "-p", doc_name)
+                cmd = py(split_script, str(src_path), "-o", str(inbox_dir), "-p", doc_name)
                 jid = launch("import_split", doc_name, cmd)
                 results.append({"doc": doc_name, "pages": n_pages, "action": "splitting", "job": jid})
         else:
-            # Single-page or no split: copy as _0001.pdf (or keep existing naming)
             stem = src_path.stem
             if PDF_RE.match(src_path.name):
-                # Already in DocName_NNNN format — copy as-is with sanitized name
                 m = re.match(r"^([A-Za-z0-9_]+)_(\d+)$", stem, re.I)
                 if m:
                     d, pg = _sanitize_doc_name(m.group(1)), m.group(2).zfill(4)
@@ -500,9 +474,48 @@ def api_corpus_import():
                 dest = inbox_dir / f"{doc_name}_0001.pdf"
             shutil.copy2(str(src_path), str(dest))
             results.append({"doc": doc_name, "pages": n_pages, "action": "copied", "dest": dest.name})
+    _invalidate_corpus_cache()
+    return results
 
-    _invalidate_corpus_cache()  # force sidebar refresh on next /api/corpus call
-    return jsonify({"imported": results})
+
+@app.post("/api/corpus/import")
+def api_corpus_import():
+    """Copy selected corpus PDFs into inbox/. Body: {inbox, files:[{path,doc}], auto_split}."""
+    data       = request.get_json(force=True) or {}
+    inbox_dir  = pathlib.Path(data.get("inbox") or "inbox")
+    auto_split = bool(data.get("auto_split", True))
+    files      = data.get("files", [])
+    if not files:
+        return jsonify({"error": "no files specified"}), 400
+    return jsonify({"imported": _do_import(inbox_dir, files, auto_split)})
+
+
+@app.post("/api/import_path")
+def api_import_path():
+    """Import a PDF (or every PDF in a folder) from ANY absolute path on the local
+    disk — the 'choose from disk' path the corpus browser (limited to CORPUS_ROOT)
+    can't reach. Body: {path, inbox, auto_split}. The dashboard runs locally, so it
+    can read any path the user names."""
+    data       = request.get_json(force=True) or {}
+    raw        = (data.get("path") or "").strip().strip('"').strip("'")
+    inbox_dir  = pathlib.Path(data.get("inbox") or "inbox")
+    auto_split = bool(data.get("auto_split", True))
+    if not raw:
+        return jsonify({"error": "no path given"}), 400
+    p = pathlib.Path(raw)
+    if not p.exists():
+        return jsonify({"error": f"path not found: {raw}"}), 400
+    files = []
+    if p.is_dir():
+        for pdf in sorted(p.glob("*.pdf")):
+            files.append({"path": str(pdf), "doc": pdf.stem})
+        if not files:
+            return jsonify({"error": f"no PDFs found in folder: {raw}"}), 400
+    elif p.suffix.lower() == ".pdf":
+        files.append({"path": str(p), "doc": p.stem})
+    else:
+        return jsonify({"error": "path must be a .pdf file or a folder containing PDFs"}), 400
+    return jsonify({"imported": _do_import(inbox_dir, files, auto_split), "count": len(files)})
 
 
 # ──────────────────────────────────────────────────────────────────────────────

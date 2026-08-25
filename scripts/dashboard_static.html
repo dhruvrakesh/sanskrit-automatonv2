@@ -223,6 +223,15 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       </div>
       <button class="btn-import" id="importBtn" onclick="importSelected()">&#x2B07; Import to Inbox</button>
       <button class="btn-import-run" id="importRunBtn" onclick="importAndRun()">&#x26A1; Import &amp; Run Pipeline</button>
+      <!-- Add a PDF (or a whole folder of PDFs) from ANY path on disk — not limited
+           to the corpus root the tree above browses. -->
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-v)">
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Add from disk</label>
+        <input type="text" id="diskPath" placeholder="D:\path\to\book.pdf  (or a folder)" spellcheck="false"
+               style="width:100%;margin-top:5px;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:5px 7px;font-size:11px;font-family:JetBrains Mono,monospace"
+               onkeydown="if(event.key==='Enter')importFromDisk()"/>
+        <button class="btn-import" style="margin-top:6px" onclick="importFromDisk()">&#x1F4C1; Import path to inbox</button>
+      </div>
       <!-- Persistent OCR / translate settings (replaces browser prompt() calls) -->
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-v);display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;align-items:center">
         <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">OCR DPI</label>
@@ -408,6 +417,25 @@ function getLang() {
 function getExportMode() {
   const el = document.getElementById('exportMode');
   return (el && el.value) || 'en';
+}
+async function importFromDisk() {
+  var el = document.getElementById('diskPath');
+  var path = (el.value || '').trim();
+  if (!path) { el.focus(); return; }
+  var autoSplit = document.getElementById('autoSplit').checked;
+  toast('Importing from ' + path + ' …');
+  try {
+    var r = await fetch('/api/import_path', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({path: path, inbox: cfg.inbox, auto_split: autoSplit})});
+    var d = await r.json();
+    if (d.error) { toast('Import failed: ' + d.error); return; }
+    var splitting = (d.imported||[]).filter(function(i){return i.action==='splitting';});
+    var copied    = (d.imported||[]).filter(function(i){return i.action==='copied';});
+    splitting.forEach(function(s){ if (s.job) trackJob(s.job, 'Split '+s.doc, 'import_split', s.doc); });
+    toast('Imported ' + (d.count||d.imported.length) + ' PDF(s): ' + copied.length + ' copied, ' + splitting.length + ' splitting. Refreshing…');
+    el.value = '';
+    setTimeout(refresh, 1500);
+  } catch(e) { toast('Import error: ' + e); }
 }
 async function openDatabase(el) {
   var orig = el.innerHTML; el.disabled = true; el.innerHTML = 'preparing&hellip;';
