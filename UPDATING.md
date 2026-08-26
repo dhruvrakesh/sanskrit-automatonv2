@@ -87,7 +87,8 @@ python scripts\db_backup.py "data\context.db" "D:\backups\context_$(Get-Date -Fo
 ```
 
 `db_backup.py` verifies source health and copy integrity and refuses to copy a locked
-or corrupt DB.
+or corrupt DB. **The database is also backed up automatically every night** — see
+Section 5.
 
 ---
 
@@ -136,3 +137,69 @@ SELECT (SELECT COUNT(*) FROM passage_embeddings) AS vectors,
        (SELECT COUNT(*) FROM entities)          AS entities,
        (SELECT COUNT(*) FROM entity_mentions)   AS mentions;
 ```
+
+---
+
+## 5. Automated daily backup
+
+A Windows Scheduled Task named **`SanskritDBBackup`** runs every night at **4:00 AM**
+and calls `scripts\backup_runner.ps1`, which:
+
+1. Runs `db_backup.py` (SQLite online-backup API — a *consistent* snapshot, never a
+   half-written file) into `D:\backups\context_<yyyyMMdd>.db`.
+2. Copies that to the rolling `D:\backups\context_daily.db`.
+3. Prunes to the **14 most-recent** dated backups.
+4. Appends every run — success **or** failure — to `D:\backups\backup_log.txt`.
+
+4:00 AM is chosen because the dashboard and translate jobs are idle then; `db_backup.py`
+refuses a locked source, so a daytime run against a busy DB would (correctly) skip.
+
+### Check that backups are healthy
+
+```powershell
+# Last few runs (look for "OK"; "FAIL … LOCKED" means it fired while a job held the DB):
+Get-Content "D:\backups\backup_log.txt" -Tail 6
+
+# Files on disk + when the task next runs:
+Get-ChildItem "D:\backups\context_*.db" | Sort-Object LastWriteTime |
+  Format-Table Name,Length,LastWriteTime -Auto
+Get-ScheduledTaskInfo -TaskName "SanskritDBBackup" |
+  Format-List LastRunTime,LastTaskResult,NextRunTime
+```
+
+### Run a backup on demand
+
+```powershell
+Start-ScheduledTask -TaskName "SanskritDBBackup"
+# or directly:
+powershell -NoProfile -ExecutionPolicy Bypass -File `
+  "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\backup_runner.ps1"
+```
+
+### Restore from a backup (rehearse this before you need it)
+
+The backups are complete, standalone SQLite files — restoring is just a copy back into
+place. **Stop the dashboard and all jobs first** (nothing may hold `context.db` open).
+
+```powershell
+cd "D:\Sanksrit Automatons\sanskrit-automatonv2"
+
+# 1. Stop writers: close the dashboard window / Ctrl-C the jobs, then confirm nothing listens:
+Get-NetTCPConnection -LocalPort 5057 -State Listen -ErrorAction SilentlyContinue
+
+# 2. Verify the backup you intend to restore is itself healthy:
+python scripts\db_backup.py "D:\backups\context_daily.db" "$env:TEMP\restore_probe.db"
+Remove-Item "$env:TEMP\restore_probe.db" -ErrorAction SilentlyContinue   # probe only
+
+# 3. Set aside the current live DB (don't delete — rename), then copy the backup in:
+$stamp = Get-Date -Format yyyyMMdd_HHmmss
+Move-Item "data\context.db" "data\context.db.broken_$stamp" -Force
+Copy-Item "D:\backups\context_daily.db" "data\context.db" -Force
+
+# 4. Sanity-check the restored DB, then restart the dashboard:
+python scripts\qa_report.py --db data\context.db --coverage --all
+```
+
+Step 2 uses `db_backup.py` purely as an integrity probe — if it prints `source OK` the
+backup is sound. A restore is a plain file swap, so it is safe and reversible as long as
+you *rename* the old DB (step 3) rather than overwriting it.
