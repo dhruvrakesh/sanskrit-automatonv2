@@ -1140,6 +1140,28 @@ function renderProgress(d) {
   const done  = d.verses_done  || 0;
   const total = d.verses_total || 0;
   const p     = total ? Math.round(100 * done / total) : 0;
+  // "Nothing to translate" is NOT success — show it as an actionable amber notice
+  // rather than a misleading green "done / 0 verses" (2026-08-26).
+  const isEmpty = d.status === 'empty' || (d.status === 'done' && total === 0);
+  if (isEmpty) {
+    const msg = esc(d.message || 'Nothing to translate for this document yet.');
+    const needsOcr = d.reason === 'no_passages';
+    el.innerHTML =
+      '<div style="padding:14px 12px;border:1px solid var(--gold);border-radius:8px;background:#e0a83015">'
+      + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">'
+      + '<span style="font-size:13px">&#9888;&#65039;</span>'
+      + '<span style="font-weight:700;color:var(--gold);font-size:11px">Nothing translated</span></div>'
+      + '<div style="font-size:11px;color:var(--ink);line-height:1.5">'
+      + '<span style="font-family:JetBrains Mono,monospace;color:var(--muted)">' + esc(d.doc||'') + '</span><br>'
+      + msg + '</div>'
+      + (needsOcr
+          ? '<div style="margin-top:8px;font-size:10px;color:var(--muted)">Next step: press '
+            + '<b style="color:var(--gold)">OCR</b> on this document (runs in parallel, won\'t block other translations), '
+            + 'then <b style="color:var(--gold)">Ingest</b>, then Translate.</div>'
+          : '')
+      + '</div>';
+    return;
+  }
   const isRun = d.status === 'running';
   const isPause = d.status === 'paused';
   const isDone  = d.status === 'done';

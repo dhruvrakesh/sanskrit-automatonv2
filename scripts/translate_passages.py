@@ -280,9 +280,16 @@ def main():
         ))
 
     if not rows:
-        print("todo = 0 rows")
+        # No ingested passages exist for this doc at all — this is NOT a completed
+        # translation. It almost always means the doc's page-PDFs have not been
+        # OCR'd + ingested yet (e.g. a freshly-split book). Report that distinctly
+        # so the UI can say "run OCR + Ingest first" instead of a misleading "done".
+        print(f"[NOTHING] doc {args.doc!r} has 0 ingested passages — "
+              f"run OCR then Ingest before translating.")
         _write_progress({
-            "status": "done", "doc": args.doc,
+            "status": "empty", "reason": "no_passages", "doc": args.doc,
+            "message": "No ingested text for this document yet — run OCR, then "
+                       "Ingest, then Translate.",
             "verses_done": 0, "verses_total": 0,
             "skipped_quality": 0, "errors": 0, "recent": [],
         })
@@ -326,8 +333,17 @@ def main():
               else "  [direct Sa->{}, English used as reference when present]".format(TGT))
              if IS_L10N else ""))
     if not todo:
+        # Passages exist, but none are translatable right now: either every verse
+        # already has a translation in this language, or the remaining source text
+        # is illegible OCR that should be re-OCR'd rather than translated. Distinct
+        # from "no_passages" so the UI gives the right next step.
+        print(f"[NOTHING] doc {args.doc!r}: 0 translatable verses "
+              f"(all already translated in {TGT}, or remaining source is illegible).")
         _write_progress({
-            "status": "done", "doc": args.doc,
+            "status": "empty", "reason": "nothing_todo", "doc": args.doc,
+            "message": f"Nothing to translate in {TGT}: every verse is already "
+                       f"translated, or the remaining source is illegible OCR "
+                       f"(re-OCR rather than translate).",
             "verses_done": 0, "verses_total": 0,
             "skipped_quality": 0, "errors": 0, "recent": [],
         })
