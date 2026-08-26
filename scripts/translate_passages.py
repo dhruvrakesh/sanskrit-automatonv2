@@ -556,7 +556,15 @@ def main():
             if translation:
                 consec_fail = 0
             else:
-                consec_fail += 1
+                # An empty result HERE (no exception) means untranslatable content —
+                # garbled OCR, or a refusal salvaged to nothing. That is NOT an API
+                # failure, so it must NOT count toward the consecutive-failure abort:
+                # otherwise a garbled patch stops the whole doc and it can never finish
+                # (markandeya/nilamata, 2026-08-26). Real API errors and quota still
+                # abort via the QuotaExhausted/except branches below. Track it as a skip
+                # so the streak breaker only ever fires on genuine API trouble.
+                skip_quality += 1
+                consec_fail = 0
 
             # Update recent ring buffer
             recent.append({

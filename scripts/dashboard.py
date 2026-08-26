@@ -834,7 +834,13 @@ def api_translate():
         return jsonify({"error": "invalid or missing doc"}), 400
     db      = data.get("db")      or "data/context.db"
     engine  = data.get("engine")  or os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
-    limit   = str(data.get("limit")   or 50)
+    # A blank/0 limit means "translate the whole doc" (finish it in one press), which
+    # is what users expect from Start/Full. A positive number still caps the run.
+    try:
+        _lim = int(data.get("limit"))
+    except (TypeError, ValueError):
+        _lim = 0
+    limit   = str(_lim if _lim > 0 else 1000000)
     sleep   = str(data.get("sleep")   or 0.8)
     context = str(data.get("context") or 5)   # 5-verse sliding context window
     min_quality = str(data.get("min_quality") or 0.35)  # Phase Q default (was 0.25)

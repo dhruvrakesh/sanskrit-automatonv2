@@ -242,8 +242,8 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
         <input id="ocrLangs" type="text" value="san+hin+eng"
                style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
                oninput="localStorage.setItem('ocrLangs',this.value)"/>
-        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Translate Limit</label>
-        <input id="xlateLimit" type="number" min="1" max="5000" value="100"
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="Verses translated per press. Leave BLANK to translate the whole document (finish it in one go).">Translate Limit <span style="text-transform:none;color:var(--faint)">(blank = whole doc)</span></label>
+        <input id="xlateLimit" type="number" min="0" max="100000" placeholder="blank = whole doc"
                style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
                oninput="localStorage.setItem('xlateLimit',this.value)"/>
         <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="Sanskrit → this language. Hindi is translated DIRECTLY from Sanskrit (never pivoted through English); a QA-passed English translation, when present, is offered only as an optional meaning reference. 'Both' runs English then Hindi in one job.">Translate Lang</label>
@@ -573,7 +573,7 @@ async function doAction(act, doc) {
   }
   if (act === 'translate') {
     const eng   = getEngine(doc);
-    const limit = (document.getElementById('xlateLimit') || {}).value || '100';
+    const limit = (document.getElementById('xlateLimit') || {}).value || '';  // blank => whole doc
     const lang  = getLang();
     const r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({doc, db: cfg.db, engine: eng, limit, lang})});
@@ -1525,7 +1525,7 @@ async function _watchImportPipeline(jid, doc, stel) {
 // ── Init ────────────────────────────────────────────────────────────────────────────
 // Restore persistent settings from localStorage (survives page reload)
 (function restoreSettings() {
-  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '100', xlateLang: 'en', exportMode: 'en', qaLang: 'en', qaThresh: '0.2'};
+  var map = {ocrDpi: '400', ocrLangs: 'san+hin+eng', xlateLimit: '', xlateLang: 'en', exportMode: 'en', qaLang: 'en', qaThresh: '0.2'};
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.value = localStorage.getItem(id) || map[id];
