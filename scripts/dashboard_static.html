@@ -226,9 +226,12 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
       <!-- Add a PDF (or a whole folder of PDFs) from ANY path on disk — not limited
            to the corpus root the tree above browses. -->
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-v)">
-        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Add from disk</label>
+        <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Add from computer</label>
+        <input type="file" id="pdfPicker" accept="application/pdf,.pdf" multiple style="display:none" onchange="uploadPicked(this)"/>
+        <button class="btn-import" style="margin-top:5px" onclick="document.getElementById('pdfPicker').click()">&#x1F4C2; Choose PDF file(s)&hellip;</button>
+        <div style="font-size:10px;color:var(--faint);margin-top:6px">or paste a path / folder:</div>
         <input type="text" id="diskPath" placeholder="D:\path\to\book.pdf  (or a folder)" spellcheck="false"
-               style="width:100%;margin-top:5px;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:5px 7px;font-size:11px;font-family:JetBrains Mono,monospace"
+               style="width:100%;margin-top:4px;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:5px 7px;font-size:11px;font-family:JetBrains Mono,monospace"
                onkeydown="if(event.key==='Enter')importFromDisk()"/>
         <button class="btn-import" style="margin-top:6px" onclick="importFromDisk()">&#x1F4C1; Import path to inbox</button>
       </div>
@@ -425,6 +428,30 @@ function flashDoc(doc) {
   var prev = tr.style.boxShadow;
   tr.style.transition = 'box-shadow .2s'; tr.style.boxShadow = 'inset 0 0 0 2px var(--gold)';
   setTimeout(function(){ tr.style.boxShadow = prev; }, 1800);
+}
+async function uploadPicked(input) {
+  var files = input.files;
+  if (!files || !files.length) return;
+  var fd = new FormData();
+  for (var i = 0; i < files.length; i++) fd.append('files', files[i]);
+  fd.append('inbox', cfg.inbox);
+  fd.append('auto_split', document.getElementById('autoSplit').checked ? 'true' : 'false');
+  toast('Uploading ' + files.length + ' file(s)… (large PDFs take a moment)');
+  try {
+    var r = await fetch('/api/upload', { method: 'POST', body: fd });
+    var d = await r.json();
+    input.value = '';
+    if (d.error) { toast('Upload failed: ' + d.error); return; }
+    var splitting = (d.imported || []).filter(function(i){return i.action==='splitting';});
+    var copied    = (d.imported || []).filter(function(i){return i.action==='copied';});
+    splitting.forEach(function(s){ if (s.job) trackJob(s.job, 'Split '+s.doc, 'import_split', s.doc); });
+    var msg = [];
+    if (splitting.length) msg.push(splitting.length+' splitting into pages (watch Job Log)');
+    if (copied.length)    msg.push(copied.length+' added');
+    toast('Uploaded ' + (d.count||0) + ' — ' + (msg.join(' · ') || 'done') + '. Refreshing…');
+    var jumpDoc = (copied[0] && copied[0].doc);
+    setTimeout(function(){ refresh(); if (jumpDoc) setTimeout(function(){ flashDoc(jumpDoc); }, 900); }, 1500);
+  } catch(e) { toast('Upload error: ' + e); }
 }
 async function importFromDisk() {
   var el = document.getElementById('diskPath');

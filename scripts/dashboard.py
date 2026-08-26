@@ -210,8 +210,11 @@ def launch(kind: str, doc: str, argv: List[str]) -> str:
 # Inbox / JSONL scanner
 # ──────────────────────────────────────────────────────────────────────────────
 
-PDF_RE  = re.compile(r"^([A-Za-z0-9_]+)_(\d{4})\.pdf$",           re.IGNORECASE)
-JSONL_RE = re.compile(r"^([A-Za-z0-9_]+)_(\d{4})(?:_norm)?\.jsonl$", re.IGNORECASE)
+# Doc part allows hyphens (e.g. "2015_405693_Shatpath-Brahmanam") to match
+# _sanitize_doc_name / DOC_RE — otherwise hyphenated docs' pages were scanned as
+# non-matching and the whole document stayed invisible in the dashboard (2026-08-26).
+PDF_RE  = re.compile(r"^([A-Za-z0-9_\-]+)_(\d{4})\.pdf$",           re.IGNORECASE)
+JSONL_RE = re.compile(r"^([A-Za-z0-9_\-]+)_(\d{4})(?:_norm)?\.jsonl$", re.IGNORECASE)
 
 def scan_inbox(inbox: pathlib.Path) -> Dict[str, List[int]]:
     docs: Dict[str, List[int]] = {}
@@ -549,6 +552,38 @@ def api_import_path():
     else:
         return jsonify({"error": "path must be a .pdf file or a folder containing PDFs"}), 400
     return jsonify({"imported": _do_import(inbox_dir, files, auto_split), "count": len(files)})
+
+
+@app.post("/api/upload")
+def api_upload():
+    """Receive PDF file(s) chosen via the browser's native OS file dialog (multipart)
+    and import them — no path typing. The uploaded bytes are saved into the inbox and
+    split like any other import. Works for a file anywhere on the user's computer."""
+    inbox_dir  = pathlib.Path(request.form.get("inbox") or "inbox")
+    auto_split = (request.form.get("auto_split", "true").lower() != "false")
+    uploads = request.files.getlist("files")
+    if not uploads:
+        return jsonify({"error": "no files uploaded"}), 400
+    inbox_dir.mkdir(parents=True, exist_ok=True)
+    items = []
+    for f in uploads:
+        name = f.filename or ""
+        if not name.lower().endswith(".pdf"):
+            continue
+        doc = _sanitize_doc_name(pathlib.Path(name).stem)
+        # Persist the uploaded source under a name scan_inbox ignores (not _NNNN);
+        # _do_import then splits it into <doc>_NNNN.pdf pages.
+        src = inbox_dir / f"{doc}__upload.pdf"
+        try:
+            f.save(str(src))
+        except Exception as e:
+            items.append({"doc": doc, "error": f"save failed: {e}"})
+            continue
+        items.append({"path": str(src), "doc": doc})
+    good = [i for i in items if "path" in i]
+    if not good:
+        return jsonify({"error": "no PDF files in upload", "imported": items}), 400
+    return jsonify({"imported": _do_import(inbox_dir, good, auto_split), "count": len(good)})
 
 
 # ──────────────────────────────────────────────────────────────────────────────
