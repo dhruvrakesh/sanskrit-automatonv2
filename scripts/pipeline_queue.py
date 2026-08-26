@@ -37,19 +37,37 @@ def run(label, cmd, cwd=None):
 def ocr_missing(doc, inbox, raw, dpi="400", lang_tries=None):
     if lang_tries is None:
         lang_tries = ["san+hin+eng", "san", "hin", "eng"]
-    PDF_RE = re.compile(r"^([A-Za-z0-9_]+)_(\d{4})\.pdf$", re.IGNORECASE)
+    # Doc part must allow hyphens (e.g. "2015_405693_Shatpath-Brahmanam") to match
+    # dashboard.py's PDF_RE. Without the \- the OCR discovery matched ZERO pages for
+    # any hyphenated doc, so "Full" printed "Nothing to OCR", exited 0 in ~2s, and
+    # the whole pipeline silently did nothing (2026-08-26).
+    PDF_RE = re.compile(r"^([A-Za-z0-9_\-]+)_(\d{4})\.pdf$", re.IGNORECASE)
     inbox_p = pathlib.Path(inbox)
     raw_p   = pathlib.Path(raw)
+    globbed = sorted(inbox_p.glob(f"{doc}_*.pdf"))
+    matched = 0
     missing = []
-    for p in sorted(inbox_p.glob(f"{doc}_*.pdf")):
+    for p in globbed:
         m = PDF_RE.match(p.name)
         if not m: continue
+        matched += 1
         pg = m.group(2)
         if not (raw_p / f"{doc}_{pg}.jsonl").exists() and \
            not (raw_p / f"{doc}_{pg}_norm.jsonl").exists():
             missing.append(p)
+    # Guard: page-PDFs exist on disk but NONE matched the naming pattern. That is a
+    # real fault (bad regex / unexpected filename), never "nothing to do" — refuse to
+    # report success, so the pipeline surfaces it instead of exiting green (2026-08-26).
+    if globbed and matched == 0:
+        print(f"[OCR][ERROR] {len(globbed)} page-PDF(s) found for {doc} but NONE "
+              f"matched the expected '<doc>_NNNN.pdf' pattern — check the filenames. "
+              f"e.g. {globbed[0].name!r}")
+        return False
     if not missing:
-        print(f"[OCR] Nothing to OCR for {doc}")
+        if matched:
+            print(f"[OCR] Nothing to OCR for {doc} — all {matched} page(s) already OCR'd")
+        else:
+            print(f"[OCR] No page-PDFs found for {doc} in {inbox_p} (import/split first)")
         return True
 
     print(f"[OCR] {len(missing)} pages to OCR for {doc} (serial, one at a time)")

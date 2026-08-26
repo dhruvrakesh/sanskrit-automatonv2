@@ -501,7 +501,7 @@ def _do_import(inbox_dir, files, auto_split):
         else:
             # Definitely single page, or splitting off/unavailable → copy as _0001
             stem = src_path.stem
-            m = re.match(r"^([A-Za-z0-9_]+)_(\d+)$", stem, re.I) if PDF_RE.match(src_path.name) else None
+            m = re.match(r"^([A-Za-z0-9_\-]+)_(\d+)$", stem, re.I) if PDF_RE.match(src_path.name) else None
             if m:
                 d, pg = _sanitize_doc_name(m.group(1)), m.group(2).zfill(4)
                 dest = inbox_dir / f"{d}_{pg}.pdf"
