@@ -107,6 +107,32 @@ The parallel-OCR pipeline (already shipped) stays regardless.
 
 ---
 
+## Phase 3.5 — Calibrate the quality metric BEFORE mass action  *(new; benchmarked)*
+
+The 2026-08-27 baseline (`BENCHMARKS.md`) shows ~90% of docs averaging `quality_score`
+0.47–0.52 — too narrow to be a reliable discriminator, and 257 verses are unscored.
+**Do not spend API budget re-translating off this number until it is trusted.** Steps:
+(1) `qa_scan.py --lang en --write` to score the 257 unscored; (2) 40-verse stratified gold
+sample rated by `gemini-2.5-pro`/human, measure correlation; (3) if weak, fix
+`text_filters.score_translation_quality`. Only then drive healing/re-sourcing at scale.
+
+**Root-cause decision tree — run `diag_provenance.py` FIRST, then pick ONE lever:**
+
+- **A/B: low score tracks OLD engine / prompt version / early months** → the fix is
+  **re-translate** the weak verses with `gemini-2.5-pro` + current prompt
+  (`retranslate.py` / `heal_lowqa.py`). Cheapest, most surgical; no re-OCR, no re-source.
+  This is the *expected* culprit given the PDFs are high quality.
+- **C: source `text` Devanagari purity is low for a doc** → OCR/source is genuinely noisy
+  → **re-OCR** that doc's high-quality PDF at 400–600 DPI, or re-source clean e-text.
+- **Neither** (clean source + current engine, still low) → the *scorer* is miscalibrated →
+  fix `score_translation_quality`, not the translations.
+
+Auto-download/auto-populate from archive.org is **rejected as a blanket strategy**: (a)
+the PDFs are already high quality, (b) raw archive OCR text discards the verse/`chandas`/
+daṇḍa structure our pipeline extracts, harming translation context, (c) it adds source
+variance. Use archive only surgically, for genuinely broken sources (corrupt PDFs), via
+the purity-gated `archive_source_finder.py`.
+
 ## Phase 4 — Quality & observability
 
 **Translation fidelity (the Debroy track).** The ceiling is OCR noise, not the model
