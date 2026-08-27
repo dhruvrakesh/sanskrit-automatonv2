@@ -29,12 +29,22 @@ target the front end and file-IO stalls (AV), not SQL.
 
 Embeddings (13,544) lag EN (13,746) by ~200 → run `build_embeddings.py` after next batch.
 
-### Translation quality — use `translation_qa`, NOT `quality_score`
-**Metric correction (2026-08-27):** two quality columns exist and they disagree.
-`quality_score` is a legacy inline heuristic that clusters ~0.5 and is **not reliable**;
-`translation_qa` (written by `qa_scan.py`) is the real QA pass. Earlier drafts of this
-file reported `quality_score` and painted a false "69% mid-tier" crisis. The truth, by
-`translation_qa`, is that the corpus is **mostly high quality**:
+### Two metrics measure TWO DIFFERENT axes (per `docs/QUALITY_LOOP_DESIGN`)
+**Metric correction (2026-08-27), reconciled with the design docs:**
+- **`quality_score` = SOURCE-corruption gate** — Devanagari density of the *source* text.
+  It is the "is this OCR clean enough to translate?" signal (Q5: skip < 0.35). Low here →
+  noisy source → **re-OCR/re-source** candidate. It is NOT a translation-quality metric.
+- **`translation_qa` = TRANSLATION structural QA** — the Phase-Q scorer (`qa_scan.py`,
+  `text_filters.score_translation_quality`): emptiness, length band, residual Devanagari,
+  gloss-pairs, style artifacts. Low here → **heal/re-translate** candidate.
+- **Neither certifies SEMANTIC fidelity.** Per `HINDI_TRACK_DESIGN` §4: "0.988 means
+  structurally sound, NOT certified faithful." Semantic certification needs the manual
+  Debroy benchmark sheet + the designed-but-unbuilt **Q4 LLM-judge** (`judge_sample.py`,
+  `mt_reviews`).
+
+My earlier diagnostics ranked docs by `quality_score` and mislabelled it "translation
+quality" — that produced a false "69% mid-tier" crisis. By the correct metric,
+`translation_qa`, the corpus is **mostly high quality**:
 
 | Doc (sample) | n | translation_qa |
 |--------------|---|----------------|
@@ -67,9 +77,12 @@ scoped to these, ~hundreds of API calls, not thousands.
   **IAST/romanized source, not OCR noise** (their `translation_qa` is 0.93 / 0.83). Do not
   re-OCR on this signal alone.
 
-### Metric hygiene TODO
-Retire or recompute `quality_score`; make `translation_qa` the single canonical column in
-all diagnostics and the dashboard (`diag_quality.py` corrected 2026-08-27).
+### Metric hygiene — resolved
+Keep BOTH columns; they are different axes. Diagnostics now label them correctly
+(`quality_score` = source gate, `translation_qa` = translation QA; corrected 2026-08-27).
+The dashboard QA panel should read `translation_qa` for translation quality (batched with
+the next restart). The real open item is **semantic** certification — see roadmap Phase 3.5
+(build the Q4 judge that `QUALITY_LOOP_DESIGN` already specifies).
 
 ---
 

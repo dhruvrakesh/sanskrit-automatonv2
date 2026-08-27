@@ -109,12 +109,17 @@ The parallel-OCR pipeline (already shipped) stays regardless.
 
 ## Phase 3.5 — Calibrate the quality metric BEFORE mass action  *(new; benchmarked)*
 
-The 2026-08-27 baseline (`BENCHMARKS.md`) shows ~90% of docs averaging `quality_score`
-0.47–0.52 — too narrow to be a reliable discriminator, and 257 verses are unscored.
-**Do not spend API budget re-translating off this number until it is trusted.** Steps:
-(1) `qa_scan.py --lang en --write` to score the 257 unscored; (2) 40-verse stratified gold
-sample rated by `gemini-2.5-pro`/human, measure correlation; (3) if weak, fix
-`text_filters.score_translation_quality`. Only then drive healing/re-sourcing at scale.
+**Reconciled with `docs/QUALITY_LOOP_DESIGN` + `HINDI_TRACK_DESIGN` (2026-08-27).** The
+Phase-Q loop already exists: provenance columns, the `translation_qa` heuristic scorer,
+`translation_history`, and `retranslate.py`/`heal_lowqa.py`. `translation_qa` is high
+(≈0.99 mean) — but the design docs are explicit that this is **structural** soundness,
+**not** certified semantic fidelity. The one designed-but-UNBUILT piece is **Q4: the
+sampled LLM-judge** (`judge_sample.py` + an `mt_reviews` table) that grades fidelity and
+fluency 1–5 against source+IAST. That is the real quality frontier — build it (bilingual
+en+hi from birth per HINDI_TRACK HI-5), plus score the manual MBh01-vs-Debroy sheet, and
+THEN the "is 0.988 actually faithful?" question is answered. `quality_score` is a separate
+axis (source-corruption gate) and stays as-is. Est. cost: ~$0.03–0.05 for a 5% MBh01
+sample — trivially within the $8 budget envelope (`cost_tracker.py`).
 
 **Root-cause decision tree — run `diag_provenance.py` FIRST, then pick ONE lever:**
 
