@@ -55,8 +55,9 @@ _SYS = (
     "  fidelity = is the MEANING of the Sanskrit preserved (no additions, omissions, "
     "or misreadings)? 5=faithful, 1=wrong/hallucinated.\n"
     "  fluency  = is it natural, readable {lang_name}? 5=elegant, 1=broken.\n"
-    "Reply with STRICT JSON only, no prose, no code fence:\n"
-    '{{"fidelity": <1-5>, "fluency": <1-5>, "reason": "<=15 words"}}'
+    "Reply with ONE LINE of minified JSON, no whitespace, no code fence, reason first "
+    "so scores are never lost to truncation:\n"
+    '{{"reason":"<=10 words","fidelity":<1-5>,"fluency":<1-5>}}'
 )
 
 _JSON_RE = re.compile(r"\{.*\}", re.DOTALL)
@@ -144,6 +145,16 @@ def _judge_one(model, lang_name, src, iast, translation):
             try: d = json.loads(m.group(0))
             except Exception: d = None
     if not isinstance(d, dict):
+        # Salvage the integer scores by regex even if the JSON was truncated mid-string
+        # (2.5-* thinking models can hit MAX_TOKENS in the reason field). Scores are what
+        # matter; a lost reason is acceptable, a lost score is not.
+        fm = re.search(r'"fidelity"\s*:\s*([1-5])', txt)
+        um = re.search(r'"fluency"\s*:\s*([1-5])', txt)
+        rm = re.search(r'"reason"\s*:\s*"([^"]*)', txt)
+        if fm or um:
+            return (int(fm.group(1)) if fm else None,
+                    int(um.group(1)) if um else None,
+                    (rm.group(1)[:200] if rm else "[salvaged from truncated JSON]"))
         fr = None
         try: fr = resp.candidates[0].finish_reason
         except Exception: pass
@@ -226,10 +237,10 @@ def main():
     # generous because gemini-2.5-* spend "thinking" tokens from this same budget —
     # 120 truncated the JSON, which is why the first pilot returned all-None (2026-08-27).
     try:
-        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=1024,
+        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=2048,
                                      response_mime_type="application/json")
     except TypeError:  # older SDK without response_mime_type
-        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=1024)
+        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=2048)
     model = genai.GenerativeModel(model_name=model_name, generation_config=cfg,
                                   system_instruction=_SYS.format(lang_name=lang_name))
 
