@@ -131,16 +131,27 @@ def _judge_one(model, lang_name, src, iast, translation):
         txt = (resp.text or "").strip()
     except Exception:
         txt = ""
-    m = _JSON_RE.search(txt)
-    if not m:
-        return None, None, (txt[:120] or "[no output]")
+    # strip ```json ... ``` fences the model adds despite instructions
+    if txt.startswith("```"):
+        txt = re.sub(r"^```[A-Za-z]*\s*", "", txt)
+        txt = re.sub(r"\s*```$", "", txt).strip()
+    d = None
     try:
-        d = json.loads(m.group(0))
-        f = int(d.get("fidelity")) if d.get("fidelity") is not None else None
-        u = int(d.get("fluency"))  if d.get("fluency")  is not None else None
-        return f, u, str(d.get("reason", ""))[:200]
+        d = json.loads(txt)
     except Exception:
-        return None, None, txt[:120]
+        m = _JSON_RE.search(txt)
+        if m:
+            try: d = json.loads(m.group(0))
+            except Exception: d = None
+    if not isinstance(d, dict):
+        fr = None
+        try: fr = resp.candidates[0].finish_reason
+        except Exception: pass
+        return None, None, f"[parse-fail fr={fr}] {txt[:80]}"
+    def _int(v):
+        try: return int(v)
+        except Exception: return None
+    return _int(d.get("fidelity")), _int(d.get("fluency")), str(d.get("reason", ""))[:200]
 
 
 def cmd_report(con, lang):
@@ -211,7 +222,14 @@ def main():
     if not key:
         print("GEMINI_API_KEY not set in .env", file=sys.stderr); sys.exit(2)
     genai.configure(api_key=key)
-    cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=120)
+    # response_mime_type forces pure JSON (no ``` fence); max_output_tokens must be
+    # generous because gemini-2.5-* spend "thinking" tokens from this same budget —
+    # 120 truncated the JSON, which is why the first pilot returned all-None (2026-08-27).
+    try:
+        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=1024,
+                                     response_mime_type="application/json")
+    except TypeError:  # older SDK without response_mime_type
+        cfg = genai.GenerationConfig(temperature=0.0, max_output_tokens=1024)
     model = genai.GenerativeModel(model_name=model_name, generation_config=cfg,
                                   system_instruction=_SYS.format(lang_name=lang_name))
 
@@ -220,6 +238,9 @@ def main():
     for i, (pid, code, vref, src, iast, tr) in enumerate(picked, 1):
         try:
             fid, flu, reason = _judge_one(model, lang_name, src, iast, tr)
+            # idempotent: replace any prior verdict for this (passage, lang, judge version)
+            con.execute("DELETE FROM mt_reviews WHERE passage_id=? AND lang=? AND prompt_version=?",
+                        (pid, args.lang, PROMPT_VERSION))
             con.execute(
                 "INSERT INTO mt_reviews(passage_id,lang,engine,prompt_version,"
                 "score_fidelity,score_fluency,comment,created_at) VALUES (?,?,?,?,?,?,?,?)",
