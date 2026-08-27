@@ -100,6 +100,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .job-badges{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--border-v);min-height:36px}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;border:1px solid}
 .badge.running{border-color:var(--gold-dim);color:var(--gold);background:#d4a01715}
+.badge.queued{border-color:var(--border-v);color:var(--muted);background:#8a7d6710;opacity:.75}
 .badge.ok{border-color:#4caf7d50;color:var(--green);background:#4caf7d10}
 .badge.fail{border-color:#e05f5f50;color:var(--red);background:#e05f5f10}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
@@ -701,6 +702,7 @@ async function pollJob(jid, label) {
     try {
       const r = await fetch('/api/job/' + jid);
       const j = await r.json();
+      if (activeJobs[jid]) activeJobs[jid].active = !!j.active;  // running vs queued
       // Only show new output lines
       if (j.out && j.out.length > lastOutLen) {
         const newText = j.out.slice(lastOutLen);
@@ -725,11 +727,20 @@ async function pollJob(jid, label) {
 
 function renderBadges() {
   const el = document.getElementById('jobBadges');
-  const running = Object.values(activeJobs).filter(function(j) { return !j.done; });
-  const recent  = Object.values(activeJobs).filter(function(j) { return j.done; }).slice(-4);
-  document.getElementById('runningCount').textContent = running.length ? running.length + ' running' : 'idle';
-  el.innerHTML = running.map(function(j) {
-    return '<span class="badge running"><span class="badge-dot"></span>' + esc(j.label) + '</span>';
+  const unfinished = Object.values(activeJobs).filter(function(j) { return !j.done; });
+  const recent     = Object.values(activeJobs).filter(function(j) { return j.done; }).slice(-4);
+  // Honest header: distinguish jobs actually executing from ones queued behind a
+  // lock (only one translation can write the DB at a time). A job is treated as
+  // running unless the server has explicitly reported it as queued (active===false).
+  const runningN = unfinished.filter(function(j) { return j.active !== false; }).length;
+  const queuedN  = unfinished.length - runningN;
+  document.getElementById('runningCount').textContent =
+    unfinished.length ? (runningN + ' running' + (queuedN ? ' · ' + queuedN + ' queued' : '')) : 'idle';
+  el.innerHTML = unfinished.map(function(j) {
+    const queued = j.active === false;
+    return '<span class="badge ' + (queued ? 'queued' : 'running') + '"'
+      + (queued ? ' title="Waiting for the translate lock (one translation writes the DB at a time)"' : '')
+      + '><span class="badge-dot"></span>' + (queued ? '&#9203; ' : '') + esc(j.label) + '</span>';
   }).concat(recent.map(function(j) {
     return '<span class="badge ' + (j.ok ? 'ok' : 'fail') + '"><span class="badge-dot"></span>' + esc(j.label) + '</span>';
   })).join('');

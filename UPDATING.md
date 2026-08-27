@@ -203,3 +203,44 @@ python scripts\qa_report.py --db data\context.db --coverage --all
 Step 2 uses `db_backup.py` purely as an integrity probe — if it prints `source OK` the
 backup is sound. A restore is a plain file swap, so it is safe and reversible as long as
 you *rename* the old DB (step 3) rather than overwriting it.
+
+---
+
+## 6. Concurrency & unattended overnight runs
+
+**What runs in parallel, and what doesn't.** The dashboard uses two independent locks:
+
+- **OCR** (`_OCR_SEM`, 2 slots) — OCR is CPU-bound and writes only JSONL files, never
+  the DB. Up to 2 OCR jobs run at once, **in parallel with translation**.
+- **Translation** (`_TRANSLATE_SEM`, 1 slot) — every translate/heal/pipeline-translate
+  job writes the *same* SQLite DB. On a Drive-synced disk, concurrent writers cause
+  `database disk I/O error`, so translations are deliberately serialized: **one at a
+  time**. Extra translate jobs you start are **queued**, not lost — the Job Log shows
+  them as `⏳ queued` and the header reads e.g. `1 running · 4 queued`. They start
+  automatically as the lock frees.
+
+**The one-button pipeline no longer blocks translation.** "Import & Run Pipeline" /
+"Full" now runs **OCR first as its own job (OCR lock, parallel to translation)**, and
+only when OCR finishes does it auto-run Ingest → Translate under the translate lock. So
+importing a big new book OCRs alongside whatever is already translating, instead of
+freezing it. (Before 2026-08-26 the pipeline held the translate lock during OCR.)
+
+**Keep the PC translating overnight.** While any job is unfinished the dashboard asks
+Windows to suppress *system* sleep (the display may still sleep to save the panel) and
+releases that request when idle — so a long run is never paused by idle sleep. Belt and
+suspenders at the OS level (run once, as admin):
+
+```powershell
+# Never sleep / never hibernate while on AC power (0 = never):
+powercfg /change standby-timeout-ac 0
+powercfg /change hibernate-timeout-ac 0
+powercfg /change disk-timeout-ac 0
+# (optional) let the monitor sleep after 15 min to save the panel — CPU keeps working:
+powercfg /change monitor-timeout-ac 15
+# Confirm nothing else can wake/force sleep:
+powercfg /requests        # while translating, expect a SYSTEM request from python.exe
+```
+
+To translate the entire OCR'd backlog unattended, press **Translate All OCR'd** (or
+per-doc Translate) and leave it — queued docs roll through the translate lock one after
+another, and the machine stays awake until the last one finishes.

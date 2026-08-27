@@ -60,6 +60,8 @@ class Job:
     err: str = ""
     proc: Optional[object] = field(default=None, repr=False)  # subprocess.Popen, not serialized
     killed: bool = False
+    active: bool = False   # True once the job's semaphore is acquired and it is
+                           # ACTUALLY executing (vs. still queued behind the lock).
 
 JOBS: Dict[str, Job] = {}
 JOBS_LOCK = threading.Lock()
@@ -170,7 +172,48 @@ _KIND_SEM = {
     "pipeline":         _TRANSLATE_SEM,
 }
 
-def launch(kind: str, doc: str, argv: List[str]) -> str:
+# ── Keep-awake: don't let the PC sleep while it is translating ────────────────
+def _any_unfinished_job() -> bool:
+    with JOBS_LOCK:
+        return any(j.ok is None for j in JOBS.values())
+
+def _keep_awake_loop():
+    """While ANY job is unfinished, ask Windows to keep the SYSTEM awake (the
+    display may still sleep to save the panel) so long overnight translation runs
+    are never paused by idle sleep. The request is released as soon as all jobs
+    finish, so the machine sleeps normally when the automaton is idle. No-op off
+    Windows. This maximises unattended translation time (2026-08-26)."""
+    if sys.platform != "win32":
+        return
+    try:
+        import ctypes
+    except Exception:
+        return
+    ES_CONTINUOUS        = 0x80000000
+    ES_SYSTEM_REQUIRED   = 0x00000001
+    ES_AWAYMODE_REQUIRED = 0x00000040
+    held = False
+    while True:
+        try:
+            busy = _any_unfinished_job()
+            if busy and not held:
+                ctypes.windll.kernel32.SetThreadExecutionState(
+                    ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED)
+                held = True
+                print("[keep-awake] jobs running — system sleep suppressed")
+            elif not busy and held:
+                ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS)
+                held = False
+                print("[keep-awake] idle — normal sleep restored")
+        except Exception:
+            pass
+        time.sleep(20)
+
+def launch(kind: str, doc: str, argv: List[str], then=None) -> str:
+    """Launch a job under its kind's semaphore. Optional `then(job)` runs AFTER the
+    job finishes AND its semaphore is released, but only if the job succeeded — this
+    is how the pipeline chains OCR (OCR lock, parallel to translation) → ingest →
+    translate (translate lock) without holding the translate lock during OCR."""
     # ── Duplicate job prevention ──────────────────────────────────────────────
     with JOBS_LOCK:
         for j in JOBS.values():
@@ -197,10 +240,18 @@ def launch(kind: str, doc: str, argv: List[str]) -> str:
 
     def run_with_sem():
         sem.acquire()
+        job.active = True   # semaphore held → this job is now REALLY executing
         try:
             _run_job(job)
         finally:
             sem.release()
+        # Chain the next stage only on success, AFTER our semaphore is released so
+        # the follow-up can take whatever lock it needs (e.g. the translate lock).
+        if then is not None and job.ok:
+            try:
+                then(job)
+            except Exception as e:
+                print(f"[chain] then() for job {job.id} ({kind}/{doc}) failed: {e}")
 
     threading.Thread(target=run_with_sem, daemon=True).start()
     return job.id
@@ -613,6 +664,8 @@ def api_job(jid):
         "ok": job.ok, "start": job.start, "end": job.end,
         "out": job.out[-6000:], "err": job.err[-2000:],
         "running": job.ok is None, "killed": job.killed,
+        # active=True: executing now; False while ok is None: queued behind its lock.
+        "active": bool(job.active), "state": ("running" if job.active else "queued") if job.ok is None else "done",
     })
 
 @app.post("/api/job/<jid>/kill")
@@ -644,12 +697,18 @@ def api_jobs_kill_all():
 def api_jobs_running():
     """List all currently running jobs."""
     with JOBS_LOCK:
-        running = [
+        unfinished = [
             {"id": j.id, "kind": j.kind, "doc": j.doc,
-             "start": j.start, "elapsed_s": round(time.time() - j.start, 1)}
+             "start": j.start, "elapsed_s": round(time.time() - j.start, 1),
+             # active=True → executing now; active=False → queued behind its lock
+             # (e.g. waiting for the single translate lock). This lets the UI show
+             # "1 running · 4 queued" instead of a misleading "5 running".
+             "active": bool(j.active), "state": "running" if j.active else "queued"}
             for j in JOBS.values() if j.ok is None
         ]
-    return jsonify({"running": running, "count": len(running)})
+    active_n = sum(1 for j in unfinished if j["active"])
+    return jsonify({"running": unfinished, "count": len(unfinished),
+                    "active": active_n, "queued": len(unfinished) - active_n})
 
 @app.post("/api/doc/<doc>/stop")
 def api_doc_stop(doc):
@@ -976,22 +1035,40 @@ def api_queue_run():
     skip_translate = bool(data.get("skip_translate"))
     skip_export    = bool(data.get("skip_export"))
 
-    cmd = py(script("pipeline_queue.py"),
-             "--doc",     doc,
-             "--inbox",   inbox,
-             "--raw",     raw,
-             "--db",      db,
-             "--exports", exports,
-             "--engine",  engine,
-             "--dpi",     dpi,
-             "--sleep",   sleep)
-    if skip_ocr:       cmd.append("--skip-ocr")
-    if skip_ingest:    cmd.append("--skip-ingest")
-    if skip_translate: cmd.append("--skip-translate")
-    if skip_export:    cmd.append("--skip-export")
+    base = [script("pipeline_queue.py"),
+            "--doc",     doc,
+            "--inbox",   inbox,
+            "--raw",     raw,
+            "--db",      db,
+            "--exports", exports,
+            "--engine",  engine,
+            "--dpi",     dpi,
+            "--sleep",   sleep]
 
-    jid = launch("pipeline", doc, cmd)
-    return jsonify({"job": jid})
+    # Stage 2 (ingest → translate → export): holds the TRANSLATE lock, so it
+    # serializes safely with every other translation (single SQLite writer).
+    def _launch_rest(_prev=None):
+        rest = py(*base, "--skip-ocr")
+        if skip_ingest:    rest.append("--skip-ingest")
+        if skip_translate: rest.append("--skip-translate")
+        if skip_export:    rest.append("--skip-export")
+        return launch("pipeline", doc, rest)
+
+    # If OCR is skipped (or the doc is already OCR'd), there is no OCR stage to run
+    # in parallel — go straight to the translate-locked remainder.
+    if skip_ocr:
+        return jsonify({"job": _launch_rest(),
+                        "message": "Ingest/Translate/Export queued (translate lock)."})
+
+    # Stage 1 (OCR only): runs under the OCR semaphore, so it executes IN PARALLEL
+    # with any ongoing translation instead of blocking it. When OCR finishes
+    # successfully, `then` auto-launches Stage 2. This is the fix for
+    # "OCR and translation can't run at the same time" (2026-08-26).
+    ocr_cmd = py(*base, "--skip-ingest", "--skip-translate", "--skip-export")
+    jid = launch("ocr", doc, ocr_cmd, then=_launch_rest)
+    return jsonify({"job": jid,
+                    "message": "OCR started in parallel with translation; "
+                               "Ingest + Translate will run automatically when OCR completes."})
 
 
 @app.post("/api/pipeline/translate-doc")
@@ -2284,5 +2361,8 @@ if __name__ == "__main__":
     print(f"  Corpus:  {CORPUS_ROOT}")
     print(f"  Engine:  {os.environ.get('MT_ENGINE','gemini:gemini-2.5-flash')}")
     print(f"{'─'*60}\n")
+
+    # Keep the machine awake while translation/OCR jobs run (overnight throughput).
+    threading.Thread(target=_keep_awake_loop, daemon=True).start()
 
     app.run(host=args.host, port=args.port, debug=False)
