@@ -14,26 +14,34 @@ canonical helper (`db_utils.py:17-28`). Backups are now automated, pruned, logge
 doc names, and the misleading job labels are all fixed. Data is safe (55 docs / 13,677
 EN / 5,136 HI / 5,135 entities).
 
-**Fragile — the real root causes.**
+**Baseline measured 2026-08-27** (read-only, `diag_baseline.py`): DB is a **normal local
+file** on a **fixed NTFS disk** (`DriveType Fixed`, `Attributes = Archive`, not a reparse
+point) = **mirror mode, WAL-safe locally**. `journal_mode=wal`, `page_size=4096`.
+**Load times are excellent** — per-doc coverage aggregate `0.00s`, full counts `0.07s`
+— so the DB layer is *not* a performance bottleneck. Corpus: 56 docs / 13,746 EN /
+5,136 HI / 5,169 entities / 22,894 mentions / 13,544 embeddings. EN quality histogram:
+0.8–1.0 = 754; 0.6–0.8 = 3,223; **0.4–0.6 = 9,479 (~69%)**; <0.4 = 301.
 
-1. **Hot paths bypass the hardened connection helper.** `db_utils.connect()`
-   (`db_utils.py:189-194`) applies WAL + `busy_timeout=30000`. But the workhorse
-   `translate_passages.py:193` uses `sqlite3.connect(args.db)` **raw**, and
-   `dashboard.py` opens raw connections in ~10 endpoints (`764, 831, 850, 1136, 1218,
-   1314, 1415, 1478`, plus its own no-pragma `connect()` at `298`). Raw connections get
-   `busy_timeout=0` → a dashboard read that overlaps a translate write throws
-   `SQLITE_BUSY` / "disk I/O error" **instantly** instead of waiting. **This is the
-   concurrency error we have been papering over with the single-writer semaphore.**
+**Fragile — the real root causes (corrected after measurement).**
 
-2. **Storage location is unverified.** The live DB is at
-   `D:\Sanksrit Automatons\...\data\context.db` on a Google-Drive-managed path. If Drive
-   runs in **stream** mode the file is virtual and WAL is explicitly unsupported by
-   SQLite on network/virtual filesystems; if Drive runs in **mirror** mode the file is a
-   real local file (WAL-safe) and only *backup* copies risk a torn read. We must
-   determine which before prescribing a move. (Phase 0.)
+1. **A file-sync client touching the hot WAL sidecars is the `SQLITE_IOERR` suspect.**
+   Correction: an earlier draft claimed raw connections use `busy_timeout=0`. That is
+   wrong — Python's `sqlite3.connect()` defaults `timeout=5.0` (a 5-second busy timeout);
+   `db_utils.connect()` (`db_utils.py:189-194`) extends it to 30s. So raw connections in
+   `translate_passages.py:193` and `dashboard.py` (`764, 831, 850, 1136, 1218, 1314,
+   1415, 1478`, plus `connect()` at `298`) already wait 5s, not 0. Unifying to 30s is
+   cheap insurance, **not** the root cause. The `disk I/O error` symptom on a *local* WAL
+   DB is the classic signature of another process (a sync client — Google Drive and/or
+   Dropbox, both present) reading/locking `context.db-wal` / `context.db-shm` mid-write.
+   The fix is to keep any sync client off the live DB and its sidecars. (Phase 1.)
+
+2. **Storage: confirmed local (mirror), so the fix is light.** No relocation of the whole
+   DB is required for WAL safety. Either exclude `context.db*` (db, `-wal`, `-shm`) from
+   the sync client, or move just the live DB to a sibling non-synced local folder and
+   keep syncing only the consistent `db_backup.py` outputs. (Phase 1/2.)
 
 The semaphore-and-callback work is fine and stays, but it is throughput/UX, not the
-substrate. The substrate is Phases 1–2.
+substrate.
 
 ---
 
@@ -50,43 +58,41 @@ distribution baseline.
 
 ---
 
-## Phase 1 — Unify & harden DB access  *(highest value, lowest risk)*
+## Phase 1 — Keep sync clients off the live DB  *(the actual root-cause fix)*
 
-**Change.** Route every connection through one helper that always sets
-`busy_timeout=30000` + WAL: fix `translate_passages.py:193` and the raw
-`sqlite3.connect` sites in `dashboard.py` to call a shared `open_db()` (or minimally,
-execute `PRAGMA busy_timeout=30000` immediately after connect). No schema change, no
-data change.
+**Confirm first.** Identify which sync client (Google Drive mirror and/or Dropbox — both
+run on this machine) actually covers `D:\Sanksrit Automatons\...`. If *none* does, the
+`disk I/O error` attribution to "Drive sync" was inherited from earlier notes and must be
+re-investigated (capture the actual SQLite error + offending process next time it fires).
 
-**Effect.** Dashboard reads no longer error during a translate write (WAL already allows
-readers concurrent with one writer; `busy_timeout` makes any writer-vs-writer contention
-*wait* up to 30s rather than fail). Removes the entire class of "disk I/O error while a
-job runs" without touching the semaphore.
+**Change (if a sync client covers the folder).** Preferred: relocate just the **live** DB
+to a sibling *non-synced* local folder (still on fast local disk, e.g.
+`D:\SanskritAutomatonLive\context.db`), and keep syncing only the consistent
+`db_backup.py` outputs to the cloud. Alternative: use the sync client's selective-sync /
+ignore rules to exclude `context.db`, `context.db-wal`, `context.db-shm`. Either removes
+the mid-write contention on the WAL sidecars that produces `SQLITE_IOERR`.
 
-**Risk / rollback.** Additive pragma only; behavior strictly more tolerant. Rollback =
-revert the two files. Deploy at a dashboard restart (translation resumes idempotently).
+**Effect.** Eliminates the real source of "disk I/O error while a job runs," and removes
+any file-access stalls the sync client causes (the DB queries themselves are already
+sub-100ms, so this is where perceived slowness actually lives).
 
-**Verification.** With a translate job running, hammer a dashboard read endpoint in a
-loop and confirm zero errors (Phase-1 verify script).
+**Risk / rollback.** A relocation is one path change (`--db` arg + backup runner `$src`);
+fully reversible. Do it during an idle window with a fresh backup in hand.
+
+**Cheap insurance (bundle in the same restart).** Unify raw connections to
+`busy_timeout=30000` (matches `db_utils`) so the rare writer-vs-writer overlap waits 30s
+instead of 5s. Not the root cause — just belt-and-suspenders.
+
+**Verification.** With a translate job running, hammer a dashboard read endpoint in a loop
+and confirm zero errors before/after.
 
 ---
 
-## Phase 2 — Right-size the storage substrate  *(decided by Phase 0)*
+## Phase 2 — (folded into Phase 1)
 
-**If Drive is in STREAM mode** (virtual files): relocate the **live** DB to a local,
-non-synced folder (e.g. `C:\SanskritAutomaton\data\context.db`); keep only the *backups*
-flowing to Drive. This removes the unsupported "WAL on virtual FS" condition and, because
-a 411 MB file is no longer re-synced on every write, **improves load/IO times** directly.
-Cutover uses the existing `db_backup.py` for a consistent move; the dashboard's `--db`
-arg and the backup runner's `$src` are repointed. Rollback = point `--db` back.
-
-**If Drive is in MIRROR mode** (local files): the live DB is already WAL-safe locally; the
-only real risk is Drive uploading a torn copy. Mitigation is lighter — exclude the live
-`context.db` (and `-wal`/`-shm`) from sync, and continue syncing the consistent
-`db_backup.py` outputs. No relocation needed.
-
-**Risk / rollback.** One path change; fully reversible. Do it during an idle window with a
-fresh backup in hand.
+Storage is confirmed **local/mirror**, so no heavy migration is needed — the light
+"keep sync off the live DB" step in Phase 1 is the whole fix. Reassess only if the
+sync-client diagnostic shows something unexpected.
 
 ---
 
