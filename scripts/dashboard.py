@@ -296,7 +296,14 @@ def scan_jsonl(raw: pathlib.Path) -> Dict[str, List[int]]:
     return docs
 
 def connect(db_path: pathlib.Path) -> sqlite3.Connection:
-    con = sqlite3.connect(str(db_path))
+    # busy_timeout 30s (Python's default is 5s), matching db_utils: a dashboard read that
+    # overlaps a translate/maintenance write WAITS rather than raising "database is
+    # locked". Additive only — WAL already allows readers alongside one writer.
+    con = sqlite3.connect(str(db_path), timeout=30)
+    try:
+        con.execute("PRAGMA busy_timeout=30000")
+    except Exception:
+        pass
     con.row_factory = sqlite3.Row
     return con
 
@@ -1338,7 +1345,8 @@ def api_passages(doc):
         tset = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
         extra_selects = ", ".join([
             f"p.{c}" for c in
-            ["verse_ref", "chapter", "text_type", "chandas", "iast", "quality_score", "translation_score"]
+            ["verse_ref", "chapter", "text_type", "chandas", "iast", "quality_score",
+             "translation_score", "translation_qa"]
             if c in cols
         ])
         if extra_selects:
@@ -1409,7 +1417,8 @@ def api_passages(doc):
 
         def row_to_dict(r):
             d = {"page_no": r[0], "idx": r[1], "text": r[2] or "", "translation": r[3] or ""}
-            col_names = ["verse_ref","chapter","text_type","chandas","iast","quality_score","translation_score"]
+            col_names = ["verse_ref","chapter","text_type","chandas","iast","quality_score",
+                         "translation_score","translation_qa"]
             for i, c in enumerate(col_names):
                 if c in cols and 4 + i < len(r):
                     d[c] = r[4 + i]
@@ -2131,7 +2140,8 @@ async function loadPage(p){{
       const ttype = p.text_type || 'mula';
       const ref   = p.verse_ref;
       const chan  = p.chandas;
-      const qual  = p.quality_score;
+      const qual  = p.quality_score;      // SOURCE: OCR/Devanagari cleanliness
+      const tqa   = p.translation_qa;     // TRANSLATION: structural QA of the rendering
       const iast  = p.iast;
 
       // Type badge
@@ -2150,7 +2160,20 @@ async function loadPage(p){{
         metaHtml += '<div class="meta-item"><span class="meta-key">Chandas</span><span class="meta-val">' + chandas_display(chan) + '</span></div>';
       }}
       if (qual !== null && qual !== undefined){{
-        metaHtml += '<div class="meta-item"><span class="meta-key">Quality ' + qPct + '%</span>' + qBar + '</div>';
+        // Labelled "Source OCR", not bare "Quality": this measures the SANSKRIT SOURCE's
+        // OCR cleanliness, NOT the translation. Conflating the two misleads the reader
+        // (see /methodology). Translation QA is shown separately below (2026-08-28).
+        metaHtml += '<div class="meta-item" title="Source OCR cleanliness: Devanagari density + verse punctuation. NOT a translation score — see Quality methodology.">'
+                 + '<span class="meta-key">Source OCR ' + qPct + '%</span>' + qBar + '</div>';
+      }}
+      // Separate, explicitly-named TRANSLATION quality — shown only when a translation
+      // exists, so the two axes are never confused with each other.
+      if (hasTr && tqa !== null && tqa !== undefined){{
+        var tPct = Math.round(tqa * 100);
+        var tCol = quality_color(tqa);
+        metaHtml += '<div class="meta-item" title="Structural QA of the translation (length band, residue, truncation). Structural soundness, not certified semantic fidelity — see Quality methodology.">'
+                 + '<span class="meta-key">Translation QA ' + tPct + '%</span>'
+                 + '<div class="quality-bar"><i style="width:'+tPct+'%;background:'+tCol+'"></i></div></div>';
       }}
       if (iast && iast.trim()){{
         metaHtml += '<div class="iast-text">' + esc(iast.substring(0,120)) + (iast.length>120?'&hellip;':'') + '</div>';

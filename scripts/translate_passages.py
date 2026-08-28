@@ -190,7 +190,11 @@ def main():
     _PROGRESS_PATH = Path(args.progress)
     _CONFIG_PATH   = Path(args.config)
 
-    con = sqlite3.connect(args.db)
+    # busy_timeout: Python's default is 5s. Match db_utils' 30s so a brief overlap with
+    # another writer (a maintenance tick, a heal, the dashboard) WAITS instead of raising
+    # "database is locked" mid-run. Purely additive — never changes what is written.
+    con = sqlite3.connect(args.db, timeout=30)
+    con.execute("PRAGMA busy_timeout=30000")
     ensure_schema(con)
     migrate_schema(con)
 
