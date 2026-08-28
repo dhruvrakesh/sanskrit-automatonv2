@@ -122,6 +122,26 @@ python scripts\qa_report.py --db data\context.db --coverage --all
 
 ---
 
+## 5b. Automated idle maintenance
+
+A Scheduled Task **`SanskritMaintenance`** (every 3 h, `scripts\maintenance_runner.ps1`)
+keeps the search index and QA scores current using spare runtime — but only when SAFE:
+
+1. **Idle guard** — queries `/api/jobs/running`; if any job is running or queued it skips
+   (a translation is the single DB writer; maintenance must never contend).
+2. **Connectivity guard** — skips if the Gemini API host is unreachable.
+3. Then runs, all idempotent + incremental: `qa_scan` (free, re-score),
+   `build_embeddings` (cheap, only new verses), `extract_entities --retry-empty`.
+4. Logs every tick (RUN / SKIP / DONE / FAIL) to `D:\backups\maintenance_log.txt`.
+
+Because embeddings/entities call the API, cost accrues against the `$8` budget
+(`cost_tracker.py`); incremental runs are near-zero when nothing new was translated.
+
+```powershell
+Get-Content "D:\backups\maintenance_log.txt" -Tail 8      # what it did / why it skipped
+Start-ScheduledTask -TaskName "SanskritMaintenance"        # run on demand
+```
+
 ## 6. Update the CODE (both repos stay identical)
 
 ```powershell
