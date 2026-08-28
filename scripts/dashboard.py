@@ -1087,6 +1087,18 @@ def api_translate_doc():
     min_quality = str(data.get("min_quality") or 0.35)  # Phase Q default (was 0.25)
     db          = data.get("db") or "data/context.db"
     lang        = (data.get("lang") or "en").strip()   # Phase HI
+    # 'both' is NOT a language — it means "English then Hindi". It must route to
+    # translate_both.py (two real passes), never be passed as --lang both, which
+    # would file English into translations_l10n under the bogus code 'both' and
+    # leave passages.translation empty (the AphorismsOfSandilya bug, 2026-08-28).
+    if lang == "both":
+        cmd = py(script("translate_both.py"),
+                 "--db", db, "--doc", doc, "--engine", engine,
+                 "--sleep", sleep_s, "--context", context, "--min-quality", min_quality)
+        if data.get("hi_pure"):
+            cmd += ["--hi-pure"]
+        return jsonify({"job": launch("translate_both", doc, cmd),
+                        "doc": doc, "engine": engine, "lang": "both"})
     cmd = py(script("translate_passages.py"),
              "--doc",         doc,
              "--db",          db,

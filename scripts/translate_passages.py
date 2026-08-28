@@ -211,6 +211,14 @@ def main():
     has_tr_score  = "translation_score"  in cols
 
     TGT = (args.lang or "en").strip()
+    # 'both' is NOT a language — it means "English then Hindi" and must be run via
+    # translate_both.py (two passes). If it ever reaches here it would be treated as
+    # an l10n target and file English under lang='both', leaving passages.translation
+    # empty. Refuse it loudly rather than corrupt silently (2026-08-28).
+    if TGT == "both":
+        print("ERROR: --lang both is invalid. Use translate_both.py (runs en then hi), "
+              "or pass --lang en / --lang hi.")
+        sys.exit(2)
     IS_L10N = TGT != "en"   # Phase HI: additional-language mode → translations_l10n
 
     # Single-verse mode (reader's on-demand translate): pin the page range to the
