@@ -34,12 +34,22 @@ two Flask instances (in-memory `JOBS`).
 
 ---
 
-## 1. Start / stop the dashboard
+## 1. Start / stop / restart the dashboard
+
+**Use the restart script** — it stops the old listener, starts the server DETACHED in its
+own window, and health-checks the port, so your terminal stays free:
 
 ```powershell
 cd "D:\Sanksrit Automatons\sanskrit-automatonv2"
-python scripts\dashboard.py                 # serves http://127.0.0.1:5057
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1
+# add -NoNewWindow to run it hidden instead of in a visible log window
+```
 
+**Do NOT** run `python scripts\dashboard.py` directly in a terminal you still need:
+it runs in the FOREGROUND, so pressing Ctrl+C to get the prompt back kills the server
+(the classic "ERR_CONNECTION_REFUSED right after a restart").
+
+```powershell
 # Stop cleanly: click "Pause All" in the UI (kills job subprocesses), then:
 $p = (Get-NetTCPConnection -LocalPort 5057 -State Listen -EA SilentlyContinue).OwningProcess | Select-Object -Unique
 $p | ForEach-Object { Stop-Process -Id $_ -Force -EA SilentlyContinue }
