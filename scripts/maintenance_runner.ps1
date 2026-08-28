@@ -10,7 +10,11 @@ $log  = "D:\backups\maintenance_log.txt"
 New-Item -ItemType Directory -Force -Path "D:\backups" | Out-Null
 Set-Location $root
 $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-function Log($m) { Add-Content $log "[$stamp] $m" }
+function Log($m) { Add-Content -Path $log -Value "[$stamp] $m" }
+
+# Always record that the runner fired, BEFORE any guard, so a silent task is
+# never a mystery again (this is what the first attempt was missing).
+Log "TICK — maintenance runner started (user=$env:USERNAME)"
 
 # Guard 1 — dashboard must be idle. If any job is running OR queued, skip this
 # tick (a translation is the single DB writer; maintenance must not contend).
