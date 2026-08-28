@@ -1483,6 +1483,7 @@ def _md_to_html(md: str) -> str:
     """Minimal, dependency-free Markdown -> HTML for the methodology page (handles the
     subset used in QUALITY_METHODOLOGY.md: #/##/### headings, fenced + inline code,
     **bold**, *italic*, - lists, --- rules, [text](url) links, paragraphs)."""
+    import html as _html   # _html is imported locally in library(), not module-wide
     lines = md.split("\n")
     out, i, in_ul = [], 0, False
     def esc(s): return _html.escape(s, quote=False)
