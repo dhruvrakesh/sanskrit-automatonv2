@@ -336,15 +336,24 @@ def count_ingested(con, schema, doc):
     else:
         return 0, 0, 0
     pages = int(con.execute(sql, (doc,)).fetchone()[0] or 0)
+    # Non-verse rows (English front matter, noise) are excluded from the translation
+    # counts so the pipeline table matches the Library and the QA panel — all three
+    # now count real Sanskrit verses only (2026-08-28).
+    try:
+        _has_tt = "text_type" in {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    except Exception:
+        _has_tt = False
+    _ttp = " AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')" if _has_tt else ""
+    _tt  = " AND COALESCE(text_type,'mula') NOT IN ('noise','frontmatter')"   if _has_tt else ""
     if dm == "join_docs":
-        sql_tot = "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?"
-        sql_tr  = "SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''"
+        sql_tot = f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?{_ttp}"
+        sql_tr  = f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=? AND TRIM(COALESCE(p.translation,''))<>''{_ttp}"
     elif dm == "passages_doc":
-        sql_tot = "SELECT COUNT(*) FROM passages WHERE doc=?"
-        sql_tr  = "SELECT COUNT(*) FROM passages WHERE doc=? AND TRIM(COALESCE(translation,''))<>''"
+        sql_tot = f"SELECT COUNT(*) FROM passages WHERE doc=?{_tt}"
+        sql_tr  = f"SELECT COUNT(*) FROM passages WHERE doc=? AND TRIM(COALESCE(translation,''))<>''{_tt}"
     else:
-        sql_tot = "SELECT COUNT(*) FROM passages WHERE doc_code=?"
-        sql_tr  = "SELECT COUNT(*) FROM passages WHERE doc_code=? AND TRIM(COALESCE(translation,''))<>''"
+        sql_tot = f"SELECT COUNT(*) FROM passages WHERE doc_code=?{_tt}"
+        sql_tr  = f"SELECT COUNT(*) FROM passages WHERE doc_code=? AND TRIM(COALESCE(translation,''))<>''{_tt}"
     total = int(con.execute(sql_tot, (doc,)).fetchone()[0] or 0)
     trans = int(con.execute(sql_tr,  (doc,)).fetchone()[0] or 0)
     return pages, total, trans
@@ -1365,14 +1374,21 @@ def api_passages(doc):
             type_clause = " AND COALESCE(p.text_type,'mula')=?"
             type_params = [text_type_filter]
 
+        # Progress counts exclude non-verse rows (English front matter, noise) so the
+        # header "194/664 translated" reflects real Sanskrit verses. The passage LIST
+        # below still SHOWS those rows, labelled "Source is English" — mark, don't hide.
+        stats_clause, stats_params = type_clause, list(type_params)
+        if not text_type_filter and "text_type" in cols:
+            stats_clause = " AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
+            stats_params = []
         total = con.execute(
-            f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?{type_clause}",
-            (doc, *type_params)
+            f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id WHERE d.code=?{stats_clause}",
+            (doc, *stats_params)
         ).fetchone()[0]
         translated = con.execute(
             f"SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id {join_l10n} "
-            f"WHERE d.code=? AND TRIM(COALESCE({trans_col},''))<>''{type_clause}",
-            (*l10n_param, doc, *type_params)
+            f"WHERE d.code=? AND TRIM(COALESCE({trans_col},''))<>''{stats_clause}",
+            (*l10n_param, doc, *stats_params)
         ).fetchone()[0]
         # Count by text_type
         type_counts = {}
@@ -1561,11 +1577,18 @@ def library():
         # page works whether or not a future migration adds a title (2026-08-23).
         dcols = {r[1] for r in con.execute("PRAGMA table_info(docs)")}
         title_expr = "COALESCE(d.title, d.code)" if "title" in dcols else "d.code"
+        # Exclude non-verse rows (English front matter, noise) from the coverage
+        # denominator, so "EN 183/664" counts real Sanskrit verses only. The QA panel
+        # already excludes them; this makes the Library agree (2026-08-28). Filter lives
+        # in the LEFT JOIN's ON clause so docs with zero verses are still returned.
+        _pcols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        _pfilter = (" AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
+                    if "text_type" in _pcols else "")
         rows = con.execute(
             f"SELECT d.code, {title_expr}, COALESCE(d.category,'other'), "
             "COUNT(p.id), "
             "SUM(CASE WHEN TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END) "
-            "FROM docs d LEFT JOIN passages p ON p.doc_id=d.id "
+            f"FROM docs d LEFT JOIN passages p ON p.doc_id=d.id{_pfilter} "
             "WHERE d.code NOT LIKE '%-RETIRED' "        # hide retired docs (reversible)
             "GROUP BY d.id ORDER BY COALESCE(d.category,'other'), d.code"
         ).fetchall()
