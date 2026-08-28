@@ -1916,6 +1916,7 @@ main{{max-width:1400px;margin:0 auto;padding:20px 16px 48px}}
 .hi-text{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:1.9;color:var(--cream)}}
 .en-pending{{color:var(--muted);font-style:italic;font-size:13px;font-family:'Inter',sans-serif}}
 .en-illegible{{color:#c06060;font-style:italic;font-size:12px;font-family:'Inter',sans-serif}}
+.en-source{{color:#9a8f70;font-style:italic;font-size:12px;font-family:'Inter',sans-serif}}
 .tr-one-btn{{margin-top:8px;background:#3a2a0f;border:1px solid #7a5a1a;color:#e0b050;border-radius:5px;padding:4px 11px;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}}
 .tr-one-btn:hover{{background:var(--gold);color:#000}}
 .tr-one-btn:disabled{{opacity:.6;cursor:wait}}
@@ -2000,6 +2001,26 @@ function looksIllegible(t){{
   var lat = (s.match(/[A-Za-z]/g) || []).length;
   var tot = s.replace(/\\s/g,'').length || 1;
   return (dev / tot) < 0.45 && lat > 6;
+}}
+
+// Coherent English SOURCE (book front-matter, title pages, editorial prefaces like the
+// Ballantyne "ADVERTISEMENT"). This is NOT garbled OCR — it is legible English that
+// simply needs no Sanskrit->English translation. Distinguished from illegible Sanskrit
+// so it is labelled honestly instead of flagged for re-OCR (2026-08-28).
+function looksEnglish(t){{
+  if (!t) return false;
+  var s = String(t);
+  var lat = (s.match(/[A-Za-z]/g) || []).length;
+  var dev = (s.match(/[ऀ-ॿ]/g) || []).length;
+  var letters = lat + dev || 1;
+  if (lat/letters < 0.85 || lat < 12) return false;   // Latin-dominant, enough text
+  var lc = ' ' + s.toLowerCase().replace(/[^a-z]+/g,' ') + ' ';
+  var words = [' the ',' of ',' and ',' to ',' in ',' is ',' was ',' this ',' that ',
+               ' with ',' by ',' for ',' as ',' which ',' work ',' published ',' edited ',
+               ' commentary ',' following ',' printed ',' society ',' college ',' preface ',
+               ' aphorisms ',' oriental ',' collection '];
+  var hits = 0; for (var i=0;i<words.length;i++){{ if (lc.indexOf(words[i])>=0) hits++; }}
+  return hits >= 3;                                    // >=3 common English words = coherent English
 }}
 
 // On-demand translate of ONE verse into the active language; saves to the corpus.
@@ -2124,7 +2145,9 @@ async function loadPage(p){{
           '<div class="col-label col-label-en">' + (LANG_LABELS[activeLang] || activeLang) + '</div>' +
           (hasTr
             ? '<div class="' + (activeLang === 'en' ? 'en-text' : 'hi-text') + '">' + esc(p.translation) + '</div>'
-            : (looksIllegible(p.text)
+            : (looksEnglish(p.text)
+                ? '<div class="en-source">&#128196; Source is English &mdash; no translation needed</div>'
+                : looksIllegible(p.text)
                 ? '<div class="en-illegible">&#9888; Source illegible &mdash; needs re-OCR, not translation</div>'
                 : '<div class="en-pending">&#x231B; Not yet translated</div>'
                   + '<button class="tr-one-btn" onclick="translateVerse(' + p.page_no + ',' + p.idx + ',this)">&#9889; Translate to ' + (LANG_SHORT[activeLang] || String(activeLang).toUpperCase()) + '</button>')) +

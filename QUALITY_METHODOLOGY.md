@@ -95,7 +95,11 @@ re‑translate a specific model/prompt generation and measure the improvement.
 - `quality_score` (source) and `translation_qa` (translation) are **different axes** — do
   not average them together.
 - Coverage (e.g. "EN 549/2581") counts verses with a stored translation; the remainder are
-  either not yet translated or **skipped as too corrupt to translate** — the honest blank.
+  either not yet translated, **skipped as too corrupt to translate** (the honest blank), or
+  **not Sanskrit at all** — a scanned book's English front matter (title page, editorial
+  preface). English source is detected, labelled "Source is English — no translation
+  needed" in the reader, and tagged `frontmatter` so it is excluded from coverage and QA
+  rather than counted as an untranslated verse.
 - "Structurally sound" is a floor, not a ceiling. Semantic certification comes from §3 and
   human review, and we report those separately rather than letting a heuristic stand in for
   faithfulness.
