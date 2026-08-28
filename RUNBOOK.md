@@ -16,6 +16,7 @@ is), `ENTERPRISE_ROADMAP.md` (forward plan), `BENCHMARKS.md` (measured baselines
 | `RUNBOOK.md` (this) | Every operational procedure | day-to-day operation |
 | `ENTERPRISE_ROADMAP.md` | Phased forward plan + rationale | planning changes |
 | `BENCHMARKS.md` | Dated measured baselines + metric semantics | before/after any change |
+| `QUALITY_METHODOLOGY.md` | How source/translation/semantic quality are computed (public-facing; served at `/methodology`) | transparency, reader-facing |
 
 **System context.** This repo (`automaton`) is one of four siblings in the
 `sanskrit-symphony` monorepo (`automaton`, `hub` = Srangam console :5050, `panchang`

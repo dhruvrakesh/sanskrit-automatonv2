@@ -1479,6 +1479,72 @@ def api_queue_skip(doc):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+def _md_to_html(md: str) -> str:
+    """Minimal, dependency-free Markdown -> HTML for the methodology page (handles the
+    subset used in QUALITY_METHODOLOGY.md: #/##/### headings, fenced + inline code,
+    **bold**, *italic*, - lists, --- rules, [text](url) links, paragraphs)."""
+    lines = md.split("\n")
+    out, i, in_ul = [], 0, False
+    def esc(s): return _html.escape(s, quote=False)
+    def inline(s):
+        s = esc(s)
+        s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
+        s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
+        s = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", s)
+        s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', s)
+        return s
+    while i < len(lines):
+        ln = lines[i]
+        if ln.startswith("```"):
+            buf = []; i += 1
+            while i < len(lines) and not lines[i].startswith("```"):
+                buf.append(esc(lines[i])); i += 1
+            out.append("<pre><code>" + "\n".join(buf) + "</code></pre>"); i += 1; continue
+        if in_ul and not ln.lstrip().startswith("- "):
+            out.append("</ul>"); in_ul = False
+        if ln.startswith("### "):   out.append("<h3>" + inline(ln[4:]) + "</h3>")
+        elif ln.startswith("## "):  out.append("<h2>" + inline(ln[3:]) + "</h2>")
+        elif ln.startswith("# "):   out.append("<h1>" + inline(ln[2:]) + "</h1>")
+        elif ln.strip() == "---":   out.append("<hr/>")
+        elif ln.lstrip().startswith("- "):
+            if not in_ul: out.append("<ul>"); in_ul = True
+            out.append("<li>" + inline(ln.lstrip()[2:]) + "</li>")
+        elif ln.strip():            out.append("<p>" + inline(ln) + "</p>")
+        i += 1
+    if in_ul: out.append("</ul>")
+    return "\n".join(out)
+
+
+@app.get("/methodology")
+def methodology():
+    """Transparent, human-readable quality methodology (renders QUALITY_METHODOLOGY.md)."""
+    try:
+        md = (ROOT / "QUALITY_METHODOLOGY.md").read_text(encoding="utf-8")
+    except Exception:
+        md = "# Quality methodology\n\n(QUALITY_METHODOLOGY.md is not present on this install.)"
+    inner = _md_to_html(md)
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Srangam &mdash; How we measure quality</title>
+<style>
+:root{{--bg:#0b0a08;--card:#161410;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58;--green:#5aaa7a}}
+*{{box-sizing:border-box}} body{{background:var(--bg);color:var(--cream);font-family:'EB Garamond',Georgia,serif;line-height:1.65;margin:0}}
+header{{background:var(--card);border-bottom:1px solid var(--border);padding:14px 24px;position:sticky;top:0}}
+header a{{color:var(--muted);text-decoration:none;font-family:Inter,sans-serif;font-size:12px}} header a:hover{{color:var(--gold)}}
+main{{max-width:820px;margin:0 auto;padding:28px 22px 70px}}
+h1{{color:var(--gold);font-family:Inter,sans-serif;font-size:25px;margin:0 0 8px}}
+h2{{color:var(--gold);font-family:Inter,sans-serif;font-size:18px;margin:26px 0 8px;border-bottom:1px solid var(--border);padding-bottom:4px}}
+h3{{color:var(--cream);font-family:Inter,sans-serif;font-size:14px;margin:16px 0 4px}}
+pre{{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow-x:auto}}
+code{{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--card);padding:1px 5px;border-radius:4px;color:var(--gold)}}
+pre code{{background:none;padding:0;color:var(--green)}}
+ul{{padding-left:22px}} li{{margin:3px 0}} hr{{border:none;border-top:1px solid var(--border);margin:22px 0}}
+em{{color:var(--muted)}} strong{{color:var(--cream)}} a{{color:var(--gold)}}
+</style></head><body>
+<header><a href="/library">&#8592; Library</a> &nbsp;&middot;&nbsp; <a href="/">Dashboard</a></header>
+<main>{inner}</main></body></html>"""
+
+
 @app.get("/library")
 def library():
     """Reader front door: every translated text, grouped by category, with
@@ -1509,6 +1575,17 @@ def library():
                 "JOIN passages p ON p.id=l.passage_id JOIN docs d ON d.id=p.doc_id "
                 "WHERE l.lang='hi' AND TRIM(COALESCE(l.translation,''))<>'' GROUP BY d.code"):
                 hi[code] = n
+        # Mean STRUCTURAL translation QA per doc (translation_qa) — surfaced as a badge
+        # with a link to the methodology, so quality is transparent, not hidden.
+        qa = {}
+        try:
+            for code, avgqa in con.execute(
+                "SELECT d.code, AVG(p.translation_qa) FROM passages p "
+                "JOIN docs d ON d.id=p.doc_id WHERE p.translation_qa IS NOT NULL GROUP BY d.code"):
+                if avgqa is not None:
+                    qa[code] = round(float(avgqa), 2)
+        except Exception:
+            qa = {}
         con.close()
     except Exception as e:
         return f"<pre>Library error: {_html.escape(str(e))}</pre>", 500
@@ -1521,7 +1598,7 @@ def library():
             continue  # only list readable texts
         total_docs += 1; total_en += en
         h = int(hi.get(code, 0) or 0); total_hi += h
-        cats.setdefault(cat, []).append((code, title, int(total or 0), en, h))
+        cats.setdefault(cat, []).append((code, title, int(total or 0), en, h, qa.get(code)))
 
     body = ""
     if not cats:
@@ -1529,9 +1606,15 @@ def library():
                 'Translate a document, then it appears here.</div>')
     for cat, docs in cats.items():
         body += f'<h2 class="cat">{_html.escape(cat)}</h2><div class="grid">'
-        for code, title, total, en, h in docs:
+        for code, title, total, en, h, qadoc in docs:
             pct = round(100 * en / total) if total else 0
             hi_badge = f'<span class="badge hi">&#2361;&#2367; {h}</span>' if h else ''
+            qa_badge = ''
+            if qadoc is not None:
+                qcls = 'q-hi' if qadoc >= 0.8 else ('q-mid' if qadoc >= 0.6 else 'q-lo')
+                qa_badge = (f'<span class="badge {qcls}" title="Mean structural translation QA '
+                            f'(translation_qa {qadoc:.2f}). Click “Quality methodology” to see how this is computed.">'
+                            f'QA {int(round(qadoc*100))}</span>')
             # "Proceed with pending translation" affordance: offer to finish the
             # English, and to add Hindi wherever English exists but Hindi does not.
             acts = ''
@@ -1548,7 +1631,7 @@ def library():
                 f'<div class="ttl">{_html.escape(title)}</div>'
                 f'<div class="code">{_html.escape(code)}</div>'
                 f'<div class="bar"><i style="width:{pct}%"></i></div>'
-                f'<div class="meta"><span class="badge en">EN {en}/{total}</span>{hi_badge}'
+                f'<div class="meta"><span class="badge en">EN {en}/{total}</span>{hi_badge}{qa_badge}'
                 f'<span class="pct">{pct}%</span></div></a>'
                 f'{acts_html}</div>'
             )
@@ -1580,6 +1663,9 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 .badge{{border-radius:20px;padding:2px 8px;font-weight:600}}
 .badge.en{{background:#22304a;color:var(--blue)}}
 .badge.hi{{background:#3a2a0f;color:var(--gold);font-family:'Noto Serif Devanagari',serif}}
+.badge.q-hi{{background:#12351f;color:var(--green)}}
+.badge.q-mid{{background:#3a2f0f;color:var(--gold)}}
+.badge.q-lo{{background:#3a1616;color:#d98a8a}}
 .pct{{margin-left:auto;color:var(--muted)}}
 .empty{{color:var(--muted);text-align:center;padding:60px 20px;font-family:'Inter',sans-serif}}
 .card-wrap{{display:flex;flex-direction:column}}
@@ -1593,7 +1679,8 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
   <a class="back" href="/">&#8592; Dashboard</a>
   <h1>&#2384; Srangam Library</h1>
   <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses</span>
-  <a class="back" href="/ask" style="margin-left:auto;color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
+  <a class="back" href="/methodology" title="How source and translation quality are measured" style="margin-left:auto;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
+  <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
 </header>
 <main>{body}</main>
 <div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;display:none;z-index:50"></div>
