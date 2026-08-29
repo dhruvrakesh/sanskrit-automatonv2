@@ -86,6 +86,30 @@ the next restart). The real open item is **semantic** certification — see road
 
 ---
 
+## OCR A/B — measured 2026-08-28 (why we are NOT re-OCRing)
+
+Hypothesis: the garbled Sanskrit in old scanned editions was a DPI problem, fixable by
+re-OCR. **Tested and rejected.**
+
+| Page | source | dev fraction | length |
+|------|--------|--------------|--------|
+| `AphorismsOfSandilya_0050` | stored (400 DPI, original run) | **0.98** | 999 |
+| `AphorismsOfSandilya_0050` | fresh OCR, 400→600 DPI escalation, all preproc variants | **0.98** | 1040 |
+
+**Verdict: no material gain.** The output is 98% Devanagari in both cases — the failure is
+*character-level misrecognition inside Devanagari* (`प्राख्डिल्यग्रतखनीयं`, `amfafe:`), not
+script confusion. Tesseract cannot read the 1861 Bibliotheca Indica founts accurately at
+any DPI we can throw at it. **Do not spend hours re-OCRing these texts.** The remedy is a
+clean e-text source (GRETIL / sanskritdocuments / the `wisdomlib` sibling), imported via
+`import_mbh_gretil.py` / `import_wisdomlib.py`.
+
+Separately, a genuine defect WAS found and fixed in `ocr_pdf.py`: acceptance was
+`len(cand) >= min_chars` — **quantity only** — so a 400-DPI pass yielding 60+ chars of
+Latin garbage was accepted and broke out of the retry loops, meaning the 450/600-DPI
+escalation never fired for the pages that needed it. Acceptance now also requires
+Devanagari-dominance (`--min-dev-frac`, default 0.45). This helps the *Latin-contaminated*
+failure class; it does not (and cannot) help the misrecognised-Devanagari class above.
+
 ## Targets (what "good" looks like)
 | Dimension | Baseline | Target |
 |-----------|----------|--------|

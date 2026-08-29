@@ -31,6 +31,17 @@ edition's scholarly value. A pristine critical edition and a rough scan of the s
 both score high if the Devanagari is clean. A high score means "readable," not "the best
 edition available."
 
+**Known blind spot (measured 2026-08-28).** This metric sees *script*, not *correctness*.
+Tesseract reading an old typeface (e.g. the 1861 *Bibliotheca Indica* founts) can emit
+confident but wrong Devanagari — `प्राख्डिल्यग्रतखनीयं भाव्यम् [अव्शब्यान््र]` — which
+scores **0.98** because it is Devanagari-dense and daṇḍa-bearing, while being largely
+unreadable as Sanskrit. So `quality_score` reliably catches *Latin-contaminated* OCR
+failure but **cannot detect misrecognised Devanagari**. A/B test: re-OCRing such a page at
+600 DPI with every preprocessing variant produced `dev=0.98` before and after — i.e. no
+gain. For these editions the honest remedy is **not** more OCR but a clean e-text source
+(GRETIL / sanskritdocuments / wisdomlib). Treat a high source score on a pre-1900 scan as
+"probably readable", and confirm by eye or by the translation's own QA.
+
 ---
 
 ## 2. Translation quality — "is the translation structurally sound?"
