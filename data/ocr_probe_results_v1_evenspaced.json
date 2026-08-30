@@ -1,0 +1,119 @@
+{
+  "2015_405693_Shatpath-Brahmanam": {
+    "pages": 5,
+    "token_agreement": 0.3022,
+    "reverse_agreement": 0.2933,
+    "median_tokens": 201,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "AphorismsOfSandilya": {
+    "pages": 5,
+    "token_agreement": 0.4026,
+    "reverse_agreement": 0.3523,
+    "median_tokens": 75,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "HAYASHIRSHA_PANCARATRA": {
+    "pages": 5,
+    "token_agreement": 0.5556,
+    "reverse_agreement": 0.5488,
+    "median_tokens": 98,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "dhanur_veda_shiva_dhanur_veda": {
+    "pages": 5,
+    "token_agreement": 0.59,
+    "reverse_agreement": 0.5741,
+    "median_tokens": 100,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "harita_caturtha_sthanam": {
+    "pages": 5,
+    "token_agreement": 0.6026,
+    "reverse_agreement": 0.5632,
+    "median_tokens": 77,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "harita_dvitiya_sthanam": {
+    "pages": 5,
+    "token_agreement": 0.6105,
+    "reverse_agreement": 0.5882,
+    "median_tokens": 95,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "harita_pancamam_kalpa_sthanam": {
+    "pages": 5,
+    "token_agreement": 0.58,
+    "reverse_agreement": 0.5631,
+    "median_tokens": 86,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "harita_prathama_sthanam": {
+    "pages": 5,
+    "token_agreement": 0.6695,
+    "reverse_agreement": 0.6591,
+    "median_tokens": 86,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "harita_shashtham_sharira_sthanam": {
+    "pages": 3,
+    "token_agreement": 0.6341,
+    "reverse_agreement": 0.6118,
+    "median_tokens": 82,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "harita_tritiya_sthanam": {
+    "pages": 4,
+    "token_agreement": 0.6076,
+    "reverse_agreement": 0.6006,
+    "median_tokens": 93,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "jyotish_surya_siddhanta": {
+    "pages": 5,
+    "token_agreement": 0.5574,
+    "reverse_agreement": 0.4865,
+    "median_tokens": 77,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "markandeya_purana": {
+    "pages": 5,
+    "token_agreement": 0.5132,
+    "reverse_agreement": 0.5176,
+    "median_tokens": 78,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  },
+  "nirukta": {
+    "pages": 5,
+    "token_agreement": 0.5455,
+    "reverse_agreement": 0.5046,
+    "median_tokens": 98,
+    "contam_tesseract": 0.0,
+    "contam_vision": 0.0,
+    "note": "salvaged from cached probe pages (evenly-spaced sampler)"
+  }
+}

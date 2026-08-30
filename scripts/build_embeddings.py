@@ -99,6 +99,7 @@ def main():
     ap.add_argument("--batch", type=int, default=64, help="passages per embed call")
     ap.add_argument("--limit", type=int, default=None, help="cap total passages this run")
     ap.add_argument("--sleep", type=float, default=0.4, help="pause between batches (rate limit)")
+    ap.add_argument("--doc", default=None, help="limit to one doc code (also labels the spend)")
     ap.add_argument("--refresh", action="store_true",
                     help="re-embed everything, even passages already embedded with this model")
     args = ap.parse_args()
@@ -178,6 +179,10 @@ def main():
         "WHERE e.passage_id = p.id AND e.model = ?)"
     )
     params = [] if args.refresh else [args.model]
+    where_doc = ""
+    if args.doc:
+        where_doc = "AND d.code = ?"
+        params.append(args.doc)          # bound AFTER the model param above
     rows = con.execute(
         f"""SELECT p.id, COALESCE(p.iast,''), p.translation
             FROM passages p
@@ -186,6 +191,7 @@ def main():
               AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')
               AND d.code NOT LIKE '%-RETIRED'
               {where_done}
+              {where_doc}
             ORDER BY p.id""",
         params,
     ).fetchall()
@@ -201,6 +207,7 @@ def main():
     print(f"Embedding {total} passages with {args.model} (batch={args.batch})…")
     cur = con.cursor()
     done = 0
+    spend_usd = 0.0
     t0 = time.time()
     for i in range(0, total, args.batch):
         chunk = rows[i : i + args.batch]
@@ -210,11 +217,23 @@ def main():
             if iast:
                 t = f"{iast.strip()} — {t}"
             texts.append(t[:2000])
+        t_batch = time.time()
         try:
             embs = _embed_batch(genai, args.model, texts, "retrieval_document")
         except Exception as exc:
             print(f"  [ERR] batch at {i}: {exc}  — stopping; re-run to resume.")
             break
+        # 2026-08-29: embeddings were billed but never recorded, so the budget
+        # cap was blind to them. embed_content returns no usage_metadata, so
+        # this is the chars/4 estimate and is logged as token_source='estimated'.
+        try:
+            from usage_meter import meter as _meter
+            spend_usd += _meter(kind="embedding", doc=args.doc, engine=args.model,
+                                in_chars=sum(len(t) for t in texts), out_chars=0,
+                                units=len(chunk), duration_s=time.time() - t_batch,
+                                con=con)
+        except Exception:
+            pass
         for (pid, _iast, _tr), vec in zip(chunk, embs):
             a = _normalise(vec)
             cur.execute(
@@ -234,6 +253,8 @@ def main():
                        (args.model,)).fetchone()[0]
     con.close()
     print(f"Done. {done} embedded this run; {have} total vectors for {args.model}.")
+    print(f"Recorded spend this run: ${spend_usd:.4f} (estimated from characters; the "
+          f"embedding API does not report token counts) - kind='embedding' in usage_log.")
 
 
 if __name__ == "__main__":

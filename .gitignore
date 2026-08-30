@@ -62,3 +62,24 @@ __pycache__/
 
 query_snapshot.db
 query_snapshot.db-*
+
+
+# ---- added 2026-08-30: OCR working directories and local backups ----
+# backups/ reached 523 MB; data/raw_vision holds one JSONL per page per book.
+# None of it is source - all of it is regenerable from inbox/ plus the scripts.
+backups/
+data/raw_vision/
+data/raw_merged/
+data/probe/
+data/manifests/
+data/vision_redo.txt
+data/tmp_*.jsonl
+
+# ...but DO keep the probe verdicts: they are small, and they are the evidence
+# behind the OCR standard in RUNBOOK 3d and BENCHMARKS.
+!data/ocr_probe_results.json
+!data/ocr_probe_results_dense.json
+!data/ocr_probe_results_v1_evenspaced.json
+
+# One-off release message drafts (use scripts\release.ps1 -MessageFile)
+COMMIT_MSG.txt

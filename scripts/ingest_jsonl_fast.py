@@ -72,6 +72,21 @@ def decide_page_no(path: pathlib.Path, items: list) -> int:
     return 1
 
 
+def _ensure_provenance(con):
+    """Add passages.ocr_engine if missing. (2026-08-29)
+
+    Which engine produced a line is a fact about the text, not a detail of the
+    run that made it. Without it the corpus cannot be filtered, audited or
+    honestly presented: a reader has no way to know whether a verse came from
+    Tesseract at ~64% word accuracy or from a vision pass at ~93% ceiling, and
+    a later quality pass cannot target the weaker half.
+    """
+    cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    if "ocr_engine" not in cols:
+        con.execute("ALTER TABLE passages ADD COLUMN ocr_engine TEXT")
+        con.commit()
+
+
 def upsert_passages(
     con: sqlite3.Connection,
     doc_id: int,
@@ -160,8 +175,8 @@ def upsert_passages(
                 INSERT INTO passages(doc_id, page_no, idx,
                     text, norm, iast,
                     verse_ref, chapter, text_type, chandas, padas, quality_score,
-                    translation)
-                VALUES(?,?,?, ?,?,?, ?,?,?,?,?,?, ?)
+                    translation, ocr_engine)
+                VALUES(?,?,?, ?,?,?, ?,?,?,?,?,?, ?,?)
                 ON CONFLICT(doc_id, page_no, idx) DO UPDATE SET
                     text=excluded.text,
                     norm=excluded.norm,
@@ -171,7 +186,8 @@ def upsert_passages(
                     text_type=COALESCE(excluded.text_type, text_type),
                     chandas=COALESCE(excluded.chandas, chandas),
                     padas=COALESCE(excluded.padas, padas),
-                    quality_score=COALESCE(excluded.quality_score, quality_score)
+                    quality_score=COALESCE(excluded.quality_score, quality_score),
+                    ocr_engine=COALESCE(excluded.ocr_engine, ocr_engine)
                     -- NOTE: translation is NOT overwritten on re-ingest
                 """,
                 (
@@ -182,6 +198,7 @@ def upsert_passages(
                     seg.get("chandas"), seg.get("padas", 0),
                     seg.get("quality_score", 0.0),
                     "",  # translation starts empty
+                    (rec.get("engine") or None),   # provenance, straight from the JSONL
                 )
             )
             # cur.lastrowid is unreliable after ON CONFLICT DO UPDATE —
@@ -215,6 +232,7 @@ def main():
     args = ap.parse_args()
 
     con = connect(args.db)
+    _ensure_provenance(con)      # idempotent; adds passages.ocr_engine if absent
     ensure_schema(con)
     migrate_schema(con)
 

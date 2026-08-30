@@ -127,11 +127,13 @@ def _judge_one(model, lang_name, src, iast, translation):
     if iast:
         parts.append(f"IAST:\n{iast}")
     parts.append(f"{lang_name.upper()} TRANSLATION:\n{translation}")
-    resp = model.generate_content("\n\n".join(parts))
+    prompt = "\n\n".join(parts)
+    resp = model.generate_content(prompt)
     try:
         txt = (resp.text or "").strip()
     except Exception:
         txt = ""
+    _judge_one.last = (resp, len(prompt), len(txt))   # for the caller's cost meter
     # strip ```json ... ``` fences the model adds despite instructions
     if txt.startswith("```"):
         txt = re.sub(r"^```[A-Za-z]*\s*", "", txt)
@@ -246,9 +248,22 @@ def main():
 
     now = datetime.now(timezone.utc).isoformat()
     ok = err = 0
+    spend_usd = 0.0
+    try:
+        from usage_meter import meter as _meter
+    except Exception:
+        _meter = None
     for i, (pid, code, vref, src, iast, tr) in enumerate(picked, 1):
         try:
+            _t0 = time.time()
             fid, flu, reason = _judge_one(model, lang_name, src, iast, tr)
+            # 2026-08-29: the QA judge is itself a paid model call. It used to
+            # cost money that never appeared in usage_log or against the cap.
+            if _meter is not None:
+                _r, _inc, _outc = getattr(_judge_one, "last", (None, 0, 0))
+                spend_usd += _meter(kind="judge", doc=code, engine=args.engine,
+                                    resp=_r, in_chars=_inc, out_chars=_outc,
+                                    units=1, duration_s=time.time() - _t0, con=con)
             # idempotent: replace any prior verdict for this (passage, lang, judge version)
             con.execute("DELETE FROM mt_reviews WHERE passage_id=? AND lang=? AND prompt_version=?",
                         (pid, args.lang, PROMPT_VERSION))
@@ -265,7 +280,10 @@ def main():
             print(f"  [{i}/{len(picked)}] {code}: ERROR {type(e).__name__}: {e}")
         time.sleep(args.sleep)
 
-    print(f"\nDone. graded={ok} errors={err}. Aggregate: python scripts/judge_sample.py --report --lang {args.lang}")
+    print(f"\nDone. graded={ok} errors={err}.  MEASURED spend this run: ${spend_usd:.4f}"
+          + (f" (${spend_usd/ok:.5f}/verse)" if ok else "")
+          + f"   [pre-flight estimate was ${est:.4f}]")
+    print(f"Aggregate: python scripts/judge_sample.py --report --lang {args.lang}")
     con.close()
 
 

@@ -31,16 +31,37 @@ _PRICING: dict[str, tuple[float, float]] = {
     "openai:gpt-4o-mini":         (0.15,   0.60),
     "openai:gpt-4o":              (2.50,  10.00),
     "openai:gpt-4o-mini-2024-07-18": (0.15, 0.60),
+    # --- 2026-08-29: added so non-translation work is no longer priced at $0 ---
+    # Embeddings bill input tokens only; there is no "output" side.
+    "models/gemini-embedding-001": (0.15,   0.00),
+    "gemini-embedding-001":        (0.15,   0.00),
+    "text-embedding-004":          (0.00,   0.00),   # free tier at time of writing
+    # Vision OCR runs on the same 2.5-flash endpoint; image tokens are priced as input.
+    "gemini-vision:gemini-2.5-flash": (0.15, 0.60),
+    "gemini-vision:gemini-2.5-pro":   (1.25, 10.00),
+    "tesseract":                   (0.00,   0.00),   # local compute, no API cost
 }
 _CHARS_PER_TOKEN = 4.0  # approximate for Sanskrit/English mixed content
 
 _lock = threading.Lock()
 
 
+def _norm_engine(engine: str) -> str:
+    return (engine or "").strip()
+
+
 def _get_pricing(engine: str) -> tuple[float, float]:
-    """Return (in_price_per_M, out_price_per_M) for an engine."""
+    """Return (in_price_per_M, out_price_per_M) for an engine.
+
+    Exact match first (2026-08-29): the old substring-only match meant a new
+    engine name could silently collide with an unrelated price row. Substring
+    matching is kept as the fallback so existing callers behave identically.
+    """
+    e = _norm_engine(engine)
+    if e in _PRICING:
+        return _PRICING[e]
     for k, v in _PRICING.items():
-        if k in engine or engine in k:
+        if k in e or e in k:
             return v
     # Default: assume Gemini 2.5 Flash (the project default engine)
     return (0.15, 0.60)
@@ -48,6 +69,13 @@ def _get_pricing(engine: str) -> tuple[float, float]:
 
 def chars_to_tokens(chars: int) -> float:
     return chars / _CHARS_PER_TOKEN
+
+
+def estimate_cost_from_tokens(engine: str, in_tokens: float, out_tokens: float) -> float:
+    """Price a call from TOKEN counts (preferred: the provider reports these
+    exactly in response.usage_metadata, so no chars/4 guessing is involved)."""
+    in_price, out_price = _get_pricing(engine)
+    return in_price * (in_tokens / 1_000_000.0) + out_price * (out_tokens / 1_000_000.0)
 
 
 def estimate_cost_usd(
@@ -103,7 +131,81 @@ def ensure_usage_schema(con: sqlite3.Connection):
         INSERT OR IGNORE INTO budget_state(id, budget_usd, spent_usd)
         VALUES (1, 8.0, 0.0);
     """)
+    # 2026-08-29 migration: record WHERE the token counts came from, so a spend
+    # figure can never again be quoted as fact when it was actually a chars/4
+    # guess. 'provider' = taken from the API's own usage_metadata; 'estimated'
+    # = derived from character counts.
+    have = {r[1] for r in con.execute("PRAGMA table_info(usage_log)")}
+    if "token_source" not in have:
+        con.execute("ALTER TABLE usage_log ADD COLUMN token_source TEXT DEFAULT 'estimated'")
     con.commit()
+
+
+def log_api_call(
+    con: sqlite3.Connection,
+    kind: str,
+    doc: str,
+    engine: str,
+    in_chars: int = 0,
+    out_chars: int = 0,
+    duration_s: float = 0.0,
+    passages: int = 1,
+    ok: bool = True,
+    in_tokens: float | None = None,
+    out_tokens: float | None = None,
+) -> float:
+    """Log ONE metered API call of any kind and charge it to the budget.
+
+    Added 2026-08-29. Until this existed, `usage_log` only ever recorded
+    kind='translation' — so vision OCR, entity extraction, embeddings and the
+    QA judge all spent real money that `budget_state.spent_usd` never saw, and
+    the cap could not stop them. `kind` is now a parameter, not a literal.
+
+    Pass in_tokens/out_tokens when the provider reports them (Gemini returns
+    response.usage_metadata); the row is then marked token_source='provider'
+    and the cost is exact to the pricing table. Omit them and the old chars/4
+    estimate is used and the row is marked 'estimated'.
+    """
+    if in_tokens is None and out_tokens is None:
+        in_tok, out_tok = chars_to_tokens(in_chars), chars_to_tokens(out_chars)
+        source = "estimated"
+    else:
+        in_tok, out_tok = float(in_tokens or 0), float(out_tokens or 0)
+        source = "provider"
+    cost = estimate_cost_from_tokens(engine, in_tok, out_tok)
+
+    with _lock:
+        ensure_usage_schema(con)
+        con.execute("""
+            INSERT INTO usage_log(kind, doc, engine, in_chars, out_chars,
+                                  in_tokens, out_tokens, cost_usd, duration_s, passages,
+                                  ok, token_source)
+            VALUES(?,?,?,?,?, ?,?,?,?,?, ?,?)
+        """, (kind, doc, engine, in_chars, out_chars, in_tok, out_tok, cost,
+              duration_s, passages, 1 if ok else 0, source))
+
+        con.execute("""
+            INSERT INTO usage_totals(engine, total_calls, total_in_chars, total_out_chars,
+                                     total_cost_usd, total_duration_s, total_passages)
+            VALUES(?,1,?,?,?,?,?)
+            ON CONFLICT(engine) DO UPDATE SET
+                total_calls     = total_calls + 1,
+                total_in_chars  = total_in_chars  + excluded.total_in_chars,
+                total_out_chars = total_out_chars + excluded.total_out_chars,
+                total_cost_usd  = total_cost_usd  + excluded.total_cost_usd,
+                total_duration_s= total_duration_s + excluded.total_duration_s,
+                total_passages  = total_passages  + excluded.total_passages,
+                last_updated    = strftime('%Y-%m-%dT%H:%M:%fZ','now')
+        """, (engine, in_chars, out_chars, cost, duration_s, passages))
+
+        con.execute("""
+            UPDATE budget_state SET
+                spent_usd  = spent_usd + ?,
+                updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now')
+            WHERE id=1
+        """, (cost,))
+        con.commit()
+    return cost
 
 
 def log_translation_call(
@@ -125,8 +227,9 @@ def log_translation_call(
         ensure_usage_schema(con)
         con.execute("""
             INSERT INTO usage_log(kind, doc, engine, in_chars, out_chars,
-                                  in_tokens, out_tokens, cost_usd, duration_s, passages, ok)
-            VALUES('translation',?,?,?,?, ?,?,?,?,?,?)
+                                  in_tokens, out_tokens, cost_usd, duration_s, passages, ok,
+                                  token_source)
+            VALUES('translation',?,?,?,?, ?,?,?,?,?,?, 'estimated')
         """, (doc, engine, in_chars, out_chars, in_tok, out_tok, cost, duration_s, passages, 1 if ok else 0))
 
         # Update running totals

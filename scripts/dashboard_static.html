@@ -91,6 +91,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .btn-act:hover{background:var(--bg4);color:var(--cream);border-color:var(--gold-dim)}
 .btn-act.ocr:hover{color:var(--blue);border-color:var(--blue)}
 .btn-act.tr:hover{color:var(--green);border-color:var(--green)}
+.btn-act.cls:hover{color:var(--gold);border-color:var(--gold)}
 .btn-act.exp:hover{color:var(--purple);border-color:var(--purple)}
 .btn-act.ing:hover{color:var(--saffron);border-color:var(--saffron)}
 
@@ -563,8 +564,37 @@ function renderPipeline(rows) {
     const ocrLine = (ocrPct !== null && ocrPct < 100)
       ? '<div style="font-size:10px;color:var(--muted);margin-top:2px">&#128220; OCR ' + (r.jsonl_count || 0) + '/' + r.pdf_count + ' (' + ocrPct + '%)</div>'
       : '';
+    // Phase L1 (2026-08-29): say what the book actually IS. A scanned edition is
+    // rarely all Sanskrit - it carries an English preface, a commentary, running
+    // heads and OCR crumbs. Showing the split stops "664 lines, 26% translated"
+    // from implying 491 untranslated verses when most of them are not verses.
+    const comp = r.composition || {};
+    const cMula = comp.mula || 0, cFront = comp.frontmatter || 0, cNoise = comp.noise || 0;
+    const cOther = Object.keys(comp).reduce(function(a, k) {
+      return a + ((k === 'mula' || k === 'frontmatter' || k === 'noise') ? 0 : comp[k]);
+    }, 0);
+    const cTot = cMula + cFront + cNoise + cOther;
+    let compLine = '';
+    if (cTot > 0 && (cFront + cNoise + cOther) > 0) {
+      const seg = function(v, col, lbl) {
+        return v ? '<span title="' + lbl + ': ' + v + '" style="display:inline-block;height:5px;'
+                 + 'width:' + (100 * v / cTot) + '%;background:' + col + '"></span>' : '';
+      };
+      compLine =
+        '<div style="margin-top:3px;line-height:0;border-radius:2px;overflow:hidden;max-width:190px">' +
+          seg(cMula, '#6bbf59', 'Sanskrit (translatable)') +
+          seg(cFront, '#5b8dd6', 'English / Hindi text') +
+          seg(cOther, '#b98cd6', 'other') +
+          seg(cNoise, '#7a7a7a', 'OCR noise') +
+        '</div>' +
+        '<div style="font-size:10px;color:var(--muted);margin-top:2px">' +
+          '&#128214; ' + cMula + ' Sanskrit' +
+          (cFront ? ' &middot; ' + cFront + ' En/Hi' : '') +
+          (cNoise ? ' &middot; ' + cNoise + ' noise' : '') +
+        '</div>';
+    }
     const docCell =
-      '<div class="doc-name">' + esc(r.doc) + '</div>' + ocrLine +
+      '<div class="doc-name">' + esc(r.doc) + '</div>' + ocrLine + compLine +
       '<div class="doc-status-chip">' +
         (isRun ? '<span class="chip-run">&#9898; running</span>' : '') +
       '</div>';
@@ -580,6 +610,8 @@ function renderPipeline(rows) {
       '<td class="actions-cell">' +
         '<button class="btn-act ocr" data-act="ocr" data-doc="' + esc(r.doc) + '">OCR</button>' +
         '<button class="btn-act ing" data-act="ingest" data-doc="' + esc(r.doc) + '">Ingest</button>' +
+        '<button class="btn-act cls" data-act="classify" data-doc="' + esc(r.doc) + '"' +
+          ' title="Sort passages into Sanskrit / English-Hindi / OCR noise, so counts and translation target real verses">Classify</button>' +
         '<button class="btn-doc-start"' + (isRun ? ' style="display:none"' : '') +
           ' onclick="startDoc(\'' + esc(r.doc) + '\')">&#9654; Start</button>' +
         '<button class="btn-doc-stop"' + (isRun ? '' : ' style="display:none"') +
@@ -633,6 +665,14 @@ async function doAction(act, doc) {
       body: JSON.stringify({doc, db: cfg.db, raw: cfg.raw})});
     const j = await r.json();
     if (j.job) { trackJob(j.job, 'Ingest ' + doc, 'ingest', doc); toast('Ingest started for ' + doc); }
+  }
+  if (act === 'classify') {
+    const r = await fetch('/api/classify', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db, apply: true})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'Classify ' + doc, 'classify', doc);
+                 toast('Classifying ' + doc + ' into Sanskrit / En-Hi / noise'); }
+    else toast(j.error || 'Classify failed', 'err');
   }
   if (act === 'translate') {
     const eng   = getEngine(doc);

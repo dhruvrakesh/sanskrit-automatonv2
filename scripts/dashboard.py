@@ -232,8 +232,10 @@ def launch(kind: str, doc: str, argv: List[str], then=None) -> str:
     # also mutate the DB (translation_qa / archive+clear+refill) so they share
     # the same semaphore — a heal can never run while a translate is writing,
     # and vice versa (2026-08-16).
+    # 'classify' UPDATEs passages.text_type, so it is a DB writer and must
+    # serialize with the translators like qa_scan/qa_heal do (2026-08-29).
     if (kind.startswith("translate")
-            or kind in ("advance_pipeline", "pipeline", "qa_scan", "qa_heal")):
+            or kind in ("advance_pipeline", "pipeline", "qa_scan", "qa_heal", "classify")):
         sem = _TRANSLATE_SEM
     else:
         sem = _KIND_SEM.get(kind, _GENERAL_SEM)
@@ -365,6 +367,23 @@ def count_ingested(con, schema, doc):
     trans = int(con.execute(sql_tr,  (doc,)).fetchone()[0] or 0)
     return pages, total, trans
 
+def doc_composition(con, doc: str) -> dict:
+    """What IS this book? Counts of passages by text_type, so the UI can show
+    that e.g. a 664-passage edition is 453 Sanskrit verses + 180 English preface
+    + 31 OCR crumbs, instead of implying 664 untranslated verses (2026-08-29)."""
+    try:
+        pcols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        if "text_type" not in pcols:
+            return {}
+        rows = con.execute(
+            """SELECT COALESCE(p.text_type,'mula'), COUNT(*)
+               FROM passages p JOIN docs d ON d.id = p.doc_id
+               WHERE d.code = ? GROUP BY 1""", (doc,)).fetchall()
+        return {str(tt): int(n) for tt, n in rows}
+    except Exception:
+        return {}
+
+
 def count_exports(exports_dir: pathlib.Path, doc: str) -> int:
     if not exports_dir.exists():
         return 0
@@ -414,6 +433,7 @@ def build_status(inbox, raw, dbp, exports):
                     "total_lines":      int(total_lines),
                     "translated_lines": int(trans_lines),
                     "exports":          count_exports(exports, doc),
+                    "composition":      doc_composition(con, doc),
                 })
                 seen.add(doc)
             # Docs already in DB (inbox empty after prior import — show them too)
@@ -437,6 +457,7 @@ def build_status(inbox, raw, dbp, exports):
                     "total_lines":      int(total_lines),
                     "translated_lines": int(trans_lines),
                     "exports":          count_exports(exports, doc),
+                    "composition":      doc_composition(con, doc),
                 })
         rows.sort(key=lambda r: r["doc"])
         return rows
@@ -914,14 +935,24 @@ def api_ocr():
     if not missing:
         return jsonify({"message": "Nothing to OCR"}), 200
     batch_script = str(SCRIPTS / "ocr_batch.py")
+    # Pass the page list as a MANIFEST FILE, never as N arguments. Windows caps a
+    # command line at ~32,767 chars; 1,064 Rgveda pages is ~80,000, so the job died
+    # in 0.0s with "[WinError 206] The filename or extension is too long" and the UI
+    # showed a red 0/1064 with no cause. Books under ~430 pages happened to fit,
+    # which made the failure look arbitrary. (2026-08-29)
+    man_dir = pathlib.Path("data") / "manifests"
+    man_dir.mkdir(parents=True, exist_ok=True)
+    manifest = man_dir / f"ocr_{doc}.txt"
+    manifest.write_text("\n".join(str(p.resolve()) for p in sorted(missing)) + "\n",
+                        encoding="utf-8")
     cmd = py(batch_script,
-             "--pdfs",      *[str(p) for p in sorted(missing)],
+             "--pdfs-from", str(manifest.resolve()),
              "--outdir",    str(raw.resolve()),
              "--dpi",       dpi,
              "--max-dpi",   "600",
              "--lang-tries", *lang_tries)
     jid = launch("ocr", doc, cmd)
-    return jsonify({"job": jid})
+    return jsonify({"job": jid, "pages": len(missing), "manifest": str(manifest)})
 
 
 @app.post("/api/ingest")
@@ -934,7 +965,30 @@ def api_ingest():
     raw  = data.get("raw") or "data/raw"
     glob = str(pathlib.Path(raw) / f"{doc}_*.jsonl")
     cmd = py(script("ingest_jsonl_fast.py"), "--doc", doc, "--glob", glob, "--db", db)
-    return jsonify({"job": launch("ingest", doc, cmd)})
+    # Phase L1 (2026-08-29): classification is now an automatic pipeline stage,
+    # not something to remember. A freshly ingested book arrives already sorted
+    # into mula / frontmatter / noise, so the counters, the Library and the
+    # translator all see real Sanskrit verses from the first moment. Chained via
+    # `then=` so it runs only on a successful ingest and takes the write lock
+    # itself rather than holding it through the ingest.
+    def _classify_after(job, _doc=doc, _db=db):
+        launch("classify", _doc,
+               py(script("classify_doc.py"), "--doc", _doc, "--db", _db, "--apply"))
+    return jsonify({"job": launch("ingest", doc, cmd, then=_classify_after)})
+
+
+@app.post("/api/classify")
+def api_classify():
+    """Run the language/util classification stage for one doc on demand."""
+    data = request.get_json(force=True) or {}
+    doc  = _validate_doc(data.get("doc"))
+    if not doc:
+        return jsonify({"error": "invalid or missing doc"}), 400
+    db = data.get("db") or "data/context.db"
+    argv = [script("classify_doc.py"), "--doc", doc, "--db", db]
+    if data.get("apply", True):
+        argv.append("--apply")
+    return jsonify({"job": launch("classify", doc, py(*argv))})
 
 @app.post("/api/translate")
 def api_translate():

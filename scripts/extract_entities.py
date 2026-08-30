@@ -117,8 +117,36 @@ def _parse_json(text: str):
     return None
 
 
+def _as_text(v) -> str:
+    """Coerce whatever the model put in a field into a plain string.
+
+    2026-08-29: a run died at verse 1110/1431 with
+    "'list' object has no attribute 'strip'" because the model answered
+    "canonical": ["Shiva", "Rudra"] instead of a string, and
+    `(canonical or "").strip()` happily returned the list. Model output shape
+    varies; one odd verse must never be able to kill a 1,400-verse job.
+    """
+    if v is None:
+        return ""
+    if isinstance(v, str):
+        return v.strip()
+    if isinstance(v, (list, tuple)):
+        # take the first non-empty element; the rest become variants elsewhere
+        for item in v:
+            t = _as_text(item)
+            if t:
+                return t
+        return ""
+    if isinstance(v, dict):
+        for k in ("canonical", "name", "surface", "value", "text"):
+            if k in v:
+                return _as_text(v[k])
+        return ""
+    return str(v).strip()
+
+
 def _upsert_entity(con, cur, canonical, kind):
-    canonical = (canonical or "").strip()
+    canonical = _as_text(canonical)
     if not canonical:
         return None
     row = con.execute("SELECT id, kind FROM entities WHERE canonical=?", (canonical,)).fetchone()
@@ -134,23 +162,30 @@ def _upsert_entity(con, cur, canonical, kind):
 def _apply_extraction(con, cur, batch, parsed):
     """batch: list of (idx_in_batch, passage_id). parsed: model JSON.
     Writes entities/variants/mentions and fills passages.ents. Returns
-    (n_verses_marked, n_mentions). Pure DB logic — unit-testable without the API."""
+    (n_verses_marked, n_mentions, n_verses_with_no_entities). The third value
+    exists because a run that prints "+0 mentions" is ambiguous: it can mean the
+    model found nothing, or it can mean every mention already existed and the
+    INSERT OR IGNORE was a no-op. Those are very different situations and the
+    old two-value return could not tell them apart. Pure DB logic —
+    unit-testable without the API."""
     by_i = {}
     for v in (parsed or {}).get("verses", []):
         try:
             by_i[int(v.get("i"))] = v.get("ents") or []
         except (TypeError, ValueError):
             continue
-    marked = mentions = 0
+    marked = mentions = barren = 0
     for i, pid in batch:
         ents = by_i.get(i, [])
         canon_list = []
         for e in ents:
-            canonical = (e.get("canonical") or e.get("surface") or "").strip()
-            kind = (e.get("kind") or "").strip().lower()
+            if not isinstance(e, dict):
+                continue
+            canonical = _as_text(e.get("canonical")) or _as_text(e.get("surface"))
+            kind = _as_text(e.get("kind")).lower()
             if kind not in _KINDS:
                 kind = "other"
-            surface = (e.get("surface") or canonical).strip()
+            surface = _as_text(e.get("surface")) or canonical
             if not canonical:
                 continue
             eid = _upsert_entity(con, cur, canonical, kind)
@@ -168,8 +203,11 @@ def _apply_extraction(con, cur, batch, parsed):
         # Always set ents (even to '[]') so the verse counts as processed/resumable.
         cur.execute("UPDATE passages SET ents=? WHERE id=?",
                     (json.dumps(canon_list, ensure_ascii=False), pid))
+        if not canon_list:
+            barren += 1          # counted AFTER processing: covers both an empty
+                                 # model reply and entries we had to skip as malformed
         marked += 1
-    return marked, mentions
+    return marked, mentions, barren
 
 
 def _gemini_extract(genai, model, prompt, max_tokens=8192):
@@ -190,10 +228,15 @@ def _gemini_extract(genai, model, prompt, max_tokens=8192):
         if _SAFETY is not None:
             kwargs["safety_settings"] = _SAFETY
         gm = genai.GenerativeModel(**kwargs)
-    return (getattr(gm.generate_content(prompt), "text", "") or "").strip()
+    # A stalled gRPC call with no timeout blocks FOREVER, and the retry/backoff
+    # around this function never gets control back - an overnight run just stops,
+    # silently, with no error. Observed 2026-08-29. 180s is generous for a 10-verse
+    # batch; anything slower is a hung socket, not a slow model.
+    resp = gm.generate_content(prompt, request_options={"timeout": 180})
+    return (getattr(resp, "text", "") or "").strip(), resp
 
 
-def _extract_chunk(con, cur, genai, model, chunk):
+def _extract_chunk(con, cur, genai, model, chunk, engine=None, doc=None, debug_raw=False):
     """Extract one chunk = list of (pid, iast, tr). On a JSON-parse failure,
     recursively SPLIT the chunk and retry each half, so a single problematic
     verse can never sink its neighbours. A lone verse that still won't parse is
@@ -202,7 +245,8 @@ def _extract_chunk(con, cur, genai, model, chunk):
     lines, batch = [], []
     for i, (pid, iast, tr) in enumerate(chunk):
         batch.append((i, pid))
-        src = (f"IAST: {iast.strip()}\n" if iast else "") + f"EN: {(tr or '').strip()[:700]}"
+        _iast, _tr = _as_text(iast), _as_text(tr)
+        src = (f"IAST: {_iast}\n" if _iast else "") + f"EN: {_tr[:700]}"
         lines.append(f"[verse {i}]\n{src}")
     prompt = "Verses:\n\n" + "\n\n".join(lines)
     # Transient API errors (504 deadline, 503 unavailable, 429 rate) are common on
@@ -210,7 +254,19 @@ def _extract_chunk(con, cur, genai, model, chunk):
     reply, _tries = None, 5
     for attempt in range(_tries):
         try:
-            reply = _gemini_extract(genai, model, prompt)
+            t0 = time.time()
+            reply, _resp = _gemini_extract(genai, model, prompt)
+            # 2026-08-29: entity extraction used to spend money invisibly - the
+            # budget cap never saw a single one of these calls.
+            try:
+                from usage_meter import meter as _meter
+                _meter(kind="entities", doc=doc, engine=engine or f"gemini:{model}",
+                       resp=_resp, in_chars=len(prompt), out_chars=len(reply or ""),
+                       units=len(chunk), duration_s=time.time() - t0, con=con)
+            except Exception:
+                pass
+            if debug_raw:
+                print(f"    [raw {len(reply or '')} chars] {(reply or '')[:400]}", flush=True)
             break
         except Exception as exc:
             msg = str(exc).lower()
@@ -224,17 +280,25 @@ def _extract_chunk(con, cur, genai, model, chunk):
             raise
     parsed = _parse_json(reply)
     if parsed is not None:
-        m, mm = _apply_extraction(con, cur, batch, parsed)
-        con.commit()
-        return m, mm
+        # A reply that parses but carries no "verses" key is NOT a success: every
+        # verse in the batch would be marked ents='[]' and never retried. Treat
+        # that shape mismatch as a parse failure so the split-retry path runs.
+        if not isinstance(parsed, dict) or "verses" not in parsed:
+            print(f"    [shape] reply parsed but has no 'verses' key "
+                  f"(keys={list(parsed)[:6] if isinstance(parsed, dict) else type(parsed).__name__}) "
+                  f"- not marking these {len(chunk)} verses.", flush=True)
+        else:
+            m, mm, bare = _apply_extraction(con, cur, batch, parsed)
+            con.commit()
+            return m, mm, bare
     if len(chunk) > 1:                              # split and retry each half
         mid = len(chunk) // 2
-        a = _extract_chunk(con, cur, genai, model, chunk[:mid])
-        b = _extract_chunk(con, cur, genai, model, chunk[mid:])
-        return a[0] + b[0], a[1] + b[1]
+        a = _extract_chunk(con, cur, genai, model, chunk[:mid], engine, doc, debug_raw)
+        b = _extract_chunk(con, cur, genai, model, chunk[mid:], engine, doc, debug_raw)
+        return a[0] + b[0], a[1] + b[1], a[2] + b[2]
     # single verse still unparseable → leave ents NULL (retryable next run)
     print(f"    [skip] passage {chunk[0][0]}: unparseable, left for a later run.")
-    return 0, 0
+    return 0, 0, 0
 
 
 def main():
@@ -249,6 +313,9 @@ def main():
     ap.add_argument("--retry-empty", action="store_true",
                     help="also re-process verses whose ents is '[]' (e.g. left empty by an "
                          "earlier JSON-parse failure) — recovers dropped verses")
+    ap.add_argument("--debug-raw", action="store_true",
+                    help="print the first 400 chars of each raw model reply — use this when a "
+                         "run reports '+0 mentions' to see what the model actually returned")
     args = ap.parse_args()
 
     try:
@@ -295,24 +362,44 @@ def main():
 
     print(f"Extracting entities from {total} verses with {model} (batch={args.batch})…")
     cur = con.cursor()
-    done = ment_total = 0
+    done = ment_total = barren_total = 0
     for start in range(0, total, args.batch):
         chunk = rows[start : start + args.batch]     # already (pid, iast, tr)
         try:
-            m, mm = _extract_chunk(con, cur, genai, model, chunk)
+            m, mm, bare = _extract_chunk(con, cur, genai, model, chunk,
+                                         engine=args.engine, doc=args.doc,
+                                         debug_raw=args.debug_raw)
         except Exception as exc:
             print(f"  [ERR] batch at {start}: {exc} — stopping; re-run to resume.")
             break
-        done += m; ment_total += mm
+        done += m; ment_total += mm; barren_total += bare
         print(f"  {min(start+len(chunk),total)}/{total} seen · {done} marked · "
-              f"+{ment_total} mentions", flush=True)
+              f"+{ment_total} mentions · {barren_total} verses with no entity",
+              flush=True)
         time.sleep(args.sleep)
 
     n_ent = con.execute("SELECT COUNT(*) FROM entities").fetchone()[0]
     n_men = con.execute("SELECT COUNT(*) FROM entity_mentions").fetchone()[0]
-    con.close()
     print(f"Done. {done} verses processed this run; corpus now has "
           f"{n_ent} distinct entities / {n_men} mentions.")
+    if done and ment_total == 0:
+        # Say plainly which of the two causes it was, instead of leaving a bare
+        # "+0" that reads like a silent failure.
+        if barren_total >= done:
+            print("  All verses this run genuinely returned NO entities from the model. "
+                  "Re-run one batch with --debug-raw to see the replies before assuming "
+                  "the corpus is simply name-free.")
+        else:
+            print("  Entities were found but every mention already existed "
+                  "(UNIQUE(entity_id, passage_id) - nothing new to add). This is a no-op, "
+                  "not a failure.")
+    try:
+        spent = con.execute("SELECT ROUND(SUM(cost_usd),4) FROM usage_log "
+                            "WHERE kind='entities'").fetchone()[0]
+        print(f"  recorded entity-extraction spend, all time: ${spent or 0}")
+    except Exception:
+        pass
+    con.close()
 
 
 if __name__ == "__main__":
