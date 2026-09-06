@@ -36,7 +36,7 @@ caveat it deserves.
   python scripts\\merge_ocr_sources.py --doc <CODE> --apply
 """
 from __future__ import annotations
-import argparse, glob as globmod, json, os, re, sys, zlib
+import argparse, difflib, glob as globmod, json, os, re, sys, zlib
 
 DEV = re.compile(r"[ऀ-ॣ॰-ॿ]")
 RUN_RE = re.compile(r"(.)\1{7,}", re.S)
@@ -53,6 +53,51 @@ def collapse_runs(s, keep=8):
 def compress_ratio(s):
     b = (s or "").encode("utf-8")
     return len(zlib.compress(b, 6)) / len(b) if b else 1.0
+
+
+def toks(t):
+    """Devanagari word tokens of 3+ chars. Shorter strings are particles and
+    numerals that match by chance and would flatter any comparison."""
+    return [w for w in re.split(r"[^ऀ-ॣ॰-ॿ]+", t or "") if len(w) >= 3]
+
+
+def variants(ttext: str, vtext: str, max_keep: int = 400) -> list[dict]:
+    """Where the two engines read the same page differently, word by word.
+
+    Vision is the source of record, but it is NOT always right: measured on a
+    sample, Tesseract carried the correct reading roughly one time in nine -
+    तरुण where vision wrote the non-word तरुश, उषितं for उपितं, अथातः for
+    अथवातः. Silently discarding the loser throws those away and leaves no trace
+    that a choice was ever made.
+
+    So record the disagreement instead. This is an apparatus criticus generated
+    automatically, at zero API cost, from two files already on disk. Only
+    REPLACEMENTS are kept - insertions and deletions are usually line-break or
+    segmentation noise rather than a genuine variant reading. (2026-08-30)
+    """
+    a, b = toks(ttext), toks(vtext)
+    if not a or not b:
+        return []
+    out = []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if tag != "replace":
+            continue
+        # Only pair up 1:1 replacements; n:m blocks are re-flowed text, not variants.
+        if (i2 - i1) != (j2 - j1):
+            continue
+        for k in range(i2 - i1):
+            t_w, v_w = a[i1 + k], b[j1 + k]
+            if t_w == v_w:
+                continue
+            sim = difflib.SequenceMatcher(None, t_w, v_w).ratio()
+            # Below ~0.5 the two words are unrelated - different places in the
+            # text, not two readings of the same word.
+            if sim < 0.5:
+                continue
+            out.append({"t": t_w, "v": v_w, "sim": round(sim, 3)})
+            if len(out) >= max_keep:
+                return out
+    return out
 
 
 def read(path):
@@ -106,6 +151,7 @@ def main():
 
     counts = {"vision": 0, "tesseract-fallback": 0, "none": 0}
     notes = []
+    n_variants = 0
     if args.apply:
         os.makedirs(args.outdir, exist_ok=True)
 
@@ -126,14 +172,17 @@ def main():
             text, engine = collapse_runs(vtext), (vrec or {}).get("engine") or "gemini-vision"
         else:
             text, engine = ttext, "tesseract-fallback"
+        vars_ = variants(ttext, vtext) if (ttext and vtext) else []
         out = {
             "engine": engine,
             "page_no": int(pg),
             "text": text,
             "meta": {"merged_from": src, "reason": why,
-                     "vision_chars": len(vtext), "tesseract_chars": len(ttext)},
+                     "vision_chars": len(vtext), "tesseract_chars": len(ttext),
+                     "variants": vars_},
             "src_pdf": f"{args.doc}_{pg}.pdf",
         }
+        n_variants += len(vars_)
         with open(os.path.join(args.outdir, f"{args.doc}_{pg}.jsonl"),
                   "w", encoding="utf-8", newline="\n") as f:
             f.write(json.dumps(out, ensure_ascii=False) + "\n")
@@ -160,6 +209,9 @@ def main():
         print("  accuracy on this corpus is 34-73% of achievable. They are marked")
         print("  engine='tesseract-fallback' in the DB so they can be found and redone.")
     if args.apply:
+        print(f"\n  engine disagreements recorded: {n_variants:,}")
+        print("  Vision is used, but the Tesseract reading is kept beside it so the")
+        print("  reader can show both. Neither engine is silently trusted.")
         print(f"\n  merged files -> {args.outdir}")
         print(f"  ingest with:\n    python scripts\\ingest_jsonl_fast.py --doc {args.doc} "
               f"--glob \"{args.outdir}\\{args.doc}_*.jsonl\" --db data\\context.db")

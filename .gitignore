@@ -83,3 +83,7 @@ data/tmp_*.jsonl
 
 # One-off release message drafts (use scripts\release.ps1 -MessageFile)
 COMMIT_MSG.txt
+
+data/raw_conf/
+data/vision_queue_*.txt
+data/ab_source_quality.json

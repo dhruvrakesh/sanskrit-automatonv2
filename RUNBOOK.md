@@ -220,6 +220,9 @@ python scripts\classify_doc.py --doc <CODE> --apply
 python scripts\classify_doc.py --apply                 # whole corpus
 
 # a big book can now OCR; check the manifest it wrote
+# --doc finds the pages itself; --pdfs-from only works if the dashboard's OCR
+# button already wrote a manifest (that is the only thing that creates one).
+python scripts\ocr_batch.py --doc <CODE> --outdir data\raw --dpi 400
 python scripts\ocr_batch.py --pdfs-from data\manifests\ocr_<CODE>.txt --outdir data\raw --dpi 400
 ```
 
@@ -275,6 +278,106 @@ page) and losing page 102 entirely. The audit now exits non-zero; gate on it:
 python scripts\repair_vision_jsonl.py --glob "data\raw_vision\<CODE>_*.jsonl" --apply
 if ($LASTEXITCODE -eq 0) { <merge + ingest> } else { "not safe to ingest" }
 ```
+
+
+## 3e. Engine disagreement: the apparatus criticus (2026-08-30)
+
+**The question this answers:** when Tesseract and vision read the same
+good-quality scan differently, which wins?
+
+**Old behaviour, and why it was wrong.** merge_ocr_sources.py preferred
+Tesseract only when vision FAILED (empty, phrase loop, drastically shorter). On
+ordinary disagreement vision won silently and the Tesseract reading was
+discarded with no record. But vision is not always right: on a sampled page
+Tesseract carried the correct reading roughly ONE TIME IN NINE -
+`तरुण` where vision wrote the non-word `तरुश`, `उषितं` for `उपितं`, `अथातः`
+for `अथवातः`. Those readings were being thrown away.
+
+**New behaviour.** Vision is still the source of record - it is right about
+eight times in nine - but the losing reading is KEPT:
+
+  * `merge_ocr_sources.py` aligns the two token streams and records 1:1
+    replacements whose similarity is >= 0.5 (below that they are different
+    places in the text, not two readings of one word).
+  * `passages.ocr_variants` stores the variants for that passage as JSON.
+  * The reader underlines the disputed word; hovering shows the Tesseract
+    reading and the similarity. A badge under each verse names the producing
+    engine and the disagreement count.
+
+This costs NOTHING - both transcriptions are already on disk. It is a critical
+apparatus generated automatically, and it is the honest presentation: the reader
+can see that a machine made a choice, and what it chose against.
+
+```powershell
+python scripts\merge_ocr_sources.py --doc <CODE> --apply     # records variants
+python scripts\ingest_jsonl_fast.py --doc <CODE> --glob "data\raw_merged\<CODE>_*.jsonl" --db data\context.db
+```
+
+```sql
+-- verses where the engines disagreed most
+SELECT d.code, p.page_no, p.verse_ref,
+       json_array_length(p.ocr_variants) AS n
+FROM passages p JOIN docs d ON d.id = p.doc_id
+WHERE p.ocr_variants IS NOT NULL
+ORDER BY n DESC LIMIT 25;
+```
+
+**Not yet done (be honest about it):** nothing ADJUDICATES a disagreement. A
+third opinion on disputed tokens only - a second vision pass at a different
+temperature, or a stronger model on that word alone - is the obvious next step
+and would be cheap, because disputed tokens are a small fraction of the text.
+
+
+## 3f. Deterministic OCR triage: Tesseract first, vision only where needed (2026-08-30)
+
+**The standing architecture.** Tesseract on every page (free, local, unlimited),
+a deterministic per-page evaluation of where it failed, and vision ONLY on those
+pages. Per PAGE, not per document - a book is not uniformly hard.
+
+**Signals tried and REJECTED - do not re-tread these:**
+
+| signal | why it failed |
+|---|---|
+| Latin-intrusion contamination | did not separate usable from unusable documents |
+| Devanagari orthographic validity | correlation 0.363 over 314 Shatpatha page-pairs; 305 of 314 pages in one band. Tesseract's errors are orthographically LEGAL but wrong - `शातपथ` for `शतपथ` |
+| per-document token agreement | works, but needs a vision pass to compute, so it cannot decide whether to spend one |
+
+**The signal that is actually available: Tesseract's own per-word confidence.**
+`ocr_pdf.py` was calling `image_to_string` and discarding it. It now records
+`conf_mean`, `conf_p10`, `conf_lt60` and `conf_words` into each page's meta,
+computed from the winning rendering. Costs one extra local pass. Sanity check:
+English OCR on a Devanagari page returns `conf_mean 25.7` with 93% of words
+under 60 - Tesseract is honest about not being able to read.
+
+```powershell
+# 1. CALIBRATE on pages where both engines have already run. Chooses the
+#    threshold from evidence, and says plainly if confidence does NOT predict.
+python scripts\ocr_batch.py --doc 2015_405693_Shatpath-Brahmanam --outdir data\raw_conf --dpi 400
+python scripts\ocr_triage.py --calibrate --doc 2015_405693_Shatpath-Brahmanam --tesseract-dir data\raw_conf
+
+# 2. Triage a document; only the failing pages are queued for vision
+python scripts\ocr_triage.py --doc <CODE> --threshold 72 --tesseract-dir data\raw_conf
+python scripts\ocr_triage.py --doc <CODE> --threshold 72 --tesseract-dir data\raw_conf --write-queue
+
+# 3. Vision only the queue, then the usual gate -> merge -> ingest -> classify
+Get-Content data\vision_queue_<CODE>.txt | ForEach-Object {
+  $stem = [IO.Path]::GetFileNameWithoutExtension($_)
+  python scripts\ocr_vision.py --pdf $_ --out "data\raw_vision\$stem.jsonl" --doc <CODE> --yes }
+```
+
+**Never re-OCR into `data\raw` on a live system to get confidence.** That
+directory holds the Tesseract text serving as the per-page fallback and as the
+apparatus's second opinion; overwriting it mid-flight would change source under
+a running merge. Write to `data\raw_conf` and point `--tesseract-dir` at it.
+
+**Pages OCR'd before 2026-08-30 carry no confidence.** The triage says so rather
+than guessing. Re-running Tesseract on a document populates it and costs nothing
+but time.
+
+**If calibration reports a weak correlation, believe it.** Building a gate on a
+signal that does not predict is exactly the orthographic-validity mistake. The
+fallback is the per-document probe verdict: vision every page of the documents
+`ocr_probe.py` rates poorly.
 
 
 ## 4. Update the DATA (idle the jobs first; all steps idempotent)
@@ -504,3 +607,46 @@ archive.org fallback); `segment_verses.py`, `resegment_doc.py`, `normalize_text.
 *Deprecated / one-off (do not run in normal ops):* `make_runs*.py`, `migrate_runs.py`,
 `fts_hotfix.py`, `backfill_missing.py`, `train_mt.py`, `watch_inbox_notinuse.py`,
 `scripts.zip`.
+
+## 9b. Phase G - operable semantic layer, resizable and sortable UI (2026-09-06)
+
+**"Why can't we update embeddings/RAG from the frontend?" Because it was never
+built.** `dashboard.py` contained ZERO references to `build_embeddings.py` or
+`extract_entities.py`. `/api/ask` existed, so the corpus could be QUERIED from
+the UI while its index could only be refreshed from a terminal - which is how
+the semantic layer went stale after every ingest without anyone being told.
+
+| added | what it does |
+|---|---|
+| `POST /api/embeddings` | rebuild the semantic index, per doc or whole corpus |
+| `POST /api/entities` | extract entities into the cross-linkage tables |
+| **Embed** / **Entities** buttons | per-doc, beside Ingest / Classify / Export |
+| `first_seen`, `last_ocr`, `last_activity` in `/api/status` | there were NO dates at all, so the table could only sort by name |
+| draggable splitters | panes were hard-coded `320px 1fr 340px`; widths persist in localStorage, double-click resets |
+| sortable headers | click any column incl. Added / Last run; sort persists |
+
+**Both new kinds join the TRANSLATE semaphore family.** They write to
+`passage_embeddings` and `entity_*`, so they must serialize with translators
+exactly as `classify` and `qa_scan` do. Omitting that would reintroduce the
+concurrent-writer bug the semaphore exists to prevent.
+
+Dates come from file mtimes (`doc_times()` in dashboard.py) - `first_seen` is
+the oldest inbox page, `last_ocr` the newest OCR output. A directory stat, no DB
+cost. Rows with no date sort LAST in both directions: a missing date is unknown,
+not oldest.
+
+```powershell
+python scripts\patch_ui_phase_g.py --apply       # backend  (idempotent)
+python scripts\patch_ui_phase_g_js.py --apply    # frontend (idempotent)
+python scripts\patch_ui_phase_g.py --verify
+powershell -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1
+```
+
+Both patchers assert every anchor is unique BEFORE writing, back up first, and
+roll back completely on any failure. Re-running is a no-op.
+
+**Still not in the UI:** nothing triggers `ocr_vision.py`, `ocr_triage.py`,
+`merge_ocr_sources.py` or `repair_vision_jsonl.py`. The vision path remains
+CLI-only and deliberately so - the audit gate must stay a hard stop, and a
+button that can be clicked past is not a gate.
+

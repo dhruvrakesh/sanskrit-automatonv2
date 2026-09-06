@@ -234,8 +234,12 @@ def launch(kind: str, doc: str, argv: List[str], then=None) -> str:
     # and vice versa (2026-08-16).
     # 'classify' UPDATEs passages.text_type, so it is a DB writer and must
     # serialize with the translators like qa_scan/qa_heal do (2026-08-29).
+    # embeddings and entities WRITE to the DB (passage_embeddings, entity_*),
+    # so they serialize with the translators exactly as classify/qa_scan do.
+    # Leaving them out would reintroduce concurrent writers. (PHASE_G_2026_09_06)
     if (kind.startswith("translate")
-            or kind in ("advance_pipeline", "pipeline", "qa_scan", "qa_heal", "classify")):
+            or kind in ("advance_pipeline", "pipeline", "qa_scan", "qa_heal", "classify",
+                        "embeddings", "entities")):
         sem = _TRANSLATE_SEM
     else:
         sem = _KIND_SEM.get(kind, _GENERAL_SEM)
@@ -367,6 +371,32 @@ def count_ingested(con, schema, doc):
     trans = int(con.execute(sql_tr,  (doc,)).fetchone()[0] or 0)
     return pages, total, trans
 
+def doc_times(inbox, raw, doc: str) -> dict:
+    """When was this book added, and when did work last touch it?
+
+    /api/status carried no dates at all, so the pipeline table could not be
+    ordered by anything but name. first_seen is the OLDEST inbox page (when the
+    book arrived); last_ocr is the NEWEST OCR output (when work last ran).
+    Epoch seconds, or None. Cheap: a directory stat, no DB. (PHASE_G_2026_09_06)
+    """
+    out = {"first_seen": None, "last_ocr": None, "last_activity": None}
+    try:
+        ins = [p.stat().st_mtime for p in pathlib.Path(inbox).glob(f"{doc}_*.pdf")]
+        if ins:
+            out["first_seen"] = min(ins)
+    except Exception:
+        pass
+    try:
+        js = [p.stat().st_mtime for p in pathlib.Path(raw).glob(f"{doc}_*.jsonl")]
+        if js:
+            out["last_ocr"] = max(js)
+    except Exception:
+        pass
+    cands = [v for v in (out["first_seen"], out["last_ocr"]) if v]
+    out["last_activity"] = max(cands) if cands else None
+    return out
+
+
 def doc_composition(con, doc: str) -> dict:
     """What IS this book? Counts of passages by text_type, so the UI can show
     that e.g. a 664-passage edition is 453 Sanskrit verses + 180 English preface
@@ -434,6 +464,7 @@ def build_status(inbox, raw, dbp, exports):
                     "translated_lines": int(trans_lines),
                     "exports":          count_exports(exports, doc),
                     "composition":      doc_composition(con, doc),
+                    **doc_times(inbox, raw, doc),
                 })
                 seen.add(doc)
             # Docs already in DB (inbox empty after prior import — show them too)
@@ -458,6 +489,7 @@ def build_status(inbox, raw, dbp, exports):
                     "translated_lines": int(trans_lines),
                     "exports":          count_exports(exports, doc),
                     "composition":      doc_composition(con, doc),
+                    **doc_times(inbox, raw, doc),
                 })
         rows.sort(key=lambda r: r["doc"])
         return rows
@@ -990,6 +1022,45 @@ def api_classify():
         argv.append("--apply")
     return jsonify({"job": launch("classify", doc, py(*argv))})
 
+@app.post("/api/embeddings")
+def api_embeddings():
+    """Rebuild the semantic index from the UI. (PHASE_G_2026_09_06)
+
+    This did not exist: the corpus could be QUERIED through /api/ask but its
+    index could only be refreshed from a terminal, so the 'sanskritic brain'
+    silently went stale after every ingest.
+    """
+    data = request.get_json(force=True) or {}
+    db   = data.get("db") or "data/context.db"
+    doc  = data.get("doc")
+    argv = [script("build_embeddings.py"), "--db", db]
+    if doc:
+        doc = _validate_doc(doc)
+        if not doc:
+            return jsonify({"error": "invalid doc"}), 400
+        argv += ["--doc", doc]
+    if data.get("refresh"):
+        argv.append("--refresh")
+    return jsonify({"job": launch("embeddings", doc or "(corpus)", py(*argv))})
+
+
+@app.post("/api/entities")
+def api_entities():
+    """Extract named entities into the cross-linkage tables, from the UI."""
+    data = request.get_json(force=True) or {}
+    db   = data.get("db") or "data/context.db"
+    doc  = data.get("doc")
+    argv = [script("extract_entities.py"), "--db", db]
+    if doc:
+        doc = _validate_doc(doc)
+        if not doc:
+            return jsonify({"error": "invalid doc"}), 400
+        argv += ["--doc", doc]
+    if data.get("retry_empty"):
+        argv.append("--retry-empty")
+    return jsonify({"job": launch("entities", doc or "(corpus)", py(*argv))})
+
+
 @app.post("/api/translate")
 def api_translate():
     data    = request.get_json(force=True) or {}
@@ -1400,7 +1471,7 @@ def api_passages(doc):
         extra_selects = ", ".join([
             f"p.{c}" for c in
             ["verse_ref", "chapter", "text_type", "chandas", "iast", "quality_score",
-             "translation_score", "translation_qa"]
+             "translation_score", "translation_qa", "ocr_engine", "ocr_variants"]
             if c in cols
         ])
         if extra_selects:
@@ -1471,10 +1542,17 @@ def api_passages(doc):
 
         def row_to_dict(r):
             d = {"page_no": r[0], "idx": r[1], "text": r[2] or "", "translation": r[3] or ""}
-            col_names = ["verse_ref","chapter","text_type","chandas","iast","quality_score",
-                         "translation_score","translation_qa"]
-            for i, c in enumerate(col_names):
-                if c in cols and 4 + i < len(r):
+            # LATENT BUG FIXED 2026-08-30: this used enumerate() over the FULL
+            # column list while the SELECT above only emits columns that exist.
+            # On any older DB missing one of them, every field after the gap was
+            # read from the wrong offset - verse_ref showing a chandas, and so
+            # on. Iterate over the PRESENT columns, in the same order the SELECT
+            # built them, so the two can never drift apart.
+            present = [c for c in ["verse_ref","chapter","text_type","chandas","iast",
+                                   "quality_score","translation_score","translation_qa",
+                                   "ocr_engine","ocr_variants"] if c in cols]
+            for i, c in enumerate(present):
+                if 4 + i < len(r):
                     d[c] = r[4 + i]
             return d
 
@@ -1994,7 +2072,7 @@ main{{max-width:1400px;margin:0 auto;padding:20px 16px 48px}}
 .col-label-en{{color:var(--blue)}}
 .col-label-meta{{color:var(--meta-col)}}
 /* ── Sanskrit text ── */
-.dev-text{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:2.0;color:var(--dev-col);white-space:pre-wrap}}
+.dev-text{{font-family:'Noto Serif Devanagari',serif;font-size:15px;line-height:2.0;color:var(--dev-col);white-space:pre-wrap}}\n.ocr-var{{border-bottom:1px dotted #c9a227;cursor:help;background:rgba(201,162,39,.10)}}\n.ocr-var:hover{{background:rgba(201,162,39,.28)}}\n.src-badge{{margin-top:6px;font-size:9px;color:#8a8a8a}}\n.src-badge.src-fallback{{color:#d08a3a}}\n.var-count{{color:#c9a227}}
 /* ── English text ── */
 .en-text{{font-size:15px;line-height:1.75;color:var(--en-col);font-style:italic}}
 .en-text em{{font-style:normal;color:var(--cream)}}
@@ -2093,6 +2171,42 @@ function looksIllegible(t){{
 // Ballantyne "ADVERTISEMENT"). This is NOT garbled OCR — it is legible English that
 // simply needs no Sanskrit->English translation. Distinguished from illegible Sanskrit
 // so it is labelled honestly instead of flagged for re-OCR (2026-08-28).
+// ---- apparatus criticus -------------------------------------------------
+// Vision is the source of record, but it is not always right: on this corpus
+// Tesseract carried the correct reading roughly one time in nine (तरुण where
+// vision wrote the non-word तरुश). merge_ocr_sources.py keeps the losing
+// reading; this marks the word so a reader can see a machine made a choice.
+function markVariants(text, rawVariants){{
+  const safe = esc(text || '');
+  if (!rawVariants) return safe;
+  let vs;
+  try {{ vs = JSON.parse(rawVariants); }} catch(e) {{ return safe; }}
+  if (!Array.isArray(vs) || !vs.length) return safe;
+  let out = safe;
+  vs.slice(0, 40).forEach(function(d){{
+    if (!d || !d.v || !d.t) return;
+    const v = esc(d.v), t = esc(d.t);
+    if (out.indexOf(v) < 0) return;
+    out = out.split(v).join(
+      '<span class="ocr-var" title="Tesseract read: ' + t +
+      '  (similarity ' + (d.sim != null ? d.sim : '?') + ')">' + v + '</span>');
+  }});
+  return out;
+}}
+
+function engineBadge(p){{
+  const e = p.ocr_engine || '';
+  let vn = 0;
+  try {{ const a = JSON.parse(p.ocr_variants || '[]'); vn = Array.isArray(a) ? a.length : 0; }} catch(_){{}}
+  if (!e && !vn) return '';
+  let cls = 'src-vision', label = 'vision OCR';
+  if (e === 'tesseract-fallback') {{ cls = 'src-fallback'; label = 'Tesseract fallback \u2014 vision failed here'; }}
+  else if (e && e.indexOf('gemini-vision') !== 0) {{ cls = 'src-other'; label = esc(e); }}
+  return '<div class="src-badge ' + cls + '">' + label +
+         (vn ? ' &middot; <span class="var-count">' + vn + ' engine disagreement' + (vn===1?'':'s') + '</span>' : '') +
+         '</div>';
+}}
+
 function looksEnglish(t){{
   if (!t) return false;
   var s = String(t);
@@ -2238,7 +2352,8 @@ async function loadPage(p){{
         // Column 1: Sanskrit Devanagari
         '<div class="col-dev">' +
           '<div class="col-label col-label-dev">&#2344;&#2350;&#2307; Sanskrit</div>' +
-          '<div class="dev-text">' + esc(p.text) + '</div>' +
+          '<div class="dev-text">' + markVariants(p.text, p.ocr_variants) + '</div>' +
+          engineBadge(p) +
         '</div>' +
         // Column 2: translation (English or localized, e.g. Hindi)
         '<div class="col-en">' +

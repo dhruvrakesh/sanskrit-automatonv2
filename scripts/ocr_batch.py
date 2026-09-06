@@ -28,14 +28,22 @@ def main():
     ap.add_argument("--pdfs-from",  dest="pdfs_from", default=None,
                     help="file listing one page-PDF path per line - use this for "
                          "large books; immune to the Windows command-line limit")
+    ap.add_argument("--doc", default=None,
+                    help="doc code: find its page-PDFs in --inbox directly. Added "
+                         "2026-08-30 because the manifest is written by the dashboard's "
+                         "OCR button, so a CLI run had no manifest to point at.")
+    ap.add_argument("--inbox", default="inbox")
+    ap.add_argument("--skip-existing", action="store_true",
+                    help="with --doc: skip pages whose .jsonl already exists in --outdir")
     ap.add_argument("--outdir",     required=True)
     ap.add_argument("--dpi",        default="400")
     ap.add_argument("--max-dpi",    default="600")
     ap.add_argument("--lang-tries", nargs="+", default=["san+hin+eng", "san", "hin", "eng"])
     args = ap.parse_args()
 
-    if bool(args.pdfs) == bool(args.pdfs_from):
-        ap.error("give exactly one of --pdfs or --pdfs-from")
+    _given = sum(1 for x in (args.pdfs, args.pdfs_from, args.doc) if x)
+    if _given != 1:
+        ap.error("give exactly one of --pdfs, --pdfs-from or --doc")
 
     ROOT   = pathlib.Path(__file__).resolve().parent.parent
     scr    = str(ROOT / "scripts" / "ocr_pdf.py")
@@ -46,6 +54,17 @@ def main():
         with open(args.pdfs_from, "r", encoding="utf-8") as fh:
             pdfs = [ln.strip() for ln in fh if ln.strip()]
         print(f"[ocr_batch] {len(pdfs)} pages from manifest {args.pdfs_from}", flush=True)
+    elif args.doc:
+        import glob as _glob, re as _re
+        _re_pg = _re.compile(r"_(\d{4})\.pdf$", _re.IGNORECASE)
+        pdfs = sorted(p for p in _glob.glob(str(pathlib.Path(args.inbox) / f"{args.doc}_*.pdf"))
+                      if _re_pg.search(p))
+        if args.skip_existing:
+            before = len(pdfs)
+            pdfs = [p for p in pdfs
+                    if not (outdir / (pathlib.Path(p).stem + ".jsonl")).exists()]
+            print(f"[ocr_batch] --skip-existing: {before - len(pdfs)} already done", flush=True)
+        print(f"[ocr_batch] {len(pdfs)} page-PDFs for doc={args.doc} in {args.inbox}", flush=True)
     else:
         pdfs = args.pdfs
     if not pdfs:

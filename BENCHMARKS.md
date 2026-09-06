@@ -242,3 +242,47 @@ previous section left open, and it settles the OCR architecture:
     with the caveat it deserves.
 
 Worked example, Shatpatha (320 pages): 314 vision, 6 tesseract-fallback, 0 lost.
+
+
+### What the checking machinery actually caught (2026-08-30)
+
+The fair challenge: is all the auditing better than simply running one engine?
+Measured on Shatpatha, 320 pages:
+
+| failure | pages | what a pure-vision pipeline would have done |
+|---|---|---|
+| runaway character repeats | 14 | ingested up to 129,421 chars of underscores per page |
+| phrase loops | 6 | ingested real Sanskrit repeated to 21,639 chars, then translated it |
+| vision returned nothing | 6 | left six holes where Tesseract had read 1,157-2,496 chars |
+| **total** | **26 of 320 = 8.1%** | **corrupt or missing** |
+
+Under pure Tesseract the whole book sits at 0.477 token agreement - roughly
+half its words wrong - and nothing in the system would have said so.
+
+So the checking is not ceremony: it is the difference between 8.1% of a book
+being silently corrupt and 0%. Separately, the Windows command-line fix
+unblocked Rgveda's 1,064 pages, which no choice of OCR engine would have
+touched, and the cost metering found $1.67 of spend that the budget cap could
+not see.
+
+**What did NOT pay.** The Latin-contamination metric (diag_ocr_contamination.py)
+did not discriminate usable from unusable documents and was superseded by token
+agreement. The first probe run cost $0.20 and returned nothing because results
+were saved only at the end and the sampler started at page 1. Both were
+avoidable.
+
+### The measurement still missing
+
+Everything above concerns SOURCE quality. Whether better source produces better
+TRANSLATIONS has never been tested, and it is not self-evident: a capable
+translator may read through OCR noise and produce the right English from
+`विषयालक्रमगिका` anyway. `ab_source_quality.py` settles it for about three
+cents - old translation vs a fresh translation of the same page's vision text,
+both graded by the judge against the vision reading.
+
+  * gain >= +0.5 fidelity -> the ~$11 corpus rebuild is justified on quality.
+  * gain +0.2 to +0.5     -> worst documents only.
+  * gain < +0.2           -> the existing 14,523 translations stand; vision OCR
+                             is for new intake, provenance and the apparatus.
+
+**Do not spend the $11 before running this.**

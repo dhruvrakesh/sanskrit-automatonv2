@@ -85,6 +85,13 @@ def _ensure_provenance(con):
     if "ocr_engine" not in cols:
         con.execute("ALTER TABLE passages ADD COLUMN ocr_engine TEXT")
         con.commit()
+    if "ocr_variants" not in cols:
+        # Where Tesseract and vision read the same words differently. Vision is
+        # used, but the losing reading is kept so the reader can show both and
+        # nothing is silently discarded - Tesseract carries the correct reading
+        # roughly one time in nine. (2026-08-30)
+        con.execute("ALTER TABLE passages ADD COLUMN ocr_variants TEXT")
+        con.commit()
 
 
 def upsert_passages(
@@ -156,10 +163,31 @@ def upsert_passages(
                 "quality_score": q,
             }]
 
+        # A page's variants are computed page-wide by merge_ocr_sources.py; give
+        # each segment only the ones whose chosen reading actually appears in it,
+        # so the reader can mark the right word on the right verse.
+        _page_vars = ((rec.get("meta") or {}).get("variants") or [])
+        # Each variant belongs to ONE segment. Attaching it to every segment that
+        # happens to contain the word inflated the count (11,879 page-level
+        # disagreements became 18,599 rows) and marked verses where that
+        # particular disagreement never occurred. Claim each variant once, for
+        # the first segment that contains it. (fix 2026-08-30)
+        _claimed = set()
+
         for seg in segments:
             text = seg["text"].strip()
             if not text:
                 continue
+            if _page_vars:
+                _mine = []
+                for _k, _d in enumerate(_page_vars):
+                    if _k in _claimed:
+                        continue
+                    if _d.get("v") and _d["v"] in text:
+                        _mine.append(_d); _claimed.add(_k)
+                if _mine:
+                    import json as _json
+                    seg["_variants"] = _json.dumps(_mine, ensure_ascii=False)
             seg_counter += 1
 
             # Generate IAST transliteration
@@ -175,8 +203,8 @@ def upsert_passages(
                 INSERT INTO passages(doc_id, page_no, idx,
                     text, norm, iast,
                     verse_ref, chapter, text_type, chandas, padas, quality_score,
-                    translation, ocr_engine)
-                VALUES(?,?,?, ?,?,?, ?,?,?,?,?,?, ?,?)
+                    translation, ocr_engine, ocr_variants)
+                VALUES(?,?,?, ?,?,?, ?,?,?,?,?,?, ?,?,?)
                 ON CONFLICT(doc_id, page_no, idx) DO UPDATE SET
                     text=excluded.text,
                     norm=excluded.norm,
@@ -187,7 +215,8 @@ def upsert_passages(
                     chandas=COALESCE(excluded.chandas, chandas),
                     padas=COALESCE(excluded.padas, padas),
                     quality_score=COALESCE(excluded.quality_score, quality_score),
-                    ocr_engine=COALESCE(excluded.ocr_engine, ocr_engine)
+                    ocr_engine=COALESCE(excluded.ocr_engine, ocr_engine),
+                    ocr_variants=COALESCE(excluded.ocr_variants, ocr_variants)
                     -- NOTE: translation is NOT overwritten on re-ingest
                 """,
                 (
@@ -199,6 +228,7 @@ def upsert_passages(
                     seg.get("quality_score", 0.0),
                     "",  # translation starts empty
                     (rec.get("engine") or None),   # provenance, straight from the JSONL
+                    seg.get("_variants") or None,  # engine disagreements in THIS segment
                 )
             )
             # cur.lastrowid is unreliable after ON CONFLICT DO UPDATE —

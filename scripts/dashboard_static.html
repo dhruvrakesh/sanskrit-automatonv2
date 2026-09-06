@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* PHASE_G_JS_2026_09_06 */
 :root {
   --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
   --border:#35302640; --border-v:#35302680; --gold:#d4a017; --gold-dim:#9a721080;
@@ -19,7 +20,16 @@
 html,body{height:100%;font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;overflow:hidden}
 
 /* Layout */
-.app{display:grid;grid-template-columns:320px 1fr 340px;grid-template-rows:56px 1fr;height:100vh}
+/* PHASE_G_2026_09_06: panes were fixed at 320px 1fr 340px so nothing resized.
+   Widths are CSS variables driven by two draggable splitters and remembered in
+   localStorage, which is per-browser and safe to lose. */
+.app{display:grid;grid-template-columns:var(--lw,320px) 6px 1fr 6px var(--rw,340px);
+     grid-template-rows:56px 1fr;height:100vh}
+.splitter{cursor:col-resize;background:var(--border-v,#2a2a2a);transition:background .12s}
+.splitter:hover,.splitter.dragging{background:var(--gold,#c9a227)}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--gold,#c9a227)}
+th.sortable .arrow{opacity:.45;font-size:9px;margin-left:3px}
 .top-bar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px;background:var(--bg2);border-bottom:1px solid var(--border-v)}
 .sidebar{grid-row:2;background:var(--bg2);border-right:1px solid var(--border-v);display:flex;flex-direction:column;overflow:hidden}
 .main{grid-row:2;overflow-y:auto;padding:20px}
@@ -272,6 +282,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
   </aside>
 
   <!-- Pipeline dashboard -->
+  <div class="splitter" id="splitL" title="Drag to resize"></div>
   <main class="main">
     <div class="section-title" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
       <span>Pipeline Status</span>
@@ -307,6 +318,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
   </main>
 
   <!-- Job log with History and Usage tabs -->
+  <div class="splitter" id="splitR" title="Drag to resize"></div>
   <aside class="log-panel">
     <div class="log-header">
       <span class="log-title">Job Log</span>
@@ -542,7 +554,99 @@ async function refresh() {
   } catch(e) { toast('Refresh failed: ' + e, 'fail'); }
 }
 
+// ---- PHASE_G_JS_2026_09_06 -------------------------------------------------
+// Dates, sorting and resizable panes. /api/status had no dates at all until
+// Phase G, so the table could only be ordered by name.
+var _sortKey = null, _sortDir = -1;
+try {
+  var _ss = localStorage.getItem('pipeSort');
+  if (_ss) { var _o = JSON.parse(_ss); _sortKey = _o.k; _sortDir = _o.d; }
+} catch(e) {}
+
+function shortDate(ts){
+  if (!ts) return '\u2014';
+  var d = new Date(ts * 1000), now = Date.now() / 1000;
+  var days = (now - ts) / 86400;
+  if (days < 1) return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  if (days < 7) return Math.floor(days) + 'd ago';
+  return d.toLocaleDateString([], {day:'2-digit', month:'short'});
+}
+function fullDate(ts){ return ts ? new Date(ts * 1000).toLocaleString() : 'no date recorded'; }
+
+function sortRows(rows){
+  if (!_sortKey) return rows;
+  var out = rows.slice();
+  out.sort(function(a, b){
+    var x = a[_sortKey], y = b[_sortKey];
+    // Rows with no value sort last in BOTH directions - a missing date is not
+    // "oldest", it is unknown, and burying it is less misleading.
+    if (x === null || x === undefined) return 1;
+    if (y === null || y === undefined) return -1;
+    if (typeof x === 'string') return _sortDir * x.localeCompare(y);
+    return _sortDir * (x - y);
+  });
+  return out;
+}
+
+function wirePipelineSort(){
+  document.querySelectorAll('th.sortable').forEach(function(th){
+    var k = th.dataset.sort;
+    var arrow = th.querySelector('.arrow');
+    if (arrow) arrow.textContent = (_sortKey === k) ? (_sortDir > 0 ? '\u25B2' : '\u25BC') : '';
+    th.onclick = function(){
+      if (_sortKey === k) { _sortDir = -_sortDir; } else { _sortKey = k; _sortDir = -1; }
+      try { localStorage.setItem('pipeSort', JSON.stringify({k:_sortKey, d:_sortDir})); } catch(e) {}
+      if (window._lastPipeRows) renderPipeline(window._lastPipeRows);
+    };
+  });
+}
+
+(function initSplitters(){
+  function restore(){
+    try {
+      var lw = localStorage.getItem('paneL'), rw = localStorage.getItem('paneR');
+      if (lw) document.documentElement.style.setProperty('--lw', lw);
+      if (rw) document.documentElement.style.setProperty('--rw', rw);
+    } catch(e) {}
+  }
+  function drag(id, varName, storeKey, fromLeft){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('mousedown', function(ev){
+      ev.preventDefault();
+      el.classList.add('dragging');
+      function move(e){
+        var w = fromLeft ? e.clientX : (window.innerWidth - e.clientX);
+        w = Math.max(200, Math.min(700, w));          // keep both panes usable
+        var px = w + 'px';
+        document.documentElement.style.setProperty(varName, px);
+        try { localStorage.setItem(storeKey, px); } catch(_) {}
+      }
+      function up(){
+        el.classList.remove('dragging');
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+      }
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
+    });
+    el.addEventListener('dblclick', function(){    // double-click resets
+      document.documentElement.style.removeProperty(varName);
+      try { localStorage.removeItem(storeKey); } catch(_) {}
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){
+      restore(); drag('splitL', '--lw', 'paneL', true); drag('splitR', '--rw', 'paneR', false);
+    });
+  } else {
+    restore(); drag('splitL', '--lw', 'paneL', true); drag('splitR', '--rw', 'paneR', false);
+  }
+})();
+
 function renderPipeline(rows) {
+  window._lastPipeRows = rows;
+  rows = sortRows(rows);
   const wrap = document.getElementById('pipelineWrap');
   if (!rows.length) {
     wrap.innerHTML = '<div class="empty-state"><div class="e-icon">&#x1F4C2;</div><h3>No documents in inbox</h3><p>Use the corpus browser to import scriptures.</p></div>';
@@ -553,7 +657,11 @@ function renderPipeline(rows) {
   Object.values(activeJobs).forEach(function(j) { if (!j.done) runningDocs.add(j.doc); });
 
   let html = '<table class="pipeline-table"><thead><tr>' +
-    '<th>Document</th><th>PDFs</th><th>Ingested</th>' +
+    '<th class="sortable" data-sort="doc">Document<span class="arrow"></span></th>' +
+    '<th class="sortable" data-sort="pdf_count">PDFs<span class="arrow"></span></th>' +
+    '<th class="sortable" data-sort="ingested_pages">Ingested<span class="arrow"></span></th>' +
+    '<th class="sortable" data-sort="first_seen">Added<span class="arrow"></span></th>' +
+    '<th class="sortable" data-sort="last_activity">Last run<span class="arrow"></span></th>' +
     '<th>Lines</th><th>Translated</th><th>Exports</th><th>Actions</th>' +
     '</tr></thead><tbody>';
   rows.forEach(function(r) {
@@ -604,6 +712,8 @@ function renderPipeline(rows) {
       '<td>' + docCell + '</td>' +
       '<td><span class="num-cell">' + r.pdf_count + '</span></td>' +
       '<td>' + progBar(r.ingested_pages, ingestDenom, false) + '</td>' +
+      '<td><span class="num-cell" title="' + fullDate(r.first_seen) + '">' + shortDate(r.first_seen) + '</span></td>' +
+      '<td><span class="num-cell" title="' + fullDate(r.last_activity) + '">' + shortDate(r.last_activity) + '</span></td>' +
       '<td><span class="num-cell">' + r.total_lines + '</span></td>' +
       '<td>' + progBar(r.translated_lines, r.total_lines, true) + '</td>' +
       '<td><span class="num-cell">' + r.exports + '</span></td>' +
@@ -616,6 +726,10 @@ function renderPipeline(rows) {
           ' onclick="startDoc(\'' + esc(r.doc) + '\')">&#9654; Start</button>' +
         '<button class="btn-doc-stop"' + (isRun ? '' : ' style="display:none"') +
           ' onclick="stopDoc(\'' + esc(r.doc) + '\')">&#9646;&#9646; Stop</button>' +
+        '<button class="btn-act emb" data-act="embeddings" data-doc="' + esc(r.doc) + '"' +
+          ' title="Rebuild this doc\'s semantic index so search and Ask the Corpus see it">Embed</button>' +
+        '<button class="btn-act ent" data-act="entities" data-doc="' + esc(r.doc) + '"' +
+          ' title="Extract named entities for cross-linking">Entities</button>' +
         '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '">Export</button>' +
         '<button class="btn-act" style="background:var(--gold);color:#000;font-size:10px" data-act="pipeline" data-doc="' + esc(r.doc) + '">&#9654; Full</button>' +
         '<a href="/reader/' + esc(r.doc) + '" target="_blank" style="display:inline-block;padding:4px 8px;background:transparent;color:var(--gold);border:1px solid var(--gold-dim);border-radius:3px;font-size:10px;text-decoration:none">&#128214;</a>' +
@@ -630,6 +744,7 @@ function renderPipeline(rows) {
   });
   html += '</tbody></table>';
   wrap.innerHTML = html;
+  wirePipelineSort();
   applyPipeFilter();
   // Restore per-doc engine overrides in newly-rendered selects
   document.querySelectorAll('select.doc-engine-sel').forEach(function(sel) {
@@ -673,6 +788,22 @@ async function doAction(act, doc) {
     if (j.job) { trackJob(j.job, 'Classify ' + doc, 'classify', doc);
                  toast('Classifying ' + doc + ' into Sanskrit / En-Hi / noise'); }
     else toast(j.error || 'Classify failed', 'err');
+  }
+  if (act === 'embeddings') {
+    const r = await fetch('/api/embeddings', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'Embed ' + doc, 'embeddings', doc);
+                 toast('Rebuilding semantic index for ' + doc); }
+    else toast(j.error || 'Embeddings failed', 'err');
+  }
+  if (act === 'entities') {
+    const r = await fetch('/api/entities', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({doc, db: cfg.db})});
+    const j = await r.json();
+    if (j.job) { trackJob(j.job, 'Entities ' + doc, 'entities', doc);
+                 toast('Extracting entities for ' + doc); }
+    else toast(j.error || 'Entity extraction failed', 'err');
   }
   if (act === 'translate') {
     const eng   = getEngine(doc);

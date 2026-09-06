@@ -121,6 +121,45 @@ def _preproc_variants(img: Image.Image) -> List[Tuple[str, Image.Image]]:
 
     return out
 
+def tess_confidence(img: Image.Image, lang: str, psm: int = 6, oem: int = 1) -> dict:
+    """Tesseract's OWN per-word confidence for this page. (2026-08-30)
+
+    We were calling image_to_string and throwing this away. Tesseract knows when
+    it is unsure, and that is the only DETERMINISTIC per-page signal available
+    without spending anything: orthographic validity was measured on 314
+    Shatpatha page-pairs and does not discriminate (correlation 0.363, 305 of
+    314 pages in one band), because Tesseract's errors are orthographically
+    LEGAL but wrong - शातपथ for शतपथ.
+
+    Returns mean confidence, the fraction of words below 60, and the word count.
+    Cheap: one extra tesseract pass over an image already in memory.
+    """
+    try:
+        d = pytesseract.image_to_data(img, lang=lang,
+                                      config=f"--oem {oem} --psm {psm}",
+                                      output_type=pytesseract.Output.DICT)
+    except Exception:
+        return {}
+    confs, words = [], 0
+    for c, t in zip(d.get("conf", []), d.get("text", [])):
+        try:
+            c = float(c)
+        except (TypeError, ValueError):
+            continue
+        if c < 0 or not (t or "").strip():
+            continue          # -1 marks layout boxes, not words
+        confs.append(c); words += 1
+    if not confs:
+        return {}
+    confs.sort()
+    return {
+        "conf_mean": round(sum(confs) / len(confs), 2),
+        "conf_p10": round(confs[len(confs) // 10], 2),
+        "conf_lt60": round(sum(1 for c in confs if c < 60) / len(confs), 4),
+        "conf_words": words,
+    }
+
+
 def _ocr_once(img: Image.Image, lang: str, psm: int = 6, oem: int = 1) -> str:
     config = f"--oem {oem} --psm {psm}"
     return pytesseract.image_to_string(img, lang=lang, config=config)
@@ -208,11 +247,15 @@ def ocr_pdf(
                         if cand_score > best_score:
                             best_text, best_score = cand, cand_score
                             best_used = {"dpi": cur_dpi, "psm": psm, "preproc": pname, "lang": lang}
+                            best_used.update(tess_confidence(pimg, lang=lang, psm=psm))
                         long_enough = cand_len >= max(20, min_chars)
                         good_script = (min_dev_frac <= 0.0) or (cand_dev >= min_dev_frac)
                         if long_enough and good_script:
                             text = cand
                             used = {"dpi": cur_dpi, "psm": psm, "preproc": pname, "lang": lang}
+                            # Tesseract's own confidence for the winning rendering -
+                            # the deterministic signal ocr_triage.py gates on.
+                            used.update(tess_confidence(pimg, lang=lang, psm=psm))
                             break
                     if text:
                         break
@@ -233,6 +276,9 @@ def ocr_pdf(
         # Always record something (even empty), so downstream knows the page exists
         print(f"page {i}: {len(text)} chars (from {base_name})  "
               f"dev={_dev_frac(text):.2f} dpi={used.get('dpi')} preproc={used.get('preproc')}")
+        # Record Tesseract's own confidence for the ACCEPTED rendering. This is
+        # what ocr_triage.py uses to decide, deterministically and for free,
+        # whether this page needs a vision pass. (2026-08-30)
         rec = {
             "engine": "tesseract",
             "page_no": i,
