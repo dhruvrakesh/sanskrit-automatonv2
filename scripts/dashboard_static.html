@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* PHASE_G_GRAB_2026_09_06 */
+/* PHASE_G_FIX_2026_09_06 */
 /* PHASE_G_JS_2026_09_06 */
 :root {
   --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
@@ -25,11 +27,36 @@ html,body{height:100%;font-family:"Inter",system-ui,sans-serif;background:var(--
    localStorage, which is per-browser and safe to lose. */
 .app{display:grid;grid-template-columns:var(--lw,320px) 6px 1fr 6px var(--rw,340px);
      grid-template-rows:56px 1fr;height:100vh}
-.splitter{cursor:col-resize;background:var(--border-v,#2a2a2a);transition:background .12s}
+.splitter{grid-row:2;cursor:col-resize;background:var(--border-v,#2a2a2a);transition:background .12s;
+   position:relative;touch-action:none}
+/* PHASE_G_GRAB_2026_09_06: the visible line stays 6px so the layout is
+   unchanged, but the GRABBABLE area is widened to 16px by an invisible
+   overlay. A 6px target at 150% Windows scaling, sitting right beside the
+   sidebar's scrollbar, is why "drag the divider" kept landing on the
+   scrollbar instead. */
+.splitter::before{content:"";position:absolute;top:0;bottom:0;left:-5px;right:-5px;cursor:col-resize}
+/* A visible grip, so the divider reads as a control rather than a border. */
+.splitter::after{content:"";position:absolute;left:1px;width:4px;top:50%;height:34px;
+   margin-top:-17px;border-radius:2px;background:var(--gold-dim,#9a721080);opacity:.55;
+   transition:opacity .12s,background .12s;pointer-events:none}
+.splitter:hover::after,.splitter.dragging::after{opacity:1;background:var(--gold,#c9a227)}
+/* PHASE_G_FIX_2026_09_06: grid-row:2 above is load-bearing. .sidebar/.main/
+   .log-panel all declare grid-row:2, so Grid places THEM first (definite row)
+   and sweeps anything auto-placed to the end - which put the splitters in
+   columns 4 and 5 and squeezed .main into the 6px track. */
 .splitter:hover,.splitter.dragging{background:var(--gold,#c9a227)}
 th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
 th.sortable:hover{color:var(--gold,#c9a227)}
 th.sortable .arrow{opacity:.45;font-size:9px;margin-left:3px}
+/* Embed + Entities pushed the actions cell to a 4th wrapped line
+   (132.5px -> 162.5px a row). Scoped to the pipeline table because
+   .btn-act is used in other panels too. Measured back to 143.5px. */
+.pipeline-table .btn-act{padding:3px 7px;font-size:10px}
+/* Third fix. Now that the panes really DO resize, dragging the middle one
+   narrow clips the Actions column - and with overflow visible there is no
+   way to scroll to it, so Export/Full/Reader become unreachable. Measured
+   at --lw 200px / --rw 620px: table 900px in an 808px box. */
+#pipelineWrap{overflow-x:auto}
 .top-bar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px;background:var(--bg2);border-bottom:1px solid var(--border-v)}
 .sidebar{grid-row:2;background:var(--bg2);border-right:1px solid var(--border-v);display:flex;flex-direction:column;overflow:hidden}
 .main{grid-row:2;overflow-y:auto;padding:20px}
@@ -612,9 +639,21 @@ function wirePipelineSort(){
   function drag(id, varName, storeKey, fromLeft){
     var el = document.getElementById(id);
     if (!el) return;
-    el.addEventListener('mousedown', function(ev){
+    // PHASE_G_GRAB_2026_09_06 — pointer events + capture, not mouse events.
+    // The old handler listened on `document` for mousemove without capture and
+    // without suppressing selection, so a REAL press-and-move started a native
+    // text selection over the sidebar and the drag read as dead. Synthetic
+    // (Playwright) events never select text, which is why the suite passed
+    // 19/19 while the UI could not be resized by hand.
+    el.addEventListener('pointerdown', function(ev){
+      if (ev.button !== 0) return;                    // left button only
       ev.preventDefault();
       el.classList.add('dragging');
+      var prevUS = document.body.style.userSelect;
+      var prevCur = document.body.style.cursor;
+      document.body.style.userSelect = 'none';        // stop the selection race
+      document.body.style.cursor = 'col-resize';
+      try { el.setPointerCapture(ev.pointerId); } catch(_) {}
       function move(e){
         var w = fromLeft ? e.clientX : (window.innerWidth - e.clientX);
         w = Math.max(200, Math.min(700, w));          // keep both panes usable
@@ -622,13 +661,18 @@ function wirePipelineSort(){
         document.documentElement.style.setProperty(varName, px);
         try { localStorage.setItem(storeKey, px); } catch(_) {}
       }
-      function up(){
+      function up(e){
         el.classList.remove('dragging');
-        document.removeEventListener('mousemove', move);
-        document.removeEventListener('mouseup', up);
+        document.body.style.userSelect = prevUS;
+        document.body.style.cursor = prevCur;
+        try { el.releasePointerCapture(ev.pointerId); } catch(_) {}
+        el.removeEventListener('pointermove', move);
+        el.removeEventListener('pointerup', up);
+        el.removeEventListener('pointercancel', up);
       }
-      document.addEventListener('mousemove', move);
-      document.addEventListener('mouseup', up);
+      el.addEventListener('pointermove', move);
+      el.addEventListener('pointerup', up);
+      el.addEventListener('pointercancel', up);       // alt-tab, lost focus
     });
     el.addEventListener('dblclick', function(){    // double-click resets
       document.documentElement.style.removeProperty(varName);

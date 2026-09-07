@@ -112,7 +112,7 @@ def open_db(path):
 
 def list_docs(con):
     return con.execute("""
-        SELECT d.id, d.code, d.title, d.category,
+        SELECT d.id, d.code, d.category,
                COUNT(p.id)                                              AS total,
                SUM(CASE WHEN TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END) AS translated
         FROM docs d LEFT JOIN passages p ON p.doc_id = d.id
@@ -130,7 +130,8 @@ def doc_by_code(con, code):
 
 def translated_passages(con, doc_id):
     return con.execute("""
-        SELECT page_no, idx, text, iast, translation, verse_ref, quality_score
+        SELECT page_no, idx, text, iast, translation, verse_ref, quality_score,
+               COALESCE(text_type,'mula') AS text_type
         FROM passages
         WHERE doc_id = ? AND TRIM(COALESCE(translation,'')) <> ''
         ORDER BY page_no, idx
@@ -144,7 +145,7 @@ def translated_passages(con, doc_id):
 def upsert_text_row(headers, doc, n_passages, engine, source_note):
     payload = {
         "doc_code": doc["code"],
-        "title": doc["title"] or doc["code"],
+        "title": doc_title(doc["code"]) or doc["code"],
         "category": doc["category"],
         "source_note": source_note,
         "translation_engine": engine,
@@ -212,6 +213,14 @@ def set_published(headers, doc_code, value):
 
 def main():
     ap = argparse.ArgumentParser(description="Publish translated docs to Srangam")
+    ap.add_argument("--gate-report", action="store_true",
+                    help="show what the publication gate would withhold, and why, "
+                         "then exit without publishing (PUBLISH_GATE_2026_09_06)")
+    ap.add_argument("--no-gate", action="store_true",
+                    help="publish WITHOUT the passage-level gate. Only for a corpus "
+                         "you have reviewed passage by passage.")
+    ap.add_argument("--dup-threshold", type=float, default=0.40)
+    ap.add_argument("--dup-window", type=int, default=1)
     ap.add_argument("--db", default="data/context.db")
     ap.add_argument("--doc", help="doc code to push (see --list)")
     ap.add_argument("--list", action="store_true",
@@ -300,3 +309,173 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ── Publication gate (PUBLISH_GATE_2026_09_06) ───────────────────────────────
+# `published` is a per-DOCUMENT flag; it cannot protect a reviewed book from bad
+# passages inside it. These are the passage-level rules, each one measured.
+import re as _gate_re
+
+_GF_ABBREV = _gate_re.compile(r"(?:का०|प्र०|ब्रा०|बृ०|अध्या०|खण्ड०|पत्र०|पृ०|सं०|अ०)")
+_GF_FOLIO = _gate_re.compile(r"[\[\({][^\]\)}\n]{0,60}?"
+                             r"(?:का०|प्र०|ब्रा०|बृ०|अ०|पृ०|अध्या०|खण्ड०|सं०)"
+                             r"[^\]\)}\n]{0,60}?[\]\)}]")
+_GF_TITLE = _gate_re.compile(r"[ऀ-ॿ]{3,}(?:ब्राह्मणम्|ब्राह्मणे|संहिता|संहितायाम्|पुराणम्|"
+                             r"उपनिषत्|उपनिषदि|भाष्यसमेतम्|भाष्यसंमेतम्|भाष्यसहितम्|सूत्रम्)")
+# Built by concatenation rather than one literal: the class contains both
+# quote characters, and escaping those through a generated file is exactly
+# the kind of avoidable trap that produces a SyntaxError at import time.
+_GF_PUNCT = (" *|-–—_।॥.,;:()[]{}<>०-९0-9"
+             + "'" + chr(34) + "“”‘’")
+_GF_DECOR = _gate_re.compile("[" + _gate_re.escape(_GF_PUNCT) + r"\s]+")
+_GF_DEVRUN = _gate_re.compile(r"[ऀ-ॿ]+")
+_GATE_NGRAM = 5
+
+
+def _gate_is_furniture_line(line: str) -> bool:
+    t = (line or "").strip()
+    if not t or len(t) > 90:
+        return False
+    if not _GF_DECOR.sub("", t) and len(t) <= 20:
+        return True
+    if not (_GF_FOLIO.search(t) or _GF_TITLE.search(t)
+            or len(_GF_ABBREV.findall(t)) >= 2):
+        return False
+    residue = _GF_DECOR.sub("", _GF_ABBREV.sub(
+        "", _GF_TITLE.sub("", _GF_FOLIO.sub("", t))))
+    return len(residue) <= 3
+
+
+def gate_has_furniture(text: str) -> bool:
+    """True when the passage still LEADS with page furniture. Same detector as
+    text_filters.strip_page_furniture, which measured 226/226 furniture cases
+    caught, 0 content loss and 0 false positives over 1,321 real passages."""
+    return bool(text) and _gate_is_furniture_line(text.split("\n")[0])
+
+
+def _gate_sig(text: str) -> set:
+    s = "".join(_GF_DEVRUN.findall(text or ""))
+    return {s[i:i + _GATE_NGRAM] for i in range(len(s) - _GATE_NGRAM + 1)}
+
+
+def _gate_containment(a: set, b: set) -> float:
+    if not a or not b:
+        return 0.0
+    return len(a & b) / min(len(a), len(b))
+
+
+def gate_rows(rows, *, dup_threshold=0.40, dup_window=1, min_grams=40):
+    """Split publisher rows into (publishable, withheld).
+
+    `withheld` entries are (row, reason). Nothing is deleted anywhere; a
+    withheld passage stays in context.db and simply is not mirrored.
+    """
+    keep, drop = [], []
+    staged = []
+    for r in rows:
+        ttype = (r["text_type"] if "text_type" in r.keys() else None) or "mula"
+        if ttype in ("noise", "frontmatter"):
+            drop.append((r, f"text_type={ttype}"))
+            continue
+        if gate_has_furniture(r["text"] or ""):
+            drop.append((r, "page furniture (running head / folio mark)"))
+            continue
+        staged.append(r)
+
+    # duplicate suppression: furniture-bearing member of a 1:1 pair.
+    # Anything already dropped for furniture is gone, so this catches the
+    # residual case where BOTH copies survived the furniture test.
+    sigs = [(_gate_sig(r["text"] or ""), r) for r in staged]
+    partners = {}
+    for i in range(len(sigs)):
+        for j in range(i + 1, len(sigs)):
+            if sigs[j][1]["page_no"] - sigs[i][1]["page_no"] > dup_window:
+                break
+            if len(sigs[i][0]) < min_grams or len(sigs[j][0]) < min_grams:
+                continue
+            if _gate_containment(sigs[i][0], sigs[j][0]) >= dup_threshold:
+                partners.setdefault(i, []).append(j)
+                partners.setdefault(j, []).append(i)
+
+    dropped_idx = set()
+    for i, js in partners.items():
+        if len(js) != 1:
+            continue            # one-to-many = commentary or real repetition
+        j = js[0]
+        if len(partners.get(j, [])) != 1:
+            continue
+        a, b = sigs[i][1], sigs[j][1]
+        # keep the denser reading; ties keep the earlier passage
+        da = len(_GF_DEVRUN.findall(a["text"] or ""))
+        db = len(_GF_DEVRUN.findall(b["text"] or ""))
+        loser = i if (da, -a["page_no"]) < (db, -b["page_no"]) else j
+        dropped_idx.add(loser)
+
+    for n, (_s, r) in enumerate(sigs):
+        if n in dropped_idx:
+            drop.append((r, "duplicate of a cleaner reading on the same page"))
+        else:
+            keep.append(r)
+    return keep, drop
+
+
+def print_gate_report(code, keep, drop):
+    from collections import Counter
+    print("=" * 74)
+    print(f"PUBLICATION GATE   {code}")
+    print("=" * 74)
+    total = len(keep) + len(drop)
+    print(f"  translated passages : {total}")
+    print(f"  would publish       : {len(keep)}")
+    print(f"  withheld            : {len(drop)}")
+    if not drop:
+        print("\n  Nothing withheld. Safe to publish.")
+        return
+    print()
+    for reason, n in Counter(r for _row, r in drop).most_common():
+        print(f"  {n:>5}  {reason}")
+    print("\n  Examples of what is being withheld:\n")
+    seen = set()
+    for row, reason in drop:
+        if reason in seen:
+            continue
+        seen.add(reason)
+        print(f"   [{reason}]  p{row['page_no']}.{row['idx']}")
+        print(f"     src: {(row['text'] or '')[:96]}")
+        print(f"     tr : {(row['translation'] or '')[:96]}")
+        print()
+    print("  Nothing was deleted. These rows remain in context.db; fix the")
+    print("  source, re-run, and they will publish.")
+
+
+# ── Display title (PUBLISH_TITLE_2026_09_06) ─────────────────────────────────
+# `docs` has no `title` column (db_utils.py: id, code, category, src_path,
+# glossary, created_at). publish_srangam.py asked for d.title and crashed on
+# its own --list. srangam_texts.title is NOT NULL, so derive a label from the
+# code rather than drop the column.
+import re as _title_re
+
+_TITLE_LEAD_ACCESSION = _title_re.compile(r"^(?:\d{4}[_-])?\d{4,}[_-]")
+_TITLE_SEPS = _title_re.compile(r"[_\-]+")
+
+
+def doc_title(code: str) -> str:
+    """A human label for a doc code. Display only — doc_code stays the key.
+
+    '2015_405693_Shatpath-Brahmanam'  -> 'Shatpath Brahmanam'
+    '476948-Rgveda-samhita'           -> 'Rgveda samhita'
+    'wl_buddha_carita_sanskrit'       -> 'Buddha Carita Sanskrit'
+    """
+    s = (code or "").strip()
+    if not s:
+        return "(untitled)"
+    s = _TITLE_LEAD_ACCESSION.sub("", s)          # drop the accession prefix
+    if s.startswith("wl_"):
+        s = s[3:]                                 # wisdomlib adapter prefix
+    s = _TITLE_SEPS.sub(" ", s)
+    s = _title_re.sub(r"\s+", " ", s).strip()
+    if not s:
+        return code
+    # Title-case ONLY words that are entirely lowercase, so 'Rgveda', 'IAST'
+    # and roman numerals are not mangled.
+    return " ".join(w.capitalize() if w.islower() else w for w in s.split(" "))

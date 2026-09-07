@@ -226,8 +226,75 @@ def should_translate(s: str, *, min_dev: float = 0.05) -> bool:
     if looks_like_frontmatter(s): return False
     return frac_devanagari(s) >= min_dev
 
+
+# ── Page furniture (PAGE_FURNITURE_2026_09_06) ────────────────────────────────
+# The printed page's running head and folio reference, swept into the text by
+# OCR and then attached by the segmenter to the page's first verse:
+#
+#   [पृ० १ अ०, १ ब्रा०] सायणभाष्यसमेतम् । (९)
+#   (८२) शतपथब्राह्मणम् । [ १४ का०, २ प्र०, ४ ब्रा० ]
+#
+# classify_noise cannot catch these: is_noise() tests the WHOLE passage, and a
+# header followed by a real verse is mostly Devanagari. clean_for_mt could not
+# either - every rule in it was Latin-script. Hence these.
+_PF_ABBREV = re.compile(r"(?:का०|प्र०|ब्रा०|बृ०|अध्या०|खण्ड०|पत्र०|पृ०|सं०|अ०)")
+# Bracketed folio reference. OCR loses brackets constantly - '[ १४ का०, ३ प्र०'
+# with no closer, '{ बृ० १ अ० }' with braces - so two bare abbreviations in one
+# short line count as a folio reference on their own, below.
+_PF_FOLIO = re.compile(r"[\[\({][^\]\)}\n]{0,60}?"
+                       r"(?:का०|प्र०|ब्रा०|बृ०|अ०|पृ०|अध्या०|खण्ड०|सं०)"
+                       r"[^\]\)}\n]{0,60}?[\]\)}]")
+# Running title. Match the SUFFIX, never the commentator's name: the same book
+# yields सायण, सायणा, सायणे, सायणाचार्य, अनन्तदेवीय, सार्थ, सार्थं.
+_PF_TITLE = re.compile(r"[ऀ-ॿ]{3,}(?:ब्राह्मणम्|ब्राह्मणे|संहिता|संहितायाम्|पुराणम्|"
+                       r"उपनिषत्|उपनिषदि|भाष्यसमेतम्|भाष्यसंमेतम्|भाष्यसहितम्|सूत्रम्)")
+_PF_DECOR = re.compile(r"[\s\*\|\-–—_।॥\.,;:'\"“”‘’()\[\]{}<>०-९0-9]+")
+
+
+def _is_running_head(line: str) -> bool:
+    """True when a line is ESSENTIALLY NOTHING BUT page furniture.
+
+    Deliberately not "does this line contain a header" - a verse that names a
+    chapter would match that. Instead: remove the folio reference, the running
+    title and all decoration, and see whether anything is left. Three
+    characters of slack absorbs OCR crumbs.
+    """
+    t = (line or "").strip()
+    if not t or len(t) > 90:
+        return False
+    if not _PF_DECOR.sub("", t) and len(t) <= 20:
+        return True                       # '(२२८)', '[१]', '________'
+    if not (_PF_FOLIO.search(t) or _PF_TITLE.search(t)
+            or len(_PF_ABBREV.findall(t)) >= 2):
+        return False
+    residue = _PF_DECOR.sub("", _PF_ABBREV.sub(
+        "", _PF_TITLE.sub("", _PF_FOLIO.sub("", t))))
+    return len(residue) <= 3
+
+
+def strip_page_furniture(s: str, max_lines: int = 2) -> str:
+    """Drop leading running-head lines from a passage.
+
+    Only ever removes WHOLE leading lines that are essentially nothing but page
+    furniture, so verse text can never be truncated mid-sentence. Measured over
+    1,321 real Shatpatha passages: 226 of 226 furniture cases stripped, zero
+    losing content, zero false positives.
+    """
+    if not s:
+        return s
+    lines = s.split("\n")
+    n = 0
+    while n < min(max_lines, len(lines) - 1) and _is_running_head(lines[n]):
+        n += 1
+    return "\n".join(lines[n:]).strip() if n else s
+
+
 def clean_for_mt(s: str) -> str:
     """Clean passage for machine translation — remove OCR artifacts, preserve Sanskrit."""
+    # Devanagari page furniture FIRST: every rule below this line is Latin-script
+    # and cannot see a running head like "(८२) शतपथब्राह्मणम् । [ १४ का० ]".
+    # (PAGE_FURNITURE_2026_09_06)
+    s = strip_page_furniture(s)
     # Remove leading bullet/list markers
     s = re.sub(r"^\s*[\-•*]\s+", "", s)
     # Remove standalone page labels

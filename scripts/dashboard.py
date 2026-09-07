@@ -59,6 +59,8 @@ class Job:
     out: str = ""
     err: str = ""
     proc: Optional[object] = field(default=None, repr=False)  # subprocess.Popen, not serialized
+    rc: Optional[int] = None   # child exit code, copied off proc before it is
+                               # cleared. (JOB_DIAG_2026_09_06)
     killed: bool = False
     active: bool = False   # True once the job's semaphore is acquired and it is
                            # ACTUALLY executing (vs. still queued behind the lock).
@@ -83,6 +85,11 @@ def _persist_job(job: Job):
             "duration_s": round((job.end or job.start) - job.start, 1),
             "out_lines": len((job.out or "").splitlines()),
             "err_preview": (job.err or "")[:300],
+            # (JOB_DIAG_2026_09_06) "ok: false" on its own is not a diagnosis.
+            # rc separates a crash (1) from bad arguments (2) from a kill, and
+            # out_tail is usually the last thing the job managed to say.
+            "rc": job.rc,
+            "out_tail": (job.out or "")[-400:],
         }
         with open(JOBS_LOG_PATH, "a", encoding="utf-8") as fh:
             fh.write(json.dumps(record, ensure_ascii=False) + "\n")
@@ -142,6 +149,7 @@ def _run_job(job: Job):
         )
         job.proc = proc  # store so it can be killed
         out, err = proc.communicate()
+        job.rc = proc.returncode          # (JOB_DIAG_2026_09_06)
         if job.killed:
             job.ok  = False
             job.err = "[KILLED by user]"
@@ -433,7 +441,13 @@ def _validate_doc(doc) -> Optional[str]:
     return doc if DOC_RE.match(doc) else None
 
 def py(*args: str) -> List[str]:
-    return [sys.executable, *args]
+    # -u is load-bearing. (JOB_DIAG_2026_09_06)
+    # _run_job pipes stdout and stderr, and CPython block-buffers stdout at 8 KB
+    # when it is a pipe. A job that does not exit cleanly therefore loses
+    # EVERYTHING it printed - which is how the entities job on 2026-09-06 came to
+    # be recorded as ok:false, out_lines:0, err_preview:"" after 32.9 seconds of
+    # work. Unbuffered, each line is delivered as it is printed.
+    return [sys.executable, "-u", *args]
 
 def script(name: str) -> str:
     return str(SCRIPTS / name)

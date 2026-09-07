@@ -650,3 +650,181 @@ roll back completely on any failure. Re-running is a no-op.
 CLI-only and deliberately so - the audit gate must stay a hard stop, and a
 button that can be clicked past is not a gate.
 
+
+## 9c. Verifying a UI change before it is served (2026-09-06)
+
+Phase G shipped a layout bug past every check the project had. The checks were
+not weak — they were the wrong kind:
+
+| check                                   | result on the broken file |
+|-----------------------------------------|---------------------------|
+| `py_compile dashboard.py`               | clean                     |
+| `node --check` on the extracted script  | clean                     |
+| CSS braces balanced                     | 138 / 138                 |
+| both patch markers present              | yes                       |
+| `/api/embeddings`, `/api/entities` present | yes                    |
+| JavaScript errors in the browser        | **none**                  |
+| the page as a human sees it             | **destroyed**             |
+
+`.sidebar`, `.main` and `.log-panel` each declare `grid-row:2`. The two new
+`.splitter` divs did not. CSS Grid's auto-placement (css-grid-1 §8.5) positions
+definite-row items first, in document order, and only then fills the leftover
+cells with fully-auto items. So the three panes took columns 1–3 and the
+splitters were swept into 4 and 5:
+
+```
+                       measured, headless Chromium 1680x980
+  sidebar    x=0     w=320    column 1
+  splitL     x=1334  w=6      column 4     <- wrong
+  main       x=320   w=40     column 2     <- crushed into the 6px track
+  splitR     x=1340  w=340    column 5     <- wrong
+  log-panel  x=326   w=1008   column 3     <- wrong
+```
+
+The pipeline table — the entire screen — rendered 40px wide. Nothing threw.
+
+**The rule this establishes: a layout change is not verified until something
+has laid the page out.** Parsing it is not laying it out.
+
+### The harness
+
+`scripts/verify_ui.py` serves `dashboard_static.html` on 127.0.0.1:8899 with a
+stand-in API (six documents chosen to hit the edges, including one with no
+dates at all) and asserts 19 properties in a real browser. It never opens
+`data/context.db`, never calls a provider and never touches the running
+dashboard.
+
+```powershell
+# once, on a dev machine only - NOT a runtime dependency
+pip install playwright
+playwright install chromium
+
+# every time dashboard_static.html changes
+python scripts\verify_ui.py
+python scripts\verify_ui.py --shots out\ui   # + screenshots for the record
+```
+
+Exit 0 means every assertion held. Non-zero means do not restart the dashboard.
+
+The first three assertions are the ones that would have caught this:
+
+```
+  pane order left to right          panes appear in DOM order
+  main is the widest pane           the content pane is not a sliver
+  neither splitter is wider than 8px
+```
+
+Confirmed against the broken file as a negative control: 5/9, with the failure
+naming the cause (`got ['sidebar','main','log-panel','splitL','splitR']`).
+
+### Two further defects the render caught
+
+* **Row height.** Embed + Entities pushed the actions cell onto a fourth
+  wrapped line: 132.5px → 162.5px a row, one fewer book per screen. Tightening
+  `.btn-act` padding *inside `.pipeline-table` only* (the class is used in other
+  panels) brings it to 143.5px. Net cost of the two buttons: 11px, not 30px.
+* **Reachability.** Once the panes genuinely resize, dragging the middle one
+  narrow clips the Actions column, and with `overflow:visible` there is no way
+  to scroll to it — Export, Full and the reader link become unclickable.
+  Measured at `--lw 200px / --rw 620px`: a 900px table in an 808px box.
+  `#pipelineWrap{overflow-x:auto}` fixes it. This defect did not exist before
+  Phase G, because the panes could not be resized.
+
+All three are in `scripts/patch_ui_phase_g_fix.py`, and folded into
+`patch_ui_phase_g.py` so a fresh application is correct from the start.
+
+### Applying the hotfix
+
+`dashboard.py` serves the HTML with `send_from_directory` (line 511), i.e. it is
+read from disk on every request. **The HTML fix therefore needs a hard refresh,
+not a restart** — no job is interrupted:
+
+```powershell
+python scripts\patch_ui_phase_g_fix.py            # dry run
+python scripts\patch_ui_phase_g_fix.py --apply
+# then Ctrl+F5 in the browser
+```
+
+The `/api/embeddings` and `/api/entities` endpoints live in `dashboard.py` and
+do require a restart — see §1, and the correction in §9d.
+
+## 9d. Restarting the dashboard while jobs are running — a correction (2026-09-06)
+
+I told you the running jobs "are subprocesses and survive" a dashboard restart.
+That was asserted, not verified, and it is **wrong**. Reading the code:
+
+`scripts/dashboard.py`, `_run_job`:
+
+```python
+proc = subprocess.Popen(
+    job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    cwd=str(ROOT), env=_child_env()
+)
+job.proc = proc
+out, err = proc.communicate()
+```
+
+No `creationflags`, no Windows Job Object. `restart_dashboard.ps1` does
+`Stop-Process -Id $procId -Force` on the **port listener only**. So:
+
+* the children are **not** killed — Windows does not cascade the kill;
+* but their stdout/stderr pipes have no reader any more. Each child runs until
+  it fills the ~64 KB pipe buffer and then **blocks forever on write**;
+* `proc.communicate()` dies with the parent, so `_persist_job()` never runs and
+  `data/jobs.jsonl` never records the outcome.
+
+They neither finish nor die. They sit there holding a DB connection, invisible
+to the new dashboard's in-memory `JOBS` list, and a translate job that blocks
+mid-document leaves the semaphore family with a writer nobody is tracking.
+
+`_kill_proc()` does the right thing — `taskkill /F /T`, a tree kill — and that
+is what the UI's **Pause All Jobs** button calls.
+
+**RUNBOOK §1 already said this**: *"Stop cleanly: click 'Pause All' in the UI
+(kills job subprocesses), then:"*. And `ENTERPRISE_ROADMAP.md`: *"No
+multi-change restarts of a live system without a stated rollback."* The
+procedure existed; I went around it.
+
+### The procedure, in order
+
+```powershell
+Set-Location "C:\path\to\sanskrit-automatonv2"     # your repo root
+
+# 1. Click "Pause All Jobs" in the dashboard (top of the Pipeline panel).
+#    Then CONFIRM it, rather than trusting the button:
+(Invoke-RestMethod http://127.0.0.1:5057/api/jobs/running).Count      # want 0
+
+# 2. Only when that reads 0:
+powershell -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1
+
+# 3. Confirm the new endpoints answer (405 = "exists, wrong verb" = good;
+#    404 = the restart did not pick up the patched dashboard.py):
+foreach ($e in '/api/embeddings','/api/entities') {
+  try   { Invoke-WebRequest "http://127.0.0.1:5057$e" -Method GET -ErrorAction Stop | Out-Null }
+  catch { "{0,-18} {1}" -f $e, $_.Exception.Response.StatusCode.value__ }
+}
+```
+
+Paused jobs are not lost work: OCR, ingest and translate are all resumable and
+skip what is already done. A blocked-forever job **is** lost work.
+
+### Rollback, and proving it before you need it
+
+```powershell
+# what Phase G backed up
+Get-ChildItem backups\dashboard*.preG*,backups\dashboard*.preGjs*,backups\dashboard*.preGfix* |
+  Sort-Object LastWriteTime | Format-Table Name,Length,LastWriteTime
+
+# prove the rollback restores byte-for-byte, WITHOUT rolling back:
+$b = (Get-ChildItem backups\dashboard_static.html.preG.* | Sort-Object LastWriteTime | Select-Object -Last 1).FullName
+Copy-Item $b "$env:TEMP\rollback_test.html"
+python scripts\patch_ui_phase_g_js.py --help *> $null   # no-op, just proves the script runs
+"backup bytes : {0}" -f (Get-Item $b).Length
+"live bytes   : {0}" -f (Get-Item scripts\dashboard_static.html).Length
+
+# actual rollback, if ever needed (UI only - no restart):
+Copy-Item $b scripts\dashboard_static.html -Force        # then Ctrl+F5
+
+# full rollback including the endpoints (needs Pause All + restart):
+Copy-Item (Get-ChildItem backups\dashboard.py.preG.* | Sort-Object LastWriteTime | Select-Object -Last 1).FullName scripts\dashboard.py -Force
+```

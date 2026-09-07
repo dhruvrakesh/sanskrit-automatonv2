@@ -37,5 +37,10 @@ python-dotenv>=1.0.1
 # ── OCR preprocessing (optional but recommended) ────
 opencv-python-headless>=4.10.0.84
 
-# ── PDF export (optional -- for server-side PDF) ────
-# playwright  # uncomment and run: playwright install chromium
+# ── Headless browser: PDF export, and scripts/verify_ui.py ──
+# DEV/CI dependency, not needed to run the pipeline. verify_ui.py renders
+# dashboard_static.html and asserts its layout - the check that caught the
+# Phase G grid bug that py_compile, node --check and a clean browser console
+# all missed (RUNBOOK 9c). After installing:  python -m playwright install chromium
+# (the 'playwright' CLI is not on PATH on this machine; use the module form)
+playwright>=1.54.0
