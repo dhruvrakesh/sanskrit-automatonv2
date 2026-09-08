@@ -1,0 +1,45 @@
+[
+  {
+    "surface": "कुरुक्षेत्र",
+    "type": "place",
+    "aliases": [
+      "Kurukṣetra",
+      "Kurukshetra",
+      "कुरु-क्षेत्र"
+    ],
+    "source": "SEED",
+    "notes": ""
+  },
+  {
+    "surface": "हस्तिनपुर",
+    "type": "place",
+    "aliases": [
+      "Hastināpura",
+      "Hastinapur",
+      "हस्तिनापुर"
+    ],
+    "source": "SEED",
+    "notes": ""
+  },
+  {
+    "surface": "द्वारका",
+    "type": "place",
+    "aliases": [
+      "Dvārakā",
+      "Dwarka",
+      "द्वारावती"
+    ],
+    "source": "SEED",
+    "notes": ""
+  },
+  {
+    "surface": "इन्द्रप्रस्थ",
+    "type": "place",
+    "aliases": [
+      "Indraprastha",
+      "इन्द्र-प्रस्थ"
+    ],
+    "source": "SEED",
+    "notes": ""
+  }
+]
