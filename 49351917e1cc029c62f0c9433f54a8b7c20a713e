@@ -1,0 +1,24 @@
+CORRECTION to this commit message.
+
+The subject says "Normalize stored line endings to LF". That describes
+only half of what this commit did.
+
+Five files under "* text=auto" (_archive/api.py, _archive/_mt_stats.py,
+_archive/_scan_low_pages.py, _archive/export_via_api.py and
+_archive/MBh01_translation.md) did go from CRLF blobs to LF blobs, and
+still check out as CRLF on Windows. That is normalization.
+
+Eight HTML files under "*.html -text" went the other way: they are now
+stored byte-for-byte as they sit in the working copy, which is CRLF.
+Verified: scripts/ask.html holds 197 CR-bearing lines in the blob,
+matching its working copy exactly.
+
+That is the intended behaviour of -text, not an oversight. These are
+export artifacts, and MBh01_translation.html is the file Booksmith
+ingests and hashes with sha256_file(). Pinning the bytes is the point:
+the same checkout on every platform, so a release identity never moves
+because someone opened the file on a different operating system.
+
+Not amended because the commit was no longer HEAD by the time the error
+was caught, and rewriting history to fix a message is a worse trade than
+carrying a note.
