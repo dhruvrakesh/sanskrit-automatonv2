@@ -80,6 +80,13 @@ OPTIONAL = {
 }
 
 
+def scope_slug(doc: str | None) -> str:
+    """Each scope gets its own directory. Two draws must not share a path."""
+    if not doc:
+        return "corpus"
+    return "".join(ch if (ch.isalnum() or ch in "-_") else "-" for ch in doc)[:60]
+
+
 def resolve_columns(con) -> dict:
     cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
     required = {"id", "doc_id", "text", "translation"}
@@ -194,10 +201,20 @@ def draw(args):
 
     rng.shuffle(picked)
 
-    out_dir = Path(args.out_dir)
+    out_dir = Path(args.out_dir) / scope_slug(args.doc)
     out_dir.mkdir(parents=True, exist_ok=True)
     sample_path = out_dir / "review_sample.csv"
     key_path = out_dir / "review_key.csv"
+
+    # A second run must never silently erase the first. The original version of
+    # this script wrote both draws to one path, and a corpus-wide sample was
+    # destroyed by the --doc run that followed it thirty seconds later.
+    if sample_path.exists() and not args.force:
+        sys.exit(f"{sample_path} already exists.\n"
+                 f"Refusing to overwrite a sample that may already hold verdicts.\n"
+                 f"Pass --force to replace it, or --out-dir to write elsewhere.\n"
+                 f"(The draw is seeded, so --force with the same --seed and --n "
+                 f"reproduces it exactly.)")
 
     has_iast = "iast" in found
     has_hindi = "hindi" in found
@@ -245,9 +262,18 @@ def draw(args):
 
 def score(args):
     sample_path = Path(args.score)
-    key_path = Path(args.out_dir) / "review_key.csv"
+    if not sample_path.exists():
+        sys.exit(f"No such file: {sample_path}")
+    # The key lives beside its own sample. Deriving it from the sample's
+    # directory rather than recomputing --out-dir means a renamed or moved
+    # review folder still scores against the right key, and a sample can never
+    # be scored against another scope's key.
+    key_path = sample_path.parent / "review_key.csv"
     if not key_path.exists():
-        sys.exit(f"No key at {key_path}. Draw a sample first.")
+        sys.exit(f"No key at {key_path}.\n"
+                 f"The key must sit in the same directory as the sample it "
+                 f"belongs to. If you moved the sample, move review_key.csv "
+                 f"with it.")
 
     key = {}
     with key_path.open(encoding="utf-8-sig") as f:
@@ -314,6 +340,8 @@ def main():
     ap.add_argument("--out-dir", default="data/fidelity_review")
     ap.add_argument("--include-empties", action="store_true",
                     help="also sample translations is_unusable() already flags")
+    ap.add_argument("--force", action="store_true",
+                    help="overwrite an existing sample in this scope's directory")
     ap.add_argument("--score", default=None, help="path to the filled review_sample.csv")
     args = ap.parse_args()
 

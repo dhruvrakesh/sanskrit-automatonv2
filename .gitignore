@@ -90,3 +90,5 @@ data/ab_source_quality.json
 # local backups made by ops scripts, 2026-09-08
 *.bak_*
 .env.bak*
+# fidelity review draws: working artifacts, not repo content
+data/fidelity_review/
