@@ -103,12 +103,20 @@ def main():
     BANDS = [(0.00, 0.02), (0.02, 0.05), (0.05, 0.10),
              (0.10, 0.20), (0.20, 0.35), (0.35, 1.01)]
     stat = {b: {"n": 0, "translated": 0, "unusable": 0, "q": 0.0, "ex": []} for b in BANDS}
+    raw = []   # THRESHOLD_FIX_2026_09_08
     scored = 0
     for code, pid, text, tr, q in rows:
         if dev_frac(text) < args.min_dev:
             continue                       # an English/Hindi page, not our target
         scored += 1
         c = contamination(text)
+        # THRESHOLD_FIX_2026_09_08 - keep the raw per-passage values. The
+        # threshold table below used to sum whole BANDS, which silently
+        # reported the wrong population for any threshold that is not itself
+        # a band boundary. 0.15 is not one, so "reject >= 0.15" was reporting
+        # the population at >= 0.20.
+        _has_tr = bool((tr or "").strip())
+        raw.append((c, _has_tr, _has_tr and is_unusable(tr)))
         for b in BANDS:
             if b[0] <= c < b[1]:
                 s = stat[b]
@@ -147,9 +155,9 @@ def main():
     print("WHAT A CONTAMINATION GATE WOULD HAVE SAVED")
     print("=" * 78)
     for thresh in (0.05, 0.10, 0.15, 0.20):
-        blocked = sum(s["n"] for b, s in stat.items() if b[0] >= thresh)
-        blk_tr = sum(s["translated"] for b, s in stat.items() if b[0] >= thresh)
-        blk_bad = sum(s["unusable"] for b, s in stat.items() if b[0] >= thresh)
+        blocked = sum(1 for c, _t, _u in raw if c >= thresh)
+        blk_tr = sum(1 for c, _t, _u in raw if c >= thresh and _t)
+        blk_bad = sum(1 for c, _t, _u in raw if c >= thresh and _t and _u)
         good_lost = blk_tr - blk_bad
         print(f"  reject contamination >= {thresh:.2f}: blocks {blocked:>6,} passages; "
               f"of the {blk_tr:,} already translated there, {blk_bad:,} were waste "
