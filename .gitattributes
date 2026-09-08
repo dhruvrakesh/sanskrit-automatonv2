@@ -1,0 +1,27 @@
+# Line-ending policy, added 2026-09-08.
+#
+# Windows tools (PowerShell Set-Content, Python Path.write_text with the
+# default newline=None) rewrite files with CRLF. Git stores LF. Without
+# this file every such write shows as a full-file diff, and a real change
+# hides inside it.
+#
+# "text=auto" means git stores LF and checks out native (CRLF here), so a
+# CRLF working tree is CLEAN - which is what we want on Windows.
+* text=auto
+
+# Byte-stable types: never convert. Booksmith derives source_sha256 from
+# sha256_file(source/source.html), a byte hash, so any EOL conversion
+# there would silently change a release identity.
+*.html    -text
+*.pdf     -text
+*.png     -text
+*.jpg     -text
+*.jpeg    -text
+*.gif     -text
+*.ttf     -text
+*.otf     -text
+*.woff    -text
+*.woff2   -text
+*.zip     -text
+*.db      -text
+*.sqlite3 -text
