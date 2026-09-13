@@ -96,22 +96,114 @@ MODE_FLAGS = {
 }
 
 
+# BOOKSMITH_UTF8_2026_09_13
+# run() decodes every Booksmith subprocess as UTF-8 with errors="replace", so
+# a byte the child wrote in cp1252 arrives here as U+FFFD. Echoing that to a
+# Windows console whose encoding is cp1252 then raises
+#
+#   UnicodeEncodeError: 'charmap' codec can't encode character U+FFFD
+#
+# which is what killed the first Hindi build of Shatpath at 15:04 on
+# 2026-09-13 - after init had created the project, before the audit policy
+# was applied. The dashboard sets PYTHONIOENCODING for the jobs it launches;
+# a console does not. This script should not depend on who started it.
+def _force_utf8_streams() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            pass
+
+
+_force_utf8_streams()
+
+
 def log(msg: str) -> None:
     print(msg, flush=True)
 
 
-def slug_for(doc: str) -> str:
-    """Project id from a doc code. Booksmith's SLUG rule is 2-64 chars of
-    lowercase letters, digits, underscore or hyphen; the seven projects that
-    already exist use hyphens, so match them."""
+# BOOKSMITH_MODES_2026_09_13
+# Archive scan identifiers that belong in provenance, not on a cover:
+# "2015_405693_Shatpath-Brahmanam" -> "Shatpath Brahmanam".
+SCAN_ID = re.compile(r"^(?:\d{4}[_\-]\d{3,}[_\-]?)+")
+PIPELINE_SUFFIX = re.compile(r"[ _-](seg|segmented|ocr|raw|clean|v\d+)$", re.I)
+
+
+def slug_for(doc: str, mode: str = "tri") -> str:
+    """Project id from a doc code AND its language composition.
+
+    Booksmith's model is one project = one witness, and a different language
+    composition is a different witness. Sharing one project between modes is
+    what made a Hindi re-export collide with a frozen trilingual manifest.
+
+    tri keeps the bare slug so the seven projects created by hand on
+    2026-09-08 continue to resolve; en and hi are suffixed. The SLUG rule is
+    2-64 chars of lowercase letters, digits, underscore or hyphen.
+    """
     s = doc.strip().lower().replace("_", "-")
     s = re.sub(r"[^a-z0-9_-]+", "-", s).strip("-")
     s = re.sub(r"-{2,}", "-", s)
-    return s[:64]
+    suffix = "" if mode == "tri" else ("-" + mode)
+    return s[: 64 - len(suffix)] + suffix
 
 
-def title_for(doc: str) -> str:
-    return doc.replace("_", " ").replace("-", " ").title()
+def title_for(doc: str, override: str | None = None) -> str:
+    """A cover title, not a filename. Conservative on purpose: it drops a
+    leading scan id and one trailing pipeline suffix, and nothing else. Words
+    that already carry capitals keep them, so MBh01 does not become Mbh01."""
+    if override:
+        return override
+    t = SCAN_ID.sub("", doc or "")
+    t = t.replace("_", " ").replace("-", " ")
+    t = re.sub(r"\s+", " ", t).strip()
+    t = PIPELINE_SUFFIX.sub("", " " + t).strip()
+    if not t:
+        return doc or "Untitled"
+    return " ".join(w if any(ch.isupper() for ch in w) else w.capitalize()
+                    for w in t.split())
+
+
+def sha256_of(path: Path) -> str:
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def prepare_existing(project: Path, html: Path) -> tuple[str, str]:
+    """Decide what to do about an existing project whose witness is about to
+    change. Returns (action, detail); action is one of same / fresh /
+    refrozen / refuse."""
+    src = project / "source" / "source.html"
+    manifest = project / "work" / "manifest.json"
+    decisions = project / "work" / "decisions.jsonl"
+
+    if not src.exists():
+        return ("fresh", "no witness yet")
+    if sha256_of(src) == sha256_of(html):
+        return ("same", "witness unchanged")
+    if not manifest.exists():
+        return ("fresh", "witness changed, nothing frozen")
+    if decisions.exists() and decisions.stat().st_size > 0:
+        return ("refuse",
+                "the witness changed and work/decisions.jsonl holds human "
+                "review decisions frozen against the previous one. Re-freezing "
+                "would invalidate them silently. Open the project in Booksmith "
+                "and decide there.")
+
+    derived = [manifest,
+               project / "build" / "book.pdf",
+               project / "build" / "layout-proof.pdf",
+               project / "build" / "build-report.json",
+               project / "build" / "qa-report.json"]
+    removed = []
+    for p in derived:
+        if p.exists():
+            p.unlink()
+            removed.append(p.name)
+    return ("refrozen", "witness changed; cleared " + (", ".join(removed) or "nothing"))
 
 
 def booksmith_exe(root: Path) -> Path:
@@ -131,10 +223,23 @@ def booksmith_exe(root: Path) -> Path:
     )
 
 
+def _utf8_env() -> dict:
+    """BOOKSMITH_UTF8_2026_09_13 - stop U+FFFD being created in the first
+    place rather than only surviving it. Without this the Booksmith venv's
+    python encodes its own output in the console's cp1252, and the Devanagari
+    and IAST it is reporting on comes back here as replacement characters -
+    unreadable in the log and, worse, unprintable."""
+    env = dict(os.environ)
+    env["PYTHONIOENCODING"] = "utf-8"
+    env["PYTHONUTF8"] = "1"
+    return env
+
+
 def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess:
     log("  $ " + " ".join(str(c) for c in cmd))
     p = subprocess.run([str(c) for c in cmd], cwd=str(cwd) if cwd else None,
-                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", env=_utf8_env())
     for line in (p.stdout or "").splitlines():
         log("    " + line)
     if p.returncode != 0:
@@ -179,6 +284,37 @@ def export_html(db: str, doc: str, mode: str, exports: Path) -> Path:
     return Path(max(pool, key=os.path.getmtime))
 
 
+def _half_created(project: Path, mode: str) -> bool:
+    """BOOKSMITH_UTF8_2026_09_13 - True for a project whose init succeeded and
+    whose policy step did not.
+
+    Deliberately narrow. tri is excluded because the trilingual projects were
+    made by hand and three of them (harita-prathama-sthanam,
+    harita-shashtham-sharira-sthanam, harita-tritiya-sthanam) also have a
+    work/ directory and no manifest, so a looser test would silently flip
+    their output_mode - a decision that belongs to the operator, not here.
+    en and hi projects only exist because this script created them."""
+    if mode == "tri":
+        return False
+    cfg = project / "book.yaml"
+    if not cfg.exists():
+        return False
+    if (project / "work" / "manifest.json").exists():
+        return False                      # a witness is frozen against it
+    decisions = project / "work" / "decisions.jsonl"
+    try:
+        if decisions.exists() and decisions.read_text(
+                encoding="utf-8", errors="replace").strip():
+            return False                  # a human has reviewed something
+    except OSError:
+        return False
+    try:
+        return "output_mode: audit" not in cfg.read_text(
+            encoding="utf-8", errors="replace")
+    except OSError:
+        return False
+
+
 def set_audit_policy(bs: Path, project: Path, languages: list[str]) -> None:
     """Set output_mode=audit and the reading languages, THROUGH Booksmith's own
     model so the result is validated rather than merely well-formed YAML.
@@ -196,6 +332,14 @@ def set_audit_policy(bs: Path, project: Path, languages: list[str]) -> None:
         "d['policy']['output_mode'] = 'audit'\n"
         "d['policy']['reading_languages'] = langs\n"
         "d['edition_label'] = 'Audit proof'\n"
+        # BOOKSMITH_MODES_2026_09_13. subtitle is a hardcoded BookConfig
+        # default - "Sanskrit - IAST - English - Hindi" - rendered on the
+        # cover and the front matter, and independent of reading_languages.
+        # A Hindi-only edition was therefore advertising English. The middot
+        # is written as an escape so nothing non-ASCII crosses the command
+        # line on a Windows console.
+        "labels = {'sanskrit':'Sanskrit','iast':'IAST','english':'English','hindi':'Hindi'}\n"
+        "d['subtitle'] = ' \\u00b7 '.join(labels.get(x, x.title()) for x in langs)\n"
         "save_yaml(paths['config'], BookConfig.model_validate(d))\n"
         "print('policy: output_mode=audit reading_languages=' + ','.join(langs))\n"
     )
@@ -237,6 +381,8 @@ def main() -> int:
     ap.add_argument("--booksmith-root", default=os.getenv("BOOKSMITH_ROOT", DEFAULT_BOOKSMITH_ROOT))
     ap.add_argument("--product", default="audit", choices=["audit", "proof"],
                     help="audit = the whole text, never gated. proof = eight representative units.")
+    ap.add_argument("--title", default=None,
+                    help="cover title; overrides the one derived from the doc code")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
 
@@ -259,7 +405,7 @@ def main() -> int:
     if not args.doc:
         raise SystemExit("--doc is required unless --selftest")
     doc = args.doc
-    slug = slug_for(doc)
+    slug = slug_for(doc, args.mode)
     if not SLUG_RE.fullmatch(slug):
         raise SystemExit("doc %r does not reduce to a legal project id (got %r)" % (doc, slug))
 
@@ -268,7 +414,13 @@ def main() -> int:
     project = home / slug
     sidecar_dir = exports / "booksmith"
     sidecar_dir.mkdir(parents=True, exist_ok=True)
-    sidecar = sidecar_dir / ("%s.json" % doc)
+    # LIBRARY_MODES_2026_09_13 - one sidecar per witness, not per doc code.
+    # slug_for() suffixes en and hi and leaves tri bare; the sidecar follows
+    # the same rule, so a Hindi build can no longer overwrite the trilingual
+    # card's account of itself. Every sidecar written before today is
+    # trilingual and keeps resolving under its bare name.
+    sidecar = sidecar_dir / (("%s.json" % doc) if args.mode == "tri"
+                             else ("%s__%s.json" % (doc, args.mode)))
 
     state = {"marker": MARK, "doc": doc, "slug": slug, "mode": args.mode,
              "product": args.product, "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -289,12 +441,33 @@ def main() -> int:
         created = not (project / "book.yaml").exists()
         if created:
             log("[2/6] init project (new)")
-            run([exe, "--home", home, "init", slug, "--title", title_for(doc)])
+            run([exe, "--home", home, "init", slug,
+                 "--title", title_for(doc, args.title)])
             set_audit_policy(exe, project, MODE_FLAGS[args.mode][2])
+        elif _half_created(project, args.mode):
+            # BOOKSMITH_UTF8_2026_09_13 - init landed, the policy did not.
+            # Without this branch the project keeps Booksmith's init defaults
+            # for ever, because the else branch below deliberately never
+            # touches an existing book.yaml.
+            log("[2/6] project exists but its policy was never applied "
+                "- applying it now")
+            set_audit_policy(exe, project, MODE_FLAGS[args.mode][2])
+            state["policy_repaired"] = True
         else:
             log("[2/6] project exists - its book.yaml is left exactly as it is")
         state["project"] = str(project)
         state["created"] = created
+
+        # BOOKSMITH_MODES_2026_09_13 - never ingest a different witness into a
+        # project that is frozen against the old one. That is what killed the
+        # nilamata Hindi run.
+        action, detail = prepare_existing(project, html)
+        state["witness"] = action
+        state["witness_detail"] = detail
+        log("      witness: %s - %s" % (action, detail))
+        if action == "refuse":
+            raise RuntimeError("refusing to re-ingest: " + detail)
+        save()
 
         log("[3/6] ingest")
         run([exe, "--home", home, "ingest", slug, str(html)])
@@ -320,7 +493,17 @@ def main() -> int:
                 state["blockers"] = blockers
                 log("      build refused - falling back to the layout proof")
                 log("      %s" % blockers[0][:300])
-                run([exe, "--home", home, "proof", slug])
+                # check=False: when the proof ALSO fails, a raised RuntimeError
+                # replaced the informative build error with "command failed (1)"
+                # in the sidecar. Record both and let the caller see the real
+                # reason.
+                q = run([exe, "--home", home, "proof", slug], check=False)
+                if q.returncode != 0:
+                    tail = (q.stderr or "").strip().splitlines()[-1:] or ["proof failed"]
+                    state["proof_blockers"] = tail
+                    save()
+                    raise RuntimeError("build and proof both refused. build: %s | proof: %s"
+                                       % (blockers[0][:200], tail[0][:200]))
                 pdf = project / "build" / "layout-proof.pdf"
         else:
             log("[5/6] proof")

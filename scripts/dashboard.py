@@ -1190,39 +1190,105 @@ BOOKSMITH_ROOT = pathlib.Path(os.getenv(
     r"D:\Nartiang_Booksmith_v0.1.0_2026-08-29\nartiang-booksmith"))
 BOOKSMITH_UI = os.getenv("BOOKSMITH_UI", "http://127.0.0.1:8765")
 BOOKSMITH_MODES = ("tri", "en", "hi")
+# LIBRARY_MODES_2026_09_13 - display order on a Library card, and what each
+# edition is called there. tri comes first because every project created
+# before 2026-09-13 is trilingual, so a text that has only ever had one
+# build looks exactly as it did.
+BOOKSMITH_MODES_ORDER = ("tri", "hi", "en")
+BOOKSMITH_MODE_LABEL = {"tri": "Trilingual", "hi": "Hindi", "en": "English"}
+
+
+# LIBRARY_MODES_2026_09_13
+def _bs_mode_slug(doc: str, mode: str = "tri") -> str:
+    """Must agree with slug_for(doc, mode) in booksmith_build.py, which since
+    BOOKSMITH_MODES_2026_09_13 gives every language composition its own
+    project - one project = one witness. tri keeps the bare slug so the
+    projects created by hand on 2026-09-08 continue to resolve; en and hi are
+    suffixed. The steps below are in the same order as there, and truncation
+    happens before the suffix, so the two agree on over-long doc codes too.
+    --verify checks that agreement against the real function."""
+    s = (doc or "").strip().lower().replace("_", "-")
+    s = re.sub(r"[^a-z0-9_-]+", "-", s).strip("-")
+    s = re.sub(r"-{2,}", "-", s)
+    suffix = "" if mode == "tri" else ("-" + mode)
+    return s[: 64 - len(suffix)] + suffix
 
 
 def _bs_slug(doc: str) -> str:
-    """Must agree with slug_for() in booksmith_build.py. Verified against the
-    six projects created by hand: harita_caturtha_sthanam ->
-    harita-caturtha-sthanam, and so on for all six."""
-    s = re.sub(r"[^a-z0-9_-]+", "-", (doc or "").strip().lower().replace("_", "-"))
-    return re.sub(r"-{2,}", "-", s).strip("-")[:64]
+    """The trilingual project id - the name every existing caller uses."""
+    return _bs_mode_slug(doc, "tri")
 
 
-def _bs_pdf_path(doc: str):
+# LIBRARY_MODES_2026_09_13
+def _bs_pdf_path(doc: str, mode=None):
     """The PDF for a doc, preferring the full audit build over the sampled
-    layout proof. Returns (path, kind) or (None, None)."""
-    project = BOOKSMITH_ROOT / "projects" / _bs_slug(doc)
-    for name, kind in (("book.pdf", "book"), ("layout-proof.pdf", "proof")):
-        p = project / "build" / name
-        if p.exists():
-            return p, kind
+    layout proof. With mode given, looks only in that edition's project;
+    without, scans tri, hi, en in that order, so a text that has only ever
+    had a trilingual build answers exactly as it did before today.
+    Returns (path, kind) or (None, None) - arity deliberately unchanged."""
+    modes = (mode,) if mode else BOOKSMITH_MODES_ORDER
+    for m in modes:
+        project = BOOKSMITH_ROOT / "projects" / _bs_mode_slug(doc, m)
+        for name, kind in (("book.pdf", "book"), ("layout-proof.pdf", "proof")):
+            p = project / "build" / name
+            if p.exists():
+                return p, kind
     return None, None
 
 
+def _bs_sidecar(doc: str, mode: str = "tri"):
+    """The last build's own account of itself, or None. Mode-aware since
+    LIBRARY_MODES_2026_09_13; the bare name is the trilingual one."""
+    name = ("%s.json" % doc) if mode == "tri" else ("%s__%s.json" % (doc, mode))
+    p = ROOT / "exports" / "booksmith" / name
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def _bs_variants(doc: str) -> list:
+    """Every edition of this text that exists on disk. A project counts once
+    it has a book.yaml; a download is offered once it also has a PDF. This is
+    what lets one Library card carry a trilingual and a Hindi edition side by
+    side instead of the second one being invisible."""
+    out = []
+    for m in BOOKSMITH_MODES_ORDER:
+        slug = _bs_mode_slug(doc, m)
+        project = BOOKSMITH_ROOT / "projects" / slug
+        if not (project / "book.yaml").exists():
+            continue
+        v = {"mode": m, "slug": slug, "label": BOOKSMITH_MODE_LABEL[m],
+             "ui": f"{BOOKSMITH_UI}/projects/{slug}"}
+        pdf, kind = _bs_pdf_path(doc, m)
+        if pdf:
+            st = pdf.stat()
+            v["pdf"] = {"kind": kind, "bytes": st.st_size,
+                        "mtime": time.strftime("%Y-%m-%d %H:%M",
+                                               time.localtime(st.st_mtime))}
+        side = _bs_sidecar(doc, m)
+        if side is not None:
+            v["last"] = side
+        out.append(v)
+    return out
+
+
+# LIBRARY_MODES_2026_09_13
 def _bs_state_one(doc: str) -> dict:
+    """One Library card's Booksmith state. variants[] is the new truth - one
+    entry per edition that exists on disk. The flat project/ui/pdf/last keys
+    are kept, pointing at the trilingual edition, so nothing that reads this
+    endpoint has to change at the same moment."""
     slug = _bs_slug(doc)
     project = BOOKSMITH_ROOT / "projects" / slug
-    state = {"doc": doc, "slug": slug,
+    state = {"doc": doc, "slug": slug, "variants": _bs_variants(doc),
              "project": project.exists() and (project / "book.yaml").exists(),
              "ui": f"{BOOKSMITH_UI}/projects/{slug}"}
-    side = ROOT / "exports" / "booksmith" / f"{doc}.json"
-    if side.exists():
-        try:
-            state["last"] = json.loads(side.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+    side = _bs_sidecar(doc, "tri")
+    if side is not None:
+        state["last"] = side
     pdf, kind = _bs_pdf_path(doc)
     if pdf:
         st = pdf.stat()
@@ -1288,12 +1354,23 @@ def api_booksmith_pdf(doc):
     doc = _validate_doc(doc)
     if not doc:
         return jsonify({"error": "invalid doc"}), 400
-    pdf, kind = _bs_pdf_path(doc)
+    # LIBRARY_MODES_2026_09_13 - ?mode=tri|en|hi picks the edition. Without
+    # it the old behaviour stands: the first edition that has a PDF, tri
+    # first. An unknown mode is a 400 rather than a quiet fall back to
+    # trilingual - handing someone the wrong language is worse than an error.
+    mode = (request.args.get("mode") or "").strip()
+    if mode and mode not in BOOKSMITH_MODES:
+        return jsonify({"error": f"mode must be one of {BOOKSMITH_MODES}"}), 400
+    pdf, kind = _bs_pdf_path(doc, mode or None)
     if not pdf:
-        return jsonify({"error": "no PDF built yet for this text"}), 404
+        return jsonify({"error": "no PDF built yet for this text"
+                                 + (f" in mode {mode}" if mode else "")}), 404
     # Read and return rather than send_file, so no new Flask import is needed
     # and the download is named after the text instead of book.pdf every time.
-    name = re.sub(r"[^A-Za-z0-9._-]+", "_", f"{doc}_{kind}") + ".pdf"
+    # LIBRARY_MODES_2026_09_13 - the language belongs in the filename, or a
+    # folder of downloads becomes three files that cannot be told apart.
+    name = re.sub(r"[^A-Za-z0-9._-]+", "_",
+                  f"{doc}_{mode or 'tri'}_{kind}") + ".pdf"
     resp = Response(pdf.read_bytes(), mimetype="application/pdf")
     resp.headers["Content-Disposition"] = f'attachment; filename="{name}"'
     return resp
@@ -2089,20 +2166,37 @@ function bsRender(s){{
   if(!el) return;
   var h='';
   if(s.job){{ h+='<span class="busy">building\u2026</span>'; }}
-  if(s.pdf){{
-    var kb=Math.round(s.pdf.bytes/1024);
-    var label = s.pdf.kind==='book' ? 'Download PDF' : 'Download layout proof';
-    h+='<a class="pdf" href="/api/booksmith/pdf/'+encodeURIComponent(s.doc)+'" '+
-       'title="'+kb+' KB, built '+s.pdf.mtime+'">\u2b07 '+label+'</a>';
+  // LIBRARY_MODES_2026_09_13 - one set of links per edition that exists,
+  // instead of one link for whichever edition happened to build last. A
+  // server from before this change sends no variants[]; render what it used
+  // to rather than a blank card.
+  var vs=(s.variants&&s.variants.length)?s.variants:null;
+  if(!vs){{
+    vs=[];
+    if(s.pdf||s.project){{
+      vs.push({{mode:'tri',label:'Trilingual',ui:s.ui,pdf:s.pdf,last:s.last}});
+    }}
   }}
-  if(s.project){{
-    h+='<a class="bsui" target="_blank" rel="noopener" href="'+s.ui+'" '+
-       'title="Open this project in Booksmith to review findings and build the reading edition">Booksmith \u2197</a>';
-  }}
-  if(s.last && s.last.blocked){{
-    h+='<span class="warn" title="'+(s.last.blockers||[]).join(' ').replace(/"/g,'')+
-       '">reading edition blocked</span>';
-  }}
+  var many=vs.length>1;
+  vs.forEach(function(v){{
+    if(v.pdf){{
+      var kb=Math.round(v.pdf.bytes/1024);
+      var what=(v.pdf.kind==='book')?'PDF':'layout proof';
+      h+='<a class="pdf" href="/api/booksmith/pdf/'+encodeURIComponent(s.doc)+
+         '?mode='+encodeURIComponent(v.mode)+'" '+
+         'title="'+v.label+' '+what+', '+kb+' KB, built '+v.pdf.mtime+'">'+
+         '\u2b07 '+v.label+' '+what+'</a>';
+    }}
+    h+='<a class="bsui" target="_blank" rel="noopener" href="'+v.ui+'" '+
+       'title="Open the '+v.label+' project in Booksmith to '+
+       'review findings and build the reading edition">Booksmith \u2197'+
+       (many?(' '+v.mode):'')+'</a>';
+    if(v.last && v.last.blocked){{
+      h+='<span class="warn" title="'+v.label+': '+
+         (v.last.blockers||[]).join(' ').replace(/"/g,'')+'">'+
+         (many?(v.label+' '):'')+'reading edition blocked</span>';
+    }}
+  }});
   el.innerHTML=h;
 }}
 
