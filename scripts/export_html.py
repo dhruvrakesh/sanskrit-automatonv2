@@ -174,7 +174,7 @@ def _provenance(con, doc, hi_lang):
 
 # --- fetch (with verse_ref, chapter, iast) -----------------------------------
 
-def _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=None):
+def _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=None, keep_frontmatter=False):
     pg = _page_col(con); idx_sel, idx_order = _idx_expr(con)
     pcols = _colnames(con, "passages")
     vref = "p.verse_ref" if "verse_ref" in pcols else "NULL"
@@ -182,6 +182,15 @@ def _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=None):
     iast = "p.iast"      if "iast"      in pcols else "NULL"
     where, prm = _doc_where(con, doc)
     where = _and(where) + f" {pg} BETWEEN ? AND ?"; prm = prm + (lo,hi)
+    # EXPORT_TEXTTYPE_2026_09_13
+    # Every other consumer of this table filters here and this one did not,
+    # so AphorismsOfSandilya shipped a Harvard bookplate and an 1861 title
+    # page as Sanskrit verse. The classifier had already marked them
+    # frontmatter. Same predicate as db_utils, dashboard/library,
+    # build_embeddings and the diag_* scripts - colophon is deliberately
+    # kept, being apparatus rather than scaffolding.
+    if "text_type" in pcols and not keep_frontmatter:
+        where += " AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
     def _q(c):
         return f"p.{c}" if re.fullmatch(r"\w+", c or "") else (c or "''")
     if hi_lang:
@@ -475,10 +484,12 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
 
 def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                 side_by_side, number_pages, drop_junk_en, force_san, force_en,
-                hi_lang=None, hi_label="Hindi", want_toc=True, want_footnotes=True, debug=False):
+                hi_lang=None, hi_label="Hindi", want_toc=True, want_footnotes=True, debug=False,
+                keep_frontmatter=False):
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
     include_hi = bool(hi_lang)
-    recs = _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=hi_lang)
+    recs = _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=hi_lang,
+                  keep_frontmatter=keep_frontmatter)
     prov = _provenance(con, doc, hi_lang)
     body, kept = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                          include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
@@ -522,6 +533,11 @@ def main():
     ap.add_argument("--no-sanskrit", action="store_true")
     ap.add_argument("--sanskrit", action="store_true")
     ap.add_argument("--keep-junk", action="store_true")
+    ap.add_argument("--keep-frontmatter", action="store_true",
+                    help="EXPORT_TEXTTYPE_2026_09_13: keep rows classified "
+                         "noise/frontmatter. Off by default; every other script "
+                         "in this pipeline excludes them. A filter you cannot "
+                         "switch off is one you cannot debug.")
     ap.add_argument("--en-col")
     ap.add_argument("--san-col")
     ap.add_argument("--title-from-doc", action="store_true")
@@ -558,7 +574,8 @@ def main():
                             include_san=include_san, include_en=include_en, side_by_side=side_by_side,
                             number_pages=number_pages, drop_junk_en=drop_junk_en,
                             force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
-                            hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug)
+                            hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
+                            keep_frontmatter=args.keep_frontmatter)
         else:
             if args.doc:
                 lo,hi = (_page_span(con, args.doc) if (args.pg_from is None or args.pg_to is None) else (args.pg_from, args.pg_to))
@@ -570,7 +587,8 @@ def main():
                         include_san=include_san, include_en=include_en, side_by_side=side_by_side,
                         number_pages=number_pages, drop_junk_en=drop_junk_en,
                         force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
-                        hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug)
+                        hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
+                        keep_frontmatter=args.keep_frontmatter)
 
 if __name__ == "__main__":
     main()
