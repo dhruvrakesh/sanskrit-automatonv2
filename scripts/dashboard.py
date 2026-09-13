@@ -1238,15 +1238,32 @@ def _bs_pdf_path(doc: str, mode=None):
 
 def _bs_sidecar(doc: str, mode: str = "tri"):
     """The last build's own account of itself, or None. Mode-aware since
-    LIBRARY_MODES_2026_09_13; the bare name is the trilingual one."""
+    LIBRARY_MODES_2026_09_13; the bare name is the trilingual one.
+
+    SIDECAR_TRUTH_2026_09_13 - the bare name was mode-blind until today, so a
+    single-language run could land under it and still sits there:
+    exports/booksmith/2015_405693_Shatpath-Brahmanam.json holds the Hindi
+    build that crashed at 15:04:55, while the trilingual edition built
+    cleanly at 17:37. Without this guard the TRILINGUAL card reports that
+    failure, and quotes an encoding error that had nothing to do with it.
+
+    Every sidecar records its own mode. Believe the file over its filename.
+    A sidecar with no "mode" key predates the field and is accepted, because
+    no edition other than trilingual existed when it was written."""
     name = ("%s.json" % doc) if mode == "tri" else ("%s__%s.json" % (doc, mode))
     p = ROOT / "exports" / "booksmith" / name
     if not p.exists():
         return None
     try:
-        return json.loads(p.read_text(encoding="utf-8"))
+        data = json.loads(p.read_text(encoding="utf-8"))
     except Exception:
         return None
+    if not isinstance(data, dict):
+        return None
+    recorded = data.get("mode")
+    if recorded is not None and recorded != mode:
+        return None          # someone else's build, under this one's name
+    return data
 
 
 def _bs_variants(doc: str) -> list:
