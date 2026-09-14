@@ -610,10 +610,16 @@ def cmd_backfill(a):
     print("")
     prior = dict(((c, s), (st, f, r)) for c, s, st, f, r in con.execute(
         "SELECT doc_code, stage, status, input_fp, reason FROM doc_stage"))
+    gone = retired_codes(con)
+    if gone:
+        print("skipping %d retired document(s): %s" % (len(gone), ", ".join(sorted(gone))))
+        print("")
     ts = now()
     wrote = 0
     changes = []
     for code in sorted(docs):
+        if code in gone:
+            continue
         m = docs[code]
         meas = measured_json(m)
         for st in STAGES:
@@ -649,6 +655,18 @@ def cmd_backfill(a):
     return 0
 
 
+def retired_codes(con):
+    """Documents retired by retire_doc.py. They keep their docs row so nothing
+    dangles, which means a measurement pass would otherwise see a code with
+    zero passages and offer it to the driver as ready to ingest. A retirement
+    that the driver can undo is not a retirement."""
+    try:
+        return set(r[0] for r in con.execute(
+            "SELECT doc_code FROM doc_stage WHERE stage='retired'"))
+    except Exception:
+        return set()
+
+
 def _load_board(con):
     board = {}
     for code, stage, status, reason in con.execute(
@@ -669,6 +687,9 @@ def cmd_status(a):
         con.close()
         return 1
     board = _load_board(con)
+    gone = retired_codes(con)
+    for c in gone:
+        board.pop(c, None)
     sizes = _sizes(con)
     print("%s  the board" % MARK)
     print("")
@@ -684,6 +705,12 @@ def cmd_status(a):
         print(line)
     print("  " + "-" * (len(hdr) - 2))
     print("  ok = done   deg = degraded, chain continues   BLK = blocked, chain halts")
+    if gone:
+        print("")
+        print("  retired, and excluded from everything above:")
+        for c, r in con.execute("SELECT doc_code, reason FROM doc_stage "
+                                "WHERE stage='retired' ORDER BY doc_code"):
+            print("    %-34s %s" % (c[:34], r))
     print("  columns: " + "  ".join("%s=%s" % (s[:4], s) for s in STAGES))
     print("")
     print("  totals by stage")
@@ -724,6 +751,8 @@ def cmd_next(a):
         con.close()
         return 1
     board = _load_board(con)
+    for c in retired_codes(con):
+        board.pop(c, None)
     sizes = _sizes(con)
     print("%s  next actionable units" % MARK)
     print("")

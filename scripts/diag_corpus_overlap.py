@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-diag_corpus_overlap.py - is any text in this corpus present twice?  v1, 2026-09-14.
+diag_corpus_overlap.py - is any text in this corpus present twice?  v2, 2026-09-14.
 
 READ-ONLY. mode=ro plus a busy timeout, safe beside a running translation.
 Run it on WINDOWS - SQLite over the Claude device bridge fails with
@@ -51,6 +51,39 @@ Nothing here writes. Nothing here decides. It prints candidates, says how
 strong each signal is, and puts the cost of each candidate beside it - how many
 rows of each member already carry a paid translation - so the question "are we
 paying twice" has a number and not an opinion.
+
+V2, AND THE THIRD TIME THIS GATE OVER-FIRED
+-------------------------------------------
+v1 ran on the live corpus and printed several hundred candidate pairs,
+including MBh01 against essentially every small document. Same failure, third
+occurrence, and the data it printed contains its own diagnosis:
+
+    smriti_05vishnu_smriti -> MBh01     50.1%    419 grams vs 11,374
+    nilamata_seg -> upapurana_nilamata 100.0%  3,357 grams vs  3,916
+
+One-way containment is confounded by SIZE. Half of a 419-gram document's
+5-grams turn up somewhere in an 11,374-gram document for the same reason that
+half of any Sanskrit text's 5-grams turn up in any other: shared vocabulary,
+shared endings, shared sandhi. It is not evidence of copying. The reverse
+direction of that same pair is about 1.8%, and that asymmetry is the tell.
+
+v2 requires BOTH directions. A real duplicate contains and is contained; a
+size artefact is lopsided. On the same data that leaves two pairs standing:
+nilamata_seg with upapurana_nilamata_purana at 100.0/85.7, and
+dhanur_veda_shiva_dhanur_veda with shiva_dhanur_veda at 70.2/69.1. Everything
+else collapses, which is what a working gate does.
+
+The asymmetric pairs are not thrown away - they are printed separately, under
+a heading that says what they are, because "this small text shares a lot of
+vocabulary with the Mahabharata" is a fact about Sanskrit and not a defect.
+
+Also fixed in v2: PROVENANCE read passages.engine and found nothing, because
+db_utils.BASE_SCHEMA documents that column as the TRANSLATION engine ("engine
+TEXT, -- e.g. gemini:gemini-2.5-pro"). The ingest stamp lives in
+passages.ocr_engine, added 2026-08-29 by ingest_jsonl_fast._ensure_provenance,
+whose own comment says "Which engine produced a line is a fact about the text,
+not a detail of the run." v2 reads that column, and reports honestly that rows
+ingested before 2026-08-29 cannot carry it.
 """
 from __future__ import annotations
 
@@ -103,7 +136,11 @@ def main():
                     help="ignore rows with fewer Devanagari characters than this "
                          "for exact matching; short rows collide for trivial reasons")
     ap.add_argument("--containment", type=float, default=0.30,
-                    help="report document pairs at or above this containment")
+                    help="one-way containment at or above this is worth printing")
+    ap.add_argument("--min-both", type=float, default=0.50,
+                    help="a pair is a CANDIDATE only when containment in BOTH "
+                         "directions reaches this. One-way containment is "
+                         "confounded by document size (default 0.50)")
     ap.add_argument("--show", type=int, default=25)
     a = ap.parse_args()
 
@@ -190,14 +227,12 @@ def main():
     print("     ... %d document(s) below the %d-gram floor: %s"
           % (len(small), a.min_sample, ", ".join(small[:6]) + (" ..." if len(small) > 6 else "")))
     print("")
-    found = []
+    pairs = []
     for i in range(len(codes)):
         A = gsets[codes[i]]
         if not A:
             continue
-        for j in range(len(codes)):
-            if i == j:
-                continue
+        for j in range(i + 1, len(codes)):
             B = gsets[codes[j]]
             if not B:
                 continue
@@ -205,33 +240,75 @@ def main():
             if not inter:
                 continue
             cab = inter / float(len(A))
-            if cab >= a.containment:
-                reliable = min(len(A), len(B)) >= a.min_sample
-                found.append((cab, codes[i], codes[j], len(A), len(B), reliable))
-    found.sort(reverse=True)
-    if not found:
-        print("   (no pair reaches containment %.2f)" % a.containment)
-    else:
-        print("   %-28s %-28s %7s %7s %7s  %s"
-              % ("A (contained)", "B (container)", "C(A|B)", "gramsA", "gramsB", "verdict"))
-        for cab, x, y, na, nb, ok in found[:a.show]:
-            print("   %-28s %-28s %6.1f%% %7d %7d  %s"
-                  % (x[:28], y[:28], 100.0 * cab, na, nb,
-                     "candidate" if ok else "UNRELIABLE (sample too small)"))
+            cba = inter / float(len(B))
+            lo, hi = min(cab, cba), max(cab, cba)
+            if hi < a.containment:
+                continue
+            reliable = min(len(A), len(B)) >= a.min_sample
+            pairs.append((lo, hi, codes[i], codes[j], len(A), len(B), reliable))
+    pairs.sort(reverse=True)
+    strong = [p for p in pairs if p[0] >= a.min_both and p[6]]
+    weak = [p for p in pairs if p not in strong]
+    print("   CANDIDATES - containment at or above %.0f%% in BOTH directions"
+          % (100 * a.min_both))
+    print("   %-30s %-30s %6s %6s %7s %7s" % (
+        "document A", "document B", "min", "max", "gramsA", "gramsB"))
+    if not strong:
+        print("   (none)")
+    for lo, hi, x, y, na, nb, _r in strong[:a.show]:
+        print("   %-30s %-30s %5.1f%% %5.1f%% %7d %7d"
+              % (x[:30], y[:30], 100 * lo, 100 * hi, na, nb))
+    print("")
+    print("   ASYMMETRIC - high one way, low the other. This is what a small text")
+    print("   sharing Sanskrit vocabulary with a large one looks like, and it is")
+    print("   NOT evidence of duplication. %d pair(s); the widest gaps:" % len(weak))
+    print("   %-30s %-30s %6s %6s %7s %7s  %s" % (
+        "document A", "document B", "min", "max", "gramsA", "gramsB", ""))
+    for lo, hi, x, y, na, nb, r in sorted(weak, key=lambda p: -(p[1] - p[0]))[:10]:
+        print("   %-30s %-30s %5.1f%% %5.1f%% %7d %7d  %s"
+              % (x[:30], y[:30], 100 * lo, 100 * hi, na, nb,
+                 "" if r else "sample too small"))
+    found = strong
     print("")
 
     # ------------------------------------------------------------------
     print("3. PROVENANCE - documents that say for themselves that they are derived")
     print("")
-    try:
-        eng = con.execute(
-            "SELECT d.code, COALESCE(p.engine,'(null)'), COUNT(*) "
-            "FROM passages p JOIN docs d ON d.id=p.doc_id "
-            "GROUP BY d.code, p.engine ORDER BY d.code").fetchall()
-    except Exception as e:
+    pcols = set(r[1] for r in con.execute("PRAGMA table_info(passages)"))
+    prov = "ocr_engine" if "ocr_engine" in pcols else None
+    if prov is None:
+        print("   passages has no ocr_engine column - this database predates")
+        print("   ingest_jsonl_fast._ensure_provenance (2026-08-29). Nothing to read.")
         eng = []
-        print("   (engine column unreadable: %s)" % e)
-    derived = [(c, e, n2) for c, e, n2 in eng if e and "resegment" in e.lower()]
+    else:
+        print("   reading passages.ocr_engine, which ingest_jsonl_fast.py writes from")
+        print("   the JSONL. NOT passages.engine - db_utils.BASE_SCHEMA documents that")
+        print("   one as the TRANSLATION engine, and translating a document overwrites")
+        print("   whatever ingest put there. v1 of this file read the wrong column and")
+        print("   reported no provenance at all.")
+        print("")
+        try:
+            eng = con.execute(
+                "SELECT d.code, COALESCE(p.%s,'(null)'), COUNT(*) "
+                "FROM passages p JOIN docs d ON d.id=p.doc_id "
+                "GROUP BY d.code, p.%s ORDER BY d.code" % (prov, prov)).fetchall()
+        except Exception as e:
+            eng = []
+            print("   (ocr_engine unreadable: %s)" % e)
+        nulls = sum(n for _c, e, n in eng if e == "(null)")
+        tot_p = sum(n for _c, _e, n in eng)
+        if tot_p and nulls:
+            print("   %d of %d rows (%.1f%%) carry no ocr_engine. Those were ingested"
+                  % (nulls, tot_p, 100.0 * nulls / tot_p))
+            print("   before the column existed on 2026-08-29, so their provenance is")
+            print("   not recoverable from the database - only the JSONL under")
+            print("   data/raw still knows what produced them.")
+            print("")
+        elif tot_p:
+            print("   every row carries an ocr_engine value.")
+            print("")
+    derived = [(c, e, n2) for c, e, n2 in eng
+               if e and ("resegment" in e.lower() or "seg" == e.lower())]
     if derived:
         for c, e, n2 in derived:
             print("   %-32s engine=%-24s %6d row(s)" % (c[:32], e, n2))
@@ -257,7 +334,7 @@ def main():
     cand = set()
     for k in pair_exact:
         cand.add(k)
-    for _c, x, y, _a2, _b2, ok in found:
+    for _lo, _hi, x, y, _na, _nb, ok in found:
         if ok:
             cand.add(tuple(sorted((x, y))))
     if not cand:
