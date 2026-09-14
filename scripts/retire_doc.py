@@ -176,6 +176,21 @@ def main():
         stmts.append(ledger)
         stmts.append("DELETE FROM doc_stage WHERE doc_code='%s' AND stage<>'retired';" % a.doc)
 
+    # RETIRE_UNIFY_2026_09_14
+    # Two conventions, one transaction. Eleven scripts filter retired
+    # documents with  d.code NOT LIKE '%-RETIRED'  and only automaton.py
+    # reads doc_stage. Writing the ledger row alone leaves those eleven
+    # treating the retiree as live, which is exactly what happened to
+    # smriti_16harita_smriti. The rename goes in the SAME statement list
+    # as the deletes, so a retirement is either complete or rolled back.
+    # It also frees the original code for a future re-ingest, which this
+    # tool's docstring already promised.
+    if not a.doc.endswith("-RETIRED"):
+        stmts.append("UPDATE docs SET code='%s-RETIRED' WHERE id=%d;" % (a.doc, sid))
+        if has_table(con, "doc_stage"):
+            stmts.append("UPDATE doc_stage SET doc_code='%s-RETIRED' "
+                         "WHERE doc_code='%s';" % (a.doc, a.doc))
+
     body = ("-- %s\n-- retire %s, superseded by %s\n"
             "-- generated %s; review before running.\n"
             "-- Take a backup first:  python scripts/db_backup.py "

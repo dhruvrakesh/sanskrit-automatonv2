@@ -616,10 +616,12 @@ def cmd_backfill(a):
         print("")
     ts = now()
     wrote = 0
+    touched = 0   # BACKFILL_COUNT_2026_09_14 - documents actually written to
     changes = []
     for code in sorted(docs):
         if code in gone:
             continue
+        touched += 1
         m = docs[code]
         meas = measured_json(m)
         for st in STAGES:
@@ -635,7 +637,7 @@ def cmd_backfill(a):
             wrote += 1
     con.commit()
     print("wrote %d ledger row(s) across %d document(s); %d differ from what"
-          % (wrote, len(docs), len(changes)))
+          % (wrote, touched, len(changes)))
     print("the ledger said before this run.")
     verdict = [c for c in changes if c[2] != "-" and not c[2].endswith("*")]
     if verdict:
