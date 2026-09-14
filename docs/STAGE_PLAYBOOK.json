@@ -1,27 +1,28 @@
 {
   "_this_file": "docs/STAGE_PLAYBOOK.json",
-  "_what": "Which command advances which stage. next_commands.py reads it.",
-  "_why": "automaton.py --next knows WHICH unit is actionable and has never been able to say WHAT to run, because nothing recorded the mapping. This records it. Edit it when a tool changes - it is data, not code.",
-  "_honesty": "cmd:null means nobody has confirmed the command. The candidates are listed so the next person can confirm one instead of guessing. Every command below uses only flags printed by that script's own --help on 2026-09-14.",
-  "_version": "2026-09-14.01",
+  "_what": "Which command advances which stage, and what must be true before it can run at all. next_commands.py reads it.",
+  "_why": "automaton.py --next knows WHICH unit is actionable and cannot say WHAT to run. This records that. It is data, not code - edit it when a tool changes.",
+  "_honesty": "cmd:null means nobody has confirmed the command; the candidates are listed so the next person can confirm one instead of guessing. precheck is a one-line python test that must pass before the command is emitted at all - and a precheck is only added once a REAL failure has named the module. morph has one because a traceback named vidyut. The translate and entity stages do not, because naming their client library would be a guess, and a precheck that names the wrong module reports working stages as blocked, which is worse than having none.",
+  "_corrections": "2026-09-14.02 - the morph note in .01 claimed --commit was the missing piece. A 200-row trial disproved it: ling_kosha.py fails identically under --survey and --commit with ModuleNotFoundError: No module named 'vidyut'. Corrected below. Also: every {db} is now quoted, because the repository path contains a space and the unquoted form split it into two arguments.",
+  "_version": "2026-09-14.02",
   "stages": {
     "ocr": {
       "cost": "paid",
       "driver": false,
       "cmd": null,
       "candidates": ["ocr_batch.py", "ocr_pdf.py", "ocr_vision.py", "ingest_pdf.py"],
-      "note": "Four plausible entry points and no way to tell them apart from flags alone. Confirm one before the driver is allowed to run this stage."
+      "note": "Four plausible entry points and no way to tell them apart from flags alone."
     },
     "ingest": {
       "cost": "free",
-      "cmd": "python scripts/ingest_jsonl_fast.py --db {db} --doc {code} --glob \"data/raw/{code}_*.jsonl\" --category {category} --no-segment",
-      "note": "Pass the category explicitly. The tool's own hint is hardcoded from the document it was written for."
+      "cmd": "python scripts/ingest_jsonl_fast.py --db \"{db}\" --doc \"{code}\" --glob \"data/raw/{code}_*.jsonl\" --category {category} --no-segment",
+      "note": "Pass the category explicitly; the tool's own hint is hardcoded from the document it was written for. IAST is produced here unless --no-iast is passed, which is why there is no separate iast runner."
     },
     "segment": {
       "cost": "free",
       "driver": false,
-      "cmd": "python scripts/resegment_doc.py --db {db} --src-doc {code} --new-doc {code}_seg --yes",
-      "note": "SUPERVISED. This writes JSONL only, and is only step one of five: ingest the JSONL, diag_retire_check, graft if it refuses, retire. Run it through block_AR_phase2.ps1, which has the gates. driver:false because a loop handed this command would re-segment an already-segmented document into {code}_seg_seg - which is exactly what the first draft of next_commands.py did on a fixture."
+      "cmd": "python scripts/resegment_doc.py --db \"{db}\" --src-doc \"{code}\" --new-doc \"{code}_seg\" --yes",
+      "note": "SUPERVISED - step one of five. Ingest the JSONL, diag_retire_check, graft if it refuses, retire. Use block_AR_phase2.ps1, which has the gates. driver:false because a loop would re-segment an already-segmented document into {code}_seg_seg."
     },
     "classify": {
       "cost": "free",
@@ -32,38 +33,39 @@
     "iast": {
       "cost": "free",
       "cmd": null,
-      "note": "There is no iast runner and there does not need to be: ingest_jsonl_fast.py takes --no-iast, so IAST is produced at ingest unless suppressed. A document short of IAST was ingested with it off, or ingested before the feature existed. Re-ingest is the fix, not a new tool."
+      "note": "There is no iast runner and there need not be: ingest_jsonl_fast.py takes --no-iast, so IAST is produced at ingest unless suppressed. A document short of IAST was ingested with it off, or before the feature existed. Re-ingest is the fix."
     },
     "translate_en": {
       "cost": "paid",
-      "cmd": "python scripts/translate_passages.py --db {db} --doc {code} --lang en --engine gemini:gemini-2.5-flash",
-      "note": "engine string observed in a live run on 2026-09-14."
+      "cmd": "python scripts/translate_passages.py --db \"{db}\" --doc \"{code}\" --lang en --engine gemini:gemini-2.5-flash",
+      "note": "Observed 2026-09-14: about $0.00016 per passage, median ~17s, with occasional 600s timeouts against 503s. Cost is negligible; wall clock is not. A row whose call fails is written empty and is picked up again on the next run."
     },
     "translate_hi": {
       "cost": "paid",
-      "cmd": "python scripts/translate_passages.py --db {db} --doc {code} --lang hi --engine gemini:gemini-2.5-flash",
-      "note": "Same tool as English. translate_hi was never a separate script. Hindi lands in translations_l10n at lang='hi'; English lands in passages.translation."
+      "cmd": "python scripts/translate_passages.py --db \"{db}\" --doc \"{code}\" --lang hi --engine gemini:gemini-2.5-flash",
+      "note": "Same tool as English. Hindi lands in translations_l10n at lang='hi'; English lands in passages.translation."
     },
     "qa": {
       "cost": "free",
       "cmd": null,
       "candidates": ["qa_scan.py", "qa_report.py", "heal_lowqa.py"],
-      "note": "qa_report reads, heal_lowqa writes, qa_scan is ambiguous. Confirm before wiring."
+      "note": "qa_report reads, heal_lowqa writes, qa_scan is ambiguous."
     },
     "entities": {
       "cost": "paid",
-      "cmd": "python scripts/extract_entities.py --db {db} --doc {code}",
-      "note": "--batch, --limit, --sleep and --retry-empty exist. --retry-empty is what made the maintenance runner exceed PT1H in September; leave it off in a driver."
+      "cmd": "python scripts/extract_entities.py --db \"{db}\" --doc \"{code}\"",
+      "note": "--retry-empty exists and is what made the maintenance runner exceed PT1H in September. Leave it off in a driver."
     },
     "embed": {
       "cost": "paid",
-      "cmd": "python scripts/build_embeddings.py --db {db} --doc {code}",
-      "note": "--model and --list-models exist; the default is used here rather than pinning a model I have not seen."
+      "cmd": "python scripts/build_embeddings.py --db \"{db}\" --doc \"{code}\"",
+      "note": "--model and --list-models exist; the default is used rather than pinning a model nobody has read."
     },
     "morph": {
       "cost": "free",
-      "cmd": "python scripts/ling_kosha.py --db {db} --doc {code} --commit",
-      "note": "THE FLAG. ling_kosha.py takes both --survey and --commit. 50.1% coverage was measured in September and 0 rows were ever written, across 48,823 live passages. Everything ever run against it was a survey."
+      "precheck": "import vidyut",
+      "cmd": "python scripts/ling_kosha.py --db \"{db}\" --doc \"{code}\" --commit",
+      "note": "CORRECTED 2026-09-14. The previous note said --commit was the missing piece. A 200-row trial disproved it: ling_kosha.py raises ModuleNotFoundError: No module named 'vidyut' at line 130 under BOTH --survey and --commit. morph is 0 of 48,823 because the dictionary is not installed in this interpreter, not because of a flag. The precheck above is what stops this command being handed out again while that is true. vidyut also ships its data as a separate download; --data-dir points at it."
     },
     "export": {
       "cost": "free",
@@ -75,7 +77,7 @@
       "cost": "free",
       "cmd": null,
       "candidates": ["booksmith_build.py"],
-      "note": "One candidate, but its flags were not read. 37 documents are READY for this stage, which makes it the cheapest large win in the corpus once the command is confirmed."
+      "note": "One candidate, flags unread. 37 documents are READY for this stage, which makes it the cheapest large win once the command is confirmed."
     }
   }
 }

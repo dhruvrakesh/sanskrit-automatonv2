@@ -3,7 +3,7 @@
 """
 next_commands.py - turn the ledger's READY list into commands you can run.
 
-FILE_VERSION = "2026-09-14.01"
+FILE_VERSION = "2026-09-14.02"
 MARK = "NEXT_COMMANDS_2026_09_14"
 
 automaton.py --next answers WHICH unit is actionable. It has never been
@@ -42,8 +42,36 @@ for _s in (sys.stdout, sys.stderr):
     except Exception:
         pass
 
-FILE_VERSION = "2026-09-14.01"
+FILE_VERSION = "2026-09-14.02"
 MARK = "NEXT_COMMANDS_2026_09_14"
+
+# PRECHECK_2026_09_14
+import subprocess
+
+_PRECHECK_CACHE = {}
+
+
+def precheck_ok(stage, expr):
+    """Run a stage's one-line precheck once. Emitting a command that cannot
+    run is worse than emitting nothing: it looks like work."""
+    if not expr:
+        return True, ""
+    if stage in _PRECHECK_CACHE:
+        return _PRECHECK_CACHE[stage]
+    try:
+        r = subprocess.run([sys.executable, "-c", expr],
+                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                           timeout=120)
+        if r.returncode == 0:
+            out = (True, "")
+        else:
+            txt = (r.stdout or b"").decode("utf-8", "replace").strip().splitlines()
+            out = (False, txt[-1] if txt else "exit %d" % r.returncode)
+    except Exception as e:
+        out = (False, str(e))
+    _PRECHECK_CACHE[stage] = out
+    return out
+
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
@@ -167,12 +195,17 @@ def main():
     skipped_paid = 0
     skipped_unknown = {}
     supervised = {}
+    blocked = {}
     for n, code, stage, reason in units:
         if n < a.min_rows:
             continue
         spec = pb.get(stage) or {}
         cmd = spec.get("cmd")
         cost = spec.get("cost", "unknown")
+        good, why = precheck_ok(stage, spec.get("precheck"))
+        if not good:
+            blocked[stage] = (blocked.get(stage, (0, why))[0] + 1, why)
+            continue
         if spec.get("driver") is False and not a.allow_supervised:
             supervised[stage] = supervised.get(stage, 0) + 1
             continue
@@ -205,6 +238,13 @@ def main():
     if emitted:
         print("")
 
+    if blocked:
+        print("  BLOCKED - the precheck for these stages FAILED, so no command was")
+        print("  emitted. Fix the environment, not the playbook:")
+        for k in sorted(blocked):
+            n, why = blocked[k]
+            print("    %-14s %4d unit(s)   %s" % (k, n, why[:90]))
+        print("")
     if supervised:
         print("  SUPERVISED, not emitted - these are step one of a gated sequence,")
         print("  not a command a loop may run: %s"
