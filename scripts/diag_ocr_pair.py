@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 diag_ocr_pair.py - are these two documents the same book, and if so which
-scan is cleaner?  v1, 2026-09-14.
+scan is cleaner?  v2, 2026-09-14.
 
 READ-ONLY. Writes nothing, calls no API, needs no external data.
 Run it on WINDOWS - SQLite over the Claude device bridge fails with
@@ -51,6 +51,29 @@ Nothing here decides anything for you. It prints the three signals and says
 what they jointly imply, and the reason it can do that honestly is that the
 signals are independent: verse numbers say whether it is one book, and
 contamination says which scan to keep. A single blended score would hide both.
+
+V2 - TWO DEFECTS FOUND ON THE FIRST REAL PAIR
+---------------------------------------------
+v1 compared the HIGHEST verse number on each page and reported 37% agreement
+for a pair whose per-page number sequences are plainly the same:
+
+    page 3   A  23,24,24,26,27,26,30,31
+             B  23,24,24,26,27,26,30,31     v1 called this "differ"
+
+One stray misread anywhere on the page moved the maximum and the whole page
+was scored as a disagreement. v2 compares the SETS, as an overlap against the
+smaller of the two, so a wrong digit costs one number instead of a page.
+
+v1 also ranked cleanliness on furniture + Latin + debris, and furniture came
+out HIGHER on the cleaner scan. That is not a contradiction, it is the metric
+being wrong: a clean scan transcribes the running head legibly, so it matches
+a furniture pattern, while a dirty scan mangles the same running head into
+letter soup, so it matches a debris pattern instead. Counting furniture
+therefore PENALISES the scan that read the page correctly.
+
+v2 ranks on Latin share and debris only, and prints furniture beside them as
+context with that explanation attached. The conclusion on the first pair does
+not change; the reasoning behind it now survives inspection.
 """
 from __future__ import annotations
 
@@ -68,6 +91,13 @@ for _s in (sys.stdout, sys.stderr):
         pass
 
 MARK = "OCR_PAIR_2026_09_14"
+# Bump this whenever the file changes. Ops blocks embed whole copies of repo
+# scripts, so running an older block after a newer one silently reverts the
+# newer work - which happened to this very file on 2026-09-14 at 13:28, when
+# block AO re-wrote the v1 copy it carried over the v2 that block AP had
+# committed eight minutes earlier. The deployment helper compares this string
+# against the copy on disk and refuses to go backwards.
+FILE_VERSION = "2026-09-14.02"
 DEV_LETTER = re.compile("[\\u0900-\\u0963\\u0970-\\u097F]")
 DEV_DIGIT_RUN = re.compile("[\\u0966-\\u096F]+")
 LATIN = re.compile("[A-Za-z]")
@@ -175,26 +205,40 @@ def main():
         return d
     na, nb = nums(A), nums(B)
     pages = sorted(set(na) & set(nb))
-    print("   %-6s %-30s %-30s %s" % ("page", "A: verse numbers", "B: verse numbers", "last"))
-    agree = 0
+
+    def overlap(pg):
+        sa, sb = set(na[pg]), set(nb[pg])
+        if not sa or not sb:
+            return None
+        return len(sa & sb) / float(min(len(sa), len(sb)))
+
+    print("   Compared as SETS, not maxima. v1 compared the highest number on")
+    print("   each page, so one misread digit condemned the whole page.")
+    print("")
+    print("   %-6s %-32s %-32s %s" % ("page", "A: verse numbers", "B: verse numbers", "shared"))
+    ovs = []
     for pg in pages[:x.show_pages]:
-        a_s, b_s = na[pg], nb[pg]
-        la = max(a_s) if a_s else None
-        lb = max(b_s) if b_s else None
-        same = (la is not None and la == lb)
-        agree += 1 if same else 0
-        print("   %-6s %-30s %-30s %s" % (
-            pg, ",".join(str(v) for v in a_s[:8]), ",".join(str(v) for v in b_s[:8]),
-            ("SAME (%s)" % la) if same else "differ"))
+        o = overlap(pg)
+        if o is None:
+            continue
+        ovs.append(o)
+        print("   %-6s %-32s %-32s %5.0f%%" % (
+            pg, ",".join(str(v) for v in na[pg][:9]),
+            ",".join(str(v) for v in nb[pg][:9]), 100 * o))
     for pg in pages[x.show_pages:]:
-        if na[pg] and nb[pg] and max(na[pg]) == max(nb[pg]):
-            agree += 1
+        o = overlap(pg)
+        if o is not None:
+            ovs.append(o)
     if len(pages) > x.show_pages:
         print("   ... %d more shared page number(s)" % (len(pages) - x.show_pages))
-    share = 100.0 * agree / max(1, len(pages))
+    share = 0.0
+    if ovs:
+        s = sorted(ovs)
+        share = 100.0 * (s[len(s) // 2] if len(s) % 2
+                         else (s[len(s) // 2 - 1] + s[len(s) // 2]) / 2.0)
     print("")
-    print("   pages where the highest verse number agrees: %d of %d  (%.0f%%)"
-          % (agree, len(pages), share))
+    print("   median per-page verse-number overlap: %.0f%%  over %d shared page(s)"
+          % (share, len(ovs)))
     print("")
 
     # ---------------------------------------------------------------- 2
@@ -232,16 +276,25 @@ def main():
     print("3. CONTAMINATION - which scan to keep")
     ma, mb = measure(A), measure(B)
     print("")
-    print("   %-24s %14s %14s" % ("", x.a[:14], x.b[:14]))
+    print("   %-26s %14s %14s" % ("", x.a[:14], x.b[:14]))
     for k, label in (("rows", "rows"),
                      ("dev_letters", "Devanagari letters"),
                      ("latin_letters", "Latin letters"),
-                     ("latin_share", "Latin share %"),
-                     ("furniture_rows", "rows with furniture"),
-                     ("furniture_share", "furniture rows %"),
+                     ("latin_share", "Latin share %          *"),
                      ("broken_rows", "rows with debris"),
-                     ("broken_share", "debris rows %")):
-        print("   %-24s %14s %14s" % (label, ma[k], mb[k]))
+                     ("broken_share", "debris rows %          *"),
+                     ("furniture_rows", "rows with furniture"),
+                     ("furniture_share", "furniture rows %")):
+        print("   %-26s %14s %14s" % (label, ma[k], mb[k]))
+    print("")
+    print("   * the two measures cleanliness is ranked on.")
+    print("")
+    print("   Furniture is printed for context and NOT used to rank. A clean scan")
+    print("   transcribes the running head legibly, so it matches a furniture")
+    print("   pattern; a dirty scan mangles the same running head into letter soup,")
+    print("   so it matches a debris pattern instead. Counting furniture therefore")
+    print("   penalises the scan that read the page correctly - which is exactly")
+    print("   what v1 of this file did.")
     print("")
 
     en_a = con.execute("SELECT COUNT(*) FROM passages p JOIN docs d ON d.id=p.doc_id "
@@ -254,28 +307,36 @@ def main():
     # ---------------------------------------------------------------- verdict
     print("WHAT THE THREE SIGNALS JOINTLY IMPLY")
     print("")
-    same_book = share >= 60.0 or med >= 0.35
+    # Either signal alone is enough, and they fail differently: verse numbers
+    # survive bad conjuncts, containment survives bad numerals.
+    same_book = share >= 50.0 or med >= 0.35
     if same_book:
-        print("   SAME BOOK. %.0f%% of shared pages close on the same verse number"
+        print("   SAME BOOK. Median per-page verse-number overlap %.0f%%, median"
               % share)
-        print("   and the median weaker-direction containment is %.1f%%. Two OCR"
+        print("   weaker-direction containment %.1f%% - and the containment holds"
               % (100 * med))
-        print("   passes over one printed setting.")
+        print("   PAGE BY PAGE in the same page order, which two unrelated texts")
+        print("   sharing vocabulary would not do. Two OCR passes over one printed")
+        print("   setting.")
     else:
-        print("   NOT the same book on this evidence: %.0f%% page agreement,"
+        print("   NOT the same book on this evidence: %.0f%% median verse-number"
               % share)
-        print("   %.1f%% median containment. Leave both." % (100 * med))
+        print("   overlap, %.1f%% median containment. Leave both." % (100 * med))
     print("")
-    dirty_a = ma["latin_share"] + ma["furniture_share"] + ma["broken_share"]
-    dirty_b = mb["latin_share"] + mb["furniture_share"] + mb["broken_share"]
+    dirty_a = ma["latin_share"] + ma["broken_share"]
+    dirty_b = mb["latin_share"] + mb["broken_share"]
     cleaner = x.a if dirty_a < dirty_b else x.b
     dirtier = x.b if cleaner == x.a else x.a
     if same_book:
+        agree_lat = (ma["latin_share"] < mb["latin_share"]) == (cleaner == x.a)
+        agree_brk = (ma["broken_share"] < mb["broken_share"]) == (cleaner == x.a)
         print("   CLEANER SCAN: %s" % cleaner)
-        print("   (Latin share + furniture rows + debris rows: %.1f vs %.1f. Three"
-              % (min(dirty_a, dirty_b), max(dirty_a, dirty_b)))
-        print("   independent contamination measures, added only to rank them -")
-        print("   the individual figures above are what you should read.)")
+        print("   Latin share + debris rows: %.1f vs %.1f." % (min(dirty_a, dirty_b),
+                                                               max(dirty_a, dirty_b)))
+        print("   Both measures agree: %s. If they disagreed the ranking would be"
+              % ("yes" if (agree_lat and agree_brk) else "NO - read them separately"))
+        print("   worth no more than a coin toss, and the figures above are what")
+        print("   you should read either way.")
         print("")
         paid = en_a if dirtier == x.a else en_b
         if paid > 0:
