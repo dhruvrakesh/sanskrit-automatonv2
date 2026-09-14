@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-automaton.py  (2026-09-14)  AUTOMATON_LEDGER_2026_09_14_B
+automaton.py  (2026-09-14)  AUTOMATON_LEDGER_2026_09_14_C
 
 The stage ledger. One new table. Nothing else in the database is written.
 
@@ -44,6 +44,35 @@ carry a verdict its own project data disputes. Two defects, both mine:
 The head-sample figure is still computed and stored as head400_mean, so the
 size of the bias is visible per document rather than argued about.
 
+Revision C - a share, not a percentile; and a retraction
+--------------------------------------------------------
+Revision B judged segmentation on the median words per row. On the live corpus
+that produced a knife edge: harita_shashtham_sharira_sthanam has p10 16, p50
+60, p90 109 - plainly a mix of verses and whole printed pages - and flipped
+from degraded to done because its median landed exactly ON the threshold of
+60. A verdict that turns on the fifty-first row of fourteen is an artefact of
+the statistic, not a fact about the text.
+
+Revision C judges on SHARES of rows, which have no knife edge and read as
+plain English - what percentage of this document's rows are shaped like a
+verse a reader could be handed?
+
+    frag_share   rows under FRAGMENT_WORDS words
+    page_share   rows over PAGE_WORDS words
+    verse_share  everything between
+
+MBh01, the clean control, is ~100% verse rows. A document at 70% is a mixture;
+one at 0% is a stack of printed pages. --distribution prints the corpus
+against several candidate values for each floor.
+
+The same revision RETRACTS --duplicates. It paired documents that merely had
+the same row count, and duly reported that shiksha_lomashi_shiksha (8 rows)
+might be smriti_07likhita_smriti (8 rows). Row count is not evidence: nine of
+its eleven pairs were noise, and it missed the one real derived pair in the
+corpus because 111 is not 1,393. diag_corpus_overlap.py replaces it, using the
+Devanagari n-gram containment that diag_duplicate_verses.py already validated
+and the engine stamp that resegment_doc.py already writes.
+
 Four commitments, each answering a failure this project has already had
 -----------------------------------------------------------------------
 1. ONE unit of work per invocation, then exit. A run that is always short is
@@ -66,11 +95,10 @@ Four commitments, each answering a failure this project has already had
 What a blocked verdict can and cannot do
 ----------------------------------------
 It stops work that has not happened yet. It cannot undo work that already
-has. nirukta is blocked at segment on 2.4 median words per row and is
-nevertheless already translated into English and Hindi, scored, and
-exported - all of that ran years before this table existed. For documents
-in that position the verdict is advisory, and --next says so explicitly
-rather than implying a protection it did not provide.
+has. Every stage downstream of a block on this corpus ran years before this
+table existed. For any document in that position the verdict is advisory, not
+protective, and --next says so in those words rather than implying a
+protection it did not provide.
 
 Safety
 ------
@@ -104,7 +132,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-MARK = "AUTOMATON_LEDGER_2026_09_14_B"
+MARK = "AUTOMATON_LEDGER_2026_09_14_C"
 
 # ---------------------------------------------------------------------------
 # The pipeline, as a graph rather than a line. A strict line would have said
@@ -144,23 +172,22 @@ DEPS = {
 # FRAG_BLOCK       above this share of fragment rows the document is not a
 #                  sequence of verses at all. Translating it spends the API
 #                  call on damage.
-# FRAG_DEGRADE     above this share, fragments are mixed into otherwise usable
-#                  text: worth translating, not worth typesetting as-is.
 # LONGWORD_BLOCK   share of words over 20 characters. Above this the text is
 #                  not word-separated, so every dictionary lookup and every
 #                  translation sees a run rather than a word.
-# PAGE_WORDS       median words per row above this means whole pages arrived
-#                  as single units. It translates and exports; Booksmith will
-#                  refuse a reading edition.
+# PAGE_WORDS       a row longer than this is a printed page, not a verse.
+# VERSE_OK         below this share of verse-shaped rows a reader cannot be
+#                  handed the document as it stands. Degraded, not blocked:
+#                  it still translates and it still exports.
 #
-# --distribution prints the corpus against all five, at several candidate
-# values, so these are visibly not picked to flatter a conclusion.
+# --distribution prints the corpus against several candidate values for each,
+# so they are visibly not picked to flatter a conclusion.
 # ---------------------------------------------------------------------------
 FRAGMENT_WORDS = 4
 FRAG_BLOCK = 50.0
-FRAG_DEGRADE = 20.0
 LONGWORD_BLOCK = 25.0
-PAGE_WORDS = 60.0
+PAGE_WORDS = 60
+VERSE_OK = 85.0
 
 WORD_SPLIT = re.compile(r"[\s\u0964\u0965|/\\]+")
 
@@ -346,6 +373,7 @@ def corpus_measure(con, root: Path, bs_root: Path, verbose=False):
         m["head_words"] = 0
         m["head_rows"] = 0
         m["frag_rows"] = 0
+        m["page_rows"] = 0
     t0 = time.time()
     scanned = 0
     if "text" in pcols:
@@ -365,6 +393,8 @@ def corpus_measure(con, root: Path, bs_root: Path, verbose=False):
                 m["wpr"].append(n)
                 if n < FRAGMENT_WORDS:
                     m["frag_rows"] += 1
+                elif n > PAGE_WORDS:
+                    m["page_rows"] += 1
                 if m["head_rows"] < 400:
                     m["head_rows"] += 1
                     m["head_words"] += n
@@ -392,6 +422,9 @@ def corpus_measure(con, root: Path, bs_root: Path, verbose=False):
         m["w50"] = round(pctl(wpr, 0.50), 1)
         m["w90"] = round(pctl(wpr, 0.90), 1)
         m["frag_row_share"] = round(100.0 * m["frag_rows"] / nrows, 1) if nrows else 0.0
+        m["page_row_share"] = round(100.0 * m["page_rows"] / nrows, 1) if nrows else 0.0
+        m["verse_share"] = round(
+            100.0 * (nrows - m["frag_rows"] - m["page_rows"]) / nrows, 1) if nrows else 0.0
         m["long_word_share"] = round(
             100.0 * sum(c for L, c in hist.items() if L > 20) / words, 1) if words else 0.0
         m["median_word_len"] = median_from_hist(hist)
@@ -445,8 +478,9 @@ def judge(stage, m):
     if stage == "segment":
         if m["passages"] == 0:
             return "pending", "nothing ingested", ""
-        w50, frag, lw = m["w50"], m["frag_row_share"], m["long_word_share"]
-        f = fp(m["passages"], w50, frag, lw)
+        frag, page = m["frag_row_share"], m["page_row_share"]
+        verse, lw = m["verse_share"], m["long_word_share"]
+        f = fp(m["passages"], frag, page, lw)
         if m["shape_rows"] == 0:
             return "pending", "no non-empty text rows to measure", f
         if lw > LONGWORD_BLOCK:
@@ -454,20 +488,19 @@ def judge(stage, m):
                                "word-separated, so every lookup and every translation "
                                "sees a run, not a word" % lw), f
         if frag > FRAG_BLOCK:
-            return "blocked", ("%.1f%% of rows carry fewer than %d words (median %.0f) - "
-                               "this is not a sequence of verses. MBh01, the clean "
-                               "control, has 0.2%% such rows."
-                               % (frag, FRAGMENT_WORDS, w50)), f
-        if w50 > PAGE_WORDS:
-            return "degraded", ("median %.0f words per row - whole pages as one unit. "
-                                "Translation and export work; a Booksmith reading "
-                                "edition will not." % w50), f
-        if frag > FRAG_DEGRADE:
-            return "degraded", ("%.1f%% of rows are fragments under %d words, mixed into "
-                                "otherwise usable text (median %.0f)"
-                                % (frag, FRAGMENT_WORDS, w50)), f
-        return "done", ("median %.0f words per row, %.1f%% fragment rows, %.1f%% long words"
-                        % (w50, frag, lw)), f
+            return "blocked", ("%.1f%% of rows carry fewer than %d words - this is not a "
+                               "sequence of verses. MBh01, the clean control, has 0.0%%."
+                               % (frag, FRAGMENT_WORDS)), f
+        if verse < VERSE_OK:
+            if page >= frag:
+                why = "%.1f%% are whole pages over %d words" % (page, PAGE_WORDS)
+            else:
+                why = "%.1f%% are fragments under %d words" % (frag, FRAGMENT_WORDS)
+            return "degraded", ("only %.1f%% of rows are verse-shaped; %s. Translation "
+                                "and export work, a reading edition does not."
+                                % (verse, why)), f
+        return "done", ("%.1f%% of rows are verse-shaped (median %.0f words)"
+                        % (verse, m["w50"])), f
 
     if stage == "classify":
         if m["passages"] == 0:
@@ -544,9 +577,9 @@ def judge(stage, m):
 
 def measured_json(m):
     keep = ("passages", "live", "shape_rows", "words", "w_mean", "w10", "w50",
-            "w90", "frag_row_share", "long_word_share", "median_word_len",
-            "head400_mean", "head_bias", "raw_files", "exports", "book_pdf",
-            "layout_proof")
+            "w90", "frag_row_share", "page_row_share", "verse_share",
+            "long_word_share", "median_word_len", "head400_mean", "head_bias",
+            "raw_files", "exports", "book_pdf", "layout_proof")
     d = dict((k, m[k]) for k in keep if k in m)
     d["pct"] = m.get("pct", {})
     return json.dumps(d, ensure_ascii=False, sort_keys=True)
@@ -751,17 +784,21 @@ def cmd_distribution(a):
     print("  rows by id. bias is head400 minus the true mean. Where that number")
     print("  is large the old sampler was reading a different document.")
     print("")
-    print("  %-32s %6s %7s %6s %5s %5s %5s %6s %6s %5s %7s" % (
-        "document", "rows", "words", "mean", "p10", "p50", "p90",
-        "frag%", "long%", "wlen", "head400"))
-    print("  " + "-" * 116)
+    print("  %-32s %6s %6s %5s %5s %6s %6s %6s %6s %7s" % (
+        "document", "rows", "p50", "p10", "p90",
+        "frag%", "page%", "VERSE%", "long%", "head400"))
+    print("  " + "-" * 112)
     for code, m in order:
         if m["shape_rows"] == 0:
             continue
-        print("  %-32s %6d %7d %6.1f %5.0f %5.0f %5.0f %6.1f %6.1f %5d %7.1f" % (
-            code[:32], m["shape_rows"], m["words"], m["w_mean"], m["w10"],
-            m["w50"], m["w90"], m["frag_row_share"], m["long_word_share"],
-            m["median_word_len"], m["head400_mean"]))
+        print("  %-32s %6d %6.0f %5.0f %5.0f %6.1f %6.1f %6.1f %6.1f %7.1f" % (
+            code[:32], m["shape_rows"], m["w50"], m["w10"], m["w90"],
+            m["frag_row_share"], m["page_row_share"], m["verse_share"],
+            m["long_word_share"], m["head400_mean"]))
+    print("")
+    print("  VERSE%% is the share of rows between %d and %d words - the rows a"
+          % (FRAGMENT_WORDS, PAGE_WORDS))
+    print("  reader could be handed. frag%% + page%% + VERSE%% = 100.")
     print("")
     print("  largest head-sample bias (old mean minus true mean)")
     for code, m in sorted(order, key=lambda kv: -abs(kv[1]["head_bias"]))[:8]:
@@ -776,65 +813,65 @@ def cmd_distribution(a):
     print("  conclusion. The shipped floors are marked <-- in use.")
     live = [m for m in docs.values() if m["shape_rows"] > 0]
     print("")
-    print("    fragment-row share above X  ->  documents")
-    for x in (10.0, 20.0, 30.0, 50.0, 70.0):
-        tag = ""
-        if x == FRAG_DEGRADE:
-            tag = "   <-- in use (degrade)"
-        if x == FRAG_BLOCK:
-            tag = "   <-- in use (block)"
+    print("    verse-shaped share BELOW X  ->  documents degraded")
+    for x in (50.0, 70.0, 85.0, 95.0, 99.0):
+        tag = "   <-- in use" if x == VERSE_OK else ""
+        print("      %5.0f%%  %3d%s" % (x, sum(1 for m in live if m["verse_share"] < x), tag))
+    print("    fragment-row share above X  ->  documents blocked")
+    for x in (30.0, 50.0, 70.0):
+        tag = "   <-- in use" if x == FRAG_BLOCK else ""
         print("      %5.0f%%  %3d%s" % (x, sum(1 for m in live if m["frag_row_share"] > x), tag))
-    print("    median words per row above X  ->  documents")
-    for x in (30.0, 40.0, 60.0, 90.0, 120.0):
-        tag = "   <-- in use (degrade)" if x == PAGE_WORDS else ""
-        print("      %5.0f   %3d%s" % (x, sum(1 for m in live if m["w50"] > x), tag))
-    print("    long-word share above X  ->  documents")
+    print("    long-word share above X  ->  documents blocked")
     for x in (10.0, 25.0, 40.0):
-        tag = "   <-- in use (block)" if x == LONGWORD_BLOCK else ""
+        tag = "   <-- in use" if x == LONGWORD_BLOCK else ""
         print("      %5.0f%%  %3d%s" % (x, sum(1 for m in live if m["long_word_share"] > x), tag))
+    print("")
+    print("    how many documents are verse-shaped enough for a reading edition")
+    print("    at each candidate floor is the whole planning question - it is the")
+    print("    count of books this corpus could publish without re-segmentation.")
     print("")
     print("  the clean control, for scale:")
     c = docs.get("MBh01")
     if c:
-        print("    MBh01  mean %.1f  p50 %.0f  frag %.1f%%  long %.1f%%  median word %d"
-              % (c["w_mean"], c["w50"], c["frag_row_share"], c["long_word_share"],
-                 c["median_word_len"]))
+        print("    MBh01  p50 %.0f  frag %.1f%%  page %.1f%%  VERSE %.1f%%  long %.1f%%"
+              % (c["w50"], c["frag_row_share"], c["page_row_share"],
+                 c["verse_share"], c["long_word_share"]))
+    s = docs.get("nilamata_seg")
+    o = docs.get("upapurana_nilamata_purana")
+    if s and o:
+        print("  and the one document that has already made the journey:")
+        print("    upapurana_nilamata_purana  p50 %.0f  VERSE %5.1f%%   (page-blobs)"
+              % (o["w50"], o["verse_share"]))
+        print("    nilamata_seg               p50 %.0f  VERSE %5.1f%%   (resegment_doc.py)"
+              % (s["w50"], s["verse_share"]))
     return 0
 
 
 def cmd_duplicates(a):
-    """Two doc codes over the same text means the automaton pays twice."""
-    con = connect(a.db, writable=False)
-    sizes = _sizes(con)
-    codes = sorted(sizes)
-    print("%s  possible duplicate documents" % MARK)
+    """RETRACTED. This gate was wrong and is kept only to say so."""
+    print("%s  --duplicates is RETRACTED" % MARK)
     print("")
-    print("  An automaton that translates both members of a pair pays twice for")
-    print("  one text. These are candidates only - the name and row count match,")
-    print("  the content still needs your eye.")
+    print("  What it did on 2026-09-14: paired any two documents that happened to")
+    print("  have the same ROW COUNT, and reported, among eleven pairs:")
     print("")
-    hits = []
-    for i, a1 in enumerate(codes):
-        for b1 in codes[i + 1:]:
-            la, lb = a1.lower(), b1.lower()
-            nested = la in lb or lb in la
-            same_n = sizes[a1] == sizes[b1] and sizes[a1] > 0
-            if nested or same_n:
-                hits.append((a1, sizes[a1], b1, sizes[b1],
-                             "name nests" if nested else "", "same row count" if same_n else ""))
-    if not hits:
-        print("    (none)")
-    for a1, na, b1, nb, r1, r2 in hits:
-        why = ", ".join(x for x in (r1, r2) if x)
-        print("    %-34s %6d   %-34s %6d   %s" % (a1[:34], na, b1[:34], nb, why))
+    print("    shiksha_lomashi_shiksha    8 rows  ~  smriti_07likhita_smriti    8 rows")
+    print("    harita_caturtha_sthanam   17 rows  ~  smriti_03apastamba_smriti 17 rows")
     print("")
-    print("  documents with zero passages (a code with nothing behind it):")
-    z = [c for c in codes if sizes[c] == 0]
-    for c in z:
-        print("    %s" % c)
-    if not z:
-        print("    (none)")
-    con.close()
+    print("  Row count is not evidence. Nine of the eleven were noise, and the one")
+    print("  real derived pair in this corpus - upapurana_nilamata_purana and")
+    print("  nilamata_seg - it missed entirely, because 111 is not 1,393.")
+    print("")
+    print("  This is the same failure diag_duplicate_verses.py v2 already records")
+    print("  against its own v1: 1,705 of 2,059 signatures called duplicates, 83%,")
+    print("  which its header calls 'not a finding, a broken gate'. I repeated it.")
+    print("")
+    print("  Use instead:")
+    print("    python scripts\\diag_corpus_overlap.py --db data\\context.db")
+    print("        exact Devanagari row matches across documents, 5-gram")
+    print("        containment for re-segmented copies, and the resegment engine")
+    print("        stamp - three signals, reported separately, with sample sizes.")
+    print("    python scripts\\diag_duplicate_verses.py --doc <CODE>")
+    print("        duplicates WITHIN one document, with fan-out and furniture.")
     return 0
 
 
@@ -846,6 +883,7 @@ FIXTURE = [
     ("fx_runon",       40, 10, 34, 0.0, "blocked"),
     ("fx_pagesized",   30, 90, 7,  1.0, "degraded"),
     ("fx_mixed",      100,  0, 7,  1.0, "degraded"),   # 30% fragments, rest clean
+    ("fx_knife",       14,  0, 7,  1.0, "degraded"),   # median exactly PAGE_WORDS
 ]
 
 
@@ -872,6 +910,12 @@ def _fixture_db():
             n = wpr
             if code == "fx_mixed":
                 n = 2 if (r % 10) < 3 else 14
+            elif code == "fx_knife":
+                # half the rows well under, half well over; the median lands on
+                # PAGE_WORDS itself. Revision B called this done.
+                n = 20 if r % 2 else 110
+                if r == rows - 1:
+                    n = PAGE_WORDS
             txt = " ".join("a" * wlen for _ in range(n))
             tr = "translated" if (float(r) / max(1, rows)) < tshare else None
             con.execute("INSERT INTO passages(id,doc_id,text,text_type,iast,translation) VALUES(?,?,?,?,?,?)",
@@ -903,9 +947,11 @@ def cmd_selftest(a):
         mm = meas.get(code, {})
         ok = (act == exp)
         fails += 0 if ok else 1
-        print("    %-14s p50 %5.0f  frag %5.1f%%  long %5.1f%%  -> %-9s expected %-9s %s"
-              % (code, mm.get("w50", 0), mm.get("frag_row_share", 0),
-                 mm.get("long_word_share", 0), act, exp, "OK" if ok else "MISMATCH"))
+        print("    %-14s frag %5.1f%%  page %5.1f%%  VERSE %5.1f%%  long %5.1f%%  -> "
+              "%-9s expected %-9s %s"
+              % (code, mm.get("frag_row_share", 0), mm.get("page_row_share", 0),
+                 mm.get("verse_share", 0), mm.get("long_word_share", 0),
+                 act, exp, "OK" if ok else "MISMATCH"))
     for code, _r, _w, _l, _t, exp in FIXTURE:
         if exp == "blocked" and got.get((code, "translate_en")) == "done":
             print("    %-14s translate_en done behind a blocked segment" % code)
@@ -923,8 +969,21 @@ def cmd_selftest(a):
               % (mx.get("w_mean", 0), mx.get("frag_row_share", 0)))
         fails += 1
     else:
-        print("    fx_mixed       mean %.1f looks clean, %.0f%% fragment rows caught it   OK"
-              % (mx.get("w_mean", 0), mx.get("frag_row_share", 0)))
+        print("    fx_mixed       mean %.1f and median %.0f both look clean; %.0f%% verse"
+              " rows caught it   OK"
+              % (mx.get("w_mean", 0), mx.get("w50", 0), mx.get("verse_share", 0)))
+    # the knife edge revision B had: a document whose median sits exactly on the
+    # page threshold must not be decided by that coincidence
+    ke = meas.get("fx_knife", {})
+    if ke:
+        st = got.get(("fx_knife", "segment"))
+        if st == "degraded":
+            print("    fx_knife       median exactly %d, %.0f%% verse rows -> degraded   OK"
+                  % (PAGE_WORDS, ke.get("verse_share", 0)))
+        else:
+            print("    fx_knife       median exactly %d -> %s, expected degraded"
+                  % (PAGE_WORDS, st))
+            fails += 1
     print("")
     print("  selftest: %s  (fixture left at %s)" % ("PASS" if fails == 0 else "FAIL", tmp))
     return 1 if fails else 0
