@@ -92,3 +92,5 @@ data/ab_source_quality.json
 .env.bak*
 # fidelity review draws: working artifacts, not repo content
 data/fidelity_review/
+# the isolated linguistic environment (Block AC) is a build artefact
+.venv-ling/
