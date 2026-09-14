@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-automaton.py  (2026-09-14)  AUTOMATON_LEDGER_2026_09_14
+automaton.py  (2026-09-14)  AUTOMATON_LEDGER_2026_09_14_B
 
 The stage ledger. One new table. Nothing else in the database is written.
 
@@ -20,6 +20,30 @@ dies with the process. Neither is resumable, because neither has anywhere to
 resume from. That absence is the entire distance between "a set of scripts
 that work" and "an automaton".
 
+Revision B - why the segment measurement changed
+------------------------------------------------
+Revision A sampled the first 400 rows of each document, ordered by id, and
+took the MEAN words per row. On the 09:53 run that produced a verdict that
+contradicts the corpus-wide survey of the same morning:
+
+    ling_kosha --survey     Padma Purana  2.3 words/row, median word 10,
+                            33.9% long-run share
+    the ledger, rev A       Padma Purana  segment = done
+
+Both cannot be right, and a ledger that a spending driver reads must not
+carry a verdict its own project data disputes. Two defects, both mine:
+
+  1. A 400-row head sample of a 15,111-row document is not the document.
+     Revision B scans every live non-empty row.
+
+  2. The MEAN is the wrong statistic. A document can average 30 words per
+     row while half its rows are two-word fragments; the mean hides exactly
+     the failure the gate exists to catch. Revision B uses the median words
+     per row and the SHARE OF ROWS that are fragments, and stores both.
+
+The head-sample figure is still computed and stored as head400_mean, so the
+size of the bias is visible per document rather than argued about.
+
 Four commitments, each answering a failure this project has already had
 -----------------------------------------------------------------------
 1. ONE unit of work per invocation, then exit. A run that is always short is
@@ -30,52 +54,40 @@ Four commitments, each answering a failure this project has already had
 2. IDEMPOTENCE BY FINGERPRINT, not by flag. A stage is done only while its
    recorded input_fp still equals what its inputs hash to now. This is
    Booksmith's source_sha256 model, which this project already trusts enough
-   to refuse a build over, as it did to the Hindi Shatpath on 13 September.
-   Change the text and every downstream stage goes stale by itself; nothing
-   has to remember to invalidate anything.
+   to refuse a build over. Change the text and every downstream stage goes
+   stale by itself.
 
 3. MEASURED, NOT ASSUMED. Every stage records what it observed. Below its
-   floor it becomes blocked or degraded with a reason in words, never
-   silently done.
+   floor it becomes blocked or degraded with a reason in words.
 
 4. DERIVED, NOT DECLARED. The ledger is backfilled from what is measurably
    true in the database today, not from anyone's memory of what was run.
 
-Two severities, because the corpus proves they differ
------------------------------------------------------
-Measured across all 57 documents on 2026-09-14:
-
-  blocked   Padma Purana: 2.3 words per row, 33.9% of words over 20
-            characters, 18.4% kosha-recognised against MBh01's 80.2%. The
-            rows are fragments of unsegmented running text. Translating
-            that spends money on damage, so the chain HALTS.
-
-  degraded  smriti_14manu: 128.3 words per row, whole pages as one unit.
-            But it IS translated and its exports build. Booksmith refuses a
-            reading edition; an audit edition is fine. The chain CONTINUES
-            carrying the flag. Thirty documents are this shape.
-
-One "broken" flag would have stopped thirty working documents, or let the
-Padma Purana through. Neither is right.
+What a blocked verdict can and cannot do
+----------------------------------------
+It stops work that has not happened yet. It cannot undo work that already
+has. nirukta is blocked at segment on 2.4 median words per row and is
+nevertheless already translated into English and Hindi, scored, and
+exported - all of that ran years before this table existed. For documents
+in that position the verdict is advisory, and --next says so explicitly
+rather than implying a protection it did not provide.
 
 Safety
 ------
 Reads are opened with PRAGMA query_only=ON rather than immutable=1. That is
-deliberate and it is the pattern diag_spend_bound.py already uses: the
-database runs in WAL mode, and immutable=1 makes SQLite ignore the -wal
-sidecar entirely, so a status report taken straight after a write would show
-the pre-write state. query_only reads the live WAL and still refuses writes
-at the engine level.
+deliberate: the database runs in WAL mode, and immutable=1 makes SQLite
+ignore the -wal sidecar, so a status report taken straight after a write
+would show the pre-write state. query_only reads the live WAL and still
+refuses writes at the engine level.
 
 Every schema-changing and row-writing statement that can reach the project
 database names doc_stage and sits on a single physical line, so that
 grepping this file for write keywords is a real audit rather than a
-formality. The only other write statements in the file build the --selftest
-fixture; they are fenced between a pair of BEGIN/END sentinel comments in
+formality. The only other write statements build the --selftest fixture;
+they are fenced between a pair of BEGIN/END sentinel comments in
 _fixture_db, they run against a tempfile.mkdtemp directory, and neither
 _fixture_db nor cmd_selftest ever reads the --db argument. The deployment
-block checks all three of those claims mechanically rather than asking you
-to take them on trust.
+block checks all three of those claims mechanically.
 """
 
 from __future__ import annotations
@@ -88,10 +100,11 @@ import re
 import sqlite3
 import sys
 import tempfile
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-MARK = "AUTOMATON_LEDGER_2026_09_14"
+MARK = "AUTOMATON_LEDGER_2026_09_14_B"
 
 # ---------------------------------------------------------------------------
 # The pipeline, as a graph rather than a line. A strict line would have said
@@ -120,6 +133,36 @@ DEPS = {
     "export":       ["translate_en"],
     "book":         ["export"],
 }
+
+# ---------------------------------------------------------------------------
+# The segment floors, in one place, with the evidence for each.
+#
+# FRAGMENT_WORDS   a row with fewer than this many words is a fragment. MBh01,
+#                  the GRETIL critical edition and the only text here that was
+#                  never OCR'd, sits at 12.5 words per row; a Sanskrit pada is
+#                  rarely under 4.
+# FRAG_BLOCK       above this share of fragment rows the document is not a
+#                  sequence of verses at all. Translating it spends the API
+#                  call on damage.
+# FRAG_DEGRADE     above this share, fragments are mixed into otherwise usable
+#                  text: worth translating, not worth typesetting as-is.
+# LONGWORD_BLOCK   share of words over 20 characters. Above this the text is
+#                  not word-separated, so every dictionary lookup and every
+#                  translation sees a run rather than a word.
+# PAGE_WORDS       median words per row above this means whole pages arrived
+#                  as single units. It translates and exports; Booksmith will
+#                  refuse a reading edition.
+#
+# --distribution prints the corpus against all five, at several candidate
+# values, so these are visibly not picked to flatter a conclusion.
+# ---------------------------------------------------------------------------
+FRAGMENT_WORDS = 4
+FRAG_BLOCK = 50.0
+FRAG_DEGRADE = 20.0
+LONGWORD_BLOCK = 25.0
+PAGE_WORDS = 60.0
+
+WORD_SPLIT = re.compile(r"[\s\u0964\u0965|/\\]+")
 
 DDL = """
 CREATE TABLE IF NOT EXISTS doc_stage(
@@ -174,19 +217,48 @@ def table_cols(con, table):
 
 def has_table(con, table):
     try:
-        r = con.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?",
-                        (table,)).fetchone()
-        return r is not None
+        return con.execute("SELECT name FROM sqlite_master WHERE type='table' "
+                           "AND name=?", (table,)).fetchone() is not None
     except Exception:
         return False
 
 
+def pctl(vals, q):
+    """Linear-interpolated percentile of a sorted list."""
+    if not vals:
+        return 0.0
+    k = (len(vals) - 1) * q
+    f = int(k)
+    c = min(f + 1, len(vals) - 1)
+    if f == c:
+        return float(vals[f])
+    return float(vals[f]) + (float(vals[c]) - float(vals[f])) * (k - f)
+
+
+def median_from_hist(hist):
+    total = sum(hist.values())
+    if not total:
+        return 0
+    half = total / 2.0
+    run = 0
+    last = 0
+    for L in sorted(hist):
+        run += hist[L]
+        last = L
+        if run >= half:
+            return L
+    return last
+
+
+def slug_for(code):
+    s = code.strip().lower().replace("_", "-")
+    s = re.sub(r"[^a-z0-9-]+", "-", s)
+    s = re.sub(r"-{2,}", "-", s).strip("-")
+    return s[:64]
+
+
 # ---------------------------------------------------------------------------
 # Measurement. Everything here reads. Nothing here writes.
-#
-# Done as three grouped passes plus one small per-document sample, rather
-# than a dozen COUNT queries per document. On 57 documents the naive shape
-# is about 700 aggregate scans of a 49,555-row table; this is four.
 # ---------------------------------------------------------------------------
 def corpus_measure(con, root: Path, bs_root: Path, verbose=False):
     pcols = table_cols(con, "passages")
@@ -201,7 +273,8 @@ def corpus_measure(con, root: Path, bs_root: Path, verbose=False):
     def nonblank(col):
         if col not in pcols:
             return "0"
-        return "SUM(CASE WHEN %s AND TRIM(COALESCE(p.%s,''))<>'' THEN 1 ELSE 0 END)" % (live, col)
+        return ("SUM(CASE WHEN %s AND TRIM(COALESCE(p.%s,''))<>'' THEN 1 ELSE 0 END)"
+                % (live, col))
 
     def notnull(col):
         if col not in pcols:
@@ -219,119 +292,141 @@ def corpus_measure(con, root: Path, bs_root: Path, verbose=False):
                nonblank("iast"), nonblank("translation"),
                nonblank("translation_qa"), notnull("ents"), nonblank("morph")))
     if verbose:
-        print("  measurement query:\n    %s" % sql)
+        print("  aggregate query:")
+        print("    %s" % sql)
 
-    docs = {}
+    docs, by_id = {}, {}
     for code, did, npass, nlive, ntyped, niast, nen, nqa, nents, nmorph in con.execute(sql):
-        docs[code] = {
-            "doc_id": did,
-            "passages": npass or 0, "live": nlive or 0, "typed": ntyped or 0,
-            "iast": niast or 0, "en": nen or 0, "qa": nqa or 0,
-            "ents": nents or 0, "morph": nmorph or 0,
-            "hi": 0, "embed": 0,
-        }
+        m = {"doc_id": did, "passages": npass or 0, "live": nlive or 0,
+             "typed": ntyped or 0, "iast": niast or 0, "en": nen or 0,
+             "qa": nqa or 0, "ents": nents or 0, "morph": nmorph or 0,
+             "hi": 0, "embed": 0}
+        docs[code] = m
+        by_id[did] = m
 
-    # Hindi lives in its own table. Count only rows that carry text, if a
-    # text-bearing column can be identified; a row with an empty body is not
-    # a translation.
     if has_table(con, "translations_l10n"):
         lcols = table_cols(con, "translations_l10n")
         body = next((c for c in ("text", "translation", "content", "body", "value")
                      if c in lcols), None)
         pred = " AND TRIM(COALESCE(l.%s,''))<>''" % body if body else ""
         try:
-            q = ("SELECT d.code, COUNT(*) FROM translations_l10n l "
-                 "JOIN passages p ON p.id=l.passage_id "
-                 "JOIN docs d ON d.id=p.doc_id "
-                 "WHERE l.lang='hi'%s GROUP BY d.code" % pred)
-            for code, n in con.execute(q):
+            for code, n in con.execute(
+                    "SELECT d.code, COUNT(*) FROM translations_l10n l "
+                    "JOIN passages p ON p.id=l.passage_id "
+                    "JOIN docs d ON d.id=p.doc_id "
+                    "WHERE l.lang='hi'%s GROUP BY d.code" % pred):
                 if code in docs:
                     docs[code]["hi"] = n
         except Exception as e:
             if verbose:
                 print("  (hindi count unavailable: %s)" % e)
 
-    for tbl, col in (("passage_embeddings", "passage_id"), ("embeddings", "passage_id")):
-        if has_table(con, tbl) and col in table_cols(con, tbl):
+    for tbl in ("passage_embeddings", "embeddings"):
+        if has_table(con, tbl) and "passage_id" in table_cols(con, tbl):
             try:
                 for code, n in con.execute(
                         "SELECT d.code, COUNT(*) FROM %s e "
-                        "JOIN passages p ON p.id=e.%s "
-                        "JOIN docs d ON d.id=p.doc_id GROUP BY d.code" % (tbl, col)):
+                        "JOIN passages p ON p.id=e.passage_id "
+                        "JOIN docs d ON d.id=p.doc_id GROUP BY d.code" % tbl):
                     if code in docs:
                         docs[code]["embed"] = max(docs[code]["embed"], n)
             except Exception:
                 pass
             break
 
-    # Word shape, sampled. This is the measurement that separates a
-    # segmentation fault from an OCR fault, and it is the one my own earlier
-    # sampler got wrong by ordering on LENGTH(text) DESC, which selects
-    # indexes and tables of contents. Order by id.
-    txt = "text" if "text" in pcols else None
-    for code, m in docs.items():
-        m["sampled_rows"] = 0
-        m["words_per_row"] = 0.0
-        m["long_word_share"] = 0.0
-        if not txt or m["passages"] == 0:
-            continue
-        rows = con.execute(
-            "SELECT p.text FROM passages p WHERE p.doc_id=? AND %s "
-            "AND TRIM(COALESCE(p.text,''))<>'' ORDER BY p.id LIMIT 400" % live,
-            (m["doc_id"],)).fetchall()
-        wc, lens = 0, []
-        for (t,) in rows:
-            ws = [w for w in re.split(r"[\s\u0964\u0965|/]+", t or "") if w.strip()]
-            wc += len(ws)
-            lens.extend(len(w) for w in ws)
-        m["sampled_rows"] = len(rows)
-        if rows:
-            m["words_per_row"] = round(float(wc) / len(rows), 1)
-        if lens:
-            m["long_word_share"] = round(100.0 * sum(1 for L in lens if L > 20) / len(lens), 1)
+    # -----------------------------------------------------------------------
+    # Word shape, over EVERY live non-empty row. Revision A sampled the first
+    # 400 rows by id and took the mean; on the Padma Purana that produced a
+    # verdict the corpus survey of the same morning contradicts. One streamed
+    # pass, word lengths accumulated as a histogram so memory stays flat.
+    # -----------------------------------------------------------------------
+    for m in docs.values():
+        m["wpr"] = []
+        m["hist"] = {}
+        m["head_words"] = 0
+        m["head_rows"] = 0
+        m["frag_rows"] = 0
+    t0 = time.time()
+    scanned = 0
+    if "text" in pcols:
+        cur = con.execute(
+            "SELECT p.doc_id, p.text FROM passages p WHERE %s "
+            "AND TRIM(COALESCE(p.text,''))<>'' ORDER BY p.doc_id, p.id" % live)
+        while True:
+            chunk = cur.fetchmany(5000)
+            if not chunk:
+                break
+            for did, t in chunk:
+                m = by_id.get(did)
+                if m is None:
+                    continue
+                ws = [w for w in WORD_SPLIT.split(t or "") if w]
+                n = len(ws)
+                m["wpr"].append(n)
+                if n < FRAGMENT_WORDS:
+                    m["frag_rows"] += 1
+                if m["head_rows"] < 400:
+                    m["head_rows"] += 1
+                    m["head_words"] += n
+                h = m["hist"]
+                for w in ws:
+                    L = len(w)
+                    h[L] = h.get(L, 0) + 1
+                scanned += 1
+    scan_s = time.time() - t0
+    if verbose:
+        print("  full word-shape scan: %d row(s) in %.1fs" % (scanned, scan_s))
 
-    # Filesystem facts.
     raw_dir = root / "data" / "raw"
     exp_dir = root / "exports"
     proj_dir = bs_root / "projects"
     for code, m in docs.items():
+        wpr = sorted(m.pop("wpr"))
+        hist = m.pop("hist")
+        nrows = len(wpr)
+        words = sum(hist.values())
+        m["shape_rows"] = nrows
+        m["words"] = words
+        m["w_mean"] = round(float(words) / nrows, 1) if nrows else 0.0
+        m["w10"] = round(pctl(wpr, 0.10), 1)
+        m["w50"] = round(pctl(wpr, 0.50), 1)
+        m["w90"] = round(pctl(wpr, 0.90), 1)
+        m["frag_row_share"] = round(100.0 * m["frag_rows"] / nrows, 1) if nrows else 0.0
+        m["long_word_share"] = round(
+            100.0 * sum(c for L, c in hist.items() if L > 20) / words, 1) if words else 0.0
+        m["median_word_len"] = median_from_hist(hist)
+        m["head400_mean"] = round(float(m["head_words"]) / m["head_rows"], 1) \
+            if m["head_rows"] else 0.0
+        m["head_bias"] = round(m["head400_mean"] - m["w_mean"], 1)
+
         raw = sorted(raw_dir.glob("%s*.jsonl" % code)) if raw_dir.is_dir() else []
         m["raw_files"] = len(raw)
         m["raw_fp"] = fp(*[(p.name, p.stat().st_size) for p in raw]) if raw else ""
         exp = sorted(exp_dir.glob("%s*.html" % code)) if exp_dir.is_dir() else []
         m["exports"] = len(exp)
         m["slug"] = slug_for(code)
-        pdfs, proofs = [], []
+        pdfs, proofs = 0, 0
         if proj_dir.is_dir():
             for d in sorted(proj_dir.glob("%s*" % m["slug"])):
                 b = d / "build"
                 if not b.is_dir():
                     continue
                 for f in b.glob("*.pdf"):
-                    (proofs if "proof" in f.name.lower() else pdfs).append(f)
-        m["book_pdf"] = len(pdfs)
-        m["layout_proof"] = len(proofs)
+                    if "proof" in f.name.lower():
+                        proofs += 1
+                    else:
+                        pdfs += 1
+        m["book_pdf"] = pdfs
+        m["layout_proof"] = proofs
         lv = max(1, m["live"])
         m["pct"] = dict((k, round(100.0 * m[k] / lv, 1))
                         for k in ("iast", "en", "hi", "qa", "ents", "morph", "embed"))
     return docs
 
 
-def slug_for(code):
-    s = code.strip().lower().replace("_", "-")
-    s = re.sub(r"[^a-z0-9-]+", "-", s)
-    s = re.sub(r"-{2,}", "-", s).strip("-")
-    return s[:64]
-
-
 # ---------------------------------------------------------------------------
 def judge(stage, m):
-    """(status, reason, input_fp) for one stage, from measurement alone.
-
-    The floors are not opinions. words_per_row comes from the corpus-wide
-    survey of 2026-09-14, in which MBh01 - a GRETIL critical edition, the
-    only text here that was never OCR'd - sits at 12.5, and every document
-    outside roughly 4..60 is either fragments or whole pages."""
+    """(status, reason, input_fp) for one stage, from measurement alone."""
     p = m["pct"]
     live = max(1, m["live"])
 
@@ -350,24 +445,29 @@ def judge(stage, m):
     if stage == "segment":
         if m["passages"] == 0:
             return "pending", "nothing ingested", ""
-        w = m["words_per_row"]
-        lw = m["long_word_share"]
-        f = fp(m["passages"], w, lw)
-        if m["sampled_rows"] == 0:
+        w50, frag, lw = m["w50"], m["frag_row_share"], m["long_word_share"]
+        f = fp(m["passages"], w50, frag, lw)
+        if m["shape_rows"] == 0:
             return "pending", "no non-empty text rows to measure", f
-        if w < 4:
-            return "blocked", ("%.1f words per row - rows are fragments, not verses "
-                               "(MBh01, the clean control, is 12.5). Translating "
-                               "fragments spends the API call on damage." % w), f
-        if lw > 25:
+        if lw > LONGWORD_BLOCK:
             return "blocked", ("%.1f%% of words exceed 20 characters - the text is not "
                                "word-separated, so every lookup and every translation "
                                "sees a run, not a word" % lw), f
-        if w > 60:
-            return "degraded", ("%.1f words per row - whole pages as one unit. "
+        if frag > FRAG_BLOCK:
+            return "blocked", ("%.1f%% of rows carry fewer than %d words (median %.0f) - "
+                               "this is not a sequence of verses. MBh01, the clean "
+                               "control, has 0.2%% such rows."
+                               % (frag, FRAGMENT_WORDS, w50)), f
+        if w50 > PAGE_WORDS:
+            return "degraded", ("median %.0f words per row - whole pages as one unit. "
                                 "Translation and export work; a Booksmith reading "
-                                "edition will not." % w), f
-        return "done", "%.1f words per row, %.1f%% long-word" % (w, lw), f
+                                "edition will not." % w50), f
+        if frag > FRAG_DEGRADE:
+            return "degraded", ("%.1f%% of rows are fragments under %d words, mixed into "
+                                "otherwise usable text (median %.0f)"
+                                % (frag, FRAGMENT_WORDS, w50)), f
+        return "done", ("median %.0f words per row, %.1f%% fragment rows, %.1f%% long words"
+                        % (w50, frag, lw)), f
 
     if stage == "classify":
         if m["passages"] == 0:
@@ -423,7 +523,7 @@ def judge(stage, m):
         f = fp(m["live"], m["morph"])
         if p["morph"] >= 95:
             return "done", "%.1f%% analysed" % p["morph"], f
-        return "pending", "%.1f%% analysed (kosha ceiling on clean text is ~80%%)" % p["morph"], f
+        return "pending", "%.1f%% analysed (kosha answers 80%% on the clean control)" % p["morph"], f
 
     if stage == "export":
         f = fp(m["exports"], m["en"], m["hi"])
@@ -436,16 +536,17 @@ def judge(stage, m):
         if m["book_pdf"] > 0:
             return "done", "%d pdf(s) under projects/%s*" % (m["book_pdf"], m["slug"]), f
         if m["layout_proof"] > 0:
-            return "blocked", ("only a layout proof exists, not a book - the audit "
-                               "gate has not been cleared"), f
+            return "blocked", "only a layout proof exists, not a book", f
         return "pending", "no Booksmith build", f
 
     return "pending", "unknown stage", ""
 
 
 def measured_json(m):
-    keep = ("passages", "live", "sampled_rows", "words_per_row",
-            "long_word_share", "raw_files", "exports", "book_pdf", "layout_proof")
+    keep = ("passages", "live", "shape_rows", "words", "w_mean", "w10", "w50",
+            "w90", "frag_row_share", "long_word_share", "median_word_len",
+            "head400_mean", "head_bias", "raw_files", "exports", "book_pdf",
+            "layout_proof")
     d = dict((k, m[k]) for k in keep if k in m)
     d["pct"] = m.get("pct", {})
     return json.dumps(d, ensure_ascii=False, sort_keys=True)
@@ -463,8 +564,6 @@ def cmd_init(a):
         return 1
     print("doc_stage columns: %s" % ", ".join(cols))
     print("rows: %d" % con.execute("SELECT COUNT(*) FROM doc_stage").fetchone()[0])
-    print("No pre-existing table was modified. Every write statement in this")
-    print("file names doc_stage; the block above prints them for you to check.")
     con.close()
     return 0
 
@@ -476,24 +575,43 @@ def cmd_backfill(a):
     print("%s  backfilling %d document(s) from measurement" % (MARK, len(docs)))
     print("Nothing below is declared. Every status is derived from the data.")
     print("")
-    wrote, changed = 0, 0
-    prior = dict(((c, s), (st, f)) for c, s, st, f in
-                 con.execute("SELECT doc_code, stage, status, input_fp FROM doc_stage"))
+    prior = dict(((c, s), (st, f, r)) for c, s, st, f, r in con.execute(
+        "SELECT doc_code, stage, status, input_fp, reason FROM doc_stage"))
     ts = now()
+    wrote = 0
+    changes = []
     for code in sorted(docs):
         m = docs[code]
         meas = measured_json(m)
         for st in STAGES:
             status, reason, f = judge(st, m)
             was = prior.get((code, st))
-            if was is None or was[0] != status or was[1] != f:
-                changed += 1
+            if was is None:
+                changes.append((code, st, "-", status, reason))
+            elif was[0] != status:
+                changes.append((code, st, was[0], status, reason))
+            elif was[1] != f:
+                changes.append((code, st, was[0] + "*", status, reason))
             con.execute(UPSERT, (code, st, status, f, meas, reason, ts))
             wrote += 1
     con.commit()
     print("wrote %d ledger row(s) across %d document(s); %d differ from what"
-          % (wrote, len(docs), changed))
+          % (wrote, len(docs), len(changes)))
     print("the ledger said before this run.")
+    verdict = [c for c in changes if c[2] != "-" and not c[2].endswith("*")]
+    if verdict:
+        print("")
+        print("  verdicts that CHANGED - old -> new, and why")
+        for code, st, old, new, reason in verdict[:60]:
+            print("    %-32s %-13s %-9s -> %-9s %s" % (code[:32], st, old, new, reason[:52]))
+        if len(verdict) > 60:
+            print("    ... and %d more" % (len(verdict) - 60))
+    refp = [c for c in changes if c[2].endswith("*")]
+    if refp:
+        print("")
+        print("  same verdict, fingerprint moved (inputs changed): %d" % len(refp))
+        for code, st, old, _new, _r in refp[:12]:
+            print("    %-32s %-13s %s" % (code[:32], st, old[:-1]))
     con.close()
     return 0
 
@@ -506,6 +624,11 @@ def _load_board(con):
     return board
 
 
+def _sizes(con):
+    return dict(con.execute("SELECT d.code, COUNT(p.id) FROM docs d "
+                            "LEFT JOIN passages p ON p.doc_id=d.id GROUP BY d.code"))
+
+
 def cmd_status(a):
     con = connect(a.db, writable=False)
     if not has_table(con, "doc_stage"):
@@ -513,8 +636,7 @@ def cmd_status(a):
         con.close()
         return 1
     board = _load_board(con)
-    sizes = dict(con.execute("SELECT d.code, COUNT(p.id) FROM docs d "
-                             "LEFT JOIN passages p ON p.doc_id=d.id GROUP BY d.code"))
+    sizes = _sizes(con)
     print("%s  the board" % MARK)
     print("")
     hdr = "  %-34s %7s  " % ("document", "rows") + " ".join("%-4s" % s[:4] for s in STAGES)
@@ -530,7 +652,6 @@ def cmd_status(a):
     print("  " + "-" * (len(hdr) - 2))
     print("  ok = done   deg = degraded, chain continues   BLK = blocked, chain halts")
     print("  columns: " + "  ".join("%s=%s" % (s[:4], s) for s in STAGES))
-
     print("")
     print("  totals by stage")
     for s in STAGES:
@@ -539,17 +660,25 @@ def cmd_status(a):
         print("    %-14s done %3d   degraded %3d   pending %3d   blocked %3d" % (
             s, c.get("done", 0), c.get("degraded", 0),
             c.get("pending", 0), c.get("blocked", 0)))
-
     print("")
-    print("  blocked and degraded, with the measurement behind each")
+    print("  blocked, with the measurement behind each")
     n = 0
-    for code, stage, status, reason in con.execute(
-            "SELECT doc_code, stage, status, reason FROM doc_stage "
-            "WHERE status IN ('blocked','degraded') ORDER BY status, stage, doc_code"):
-        print("    %-8s %-30s %-9s %s" % (status, code[:30], stage, reason))
+    for code, stage, reason in con.execute(
+            "SELECT doc_code, stage, reason FROM doc_stage WHERE status='blocked' "
+            "ORDER BY stage, doc_code"):
+        print("    %-32s %-9s %s" % (code[:32], stage, reason))
         n += 1
     if n == 0:
         print("    (none)")
+    print("")
+    print("  degraded at segment - no reading edition is reachable for these")
+    rows = con.execute("SELECT doc_code, reason FROM doc_stage WHERE status='degraded' "
+                       "AND stage='segment' ORDER BY doc_code").fetchall()
+    for code, reason in rows[:a.limit]:
+        print("    %-32s %s" % (code[:32], reason[:70]))
+    if len(rows) > a.limit:
+        print("    ... and %d more (all the same shape)" % (len(rows) - a.limit))
+    print("    %d of %d documents" % (len(rows), len(board)))
     con.close()
     return 0
 
@@ -562,15 +691,12 @@ def cmd_next(a):
         con.close()
         return 1
     board = _load_board(con)
-    sizes = dict(con.execute("SELECT d.code, COUNT(p.id) FROM docs d "
-                             "LEFT JOIN passages p ON p.doc_id=d.id GROUP BY d.code"))
+    sizes = _sizes(con)
     print("%s  next actionable units" % MARK)
     print("")
     print("  A stage is actionable when it is pending and every prerequisite is")
     print("  done or degraded. Degraded satisfies a prerequisite on purpose: an")
-    print("  under-segmented document still translates and still exports. Blocked")
-    print("  does not, and that is the point - nothing downstream of a")
-    print("  segmentation fault should run at all.")
+    print("  under-segmented document still translates and still exports.")
     print("")
     ready, halted = [], []
     for code, st in board.items():
@@ -580,32 +706,138 @@ def cmd_next(a):
             if status in STATUS_OK:
                 continue
             if status in ("blocked", "failed"):
-                halted.append((n, code, s, reason))
+                after = [x for x in STAGES[STAGES.index(s) + 1:]
+                         if st.get(x, ("pending", ""))[0] in STATUS_OK]
+                halted.append((n, code, s, reason, after))
                 continue
-            deps = DEPS.get(s, [])
-            if all(st.get(d, ("pending", ""))[0] in STATUS_OK for d in deps):
+            if all(st.get(d, ("pending", ""))[0] in STATUS_OK for d in DEPS.get(s, [])):
                 ready.append((n, code, s, reason))
     lim = a.limit
-    print("  READY  %d unit(s); largest first%s" % (
-        len(ready), (", showing %d" % lim) if len(ready) > lim else ""))
+    by_stage = {}
+    for _n, _c, s, _r in ready:
+        by_stage[s] = by_stage.get(s, 0) + 1
+    print("  READY  %d unit(s) over %d stage(s):" % (len(ready), len(by_stage)))
+    print("    " + "   ".join("%s=%d" % (s, by_stage[s]) for s in STAGES if s in by_stage))
+    print("")
+    print("  largest first%s:" % (", showing %d" % lim if len(ready) > lim else ""))
     for n, code, s, reason in sorted(ready, reverse=True)[:lim]:
         print("    %-32s %-13s %7d rows  %s" % (code[:32], s, n, reason[:44]))
     if not ready:
         print("    (none)")
     print("")
-    print("  HALTED  %d unit(s) - fix the cause, do not run past it" % len(halted))
-    for n, code, s, reason in sorted(halted, reverse=True)[:lim]:
-        print("    %-32s %-13s %7d rows  %s" % (code[:32], s, n, reason[:64]))
+    print("  HALTED  %d unit(s)" % len(halted))
+    for n, code, s, reason, after in sorted(halted, reverse=True)[:lim]:
+        print("    %-32s %-13s %7d rows  %s" % (code[:32], s, n, reason[:62]))
+        if after:
+            print("      NOTE: %s already ran here before this ledger existed, so the"
+                  % ", ".join(after[:6]))
+            print("      block is advisory for this document, not protective. The spend")
+            print("      has happened; what it bought still needs re-segmenting.")
     if not halted:
         print("    (none)")
     con.close()
     return 0
 
 
-# ---------------------------------------------------------------------------
-# --selftest builds a throwaway database with four documents of known shape
-# and asserts the judge classifies each correctly. It runs on your machine,
-# against your Python and your SQLite, before the real database is touched.
+def cmd_distribution(a):
+    """The evidence behind the segment floors. Read-only; writes nothing."""
+    con = connect(a.db, writable=False)
+    docs = corpus_measure(con, Path(a.root), Path(a.booksmith_root), verbose=a.verbose)
+    con.close()
+    order = sorted(docs.items(), key=lambda kv: -kv[1]["shape_rows"])
+    print("%s  word shape, every live row of every document" % MARK)
+    print("")
+    print("  head400 is what revision A measured: the mean over the first 400")
+    print("  rows by id. bias is head400 minus the true mean. Where that number")
+    print("  is large the old sampler was reading a different document.")
+    print("")
+    print("  %-32s %6s %7s %6s %5s %5s %5s %6s %6s %5s %7s" % (
+        "document", "rows", "words", "mean", "p10", "p50", "p90",
+        "frag%", "long%", "wlen", "head400"))
+    print("  " + "-" * 116)
+    for code, m in order:
+        if m["shape_rows"] == 0:
+            continue
+        print("  %-32s %6d %7d %6.1f %5.0f %5.0f %5.0f %6.1f %6.1f %5d %7.1f" % (
+            code[:32], m["shape_rows"], m["words"], m["w_mean"], m["w10"],
+            m["w50"], m["w90"], m["frag_row_share"], m["long_word_share"],
+            m["median_word_len"], m["head400_mean"]))
+    print("")
+    print("  largest head-sample bias (old mean minus true mean)")
+    for code, m in sorted(order, key=lambda kv: -abs(kv[1]["head_bias"]))[:8]:
+        if m["shape_rows"] == 0:
+            continue
+        print("    %-32s head400 %7.1f   true %7.1f   bias %+8.1f" % (
+            code[:32], m["head400_mean"], m["w_mean"], m["head_bias"]))
+
+    print("")
+    print("  sensitivity - how many documents each candidate floor would catch,")
+    print("  so you can see the chosen values are not picked to flatter a")
+    print("  conclusion. The shipped floors are marked <-- in use.")
+    live = [m for m in docs.values() if m["shape_rows"] > 0]
+    print("")
+    print("    fragment-row share above X  ->  documents")
+    for x in (10.0, 20.0, 30.0, 50.0, 70.0):
+        tag = ""
+        if x == FRAG_DEGRADE:
+            tag = "   <-- in use (degrade)"
+        if x == FRAG_BLOCK:
+            tag = "   <-- in use (block)"
+        print("      %5.0f%%  %3d%s" % (x, sum(1 for m in live if m["frag_row_share"] > x), tag))
+    print("    median words per row above X  ->  documents")
+    for x in (30.0, 40.0, 60.0, 90.0, 120.0):
+        tag = "   <-- in use (degrade)" if x == PAGE_WORDS else ""
+        print("      %5.0f   %3d%s" % (x, sum(1 for m in live if m["w50"] > x), tag))
+    print("    long-word share above X  ->  documents")
+    for x in (10.0, 25.0, 40.0):
+        tag = "   <-- in use (block)" if x == LONGWORD_BLOCK else ""
+        print("      %5.0f%%  %3d%s" % (x, sum(1 for m in live if m["long_word_share"] > x), tag))
+    print("")
+    print("  the clean control, for scale:")
+    c = docs.get("MBh01")
+    if c:
+        print("    MBh01  mean %.1f  p50 %.0f  frag %.1f%%  long %.1f%%  median word %d"
+              % (c["w_mean"], c["w50"], c["frag_row_share"], c["long_word_share"],
+                 c["median_word_len"]))
+    return 0
+
+
+def cmd_duplicates(a):
+    """Two doc codes over the same text means the automaton pays twice."""
+    con = connect(a.db, writable=False)
+    sizes = _sizes(con)
+    codes = sorted(sizes)
+    print("%s  possible duplicate documents" % MARK)
+    print("")
+    print("  An automaton that translates both members of a pair pays twice for")
+    print("  one text. These are candidates only - the name and row count match,")
+    print("  the content still needs your eye.")
+    print("")
+    hits = []
+    for i, a1 in enumerate(codes):
+        for b1 in codes[i + 1:]:
+            la, lb = a1.lower(), b1.lower()
+            nested = la in lb or lb in la
+            same_n = sizes[a1] == sizes[b1] and sizes[a1] > 0
+            if nested or same_n:
+                hits.append((a1, sizes[a1], b1, sizes[b1],
+                             "name nests" if nested else "", "same row count" if same_n else ""))
+    if not hits:
+        print("    (none)")
+    for a1, na, b1, nb, r1, r2 in hits:
+        why = ", ".join(x for x in (r1, r2) if x)
+        print("    %-34s %6d   %-34s %6d   %s" % (a1[:34], na, b1[:34], nb, why))
+    print("")
+    print("  documents with zero passages (a code with nothing behind it):")
+    z = [c for c in codes if sizes[c] == 0]
+    for c in z:
+        print("    %s" % c)
+    if not z:
+        print("    (none)")
+    con.close()
+    return 0
+
+
 # ---------------------------------------------------------------------------
 FIXTURE = [
     # code, rows, words per row, word length, translated share, expect at segment
@@ -613,6 +845,7 @@ FIXTURE = [
     ("fx_fragmented", 200,  2, 6,  0.0, "blocked"),
     ("fx_runon",       40, 10, 34, 0.0, "blocked"),
     ("fx_pagesized",   30, 90, 7,  1.0, "degraded"),
+    ("fx_mixed",      100,  0, 7,  1.0, "degraded"),   # 30% fragments, rest clean
 ]
 
 
@@ -636,7 +869,10 @@ def _fixture_db():
         con.execute("INSERT INTO docs(id,code) VALUES(?,?)", (i, code))
         for r in range(rows):
             pid += 1
-            txt = " ".join("a" * wlen for _ in range(wpr))
+            n = wpr
+            if code == "fx_mixed":
+                n = 2 if (r % 10) < 3 else 14
+            txt = " ".join("a" * wlen for _ in range(n))
             tr = "translated" if (float(r) / max(1, rows)) < tshare else None
             con.execute("INSERT INTO passages(id,doc_id,text,text_type,iast,translation) VALUES(?,?,?,?,?,?)",
                         (pid, i, txt, "mula", "iast", tr))
@@ -654,31 +890,41 @@ def cmd_selftest(a):
     print("")
     rc |= cmd_backfill(ns)
     print("")
-
     con = connect(dbp, writable=False)
     got = dict(((c, s), st) for c, s, st in
                con.execute("SELECT doc_code, stage, status FROM doc_stage"))
+    meas = dict((c, json.loads(j)) for c, j in con.execute(
+        "SELECT doc_code, measured FROM doc_stage WHERE stage='segment'"))
+    con.close()
     print("  assertions")
     fails = 0
     for code, rows, wpr, wlen, tshare, exp in FIXTURE:
         act = got.get((code, "segment"))
+        mm = meas.get(code, {})
         ok = (act == exp)
         fails += 0 if ok else 1
-        print("    %-14s %2d w/row, %2d chars -> segment=%-9s expected %-9s %s"
-              % (code, wpr, wlen, act, exp, "OK" if ok else "MISMATCH"))
-    # the chain must halt for the two blocked fixtures and not for the others
+        print("    %-14s p50 %5.0f  frag %5.1f%%  long %5.1f%%  -> %-9s expected %-9s %s"
+              % (code, mm.get("w50", 0), mm.get("frag_row_share", 0),
+                 mm.get("long_word_share", 0), act, exp, "OK" if ok else "MISMATCH"))
     for code, _r, _w, _l, _t, exp in FIXTURE:
-        en = got.get((code, "translate_en"))
-        if exp == "blocked" and en == "done":
-            print("    %-14s translate_en is done behind a blocked segment" % code)
+        if exp == "blocked" and got.get((code, "translate_en")) == "done":
+            print("    %-14s translate_en done behind a blocked segment" % code)
             fails += 1
-    deg = got.get(("fx_pagesized", "translate_en"))
-    if deg != "done":
-        print("    fx_pagesized translate_en=%s - degraded should NOT halt the chain" % deg)
+    if got.get(("fx_pagesized", "translate_en")) != "done":
+        print("    fx_pagesized translate_en=%s - degraded must not halt the chain"
+              % got.get(("fx_pagesized", "translate_en")))
         fails += 1
     else:
-        print("    fx_pagesized  degraded segment did not halt translate_en   OK")
-    con.close()
+        print("    fx_pagesized   degraded segment did not halt translate_en   OK")
+    # the mean would have called fx_mixed clean; the median plus fragment share must not
+    mx = meas.get("fx_mixed", {})
+    if mx.get("w_mean", 0) >= FRAGMENT_WORDS and got.get(("fx_mixed", "segment")) == "done":
+        print("    fx_mixed  mean %.1f hid a %.0f%% fragment share - the old rule's bug"
+              % (mx.get("w_mean", 0), mx.get("frag_row_share", 0)))
+        fails += 1
+    else:
+        print("    fx_mixed       mean %.1f looks clean, %.0f%% fragment rows caught it   OK"
+              % (mx.get("w_mean", 0), mx.get("frag_row_share", 0)))
     print("")
     print("  selftest: %s  (fixture left at %s)" % ("PASS" if fails == 0 else "FAIL", tmp))
     return 1 if fails else 0
@@ -696,9 +942,12 @@ def main():
     ap.add_argument("--backfill", action="store_true")
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--next", action="store_true")
+    ap.add_argument("--distribution", action="store_true")
+    ap.add_argument("--duplicates", action="store_true")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
-    acts = (a.selftest, a.init, a.backfill, a.status, a.next)
+    acts = (a.selftest, a.init, a.backfill, a.status, a.next,
+            a.distribution, a.duplicates)
     if not any(acts):
         ap.print_help()
         return 0
@@ -707,12 +956,16 @@ def main():
         rc |= cmd_selftest(a)
     if a.init:
         rc |= cmd_init(a)
+    if a.distribution:
+        rc |= cmd_distribution(a)
     if a.backfill:
         rc |= cmd_backfill(a)
     if a.status:
         rc |= cmd_status(a)
     if a.next:
         rc |= cmd_next(a)
+    if a.duplicates:
+        rc |= cmd_duplicates(a)
     return rc
 
 
