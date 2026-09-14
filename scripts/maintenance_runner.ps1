@@ -10,7 +10,12 @@ $log  = "D:\backups\maintenance_log.txt"
 New-Item -ItemType Directory -Force -Path "D:\backups" | Out-Null
 Set-Location $root
 $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-function Log($m) { Add-Content -Path $log -Value "[$stamp] $m" }
+# MAINT_CONVERGE_2026_09_12: stamp each line at the time it is WRITTEN. This
+# captured $stamp once at script start, so every line of an hour-long run
+# carried the same second and the log read as if nothing took any time.
+function Log($m) {
+    Add-Content -Path $log -Value ("[" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + "] " + $m)
+}
 
 # Always record that the runner fired, before any guard, so a silent task is
 # never a mystery again.
@@ -34,16 +39,39 @@ $py = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $py) { $py = "python" }
 
 Log "START maintenance"
+$t0 = Get-Date
 try {
     # a) refresh QA scores (FREE, no API) - keeps translation_qa current
+    $ta = Get-Date
     & $py scripts\qa_scan.py --db data\context.db --lang en --write 2>&1 | Add-Content $log
+    Log ("STEP a qa_scan      {0:n0}s" -f ((Get-Date) - $ta).TotalSeconds)
+
     # b) incremental semantic index (CHEAP) - embeds only new/changed verses
+    $tb = Get-Date
     & $py scripts\build_embeddings.py --db data\context.db 2>&1 | Add-Content $log
-    # c) incremental entity layer (MODERATE) - new verses + retry prior empties
-    & $py scripts\extract_entities.py --db data\context.db --retry-empty 2>&1 | Add-Content $log
-    Log "DONE maintenance"
+    Log ("STEP b embeddings   {0:n0}s" -f ((Get-Date) - $tb).TotalSeconds)
+
+    # c) incremental entity layer (MODERATE) - NEW verses only.
+    #
+    # MAINT_CONVERGE_2026_09_12. This carried --retry-empty, which also
+    # re-selects every verse whose ents is '[]'. A verse with no names
+    # returns '[]' every time, so that set never shrinks: 5,486 rows
+    # re-processed on every run, for ever, about 87% of the budget spent
+    # re-confirming nothing. 630 API calls at batch=10 ran past the task's
+    # PT1H limit and the run was killed - 41 starts, 0 completions, no
+    # error logged because a killed process cannot log one.
+    #
+    # Without it the set is the 809 genuinely unprocessed verses. --limit
+    # is a ceiling that does not bind today and will bind later, when
+    # translation grows the corpus. To recover verses that were dropped by
+    # an old JSON-parse failure, run --retry-empty BY HAND with a --limit.
+    $tc = Get-Date
+    & $py scripts\extract_entities.py --db data\context.db --limit 1500 2>&1 | Add-Content $log
+    Log ("STEP c entities     {0:n0}s" -f ((Get-Date) - $tc).TotalSeconds)
+
+    Log ("DONE maintenance - total {0:n0}s" -f ((Get-Date) - $t0).TotalSeconds)
     exit 0
 } catch {
-    Log "FAIL: $_"
+    Log ("FAIL after {0:n0}s: {1}" -f ((Get-Date) - $t0).TotalSeconds, $_)
     exit 1
 }

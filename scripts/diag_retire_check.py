@@ -53,10 +53,48 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
+def _force_utf8_streams():
+    """patch_booksmith_utf8.py's reason, and it applies here too: PowerShell
+    5.1 hands a console whose codepage is not UTF-8, so Devanagari prints as
+    mojibake. The transcript file is still correct; this makes the console
+    correct too, where the font can draw it."""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            pass
+
+
+_force_utf8_streams()
+
 try:
     from resegment_doc import split_verses
 except Exception as e:  # pragma: no cover
     sys.exit("cannot import resegment_doc.py from %s: %s" % (HERE, e))
+
+# IAST beside every unmatched verse, because IAST is ASCII and will render in
+# any console whatever its codepage or font. A verse you cannot read is a
+# verse you cannot make a decision about.
+_IAST = None
+try:
+    import iast_utils as _iu
+    for _n in ("to_iast", "dev_to_iast", "devanagari_to_iast", "iast", "transliterate"):
+        _f = getattr(_iu, _n, None)
+        if callable(_f):
+            _IAST = _f
+            break
+except Exception:
+    _IAST = None
+
+
+def iast_of(s):
+    if not _IAST:
+        return None
+    try:
+        out = _IAST(s)
+        return out if isinstance(out, str) else None
+    except Exception:
+        return None
 
 MARK = "RETIRE_CHECK_2026_09_14"
 DEV_ALL = re.compile("[\\u0900-\\u097F]+")
@@ -154,8 +192,14 @@ def main():
         for page_no, idx, ref, txt in missing[:a.show]:
             flat = " ".join((txt or "").split())
             print("")
-            print("    page %s idx %s  ref=%s  (%d chars)" % (page_no, idx, ref, len(flat)))
+            dev = sum(1 for ch in flat if "\u0900" <= ch <= "\u097f")
+            print("    page %s idx %s  ref=%s  (%d chars, %.0f%% Devanagari)"
+                  % (page_no, idx, ref, len(flat),
+                     100.0 * dev / max(1, len(flat.replace(" ", "")))))
             print("      %s" % flat[:300])
+            ia = iast_of(flat)
+            if ia:
+                print("      IAST: %s" % " ".join(ia.split())[:300])
         if len(missing) > a.show:
             print("")
             print("    ... and %d more" % (len(missing) - a.show))
