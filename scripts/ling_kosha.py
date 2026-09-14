@@ -235,6 +235,7 @@ class Kosha:
         slp_all, residue = self.to_slp1(cleaned)
         words_dev = [w for w in SPLIT_RE.split(cleaned) if w.strip(STRIP_EDGE)]
         rows, known = [], 0
+        self.last_wordlens = [len(w.strip(STRIP_EDGE)) for w in words_dev]
         for wd in words_dev:
             slp_w, _ = self.to_slp1(wd)
             key, lemmas, n, near = self.lookup(slp_w)
@@ -320,8 +321,10 @@ def main():
             continue
         tot_w += n; tot_k += known
         tot_near += sum(1 for w in words if "near" in w)
-        d = per_doc.setdefault(code, [0, 0, 0])
+        d = per_doc.setdefault(code, [0, 0, 0, [], 0])
         d[0] += 1; d[1] += n; d[2] += known
+        d[3].extend(kk.last_wordlens)
+        d[4] += sum(1 for w in words if "near" in w)
         for c in residue:
             residues["U+%04X" % ord(c)] += 1
         done += 1
@@ -356,12 +359,41 @@ def main():
         con.commit(); pending.clear()
 
     el = time.time() - t0
-    print("\n  %-44s %8s %8s %9s" % ("document", "rows", "words", "in kosha"))
-    print("  " + "-" * 72)
-    for code, (r, w, k) in sorted(per_doc.items(), key=lambda kv: -kv[1][1]):
-        print("  %-44s %8d %8d %8.1f%%" % (code[:44], r, w, 100.0 * k / max(1, w)))
-    print("  " + "-" * 72)
-    print("  %-44s %8d %8d %8.1f%%" % ("TOTAL", done, tot_w, 100.0 * tot_k / max(1, tot_w)))
+    import statistics as _st
+    CTRL = "MBh01"   # GRETIL critical-edition e-text, never OCR'd: the control
+    ctrl_cov = None
+    if CTRL in per_doc:
+        _r, _w, _k = per_doc[CTRL][0], per_doc[CTRL][1], per_doc[CTRL][2]
+        ctrl_cov = 100.0 * _k / max(1, _w)
+
+    print("\n  %-34s %7s %8s %6s %6s %6s %7s %7s" % (
+        "document", "rows", "words", "w/row", "medlen", "run%", "kosha", "vs ctl"))
+    print("  " + "-" * 92)
+    for code, (r, w, k, lens, near) in sorted(per_doc.items(), key=lambda kv: -kv[1][1]):
+        cov = 100.0 * k / max(1, w)
+        med = _st.median(lens) if lens else 0
+        runs = 100.0 * sum(1 for L in lens if L > 20) / max(1, len(lens))
+        gap = ("%+6.1f" % (cov - ctrl_cov)) if ctrl_cov is not None else "     -"
+        tag = ""
+        if w / max(1, r) < 5:
+            tag = "  rows are fragments"
+        elif w / max(1, r) > 60:
+            tag = "  whole pages as one row"
+        if runs > 25:
+            tag += "  unsegmented runs"
+        print("  %-34s %7d %8d %6.1f %6d %5.1f%% %6.1f%% %s%s" % (
+            code[:34], r, w, w / max(1, r), med, runs, cov, gap, tag))
+    print("  " + "-" * 92)
+    print("  %-34s %7d %8d %6.1f %6s %6s %6.1f%%" % (
+        "TOTAL", done, tot_w, tot_w / max(1, done), "", "",
+        100.0 * tot_k / max(1, tot_w)))
+    if ctrl_cov is not None:
+        print("\n  control: %s is a GRETIL critical-edition import, never OCR'd." % CTRL)
+        print("  Its %.1f%% is what the kosha achieves on clean Sanskrit. The gap in" % ctrl_cov)
+        print("  the last column is this document's damage, not the kosha's limit.")
+        print("  medlen is the median word length in characters and run%% the share")
+        print("  over 20 characters: high run%% means words are not separated, which")
+        print("  needs a segmenter; low run%% with a big gap means the OCR is wrong.")
     print("\n  %.1fs, %.0f rows/s" % (el, done / el if el else 0))
     if tot_near:
         print("\n  %d word(s) the kosha rejects but WOULD accept with one vowel"
