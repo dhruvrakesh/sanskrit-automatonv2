@@ -186,9 +186,11 @@ def main():
     ap.add_argument("--lang", default="en",
                     help="Target language. 'en' (default) writes passages."
                          "translation as always. 'hi' (Phase HI) translates "
-                         "Sanskrit→Hindi, anchored by the verified English, and "
-                         "writes translations_l10n — only for passages whose "
-                         "English exists and passed QA (>= --anchor-min-qa).")
+                         "Sanskrit->Hindi DIRECTLY and writes translations_l10n; "
+                         "a QA-passed English, when one exists, is passed only as "
+                         "a meaning reference. Decision 2026-09-27 "
+                         "(TRANSLATION_FILTERS2_2026_09_27): direct sa->hi for "
+                         "fidelity; --require-anchor restores English gating.")
     ap.add_argument("--anchor-min-qa", type=float, default=0.6,
                     help="For --lang != en: when a QA-passed English translation "
                          "exists (translation_qa >= this), pass it to the model "

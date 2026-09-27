@@ -1094,6 +1094,16 @@ def api_translate():
     context = str(data.get("context") or 5)   # 5-verse sliding context window
     min_quality = str(data.get("min_quality") or 0.35)  # Phase Q default (was 0.25)
     lang    = (data.get("lang") or "en").strip()   # Phase HI ('both' => EN then HI)
+    # TRANSLATION_FILTERS2_2026_09_27: optional page window, so a retry of the
+    # verses a run already went past does not also start the untranslated rest.
+    _win = []
+    for _k, _flag in (("since_page", "--since-page"), ("until_page", "--until-page")):
+        try:
+            _v = int(data.get(_k) or 0)
+        except (TypeError, ValueError):
+            _v = 0
+        if _v > 0:
+            _win += [_flag, str(_v)]
 
     # One-job EN+HI: run the English pass then the Hindi pass back to back via the
     # translate_both.py orchestrator. Each pass is the UNCHANGED translate_passages.py
@@ -1111,7 +1121,7 @@ def api_translate():
     cmd = py(script("translate_passages.py"),
              "--db", db, "--doc", doc, "--engine", engine,
              "--sleep", sleep, "--limit", limit, "--context", context,
-             "--min-quality", min_quality)
+             "--min-quality", min_quality) + _win
     kind = "translate"
     if lang != "en":
         cmd += ["--lang", lang]
@@ -1279,6 +1289,16 @@ def _bs_variants(doc: str) -> list:
             continue
         v = {"mode": m, "slug": slug, "label": BOOKSMITH_MODE_LABEL[m],
              "ui": f"{BOOKSMITH_UI}/projects/{slug}"}
+        # TRANSLATION_FILTERS2_2026_09_27: say what the PDF is. booksmith_build
+        # makes every project it creates an AUDIT proof ("not a textual
+        # release"); only policy.output_mode 'reading' passes the reading gate.
+        try:
+            _om = re.search(r"^\s*output_mode:\s*([a-z_]+)",
+                            (project / "book.yaml").read_text(encoding="utf-8", errors="replace"),
+                            re.M)
+            v["output_mode"] = _om.group(1) if _om else "reading"
+        except OSError:
+            v["output_mode"] = None
         pdf, kind = _bs_pdf_path(doc, m)
         if pdf:
             st = pdf.stat()
@@ -2198,7 +2218,7 @@ function bsRender(s){{
   vs.forEach(function(v){{
     if(v.pdf){{
       var kb=Math.round(v.pdf.bytes/1024);
-      var what=(v.pdf.kind==='book')?'PDF':'layout proof';
+      var what=(v.pdf.kind!=='book')?'layout proof':(v.output_mode==='audit'?'audit proof PDF':'PDF');
       h+='<a class="pdf" href="/api/booksmith/pdf/'+encodeURIComponent(s.doc)+
          '?mode='+encodeURIComponent(v.mode)+'" '+
          'title="'+v.label+' '+what+', '+kb+' KB, built '+v.pdf.mtime+'">'+

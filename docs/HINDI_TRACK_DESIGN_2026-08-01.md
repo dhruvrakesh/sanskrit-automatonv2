@@ -120,3 +120,6 @@ Hindi work starts only after: current English sweeps drain, LalitaVistara +
 Śukla Yajurveda overnight runs complete, and the Debroy sheet is scored —
 that scoring calibrates the judge and locks the engine before the corpus is
 translated twice. Budget check at HI-4 gate: ~$2 within the $8 envelope.
+
+---
+**Superseded in part, 2026-09-27 (TRANSLATION_FILTERS2_2026_09_27).** Rule D1 ("Hindi is generated only for passages whose English exists and passed QA") is no longer the default. Hindi is translated **directly from the Sanskrit** for fidelity. A QA-passed English, where one exists, is passed only as a meaning reference, and `--require-anchor` restores the old gating. See docs/TRANSLATION_EMPTY_OUTCOMES_2026-09-27.md, section 7.

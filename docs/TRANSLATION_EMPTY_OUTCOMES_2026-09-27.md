@@ -70,3 +70,25 @@ The apply step needs a backup, runs in one transaction and prints the SQL that r
 - Do not use `purge_empty_cache.py --yes` casually: it runs `VACUUM`, and RETIREMENT_AND_BACKUP_POLICY §6 says never to. It is not needed here, because empties are not cached and the Hindi version bump already retires the old Hindi keys.
 
 RUNBOOK §3g is a short pointer to this document.
+
+## 6. Second pass, from the live corpus (TRANSLATION_FILTERS2_2026_09_27)
+
+Measured by Block AY on the live database:
+
+- **Replay of every stored translation.** 18,481 English rows are unchanged. One row loosened: id 37517, a real sentence that the old filter had emptied. One row tightened: id 12574, which contains no English at all. The only Hindi rows affected were the 1,157 that are nothing but `[asphuta]`.
+- **Remediation.** The 1,157 bare-token Hindi rows were archived and removed. The invented "Vaisampayana said -" opening was stripped from 35 rows: Shatapatha 20, Aphorisms 10, nirukta 3, nilamata 2.
+- **Paid probe of 12 verses.**
+  - Shatapatha p297.12 ("the remainder of the sutra") was emptied by the old filter and is kept by the new one.
+  - Shatapatha p131.2 and p251.3 came back as complete, faithful translations with one `[ILLEGIBLE]` where a word is damaged. The first-pass filter still emptied them, because "illegible" is a refusal phrase.
+  - Seven of the 12 answers were the bare `[ILLEGIBLE]` token. Four were on the errata apparatus (now frontmatter) and one on garbled OCR, but two were on largely legible Brhadaranyaka text in the Shatapatha (p194.4, quality 0.91; p139.4, quality 0.89).
+
+What changed in the second pass:
+
+- **Filter.** A lacuna token *inside* a translation is a mark, not a refusal; only an output that is nothing but the token is left empty.
+- **Prompts.** English rule 12 and Hindi rule 10 now allow the bare token only when no part of the text can be read; otherwise the model translates what it can and marks the gap. The prompt versions are now `v3-2026-09-27` and `hi-v3-2026-09-27`. That changes the cache keys, but rows already translated are never requested again, so nothing is billed twice.
+- **Dashboard.** `/api/translate` accepts an optional `until_page`. `plan_empty_retries.py` (read-only) uses it to plan retries that cover only the verses a run has already passed.
+- **Library.** A build made in audit mode is now labelled "audit proof PDF".
+
+## 7. Decision: Hindi is translated directly from Sanskrit (2026-09-27)
+
+For fidelity, Hindi is translated straight from the Sanskrit. A QA-passed English translation, where one exists, is passed to the model only as a meaning reference. This supersedes rule D1 of HINDI_TRACK_DESIGN_2026-08-01 ("Hindi only where English exists and passed QA"). `--require-anchor` restores the old gating for any run that needs it.

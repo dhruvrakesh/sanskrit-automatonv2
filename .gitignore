@@ -99,3 +99,4 @@ data/fidelity_review/
 data/translate_outcomes.jsonl
 scripts/*.bak_tf_*
 
+scripts/*.bak_tf2_*

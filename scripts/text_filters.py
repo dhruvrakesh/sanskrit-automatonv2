@@ -219,6 +219,16 @@ def _bare_token_hi(t: str) -> bool:
     return rest != t.strip() and (not rest or bool(ONLY_PUNCT_RE.match(rest)))
 
 
+_LACUNA_RE = re.compile(r"\[\s*(?:illegible|\u0905\u0938\u094d\u092a\u0937\u094d\u091f)\s*\]", re.I)
+
+
+def _bare_lacuna(t: str) -> bool:
+    """True when t is nothing but lacuna token(s) - [ILLEGIBLE] / [asphuta] -
+    and punctuation. (TRANSLATION_FILTERS2_2026_09_27)"""
+    rest = _LACUNA_RE.sub(" ", t).strip()
+    return rest != t.strip() and (not rest or bool(ONLY_PUNCT_RE.match(rest)))
+
+
 def _refusal_cut(t: str, lang: str = "en", caveats: bool = True) -> int:
     """Earliest index in t where a refusal or OCR caveat begins, else -1.
 
@@ -229,6 +239,16 @@ def _refusal_cut(t: str, lang: str = "en", caveats: bool = True) -> int:
         return -1
     if lang == "hi" and _bare_token_hi(t):
         return 0
+    # TRANSLATION_FILTERS2_2026_09_27. The prompt's hard-fail token INSIDE a
+    # translation is a lacuna mark, not a refusal. Measured on the live
+    # corpus: Shatapatha p131.2 and p251.3 came back as full, faithful
+    # translations with one "[ILLEGIBLE]" where a word is damaged, and the
+    # old test emptied both because "illegible" is a refusal phrase. An output
+    # that is ONLY the token (and punctuation) is still empty; everywhere else
+    # the token is masked, length-preserving, before the phrase scan.
+    if _bare_lacuna(t):
+        return 0
+    t = _LACUNA_RE.sub(lambda m: " " * len(m.group(0)), t)
     low = t.lower()
     cut = -1
 

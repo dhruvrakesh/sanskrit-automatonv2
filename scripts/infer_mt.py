@@ -51,8 +51,8 @@ class BudgetBlocked(QuotaExhausted):
 # vice versa). Bump the relevant entry whenever that language's system prompt
 # changes materially. (Old cache rows are retained; they simply stop matching.)
 PROMPT_VERSIONS = {
-    "en": "v2-2026-07-20",
-    "hi": "hi-v2-2026-09-27",   # TRANSLATION_FILTERS_2026_09_27: rule 7
+    "en": "v3-2026-09-27",      # TRANSLATION_FILTERS2_2026_09_27: rule 12
+    "hi": "hi-v3-2026-09-27",   # _2026_09_27 rule 7; FILTERS2: rule 10
 }
 # Backward-compat alias: existing English callers/imports still see the same
 # string, so English cache hashes are byte-identical to what is already stored.
@@ -82,7 +82,7 @@ Your translation principles:
 9. AGREEMENT: Every clause must have an explicit grammatical subject, and absolutive (gerund) constructions must be resolved to their true agent so that subject and main verb always agree. Never produce "X-plural having seen..., then Y-singular addressed...".
 10. NAME CONSISTENCY: Use exactly one IAST spelling for each proper noun throughout (e.g. always Śārṅgaka — never Śārṅgaka and Śārṅga in alternation).
 11. DEMONSTRATIVES: Do not calque tad/te as "that/those" by default; use English articles unless the demonstrative is genuinely deictic.
-12. OUTPUT: Produce ONLY the English translation — no preamble, no "Translation:", no meta-commentary. If the text is illegible OCR noise, output exactly: [ILLEGIBLE]"""
+12. OUTPUT: Produce ONLY the English translation — no preamble, no "Translation:", no meta-commentary. Output exactly [ILLEGIBLE] ONLY when no part of the text can be read. If some words are damaged, translate everything that can be read and write [ILLEGIBLE] only where the unreadable words stand — never withhold a readable passage because part of it is damaged."""
 
 
 # ── Hindi system prompt (Phase HI, hi-v1) ────────────────────────────────────
@@ -101,7 +101,7 @@ _SYSTEM_PROMPT_HI = """आप एक संस्कृत विद्वान
 7. वक्ता-सूचना: वक्ता-पंक्ति केवल तभी दें जब संस्कृत पाठ में स्वयं वक्ता हो (जैसे "<नाम> उवाच" → "<नाम> ने कहा —")। जहाँ संस्कृत में वक्ता नहीं है, वहाँ कोई वक्ता न जोड़ें।
 8. कर्ता-संगति: प्रत्येक उपवाक्य का स्पष्ट कर्ता हो; प्रत्येक विशेषनाम की एक ही वर्तनी सर्वत्र प्रयुक्त हो।
 9. सन्दर्भ: नीचे दिया गया अंग्रेज़ी अनुवाद केवल अर्थ के सत्यापित सन्दर्भ हेतु है — उसका अनुवाद न करें, केवल संस्कृत का अनुवाद करें।
-10. निर्गम: केवल हिन्दी अनुवाद दें — कोई भूमिका, "अनुवाद:" शीर्षक या टिप्पणी नहीं। यदि पाठ अपठनीय OCR कोलाहल है तो ठीक यही लिखें: [अस्पष्ट]"""
+10. निर्गम: केवल हिन्दी अनुवाद दें — कोई भूमिका, "अनुवाद:" शीर्षक या टिप्पणी नहीं। केवल [अस्पष्ट] तभी लिखें जब पाठ का कोई भी अंश पढ़ा न जा सके। यदि कुछ शब्द क्षतिग्रस्त हों, तो जो पढ़ा जा सकता है उस सबका अनुवाद करें और [अस्पष्ट] केवल वहीं लिखें जहाँ अपठनीय शब्द हैं — आंशिक क्षति के कारण पठनीय अंश का अनुवाद कभी न छोड़ें।"""
 
 
 def _build_system_prompt(

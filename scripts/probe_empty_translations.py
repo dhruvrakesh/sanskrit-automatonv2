@@ -67,6 +67,9 @@ def main():
     ap.add_argument("--engine", default=None)
     ap.add_argument("--min-quality", type=float, default=0.35)
     ap.add_argument("--yes", action="store_true", help="actually call the model (paid)")
+    ap.add_argument("--ids", default=None,
+                    help="comma-separated passage ids to probe exactly (even if no longer "
+                         "empty) - re-asks the same verses after a prompt change")
     a = ap.parse_args()
     if a.n > 25:
         print("--n is capped at 25 for a probe."); return 2
@@ -90,12 +93,17 @@ def main():
         empty = "NOT " + done
     last = ro.execute("SELECT MAX(p.page_no) FROM passages p WHERE p.doc_id=? AND %s" % done,
                       (did,)).fetchone()[0] or 0
+    sel = empty
+    if a.ids:
+        ids = [int(x) for x in a.ids.split(",") if x.strip().isdigit()]
+        sel = "p.id IN (%s)" % (",".join(str(i) for i in ids) or "-1")
+        last = 10 ** 9
     rows = ro.execute(
         "SELECT p.id, p.page_no, p.idx, p.text, COALESCE(p.quality_score,0), %s, %s, %s, %s, %s, "
         "COALESCE(p.translation,''), COALESCE(p.translation_qa,0) FROM passages p "
         "WHERE p.doc_id=? AND %s AND %s AND p.page_no<=? ORDER BY p.quality_score DESC, p.page_no"
         % (pick("verse_ref"), pick("chapter"), pick("chandas"), pick("text_type"), pick("iast"),
-           LIVE, empty), (did, last)).fetchall()
+           LIVE, sel), (did, last)).fetchall()
     todo = []
     for r in rows:
         normed = normalize_sanskrit(r[3] or "")
