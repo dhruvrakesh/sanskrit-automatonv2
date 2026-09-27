@@ -8,6 +8,7 @@ heuristic QA score for stored translations, used by qa_scan.py, retranslate.py
 and the translate write-path.
 """
 from __future__ import annotations
+import json   # PARK_ILLEGIBLE_2026_09_27
 import re
 
 DEV_RE = re.compile(r"[ऀ-ॿ]")          # Devanagari block
@@ -643,3 +644,63 @@ def score_translation_quality(src: str, translation: str, lang: str = "en") -> f
         score -= 0.5          # no English letters at all
 
     return round(max(0.0, min(1.0, score)), 3)
+
+
+
+# -- PARK_ILLEGIBLE_2026_09_27 ------------------------------------------------
+# A verse answered with nothing but the lacuna token on --park-after separate
+# runs, under the current prompt and for the same source text, is parked:
+# asking again buys the same answer. Evidence is the append-only ledger
+# data/translate_outcomes.jsonl; nothing in the database is changed, and a new
+# prompt version or a re-OCR'd source un-parks the verse by itself.
+_PARK_TOKEN_RE = re.compile(
+    r"\[\s*(?:illegible|\u0905\u0938\u094d\u092a\u0937\u094d\u091f)\s*\]", re.I)
+_PARK_SOFT_RE = re.compile(r"\[\s*\?\s*\]")      # the uncertainty mark [?]
+_PARK_PUNCT_RE = re.compile(
+    r"[\s\d\u0966-\u096f/|\u0964\u0965.,;:!?'\"()\[\]*_~`\-\u2013\u2014\u2026]+")
+# infer_mt.py was rewritten with the v3 prompts at 2026-09-27 07:16:03 UTC.
+# Ledger records from before this patch carry no "prompt" field; they count
+# as the current prompt only when written after that moment.
+PARK_LEGACY_SINCE = "2026-09-27T07:16:04+00:00"
+
+
+def is_bare_illegible(raw) -> bool:
+    """True when raw is only lacuna token(s) plus punctuation / verse numbers."""
+    s = raw or ""
+    if not _PARK_TOKEN_RE.search(s):
+        return False
+    s = _PARK_SOFT_RE.sub(" ", _PARK_TOKEN_RE.sub(" ", s))   # tokens first, then punctuation
+    return _PARK_PUNCT_RE.sub("", s) == ""
+
+
+def load_parked(ledger_path, lang, current_prompt, min_attempts=2,
+                legacy_since=PARK_LEGACY_SINCE):
+    """{(passage_id, source[:2000]): attempts} for verses to skip. Never raises."""
+    counts = {}
+    try:
+        fh = open(str(ledger_path), encoding="utf-8")
+    except OSError:
+        return {}
+    with fh:
+        for line in fh:
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if not isinstance(r, dict) or r.get("lang") != lang:
+                continue
+            if r.get("cause") != "refusal-filter" or not is_bare_illegible(r.get("raw")):
+                continue
+            p = r.get("prompt")
+            if p is None:
+                if str(r.get("ts") or "") < legacy_since:
+                    continue
+            elif p != current_prompt:
+                continue
+            pid, src = r.get("passage_id"), r.get("source")
+            if pid is None or src is None:
+                continue
+            key = (pid, str(src)[:2000])
+            counts[key] = counts.get(key, 0) + 1
+    n = max(1, int(min_attempts or 1))
+    return {k: v for k, v in counts.items() if v >= n}

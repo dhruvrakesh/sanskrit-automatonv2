@@ -47,6 +47,7 @@ for _s in (sys.stdout, sys.stderr):
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import text_filters as tf                      # noqa: E402
 from normalize_text import normalize_sanskrit  # noqa: E402
+from infer_mt import PROMPT_VERSIONS           # noqa: E402  PARK_ILLEGIBLE_2026_09_27
 
 LIVE = ("COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter') "
         "AND TRIM(COALESCE(p.text,''))<>''")
@@ -61,6 +62,10 @@ def main():
     ap.add_argument("--min-dev", type=float, default=0.05)
     ap.add_argument("--per-verse", type=float, default=0.00023)
     ap.add_argument("--min-rows", type=int, default=1)
+    ap.add_argument("--park-after", type=int, default=2,
+                    help="same rule as translate_passages --park-after")
+    ap.add_argument("--include-parked", action="store_true",
+                    help="count parked verses as retries anyway")
     a = ap.parse_args()
     langs = [x.strip() for x in a.langs.split(",") if x.strip()]
 
@@ -71,23 +76,31 @@ def main():
         "SELECT d.code, p.page_no, p.idx, p.text, COALESCE(p.quality_score,0), "
         "TRIM(COALESCE(p.translation,''))<>'', "
         "EXISTS(SELECT 1 FROM translations_l10n l WHERE l.passage_id=p.id AND l.lang='hi' "
-        "       AND TRIM(COALESCE(l.translation,''))<>'') "
+        "       AND TRIM(COALESCE(l.translation,''))<>''), p.id "
         "FROM passages p JOIN docs d ON d.id=p.doc_id "
         "WHERE " + LIVE + " AND d.code NOT LIKE '%-RETIRED' ORDER BY d.code, p.page_no, p.idx").fetchall()
     last = {}                       # (code, lang) -> (page, idx) of the last translated verse
-    for code, page, idx, _t, _q, en, hi in rows:
+    for code, page, idx, _t, _q, en, hi, _pid in rows:
         for lg, done in (("en", en), ("hi", hi)):
             if done and (page, idx) > last.get((code, lg), (-1, -1)):
                 last[(code, lg)] = (page, idx)
+    ledger = Path(a.db).resolve().parent / "translate_outcomes.jsonl"
+    parked = {lg: ({} if a.include_parked else tf.load_parked(
+        ledger, lg, PROMPT_VERSIONS.get(lg), a.park_after)) for lg in langs}
+    npark = {}
     count, fresh, below1 = {}, {}, {}
-    for code, page, idx, text, qs, en, hi in rows:
+    for code, page, idx, text, qs, en, hi, pid in rows:
         normed = normalize_sanskrit(text or "")
         if not tf.should_translate(normed, min_dev=a.min_dev) or not tf.clean_for_mt(normed):
             continue
         if 0 < qs < a.min_quality:
             continue
+        src_key = (pid, tf.clean_for_mt(normed)[:2000])
         for lg, done in (("en", en), ("hi", hi)):
             if lg not in langs or done or (code, lg) not in last:
+                continue
+            if src_key in parked.get(lg, {}):   # PARK_ILLEGIBLE_2026_09_27
+                npark[(code, lg)] = npark.get((code, lg), 0) + 1
                 continue
             lp, li = last[(code, lg)]
             if page < 1:
@@ -134,6 +147,11 @@ def main():
         print("  never reachable (page_no < 1; translate_passages starts at page 1):")
         for (code, lg), n in sorted(below1.items(), key=lambda kv: -kv[1]):
             print("    %-44s %-3s %6d" % (code[:44], lg, n))
+    if npark:   # PARK_ILLEGIBLE_2026_09_27
+        print("  parked (lacuna-only answer on %d+ runs, this prompt, same source) - re-OCR these:"
+              % a.park_after)
+        for (code, lg), n in sorted(npark.items(), key=lambda kv: -kv[1]):
+            print("    %-44s %-3s %6d" % (code[:44], lg, n))
     if b:
         print("  budget: cap $%.2f  spent $%.4f  headroom $%.4f  paused=%s" % (b[0], b[1], b[0] - b[1], b[2]))
     print("  retry = empty verse at or before the last translated (page, idx); new* = never-")
@@ -141,7 +159,8 @@ def main():
     print("  hi-rm = Hindi rows removed as bare [asphuta] by remediate_hi_artifacts.")
     if a.out:
         Path(a.out).write_text(json.dumps({"version": 2, "plan": plan, "per_verse": a.per_verse,
-                                           "headroom": (b[0] - b[1]) if b else None},
+                                           "headroom": (b[0] - b[1]) if b else None,
+                                           "parked": {"%s|%s" % k: v for k, v in npark.items()}},
                                           ensure_ascii=False, indent=1), encoding="utf-8")
         print("  plan written: %s" % a.out)
 

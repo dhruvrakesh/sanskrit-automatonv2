@@ -104,3 +104,4 @@ scripts/*.bak_tf2_*
 scripts/*.bak_tf3_*
 scripts/*.bak_pb_*
 scripts/*.tmp_patch
+scripts/*.bak_pk_*

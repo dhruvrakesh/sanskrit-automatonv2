@@ -32,7 +32,8 @@ from normalize_text import normalize_sanskrit
 from text_filters import (should_translate, clean_for_mt,
                           is_translation_boilerplate, score_translation_quality,
                           is_source_echo, salvage_translation,
-                          strip_leading_source_echo)   # FILTERS3_2026_09_27
+                          strip_leading_source_echo,   # FILTERS3_2026_09_27
+                          load_parked)                 # PARK_ILLEGIBLE_2026_09_27
 from infer_mt import translate_batch, PROMPT_VERSION, PROMPT_VERSIONS, QuotaExhausted
 from db_utils import ensure_schema, migrate_schema
 
@@ -205,6 +206,12 @@ def main():
                          "translatable Sanskrit directly, English used when present.")
     ap.add_argument("--progress",     default=str(_PROGRESS_PATH))
     ap.add_argument("--config",       default=str(_CONFIG_PATH))
+    ap.add_argument("--park-after", type=int, default=2,
+                    help="PARK_ILLEGIBLE_2026_09_27: skip a verse whose answer under the "
+                         "current prompt was only the lacuna token on this many runs "
+                         "(same source text). It needs re-OCR, not another call.")
+    ap.add_argument("--retry-illegible", action="store_true",
+                    help="ask parked verses again anyway (this run only)")
     args = ap.parse_args()
 
     _PROGRESS_PATH = Path(args.progress)
@@ -327,6 +334,12 @@ def main():
         })
         return
 
+    # PARK_ILLEGIBLE_2026_09_27: verses answered only with the lacuna token
+    # on --park-after runs (current prompt, same source) are not asked again.
+    parked = {} if (args.retranslate or args.retry_illegible) else load_parked(
+        _PROGRESS_PATH.parent / "translate_outcomes.jsonl", TGT,
+        PROMPT_VERSIONS.get(TGT, PROMPT_VERSION), args.park_after)
+    n_parked = 0
     todo = []
     for row in rows:
         rowid, page_no, idx, text = row[0], row[1], row[2], row[3]
@@ -353,6 +366,9 @@ def main():
         cleaned = clean_for_mt(normed)
         if not cleaned:
             continue
+        if parked and (rowid, cleaned[:2000]) in parked:   # PARK_ILLEGIBLE_2026_09_27
+            n_parked += 1
+            continue
         todo.append((rowid, page_no, idx, cleaned, rest))
 
     if args.limit:
@@ -364,6 +380,10 @@ def main():
           + (("  [strict: English-gated]" if args.require_anchor
               else "  [direct Sa->{}, English used as reference when present]".format(TGT))
              if IS_L10N else ""))
+    if n_parked:   # PARK_ILLEGIBLE_2026_09_27
+        print(f"  [PARKED] {n_parked} verse(s) skipped: only the lacuna token on "
+              f"{args.park_after}+ runs under this prompt - re-OCR them, or pass "
+              f"--retry-illegible")
     if not todo:
         # Passages exist, but none are translatable right now: either every verse
         # already has a translation in this language, or the remaining source text
@@ -616,7 +636,7 @@ def main():
                 if translation != raw_out:
                     _log_outcome({"doc": args.doc, "lang": TGT, "passage_id": rowid,
                                   "page": page_no, "idx": idx, "quality": quality,
-                                  "cause": "salvaged", "kept": translation,
+                                  "cause": "salvaged", "kept": translation, "prompt": ver,
                                   "raw": raw_out, "source": cleaned[:2000]})
             else:
                 # An empty result HERE (no exception) means untranslatable content —
@@ -633,7 +653,7 @@ def main():
                 print(f"  [EMPTY:{why}] p{page_no}.{idx} q={quality:.2f}")
                 _log_outcome({"doc": args.doc, "lang": TGT, "passage_id": rowid,
                               "page": page_no, "idx": idx, "quality": quality,
-                              "cause": why, "raw": raw_out, "source": cleaned[:2000]})
+                              "cause": why, "prompt": ver, "raw": raw_out, "source": cleaned[:2000]})
 
             # Update recent ring buffer
             recent.append({
@@ -722,6 +742,8 @@ def main():
         print("  of those, empty after a paid call: " + ", ".join(
             f"{k}={v}" for k, v in sorted(empty_by.items()))
               + "  (raw outputs: data/translate_outcomes.jsonl)")
+    if n_parked:   # PARK_ILLEGIBLE_2026_09_27
+        print(f"  parked (not asked, lacuna-only answers before): {n_parked}")
     _write_progress({
         "status": "aborted" if aborted else "done",
         "abort_reason": aborted,
