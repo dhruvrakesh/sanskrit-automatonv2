@@ -841,3 +841,21 @@ ask the model again for specific verses with scripts/probe_empty_translations.py
 (paid, metered). A capped budget now ABORTS a run (BudgetBlocked). The Hindi
 prompt is hi-v2-2026-09-27. Full account:
 docs/TRANSLATION_EMPTY_OUTCOMES_2026-09-27.md.
+
+
+## 3h. Routine: measure, retry, rebuild (CONTINUITY_2026_09_27)
+
+After any translate sweep, and at least weekly:
+
+1. `& 'D:\Sanksrit Automatons\_ops_2026-09-10\block_BA_continuity.ps1' -Status`
+   - This is read-only. It lists running jobs, shows the outcome ledger by cause, and prints the retry plan.
+2. `... block_BA_continuity.ps1 -Queue`
+   - This queues one dashboard job per document and language, covering only the verses a run went past and left empty.
+   - It refuses to run if the estimate exceeds half the budget headroom.
+   - A document marked mostly-new (mostly never-attempted verses) is skipped unless `-IncludeNew` is given.
+3. When a document's jobs have finished, rebuild its Booksmith editions:
+   - `python scripts/booksmith_build.py --db "data\context.db" --doc <code> --mode tri`
+   - then the same command with `--mode hi`
+4. Human review happens in Booksmith (http://127.0.0.1:8765). Only a project with `output_mode: reading` and no open findings is a reading edition. Everything else is an audit proof, and the Library labels it that way.
+
+Never: run two dashboards, run `purge_empty_cache.py --yes` (it runs VACUUM), or edit `translations_l10n` by hand. `remediate_hi_artifacts.py` supersedes rows and archives the old ones to `translation_history`.

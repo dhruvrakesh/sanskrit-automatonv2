@@ -100,3 +100,4 @@ data/translate_outcomes.jsonl
 scripts/*.bak_tf_*
 
 scripts/*.bak_tf2_*
+*.bak_cont_*

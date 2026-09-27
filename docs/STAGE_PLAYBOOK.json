@@ -4,7 +4,8 @@
   "_why": "automaton.py --next knows WHICH unit is actionable and cannot say WHAT to run. This records that. It is data, not code - edit it when a tool changes.",
   "_honesty": "cmd:null means nobody has confirmed the command; the candidates are listed so the next person can confirm one instead of guessing. precheck is a one-line python test that must pass before the command is emitted at all - and a precheck is only added once a REAL failure has named the module. morph has one because a traceback named vidyut. The translate and entity stages do not, because naming their client library would be a guess, and a precheck that names the wrong module reports working stages as blocked, which is worse than having none.",
   "_corrections": "2026-09-14.02 - the morph note in .01 claimed --commit was the missing piece. A 200-row trial disproved it: ling_kosha.py fails identically under --survey and --commit with ModuleNotFoundError: No module named 'vidyut'. Corrected below. Also: every {db} is now quoted, because the repository path contains a space and the unquoted form split it into two arguments.",
-  "_version": "2026-09-14.02",
+  "_version": "2026-09-27.01",
+  "_corrections_2026_09_27": "CONTINUITY_2026_09_27 - book confirmed: booksmith_build.py built the Aphorisms and Shatpath editions, tri and hi, on 2026-09-27 (Block AX -Rebuild, Block AZ -RebuildShatpath); the other 17 projects were re-frozen through the Booksmith CLI (Block AX -Refreeze). Translate notes now name the outcome ledger and the retry path.",
   "stages": {
     "ocr": {
       "cost": "paid",
@@ -38,12 +39,12 @@
     "translate_en": {
       "cost": "paid",
       "cmd": "python scripts/translate_passages.py --db \"{db}\" --doc \"{code}\" --lang en --engine gemini:gemini-2.5-flash",
-      "note": "Observed 2026-09-14: about $0.00016 per passage, median ~17s, with occasional 600s timeouts against 503s. Cost is negligible; wall clock is not. A row whose call fails is written empty and is picked up again on the next run."
+      "note": "Observed 2026-09-14: about $0.00016 per passage, median ~17s, with occasional 600s timeouts against 503s. Cost is negligible; wall clock is not. A row whose call fails is written empty and is picked up again on the next run. 2026-09-27: mean $0.00023 per verse over 12 probe calls; every paid-but-empty verse is logged with its cause in data/translate_outcomes.jsonl; retry only verses a run went past with scripts/plan_empty_retries.py and POST /api/translate {doc, lang, until_page} (Block AZ/BA -Queue). Prompt v3-2026-09-27."
     },
     "translate_hi": {
       "cost": "paid",
       "cmd": "python scripts/translate_passages.py --db \"{db}\" --doc \"{code}\" --lang hi --engine gemini:gemini-2.5-flash",
-      "note": "Same tool as English. Hindi lands in translations_l10n at lang='hi'; English lands in passages.translation."
+      "note": "Same tool as English. Hindi lands in translations_l10n at lang='hi'; English lands in passages.translation. Decision 2026-09-27: Hindi is translated DIRECTLY from Sanskrit; English, when QA-passed, is only a meaning reference (--require-anchor restores gating). Prompt hi-v3-2026-09-27."
     },
     "qa": {
       "cost": "free",
@@ -75,9 +76,10 @@
     },
     "book": {
       "cost": "free",
-      "cmd": null,
-      "candidates": ["booksmith_build.py"],
-      "note": "One candidate, flags unread. 37 documents are READY for this stage, which makes it the cheapest large win once the command is confirmed."
+      "driver": false,
+      "cmd": "python scripts/booksmith_build.py --db \"{db}\" --doc \"{code}\" --mode tri",
+      "modes": {"tri": "sanskrit, iast, english, hindi (bare project id)", "hi": "sanskrit, iast, hindi (id-hi)", "en": "sanskrit, iast, english (id-en)"},
+      "note": "CONFIRMED 2026-09-27 (CONTINUITY_2026_09_27): booksmith_build.py exports the witness, creates the project in AUDIT mode if new, never edits a book.yaml it did not write, refuses to re-ingest a changed witness into a project with review decisions, and builds + QA-checks the PDF. Run --mode hi as a second command for the Hindi edition. Supervised (driver false): a changed witness re-freezes the manifest."
     }
   }
 }
