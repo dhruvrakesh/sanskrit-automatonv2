@@ -1,0 +1,11 @@
+{
+  "_about": "Human-confirmed display titles for doc codes (DOC_TITLES_2026_09_27). The doc code stays the key everywhere; this file only changes what a reader sees. Add a title here only when a person has confirmed it against the source; a code without an entry is shown as its code. Read by srangam-42267/scripts/emit_project_status.py.",
+  "_sources": {
+    "MBh01": "the Srangam status panel's own wording before it was generated (quoted in Lovable's issue report, 2026-09-27)",
+    "AphorismsOfSandilya": "Booksmith projects/aphorismsofsandilya/book.yaml title, set with block_AX -SetTitle"
+  },
+  "titles": {
+    "MBh01": "Mah\u0101bh\u0101rata, Book I",
+    "AphorismsOfSandilya": "\u015a\u0101\u1e47\u1e0dilya Bhakti S\u016btra"
+  }
+}

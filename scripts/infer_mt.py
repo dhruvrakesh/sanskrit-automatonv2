@@ -314,6 +314,27 @@ _GEMINI_SAFETY = [
 _MAXTOK_LADDER = tuple(int(x) for x in
                        os.environ.get("MT_MAXTOK_LADDER", "16384,32768").split(","))
 _FALLBACK_MODEL = os.environ.get("MT_FALLBACK_MODEL", "gemini-2.0-flash").strip()
+
+# MT_TIMEOUT_2026_09_27. Without a request timeout the SDK waits up to 600 s
+# per call on a dead connection, and RETRIES=3 - one network drop held the
+# single translate lane for 33 minutes on 2026-09-27. The longest real call
+# measured that day was 33.8 s. MT_REQUEST_TIMEOUT=0 restores the old wait.
+_REQ_TIMEOUT = float(os.environ.get("MT_REQUEST_TIMEOUT", "120") or 0)
+_REQ_OPTS_OK = None
+
+
+def _gen(gm, msg):
+    """gm.generate_content(msg) with a bounded wait when the SDK supports it."""
+    global _REQ_OPTS_OK
+    if _REQ_OPTS_OK is None:
+        import inspect
+        try:
+            _REQ_OPTS_OK = "request_options" in inspect.signature(gm.generate_content).parameters
+        except (TypeError, ValueError):
+            _REQ_OPTS_OK = False
+    if _REQ_OPTS_OK and _REQ_TIMEOUT > 0:
+        return gm.generate_content(msg, request_options={"timeout": _REQ_TIMEOUT})
+    return gm.generate_content(msg)
 _CHUNK_SPLIT_RE = re.compile(r"[।॥\n]")
 
 
@@ -325,7 +346,7 @@ def _gemini_generate(model_name: str, system_prompt: str, msg: str, max_tokens: 
     gm = genai.GenerativeModel(model_name=model_name, generation_config=cfg,
                                safety_settings=_GEMINI_SAFETY,
                                system_instruction=system_prompt)
-    resp = gm.generate_content(msg)
+    resp = _gen(gm, msg)   # MT_TIMEOUT_2026_09_27
     try:
         text = (resp.text or "").strip()
     except Exception:
@@ -445,7 +466,7 @@ def _gemini_translate(
     for i, t in enumerate(texts):
         for attempt in range(RETRIES):
             try:
-                resp = gm.generate_content(msgs_to_use[i].strip())
+                resp = _gen(gm, msgs_to_use[i].strip())   # MT_TIMEOUT_2026_09_27
 
                 # ── Safe text extraction (no valid parts → inspect finish_reason) ──
                 # FinishReason enum: 1=STOP, 2=MAX_TOKENS, 3=SAFETY, 4=RECITATION.

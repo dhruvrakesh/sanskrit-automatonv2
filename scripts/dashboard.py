@@ -3140,4 +3140,17 @@ if __name__ == "__main__":
     # Keep the machine awake while translation/OCR jobs run (overnight throughput).
     threading.Thread(target=_keep_awake_loop, daemon=True).start()
 
+    # SINGLE_INSTANCE_2026_09_27. JOBS live in this process's memory, so a second
+    # dashboard beside a running one splits the queue and the translate lock in
+    # two (2026-09-27: pid 21432 started at 15:05 beside pid 41088). Refuse.
+    import socket as _si_socket
+    _si_host = "127.0.0.1" if args.host in ("", "0.0.0.0", "::") else args.host
+    try:
+        with _si_socket.create_connection((_si_host, args.port), timeout=1.5):
+            print(f"[REFUSED] something already answers on {_si_host}:{args.port} - "
+                  "not starting a second dashboard (RUNBOOK 3h). Use "
+                  "scripts\\restart_dashboard.ps1 to replace it.")
+            sys.exit(3)
+    except OSError:
+        pass
     app.run(host=args.host, port=args.port, debug=False)

@@ -858,4 +858,16 @@ After any translate sweep, and at least weekly:
    - then the same command with `--mode hi`
 4. Human review happens in Booksmith (http://127.0.0.1:8765). Only a project with `output_mode: reading` and no open findings is a reading edition. Everything else is an audit proof, and the Library labels it that way.
 
+5. Refresh the public status on Srangam (it is a generated file, not live):
+   `& 'D:\Sanksrit Automatons\_ops_2026-09-10\block_BD_status.ps1' -Emit -Commit`, then press Publish in Lovable.
+   - This runs `D:\srangam-42267\scripts\emit_project_status.py`, which measures `context.db` read-only and commits only `src/data/projectStatus.ts`.
+   - It refuses to commit if the Srangam repo has diverged from origin.
+
+Operating rules (RUNBOOK_OPS_2026_09_27):
+- **Run blocks in their own PowerShell window.** Closing the "Sanskrit Dashboard" window, or pressing Ctrl+C in it, kills the dashboard. It also drops every queued job (2026-09-27 14:46). The plan rebuilds them: `block_BA_continuity.ps1 -Queue`.
+- **A second dashboard now refuses to start** (`[REFUSED]`, exit 3). The hub also refuses when port 5057 is taken.
+  - To check for strays: `Get-CimInstance Win32_Process -Filter "Name like 'python%'" | ? CommandLine -match 'dashboard.py'`.
+  - More than one is a fault. Keep the one that owns port 5057, `(Get-NetTCPConnection -LocalPort 5057 -State Listen).OwningProcess`, and stop the other only if it has no child processes.
+- **Model calls are bounded** by `MT_REQUEST_TIMEOUT` (seconds, default 120, set in `.env`). A stalled job (no change to `data\translation_progress.json` for 10+ minutes) is a network hang. Stop that job's `translate_passages` process, never the dashboard; the next job starts and the verse is retried by the next plan.
+
 Never: run two dashboards, run `purge_empty_cache.py --yes` (it runs VACUUM), or edit `translations_l10n` by hand. `remediate_hi_artifacts.py` supersedes rows and archives the old ones to `translation_history`.
