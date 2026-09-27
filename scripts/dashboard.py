@@ -3023,8 +3023,33 @@ def api_db_open():
     db   = data.get("db") or "data/context.db"
     port = int(_DATASETTE["port"])
     url  = f"http://127.0.0.1:{port}"
+    # FILTERS3_2026_09_27: say how old the snapshot is, and refresh it when
+    # asked or when it is older than max_age_s (default 600) - but only a
+    # Datasette THIS dashboard started; one left by an earlier dashboard
+    # process is reported, never killed from here.
+    _snap = ROOT / "query_snapshot.db"
+    _age = (time.time() - _snap.stat().st_mtime) if _snap.exists() else None
     if _port_serving("127.0.0.1", port):
-        return jsonify({"url": url, "status": "already-running"})
+        _p = _DATASETTE.get("proc")
+        _owned = _p is not None and _p.poll() is None
+        try:
+            _max = float(data.get("max_age_s", 600))
+        except (TypeError, ValueError):
+            _max = 600.0
+        _want = bool(data.get("refresh")) or (_age is not None and _age > _max)
+        if not (_want and _owned):
+            return jsonify({"url": url, "status": "already-running",
+                            "snapshot_age_s": int(_age) if _age is not None else None,
+                            "owned": _owned, "stale": bool(_want and not _owned)})
+        _p.terminate()
+        try:
+            _p.wait(timeout=10)
+        except Exception:
+            _p.kill()
+        for _i in range(20):
+            if not _port_serving("127.0.0.1", port):
+                break
+            time.sleep(0.5)
     if not shutil.which("datasette"):
         return jsonify({"error": "Datasette is not installed. Run:  pip install datasette"}), 500
     snap = str((ROOT / "query_snapshot.db").resolve())

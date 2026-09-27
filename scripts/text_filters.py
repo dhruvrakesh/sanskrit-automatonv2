@@ -435,6 +435,46 @@ def score_passage_quality(s: str) -> float:
 # for English carried embedded verse-number digits) and reached the reader as
 # garbled non-translations. Measured 2026-08-02: 2 Hindi + 15 English rows.
 
+# -- A leading copy of the source is not an echo (FILTERS3_2026_09_27) --------
+# Measured in data/translate_outcomes.jsonl on 2026-09-27: three Aphorisms
+# Hindi answers were full, faithful translations that the model PREFIXED with
+# the Sanskrit it was given ("tat-samkhya-amrtatva-upadesat || / usaki (bhakti
+# ki) samkhya ..."). is_source_echo() sees the whole source inside the output
+# and empties the verse. This drops only LEADING lines that are the source
+# again - Devanagari lines whose words are >= 80% words of the source and
+# carry no Hindi function word - and keeps the rest when anything is left.
+_DEV_WORD_RE = re.compile(r"[ऀ-ॿ]+")
+
+
+def strip_leading_source_echo(src: str, out: str, lang: str = "en") -> str:
+    """Return out without leading lines that merely repeat the source."""
+    if not src or not out:
+        return out
+    stoks = set(_DEV_WORD_RE.findall(src))
+    if not stoks:
+        return out
+    lines = out.split("\n")
+    k = 0
+    while k < len(lines):
+        ln = lines[k].strip()
+        if not ln or ln in ("/", "//"):
+            k += 1
+            continue
+        toks = _DEV_WORD_RE.findall(ln)
+        if not toks or frac_devanagari(ln) <= 0.5:
+            break
+        inside = sum(1 for t in toks if t in stoks) / len(toks)
+        words = set(ln.replace("(", " ").replace(")", " ").split())
+        if inside >= 0.8 and not (lang == "hi" and words & set(_HI_FUNC_WORDS)):
+            k += 1
+            continue
+        break
+    if k == 0:
+        return out
+    rest = "\n".join(lines[k:]).strip()
+    return rest if len(rest) >= 8 else out
+
+
 def is_source_echo(src: str, out: str, lang: str = "en") -> bool:
     """True if `out` is the source echoed rather than a real translation.
 

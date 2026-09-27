@@ -538,7 +538,9 @@ async function openDatabase(el) {
     var d = await r.json();
     if (d.url) {
       var running = d.status === 'already-running';
-      toast(running ? 'Opening database…' : 'Snapshotting + starting Datasette (a few seconds)…');
+      // FILTERS3_2026_09_27: say how old the snapshot is
+      var age = (d.snapshot_age_s != null) ? (' (snapshot ' + Math.round(d.snapshot_age_s / 60) + ' min old' + (d.stale ? ' - stale: close Datasette to refresh' : '') + ')') : '';
+      toast(running ? ('Opening database' + age + '…') : 'Snapshotting + starting Datasette (a few seconds)…');
       setTimeout(function(){ window.open(d.url, '_blank'); }, running ? 250 : 3200);
     } else {
       toast('Database: ' + (d.error || 'failed'));

@@ -31,7 +31,8 @@ except Exception:
 from normalize_text import normalize_sanskrit
 from text_filters import (should_translate, clean_for_mt,
                           is_translation_boilerplate, score_translation_quality,
-                          is_source_echo, salvage_translation)
+                          is_source_echo, salvage_translation,
+                          strip_leading_source_echo)   # FILTERS3_2026_09_27
 from infer_mt import translate_batch, PROMPT_VERSION, PROMPT_VERSIONS, QuotaExhausted
 from db_utils import ensure_schema, migrate_schema
 
@@ -530,6 +531,11 @@ def main():
                         print(f"  [SKIP-JUNK] p{page_no}.{idx}: {translation[:60]!r}")
                         empty_why = "refusal-filter"
                     translation = salvaged
+                if translation:   # FILTERS3_2026_09_27: a repeated source line is not an echo
+                    _unq = strip_leading_source_echo(cleaned, translation, TGT)
+                    if _unq != translation:
+                        print(f"  [UNQUOTE] p{page_no}.{idx}: dropped the repeated source line(s)")
+                        translation = _unq
                 if translation and is_source_echo(cleaned, translation, TGT):
                     # Model echoed the (garbled) source instead of translating —
                     # store empty so it is genuinely re-attempted, never shown.
