@@ -155,6 +155,103 @@ _CAVEAT_HI_EXTRA = (
     "शेष पाठ", "शेष भाग", "अस्पष्ट है", "ओसीआर", "पाठ अस्पष्ट",
 )
 
+# -- Sentence-scoped refusal detection (TRANSLATION_FILTERS_2026_09_27) --------
+# The phrase lists above are plain substring tests over the whole output, and
+# some of their phrases are ordinary language that a FAITHFUL translation uses.
+# Replayed 2026-09-27 on faithful translations, the old test empties:
+#   vakyasesa         -> "the remainder of the sentence ..."   (the remainder of)
+#   a speaker's words -> "I am sorry, O king ..."               (i am sorry)
+#   Hindi commentary  -> "yah patha ..." / "sesa patha ..."
+# An AMBIGUOUS phrase therefore counts only when the sentence it sits in also
+# talks about the INPUT - OCR, legibility, the text supplied, translating it.
+# Every other phrase is unchanged and still counts wherever it appears, so a
+# real refusal is caught exactly as before. A Hindi output that is NOTHING
+# BUT the hard-fail token the prompt asks for, "[asphuta]", is now empty like
+# its English twin "[ILLEGIBLE]" always was; until today it was stored and
+# printed as a translation. The token INSIDE a translation is a lacuna mark
+# and is left alone.
+_AMBIGUOUS_EN = frozenset((
+    "i am sorry", "sorry, but", "i'm sorry, but", "i'm sorry, i cannot",
+    "cannot identify", "the remainder of", "the rest of the text",
+    "the remaining text",
+))
+_META_CUES_EN = (
+    "ocr", "illegib", "legible", "garbl", "unclear", "corrupt", "snippet",
+    "provided", "translat", "transcri", "the input", "source text",
+    "sanskrit text", "this passage", "the passage", "noise", "misprint",
+    "scan", "sanskrit", "coherent",
+)
+_TOKEN_HI = "[अस्पष्ट]"          # [asphuta]
+_AMBIGUOUS_HI = frozenset((
+    "यह पाठ",                                  # yah patha
+    "स्पष्ट नहीं",    # spasta nahim
+    "प्रदान नहीं कर",  # pradana nahim kara
+    "क्षमा कर",                      # ksama kara
+    "मैं असमर्थ",          # maim asamartha
+    "शेष पाठ",                            # sesa patha
+    "शेष भाग",                            # sesa bhaga
+))
+_META_CUES_HI = (
+    "ओसीआर",                  # osiar (OCR)
+    "पठनीय",                  # pathaniya (legible)
+    "अस्पष्ट",      # asphuta (unclear)
+    "अनुवाद",            # anuvada (translation)
+    "दिया गया",     # diya gaya (given)
+    "प्रदत्त",      # pradatta (supplied)
+    "स्कैन",                  # scan
+    "ocr", "translat",
+)
+_SENT_BOUND_RE = re.compile(r"[.!?।॥\n]|//")
+
+
+def _sentence_around(s: str, i: int, n: int) -> str:
+    """The sentence of s that contains s[i:i+n]."""
+    start = 0
+    for m in _SENT_BOUND_RE.finditer(s, 0, i):
+        start = m.end()
+    m = _SENT_BOUND_RE.search(s, i + n)
+    return s[start:(m.start() if m else len(s))]
+
+
+def _bare_token_hi(t: str) -> bool:
+    """True when t is only the [asphuta] token(s) and punctuation."""
+    rest = t.replace(_TOKEN_HI, " ").strip()
+    return rest != t.strip() and (not rest or bool(ONLY_PUNCT_RE.match(rest)))
+
+
+def _refusal_cut(t: str, lang: str = "en", caveats: bool = True) -> int:
+    """Earliest index in t where a refusal or OCR caveat begins, else -1.
+
+    caveats=False tests the refusal lists only (is_translation_boilerplate's
+    historical scope); True adds the caveat lists (salvage_translation's).
+    """
+    if not t:
+        return -1
+    if lang == "hi" and _bare_token_hi(t):
+        return 0
+    low = t.lower()
+    cut = -1
+
+    def scan(hay, phrases, ambiguous, cues):
+        nonlocal cut
+        for ph in phrases:
+            pos = hay.find(ph)
+            while pos >= 0:
+                if ph not in ambiguous or any(
+                        c in _sentence_around(hay, pos, len(ph)) for c in cues):
+                    if cut < 0 or pos < cut:
+                        cut = pos
+                    break
+                pos = hay.find(ph, pos + 1)
+
+    scan(low, JUNK_PHRASES + (_CAVEAT_EXTRA if caveats else ()),
+         _AMBIGUOUS_EN, _META_CUES_EN)
+    if lang == "hi":
+        scan(t, JUNK_PHRASES_HI + (_CAVEAT_HI_EXTRA if caveats else ()),
+             _AMBIGUOUS_HI, _META_CUES_HI)
+    return cut
+
+
 def salvage_translation(out: str, lang: str = "en") -> str:
     """Fidelity guard (2026-08-02). Three outcomes:
 
@@ -173,17 +270,8 @@ def salvage_translation(out: str, lang: str = "en") -> str:
     if not out or not out.strip():
         return ""
     t = out.strip()
-    low = t.lower()
-    cut = len(t); found = False
-    for ph in JUNK_PHRASES + _CAVEAT_EXTRA:
-        i = low.find(ph)
-        if 0 <= i < cut:
-            cut = i; found = True
-    if lang == "hi":
-        for ph in JUNK_PHRASES_HI + _CAVEAT_HI_EXTRA:
-            i = t.find(ph)
-            if 0 <= i < cut:
-                cut = i; found = True
+    cut = _refusal_cut(t, lang, caveats=True)   # TRANSLATION_FILTERS_2026_09_27
+    found = cut >= 0
     if not found:
         return t  # no caveat — unchanged
     head = t[:cut]
@@ -211,8 +299,9 @@ def is_translation_boilerplate(en: str, lang: str = "en") -> bool:
     if ONLY_PUNCT_RE.match(t): return True
     if MQQ_RE.match(t): return True
     if len(t) < 4: return True
-    if any(x in t for x in JUNK_PHRASES): return True
-    if lang == "hi" and any(x in en for x in JUNK_PHRASES_HI): return True
+    # TRANSLATION_FILTERS_2026_09_27: the same lists, sentence-scoped for the
+    # ambiguous phrases, plus the Hindi hard-fail token.
+    if _refusal_cut(en.strip(), lang, caveats=False) >= 0: return True
     return False
 
 def should_translate(s: str, *, min_dev: float = 0.05) -> bool:
@@ -357,11 +446,26 @@ def is_source_echo(src: str, out: str, lang: str = "en") -> bool:
         return False
     # Latin-script target (English): the output is the Devanagari source, or
     # carries embedded Devanagari verse-number digits / OCR gibberish.
-    if DEV_DIGIT_RE.search(o):
+    # TRANSLATION_FILTERS_2026_09_27: a citation the model kept verbatim in
+    # Devanagari - "(ma. sa. pa. bra. 7 | 2 | 1 | 24)" as printed - or a
+    # printed verse number between dandas is not an echo of the verse, and it
+    # emptied whole commentary translations. Test what is left once those
+    # are set aside. Unbracketed digits, an output that is mostly Devanagari,
+    # and an output with no English left in it are still echoes.
+    core = _EN_CITATION_RE.sub(
+        lambda m: " " if DEV_RE.search(m.group(0)) else m.group(0), o)
+    core = _EN_VNUM_RE.sub(" ", core)
+    if not LATIN_RE.search(core):
         return True
-    if frac_devanagari(o) > 0.5:
+    if DEV_DIGIT_RE.search(core):
+        return True
+    if frac_devanagari(core) > 0.5 or frac_devanagari(o) > 0.5:
         return True
     return False
+
+
+_EN_CITATION_RE = re.compile(r"[\(\[][^()\[\]\n]{1,90}[\)\]]")
+_EN_VNUM_RE = re.compile(r"[\u0964\u0965|]+\s*[\u0966-\u096f]{1,4}\s*[\u0964\u0965|]*")
 
 
 # ── Phase Q: translation QA (heuristic, no API calls) ────────────────────────

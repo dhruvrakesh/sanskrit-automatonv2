@@ -36,6 +36,15 @@ class QuotaExhausted(RuntimeError):
     than grind on — continuing produces empty results for every verse."""
     pass
 
+
+class BudgetBlocked(QuotaExhausted):
+    """TRANSLATION_FILTERS_2026_09_27. The budget cap refused the call. It used
+    to return empty strings, which translate_passages counts as untranslatable
+    source and carries on - so a capped run walked the whole queue, wrote
+    nothing and reported success. As a QuotaExhausted it aborts the run with
+    the reason, exactly like a provider quota does."""
+    pass
+
 # Per-target prompt versions. Mixed into the cache key so outputs produced
 # under an older prompt are never served for requests made under a newer one,
 # AND so iterating the Hindi prompt never invalidates the English cache (or
@@ -43,7 +52,7 @@ class QuotaExhausted(RuntimeError):
 # changes materially. (Old cache rows are retained; they simply stop matching.)
 PROMPT_VERSIONS = {
     "en": "v2-2026-07-20",
-    "hi": "hi-v1-2026-08-01",
+    "hi": "hi-v2-2026-09-27",   # TRANSLATION_FILTERS_2026_09_27: rule 7
 }
 # Backward-compat alias: existing English callers/imports still see the same
 # string, so English cache hashes are byte-identical to what is already stored.
@@ -89,7 +98,7 @@ _SYSTEM_PROMPT_HI = """आप एक संस्कृत विद्वान
 4. श्लोक-प्रवाह: पूरे श्लोक का एक या दो प्रवाहमयी वाक्यों में अनुवाद करें; पाद-क्रम की नकल न करें। पूर्ण श्लोक के अन्त में " //" लगाएँ।
 5. निपात: केवल-बलसूचक निपात (एव, हि, वै, ह, खलु, पूरक तु) प्रायः छोड़ दें, जब तक बल अर्थतः आवश्यक न हो।
 6. पारिभाषिक शब्द: धर्म, कर्म, यज्ञ आदि हिन्दी में स्वयं स्पष्ट हैं — उनकी व्याख्या न दें। केवल वास्तविक रूप से तकनीकी अनुष्ठान/दार्शनिक शब्दों का प्रथम बार संक्षिप्त अर्थ कोष्ठक में दें।
-7. वक्ता-सूचना: "वैशम्पायन ने कहा —" इस शैली में वक्ता-पंक्तियाँ रखें।
+7. वक्ता-सूचना: वक्ता-पंक्ति केवल तभी दें जब संस्कृत पाठ में स्वयं वक्ता हो (जैसे "<नाम> उवाच" → "<नाम> ने कहा —")। जहाँ संस्कृत में वक्ता नहीं है, वहाँ कोई वक्ता न जोड़ें।
 8. कर्ता-संगति: प्रत्येक उपवाक्य का स्पष्ट कर्ता हो; प्रत्येक विशेषनाम की एक ही वर्तनी सर्वत्र प्रयुक्त हो।
 9. सन्दर्भ: नीचे दिया गया अंग्रेज़ी अनुवाद केवल अर्थ के सत्यापित सन्दर्भ हेतु है — उसका अनुवाद न करें, केवल संस्कृत का अनुवाद करें।
 10. निर्गम: केवल हिन्दी अनुवाद दें — कोई भूमिका, "अनुवाद:" शीर्षक या टिप्पणी नहीं। यदि पाठ अपठनीय OCR कोलाहल है तो ठीक यही लिखें: [अस्पष्ट]"""
@@ -605,8 +614,11 @@ def translate_batch(
                 print(f"[BUDGET] BLOCKED — spent ${spent:.4f} of ${budget:.2f}. "
                       f"Estimated next batch: ${est_cost:.4f}. "
                       f"Call resume_budget() or increase budget to continue.")
-                # Return empty strings for uncached — don't call API
-                return [outs[i] or "" for i in range(len(texts))]
+                # TRANSLATION_FILTERS_2026_09_27: refuse loudly - an empty
+                # result here would be recorded as untranslatable source.
+                raise BudgetBlocked(
+                    f"budget cap reached: spent ${spent:.4f} of ${budget:.2f}; "
+                    f"next batch ~${est_cost:.4f}. Raise it with set_budget.py.")
 
         t_start = time.time()
 

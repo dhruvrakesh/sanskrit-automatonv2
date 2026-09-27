@@ -828,3 +828,16 @@ Copy-Item $b scripts\dashboard_static.html -Force        # then Ctrl+F5
 # full rollback including the endpoints (needs Pause All + restart):
 Copy-Item (Get-ChildItem backups\dashboard.py.preG.* | Sort-Object LastWriteTime | Select-Object -Last 1).FullName scripts\dashboard.py -Force
 ```
+
+## 3g. Empty translations - causes and the outcome ledger (TRANSLATION_FILTERS_2026_09_27)
+
+"[empty]" on the dashboard and its "skip" count mix never-sent rows
+(SKIP-UI, SKIP-QUALITY) with PAID rows that came back empty. Since
+2026-09-27 every paid-but-empty or salvaged verse is appended, with its
+cause (model-empty | refusal-filter | echo-filter | salvaged) and the raw
+model output, to data/translate_outcomes.jsonl, and the run prints
+[EMPTY:<cause>]. Measure with scripts/diag_empty_translations.py (read-only);
+ask the model again for specific verses with scripts/probe_empty_translations.py
+(paid, metered). A capped budget now ABORTS a run (BudgetBlocked). The Hindi
+prompt is hi-v2-2026-09-27. Full account:
+docs/TRANSLATION_EMPTY_OUTCOMES_2026-09-27.md.

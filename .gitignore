@@ -94,3 +94,8 @@ data/ab_source_quality.json
 data/fidelity_review/
 # the isolated linguistic environment (Block AC) is a build artefact
 .venv-ling/
+
+# TRANSLATION_FILTERS_2026_09_27: runtime ledger and patch backups
+data/translate_outcomes.jsonl
+scripts/*.bak_tf_*
+

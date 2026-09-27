@@ -59,6 +59,23 @@ def _write_progress(data):
         pass
 
 
+# TRANSLATION_FILTERS_2026_09_27. Every verse that ends EMPTY after a paid call,
+# and every verse whose output was cut back by salvage, is recorded here with
+# the model's raw output and the cause. Until now the raw output was thrown
+# away, so "valid Sanskrit came back empty" could not be told apart from a
+# model refusal, a filter false positive or a copied citation. Append-only,
+# one JSON object per line, never raises.
+def _log_outcome(rec):
+    try:
+        path = _PROGRESS_PATH.parent / "translate_outcomes.jsonl"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        rec = dict(rec, ts=datetime.now(timezone.utc).isoformat())
+        with open(path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
 def _get_doc_meta(con, doc):
     row = con.execute(
         "SELECT id, category FROM docs WHERE code=?", (doc,)
@@ -369,6 +386,7 @@ def main():
     consec_fail  = 0   # consecutive empty/failed results (streak breaker)
     aborted      = None
     recent       = []
+    empty_by     = {}   # TRANSLATION_FILTERS_2026_09_27: cause -> count
 
     _write_progress({
         "status": "running",
@@ -492,6 +510,8 @@ def main():
                 text_types=[meta_row.get("text_type")],
             )
             translation = outs[0] if outs else ""
+            raw_out = translation      # TRANSLATION_FILTERS_2026_09_27
+            empty_why = None if translation else "model-empty"
 
             tr_score = None
             tr_qa    = None
@@ -506,12 +526,14 @@ def main():
                         print(f"  [SALVAGE] p{page_no}.{idx}: kept faithful part, dropped OCR caveat")
                     else:
                         print(f"  [SKIP-JUNK] p{page_no}.{idx}: {translation[:60]!r}")
+                        empty_why = "refusal-filter"
                     translation = salvaged
                 if translation and is_source_echo(cleaned, translation, TGT):
                     # Model echoed the (garbled) source instead of translating —
                     # store empty so it is genuinely re-attempted, never shown.
                     print(f"  [SKIP-ECHO] p{page_no}.{idx}: source echoed, not translated")
                     translation = ""
+                    empty_why = "echo-filter"
                 if translation:
                     ratio    = len(translation) / max(1, len(cleaned))
                     tr_score = round(min(1.0, max(0.0, ratio / 5.0)), 3)
@@ -583,6 +605,11 @@ def main():
             ok_count += 1
             if translation:
                 consec_fail = 0
+                if translation != raw_out:
+                    _log_outcome({"doc": args.doc, "lang": TGT, "passage_id": rowid,
+                                  "page": page_no, "idx": idx, "quality": quality,
+                                  "cause": "salvaged", "kept": translation,
+                                  "raw": raw_out, "source": cleaned[:2000]})
             else:
                 # An empty result HERE (no exception) means untranslatable content —
                 # garbled OCR, or a refusal salvaged to nothing. That is NOT an API
@@ -593,6 +620,12 @@ def main():
                 # so the streak breaker only ever fires on genuine API trouble.
                 skip_quality += 1
                 consec_fail = 0
+                why = empty_why or "model-empty"
+                empty_by[why] = empty_by.get(why, 0) + 1
+                print(f"  [EMPTY:{why}] p{page_no}.{idx} q={quality:.2f}")
+                _log_outcome({"doc": args.doc, "lang": TGT, "passage_id": rowid,
+                              "page": page_no, "idx": idx, "quality": quality,
+                              "cause": why, "raw": raw_out, "source": cleaned[:2000]})
 
             # Update recent ring buffer
             recent.append({
@@ -677,6 +710,10 @@ def main():
 
     print(f"\nDone. {ok_count}/{len(todo)} translated | "
           f"{skip_quality} quality-skipped | {err_count} errors")
+    if empty_by:   # TRANSLATION_FILTERS_2026_09_27
+        print("  of those, empty after a paid call: " + ", ".join(
+            f"{k}={v}" for k, v in sorted(empty_by.items()))
+              + "  (raw outputs: data/translate_outcomes.jsonl)")
     _write_progress({
         "status": "aborted" if aborted else "done",
         "abort_reason": aborted,
