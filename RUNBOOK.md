@@ -504,6 +504,12 @@ stale and every number above moves with it.
 
 ## 6. Update the CODE (both repos stay identical)
 
+> **SUPERSEDED 2026-09-30 (RUNBOOK_EXPORT_2026_09_30).** Do not copy scripts into
+> `D:\sanskrit-symphony`. SOURCES_OF_TRUTH.md rule 2: symphony holds cross-project
+> docs and the register only, and must not contain a copy of any other project.
+> Release this repo with section 6b (`scripts\release.ps1`) and nothing else. The
+> commands below are kept for history only.
+
 ```powershell
 cd "D:\Sanksrit Automatons\sanskrit-automatonv2"
 git add scripts\*.py scripts\*.html *.md
@@ -871,3 +877,28 @@ Operating rules (RUNBOOK_OPS_2026_09_27):
 - **Model calls are bounded** by `MT_REQUEST_TIMEOUT` (seconds, default 120, set in `.env`). A stalled job (no change to `data\translation_progress.json` for 10+ minutes) is a network hang. Stop that job's `translate_passages` process, never the dashboard; the next job starts and the verse is retried by the next plan.
 
 Never: run two dashboards, run `purge_empty_cache.py --yes` (it runs VACUUM), or edit `translations_l10n` by hand. `remediate_hi_artifacts.py` supersedes rows and archives the old ones to `translation_history`.
+
+## 3i. Export editions (RUNBOOK_EXPORT_2026_09_30)
+
+The Export button produces one of three editions, chosen by **Export As** in the left panel:
+
+| Export As | File name | Contents |
+|---|---|---|
+| English only | `<doc>_<from>-<to>.html` | English |
+| Hindi only | `<doc>_<from>-<to>_hi.html` | Hindi |
+| Trilingual (Sa/En/Hi) | `<doc>_<from>-<to>_tri.html` | Sanskrit, English and Hindi side by side |
+
+- **Export As is remembered** in the browser (localStorage) across reloads and restarts. Since EXPORT_MODE_VISIBLE_2026_09_30 each row button names the edition it will produce, and Export All asks for confirmation.
+- **The edition is recorded** in `data/jobs.jsonl` as `"mode"` on export records (EXPORT_MODE_JOBLOG_2026_09_30). Older records have no `mode`; read the suffix of the output file instead.
+- **"Trilingual export is broken"** on 2026-09-30 was a Hindi export: Export As had been left on Hindi. Check the newest files before debugging:
+
+```powershell
+Get-ChildItem exports\*.html | Select Name, @{n='Edition';e={ if ($_.BaseName -match '_tri$') {'tri'} elseif ($_.BaseName -match '_hi$') {'hi'} else {'en'} }}, LastWriteTime |
+  Sort LastWriteTime -Desc | Select -First 15 | Format-Table -Auto
+```
+
+- **Export from PowerShell** (reads the database only; safe while the dashboard runs):
+
+```powershell
+python scripts\export_html.py --db data\context.db --doc <DOC> --out exports --sanskrit --hindi --side-by-side --title "<DOC> - Sanskrit / English / Hindi"
+```

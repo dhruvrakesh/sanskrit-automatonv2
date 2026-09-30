@@ -64,6 +64,7 @@ class Job:
     killed: bool = False
     active: bool = False   # True once the job's semaphore is acquired and it is
                            # ACTUALLY executing (vs. still queued behind the lock).
+    mode: str = ""         # EXPORT_MODE_JOBLOG_2026_09_30: edition (en/hi/tri) for exports; "" otherwise.
 
 JOBS: Dict[str, Job] = {}
 JOBS_LOCK = threading.Lock()
@@ -91,6 +92,8 @@ def _persist_job(job: Job):
             "rc": job.rc,
             "out_tail": (job.out or "")[-400:],
         }
+        if job.mode:  # EXPORT_MODE_JOBLOG_2026_09_30 - only when set; other records keep their shape
+            record["mode"] = job.mode
         with open(JOBS_LOG_PATH, "a", encoding="utf-8") as fh:
             fh.write(json.dumps(record, ensure_ascii=False) + "\n")
     except Exception:
@@ -217,7 +220,7 @@ def _keep_awake_loop():
             pass
         time.sleep(20)
 
-def launch(kind: str, doc: str, argv: List[str], then=None) -> str:
+def launch(kind: str, doc: str, argv: List[str], then=None, mode: str = "") -> str:
     """Launch a job under its kind's semaphore. Optional `then(job)` runs AFTER the
     job finishes AND its semaphore is released, but only if the job succeeded — this
     is how the pipeline chains OCR (OCR lock, parallel to translation) → ingest →
@@ -225,11 +228,13 @@ def launch(kind: str, doc: str, argv: List[str], then=None) -> str:
     # ── Duplicate job prevention ──────────────────────────────────────────────
     with JOBS_LOCK:
         for j in JOBS.values():
-            if j.ok is None and j.kind == kind and j.doc == doc:
+            # EXPORT_MODE_JOBLOG_2026_09_30: mode is part of the identity, so a
+            # trilingual export is not swallowed by a running Hindi one.
+            if j.ok is None and j.kind == kind and j.doc == doc and j.mode == mode:
                 print(f"[launch] SKIPPED duplicate: kind={kind} doc={doc} (job {j.id} still running)")
                 return j.id  # Return existing job ID
 
-    job = Job(id=str(uuid.uuid4()), kind=kind, doc=doc, cmd=argv)
+    job = Job(id=str(uuid.uuid4()), kind=kind, doc=doc, cmd=argv, mode=mode)
     with JOBS_LOCK:
         JOBS[job.id] = job
 
@@ -746,7 +751,7 @@ def api_job(jid):
         "id": job.id, "kind": job.kind, "doc": job.doc,
         "ok": job.ok, "start": job.start, "end": job.end,
         "out": job.out[-6000:], "err": job.err[-2000:],
-        "running": job.ok is None, "killed": job.killed,
+        "running": job.ok is None, "killed": job.killed, "mode": job.mode or None,
         # active=True: executing now; False while ok is None: queued behind its lock.
         "active": bool(job.active), "state": ("running" if job.active else "queued") if job.ok is None else "done",
     })
@@ -1178,7 +1183,7 @@ def api_export():
                 "--title", data.get("title") or f"{doc} — Sanskrit / English / Hindi"]
     else:
         cmd += ["--no-sanskrit", "--title", data.get("title") or f"{doc} — English Translation"]
-    return jsonify({"job": launch("export", doc, cmd), "mode": mode})
+    return jsonify({"job": launch("export", doc, cmd, mode=mode), "mode": mode})
 
 
 # ─────────────────────────────────────────────────────────────────────────
