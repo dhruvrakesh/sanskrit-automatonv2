@@ -84,3 +84,22 @@ Two further failures from the same week have the same root. The queue was lost o
 - The Srangam status generator reports stranded pages, so public coverage figures stop implying the pipeline has seen every page.
 
 **Stranded books (operator decision, per book).** Each book is re-OCR'd by its own Continue or `/api/queue/run` call, not in bulk. Several were ingested from only their first pages, and a full OCR changes their passage set. Each one is reviewed with `pipeline_inventory.py` and a Datasette look before it is resumed.
+
+## 5. Inventory results (run on this machine, 2026-09-30 13:37; `inventory_20260930.json`)
+
+The inventory covered 68 books: 15 translated, 27 translating, 9 ingested and not translated, and 17 marked stuck. Reading the rows one by one sorts the stuck books into five kinds of failure. Each needs a different decision.
+
+| Kind | Books (from the inventory) | What it means |
+|---|---|---|
+| **Split, never OCR'd** | Mallapurana 137, gandharva_veda_natya_shastra 507, 3 one-page items | the gap described in section 2 |
+| **OCR stopped part-way** | Rgveda Vol II 18/1064 (4 failed attempts, Aug 26-29), yajur_veda_taittiriya 12/496, upapurana saura 11/289, samba 11/241, parashara 10/72 | OCR was never resumed; ingest ran on the pages that existed |
+| **OCR finished, never ingested** | sama_veda_sama_veda 257, dhanur_veda_niti_prakashika 44 | standalone OCR does not chain to ingest |
+| **Ingested before OCR finished** | upapurana_narasimha_purana (309 OCR pages, 12 in the database), SP_4214 Pataal Khanda (364 / 280) | ingest is never re-run when more OCR pages appear |
+| **Same work under two codes** (legacy) | smriti_14manu_smriti (208 page-sized passages) and smriti_14manu_smriti_seg (2,568); smriti_16harita_smriti and _seg; upapurana_nilamata_purana and nilamata_seg; dhanur_veda_vasishtha_dhanur_veda and vasishtha_dhanur_veda; dhanur_veda_shiva_dhanur_veda and shiva_dhanur_veda (both translated) | the first inventory reported these as stranded; v2 recognises them as aliases |
+
+Separately, 2015_368408_Natyasastra-With (2,916 live passages) and SP_4214 (15,111) were ingested and never translated. The retry planner queues only verses a previous run went past, so books that have never been started are never queued. That is a policy decision, not a fault.
+
+**Corrections in v2 of `pipeline_inventory.py`:**
+- An empty book no longer counts as 1 live passage (a LEFT JOIN artefact).
+- Aliases are matched on the distinctive tokens of the code **and** an equal OCR page count. They are reported, never merged.
+- An ingested book whose passages are page-sized (at most one per page, average over 600 characters) is flagged as not verse-segmented.

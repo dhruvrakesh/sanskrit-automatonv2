@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """pipeline_inventory.py - where every book actually stands. READ-ONLY.
-(PIPELINE_INVENTORY_2026_09_30)
+(PIPELINE_INVENTORY_2026_09_30, v2: aliases, empty-doc count, page-sized passages)
 
 The dashboard has no per-book pipeline state: a book is "split" if its page PDFs
 are in inbox/, "OCR'd" if data/raw/ has a JSONL per page, "ingested" if
@@ -40,7 +40,11 @@ for _s in (sys.stdout, sys.stderr):
 
 PDF_RE = re.compile(r"^([A-Za-z0-9_\-]+)_(\d{4})\.pdf$", re.I)          # = dashboard.PDF_RE
 JSONL_RE = re.compile(r"^([A-Za-z0-9_\-]+)_(\d{4})(?:_norm)?\.jsonl$", re.I)  # = dashboard.JSONL_RE
-LIVE = "COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
+LIVE = "p.id IS NOT NULL AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
+# v2 2026-09-30: "p.id IS NOT NULL" - with the LEFT JOIN, a doc with no passages
+# produced one all-NULL row that counted as 1 live passage.
+# Tokens that name a genre, not a work, so aliases can be matched on what is left.
+GENERIC = {"seg", "purana", "upapurana", "veda", "dhanur", "smriti", "the", "of", "with"}
 
 
 def pages_by_doc(folder: Path, rx) -> dict:
@@ -63,13 +67,15 @@ def db_facts(db: Path) -> dict:
     con = sqlite3.connect("file:%s?mode=ro" % db.resolve().as_posix(), uri=True, timeout=30)
     con.execute("PRAGMA query_only=ON")
     try:
-        for code, pages, live, en in con.execute(
+        for code, pages, live, en, avg_len in con.execute(
                 "SELECT d.code, COUNT(DISTINCT p.page_no), "
                 f"SUM(CASE WHEN {LIVE} THEN 1 ELSE 0 END), "
-                f"SUM(CASE WHEN {LIVE} AND TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END) "
+                f"SUM(CASE WHEN {LIVE} AND TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END), "
+                f"AVG(CASE WHEN {LIVE} THEN LENGTH(p.text) END) "
                 "FROM docs d LEFT JOIN passages p ON p.doc_id = d.id "
                 "WHERE d.code NOT LIKE '%-RETIRED' GROUP BY d.id"):
-            out[code] = {"db_pages": pages or 0, "live": live or 0, "en": en or 0, "hi": 0}
+            out[code] = {"db_pages": pages or 0, "live": live or 0, "en": en or 0, "hi": 0,
+                         "avg_len": int(avg_len or 0)}
         try:
             for code, hi in con.execute(
                     "SELECT d.code, COUNT(*) FROM translations_l10n l "
@@ -153,8 +159,41 @@ def main() -> int:
         stage, stuck, reason = classify(pdf, ocr, f, jobs.get(doc, {}))
         rows.append({"doc": doc, "pdf_pages": len(pdf), "ocr_pages": len(ocr & pdf) if pdf else len(ocr),
                      "db_pages": f.get("db_pages", 0), "live": f.get("live", 0), "en": f.get("en", 0),
-                     "hi": f.get("hi", 0), "stage": stage, "stuck": stuck, "reason": reason,
+                     "hi": f.get("hi", 0), "avg_len": f.get("avg_len", 0), "stage": stage, "stuck": stuck, "reason": reason,
                      "in_database": doc in facts})
+    # v2: aliases. The same work imported under two codes (a "_seg" re-segmentation,
+    # or "dhanur_veda_vasishtha_dhanur_veda" vs "vasishtha_dhanur_veda") shows up
+    # as one stranded code and one healthy one. Match on the distinctive tokens AND
+    # an equal OCR page count; report, never merge.
+    def key(c):
+        return frozenset(t for t in c.lower().split("_") if t and t not in GENERIC)
+    by = {r["doc"]: r for r in rows}
+    for r in rows:
+        k = key(r["doc"])
+        if not k:
+            continue
+        twins = [o for o in rows if o is not r and key(o["doc"]) == k
+                 and o["ocr_pages"] and o["ocr_pages"] == r["ocr_pages"]]
+        if not twins:
+            continue
+        r["twins"] = [o["doc"] for o in twins]
+        live_twins = [o for o in twins if o["live"]]
+        if not r["live"] and live_twins:
+            r["stage"], r["stuck"] = "alias", False
+            r["reason"] = "same work as %s (same %d OCR pages, in the database) - not stranded" % (
+                ", ".join(o["doc"] for o in live_twins), r["ocr_pages"])
+        elif r["live"] and live_twins:
+            r["stage"], r["stuck"] = "duplicate", True
+            r["reason"] = "also in the database as %s (%s live passages): one of the two is legacy" % (
+                ", ".join(o["doc"] for o in live_twins), ", ".join(str(o["live"]) for o in live_twins))
+    # v2: a book ingested as one passage per page was not verse-segmented.
+    for r in rows:
+        f = facts.get(r["doc"], {})
+        if r["stage"] in ("ingested", "translating") and r["live"] and r["db_pages"] \
+                and r["live"] <= r["db_pages"] and f.get("avg_len", 0) > 600:
+            r["stuck"] = True
+            r["reason"] = ("one passage per page (avg %d chars): not verse-segmented; "
+                           "translating it would send whole pages" % f["avg_len"])
     shown = rows if a.all else [r for r in rows if r["stuck"]]
     print("pipeline_inventory  (read-only)  books: %d  stuck: %d  stranded pages (no OCR): %d"
           % (len(rows), sum(r["stuck"] for r in rows),
