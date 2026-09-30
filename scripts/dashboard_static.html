@@ -299,7 +299,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
         <label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em" title="What the Export button produces.">Export As</label>
         <select id="exportMode"
                style="background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px;font-family:JetBrains Mono,monospace;width:100%"
-               onchange="localStorage.setItem('exportMode',this.value)">
+               onchange="localStorage.setItem('exportMode',this.value);syncExportLabels()">
           <option value="en">English only</option>
           <option value="hi">हिन्दी Hindi only</option>
           <option value="tri">Trilingual (Sa/En/Hi)</option>
@@ -470,6 +470,17 @@ function getLang() {
 function getExportMode() {
   const el = document.getElementById('exportMode');
   return (el && el.value) || 'en';
+}
+// EXPORT_MODE_VISIBLE_2026_09_30 - the persisted Export As value was invisible
+// at the moment of clicking, so a Hindi-only export was taken for a broken
+// trilingual one. The row button now names the edition it will produce.
+function exportModeShort(m) {
+  m = m || getExportMode();
+  return m === 'tri' ? '(Sa/En/Hi)' : (m === 'hi' ? '(Hindi)' : '(English)');
+}
+function syncExportLabels() {
+  var t = exportModeShort();
+  document.querySelectorAll('.exp-mode').forEach(function(s) { s.textContent = t; });
 }
 function flashDoc(doc) {
   var tr = document.querySelector('tr[data-doc="' + (window.CSS && CSS.escape ? CSS.escape(doc) : doc) + '"]');
@@ -776,7 +787,7 @@ function renderPipeline(rows) {
           ' title="Rebuild this doc\'s semantic index so search and Ask the Corpus see it">Embed</button>' +
         '<button class="btn-act ent" data-act="entities" data-doc="' + esc(r.doc) + '"' +
           ' title="Extract named entities for cross-linking">Entities</button>' +
-        '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '">Export</button>' +
+        '<button class="btn-act exp" data-act="export" data-doc="' + esc(r.doc) + '" title="Edition set by Export As in the left panel">Export <span class="exp-mode">' + esc(exportModeShort()) + '</span></button>' +
         '<button class="btn-act" style="background:var(--gold);color:#000;font-size:10px" data-act="pipeline" data-doc="' + esc(r.doc) + '">&#9654; Full</button>' +
         '<a href="/reader/' + esc(r.doc) + '" target="_blank" style="display:inline-block;padding:4px 8px;background:transparent;color:var(--gold);border:1px solid var(--gold-dim);border-radius:3px;font-size:10px;text-decoration:none">&#128214;</a>' +
         '<select class="doc-engine-sel" data-doc="' + esc(r.doc) + '" title="Engine override (overrides global for this doc)" onchange="docEngines[this.dataset.doc]=this.value" style="background:var(--bg3);border:1px solid var(--border-v);color:var(--muted);border-radius:3px;font-size:9px;padding:2px 4px;cursor:pointer;max-width:90px">' +
@@ -893,6 +904,11 @@ async function batchAction(act) {
     if (!confirm('Start translation for ALL ' + docs.length + ' docs?\n\nJobs are rate-limited to 1 at a time. Each will queue behind the previous.')) return;
     for (var i = 0; i < docs.length; i++) { await startDoc(docs[i]); }
     return;
+  }
+  if (act === 'export') {  // EXPORT_MODE_VISIBLE_2026_09_30
+    var nExp = document.querySelectorAll('button[data-act="export"]').length;
+    if (!confirm('Export ALL ' + nExp + ' docs as ' + exportModeShort() + '?\n\n'
+        + 'Change "Export As" in the left panel first if this is not the edition you want.')) return;
   }
   document.querySelectorAll('button[data-act="' + act + '"]').forEach(async function(b) {
     await doAction(act, b.dataset.doc);
