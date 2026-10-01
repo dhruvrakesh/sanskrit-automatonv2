@@ -106,3 +106,7 @@ scripts/*.bak_pb_*
 scripts/*.tmp_patch
 scripts/*.bak_pk_*
 *.bak_og_*
+
+# OCR_CONSENSUS_2026_09_30 working files
+data/ocr_consensus/
+data/ab/
