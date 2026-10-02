@@ -39,3 +39,23 @@ What F4 means: the translation layer already works as a learning system. The one
 - **Chores.**
   - Set `COST_PER_PAGE` in `ocr_vision.py` to 0.00028 (measured).
   - Split `siddhanta_shiromani` with `--zero-pad 4`.
+
+## 4. Measured 2026-09-30 / 10-01 (census, drift, triage)
+
+- **Ingest fidelity is about 1.0.** Mallapurana was re-ingested from `data/raw_merged`. Its drift came back with 137 pages current: 132 at similarity 1.0, 4 at 0.95 or above, and 1 at 0.90 or above. So the 0.92 threshold separates "same text" from "different text".
+- **Shatpatha is not current.** 34 pages are stale, all vision→vision at similarity 0.81–0.89, and most current pages sit at 0.90–0.95. All vision files are dated 08-29, so the DB text differs from today's consensus for a reason not yet known. Do not wipe it until `--explain` says why: `ocr_consensus.py --doc 2015_405693_Shatpath-Brahmanam --explain 0291,0164,0225`. That shows the DB rows by text_type and the word-level differences. Leftover noise rows (the 08-29 phrase-loop junk) are the first suspect.
+- **Hindi damage check passed.** `hi_qmark = 0` everywhere, so stored Hindi has no encoding damage. The old `[???????]` query was simply wrong.
+- **Hindi marks lacunas 5–20× more often than English on the same source:**
+
+  | Book | English lacuna rate | Hindi lacuna rate |
+  |---|---|---|
+  | nilamata_seg | 0 % | 11.4 % |
+  | nirukta | 1.8 % | 14.3 % |
+  | harita_tritiya | 3.6 % | 53 % |
+  | Shatpatha (vision) | 0.5 % | 4.4 % |
+  | HAYASHIRSHA | 0 of 158 English done | 60 % |
+
+  `hi_bare` is about 0, so these are partial lacunas inside otherwise complete Hindi. Most of this is a Hindi prompt or model effect, not OCR. Re-OCR alone will not remove it. `measure_lacunae.py` now prints three splits to locate it: by prompt version, by whether English was available, and paired (Hindi-only versus both).
+- **Triage cannot run on most older books.** Pages OCR'd before 08-30 carry no Tesseract confidence. The fallback is to vision every page, which costs $0.00028 a page, about $0.21 for HAYASHIRSHA, markandeya, nirukta and harita_tritiya together: `--include-unassessed`. Two books cannot take this route:
+  - Bodhicaryavatara has no page PDFs in `inbox`.
+  - nilamata_seg is a resegmented derivative of upapurana_nilamata_purana and has no pages of its own.

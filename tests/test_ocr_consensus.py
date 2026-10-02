@@ -76,12 +76,32 @@ class Consensus(unittest.TestCase):
     def test_drift_opens_read_only(self):
         with tempfile.TemporaryDirectory() as t:
             db = Path(t) / "c.db"
-            sqlite3.connect(db).executescript(
+            c = sqlite3.connect(db)  # Windows: an open handle blocks TemporaryDirectory cleanup
+            c.executescript(
                 "CREATE TABLE docs(id INTEGER PRIMARY KEY, code TEXT);"
                 "CREATE TABLE passages(id INTEGER PRIMARY KEY, doc_id INT, page_no INT, idx INT, text TEXT);")
+            c.close()
             before = db.stat().st_mtime_ns
             self.m.drift(db, "X", {})
             self.assertEqual(before, db.stat().st_mtime_ns)
+
+    def test_explain_reports_db_only_tokens(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t); mdir = d / "merged"; mdir.mkdir()
+            db = d / "c.db"
+            con = sqlite3.connect(db)
+            con.executescript("CREATE TABLE docs(id INTEGER PRIMARY KEY, code TEXT);"
+                              "CREATE TABLE passages(id INTEGER PRIMARY KEY, doc_id INT, page_no INT, idx INT, text TEXT, text_type TEXT, ocr_engine TEXT);"
+                              "INSERT INTO docs VALUES(1,'X');")
+            con.execute("INSERT INTO passages VALUES(1,1,7,1,?,'mula','v')", (SA,))
+            con.execute("INSERT INTO passages VALUES(2,1,7,2,?,'noise','v')", (SB,))
+            con.commit(); con.close()
+            jl(mdir / "X_0007.jsonl", {"engine": "v", "page_no": 7, "text": SA})
+            r = self.m.explain(db, "X", "0007", mdir / "X_0007.jsonl")
+            self.assertEqual(r["sim_without_noise_frontmatter"], 1.0)
+            self.assertLess(r["sim_all_rows"], 1.0)
+            self.assertEqual(r["text_types"], {"mula": 1, "noise": 1})
+            self.assertTrue(any(o["op"] == "delete" for o in r["ops"]), "the noise row is only in the DB")
 
 
 class Lacunae(unittest.TestCase):
@@ -113,10 +133,41 @@ class Lacunae(unittest.TestCase):
                 "INSERT INTO passages VALUES(3,1,1,3,'s','[ILLEGIBLE]','noise','tesseract');"
                 "INSERT INTO translations_l10n VALUES(2,'hi','??????? x');")
             con.commit(); con.close()
-            rows = {r["engine"]: r for r in self.m.measure(self.m.open_ro(str(db)))}
+            ro = self.m.open_ro(str(db))
+            try:
+                rows = {r["engine"]: r for r in self.m.measure(ro)}
+            finally:
+                ro.close()
             self.assertEqual(rows["tesseract"]["en_lac"], 1, "noise rows are out of scope")
             self.assertEqual(rows["gemini-vision:x"]["en_lac"], 0)
             self.assertEqual(rows["gemini-vision:x"]["hi_qmark"], 1)
+
+    def test_breakdowns_paired_and_prompt(self):
+        with tempfile.TemporaryDirectory() as t:
+            db = Path(t) / "c.db"
+            con = sqlite3.connect(db)
+            con.executescript(
+                "CREATE TABLE docs(id INTEGER PRIMARY KEY, code TEXT);"
+                "CREATE TABLE passages(id INTEGER PRIMARY KEY, doc_id INT, page_no INT, idx INT, text TEXT,"
+                " translation TEXT, translation_qa REAL, mt_prompt_version TEXT, text_type TEXT);"
+                "CREATE TABLE translations_l10n(passage_id INT, lang TEXT, translation TEXT, mt_prompt_version TEXT);"
+                "INSERT INTO docs VALUES(1,'X');"
+                "INSERT INTO passages VALUES(1,1,1,1,'s','ok',0.9,'v3','mula');"
+                "INSERT INTO passages VALUES(2,1,1,2,'s','a [ILLEGIBLE]',0.9,'v3','mula');"
+                "INSERT INTO passages VALUES(3,1,1,3,'s',NULL,NULL,NULL,'mula');")
+            L = "[\u0905\u0938\u094d\u092a\u0937\u094d\u091f]"
+            con.executemany("INSERT INTO translations_l10n VALUES(?,?,?,?)",
+                            [(1, "hi", "x " + L, "hi-v3"), (2, "hi", "y " + L, "hi-v3"), (3, "hi", "z", "hi-v1")])
+            con.commit(); con.close()
+            ro = self.m.open_ro(str(db))
+            try:
+                b = self.m.breakdowns(ro)
+            finally:
+                ro.close()
+            self.assertEqual(b["paired"], {"pairs": 2, "both": 1, "en_only": 0, "hi_only": 1, "neither": 0})
+            self.assertEqual(b["by_prompt_hi"]["hi-v3"], [2, 2])
+            self.assertEqual(b["by_prompt_hi"]["hi-v1"], [1, 0])
+            self.assertEqual(b["hi_by_anchor"]["no QA-passed English"], [1, 0])
 
 
 class HindiAB(unittest.TestCase):

@@ -169,6 +169,50 @@ def drift(db: Path, doc: str, merged: dict[str, Path]) -> list[dict]:
     return rows
 
 
+def explain(db: Path, doc: str, page: str, merged_path: Path, n_ops: int = 15) -> dict:
+    """OCR_CONSENSUS_EXPLAIN_2026_10_01 - read-only. Why is this page stale?
+    Prints the DB rows for the page (idx, text_type, engine, tokens) and the
+    word-level differences between the DB text and the consensus text."""
+    uri = db.resolve().as_uri() + "?mode=ro"
+    con = sqlite3.connect(uri, uri=True)
+    con.execute("PRAGMA query_only=1")
+    cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    tt = "p.text_type" if "text_type" in cols else "NULL"
+    eng = "p.ocr_engine" if "ocr_engine" in cols else "NULL"
+    rows = con.execute(f"""SELECT p.idx, {tt}, {eng}, p.text FROM passages p JOIN docs d ON d.id=p.doc_id
+                           WHERE d.code=? AND p.page_no=? ORDER BY p.idx""", (doc, int(page))).fetchall()
+    con.close()
+    cons = read_rec(merged_path).get("text") or ""
+    db_all = "\n".join(r[3] or "" for r in rows)
+    db_main = "\n".join(r[3] or "" for r in rows if (r[1] or "mula") not in ("noise", "frontmatter"))
+    ta, tb = dev_tokens(db_all), dev_tokens(cons)
+    res = {"page": page, "db_rows": len(rows), "db_tokens": len(ta), "consensus_tokens": len(tb),
+           "sim_all_rows": round(similarity(db_all, cons), 3),
+           "sim_without_noise_frontmatter": round(similarity(db_main, cons), 3),
+           "text_types": {}, "ops": []}
+    for r in rows:
+        k = r[1] or "(none)"
+        res["text_types"][k] = res["text_types"].get(k, 0) + 1
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, ta, tb, autojunk=False).get_opcodes():
+        if tag == "equal":
+            continue
+        res["ops"].append({"op": tag, "db": " ".join(ta[i1:i2][:12]), "db_n": i2 - i1,
+                           "consensus": " ".join(tb[j1:j2][:12]), "cons_n": j2 - j1})
+    big = sorted(res["ops"], key=lambda o: -(o["db_n"] + o["cons_n"]))[:n_ops]
+    print("  page %s: %d DB rows %s | tokens DB %d vs consensus %d" % (
+        page, len(rows), res["text_types"], len(ta), len(tb)))
+    print("  similarity: all rows %.3f | without noise/frontmatter rows %.3f" % (
+        res["sim_all_rows"], res["sim_without_noise_frontmatter"]))
+    n = {"insert": 0, "delete": 0, "replace": 0}
+    for o in res["ops"]:
+        n[o["op"]] += 1
+    print("  diff blocks: only-in-consensus %(insert)d | only-in-DB %(delete)d | changed %(replace)d" % n)
+    for o in big:
+        print("   [%s] DB(%d): %s" % (o["op"], o["db_n"], o["db"]))
+        print("   %s  CONS(%d): %s" % (" " * len(o["op"]), o["cons_n"], o["consensus"]))
+    return res
+
+
 def reingest_commands(doc: str) -> str:
     stamp = "$(Get-Date -Format yyyyMMdd_HHmmss)"
     return "\n".join([
@@ -204,7 +248,11 @@ def main() -> int:
     ap.add_argument("--model", default=None, help="passed to ocr_vision.py --model")
     ap.add_argument("--yes", action="store_true", help="spend (vision) and write (repair, merge)")
     ap.add_argument("--drift-only", action="store_true")
+    ap.add_argument("--explain", default=None,
+                    help="comma-separated page numbers (e.g. 0291,0164): show why each is stale; read-only, implies --drift-only")
     args = ap.parse_args()
+    if args.explain:
+        args.drift_only = True
 
     doc = args.doc
     if not re.match(r"^[A-Za-z0-9_\-]+$", doc):
@@ -326,6 +374,17 @@ def main() -> int:
         return 0
     if not Path(args.db).exists():
         print("  %s not found; skipping drift." % args.db)
+        return 0
+    if args.explain:
+        out = []
+        for pg in [x.strip().zfill(4) for x in args.explain.split(",") if x.strip()]:
+            if pg not in merged:
+                print("  page %s: no consensus file" % pg)
+                continue
+            out.append(explain(Path(args.db), doc, pg, merged[pg]))
+        ex = work / ("%s_explain.json" % doc)
+        ex.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+        print("  full diff: %s" % ex)
         return 0
     rows = drift(Path(args.db), doc, merged)
     st = {k: sum(1 for r in rows if r["status"] == k) for k in ("current", "stale", "missing-in-db")}

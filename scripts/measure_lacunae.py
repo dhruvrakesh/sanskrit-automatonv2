@@ -105,6 +105,51 @@ def measure(con: sqlite3.Connection, doc: str | None = None) -> list[dict]:
     return out
 
 
+def breakdowns(con: sqlite3.Connection, doc: str | None = None) -> dict:
+    """LACUNA_MEASURE_2026_10_01: where do the lacunas come from?
+    by_prompt_en / by_prompt_hi : {mt_prompt_version: [done, with_lacuna]}
+    hi_by_anchor : Hindi split by whether a QA-passed English exists NOW
+                   (>= 0.6, the default --anchor-min-qa). Correlational only: it
+                   is today's English, not necessarily the one the Hindi saw.
+    paired       : verses translated in BOTH languages - which side marked a lacuna.
+                   'hi_only' far above 'both' means the Hindi lacunas are not caused
+                   by an unreadable source: English read the same text."""
+    pcols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    if not con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='translations_l10n'").fetchone():
+        return {}
+    lcols = {r[1] for r in con.execute("PRAGMA table_info(translations_l10n)")}
+    pv_en = "COALESCE(p.mt_prompt_version,'(none)')" if "mt_prompt_version" in pcols else "'(no column)'"
+    pv_hi = "COALESCE(l.mt_prompt_version,'(none)')" if "mt_prompt_version" in lcols else "'(no column)'"
+    qa = "COALESCE(p.translation_qa,0.0)" if "translation_qa" in pcols else "0.0"
+    tt = "AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')" if "text_type" in pcols else ""
+    where_doc = "AND d.code = ?" if doc else ""
+    sql = f"""SELECT p.translation, {pv_en}, {qa}, l.translation, {pv_hi}
+              FROM passages p JOIN docs d ON d.id = p.doc_id
+              LEFT JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = 'hi'
+              WHERE 1=1 {tt} {where_doc}"""
+    out = {"by_prompt_en": defaultdict(lambda: [0, 0]), "by_prompt_hi": defaultdict(lambda: [0, 0]),
+           "hi_by_anchor": defaultdict(lambda: [0, 0]),
+           "paired": {"pairs": 0, "both": 0, "en_only": 0, "hi_only": 0, "neither": 0}}
+    for en, ven, q, hi, vhi in con.execute(sql, [doc] if doc else []):
+        en_ok = bool(en and en.strip()); hi_ok = bool(hi and hi.strip())
+        el = classify(en)[0] if en_ok else 0
+        hl = classify(hi)[0] if hi_ok else 0
+        if en_ok:
+            b = out["by_prompt_en"][ven]; b[0] += 1; b[1] += el
+        if hi_ok:
+            b = out["by_prompt_hi"][vhi]; b[0] += 1; b[1] += hl
+            key = "english QA>=0.6 now" if (en_ok and q >= 0.6) else "no QA-passed English"
+            b = out["hi_by_anchor"][key]; b[0] += 1; b[1] += hl
+        if en_ok and hi_ok:
+            pr = out["paired"]; pr["pairs"] += 1
+            pr["both" if (el and hl) else "en_only" if el else "hi_only" if hl else "neither"] += 1
+    return out
+
+
+def _pct(d, l):
+    return (100.0 * l / d) if d else 0.0
+
+
 COLS = ["doc", "engine", "passages", "en_done", "en_lac", "en_lac_pct", "en_bare",
         "hi_done", "hi_lac", "hi_lac_pct", "hi_bare", "hi_qmark"]
 
@@ -121,6 +166,7 @@ def main() -> int:
         return 2
     con = open_ro(args.db)
     rows = measure(con, args.doc)
+    bd = breakdowns(con, args.doc)
     con.close()
     shown = [r for r in rows if (r["en_lac"] + r["hi_lac"]) >= args.min]
     w = {c: max(len(c), *(len(str(r[c])) for r in shown)) if shown else len(c) for c in COLS}
@@ -141,6 +187,18 @@ def main() -> int:
         print("  %-22s %6d translated  %5d with lacuna  %5.1f%%" % (e, d, l, (100.0 * l / d) if d else 0.0))
     if tot["hi_qmark"]:
         print("\nWARNING: %d Hindi rows contain '???' or U+FFFD - encoding damage at write time." % tot["hi_qmark"])
+    if bd:
+        for key, title in (("by_prompt_en", "English lacuna rate by prompt version:"),
+                           ("by_prompt_hi", "Hindi lacuna rate by prompt version:"),
+                           ("hi_by_anchor", "Hindi lacuna rate by English reference available (today's English):")):
+            print("\n" + title)
+            for k, (d, l) in sorted(bd[key].items(), key=lambda kv: -kv[1][0]):
+                print("  %-28s %6d done  %5d with lacuna  %5.1f%%" % (k, d, l, _pct(d, l)))
+        pr = bd["paired"]
+        print("\nVerses translated in BOTH languages: %(pairs)d" % pr)
+        print("  lacuna in both %(both)d | English only %(en_only)d | Hindi only %(hi_only)d | neither %(neither)d" % pr)
+        if pr["hi_only"] > 3 * max(pr["both"], 1):
+            print("  -> most Hindi lacunas sit on verses English read in full: a Hindi prompt/model effect, not OCR.")
     if args.csv:
         with open(args.csv, "w", newline="", encoding="utf-8") as f:
             wr = csv.DictWriter(f, fieldnames=COLS)
