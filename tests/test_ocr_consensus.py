@@ -103,6 +103,24 @@ class Consensus(unittest.TestCase):
             self.assertEqual(r["text_types"], {"mula": 1, "noise": 1})
             self.assertTrue(any(o["op"] == "delete" for o in r["ops"]), "the noise row is only in the DB")
 
+    def test_drift_compares_what_ingest_stores(self):
+        # OCR_CONSENSUS_NORM_2026_10_02: a word hyphenated across a line break in the
+        # consensus is ONE word in the DB (normalize_sanskrit joins it). Not stale.
+        w1, w2 = "\u091c\u093e\u0924\u0942", "\u0915\u0930\u094d\u0923\u094d\u092f\u093e\u091c\u094d\u091c\u093e\u0924\u0942\u0915\u0930\u094d\u0923\u094d\u092f\u094b"
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t); mdir = d / "merged"; mdir.mkdir()
+            db = d / "c.db"
+            con = sqlite3.connect(db)
+            con.executescript("CREATE TABLE docs(id INTEGER PRIMARY KEY, code TEXT);"
+                              "CREATE TABLE passages(id INTEGER PRIMARY KEY, doc_id INT, page_no INT, idx INT, text TEXT, ocr_engine TEXT);"
+                              "INSERT INTO docs VALUES(1,'X');")
+            con.execute("INSERT INTO passages VALUES(1,1,9,1,?, 'v')", (SA + " " + w1 + w2,))
+            con.commit(); con.close()
+            jl(mdir / "X_0009.jsonl", {"engine": "v", "page_no": 9, "text": SA + " " + w1 + "-\n" + w2})
+            rows = self.m.drift(db, "X", self.m.page_map(mdir, "X", "jsonl"))
+            self.assertEqual(rows[0]["status"], "current")
+            self.assertEqual(rows[0]["similarity"], 1.0)
+
 
 class Lacunae(unittest.TestCase):
     @classmethod
@@ -184,6 +202,43 @@ class HindiAB(unittest.TestCase):
         self.assertEqual(self.m.tatsama_share(SA, SA), 1.0)
         self.assertEqual(self.m.tatsama_share(SA, SB), 0.0)
         self.assertEqual(self.m.tatsama_share(SA, "no devanagari"), 0.0)
+
+    def test_parse_arms(self):
+        self.assertEqual(self.m.parse_arms("", False), ["a", "b"])
+        self.assertEqual(self.m.parse_arms("", True), ["a", "b", "c", "d"])
+        self.assertEqual(self.m.parse_arms("b, d", True), ["b", "d"])
+        with self.assertRaises(ValueError):
+            self.m.parse_arms("c", False)
+        with self.assertRaises(ValueError):
+            self.m.parse_arms("z", True)
+
+    def test_score_output_counts_lacuna_and_conjecture(self):
+        L = "[\u0905\u0938\u094d\u092a\u0937\u094d\u091f]"
+        out = "x " + L + " \u27e8\u090b\u0937\u093f\u0936\u093e\u0930\u094d\u0926\u0942\u0932\u27e9 " + L
+        r = self.m.score_output(SA, out, "x", None)
+        self.assertTrue(r["lacuna"]); self.assertEqual(r["lacuna_tokens"], 2); self.assertEqual(r["conj"], 1)
+        self.assertIn("vs_a", r); self.assertIsNone(r["qa"])
+
+    def test_candidate_prompt_keeps_rules_1_to_9(self):
+        p = REPO / "prompts" / "hi-v4-candidate.txt"
+        if not p.exists():
+            self.skipTest("prompts/hi-v4-candidate.txt not present")
+        t = p.read_text(encoding="utf-8")
+        for k in range(1, 12):
+            self.assertIn("\n%d. " % k if k > 1 else "1. ", t)
+        self.assertIn("\u27e8", t)
+
+    def test_report_pools_by_doc_and_arm(self):
+        L = "[\u0905\u0938\u094d\u092a\u0937\u094d\u091f]"
+        with tempfile.TemporaryDirectory() as td:
+            f1 = Path(td) / "hindi_ref_X_20261001_000000.jsonl"
+            f1.write_text(json.dumps({"sa": SA, "hi_a": "x " + L, "hi_b": "y"}) + "\n", encoding="utf-8")
+            f2 = Path(td) / "hindi_ref_my_doc_20261002_000000.jsonl"
+            f2.write_text(json.dumps({"sa": SA, "arms": ["c"], "hi_c": "\u27e8z\u27e9"}) + "\n", encoding="utf-8")
+            r = self.m.report([str(f1), str(f2)])
+        self.assertEqual(r["X"]["a"][:2], [1, 1]); self.assertEqual(r["X"]["b"][:2], [1, 0])
+        self.assertEqual(r["my_doc"]["c"][3], 1, "doc codes with underscores survive")
+        self.assertEqual(r["_all"]["a"][0], 1)
 
 
 if __name__ == "__main__":

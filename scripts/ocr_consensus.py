@@ -102,6 +102,29 @@ def dev_tokens(t: str) -> list[str]:
     return [w for w in DEV_WORD.findall(t or "") if len(w) >= 3]
 
 
+_NORM = None
+
+
+def ingest_view(text: str) -> str:
+    """OCR_CONSENSUS_NORM_2026_10_02: the text exactly as ingest stores it.
+    ingest_jsonl_fast.py runs normalize_sanskrit() before segmenting, and that
+    joins words hyphenated across line breaks (`jatu-\\n karnya` -> one word). The
+    first drift report compared the RAW consensus text, so every line-wrapped
+    prose page (Shatapatha) looked 'stale' at 0.81-0.89 while its DB text was in
+    fact byte-for-byte what ingest would write today (verified on pages 0001,
+    0093, 0164, 0225, 0291: token counts 17/144/26/99/102 equal the DB's)."""
+    global _NORM
+    if _NORM is None:
+        try:
+            sys.path.insert(0, str(SCRIPTS))
+            from normalize_text import normalize_sanskrit as _n
+            _NORM = _n
+        except Exception:
+            print("  [warn] normalize_text not importable; using the line-break rule only")
+            _NORM = lambda t: re.sub(r"-\s*\n\s*", "", t or "")
+    return _NORM(text or "")
+
+
 def similarity(a: str, b: str) -> float:
     ta, tb = dev_tokens(a), dev_tokens(b)
     if not ta and not tb:
@@ -162,7 +185,7 @@ def drift(db: Path, doc: str, merged: dict[str, Path]) -> list[dict]:
         if n not in db_pages:
             entry.update(similarity=None, db_engine=None, status="missing-in-db")
         else:
-            s = similarity("\n".join(db_pages[n][0]), text)
+            s = similarity("\n".join(db_pages[n][0]), ingest_view(text))
             entry.update(similarity=round(s, 3), db_engine=",".join(sorted(db_pages[n][1])) or None,
                          status="current" if s >= STALE_BELOW else "stale")
         rows.append(entry)
@@ -182,7 +205,7 @@ def explain(db: Path, doc: str, page: str, merged_path: Path, n_ops: int = 15) -
     rows = con.execute(f"""SELECT p.idx, {tt}, {eng}, p.text FROM passages p JOIN docs d ON d.id=p.doc_id
                            WHERE d.code=? AND p.page_no=? ORDER BY p.idx""", (doc, int(page))).fetchall()
     con.close()
-    cons = read_rec(merged_path).get("text") or ""
+    cons = ingest_view(read_rec(merged_path).get("text") or "")   # compare what ingest would store
     db_all = "\n".join(r[3] or "" for r in rows)
     db_main = "\n".join(r[3] or "" for r in rows if (r[1] or "mula") not in ("noise", "frontmatter"))
     ta, tb = dev_tokens(db_all), dev_tokens(cons)

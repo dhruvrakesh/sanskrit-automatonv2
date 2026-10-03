@@ -1,37 +1,39 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
 """
-diag_hindi_ab.py  (2026-09-30)  HINDI_REF_AB_2026_09_30
+diag_hindi_ab.py  (2026-09-30, v2 2026-10-02)  HINDI_REF_AB_2026_09_30  HINDI_AB_ARMS_2026_10_02
 
-QUESTION: should Hindi be translated from the Sanskrit ALONE, or with the
-QA-passed English passed as a meaning reference (the current default,
-TRANSLATION_FILTERS2_2026_09_27)?
+MEASURES Hindi translation choices on a deterministic sample. Changes nothing:
+mt_cache is bypassed (its key ignores the reference and the prompt text would
+make arms identical), nothing is written to mt_cache, passages or
+translations_l10n. Spend is metered to api_usage (use --no-meter to skip).
 
-The two are not independent today. English never sees Hindi. Hindi sees the
-English of the same verse whenever translation_qa >= 0.6. That can help
-(names, hard compounds) or hurt: English errors are copied into Hindi, and the
-Hindi drifts toward an English paraphrase instead of keeping the Sanskrit
-(tatsama) vocabulary that Hindi can carry over directly.
+ARMS (one variable at a time; same verse, context, model):
+  a  production Hindi prompt  + English reference (when QA-passed)   = today's behaviour
+  b  production Hindi prompt  , Sanskrit only
+  c  CANDIDATE prompt (--candidate-prompt FILE) + English reference
+  d  CANDIDATE prompt , Sanskrit only
+Default arms: a,b (the 2026-09-30 test). With --candidate-prompt: a,b,c,d.
 
-This script MEASURES it on a deterministic sample. It changes nothing:
-  * Arm A: the production message (Sanskrit + IAST + Hindi context + English reference)
-  * Arm B: the identical message WITHOUT the English reference
-  Same system prompt, same context, same model, same verse. One variable.
-  * mt_cache is bypassed on purpose (its key ignores the reference, so a cached
-    answer would make the two arms identical). Nothing is written to mt_cache,
-    passages or translations_l10n.
-  * Spend is metered to api_usage under the doc (use --no-meter to skip).
+POPULATION (--population):
+  anchored  verses with a QA-passed English (the 2026-09-30 default)
+  lacuna    verses whose STORED Hindi contains the lacuna mark - the rows a fix must repair
+  all       every translatable verse with a stored Hindi
+Verses without a QA-passed English get no reference in arms a/c either; the
+summary reports how many verses actually carried one.
 
-Metrics per arm (all computed locally, no second model):
-  qa        text_filters.score_translation_quality(src, out, lang='hi')  - the production scorer
-  lacuna    outputs containing [asphuta]
-  tatsama   share of the output's Devanagari words (>= 3 letters) that also occur
-            in the Sanskrit source - how much Sanskrit vocabulary is carried over
-  a_vs_b    character similarity between the two arms (1.0 = the reference changed nothing)
-And a side-by-side HTML for reading by eye, which is the real test.
+METRICS per arm (local, no second model):
+  qa       text_filters.score_translation_quality(src, out, 'hi') - production scorer (saturates near 1.0)
+  lacuna   verses whose output contains [asphuta]; tokens = total marks
+  conj     marked conjectures U+27E8 ... U+27E9 (the candidate prompt asks for them)
+  tatsama  share of output Devanagari words found in the Sanskrit source
+  vs_a     character similarity to arm a
+Measured noise (2026-10-01, markandeya, same 40 verses, 3 runs): arm a lacuna
+15/20/17, arm b 18/18/21. Differences under ~4 per 40 verses are noise; use
+--n 80 and pool several books before deciding.
 
-  python scripts\\diag_hindi_ab.py --doc markandeya_purana                # dry run: sample + cost estimate
-  python scripts\\diag_hindi_ab.py --doc markandeya_purana --n 40 --yes   # call the API (2 calls per verse)
+  python scripts\\diag_hindi_ab.py --doc nilamata_seg --population lacuna --n 40 --candidate-prompt prompts\\hi-v4-candidate.txt
+  ... add --yes to call the API.
 Output: data\\ab\\hindi_ref_<doc>_<stamp>.jsonl and .html
 """
 from __future__ import annotations
@@ -54,9 +56,12 @@ try:
 except Exception:
     pass
 
-MARK = "HINDI_REF_AB_2026_09_30"
+MARK = "HINDI_AB_ARMS_2026_10_02"
 DEV_WORD = re.compile(r"[\u0900-\u0963\u0970-\u097f]+")
 LACUNA = re.compile(r"\[\s*\u0905\u0938\u094d\u092a\u0937\u094d\u091f\s*\]")
+CONJ = re.compile(r"\u27e8[^\u27e9]{1,80}\u27e9")
+ARM_LABEL = {"a": "a  production + English ref", "b": "b  production, Sanskrit only",
+             "c": "c  candidate + English ref", "d": "d  candidate, Sanskrit only"}
 
 
 def tatsama_share(src: str, out: str) -> float:
@@ -75,17 +80,71 @@ def pick_sample(rows: list, n: int) -> list:
     return [rows[int(i * step)] for i in range(n)]
 
 
+def parse_arms(spec: str, have_candidate: bool) -> list[str]:
+    arms = [a.strip().lower() for a in (spec or "").split(",") if a.strip()]
+    if not arms:
+        arms = ["a", "b", "c", "d"] if have_candidate else ["a", "b"]
+    bad = [a for a in arms if a not in ARM_LABEL]
+    if bad:
+        raise ValueError("unknown arm(s): %s" % ",".join(bad))
+    if any(a in ("c", "d") for a in arms) and not have_candidate:
+        raise ValueError("arms c/d need --candidate-prompt")
+    return arms
+
+
+def score_output(sa: str, out: str, ref_out: str | None, scorer) -> dict:
+    r = {"lacuna": bool(LACUNA.search(out or "")), "lacuna_tokens": len(LACUNA.findall(out or "")),
+         "conj": len(CONJ.findall(out or "")), "tatsama": round(tatsama_share(sa, out), 3)}
+    r["qa"] = round(scorer(sa, out, lang="hi"), 3) if (out and scorer) else None
+    if ref_out is not None and out:
+        r["vs_a"] = round(difflib.SequenceMatcher(None, ref_out, out).ratio(), 3)
+    return r
+
+
 def open_ro(db: str) -> sqlite3.Connection:
     con = sqlite3.connect(Path(db).resolve().as_uri() + "?mode=ro", uri=True)
     con.execute("PRAGMA query_only=1")
     return con
 
 
+def report(paths: list) -> dict:
+    """Pool every v2 result file (records carrying "arms") by doc and arm.
+    Returns {doc: {arm: [n, lacuna_verses, lacuna_tokens, conj, tatsama_sum]}} plus '_all'."""
+    out: dict = {}
+    for p in paths:
+        try:
+            lines = Path(p).read_text(encoding="utf-8").splitlines()
+        except Exception:
+            continue
+        for l in lines:
+            if not l.strip():
+                continue
+            try:
+                r = json.loads(l)
+            except Exception:
+                continue
+            arms = r.get("arms") or ["a", "b"]
+            doc = Path(p).name.replace("hindi_ref_", "").rsplit("_", 2)[0]
+            for key in (doc, "_all"):
+                for arm in arms:
+                    o = r.get("hi_" + arm)
+                    if not o:
+                        continue
+                    g = out.setdefault(key, {}).setdefault(arm, [0, 0, 0, 0, 0.0])
+                    g[0] += 1; g[1] += 1 if LACUNA.search(o) else 0; g[2] += len(LACUNA.findall(o))
+                    g[3] += len(CONJ.findall(o)); g[4] += tatsama_share(r.get("sa") or "", o)
+    return out
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="A/B: Hindi with vs without the English reference (no DB writes)")
+    ap = argparse.ArgumentParser(description="A/B/C/D for Hindi: reference and prompt (no DB writes)")
     ap.add_argument("--db", default="data/context.db")
-    ap.add_argument("--doc", required=True)
+    ap.add_argument("--doc", default=None)
+    ap.add_argument("--report", action="store_true", help="pool data/ab/hindi_ref_*.jsonl by doc and arm; no API")
     ap.add_argument("--n", type=int, default=40)
+    ap.add_argument("--population", choices=["anchored", "lacuna", "all"], default="anchored")
+    ap.add_argument("--candidate-prompt", default=None, help="UTF-8 file: a full replacement Hindi base prompt")
+    ap.add_argument("--arms", default="", help="comma list of a,b,c,d (default a,b; a,b,c,d with a candidate)")
     ap.add_argument("--engine", default="gemini:gemini-2.5-flash")
     ap.add_argument("--anchor-min-qa", type=float, default=0.6)
     ap.add_argument("--context", type=int, default=5)
@@ -93,11 +152,38 @@ def main() -> int:
     ap.add_argument("--no-meter", action="store_true")
     ap.add_argument("--yes", action="store_true", help="call the API (default: dry run)")
     args = ap.parse_args()
+    if args.report:
+        import glob as _g
+        res = report(sorted(_g.glob(str(Path("data") / "ab" / "hindi_ref_*.jsonl"))))
+        print("%-34s %-4s %5s %8s %7s %6s %8s" % ("doc", "arm", "n", "lac_vs", "lac_tok", "conj", "tatsama"))
+        for doc in sorted(k for k in res if k != "_all") + (["_all"] if "_all" in res else []):
+            for arm in sorted(res[doc]):
+                n, lv, lt, cj, ts = res[doc][arm]
+                print("%-34s %-4s %5d %7.1f%% %7d %6d %8.3f" % (doc, arm, n, 100.0 * lv / n if n else 0, lt, cj, ts / n if n else 0))
+        return 0
+    if not args.doc:
+        print("FAIL: --doc is required (or use --report).")
+        return 2
     if not Path(args.db).exists():
         print("FAIL: %s not found. Run from the repo root." % args.db)
         return 2
     if not args.engine.startswith("gemini:"):
         print("FAIL: only gemini:* engines are wired here (production engine).")
+        return 2
+    cand_text = None
+    if args.candidate_prompt:
+        p = Path(args.candidate_prompt)
+        if not p.exists():
+            print("FAIL: %s not found." % p)
+            return 2
+        cand_text = p.read_text(encoding="utf-8").strip()
+        if len(cand_text) < 200:
+            print("FAIL: candidate prompt looks too short (%d chars)." % len(cand_text))
+            return 2
+    try:
+        arms = parse_arms(args.arms, cand_text is not None)
+    except ValueError as e:
+        print("FAIL: %s" % e)
         return 2
 
     from normalize_text import normalize_sanskrit
@@ -108,130 +194,153 @@ def main() -> int:
     con = open_ro(args.db)
     cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
     opt = [c for c in ("verse_ref", "chapter", "chandas", "text_type", "iast") if c in cols]
-    sel = ", ".join("p." + c for c in opt)
+    sel = (", " + ", ".join("p." + c for c in opt)) if opt else ""
+    if args.population == "anchored":
+        where = ("AND TRIM(COALESCE(p.translation,'')) <> '' AND COALESCE(p.translation_qa, 0.0) >= ?")
+        params = [args.doc, args.anchor_min_qa]
+    else:
+        where = "AND TRIM(COALESCE(l.translation,'')) <> ''"
+        params = [args.doc]
     rows = con.execute(
-        f"""SELECT p.id, p.page_no, p.idx, p.text, p.translation, {sel}
+        f"""SELECT p.id, p.page_no, p.idx, p.text, p.translation, COALESCE(p.translation_qa,0.0), l.translation{sel}
             FROM passages p JOIN docs d ON d.id = p.doc_id
-            WHERE d.code = ? AND TRIM(COALESCE(p.translation,'')) <> ''
-              AND COALESCE(p.translation_qa, 0.0) >= ?
+            LEFT JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = 'hi'
+            WHERE d.code = ? {where}
               AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')
-            ORDER BY p.page_no, p.idx""", (args.doc, args.anchor_min_qa)).fetchall()
+            ORDER BY p.page_no, p.idx""", params).fetchall()
+    if args.population == "lacuna":
+        rows = [r for r in rows if LACUNA.search(r[6] or "")]
     usable = []
     for r in rows:
-        cleaned = clean_for_mt(normalize_sanskrit(r[3] or ""))
-        if cleaned and should_translate(normalize_sanskrit(r[3] or ""), min_dev=0.05):
+        normed = normalize_sanskrit(r[3] or "")
+        cleaned = clean_for_mt(normed)
+        if cleaned and should_translate(normed, min_dev=0.05):
             usable.append((r, cleaned))
     sample = pick_sample(usable, args.n)
     meta = _get_doc_meta(con, args.doc)
-    stored = {}
-    if sample:
-        ids = [s[0][0] for s in sample]
-        q = ",".join("?" * len(ids))
-        stored = dict(con.execute(f"SELECT passage_id, translation FROM translations_l10n "
-                                  f"WHERE lang='hi' AND passage_id IN ({q})", ids).fetchall())
     print("=" * 74)
-    print("HINDI REFERENCE A/B  %s   %s   %s" % (args.doc, "RUN" if args.yes else "DRY RUN", MARK))
+    print("HINDI A/B  %s   population=%s   arms=%s   %s   %s" % (
+        args.doc, args.population, ",".join(arms), "RUN" if args.yes else "DRY RUN", MARK))
     print("=" * 74)
-    print("  QA-passed English verses: %d   usable: %d   sample: %d" % (len(rows), len(usable), len(sample)))
+    print("  candidates: %d   usable: %d   sample: %d" % (len(rows), len(usable), len(sample)))
     if not sample:
-        print("  Nothing to sample (no English with translation_qa >= %.2f)." % args.anchor_min_qa)
+        print("  Nothing to sample.")
         return 1
 
-    items = []
-    in_chars = 0
+    def system_prompt(m, use_candidate):
+        saved = infer_mt._SYSTEM_PROMPT_HI
+        try:
+            if use_candidate:
+                infer_mt._SYSTEM_PROMPT_HI = cand_text
+            return infer_mt._build_system_prompt(
+                doc_code=args.doc, category=meta.get("category"), chapter=m.get("chapter"),
+                verse_ref=m.get("verse_ref"), chandas=m.get("chandas"), text_type=m.get("text_type"), tgt="hi")
+        finally:
+            infer_mt._SYSTEM_PROMPT_HI = saved
+
+    items, in_chars, n_ref = [], 0, 0
     for (r, cleaned) in sample:
-        m = dict(zip(opt, r[5:]))
+        m = dict(zip(opt, r[7:]))
+        ref = r[4] if (r[4] and str(r[4]).strip() and (r[5] or 0.0) >= args.anchor_min_qa) else None
+        n_ref += 1 if ref else 0
         ctx = _fetch_context_l10n(con, args.doc, "hi", r[1], r[2], n=args.context)
-        sp = infer_mt._build_system_prompt(doc_code=args.doc, category=meta.get("category"),
-                                           chapter=m.get("chapter"), verse_ref=m.get("verse_ref"),
-                                           chandas=m.get("chandas"), text_type=m.get("text_type"), tgt="hi")
-        ma = infer_mt._build_user_message(cleaned, m.get("iast"), ctx or None, r[4])
-        mb = infer_mt._build_user_message(cleaned, m.get("iast"), ctx or None, None)
-        in_chars += 2 * len(sp) + len(ma) + len(mb)
-        items.append({"passage_id": r[0], "page": r[1], "idx": r[2], "verse_ref": m.get("verse_ref"),
-                      "sa": cleaned, "en_ref": r[4], "hi_stored": stored.get(r[0]),
-                      "_sp": sp, "_ma": ma, "_mb": mb})
+        it = {"passage_id": r[0], "page": r[1], "idx": r[2], "verse_ref": m.get("verse_ref"),
+              "sa": cleaned, "en_ref": ref, "hi_stored": r[6], "_calls": {}}
+        for arm in arms:
+            sp = system_prompt(m, arm in ("c", "d"))
+            msg = infer_mt._build_user_message(cleaned, m.get("iast"), ctx or None, ref if arm in ("a", "c") else None)
+            it["_calls"][arm] = (sp, msg)
+            in_chars += len(sp) + len(msg)
+        items.append(it)
     con.close()
+    n_calls = len(items) * len(arms)
+    print("  verses carrying an English reference: %d of %d" % (n_ref, len(items)))
     try:
         from cost_tracker import estimate_cost_usd
-        est = estimate_cost_usd(args.engine, in_chars, in_chars)
-        print("  calls: %d   input chars: %d   est cost: ~$%.4f (output assumed = input)" % (2 * len(items), in_chars, est))
+        print("  calls: %d   input chars: %d   est cost: ~$%.4f (output assumed = input)" % (
+            n_calls, in_chars, estimate_cost_usd(args.engine, in_chars, in_chars)))
     except Exception:
-        print("  calls: %d   input chars: %d" % (2 * len(items), in_chars))
+        print("  calls: %d   input chars: %d" % (n_calls, in_chars))
     if not args.yes:
         print("\n  Dry run. Add --yes to call the API. Nothing was written.")
         return 0
 
     model = args.engine.split(":", 1)[1]
-    t0 = time.time()
-    out_chars = 0
+    t0, out_chars = time.time(), 0
     for i, it in enumerate(items, 1):
-        for arm, msg in (("a", it["_ma"]), ("b", it["_mb"])):
+        for arm in arms:
+            sp, msg = it["_calls"][arm]
             try:
-                res = infer_mt._gemini_translate([it["sa"]], model=model, system_prompt=it["_sp"], user_messages=[msg])
+                res = infer_mt._gemini_translate([it["sa"]], model=model, system_prompt=sp, user_messages=[msg])
                 it["hi_" + arm] = (res[0] if res else "") or ""
             except Exception as e:
                 it["hi_" + arm] = ""
                 it["err_" + arm] = str(e)[:200]
             out_chars += len(it["hi_" + arm])
             time.sleep(args.sleep)
-        print("  (%d/%d) p%s.%s  A %d chars | B %d chars" % (i, len(items), it["page"], it["idx"],
-                                                           len(it["hi_a"]), len(it["hi_b"])), flush=True)
+        print("  (%d/%d) p%s.%s  " % (i, len(items), it["page"], it["idx"])
+              + " | ".join("%s %d" % (a, len(it["hi_" + a])) for a in arms), flush=True)
     dur = time.time() - t0
     if not args.no_meter:
         try:
             from cost_tracker import log_translation_call
             wcon = sqlite3.connect(args.db, timeout=30)
             log_translation_call(wcon, args.doc, args.engine, in_chars=in_chars, out_chars=out_chars,
-                                 duration_s=dur, passages=2 * len(items), ok=True)
+                                 duration_s=dur, passages=n_calls, ok=True)
             wcon.commit(); wcon.close()
         except Exception as e:
             print("  [meter] could not log spend: %s" % e)
 
-    agg = {"a": [0.0, 0, 0.0, 0], "b": [0.0, 0, 0.0, 0]}
-    sims = []
+    agg = {a: {"n": 0, "qa": 0.0, "lacuna": 0, "lacuna_tokens": 0, "conj": 0, "tatsama": 0.0, "vs_a": []}
+           for a in arms}
     for it in items:
-        for arm in ("a", "b"):
+        base = it.get("hi_a") if "a" in arms else None
+        for arm in arms:
             o = it["hi_" + arm]
             if not o:
                 continue
-            it["qa_" + arm] = round(score_translation_quality(it["sa"], o, lang="hi"), 3)
-            it["tatsama_" + arm] = round(tatsama_share(it["sa"], o), 3)
-            it["lacuna_" + arm] = bool(LACUNA.search(o))
-            a = agg[arm]; a[0] += it["qa_" + arm]; a[1] += int(it["lacuna_" + arm]); a[2] += it["tatsama_" + arm]; a[3] += 1
-        if it["hi_a"] and it["hi_b"]:
-            it["a_vs_b"] = round(difflib.SequenceMatcher(None, it["hi_a"], it["hi_b"]).ratio(), 3)
-            sims.append(it["a_vs_b"])
-    print("\n  %-28s %8s %8s %8s %6s" % ("arm", "mean qa", "lacuna", "tatsama", "n"))
-    for arm, label in (("a", "A  with English reference"), ("b", "B  Sanskrit only")):
-        s, l, t, n = agg[arm]
-        print("  %-28s %8.3f %8d %8.3f %6d" % (label, s / n if n else 0, l, t / n if n else 0, n))
-    if sims:
-        print("  mean A-vs-B similarity: %.3f   (1.0 = the reference changes nothing)" % (sum(sims) / len(sims)))
+            sc = score_output(it["sa"], o, base if arm != "a" else None, score_translation_quality)
+            for k, v in sc.items():
+                it["%s_%s" % (k, arm)] = v
+            g = agg[arm]; g["n"] += 1
+            g["qa"] += sc["qa"] or 0.0; g["lacuna"] += int(sc["lacuna"]); g["lacuna_tokens"] += sc["lacuna_tokens"]
+            g["conj"] += sc["conj"]; g["tatsama"] += sc["tatsama"]
+            if "vs_a" in sc:
+                g["vs_a"].append(sc["vs_a"])
+    stored_lac = sum(1 for it in items if LACUNA.search(it["hi_stored"] or ""))
+    print("\n  %-30s %7s %7s %7s %6s %8s %6s %4s" % ("arm", "qa", "lacuna", "tokens", "conj", "tatsama", "vs_a", "n"))
+    for arm in arms:
+        g = agg[arm]; n = g["n"] or 1
+        vs = ("%.3f" % (sum(g["vs_a"]) / len(g["vs_a"]))) if g["vs_a"] else "  -  "
+        print("  %-30s %7.3f %7d %7d %6d %8.3f %6s %4d" % (
+            ARM_LABEL[arm], g["qa"] / n, g["lacuna"], g["lacuna_tokens"], g["conj"], g["tatsama"] / n, vs, g["n"]))
+    print("  stored Hindi in this sample: %d of %d with a lacuna" % (stored_lac, len(items)))
 
     outdir = Path("data/ab"); outdir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     base = outdir / ("hindi_ref_%s_%s" % (args.doc, stamp))
     with open(str(base) + ".jsonl", "w", encoding="utf-8", newline="\n") as f:
         for it in items:
-            f.write(json.dumps({k: v for k, v in it.items() if not k.startswith("_")}, ensure_ascii=False) + "\n")
+            rec = {k: v for k, v in it.items() if not k.startswith("_")}
+            rec["arms"] = arms; rec["population"] = args.population
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
     e = html.escape
-    rows_html = "".join(
-        "<tr><td>%s.%s<br><small>%s</small></td><td class=sa>%s</td><td>%s</td>"
-        "<td>%s<br><small>qa %s | tatsama %s</small></td><td>%s<br><small>qa %s | tatsama %s</small></td></tr>"
-        % (it["page"], it["idx"], e(str(it.get("verse_ref") or "")), e(it["sa"]), e(it["en_ref"] or ""),
-           e(it.get("hi_a") or it.get("err_a", "")), it.get("qa_a", "-"), it.get("tatsama_a", "-"),
-           e(it.get("hi_b") or it.get("err_b", "")), it.get("qa_b", "-"), it.get("tatsama_b", "-"))
-        for it in items)
+    head = "".join("<th>%s</th>" % e(ARM_LABEL[a]) for a in arms)
+    body = []
+    for it in items:
+        cells = "".join("<td>%s<br><small>lacuna %s | conj %s | tatsama %s</small></td>" % (
+            e(it.get("hi_" + a) or it.get("err_" + a, "")), it.get("lacuna_tokens_" + a, "-"),
+            it.get("conj_" + a, "-"), it.get("tatsama_" + a, "-")) for a in arms)
+        body.append("<tr><td>%s.%s</td><td class=sa>%s</td><td>%s</td><td>%s</td>%s</tr>" % (
+            it["page"], it["idx"], e(it["sa"]), e(it["en_ref"] or ""), e(it["hi_stored"] or ""), cells))
     Path(str(base) + ".html").write_text(
-        "<!doctype html><meta charset=utf-8><title>Hindi reference A/B %s</title>"
+        "<!doctype html><meta charset=utf-8><title>Hindi A/B %s</title>"
         "<style>body{font:15px/1.5 system-ui;margin:16px}table{border-collapse:collapse}"
         "td,th{border:1px solid #ccc;padding:6px;vertical-align:top}.sa{font-size:17px}small{color:#666}</style>"
-        "<h2>%s: Hindi with vs without the English reference</h2>"
-        "<p>Read B against the Sanskrit. Does it keep meaning the English lost, or lose meaning the English supplied?</p>"
-        "<table><tr><th>page.idx</th><th>Sanskrit</th><th>English reference</th>"
-        "<th>A: with reference</th><th>B: Sanskrit only</th></tr>%s</table>" % (e(args.doc), e(args.doc), rows_html),
-        encoding="utf-8")
+        "<h2>%s - Hindi arms (%s population)</h2><p>Read each arm against the Sanskrit. A conjecture in "
+        "\u27e8 \u27e9 is the model's marked guess at an OCR-damaged word.</p>"
+        "<table><tr><th>page.idx</th><th>Sanskrit</th><th>English ref</th><th>stored Hindi</th>%s</tr>%s</table>"
+        % (e(args.doc), e(args.doc), e(args.population), head, "".join(body)), encoding="utf-8")
     print("\n  wrote %s.jsonl and .html" % base)
     return 0
 

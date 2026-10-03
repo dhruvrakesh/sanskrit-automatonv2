@@ -59,3 +59,28 @@ What F4 means: the translation layer already works as a learning system. The one
 - **Triage cannot run on most older books.** Pages OCR'd before 08-30 carry no Tesseract confidence. The fallback is to vision every page, which costs $0.00028 a page, about $0.21 for HAYASHIRSHA, markandeya, nirukta and harita_tritiya together: `--include-unassessed`. Two books cannot take this route:
   - Bodhicaryavatara has no page PDFs in `inbox`.
   - nilamata_seg is a resegmented derivative of upapurana_nilamata_purana and has no pages of its own.
+
+## 5. Measured 2026-10-01 / 10-02: corrections and the Hindi finding
+
+- **Correction: Shatpatha was never stale.** `ingest_jsonl_fast.py` normalizes text before storing it (`normalize_sanskrit`, which joins words hyphenated across line breaks), and the first drift report compared the *raw* consensus text. I re-normalized pages 0001, 0093, 0164, 0225 and 0291: their token counts come to 17, 144, 26, 99 and 102, exactly the DB's. Drift now compares what ingest would store (`ingest_view`, OCR_CONSENSUS_NORM_2026_10_02). One small edge remains: a hyphen before a *blank* line is also joined (`विश्व-\n\nअथ` becomes `विश्वअथ`). Leave it for now.
+- **Mallapurana after consensus:**
+
+  | Text source | English with lacuna | Hindi with lacuna |
+  |---|---|---|
+  | vision pages | 6.4 % | 5.7 % |
+  | Tesseract pages (the 58 triage accepted + 4 vision failures) | 55.4 % | 57.2 % |
+
+  Paired: of 704 verses translated in both languages, 122 have a lacuna in both, 0 in English only and 4 in Hindi only. **In this book the lacunas are OCR, and Tesseract confidence of 72 or more did not mean translatable.** At the measured $0.00028 a page, triage saves cents per book. Recommendation: vision every page (`--threshold 101`).
+- **Hindi elsewhere is a prompt effect.** Paired counts are Hindi-only 125 vs both 0 for nilamata_seg, 123 vs 8 for harita_tritiya, and 43 vs 0 for HAYASHIRSHA.
+- **A/B of the English reference** (5 runs, 200 verse-pairs):
+
+  | | With the English reference | Without it |
+  |---|---|---|
+  | Lacunas, pooled | 65 | 76 |
+  | Tatsama (Sanskrit vocabulary kept) | lower | higher in **all 5 runs** |
+  | QA score | saturated, about equal | saturated, about equal |
+
+  - Run-to-run noise on the same 40 verses: with the reference 15, 20 and 17; without it 18, 18 and 21.
+  - The reference helps mainly where the OCR is garbled. English silently emends (for example, ṛṣiśārdūla from a garbled `षिशाह लो`), and Hindi copies that only when it can see the English.
+  - **Neither setting fixes the problem.** On clean nilamata the current prompt still marked 8 to 13 of 40 verses.
+- **Next measurement:** run `prompts/hi-v4-candidate.txt` with `diag_hindi_ab.py` arms a/b/c/d on the stored-lacuna population. The candidate keeps rules 1–9 verbatim; rule 11 says to conjecture damaged words inside ⟨ ⟩, to keep readable rare words as tatsama, and to use [अस्पष्ट] only for truly unreadable characters.
