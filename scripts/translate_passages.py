@@ -210,9 +210,17 @@ def main():
                     help="PARK_ILLEGIBLE_2026_09_27: skip a verse whose answer under the "
                          "current prompt was only the lacuna token on this many runs "
                          "(same source text). It needs re-OCR, not another call.")
+    ap.add_argument("--reference", choices=["auto", "none"], default="auto",
+                    help="HI_PROMPT_FILE_2026_10_03: Hindi only. none = do not show the model the "
+                         "English of the verse (prompt version gains +noref).")
+    ap.add_argument("--only-lacuna", action="store_true",
+                    help="HI_PROMPT_FILE_2026_10_03: re-translate only rows whose stored translation "
+                         "carries the lacuna mark; implies --retranslate (old rows are archived).")
     ap.add_argument("--retry-illegible", action="store_true",
                     help="ask parked verses again anyway (this run only)")
     args = ap.parse_args()
+    if args.only_lacuna:   # HI_PROMPT_FILE_2026_10_03
+        args.retranslate = True
 
     _PROGRESS_PATH = Path(args.progress)
     _CONFIG_PATH   = Path(args.config)
@@ -251,6 +259,10 @@ def main():
               "or pass --lang en / --lang hi.")
         sys.exit(2)
     IS_L10N = TGT != "en"   # Phase HI: additional-language mode → translations_l10n
+    if IS_L10N and args.reference == "none":   # HI_PROMPT_FILE_2026_10_03
+        # A distinct prompt version: the cache key and mt_prompt_version both carry it,
+        # so an answer made WITH the English reference is never served as one without.
+        PROMPT_VERSIONS[TGT] = PROMPT_VERSIONS.get(TGT, PROMPT_VERSION) + "+noref"
 
     # Single-verse mode (reader's on-demand translate): pin the page range to the
     # one page and add an idx filter used by both the en and l10n selects below.
@@ -278,6 +290,10 @@ def main():
             where_extra.append("TRIM(COALESCE(p.translation,'')) <> ''")
             where_extra.append("COALESCE(p.translation_qa, 1.0) >= ?")
             params.append(args.anchor_min_qa)
+        if args.only_lacuna:   # HI_PROMPT_FILE_2026_10_03
+            where_extra.append("EXISTS (SELECT 1 FROM translations_l10n l2 WHERE l2.passage_id=p.id "
+                               "AND l2.lang=? AND l2.translation LIKE ?)")
+            params.extend([TGT, "%[\u0905\u0938\u094d\u092a\u0937\u094d\u091f]%"])
         if not args.retranslate:
             where_extra.append("NOT EXISTS (SELECT 1 FROM translations_l10n l "
                                "WHERE l.passage_id=p.id AND l.lang=?)")
@@ -300,7 +316,8 @@ def main():
             params,
         ))
     else:
-        translation_filter = ("" if args.retranslate
+        translation_filter = ("AND p.translation LIKE '%[ILLEGIBLE]%'" if args.only_lacuna  # HI_PROMPT_FILE_2026_10_03
+                              else "" if args.retranslate
                               else "AND COALESCE(TRIM(p.translation),'')=''")
         en_params = [args.doc, args.since_page, args.until_page]
         if args.only_idx is not None:
@@ -348,7 +365,8 @@ def main():
         # its absence never blocks the verse (direct Sanskrit→target translation).
         eng_ref = row[-1] if IS_L10N else None
         eng_qa  = row[-2] if IS_L10N else None
-        use_ref = bool(IS_L10N and eng_ref and str(eng_ref).strip()
+        use_ref = bool(IS_L10N and args.reference != "none"   # HI_PROMPT_FILE_2026_10_03
+                       and eng_ref and str(eng_ref).strip()
                        and (eng_qa or 0.0) >= args.anchor_min_qa)
         meta_row_end = (len(row) - 2) if IS_L10N else len(row)
         rest = {

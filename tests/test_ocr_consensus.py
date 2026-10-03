@@ -212,6 +212,11 @@ class HindiAB(unittest.TestCase):
         self.assertEqual(self.m.tatsama_share(SA, SB), 0.0)
         self.assertEqual(self.m.tatsama_share(SA, "no devanagari"), 0.0)
 
+    def test_unmarked_damage(self):
+        self.assertTrue(self.m.unmarked("abc FOO def", "clean hindi"))
+        self.assertFalse(self.m.unmarked("abc FOO def", "x \u27e8y\u27e9"))
+        self.assertFalse(self.m.unmarked("\u0905\u0925", "clean hindi"), "no debris, nothing to mark")
+
     def test_parse_arms(self):
         self.assertEqual(self.m.parse_arms("", False), ["a", "b"])
         self.assertEqual(self.m.parse_arms("", True), ["a", "b", "c", "d"])
@@ -246,6 +251,7 @@ class HindiAB(unittest.TestCase):
             f2.write_text(json.dumps({"sa": SA, "arms": ["c"], "hi_c": "\u27e8z\u27e9"}) + "\n", encoding="utf-8")
             r = self.m.report([str(f1), str(f2)])
         self.assertEqual(r["X"]["a"][:2], [1, 1]); self.assertEqual(r["X"]["b"][:2], [1, 0])
+        self.assertEqual(len(r["X"]["a"]), 6, "unmarked count is the 6th field")
         self.assertEqual(r["my_doc"]["c"][3], 1, "doc codes with underscores survive")
         self.assertEqual(r["_all"]["a"][0], 1)
 

@@ -132,3 +132,48 @@ What F4 means: the translation layer already works as a learning system. The one
   - VISION_FINISH3 turns banding off by default (`OCR_RECITATION_TILES` turns it back on), stops temperature retries on RECITATION, and retries once on transient errors.
   - These pages stay on Tesseract and are marked `finish=RECITATION` in their meta.
 - **Apparatus rule refined (APPARATUS_TAG2_2026_10_03).** The first rule tagged 3 chapter colophons (p59.2, p63.8 and one more) and a verse with footnotes (p56.11) as noise. The rule now excludes colophons and rows that open with a danda-marked verse; `--reconcile` restores them.
+
+## 8. Hindi: the four-way test (2026-10-03) and the production switch (HI_PROMPT_FILE_2026_10_03)
+
+**Measured.** The population was 160 verses whose stored Hindi already had a lacuna, 40 each from nilamata_seg, harita_tritiya, HAYASHIRSHA and markandeya. Every arm used the same verses, the same context and the same model.
+
+| Arm | Verses with lacuna | Lacuna marks | Conjectures ⟨…⟩ | Damage left unmarked* |
+|---|---|---|---|---|
+| a: hi-v3, with English (production today) | 143 / 159 | 496 | 0 | 8 |
+| b: hi-v3, Sanskrit only | 150 / 160 | 527 | 0 | 4 |
+| c: hi-v4 candidate, with English | 89 / 160 | 178 | 533 | 11 |
+| d: hi-v4 candidate, Sanskrit only | **74 / 160** | **170** | 565 | 9 |
+
+\*Unmarked damage means the verse contains Latin OCR debris, but the output has neither a lacuna nor a conjecture mark. 136 of the 160 verses contain debris.
+
+- **Per book, arm d against arm a.**
+
+  | Book | Verses with lacuna, a → d |
+  |---|---|
+  | nilamata_seg | 33 → 18 |
+  | harita_tritiya | 39 → 28 |
+  | HAYASHIRSHA | 38 → 16 |
+  | markandeya | 33 → 12 |
+
+  Conjectures make up 5–16 % of the output characters.
+- **What the conjectures are.** Read by hand, most are real OCR corrections: घाव्री → ⟨धात्री⟩, सेन्यव → ⟨सैन्धव⟩, शोभाझनक → ⟨शोभाञ्जनक⟩, wa → ⟨वकार⟩, चलुरख → ⟨चतुरस्र⟩.
+- **Defects in hi-v4:**
+  - Phrase-length guesses, e.g. ⟨स्वादु मधु और घृत⟩.
+  - Sanskrit stems left inside ⟨⟩, e.g. ⟨तोयसमाम्⟩.
+  - Silent handling of damage: HAYASHIRSHA p77.5 drops `afaeay` and `ASAT` without any mark, and markandeya p61.7 adds "मार डाला" from `TET` without one.
+- **hi-v5 (`prompts/hi-v5-candidate.txt`).** Rules 1–10 are unchanged. Rule 11 now says:
+  - (क) Put the *Hindi* rendering inside ⟨⟩, at most three words to a mark.
+  - (ख) Never mark a word that can be read.
+  - (ग) Use [अस्पष्ट] only for unreadable characters.
+  - (घ) Every damaged spot must carry one mark or the other; nothing may be dropped or added silently.
+
+**Production path (data, not code).** `patch_hindi_prompt_file.py`:
+- `infer_mt` uses `prompts/hi-production.txt` when that file exists, with version `hi-file-<content hash>`. That gives a new cache key and a new `mt_prompt_version` automatically.
+- `translate_passages` gains `--reference none`, which appends `+noref` to the version so a cached answer made with the reference is never reused.
+- It also gains `--only-lacuna`, which re-translates only rows that carry a lacuna; old rows are archived to `translation_history`.
+- Nothing changes until the file exists. To activate, copy the validated candidate to `prompts/hi-production.txt`. To revert, delete it.
+
+**Gate before activation:** arm d with hi-v5, on the same population, should show:
+- lacunas no higher than hi-v4 d (74 of 160);
+- unmarked damage at or below 4 (arm b's rate);
+- a hand check of 20 conjectures.

@@ -92,3 +92,18 @@ Guardrails that hold throughout:
   - I4: approved images placed in `export_html`, which `export_pdf` then prints.
   - E2: export hygiene (methodology text, empty sections).
   - E3: a PDF button in the dashboard.
+
+## 5. I2 shipped: the Images tab (IMAGES_UI_2026_10_03, IMAGE_DEDUPE_2026_10_03)
+
+- **What it is.** `scripts/images_web.py` and `scripts/images_static.html` add a page at `http://127.0.0.1:5057/images`, reached by an "Images" link in the dashboard top bar. `scripts/patch_images_ui.py` adds the link and registers the routes; it is guarded so a broken module cannot stop the dashboard, and it needs one restart while the dashboard is idle.
+- **What the page does:**
+  - Pick a text, filter by status, and see thumbnails (360-px JPEGs, made once and cached in `_thumbs/`).
+  - Edit title, idea, the note on why the image belongs, English and Hindi captions, and the verse anchor, with a preview of that verse.
+  - Approve an idea, generate, approve the image, redraw as a new version, retire, or restore.
+  - Propose ideas and remove duplicates.
+  - Calls to the model run as dashboard jobs (`images_brief` and `images_gen`), with a per-image job identity so one image's job never swallows another's.
+- **Duplicate ideas, measured.** `brief --yes` was run twice on 2026-10-03, creating rows 1–6 and 7–12. Five of the six new rows sat at the same verse as an earlier one; the sixth moved from 73.10 to 77.8.
+  - `brief` now refuses while unreviewed ideas exist (unless `--more` is given), and skips an idea already present at the same verse with the same title.
+  - `dedupe` retires later ideas at the same verse.
+- **Refused pages.** `ocr_consensus.py` no longer re-sends pages whose vision file records a RECITATION or SAFETY refusal, because a retry only costs a call; `--retry-refused` re-sends them.
+- **Tests.** `tests/test_images_web.py` (5, Flask test client) and `test_images.py` (6). The full suite is 62 tests.

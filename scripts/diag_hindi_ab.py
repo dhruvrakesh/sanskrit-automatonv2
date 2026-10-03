@@ -92,9 +92,19 @@ def parse_arms(spec: str, have_candidate: bool) -> list[str]:
     return arms
 
 
+JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")   # Latin OCR debris inside Devanagari
+
+
+def unmarked(sa: str, out: str) -> bool:
+    """HINDI_AB_UNMARKED_2026_10_03: the source carries OCR debris but the output marks
+    nothing (no lacuna, no conjecture) - the damage was dropped or guessed silently."""
+    return bool(JUNK.search(sa or "")) and not LACUNA.search(out or "") and not CONJ.search(out or "")
+
+
 def score_output(sa: str, out: str, ref_out: str | None, scorer) -> dict:
     r = {"lacuna": bool(LACUNA.search(out or "")), "lacuna_tokens": len(LACUNA.findall(out or "")),
-         "conj": len(CONJ.findall(out or "")), "tatsama": round(tatsama_share(sa, out), 3)}
+         "conj": len(CONJ.findall(out or "")), "tatsama": round(tatsama_share(sa, out), 3),
+         "unmarked": unmarked(sa, out)}
     r["qa"] = round(scorer(sa, out, lang="hi"), 3) if (out and scorer) else None
     if ref_out is not None and out:
         r["vs_a"] = round(difflib.SequenceMatcher(None, ref_out, out).ratio(), 3)
@@ -130,10 +140,19 @@ def report(paths: list) -> dict:
                     o = r.get("hi_" + arm)
                     if not o:
                         continue
-                    g = out.setdefault(key, {}).setdefault(arm, [0, 0, 0, 0, 0.0])
+                    g = out.setdefault(key, {}).setdefault(arm, [0, 0, 0, 0, 0.0, 0])
                     g[0] += 1; g[1] += 1 if LACUNA.search(o) else 0; g[2] += len(LACUNA.findall(o))
                     g[3] += len(CONJ.findall(o)); g[4] += tatsama_share(r.get("sa") or "", o)
+                    g[5] += 1 if unmarked(r.get("sa") or "", o) else 0
     return out
+
+
+def _first_population(path) -> str | None:
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.loads(f.readline()).get("population")
+    except Exception:
+        return None
 
 
 def main() -> int:
@@ -141,6 +160,8 @@ def main() -> int:
     ap.add_argument("--db", default="data/context.db")
     ap.add_argument("--doc", default=None)
     ap.add_argument("--report", action="store_true", help="pool data/ab/hindi_ref_*.jsonl by doc and arm; no API")
+    ap.add_argument("--population-only", default=None, choices=["anchored", "lacuna", "all"],
+                    help="with --report: pool only runs of this population")
     ap.add_argument("--n", type=int, default=40)
     ap.add_argument("--population", choices=["anchored", "lacuna", "all"], default="anchored")
     ap.add_argument("--candidate-prompt", default=None, help="UTF-8 file: a full replacement Hindi base prompt")
@@ -155,11 +176,15 @@ def main() -> int:
     if args.report:
         import glob as _g
         res = report(sorted(_g.glob(str(Path("data") / "ab" / "hindi_ref_*.jsonl"))))
-        print("%-34s %-4s %5s %8s %7s %6s %8s" % ("doc", "arm", "n", "lac_vs", "lac_tok", "conj", "tatsama"))
+        if args.population_only:
+            res = report([p for p in sorted(_g.glob(str(Path("data") / "ab" / "hindi_ref_*.jsonl")))
+                          if _first_population(p) == args.population_only])
+        print("%-34s %-4s %5s %8s %7s %6s %8s %9s" % ("doc", "arm", "n", "lac_vs", "lac_tok", "conj", "tatsama", "unmarked"))
         for doc in sorted(k for k in res if k != "_all") + (["_all"] if "_all" in res else []):
             for arm in sorted(res[doc]):
-                n, lv, lt, cj, ts = res[doc][arm]
-                print("%-34s %-4s %5d %7.1f%% %7d %6d %8.3f" % (doc, arm, n, 100.0 * lv / n if n else 0, lt, cj, ts / n if n else 0))
+                n, lv, lt, cj, ts, um = res[doc][arm]
+                print("%-34s %-4s %5d %7.1f%% %7d %6d %8.3f %9d" % (doc, arm, n, 100.0 * lv / n if n else 0, lt, cj,
+                                                               ts / n if n else 0, um))
         return 0
     if not args.doc:
         print("FAIL: --doc is required (or use --report).")

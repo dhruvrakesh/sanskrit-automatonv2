@@ -104,6 +104,27 @@ _SYSTEM_PROMPT_HI = """आप एक संस्कृत विद्वान
 10. निर्गम: केवल हिन्दी अनुवाद दें — कोई भूमिका, "अनुवाद:" शीर्षक या टिप्पणी नहीं। केवल [अस्पष्ट] तभी लिखें जब पाठ का कोई भी अंश पढ़ा न जा सके। यदि कुछ शब्द क्षतिग्रस्त हों, तो जो पढ़ा जा सकता है उस सबका अनुवाद करें और [अस्पष्ट] केवल वहीं लिखें जहाँ अपठनीय शब्द हैं — आंशिक क्षति के कारण पठनीय अंश का अनुवाद कभी न छोड़ें।"""
 
 
+# HI_PROMPT_FILE_2026_10_03: the production Hindi prompt may live in a reviewed
+# file (prompts/hi-production.txt, or SA_HI_PROMPT_FILE). Its version is derived
+# from its content, so changing the text is a new cache key automatically.
+# No file -> the built-in prompt above and PROMPT_VERSIONS['hi'], unchanged.
+HI_PROMPT_SOURCE = "built-in"
+_HI_PROMPT_FILE = os.environ.get("SA_HI_PROMPT_FILE") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prompts", "hi-production.txt")
+try:
+    if os.path.isfile(_HI_PROMPT_FILE):
+        with open(_HI_PROMPT_FILE, encoding="utf-8") as _hf:
+            _hi_txt = _hf.read().replace("\r\n", "\n").strip()
+        if len(_hi_txt) >= 200:
+            _SYSTEM_PROMPT_HI = _hi_txt
+            PROMPT_VERSIONS["hi"] = "hi-file-" + hashlib.sha256(_hi_txt.encode("utf-8")).hexdigest()[:10]
+            HI_PROMPT_SOURCE = _HI_PROMPT_FILE
+        else:
+            print(f"[infer_mt] {_HI_PROMPT_FILE} is too short ({len(_hi_txt)} chars); built-in Hindi prompt used")
+except Exception as _hi_err:   # never let a bad file stop translation
+    print(f"[infer_mt] Hindi prompt file ignored: {type(_hi_err).__name__}: {_hi_err}")
+
+
 def _build_system_prompt(
     doc_code: str,
     category: str = None,
