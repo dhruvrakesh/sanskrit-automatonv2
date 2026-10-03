@@ -286,3 +286,26 @@ both graded by the judge against the vision reading.
                              is for new intake, provenance and the apparatus.
 
 **Do not spend the $11 before running this.**
+
+## OCR consensus and Hindi lacunas - measured 2026-10-01/02 (DOCS_MAP_2026_10_02)
+
+Tools: `scripts/ocr_consensus.py`, `scripts/measure_lacunae.py`, `scripts/diag_hindi_ab.py`.
+Details and caveats: `docs/OCR_CONSENSUS_2026-09-30.md` sections 4-5.
+
+| Measure | Value |
+|---|---|
+| Mallapurana English lacuna rate, before (all Tesseract) | 237 / 370 = 64 % |
+| after consensus, vision pages | 35 / 548 = 6.4 % |
+| after consensus, Tesseract pages (58 triage-accepted at conf >= 72, plus 4 vision failures) | 87 / 157 = 55.4 % |
+| Mallapurana Hindi lacuna rate, vision pages / Tesseract pages | 5.7 % / 57.2 % |
+| Paired lacunas, Mallapurana (both / en only / hi only) | 122 / 0 / 4 - the cause is OCR |
+| Paired lacunas, nilamata_seg, harita_tritiya, HAYASHIRSHA (hi only / both) | 125/0, 123/8, 43/0 - the cause is the Hindi prompt |
+| Hindi with vs without English reference, 200 verse-pairs, lacunas | 65 vs 76 |
+| same, tatsama share | lower with reference in 5 of 5 runs |
+| same-sample run-to-run noise (40 verses, 3 runs) | 15/20/17 vs 18/18/21 |
+| vision cost per page, measured | $0.00028 |
+
+**Lacuna counts are not fidelity.** The judge-graded question in the section
+above ("The measurement still missing", `ab_source_quality.py`) is still open.
+Mallapurana's lacuna drop is strong evidence for that one book. The rule above
+stands: no corpus-wide rebuild before ab_source_quality has run.

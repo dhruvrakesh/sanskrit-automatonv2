@@ -36,7 +36,8 @@ except Exception:
 
 DEV_LETTER_RE = re.compile(r"[ऀ-ॣ॰-ॿ]")
 LAT_RE        = re.compile(r"[A-Za-z]")
-COST_PER_PAGE = 0.00073   # MEASURED 2026-08-29 from provider token counts on a
+COST_PER_PAGE = 0.00028   # VISION_FINISH_2026_10_03: re-measured 2026-09-30 (Mallapurana);
+                          # was 0.00073, MEASURED 2026-08-29 from provider token counts on a
                           # 300-dpi Shatpatha page (was 0.0004, an unverified guess).
                           # Re-measure if the model, DPI or prompt changes.
 MODEL_DEFAULT = "gemini-2.5-flash"
@@ -98,6 +99,151 @@ LOOP_MIN_CHARS = 3000
 # wants determinism; these only apply once a page has already failed, where the
 # determinism is precisely the problem.
 RETRY_TEMPS = (0.3, 0.7)
+# VISION_FINISH_2026_10_03 - output-budget ladder for finish_reason=MAX_TOKENS,
+# the same remedy infer_mt.py uses (thinking tokens count against the budget).
+MAXTOK_LADDER = tuple(int(x) for x in
+                      os.environ.get("OCR_MAXTOK_LADDER", "16384,32768").split(",") if x.strip())
+
+
+def _finish_name(resp):
+    """Provider finish_reason as a name: STOP, MAX_TOKENS, SAFETY, RECITATION, or None."""
+    try:
+        cands = getattr(resp, "candidates", None)
+        fr = cands[0].finish_reason if cands else None
+    except Exception:
+        return None
+    if fr is None:
+        return None
+    name = getattr(fr, "name", None)
+    if name:
+        return str(name)
+    try:
+        return {1: "STOP", 2: "MAX_TOKENS", 3: "SAFETY", 4: "RECITATION"}.get(int(fr), str(fr))
+    except Exception:
+        return str(fr)
+
+
+NEAR_EMPTY = 5   # VISION_FINISH2_2026_10_03: same threshold as merge_ocr_sources.DEFINITELY_EMPTY
+LAST_TILES = [0]  # bands used for the most recent page (0 = whole page); read into meta
+# VISION_FINISH3_2026_10_03: banding did not beat RECITATION on any of 5 pages; off by default.
+RECITATION_TILES = tuple(int(x) for x in os.environ.get("OCR_RECITATION_TILES", "").split(",") if x.strip())
+_TRANSIENT = ("DeadlineExceeded", "ServiceUnavailable", "InternalServerError", "TooManyRequests",
+              "ResourceExhausted", " 429", " 500", " 503", " 504")
+
+
+def _with_retry(fn, wait_s=6.0):
+    """Retry a call once on a transient provider error (VISION_FINISH3_2026_10_03)."""
+    def call(*a, **k):
+        try:
+            return fn(*a, **k)
+        except Exception as e:
+            tag = type(e).__name__ + " " + str(e)[:200]
+            if not any(t in tag for t in _TRANSIENT):
+                raise
+            print(f"      [retry] transient {type(e).__name__}; once more in {wait_s:.0f}s")
+            if wait_s:
+                time.sleep(wait_s)
+            return fn(*a, **k)
+    return call
+
+
+def _page_problem(t):
+    if len((t or "").strip()) < NEAR_EMPTY:
+        return "empty"
+    if len(t) >= LOOP_MIN_CHARS and compress_ratio(t) < LOOP_RATIO:
+        return "phrase loop"
+    return None
+
+
+def _cut_rows(img, n):
+    """Row indices that split the page into n bands, each cut placed on the whitest
+    row (least ink) within +-8% of the even split, so no printed line is cut."""
+    g = img.convert("L").resize((48, img.height))
+    w, h = g.size
+    px = list(g.getdata())
+    ink = [sum(255 - px[r * w + c] for c in range(w)) for r in range(h)]
+    win = max(3, h // 300)
+    smooth = [sum(ink[max(0, r - win):r + win + 1]) for r in range(h)]
+    cuts = []
+    for k in range(1, n):
+        target = h * k // n
+        lo, hi = max(1, target - h * 8 // 100), min(h - 1, target + h * 8 // 100)
+        least = min(smooth[lo:hi])
+        cuts.append(min((r for r in range(lo, hi) if smooth[r] <= least), key=lambda r: abs(r - target)))
+    return sorted(set(cuts))
+
+
+def _transcribe_tiled(img, model_name, name, tfn, n, budget):
+    """Transcribe n horizontal bands. Returns (text or "", resps). All-or-nothing."""
+    cuts = [0] + _cut_rows(img, n) + [img.height]
+    texts, resps = [], []
+    for i in range(len(cuts) - 1):
+        band = img.crop((0, cuts[i], img.width, cuts[i + 1]))
+        t, r, _ = tfn(band, model_name, max_tokens=budget)
+        resps.append(r)
+        if _page_problem(t):
+            print(f"      [tiles] {name}: band {i + 1}/{len(cuts) - 1} failed ({_finish_name(r)})")
+            return "", resps
+        texts.append(t.strip())
+    return "\n".join(texts), resps
+
+
+def transcribe_robust(img, model_name, name, tfn=None, sleep_s=2.0):
+    """One page with the recovery ladders. Returns (text, resp, raw_len, discarded).
+    discarded = responses that were paid for but are not `resp` (retries, bands)."""
+    tfn = _with_retry(tfn or transcribe, 0.0 if sleep_s == 0 else 6.0)   # VISION_FINISH3_2026_10_03
+    discarded = []
+    budget = 8192
+    LAST_TILES[0] = 0
+    text, resp, raw_len = tfn(img, model_name)
+    if _finish_name(resp) == "MAX_TOKENS":
+        # VISION_FINISH2_2026_10_03: MAX_TOKENS means truncated, at any length.
+        best = (text, resp, raw_len)
+        for b in MAXTOK_LADDER:
+            print(f"      [retry] {name}: MAX_TOKENS ({len((text or '').strip())} chars), max_output_tokens={b}")
+            budget = b
+            t3, r3, rl3 = tfn(img, model_name, max_tokens=b)
+            if len((t3 or "").strip()) >= len((best[0] or "").strip()):
+                discarded.append(best[1]); best = (t3, r3, rl3)
+            else:
+                discarded.append(r3)
+            if _finish_name(r3) != "MAX_TOKENS":
+                break
+        text, resp, raw_len = best
+    problem = _page_problem(text)
+    for temp in RETRY_TEMPS:
+        if not problem:
+            break
+        if _finish_name(resp) == "RECITATION":   # VISION_FINISH3_2026_10_03: temperature never helps
+            break
+        print(f"      [retry] {name}: {problem}, retrying at temperature={temp}")
+        if sleep_s:
+            time.sleep(sleep_s)
+        t2, r2, rl2 = tfn(img, model_name, temperature=temp, max_tokens=budget)
+        if not _page_problem(t2):
+            print(f"      [retry] {name}: clean at temperature={temp}, using it")
+            discarded.append(resp)
+            text, resp, raw_len = t2, r2, rl2
+            problem = None
+        elif (t2 or "").strip() and problem == "empty":
+            # still imperfect, but text beats nothing - keep the best so far
+            discarded.append(resp)
+            text, resp, raw_len = t2, r2, rl2
+            problem = _page_problem(text)
+        else:
+            discarded.append(r2)
+    if problem == "empty" and _finish_name(resp) == "RECITATION" and img is not None:
+        # VISION_FINISH2_2026_10_03: shorter passages are not refused as recitation.
+        for n in RECITATION_TILES:   # VISION_FINISH3_2026_10_03: empty unless OCR_RECITATION_TILES is set
+            print(f"      [tiles] {name}: RECITATION, transcribing in {n} bands")
+            tt, rs = _transcribe_tiled(img, model_name, name, tfn, n, budget)
+            if tt:
+                discarded.append(resp); discarded.extend(rs[:-1])
+                text, resp, raw_len = tt, rs[-1], len(tt)
+                LAST_TILES[0] = n
+                break
+            discarded.extend(rs)
+    return text, resp, raw_len, discarded
 
 
 def compress_ratio(s: str) -> float:
@@ -120,7 +266,8 @@ def render_page(pdf: str, dpi: int, poppler_bin: str | None):
     return pages[0]
 
 
-def transcribe(img, model_name: str, timeout_s: int = 120, temperature: float = 0.0):
+def transcribe(img, model_name: str, timeout_s: int = 120, temperature: float = 0.0,
+               max_tokens: int = 8192):  # VISION_FINISH_2026_10_03: budget is a parameter
     """Returns (text, resp). The response is handed back so the caller can read
     the provider's own token counts out of it - an image's cost cannot be
     derived from character counts, so anything else would be a guess."""
@@ -136,7 +283,7 @@ def transcribe(img, model_name: str, timeout_s: int = 120, temperature: float = 
     # SAME loop byte for byte - observed 2026-08-29 on pages 0215 and 0302, which
     # looped identically on two independent calls. Breaking the cycle needs a
     # different sampling path, which means a non-zero temperature on the retry.
-    cfg = genai.GenerationConfig(temperature=temperature, max_output_tokens=8192)
+    cfg = genai.GenerationConfig(temperature=temperature, max_output_tokens=max_tokens)
     gm = genai.GenerativeModel(model_name=model_name, generation_config=cfg,
                                system_instruction=PROMPT)
     resp = gm.generate_content([{"mime_type": "image/png", "data": buf.getvalue()}],
@@ -228,38 +375,22 @@ def main():
         try:
             t0 = time.time()
             img = render_page(pdf, args.dpi, args.poppler_bin)
-            text, resp, raw_len = transcribe(img, args.model)
-            def _bad(t):
-                if not t.strip():
-                    return "empty"
-                if len(t) >= LOOP_MIN_CHARS and compress_ratio(t) < LOOP_RATIO:
-                    return "phrase loop"
-                return None
-
-            problem = _bad(text)
-            for temp in RETRY_TEMPS:
-                if not problem:
-                    break
-                print(f"      [retry] {name}: {problem}, retrying at temperature={temp}")
-                time.sleep(2.0)
-                t2, r2, rl2 = transcribe(img, args.model, temperature=temp)
-                if not _bad(t2):
-                    print(f"      [retry] {name}: clean at temperature={temp}, using it")
-                    text, resp, raw_len = t2, r2, rl2
-                    problem = None
-                elif t2.strip() and problem == "empty":
-                    # still imperfect, but text beats nothing - keep the best so far
-                    text, resp, raw_len = t2, r2, rl2
-                    problem = _bad(text)
+            # VISION_FINISH_2026_10_03: budget ladder, then temperature ladder.
+            text, resp, raw_len, discarded = transcribe_robust(img, args.model, name)
             if meter is not None:
                 spend += meter(kind="ocr_vision", doc=args.doc, engine=engine_tag,
                                resp=resp, out_chars=len(text), units=1,
                                duration_s=time.time() - t0, con=mcon)
+                for _r in discarded:   # VISION_FINISH_2026_10_03: paid retries are recorded too
+                    spend += meter(kind="ocr_vision", doc=args.doc, engine=engine_tag,
+                                   resp=_r, out_chars=0, units=0, duration_s=0.0, con=mcon)
             rec = {
                 "engine": f"gemini-vision:{args.model}",
                 "page_no": page_no_from_name(name),
                 "text": text,
                 "meta": {"dpi": args.dpi, "model": args.model, "dev": round(dev_frac(text), 3),
+                         "finish": _finish_name(resp), "retries": len(discarded),
+                         "tiles": LAST_TILES[0],  # VISION_FINISH2_2026_10_03
                          "raw_len": raw_len, "collapsed": bool(raw_len > len(text)),
                          "compress": round(compress_ratio(text), 4),
                          "suspect": bool(len(text) > RUNAWAY_CHARS

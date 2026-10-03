@@ -121,6 +121,15 @@ class Consensus(unittest.TestCase):
             self.assertEqual(rows[0]["status"], "current")
             self.assertEqual(rows[0]["similarity"], 1.0)
 
+    def test_plan_vision_skips_refused_pages_unless_asked(self):
+        with tempfile.TemporaryDirectory() as t:
+            v = Path(t)
+            jl(v / "X_0001.jsonl", {"text": "", "meta": {"finish": "RECITATION"}})
+            jl(v / "X_0002.jsonl", {"text": "", "meta": {"finish": "MAX_TOKENS"}})
+            q = ["inbox\\X_0001.pdf", "inbox\\X_0002.pdf"]
+            self.assertEqual(self.m.plan_vision(q, v), (["inbox\\X_0002.pdf"], ["inbox\\X_0001.pdf"]))
+            self.assertEqual(self.m.plan_vision(q, v, True)[0], q)
+
 
 class Lacunae(unittest.TestCase):
     @classmethod

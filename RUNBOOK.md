@@ -17,13 +17,21 @@ is), `ENTERPRISE_ROADMAP.md` (forward plan), `BENCHMARKS.md` (measured baselines
 | `ENTERPRISE_ROADMAP.md` | Phased forward plan + rationale | planning changes |
 | `BENCHMARKS.md` | Dated measured baselines + metric semantics | before/after any change |
 | `QUALITY_METHODOLOGY.md` | How source/translation/semantic quality are computed (public-facing; served at `/methodology`) | transparency, reader-facing |
+| `docs/ENTERPRISE_PATH_2026-09-06.md` | Measured state and ordered plan as of 2026-09-06 | planning (read with ENTERPRISE_ROADMAP) |
+| `docs/RETIREMENT_AND_BACKUP_POLICY_2026-09-14.md` | retire_doc / graft_verses / backup policy | before retiring or grafting a doc |
+| `docs/OPERATING_MODEL_2026-09-27.md` | What feeds what, how often, who presses the button; guardrails | operating the system |
+| `docs/TRANSLATION_EMPTY_OUTCOMES_2026-09-27.md` | Why valid Sanskrit got empty translations; the outcome ledger | empty / filtered translations |
+| `docs/PARK_AND_TITLE_2026-09-27.md` | Parking lacuna-only verses; Srangam display titles | lacunas, publishing titles |
+| `docs/SRANGAM_BRIDGE_2026-09-27.md` | Automaton -> Srangam publish bridge and SQL-editor route | publishing to Srangam |
+| `docs/PIPELINE_STATE_2026-09-30.md` | Why a book stops between stages; the plan | a book is stuck |
+| `docs/OCR_CONSENSUS_2026-09-30.md` | One-command OCR consensus, drift, lacuna census, Hindi A/B and findings | OCR or lacuna work |
 
 **System context.** This repo (`automaton`) is one of four siblings in the
 `sanskrit-symphony` monorepo (`automaton`, `hub` = Srangam console :5050, `panchang`
 :8501, `wisdomlib` = e-text crawler). A live **Srangam** website (Lovable + Supabase, its
 own repo) is fed by `publish_srangam.py`. The **origin** repo
 (`D:\Sanksrit Automatons\sanskrit-automatonv2`) is the LIVE system; the monorepo
-`automaton/` is a code-only mirror pending data cutover — keep both in sync (§6).
+`automaton/` is a code-only mirror pending data cutover — keep both in sync (§6). **Superseded 2026-09-30:** SOURCES_OF_TRUTH.md rule 2 - the symphony repo holds cross-project docs only; release this repo with §6b. (DOCS_MAP_2026_10_02)
 
 **Two metrics, two axes** (see BENCHMARKS): `quality_score` = SOURCE Devanagari/OCR gate;
 `translation_qa` = TRANSLATION structural QA. Neither certifies semantic fidelity — that

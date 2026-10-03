@@ -52,8 +52,31 @@ _META_HI = re.compile(r"^\s*\[[^\]]{0,240}?(\u0909\u092a\u0932\u092c\u094d\u0927
                       r"[^\]]{0,240}\]\s*$")
 
 
+# APPARATUS_TAG2_2026_10_03: the first rule tagged Mallapurana chapter COLOPHONS
+# ("iti srimallapurane ... adhyayah") that carry a footnote tail, and a verse
+# followed by its footnotes. Neither is apparatus: a colophon never is, and a row
+# that OPENS with a danda-marked verse is a verse with footnotes attached. (A rule
+# on apparatus share of letters was tried and rejected: footnotes that quote a
+# whole variant line score low and would be missed.)
+COLOPHON = re.compile(r"\u0907\u0924\u093f\s*\u0936\u094d\u0930\u0940|\u0905\u0927\u094d\u092f\u093e\u092f\u0903")
+_LETTER = re.compile(r"[\u0905-\u0939\u093e-\u094c\u0950-\u0963]")
+
+
+def leading_verse(text: str, min_letters: int = 20) -> bool:
+    """True when the row starts with real verse text (letters + a danda) before any apparatus entry."""
+    t = text or ""
+    m = APPARATUS_HIT.search(t)
+    head = t[:m.start()] if m else t
+    return len(_LETTER.findall(head)) >= min_letters and ("\u0964" in head or "\u0965" in head)
+
+
 def is_apparatus(text: str, min_hits: int = 2) -> bool:
-    return len(APPARATUS_HIT.findall(text or "")) >= min_hits
+    t = text or ""
+    if len(APPARATUS_HIT.findall(t)) < min_hits:
+        return False
+    if COLOPHON.search(t) or leading_verse(t):
+        return False
+    return True
 
 
 def has_unit_loop(text: str) -> bool:
@@ -138,7 +161,7 @@ def main() -> int:
         print("  ".join(str(r[c]).ljust(w[c]) for c in COLS))
     tot = {k: sum(r[k] for r in rows) for k in COLS[1:]}
     print("\nTOTAL  " + " | ".join("%s %d" % (k, v) for k, v in tot.items()))
-    for (code, kind), lst in sorted(samples.items()):
+    for (code, kind), lst in sorted((k, v) for k, v in samples.items() if v):  # no empty headers
         print("\n  %s / %s:" % (code, kind))
         for pid, pg, idx, snippet in lst:
             print("    id %d  p%s.%s  %s" % (pid, pg, idx, snippet.replace("\n", " ")))

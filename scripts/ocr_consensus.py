@@ -86,15 +86,30 @@ def nonempty_jsonl(p: Path) -> bool:
         return False
 
 
-def plan_vision(queue_lines: list[str], vision_dir: Path) -> tuple[list[str], list[str]]:
-    """Split the queue into (todo, done). Done = a non-empty vision file exists."""
+def refused(p: Path) -> bool:
+    """CONSENSUS_REFUSED_2026_10_03: the vision file records that the provider refused
+    the page (finish RECITATION or SAFETY). Retrying costs a call and changes nothing."""
+    try:
+        with open(p, encoding="utf-8") as f:
+            rec = json.loads(next((l for l in f if l.strip()), "{}"))
+        return ((rec.get("meta") or {}).get("finish") in ("RECITATION", "SAFETY")
+                and not (rec.get("text") or "").strip())
+    except Exception:
+        return False
+
+
+def plan_vision(queue_lines: list[str], vision_dir: Path, retry_refused: bool = False):
+    """Split the queue into (todo, done). Done = a non-empty vision file exists, or the
+    provider refused the page before (unless retry_refused) - merge keeps Tesseract."""
     todo, done = [], []
     for q in queue_lines:
         q = q.strip()
         if not q:
             continue
         stem = Path(q.replace("\\", "/")).stem
-        (done if nonempty_jsonl(vision_dir / (stem + ".jsonl")) else todo).append(q)
+        vf = vision_dir / (stem + ".jsonl")
+        ok = nonempty_jsonl(vf) or (not retry_refused and refused(vf))
+        (done if ok else todo).append(q)
     return todo, done
 
 
@@ -264,6 +279,8 @@ def main() -> int:
     ap.add_argument("--vision-dir", default="data/raw_vision")
     ap.add_argument("--merged-dir", default="data/raw_merged")
     ap.add_argument("--threshold", type=float, default=72.0)
+    ap.add_argument("--retry-refused", action="store_true",
+                    help="also re-send pages the provider refused (RECITATION/SAFETY) before")
     ap.add_argument("--include-unassessed", action="store_true",
                     help="also vision pages whose Tesseract output carries no confidence")
     ap.add_argument("--max-usd", type=float, default=1.00, help="refuse the vision step above this estimate")
@@ -331,7 +348,11 @@ def main() -> int:
                     if stem not in assessed and pg in inbox:
                         queue.append(os.path.join(args.inbox, stem + ".pdf"))
         # 2. VISION (metered, skip-existing)
-        todo, done = plan_vision(queue, vdir)
+        todo, done = plan_vision(queue, vdir, args.retry_refused)
+        n_ref = sum(1 for q in done if refused(vdir / (Path(q.replace("\\", "/")).stem + ".jsonl")))
+        if n_ref:
+            print("  %d page(s) skipped: the provider refused them before (RECITATION/SAFETY); "
+                  "Tesseract is kept. --retry-refused to try again." % n_ref)
         if args.max_pages and len(todo) > args.max_pages:
             todo = todo[:args.max_pages]
         est = len(todo) * COST_PER_PAGE_MEASURED

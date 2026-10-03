@@ -3117,6 +3117,14 @@ if not _static_html.exists():
 # CLI entry point
 # ──────────────────────────────────────────────────────────────────────────────
 
+# IMAGES_UI_2026_10_03: the Images tab (/images) - see scripts/images_web.py.
+# Guarded: if the module is missing or broken the dashboard still starts.
+try:
+    import images_web as _images_web
+    _images_web.register(app, launch=launch, root=ROOT, py=py, script=script)
+except Exception as _images_err:
+    print(f"[images] Images tab not loaded: {type(_images_err).__name__}: {_images_err}")
+
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()

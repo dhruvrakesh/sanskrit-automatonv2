@@ -84,3 +84,51 @@ What F4 means: the translation layer already works as a learning system. The one
   - The reference helps mainly where the OCR is garbled. English silently emends (for example, ṛṣiśārdūla from a garbled `षिशाह लो`), and Hindi copies that only when it can see the English.
   - **Neither setting fixes the problem.** On clean nilamata the current prompt still marked 8 to 13 of 40 verses.
 - **Next measurement:** run `prompts/hi-v4-candidate.txt` with `diag_hindi_ab.py` arms a/b/c/d on the stored-lacuna population. The candidate keeps rules 1–9 verbatim; rule 11 says to conjecture damaged words inside ⟨ ⟩, to keep readable rare words as tatsama, and to use [अस्पष्ट] only for truly unreadable characters.
+
+## 6. Measured 2026-10-03: Mallapurana complete, and the empty-vision cause
+
+- **Mallapurana after vision on every page** (`--threshold 101`):
+
+  | | Before (all Tesseract) | After |
+  |---|---|---|
+  | English translated | 705 / 1037 | 1005 / 1036 (QA mean 0.994) |
+  | English lacuna rate | 64 % | 7.8 % |
+  | Hindi lacuna rate | 65 % | 8.1 % |
+  | Lacuna rate on vision pages | — | 4.5 % (English) / 4.7 % (Hindi) |
+
+  Paired: 72 in both languages, 6 English only, 8 Hindi only. The remaining lacunas sit on 53 passages from 10 pages that vision returned **empty**: 71 % English lacuna rate on those.
+- **Likely cause** (not yet confirmed). `ocr_vision.transcribe` uses `max_output_tokens=8192`, and gemini-2.5-* thinking tokens count against that budget. Its retries change only temperature, and it discards `finish_reason`. `patch_ocr_vision_finish.py` (VISION_FINISH_2026_10_03) does four things:
+  - adds the 16384/32768 budget ladder that `infer_mt.py` already uses;
+  - records `finish` and `retries` in each page's meta, so the next empty page names its cause;
+  - meters paid retries;
+  - sets `COST_PER_PAGE` to 0.00028.
+
+  Corpus-wide, 12 vision pages are empty where Tesseract has text: Mallapurana 10, Shatpatha 1, Aphorisms 1.
+- **Hygiene census** (`diag_text_hygiene.py`, 54,818 passages):
+
+  | Defect | Rows | Note |
+  |---|---|---|
+  | Apparatus rows | 36 | 35 Mallapurana. 15 were paid in English and 15 in Hindi |
+  | 2–4-character vision loops | 20 | |
+  | Bracketed meta outputs | 1 | on an apparatus row |
+
+  These are small. `classify_apparatus.py` (APPARATUS_TAG_2026_10_03) tags apparatus rows as noise and keeps their translations; it is reversible with `--undo`. The unit loops are left for the next merge change.
+
+## 7. Measured 2026-10-03 (afternoon)
+
+- **`ab_source_quality.py` on markandeya (10 pages, judge-graded against the vision text):**
+
+  | | Old translations (from Tesseract text) | New translations (from vision text) | Change |
+  |---|---|---|---|
+  | Fidelity | 1.20 | 2.40 | +1.20 |
+  | Fluency | 2.60 | 3.60 | +1.00 |
+
+  New was better on 4 pages, tied on 4 and worse on 2. That is past the BENCHMARKS decision line (+0.5), so **re-OCR plus re-translation is justified on translation quality**, not only on provenance.
+  - Caveat: one judge, 10 pages.
+  - Absolute scores are low because this experiment translates a whole page in one call, which is not the production verse-by-verse path.
+  - The first attempt died on a 504 inside `ocr_vision.transcribe`, which has no transient retry when called directly.
+- **Vision on the refused pages:**
+  - RECITATION is not beaten by splitting the page into bands. Mallapurana pages 0022, 0026 and 0029 were refused again after 4–5 paid calls; 0024 ended on a 504.
+  - VISION_FINISH3 turns banding off by default (`OCR_RECITATION_TILES` turns it back on), stops temperature retries on RECITATION, and retries once on transient errors.
+  - These pages stay on Tesseract and are marked `finish=RECITATION` in their meta.
+- **Apparatus rule refined (APPARATUS_TAG2_2026_10_03).** The first rule tagged 3 chapter colophons (p59.2, p63.8 and one more) and a verse with footnotes (p56.11) as noise. The rule now excludes colophons and rows that open with a danda-marked verse; `--reconcile` restores them.

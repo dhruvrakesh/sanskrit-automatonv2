@@ -110,3 +110,9 @@ scripts/*.bak_pk_*
 # OCR_CONSENSUS_2026_09_30 working files
 data/ocr_consensus/
 data/ab/
+
+# IMAGE_LIBRARY_2026_10_03
+data/images/
+
+# IMAGE_LIBRARY_2026_10_03
+data/images/

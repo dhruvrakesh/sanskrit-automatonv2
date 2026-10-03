@@ -1,0 +1,230 @@
+{
+ "marker": "APPARATUS_TAG_2026_10_03",
+ "at": "2026-10-03T11:08:09",
+ "rows": [
+  {
+   "id": 187176,
+   "doc": "Mallapurana",
+   "page": 46,
+   "idx": 10,
+   "prev": "mula"
+  },
+  {
+   "id": 187188,
+   "doc": "Mallapurana",
+   "page": 47,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 187199,
+   "doc": "Mallapurana",
+   "page": 48,
+   "idx": 11,
+   "prev": "mula"
+  },
+  {
+   "id": 187213,
+   "doc": "Mallapurana",
+   "page": 49,
+   "idx": 14,
+   "prev": "prose"
+  },
+  {
+   "id": 187245,
+   "doc": "Mallapurana",
+   "page": 52,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 187299,
+   "doc": "Mallapurana",
+   "page": 57,
+   "idx": 11,
+   "prev": "mula"
+  },
+  {
+   "id": 187310,
+   "doc": "Mallapurana",
+   "page": 58,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 187322,
+   "doc": "Mallapurana",
+   "page": 60,
+   "idx": 10,
+   "prev": "prose"
+  },
+  {
+   "id": 187333,
+   "doc": "Mallapurana",
+   "page": 61,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 187345,
+   "doc": "Mallapurana",
+   "page": 62,
+   "idx": 12,
+   "prev": "mula"
+  },
+  {
+   "id": 187363,
+   "doc": "Mallapurana",
+   "page": 64,
+   "idx": 10,
+   "prev": "prose"
+  },
+  {
+   "id": 187375,
+   "doc": "Mallapurana",
+   "page": 65,
+   "idx": 12,
+   "prev": "mula"
+  },
+  {
+   "id": 187399,
+   "doc": "Mallapurana",
+   "page": 68,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 187512,
+   "doc": "Mallapurana",
+   "page": 76,
+   "idx": 11,
+   "prev": "mula"
+  },
+  {
+   "id": 187524,
+   "doc": "Mallapurana",
+   "page": 77,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 187536,
+   "doc": "Mallapurana",
+   "page": 78,
+   "idx": 12,
+   "prev": "mula"
+  },
+  {
+   "id": 187548,
+   "doc": "Mallapurana",
+   "page": 79,
+   "idx": 12,
+   "prev": "mula"
+  },
+  {
+   "id": 187560,
+   "doc": "Mallapurana",
+   "page": 80,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 187577,
+   "doc": "Mallapurana",
+   "page": 82,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 187590,
+   "doc": "Mallapurana",
+   "page": 84,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 187600,
+   "doc": "Mallapurana",
+   "page": 85,
+   "idx": 10,
+   "prev": "mula"
+  },
+  {
+   "id": 187612,
+   "doc": "Mallapurana",
+   "page": 86,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 187624,
+   "doc": "Mallapurana",
+   "page": 87,
+   "idx": 12,
+   "prev": "mula"
+  },
+  {
+   "id": 187634,
+   "doc": "Mallapurana",
+   "page": 88,
+   "idx": 10,
+   "prev": "mula"
+  },
+  {
+   "id": 187635,
+   "doc": "Mallapurana",
+   "page": 88,
+   "idx": 11,
+   "prev": "mula"
+  },
+  {
+   "id": 187646,
+   "doc": "Mallapurana",
+   "page": 89,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 188160,
+   "doc": "Mallapurana",
+   "page": 132,
+   "idx": 1,
+   "prev": "prose"
+  },
+  {
+   "id": 188161,
+   "doc": "Mallapurana",
+   "page": 133,
+   "idx": 1,
+   "prev": "prose"
+  },
+  {
+   "id": 188162,
+   "doc": "Mallapurana",
+   "page": 134,
+   "idx": 1,
+   "prev": "prose"
+  },
+  {
+   "id": 188163,
+   "doc": "Mallapurana",
+   "page": 135,
+   "idx": 1,
+   "prev": "prose"
+  },
+  {
+   "id": 188164,
+   "doc": "Mallapurana",
+   "page": 136,
+   "idx": 1,
+   "prev": "tika"
+  },
+  {
+   "id": 188165,
+   "doc": "Mallapurana",
+   "page": 137,
+   "idx": 1,
+   "prev": "prose"
+  }
+ ]
+}
