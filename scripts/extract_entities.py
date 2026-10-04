@@ -363,8 +363,15 @@ def main():
     print(f"Extracting entities from {total} verses with {model} (batch={args.batch})…")
     cur = con.cursor()
     done = ment_total = barren_total = 0
+    try:   # METER_GATES_2026_10_04: ask the budget before every batch, as translation does
+        from usage_meter import budget_ok as _budget_ok
+    except Exception:
+        _budget_ok = lambda _c: True
     for start in range(0, total, args.batch):
         chunk = rows[start : start + args.batch]     # already (pid, iast, tr)
+        if not _budget_ok(con):
+            print("  Stopping: the spend cap is reached. Raise it, then re-run to resume.")
+            break
         try:
             m, mm, bare = _extract_chunk(con, cur, genai, model, chunk,
                                          engine=args.engine, doc=args.doc,

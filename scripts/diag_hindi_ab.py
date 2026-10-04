@@ -290,6 +290,14 @@ def main() -> int:
         print("\n  Dry run. Add --yes to call the API. Nothing was written.")
         return 0
 
+    try:   # METER_GATES_2026_10_04
+        from usage_meter import budget_ok as _bok
+        if not _bok(args.db):
+            print("  Refusing: the spend cap is reached."); return 1
+    except Exception:
+        pass
+    if hasattr(infer_mt, "_usage_reset"):
+        infer_mt._usage_reset()
     model = args.engine.split(":", 1)[1]
     t0, out_chars = time.time(), 0
     for i, it in enumerate(items, 1):
@@ -308,10 +316,16 @@ def main() -> int:
     dur = time.time() - t0
     if not args.no_meter:
         try:
-            from cost_tracker import log_translation_call
+            from cost_tracker import log_translation_call, log_api_call
             wcon = sqlite3.connect(args.db, timeout=30)
-            log_translation_call(wcon, args.doc, args.engine, in_chars=in_chars, out_chars=out_chars,
-                                 duration_s=dur, passages=n_calls, ok=True)
+            _u = getattr(infer_mt, "_USAGE", None) or {}
+            if _u.get("calls"):   # METER_GATES_2026_10_04: provider counts, and not booked as 'translation'
+                log_api_call(wcon, kind="ab_test", doc=args.doc or "", engine=args.engine, in_chars=in_chars,
+                             out_chars=out_chars, duration_s=dur, passages=n_calls, ok=True,
+                             in_tokens=_u["in"], out_tokens=_u["out"])
+            else:
+                log_translation_call(wcon, args.doc, args.engine, in_chars=in_chars, out_chars=out_chars,
+                                     duration_s=dur, passages=n_calls, ok=True)
             wcon.commit(); wcon.close()
         except Exception as e:
             print("  [meter] could not log spend: %s" % e)

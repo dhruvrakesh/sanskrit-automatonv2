@@ -73,6 +73,13 @@ GENERATED_LABEL = "Illustration - generated, not a historical source."
 # IMAGE_QUALITY_2026_10_04 -----------------------------------------------------
 IMAGE_ASPECT = os.environ.get("SA_IMAGE_ASPECT") or None   # e.g. "3:4"; None = the model's default
 IMAGE_SIZE = os.environ.get("SA_IMAGE_SIZE") or None       # "1K" | "2K" | "4K"
+# METER_GATES_2026_10_04: image tokens per image by size, from Google's per-image prices for
+# 3.1 Flash Image (read 2026-10-04): 1K $0.067, 2K $0.101, 4K $0.151 at $60/M. Unset = 1K.
+# The provider also reports about 400 more output tokens per image (thinking/text): measured
+# 1,482-1,551 at 1K and 2,080 at 2K in usage_log on 2026-10-04. The ledger prices all output at
+# the image rate, so the estimate does too.
+IMAGE_OUT_TOKENS = {"1K": 1120, "2K": 1680, "4K": 2520}
+IMAGE_OVERHEAD_TOKENS = int(os.environ.get("SA_IMAGE_OVERHEAD_TOKENS", "400"))
 IMAGE_CONFIG_FIELD = os.environ.get("SA_IMAGE_CONFIG_FIELD", "imageConfig")
 COVER_ASPECT = "2:3"
 NO_MARKS = (" No letters, words, numerals, script-like squiggles, seals or inscriptions anywhere, "
@@ -702,8 +709,12 @@ def main() -> int:
             if not todo:
                 print("Nothing to generate (approve a brief first)."); return 0
             in_p, out_p = IMAGE_PRICING.get(args.model, (0.5, 60.0))
-            print("generate: %d image(s) with %s, ~$%.3f each (about 1,300 output tokens at $%.0f/M)"
-                  % (len(todo), args.model, 1300 * out_p / 1e6, out_p))
+            _img = IMAGE_OUT_TOKENS.get((IMAGE_SIZE or "1K").upper(), 1120)   # METER_GATES_2026_10_04
+            _tok = _img + IMAGE_OVERHEAD_TOKENS
+            print("generate: %d image(s) with %s at %s, ~$%.3f each (about %d image + %d other output tokens, "
+                  "at $%.0f/M as the ledger records them)"
+                  % (len(todo), args.model, IMAGE_SIZE or "1K (default)", _tok * out_p / 1e6, _img,
+                     IMAGE_OVERHEAD_TOKENS, out_p))
             if args.cmd == "generate" and not args.yes:
                 for t in todo:
                     print("  would generate #%d p%s.%s %s" % (t["id"], t["anchor_page"], t["anchor_idx"], t["title"]))

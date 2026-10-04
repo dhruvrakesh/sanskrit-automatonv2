@@ -1,0 +1,14 @@
+Spend: every paid call site metered and gated; estimates follow the meter; orphan false alarm (METER_GATES_2026_10_04, DIAG_ORPHANS_2026_10_04, DOCS6_2026_10_04)
+
+corpus_status: vision $/page measured as in ocr_consensus (fallback 0.0054, was 0.0015);
+--max-usd with 15% headroom; translation $/passage repriced, provider rows preferred;
+header names both sources.
+images: estimate by SA_IMAGE_SIZE plus ~400 measured overhead tokens (1K ~$0.091, 2K ~$0.125, 4K ~$0.175).
+retire_doc: orphans counted before and after; warns/exits 1 only on an increase.
+dashboard Ask: answer metered (kind ask, provider tokens) and budget-gated (402 with
+sources); query embedding metered (ask_embed).
+extract_entities: budget asked before every batch. judge_sample, ab_source_quality,
+diag_hindi_ab: budget asked after --yes; diag_hindi_ab logs provider tokens as ab_test.
+New: scripts/diag_orphans.py (read-only; any db incl. backups).
+Patches: scripts/patch_meter_gates_2026_10_04.py, scripts/patch_docs6_2026_10_04.py.
+Test: tests/test_meter_gates_2026_10_04.py.

@@ -1015,3 +1015,14 @@ Both refusals exit with code 3 and print the next command.
 - **Spend:**
   - `python scripts/spend_audit.py` shows recorded vs repriced spend, estimated rows, and the call sites.
   - Check the budget before translating after SPEND_TRUTH; recorded prices rose.
+
+
+## Meters, gates, orphans (DOCS6_2026_10_04)
+
+- **Orphans:**
+  - `python scripts\diag_orphans.py` shows where they are (read-only). Add `--db <backup>` to see whether they were already there.
+  - `python scripts\fix_orphans.py --apply` removes them. Run it while the dashboard is idle; it takes a backup first.
+- **Spend before a run:**
+  - `python scripts\corpus_status.py --commands`: the vision $/page line says "measured" or "fallback".
+  - `python scripts\spend_audit.py --days 1`: Ask now appears as `ask` and `ask_embed`.
+- **Cap reached:** Ask returns 402 with sources, and `extract_entities` stops at a batch boundary. Raise the cap with `python scripts\set_budget.py --cap <usd> --unpause`.

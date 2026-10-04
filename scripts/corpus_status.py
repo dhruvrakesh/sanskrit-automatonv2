@@ -79,7 +79,11 @@ LACUNA_RE = re.compile(r"\[\s*(?:illegible|\u0905\u0938\u094d\u092a\u0937\u094d\
 JUNK_RE = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")     # = diag_hindi_ab.JUNK
 DEV_RE = re.compile(r"[\u0900-\u097f]")
 PAGE_RX = r"^%s_(\d{4})(?:_norm)?\.%s$"
-VISION_COST_PER_PAGE = 0.0015
+# METER_GATES_2026_10_04: fallback only, used when usage_log has fewer than 5 measured pages.
+# Was 0.0015 (the old 2.5 Flash price). Repriced median, ocr_vision, 24 h to 2026-10-04: ~$0.0054.
+VISION_COST_PER_PAGE = 0.0054
+VISION_CPP = {"value": None, "source": "fallback $%.4f" % VISION_COST_PER_PAGE}
+CPP_SOURCE = {"source": "?"}
 SCOPE = "COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
 ENGINE = "gemini:gemini-2.5-flash"
 
@@ -223,13 +227,57 @@ def image_counts(con: sqlite3.Connection, doc: str) -> dict:
 
 
 def translation_cost_per_passage(con: sqlite3.Connection) -> float | None:
-    """Measured: total translation spend / passages it produced, from usage_log."""
+    """USD per translated passage at TODAY's prices (METER_GATES_2026_10_04).
+
+    Prefers provider-metered rows (token_source='provider', which count thinking
+    tokens and the MAX_TOKENS ladder) once they cover 200+ passages; else every
+    row's stored tokens repriced (chars/4 estimates: reads low); else the recorded
+    cost, as before, when usage_log has no token columns."""
     try:
+        cols = {r[1] for r in con.execute("PRAGMA table_info(usage_log)")}
+        if {"engine", "in_tokens", "out_tokens"} <= cols:
+            import cost_tracker
+
+            def priced(rows):
+                usd = n = 0.0
+                for eng, tin, tout, k in rows:
+                    pin, pout = cost_tracker._get_pricing(eng or "")
+                    usd += ((tin or 0) * pin + (tout or 0) * pout) / 1e6
+                    n += k or 0
+                return (usd / n) if n and usd else None
+            base = ("SELECT engine, in_tokens, out_tokens, passages FROM usage_log WHERE kind = 'translation' "
+                    "AND passages > 0 AND COALESCE(ok, 1) = 1")
+            if "token_source" in cols:
+                rows = con.execute(base + " AND token_source = 'provider' ORDER BY rowid DESC LIMIT 3000").fetchall()
+                if sum(r[3] or 0 for r in rows) >= 200:
+                    v = priced(rows)
+                    if v:
+                        CPP_SOURCE["source"] = "provider tokens, last %d calls, today's prices" % len(rows)
+                        return v
+            v = priced(con.execute(base).fetchall())
+            if v:
+                CPP_SOURCE["source"] = "chars/4 estimates repriced (no thinking tokens: reads low)"
+                return v
         r = con.execute("""SELECT SUM(cost_usd), SUM(passages) FROM usage_log
                            WHERE kind = 'translation' AND passages > 0 AND COALESCE(ok, 1) = 1""").fetchone()
+        CPP_SOURCE["source"] = "recorded cost"
         return (r[0] / r[1]) if r and r[0] and r[1] else None
     except sqlite3.Error:
         return None
+
+
+def vision_cost_per_page(db: str) -> float | None:
+    """METER_GATES_2026_10_04: the same measured figure ocr_consensus uses for --max-usd."""
+    try:
+        import ocr_consensus
+        v = ocr_consensus.measured_cost_per_page(db, fallback=0.0)
+    except Exception:
+        v = 0.0
+    if v:
+        VISION_CPP.update(value=v, source="measured: median of the last 300 metered vision pages, today's prices")
+        return v
+    VISION_CPP.update(value=None, source="fallback $%.4f (fewer than 5 measured pages)" % VISION_COST_PER_PAGE)
+    return None
 
 
 def drift_counts(db: str, doc: str, merged: dict) -> dict:
@@ -255,12 +303,13 @@ def _usd(x: float | None) -> str:
 
 def consensus_cmds(code: str, s: dict) -> tuple[list[str], float]:
     todo = max(0, s.get("pages_inbox", 0) - s.get("pages_vision", 0) - s.get("pages_refused", 0))
-    usd = max(0.05, round(todo * VISION_COST_PER_PAGE + 0.005, 2))
+    cpp = VISION_CPP["value"] or VISION_COST_PER_PAGE   # METER_GATES_2026_10_04
+    usd = max(0.05, round(todo * cpp * 1.15 + 0.01, 2))   # 15% headroom: the median moves between runs
     # --include-unassessed: pages OCR'd before 2026-08-30 carry no Tesseract confidence, and triage then
     # fails (seen on markandeya_purana, 2026-10-04 12:21). With it, every inbox page is queued.
     return (["python scripts\\ocr_consensus.py --doc %s --threshold 101 --include-unassessed            # PLAN: no spend" % code,
              "python scripts\\ocr_consensus.py --doc %s --threshold 101 --include-unassessed --yes --max-usd %.2f   # ~%d pages to vision"
-             % (code, usd, todo)], todo * VISION_COST_PER_PAGE)
+             % (code, usd, todo)], todo * cpp)
 
 
 def verdict(s: dict, lacuna_ok: float, debris_ok: float = 5.0, cpp: float | None = None,
@@ -417,6 +466,7 @@ def collect(db: str, docs: list[str] | None, raw: Path, vision: Path, merged: Pa
         all_codes = [r[0] for r in con.execute("SELECT code FROM docs ORDER BY code")]
         codes = docs or all_codes
         cpp = translation_cost_per_passage(con)
+        vision_cost_per_page(db)   # METER_GATES_2026_10_04
         inbox_codes = Counter()
         if inbox.is_dir():
             for p in inbox.iterdir():
@@ -524,6 +574,8 @@ def main() -> int:
     if args.commands:
         print("# corpus_status %s/%s  en=%s  hi=%s  translation $/passage=%s"
               % (MARK, MARK2, en_ver, hi_ver, ("%.5f" % cpp) if cpp else "?"))
+        print("# vision $/page %.4f (%s); translation $/passage from %s"   # METER_GATES_2026_10_04
+              % (VISION_CPP["value"] or VISION_COST_PER_PAGE, VISION_CPP["source"], CPP_SOURCE["source"]))
         print("# Back up first:  python scripts\\db_backup.py \"data\\context.db\" "
               "\"D:\\backups\\context_pre_status_$(Get-Date -Format yyyyMMdd_HHmmss).db\"")
         print("# Run one book at a time, only when the dashboard header reads idle; re-run corpus_status after each.")
@@ -537,6 +589,8 @@ def main() -> int:
 
     print("%s/%s   prompts: en=%s  hi=%s (%s)   lacunae ok <= %.1f%%   debris ok <= %.1f%%   translation $/passage %s"
           % (MARK, MARK2, en_ver, hi_ver, hi_src, args.lacuna_ok, args.debris_ok, ("%.5f" % cpp) if cpp else "?"))
+    print("vision $/page %.4f (%s); translation $/passage from %s"   # METER_GATES_2026_10_04
+          % (VISION_CPP["value"] or VISION_COST_PER_PAGE, VISION_CPP["source"], CPP_SOURCE["source"]))
     hdr = "%-40s %-18s %6s %5s %4s %5s %6s %6s %6s %6s %6s %4s %8s" % (
         "doc", "verdict", "rows", "deb%", "vis%", "inbox", "en", "en_lac", "hi", "hi_lac", "hi_cur", "img", "est$")
     print(hdr); print("-" * len(hdr))

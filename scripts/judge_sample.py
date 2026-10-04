@@ -235,6 +235,12 @@ def main():
     if not key:
         print("GEMINI_API_KEY not set in .env", file=sys.stderr); sys.exit(2)
     genai.configure(api_key=key)
+    try:   # METER_GATES_2026_10_04
+        from usage_meter import budget_ok as _bok
+        if not _bok(args.db):
+            print("Refusing: the spend cap is reached."); con.close(); return
+    except Exception:
+        pass
     # response_mime_type forces pure JSON (no ``` fence); max_output_tokens must be
     # generous because gemini-2.5-* spend "thinking" tokens from this same budget —
     # 120 truncated the JSON, which is why the first pilot returned all-None (2026-08-27).

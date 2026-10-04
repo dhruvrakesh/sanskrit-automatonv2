@@ -222,6 +222,13 @@ def main():
         return 0
 
     print("")
+    # METER_GATES_2026_10_04: the post-check is corpus-wide. Count BEFORE, so orphans that
+    # were already there (157 mentions in STATUS_20261004_1304.md, before the manu
+    # retirement) are not reported as this retirement's fault, and a new leak still is.
+    ov0 = one("SELECT COUNT(*) FROM passage_embeddings e LEFT JOIN passages p "
+              "ON p.id=e.passage_id WHERE p.id IS NULL")
+    om0 = one("SELECT COUNT(*) FROM entity_mentions m LEFT JOIN passages p "
+              "ON p.id=m.passage_id WHERE p.id IS NULL")
     print("  applying, in one transaction...")
     try:
         con.execute("BEGIN IMMEDIATE")
@@ -243,15 +250,19 @@ def main():
     pas = one("SELECT COUNT(*) FROM passages")
     print("  done.")
     print("    %s now has %d passage(s)" % (a.doc, left))
-    print("    orphaned vectors corpus-wide  : %d" % ov)
-    print("    orphaned mentions corpus-wide : %d" % om)
+    print("    orphaned vectors corpus-wide  : %d  (before: %d)" % (ov, ov0))
+    print("    orphaned mentions corpus-wide : %d  (before: %d)" % (om, om0))
     print("    passages_fts %d vs passages %d  %s"
           % (fts, pas, "(aligned)" if fts == pas else "(REBUILD FTS)"))
-    if ov or om:
-        print("    NON-ZERO ORPHANS. Something dependent was missed; investigate")
-        print("    before the next retirement.")
+    if ov > ov0 or om > om0:
+        print("    NEW ORPHANS (+%d vectors, +%d mentions). Something dependent was"
+              % (ov - ov0, om - om0))
+        print("    missed; investigate before the next retirement.")
+    elif ov or om:
+        print("    Pre-existing orphans, not made by this retirement. Report them with")
+        print("    python scripts\\diag_orphans.py, clean with fix_orphans.py --apply.")
     con.close()
-    return 1 if (ov or om or left) else 0
+    return 1 if (ov > ov0 or om > om0 or left) else 0
 
 
 if __name__ == "__main__":

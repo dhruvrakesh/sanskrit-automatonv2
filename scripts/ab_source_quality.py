@@ -155,6 +155,12 @@ def main():
     if not args.yes:
         print("\nRe-run with --yes. Nothing was called.")
         con.close(); return
+    try:   # METER_GATES_2026_10_04
+        from usage_meter import budget_ok as _bok
+        if not _bok(con):
+            print("Refusing: the spend cap is reached."); con.close(); return
+    except Exception:
+        pass
 
     try:
         from usage_meter import meter

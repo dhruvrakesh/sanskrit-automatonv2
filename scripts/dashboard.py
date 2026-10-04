@@ -2898,6 +2898,13 @@ def _ask_semantic_retrieve(con, q, k=12):
     try:
         genai.configure(api_key=key)
         res = genai.embed_content(model=model, content=q, task_type="retrieval_query")
+        try:   # METER_GATES_2026_10_04: about $0.000001 a question, but recorded like any paid call
+            from usage_meter import meter as _meter
+            _dbf = (con.execute("PRAGMA database_list").fetchone() or (None, None, ""))[2]
+            if _dbf:   # the file this question was asked of, never a default path
+                _meter(kind="ask_embed", doc="", engine=model, in_chars=len(q), units=1, db=_dbf)
+        except Exception:
+            pass
         qv = np.asarray(res["embedding"] if isinstance(res, dict) else res.embedding,
                         dtype="float32")
     except Exception:
@@ -2987,6 +2994,15 @@ def api_ask():
                         "page_no": page, "idx": idx, "english": tr})
         ctx.append(f"[{i}] [{tag}] {(tr or '')[:600]}")
     user_msg = "PASSAGES:\n" + "\n".join(ctx) + f"\n\nQUESTION: {q}\n\nAnswer, citing [tags]:"
+    # METER_GATES_2026_10_04: Ask is a paid call like any other. It asks the budget first and is metered.
+    try:
+        from usage_meter import budget_ok as _bok
+        if not _bok(db):
+            return jsonify({"error": "The spend cap is reached, so Ask is paused. The passages below were "
+                                     "found without a paid call. Raise the cap with python scripts\\set_budget.py.",
+                            "sources": sources, "mode": mode}), 402
+    except Exception:
+        pass
     # 2. LLM answer — self-contained Gemini config so the translation engine is untouched
     try:
         import google.generativeai as genai
@@ -3000,7 +3016,18 @@ def api_ask():
                       system_instruction=_ASK_SYSTEM)
         if _ASK_SAFETY is not None:
             kwargs["safety_settings"] = _ASK_SAFETY
+        _t0 = time.time()
         resp = genai.GenerativeModel(**kwargs).generate_content(user_msg)
+        try:   # METER_GATES_2026_10_04
+            from usage_meter import meter as _meter
+            try:
+                _out = len(getattr(resp, "text", "") or "")
+            except Exception:
+                _out = 0
+            _meter(kind="ask", doc="", engine=engine, resp=resp, in_chars=len(user_msg) + len(_ASK_SYSTEM),
+                   out_chars=_out, units=1, duration_s=time.time() - _t0, db=db)
+        except Exception:
+            pass
         answer = (getattr(resp, "text", "") or "").strip() or \
                  "(The model returned no text — try rephrasing or a smaller k.)"
     except Exception as e:
