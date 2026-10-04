@@ -1026,3 +1026,18 @@ Both refusals exit with code 3 and print the next command.
   - `python scripts\corpus_status.py --commands`: the vision $/page line says "measured" or "fallback".
   - `python scripts\spend_audit.py --days 1`: Ask now appears as `ask` and `ask_embed`.
 - **Cap reached:** Ask returns 402 with sources, and `extract_entities` stops at a batch boundary. Raise the cap with `python scripts\set_budget.py --cap <usd> --unpause`.
+
+
+## Documentation map addendum (DOCS7_2026_10_04)
+
+The map in section 0 predates these. Read them as part of it:
+
+- `docs/ENTERPRISE_PATH_2026-10-04.md`: the forward plan, phases 0-4, and what is true where documents disagree. It supersedes `docs/ENTERPRISE_PATH_2026-09-06.md` section 4 and `ENTERPRISE_ROADMAP.md` as the plan.
+- `docs/PLATFORM_2026-10-04.md`: this week's changes. Section 10 corrects section 9.
+- `docs/EDITIONS_AND_IMAGES_2026-10-03.md`: editions, plates, the image library.
+
+Rules added on 2026-10-04:
+
+- **Reading a backup:** `python scripts\diag_orphans.py --db <backup> --backup`. For any other read-only open of a backup, use the URI `?mode=ro&immutable=1`. Never use `immutable` on the live `data/context.db`.
+- **Prepaid credit:** a translation run that prints `[ABORT] ... prepaid credits are depleted (HTTP 402)` has stopped cleanly. Top up in AI Studio, then re-run; done verses are kept.
+- **Srangam migrations:** `_ops_2026-09-10\srangam_migration_audit_2026_10_04.sql` is read-only. Do not hand-insert rows into `supabase_migrations.schema_migrations`.

@@ -24,7 +24,10 @@ table keyed by passage_id:
 
 --db can point at a backup, to see whether the orphans were already there:
   python scripts\\diag_orphans.py
-  python scripts\\diag_orphans.py --db "D:\\backups\\context_pre_guards_20261004_122916.db"
+  python scripts\\diag_orphans.py --db "D:\\backups\\context_pre_guards_20261004_122916.db" --backup
+(CREDITS_COST_2026_10_04: --backup opens the file immutable=1. A plain mode=ro open of a
+WAL-mode backup leaves -wal/-shm files beside it; immutable never does. Never use --backup
+on the live data/context.db - it would ignore the live WAL.)
 
 Never writes: the database is opened with mode=ro and PRAGMA query_only.
 """
@@ -38,8 +41,9 @@ from pathlib import Path
 MARK = "DIAG_ORPHANS_2026_10_04"
 
 
-def open_ro(db: str) -> sqlite3.Connection:
-    con = sqlite3.connect(Path(db).resolve().as_uri() + "?mode=ro", uri=True, timeout=60)
+def open_ro(db: str, immutable: bool = False) -> sqlite3.Connection:
+    con = sqlite3.connect(Path(db).resolve().as_uri() + "?mode=ro" + ("&immutable=1" if immutable else ""),
+                          uri=True, timeout=60)
     con.execute("PRAGMA query_only=1")
     con.execute("PRAGMA busy_timeout=60000")
     return con
@@ -77,8 +81,8 @@ def neighbour(con, pid: int, below: bool):
     return ("%s (passage %d)" % (r[1], r[0])) if r else "-"
 
 
-def run(db: str, samples: int = 3, out=print) -> dict:
-    con = open_ro(db)
+def run(db: str, samples: int = 3, out=print, immutable: bool = False) -> dict:
+    con = open_ro(db, immutable)
     try:
         maxid = con.execute("SELECT COALESCE(MAX(id), 0) FROM passages").fetchone()[0]
         psql = (con.execute("SELECT sql FROM sqlite_master WHERE name='passages'").fetchone() or [""])[0] or ""
@@ -145,10 +149,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Read-only: where orphans came from")
     ap.add_argument("--db", default="data/context.db")
     ap.add_argument("--samples", type=int, default=3)
+    ap.add_argument("--backup", action="store_true", help="the file is a backup: open it immutable (no sidecar files)")
     a = ap.parse_args()
     if not Path(a.db).exists():
         print("FAIL: %s not found. Run from the repo root, or pass --db." % a.db); return 2
-    run(a.db, a.samples)
+    if a.backup and Path(a.db).resolve() == Path("data/context.db").resolve():
+        print("REFUSING: --backup is for backup files, never the live database."); return 2
+    run(a.db, a.samples, immutable=a.backup)
     return 0
 
 

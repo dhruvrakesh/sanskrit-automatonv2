@@ -37,6 +37,21 @@ class QuotaExhausted(RuntimeError):
     pass
 
 
+class CreditsDepleted(QuotaExhausted):
+    """CREDITS_COST_2026_10_04. The provider answered HTTP 402 "Your prepayment
+    credits are depleted". Not transient: every further call gets the same
+    answer. As a QuotaExhausted it aborts the run with the reason."""
+    pass
+
+
+def _credits_depleted(err: str) -> bool:
+    """CREDITS_COST_2026_10_04: True for the prepaid-credit 402, never for a page number."""
+    low = (err or "").lower()
+    if "prepayment" in low or "credits are depleted" in low:
+        return True
+    return bool(re.search(r"\b402\b", err or "")) and any(w in low for w in ("payment", "credit", "billing"))
+
+
 class BudgetBlocked(QuotaExhausted):
     """TRANSLATION_FILTERS_2026_09_27. The budget cap refused the call. It used
     to return empty strings, which translate_passages counts as untranslatable
@@ -334,7 +349,9 @@ _GEMINI_SAFETY = [
 # Both the fallback model and the ladder are env-overridable.
 _MAXTOK_LADDER = tuple(int(x) for x in
                        os.environ.get("MT_MAXTOK_LADDER", "16384,32768").split(","))
-_FALLBACK_MODEL = os.environ.get("MT_FALLBACK_MODEL", "gemini-2.0-flash").strip()
+# CREDITS_COST_2026_10_04: was gemini-2.0-flash, which this key's model list no longer has
+# (list_models, 2026-10-04), so the rung always failed. MT_FALLBACK_MODEL still overrides.
+_FALLBACK_MODEL = os.environ.get("MT_FALLBACK_MODEL", "gemini-2.5-flash-lite").strip()
 
 # MT_TIMEOUT_2026_09_27. Without a request timeout the SDK waits up to 600 s
 # per call on a dead connection, and RETRIES=3 - one network drop held the
@@ -561,6 +578,10 @@ def _gemini_translate(
             except Exception as exc:
                 err_str = str(exc)
                 low = err_str.lower()
+                # CREDITS_COST_2026_10_04: prepaid credit exhausted -> stop the run now, send nothing more.
+                if _credits_depleted(err_str):
+                    raise CreditsDepleted("Gemini prepaid credits are depleted (HTTP 402). Top up in "
+                                          "AI Studio, then re-run; done verses are kept. %s" % err_str[:300])
                 # Detect safety block masquerading as generic exception
                 if "finish_reason" in err_str and ("is 2" in err_str or "is 3" in err_str):
                     print(f"[gemini] SAFETY/RECITATION block on attempt {attempt+1} — skipping verse.")

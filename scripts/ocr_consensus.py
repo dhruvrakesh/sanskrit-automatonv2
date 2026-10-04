@@ -99,8 +99,11 @@ def refused(p: Path) -> bool:
 
 
 def measured_cost_per_page(db, fallback: float = 0.0015) -> float:
-    """SPEND_TRUTH_2026_10_04: median USD per vision page from usage_log (last 300
-    provider-metered ocr_vision rows), repriced with cost_tracker's current table."""
+    """SPEND_TRUTH_2026_10_04: USD per vision page from usage_log (last 300
+    provider-metered ocr_vision rows), repriced with cost_tracker's current table.
+    CREDITS_COST_2026_10_04: the MEAN, not the median - an estimate of a total is
+    n x mean, and page cost is right-skewed (2026-10-04: median $0.00282, mean
+    $0.00313, max $0.04282)."""
     try:
         sys.path.insert(0, str(SCRIPTS))
         import cost_tracker
@@ -117,7 +120,7 @@ def measured_cost_per_page(db, fallback: float = 0.0015) -> float:
             pin, pout = cost_tracker._get_pricing(eng or "")
             vals.append(((tin or 0) * pin + (tout or 0) * pout) / 1e6 / max(1, n))
         vals = sorted(v for v in vals if v > 0)
-        return vals[len(vals) // 2] if len(vals) >= 5 else fallback
+        return (sum(vals) / len(vals)) if len(vals) >= 5 else fallback   # CREDITS_COST_2026_10_04: mean
     except Exception:
         return fallback
 

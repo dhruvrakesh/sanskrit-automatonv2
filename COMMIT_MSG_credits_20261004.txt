@@ -1,0 +1,14 @@
+Prepaid credits abort translation; vision estimate by mean; live fallback model; Shelf repeats; backup reads immutable; enterprise path (CREDITS_COST_2026_10_04, DOCS7_2026_10_04)
+
+infer_mt: HTTP 402 "prepayment credits are depleted" raises CreditsDepleted (a
+QuotaExhausted) - translate aborts at once instead of 3 retries + an empty result
+per remaining verse. MAX_TOKENS fallback default gemini-2.5-flash-lite
+(gemini-2.0-flash is not in the key's model list).
+ocr_consensus.measured_cost_per_page: mean, not median (median $0.00282, mean
+$0.00313 on 2026-10-04). corpus_status fallback 0.0041 (was 0.0054, not a ledger figure).
+shelf_static.html: badge clear of the series line; document code shown when a
+title repeats in a collection.
+diag_orphans.py --backup: immutable read of a backup (no -wal/-shm left behind).
+Docs: docs/ENTERPRISE_PATH_2026-10-04.md (new), PLATFORM s10 corrections, RUNBOOK map addendum.
+Patches: scripts/patch_credits_cost_2026_10_04.py, scripts/patch_docs7_2026_10_04.py.
+Tests: tests/test_credits_cost_2026_10_04.py (new), tests/test_meter_gates_2026_10_04.py (fallback assertion follows the constant).

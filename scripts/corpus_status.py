@@ -80,8 +80,10 @@ JUNK_RE = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")     # = diag_hind
 DEV_RE = re.compile(r"[\u0900-\u097f]")
 PAGE_RX = r"^%s_(\d{4})(?:_norm)?\.%s$"
 # METER_GATES_2026_10_04: fallback only, used when usage_log has fewer than 5 measured pages.
-# Was 0.0015 (the old 2.5 Flash price). Repriced median, ocr_vision, 24 h to 2026-10-04: ~$0.0054.
-VISION_COST_PER_PAGE = 0.0054
+# Was 0.0015 (the old 2.5 Flash price). CREDITS_COST_2026_10_04: 0.0041 = all provider-metered
+# vision since metering began, repriced, per page delivered (retries included), on 2026-10-04.
+# (The 0.0054 written here before was not a ledger figure.)
+VISION_COST_PER_PAGE = 0.0041
 VISION_CPP = {"value": None, "source": "fallback $%.4f" % VISION_COST_PER_PAGE}
 CPP_SOURCE = {"source": "?"}
 SCOPE = "COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')"
@@ -274,7 +276,7 @@ def vision_cost_per_page(db: str) -> float | None:
     except Exception:
         v = 0.0
     if v:
-        VISION_CPP.update(value=v, source="measured: median of the last 300 metered vision pages, today's prices")
+        VISION_CPP.update(value=v, source="measured: mean of the last 300 metered vision pages, today's prices")
         return v
     VISION_CPP.update(value=None, source="fallback $%.4f (fewer than 5 measured pages)" % VISION_COST_PER_PAGE)
     return None
@@ -304,7 +306,7 @@ def _usd(x: float | None) -> str:
 def consensus_cmds(code: str, s: dict) -> tuple[list[str], float]:
     todo = max(0, s.get("pages_inbox", 0) - s.get("pages_vision", 0) - s.get("pages_refused", 0))
     cpp = VISION_CPP["value"] or VISION_COST_PER_PAGE   # METER_GATES_2026_10_04
-    usd = max(0.05, round(todo * cpp * 1.15 + 0.01, 2))   # 15% headroom: the median moves between runs
+    usd = max(0.05, round(todo * cpp * 1.15 + 0.01, 2))   # 15% headroom: retries and outliers (p90 = 1.12 x mean on 2026-10-04)
     # --include-unassessed: pages OCR'd before 2026-08-30 carry no Tesseract confidence, and triage then
     # fails (seen on markandeya_purana, 2026-10-04 12:21). With it, every inbox page is queued.
     return (["python scripts\\ocr_consensus.py --doc %s --threshold 101 --include-unassessed            # PLAN: no spend" % code,

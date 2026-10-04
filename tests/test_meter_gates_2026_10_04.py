@@ -121,7 +121,7 @@ class CorpusStatusCosts(Base):
         importlib.reload(corpus_status)
         self.assertIsNone(corpus_status.vision_cost_per_page(self.db))
         _, est = corpus_status.consensus_cmds("D", {"pages_inbox": 10, "pages_vision": 0, "pages_refused": 0})
-        self.assertAlmostEqual(est, 0.054, places=6)
+        self.assertAlmostEqual(est, 10 * corpus_status.VISION_COST_PER_PAGE, places=6)   # the fallback, whatever its value
 
 
 class ImageEstimate(unittest.TestCase):
