@@ -43,6 +43,8 @@ class CorpusStatus(unittest.TestCase):
             "Current":  (30, SA, VIS, ("fine", EN_VER), (HI, HI_VER + "+noref")),
             "Aged":     (30, SA, VIS, ("fine", "v2-2026-07-20"), (HI, "hi-v3-2026-09-27")),
             "Tiny":     (3, SA, "tesseract", None, None),
+            "Mixed":    (30, SA, "resegment-devnum", ("fine", EN_VER), None),   # took Mixed_seg's files
+            "Mixed_seg": (30, SA, "resegment-devnum", ("fine", EN_VER), (HI, HI_VER)),
         }
         for code, (n, text, eng, en, hi) in specs.items():
             con.execute("INSERT INTO docs(code, category) VALUES(?, 'upapurana')", (code,))
@@ -70,6 +72,9 @@ class CorpusStatus(unittest.TestCase):
             put("raw", "Seg_%04d.jsonl" % pg, {"engine": "resegment-devnum", "text": DEBRIS, "page_no": pg,
                                                 "meta": {"src_doc": "SrcBook", "src_page": pg}})
             put("raw", "SrcBook_%04d.jsonl" % pg, {"engine": "tesseract", "text": DEBRIS})
+            put("raw", "Mixed_%04d.jsonl" % pg, {"engine": "tesseract", "text": DEBRIS})
+            put("raw", "Mixed_seg_%04d.jsonl" % pg, {"engine": "resegment-devnum", "text": SA, "page_no": pg,
+                                                    "meta": {"src_doc": "Mixed", "src_page": pg}})
             put("raw_merged", "Behind_%04d.jsonl" % pg, {"engine": "gemini-vision", "text": OTHER})
             put("raw_merged", "Current_%04d.jsonl" % pg, {"engine": "gemini-vision", "text": "\n".join([SA] * 3)})
         for pg in range(1, 4):   # RawTess: 3 pages already have vision
@@ -92,7 +97,7 @@ class CorpusStatus(unittest.TestCase):
     def test_verdicts(self):
         s, _, _ = self.stats()
         self.assertNotIn("Tiny", s)
-        want = {"Damaged": "NEEDS-OCR", "RawTess": "NEEDS-OCR", "NoPdf": "NO-SOURCE-PDF",
+        want = {"Mixed": "CONTAMINATED", "Damaged": "NEEDS-OCR", "RawTess": "NEEDS-OCR", "NoPdf": "NO-SOURCE-PDF",
                 "Seg": "DERIVED-NEEDS-OCR", "HiOnly": "NEEDS-TRANSLATION", "Behind": "NEEDS-REINGEST",
                 "NoHindi": "NEEDS-TRANSLATION", "Current": "CURRENT", "Aged": "AGED"}
         self.assertEqual({k: s[k]["verdict"] for k in want}, want)
@@ -104,15 +109,22 @@ class CorpusStatus(unittest.TestCase):
         self.assertTrue(any("--threshold 101 --include-unassessed --yes --max-usd" in c and "~7 pages" in c
                             for c in s["RawTess"]["commands"]), s["RawTess"]["commands"])   # 10 inbox - 3 done
 
-    def test_derived_repairs_the_source_then_resegments(self):
+    def test_derived_follows_the_retirement_policy(self):
         s, peers, _ = self.stats()
         c = "\n".join(s["Seg"]["commands"])
         self.assertIn("ocr_consensus.py --doc SrcBook --threshold 101", c)
-        self.assertIn('--glob "data\\raw_merged\\SrcBook_*.jsonl"', c)
-        self.assertIn("resegment_doc.py --src-doc SrcBook --new-doc Seg --yes", c)
-        self.assertIn("--no-segment", c)
-        self.assertNotIn("wipe_doc.py --db data\\context.db --doc SrcBook", c)   # SrcBook is not in the DB
+        self.assertIn('--doc SrcBook_v2 --glob "data\\raw_merged\\SrcBook_*.jsonl"', c)
+        self.assertIn("resegment_doc.py --src-doc SrcBook_v2 --new-doc Seg_v2 --yes", c)
+        self.assertIn("diag_retire_check.py --src Seg --keep Seg_v2", c)
+        self.assertNotIn("wipe_doc", c, "a derived doc (it may hold grafts) is never wiped in place")
         self.assertFalse(peers["SrcBook"]["in_db"])
+
+    def test_contaminated_source_is_sent_to_retirement_check(self):
+        s, _, _ = self.stats()
+        self.assertEqual(s["Mixed"]["verdict"], "CONTAMINATED")
+        c = "\n".join(s["Mixed"]["commands"])
+        self.assertIn("diag_retire_check.py --src Mixed --keep Mixed_seg", c)
+        self.assertNotIn("ocr_consensus", c)
 
     def test_alias_is_a_hint_with_a_copy_command(self):
         s, _, _ = self.stats()

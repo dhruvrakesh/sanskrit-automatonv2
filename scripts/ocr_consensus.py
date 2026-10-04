@@ -98,6 +98,41 @@ def refused(p: Path) -> bool:
         return False
 
 
+def measured_cost_per_page(db, fallback: float = 0.0015) -> float:
+    """SPEND_TRUTH_2026_10_04: median USD per vision page from usage_log (last 300
+    provider-metered ocr_vision rows), repriced with cost_tracker's current table."""
+    try:
+        sys.path.insert(0, str(SCRIPTS))
+        import cost_tracker
+        uri = Path(db).resolve().as_uri() + "?mode=ro"
+        con = sqlite3.connect(uri, uri=True)
+        try:
+            rows = con.execute("""SELECT engine, in_tokens, out_tokens, passages FROM usage_log
+                                  WHERE kind='ocr_vision' AND token_source='provider' AND COALESCE(ok,1)=1
+                                  AND passages > 0 ORDER BY id DESC LIMIT 300""").fetchall()
+        finally:
+            con.close()
+        vals = []
+        for eng, tin, tout, n in rows:
+            pin, pout = cost_tracker._get_pricing(eng or "")
+            vals.append(((tin or 0) * pin + (tout or 0) * pout) / 1e6 / max(1, n))
+        vals = sorted(v for v in vals if v > 0)
+        return vals[len(vals) // 2] if len(vals) >= 5 else fallback
+    except Exception:
+        return fallback
+
+
+def gave_up(p: Path) -> bool:
+    """SPEND_TRUTH_2026_10_04: an EMPTY vision file that already had >= 2 retries is a
+    blank or unreadable page; re-sending it every run only bills it again."""
+    try:
+        with open(p, encoding="utf-8") as f:
+            rec = json.loads(next((l for l in f if l.strip()), "{}"))
+        return (not (rec.get("text") or "").strip()) and int((rec.get("meta") or {}).get("retries") or 0) >= 2
+    except Exception:
+        return False
+
+
 def plan_vision(queue_lines: list[str], vision_dir: Path, retry_refused: bool = False):
     """Split the queue into (todo, done). Done = a non-empty vision file exists, or the
     provider refused the page before (unless retry_refused) - merge keeps Tesseract."""
@@ -108,7 +143,7 @@ def plan_vision(queue_lines: list[str], vision_dir: Path, retry_refused: bool = 
             continue
         stem = Path(q.replace("\\", "/")).stem
         vf = vision_dir / (stem + ".jsonl")
-        ok = nonempty_jsonl(vf) or (not retry_refused and refused(vf))
+        ok = nonempty_jsonl(vf) or (not retry_refused and (refused(vf) or gave_up(vf)))   # SPEND_TRUTH_2026_10_04
         (done if ok else todo).append(q)
     return todo, done
 
@@ -355,9 +390,10 @@ def main() -> int:
                   "Tesseract is kept. --retry-refused to try again." % n_ref)
         if args.max_pages and len(todo) > args.max_pages:
             todo = todo[:args.max_pages]
-        est = len(todo) * COST_PER_PAGE_MEASURED
+        cpp = measured_cost_per_page(args.db)   # SPEND_TRUTH_2026_10_04
+        est = len(todo) * cpp
         print("\n[2] vision    queued %d | already done %d | to run %d | est $%.4f at $%.5f/page"
-              % (len(queue), len(done), len(todo), est, COST_PER_PAGE_MEASURED))
+              % (len(queue), len(done), len(todo), est, cpp))
         if todo and args.yes:
             if est > args.max_usd:
                 print("  REFUSING: estimate $%.4f exceeds --max-usd %.4f" % (est, args.max_usd))

@@ -25,7 +25,9 @@ from typing import Optional
 # ── Pricing table (USD per 1M tokens) ────────────────────────────────────────
 _PRICING: dict[str, tuple[float, float]] = {
     "gemini:gemini-2.5-pro":      (1.25,  10.00),
-    "gemini:gemini-2.5-flash":    (0.15,   0.60),
+    # SPEND_TRUTH_2026_10_04: $0.30 / $2.50 (pricepertoken.com 2026-10-02, morphllm.com 2026-08-21;
+    # Google's own page no longer lists 2.5 Flash). Was (0.15, 0.60), the 2025 preview price.
+    "gemini:gemini-2.5-flash":    (0.30,   2.50),
     "gemini:gemini-2.0-flash":    (0.075,  0.30),
     "gemini:gemini-1.5-pro":      (1.25,   5.00),
     "openai:gpt-4o-mini":         (0.15,   0.60),
@@ -37,7 +39,7 @@ _PRICING: dict[str, tuple[float, float]] = {
     "gemini-embedding-001":        (0.15,   0.00),
     "text-embedding-004":          (0.00,   0.00),   # free tier at time of writing
     # Vision OCR runs on the same 2.5-flash endpoint; image tokens are priced as input.
-    "gemini-vision:gemini-2.5-flash": (0.15, 0.60),
+    "gemini-vision:gemini-2.5-flash": (0.30, 2.50),   # SPEND_TRUTH_2026_10_04
     "gemini-vision:gemini-2.5-pro":   (1.25, 10.00),
     "tesseract":                   (0.00,   0.00),   # local compute, no API cost
 }
@@ -63,8 +65,8 @@ def _get_pricing(engine: str) -> tuple[float, float]:
     for k, v in _PRICING.items():
         if k in e or e in k:
             return v
-    # Default: assume Gemini 2.5 Flash (the project default engine)
-    return (0.15, 0.60)
+    # Default: assume Gemini 2.5 Flash (the project default engine) - SPEND_TRUTH_2026_10_04
+    return (0.30, 2.50)
 
 
 def chars_to_tokens(chars: int) -> float:

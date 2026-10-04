@@ -1,0 +1,187 @@
+{
+ "_about": "Shelves for the library (COLLECTIONS_2026_10_04). Edit freely: order, titles, members. A text listed in no collection is shown under 'Other texts'. Written by collections_cfg.py --draft on 2026-10-04; the Shelf page's 'move to' writes here too, with a backup.",
+ "collections": [
+  {
+   "key": "veda",
+   "title": "Vedas",
+   "title_sa": "वेदाः",
+   "order": 10,
+   "members": [
+    "476948-Rgveda-samhita_Vol-ii",
+    "yajur_veda_shukla_yajur_veda",
+    "yajur_veda_taittiriya_krishna_yajur_veda"
+   ]
+  },
+  {
+   "key": "brahmana",
+   "title": "Brāhmaṇas and Āraṇyakas",
+   "title_sa": "ब्राह्मणारण्यकानि",
+   "order": 20,
+   "members": [
+    "2015_405693_Shatpath-Brahmanam"
+   ]
+  },
+  {
+   "key": "vedanga",
+   "title": "Vedāṅgas",
+   "title_sa": "वेदाङ्गानि",
+   "order": 30,
+   "members": [
+    "nirukta",
+    "shiksha_amoghanandini_shiksha",
+    "shiksha_apishali_shiksha",
+    "shiksha_aranya_shiksha",
+    "shiksha_atreya_shiksha",
+    "shiksha_avasananirnaya_shiksha",
+    "shiksha_bharadvaja_shiksha",
+    "shiksha_lomashi_shiksha"
+   ]
+  },
+  {
+   "key": "itihasa",
+   "title": "Itihāsa",
+   "title_sa": "इतिहासः",
+   "order": 40,
+   "members": [
+    "MBh01"
+   ]
+  },
+  {
+   "key": "purana",
+   "title": "Purāṇas",
+   "title_sa": "पुराणानि",
+   "order": 50,
+   "members": [
+    "Mallapurana",
+    "markandeya_purana",
+    "SP_4214_Pataal_Khanda_from_Padma_Puran_1895_-_Sri_Venkateshwar_Press"
+   ]
+  },
+  {
+   "key": "upapurana",
+   "title": "Upapurāṇas",
+   "title_sa": "उपपुराणानि",
+   "order": 60,
+   "members": [
+    "nilamata_seg",
+    "upapurana_kapila_purana",
+    "upapurana_narasimha_purana",
+    "upapurana_parashara_purana",
+    "upapurana_samba_purana",
+    "upapurana_saura_purana"
+   ]
+  },
+  {
+   "key": "smrti",
+   "title": "Smṛtis and Dharmasūtras",
+   "title_sa": "स्मृतयः",
+   "order": 70,
+   "members": [
+    "smriti_01angirasa_smriti",
+    "smriti_02vyasa_smriti",
+    "smriti_03apastamba_smriti",
+    "smriti_04daksha_smriti",
+    "smriti_05vishnu_smriti",
+    "smriti_06yagyavalkya_smriti",
+    "smriti_07likhita_smriti",
+    "smriti_08samvartta_smriti",
+    "smriti_09shankha_smriti",
+    "smriti_10brihaspati_smriti",
+    "smriti_11atri_smriti",
+    "smriti_12katyayana_smriti",
+    "smriti_13parashara_smriti",
+    "smriti_14manu_smriti",
+    "smriti_14manu_smriti_seg",
+    "smriti_15aushanasa_smriti",
+    "smriti_16harita_smriti_seg",
+    "smriti_17gautama_smriti",
+    "smriti_18yama_smriti",
+    "bodhyana"
+   ]
+  },
+  {
+   "key": "agama",
+   "title": "Āgama and Tantra",
+   "title_sa": "आगमतन्त्राणि",
+   "order": 80,
+   "members": [
+    "HAYASHIRSHA_PANCARATRA",
+    "Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi",
+    "tantric_texts_series_edited_by_arthur_av"
+   ]
+  },
+  {
+   "key": "jyotisa",
+   "title": "Jyotiṣa and Gaṇita",
+   "title_sa": "ज्योतिषम्",
+   "order": 90,
+   "members": [
+    "Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V",
+    "jyotish_surya_siddhanta"
+   ]
+  },
+  {
+   "key": "ayurveda",
+   "title": "Āyurveda",
+   "title_sa": "आयुर्वेदः",
+   "order": 100,
+   "members": [
+    "harita_prathama_sthanam",
+    "harita_dvitiya_sthanam",
+    "harita_tritiya_sthanam",
+    "harita_caturtha_sthanam",
+    "harita_pancamam_kalpa_sthanam",
+    "harita_shashtham_sharira_sthanam"
+   ]
+  },
+  {
+   "key": "dhanurveda",
+   "title": "Dhanurveda",
+   "title_sa": "धनुर्वेदः",
+   "order": 110,
+   "members": [
+    "dhanur_veda_niti_prakashika",
+    "dhanur_veda_shiva_dhanur_veda",
+    "dhanur_veda_vasishtha_dhanur_veda",
+    "shiva_dhanur_veda",
+    "vasishtha_dhanur_veda"
+   ]
+  },
+  {
+   "key": "natya",
+   "title": "Nāṭya and Gāndharva",
+   "title_sa": "नाट्यशास्त्रम्",
+   "order": 120,
+   "members": [
+    "2015_368408_Natyasastra-With",
+    "gandharva_veda_natya_shastra"
+   ]
+  },
+  {
+   "key": "bhakti",
+   "title": "Bhakti and Darśana",
+   "title_sa": "भक्तिः",
+   "order": 130,
+   "members": [
+    "AphorismsOfSandilya"
+   ]
+  },
+  {
+   "key": "bauddha",
+   "title": "Bauddha",
+   "title_sa": "बौद्धम्",
+   "order": 140,
+   "members": [
+    "Bodhicaryavatara",
+    "LalitaVistara"
+   ]
+  },
+  {
+   "key": "other",
+   "title": "Other texts",
+   "title_sa": "",
+   "order": 999,
+   "members": []
+  }
+ ]
+}

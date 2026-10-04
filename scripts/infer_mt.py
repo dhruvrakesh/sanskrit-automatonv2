@@ -344,6 +344,32 @@ _REQ_TIMEOUT = float(os.environ.get("MT_REQUEST_TIMEOUT", "120") or 0)
 _REQ_OPTS_OK = None
 
 
+# SPEND_TRUTH_2026_10_04: provider token counts for every call in a batch, including
+# retries and the MAX_TOKENS ladder. Thinking tokens are billed as output.
+_USAGE = {"in": 0.0, "out": 0.0, "calls": 0}
+
+
+def _usage_reset():
+    _USAGE.update({"in": 0.0, "out": 0.0, "calls": 0})
+
+
+def _usage_add(resp):
+    try:
+        um = getattr(resp, "usage_metadata", None)
+        if um is None:
+            return
+        pin = getattr(um, "prompt_token_count", None)
+        out = getattr(um, "candidates_token_count", None)
+        think = getattr(um, "thoughts_token_count", None) or 0
+        if pin is None and out is None:
+            return
+        _USAGE["in"] += float(pin or 0)
+        _USAGE["out"] += float((out or 0) + think)
+        _USAGE["calls"] += 1
+    except Exception:
+        pass
+
+
 def _gen(gm, msg):
     """gm.generate_content(msg) with a bounded wait when the SDK supports it."""
     global _REQ_OPTS_OK
@@ -354,8 +380,11 @@ def _gen(gm, msg):
         except (TypeError, ValueError):
             _REQ_OPTS_OK = False
     if _REQ_OPTS_OK and _REQ_TIMEOUT > 0:
-        return gm.generate_content(msg, request_options={"timeout": _REQ_TIMEOUT})
-    return gm.generate_content(msg)
+        resp = gm.generate_content(msg, request_options={"timeout": _REQ_TIMEOUT})
+    else:
+        resp = gm.generate_content(msg)
+    _usage_add(resp)   # SPEND_TRUTH_2026_10_04
+    return resp
 _CHUNK_SPLIT_RE = re.compile(r"[।॥\n]")
 
 
@@ -663,6 +692,7 @@ def translate_batch(
                     f"next batch ~${est_cost:.4f}. Raise it with set_budget.py.")
 
         t_start = time.time()
+        _usage_reset()   # SPEND_TRUTH_2026_10_04
 
         if engine.startswith("openai:"):
             model = engine.split(":", 1)[1]
@@ -690,14 +720,21 @@ def translate_batch(
         if _cost_tracker_ok and not engine.startswith("echo"):
             actual_in  = sum(len(m) for m in missing_msgs) + len(system_prompt) * len(missing_msgs)
             actual_out = sum(len(g) for g in generated)
-            cost = log_translation_call(
-                con, doc_code, engine,
-                in_chars=actual_in,
-                out_chars=actual_out,
-                duration_s=duration,
-                passages=len(missing_texts),
-                ok=True,
-            )
+            if _USAGE["calls"] and (_USAGE["in"] + _USAGE["out"]) > 0:   # SPEND_TRUTH_2026_10_04
+                from cost_tracker import log_api_call as _log_api
+                cost = _log_api(con, kind="translation", doc=doc_code, engine=engine,
+                                in_chars=actual_in, out_chars=actual_out, duration_s=duration,
+                                passages=len(missing_texts), ok=True,
+                                in_tokens=_USAGE["in"], out_tokens=_USAGE["out"])
+            else:
+                cost = log_translation_call(
+                    con, doc_code, engine,
+                    in_chars=actual_in,
+                    out_chars=actual_out,
+                    duration_s=duration,
+                    passages=len(missing_texts),
+                    ok=True,
+                )
             rate = len(missing_texts) / max(0.01, duration) * 3600
             print(f"[COST] {len(missing_texts)} passages | {duration:.1f}s | "
                   f"${cost:.5f} | {rate:.0f} passages/hr | engine={engine}")

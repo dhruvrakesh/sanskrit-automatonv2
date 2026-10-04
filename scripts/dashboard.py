@@ -2869,6 +2869,9 @@ def _ask_retrieve(con, q, k=12):
         return []
 
 
+_ASK_VEC_CACHE = {}   # ASK_VECTOR_CACHE_2026_10_04: {key, ids, mat}
+
+
 def _ask_semantic_retrieve(con, q, k=12):
     """Vector (meaning-based) retrieval using passage_embeddings, if it exists
     and is populated. Returns a list of (code, verse_ref, page, idx, translation)
@@ -2902,16 +2905,24 @@ def _ask_semantic_retrieve(con, q, k=12):
     n = float(np.linalg.norm(qv))
     if n > 0:
         qv = qv / n
-    ids, mats = [], []
-    for pid, blob in con.execute(
-            "SELECT passage_id, vec FROM passage_embeddings WHERE model=?", (model,)):
-        v = np.frombuffer(blob, dtype="float32")
-        if dim and v.shape[0] != dim:
-            continue
-        ids.append(pid); mats.append(v)
-    if not ids:
-        return None
-    sims = np.vstack(mats) @ qv          # both L2-normalised → dot == cosine
+    # ASK_VECTOR_CACHE_2026_10_04: read the matrix once; rebuild only when the index changes.
+    _sig = con.execute("SELECT COUNT(*), MAX(updated_at) FROM passage_embeddings WHERE model=?",
+                       (model,)).fetchone()
+    _key = (model, dim, _sig[0], _sig[1])
+    if _ASK_VEC_CACHE.get("key") != _key:
+        ids, mats = [], []
+        for pid, blob in con.execute(
+                "SELECT passage_id, vec FROM passage_embeddings WHERE model=?", (model,)):
+            v = np.frombuffer(blob, dtype="float32")
+            if dim and v.shape[0] != dim:
+                continue
+            ids.append(pid); mats.append(v)
+        if not ids:
+            return None
+        _ASK_VEC_CACHE.clear()
+        _ASK_VEC_CACHE.update(key=_key, ids=ids, mat=np.vstack(mats))
+    ids = _ASK_VEC_CACHE["ids"]
+    sims = _ASK_VEC_CACHE["mat"] @ qv    # both L2-normalised → dot == cosine
     order = np.argsort(-sims)[: max(k * 3, k)]   # over-fetch, then filter retired
     top_ids = [ids[j] for j in order]
     ph = ",".join("?" * len(top_ids))
@@ -3124,6 +3135,13 @@ try:
     _images_web.register(app, launch=launch, root=ROOT, py=py, script=script)
 except Exception as _images_err:
     print(f"[images] Images tab not loaded: {type(_images_err).__name__}: {_images_err}")
+
+# SHELF_2026_10_04: the Shelf (/shelf) - see scripts/library_web.py. Guarded like the Images tab.
+try:
+    import library_web as _library_web
+    _library_web.register(app, root=ROOT, bs_pdf=_bs_pdf_path, bs_modes=BOOKSMITH_MODES)
+except Exception as _shelf_err:
+    print(f"[shelf] Shelf not loaded: {type(_shelf_err).__name__}: {_shelf_err}")
 
 if __name__ == "__main__":
     import argparse

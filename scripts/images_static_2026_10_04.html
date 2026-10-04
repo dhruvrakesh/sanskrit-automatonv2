@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Images - Sanskrit Automaton</title>
-<!-- IMAGES_UI_2026_10_03 + IMAGES_QUEUE_2026_10_04 + IMAGE_QUALITY_2026_10_04 - served by images_web.py at /images -->
+<!-- IMAGES_UI_2026_10_03 + IMAGES_QUEUE_2026_10_04 - served by images_web.py at /images -->
 <style>
 :root{
   --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
@@ -89,7 +89,6 @@ details summary{cursor:pointer;color:var(--muted);font-size:12.5px}
   <span class="sp" style="flex:1"></span>
   <label class="note">ideas <input id="maxn" type="number" min="1" max="12" value="6" style="width:4em"></label>
   <button id="btnBrief" title="Ask the model for a few illustration ideas anchored to verses (one text call)">Propose ideas</button>
-  <button id="btnCover" title="Ask for ONE cover idea (portrait, no lettering); it is reviewed like any idea">Propose a cover</button>
   <button id="btnGen" class="primary" title="Draw every approved idea once (one image call each)">Generate approved ideas</button>
   <button id="btnDedupe" title="Retire later ideas at the same verse">Remove duplicates</button>
 </div>
@@ -198,7 +197,7 @@ let serverJobs = null;        // null = endpoint unavailable
 let lastDone = new Set(), pollTimer = null, polledOnce = false;
 function jobLabel(j){
   const m = (j.mode||''), n = m.replace(/^\D+/, '');
-  if(j.kind==='images_brief') return m==='cover' ? 'Proposing a cover' : 'Proposing ideas';
+  if(j.kind==='images_brief') return 'Proposing ideas';
   if(m.startsWith('regen')) return 'Redrawing #' + n + ' (new version)';
   if(m.startsWith('id')) return 'Drawing #' + n;
   return 'Drawing approved ideas';
@@ -315,15 +314,6 @@ $('#btnBrief').addEventListener('click', async () => {
   let more = false;
   if(open){ if(!confirm(open + ' idea(s) are still unreviewed. Ask for more anyway?')) return; more = true; }
   try { const j = await api('/api/images/brief', {doc:getDoc(), max:+$('#maxn').value||6, more}); track(j.job, 'Proposing ideas'); }
-  catch(e){ toast(e.message); }
-});
-$('#btnCover').addEventListener('click', async () => {
-  const open = rows.filter(r=>r.kind==='cover' && r.status!=='retired').length;
-  let more = false;
-  if(open){ if(!confirm(open + ' cover(s) already exist. Ask for another?')) return; more = true; }
-  const brief = prompt('Describe the cover yourself, or leave empty to let the model propose one from the text:', '') ;
-  if(brief === null) return;
-  try { const j = await api('/api/images/cover', {doc:getDoc(), brief, more}); track(j.job, 'Proposing a cover'); }
   catch(e){ toast(e.message); }
 });
 $('#btnGen').addEventListener('click', async () => {

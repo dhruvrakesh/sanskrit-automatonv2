@@ -993,3 +993,25 @@ Work one book at a time, only when the dashboard reads idle, and re-run the stat
 Run `ocr_consensus.py --threshold 101 --include-unassessed` first. Override with `--allow-debris`, or with `SA_ALLOW_DEBRIS=1` for the dashboard.
 
 Both refusals exit with code 3 and print the next command.
+
+
+## Status page, image queue, context engine (DOCS4_2026_10_04)
+
+- One read-only page with everything in one place:
+  `python scripts/status_report.py`, which writes `exports/status/STATUS_latest.md`.
+  It covers code HEAD, prompts, corpus verdicts and spend, semantic index (stale and orphaned vectors, guard triggers), images, 7-day spend, maintenance ticks, backups and the Srangam panel's age.
+- Image jobs run one at a time, in the order asked, and are listed with progress on the Images page (IMAGES_QUEUE_2026_10_04). This needs one dashboard restart while idle.
+- The SanskritMaintenance task (every 3 h, idle only) keeps embeddings current. Since BRAIN_FRESH_2026_10_04 it also re-embeds passages re-translated after their vector. `python scripts/build_embeddings.py --plan` shows the counts and makes no call.
+- Findings, corrections and the UI path (U1 to U4): `docs/PLATFORM_2026-10-04.md`.
+
+
+## Shelf, covers, spend (DOCS5_2026_10_04)
+
+- **Shelf:** `http://127.0.0.1:5057/shelf`, after one restart while idle.
+  - Collections: `python scripts/collections_cfg.py --show`. `--draft` writes `configs/collections.json` for editing.
+  - Titles confirmed on the page go to `configs/doc_titles.json`.
+- **Covers:** `python scripts/images.py cover --doc <code> --yes` (or `--brief "..."` to write the idea yourself). Then approve the idea, generate, and approve the image. Use `export_html --images approved` to put it on the title page.
+- **Plates at book proportions:** `$env:SA_IMAGE_ASPECT="3:4"; $env:SA_IMAGE_SIZE="2K"` before `images.py generate` or `regenerate`. A WARN means the API ignored the setting.
+- **Spend:**
+  - `python scripts/spend_audit.py` shows recorded vs repriced spend, estimated rows, and the call sites.
+  - Check the budget before translating after SPEND_TRUTH; recorded prices rose.

@@ -69,6 +69,38 @@ STYLE = ("Illustration for a scholarly reading edition of a Sanskrit text. Style
          "plausible dress, objects and architecture; nothing modern. Respectful depiction of persons and "
          "deities; no caricature.")
 GENERATED_LABEL = "Illustration - generated, not a historical source."
+
+# IMAGE_QUALITY_2026_10_04 -----------------------------------------------------
+IMAGE_ASPECT = os.environ.get("SA_IMAGE_ASPECT") or None   # e.g. "3:4"; None = the model's default
+IMAGE_SIZE = os.environ.get("SA_IMAGE_SIZE") or None       # "1K" | "2K" | "4K"
+IMAGE_CONFIG_FIELD = os.environ.get("SA_IMAGE_CONFIG_FIELD", "imageConfig")
+COVER_ASPECT = "2:3"
+NO_MARKS = (" No letters, words, numerals, script-like squiggles, seals or inscriptions anywhere, "
+            "including on scrolls, books and banners.")
+STYLE_PRESETS = {
+    "pahari": ("Illustration for a scholarly reading edition of a Sanskrit text, in the manner of an 18th-century "
+               "Pahari (Kangra/Guler) miniature: fine brush line, flat mineral and vegetable pigments, lyrical "
+               "landscape, figures in profile or three-quarter view, a plain painted border." + NO_MARKS +
+               " Respectful depiction of persons and deities; no caricature; nothing modern."),
+    "palm-leaf": ("Illustration in the manner of an Odia or Pala palm-leaf manuscript painting: incised or fine ink "
+                  "line on warm leaf-coloured ground, sparse red and black accents, frieze-like composition."
+                  + NO_MARKS + " Respectful depiction of persons and deities; nothing modern."),
+    "mural": ("Illustration in the manner of a Kerala temple mural: ochre, green and red earth pigments, strong "
+              "outlines, crowded devotional composition, ornamented figures." + NO_MARKS +
+              " Respectful depiction of persons and deities; nothing modern."),
+}
+if (os.environ.get("SA_IMAGE_STYLE") or "") in STYLE_PRESETS:
+    STYLE = STYLE_PRESETS[os.environ["SA_IMAGE_STYLE"]]
+COVER_NOTE = ("\n\nComposition: book-cover artwork in portrait format. Keep the upper third calm and "
+              "uncluttered (plain sky, wall or ground) so a title can be typeset there later." + NO_MARKS)
+COVER_SYSTEM = (
+    "You write ONE cover illustration brief for a scholarly edition of a Sanskrit text. Choose a single "
+    "emblematic image grounded in what the text itself describes: a deity, sage, place, object or scene. Give "
+    "its iconography exactly (heads, arms, attributes, vehicle, posture, dress) as the text or standard "
+    "iconography has it; if unsure, choose an object or landscape instead of a figure. Portrait composition, "
+    "calm upper third, no lettering. Respond with one JSON object only: {\"title\": str, \"brief\": str "
+    "(40-90 words), \"context_note\": str (why this image, citing the text), \"caption_en\": str, "
+    "\"caption_hi\": str}.")
 STATUSES = ("brief", "brief-approved", "draft", "approved", "retired")
 
 SCHEMA = """
@@ -126,8 +158,11 @@ def prompt_for(brief: str) -> str:
     return STYLE + "\n\nSubject: " + (brief or "").strip()
 
 
-def prompt_hash(model: str, brief: str) -> str:
-    return hashlib.sha256((model + "\x00" + prompt_for(brief)).encode("utf-8")).hexdigest()
+def prompt_hash(model: str, brief: str, aspect=None, size=None, extra: str = "") -> str:
+    s = model + "\x00" + prompt_for(brief) + extra
+    if aspect or size:   # IMAGE_QUALITY_2026_10_04: hashes made without them are unchanged
+        s += "\x00ar=%s|sz=%s" % (aspect or "", size or "")
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
 def get(con, image_id: int) -> dict:
@@ -205,11 +240,18 @@ def meter(kind: str, doc: str, engine: str, resp: dict, db: str, duration: float
         return 0.0
 
 
-def call_image(model: str, prompt: str, http=None) -> tuple[bytes, str, dict]:
+def call_image(model: str, prompt: str, http=None, aspect=None, size=None) -> tuple[bytes, str, dict]:
     http = http or http_json
+    gc = {"responseModalities": ["IMAGE"]}
+    if aspect or size:   # IMAGE_QUALITY_2026_10_04
+        ic = {k: v for k, v in (("aspectRatio", aspect), ("imageSize", size)) if v}
+        if IMAGE_CONFIG_FIELD == "responseFormat":
+            gc["responseFormat"] = {"image": ic}
+        else:
+            gc["imageConfig"] = ic
     resp = http("%s/models/%s:generateContent" % (API, model),
                 {"contents": [{"role": "user", "parts": [{"text": prompt}]}],
-                 "generationConfig": {"responseModalities": ["IMAGE"]}})
+                 "generationConfig": gc})
     for cand in resp.get("candidates") or []:
         for part in (cand.get("content") or {}).get("parts") or []:
             inline = part.get("inlineData") or part.get("inline_data")
@@ -238,7 +280,11 @@ BRIEF_SYSTEM = (
     "processes that the text itself describes. Never illustrate doctrine as if it were evidence; never "
     "invent events. Respond with a JSON array only. Each item: {\"page\": int, \"idx\": int, "
     "\"title\": str, \"brief\": str (what to draw, 40-90 words, no text in the image), "
-    "\"context_note\": str (why here, citing the passage), \"caption_en\": str, \"caption_hi\": str}.")
+    "\"context_note\": str (why here, citing the passage), \"caption_en\": str, \"caption_hi\": str}. "
+    # IMAGE_QUALITY_2026_10_04
+    "For any deity or sage, state the iconography in the brief (number of heads and arms, attributes held, "
+    "vehicle, posture, dress) as the text or standard iconography gives it; if you are not sure of it, "
+    "choose a depictable object, place or ritual act instead of a figure.")
 
 
 def gather_text(con, code: str, budget_chars: int = 40000, sections: int = 24) -> tuple[str, set]:
@@ -330,7 +376,11 @@ def store_briefs(con, code: str, items: list, valid: set, max_n: int, model: str
 
 # ---------------------------------------------------------------- generation
 def generate_one(con, row: dict, model: str, root: Path, code: str, db: str, http=None) -> int:
-    ph = prompt_hash(model, row["brief"] or "")
+    _cover = (row.get("kind") == "cover")   # IMAGE_QUALITY_2026_10_04 / COVERS_2026_10_04
+    _aspect = COVER_ASPECT if _cover else IMAGE_ASPECT
+    _extra = COVER_NOTE if _cover else ""
+    _prompt = prompt_for(row["brief"] or "") + _extra
+    ph = prompt_hash(model, row["brief"] or "", _aspect, IMAGE_SIZE, _extra)
     cached = con.execute("SELECT path, sha256, mime, width, height FROM doc_images WHERE prompt_hash=? "
                          "AND path IS NOT NULL AND id<>? LIMIT 1", (ph, row["id"])).fetchone()
     if cached and Path(cached[0]).exists():
@@ -339,7 +389,7 @@ def generate_one(con, row: dict, model: str, root: Path, code: str, db: str, htt
                    width=cached[3], height=cached[4], prompt_hash=ph, model=model)
         return row["id"]
     t0 = time.time()
-    data, mime, resp = call_image(model, prompt_for(row["brief"] or ""), http=http)
+    data, mime, resp = call_image(model, _prompt, http=http, aspect=_aspect, size=IMAGE_SIZE)
     meter("image", code, "gemini-image:" + model, resp, db, time.time() - t0)
     ext = {"image/png": "png", "image/jpeg": "jpg", "image/webp": "webp"}.get(mime, "png")
     folder = root / code
@@ -353,8 +403,17 @@ def generate_one(con, row: dict, model: str, root: Path, code: str, db: str, htt
             w, h = im.size
     except Exception:
         pass
+    if _aspect and w and h:   # IMAGE_QUALITY_2026_10_04: did the API honour the ratio?
+        try:
+            _a, _b = (float(x) for x in _aspect.split(":"))
+            if abs((w / h) - (_a / _b)) > 0.05 * (_a / _b):
+                print("  WARN #%d: asked %s, got %dx%d - the API ignored the image config (try "
+                      "SA_IMAGE_CONFIG_FIELD=responseFormat, or another model)" % (row["id"], _aspect, w, h))
+        except ValueError:
+            pass
     prov = json.loads(row.get("provenance") or "{}")
-    prov.update({"image_model": model, "prompt": prompt_for(row["brief"] or ""), "generated_at": now(),
+    prov.update({"image_model": model, "prompt": _prompt, "aspect": _aspect, "size": IMAGE_SIZE,
+                 "generated_at": now(),
                  "label": GENERATED_LABEL})
     set_status(con, row["id"], "draft", path=str(path), sha256=hashlib.sha256(data).hexdigest(), mime=mime,
                width=w, height=h, prompt_hash=ph, model=model, provenance=json.dumps(prov, ensure_ascii=False))
@@ -429,10 +488,34 @@ def _print_rows(con, code: str, status: str | None) -> None:
     print("%d row(s)" % len(rows))
 
 
+def _progress(path, **kw):
+    """IMAGES_QUEUE_2026_10_04: merge kw into a small JSON progress file (atomic). No-op without a path."""
+    if not path:
+        return
+    try:
+        p = Path(path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        d = {}
+        if p.exists():
+            try:
+                d = json.loads(p.read_text(encoding="utf-8"))
+            except Exception:
+                d = {}
+        d.update(kw)
+        d["updated"] = time.time()
+        t = p.with_name(p.name + ".tmp")
+        t.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+        os.replace(t, p)
+    except Exception:
+        pass
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Managed per-text image library (I1)")
     ap.add_argument("--db", default="data/context.db")
     ap.add_argument("--root", default="data/images")
+    ap.add_argument("--progress", default=None,
+                    help="IMAGES_QUEUE_2026_10_04: write job progress JSON here (used by the Images page)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("init")
     sub.add_parser("models")
@@ -455,6 +538,10 @@ def main() -> int:
     a.add_argument("--anchor", required=True); a.add_argument("--title", default=None)
     a.add_argument("--caption-en", default=None); a.add_argument("--caption-hi", default=None)
     a.add_argument("--context", default=None); a.add_argument("--license", default=None)
+    cv = sub.add_parser("cover"); cv.add_argument("--doc", required=True)   # COVERS_2026_10_04
+    cv.add_argument("--brief", default=None, help="write the cover idea yourself (no model call)")
+    cv.add_argument("--title", default=None); cv.add_argument("--model", default=BRIEF_MODEL)
+    cv.add_argument("--more", action="store_true"); cv.add_argument("--yes", action="store_true")
     m = sub.add_parser("manifest"); m.add_argument("--doc", required=True)
     args = ap.parse_args()
 
@@ -499,12 +586,68 @@ def main() -> int:
                                                                                 len(user), len(user) // 4))
             if not args.yes:
                 print("Dry run. Add --yes to ask the model. Nothing was written."); return 0
+            try:   # IMAGE_QUALITY_2026_10_04: ask the budget first
+                from usage_meter import budget_ok as _bok
+                if not _bok(args.db):
+                    print("Refusing: the spend cap is reached."); return 1
+            except ImportError:
+                pass
             t0 = time.time()
+            _progress(args.progress, phase="asking %s for up to %d ideas (one call, usually 30-60 s)" % (args.model, n),
+                      step=0, total=1, started=t0)
             items, resp = call_text_json(args.model, BRIEF_SYSTEM, user)
             meter("image_brief", args.doc, "gemini:" + args.model, resp, args.db, time.time() - t0)
             ids = store_briefs(con, args.doc, items if isinstance(items, list) else [], valid, n, args.model)
             print("stored %d brief(s): %s" % (len(ids), ids))
+            _progress(args.progress, phase="stored %d idea(s)" % len(ids), step=1, total=1, done=True)
             _print_rows(con, args.doc, "brief"); return 0
+        if args.cmd == "cover":   # COVERS_2026_10_04
+            did = doc_id(con, args.doc)
+            n_open = con.execute("SELECT COUNT(*) FROM doc_images WHERE doc_id=? AND kind='cover' "
+                                 "AND status<>'retired'", (did,)).fetchone()[0]
+            if n_open and not args.more:
+                print("REFUSING: %s already has %d cover(s) not retired. Review or retire them, or pass --more."
+                      % (args.doc, n_open)); return 1
+            if args.brief:
+                item = {"title": args.title or "Cover", "brief": args.brief, "caption_en": "", "caption_hi": "",
+                        "context_note": "Cover idea written by a person."}
+                src_note = "written"
+            else:
+                text, _valid = gather_text(con, args.doc, budget_chars=12000, sections=12)
+                if not text:
+                    print("FAIL: no translated passages for %s." % args.doc); return 1
+                user = "Text: %s\nTitle: %s\n\n%s" % (args.doc, args.title or args.doc, text)
+                print("cover: %s  model %s  prompt %d chars" % (args.doc, args.model, len(user)))
+                if not args.yes:
+                    print("Dry run. Add --yes to ask the model. Nothing was written."); return 0
+                try:
+                    from usage_meter import budget_ok as _bok
+                    if not _bok(args.db):
+                        print("Refusing: the spend cap is reached."); return 1
+                except ImportError:
+                    pass
+                _progress(args.progress, phase="asking %s for a cover idea" % args.model, step=0, total=1,
+                          started=time.time())
+                t0 = time.time()
+                got, resp = call_text_json(args.model, COVER_SYSTEM, user)
+                meter("image_brief", args.doc, "gemini:" + args.model, resp, args.db, time.time() - t0)
+                item = got[0] if isinstance(got, list) and got else got
+                if not isinstance(item, dict) or not str(item.get("brief") or "").strip():
+                    print("FAIL: the model returned no usable cover idea."); return 1
+                src_note = "images.py cover"
+            cur = con.execute(
+                """INSERT INTO doc_images(doc_id, kind, status, title, brief, context_note, caption_en, caption_hi,
+                                          anchor_page, anchor_idx, model, provenance, created_at, updated_at)
+                   VALUES(?, 'cover', 'brief', ?,?,?,?,?, 0, 0, ?,?,?,?)""",
+                (did, item.get("title") or "Cover", item.get("brief"), item.get("context_note"),
+                 item.get("caption_en"), item.get("caption_hi"), args.model,
+                 json.dumps({"source": src_note}), now(), now()))
+            con.execute("UPDATE doc_images SET lineage_id=id WHERE id=?", (cur.lastrowid,))
+            con.commit()
+            _progress(args.progress, phase="stored cover idea #%d" % cur.lastrowid, step=1, total=1, done=True)
+            print("stored cover idea #%d (status brief): approve it, then generate (drawn 2:3, no lettering)."
+                  % cur.lastrowid)
+            return 0
         if args.cmd == "edit":
             row = get(con, args.id); f = {}
             for k, col in (("title", "title"), ("brief", "brief"), ("context", "context_note"),
@@ -572,11 +715,16 @@ def main() -> int:
             except Exception:
                 pass
             bad = 0
-            for t in todo:
+            _progress(args.progress, phase="drawing", step=0, total=len(todo), started=time.time())
+            for _i, t in enumerate(todo):
+                _progress(args.progress, phase="drawing", step=_i, total=len(todo),
+                          current="#%d %s" % (t["id"], (t["title"] or "")[:60]))
                 try:
                     generate_one(con, t, args.model, root, code, args.db)
                 except Exception as ex:
                     bad += 1; print("  #%d: FAILED %s" % (t["id"], ex))
+            _progress(args.progress, phase=("finished" if not bad else "%d failed" % bad), step=len(todo),
+                      total=len(todo), current="", done=True)
             return 1 if bad else 0
         if args.cmd == "add":
             did = doc_id(con, args.doc)

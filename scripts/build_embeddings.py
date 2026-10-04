@@ -100,6 +100,10 @@ def main():
     ap.add_argument("--limit", type=int, default=None, help="cap total passages this run")
     ap.add_argument("--sleep", type=float, default=0.4, help="pause between batches (rate limit)")
     ap.add_argument("--doc", default=None, help="limit to one doc code (also labels the spend)")
+    ap.add_argument("--no-stale", action="store_true",
+                    help="BRAIN_FRESH_2026_10_04: do NOT re-embed passages re-translated after their vector")
+    ap.add_argument("--plan", action="store_true",
+                    help="BRAIN_FRESH_2026_10_04: print missing/stale counts and exit (no API call)")
     ap.add_argument("--refresh", action="store_true",
                     help="re-embed everything, even passages already embedded with this model")
     args = ap.parse_args()
@@ -174,9 +178,14 @@ def main():
     # Passages worth embedding: have a real English translation, not noise.
     # Embed the English (retrieval target) prefixed with the IAST so proper
     # nouns anchor — keeps names searchable even when the English paraphrases.
+    # BRAIN_FRESH_2026_10_04: a vector made before the passage was (re)translated is stale.
     where_done = "" if args.refresh else (
         "AND NOT EXISTS (SELECT 1 FROM passage_embeddings e "
-        "WHERE e.passage_id = p.id AND e.model = ?)"
+        "WHERE e.passage_id = p.id AND e.model = ?"
+        + ("" if args.no_stale else
+           " AND NOT (p.translated_at IS NOT NULL AND e.updated_at IS NOT NULL"
+           " AND julianday(p.translated_at) > julianday(e.updated_at))")
+        + ")"
     )
     params = [] if args.refresh else [args.model]
     where_doc = ""
@@ -196,6 +205,13 @@ def main():
         params,
     ).fetchall()
 
+    if args.plan:   # BRAIN_FRESH_2026_10_04
+        have = {r[0] for r in con.execute("SELECT passage_id FROM passage_embeddings WHERE model=?", (args.model,))}
+        stale = sum(1 for r in rows if r[0] in have)
+        print("PLAN %s: %d to embed (%d missing, %d stale: re-translated after their vector). No call made."
+              % (args.model, len(rows), len(rows) - stale, stale))
+        con.close()
+        return
     if args.limit:
         rows = rows[: args.limit]
     total = len(rows)
@@ -204,6 +220,14 @@ def main():
         con.close()
         return
 
+    try:   # SPEND_TRUTH_2026_10_04: ask the budget before spending
+        from usage_meter import budget_ok as _budget_ok
+        if not _budget_ok(con):
+            print("Refusing: the spend cap is reached (budget_state). Nothing embedded.")
+            con.close()
+            return
+    except ImportError:
+        pass
     print(f"Embedding {total} passages with {args.model} (batch={args.batch})…")
     cur = con.cursor()
     done = 0

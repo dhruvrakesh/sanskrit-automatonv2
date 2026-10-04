@@ -544,6 +544,7 @@ def _load_figures(con, doc, root=None):
                   i.path, i.anchor_page, i.anchor_idx
            FROM doc_images i JOIN docs d ON d.id = i.doc_id
            WHERE d.code = ? AND i.status = 'approved' AND i.path IS NOT NULL
+             AND COALESCE(i.kind, '') <> 'cover'   -- COVERS_2026_10_04: the cover goes on the title page
            ORDER BY i.anchor_page, i.anchor_idx, i.id""", (doc,)).fetchall()
     out = {}
     for (iid, ver, kind, title, cen, chi, note, path, pg, ix) in rows:
@@ -587,6 +588,25 @@ def _figure_html(fg, include_en, include_hi):
             % (fg["id"], html.escape(fg["kind"], quote=True), fg["uri"], alt, " ".join(cap)))
 
 
+def _load_cover(con, doc, root=None):
+    """COVERS_2026_10_04: the newest APPROVED cover (kind='cover') as a figure for the title page, or ''."""
+    if not doc or "doc_images" not in _tables(con):
+        return ""
+    root = root or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    r = con.execute("""SELECT i.id, i.title, i.path FROM doc_images i JOIN docs d ON d.id = i.doc_id
+                       WHERE d.code = ? AND i.status = 'approved' AND i.kind = 'cover' AND i.path IS NOT NULL
+                       ORDER BY i.approved_at DESC, i.id DESC LIMIT 1""", (doc,)).fetchone()
+    if not r:
+        return ""
+    full = r[2] if os.path.isabs(r[2]) else os.path.join(root, r[2])
+    uri = _fig_embed(full)
+    if not uri:
+        return ""
+    return ("<figure class='plate cover' id='cover-%s' style='max-width:24rem'><img src='%s' alt='%s'/>"
+            "<figcaption><span class='plate-label'>%s</span></figcaption></figure>"
+            % (r[0], uri, html.escape(r[1] or "cover", quote=True), html.escape(_FIG_LABEL_EN)))
+
+
 def _with_fig_css(doc_html, on):
     return doc_html.replace("</style>", _FIG_CSS + "</style>", 1) if on else doc_html
 
@@ -599,6 +619,7 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                 keep_frontmatter=False, images="none"):
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
     figs = _load_figures(con, doc) if images == "approved" else {}   # EXPORT_IMAGES_2026_10_04
+    cover = _load_cover(con, doc) if images == "approved" else ""   # COVERS_2026_10_04
     _fig_total = sum(len(v) for v in figs.values())
     include_hi = bool(hi_lang)
     recs = _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=hi_lang,
@@ -622,7 +643,9 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
     out_path = os.path.join(dest, f"{_safe_filename(doc or 'export')}_{lo}-{hi}{suffix}.html")
     lang_attr = hi_lang if (include_hi and not include_en) else "en"
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write(_with_fig_css(_html(title or (doc or "Export"), body, lang_attr=lang_attr), bool(figs)))
+        if cover:   # COVERS_2026_10_04
+            body = body.replace("<div class='titlepage'>", "<div class='titlepage'>" + cover, 1)
+        f.write(_with_fig_css(_html(title or (doc or "Export"), body, lang_attr=lang_attr), bool(figs) or bool(cover)))
     if images == "approved":   # EXPORT_IMAGES_2026_10_04
         _n_in = body.count("<figure class='plate'")
         print(f"[export] images: {_fig_total} approved, {_n_in} placed, "
@@ -716,3 +739,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# IMAGE_QUALITY_2026_10_04

@@ -172,13 +172,15 @@ def db_measures(con: sqlite3.Connection, doc: str, en_ver: str, hi_ver: str) -> 
             FROM passages p JOIN docs d ON d.id = p.doc_id
             LEFT JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = 'hi'
             WHERE d.code = ? AND {SCOPE}""", (doc,)).fetchall()
-    r = Counter({k: 0 for k in ("passages", "ocr_vision", "ocr_tesseract", "ocr_etext", "ocr_unrecorded",
+    r = Counter({k: 0 for k in ("passages", "ocr_vision", "ocr_tesseract", "ocr_etext", "ocr_unrecorded", "ocr_reseg",
                                 "dev_rows", "debris_rows", "en_done", "en_current", "en_lacuna",
                                 "hi_done", "hi_current", "hi_lacuna", "hi_ref_older")})
     en_vers, hi_vers = Counter(), Counter()
     for (_pid, oe, text, en, ev, eat, hi, hv, hat) in rows:
         r["passages"] += 1
         r["ocr_" + engine_class(oe)] += 1
+        if (oe or "") == "resegment-devnum":
+            r["ocr_reseg"] += 1
         d = is_debris(text)
         if d is not None:
             r["dev_rows"] += 1
@@ -277,33 +279,55 @@ def verdict(s: dict, lacuna_ok: float, debris_ok: float = 5.0, cpp: float | None
     etext = s.get("ocr_etext", 0) > n / 2 or engine_class(s.get("raw_engine")) == "etext"
     damaged = (not etext) and debris > debris_ok and vision_share < 50.0
 
+    # CORPUS_STATUS3_2026_10_04: rows that came from ANOTHER doc's files (the old
+    # "<doc>_*.jsonl" glob took <doc>_seg_* too). Evidence: their ocr_engine says
+    # resegment-devnum while this doc's own page files do not.
+    if s.get("ocr_reseg", 0) and s.get("raw_engine") != "resegment-devnum":
+        keep = s.get("derived_by") or "<the derived doc>"
+        reasons.append("%d of %d rows carry engine resegment-devnum although this doc's own page files are %s: "
+                       "they were ingested from %s's files by the old glob. This doc's text is now a copy "
+                       "of %s, not its own." % (s["ocr_reseg"], n, s.get("raw_engine") or "unrecorded", keep, keep))
+        cmds += ["python scripts\\diag_retire_check.py --src %s --keep %s" % (doc, keep),
+                 "python scripts\\retire_doc.py --doc %s --supersedes %s --dry-run" % (doc, keep),
+                 "# only when the check reports zero unmatched verses, after a fresh backup:",
+                 "python scripts\\retire_doc.py --doc %s --supersedes %s --yes" % (doc, keep)]
+        return "CONTAMINATED", reasons, cmds
+
     if damaged and s.get("src_doc"):
+        # CORPUS_STATUS3_2026_10_04: follow RETIREMENT_AND_BACKUP_POLICY_2026-09-14. The derived
+        # doc may hold grafted verses (graft_verses.py) and its source may be RETIRED, so it is
+        # never wiped and re-split in place. The repaired text becomes NEW codes; the existing
+        # doc is retired only after diag_retire_check passes.
         src = s["src_doc"]
         sp = peers.get(src, {})
+        new_src, new_doc = src + "_v2", doc + "_v2"
         reasons.append("source debris %.1f%% of passages; this doc is DERIVED from %s by resegment_doc.py "
-                       "(page files say so), so OCR is repaired on %s and the split re-run" % (debris, src, src))
+                       "(page files say so)%s. The repaired text goes to NEW codes %s / %s; %s is kept until "
+                       "diag_retire_check passes (RETIREMENT_AND_BACKUP_POLICY)"
+                       % (debris, src, " and %s is retired in the DB" % src if sp.get("retired") else "",
+                          new_src, new_doc, doc))
         if sp.get("pages_inbox", 0):
             c, usd = consensus_cmds(src, sp)
-            cmds += c; s["est_usd"] += usd
+            cmds += ["# 1. vision on the SOURCE pages (writes files only, never the DB)"] + c
+            s["est_usd"] += usd
         else:
             reasons.append("inbox holds no page PDFs named %s_NNNN.pdf, so vision cannot run on the source" % src)
             cmds += ['python inbox\\split_pdf_pages.py "<source.pdf>" -o inbox -p %s --zero-pad 4' % src]
-        try:
-            import ocr_consensus
-            skip = ("translate_passages", "qa_scan", "measure_lacunae")
-            if not sp.get("in_db", True):
-                skip += ("wipe_doc",)    # the source is not in the DB yet: nothing to wipe
-            cmds += [l for l in ocr_consensus.reingest_commands(src).splitlines() if not any(k in l for k in skip)]
-        except Exception:
-            cmds.append("python scripts\\ocr_consensus.py --doc %s --drift-only   # prints the re-ingest block" % src)
+            return "DERIVED-NEEDS-OCR", reasons, cmds
         cat = s.get("category") or "upapurana"
-        cmds += ["python scripts\\resegment_doc.py --src-doc %s --new-doc %s --dry-run" % (src, doc),
-                 "python scripts\\resegment_doc.py --src-doc %s --new-doc %s --yes" % (src, doc),
-                 "python scripts\\wipe_doc.py --db data\\context.db --doc %s --dry-run" % doc,
-                 "python scripts\\wipe_doc.py --db data\\context.db --doc %s --yes" % doc,
+        cmds += ["# 2. the repaired source as a NEW page-blob doc, then a NEW split (the current docs are untouched)",
+                 'python scripts\\ingest_jsonl_fast.py --doc %s --glob "data\\raw_merged\\%s_*.jsonl" --db data\\context.db '
+                 '--category %s --no-segment' % (new_src, src, cat),
+                 "python scripts\\resegment_doc.py --src-doc %s --new-doc %s --dry-run" % (new_src, new_doc),
+                 "python scripts\\resegment_doc.py --src-doc %s --new-doc %s --yes" % (new_src, new_doc),
                  'python scripts\\ingest_jsonl_fast.py --doc %s --glob "data\\raw\\%s_*.jsonl" --db data\\context.db '
-                 '--category %s --no-segment' % (doc, doc, cat),
-                 "python scripts\\corpus_status.py --doc %s      # then translate as it says" % doc]
+                 '--category %s --no-segment' % (new_doc, new_doc, cat),
+                 "# 3. translate %s (corpus_status --doc %s prints the commands), then compare and adopt:" % (new_doc, new_doc),
+                 "python scripts\\diag_retire_check.py --src %s --keep %s" % (doc, new_doc),
+                 "#    graft_verses.py for any verse the check names; then retire_doc.py --doc %s --supersedes %s"
+                 % (doc, new_doc),
+                 "#    and retire_doc.py --doc %s --supersedes %s (a page-blob source is never translated)"
+                 % (new_src, new_doc)]
         return "DERIVED-NEEDS-OCR", reasons, cmds
 
     if damaged:
@@ -418,6 +442,19 @@ def collect(db: str, docs: list[str] | None, raw: Path, vision: Path, merged: Pa
                 f = ocr_files(sd, raw, vision, merged, inbox); f.pop("_merged", None)
                 f["in_db"] = sd in all_codes
                 peers[sd] = f
+        try:   # CORPUS_STATUS3_2026_10_04: retired codes (retire_doc.py writes doc_stage 'retired')
+            retired = {r[0] for r in con.execute("SELECT doc_code FROM doc_stage WHERE stage='retired'")}
+        except sqlite3.Error:
+            retired = set()
+        for sd, f in peers.items():
+            f["retired"] = sd in retired
+        by_src = {}
+        for s in out:
+            if s.get("src_doc"):
+                by_src.setdefault(s["src_doc"], s["doc"])
+        for s in out:
+            if s["doc"] in by_src:
+                s["derived_by"] = by_src[s["doc"]]
     finally:
         con.close()
     for s in out:
@@ -450,7 +487,7 @@ def row_for(s: dict) -> dict:
             "est_usd": round(s.get("est_usd", 0.0), 2)}
 
 
-ORDER = {"DERIVED-NEEDS-OCR": 0, "NEEDS-OCR": 1, "NO-SOURCE-PDF": 2, "NEEDS-REINGEST": 3,
+ORDER = {"CONTAMINATED": -1, "DERIVED-NEEDS-OCR": 0, "NEEDS-OCR": 1, "NO-SOURCE-PDF": 2, "NEEDS-REINGEST": 3,
          "NEEDS-TRANSLATION": 4, "AGED": 5, "CURRENT": 6, "EMPTY": 7}
 
 

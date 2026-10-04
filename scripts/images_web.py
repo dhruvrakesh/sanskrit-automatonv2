@@ -235,14 +235,93 @@ def register(app, *, launch, root, py, script, db=None):
             c.close()
         return jsonify({"retired": [r[0] for r in res]})
 
+    # IMAGES_QUEUE_2026_10_04 ------------------------------------------------------
+    # The dashboard's own job table, read through launch's module globals (dashboard.py
+    # runs as __main__). Missing on an unusual host: the page then tracks its own jobs.
+    _g = getattr(launch, "__globals__", {}) or {}
+    _JOBS, _JOBS_LOCK = _g.get("JOBS"), _g.get("JOBS_LOCK")
+    _KINDS = ("images_brief", "images_gen")
+    _ks = _g.get("_KIND_SEM")
+    if isinstance(_ks, dict) and not any(k in _ks for k in _KINDS):
+        import threading as _threading
+        _img_sem = _threading.Semaphore(1)     # one image job at a time, in the order asked
+        for _k in _KINDS:
+            _ks[_k] = _img_sem
+    prog_dir = root / "data" / "images" / "_progress"
+
+    def _pfile(kind, doc, mode):
+        return prog_dir / ("%s__%s__%s.json" % (kind, doc, mode or "all"))
+
+    def _snapshot():
+        if _JOBS is None or _JOBS_LOCK is None:
+            return None
+        with _JOBS_LOCK:
+            return [j for j in _JOBS.values() if j.kind in _KINDS]
+
     def _job(kind, doc, argv, mode="all"):
         # mode is part of the dashboard's duplicate-job identity: generating image 3
         # must not be swallowed by a running generation of image 5.
+        pf = _pfile(kind, doc, mode)
+        snap = _snapshot() or []
+        if not any(j.ok is None and j.doc == doc and j.kind == kind and (j.mode or "") == mode for j in snap):
+            try:
+                pf.unlink()          # a fresh request starts with a fresh progress file
+            except OSError:
+                pass
+        argv = ["--progress", str(pf)] + list(argv)
         try:
             jid = launch(kind, doc, py(script("images.py"), "--db", str(dbp), *argv), mode=mode)
         except TypeError:   # a dashboard without EXPORT_MODE_JOBLOG (no mode argument)
             jid = launch(kind, doc, py(script("images.py"), "--db", str(dbp), *argv))
         return jsonify({"job": jid})
+
+    @app.post("/api/images/cover")   # COVERS_2026_10_04 / IMAGE_QUALITY_2026_10_04
+    def images_cover():
+        data = request.get_json(force=True) or {}
+        doc = data.get("doc", "")
+        if not DOC_RE.match(doc):
+            return bad("invalid doc")
+        argv = ["cover", "--doc", doc, "--yes"] + (["--more"] if data.get("more") else [])
+        if (data.get("brief") or "").strip():
+            argv += ["--brief", data["brief"].strip()[:2000]]
+        return _job("images_brief", doc, argv, "cover")
+
+    @app.get("/api/images/jobs")
+    def images_jobs():
+        doc = request.args.get("doc", "")
+        snap = _snapshot()
+        if snap is None:
+            return jsonify({"jobs": [], "available": False})
+        now = time.time()
+        waiting = sorted((j for j in snap if j.ok is None and not getattr(j, "active", False)),
+                         key=lambda j: j.start)
+        out = []
+        for j in snap:
+            if doc and j.doc != doc:
+                continue
+            if j.ok is not None and (not j.end or now - j.end > 900):
+                continue
+            if j.ok is None:
+                state = "running" if getattr(j, "active", False) else "queued"
+            else:
+                state = "done" if j.ok else ("killed" if getattr(j, "killed", False) else "failed")
+            prog = None
+            try:
+                pf = _pfile(j.kind, j.doc, j.mode)
+                if pf.exists():
+                    prog = json.loads(pf.read_text(encoding="utf-8"))
+            except Exception:
+                prog = None
+            tail = ""
+            if state not in ("queued", "running"):
+                tail = "\n".join((j.out or "").strip().splitlines()[-4:])
+                if state != "done" and j.err:
+                    tail += "\n" + "\n".join(j.err.strip().splitlines()[-3:])
+            out.append({"id": j.id, "kind": j.kind, "doc": j.doc, "mode": j.mode or "", "state": state,
+                        "start": j.start, "end": j.end, "progress": prog, "tail": tail.strip(),
+                        "position": (waiting.index(j) + 1) if state == "queued" else None})
+        out.sort(key=lambda x: -(x["start"] or 0))
+        return jsonify({"jobs": out, "available": True, "queued_total": len(waiting)})
 
     @app.post("/api/images/brief")
     def images_brief():
