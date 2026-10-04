@@ -361,7 +361,7 @@ def _section_key(rec):
 
 def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
             side_by_side, number_pages, drop_junk_en, want_toc=True, want_footnotes=True,
-            title=None):
+            title=None, figures=None):   # EXPORT_IMAGES_2026_10_04: figures
     # Group into ordered sections.
     sections = OrderedDict()
     for r in recs:
@@ -468,6 +468,15 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                     if iast: out.append(f"<p class='iast'>{html.escape(iast)}</p>")
                 out.append("</div>")
             kept += 1
+            if figures:   # EXPORT_IMAGES_2026_10_04: right after the anchored verse
+                for _fg in figures.pop(_fig_key(r["page"], r["idx"]), []):
+                    out.append(_figure_html(_fg, include_en, include_hi))
+        if figures:   # anchors whose verse was filtered out: end of the section holding the page
+            _pages = {_fig_key(x["page"], 0)[0] for x in rows}
+            for _k in sorted((k for k in list(figures) if k[0] in _pages), key=str):
+                for _fg in figures.pop(_k):
+                    _fg["_late"] = True
+                    out.append(_figure_html(_fg, include_en, include_hi))
         # footnotes for this section
         if want_footnotes and fn_notes:
             out.append("<div class='footnotes'><ol>")
@@ -480,13 +489,117 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
         out.append("<p class='note'>(No content matched your filters.)</p>")
     return "\n".join(out), kept
 
+# --- EXPORT_IMAGES_2026_10_04: approved images as figures (opt-in) -----------
+_FIG_LABEL_EN = "Illustration - generated, not a historical source."
+_FIG_LABEL_HI = "\u091a\u093f\u0924\u094d\u0930\u0923 - \u0915\u0943\u0924\u094d\u0930\u093f\u092e \u0930\u0942\u092a \u0938\u0947 \u0928\u093f\u0930\u094d\u092e\u093f\u0924, \u0910\u0924\u093f\u0939\u093e\u0938\u093f\u0915 \u0938\u094d\u0930\u094b\u0924 \u0928\u0939\u0940\u0902\u0964"
+_FIG_CSS = (
+    "figure.plate { margin: 1.6rem auto 2rem; max-width: 36rem; text-align: center; break-inside: avoid; }"
+    "figure.plate img { max-width: 100%; max-height: 70vh; border: 1px solid var(--rule); border-radius: 3px; }"
+    "figure.plate figcaption { font-size: .84rem; color: var(--muted); margin-top: .5rem; line-height: 1.6; text-align: left; }"
+    "figure.plate figcaption b { color: var(--ink); }"
+    "figure.plate .plate-hi { font-family: 'Noto Sans Devanagari','Nirmala UI','Mangal',serif; }"
+    "figure.plate .plate-note { display: block; margin-top: .3rem; }"
+    "figure.plate .plate-label { display: block; margin-top: .3rem; font-style: italic; font-size: .76rem; }"
+    "@media print { figure.plate { break-inside: avoid; page-break-inside: avoid; }"
+    " figure.plate img { max-height: 150mm; } }"
+)
+
+
+def _fig_key(page, idx):
+    try:
+        return (int(page), int(idx))
+    except (TypeError, ValueError):
+        return (page, idx)
+
+
+def _fig_embed(path: str):
+    """data: URI for the image file, or None when it cannot be read."""
+    import base64, io
+    try:
+        raw = open(path, "rb").read()
+    except OSError:
+        return None
+    try:
+        from PIL import Image
+        with Image.open(io.BytesIO(raw)) as im:
+            im = im.convert("RGB")
+            im.thumbnail((1400, 1400))
+            buf = io.BytesIO()
+            im.save(buf, "JPEG", quality=84, optimize=True)
+            raw, mime = buf.getvalue(), "image/jpeg"
+    except Exception:
+        ext = os.path.splitext(path)[1].lower()
+        mime = {".png": "image/png", ".webp": "image/webp", ".gif": "image/gif"}.get(ext, "image/jpeg")
+    return "data:%s;base64,%s" % (mime, base64.b64encode(raw).decode("ascii"))
+
+
+def _load_figures(con, doc, root=None):
+    """{(page, idx): [figure dict, ...]} for the doc's APPROVED images. Empty when
+    the doc_images table does not exist yet (no image library) or nothing is approved."""
+    if not doc or "doc_images" not in _tables(con):
+        return {}
+    root = root or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    rows = con.execute(
+        """SELECT i.id, i.version, i.kind, i.title, i.caption_en, i.caption_hi, i.context_note,
+                  i.path, i.anchor_page, i.anchor_idx
+           FROM doc_images i JOIN docs d ON d.id = i.doc_id
+           WHERE d.code = ? AND i.status = 'approved' AND i.path IS NOT NULL
+           ORDER BY i.anchor_page, i.anchor_idx, i.id""", (doc,)).fetchall()
+    out = {}
+    for (iid, ver, kind, title, cen, chi, note, path, pg, ix) in rows:
+        full = path if os.path.isabs(path) else os.path.join(root, path)
+        uri = _fig_embed(full)
+        if not uri:
+            print("[export] image #%s skipped: file not found (%s)" % (iid, full))
+            continue
+        out.setdefault(_fig_key(pg, ix), []).append(
+            {"id": iid, "version": ver, "kind": kind or "", "title": title or "", "caption_en": cen or "",
+             "caption_hi": chi or "", "note": note or "", "uri": uri, "page": pg, "idx": ix})
+    return out
+
+
+def _fig_copy(figs):
+    return {k: list(v) for k, v in (figs or {}).items()}
+
+
+def _figure_html(fg, include_en, include_hi):
+    cap = []
+    if fg["title"]:
+        cap.append("<b>%s</b>" % html.escape(fg["title"]))
+    if include_en and fg["caption_en"]:
+        cap.append(html.escape(fg["caption_en"]))
+    if include_hi and fg["caption_hi"]:
+        cap.append("<span class='plate-hi'>%s</span>" % html.escape(fg["caption_hi"]))
+    if not include_en and not (include_hi and fg["caption_hi"]) and fg["caption_en"]:
+        cap.append(html.escape(fg["caption_en"]))
+    if include_en and fg["note"]:
+        cap.append("<span class='plate-note'>%s</span>" % html.escape(fg["note"]))
+    if fg["kind"] == "generated":
+        lab = _FIG_LABEL_EN if include_en or not include_hi else _FIG_LABEL_HI
+        if include_en and include_hi:
+            lab = _FIG_LABEL_EN + " / " + _FIG_LABEL_HI
+        cap.append("<span class='plate-label'>%s</span>" % html.escape(lab))
+    elif fg["kind"] == "edition-plate":
+        cap.append("<span class='plate-label'>Plate from the source edition.</span>")
+    alt = html.escape(fg["title"] or "illustration", quote=True)
+    return ("<figure class='plate' id='img-%s' data-kind='%s'><img src='%s' alt='%s'/>"
+            "<figcaption>%s</figcaption></figure>"
+            % (fg["id"], html.escape(fg["kind"], quote=True), fg["uri"], alt, " ".join(cap)))
+
+
+def _with_fig_css(doc_html, on):
+    return doc_html.replace("</style>", _FIG_CSS + "</style>", 1) if on else doc_html
+
+
 # --- export core -------------------------------------------------------------
 
 def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                 side_by_side, number_pages, drop_junk_en, force_san, force_en,
                 hi_lang=None, hi_label="Hindi", want_toc=True, want_footnotes=True, debug=False,
-                keep_frontmatter=False):
+                keep_frontmatter=False, images="none"):
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
+    figs = _load_figures(con, doc) if images == "approved" else {}   # EXPORT_IMAGES_2026_10_04
+    _fig_total = sum(len(v) for v in figs.values())
     include_hi = bool(hi_lang)
     recs = _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=hi_lang,
                   keep_frontmatter=keep_frontmatter)
@@ -494,18 +607,26 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
     body, kept = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                          include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                          number_pages=number_pages, drop_junk_en=drop_junk_en,
-                         want_toc=want_toc, want_footnotes=want_footnotes, title=title)
+                         want_toc=want_toc, want_footnotes=want_footnotes, title=title,
+                         figures=_fig_copy(figs) if figs else None)
     if kept == 0 and include_en and not include_san and drop_junk_en:
         body, _ = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                           include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                           number_pages=number_pages, drop_junk_en=False,
-                          want_toc=want_toc, want_footnotes=want_footnotes, title=title)
+                          want_toc=want_toc, want_footnotes=want_footnotes, title=title,
+                         figures=_fig_copy(figs) if figs else None)
     os.makedirs(dest, exist_ok=True)
     suffix = f"_{hi_lang}" if (include_hi and not include_en) else ("_tri" if include_hi else "")
+    if images == "approved":   # EXPORT_IMAGES_2026_10_04: never overwrite the plain edition
+        suffix += "_img"
     out_path = os.path.join(dest, f"{_safe_filename(doc or 'export')}_{lo}-{hi}{suffix}.html")
     lang_attr = hi_lang if (include_hi and not include_en) else "en"
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write(_html(title or (doc or "Export"), body, lang_attr=lang_attr))
+        f.write(_with_fig_css(_html(title or (doc or "Export"), body, lang_attr=lang_attr), bool(figs)))
+    if images == "approved":   # EXPORT_IMAGES_2026_10_04
+        _n_in = body.count("<figure class='plate'")
+        print(f"[export] images: {_fig_total} approved, {_n_in} placed, "
+              f"{_fig_total - _n_in} outside pages {lo}-{hi}")
     if debug: print(f"[export] wrote {out_path} | recs={len(recs)} | san='{san_col}' en='{en_col}' hi='{hi_lang}'")
     return out_path
 
@@ -546,6 +667,9 @@ def main():
     ap.add_argument("--lang", default=None, help="Localized language code (default 'hi').")
     ap.add_argument("--no-toc", action="store_true", help="Omit the table of contents.")
     ap.add_argument("--no-footnotes", action="store_true", help="Keep [bracketed] notes inline.")
+    ap.add_argument("--images", choices=["none", "approved"], default="none",
+                    help="EXPORT_IMAGES_2026_10_04: approved = place approved images from the "
+                         "image library at their verses (file name gains _img).")
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
 
@@ -575,7 +699,7 @@ def main():
                             number_pages=number_pages, drop_junk_en=drop_junk_en,
                             force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
                             hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
-                            keep_frontmatter=args.keep_frontmatter)
+                            keep_frontmatter=args.keep_frontmatter, images=args.images)
         else:
             if args.doc:
                 lo,hi = (_page_span(con, args.doc) if (args.pg_from is None or args.pg_to is None) else (args.pg_from, args.pg_to))
@@ -588,7 +712,7 @@ def main():
                         number_pages=number_pages, drop_junk_en=drop_junk_en,
                         force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
                         hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
-                        keep_frontmatter=args.keep_frontmatter)
+                        keep_frontmatter=args.keep_frontmatter, images=args.images)
 
 if __name__ == "__main__":
     main()

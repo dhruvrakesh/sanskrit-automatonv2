@@ -249,6 +249,43 @@ def upsert_passages(
     return n_inserted
 
 
+# INGEST_SOURCE_2026_10_04 ---------------------------------------------------
+def _resolve_source(doc, pattern, paths, mode="auto"):
+    """(paths, note, refuse). See patch_guards_2026_10_04.py for why."""
+    rx = re.compile(r"^%s_(\d{4})(?:_norm)?\.jsonl$" % re.escape(doc))
+    pat = pathlib.Path(pattern)
+    simple = pat.name == "%s_*.jsonl" % doc
+    notes = []
+    if not simple or mode == "given":
+        return paths, "", False
+    kept = [p for p in paths if rx.match(p.name)]
+    if len(kept) != len(paths):
+        other = sorted(p.name for p in paths if not rx.match(p.name))
+        notes.append("[ingest] %s: %d file(s) matched %s but belong to another doc (e.g. %s) - skipped"
+                     % (MARK_SOURCE, len(other), pat.name, other[0]))
+    paths = kept
+    if mode == "auto" and pat.parent.name.lower() == "raw":
+        mdir = pat.parent.parent / "raw_merged"
+        merged = sorted(p for p in mdir.glob("%s_*.jsonl" % doc) if rx.match(p.name)) if mdir.is_dir() else []
+        if merged:
+            raw_pages = {rx.match(p.name).group(1) for p in paths}
+            m_pages = {rx.match(p.name).group(1) for p in merged}
+            if raw_pages <= m_pages:
+                notes.append("[ingest] %s: data/raw_merged holds OCR consensus for all %d page(s) of %s - "
+                             "ingesting those instead of data/raw (Tesseract). --source raw forces Tesseract."
+                             % (MARK_SOURCE, len(m_pages), doc))
+                return merged, "\n".join(notes), False
+            notes.append("REFUSING (%s): data/raw_merged holds consensus for %d of %d page(s) of %s. Ingesting "
+                         "data/raw would put Tesseract text back over consensus text. Finish the consensus "
+                         "(python scripts\\ocr_consensus.py --doc %s ...) or pass --source raw."
+                         % (MARK_SOURCE, len(raw_pages & m_pages), len(raw_pages), doc, doc))
+            return paths, "\n".join(notes), True
+    return paths, "\n".join(notes), False
+
+
+MARK_SOURCE = "INGEST_SOURCE_2026_10_04"
+
+
 def main():
     ap = argparse.ArgumentParser(
         description="Ingest OCR JSONL into SQLite with verse segmentation"
@@ -259,6 +296,9 @@ def main():
     ap.add_argument("--category", default=None, help="scripture category for docs table")
     ap.add_argument("--no-segment",  action="store_true", help="skip verse segmentation")
     ap.add_argument("--no-iast",     action="store_true", help="skip IAST generation")
+    ap.add_argument("--source", choices=["auto", "raw", "given"], default="auto",
+                    help="INGEST_SOURCE_2026_10_04: auto = for data/raw/<doc>_*.jsonl prefer complete "
+                         "OCR consensus in data/raw_merged; raw = Tesseract; given = the glob as is")
     args = ap.parse_args()
 
     con = connect(args.db)
@@ -269,6 +309,11 @@ def main():
     doc_id = ensure_doc(con, args.doc, category=args.category)
 
     paths = sorted(pathlib.Path(p) for p in _glob.glob(args.glob))
+    paths, _src_note, _src_refuse = _resolve_source(args.doc, args.glob, paths, args.source)  # INGEST_SOURCE_2026_10_04
+    if _src_note:
+        print(_src_note)
+    if _src_refuse:
+        sys.exit(3)
     if not paths:
         print(f"No files matched: {args.glob}")
         sys.exit(0)

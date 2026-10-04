@@ -153,6 +153,39 @@ def _archive_previous_translation(con, cur, rowid, reason="retranslate-overwrite
     return True
 
 
+# TRANSLATE_DEBRIS_GUARD_2026_10_04 -------------------------------------------
+def _debris_guard(con, doc, debris_max, inbox=None):
+    """A refusal message when the doc's stored text is repairable Tesseract debris, else None."""
+    import re as _re
+    junk = _re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")     # = diag_hindi_ab.JUNK
+    dev = _re.compile(r"[\u0900-\u097f]")
+    cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    eng = "p.ocr_engine" if "ocr_engine" in cols else "NULL"
+    scope = ("AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')" if "text_type" in cols else "")
+    n = dn = bad = vis = 0
+    for text, oe in con.execute(f"""SELECT p.text, {eng} FROM passages p JOIN docs d ON d.id = p.doc_id
+                                    WHERE d.code = ? {scope}""", (doc,)):
+        n += 1
+        vis += 1 if "vision" in (oe or "").lower() else 0
+        if len(dev.findall(text or "")) >= 8:
+            dn += 1
+            bad += 1 if junk.search(text) else 0
+    if not dn:
+        return None
+    share, vshare = 100.0 * bad / dn, 100.0 * vis / max(1, n)
+    inbox = Path(inbox or os.environ.get("SA_INBOX_DIR") or Path(__file__).resolve().parent.parent / "inbox")
+    rx = _re.compile(r"^%s_\d{4}\.pdf$" % _re.escape(doc), _re.I)
+    pdfs = sum(1 for p in inbox.iterdir() if rx.match(p.name)) if inbox.is_dir() else 0
+    if share <= debris_max or vshare >= 50.0 or not pdfs:
+        return None
+    return ("REFUSING (TRANSLATE_DEBRIS_GUARD_2026_10_04): %.1f%% of %s's passages carry Tesseract debris "
+            "(Latin letters inside Devanagari; vision text measures 0-2%%), %.0f%% come from vision OCR, and inbox "
+            "holds %d page PDF(s), so the source can be repaired first. Translating now pays for text that "
+            "consensus will replace.\n  Next (plan, no spend): python scripts\\ocr_consensus.py --doc %s "
+            "--threshold 101 --include-unassessed\n  Translate anyway: add --allow-debris "
+            "(dashboard: set SA_ALLOW_DEBRIS=1)." % (share, doc, vshare, pdfs, doc))
+
+
 def main():
     global _PROGRESS_PATH, _CONFIG_PATH  # declared before first use (Python 3.12+)
     ap = argparse.ArgumentParser(description="Translate Sanskrit passages")
@@ -210,6 +243,11 @@ def main():
                     help="PARK_ILLEGIBLE_2026_09_27: skip a verse whose answer under the "
                          "current prompt was only the lacuna token on this many runs "
                          "(same source text). It needs re-OCR, not another call.")
+    ap.add_argument("--allow-debris", action="store_true",
+                    help="TRANSLATE_DEBRIS_GUARD_2026_10_04: translate even when the source is repairable "
+                         "Tesseract debris (env SA_ALLOW_DEBRIS=1 does the same)")
+    ap.add_argument("--debris-max", type=float, default=float(os.environ.get("SA_DEBRIS_MAX") or 30.0),
+                    help="TRANSLATE_DEBRIS_GUARD_2026_10_04: refuse above this %% of debris passages")
     ap.add_argument("--reference", choices=["auto", "none"], default="auto",
                     help="HI_PROMPT_FILE_2026_10_03: Hindi only. none = do not show the model the "
                          "English of the verse (prompt version gains +noref).")
@@ -237,6 +275,12 @@ def main():
     if doc_meta["id"] is None:
         print(f"ERROR: doc '{args.doc}' not found in DB")
         sys.exit(1)
+    if (args.only_page is None and not args.allow_debris
+            and os.environ.get("SA_ALLOW_DEBRIS", "") not in ("1", "true", "yes")):   # TRANSLATE_DEBRIS_GUARD_2026_10_04
+        _msg = _debris_guard(con, args.doc, args.debris_max)
+        if _msg:
+            print(_msg)
+            sys.exit(3)
 
     base_engine = args.engine or None
 

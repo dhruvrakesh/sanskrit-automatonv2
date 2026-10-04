@@ -72,6 +72,7 @@ import glob
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -346,6 +347,119 @@ def set_audit_policy(bs: Path, project: Path, languages: list[str]) -> None:
     run([py, "-c", script, str(project), ",".join(languages)])
 
 
+# BOOKSMITH_PLATES_2026_10_04 -------------------------------------------------
+PLATE_PREFIX = "assets/plates/imglib_"
+PLATE_CAP = 12        # Booksmith: illustrations_per_volume le=12
+
+
+def approved_generated_images(db: str, doc: str) -> list[dict]:
+    """APPROVED generated images of the doc, in anchor order. Read-only."""
+    import sqlite3
+    uri = Path(db).resolve().as_uri() + "?mode=ro"
+    con = sqlite3.connect(uri, uri=True)
+    try:
+        con.execute("PRAGMA query_only=1")
+        if not con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='doc_images'").fetchone():
+            return []
+        rows = con.execute(
+            """SELECT i.id, i.version, i.path, i.anchor_page, i.anchor_idx FROM doc_images i
+               JOIN docs d ON d.id = i.doc_id
+               WHERE d.code = ? AND i.status = 'approved' AND i.kind = 'generated' AND i.path IS NOT NULL
+               ORDER BY i.anchor_page, i.anchor_idx, i.id""", (doc,)).fetchall()
+    finally:
+        con.close()
+    out = []
+    for iid, ver, path, pg, ix in rows:
+        src = Path(path) if os.path.isabs(path) else ROOT / path
+        out.append({"id": iid, "version": ver, "src": src, "page": pg, "idx": ix})
+    return out
+
+
+def plan_plates(current: list[str], images: list[dict], cap: int = PLATE_CAP) -> tuple[list[str], list[tuple]]:
+    """(new plate_paths, [(src Path, relative dst)]). The project's own plates
+    (anything not imglib_*) are kept first and never removed."""
+    own = [p for p in current if not str(p).replace("\\", "/").startswith(PLATE_PREFIX)]
+    room = max(0, cap - len(own))
+    ours, copies = [], []
+    for im in images[:room]:
+        ext = (im["src"].suffix or ".jpg").lower()
+        rel = "%s%d_v%d%s" % (PLATE_PREFIX, im["id"], im["version"] or 1, ext)
+        ours.append(rel)
+        copies.append((im["src"], rel))
+    return own + ours, copies
+
+
+def _booksmith_config_io(bs: Path, project: Path, new_paths=None, ipv=None) -> dict:
+    """Read (and with new_paths, write) plate_paths and illustrations_per_volume
+    through Booksmith's own model."""
+    py = project_python(bs)
+    script = (
+        "import sys, json\n"
+        "from pathlib import Path\n"
+        "from nartiang_booksmith.config import load_yaml, save_yaml, project_paths\n"
+        "from nartiang_booksmith.domain import BookConfig\n"
+        "paths = project_paths(Path(sys.argv[1]))\n"
+        "c = load_yaml(paths['config'], BookConfig)\n"
+        "if len(sys.argv) > 2:\n"
+        "    d = c.model_dump(mode='json')\n"
+        "    d['plate_paths'] = json.loads(sys.argv[2])\n"
+        "    d['policy']['illustrations_per_volume'] = int(sys.argv[3])\n"
+        "    c = BookConfig.model_validate(d)\n"
+        "    save_yaml(paths['config'], c)\n"
+        "print('PLATES_JSON=' + json.dumps({'plate_paths': list(c.plate_paths),"
+        " 'ipv': c.policy.illustrations_per_volume}))\n"
+    )
+    argv = [py, "-c", script, str(project)]
+    if new_paths is not None:
+        argv += [json.dumps(list(new_paths)), str(int(ipv))]
+    p = run(argv)
+    for line in (p.stdout or "").splitlines():
+        if line.startswith("PLATES_JSON="):
+            return json.loads(line[len("PLATES_JSON="):])
+    raise RuntimeError("could not read plate_paths from %s" % project)
+
+
+def sync_plates(bs: Path, project: Path, db: str, doc: str, config_io=None) -> dict:
+    """Make the project's library plates match the approved generated images.
+    Returns a small report for the sidecar. Raises RuntimeError on refusal."""
+    io = config_io or (lambda new=None, ipv=None: _booksmith_config_io(bs, project, new, ipv))
+    cur = io()
+    images = approved_generated_images(db, doc)
+    missing = [str(im["src"]) for im in images if not im["src"].exists()]
+    images = [im for im in images if im["src"].exists()]
+    new, copies = plan_plates(list(cur["plate_paths"]), images)
+    pending = [(src, rel) for src, rel in copies
+               if not (project / rel).exists() or sha256_of(project / rel) != sha256_of(src)]
+    ipv = min(PLATE_CAP, len(new)) if new else cur["ipv"]
+    rep = {"approved_generated": len(images) + len(missing), "missing_files": missing,
+           "plates": new, "copied": len(pending), "dropped_over_cap": len(images) - len(copies)}
+    if new == list(cur["plate_paths"]) and ipv == cur["ipv"] and not pending:
+        rep["action"] = "unchanged"
+        return rep
+    decisions = project / "work" / "decisions.jsonl"
+    if (project / "work" / "manifest.json").exists() and decisions.exists() and decisions.stat().st_size > 0:
+        # Checked BEFORE any file is copied: a refused run leaves the project exactly as it was.
+        raise RuntimeError("plates changed, but work/decisions.jsonl holds human review decisions frozen "
+                           "against the current manifest; re-freezing would invalidate them silently. "
+                           "Open the project in Booksmith and decide there, or run without --plates.")
+    for src, rel in pending:
+        (project / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, project / rel)
+    cfg = project / "book.yaml"
+    stamp = time.strftime("%Y%m%d_%H%M%S")
+    (project / "work").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(cfg, project / "work" / ("book.yaml.bak_plates_" + stamp))
+    cleared = []
+    for p in [project / "work" / "manifest.json", project / "build" / "book.pdf",
+              project / "build" / "layout-proof.pdf", project / "build" / "build-report.json",
+              project / "build" / "qa-report.json"]:
+        if p.exists():
+            p.unlink(); cleared.append(p.name)
+    io(new, ipv)
+    rep.update(action="updated", cleared=cleared, ipv=ipv, backup="work/book.yaml.bak_plates_" + stamp)
+    return rep
+
+
 def project_python(bs: Path) -> Path:
     p = bs.parent / "python.exe"
     if p.exists():
@@ -383,6 +497,9 @@ def main() -> int:
                     help="audit = the whole text, never gated. proof = eight representative units.")
     ap.add_argument("--title", default=None,
                     help="cover title; overrides the one derived from the doc code")
+    ap.add_argument("--plates", default="none", choices=["none", "approved"],
+                    help="BOOKSMITH_PLATES_2026_10_04: approved = approved generated images from the "
+                         "image library become colour plates (evenly spaced; edits book.yaml).")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
 
@@ -469,6 +586,12 @@ def main() -> int:
             raise RuntimeError("refusing to re-ingest: " + detail)
         save()
 
+        if args.plates == "approved":   # BOOKSMITH_PLATES_2026_10_04
+            log("[2b/6] plates from the image library")
+            state["plates"] = sync_plates(exe, project, args.db, doc)
+            log("      plates: %s (%d in book.yaml, %d copied)"
+                % (state["plates"]["action"], len(state["plates"]["plates"]), state["plates"]["copied"]))
+            save()
         log("[3/6] ingest")
         run([exe, "--home", home, "ingest", slug, str(html)])
 

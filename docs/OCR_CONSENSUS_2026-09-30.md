@@ -177,3 +177,123 @@ What F4 means: the translation layer already works as a learning system. The one
 - lacunas no higher than hi-v4 d (74 of 160);
 - unmarked damage at or below 4 (arm b's rate);
 - a hand check of 20 conjectures.
+
+
+## 9. The hi-v5 gate, paired, and the decision (2026-10-04, DOCS_2026_10_04)
+
+hi-v5 (`hi-file-37e6ff9a2b`) was put into production on 2026-10-03 before its gate was read. The four v5 runs are now compared with the v4 runs of the same morning. For three books the 40 verses are **the same verses** (passage ids overlap 40 of 40), so the comparison is paired. All runs use arm d (no English reference) and the lacuna population.
+
+| Book (same 40 verses) | Verses with a lacuna, v4 / v5 | Lacuna tokens, v4 / v5 | Conjectures, v4 / v5 | Unmarked damage, v4 / v5 |
+|---|---|---|---|---|
+| HAYASHIRSHA_PANCARATRA | 16 / 25 | 28 / 38 | 94 / 124 | 2 / 0 |
+| harita_tritiya_sthanam | 28 / 33 | 100 / 146 | 344 / 523 | 2 / 0 |
+| nilamata_seg | 18 / 24 | 23 / 29 | 49 / 56 | 1 / 1 |
+| **Total (120 verses)** | **62 / 82** | **151 / 213** | **487 / 703** | **5 / 1** |
+
+markandeya_purana is not paired (the samples share 1 verse). Its unpaired figures are v4 12/40 and v5 16/40.
+
+**Hand check.** I read six verses where the two prompts disagree on whether to mark a lacuna:
+
+- v4 is better in four:
+  - `facta` gave v4 ⟨विदीर्ण करो⟩; v5 left the sentence without its verb.
+  - `SHEET` gave v4 ⟨देखकर⟩; v5 both marked the gap and guessed.
+  - Verse 60251 is fluent under v4.
+  - In verse 101301, v5 put the readable चैव in ⟨⟩, breaking its own rule 11(ख).
+- v5 is better in one. In 101221, v4 echoed the Sanskrit lines into the Hindi. Echoes are rare under both prompts: v4 1-2 per 40 verses, v5 1-4.
+- Neither is right in one. In 101423, शरगुष्व is शृणुष्व ("listen"), and both prompts missed it.
+
+**Decision: production goes back to v4.** Copy `prompts/hi-v4-candidate.txt` over `prompts/hi-production.txt`; the version becomes `hi-file-18a0d5f5eb`. v5 has one real gain, "every damaged spot is marked" (unmarked 5 to 1), and it costs 20 more verses with gaps out of 120. The candidate for that gain is a v6 that adds only rule 11(घ) to v4, gated paired against v4 on the same 120 verses before any switch.
+
+**What prompts cannot do.** The source-junk column of the A/B files shows that 29 to 40 of every 40 sampled verses carry Tesseract debris (Latin fragments inside Devanagari). After the production `--only-lacuna` runs, these books still carry lacunas on 37-57% of their Hindi rows: markandeya, HAYASHIRSHA, nilamata. The damage is in the source text. The order that converges is:
+
+1. vision consensus;
+2. wipe and re-ingest from raw_merged;
+3. translate. Changed text is a new cache key, so only changed verses are paid for.
+
+`scripts/corpus_status.py` now says this per book (RUNBOOK, "Is the corpus up to date?").
+
+**Upsert caveat, verified in `ingest_jsonl_fast.py`.** On re-ingest, `ON CONFLICT ... DO UPDATE` replaces `text` but deliberately not `translation`. Re-ingesting changed text on top of a doc, without `wipe_doc.py` first, would therefore leave old translations attached to new text, possibly to different verses if segmentation moved. `reingest_commands()` always wipes first. Keep it that way.
+
+
+## 10. The first corpus-wide status, and why v1 of it was wrong (2026-10-04, DOCS2_2026_10_04)
+
+`corpus_status.py` v1 ran on 36 docs (at least 20 passages each). It returned NEEDS-OCR for 15 and NEEDS-TRANSLATION for 21. It judged source damage from **lacuna rates**, which is the wrong evidence. It went wrong in two directions:
+
+- **It sent clean-English books to OCR on Hindi lacunae alone.** For example, vasishtha_dhanur_veda had English 0.0% and Hindi 72.7%, and harita_prathama_sthanam had English 2.7% and Hindi 56.4%. Older Hindi prompts produce those lacunae.
+- **It sent untranslated Tesseract books to translation.** A book with no translations has no lacunae, so v1 read it as clean. Examples are 476948-Rgveda-samhita_Vol-ii (7,053 passages) and SP_4214_Pataal_Khanda (19,071 passages). Translating Tesseract debris is the most expensive mistake available.
+
+**v2 (`CORPUS_STATUS2_2026_10_04`) measures the source.** Source debris is the share of passages with at least 8 Devanagari characters that contain Latin-letter runs. It is the same JUNK test that `diag_hindi_ab.py` uses. I calibrated it on the page files on 2026-10-04, counting per text line:
+
+| Producer | Debris |
+|---|---|
+| Tesseract (`data/raw`) | Ganita 10.3%, Karan 13.5%, manu 17.7%, jyotish 19.4%, upapurana_nilamata 20.2%, harita smriti 21.3%, harita_tritiya 22.2%, nirukta 24.5%, markandeya 26.4%, Natyasastra 29.6%, Bodhicaryavatara 33.8%, tantric texts 35.2%, vasishtha 35.8%, shukla yajur 35.8%, HAYASHIRSHA 36.0%, Sandilya 38.4%, Mallapurana 43.6%, Pataal Khanda 48.5%, LalitaVistara 49.6%, Rgveda 53.9%, Shatapatha 58.5%, bodhyana 70.9% |
+| Vision (`data/raw_vision`) | Shatapatha 0.0% (merged 0.9%), Rgveda 0.5%, Sandilya 1.8%. Mallapurana is 10.4% (merged 11.7%); that comes from plate captions and its 5 refused pages. |
+| E-text | MBh01 0.0% (raw engine `gretil-bori-etext`) |
+
+So `--debris-ok` defaults to 5%. NEEDS-OCR now means: debris above 5%, fewer than half the passages from vision, and page PDFs present in inbox. No translation is recommended until consensus is done.
+
+**Provenance is read from the page files, not inferred.** Three docs carry engine `resegment-devnum` with `meta.src_doc`:
+
+| Derived doc | Source doc |
+|---|---|
+| nilamata_seg | upapurana_nilamata_purana |
+| smriti_14manu_smriti_seg | smriti_14manu_smriti |
+| smriti_16harita_smriti_seg | smriti_16harita_smriti |
+
+Their pages match their sources' pages at only 0.06-0.19 similarity (sampled pages 10, 30 and 60). That is expected, because they are the same text cut at different places. So a derived doc is never re-OCR'd itself. The order is:
+
+1. vision on the source;
+2. re-ingest the source;
+3. `resegment_doc.py`;
+4. wipe the derived doc and ingest it with `--no-segment`.
+
+The verdict for these is DERIVED-NEEDS-OCR. This follows the rule `diag_corpus_overlap.py` records: row counts are not evidence.
+
+**Source PDFs.** vision needs `inbox/<code>_NNNN.pdf`. None exist for LalitaVistara, Bodhicaryavatara, bodhyana, vasishtha_dhanur_veda or shiva_dhanur_veda; their verdict is NO-SOURCE-PDF. MBh01 is e-text and needs none.
+
+For vasishtha_dhanur_veda and shiva_dhanur_veda, inbox holds `dhanur_veda_vasishtha_dhanur_veda_*` (32 pages) and `dhanur_veda_shiva_dhanur_veda_*` (19 pages), the same page counts as their raw files. That is a hint only; their raw pages 10, 30 and 60 matched at 0.47, 0.10 and 1.0. The report offers a copy-with-rename command, to run after a person compares two pages.
+
+**Fixed with it (`MAINT_2026_10_04`):**
+
+- `resegment_doc.py` wrote one file per source page but opened it once per source passage. On a segmented source, only each page's last passage survived. Consecutive entries are now merged. Page-blob sources give identical output.
+- `images.py approve` stopped at the first already-approved id (`approve 3 4 5 6 10` left 6 and 10 as drafts). It now skips and continues.
+- `tests/test_translation_filters2.py` asserted the built-in Hindi version, so it failed whenever a reviewed prompt file was active. It now checks the built-in prompt in a child process with the file switched off. That was the one failure in the 117-test suite.
+
+
+## 11. Two doors, two guards (2026-10-04 afternoon, DOCS3_2026_10_04)
+
+**The pilot did not run.** `ocr_consensus.py --doc markandeya_purana --threshold 101 --yes` stopped at triage: "100 page(s) have no confidence recorded (OCR'd before 2026-08-30)". Pages OCR'd before that date carry no Tesseract confidence, so triage has nothing to rank. `--include-unassessed` queues every inbox page; corpus_status now prints it on every consensus command. Nothing was spent and nothing was written.
+
+**INGEST_SOURCE_2026_10_04 (scripts/ingest_jsonl_fast.py).** Two faults were found in the code and files:
+
+- *The glob caught other books.* The glob `<doc>_*.jsonl` also matches docs whose code starts with `<doc>_`. data/raw holds 208 `smriti_14manu_smriti_seg_*` files beside the 208 `smriti_14manu_smriti_*` files, and the same holds for `smriti_16harita_smriti`. Ingesting the source doc therefore also ingested the derived doc's files on the same page numbers. Both manu docs show 2,568 rows, which is consistent with this.
+  - Only `<doc>_NNNN.jsonl` and `<doc>_NNNN_norm.jsonl` are taken now.
+  - The others are named in the log.
+- *Ingest could undo consensus.* The dashboard Ingest button and `advance_pipeline.py` ("Translate All OCR'd") ingest `data/raw/<doc>_*.jsonl`, which is Tesseract text. For a doc with consensus, that put Tesseract text back over vision text, and upsert keeps the old translations on the new text. Now:
+
+  | Situation | What ingest does |
+  |---|---|
+  | `data/raw_merged` covers every page | ingests raw_merged and says so |
+  | `data/raw_merged` covers only some pages | refuses (exit 3) |
+  | `--source raw` | Tesseract, deliberately |
+  | `--source given` | the glob exactly as given (the old behaviour) |
+
+  This fixes plan item C2 at the one place every path goes through.
+
+**TRANSLATE_DEBRIS_GUARD_2026_10_04 (scripts/translate_passages.py).** Before any API call, it refuses (exit 3) when all three of these hold:
+
+- more than 30% of passages carry debris (`--debris-max`, env `SA_DEBRIS_MAX`);
+- fewer than half the passages come from vision;
+- inbox holds page PDFs for the doc.
+
+On the page-file measurements, that stops Rgveda Vol-ii (53.9%), Pataal Khanda (48.5%) and HAYASHIRSHA (36.0%). It lets these through:
+
+- Ganita (10.3%), whose translation was running at 12:21 (1,069 of 2,592 verses);
+- Natyasastra (29.6%);
+- every book with no source PDF.
+
+You can override it with `--allow-debris`, or with env `SA_ALLOW_DEBRIS=1` for dashboard runs. Single-verse reader requests are never blocked.
+
+**Measured translation cost:** $0.00021 per passage (corpus_status, from usage_log). For example, Ganita's 2,592 verses cost about $0.54, a lower bound. A Tesseract-to-vision re-ingest later changes nearly every verse's text, so those translations are paid for again.
+
+**Release:** `release.ps1` without `-Apply` is a dry run. The 2026-10-04 dry run listed 19 clean paths.

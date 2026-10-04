@@ -938,3 +938,58 @@ python scripts\measure_lacunae.py --doc <DOC> --csv exports\lacunae_<DOC>.csv
 python scripts\diag_hindi_ab.py --doc <DOC> --n 40          # dry run + cost
 python scripts\diag_hindi_ab.py --doc <DOC> --n 40 --yes    # writes data\ab\hindi_ref_<DOC>_<stamp>.html
 ```
+
+
+## Is the corpus up to date? (CORPUS_STATUS_2026_10_04, DOCS_2026_10_04)
+
+`python scripts/corpus_status.py` is read-only and safe while jobs run. It gives one line per text.
+
+It measures:
+
+- OCR source share;
+- drift against raw_merged;
+- English and Hindi completeness, prompt currency and lacuna rate;
+- approved images.
+
+It returns one verdict in pipeline order: NEEDS-OCR, then NEEDS-REINGEST, then NEEDS-TRANSLATION, then AGED, then CURRENT.
+
+`--commands` prints the next commands, in that order. Every one of them is idempotent, so running the status, then the commands, then the status again converges. "Negligible lacunae" is `--lacuna-ok` (default 5%). AGED means complete and clean, with some rows on older prompt versions; that is acceptable, and re-translation there is a choice, not a repair.
+
+
+### Verdicts as of corpus_status v2 (CORPUS_STATUS2_2026_10_04, DOCS2_2026_10_04)
+
+The verdicts, in order:
+
+1. DERIVED-NEEDS-OCR
+2. NEEDS-OCR
+3. NO-SOURCE-PDF
+4. NEEDS-REINGEST
+5. NEEDS-TRANSLATION
+6. AGED
+7. CURRENT
+
+Source damage is judged from **source debris** (`--debris-ok`, default 5%), never from lacuna rates. A derived doc (`resegment-devnum`) is repaired through its source. Each command line carries a cost estimate:
+
+- vision at $0.0015 per page;
+- translation at the measured $/passage from usage_log, which is a lower bound.
+
+Work one book at a time, only when the dashboard reads idle, and re-run the status after each book.
+
+
+### Ingest and translate guards (INGEST_SOURCE_2026_10_04, TRANSLATE_DEBRIS_GUARD_2026_10_04, DOCS3_2026_10_04)
+
+**Ingest:**
+
+- If complete OCR consensus exists in `data/raw_merged`, ingest uses it, even when it is asked for `data/raw`.
+- With only partial consensus, ingest refuses. Finish the consensus, or pass `--source raw` deliberately.
+- The plain glob `<doc>_*.jsonl` no longer picks up another doc's files (for example `<doc>_seg_*`).
+
+**Translate:** it refuses repairable Tesseract text when all of these hold:
+
+- more than 30% of passages carry debris;
+- fewer than half the passages come from vision;
+- page PDFs are in inbox.
+
+Run `ocr_consensus.py --threshold 101 --include-unassessed` first. Override with `--allow-debris`, or with `SA_ALLOW_DEBRIS=1` for the dashboard.
+
+Both refusals exit with code 3 and print the next command.

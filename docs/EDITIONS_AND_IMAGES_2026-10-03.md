@@ -107,3 +107,33 @@ Guardrails that hold throughout:
   - `dedupe` retires later ideas at the same verse.
 - **Refused pages.** `ocr_consensus.py` no longer re-sends pages whose vision file records a RECITATION or SAFETY refusal, because a retry only costs a call; `--retry-refused` re-sends them.
 - **Tests.** `tests/test_images_web.py` (5, Flask test client) and `test_images.py` (6). The full suite is 62 tests.
+
+
+## 6. Images in the editions (2026-10-04, EXPORT_IMAGES_2026_10_04, BOOKSMITH_PLATES_2026_10_04, DOCS_2026_10_04)
+
+Until today an approved image appeared nowhere but the Images tab. There are now two opt-in paths, and both defaults are unchanged.
+
+| | HTML / PDF edition (`export_html.py --images approved`, then `export_pdf.py`) | Booksmith (`booksmith_build.py --plates approved`) |
+|---|---|---|
+| Placement | Right after the verse it is anchored to. If that verse is filtered out (noise or frontmatter), it goes at the end of the section holding that page. | Evenly spaced through the book. Booksmith has no anchors (renderer.py 305-310). |
+| Which images | Every approved image: generated, edition-plate, diagram. | Approved **generated** images only. Booksmith captions every plate "Symbolic editorial artwork; not a textual witness", which would be false for a scan of the source edition. |
+| Caption | Title; English and/or Hindi caption (following the edition's languages); the context note; and for generated images the label "Illustration - generated, not a historical source." (Hindi equivalent in a Hindi edition). | Booksmith's fixed caption. Ours are not shown. |
+| Files | Images are embedded (data: URI, 1400 px JPEG), so the HTML is self-contained and prints from `exports/_print/`. The name gains `_img`, so the plain edition is never overwritten. | Copied to `<project>/assets/plates/imglib_<id>_v<ver>.<ext>`. The project's own plates are kept first; at most 12 plates in all. |
+| Default | `--images none`: byte-for-byte the old output. This matters because Booksmith freezes the witness sha256, so a changed default would clear every project's manifest. | `--plates none`: book.yaml is untouched. |
+| Safety | Read-only on the DB. | Idempotent: an unchanged list writes nothing. If `work/decisions.jsonl` holds human decisions, it **refuses** before copying anything. Otherwise it backs up book.yaml to `work/book.yaml.bak_plates_<stamp>`, clears the derived manifest and PDFs (as a changed witness does), and saves through Booksmith's own BookConfig model. |
+
+Recommendation: use the HTML/PDF edition for illustrated books. Use Booksmith plates only when a Booksmith audit or proof is the deliverable.
+
+Tests: `tests/test_export_images.py` (5), `tests/test_booksmith_plates.py` (6). Both fail before their patch and pass after. The default export was compared byte for byte, before and after, in three modes.
+
+
+## 7. First illustrated runs (2026-10-04, DOCS2_2026_10_04)
+
+- **HTML/PDF route.** `export_html.py --images approved` on Mallapurana placed 3 of 3 approved images (#3, #4, #5), with 0 outside the pages. `export_pdf.py` printed `Mallapurana_1-137_tri_img.pdf`: 81 pages A4, 2,057 KB, in 32.6 s.
+- **Booksmith route.** `booksmith_build.py --doc Mallapurana --mode hi --plates approved` ran as follows:
+  - The witness had changed (new Hindi rows), so it cleared the manifest, as designed.
+  - It wrote plates `imglib_3_v1`, `imglib_4_v1` and `imglib_5_v1` into book.yaml (`illustrations_per_volume` 3).
+  - The audit found 86 findings, none at error level: 19 missing-language and 67 ocr-intrusion. The 19 match the 19 passages without Hindi in corpus_status.
+  - `book.pdf` came out at 192 pages, 3,571,743 bytes, and QA passed.
+  - `font_scan` stderr shows "No display font for 'Symbol' / 'ArialUnicode'". That is the PDF font scanner's own warning, and `unembedded` is empty.
+- Images #6 and #10 stayed drafts because `approve` stopped early (fixed in MAINT_2026_10_04). After approving them, re-run both routes. Booksmith rewrites plates idempotently and spaces 5 evenly.

@@ -39,10 +39,25 @@ class Lacuna(unittest.TestCase):
 class Prompts(unittest.TestCase):
     def test_versions_and_rules(self):
         self.assertEqual(infer_mt.PROMPT_VERSIONS["en"], "v3-2026-09-27")
-        self.assertEqual(infer_mt.PROMPT_VERSIONS["hi"], "hi-v3-2026-09-27")
         self.assertIn("ONLY when no part of the text can be read", infer_mt._SYSTEM_PROMPT_BASE)
-        self.assertIn("\u0906\u0902\u0936\u093f\u0915 \u0915\u094d\u0937\u0924\u093f", infer_mt._SYSTEM_PROMPT_HI)
-        self.assertNotIn("\u0935\u0948\u0936\u092e\u094d\u092a\u093e\u092f\u0928 \u0928\u0947", infer_mt._SYSTEM_PROMPT_HI)
+        # MAINT_2026_10_04: since HI_PROMPT_FILE_2026_10_03 production Hindi may come from
+        # prompts/hi-production.txt. The BUILT-IN prompt is checked with the file switched off.
+        import json, os, subprocess, tempfile
+        probe = ("import json, sys; sys.path.insert(0, %r); import infer_mt as m; "
+                 "print('J=' + json.dumps([m.PROMPT_VERSIONS['hi'], m.HI_PROMPT_SOURCE, m._SYSTEM_PROMPT_HI]))"
+                 % str(Path(__file__).resolve().parent.parent / "scripts"))
+        env = dict(os.environ, PYTHONIOENCODING="utf-8",
+                   SA_HI_PROMPT_FILE=os.path.join(tempfile.gettempdir(), "no_such_hi_prompt_maint_20261004.txt"))
+        p = subprocess.run([sys.executable, "-c", probe], capture_output=True, text=True,
+                           encoding="utf-8", env=env)
+        line = [l for l in p.stdout.splitlines() if l.startswith("J=")]
+        self.assertTrue(line, p.stdout + p.stderr)
+        ver, src, hi = json.loads(line[-1][2:])
+        self.assertEqual((ver, src), ("hi-v3-2026-09-27", "built-in"))
+        self.assertIn("\u0906\u0902\u0936\u093f\u0915 \u0915\u094d\u0937\u0924\u093f", hi)
+        self.assertNotIn("\u0935\u0948\u0936\u092e\u094d\u092a\u093e\u092f\u0928 \u0928\u0947", hi)
+        if infer_mt.HI_PROMPT_SOURCE != "built-in":   # a reviewed file is active: versioned by content
+            self.assertRegex(infer_mt.PROMPT_VERSIONS["hi"], r"^hi-file-[0-9a-f]{10}$")
 
 
 if __name__ == "__main__":

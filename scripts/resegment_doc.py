@@ -121,7 +121,13 @@ def main():
             kept += 1
         if recs:
             fname = out_dir / f"{args.new_doc}_{page_no:04d}.jsonl"
-            to_write.append((fname, recs))
+            # MAINT_2026_10_04: one file per source PAGE. A page held by several passages
+            # (a segmented source) used to be written once per passage, each open('w')
+            # replacing the last - only its final passage survived. Merge instead.
+            if to_write and to_write[-1][0] == fname:
+                to_write[-1][1].extend(recs)
+            else:
+                to_write.append((fname, recs))
         if len(per_page_preview) < 3:
             per_page_preview.append((page_no, recs[:3]))
 

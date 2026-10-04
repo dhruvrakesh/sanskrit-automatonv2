@@ -527,10 +527,17 @@ def main() -> int:
                     print("  skip #%d: it is %s, not 'brief'" % (i, row["status"])); bad += 1; continue
                 set_status(con, i, "brief-approved"); print("  #%d brief approved" % i)
             return 1 if bad else 0
-        if args.cmd == "approve":
+        if args.cmd == "approve":   # MAINT_2026_10_04: skip and continue, never stop half-way
+            bad = 0
             for i in args.id:
+                row = get(con, i)
+                if row["status"] == "approved":
+                    print("  skip #%d: already approved" % i); continue
+                if row["status"] != "draft" or not row["path"]:
+                    print("  skip #%d: it is %s%s - only a draft with an image can be approved"
+                          % (i, row["status"], "" if row["path"] else " with no image yet")); bad += 1; continue
                 approve(con, i); print("  #%d approved" % i)
-            return 0
+            return 1 if bad else 0
         if args.cmd == "retire":
             for i in args.id:
                 get(con, i); set_status(con, i, "retired"); print("  #%d retired (file kept)" % i)
