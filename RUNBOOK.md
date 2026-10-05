@@ -1058,3 +1058,17 @@ Every step is a dry run unless `--yes` is given.
   - `python scripts\stories.py anthology --docs a,b --title "..."`.
   - Then `python scripts\export_pdf.py exports\anthology_<date>.html`.
 - **Approve the story only after reading its notes.** Where the notes flag a damaged reading, fix the source passage first, through consensus or re-OCR. Never fix it in the story alone.
+
+
+## Stories page, gaps, running heads (DOCS10_2026_10_05)
+
+- **Stories:** open `http://127.0.0.1:5057/stories` and pick the text.
+  - Read each card's notes and problems.
+  - Click a citation to see the passages.
+  - Edit if needed (the check re-runs), then Approve.
+  - Use the page, not PowerShell, for any edit with Devanagari or IAST.
+- **After a prompt or verify change:** press "Check again" on the old drafts (free), and "Rewrite" a story the notes or problems condemn (about $0.01).
+- **A text stuck at NEEDS-TRANSLATION with a few rows that never translate:**
+  - First run `python scripts\corpus_status.py --doc <code>`. Gaps within the allowance now show as a note.
+  - Then `python scripts\classify_noise.py --doc <code> --running-heads` (dry run) and read the listed lines.
+  - Only then add `--apply`, with the dashboard idle and after a backup.

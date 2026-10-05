@@ -103,6 +103,9 @@ STORY_SYSTEM = (
     "citations. "
     "(5) quote_sa: one line of the Sanskrit copied EXACTLY from one passage (at most 120 characters), with its "
     "tag in quote_ref. Choose a line whose printed text looks sound. "
+    "(6) If a translated detail makes no sense in the story (an animal, object or act that does not belong, "
+    "which usually means the translation or the OCR is wrong there), leave it out of story_en and story_hi "
+    "and describe it in 'notes' with its tag. "   # STORIES_UI_2026_10_05
     "Respond with JSON only: {\"title\": str, \"title_hi\": str, \"story_en\": str, \"story_hi\": str, "
     "\"quote_sa\": str, \"quote_ref\": \"page.idx\", \"notes\": str, \"cites\": [\"page.idx\", ...]}")
 
@@ -111,7 +114,9 @@ BRACKET_RE = re.compile(r"\[([^\]]*\d+\.\d+[^\]]*)\]")
 IAST = "\u0101\u012b\u016b\u1e5b\u1e5d\u1e37\u1e45\u00f1\u1e6d\u1e0d\u1e47\u015b\u1e63\u1e43\u1e25" \
        "\u0100\u012a\u016a\u1e5a\u1e5c\u1e36\u1e44\u00d1\u1e6c\u1e0c\u1e46\u015a\u1e62\u1e42\u1e24"
 WORD_RE = re.compile(r"[A-Za-z%s'\u2019]+" % IAST)
-SENT_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\"'\u201c%s])" % IAST)
+# STORIES_UI_2026_10_05: also split after a citation that follows the full stop ("fled. [11.5] Later ...").
+SENT_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\"'\u201c%s])|(?<=\])\s+(?=[A-Z\"'\u201c%s])" % (IAST, IAST))
+OPENERS = "\"'\u201c\u2018:;(\u2014"   # a capital after these starts speech or a clause, not a name
 NAME_STOP = {"i", "o", "god", "lord", "king", "sage", "the", "a", "an", "he", "she", "they", "his", "her"}
 
 
@@ -202,10 +207,12 @@ def verify(story: dict, given: list) -> dict:
     src = _fold(" ".join("%s %s" % (refs[c][3], refs[c][4]) for c in cited if c in refs))
     unknown = []
     for s in SENT_RE.split(en):
-        toks = WORD_RE.findall(s)
-        for k, t in enumerate(toks):
+        for k, mt in enumerate(WORD_RE.finditer(s)):   # STORIES_UI_2026_10_05
+            t = mt.group(0)
             t2 = t.strip("'\u2019").removesuffix("'s").removesuffix("\u2019s")
-            is_name = any(c in IAST for c in t2) or (k > 0 and t2[:1].isupper())
+            lead = s[:mt.start()].rstrip()[-1:]
+            opens = k == 0 or (lead != "" and lead in OPENERS)
+            is_name = any(c in IAST for c in t2) or (not opens and t2[:1].isupper())
             if is_name and len(t2) > 2 and t2.lower() not in NAME_STOP and _fold(t2) not in src:
                 unknown.append(t2)
     if unknown:

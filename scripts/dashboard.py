@@ -3170,6 +3170,13 @@ try:
 except Exception as _shelf_err:
     print(f"[shelf] Shelf not loaded: {type(_shelf_err).__name__}: {_shelf_err}")
 
+# STORIES_UI_2026_10_05: the Stories page (/stories) - see scripts/stories_web.py. Guarded like the Shelf.
+try:
+    import stories_web as _stories_web
+    _stories_web.register(app, launch=launch, root=ROOT, py=py, script=script)
+except Exception as _stories_err:
+    print(f"[stories] Stories page not loaded: {type(_stories_err).__name__}: {_stories_err}")
+
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()

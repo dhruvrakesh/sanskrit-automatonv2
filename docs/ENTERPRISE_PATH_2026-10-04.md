@@ -168,3 +168,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | 2.9 | Image ideas placed from mined episodes rather than a 40,000-character sample | After 1.9 has run on two books |
 | 3.9 | A fidelity check of the cited passages before approval (judge_sample on those passages) | Before an anthology goes outside the team |
 | S9 | Approved stories to the Srangam reader beside the passages (needs a site table; Lovable side) | After S4 |
+
+
+## Addendum 2026-10-05 (2): Stories page, gaps (DOCS10_2026_10_05)
+
+| # | Item | State |
+|---|---|---|
+| 2.8 | Story review in the browser: write, check, edit, approve, anthology, PDF (`/stories`) | Built 2026-10-05 as its own page (not a panel on `/images`); cards link to the image library |
+| 2.10 | verify: sentence split after a citation; speech openers | Built 2026-10-05 (STORIES_UI) |
+| 2.11 | Untranslatable passages counted as gaps; running-heads tagging | Built 2026-10-05 (GAPS); first use markandeya_purana |
+| 3.10 | Story fidelity: a judge on the cited passages, and a reader's correction loop back to the passage | Open (follows 3.9) |

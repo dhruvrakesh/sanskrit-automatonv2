@@ -1,0 +1,20 @@
+Stories page; verify split fix; gaps and running heads (STORIES_UI_2026_10_05, GAPS_2026_10_05, DOCS10_2026_10_05)
+
+New scripts/stories_web.py + stories_static.html: /stories, the front end of stories.py,
+registered from dashboard.py inside try/except after the Shelf. Per text: cards with
+plate, status, check result, Sanskrit epigraph, EN/HI with clickable citations (drawer
+of the cited passages, Sanskrit + English), notes, problems; edit re-runs the check and
+returns the story to draft; approve follows the CLI rule (failed check: "Approve
+anyway" only); retire/restore. Find episodes / write / anthology / PDF run as dashboard
+jobs (kind 'stories'). Never creates a database. Header link "Stories" before Shelf.
+stories.py: the sentence split also breaks after a citation that follows the full stop
+(no more "Later"/"Simultaneously" reported as names; an uncited sentence after such a
+citation is now caught); a capital opening speech or after a colon is not a name;
+prompt rule (6): a nonsensical translated detail is left out and noted.
+corpus_status.py (read-only): untranslated passages tried with unusable output
+(translate_outcomes.jsonl, any cause but 'salvaged') or below OCR quality 0.35 are gaps,
+counted with lacunae against --lacuna-ok, not todo; --outcomes; en_gap/hi_gap columns.
+classify_noise.py --running-heads: repeated first/last page lines (no danda, no uvaca,
+<= 60 chars, >= 3 pages, untranslated); dry run unless --apply.
+Docs: PLATFORM s13, RUNBOOK, ENTERPRISE_PATH addendum.
+Tests: tests/test_stories_ui_2026_10_05.py, tests/test_gaps_2026_10_05.py.

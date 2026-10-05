@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stories - Sanskrit Automaton</title>
+<!-- STORIES_UI_2026_10_05 - served by stories_web.py at /stories -->
+<style>
+:root{
+  --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
+  --border:#35302680; --gold:#d4a017; --saffron:#f47c20; --cream:#f0e6cc;
+  --muted:#8a7d67; --ink:#e8dcc8; --green:#4caf7d; --red:#e05f5f; --blue:#6b9bd2;
+  --r:10px; --r-sm:6px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,'Segoe UI',sans-serif}
+a{color:var(--gold)}
+.top{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.top h1{font-size:15px;margin:0;color:var(--cream)}
+.sp{flex:1}
+input,select,button,textarea{font:inherit;color:var(--ink);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:5px 9px}
+textarea{width:100%;min-height:90px;resize:vertical}
+button{cursor:pointer} button:hover{border-color:var(--gold)} button:disabled{opacity:.45;cursor:default}
+button.primary{background:#3a2d10;border-color:var(--gold);color:var(--cream)}
+button.warn{border-color:#e05f5f80;color:#f0b0b0}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.note{color:var(--muted);font-size:12.5px}
+#job{padding:8px 16px;font-size:12.5px;color:var(--muted);white-space:pre-wrap;display:none;border-bottom:1px solid var(--border);background:#14120f}
+#list{padding:14px 16px;display:flex;flex-direction:column;gap:14px;max-width:1200px}
+.card{display:flex;gap:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.card .img{flex:0 0 180px}
+.card .img img{width:180px;border-radius:var(--r-sm);display:block}
+.card .img .ph{width:180px;height:120px;border:1px dashed var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;text-align:center;padding:6px}
+.card .body{flex:1;min-width:0}
+.card h3{margin:0;font-size:16px;color:var(--cream)}
+.hi,.sa{font-family:'Nirmala UI','Noto Serif Devanagari','Mangal',serif}
+.th{color:var(--muted);font-size:14px}
+.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0}
+.badge{font-size:11px;padding:1px 8px;border-radius:99px;border:1px solid var(--border)}
+.b-candidate{color:var(--blue);border-color:#6b9bd280}.b-draft{color:var(--saffron);border-color:#f47c2080}
+.b-approved{color:var(--green);border-color:#4caf7d80}.b-retired{color:var(--muted)}
+.b-ok{color:var(--green)}.b-check{color:var(--red);border-color:#e05f5f80}
+blockquote.sa{margin:8px 0;padding-left:10px;border-left:3px solid #c9a24a;font-size:15px}
+.story{margin:6px 0}
+sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
+.notes{font-size:12.5px;background:#2a2112;border:1px solid #6b520f;border-radius:var(--r-sm);padding:6px 9px;margin-top:6px;color:#f3d79a}
+.probs{font-size:12.5px;color:#f0b0b0;margin:6px 0 0 18px;padding:0}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.why{font-size:13px;color:var(--muted)}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--bg2);border-left:1px solid var(--border);transform:translateX(100%);transition:transform .2s;z-index:10;overflow:auto;padding:14px}
+#drawer.on{transform:none}
+.psg{border-bottom:1px solid var(--border);padding:8px 2px}
+.psg.cited{background:#2a2112}
+.psg.flash{outline:2px solid var(--gold)}
+.psg .ref{color:var(--gold);font-size:12px}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+#toast{position:fixed;left:16px;bottom:16px;background:var(--bg4);border:1px solid var(--gold);border-radius:var(--r);padding:8px 12px;display:none;z-index:20;max-width:70vw}
+@media (max-width:700px){.card{flex-direction:column}.card .img{flex:none}}
+</style>
+</head>
+<body>
+<div class="top">
+  <a href="/" style="text-decoration:none">&larr; Dashboard</a>
+  <a href="/images" style="text-decoration:none">Images</a>
+  <a href="/shelf" style="text-decoration:none">Shelf</a>
+  <h1>Stories</h1>
+  <select id="doc" title="text"></select>
+  <select id="status"><option value="">all</option><option>candidate</option><option>draft</option><option>approved</option><option>retired</option></select>
+  <span class="sp"></span>
+  <span class="note" id="summary"></span>
+  <button id="refresh">Refresh</button>
+</div>
+<div class="bar">
+  <button id="mine" title="Read the whole English of this text and propose episodes (paid, about $0.05 a book)">Find episodes</button>
+  <input id="mineMax" type="number" min="1" max="40" value="12" style="width:64px" title="how many">
+  <button id="wImages" title="One story for every drawn image of this text (paid, about $0.01 each)">Write for drawn images</button>
+  <button id="wCands" title="Write the found episodes (paid, about $0.01 each)">Write found episodes</button>
+  <input id="wMax" type="number" min="1" max="30" value="6" style="width:64px" title="at most">
+  <span class="sp"></span>
+  <input id="aTitle" placeholder="Anthology title" style="min-width:220px">
+  <button id="anth" title="Compile every approved story of this text into an illustrated, cited book">Build anthology</button>
+  <span id="anthOut" class="note"></span>
+</div>
+<div id="job"></div>
+<div class="note" style="padding:8px 16px">Stories are drafted by a model from the cited passages only, then checked here without any paid call: every sentence cited, citations inside the episode, the Sanskrit quotation found word for word, and every name present in the passages. Read the passages (click a citation) and the editorial notes before approving. A damaged reading should be fixed in the source, not only in the story.</div>
+<div id="list"></div>
+<div id="drawer"></div>
+<div id="toast"></div>
+<script>
+let S = [], DOCS = [], JOB = null;
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',5000); }
+async function api(url, body){
+  const r = await fetch(url, body===undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j = await r.json().catch(()=>({error:'bad response'}));
+  if(!r.ok || j.error){ const e = new Error(j.error || ('HTTP '+r.status)); e.status = r.status; throw e; }
+  return j;
+}
+const doc = () => $('#doc').value;
+function cites(text){ return esc(text).replace(/\[([^\]]*\d+\.\d+[^\]]*)\]/g, (m, inner) => `<sup class="cite" data-c="${esc(inner)}">[${inner}]</sup>`); }
+async function loadDocs(){
+  DOCS = await api('/api/stories/docs');
+  const want = new URLSearchParams(location.search).get('doc') || (()=>{ try { return localStorage.getItem('storiesDoc'); } catch(e){ return null; } })();
+  $('#doc').innerHTML = DOCS.map(d => {
+    const n = Object.values(d.stories).reduce((a,b)=>a+b,0);
+    return `<option value="${esc(d.doc)}">${esc(d.doc)}${n ? ' - '+n+' stories' : ''}${d.images_drawn ? ' - '+d.images_drawn+' drawn' : ''}</option>`;
+  }).join('');
+  if(want && DOCS.some(d => d.doc === want)) $('#doc').value = want;
+}
+async function load(){
+  if(!doc()) { $('#list').innerHTML = '<div class="empty">No translated texts.</div>'; return; }
+  try { localStorage.setItem('storiesDoc', doc()); } catch(e){}
+  S = await api('/api/stories/list?doc=' + encodeURIComponent(doc()));
+  render();
+}
+function card(s){
+  const v = s.verify;
+  const vb = v ? (v.ok ? '<span class="badge b-ok">check ok</span>' : '<span class="badge b-check">check failed</span>') : '';
+  const img = s.image ? (s.image.has_image
+      ? `<a href="/images" title="image #${s.image.id} (${esc(s.image.status)})"><img loading="lazy" src="/api/images/thumb/${s.image.id}" alt="${esc(s.image.title||'')}"></a><div class="note">image #${s.image.id} - ${esc(s.image.status)}</div>`
+      : `<div class="ph">image #${s.image.id}: no picture yet</div>`)
+    : '<div class="ph">no image - an episode found in the text</div>';
+  const acts = [];
+  if(s.status === 'candidate'){ acts.push(`<button class="primary" data-a="write">Write story</button>`); }
+  if(s.status === 'draft'){
+    if(!v || !v.ok) acts.push(`<button class="warn" data-a="force" title="The check failed: read the problems and the passages first">Approve anyway</button>`);
+    else acts.push(`<button class="primary" data-a="approve">Approve</button>`);
+    acts.push(`<button data-a="verify">Check again</button>`, `<button data-a="write">Rewrite</button>`);
+  }
+  if(s.status === 'draft' || s.status === 'approved') acts.push(`<button data-a="edit">Edit</button>`);
+  acts.push(`<button data-a="psg">Passages</button>`);
+  acts.push(s.status === 'retired' ? `<button data-a="unretire">Restore</button>` : `<button class="warn" data-a="retire">Retire</button>`);
+  return `<div class="card" data-id="${s.id}">
+    <div class="img">${img}</div>
+    <div class="body">
+      <h3>${esc(s.title || '(untitled)')}</h3>${s.title_hi ? `<div class="th hi">${esc(s.title_hi)}</div>` : ''}
+      <div class="meta"><span class="badge b-${esc(s.status)}">${esc(s.status)}</span>${vb}<span class="note">#${s.id} - passages ${esc(s.range)}${v ? ' - '+v.words+' words' : ''}</span></div>
+      ${s.why && !s.story_en ? `<div class="why">${esc(s.why)}</div>` : ''}
+      ${s.quote_sa ? `<blockquote class="sa">${esc(s.quote_sa)} <span class="note">[${esc(s.quote_ref||'')}]</span></blockquote>` : ''}
+      ${s.story_en ? `<div class="story">${cites(s.story_en)}</div>` : ''}
+      ${s.story_hi ? `<div class="story hi">${cites(s.story_hi)}</div>` : ''}
+      ${s.notes ? `<div class="notes"><b>Editorial notes:</b> ${esc(s.notes)}</div>` : ''}
+      ${v && !v.ok ? `<ul class="probs">${v.problems.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+      <div class="acts">${acts.join('')}</div>
+      <div class="edit"></div>
+    </div></div>`;
+}
+function render(){
+  const f = $('#status').value;
+  const rows = S.filter(s => !f || s.status === f);
+  const c = {}; S.forEach(s => c[s.status] = (c[s.status]||0) + 1);
+  $('#summary').textContent = Object.entries(c).map(([k,n]) => n+' '+k).join(' - ') || 'no stories yet';
+  $('#list').innerHTML = rows.length ? rows.map(card).join('') :
+    `<div class="empty">No stories here yet. "Write for drawn images" gives each drawn picture its story; "Find episodes" proposes readable episodes from the whole text.</div>`;
+}
+async function openPassages(id, focus){
+  const s = S.find(x => x.id === id); if(!s) return;
+  const P = await api(`/api/stories/${id}/passages`);
+  const cited = new Set(s.cites || []);
+  $('#drawer').innerHTML = `<div style="display:flex;justify-content:space-between;gap:8px;align-items:start">
+      <div><b>${esc(s.title||'')}</b><div class="note">passages ${esc(s.range)} - the Sanskrit as printed (OCR) and the machine English. Cited passages are shaded.</div></div>
+      <button id="close">&times;</button></div>` +
+    P.map(p => `<div class="psg ${cited.has(p.ref)?'cited':''}" id="p-${p.ref.replace('.','_')}"><div class="ref">${esc(p.ref)}</div>
+      <div class="sa">${esc(p.sa)}</div>${p.iast ? `<div class="note">${esc(p.iast)}</div>` : ''}<div>${esc(p.en)}</div></div>`).join('');
+  $('#drawer').classList.add('on');
+  $('#close').onclick = () => $('#drawer').classList.remove('on');
+  if(focus){
+    const first = (focus.match(/\d+\.\d+/) || [])[0];
+    const el = first && document.getElementById('p-' + first.replace('.','_'));
+    if(el){ el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'), 1600); }
+  }
+}
+function openEdit(id){
+  const s = S.find(x => x.id === id); const box = document.querySelector(`.card[data-id="${id}"] .edit`);
+  const f = (k, label, ta) => `<label class="note">${label}</label>` + (ta
+      ? `<textarea data-k="${k}" class="${k.endsWith('_hi')||k==='quote_sa'?'hi':''}">${esc(s[k]||'')}</textarea>`
+      : `<input data-k="${k}" value="${esc(s[k]||'')}" style="width:100%" class="${k.endsWith('_hi')||k==='quote_sa'?'hi':''}">`);
+  box.innerHTML = `<div style="margin-top:10px;display:flex;flex-direction:column;gap:4px">
+    ${f('title','Title')}${f('title_hi','Hindi title')}${f('quote_sa','Sanskrit quotation (copied exactly from one passage)')}${f('quote_ref','Its passage, page.idx')}
+    ${f('story_en','English (keep a [page.idx] after every sentence)',1)}${f('story_hi','Hindi',1)}${f('notes','Editorial notes',1)}
+    <div class="acts"><button class="primary" data-a="save">Save and check</button><button data-a="cancel">Cancel</button></div></div>`;
+}
+async function act(id, a, btn){
+  const s = S.find(x => x.id === id);
+  try {
+    if(a === 'psg') return openPassages(id);
+    if(a === 'edit') return openEdit(id);
+    if(a === 'cancel'){ document.querySelector(`.card[data-id="${id}"] .edit`).innerHTML = ''; return; }
+    if(a === 'save'){
+      const body = {}; document.querySelectorAll(`.card[data-id="${id}"] .edit [data-k]`).forEach(el => body[el.dataset.k] = el.value);
+      const r = await api(`/api/stories/${id}/edit`, body);
+      toast(r.verify.ok ? 'Saved; the check passes.' : 'Saved; the check fails: ' + r.verify.problems.join('; '));
+      return load();
+    }
+    if(a === 'write'){ return startJob(await api('/api/stories/write', {doc: doc(), id}), 'Writing story #'+id); }
+    if(a === 'approve' || a === 'force'){
+      await api(`/api/stories/${id}/action`, {action:'approve', force: a === 'force'}); toast('#'+id+' approved'); return load();
+    }
+    if(a === 'verify'){ const r = await api(`/api/stories/${id}/action`, {action:'verify'}); toast(r.verify.ok ? 'Check passes' : 'Check fails: ' + r.verify.problems.join('; ')); return load(); }
+    if(a === 'retire' || a === 'unretire'){ await api(`/api/stories/${id}/action`, {action:a}); return load(); }
+  } catch(e){ toast(e.message); }
+}
+function startJob(r, label){
+  JOB = {id: r.job, label}; $('#job').style.display = 'block'; $('#job').textContent = label + ': started';
+  poll();
+}
+async function poll(){
+  if(!JOB) return;
+  try {
+    const j = await api('/api/job/' + JOB.id);
+    const tail = (j.out || '').trim().split('\n').slice(-6).join('\n');
+    $('#job').textContent = `${JOB.label}: ${j.running ? (j.active ? 'running' : 'queued behind other jobs') : (j.ok ? 'done' : 'FAILED')}\n${tail}${!j.running && !j.ok && j.err ? '\n' + j.err.trim().split('\n').slice(-3).join('\n') : ''}`;
+    if(j.running){ setTimeout(poll, 3000); return; }
+    const m = (j.out || '').match(/anthology_\d{8}\.html/);
+    if(m){ $('#anthOut').innerHTML = `<a href="/api/shelf/file?name=${m[0]}" target="_blank">${m[0]}</a> <button id="pdf">Make PDF</button>`;
+           $('#pdf').onclick = async () => { try { startJob(await api('/api/stories/pdf', {name: m[0]}), 'PDF'); } catch(e){ toast(e.message); } }; }
+    const p = (j.out || '').match(/anthology_\d{8}\.pdf/);
+    if(p) $('#anthOut').innerHTML += ` <a href="/api/shelf/file?name=${p[0]}" target="_blank">${p[0]}</a>`;
+    JOB = null; await loadDocs(); await load();
+  } catch(e){ $('#job').textContent = 'job status unavailable: ' + e.message; JOB = null; }
+}
+document.addEventListener('keydown', ev => { if(ev.key === 'Escape') $('#drawer').classList.remove('on'); });
+document.addEventListener('click', ev => {
+  const c = ev.target.closest('sup.cite');
+  if(c){ const card = c.closest('.card'); openPassages(+card.dataset.id, c.dataset.c); return; }
+  const b = ev.target.closest('button[data-a]');
+  if(b){ const card = b.closest('.card'); if(card) act(+card.dataset.id, b.dataset.a, b); }
+});
+$('#doc').addEventListener('change', load);
+$('#status').addEventListener('change', render);
+$('#refresh').addEventListener('click', async () => { await loadDocs(); await load(); });
+$('#mine').onclick = async () => { try { startJob(await api('/api/stories/mine', {doc: doc(), max: +$('#mineMax').value}), 'Finding episodes in ' + doc()); } catch(e){ toast(e.message); } };
+$('#wImages').onclick = async () => { try { startJob(await api('/api/stories/write', {doc: doc(), which:'images', max: +$('#wMax').value}), 'Writing stories for drawn images'); } catch(e){ toast(e.message); } };
+$('#wCands').onclick = async () => { try { startJob(await api('/api/stories/write', {doc: doc(), which:'candidates', max: +$('#wMax').value}), 'Writing found episodes'); } catch(e){ toast(e.message); } };
+$('#anth').onclick = async () => { try { startJob(await api('/api/stories/anthology', {docs:[doc()], title: $('#aTitle').value || ''}), 'Building anthology'); } catch(e){ toast(e.message); } };
+(async () => { try { await loadDocs(); await load(); } catch(e){ $('#list').innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; } })();
+</script>
+</body>
+</html>

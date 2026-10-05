@@ -169,6 +169,65 @@ def is_debris(text: str) -> bool | None:
     return bool(JUNK_RE.search(text))
 
 
+# GAPS_2026_10_05: passages that cannot be translated as printed are gaps, not work to do.
+GAP_MIN_QUALITY = 0.35   # translate_passages.py --min-quality default: below it a passage is never sent
+
+
+def tried_unusable(path) -> dict:
+    """{(doc, lang): {(page, idx)}} from translate_outcomes.jsonl: attempts whose output was unusable
+    (every cause except 'salvaged', where the cleaned output was kept). Missing file: {}. Never raises."""
+    out: dict = {}
+    try:
+        fh = open(str(path), encoding="utf-8")
+    except (OSError, TypeError):
+        return out
+    with fh:
+        for line in fh:
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if not isinstance(r, dict) or r.get("cause") in (None, "salvaged"):
+                continue
+            try:
+                k = (int(r["page"]), int(r["idx"]))
+            except (KeyError, TypeError, ValueError):
+                continue
+            out.setdefault((str(r.get("doc")), str(r.get("lang") or "en")), set()).add(k)
+    return out
+
+
+def gap_measures(con: sqlite3.Connection, doc: str, tried: dict) -> dict:
+    """en_gap / hi_gap: untranslated in-scope passages that were tried with unusable output, or that
+    translate_passages skips for OCR quality. *_gap_tried, *_gap_lowq split them; *_gap_refs: examples."""
+    cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    q = "p.quality_score" if "quality_score" in cols else "NULL"
+    res: dict = {}
+    for lang in ("en", "hi"):
+        res.update({lang + "_gap": 0, lang + "_gap_tried": 0, lang + "_gap_lowq": 0, lang + "_gap_refs": []})
+    rows = con.execute(
+        f"""SELECT p.page_no, p.idx, {q}, TRIM(COALESCE(p.translation,'')) <> '',
+                   TRIM(COALESCE(l.translation,'')) <> ''
+            FROM passages p JOIN docs d ON d.id = p.doc_id
+            LEFT JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = 'hi'
+            WHERE d.code = ? AND {SCOPE}""", (doc,)).fetchall()
+    for page, idx, qs, has_en, has_hi in rows:
+        try:
+            low = qs is not None and 0.0 < float(qs) < GAP_MIN_QUALITY
+        except (TypeError, ValueError):
+            low = False
+        for lang, has in (("en", has_en), ("hi", has_hi)):
+            if has:
+                continue
+            was_tried = (int(page or 0), int(idx or 0)) in tried.get((doc, lang), ())
+            if was_tried or low:
+                res[lang + "_gap"] += 1
+                res[lang + ("_gap_tried" if was_tried else "_gap_lowq")] += 1
+                if len(res[lang + "_gap_refs"]) < 8:
+                    res[lang + "_gap_refs"].append("%s.%s" % (page, idx))
+    return res
+
+
 def db_measures(con: sqlite3.Connection, doc: str, en_ver: str, hi_ver: str) -> dict:
     cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
     eng = "p.ocr_engine" if "ocr_engine" in cols else "NULL"
@@ -434,7 +493,9 @@ def verdict(s: dict, lacuna_ok: float, debris_ok: float = 5.0, cpp: float | None
         return "NEEDS-REINGEST", reasons, cmds
 
     v = "CURRENT"
-    en_todo, hi_todo = n - s.get("en_done", 0), n - s.get("hi_done", 0)
+    # GAPS_2026_10_05: gaps (tried with unusable output, or skipped for OCR quality) are not work to do.
+    en_gap, hi_gap = s.get("en_gap", 0), s.get("hi_gap", 0)
+    en_todo, hi_todo = n - s.get("en_done", 0) - en_gap, n - s.get("hi_done", 0) - hi_gap
 
     def add(cmd: str, rows: int):
         cost = (rows * cpp) if cpp else None
@@ -455,6 +516,22 @@ def verdict(s: dict, lacuna_ok: float, debris_ok: float = 5.0, cpp: float | None
     if hi_lp > lacuna_ok:
         reasons.append("Hindi lacunae %.1f%% > %.1f%% (source is clean, so the prompt can fix these)" % (hi_lp, lacuna_ok))
         add(base + " --lang hi --reference none --only-lacuna", s.get("hi_lacuna", 0)); v = "NEEDS-TRANSLATION"
+    for lang, name, gap in (("en", "English", en_gap), ("hi", "Hindi", hi_gap)):   # GAPS_2026_10_05
+        if not gap:
+            continue
+        share = pct(gap + s.get(lang + "_lacuna", 0), n)
+        what = ("%d passage(s) without %s cannot be translated as printed (%d tried with unusable output, "
+                "%d below OCR quality %.2f; e.g. %s)" % (gap, name, s.get(lang + "_gap_tried", 0),
+                                                        s.get(lang + "_gap_lowq", 0), GAP_MIN_QUALITY,
+                                                        ", ".join(s.get(lang + "_gap_refs") or [])))
+        if share > lacuna_ok:
+            reasons.append("%s; with the lacunae that is %.1f%% of passages > %.1f%%" % (what, share, lacuna_ok))
+            v = "NEEDS-TRANSLATION"
+            cmds.append("# %s gaps are a SOURCE problem (a re-run returns the same). Running heads first:" % name)
+            cmds.append("python scripts\\classify_noise.py --doc %s --running-heads --show" % doc)
+        else:
+            reasons.append("note: %s; counted as gaps (%.1f%% of passages with the lacunae, within %.1f%%)"
+                           % (what, share, lacuna_ok))
     if cmds:
         cmds.append("python scripts\\measure_lacunae.py --doc %s" % doc)
     if debris > debris_ok and not etext:
@@ -474,9 +551,12 @@ def verdict(s: dict, lacuna_ok: float, debris_ok: float = 5.0, cpp: float | None
 
 
 def collect(db: str, docs: list[str] | None, raw: Path, vision: Path, merged: Path, inbox: Path = Path("inbox"),
-            do_drift: bool = True, min_passages: int = 1) -> tuple[list[dict], tuple, dict, float | None]:
+            do_drift: bool = True, min_passages: int = 1,
+            outcomes: Path | None = None) -> tuple[list[dict], tuple, dict, float | None]:
     """(stats for the requested docs, versions, all docs' file facts by code (for derived sources), cost/passage)."""
     en_ver, hi_ver, hi_src = current_versions()
+    tried = tried_unusable(outcomes if outcomes is not None
+                           else Path(db).parent / "translate_outcomes.jsonl")   # GAPS_2026_10_05
     con = open_ro(db)
     try:
         all_codes = [r[0] for r in con.execute("SELECT code FROM docs ORDER BY code")]
@@ -493,6 +573,7 @@ def collect(db: str, docs: list[str] | None, raw: Path, vision: Path, merged: Pa
         for code in codes:
             s = {"doc": code}
             s.update(db_measures(con, code, en_ver, hi_ver))
+            s.update(gap_measures(con, code, tried))   # GAPS_2026_10_05
             s.update(doc_meta(con, code))
             f = ocr_files(code, raw, vision, merged, inbox)
             s.update(f)
@@ -533,7 +614,7 @@ def collect(db: str, docs: list[str] | None, raw: Path, vision: Path, merged: Pa
 COLS = ["doc", "verdict", "passages", "debris_pct", "vision_pct", "raw_engine", "src_doc", "pages_inbox",
         "pages_tesseract", "pages_vision", "pages_refused", "pages_merged", "drift_stale", "drift_missing",
         "en_done", "en_current", "en_lac_pct", "hi_done", "hi_current", "hi_lac_pct", "hi_ref_older",
-        "img_approved", "est_usd"]
+        "img_approved", "est_usd", "en_gap", "hi_gap"]
 
 
 def row_for(s: dict) -> dict:
@@ -550,7 +631,8 @@ def row_for(s: dict) -> dict:
             "hi_done": s.get("hi_done", 0), "hi_current": s.get("hi_current", 0),
             "hi_lac_pct": pct(s.get("hi_lacuna", 0), s.get("hi_done", 0)),
             "hi_ref_older": s.get("hi_ref_older", 0), "img_approved": (s.get("images") or {}).get("approved", 0),
-            "est_usd": round(s.get("est_usd", 0.0), 2)}
+            "est_usd": round(s.get("est_usd", 0.0), 2),
+            "en_gap": s.get("en_gap", 0), "hi_gap": s.get("hi_gap", 0)}   # GAPS_2026_10_05
 
 
 ORDER = {"CONTAMINATED": -1, "DERIVED-NEEDS-OCR": 0, "NEEDS-OCR": 1, "NO-SOURCE-PDF": 2, "NEEDS-REINGEST": 3,
@@ -569,6 +651,8 @@ def main() -> int:
     ap.add_argument("--debris-ok", type=float, default=5.0, help="source-debris passages %% that counts as clean")
     ap.add_argument("--min-passages", type=int, default=20, help="skip docs smaller than this")
     ap.add_argument("--no-drift", action="store_true", help="skip the raw_merged drift check (faster)")
+    ap.add_argument("--outcomes", default=None,
+                    help="translate_outcomes.jsonl (default: beside the DB) - GAPS_2026_10_05")
     ap.add_argument("--commands", action="store_true", help="print only the recommended commands, in order")
     ap.add_argument("--csv", default=None)
     ap.add_argument("--json", default=None)
@@ -578,7 +662,7 @@ def main() -> int:
 
     stats, (en_ver, hi_ver, hi_src), peers, cpp = collect(
         args.db, args.doc, Path(args.raw_dir), Path(args.vision_dir), Path(args.merged_dir), Path(args.inbox),
-        not args.no_drift, args.min_passages)
+        not args.no_drift, args.min_passages, Path(args.outcomes) if args.outcomes else None)
     by_code = {s["doc"]: s for s in stats}
     for s in stats:
         sd = s.get("src_doc")
