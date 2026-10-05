@@ -157,3 +157,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | Open proxy on the site | Open | S5. |
 | A backup that is not a backup | One 0-byte file | `status_report` flags it; delete it. |
 | Docs drift | Continuing | §2 and §3 here; append-only PLATFORM docs. |
+
+
+## Addendum 2026-10-05: vignettes and the anthology (DOCS9_2026_10_05)
+
+| # | Item | State |
+|---|---|---|
+| 1.9 | Cited retellings for drawn images; episode mining; anthology export (`scripts/stories.py`, `patch_vignettes`) | Built 2026-10-05; first runs on markandeya_purana and Mallapurana |
+| 2.8 | A Story panel on the `/images` cards (write, verify, approve from the page) | Next UI item, alongside U1 |
+| 2.9 | Image ideas placed from mined episodes rather than a 40,000-character sample | After 1.9 has run on two books |
+| 3.9 | A fidelity check of the cited passages before approval (judge_sample on those passages) | Before an anthology goes outside the team |
+| S9 | Approved stories to the Srangam reader beside the passages (needs a site table; Lovable side) | After S4 |

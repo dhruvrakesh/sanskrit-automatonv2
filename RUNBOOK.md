@@ -1041,3 +1041,20 @@ Rules added on 2026-10-04:
 - **Reading a backup:** `python scripts\diag_orphans.py --db <backup> --backup`. For any other read-only open of a backup, use the URI `?mode=ro&immutable=1`. Never use `immutable` on the live `data/context.db`.
 - **Prepaid credit:** a translation run that prints `[ABORT] ... prepaid credits are depleted (HTTP 402)` has stopped cleanly. Top up in AI Studio, then re-run; done verses are kept.
 - **Srangam migrations:** `_ops_2026-09-10\srangam_migration_audit_2026_10_04.sql` is read-only. Do not hand-insert rows into `supabase_migrations.schema_migrations`.
+
+
+## Vignettes and the anthology (DOCS9_2026_10_05)
+
+Every step is a dry run unless `--yes` is given.
+
+- **Stories for drawn images:**
+  - `python scripts\stories.py write --doc <code> --images --max 6` (dry run), then add `--yes`.
+  - `python scripts\stories.py list --doc <code>`, then `show --id N`, then `approve --id N`.
+  - A draft whose check failed needs `--force` after you have read it.
+- **Mining episodes:**
+  - `python scripts\stories.py mine --doc <code> --max 12` (dry run), then add `--yes`.
+  - Then `write --doc <code> --candidates --max 6 --yes`.
+- **Anthology:**
+  - `python scripts\stories.py anthology --docs a,b --title "..."`.
+  - Then `python scripts\export_pdf.py exports\anthology_<date>.html`.
+- **Approve the story only after reading its notes.** Where the notes flag a damaged reading, fix the source passage first, through consensus or re-OCR. Never fix it in the story alone.

@@ -1,0 +1,526 @@
+#!/usr/bin/env python3
+# -*- coding: ascii -*-
+"""
+stories.py  (2026-10-05)  VIGNETTES_2026_10_05
+
+Short, cited retellings ("vignettes") of episodes in a text: one beside each
+generated image, and a way to mine a book for its readable episodes and compile
+the approved ones into an illustrated, cited anthology.
+
+WHY THE CARE
+------------
+A retelling is an interpretation, and these texts reach us through OCR and machine
+translation. Measured on markandeya_purana (2026-10-05): image idea #86 calls the
+sage "Mrnjiga". The passages name him Samika (11.5, 11.8, 21.8). The one
+"Mrnjiga" (14.11, "saha putrena mrnjiga") is an OCR misreading - most likely of
+the name of Samika's son - which the translation then took as the sage's name.
+So every story here:
+  - is written ONLY from the passages it is given (Sanskrit + English);
+  - cites a passage after every sentence, as [page.idx];
+  - quotes one Sanskrit line, which must be found verbatim in a cited passage;
+  - carries editorial NOTES for readings that look damaged, instead of guessing;
+  - is checked by `verify` (deterministic, no API): every sentence cited, cites
+    inside the range given, the quote found, and every proper name present in
+    the cited passages. A story that fails cannot be approved without --force.
+Nothing is published until a person approves it.
+
+STORAGE
+-------
+New table doc_stories, created on first use. It references passages by
+(page, idx) like doc_images, not by passage id, so a re-ingest does not orphan it.
+
+  candidate -> draft -> approved | retired
+
+COMMANDS (dry run unless --yes; every paid call is metered and asks the budget)
+  python scripts\\stories.py mine    --doc markandeya_purana [--max 12] [--chunk 150] [--yes]
+  python scripts\\stories.py write   --doc markandeya_purana --images [--max 6] [--yes]
+  python scripts\\stories.py write   --id 7 [--yes]          (a mined candidate)
+  python scripts\\stories.py write   --image 86 [--yes]      (one image)
+  python scripts\\stories.py verify  --id 7
+  python scripts\\stories.py list    --doc markandeya_purana [--status draft]
+  python scripts\\stories.py show    --id 7
+  python scripts\\stories.py approve --id 7 [--force] | retire --id 7
+  python scripts\\stories.py anthology --docs markandeya_purana,Mallapurana [--title "..."]
+         -> exports\\anthology_<date>.html  (then: python scripts\\export_pdf.py <that file>)
+An approved story linked to an approved image also appears under that image in
+export_html --images approved (patch_vignettes_2026_10_05.py).
+"""
+from __future__ import annotations
+
+import argparse
+import datetime
+import hashlib
+import html
+import json
+import os
+import re
+import sqlite3
+import sys
+import time
+import unicodedata
+from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import images as im  # noqa: E402  (REST client, metering, connection helpers)
+
+MARK = "VIGNETTES_2026_10_05"
+MODEL = os.environ.get("SA_STORY_MODEL", im.BRIEF_MODEL)
+ROOT = Path(__file__).resolve().parents[1]
+STATUSES = ("candidate", "draft", "approved", "retired")
+
+SCHEMA = """
+CREATE TABLE IF NOT EXISTS doc_stories(
+  id INTEGER PRIMARY KEY, doc_id INTEGER NOT NULL, image_id INTEGER,
+  status TEXT NOT NULL DEFAULT 'candidate',
+  title TEXT, title_hi TEXT, why TEXT,
+  from_page INTEGER, from_idx INTEGER, to_page INTEGER, to_idx INTEGER,
+  story_en TEXT, story_hi TEXT, quote_sa TEXT, quote_ref TEXT, notes TEXT,
+  cites TEXT, verify TEXT, model TEXT, prompt_hash TEXT, provenance TEXT,
+  created_at TEXT, updated_at TEXT, approved_at TEXT);
+CREATE INDEX IF NOT EXISTS ix_doc_stories_doc ON doc_stories(doc_id, status);
+CREATE INDEX IF NOT EXISTS ix_doc_stories_image ON doc_stories(image_id);
+"""
+
+MINE_SYSTEM = (
+    "You read an English translation of part of a Sanskrit text, passage by passage, each tagged [page.idx]. "
+    "Find the EPISODES a general reader would enjoy as a short story: a narrated event with people, a place "
+    "and a turn (a meeting, a curse, a rescue, a contest, a vow, a journey, a dialogue that changes something). "
+    "Skip lists, rules, praise and doctrine. Use only what these passages say. Respond with JSON only: "
+    "{\"episodes\": [{\"title\": str (6-10 words), \"title_hi\": str, \"from\": \"page.idx\", "
+    "\"to\": \"page.idx\", \"why\": str (one sentence: what happens)}]}. 'from' and 'to' must be tags that "
+    "appear below, with from before to, spanning the whole episode (usually 4-40 passages). At most %d episodes.")
+
+STORY_SYSTEM = (
+    "You retell ONE episode from a Sanskrit text for an illustrated, cited anthology. You are given the passages: "
+    "each has a tag [page.idx], the Sanskrit as printed (from OCR, sometimes damaged) and an English translation "
+    "(machine-made, sometimes wrong where the Sanskrit is damaged). Rules: "
+    "(1) Use ONLY these passages. Add no events, motives, speech, places or descriptions that they do not give. "
+    "(2) After EVERY sentence, cite the passage(s) it rests on, as [page.idx] or [page.idx, page.idx]. "
+    "(3) Give names exactly as the passages give them, in IAST. If one passage gives a name that the others do "
+    "not support, or the Sanskrit looks damaged, do not build on it: say so in 'notes' (you may suggest a likely "
+    "reading there, marked 'reading uncertain'). "
+    "(4) story_en: 120-220 words, plain and vivid, past tense. story_hi: the same story in natural Hindi, same "
+    "citations. "
+    "(5) quote_sa: one line of the Sanskrit copied EXACTLY from one passage (at most 120 characters), with its "
+    "tag in quote_ref. Choose a line whose printed text looks sound. "
+    "Respond with JSON only: {\"title\": str, \"title_hi\": str, \"story_en\": str, \"story_hi\": str, "
+    "\"quote_sa\": str, \"quote_ref\": \"page.idx\", \"notes\": str, \"cites\": [\"page.idx\", ...]}")
+
+REF_RE = re.compile(r"(\d+)\.(\d+)")
+BRACKET_RE = re.compile(r"\[([^\]]*\d+\.\d+[^\]]*)\]")
+IAST = "\u0101\u012b\u016b\u1e5b\u1e5d\u1e37\u1e45\u00f1\u1e6d\u1e0d\u1e47\u015b\u1e63\u1e43\u1e25" \
+       "\u0100\u012a\u016a\u1e5a\u1e5c\u1e36\u1e44\u00d1\u1e6c\u1e0c\u1e46\u015a\u1e62\u1e42\u1e24"
+WORD_RE = re.compile(r"[A-Za-z%s'\u2019]+" % IAST)
+SENT_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\"'\u201c%s])" % IAST)
+NAME_STOP = {"i", "o", "god", "lord", "king", "sage", "the", "a", "an", "he", "she", "they", "his", "her"}
+
+
+# ------------------------------------------------------------------ helpers
+def now() -> str:
+    return datetime.datetime.now().isoformat(timespec="seconds")
+
+
+def ensure_schema(con) -> None:
+    con.executescript(SCHEMA)
+    con.commit()
+
+
+def ref(p, i) -> str:
+    return "%d.%d" % (int(p), int(i))
+
+
+def parse_ref(s) -> tuple | None:
+    m = REF_RE.search(str(s or ""))
+    return (int(m.group(1)), int(m.group(2))) if m else None
+
+
+def passages(con, code: str) -> list:
+    """[(page, idx, sanskrit, iast, english)] translated, non-noise, in reading order."""
+    cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    iast = "COALESCE(p.iast,'')" if "iast" in cols else "''"
+    return con.execute(
+        """SELECT p.page_no, p.idx, COALESCE(p.text,''), %s, p.translation FROM passages p
+           JOIN docs d ON d.id = p.doc_id
+           WHERE d.code = ? AND TRIM(COALESCE(p.translation,'')) <> ''
+             AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')
+           ORDER BY p.page_no, p.idx""" % iast, (code,)).fetchall()
+
+
+def window(rows: list, lo: tuple, hi: tuple, pad: int = 2, cap: int = 40) -> list:
+    keys = [(r[0], r[1]) for r in rows]
+    a = next((k for k, x in enumerate(keys) if x >= lo), None)
+    b = max((k for k, x in enumerate(keys) if x <= hi), default=None)
+    if a is None or b is None or b < a:
+        return []
+    a, b = max(0, a - pad), min(len(rows) - 1, b + pad)
+    if b - a + 1 > cap:
+        b = a + cap - 1
+    return rows[a:b + 1]
+
+
+def _fold(s: str) -> str:
+    s = unicodedata.normalize("NFKD", s or "")
+    return "".join(c for c in s if not unicodedata.combining(c)).lower()
+
+
+def _norm_sa(s: str) -> str:
+    return re.sub(r"[\s\u0964\u0965|/0-9\u0966-\u096f]+", "", unicodedata.normalize("NFC", s or ""))
+
+
+def budget_ok(db: str) -> bool:
+    try:
+        from usage_meter import budget_ok as _b
+        return _b(db)
+    except Exception:
+        return True
+
+
+# ------------------------------------------------------------------ verify (no API)
+def verify(story: dict, given: list) -> dict:
+    """Deterministic checks of a written story against the passages it was given."""
+    problems = []
+    refs = {ref(r[0], r[1]): r for r in given}
+    en = story.get("story_en") or ""
+    words = len(WORD_RE.findall(en))
+    if words < 80 or words > 300:
+        problems.append("English length %d words (want 120-220)" % words)
+    cited = set()
+    for b in BRACKET_RE.findall(en) + BRACKET_RE.findall(story.get("story_hi") or ""):
+        for m in REF_RE.finditer(b):
+            cited.add(ref(m.group(1), m.group(2)))
+    outside = sorted(c for c in cited if c not in refs)
+    if outside:
+        problems.append("cites outside the passages given: " + ", ".join(outside))
+    uncited = [s for s in SENT_RE.split(en.strip()) if len(WORD_RE.findall(s)) >= 4 and not BRACKET_RE.search(s)]
+    if uncited:
+        problems.append("%d sentence(s) without a citation, e.g. %r" % (len(uncited), uncited[0][:80]))
+    q, qr = story.get("quote_sa") or "", ref(*parse_ref(story.get("quote_ref"))) if parse_ref(story.get("quote_ref")) else ""
+    if not q:
+        problems.append("no Sanskrit quotation")
+    elif qr not in refs or _norm_sa(q) not in _norm_sa(refs[qr][2]):
+        problems.append("the Sanskrit quotation is not found verbatim in passage %s" % (qr or "?"))
+    src = _fold(" ".join("%s %s" % (refs[c][3], refs[c][4]) for c in cited if c in refs))
+    unknown = []
+    for s in SENT_RE.split(en):
+        toks = WORD_RE.findall(s)
+        for k, t in enumerate(toks):
+            t2 = t.strip("'\u2019").removesuffix("'s").removesuffix("\u2019s")
+            is_name = any(c in IAST for c in t2) or (k > 0 and t2[:1].isupper())
+            if is_name and len(t2) > 2 and t2.lower() not in NAME_STOP and _fold(t2) not in src:
+                unknown.append(t2)
+    if unknown:
+        problems.append("names not found in the cited passages: " + ", ".join(sorted(set(unknown))[:12]))
+    return {"ok": not problems, "problems": problems, "cited": sorted(cited, key=parse_ref),
+            "words": words, "checked_at": now()}
+
+
+# ------------------------------------------------------------------ paid steps
+def _prompt_block(rows: list, with_sa: bool) -> str:
+    out = []
+    for p, i, sa, ia, en in rows:
+        line = "[%s]" % ref(p, i)
+        if with_sa:
+            line += "\nSA: " + sa.strip().replace("\n", " ")
+        line += "\nEN: " + (en or "").strip().replace("\n", " ")
+        out.append(line)
+    return "\n\n".join(out)
+
+
+def mine(con, code: str, did: int, db: str, max_n: int = 12, chunk: int = 150, yes: bool = False,
+         http=None) -> list:
+    rows = passages(con, code)
+    if not rows:
+        print("Nothing to mine: no translated passages for %s." % code); return []
+    chunks = [rows[i:i + chunk] for i in range(0, len(rows), chunk)]
+    chars = sum(len(_prompt_block(c, False)) for c in chunks)
+    est = (chars / 4 * 0.30 + len(chunks) * 1500 * 2.50) / 1e6
+    print("mine %s: %d passages in %d chunk(s), about %d input tokens, est $%.3f with %s"
+          % (code, len(rows), len(chunks), chars // 4, est, MODEL))
+    if not yes:
+        print("Dry run. Add --yes."); return []
+    per = max(2, -(-max_n // len(chunks)))
+    have = {im._norm_title(r[0]) for r in con.execute("SELECT title FROM doc_stories WHERE doc_id=?", (did,))}
+    made = []
+    for n, c in enumerate(chunks, 1):
+        if len(made) >= max_n:
+            break
+        if not budget_ok(db):
+            print("Stopping: the spend cap is reached."); break
+        valid = {(r[0], r[1]) for r in c}
+        t0 = time.time()
+        data, resp = im.call_text_json(MODEL, MINE_SYSTEM % per, _prompt_block(c, False), http=http)
+        im.meter("story_mine", code, "gemini:" + MODEL, resp, db, time.time() - t0, units=len(c))
+        for e in (data.get("episodes") if isinstance(data, dict) else data) or []:
+            a, b = parse_ref(e.get("from")), parse_ref(e.get("to"))
+            t = (e.get("title") or "").strip()
+            if not (a and b and a in valid and b in valid and a <= b and t) or im._norm_title(t) in have:
+                continue
+            cur = con.execute(
+                """INSERT INTO doc_stories(doc_id, status, title, title_hi, why, from_page, from_idx, to_page, to_idx,
+                                           model, provenance, created_at, updated_at)
+                   VALUES(?, 'candidate', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (did, t, e.get("title_hi") or "", e.get("why") or "", a[0], a[1], b[0], b[1], MODEL,
+                 json.dumps({"mined_from": [ref(*c[0][:2]), ref(*c[-1][:2])]}), now(), now()))
+            have.add(im._norm_title(t)); made.append(cur.lastrowid)
+            if len(made) >= max_n:
+                break
+        con.commit()
+        print("  chunk %d/%d: %d candidate(s) so far" % (n, len(chunks), len(made)))
+    return made
+
+
+def write_story(con, sid: int, code: str, db: str, pad: int = 2, http=None, cap: int = 60) -> dict:
+    s = dict(zip([c[1] for c in con.execute("PRAGMA table_info(doc_stories)")],
+                 con.execute("SELECT * FROM doc_stories WHERE id=?", (sid,)).fetchone()))
+    rows = window(passages(con, code), (s["from_page"], s["from_idx"]), (s["to_page"], s["to_idx"]), pad=pad, cap=cap)
+    if not rows:
+        raise SystemExit("FAIL: story #%d: no translated passages in its range." % sid)
+    user = "Episode: %s\n%s\n\nPASSAGES\n\n%s" % (s.get("title") or "", s.get("why") or "", _prompt_block(rows, True))
+    t0 = time.time()
+    data, resp = im.call_text_json(MODEL, STORY_SYSTEM, user, http=http)
+    im.meter("story", code, "gemini:" + MODEL, resp, db, time.time() - t0, units=1)
+    data = data if isinstance(data, dict) else {}
+    v = verify(data, rows)
+    ph = hashlib.sha256((MODEL + STORY_SYSTEM + user).encode("utf-8")).hexdigest()[:16]
+    con.execute(
+        """UPDATE doc_stories SET status='draft', title=COALESCE(NULLIF(?,''), title), title_hi=COALESCE(NULLIF(?,''), title_hi),
+             story_en=?, story_hi=?, quote_sa=?, quote_ref=?, notes=?, cites=?, verify=?, model=?, prompt_hash=?,
+             provenance=?, updated_at=? WHERE id=?""",
+        (data.get("title") or "", data.get("title_hi") or "", data.get("story_en") or "", data.get("story_hi") or "",
+         data.get("quote_sa") or "", data.get("quote_ref") or "", data.get("notes") or "",
+         json.dumps(v["cited"]), json.dumps(v), MODEL, ph,
+         json.dumps({"given": [ref(*rows[0][:2]), ref(*rows[-1][:2])], "n_given": len(rows),
+                     "written_at": now()}), now(), sid))
+    con.commit()
+    return v
+
+
+def story_for_image(con, image_id: int, before: int = 6, after: int = 6) -> int:
+    r = con.execute("""SELECT i.doc_id, i.title, i.context_note, i.anchor_page, i.anchor_idx, i.kind
+                       FROM doc_images i WHERE i.id=?""", (image_id,)).fetchone()
+    if not r:
+        raise SystemExit("FAIL: image #%d not found." % image_id)
+    did, title, note, pg, ix, kind = r
+    if kind == "cover" or pg is None:
+        raise SystemExit("image #%d is a cover or has no anchor; covers carry no story." % image_id)
+    old = con.execute("SELECT id FROM doc_stories WHERE image_id=? AND status<>'retired' ORDER BY id DESC",
+                      (image_id,)).fetchone()
+    if old:
+        return old[0]
+    code = con.execute("SELECT code FROM docs WHERE id=?", (did,)).fetchone()[0]
+    rows = passages(con, code)
+    keys = [(x[0], x[1]) for x in rows]
+    at = min(range(len(keys)), key=lambda k: (abs(keys[k][0] - pg), abs(keys[k][1] - ix))) if keys else None
+    if at is None:
+        raise SystemExit("FAIL: %s has no translated passages." % code)
+    a, b = keys[max(0, at - before)], keys[min(len(keys) - 1, at + after)]
+    cur = con.execute(
+        """INSERT INTO doc_stories(doc_id, image_id, status, title, why, from_page, from_idx, to_page, to_idx,
+                                   provenance, created_at, updated_at)
+           VALUES(?, ?, 'candidate', ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (did, image_id, title or "", note or "", a[0], a[1], b[0], b[1],
+         json.dumps({"from_image": image_id, "anchor": ref(pg, ix)}), now(), now()))
+    con.commit()
+    return cur.lastrowid
+
+
+# ------------------------------------------------------------------ anthology
+def _cite_html(text: str) -> str:
+    t = html.escape(text or "")
+    return BRACKET_RE.sub(lambda m: "<sup class='cite'>[%s]</sup>" % m.group(1), t)
+
+
+def anthology(con, codes: list, title: str, out: Path) -> tuple:
+    import export_html as ex
+    try:
+        import collections_cfg as cc
+        titles = cc.load_titles(ROOT / "configs" / "doc_titles.json")
+    except Exception:
+        titles = {}
+    parts, appendix, n = [], [], 0
+    for code in codes:
+        did = im.doc_id(con, code)
+        book = titles.get(code) or code.replace("_", " ")
+        rows = {ref(r[0], r[1]): r for r in passages(con, code)}
+        for s in con.execute("""SELECT id, image_id, title, title_hi, story_en, story_hi, quote_sa, quote_ref, notes,
+                                       cites, from_page, from_idx, to_page, to_idx FROM doc_stories
+                                WHERE doc_id=? AND status='approved' ORDER BY from_page, from_idx""", (did,)).fetchall():
+            n += 1
+            sid, iid, t, th, en, hi, q, qr, notes, cites, fp, fi, tp, ti = s
+            fig = ""
+            img = con.execute("""SELECT path, title FROM doc_images WHERE id=? AND status='approved' AND path IS NOT NULL""",
+                              (iid,)).fetchone() if iid else None
+            if img:
+                full = img[0] if os.path.isabs(img[0]) else str(ROOT / img[0])
+                uri = ex._fig_embed(full)
+                if uri:
+                    fig = ("<figure class='plate'><img src='%s' alt='%s'/><figcaption><span class='plate-label'>%s"
+                           "</span></figcaption></figure>" % (uri, html.escape(img[1] or t or "", quote=True),
+                                                              html.escape(im.GENERATED_LABEL)))
+            parts.append(
+                "<section class='story' id='s%d'><h2>%d. %s</h2>%s<div class='src'>%s, %s-%s</div>"
+                "<blockquote class='sa'>%s<span class='qref'> [%s]</span></blockquote>%s"
+                "<div class='en'>%s</div>%s%s</section>"
+                % (n, n, html.escape(t or ""), ("<div class='th'>%s</div>" % html.escape(th)) if th else "",
+                   html.escape(book), ref(fp, fi), ref(tp, ti), html.escape(q or ""), html.escape(qr or ""), fig,
+                   _cite_html(en), ("<div class='hi'>%s</div>" % _cite_html(hi)) if hi else "",
+                   ("<div class='notes'>Editorial notes: %s</div>" % html.escape(notes)) if notes else ""))
+            for c in json.loads(cites or "[]"):
+                r = rows.get(c)
+                if r:
+                    appendix.append("<tr><td>%s</td><td>%s %s</td><td class='sa'>%s</td><td>%s</td></tr>"
+                                    % (n, html.escape(book), c, html.escape(r[2]), html.escape(r[4])))
+    css = ("body{font-family:Georgia,serif;max-width:46rem;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#222}"
+           "h1{text-align:center}h2{margin-top:3rem}.th,.hi,.sa{font-family:'Nirmala UI','Noto Serif Devanagari',serif}"
+           ".src{color:#666;font-size:.9rem}.qref{color:#888;font-size:.8rem}.cite{color:#8a6d1d;font-size:.7rem}"
+           "blockquote.sa{border-left:3px solid #c9a24a;padding-left:1rem;margin-left:0}.notes{font-size:.85rem;"
+           "color:#7a4b00;background:#fdf6e3;padding:.5rem .8rem;margin-top:.8rem}figure.plate{margin:1rem 0;"
+           "text-align:center}figure.plate img{max-width:100%;max-height:70vh}.plate-label{font-size:.75rem;color:#888}"
+           "table{border-collapse:collapse;font-size:.85rem}td{border-top:1px solid #ddd;padding:.3rem;vertical-align:top}"
+           ".story{page-break-before:always}")
+    body = ("<h1>%s</h1><p style='text-align:center;color:#666'>%d retellings, each cited to the passages it rests "
+            "on. Illustrations are generated, not historical sources. Retellings were drafted by a model from the "
+            "passages and approved by an editor.</p>%s<h2>Sources</h2><table><tr><th>#</th><th>Passage</th>"
+            "<th>Sanskrit (as printed)</th><th>English (machine translation)</th></tr>%s</table>"
+            % (html.escape(title), n, "".join(parts), "".join(appendix)))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("<!doctype html><html lang='en'><head><meta charset='utf-8'><title>%s</title><style>%s</style>"
+                   "</head><body><!-- %s -->%s</body></html>" % (html.escape(title), css, MARK, body), encoding="utf-8")
+    return out, n
+
+
+# ------------------------------------------------------------------ CLI
+def _row(con, sid: int) -> dict:
+    cols = [c[1] for c in con.execute("PRAGMA table_info(doc_stories)")]
+    r = con.execute("SELECT * FROM doc_stories WHERE id=?", (sid,)).fetchone()
+    if not r:
+        raise SystemExit("FAIL: story #%d not found." % sid)
+    return dict(zip(cols, r))
+
+
+def _code_of(con, did: int) -> str:
+    return con.execute("SELECT code FROM docs WHERE id=?", (did,)).fetchone()[0]
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="Cited retellings of episodes, for images and anthologies")
+    ap.add_argument("--db", default="data/context.db")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    m = sub.add_parser("mine"); m.add_argument("--doc", required=True); m.add_argument("--max", type=int, default=12)
+    m.add_argument("--chunk", type=int, default=150); m.add_argument("--yes", action="store_true")
+    w = sub.add_parser("write"); w.add_argument("--id", type=int); w.add_argument("--image", type=int)
+    w.add_argument("--doc"); w.add_argument("--images", action="store_true", help="one story per drawn image of --doc")
+    w.add_argument("--candidates", action="store_true", help="write the mined candidates of --doc")
+    w.add_argument("--max", type=int, default=6); w.add_argument("--yes", action="store_true")
+    w.add_argument("--before", type=int, default=6, help="with --image/--images: passages before the anchor")
+    w.add_argument("--after", type=int, default=6, help="with --image/--images: passages after the anchor")
+    w.add_argument("--cap", type=int, default=60, help="most passages sent for one story")
+    v = sub.add_parser("verify"); v.add_argument("--id", type=int, required=True)
+    ls = sub.add_parser("list"); ls.add_argument("--doc", required=True); ls.add_argument("--status", default=None)
+    sh = sub.add_parser("show"); sh.add_argument("--id", type=int, required=True)
+    a = sub.add_parser("approve"); a.add_argument("--id", type=int, required=True); a.add_argument("--force", action="store_true")
+    r = sub.add_parser("retire"); r.add_argument("--id", type=int, required=True)
+    an = sub.add_parser("anthology"); an.add_argument("--docs", required=True); an.add_argument("--title", default=None)
+    an.add_argument("--out", default=None)
+    args = ap.parse_args()
+    if not Path(args.db).exists():
+        print("FAIL: %s not found. Run from the repo root." % args.db); return 2
+
+    con = im._connect(args.db)
+    try:
+        ensure_schema(con)
+        if args.cmd == "mine":
+            did = im.doc_id(con, args.doc)
+            made = mine(con, args.doc, did, args.db, args.max, args.chunk, args.yes)
+            if made:
+                print("%d candidate(s): %s. Next: list, then write --doc %s --candidates" % (len(made), made, args.doc))
+            return 0
+        if args.cmd == "write":
+            ids = []
+            if args.id:
+                ids = [args.id]
+            elif args.image:
+                ids = [story_for_image(con, args.image, args.before, args.after)]
+            elif args.doc and args.images:
+                did = im.doc_id(con, args.doc)
+                for (iid,) in con.execute("""SELECT id FROM doc_images WHERE doc_id=? AND kind='generated'
+                                             AND status IN ('draft','approved') AND path IS NOT NULL
+                                             ORDER BY anchor_page, anchor_idx""", (did,)).fetchall():
+                    ids.append(story_for_image(con, iid, args.before, args.after))
+            elif args.doc and args.candidates:
+                did = im.doc_id(con, args.doc)
+                ids = [x for (x,) in con.execute("SELECT id FROM doc_stories WHERE doc_id=? AND status='candidate' "
+                                                  "ORDER BY from_page, from_idx", (did,))]
+            else:
+                print("give --id, --image, or --doc with --images or --candidates"); return 2
+            ids = [i for i in ids if _row(con, i)["status"] in ("candidate", "draft")][:args.max]
+            print("write: %d story(ies) with %s, about $0.01 each" % (len(ids), MODEL))
+            for i in ids:
+                s = _row(con, i)
+                print("  #%d  %s-%s  %s" % (i, ref(s["from_page"], s["from_idx"]), ref(s["to_page"], s["to_idx"]),
+                                           s["title"] or ""))
+            if not args.yes:
+                print("Dry run. Add --yes."); return 0
+            bad = 0
+            for i in ids:
+                if not budget_ok(args.db):
+                    print("Stopping: the spend cap is reached."); break
+                s = _row(con, i)
+                res = write_story(con, i, _code_of(con, s["doc_id"]), args.db, cap=args.cap)
+                print("  #%d %s %s" % (i, "verified" if res["ok"] else "NEEDS REVIEW:", "; ".join(res["problems"])))
+                bad += 0 if res["ok"] else 1
+            print("Next: show --id N, then approve --id N (a failed check needs --force after you read it).")
+            return 0
+        if args.cmd == "verify":
+            s = _row(con, args.id)
+            rows = window(passages(con, _code_of(con, s["doc_id"])), (s["from_page"], s["from_idx"]),
+                          (s["to_page"], s["to_idx"]), pad=2)
+            res = verify(s, rows)
+            con.execute("UPDATE doc_stories SET verify=?, updated_at=? WHERE id=?", (json.dumps(res), now(), args.id))
+            con.commit()
+            print(json.dumps(res, ensure_ascii=False, indent=1)); return 0 if res["ok"] else 1
+        if args.cmd == "list":
+            did = im.doc_id(con, args.doc)
+            q = "SELECT id, status, image_id, from_page, from_idx, to_page, to_idx, title, verify FROM doc_stories WHERE doc_id=?"
+            p = [did]
+            if args.status:
+                q += " AND status=?"; p.append(args.status)
+            n = 0
+            for sid, st, iid, fp, fi, tp, ti, t, vj in con.execute(q + " ORDER BY from_page, from_idx", p):
+                ok = (json.loads(vj).get("ok") if vj else None)
+                print("%4d  %-9s img=%-5s %8s-%-8s %-6s %s" % (sid, st, iid or "-", ref(fp, fi), ref(tp, ti),
+                                                           {True: "ok", False: "CHECK", None: ""}[ok], t or ""))
+                n += 1
+            print("%d row(s)" % n); return 0
+        if args.cmd == "show":
+            s = _row(con, args.id)
+            for k in ("title", "title_hi", "status", "image_id", "quote_sa", "quote_ref", "story_en", "story_hi", "notes"):
+                print("%-9s %s" % (k, s.get(k) or ""))
+            print("verify   ", s.get("verify") or "(not written yet)"); return 0
+        if args.cmd == "approve":
+            s = _row(con, args.id)
+            if s["status"] != "draft":
+                print("Refusing: #%d is %s; only a written draft can be approved." % (args.id, s["status"])); return 1
+            ok = json.loads(s["verify"] or "{}").get("ok")
+            if not ok and not args.force:
+                print("Refusing: the check failed (show --id %d). Read it; --force approves anyway." % args.id); return 1
+            con.execute("UPDATE doc_stories SET status='approved', approved_at=?, updated_at=? WHERE id=?",
+                        (now(), now(), args.id)); con.commit()
+            print("#%d approved" % args.id); return 0
+        if args.cmd == "retire":
+            con.execute("UPDATE doc_stories SET status='retired', updated_at=? WHERE id=?", (now(), args.id)); con.commit()
+            print("#%d retired" % args.id); return 0
+        if args.cmd == "anthology":
+            codes = [c.strip() for c in args.docs.split(",") if c.strip()]
+            out = Path(args.out) if args.out else ROOT / "exports" / ("anthology_%s.html"
+                                                                       % datetime.date.today().strftime("%Y%m%d"))
+            path, n = anthology(con, codes, args.title or "Episodes from the Sanskrit corpus", out)
+            print("wrote %s (%d approved stories). PDF: python scripts\\export_pdf.py \"%s\"" % (path, n, path))
+            return 0
+    finally:
+        con.close()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

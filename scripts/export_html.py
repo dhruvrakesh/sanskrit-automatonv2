@@ -556,7 +556,47 @@ def _load_figures(con, doc, root=None):
         out.setdefault(_fig_key(pg, ix), []).append(
             {"id": iid, "version": ver, "kind": kind or "", "title": title or "", "caption_en": cen or "",
              "caption_hi": chi or "", "note": note or "", "uri": uri, "page": pg, "idx": ix})
+    _attach_stories(con, out)   # VIGNETTES_2026_10_05
     return out
+
+
+def _attach_stories(con, figs):
+    """VIGNETTES_2026_10_05: an APPROVED story (scripts/stories.py) linked to an image placed
+    here is printed under that image. No doc_stories table, or no approved story: no change."""
+    if not figs or "doc_stories" not in _tables(con):
+        return
+    ids = [fg["id"] for v in figs.values() for fg in v]
+    got = {}
+    for iid, en, hi, q, qr in con.execute(
+            "SELECT image_id, story_en, story_hi, quote_sa, quote_ref FROM doc_stories "
+            "WHERE status = 'approved' AND image_id IN (%s) ORDER BY approved_at" % ",".join("?" * len(ids)), ids):
+        got[iid] = {"en": en or "", "hi": hi or "", "q": q or "", "qr": qr or ""}
+    for v in figs.values():
+        for fg in v:
+            if fg["id"] in got:
+                fg["story"] = got[fg["id"]]
+
+
+def _story_html(st, include_en, include_hi):
+    """VIGNETTES_2026_10_05: the retelling under a plate, citations as superscripts."""
+    if not st:
+        return ""
+    import re as _re
+    def _cite(t):
+        return _re.sub(r"\[([^\]]*\d+\.\d+[^\]]*)\]", r"<sup class='cite'>[\1]</sup>", html.escape(t))
+    parts = []
+    if st.get("q"):
+        parts.append("<div class='plate-story-sa'>%s <span class='plate-label'>[%s]</span></div>"
+                     % (html.escape(st["q"]), html.escape(st.get("qr") or "")))
+    if include_en and st.get("en"):
+        parts.append("<div>%s</div>" % _cite(st["en"]))
+    if include_hi and st.get("hi"):
+        parts.append("<div class='plate-hi'>%s</div>" % _cite(st["hi"]))
+    if not parts:
+        return ""
+    return ("<div class='plate-story' style='text-align:left;font-size:.92em;max-width:40rem;margin:.6rem auto'>%s"
+            "<div class='plate-label'>Retold from the passages cited; drafted by a model, approved by an editor."
+            "</div></div>" % "".join(parts))
 
 
 def _fig_copy(figs):
@@ -583,9 +623,10 @@ def _figure_html(fg, include_en, include_hi):
     elif fg["kind"] == "edition-plate":
         cap.append("<span class='plate-label'>Plate from the source edition.</span>")
     alt = html.escape(fg["title"] or "illustration", quote=True)
+    _st = _story_html(fg.get("story"), include_en, include_hi)   # VIGNETTES_2026_10_05
     return ("<figure class='plate' id='img-%s' data-kind='%s'><img src='%s' alt='%s'/>"
-            "<figcaption>%s</figcaption></figure>"
-            % (fg["id"], html.escape(fg["kind"], quote=True), fg["uri"], alt, " ".join(cap)))
+            "<figcaption>%s</figcaption>%s</figure>"
+            % (fg["id"], html.escape(fg["kind"], quote=True), fg["uri"], alt, " ".join(cap), _st))
 
 
 def _load_cover(con, doc, root=None):

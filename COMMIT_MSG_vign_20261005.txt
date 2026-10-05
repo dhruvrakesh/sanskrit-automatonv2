@@ -1,0 +1,14 @@
+Vignettes: cited retellings for images, episode mining, illustrated anthology (VIGNETTES_2026_10_05, DOCS9_2026_10_05)
+
+New scripts/stories.py: table doc_stories (keyed by page.idx); mine (episode ranges
+from the whole English, chunked), write (from a candidate, one image, or every drawn
+image; Sanskrit+English passages in, 120-220 words EN + HI, a citation after every
+sentence, one verbatim Sanskrit quote, editorial notes for damaged readings),
+verify (no API: citations present and in range, quote verbatim, names present in
+the cited passages), approve/retire (failed check needs --force), anthology (HTML
+with plates, epigraphs, EN/HI, notes and a Sources table). Metered (story_mine,
+story) and budget-gated.
+export_html --images approved prints an approved story under its image
+(patch_vignettes; unchanged output when none is approved).
+Docs: PLATFORM s12, RUNBOOK, ENTERPRISE_PATH addendum.
+Test: tests/test_vignettes_2026_10_05.py.
