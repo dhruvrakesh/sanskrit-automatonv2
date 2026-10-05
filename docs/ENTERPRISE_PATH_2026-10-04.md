@@ -21,7 +21,7 @@ This is the forward plan for the whole estate. It was written after reading the 
 | Entity layer | 32,092 mentions, 0 orphaned (157 removed by `fix_orphans --apply`, 17:58); 6 cascade triggers | same; backups `context_pre_orphanfix_*` |
 | Budget (the app's own ledger) | cap $25.00; recorded spend $17.72 | `budget_state` in the 17:58 backup |
 | Spend, last 7 days | translation $1.82, image $1.47, ocr_vision $0.81, entities $0.31, embedding $0.07, image_brief $0.05, ab_test $0.01 | STATUS_20261004_1949 |
-| Vision cost per page (repriced) | median $0.00282, mean $0.00313, p90 $0.00350; $0.00407 per delivered page over all metered history (1,278 calls for 1,086 pages) | `usage_log`, 17:58 backup |
+| Vision cost per page (repriced) | Cost / pages delivered, ladder retries included (DOCS8_2026_10_05). Last 24 h on 10-04: $0.00542. All history: $0.00407. Per text: Rgveda $0.00646, Shatpatha $0.00348, markandeya $0.00132, Mallapurana $0.00115. | `usage_log`, 2026-10-05 04:00 backup; PLATFORM s11 |
 | Translation cost per passage, provider-metered | $0.00036 | corpus_status header (302 calls) |
 | Provider account | **Prepaid.** At 2026-10-04 10:55 UTC two image jobs got HTTP 402: "Your prepayment credits are depleted". | `data/jobs.jsonl` |
 | Maintenance task | runs every 3 h when idle. 118 STARTs; 62 skipped because the dashboard was busy; 39 skipped with "no API connectivity" (the last at 15:11 on 10-04); 1 FAIL (2026-09-20, embeddings) | `maintenance_log.txt` |
@@ -63,7 +63,7 @@ Not verified:
 
 | Topic | Docs disagree | True as of 2026-10-04 |
 |---|---|---|
-| Vision $/page | 0.00028, 0.00087, 0.0015, 0.0054 | Mean $0.0031 a call; $0.0041 a delivered page including retries. PLATFORM §9's "about $0.0054" was wrong (PLATFORM §10). |
+| Vision $/page | 0.00028, 0.00087, 0.0015, 0.0054 | It depends on the book: $0.0012-0.0065 a delivered page, retries included. The 24 h figure of $0.0054 was right; PLATFORM s10's retraction of it was wrong (PLATFORM s11). Estimates now use each text's own rate. |
 | 2.5 Flash price | $0.15/$0.60 in STEPS_TO_RUN | $0.30/$2.50, per two price trackers. Google's page no longer lists 2.5 Flash. |
 | Image cost | $0.045, $0.078 | The ledger records $0.089-0.093 at 1K and $0.125 at 2K, because about 400 output tokens beyond the image itself are priced at $60/M. |
 | Q4 judge | "unbuilt" | Built: `judge_sample.py` writes `mt_reviews`, and 40 verdicts are metered. |
@@ -103,8 +103,8 @@ The order follows `corpus_status`. Each book goes through consensus → drift �
 | # | Item | Size | Estimate |
 |---|---|---|---|
 | 1.1 | markandeya_purana: finish English (373/1,268 done), then Hindi `--reference none`, QA, lacunae | 895 EN + 1,266 HI | about $0.80 |
-| 1.2 | Rgveda Vol-ii: vision on the remaining pages, merge, re-ingest, translate | 618 pages, then about 11.5k passages | vision about $2.0; translation about $4 EN + $4 HI |
-| 1.3 | Dhanurveda: vision on the two PDF-backed codes, then ingest into them | `dhanur_veda_shiva_dhanur_veda` 19 pages; `dhanur_veda_vasishtha_dhanur_veda` 32 pages | about $0.20 |
+| 1.2 | Rgveda Vol-ii: vision on the remaining pages, merge, re-ingest, translate | 618 pages, then about 11.5k passages | vision about $4.0 at Rgveda's own $0.00646 a page (DOCS8); translation about $4 EN + $4 HI |
+| 1.3 | Dhanurveda: vision on the two PDF-backed codes, then ingest into them | `dhanur_veda_shiva_dhanur_veda` 19 pages; `dhanur_veda_vasishtha_dhanur_veda` 32 pages | Vision done 2026-10-05, about $0.06 for 51 pages, all clean. Next: re-ingest and translate. |
 | 1.4 | The other NEEDS-OCR texts, largest debris first | 23 texts | about $12-13 (STATUS 19:49, median-based, +11% for the mean) |
 | 1.5 | Derived texts (`*_seg`): vision on the source, ingest as `<src>_v2`, re-split to `<doc>_v2` | manu, harita, nilamata | $1.5 (STATUS) |
 | 1.6 | NO-SOURCE-PDF: find PDFs for LalitaVistara, Bodhicaryavatara and bodhyana. Vasishtha's PDFs exist under the `dhanur_veda_` code (1.3). | 4 | |

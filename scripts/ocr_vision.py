@@ -339,7 +339,13 @@ def main():
 
     print(f"pages: {len(targets)}   model: {args.model}   dpi: {args.dpi}   "
           f"({'LIVE' if args.yes else 'DRY-RUN'})")
-    print(f"  pre-flight estimate: ${len(targets)*COST_PER_PAGE:.3f} at ${COST_PER_PAGE}/page "
+    _cpp = COST_PER_PAGE   # COST_RATIO_2026_10_05: the ledger's own figure for this text when it has one
+    try:
+        import ocr_consensus as _oc
+        _cpp = _oc.measured_cost_per_page(args.db, fallback=COST_PER_PAGE, doc=args.doc)
+    except Exception:
+        pass
+    print(f"  pre-flight estimate: ${len(targets)*_cpp:.3f} at ${_cpp:.5f}/page "
           f"-- this is an ESTIMATE ONLY. The real per-page cost is measured from the "
           f"provider's own token counts after each call and totalled at the end.")
     if not args.yes:
@@ -427,9 +433,9 @@ def main():
         per = (spend / ok) if ok else 0.0
         print(f"MEASURED spend this run: ${spend:.4f}  ({ok} pages, ${per:.5f}/page) "
               f"-- from the provider's token counts, recorded as kind='ocr_vision'.")
-        if ok and abs(per - COST_PER_PAGE) / max(per, 1e-9) > 0.25:
-            print(f"  NOTE: the ${COST_PER_PAGE}/page pre-flight estimate is off by more than "
-                  f"25%. Update COST_PER_PAGE to {per:.5f} in ocr_vision.py.")
+        if ok >= 5 and abs(per - _cpp) / max(per, 1e-9) > 0.25:   # COST_RATIO_2026_10_05
+            print(f"  NOTE: this run cost ${per:.5f}/page against the ledger's ${_cpp:.5f}/page. "
+                  f"Estimates follow the ledger; nothing needs editing.")
     if mcon is not None:
         mcon.close()
     if args.outdir:

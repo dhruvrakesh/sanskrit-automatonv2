@@ -98,29 +98,40 @@ def refused(p: Path) -> bool:
         return False
 
 
-def measured_cost_per_page(db, fallback: float = 0.0015) -> float:
-    """SPEND_TRUTH_2026_10_04: USD per vision page from usage_log (last 300
-    provider-metered ocr_vision rows), repriced with cost_tracker's current table.
-    CREDITS_COST_2026_10_04: the MEAN, not the median - an estimate of a total is
-    n x mean, and page cost is right-skewed (2026-10-04: median $0.00282, mean
-    $0.00313, max $0.04282)."""
+def measured_cost_per_page(db, fallback: float = 0.0015, doc: str | None = None) -> float:
+    """USD per DELIVERED vision page, from usage_log, repriced with cost_tracker's table.
+
+    COST_RATIO_2026_10_05: total cost of the calls / pages they delivered (a ratio of
+    sums). The mean and median used before (SPEND_TRUTH, CREDITS_COST) counted only
+    rows with passages > 0, and so left out the ladder attempts that ocr_vision meters
+    with units=0 - which are billed. On 2026-10-03/04: 93 such calls cost $1.08 of
+    $3.02 (36%), almost all on Rgveda. Pages differ by book too (Rgveda $0.00646 a
+    page, Mallapurana $0.00115), so with doc= a text that already has >= 20 delivered
+    pages is priced from its own last 600 calls; otherwise the last 300 calls
+    corpus-wide are used."""
     try:
         sys.path.insert(0, str(SCRIPTS))
         import cost_tracker
         uri = Path(db).resolve().as_uri() + "?mode=ro"
         con = sqlite3.connect(uri, uri=True)
         try:
-            rows = con.execute("""SELECT engine, in_tokens, out_tokens, passages FROM usage_log
-                                  WHERE kind='ocr_vision' AND token_source='provider' AND COALESCE(ok,1)=1
-                                  AND passages > 0 ORDER BY id DESC LIMIT 300""").fetchall()
+            base = ("SELECT engine, in_tokens, out_tokens, passages FROM usage_log "
+                    "WHERE kind='ocr_vision' AND token_source='provider'")
+            rows = []
+            if doc:
+                rows = con.execute(base + " AND doc=? ORDER BY id DESC LIMIT 600", (doc,)).fetchall()
+                if sum((r[3] or 0) for r in rows) < 20:
+                    rows = []
+            if not rows:
+                rows = con.execute(base + " ORDER BY id DESC LIMIT 300").fetchall()
         finally:
             con.close()
-        vals = []
+        usd = pages = 0.0
         for eng, tin, tout, n in rows:
             pin, pout = cost_tracker._get_pricing(eng or "")
-            vals.append(((tin or 0) * pin + (tout or 0) * pout) / 1e6 / max(1, n))
-        vals = sorted(v for v in vals if v > 0)
-        return (sum(vals) / len(vals)) if len(vals) >= 5 else fallback   # CREDITS_COST_2026_10_04: mean
+            usd += ((tin or 0) * pin + (tout or 0) * pout) / 1e6
+            pages += max(0, n or 0)
+        return (usd / pages) if (pages >= 5 and usd > 0) else fallback
     except Exception:
         return fallback
 
@@ -393,7 +404,7 @@ def main() -> int:
                   "Tesseract is kept. --retry-refused to try again." % n_ref)
         if args.max_pages and len(todo) > args.max_pages:
             todo = todo[:args.max_pages]
-        cpp = measured_cost_per_page(args.db)   # SPEND_TRUTH_2026_10_04
+        cpp = measured_cost_per_page(args.db, doc=doc)   # COST_RATIO_2026_10_05: this text's own rate
         est = len(todo) * cpp
         print("\n[2] vision    queued %d | already done %d | to run %d | est $%.4f at $%.5f/page"
               % (len(queue), len(done), len(todo), est, cpp))

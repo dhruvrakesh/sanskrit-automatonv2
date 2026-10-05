@@ -165,7 +165,10 @@ def main() -> int:
     print("%-28s %-8s %s" % ("script", "metered", "asks budget first"))
     for name, m, g in static_check(SCRIPTS):
         print("%-28s %-8s %s" % (name, "yes" if m else "NO", "yes" if g else "no"))
-    print("\nOnly Google Cloud Billing is the bill. Set a budget alert and lower the API quota there for a hard cap.")
+    # COST_RATIO_2026_10_05: jobs.jsonl 2026-10-04 shows HTTP 402 "prepayment credits are depleted".
+    print("\nThe provider's record is the bill, not this ledger. This key draws PREPAID credit (AI Studio):"
+          "\nreconcile the two weekly, and keep the app cap (set_budget.py) a little below the remaining"
+          "\nbalance, so the app stops cleanly before the provider refuses.")
     if args.csv:
         with open(args.csv, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=list(allrows[0].keys()) if allrows else ["kind"])

@@ -276,10 +276,24 @@ def vision_cost_per_page(db: str) -> float | None:
     except Exception:
         v = 0.0
     if v:
-        VISION_CPP.update(value=v, source="measured: mean of the last 300 metered vision pages, today's prices")
+        VISION_CPP.update(value=v, db=db, source="measured: cost / pages delivered, last 300 vision calls "
+                                                  "incl. ladder retries, today's prices; per text where it has its own")
         return v
     VISION_CPP.update(value=None, source="fallback $%.4f (fewer than 5 measured pages)" % VISION_COST_PER_PAGE)
     return None
+
+
+def _doc_vision_cpp(code: str) -> float:
+    """COST_RATIO_2026_10_05: this text's own measured $/page when it has >= 20 delivered pages."""
+    base = VISION_CPP["value"] or VISION_COST_PER_PAGE
+    db = VISION_CPP.get("db")
+    if not db:
+        return base
+    try:
+        import ocr_consensus
+        return ocr_consensus.measured_cost_per_page(db, fallback=base, doc=code)
+    except Exception:
+        return base
 
 
 def drift_counts(db: str, doc: str, merged: dict) -> dict:
@@ -305,7 +319,7 @@ def _usd(x: float | None) -> str:
 
 def consensus_cmds(code: str, s: dict) -> tuple[list[str], float]:
     todo = max(0, s.get("pages_inbox", 0) - s.get("pages_vision", 0) - s.get("pages_refused", 0))
-    cpp = VISION_CPP["value"] or VISION_COST_PER_PAGE   # METER_GATES_2026_10_04
+    cpp = _doc_vision_cpp(code)   # COST_RATIO_2026_10_05 (was the corpus-wide figure for every text)
     usd = max(0.05, round(todo * cpp * 1.15 + 0.01, 2))   # 15% headroom: retries and outliers (p90 = 1.12 x mean on 2026-10-04)
     # --include-unassessed: pages OCR'd before 2026-08-30 carry no Tesseract confidence, and triage then
     # fails (seen on markandeya_purana, 2026-10-04 12:21). With it, every inbox page is queued.
