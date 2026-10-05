@@ -1,0 +1,11 @@
+Vision cost: cost / pages delivered incl. billed ladder retries, per text; ledger-based pre-flight; prepaid footer; docs corrected (COST_RATIO_2026_10_05, DOCS8_2026_10_05)
+
+ocr_consensus.measured_cost_per_page: ratio of sums including the zero-page ladder
+calls (93 calls = $1.08 of $3.02 vision spend on 10-03/04); doc= uses the text's own
+last 600 calls when it has >= 20 delivered pages (Rgveda $0.00646/page, Mallapurana
+$0.00115). ocr_consensus and corpus_status price each text at its own rate.
+ocr_vision: pre-flight estimate from the ledger; no per-page "Update COST_PER_PAGE" note.
+spend_audit: closing line names the prepaid credit as the bill.
+Docs: PLATFORM s11 (retracts the s10 claim about $0.0054), ENTERPRISE_PATH rows.
+Patches: scripts/patch_cost_ratio_2026_10_05.py, scripts/patch_docs8_2026_10_05.py.
+Test: tests/test_cost_ratio_2026_10_05.py.
