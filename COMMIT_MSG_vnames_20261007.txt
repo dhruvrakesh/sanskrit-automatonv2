@@ -1,0 +1,18 @@
+Story check second pass, corpus_status code hints, Srangam S2 follow-up (VERIFY_NAMES_2026_10_07, DOC_HINT_2026_10_07, DOCS14_2026_10_07)
+
+stories.py (patch_verify_names): three false failures found by reading the five markandeya stories
+that still failed after verify-all against their passages: English title words ("Mount Meru") are
+not names; the citation check joins a fragment that ends inside a quotation to the next (at most
+4), so 'he cried, "Alas! ..." [60.10]' is one sentence; a name ending in a visarga is also found by
+its stem at a word start (10.3 "vapum apsarasam"). Same 13 stories: 8 -> 11 pass; #5 (a name the
+passages do not give) and #10 (8 uncited sentences) still fail, as they should. #3 passes the check
+but misidentifies Vapu (10.2-10.3): edit before approving.
+corpus_status.py (patch_doc_hint): --doc is checked against docs; a unique prefix or another case is
+used with a note, anything else gets the closest codes, and nothing matched stops instead of
+reporting every text ("--doc Ganita_Yukti_Bhasa" printed "0 docs").
+docs/cloud/S2_srangam_followup_2026-10-07.sql: read-only G1-G5 (full 20260201064547 statement,
+increment_term_usage_counts EXECUTE grants, live policies, the 169 references the public cannot see
+by article status, SECURITY DEFINER functions anon can run). S1 applied 14:39: view live, 1,561
+references (1,392 public under RLS).
+docs: PLATFORM s17 (with the Ganita code correction to s15/s16), RUNBOOK, ENTERPRISE_PATH addendum (4).
+Tests: tests/test_verify_names_2026_10_07.py, tests/test_doc_hint_2026_10_07.py.

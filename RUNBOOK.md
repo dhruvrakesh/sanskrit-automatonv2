@@ -1111,3 +1111,14 @@ Every step is a dry run unless `--yes` is given.
 - **Update the brain from PowerShell.** Run `python scripts\brain_items.py --db data\context.db`. It now reads `.env` itself. Maintenance step b2 does the same every 3 hours when the dashboard is idle.
 - **A translation gap that never closes.** If corpus_status says "N never sent", those rows are page 0 or carry no translatable Sanskrit (a lone danda, a stray mark). The translator will not send them, and that is correct; they are not work.
 - **Srangam S1.** Paste `docs\cloud\S1_srangam_heal_2026-10-07.sql` into the Lovable Cloud SQL editor one block at a time: H1, H2, H3, H4. Then run `block_BE_reader.ps1 -Verify`. Never insert into supabase_migrations.schema_migrations by hand.
+
+
+## Stories that still fail the check; the Ganita code; Srangam S2 (DOCS14_2026_10_07)
+
+- **After `patch_verify_names_2026_10_07.py`,** run `python scripts\stories.py verify-all --doc markandeya_purana`. Expect 11 pass and 2 fail. Approve only after reading.
+  - **#3:** fix who Vapu is first (see PLATFORM section 17).
+  - **#5:** change "Draupadi" to "the daughter of Drupada", or approve anyway with a note.
+  - **#10:** Rewrite.
+- **Ganita.** `python scripts\corpus_status.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V`. A wrong `--doc` now says which codes are close.
+  - Resume from the dashboard (translate_both, as on 6 Oct) with the machine kept awake. Allow 6-11 hours for the English alone at the measured rate.
+- **Srangam S2.** Paste `docs\cloud\S2_srangam_followup_2026-10-07.sql` one block at a time (G1-G5, all read-only) and keep the CSVs.

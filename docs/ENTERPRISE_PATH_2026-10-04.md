@@ -226,3 +226,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | 1.12 | Maintenance alongside long translations | Open: measure concurrent writes first |
 | 1.13 | Delete the vectors of noise rows | Open; Ask already filters them |
 | C0 / C1 / C2 | Cloud pre-flight, corpus brain schema, `embed-published-passages` | C0 ready to run; C1 drafted and tested, not applied; C2 next |
+
+
+## Addendum 2026-10-07 (4): second pass (DOCS14_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| 2.18 | Story check: title words, quotations, visarga stems (VERIFY_NAMES); 11 of 13 pass, 2 real failures left | Built 2026-10-07 |
+| 1.16 | corpus_status `--doc` resolves a unique prefix or case, suggests close codes, never falls through to all texts (DOC_HINT) | Built 2026-10-07 |
+| S1 | `srangam_cross_reference_stats` live: 1,561 references, 1,392 public (RLS: both articles published) | Done 2026-10-07 14:40 |
+| S2 | Read-only follow-up: the full 20260201064547 statement, who can execute increment_term_usage_counts, the live policies, the 169 hidden references by status, SECURITY DEFINER functions anon can run | Ready to run |
+| T1 | Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V: 977 of 2,706 without English, no Hindi (corrects addendum 3) | Open: resume, machine awake |
+| T2 | Translation throughput: 91-157 passages an hour, one call per passage | Open: a measured comparison (thinking budget, batching) on a sample, judged by qa_scan, before any change |
+| 1.12 / 1.13 | Maintenance alongside long translations; noise vectors | Open; 1.12 matters more now (T1 keeps the dashboard busy for a day or more) |
+| C0 / C1 / C2 | Cloud pre-flight, corpus brain schema, `embed-published-passages` | C0 ready to run; C1 drafted and tested, not applied; C2 after C1 |

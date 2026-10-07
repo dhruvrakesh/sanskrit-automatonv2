@@ -180,6 +180,46 @@ def budget_ok(db: str) -> bool:
         return True
 
 
+# ------------------------------------------------------------------ VERIFY_NAMES_2026_10_07
+# Three false failures found by re-checking markandeya_purana on 2026-10-07, each read against its
+# passages: "Mount Meru" ("Mount" is a title word), 'he cried, "Alas! This is ..." [60.10]' (the
+# splitter cut inside the quotation), "Vapuh" (10.3 gives the name inflected, "vapum apsarasam").
+# Real problems still fail: a name the passages do not give, a sentence with no citation.
+NAME_STOP |= {"mount", "mountain", "river", "lake", "forest", "ocean", "sea", "queen", "prince",
+              "princess", "goddess", "lady", "mother", "father"}
+
+
+def _open_quote(s: str) -> bool:
+    """True when a text ends inside a quotation: an odd number of straight double quotes, or more
+    opening than closing curly ones. Single quotes are left alone (they are mostly apostrophes)."""
+    return s.count("\"") % 2 == 1 or s.count("\u201c") > s.count("\u201d")
+
+
+def _cite_units(en: str, join_max: int = 4) -> list:
+    """Sentences for the citation check. A fragment that ends inside a quotation is joined to the
+    next (at most join_max fragments), so the citation after the closing quote covers the sentence."""
+    out, buf, n = [], "", 0
+    for f in SENT_RE.split((en or "").strip()):
+        buf, n = ((buf + " " + f) if buf else f), n + 1
+        if not _open_quote(buf) or n >= join_max:
+            out.append(buf); buf, n = "", 0
+    if buf:
+        out.append(buf)
+    return out
+
+
+def _name_in(t: str, src: str) -> bool:
+    """A name is supported when the folded cited passages contain it. A name ending in a visarga
+    (the nominative ending) may stand in another case there, so its stem is looked for at the start
+    of a word ("Vapu\u1e25" -> "vapu" in "vapumapsaras\u0101\u1e43")."""
+    f = _fold(t)
+    if f in src:
+        return True
+    if t.endswith("\u1e25") and len(f) >= 4:
+        return re.search(r"(?<![a-z])" + re.escape(f[:-1]), src) is not None
+    return False
+
+
 # ------------------------------------------------------------------ verify (no API)
 def verify(story: dict, given: list) -> dict:
     """Deterministic checks of a written story against the passages it was given."""
@@ -196,7 +236,7 @@ def verify(story: dict, given: list) -> dict:
     outside = sorted(c for c in cited if c not in refs)
     if outside:
         problems.append("cites outside the passages given: " + ", ".join(outside))
-    uncited = [s for s in SENT_RE.split(en.strip()) if len(WORD_RE.findall(s)) >= 4 and not BRACKET_RE.search(s)]
+    uncited = [s for s in _cite_units(en) if len(WORD_RE.findall(s)) >= 4 and not BRACKET_RE.search(s)]   # VERIFY_NAMES_2026_10_07
     if uncited:
         problems.append("%d sentence(s) without a citation, e.g. %r" % (len(uncited), uncited[0][:80]))
     q, qr = story.get("quote_sa") or "", ref(*parse_ref(story.get("quote_ref"))) if parse_ref(story.get("quote_ref")) else ""
@@ -213,7 +253,7 @@ def verify(story: dict, given: list) -> dict:
             lead = s[:mt.start()].rstrip()[-1:]
             opens = k == 0 or (lead != "" and lead in OPENERS)
             is_name = any(c in IAST for c in t2) or (not opens and t2[:1].isupper())
-            if is_name and len(t2) > 2 and t2.lower() not in NAME_STOP and _fold(t2) not in src:
+            if is_name and len(t2) > 2 and t2.lower() not in NAME_STOP and not _name_in(t2, src):   # VERIFY_NAMES_2026_10_07
                 unknown.append(t2)
     if unknown:
         problems.append("names not found in the cited passages: " + ", ".join(sorted(set(unknown))[:12]))

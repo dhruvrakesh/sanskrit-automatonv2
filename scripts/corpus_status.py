@@ -660,6 +660,42 @@ ORDER = {"CONTAMINATED": -1, "DERIVED-NEEDS-OCR": 0, "NEEDS-OCR": 1, "NO-SOURCE-
          "NEEDS-TRANSLATION": 4, "AGED": 5, "CURRENT": 6, "EMPTY": 7}
 
 
+# ------------------------------------------------------------------ DOC_HINT_2026_10_07
+def resolve_docs(db: str, wanted: list | None) -> tuple:
+    """(codes to report, notes). Each --doc is checked against the docs table: an exact code is used;
+    another case of a code, or the only code that starts with what was given, is used with a note;
+    anything else gets a note with the closest codes. 2026-10-07: '--doc Ganita_Yukti_Bhasa' printed
+    '0 docs' with no reason (the code is Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V)."""
+    if not wanted:
+        return wanted, []
+    import difflib
+    con = open_ro(db)
+    try:
+        codes = [r[0] for r in con.execute("SELECT code FROM docs ORDER BY code")]
+    finally:
+        con.close()
+    have, low = set(codes), {c.lower(): c for c in codes}
+    out, notes = [], []
+    for w in wanted:
+        lw = w.lower()
+        if w in have:
+            out.append(w)
+        elif lw in low:
+            out.append(low[lw]); notes.append("# note: --doc %s -> %s (case)" % (w, low[lw]))
+        else:
+            pre = [c for c in codes if c.lower().startswith(lw)]
+            if len(pre) == 1:
+                out.append(pre[0]); notes.append("# note: --doc %s is not a code; using %s" % (w, pre[0]))
+            else:
+                toks = [t for t in re.split(r"[^0-9a-z]+", lw) if t]
+                near = pre[:8] or [c for c in codes if lw in c.lower()][:8] \
+                    or [c for c in codes if toks and all(t in c.lower() for t in toks)][:8] \
+                    or difflib.get_close_matches(w, codes, n=5, cutoff=0.5)
+                notes.append("# note: no text has the code %r.%s" % (
+                    w, (" Did you mean: " + ", ".join(near)) if near else " Run without --doc to list every text."))
+    return out, notes
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Read-only per-text currency report with next commands")
     ap.add_argument("--db", default="data/context.db")
@@ -680,6 +716,12 @@ def main() -> int:
     args = ap.parse_args()
     if not Path(args.db).exists():
         print("FAIL: %s not found. Run from the repo root." % args.db); return 2
+    if args.doc:   # DOC_HINT_2026_10_07
+        args.doc, _notes = resolve_docs(args.db, args.doc)
+        for _n in _notes:
+            print(_n)
+        if not args.doc:
+            print("# nothing to report: no --doc matched a text."); return 2
 
     stats, (en_ver, hi_ver, hi_src), peers, cpp = collect(
         args.db, args.doc, Path(args.raw_dir), Path(args.vision_dir), Path(args.merged_dir), Path(args.inbox),
