@@ -1139,3 +1139,22 @@ Every step is a dry run unless `--yes` is given.
   1. `python scripts\publish_srangam.py --doc <code> --gate-report`, then `--dry-run`, then `--emit-sql <dir>`.
   2. Paste 00_text.sql, each NN_passages.sql and 99_verify.sql. The text lands unpublished.
   3. After review, run `UPDATE public.srangam_texts SET published = true WHERE doc_code = '<code>';`, then `block_BE_reader.ps1 -Verify`.
+
+
+## Srangam: refresh the status panel, apply C1, deploy and run C2 (DOCS16_2026_10_07)
+
+- **Run an ops script as a file, never by pasting its text:** `& 'D:\Sanksrit Automatons\_ops_2026-09-10\block_BE_reader.ps1' -Verify`. Pasted text runs with no switches.
+- **The status panel** (git by hand, in `D:\srangam-42267`):
+  1. `git status -sb`, then `git switch main`, then `git pull --ff-only origin main`.
+  2. `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_site_line_2026_10_07.py" --check`, then the same without `--check`.
+  3. `python scripts\emit_project_status.py --db "D:\Sanksrit Automatons\sanskrit-automatonv2\data\context.db" --site-reader --check`, then the same without `--check`.
+  4. `git diff --stat`, then commit the two files.
+  5. Push main yourself, then Publish in Lovable.
+- **C1.** Paste `docs\cloud\C1_corpus_brain_2026-10-07.sql` whole, run it once, then V1-V4 one at a time.
+- **C2.**
+  1. On main in `D:\srangam-42267`, copy `index.ts` and `lib.ts` from `docs\cloud\C2_embed-published-passages` into `supabase\functions\embed-published-passages\`.
+  2. Append `[functions.embed-published-passages]` / `verify_jwt = false` to `supabase\config.toml`.
+  3. Commit, push, Publish.
+  4. Confirm the function is listed in Lovable Cloud (Edge functions); if it is not, ask Lovable in its chat to deploy it.
+  5. Then run `docs\cloud\C2_run_and_schedule_2026-10-07.sql` R1-R5.
+- **Recall check, any time:** `python scripts\recall_check_768.py --db "D:\backups\<a backup>.db" --immutable` (add `--dims 1536` to measure 1536).

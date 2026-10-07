@@ -211,6 +211,25 @@ def set_published(headers, doc_code, value):
     print(f"{doc_code}: {state}")
 
 
+# ----------------------------------------------------------------------------- PUBLISH_ENGINE_2026_10_07
+def single_engine(con, doc_id):
+    """The engine to label a text with when --engine is not given: the one engine that every
+    translated passage of the doc records (passages.engine). None when they differ, when none is
+    recorded, or when the column is absent; then the counts are printed and nothing is guessed."""
+    cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+    if "engine" not in cols:
+        return None
+    rows = [tuple(r) for r in con.execute(
+        "SELECT engine, COUNT(*) FROM passages WHERE doc_id = ? AND TRIM(COALESCE(translation,'')) <> '' "
+        "GROUP BY engine ORDER BY 2 DESC", (doc_id,))]
+    if len(rows) == 1 and (rows[0][0] or "").strip():
+        return rows[0][0].strip()
+    if rows:
+        print("note: the translated passages record %d engine label(s): %s - pass --engine to label the text"
+              % (len(rows), ", ".join("%s x%d" % (e or "(none)", n) for e, n in rows)))
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser(description="Publish translated docs to Srangam")
     ap.add_argument("--gate-report", action="store_true",
@@ -300,6 +319,10 @@ def main():
 
     pages = len({r["page_no"] for r in rows})
     print(f"{args.doc}: {len(rows)} translated passages across {pages} pages")
+    if args.engine is None:   # PUBLISH_ENGINE_2026_10_07
+        args.engine = single_engine(con, doc["id"])
+        if args.engine:
+            print(f"{args.doc}: engine label {args.engine} (recorded by every translated passage)")
 
     if args.emit_sql:
         emit_sql(args.emit_sql, doc, rows, args.engine, source_note, args.sql_batch,

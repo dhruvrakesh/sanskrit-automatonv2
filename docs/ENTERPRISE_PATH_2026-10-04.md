@@ -256,3 +256,21 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | W3 | Article titled "....docx (1)"; network type filter offers 5 types, 2 exist | Open: Srangam admin / Lovable |
 | W4 | completeWorks needs 100% English; texts whose only gaps cannot be translated as printed are never "complete" | Open: Srangam generator |
 | T1 | Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V is NEEDS-OCR (21.9% debris, 0% vision, 339 pages, est $1.08): OCR and re-ingest before translating (corrects addendum 4) | Open |
+
+
+## Addendum 2026-10-07 (6): the cloud brain's first real step (DOCS16_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| S3 | Function lockdown | Applied 16:13; L3/L4 as expected; post-revoke cron runs to confirm (S4 M6) |
+| W2 | markandeya_purana on /texts | Done 16:1x: 1,216 passages, 25 pages |
+| W7 | Engine label and IAST title for markandeya (S4 M2/M3); publisher labels by itself from now on (PUBLISH_ENGINE) | M2/M3 ready to run; patch built |
+| W1 | Status panel: SITE_CORPUS 2026-10-07 and the "readable on this site" line (SITE_LINE) | Patch built; manual git on main, then Publish |
+| R768 | 768 vs 1536 dimensions, measured: recall@12 0.893 vs 0.956 | Done; 1536 chosen |
+| C1 | Final file: halfvec(1536), embed queue, explicit grants | Ready to apply; re-tested |
+| C2 | `embed-published-passages` edge function + run/schedule SQL | Built and tested offline; deploy, then R1-R5 |
+| C3 | Ask on the site: embed the question (RETRIEVAL_QUERY, 1536), match_text_passages, answer with citations | Next, after C2 has run |
+| W5 | "<decorative line>" OCR markers shown on the reader (2 passages, p1.4 and p1.6) | Open: strip in the publisher or the reader |
+| W6 | Hindi on the reader (B1 has no Hindi column) | Open: needs a column, the publisher and the reader page |
+| W3 | Article titled "....docx (1)" | S4 M4/M5 ready |
+| T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |

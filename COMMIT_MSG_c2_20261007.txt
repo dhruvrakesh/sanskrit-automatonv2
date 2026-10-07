@@ -1,0 +1,23 @@
+Cloud brain first real step: 1536 dimensions measured, C1 final, C2 edge function, status-panel line, publisher engine label (RECALL_768_2026_10_07, EMBED_PUBLISHED_C2_2026_10_07, SITE_LINE_2026_10_07, PUBLISH_ENGINE_2026_10_07, DOCS16_2026_10_07)
+
+scripts/recall_check_768.py (read-only, no API): nearest neighbours of 300 sampled passages under the
+local 3,072-dim vectors vs their first N dims, renormalised. On 21,645 vectors: N=768 recall@12
+0.893 (recall@5 0.875), N=1536 recall@12 0.956 (0.948). The plan's bar was 0.90, so 1536.
+docs/cloud/C1_corpus_brain_2026-10-07.sql (supersedes the DRAFT): halfvec(1536); queue function
+srangam_passages_to_embed (published, non-empty, no vector or changed text; total_pending);
+explicit grants (match_text_passages public, the queue service-role only). Re-tested on PG16 +
+pgvector 0.8.0 with Supabase-like default privileges. Not applied by this commit.
+docs/cloud/C2_embed-published-passages/ (index.ts, lib.ts, lib_test.ts): edge function for the
+Srangam repo; requireAdminOrCron; gemini-embedding-001 batchEmbedContents, RETRIEVAL_DOCUMENT,
+1536 dims, key in a header, retries on 429/5xx, L2-normalised halfvec upserts on passage_id, stops
+at the first failure, 100 s deadline, dry_run. 10 Deno tests; type-checks against the real auth
+gate and supabase-js 2.58.0. Not deployed by this commit. C2_run_and_schedule SQL: R1-R6.
+scripts/patch_site_line_2026_10_07.py: for the Srangam repo's emit_project_status.py: SITE_CORPUS
+= 2026-10-07 (2 texts, 2 published, 1,655 passages, reader live) and, with the reader live, the
+"Not yet true" line becomes "Only 2 of the 65 works ... can be read on this site so far".
+scripts/patch_publish_engine_2026_10_07.py: without --engine, label the text with the one engine
+every translated passage records; guess nothing when they differ.
+docs/cloud/S4_site_metadata_2026-10-07.sql: site counts, markandeya engine label and IAST title,
+the ".docx (1)" article title, cron runs after the S3 revoke.
+docs: PLATFORM s19, RUNBOOK, ENTERPRISE_PATH addendum (6).
+Tests: test_recall_check_768, test_site_line_2026_10_07, test_publish_engine_2026_10_07.
