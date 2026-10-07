@@ -240,3 +240,19 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | T2 | Translation throughput: 91-157 passages an hour, one call per passage | Open: a measured comparison (thinking budget, batching) on a sample, judged by qa_scan, before any change |
 | 1.12 / 1.13 | Maintenance alongside long translations; noise vectors | Open; 1.12 matters more now (T1 keeps the dashboard busy for a day or more) |
 | C0 / C1 / C2 | Cloud pre-flight, corpus brain schema, `embed-published-passages` | C0 ready to run; C1 drafted and tested, not applied; C2 after C1 |
+
+
+## Addendum 2026-10-07 (5): Srangam state and lockdown (DOCS15_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| S2 | Read-only follow-up (G1-G5) | Done 15:05-15:06 |
+| S3 | Revoke anon (and authenticated where service-role only) on `_cron_invoke_edge`, `reconcile_stuck_admin_jobs`, `get_corpus_correlations`, `get_corpus_correlations_v2` | Ready to run; tested |
+| C0 | Cloud pre-flight | Done 15:07: every C1 precondition met |
+| C1 | Vectors, stories, RLS, `match_text_passages` | Ready; apply together with C2 |
+| C2 | Edge function `embed-published-passages` (GEMINI_API_KEY is already referenced by Srangam edge functions; confirm it is set in Lovable Cloud secrets) | Next |
+| W1 | Status panel stale (2026-09-27) and says there is no reading page; the fix (6b15ee7) is local on a feature branch | Open: manual git on main, then Publish |
+| W2 | Publish markandeya_purana to /texts (gate report, SQL, review, flip) | Open: your decision |
+| W3 | Article titled "....docx (1)"; network type filter offers 5 types, 2 exist | Open: Srangam admin / Lovable |
+| W4 | completeWorks needs 100% English; texts whose only gaps cannot be translated as printed are never "complete" | Open: Srangam generator |
+| T1 | Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V is NEEDS-OCR (21.9% debris, 0% vision, 339 pages, est $1.08): OCR and re-ingest before translating (corrects addendum 4) | Open |

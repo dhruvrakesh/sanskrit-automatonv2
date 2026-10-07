@@ -1122,3 +1122,20 @@ Every step is a dry run unless `--yes` is given.
 - **Ganita.** `python scripts\corpus_status.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V`. A wrong `--doc` now says which codes are close.
   - Resume from the dashboard (translate_both, as on 6 Oct) with the machine kept awake. Allow 6-11 hours for the English alone at the measured rate.
 - **Srangam S2.** Paste `docs\cloud\S2_srangam_followup_2026-10-07.sql` one block at a time (G1-G5, all read-only) and keep the CSVs.
+
+
+## Srangam: refresh the status panel, lock down functions, publish a text; Ganita OCR first (DOCS15_2026_10_07)
+
+- **Ganita.** Do not resume translation. Run `python scripts\corpus_status.py --commands --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` and follow its order: `ocr_consensus.py` plan (free), then `--yes --max-usd`, then `--drift-only` (the re-ingest block), then translate.
+- **S3.** Paste L1, L2, L3 and L4, then L5 ten minutes later, and L5 again the next day for the nightly jobs. Re-run L4 after any Lovable change that adds a database function.
+- **The status panel.** Git runs by hand, in `D:\srangam-42267`; no script pushes main.
+  1. Look first: `git status -sb`, `git fetch origin`, `git rev-list --left-right --count HEAD...origin/main`.
+  2. Switch and update: `git switch main`, then `git pull --ff-only origin main`.
+  3. Run `block_BE_reader.ps1 -ReaderLive -NoPush`. It regenerates the panel with fresh numbers and the reading page, and commits locally.
+  4. Read `git show --stat HEAD`.
+  5. Push main yourself, then Publish in Lovable.
+  - Branch feat/s1-nartiang-backlink (6b15ee7) is then superseded; delete it when you are content.
+- **Publishing a text to /texts.**
+  1. `python scripts\publish_srangam.py --doc <code> --gate-report`, then `--dry-run`, then `--emit-sql <dir>`.
+  2. Paste 00_text.sql, each NN_passages.sql and 99_verify.sql. The text lands unpublished.
+  3. After review, run `UPDATE public.srangam_texts SET published = true WHERE doc_code = '<code>';`, then `block_BE_reader.ps1 -Verify`.
