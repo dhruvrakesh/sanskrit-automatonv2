@@ -15,6 +15,14 @@ retire it in the browser, where Devanagari and IAST display properly.
   * An edit re-runs the check and returns the story to 'draft'; approval follows the
     same rule as the CLI (a failed check needs an explicit "approve anyway").
 Registered from dashboard.py inside try/except, so a fault here cannot stop the dashboard.
+
+STORY_BOOKS_2026_10_07 (same page, more wiring):
+  * Propose image: stories.py illustrate (one idea, linked to the story); drawing,
+    approving and redrawing reuse the image library's own routes (/api/images/...).
+  * Book: choose texts and stories, an audience and languages -> stories.py book
+    (HTML, then PDF) or a Booksmith edition (booksmith_build.py --source-html).
+  * Brain: what of the stories, episodes and images is not yet in the Ask index
+    (brain_items.py), and a button to add it.
 """
 from __future__ import annotations
 
@@ -31,6 +39,9 @@ import stories as st  # noqa: E402
 import images as im   # noqa: E402
 
 MARK = "STORIES_UI_2026_10_05"
+MARK2 = "STORY_BOOKS_2026_10_07"
+BOOK_RE = re.compile(r"^(anthology_\d{8}|book_[a-z0-9-]{1,40}_\d{8})\.html$")
+AUDIENCES = ("young", "general", "scholar")
 DOC_RE = re.compile(r"^[A-Za-z0-9_\-]+$")
 EDITABLE = ("title", "title_hi", "story_en", "story_hi", "quote_sa", "quote_ref", "notes")
 LIMITS = {"title": 300, "title_hi": 300, "story_en": 6000, "story_hi": 8000, "quote_sa": 400, "quote_ref": 20,
@@ -64,7 +75,7 @@ def register(app, *, launch, root, py, script, db=None):
         def inner(*a, **k):
             try:
                 return fn(*a, **k)
-            except (FileNotFoundError, sqlite3.Error, ValueError, TypeError) as e:
+            except (FileNotFoundError, sqlite3.Error, ValueError, TypeError, AttributeError, SystemExit) as e:
                 return jsonify({"error": "%s: %s" % (type(e).__name__, e)}), 500
         return inner
 
@@ -85,9 +96,17 @@ def register(app, *, launch, root, py, script, db=None):
         d["range"] = "%s-%s" % (st.ref(d["from_page"], d["from_idx"]), st.ref(d["to_page"], d["to_idx"]))
         img = None
         if d.get("image_id"):
-            r = c.execute("SELECT id, status, title, path FROM doc_images WHERE id=?", (d["image_id"],)).fetchone()
+            # STORY_BOOKS_2026_10_07: show the newest version of the picture's lineage that is not retired, so a
+            # Redraw (images.py regenerate makes a new row) appears here; approving it relinks the story.
+            r = c.execute("""SELECT i.id, i.status, i.title, i.path, i.brief, i.caption_en, i.kind FROM doc_images i
+                             WHERE i.lineage_id = (SELECT COALESCE(lineage_id, id) FROM doc_images WHERE id=?)
+                               AND i.status <> 'retired' ORDER BY i.version DESC, i.id DESC LIMIT 1""",
+                          (d["image_id"],)).fetchone() or c.execute(
+                "SELECT id, status, title, path, brief, caption_en, kind FROM doc_images WHERE id=?",
+                (d["image_id"],)).fetchone()
             if r:
-                img = {"id": r[0], "status": r[1], "title": r[2], "has_image": bool(r[3])}
+                img = {"id": r[0], "status": r[1], "title": r[2], "has_image": bool(r[3]), "brief": r[4] or "",
+                       "caption_en": r[5] or "", "kind": r[6]}
         d["image"] = img
         return d
 
@@ -282,7 +301,7 @@ def register(app, *, launch, root, py, script, db=None):
     def stories_pdf():
         data = request.get_json(force=True) or {}
         name = str(data.get("name") or "")
-        if not re.match(r"^anthology_\d{8}\.html$", name) or not (root / "exports" / name).is_file():
+        if not BOOK_RE.match(name) or not (root / "exports" / name).is_file():
             return bad("no such anthology file")
         cmd = py(script("export_pdf.py"), str(root / "exports" / name))
         try:
@@ -290,5 +309,203 @@ def register(app, *, launch, root, py, script, db=None):
         except TypeError:
             jid = launch("stories", name, cmd)
         return jsonify({"job": jid})
+
+    # ---------------------------------------------------------------- STORY_BOOKS_2026_10_07
+    @app.post("/api/stories/<int:sid>/illustrate")
+    @guarded
+    def stories_illustrate(sid):
+        c = con()
+        try:
+            s = get_story(c, sid)
+            if not s:
+                return bad("unknown story", 404)
+            if s["status"] == "retired":
+                return bad("this story is retired")
+            if s.get("image_id"):
+                r = c.execute("SELECT status FROM doc_images WHERE id=?", (s["image_id"],)).fetchone()
+                if r and r[0] != "retired":
+                    return bad("story #%d already has image #%d (%s)" % (sid, s["image_id"], r[0]))
+            code = c.execute("SELECT code FROM docs WHERE id=?", (s["doc_id"],)).fetchone()[0]
+        finally:
+            c.close()
+        return job(code, ["illustrate", "--id", str(sid), "--yes"], "illus-%d" % sid)
+
+    @app.post("/api/stories/<int:sid>/image")
+    @guarded
+    def stories_image(sid):
+        """approve: approve the picture (the image library's rule: one approved version per lineage) and link
+        it to the story; retire: retire the idea or picture, so another can be proposed."""
+        data = request.get_json(force=True) or {}
+        act, iid = data.get("action"), int(data.get("image") or 0)
+        c = con()
+        try:
+            s = get_story(c, sid)
+            if not s:
+                return bad("unknown story", 404)
+            row = c.execute("SELECT doc_id, lineage_id FROM doc_images WHERE id=?", (iid,)).fetchone()
+            mine = c.execute("SELECT COALESCE(lineage_id, id) FROM doc_images WHERE id=?",
+                             (s.get("image_id") or 0,)).fetchone()
+            if not row or row[0] != s["doc_id"] or not mine or (row[1] or iid) != mine[0]:
+                return bad("image #%d is not this story's picture" % iid)
+            if act == "approve":
+                im.approve(c, iid)
+            elif act == "retire":
+                im.set_status(c, iid, "retired")
+            else:
+                return bad("unknown action")
+            if act == "approve":
+                c.execute("UPDATE doc_stories SET image_id=?, updated_at=? WHERE id=?", (iid, st.now(), sid))
+                c.commit()
+            return jsonify({"ok": True})
+        finally:
+            c.close()
+
+    @app.get("/api/stories/brain")
+    @guarded
+    def stories_brain():
+        try:
+            import brain_items as bi
+        except Exception as e:
+            return jsonify({"available": False, "error": "%s: %s" % (type(e).__name__, e)})
+        c = con()
+        try:
+            p = bi.plan(c)
+        finally:
+            c.close()
+        return jsonify({"available": True, "model": p["model"], "items": p["items"], "indexed": p["indexed"],
+                        "add": p["add"], "update": p["update"], "drop": p["drop"]})
+
+    @app.post("/api/stories/brain/refresh")
+    @guarded
+    def stories_brain_refresh():
+        cmd = py(script("brain_items.py"), "--db", str(dbp))
+        try:
+            jid = launch("brain", "(corpus)", cmd, mode="items")
+        except TypeError:
+            jid = launch("brain", "(corpus)", cmd)
+        return jsonify({"job": jid})
+
+    @app.get("/api/stories/books/stories")
+    @guarded
+    def stories_for_books():
+        docs = [d for d in (request.args.get("docs") or "").split(",") if DOC_RE.match(d)]
+        if not docs:
+            return bad("give docs")
+        c = con()
+        try:
+            out = []
+            for code, sid, st, title, th, fp, fi, tp, ti, iid, ipath, ist, en, vj in c.execute(
+                    """SELECT d.code, s.id, s.status, s.title, s.title_hi, s.from_page, s.from_idx, s.to_page, s.to_idx,
+                              s.image_id, i.path, i.status, COALESCE(s.story_en,''), s.verify
+                       FROM doc_stories s JOIN docs d ON d.id = s.doc_id
+                       LEFT JOIN doc_images i ON i.id = s.image_id
+                       WHERE d.code IN (%s) AND s.status IN ('draft','approved')
+                       ORDER BY d.code, s.from_page, s.from_idx, s.id""" % ",".join("?" * len(docs)), docs):
+                try:
+                    ok = (json.loads(vj or "null") or {}).get("ok")
+                except ValueError:
+                    ok = None
+                out.append({"doc": code, "id": sid, "status": st, "title": title or "", "title_hi": th or "",
+                            "range": "%s-%s" % (st_ref(fp, fi), st_ref(tp, ti)), "image_id": iid,
+                            "image_ok": bool(ipath) and ist == "approved", "words": len(en.split()), "check_ok": ok})
+            return jsonify(out)
+        finally:
+            c.close()
+
+    def st_ref(p, i):
+        return st.ref(p, i) if p is not None and i is not None else "?"
+
+    def _ids(data):
+        ids = []
+        for x in (data.get("ids") or []):
+            try:
+                ids.append(int(x))
+            except (TypeError, ValueError):
+                pass
+        return ids[:200]
+
+    @app.post("/api/stories/book")
+    @guarded
+    def stories_book():
+        data = request.get_json(force=True) or {}
+        ids = _ids(data)
+        if not ids:
+            return bad("choose at least one story")
+        title = str(data.get("title") or "Stories from the Sanskrit corpus").strip()[:200]
+        aud = data.get("audience") if data.get("audience") in AUDIENCES else "general"
+        argv = ["book", "--ids", ",".join(map(str, ids)), "--title", title, "--audience", aud]
+        if not data.get("hindi", True):
+            argv.append("--no-hindi")
+        if data.get("proof"):
+            argv.append("--proof")
+        return job("(book)", argv, "book-" + st._slug(title) + "-" + aud)
+
+    @app.post("/api/stories/booksmith")
+    @guarded
+    def stories_booksmith():
+        """Write the Booksmith witness now (local, no API), then build it as a dashboard job."""
+        data = request.get_json(force=True) or {}
+        ids = _ids(data)
+        if not ids:
+            return bad("choose at least one story")
+        title = str(data.get("title") or "Stories from the Sanskrit corpus").strip()[:200]
+        label = "stories-" + st._slug(title)
+        witness = root / "exports" / "booksmith" / ("%s.html" % label)
+        c = con()
+        try:
+            _p, n = st.booksmith_source(c, ids, title, witness)
+            plate_ids = []
+            if data.get("plates", True):
+                for sid in ids:
+                    r = c.execute("""SELECT i.id FROM doc_stories s JOIN doc_images i ON i.id = s.image_id
+                                     WHERE s.id=? AND s.status='approved' AND i.status='approved'
+                                       AND i.path IS NOT NULL""", (sid,)).fetchone()
+                    if r:
+                        plate_ids.append(r[0])
+        finally:
+            c.close()
+        if not n:
+            return bad("none of the chosen stories is approved; a Booksmith edition takes approved stories only")
+        argv = py(script("booksmith_build.py"), "--db", str(dbp), "--doc", label, "--mode", "story",
+                  "--source-html", str(witness), "--title", title)
+        if plate_ids:
+            argv += ["--plate-ids", ",".join(map(str, plate_ids[:12]))]
+        try:
+            jid = launch("booksmith", label, argv, mode="story")
+        except TypeError:
+            jid = launch("booksmith", label, argv)
+        return jsonify({"job": jid, "label": label, "stories": n, "plates": len(plate_ids[:12])})
+
+    @app.get("/api/stories/booksmith/file")
+    def stories_booksmith_file():
+        from flask import send_file
+        label = request.args.get("label", "")
+        if not re.match(r"^stories-[a-z0-9-]{1,40}$", label):
+            return bad("invalid label")
+        side = root / "exports" / "booksmith" / ("%s__story.json" % label)
+        try:
+            pdf = Path(json.loads(side.read_text(encoding="utf-8")).get("pdf") or "")
+        except (OSError, ValueError):
+            return bad("no build recorded for %s" % label, 404)
+        if pdf.name not in ("book.pdf", "layout-proof.pdf") or pdf.parent.name != "build" or not pdf.is_file():
+            return bad("no PDF for %s" % label, 404)
+        return send_file(str(pdf), mimetype="application/pdf", download_name="%s.pdf" % label)
+
+    @app.get("/api/stories/books/files")
+    @guarded
+    def stories_book_files():
+        ex = root / "exports"
+        files = sorted([p for p in ex.glob("*.html") if BOOK_RE.match(p.name)], key=lambda p: -p.stat().st_mtime)[:30]
+        out = [{"name": p.name, "pdf": (p.with_suffix(".pdf").name if p.with_suffix(".pdf").is_file() else None),
+                "mtime": p.stat().st_mtime} for p in files]
+        bsd = ex / "booksmith"
+        for side in sorted(bsd.glob("stories-*__story.json"), key=lambda p: -p.stat().st_mtime)[:20] if bsd.is_dir() else []:
+            try:
+                d = json.loads(side.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            out.append({"booksmith": d.get("doc"), "ok": d.get("ok"), "pdf_kind": d.get("pdf_kind"),
+                        "error": d.get("error"), "mtime": side.stat().st_mtime})
+        return jsonify(out)
 
     return app

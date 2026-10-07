@@ -166,9 +166,11 @@
     LAST_SOURCES = sources || [];
     var html = '';
     (sources||[]).forEach(function(s){
-      html += '<a class="src" id="src-'+s.n+'" href="/reader/'+encodeURIComponent(s.doc)+'" target="_blank">'
-            + '<span class="open">open in reader &#8599;</span>'
+      // BRAIN_ITEMS_2026_10_07: an editorial item opens its story, episode or picture
+      html += '<a class="src" id="src-'+s.n+'" href="'+(s.link ? esc(s.link) : '/reader/'+encodeURIComponent(s.doc))+'" target="_blank">'
+            + '<span class="open">'+(s.link ? 'open &#8599;' : 'open in reader &#8599;')+'</span>'
             + '<span class="num">'+s.n+'</span><span class="tag">['+esc(s.tag)+']</span>'
+            + (s.label ? ' <i style="color:#b18a45">'+esc(s.label)+'</i>' : '')
             + '<div class="en">'+esc(s.english||'')+'</div></a>';
     });
     document.getElementById('sources').innerHTML = html;

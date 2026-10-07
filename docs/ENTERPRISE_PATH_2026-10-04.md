@@ -178,3 +178,23 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | 2.10 | verify: sentence split after a citation; speech openers | Built 2026-10-05 (STORIES_UI) |
 | 2.11 | Untranslatable passages counted as gaps; running-heads tagging | Built 2026-10-05 (GAPS); first use markandeya_purana |
 | 3.10 | Story fidelity: a judge on the cited passages, and a reader's correction loop back to the passage | Open (follows 3.9) |
+
+
+## Addendum 2026-10-07: pictures, books, brain items; next phases (DOCS11_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| 2.12 | Pictures from stories: propose, draw, approve and redraw on `/stories` | Built 2026-10-07 |
+| 2.13 | Book composer: choose texts and stories, order, readers; reading book HTML and PDF; Booksmith edition | Built 2026-10-07 (Booksmith verified on a copy of 0.2.1) |
+| 1.10 | Editorial index for Ask (`brain_items`): stories, episodes and images; maintenance step b2 | Built 2026-10-07 |
+| 2.14 | Running heads with a page number and a danda (markandeya) | Built 2026-10-07 |
+| 2.15 | Retellings per age group (`stories.py retell --audience young`): a variant row with the same checks; citations kept in the data and hidden in the young layout | Next. About $0.01 a story |
+| 2.16 | Graphic novels of 10-15 pages from a story or a text (see below) | After 2.15 |
+| C0-C4 | The cloud brain on the existing Supabase (Lovable Cloud): vectors as halfvec(768), approved stories and images, an Ask Edge Function. See docs/CLOUD_BRAIN_2026-10-07.md | After the audit Q1-Q6 |
+
+**Graphic novel, as designed (2.16).** Nothing in it is drawn or captioned without a passage behind it.
+- **novel plan --story N --pages 12** makes one call (about $0.01). Inputs: the story's passages, the approved retelling and its notes. Output: the pages and their panels, each with a scene, a caption of at most 25 words with its [page.idx] citation, and dialogue only where a passage quotes speech. It also writes a cast sheet that fixes each figure's iconography. The output is checked by the existing verify rules: citations present and in range, and names found in the cited passages.
+- **novel cast** draws a reference sheet for each main figure (2-4 images).
+- **novel draw** draws one image per page, giving the cast sheets to the image model as reference images so the figures stay the same from page to page. No lettering goes in the images. Captions are typeset in HTML, because script drawn by an image model is unreliable, Devanagari above all.
+- Layout is an HTML comic template (page image and caption boxes), then a PDF through `export_pdf.py`. A person approves each page.
+- **Cost:** about $1.4 to $1.9 for 12 pages at 1K-2K (13 to 16 images at $0.09-0.13, plus the plan), plus redraws. Budget-gated, a dry run first.

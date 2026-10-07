@@ -51,6 +51,17 @@ try {
     & $py scripts\build_embeddings.py --db data\context.db 2>&1 | Add-Content $log
     Log ("STEP b embeddings   {0:n0}s" -f ((Get-Date) - $tb).TotalSeconds)
 
+    # b2) BRAIN_ITEMS_2026_10_07: stories, found episodes and drawn images into the Ask index (CHEAP,
+    #     incremental: only new or changed items are embedded; retired ones are dropped)
+    #     A failure here is logged and skipped; it never stops step c.
+    $tb2 = Get-Date
+    try {
+        & $py scripts\brain_items.py --db data\context.db 2>&1 | Add-Content $log
+        Log ("STEP b2 brain items {0:n0}s" -f ((Get-Date) - $tb2).TotalSeconds)
+    } catch {
+        Log ("STEP b2 brain items SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $tb2).TotalSeconds, $_)
+    }
+
     # c) incremental entity layer (MODERATE) - NEW verses only.
     #
     # MAINT_CONVERGE_2026_09_12. This carried --retry-empty, which also

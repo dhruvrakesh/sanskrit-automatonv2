@@ -2870,6 +2870,25 @@ def _ask_retrieve(con, q, k=12):
 
 
 _ASK_VEC_CACHE = {}   # ASK_VECTOR_CACHE_2026_10_04: {key, ids, mat}
+_ASK_QV = {}          # BRAIN_ITEMS_2026_10_07: question -> (model, normalised vector), briefly
+
+
+def _ask_brain_items(con, q, data):
+    """BRAIN_ITEMS_2026_10_07: approved stories, found episodes and approved images close to the
+    question, from brain_items (scripts/brain_items.py). [] when there is no such index."""
+    got = _ASK_QV.pop(q, None)
+    if not got:
+        return []
+    try:
+        import brain_items as _bi
+        try:
+            k = max(0, min(6, int(data.get("k_editorial", 3))))
+        except (TypeError, ValueError):
+            k = 3
+        return _bi.retrieve(con, got[1], got[0], k=k, include_drafts=True if data.get("drafts") else None)
+    except Exception as e:
+        print(f"[ask] editorial items skipped: {type(e).__name__}: {e}")
+        return []
 
 
 def _ask_semantic_retrieve(con, q, k=12):
@@ -2912,6 +2931,9 @@ def _ask_semantic_retrieve(con, q, k=12):
     n = float(np.linalg.norm(qv))
     if n > 0:
         qv = qv / n
+    _ASK_QV[q] = (model, qv)   # BRAIN_ITEMS_2026_10_07: the same vector finds editorial items, no second call
+    while len(_ASK_QV) > 64:
+        _ASK_QV.pop(next(iter(_ASK_QV)))
     # ASK_VECTOR_CACHE_2026_10_04: read the matrix once; rebuild only when the index changes.
     _sig = con.execute("SELECT COUNT(*), MAX(updated_at) FROM passage_embeddings WHERE model=?",
                        (model,)).fetchone()
@@ -2955,6 +2977,10 @@ _ASK_SYSTEM = (
     "exactly as given, e.g. [MBh01 1.1.0]. If the passages do not contain the answer, "
     "say so plainly instead of inventing one. Be concise, precise, and scholarly; do "
     "not add outside knowledge unless you clearly label it as background context."
+    # BRAIN_ITEMS_2026_10_07
+    " Items labelled EDITORIAL (a retelling, an episode pointer or an illustration) were made from this corpus "
+    "by the project; they are not scripture. Ground every claim in the passages, and cite an editorial item only "
+    "for what it adds, such as where an episode is told or that a retelling or picture of it exists."
 )
 
 @app.post("/api/ask")
@@ -2976,10 +3002,12 @@ def api_ask():
     except Exception as e:
         return jsonify({"error": f"cannot open db: {e}"}), 500
     mode = "keyword"
+    extra = []   # BRAIN_ITEMS_2026_10_07
     try:
         rows = _ask_semantic_retrieve(con, q, k)   # meaning-based if embeddings built
         if rows:
             mode = "semantic"
+            extra = _ask_brain_items(con, q, data)
         else:
             rows = _ask_retrieve(con, q, k)        # else keyword FTS
     finally:
@@ -2993,6 +3021,11 @@ def api_ask():
         sources.append({"n": i, "tag": tag, "doc": code, "verse_ref": vref,
                         "page_no": page, "idx": idx, "english": tr})
         ctx.append(f"[{i}] [{tag}] {(tr or '')[:600]}")
+    for j, it in enumerate(extra, len(sources) + 1):   # BRAIN_ITEMS_2026_10_07
+        sources.append({"n": j, "tag": it["tag"], "doc": it["doc"], "verse_ref": None, "page_no": it["page"],
+                        "idx": it["idx"], "english": it["text"][:600], "kind": it["kind"], "link": it["link"],
+                        "label": it["label"]})
+        ctx.append(f"[{j}] [{it['tag']}] ({it['label']}) {it['text'][:700]}")
     user_msg = "PASSAGES:\n" + "\n".join(ctx) + f"\n\nQUESTION: {q}\n\nAnswer, citing [tags]:"
     # METER_GATES_2026_10_04: Ask is a paid call like any other. It asks the budget first and is metered.
     try:
@@ -3033,7 +3066,7 @@ def api_ask():
     except Exception as e:
         return jsonify({"error": f"LLM error: {e}", "sources": sources}), 500
     return jsonify({"answer": answer, "sources": sources, "engine": engine,
-                    "k": k, "mode": mode})
+                    "k": k, "mode": mode, "editorial": len(extra)})   # BRAIN_ITEMS_2026_10_07
 
 
 @app.get("/ask")

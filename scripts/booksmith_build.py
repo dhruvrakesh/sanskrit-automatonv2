@@ -94,6 +94,8 @@ MODE_FLAGS = {
             ["sanskrit", "iast", "english"]),
     "hi":  (["--sanskrit", "--hindi-only"], "_hi",
             ["sanskrit", "iast", "hindi"]),
+    # BOOKSMITH_STORIES_2026_10_07: a story collection (stories.py booksmith-source); --source-html only
+    "story": ([], "", ["sanskrit", "english", "hindi"]),
 }
 
 
@@ -419,12 +421,33 @@ def _booksmith_config_io(bs: Path, project: Path, new_paths=None, ipv=None) -> d
     raise RuntimeError("could not read plate_paths from %s" % project)
 
 
-def sync_plates(bs: Path, project: Path, db: str, doc: str, config_io=None) -> dict:
+def images_by_ids(db: str, ids: list) -> list[dict]:
+    """BOOKSMITH_STORIES_2026_10_07: APPROVED images with these ids, in the order given. Read-only."""
+    import sqlite3
+    uri = Path(db).resolve().as_uri() + "?mode=ro"
+    con = sqlite3.connect(uri, uri=True)
+    try:
+        con.execute("PRAGMA query_only=1")
+        got = {r[0]: r for r in con.execute(
+            "SELECT id, version, path, anchor_page, anchor_idx FROM doc_images WHERE status='approved' "
+            "AND path IS NOT NULL AND id IN (%s)" % ",".join("?" * len(ids)), list(ids))} if ids else {}
+    finally:
+        con.close()
+    out = []
+    for i in ids:
+        if i in got:
+            iid, ver, path, pg, ix = got[i]
+            src = Path(path) if os.path.isabs(path) else ROOT / path
+            out.append({"id": iid, "version": ver, "src": src, "page": pg, "idx": ix})
+    return out
+
+
+def sync_plates(bs: Path, project: Path, db: str, doc: str, config_io=None, images=None) -> dict:
     """Make the project's library plates match the approved generated images.
     Returns a small report for the sidecar. Raises RuntimeError on refusal."""
     io = config_io or (lambda new=None, ipv=None: _booksmith_config_io(bs, project, new, ipv))
     cur = io()
-    images = approved_generated_images(db, doc)
+    images = approved_generated_images(db, doc) if images is None else images   # BOOKSMITH_STORIES_2026_10_07
     missing = [str(im["src"]) for im in images if not im["src"].exists()]
     images = [im for im in images if im["src"].exists()]
     new, copies = plan_plates(list(cur["plate_paths"]), images)
@@ -501,6 +524,9 @@ def main() -> int:
                     help="BOOKSMITH_PLATES_2026_10_04: approved = approved generated images from the "
                          "image library become colour plates (evenly spaced; edits book.yaml).")
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--source-html", default=None,
+                    help="BOOKSMITH_STORIES_2026_10_07: build this witness instead of exporting --doc")
+    ap.add_argument("--plate-ids", default=None, help="approved image ids, in order, as the plates")
     args = ap.parse_args()
 
     bs_root = Path(args.booksmith_root)
@@ -522,6 +548,8 @@ def main() -> int:
     if not args.doc:
         raise SystemExit("--doc is required unless --selftest")
     doc = args.doc
+    if args.mode == "story" and not args.source_html:   # BOOKSMITH_STORIES_2026_10_07
+        raise SystemExit("--mode story needs --source-html (python scripts\\stories.py booksmith-source ...)")
     slug = slug_for(doc, args.mode)
     if not SLUG_RE.fullmatch(slug):
         raise SystemExit("doc %r does not reduce to a legal project id (got %r)" % (doc, slug))
@@ -549,8 +577,14 @@ def main() -> int:
     try:
         log("%s  doc=%s slug=%s mode=%s" % (MARK, doc, slug, args.mode))
 
-        log("[1/6] export HTML")
-        html = export_html(args.db, doc, args.mode, exports)
+        if args.source_html:   # BOOKSMITH_STORIES_2026_10_07
+            log("[1/6] witness given (--source-html); nothing exported")
+            html = Path(args.source_html).resolve()
+            if not html.is_file():
+                raise RuntimeError("no such witness: %s" % html)
+        else:
+            log("[1/6] export HTML")
+            html = export_html(args.db, doc, args.mode, exports)
         state["html"] = str(html)
         log("      witness: %s" % html)
         save()
@@ -586,9 +620,11 @@ def main() -> int:
             raise RuntimeError("refusing to re-ingest: " + detail)
         save()
 
-        if args.plates == "approved":   # BOOKSMITH_PLATES_2026_10_04
+        if args.plates == "approved" or args.plate_ids:   # BOOKSMITH_PLATES_2026_10_04 / BOOKSMITH_STORIES
             log("[2b/6] plates from the image library")
-            state["plates"] = sync_plates(exe, project, args.db, doc)
+            state["plates"] = sync_plates(exe, project, args.db, doc, images=(
+                images_by_ids(args.db, [int(x) for x in re.findall(r"\d+", args.plate_ids)])
+                if args.plate_ids else None))
             log("      plates: %s (%d in book.yaml, %d copied)"
                 % (state["plates"]["action"], len(state["plates"]["plates"]), state["plates"]["copied"]))
             save()

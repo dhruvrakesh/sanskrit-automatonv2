@@ -1,0 +1,22 @@
+Stories: pictures, books, Booksmith editions; brain editorial index; running heads v2 (STORY_BOOKS_2026_10_07, BOOKSMITH_STORIES_2026_10_07, BRAIN_ITEMS_2026_10_07, HEADS2_2026_10_07, DOCS11_2026_10_07)
+
+stories.py: illustrate (one image idea per story from its passages, retelling and
+notes; doc_images status brief, linked), book (reading book of chosen approved
+stories, in order, audience young|general|scholar layouts, own plate per story),
+booksmith-source (the stories as a Booksmith witness).
+stories_web.py / stories_static.html: job list in the sticky header with per-card
+busy state, refresh and flash on completion (Write story had worked, unseen);
+Propose image / Draw it / Approve image / Redraw / Drop idea on each card (image
+library routes; newest version shown; approve relinks the story); "Make a book"
+tab (texts, stories, order, readers, Hindi, proof; reading book HTML+PDF, Booksmith
+edition, recent books); brain status chip and "Update brain".
+booksmith_build.py: --source-html, --mode story (sanskrit, english, hindi),
+--plate-ids; existing modes unchanged. Verified on a copy of Booksmith 0.2.1.
+brain_items.py (new): stories, found episodes and drawn images in a second index with
+the passage model; incremental; Ask (/api/ask) adds up to 3 approved items with the
+same question vector, labelled EDITORIAL; ask.html links them; maintenance step b2.
+classify_noise.py --running-heads: numbered first-line heads with a danda (markandeya
+"<n> markandeya puranam ||"); --include-translated.
+Docs: PLATFORM s14, RUNBOOK, ENTERPRISE_PATH addendum (age-group retellings, graphic
+novel design), docs/CLOUD_BRAIN_2026-10-07.md (platform choice and design).
+Tests: test_story_books_2026_10_07, test_brain_items_2026_10_07, test_heads2_2026_10_07.

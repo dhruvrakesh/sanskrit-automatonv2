@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Stories - Sanskrit Automaton</title>
-<!-- STORIES_UI_2026_10_05 - served by stories_web.py at /stories -->
+<!-- STORIES_UI_2026_10_05 + STORY_BOOKS_2026_10_07 - served by stories_web.py at /stories -->
 <style>
 :root{
   --bg:#0e0d0b; --bg2:#161411; --bg3:#1e1b16; --bg4:#28231b;
@@ -15,7 +15,8 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,'Segoe UI',sans-serif}
 a{color:var(--gold)}
-.top{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.hdr{position:sticky;top:0;z-index:5;background:var(--bg2);border-bottom:1px solid var(--border)}
+.top{display:flex;align-items:center;gap:10px;padding:10px 16px;flex-wrap:wrap}
 .top h1{font-size:15px;margin:0;color:var(--cream)}
 .sp{flex:1}
 input,select,button,textarea{font:inherit;color:var(--ink);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:5px 9px}
@@ -23,14 +24,29 @@ textarea{width:100%;min-height:90px;resize:vertical}
 button{cursor:pointer} button:hover{border-color:var(--gold)} button:disabled{opacity:.45;cursor:default}
 button.primary{background:#3a2d10;border-color:var(--gold);color:var(--cream)}
 button.warn{border-color:#e05f5f80;color:#f0b0b0}
+.tabs{display:flex;gap:4px}
+.tabs button{border-radius:99px;padding:3px 14px}
+.tabs button.on{background:#3a2d10;border-color:var(--gold);color:var(--cream)}
+.chip{font-size:12px;padding:2px 10px;border-radius:99px;border:1px solid var(--border);color:var(--muted)}
+.chip.due{border-color:var(--gold);color:var(--gold)}
 .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg2)}
 .note{color:var(--muted);font-size:12.5px}
-#job{padding:8px 16px;font-size:12.5px;color:var(--muted);white-space:pre-wrap;display:none;border-bottom:1px solid var(--border);background:#14120f}
+#jobs{display:none;padding:6px 16px 8px;border-top:1px solid var(--border);background:#14120f;max-height:40vh;overflow:auto}
+.jobrow{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;padding:3px 0}
+.jobrow .st{flex:0 0 70px;font-weight:600}
+.jobrow .st.run{color:var(--gold)} .jobrow .st.ok{color:var(--green)} .jobrow .st.bad{color:var(--red)}
+.jobrow pre{margin:0;white-space:pre-wrap;color:var(--muted);font:12px/1.4 ui-monospace,Consolas,monospace;flex:1}
+.jobrow .x{padding:0 7px}
 #list{padding:14px 16px;display:flex;flex-direction:column;gap:14px;max-width:1200px}
-.card{display:flex;gap:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px}
-.card .img{flex:0 0 180px}
-.card .img img{width:180px;border-radius:var(--r-sm);display:block}
-.card .img .ph{width:180px;height:120px;border:1px dashed var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;text-align:center;padding:6px}
+.card{display:flex;gap:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px;scroll-margin-top:140px}
+.card.flash{outline:2px solid var(--gold)}
+.card.busy{opacity:.75}
+.busyline{font-size:12.5px;color:var(--gold);margin-top:6px}
+.card .img{flex:0 0 190px;display:flex;flex-direction:column;gap:6px}
+.card .img img{width:190px;border-radius:var(--r-sm);display:block}
+.card .img .ph{width:190px;min-height:110px;border:1px dashed var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;text-align:center;padding:8px}
+.card .img .idea{font-size:12px;color:var(--ink);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 8px;max-height:150px;overflow:auto}
+.card .img button{font-size:12.5px;padding:3px 8px}
 .card .body{flex:1;min-width:0}
 .card h3{margin:0;font-size:16px;color:var(--cream)}
 .hi,.sa{font-family:'Nirmala UI','Noto Serif Devanagari','Mangal',serif}
@@ -54,43 +70,96 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
 .psg.flash{outline:2px solid var(--gold)}
 .psg .ref{color:var(--gold);font-size:12px}
 .empty{padding:40px;text-align:center;color:var(--muted)}
-#toast{position:fixed;left:16px;bottom:16px;background:var(--bg4);border:1px solid var(--gold);border-radius:var(--r);padding:8px 12px;display:none;z-index:20;max-width:70vw}
+#toast{position:fixed;left:16px;bottom:16px;background:var(--bg4);border:1px solid var(--gold);border-radius:var(--r);padding:8px 12px;display:none;z-index:20;max-width:70vw;white-space:pre-wrap}
+/* Book composer */
+#book{display:none;padding:14px 16px;max-width:1300px}
+.cols{display:grid;grid-template-columns:240px 1fr 340px;gap:14px;align-items:start}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px}
+.panel h4{margin:0 0 8px;color:var(--cream);font-size:13.5px}
+.texts label,.pick label{display:flex;gap:8px;align-items:flex-start;padding:4px 2px;font-size:13px;cursor:pointer}
+.texts label .n{color:var(--muted);font-size:12px;margin-left:auto}
+.pick .grp{color:var(--gold);font-size:12px;margin:8px 0 2px;text-transform:uppercase;letter-spacing:.05em}
+.pick label.off{opacity:.5;cursor:default}
+.pick .t{flex:1}
+.pick .m{color:var(--muted);font-size:12px}
+.order li{display:flex;gap:6px;align-items:center;padding:3px 0;font-size:13px}
+.order li span{flex:1}
+.order li button{padding:0 7px}
+.order{margin:0;padding-left:18px}
+.field{display:flex;flex-direction:column;gap:3px;margin-bottom:9px}
+.files a{display:block;font-size:12.5px;padding:2px 0}
+@media (max-width:980px){.cols{grid-template-columns:1fr}}
 @media (max-width:700px){.card{flex-direction:column}.card .img{flex:none}}
 </style>
 </head>
 <body>
-<div class="top">
-  <a href="/" style="text-decoration:none">&larr; Dashboard</a>
-  <a href="/images" style="text-decoration:none">Images</a>
-  <a href="/shelf" style="text-decoration:none">Shelf</a>
-  <h1>Stories</h1>
-  <select id="doc" title="text"></select>
-  <select id="status"><option value="">all</option><option>candidate</option><option>draft</option><option>approved</option><option>retired</option></select>
-  <span class="sp"></span>
-  <span class="note" id="summary"></span>
-  <button id="refresh">Refresh</button>
+<div class="hdr">
+  <div class="top">
+    <a href="/" style="text-decoration:none">&larr; Dashboard</a>
+    <a href="/images" style="text-decoration:none">Images</a>
+    <a href="/shelf" style="text-decoration:none">Shelf</a>
+    <a href="/ask" style="text-decoration:none">Ask</a>
+    <h1>Stories</h1>
+    <div class="tabs"><button id="tReview" class="on">Review</button><button id="tBook">Make a book</button></div>
+    <select id="doc" title="text"></select>
+    <select id="status"><option value="">all</option><option>candidate</option><option>draft</option><option>approved</option><option>retired</option></select>
+    <span class="sp"></span>
+    <span class="note" id="summary"></span>
+    <span class="chip" id="brain" title="Stories, found episodes and drawn images in the Ask index (brain_items.py)">Brain: ...</span>
+    <button id="brainBtn" title="Add new or changed stories, episodes and images to the Ask index (about $0.00002 each)">Update brain</button>
+    <button id="refresh">Refresh</button>
+  </div>
+  <div id="jobs"></div>
 </div>
+
+<div id="review">
 <div class="bar">
   <button id="mine" title="Read the whole English of this text and propose episodes (paid, about $0.05 a book)">Find episodes</button>
   <input id="mineMax" type="number" min="1" max="40" value="12" style="width:64px" title="how many">
   <button id="wImages" title="One story for every drawn image of this text (paid, about $0.01 each)">Write for drawn images</button>
   <button id="wCands" title="Write the found episodes (paid, about $0.01 each)">Write found episodes</button>
   <input id="wMax" type="number" min="1" max="30" value="6" style="width:64px" title="at most">
-  <span class="sp"></span>
-  <input id="aTitle" placeholder="Anthology title" style="min-width:220px">
-  <button id="anth" title="Compile every approved story of this text into an illustrated, cited book">Build anthology</button>
-  <span id="anthOut" class="note"></span>
 </div>
-<div id="job"></div>
-<div class="note" style="padding:8px 16px">Stories are drafted by a model from the cited passages only, then checked here without any paid call: every sentence cited, citations inside the episode, the Sanskrit quotation found word for word, and every name present in the passages. Read the passages (click a citation) and the editorial notes before approving. A damaged reading should be fixed in the source, not only in the story.</div>
+<div class="note" style="padding:8px 16px">Stories are drafted by a model from the cited passages only, then checked here without any paid call: every sentence cited, citations inside the episode, the Sanskrit quotation found word for word, and every name present in the passages. Read the passages (click a citation) and the editorial notes before approving. A damaged reading should be fixed in the source, not only in the story. Pictures: "Propose image" writes one idea from the story (about $0.003); "Draw" makes it (one image, about $0.09 at 1K, $0.13 at 2K).</div>
 <div id="list"></div>
+</div>
+
+<div id="book">
+  <div class="cols">
+    <div class="panel texts"><h4>1. Texts</h4><div id="bTexts" class="note">loading...</div></div>
+    <div class="panel pick"><h4>2. Stories</h4>
+      <div class="note" style="margin-bottom:6px">Approved stories can go into a book. Tick "Proof" to include drafts, marked PROOF.</div>
+      <div id="bStories" class="note">Choose one or more texts.</div></div>
+    <div class="panel">
+      <h4>3. The book</h4>
+      <div class="field"><label class="note">Title</label><input id="bTitle" placeholder="Tales from the Markandeya Purana"></div>
+      <div class="field"><label class="note">Readers</label>
+        <select id="bAud"><option value="young">Young readers (about 9-14): large type, picture first, no citation marks</option>
+          <option value="general" selected>General readers: citations as small marks, notes, sources</option>
+          <option value="scholar">Scholars: every citation, Sanskrit and English of each cited passage</option></select></div>
+      <label class="note"><input type="checkbox" id="bHindi" checked> Hindi beside the English</label><br>
+      <label class="note"><input type="checkbox" id="bProof"> Proof (include drafts)</label>
+      <div class="note" style="margin:8px 0">The readers setting changes the layout, not the wording: every book uses the editor-approved retelling. Retellings written for an age group are the next phase.</div>
+      <h4 style="margin-top:10px">Order <span class="note" id="bCount"></span></h4>
+      <ol class="order" id="bOrder"></ol>
+      <div class="acts">
+        <button class="primary" id="bMake" title="HTML reading book, then a PDF of it (export_pdf.py). No paid call.">Make reading book (HTML + PDF)</button>
+        <button id="bSmith" title="A Booksmith edition: its typography, fonts and release record; plates spread evenly (at most 12). Approved stories only. No paid call.">Booksmith edition</button>
+      </div>
+      <h4 style="margin-top:14px">Recent books</h4>
+      <div id="bFiles" class="files note">-</div>
+    </div>
+  </div>
+</div>
 <div id="drawer"></div>
 <div id="toast"></div>
 <script>
-let S = [], DOCS = [], JOB = null;
+let S = [], DOCS = [], BOOK = {texts: new Set(), stories: [], order: []};
+const JOBS = {};          // jid -> {label, sid, kind, then, state, tail}
+const BUSY = {};          // story id -> jid
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',5000); }
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',6000); }
 async function api(url, body){
   const r = await fetch(url, body===undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   const j = await r.json().catch(()=>({error:'bad response'}));
@@ -99,9 +168,64 @@ async function api(url, body){
 }
 const doc = () => $('#doc').value;
 function cites(text){ return esc(text).replace(/\[([^\]]*\d+\.\d+[^\]]*)\]/g, (m, inner) => `<sup class="cite" data-c="${esc(inner)}">[${inner}]</sup>`); }
+
+/* ---------------------------------------------------------------- jobs */
+function track(r, label, opts){
+  opts = opts || {};
+  JOBS[r.job] = {label, sid: opts.sid || null, then: opts.then || null, state: 'started', tail: ''};
+  if(opts.sid) BUSY[opts.sid] = r.job;
+  renderJobs(); render(); pollJobs();
+}
+let polling = false;
+async function pollJobs(){
+  if(polling) return; polling = true;
+  try {
+    while(Object.values(JOBS).some(j => j.state === 'started' || j.state === 'running' || j.state === 'queued')){
+      for(const [jid, J] of Object.entries(JOBS)){
+        if(!['started','running','queued'].includes(J.state)) continue;
+        try {
+          const j = await api('/api/job/' + jid);
+          J.tail = (j.out || '').trim().split('\n').slice(-4).join('\n') + (!j.running && !j.ok && j.err ? '\n' + j.err.trim().split('\n').slice(-2).join('\n') : '');
+          J.out = j.out || '';
+          if(j.running){ J.state = j.active ? 'running' : 'queued'; continue; }
+          J.state = j.ok ? 'done' : 'failed';
+          if(J.sid){ delete BUSY[J.sid]; }
+          const last = (j.out || '').trim().split('\n').filter(Boolean).slice(-2).join('\n');
+          toast(J.label + (j.ok ? ' - done' : ' - FAILED') + (last ? '\n' + last : ''));
+          if(J.then){ try { await J.then(j); } catch(e){ toast(e.message); } }
+          await refreshAll(J.sid);
+        } catch(e){ J.state = 'failed'; J.tail = 'status unavailable: ' + e.message; if(J.sid) delete BUSY[J.sid]; }
+      }
+      renderJobs(); render();
+      await new Promise(res => setTimeout(res, 3000));
+    }
+  } finally { polling = false; renderJobs(); }
+}
+function renderJobs(){
+  const rows = Object.entries(JOBS);
+  $('#jobs').style.display = rows.length ? 'block' : 'none';
+  $('#jobs').innerHTML = rows.slice(-6).reverse().map(([jid, J]) => {
+    const cls = J.state === 'done' ? 'ok' : (J.state === 'failed' ? 'bad' : 'run');
+    const st = {started:'started', running:'running', queued:'queued', done:'done', failed:'FAILED'}[J.state] || J.state;
+    const x = (J.state === 'done' || J.state === 'failed') ? `<button class="x" data-dismiss="${jid}" title="dismiss">&times;</button>` : '';
+    return `<div class="jobrow"><span class="st ${cls}">${esc(st)}</span><pre><b>${esc(J.label)}</b>${J.tail ? '\n' + esc(J.tail) : ''}</pre>${x}</div>`;
+  }).join('');
+}
+async function refreshAll(sid){
+  await loadDocs(); await load(); await loadBrain();
+  if($('#book').style.display === 'block'){ await loadBookStories(); await loadFiles(); }
+  if(sid) flash(sid);
+}
+function flash(sid){
+  const el = document.getElementById('s' + sid);
+  if(el){ el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'), 1800); }
+}
+
+/* ---------------------------------------------------------------- review */
 async function loadDocs(){
   DOCS = await api('/api/stories/docs');
-  const want = new URLSearchParams(location.search).get('doc') || (()=>{ try { return localStorage.getItem('storiesDoc'); } catch(e){ return null; } })();
+  const keep = doc();
+  const want = keep || new URLSearchParams(location.search).get('doc') || (()=>{ try { return localStorage.getItem('storiesDoc'); } catch(e){ return null; } })();
   $('#doc').innerHTML = DOCS.map(d => {
     const n = Object.values(d.stories).reduce((a,b)=>a+b,0);
     return `<option value="${esc(d.doc)}">${esc(d.doc)}${n ? ' - '+n+' stories' : ''}${d.images_drawn ? ' - '+d.images_drawn+' drawn' : ''}</option>`;
@@ -114,25 +238,44 @@ async function load(){
   S = await api('/api/stories/list?doc=' + encodeURIComponent(doc()));
   render();
 }
-function card(s){
-  const v = s.verify;
-  const vb = v ? (v.ok ? '<span class="badge b-ok">check ok</span>' : '<span class="badge b-check">check failed</span>') : '';
-  const img = s.image ? (s.image.has_image
-      ? `<a href="/images" title="image #${s.image.id} (${esc(s.image.status)})"><img loading="lazy" src="/api/images/thumb/${s.image.id}" alt="${esc(s.image.title||'')}"></a><div class="note">image #${s.image.id} - ${esc(s.image.status)}</div>`
-      : `<div class="ph">image #${s.image.id}: no picture yet</div>`)
-    : '<div class="ph">no image - an episode found in the text</div>';
+function imageBlock(s){
+  const I = s.image, busy = BUSY[s.id];
+  if(!I){
+    if(s.status === 'retired') return '<div class="ph">no image</div>';
+    return `<div class="ph">no image yet</div><button data-a="illus" ${busy?'disabled':''} title="One image idea from this episode's passages, retelling and notes (about $0.003)">Propose image</button>`;
+  }
+  if(I.status === 'retired'){
+    return `<div class="ph">image #${I.id} retired</div><button data-a="illus" ${busy?'disabled':''}>Propose image</button>`;
+  }
+  if(!I.has_image){
+    const draw = I.status === 'brief' || I.status === 'brief-approved';
+    return `<div class="idea"><b>Idea #${I.id}: ${esc(I.title||'')}</b><br>${esc(I.brief||'')}${I.caption_en ? '<br><i>' + esc(I.caption_en) + '</i>' : ''}</div>
+      ${draw ? `<button class="primary" data-a="draw" data-img="${I.id}" data-st="${esc(I.status)}" ${busy?'disabled':''} title="Approve this idea and draw it once (about $0.09 at 1K, $0.13 at 2K)">Draw it</button>` : ''}
+      <button data-a="editimg" title="Edit the idea in the image library">Edit idea</button>
+      <button class="warn" data-a="dropimg" data-img="${I.id}" title="Retire this idea, so another can be proposed">Drop idea</button>`;
+  }
   const acts = [];
-  if(s.status === 'candidate'){ acts.push(`<button class="primary" data-a="write">Write story</button>`); }
+  if(I.status === 'draft') acts.push(`<button class="primary" data-a="okimg" data-img="${I.id}" title="Approve the picture (it then prints in books)">Approve image</button>`);
+  acts.push(`<button data-a="redraw" data-img="${I.id}" ${busy?'disabled':''} title="A new version from the same idea (about $0.09-0.13)">Redraw</button>`);
+  return `<a href="/api/images/file/${I.id}" target="_blank" title="image #${I.id} (${esc(I.status)})"><img loading="lazy" src="/api/images/thumb/${I.id}?v=${esc(I.status)}" alt="${esc(I.title||'')}"></a><div class="note">image #${I.id} - ${esc(I.status)}</div>${acts.join('')}`;
+}
+function card(s){
+  const v = s.verify, busy = BUSY[s.id];
+  const vb = v ? (v.ok ? '<span class="badge b-ok">check ok</span>' : '<span class="badge b-check">check failed</span>') : '';
+  const acts = [];
+  const dis = busy ? 'disabled' : '';
+  if(s.status === 'candidate'){ acts.push(`<button class="primary" data-a="write" ${dis} title="Write this episode as a cited story (about $0.01)">Write story</button>`); }
   if(s.status === 'draft'){
     if(!v || !v.ok) acts.push(`<button class="warn" data-a="force" title="The check failed: read the problems and the passages first">Approve anyway</button>`);
     else acts.push(`<button class="primary" data-a="approve">Approve</button>`);
-    acts.push(`<button data-a="verify">Check again</button>`, `<button data-a="write">Rewrite</button>`);
+    acts.push(`<button data-a="verify">Check again</button>`, `<button data-a="write" ${dis} title="Write it again from the passages (about $0.01)">Rewrite</button>`);
   }
   if(s.status === 'draft' || s.status === 'approved') acts.push(`<button data-a="edit">Edit</button>`);
   acts.push(`<button data-a="psg">Passages</button>`);
   acts.push(s.status === 'retired' ? `<button data-a="unretire">Restore</button>` : `<button class="warn" data-a="retire">Retire</button>`);
-  return `<div class="card" data-id="${s.id}">
-    <div class="img">${img}</div>
+  const bl = busy && JOBS[busy] ? `<div class="busyline">${esc(JOBS[busy].label)}: ${esc(JOBS[busy].state)}... (the list refreshes when it finishes)</div>` : '';
+  return `<div class="card ${busy?'busy':''}" data-id="${s.id}" id="s${s.id}">
+    <div class="img">${imageBlock(s)}</div>
     <div class="body">
       <h3>${esc(s.title || '(untitled)')}</h3>${s.title_hi ? `<div class="th hi">${esc(s.title_hi)}</div>` : ''}
       <div class="meta"><span class="badge b-${esc(s.status)}">${esc(s.status)}</span>${vb}<span class="note">#${s.id} - passages ${esc(s.range)}${v ? ' - '+v.words+' words' : ''}</span></div>
@@ -142,11 +285,14 @@ function card(s){
       ${s.story_hi ? `<div class="story hi">${cites(s.story_hi)}</div>` : ''}
       ${s.notes ? `<div class="notes"><b>Editorial notes:</b> ${esc(s.notes)}</div>` : ''}
       ${v && !v.ok ? `<ul class="probs">${v.problems.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
-      <div class="acts">${acts.join('')}</div>
+      <div class="acts">${acts.join('')}</div>${bl}
       <div class="edit"></div>
     </div></div>`;
 }
 function render(){
+  if($('#review').style.display === 'none') return;
+  const open = {}; document.querySelectorAll('.card .edit').forEach(b => { if(b.innerHTML.trim()) open[b.closest('.card').dataset.id] = true; });
+  if(Object.keys(open).length) return;   // never wipe an edit in progress; the next refresh catches up
   const f = $('#status').value;
   const rows = S.filter(s => !f || s.status === f);
   const c = {}; S.forEach(s => c[s.status] = (c[s.status]||0) + 1);
@@ -186,55 +332,151 @@ async function act(id, a, btn){
   try {
     if(a === 'psg') return openPassages(id);
     if(a === 'edit') return openEdit(id);
-    if(a === 'cancel'){ document.querySelector(`.card[data-id="${id}"] .edit`).innerHTML = ''; return; }
+    if(a === 'cancel'){ document.querySelector(`.card[data-id="${id}"] .edit`).innerHTML = ''; return render(); }
     if(a === 'save'){
       const body = {}; document.querySelectorAll(`.card[data-id="${id}"] .edit [data-k]`).forEach(el => body[el.dataset.k] = el.value);
       const r = await api(`/api/stories/${id}/edit`, body);
+      document.querySelector(`.card[data-id="${id}"] .edit`).innerHTML = '';
       toast(r.verify.ok ? 'Saved; the check passes.' : 'Saved; the check fails: ' + r.verify.problems.join('; '));
-      return load();
+      await load(); await loadBrain(); return flash(id);
     }
-    if(a === 'write'){ return startJob(await api('/api/stories/write', {doc: doc(), id}), 'Writing story #'+id); }
+    if(a === 'write'){ btn.disabled = true; return track(await api('/api/stories/write', {doc: doc(), id}), (s.status === 'candidate' ? 'Writing story #' : 'Rewriting story #') + id, {sid: id}); }
+    if(a === 'illus'){ btn.disabled = true; return track(await api(`/api/stories/${id}/illustrate`, {}), 'Proposing an image for story #' + id, {sid: id}); }
+    if(a === 'draw'){
+      btn.disabled = true;
+      const iid = +btn.dataset.img;
+      if(btn.dataset.st === 'brief') await api(`/api/images/${iid}/action`, {action: 'approve-brief'});
+      return track(await api('/api/images/generate', {doc: doc(), id: iid}), 'Drawing image #' + iid + ' for story #' + id, {sid: id});
+    }
+    if(a === 'redraw'){ btn.disabled = true; const iid = +btn.dataset.img; return track(await api(`/api/images/${iid}/regenerate`, {}), 'Redrawing image #' + iid, {sid: id}); }
+    if(a === 'okimg'){ await api(`/api/stories/${id}/image`, {action: 'approve', image: +btn.dataset.img}); toast('Image approved'); await load(); await loadBrain(); return flash(id); }
+    if(a === 'dropimg'){ await api(`/api/stories/${id}/image`, {action: 'retire', image: +btn.dataset.img}); toast('Idea retired; you can propose another.'); await load(); return flash(id); }
+    if(a === 'editimg'){ try { localStorage.setItem('imagesDoc', doc()); } catch(e){} location.href = '/images'; return; }
     if(a === 'approve' || a === 'force'){
-      await api(`/api/stories/${id}/action`, {action:'approve', force: a === 'force'}); toast('#'+id+' approved'); return load();
+      await api(`/api/stories/${id}/action`, {action:'approve', force: a === 'force'}); toast('#'+id+' approved'); await load(); await loadBrain(); return flash(id);
     }
-    if(a === 'verify'){ const r = await api(`/api/stories/${id}/action`, {action:'verify'}); toast(r.verify.ok ? 'Check passes' : 'Check fails: ' + r.verify.problems.join('; ')); return load(); }
-    if(a === 'retire' || a === 'unretire'){ await api(`/api/stories/${id}/action`, {action:a}); return load(); }
-  } catch(e){ toast(e.message); }
+    if(a === 'verify'){ const r = await api(`/api/stories/${id}/action`, {action:'verify'}); toast(r.verify.ok ? 'Check passes' : 'Check fails: ' + r.verify.problems.join('; ')); await load(); return flash(id); }
+    if(a === 'retire' || a === 'unretire'){ await api(`/api/stories/${id}/action`, {action:a}); await load(); await loadBrain(); return; }
+  } catch(e){ if(btn) btn.disabled = false; toast(e.message); }
 }
-function startJob(r, label){
-  JOB = {id: r.job, label}; $('#job').style.display = 'block'; $('#job').textContent = label + ': started';
-  poll();
-}
-async function poll(){
-  if(!JOB) return;
+
+/* ---------------------------------------------------------------- brain */
+async function loadBrain(){
   try {
-    const j = await api('/api/job/' + JOB.id);
-    const tail = (j.out || '').trim().split('\n').slice(-6).join('\n');
-    $('#job').textContent = `${JOB.label}: ${j.running ? (j.active ? 'running' : 'queued behind other jobs') : (j.ok ? 'done' : 'FAILED')}\n${tail}${!j.running && !j.ok && j.err ? '\n' + j.err.trim().split('\n').slice(-3).join('\n') : ''}`;
-    if(j.running){ setTimeout(poll, 3000); return; }
-    const m = (j.out || '').match(/anthology_\d{8}\.html/);
-    if(m){ $('#anthOut').innerHTML = `<a href="/api/shelf/file?name=${m[0]}" target="_blank">${m[0]}</a> <button id="pdf">Make PDF</button>`;
-           $('#pdf').onclick = async () => { try { startJob(await api('/api/stories/pdf', {name: m[0]}), 'PDF'); } catch(e){ toast(e.message); } }; }
-    const p = (j.out || '').match(/anthology_\d{8}\.pdf/);
-    if(p) $('#anthOut').innerHTML += ` <a href="/api/shelf/file?name=${p[0]}" target="_blank">${p[0]}</a>`;
-    JOB = null; await loadDocs(); await load();
-  } catch(e){ $('#job').textContent = 'job status unavailable: ' + e.message; JOB = null; }
+    const b = await api('/api/stories/brain');
+    if(!b.available){ $('#brain').textContent = 'Brain: unavailable'; $('#brain').title = b.error || ''; return; }
+    const due = b.add + b.update + b.drop;
+    $('#brain').textContent = due ? `Brain: ${due} to add or update` : `Brain: ${b.indexed} items, up to date`;
+    $('#brain').className = 'chip' + (due ? ' due' : '');
+    $('#brain').title = `${b.items} stories, episodes and drawn images; ${b.indexed} in the Ask index (${b.model || 'no passage index yet'}). Kept current every maintenance run; "Update brain" does it now.`;
+  } catch(e){ $('#brain').textContent = 'Brain: ?'; }
 }
+
+/* ---------------------------------------------------------------- book composer */
+async function loadBookTexts(){
+  const withStories = DOCS.filter(d => (d.stories.approved || 0) + (d.stories.draft || 0) > 0);
+  $('#bTexts').innerHTML = withStories.length ? withStories.map(d =>
+    `<label><input type="checkbox" data-text="${esc(d.doc)}" ${BOOK.texts.has(d.doc)?'checked':''}> <span>${esc(d.doc)}</span><span class="n">${d.stories.approved||0} approved${d.stories.draft ? ', '+d.stories.draft+' draft' : ''}</span></label>`).join('')
+    : 'No text has a written story yet. Write some in Review first.';
+}
+async function loadBookStories(){
+  if(!BOOK.texts.size){ BOOK.stories = []; $('#bStories').innerHTML = 'Choose one or more texts.'; return renderOrder(); }
+  BOOK.stories = await api('/api/stories/books/stories?docs=' + encodeURIComponent([...BOOK.texts].join(',')));
+  const proof = $('#bProof').checked;
+  BOOK.order = BOOK.order.filter(id => BOOK.stories.some(s => s.id === id && (s.status === 'approved' || proof)));
+  let g = '';
+  $('#bStories').innerHTML = BOOK.stories.map(s => {
+    const ok = s.status === 'approved' || proof;
+    const head = s.doc !== g ? `<div class="grp">${esc(s.doc)}</div>` : ''; g = s.doc;
+    return head + `<label class="${ok?'':'off'}"><input type="checkbox" data-story="${s.id}" ${ok?'':'disabled'} ${BOOK.order.includes(s.id)?'checked':''}>
+      <span class="t">${esc(s.title)}<br><span class="m">#${s.id} - ${esc(s.status)} - ${esc(s.range)} - ${s.words} words${s.image_ok ? ' - picture' : (s.image_id ? ' - picture not approved' : ' - no picture')}${s.check_ok === false ? ' - check failed' : ''}</span></span></label>`;
+  }).join('') || 'These texts have no written stories yet.';
+  renderOrder();
+}
+function renderOrder(){
+  const by = Object.fromEntries(BOOK.stories.map(s => [s.id, s]));
+  $('#bOrder').innerHTML = BOOK.order.map((id, k) => `<li><span>${esc((by[id]||{}).title || '#'+id)}</span>
+    <button data-up="${k}" ${k?'':'disabled'} title="earlier">&uarr;</button><button data-down="${k}" ${k<BOOK.order.length-1?'':'disabled'} title="later">&darr;</button></li>`).join('');
+  $('#bCount').textContent = BOOK.order.length ? '(' + BOOK.order.length + ' stories)' : '';
+  $('#bMake').disabled = $('#bSmith').disabled = !BOOK.order.length;
+}
+async function loadFiles(){
+  try {
+    const F = await api('/api/stories/books/files');
+    $('#bFiles').innerHTML = F.map(f => f.name
+      ? `<a href="/api/shelf/file?name=${encodeURIComponent(f.name)}" target="_blank">${esc(f.name)}</a>${f.pdf ? ` <a style="display:inline" href="/api/shelf/file?name=${encodeURIComponent(f.pdf)}" target="_blank">PDF</a>` : ` <button data-pdf="${esc(f.name)}" style="padding:0 6px">Make PDF</button>`}`
+      : (f.ok ? `<a href="/api/stories/booksmith/file?label=${encodeURIComponent(f.booksmith)}" target="_blank">${esc(f.booksmith)} (Booksmith, ${esc(f.pdf_kind||'pdf')})</a>`
+              : `<span>${esc(f.booksmith)} (Booksmith): ${esc(f.error || 'building or not built')}</span>`)).join('') || '-';
+  } catch(e){ $('#bFiles').textContent = e.message; }
+}
+function bookBody(){
+  return {ids: BOOK.order, title: $('#bTitle').value.trim() || 'Stories from the Sanskrit corpus', audience: $('#bAud').value,
+          hindi: $('#bHindi').checked, proof: $('#bProof').checked};
+}
+async function makePdf(name){ track(await api('/api/stories/pdf', {name}), 'PDF of ' + name, {then: loadFiles}); }
+
+/* ---------------------------------------------------------------- tabs and events */
+function tab(which){
+  const book = which === 'book';
+  $('#review').style.display = book ? 'none' : 'block';
+  $('#book').style.display = book ? 'block' : 'none';
+  $('#tReview').classList.toggle('on', !book); $('#tBook').classList.toggle('on', book);
+  $('#doc').style.display = $('#status').style.display = book ? 'none' : '';
+  if(book){ if(!BOOK.texts.size && doc()) BOOK.texts.add(doc()); loadBookTexts(); loadBookStories(); loadFiles(); } else render();
+}
+$('#tReview').onclick = () => tab('review');
+$('#tBook').onclick = () => tab('book');
 document.addEventListener('keydown', ev => { if(ev.key === 'Escape') $('#drawer').classList.remove('on'); });
 document.addEventListener('click', ev => {
+  const d = ev.target.closest('button[data-dismiss]');
+  if(d){ delete JOBS[d.dataset.dismiss]; return renderJobs(); }
   const c = ev.target.closest('sup.cite');
   if(c){ const card = c.closest('.card'); openPassages(+card.dataset.id, c.dataset.c); return; }
+  const up = ev.target.closest('button[data-up]'), dn = ev.target.closest('button[data-down]');
+  if(up || dn){ const k = +(up ? up.dataset.up : dn.dataset.down), j = up ? k - 1 : k + 1;
+    [BOOK.order[k], BOOK.order[j]] = [BOOK.order[j], BOOK.order[k]]; return renderOrder(); }
+  const pdf = ev.target.closest('button[data-pdf]');
+  if(pdf){ makePdf(pdf.dataset.pdf).catch(e => toast(e.message)); return; }
   const b = ev.target.closest('button[data-a]');
   if(b){ const card = b.closest('.card'); if(card) act(+card.dataset.id, b.dataset.a, b); }
 });
+document.addEventListener('change', ev => {
+  const t = ev.target;
+  if(t.dataset && t.dataset.text !== undefined){ t.checked ? BOOK.texts.add(t.dataset.text) : BOOK.texts.delete(t.dataset.text); return loadBookStories(); }
+  if(t.dataset && t.dataset.story !== undefined){ const id = +t.dataset.story;
+    if(t.checked && !BOOK.order.includes(id)) BOOK.order.push(id);
+    if(!t.checked) BOOK.order = BOOK.order.filter(x => x !== id);
+    return renderOrder(); }
+});
+$('#bProof').addEventListener('change', loadBookStories);
+$('#bMake').onclick = async () => {
+  try {
+    const body = bookBody();
+    track(await api('/api/stories/book', body), 'Reading book "' + body.title + '" (' + body.audience + ')', {then: async (j) => {
+      const m = (j.out || '').match(/(book_[a-z0-9-]+_\d{8}\.html)/);
+      if(m && j.ok) await makePdf(m[1]);
+      await loadFiles();
+    }});
+  } catch(e){ toast(e.message); }
+};
+$('#bSmith').onclick = async () => {
+  try {
+    const r = await api('/api/stories/booksmith', bookBody());
+    track(r, `Booksmith edition ${r.label} (${r.stories} stories, ${r.plates} plates)`, {then: loadFiles});
+  } catch(e){ toast(e.message); }
+};
 $('#doc').addEventListener('change', load);
 $('#status').addEventListener('change', render);
-$('#refresh').addEventListener('click', async () => { await loadDocs(); await load(); });
-$('#mine').onclick = async () => { try { startJob(await api('/api/stories/mine', {doc: doc(), max: +$('#mineMax').value}), 'Finding episodes in ' + doc()); } catch(e){ toast(e.message); } };
-$('#wImages').onclick = async () => { try { startJob(await api('/api/stories/write', {doc: doc(), which:'images', max: +$('#wMax').value}), 'Writing stories for drawn images'); } catch(e){ toast(e.message); } };
-$('#wCands').onclick = async () => { try { startJob(await api('/api/stories/write', {doc: doc(), which:'candidates', max: +$('#wMax').value}), 'Writing found episodes'); } catch(e){ toast(e.message); } };
-$('#anth').onclick = async () => { try { startJob(await api('/api/stories/anthology', {docs:[doc()], title: $('#aTitle').value || ''}), 'Building anthology'); } catch(e){ toast(e.message); } };
-(async () => { try { await loadDocs(); await load(); } catch(e){ $('#list').innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; } })();
+$('#refresh').addEventListener('click', () => refreshAll());
+$('#brainBtn').onclick = async () => { try { track(await api('/api/stories/brain/refresh', {}), 'Updating the brain (stories, episodes, images)'); } catch(e){ toast(e.message); } };
+$('#mine').onclick = async () => { try { track(await api('/api/stories/mine', {doc: doc(), max: +$('#mineMax').value}), 'Finding episodes in ' + doc()); } catch(e){ toast(e.message); } };
+$('#wImages').onclick = async () => { try { track(await api('/api/stories/write', {doc: doc(), which:'images', max: +$('#wMax').value}), 'Writing stories for drawn images'); } catch(e){ toast(e.message); } };
+$('#wCands').onclick = async () => { try { track(await api('/api/stories/write', {doc: doc(), which:'candidates', max: +$('#wMax').value}), 'Writing found episodes'); } catch(e){ toast(e.message); } };
+(async () => {
+  try { await loadDocs(); await load(); loadBrain();
+        const m = location.hash.match(/^#s(\d+)$/); if(m) flash(+m[1]); }
+  catch(e){ $('#list').innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; }
+})();
 </script>
 </body>
 </html>

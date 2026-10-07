@@ -1072,3 +1072,18 @@ Every step is a dry run unless `--yes` is given.
   - First run `python scripts\corpus_status.py --doc <code>`. Gaps within the allowance now show as a note.
   - Then `python scripts\classify_noise.py --doc <code> --running-heads` (dry run) and read the listed lines.
   - Only then add `--apply`, with the dashboard idle and after a backup.
+
+
+## Pictures, books and the brain from the Stories page (DOCS11_2026_10_07)
+
+- **A picture for a story** (in Review): Propose image (about $0.003), then read the idea. Then Draw it (about $0.09-0.13), then Approve image. Edit the idea in `/images` when the iconography is wrong. Drop it to start again.
+- **A book** (in Make a book):
+  - Tick the texts, then the stories, then set the order, the title and the readers.
+  - "Make reading book" writes `exports\book_<title>_<date>.html` and its PDF.
+  - "Booksmith edition" builds through Booksmith. It writes the sidecar `exports\booksmith\stories-<title>__story.json`, and the PDF link appears under Recent books.
+- **The brain.** The chip in the header says how many items are not yet in the Ask index. Maintenance adds them every run; "Update brain" adds them now.
+- **Running heads**, in order:
+  - `python scripts\classify_noise.py --doc <code> --running-heads` (dry run). Read the listed lines.
+  - Back up.
+  - Add `--apply`, and add `--include-translated` to also tag the translated copies.
+  - Then run `corpus_status --doc <code>`.

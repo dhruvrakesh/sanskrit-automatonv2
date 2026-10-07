@@ -54,7 +54,7 @@ def head_key(s: str) -> str:
     return " ".join(s.split()).lower()
 
 
-def running_heads(con, doc=None, min_repeat=3, max_len=60):
+def running_heads(con, doc=None, min_repeat=3, max_len=60, include_translated=False):   # HEADS2_2026_10_07
     """(hits, groups). hits: [(id, code, text)] untranslated passages that are the first or last line of
     their page and whose head_key is the first/last line of >= min_repeat pages of the same doc.
     Never: a line with a danda (verse, incl. refrains), a speaker line (uvaca), a line over max_len.
@@ -70,22 +70,32 @@ def running_heads(con, doc=None, min_repeat=3, max_len=60):
         pages.setdefault((code, page), []).append((pid, text or "", bool(done)))
     by = {}
     for (code, page), rows in pages.items():
-        for pid, text, done in {rows[0][0]: rows[0], rows[-1][0]: rows[-1]}.values():
+        edge = [(rows[0], True)] + ([(rows[-1], False)] if len(rows) > 1 else [])
+        for (pid, text, done), first in edge:
             t = " ".join(text.split())
             k = head_key(t)
-            if not k or len(t) > max_len or _UVACA in t or "\u0964" in t or "\u0965" in t:
-                continue   # a danda marks verse (a refrain can close many pages); a head has none
-            g = by.setdefault((code, k), {"pages": set(), "todo": [], "done": 0, "sample": t})
+            if not k or len(t) > max_len or _UVACA in t:
+                continue
+            # HEADS2_2026_10_07: a danda marks verse (a refrain can close many pages), EXCEPT in a short first
+            # line that carries a page number - "6 markandeya puranam ||" is how this edition prints its head.
+            danda = "\u0964" in t or "\u0965" in t
+            nums = "".join(re.findall(r"[0-9\u0966-\u096f]+", t))
+            letters = len(re.findall(r"[\u0900-\u0963\u0971-\u097f]", t))
+            if danda and not (first and nums and letters <= 24):
+                continue
+            g = by.setdefault((code, k), {"pages": set(), "todo": [], "done": [], "sample": t, "nums": set(),
+                                          "danda": False})
             g["pages"].add(page)
-            if done:
-                g["done"] += 1
-            else:
-                g["todo"].append((pid, code, text))
+            g["nums"].add(nums)
+            g["danda"] = g["danda"] or danda
+            (g["done"] if done else g["todo"]).append((pid, code, text))
     hits, groups = [], []
     for (code, k), g in by.items():
-        if len(g["pages"]) >= min_repeat and len(g["todo"]) > g["done"]:
-            hits += g["todo"]
-            groups.append((code, k, len(g["pages"]), len(g["todo"]), g["done"], g["sample"]))
+        numbered = len(g["nums"] - {""}) >= 2          # page numbers that change: a running head
+        plain = not g["danda"] and len(g["todo"]) > len(g["done"])
+        if len(g["pages"]) >= min_repeat and (numbered or plain):
+            hits += g["todo"] + (g["done"] if include_translated else [])
+            groups.append((code, k, len(g["pages"]), len(g["todo"]), len(g["done"]), g["sample"]))
     groups.sort(key=lambda x: (x[0], -x[2]))
     return hits, groups
 
@@ -102,6 +112,8 @@ def main():
                          "(GAPS_2026_10_05)")
     ap.add_argument("--min-repeat", type=int, default=3, help="with --running-heads: pages (default 3)")
     ap.add_argument("--max-len", type=int, default=60, help="with --running-heads: characters (default 60)")
+    ap.add_argument("--include-translated", action="store_true",
+                    help="with --running-heads: also tag translated copies of a running head (HEADS2_2026_10_07)")
     ap.add_argument("--apply", action="store_true")
     args = ap.parse_args()
 
@@ -124,9 +136,10 @@ def main():
             sys.stdout.reconfigure(errors="replace")
         except (AttributeError, ValueError):
             pass
-        hits, groups = running_heads(con, args.doc, args.min_repeat, args.max_len)
+        hits, groups = running_heads(con, args.doc, args.min_repeat, args.max_len, args.include_translated)
         print(f"Running heads/footers ({'APPLY' if args.apply else 'DRY-RUN'}): first or last line of a page, "
-              f"no danda, <= {args.max_len} chars, repeated on >= {args.min_repeat} pages, untranslated:")
+              f"<= {args.max_len} chars, repeated on >= {args.min_repeat} pages, numbered or untranslated "
+              f"(a danda only in a short numbered first line){' - translated copies too' if args.include_translated else ''}:")
         for code, k, npg, todo, done, sample in groups[:40]:
             print(f"  [{code[:22]:22s}] {npg:4d} pages  {todo:4d} untranslated  {done:3d} translated  {sample!r}")
         if len(groups) > 40:
