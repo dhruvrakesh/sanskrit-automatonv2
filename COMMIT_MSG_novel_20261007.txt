@@ -1,0 +1,18 @@
+Younger-reader versions, graphic novels, Ask skips running heads; cloud C0/C1 drafted and tested (STORY_VARIANTS_2026_10_07, NOVEL_2026_10_07, ASK_NOISE_2026_10_07, DOCS12_2026_10_07)
+
+stories.py: retell (a version of an approved story for children 8-12 or readers 13-16,
+same passages + approved retelling + notes, every sentence cited, checked by verify with
+the story's quotation; table doc_story_variants), variant (approve/force/retire/verify);
+book --audience young|teen uses the approved version for that age, else the story.
+novel.py (new): plan (8-16 cited pages + cast sheet, checked), cast (reference pictures),
+draw (pages with the cast sheets as reference images, no lettering), per-page approval,
+edit marks a changed scene stale, approve, build (HTML, then PDF); table doc_novels.
+stories_web.py / stories_static.html: "For younger readers" on approved cards (write,
+check, edit, approve, retire), "Graphic novels" tab (plan, cast, pages with editable
+scene/caption, draw/redraw, approve, build), teen book layout.
+dashboard.py: Ask keyword and semantic retrieval skip text_type noise/frontmatter (46
+markandeya running heads tagged 2026-10-07, 31 with translations); over-fetch +64.
+docs/cloud: C0 pre-flight (read-only) and the C1 draft (srangam_passage_vectors halfvec(768)
+HNSW, srangam_stories, RLS, match_text_passages), tested on PostgreSQL 16 + pgvector 0.8.0;
+not applied. CLOUD_BRAIN revision 2. PLATFORM s15, RUNBOOK, ENTERPRISE_PATH addendum.
+Tests: test_story_variants_2026_10_07, test_novel_2026_10_07, test_ask_noise_2026_10_07.

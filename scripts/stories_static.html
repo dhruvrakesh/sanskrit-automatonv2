@@ -73,6 +73,22 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
 #toast{position:fixed;left:16px;bottom:16px;background:var(--bg4);border:1px solid var(--gold);border-radius:var(--r);padding:8px 12px;display:none;z-index:20;max-width:70vw;white-space:pre-wrap}
 /* Book composer */
 #book{display:none;padding:14px 16px;max-width:1300px}
+/* STORY_VARIANTS_2026_10_07 + NOVEL_2026_10_07 */
+.vers{margin-top:10px;border-top:1px dashed var(--border);padding-top:8px}
+.vers .vrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:4px 0;font-size:13px}
+.vers details{margin:4px 0 6px;font-size:13.5px}
+.vers summary{cursor:pointer;color:var(--muted)}
+#novel{display:none;padding:14px 16px;max-width:1300px}
+.nv{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:14px}
+.nv h3{margin:0 0 4px;color:var(--cream);font-size:16px}
+.cast{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.cast .c{width:150px;font-size:12px}
+.cast img,.pgs img{width:100%;border-radius:var(--r-sm);display:block}
+.pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.pgs .p{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px;display:flex;flex-direction:column;gap:5px}
+.pgs .p textarea{min-height:60px;font-size:12.5px}
+.pgs .ph{height:150px;border:1px dashed var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+.pgs .p .st{font-size:11.5px;color:var(--muted)}
 .cols{display:grid;grid-template-columns:240px 1fr 340px;gap:14px;align-items:start}
 .panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px}
 .panel h4{margin:0 0 8px;color:var(--cream);font-size:13.5px}
@@ -100,7 +116,7 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
     <a href="/shelf" style="text-decoration:none">Shelf</a>
     <a href="/ask" style="text-decoration:none">Ask</a>
     <h1>Stories</h1>
-    <div class="tabs"><button id="tReview" class="on">Review</button><button id="tBook">Make a book</button></div>
+    <div class="tabs"><button id="tReview" class="on">Review</button><button id="tBook">Make a book</button><button id="tNovel">Graphic novels</button></div>
     <select id="doc" title="text"></select>
     <select id="status"><option value="">all</option><option>candidate</option><option>draft</option><option>approved</option><option>retired</option></select>
     <span class="sp"></span>
@@ -134,12 +150,13 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
       <h4>3. The book</h4>
       <div class="field"><label class="note">Title</label><input id="bTitle" placeholder="Tales from the Markandeya Purana"></div>
       <div class="field"><label class="note">Readers</label>
-        <select id="bAud"><option value="young">Young readers (about 9-14): large type, picture first, no citation marks</option>
+        <select id="bAud"><option value="young">Children 8-12: their own version where approved; large type, picture first, no citation marks</option>
+          <option value="teen">Readers 13-16: their own version where approved; citations as small marks</option>
           <option value="general" selected>General readers: citations as small marks, notes, sources</option>
           <option value="scholar">Scholars: every citation, Sanskrit and English of each cited passage</option></select></div>
       <label class="note"><input type="checkbox" id="bHindi" checked> Hindi beside the English</label><br>
       <label class="note"><input type="checkbox" id="bProof"> Proof (include drafts)</label>
-      <div class="note" style="margin:8px 0">The readers setting changes the layout, not the wording: every book uses the editor-approved retelling. Retellings written for an age group are the next phase.</div>
+      <div class="note" style="margin:8px 0">For children and for 13-16 the book uses each story's approved version for that age group (written under "For younger readers" in Review); where there is none it uses the approved story. General and scholarly books use the approved story.</div>
       <h4 style="margin-top:10px">Order <span class="note" id="bCount"></span></h4>
       <ol class="order" id="bOrder"></ol>
       <div class="acts">
@@ -150,6 +167,19 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
       <div id="bFiles" class="files note">-</div>
     </div>
   </div>
+</div>
+<div id="novel">
+  <div class="nv">
+    <h3>A graphic novel from an approved story</h3>
+    <div class="note">One picture per page with a cited caption under it, figures kept the same from page to page by reference sheets. Plan first (about $0.01), read and correct the pages, then draw the cast (one picture each) and the pages (about $0.09 at 1K, $0.13 at 2K each). Nothing is lettered inside the pictures; captions are typeset.</div>
+    <div class="acts">
+      <select id="nStory" style="min-width:280px"></select>
+      <label class="note">pages <input id="nPages" type="number" min="8" max="16" value="12" style="width:60px"></label>
+      <select id="nAud"><option value="general">General readers</option><option value="teen">Readers 13-16</option><option value="young">Children 8-12</option></select>
+      <button class="primary" id="nPlan">Plan the pages (about $0.01)</button>
+    </div>
+  </div>
+  <div id="nList" class="note">-</div>
 </div>
 <div id="drawer"></div>
 <div id="toast"></div>
@@ -272,6 +302,7 @@ function card(s){
   }
   if(s.status === 'draft' || s.status === 'approved') acts.push(`<button data-a="edit">Edit</button>`);
   acts.push(`<button data-a="psg">Passages</button>`);
+  if(s.status === 'approved') acts.push(`<button data-a="novel" title="Plan a graphic novel of this story">Graphic novel${(s.novels||[]).length ? ' (' + s.novels.length + ')' : ''}</button>`);
   acts.push(s.status === 'retired' ? `<button data-a="unretire">Restore</button>` : `<button class="warn" data-a="retire">Retire</button>`);
   const bl = busy && JOBS[busy] ? `<div class="busyline">${esc(JOBS[busy].label)}: ${esc(JOBS[busy].state)}... (the list refreshes when it finishes)</div>` : '';
   return `<div class="card ${busy?'busy':''}" data-id="${s.id}" id="s${s.id}">
@@ -285,13 +316,14 @@ function card(s){
       ${s.story_hi ? `<div class="story hi">${cites(s.story_hi)}</div>` : ''}
       ${s.notes ? `<div class="notes"><b>Editorial notes:</b> ${esc(s.notes)}</div>` : ''}
       ${v && !v.ok ? `<ul class="probs">${v.problems.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+      ${s.status === 'approved' ? versionsBlock(s) : ''}
       <div class="acts">${acts.join('')}</div>${bl}
       <div class="edit"></div>
     </div></div>`;
 }
 function render(){
   if($('#review').style.display === 'none') return;
-  const open = {}; document.querySelectorAll('.card .edit').forEach(b => { if(b.innerHTML.trim()) open[b.closest('.card').dataset.id] = true; });
+  const open = {}; document.querySelectorAll('.card .edit, .card .vedit').forEach(b => { if(b.innerHTML.trim()) open[b.closest('.card').dataset.id] = true; });
   if(Object.keys(open).length) return;   // never wipe an edit in progress; the next refresh catches up
   const f = $('#status').value;
   const rows = S.filter(s => !f || s.status === f);
@@ -357,7 +389,113 @@ async function act(id, a, btn){
     }
     if(a === 'verify'){ const r = await api(`/api/stories/${id}/action`, {action:'verify'}); toast(r.verify.ok ? 'Check passes' : 'Check fails: ' + r.verify.problems.join('; ')); await load(); return flash(id); }
     if(a === 'retire' || a === 'unretire'){ await api(`/api/stories/${id}/action`, {action:a}); await load(); await loadBrain(); return; }
+    /* STORY_VARIANTS_2026_10_07 */
+    const aud = btn && btn.dataset.aud;
+    if(a === 'retell'){ btn.disabled = true; return track(await api(`/api/stories/${id}/retell`, {audience: aud}), `Writing the ${AUD[aud]} version of #${id}`, {sid: id}); }
+    if(a === 'vapprove' || a === 'vforce' || a === 'vretire' || a === 'vverify'){
+      const r = await api(`/api/stories/${id}/variant`, {audience: aud, action: {vapprove:'approve', vforce:'force', vretire:'retire', vverify:'verify'}[a]});
+      toast(r.verify ? (r.verify.ok ? 'Check passes' : 'Check fails: ' + r.verify.problems.join('; ')) : 'Done'); await load(); return flash(id);
+    }
+    if(a === 'vedit'){ return openVariantEdit(id, aud); }
+    if(a === 'vsave'){
+      const body = {audience: aud, action: 'edit'}; document.querySelectorAll(`.card[data-id="${id}"] .vedit [data-k]`).forEach(el => body[el.dataset.k] = el.value);
+      const r = await api(`/api/stories/${id}/variant`, body);
+      document.querySelector(`.card[data-id="${id}"] .vedit`).innerHTML = '';
+      toast(r.verify.ok ? 'Saved; the check passes.' : 'Saved; the check fails: ' + r.verify.problems.join('; ')); await load(); return flash(id);
+    }
+    if(a === 'vcancel'){ document.querySelector(`.card[data-id="${id}"] .vedit`).innerHTML = ''; return render(); }
+    if(a === 'novel'){ NOVEL_PICK = id; return tab('novel'); }
   } catch(e){ if(btn) btn.disabled = false; toast(e.message); }
+}
+
+/* ---------------------------------------------------------------- STORY_VARIANTS_2026_10_07: versions for younger readers */
+const AUD = {young: 'children 8-12', teen: 'readers 13-16'};
+function versionsBlock(s){
+  const V = s.variants || {}, busy = BUSY[s.id];
+  const rows = ['young', 'teen'].map(a => {
+    const v = V[a];
+    if(!v || v.status === 'retired') return `<div class="vrow"><span class="note">${AUD[a]}:</span> <button data-a="retell" data-aud="${a}" ${busy?'disabled':''} title="A version of this approved story for ${AUD[a]} (about $0.01), checked like the story">Write version</button>${v ? ' <span class="note">(retired)</span>' : ''}</div>`;
+    const ck = v.verify ? (v.verify.ok ? '<span class="badge b-ok">check ok</span>' : '<span class="badge b-check">check failed</span>') : '';
+    const acts = [];
+    if(v.status === 'draft') acts.push((!v.verify || !v.verify.ok) ? `<button class="warn" data-a="vforce" data-aud="${a}">Approve anyway</button>` : `<button class="primary" data-a="vapprove" data-aud="${a}">Approve</button>`);
+    acts.push(`<button data-a="vverify" data-aud="${a}">Check again</button>`, `<button data-a="vedit" data-aud="${a}">Edit</button>`,
+              `<button data-a="retell" data-aud="${a}" ${busy?'disabled':''}>Rewrite</button>`, `<button class="warn" data-a="vretire" data-aud="${a}">Retire</button>`);
+    return `<div class="vrow"><span class="note">${AUD[a]}:</span> <span class="badge b-${esc(v.status)}">${esc(v.status)}</span>${ck} ${acts.join(' ')}</div>
+      <details><summary>${esc(v.title || '')}</summary><div class="story">${cites(v.story_en || '')}</div><div class="story hi">${cites(v.story_hi || '')}</div>
+      ${v.notes ? `<div class="notes"><b>What was left out or simplified:</b> ${esc(v.notes)}</div>` : ''}
+      ${v.verify && !v.verify.ok ? `<ul class="probs">${v.verify.problems.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}</details>`;
+  }).join('');
+  return `<div class="vers"><div class="note"><b>For younger readers</b> - written from the same passages and this approved story; used by books for those ages.</div>${rows}<div class="vedit"></div></div>`;
+}
+function openVariantEdit(id, aud){
+  const s = S.find(x => x.id === id), v = (s.variants || {})[aud] || {};
+  const box = document.querySelector(`.card[data-id="${id}"] .vedit`);
+  const f = (k, label, ta) => `<label class="note">${label}</label>` + (ta ? `<textarea data-k="${k}" class="${k.endsWith('_hi')?'hi':''}">${esc(v[k]||'')}</textarea>`
+      : `<input data-k="${k}" value="${esc(v[k]||'')}" style="width:100%" class="${k.endsWith('_hi')?'hi':''}">`);
+  box.innerHTML = `<div style="margin-top:8px;display:flex;flex-direction:column;gap:4px"><b class="note">Edit the version for ${AUD[aud]}</b>
+    ${f('title','Title')}${f('title_hi','Hindi title')}${f('story_en','English (keep a [page.idx] after every sentence)',1)}${f('story_hi','Hindi',1)}${f('notes','Notes',1)}
+    <div class="acts"><button class="primary" data-a="vsave" data-aud="${aud}">Save and check</button><button data-a="vcancel" data-aud="${aud}">Cancel</button></div></div>`;
+}
+
+/* ---------------------------------------------------------------- NOVEL_2026_10_07: graphic novels */
+let NOVELS = [], NOVEL_PICK = null;
+async function loadNovels(){
+  if(!doc()){ $('#nList').textContent = 'Choose a text.'; return; }
+  try {
+    const r = await api('/api/novels?doc=' + encodeURIComponent(doc()));
+    NOVELS = r.novels;
+    $('#nStory').innerHTML = r.stories.length ? r.stories.map(x => `<option value="${x.id}" ${x.id === NOVEL_PICK ? 'selected' : ''}>#${x.id} ${esc(x.title)} (${esc(x.range)})</option>`).join('')
+      : '<option value="">no approved story in this text yet</option>';
+    $('#nPlan').disabled = !r.stories.length;
+    renderNovels();
+  } catch(e){ $('#nList').textContent = e.message; }
+}
+function renderNovels(){
+  $('#nList').innerHTML = NOVELS.length ? NOVELS.map(n => {
+    const P = (n.plan || {}).pages || [], C = (n.plan || {}).cast || [], v = n.verify || {};
+    const missing = P.filter(p => !n.page_images[p.n] || n.page_images[p.n].status === 'stale').length;
+    const castMissing = C.filter((c, k) => !n.cast_sheets[k + 1]).length;
+    const approved = P.filter(p => (n.page_images[p.n] || {}).status === 'approved').length;
+    const cast = C.map((c, k) => { const sh = n.cast_sheets[k + 1];
+      return `<div class="c">${sh ? `<a href="/api/novels/${n.id}/img?kind=cast&n=${k+1}" target="_blank"><img loading="lazy" src="/api/novels/${n.id}/img?kind=cast&n=${k+1}&v=${esc(sh.version)}"></a>` : '<div class="ph" style="height:100px;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center">no sheet yet</div>'}<b>${esc(c.name)}</b><br><span class="note">${esc(c.look)}</span></div>`; }).join('');
+    const pages = P.map(p => { const im = n.page_images[p.n];
+      return `<div class="p" data-novel="${n.id}" data-page="${p.n}"><div class="st">page ${p.n}${im ? ' - ' + esc(im.status) : ''}</div>
+        ${im ? `<a href="/api/novels/${n.id}/img?kind=page&n=${p.n}" target="_blank"><img loading="lazy" src="/api/novels/${n.id}/img?kind=page&n=${p.n}&v=${esc(im.version)}-${esc(im.status)}"></a>` : '<div class="ph">not drawn yet</div>'}
+        <label class="note">Scene (what to draw)</label><textarea data-f="scene">${esc(p.scene)}</textarea>
+        <label class="note">Caption</label><textarea data-f="caption">${esc(p.caption)}</textarea>
+        <textarea data-f="caption_hi" class="hi">${esc(p.caption_hi)}</textarea>
+        ${(p.speech || []).map(sp => `<div class="note"><i>${esc(sp.who)}: "${esc(sp.line)}" [${esc(sp.cite)}]</i></div>`).join('')}
+        <div class="acts"><button data-n="save">Save</button><button data-n="draw" title="about $${n.cost_per_image}">${im ? 'Redraw' : 'Draw'}</button>${im && im.status === 'draft' ? '<button class="primary" data-n="okpage">Approve</button>' : ''}</div></div>`; }).join('');
+    return `<div class="nv" data-novel="${n.id}"><h3>#${n.id} ${esc(n.title || '')} <span class="badge b-${n.status === 'approved' ? 'approved' : 'draft'}">${esc(n.status)}</span>
+      ${v.ok ? '<span class="badge b-ok">check ok</span>' : '<span class="badge b-check">check failed</span>'}</h3>
+      ${n.title_hi ? `<div class="th hi">${esc(n.title_hi)}</div>` : ''}
+      <div class="note">story #${n.story_id} - ${P.length} pages - ${esc(n.audience)} - ${approved} of ${P.length} pages approved</div>
+      ${v.problems && v.problems.length ? `<ul class="probs">${v.problems.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      <div class="acts">
+        <button data-n="cast" ${castMissing ? '' : 'disabled'} title="One reference picture per cast member">Draw cast (${castMissing}, about $${(castMissing * n.cost_per_image).toFixed(2)})</button>
+        <button class="primary" data-n="drawall" ${missing ? '' : 'disabled'} title="Every page not drawn yet">Draw pages (${missing}, about $${(missing * n.cost_per_image).toFixed(2)})</button>
+        <button data-n="build" title="HTML, then a PDF">Make the book (HTML + PDF)</button>
+        ${n.status !== 'approved' ? `<button data-n="approve">Approve novel</button>` : ''}
+        <button class="warn" data-n="retire">Retire</button></div>
+      <div class="cast">${cast}</div><div class="pgs">${pages}</div></div>`;
+  }).join('') : '<div class="empty">No graphic novel for this text yet. Choose an approved story above and plan it.</div>';
+}
+async function novelAct(btn){
+  const box = btn.closest('[data-novel]'), nid = +box.dataset.novel, a = btn.dataset.n;
+  const pg = btn.closest('.p'), page = pg ? +pg.dataset.page : null;
+  try {
+    if(a === 'save'){ const body = {action: 'edit', page}; pg.querySelectorAll('[data-f]').forEach(el => body[el.dataset.f] = el.value);
+      const r = await api(`/api/novels/${nid}/page`, body); toast(r.verify.ok ? 'Saved; the check passes.' : 'Saved; the check fails: ' + r.verify.problems.join('; ')); return loadNovels(); }
+    if(a === 'okpage'){ await api(`/api/novels/${nid}/page`, {action: 'approve', page}); return loadNovels(); }
+    btn.disabled = true;
+    if(a === 'draw') return track(await api(`/api/novels/${nid}/draw`, {pages: [page], redo: true}), `Drawing page ${page} of novel #${nid}`, {then: loadNovels});
+    if(a === 'drawall') return track(await api(`/api/novels/${nid}/draw`, {}), `Drawing the pages of novel #${nid}`, {then: loadNovels});
+    if(a === 'cast') return track(await api(`/api/novels/${nid}/cast`, {}), `Drawing the cast of novel #${nid}`, {then: loadNovels});
+    if(a === 'build') return track(await api(`/api/novels/${nid}/build`, {}), `Making the book of novel #${nid}`, {then: async (j) => {
+      const m = (j.out || '').match(/(novel_[a-z0-9-]+_\d{8}\.html)/); if(m && j.ok) await makePdf(m[1]); }});
+    if(a === 'approve'){ await api(`/api/novels/${nid}/action`, {action: 'approve'}); toast('Novel approved'); return loadNovels(); }
+    if(a === 'retire'){ await api(`/api/novels/${nid}/action`, {action: 'retire'}); return loadNovels(); }
+  } catch(e){ btn.disabled = false; toast(e.message); }
 }
 
 /* ---------------------------------------------------------------- brain */
@@ -417,15 +555,19 @@ async function makePdf(name){ track(await api('/api/stories/pdf', {name}), 'PDF 
 
 /* ---------------------------------------------------------------- tabs and events */
 function tab(which){
-  const book = which === 'book';
-  $('#review').style.display = book ? 'none' : 'block';
+  const book = which === 'book', nov = which === 'novel';
+  $('#review').style.display = (book || nov) ? 'none' : 'block';
   $('#book').style.display = book ? 'block' : 'none';
-  $('#tReview').classList.toggle('on', !book); $('#tBook').classList.toggle('on', book);
-  $('#doc').style.display = $('#status').style.display = book ? 'none' : '';
-  if(book){ if(!BOOK.texts.size && doc()) BOOK.texts.add(doc()); loadBookTexts(); loadBookStories(); loadFiles(); } else render();
+  $('#novel').style.display = nov ? 'block' : 'none';
+  $('#tReview').classList.toggle('on', !book && !nov); $('#tBook').classList.toggle('on', book); $('#tNovel').classList.toggle('on', nov);
+  $('#doc').style.display = book ? 'none' : '';
+  $('#status').style.display = (book || nov) ? 'none' : '';
+  if(book){ if(!BOOK.texts.size && doc()) BOOK.texts.add(doc()); loadBookTexts(); loadBookStories(); loadFiles(); }
+  else if(nov){ loadNovels(); } else render();
 }
 $('#tReview').onclick = () => tab('review');
 $('#tBook').onclick = () => tab('book');
+$('#tNovel').onclick = () => tab('novel');
 document.addEventListener('keydown', ev => { if(ev.key === 'Escape') $('#drawer').classList.remove('on'); });
 document.addEventListener('click', ev => {
   const d = ev.target.closest('button[data-dismiss]');
@@ -435,6 +577,8 @@ document.addEventListener('click', ev => {
   const up = ev.target.closest('button[data-up]'), dn = ev.target.closest('button[data-down]');
   if(up || dn){ const k = +(up ? up.dataset.up : dn.dataset.down), j = up ? k - 1 : k + 1;
     [BOOK.order[k], BOOK.order[j]] = [BOOK.order[j], BOOK.order[k]]; return renderOrder(); }
+  const nb = ev.target.closest('button[data-n]');
+  if(nb){ novelAct(nb); return; }
   const pdf = ev.target.closest('button[data-pdf]');
   if(pdf){ makePdf(pdf.dataset.pdf).catch(e => toast(e.message)); return; }
   const b = ev.target.closest('button[data-a]');
@@ -449,6 +593,11 @@ document.addEventListener('change', ev => {
     return renderOrder(); }
 });
 $('#bProof').addEventListener('change', loadBookStories);
+$('#nPlan').onclick = async () => {
+  try { const story = +$('#nStory').value; NOVEL_PICK = story;
+        track(await api('/api/novels/plan', {story, pages: +$('#nPages').value, audience: $('#nAud').value}), 'Planning a graphic novel of story #' + story, {then: loadNovels}); }
+  catch(e){ toast(e.message); }
+};
 $('#bMake').onclick = async () => {
   try {
     const body = bookBody();
@@ -465,7 +614,7 @@ $('#bSmith').onclick = async () => {
     track(r, `Booksmith edition ${r.label} (${r.stories} stories, ${r.plates} plates)`, {then: loadFiles});
   } catch(e){ toast(e.message); }
 };
-$('#doc').addEventListener('change', load);
+$('#doc').addEventListener('change', () => { load(); if($('#novel').style.display === 'block') loadNovels(); });
 $('#status').addEventListener('change', render);
 $('#refresh').addEventListener('click', () => refreshAll());
 $('#brainBtn').onclick = async () => { try { track(await api('/api/stories/brain/refresh', {}), 'Updating the brain (stories, episodes, images)'); } catch(e){ toast(e.message); } };

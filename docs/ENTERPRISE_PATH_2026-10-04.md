@@ -198,3 +198,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 - **novel draw** draws one image per page, giving the cast sheets to the image model as reference images so the figures stay the same from page to page. No lettering goes in the images. Captions are typeset in HTML, because script drawn by an image model is unreliable, Devanagari above all.
 - Layout is an HTML comic template (page image and caption boxes), then a PDF through `export_pdf.py`. A person approves each page.
 - **Cost:** about $1.4 to $1.9 for 12 pages at 1K-2K (13 to 16 images at $0.09-0.13, plus the plan), plus redraws. Budget-gated, a dry run first.
+
+
+## Addendum 2026-10-07 (2): younger readers, graphic novels, cloud C0/C1 (DOCS12_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| 2.15 | Versions for children 8-12 and readers 13-16 (`retell`, `variant`), used by the books for those ages | Built 2026-10-07 |
+| 2.16 | Graphic novels: cited plan, cast sheets as references, pages, per-page approval, book (`novel.py`, "Graphic novels" tab) | Built 2026-10-07 |
+| 1.11 | Ask skips noise and frontmatter (running heads) | Built 2026-10-07 |
+| 1.12 | Maintenance runs while a long translation is going (embeddings serialised behind it by SQLite, not skipped) | Open: needs a measured test of concurrent writes first |
+| 1.13 | Delete the vectors of noise rows (`build_embeddings --prune`) | Open; Ask already filters them |
+| C0 | Read-only pre-flight (`docs/cloud/C0_preflight_2026-10-07.sql`) | Ready to run |
+| C1 | Vectors, stories, RLS, `match_text_passages` (`docs/cloud/C1_corpus_brain_DRAFT_2026-10-07.sql`) | Drafted and tested on PostgreSQL 16 + pgvector 0.8.0; not applied |
+| C2 | Edge function `embed-published-passages` in the Srangam repo | Next, after C1 |

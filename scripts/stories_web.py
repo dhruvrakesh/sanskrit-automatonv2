@@ -40,8 +40,10 @@ import images as im   # noqa: E402
 
 MARK = "STORIES_UI_2026_10_05"
 MARK2 = "STORY_BOOKS_2026_10_07"
-BOOK_RE = re.compile(r"^(anthology_\d{8}|book_[a-z0-9-]{1,40}_\d{8})\.html$")
-AUDIENCES = ("young", "general", "scholar")
+MARK3 = "STORY_VARIANTS_2026_10_07 + NOVEL_2026_10_07"
+BOOK_RE = re.compile(r"^(anthology_\d{8}|(book|novel)_[a-z0-9-]{1,40}_\d{8})\.html$")
+AUDIENCES = ("young", "teen", "general", "scholar")
+VARIANT_AUDIENCES = ("young", "teen")
 DOC_RE = re.compile(r"^[A-Za-z0-9_\-]+$")
 EDITABLE = ("title", "title_hi", "story_en", "story_hi", "quote_sa", "quote_ref", "notes")
 LIMITS = {"title": 300, "title_hi": 300, "story_en": 6000, "story_hi": 8000, "quote_sa": 400, "quote_ref": 20,
@@ -108,7 +110,25 @@ def register(app, *, launch, root, py, script, db=None):
                 img = {"id": r[0], "status": r[1], "title": r[2], "has_image": bool(r[3]), "brief": r[4] or "",
                        "caption_en": r[5] or "", "kind": r[6]}
         d["image"] = img
+        d["variants"] = {}   # STORY_VARIANTS_2026_10_07: versions for younger readers
+        if "doc_story_variants" in tables(c):
+            for vr in c.execute("""SELECT audience, status, title, title_hi, story_en, story_hi, notes, verify
+                                   FROM doc_story_variants WHERE story_id=?""", (d["id"],)):
+                try:
+                    vv = json.loads(vr[7] or "null")
+                except ValueError:
+                    vv = None
+                d["variants"][vr[0]] = {"status": vr[1], "title": vr[2], "title_hi": vr[3], "story_en": vr[4],
+                                        "story_hi": vr[5], "notes": vr[6], "verify": vv}
+        d["novels"] = []
+        if "doc_novels" in tables(c):
+            d["novels"] = [{"id": r[0], "status": r[1], "pages": r[2]} for r in c.execute(
+                "SELECT id, status, pages FROM doc_novels WHERE story_id=? AND status<>'retired' ORDER BY id",
+                (d["id"],))]
         return d
+
+    def tables(c):
+        return {r[0] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table'")}
 
     def get_story(c, sid):
         c.row_factory = sqlite3.Row
@@ -507,5 +527,235 @@ def register(app, *, launch, root, py, script, db=None):
             out.append({"booksmith": d.get("doc"), "ok": d.get("ok"), "pdf_kind": d.get("pdf_kind"),
                         "error": d.get("error"), "mtime": side.stat().st_mtime})
         return jsonify(out)
+
+    # ---------------------------------------------------------------- STORY_VARIANTS_2026_10_07
+    @app.post("/api/stories/<int:sid>/retell")
+    @guarded
+    def stories_retell(sid):
+        aud = (request.get_json(force=True) or {}).get("audience")
+        if aud not in VARIANT_AUDIENCES:
+            return bad("audience must be young or teen")
+        c = con()
+        try:
+            s = get_story(c, sid)
+            if not s:
+                return bad("unknown story", 404)
+            if s["status"] != "approved":
+                return bad("approve the story first; versions for younger readers are made from an approved story")
+            code = c.execute("SELECT code FROM docs WHERE id=?", (s["doc_id"],)).fetchone()[0]
+        finally:
+            c.close()
+        return job(code, ["retell", "--id", str(sid), "--audience", aud, "--yes"], "retell-%s-%d" % (aud, sid))
+
+    @app.post("/api/stories/<int:sid>/variant")
+    @guarded
+    def stories_variant(sid):
+        data = request.get_json(force=True) or {}
+        aud, act = data.get("audience"), data.get("action")
+        if aud not in VARIANT_AUDIENCES:
+            return bad("audience must be young or teen")
+        c = con()
+        try:
+            s = get_story(c, sid)
+            v = st._variant_row(c, sid, aud) if s else None
+            if not v:
+                return bad("no %s version of story #%d yet" % (aud, sid), 404)
+            if act == "edit":
+                fields = {k: str(data[k])[:LIMITS.get(k, 8000)] for k in ("title", "title_hi", "story_en", "story_hi", "notes")
+                          if k in data}
+                if not fields:
+                    return bad("nothing to change")
+                v.update(fields)
+                res = st.variant_verify(c, s, v)
+                c.execute("UPDATE doc_story_variants SET %s, verify=?, cites=?, status='draft', approved_at=NULL, "
+                          "updated_at=? WHERE id=?" % ", ".join("%s=?" % k for k in fields),
+                          list(fields.values()) + [json.dumps(res), json.dumps(res["cited"]), st.now(), v["id"]])
+                c.commit()
+                return jsonify({"ok": True, "verify": res})
+            if act == "verify":
+                res = st.variant_verify(c, s, v)
+                c.execute("UPDATE doc_story_variants SET verify=?, updated_at=? WHERE id=?", (json.dumps(res), st.now(), v["id"]))
+                c.commit()
+                return jsonify({"ok": True, "verify": res})
+            if act in ("approve", "force"):
+                if v["status"] != "draft":
+                    return bad("this version is %s" % v["status"])
+                if not (json.loads(v.get("verify") or "{}") or {}).get("ok") and act != "force":
+                    return bad("the check failed; read the problems, then use 'Approve anyway'", 409)
+                c.execute("UPDATE doc_story_variants SET status='approved', approved_at=?, updated_at=? WHERE id=?",
+                          (st.now(), st.now(), v["id"]))
+                c.commit()
+                return jsonify({"ok": True})
+            if act == "retire":
+                c.execute("UPDATE doc_story_variants SET status='retired', updated_at=? WHERE id=?", (st.now(), v["id"]))
+                c.commit()
+                return jsonify({"ok": True})
+            return bad("unknown action")
+        finally:
+            c.close()
+
+    # ---------------------------------------------------------------- NOVEL_2026_10_07
+    def novel_mod():
+        import novel as nv
+        return nv
+
+    def novel_out(c, n):
+        nv = novel_mod()
+        d = nv.get(c, n) if isinstance(n, int) else n
+        d.pop("provenance", None)
+        cpi = nv._cost_per_image(d.get("image_model") or nv.IMAGE_MODEL)
+        d["cost_per_image"] = round(cpi, 3)
+        return d
+
+    def novel_job(code, argv, mode, kind="stories"):
+        cmd = py(script("novel.py"), "--db", str(dbp), *argv)
+        try:
+            jid = launch(kind, code, cmd, mode=mode)
+        except TypeError:
+            jid = launch(kind, code, cmd)
+        return jsonify({"job": jid})
+
+    @app.get("/api/novels")
+    @guarded
+    def novels_list():
+        doc = request.args.get("doc", "")
+        if not DOC_RE.match(doc):
+            return bad("invalid doc")
+        nv = novel_mod()
+        c = con()
+        try:
+            nv.ensure_schema(c)
+            ids = [r[0] for r in c.execute("""SELECT n.id FROM doc_novels n JOIN docs d ON d.id = n.doc_id
+                                              WHERE d.code=? AND n.status<>'retired' ORDER BY n.id DESC""", (doc,))]
+            stories = [{"id": r[0], "title": r[1], "range": "%s-%s" % (st_ref(r[2], r[3]), st_ref(r[4], r[5]))}
+                       for r in c.execute("""SELECT s.id, s.title, s.from_page, s.from_idx, s.to_page, s.to_idx
+                                             FROM doc_stories s JOIN docs d ON d.id = s.doc_id
+                                             WHERE d.code=? AND s.status='approved' ORDER BY s.from_page, s.from_idx""", (doc,))]
+            return jsonify({"novels": [novel_out(c, i) for i in ids], "stories": stories})
+        finally:
+            c.close()
+
+    @app.post("/api/novels/plan")
+    @guarded
+    def novels_plan():
+        data = request.get_json(force=True) or {}
+        sid = int(data.get("story") or 0)
+        pages = max(8, min(16, int(data.get("pages") or 12)))
+        aud = data.get("audience") if data.get("audience") in ("young", "teen", "general") else "general"
+        c = con()
+        try:
+            s = get_story(c, sid)
+            if not s or s["status"] != "approved":
+                return bad("choose an approved story")
+            code = c.execute("SELECT code FROM docs WHERE id=?", (s["doc_id"],)).fetchone()[0]
+        finally:
+            c.close()
+        return novel_job(code, ["plan", "--story", str(sid), "--pages", str(pages), "--audience", aud, "--yes"],
+                         "plan-%d" % sid)
+
+    def _novel_code(nid):
+        c = con()
+        try:
+            r = c.execute("SELECT d.code, n.status FROM doc_novels n JOIN docs d ON d.id = n.doc_id WHERE n.id=?",
+                          (nid,)).fetchone()
+        finally:
+            c.close()
+        return r
+
+    @app.post("/api/novels/<int:nid>/cast")
+    @guarded
+    def novels_cast(nid):
+        r = _novel_code(nid)
+        if not r:
+            return bad("unknown novel", 404)
+        argv = ["cast", "--id", str(nid), "--yes"] + (["--redo"] if (request.get_json(force=True) or {}).get("redo") else [])
+        return novel_job(r[0], argv, "cast-%d" % nid, kind="images_gen")
+
+    @app.post("/api/novels/<int:nid>/draw")
+    @guarded
+    def novels_draw(nid):
+        r = _novel_code(nid)
+        if not r:
+            return bad("unknown novel", 404)
+        data = request.get_json(force=True) or {}
+        pages = ",".join(str(int(x)) for x in (data.get("pages") or []) if str(x).isdigit())[:200]
+        argv = ["draw", "--id", str(nid), "--yes"] + (["--pages", pages] if pages else []) + (["--redo"] if data.get("redo") else [])
+        return novel_job(r[0], argv, "draw-%d-%s" % (nid, pages or "all"), kind="images_gen")
+
+    @app.post("/api/novels/<int:nid>/page")
+    @guarded
+    def novels_page(nid):
+        nv = novel_mod()
+        data = request.get_json(force=True) or {}
+        page = int(data.get("page") or 0)
+        c = con()
+        try:
+            if data.get("action") == "approve":
+                nv.approve_page(c, nid, page)
+                return jsonify({"ok": True})
+            if data.get("action") == "edit":
+                v = nv.edit_page(c, nid, page, {k: data[k] for k in ("scene", "caption", "caption_hi") if k in data})
+                return jsonify({"ok": True, "verify": v})
+            return bad("unknown action")
+        except SystemExit as e:
+            return bad(str(e).replace("FAIL: ", ""))
+        finally:
+            c.close()
+
+    @app.post("/api/novels/<int:nid>/action")
+    @guarded
+    def novels_action(nid):
+        nv = novel_mod()
+        data = request.get_json(force=True) or {}
+        act = data.get("action")
+        c = con()
+        try:
+            if act in ("approve", "force"):
+                nv.approve(c, nid, force=(act == "force"))
+            elif act == "retire":
+                nv.get(c, nid); nv.save(c, nid, status="retired")
+            else:
+                return bad("unknown action")
+            return jsonify({"ok": True})
+        except SystemExit as e:
+            return bad(str(e).replace("FAIL: ", ""))
+        finally:
+            c.close()
+
+    @app.post("/api/novels/<int:nid>/build")
+    @guarded
+    def novels_build(nid):
+        r = _novel_code(nid)
+        if not r:
+            return bad("unknown novel", 404)
+        return novel_job(r[0], ["build", "--id", str(nid)], "build-%d" % nid)
+
+    @app.get("/api/novels/<int:nid>/img")
+    def novels_img(nid):
+        from flask import Response
+        nv = novel_mod()
+        kind, k = request.args.get("kind", "page"), request.args.get("n", "")
+        c = con()
+        try:
+            n = nv.get(c, nid)
+        except SystemExit:
+            return bad("unknown novel", 404)
+        finally:
+            c.close()
+        rec = (n["page_images"] if kind == "page" else n["cast_sheets"]).get(str(k)) or {}
+        p = Path(rec.get("path") or "")
+        if not p.is_file():
+            return bad("no picture", 404)
+        try:
+            from PIL import Image
+            import io
+            with Image.open(p) as imx:
+                imx = imx.convert("RGB"); imx.thumbnail((720, 720))
+                buf = io.BytesIO(); imx.save(buf, "JPEG", quality=82)
+            resp = Response(buf.getvalue(), mimetype="image/jpeg")
+        except Exception:
+            resp = Response(p.read_bytes(), mimetype=rec.get("mime") or "image/png")
+        resp.headers["Cache-Control"] = "private, max-age=600"
+        return resp
 
     return app

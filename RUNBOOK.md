@@ -1087,3 +1087,15 @@ Every step is a dry run unless `--yes` is given.
   - Back up.
   - Add `--apply`, and add `--include-translated` to also tag the translated copies.
   - Then run `corpus_status --doc <code>`.
+
+
+## Younger readers, graphic novels, cloud pre-flight (DOCS12_2026_10_07)
+
+- **A version for younger readers.** On an approved story's card, under "For younger readers", click "Write version" (about $0.01). Read it, Edit if needed, then Approve. Books for those ages use it.
+  - From the command line: `python scripts\stories.py retell --id N --audience young --yes`, then `python scripts\stories.py variant --id N --audience young --action approve`.
+- **A graphic novel.** In Stories, open "Graphic novels", choose the story, pages and readers, then "Plan the pages" (about $0.01).
+  - Read every page and correct captions and scenes (Save checks them).
+  - "Draw cast", then "Draw pages", then Approve each page, then "Make the book".
+  - From the command line, `python scripts\novel.py plan --story N --pages 12 --yes`, then `cast --id K --yes`, `draw --id K --yes`, `approve-page`, `approve`, `build`.
+- **Before restarting the dashboard,** look at the header: a running translation is killed by a restart, and it resumes when started again. Keep the machine awake (lid open, sleep off) for long runs.
+- **Cloud.** Paste `docs\cloud\C0_preflight_2026-10-07.sql` into the Lovable Cloud SQL editor one query at a time (read-only) and keep the results. C1 is applied only after that, and only after the file has been read through.

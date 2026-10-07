@@ -126,7 +126,7 @@ def now() -> str:
 
 
 def ensure_schema(con) -> None:
-    con.executescript(SCHEMA)
+    con.executescript(SCHEMA + VARIANT_SCHEMA)   # STORY_VARIANTS_2026_10_07
     con.commit()
 
 
@@ -408,7 +408,7 @@ ILLUSTRATE_SYSTEM = (
     "Respond with one JSON object only: {\"anchor\": \"page.idx\" (one of the tags given: the passage the "
     "moment rests on), \"title\": str (4-9 words), \"brief\": str (what to draw, 40-90 words), "
     "\"context_note\": str (why this moment, citing [page.idx]), \"caption_en\": str, \"caption_hi\": str}")
-AUDIENCES = ("young", "general", "scholar")
+AUDIENCES = ("young", "teen", "general", "scholar")   # teen: STORY_VARIANTS_2026_10_07
 
 
 def illustrate(con, sid: int, db: str, http=None, cap: int = 40) -> int:
@@ -507,6 +507,10 @@ def book(con, ids: list, title: str, out: Path, audience: str = "general", hindi
             if uri:
                 fig = ("<figure class='plate'><img src='%s' alt='%s'/><figcaption>%s</figcaption></figure>"
                        % (uri, html.escape(img[1] or s.get("title") or "", quote=True), html.escape(im.GENERATED_LABEL)))
+        vv = _variant_for(con, s["id"], audience)   # STORY_VARIANTS_2026_10_07
+        if vv:
+            s = dict(s, title=vv.get("title") or s.get("title"), title_hi=vv.get("title_hi") or s.get("title_hi"),
+                     story_en=vv.get("story_en") or "", story_hi=vv.get("story_hi") or "", cites=vv.get("cites"))
         en = s.get("story_en") or ""
         hi = s.get("story_hi") or ""
         body_en = ("<p>%s</p>" % html.escape(_plain(en))) if audience == "young" else ("<div class='en'>%s</div>" % _cite_html(en))
@@ -519,7 +523,7 @@ def book(con, ids: list, title: str, out: Path, audience: str = "general", hindi
             epi = ("<blockquote class='sa'>%s<span class='qref'> [%s]</span></blockquote>"
                    % (html.escape(s["quote_sa"]), html.escape(s.get("quote_ref") or "")))
         notes = ""
-        if s.get("notes") and audience != "young":
+        if s.get("notes") and audience not in ("young", "teen"):
             notes = "<div class='notes'>Editorial notes: %s</div>" % html.escape(s["notes"])
         badge = "<div class='proof'>PROOF - not yet approved</div>" if s["status"] != "approved" else ""
         parts.append("<section class='story' id='s%d'>%s<h2>%d. %s</h2>%s<div class='src'>%s, passages %s</div>%s%s%s%s%s"
@@ -547,9 +551,12 @@ def book(con, ids: list, title: str, out: Path, audience: str = "general", hindi
             "padding:.3rem;vertical-align:top}.story{page-break-before:always}h1{text-align:center}")
     aud = {"young": "body{font-size:1.25rem;line-height:1.75}h2{font-size:1.7rem;color:#7a3d00}p{margin:.8rem 0}"
                     "figure.plate img{max-height:80vh}",
+           "teen": "body{font-size:1.12rem;line-height:1.7}h2{color:#5a3a12}",
            "general": "body{font-size:1.05rem;line-height:1.65}",
            "scholar": "body{font-size:1rem;line-height:1.6}.notes{font-size:.9rem}"}[audience]
     intro = {"young": "Stories retold from an old Sanskrit book. The pictures are new paintings made for this book.",
+             "teen": "Episodes retold from a Sanskrit text, each resting on the passages cited after its sentences. "
+                     "The pictures are new paintings made for this book, not historical sources.",
              "general": "Retellings, each cited to the passages it rests on. Illustrations are generated, not historical "
                         "sources. Retellings were drafted by a model from the passages and approved by an editor.",
              "scholar": "Retellings with a citation after every sentence, the Sanskrit as printed, the machine English "
@@ -606,6 +613,101 @@ def _slug(t: str) -> str:
     return (s or "stories")[:40]
 
 
+# ------------------------------------------------------------------ STORY_VARIANTS_2026_10_07
+VARIANT_AUDIENCES = ("young", "teen")
+VARIANT_SCHEMA = """
+CREATE TABLE IF NOT EXISTS doc_story_variants(
+  id INTEGER PRIMARY KEY, story_id INTEGER NOT NULL, audience TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'draft', title TEXT, title_hi TEXT, story_en TEXT, story_hi TEXT, notes TEXT,
+  cites TEXT, verify TEXT, model TEXT, prompt_hash TEXT, provenance TEXT,
+  created_at TEXT, updated_at TEXT, approved_at TEXT, UNIQUE(story_id, audience));
+"""
+AUDIENCE_SPEC = {
+    "young": ("children aged 8 to 12",
+              "Use short sentences and everyday words, 150-230 words, past tense. Tell hard moments (death, curses, "
+              "war) plainly and gently, without gore."),
+    "teen": ("readers aged 13 to 16",
+             "Use clear, vivid prose, 180-260 words, past tense. Keep the motives the passages give; no gore."),
+}
+RETELL_SYSTEM = (
+    "You retell ONE episode from a Sanskrit text for %s, for an illustrated book. You are given the passages "
+    "(tag [page.idx], the Sanskrit as printed and a machine English translation) and the editor-approved retelling "
+    "for adults with its editorial notes. Rules: (1) Use ONLY what the passages say. The approved retelling shows "
+    "what the editor accepted; the notes say what to leave out. Add no events, motives, speech, places or "
+    "descriptions that the passages do not give. (2) After EVERY sentence, cite the passage(s) it rests on, as "
+    "[page.idx] or [page.idx, page.idx]. (3) Give every name exactly as the passages give it, in IAST. Where a word "
+    "may be unfamiliar, add a few plain words that explain it (for example 'Samika, a forest sage'), never a new "
+    "fact. (4) %s (5) story_hi: the same retelling in simple, natural Hindi, with the same citations. "
+    "Respond with JSON only: {\"title\": str, \"title_hi\": str, \"story_en\": str, \"story_hi\": str, "
+    "\"notes\": str (what you left out or simplified, and why)}")
+
+
+def ensure_variants(con) -> None:
+    con.executescript(VARIANT_SCHEMA)
+    con.commit()
+
+
+def _variant_row(con, sid: int, audience: str) -> dict | None:
+    if "doc_story_variants" not in {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}:
+        return None
+    cols = [c[1] for c in con.execute("PRAGMA table_info(doc_story_variants)")]
+    r = con.execute("SELECT * FROM doc_story_variants WHERE story_id=? AND audience=?", (sid, audience)).fetchone()
+    return dict(zip(cols, r)) if r else None
+
+
+def _variant_for(con, sid: int, audience: str) -> dict | None:
+    """The APPROVED version of story sid for this audience, or None."""
+    if audience not in VARIANT_AUDIENCES:
+        return None
+    v = _variant_row(con, sid, audience)
+    return v if v and v["status"] == "approved" else None
+
+
+def variant_verify(con, s: dict, v: dict) -> dict:
+    rows = window(passages(con, _code_of(con, s["doc_id"])), (s["from_page"], s["from_idx"]),
+                  (s["to_page"], s["to_idx"]), pad=2, cap=60)
+    return verify({"story_en": v.get("story_en") or "", "story_hi": v.get("story_hi") or "",
+                   "quote_sa": s.get("quote_sa") or "", "quote_ref": s.get("quote_ref") or ""}, rows)
+
+
+def retell(con, sid: int, audience: str, db: str, http=None, cap: int = 60, force: bool = False) -> dict:
+    if audience not in VARIANT_AUDIENCES:
+        raise SystemExit("FAIL: audience must be one of %s" % ", ".join(VARIANT_AUDIENCES))
+    s = _row(con, sid)
+    if s["status"] != "approved" and not (force and s["status"] == "draft"):
+        raise SystemExit("FAIL: story #%d is %s; a version for younger readers is made from an approved story "
+                         "(--force for a draft)." % (sid, s["status"]))
+    ensure_variants(con)
+    code = _code_of(con, s["doc_id"])
+    rows = window(passages(con, code), (s["from_page"], s["from_idx"]), (s["to_page"], s["to_idx"]), pad=2, cap=cap)
+    if not rows:
+        raise SystemExit("FAIL: story #%d: no translated passages in its range." % sid)
+    who, how = AUDIENCE_SPEC[audience]
+    system = RETELL_SYSTEM % (who, how)
+    user = ("Episode: %s\n\nAPPROVED RETELLING (for adults):\n%s\n\nEDITORIAL NOTES:\n%s\n\nPASSAGES\n\n%s"
+            % (s.get("title") or "", s.get("story_en") or "", s.get("notes") or "(none)", _prompt_block(rows, True)))
+    t0 = time.time()
+    data, resp = im.call_text_json(MODEL, system, user, http=http)
+    im.meter("story", code, "gemini:" + MODEL, resp, db, time.time() - t0, units=1)
+    data = data if isinstance(data, dict) else {}
+    v = variant_verify(con, s, data)
+    ph = hashlib.sha256((MODEL + system + user).encode("utf-8")).hexdigest()[:16]
+    con.execute(
+        """INSERT INTO doc_story_variants(story_id, audience, status, title, title_hi, story_en, story_hi, notes, cites,
+                                          verify, model, prompt_hash, provenance, created_at, updated_at)
+           VALUES(?, ?, 'draft', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+           ON CONFLICT(story_id, audience) DO UPDATE SET status='draft', title=excluded.title,
+             title_hi=excluded.title_hi, story_en=excluded.story_en, story_hi=excluded.story_hi, notes=excluded.notes,
+             cites=excluded.cites, verify=excluded.verify, model=excluded.model, prompt_hash=excluded.prompt_hash,
+             provenance=excluded.provenance, updated_at=excluded.updated_at, approved_at=NULL""",
+        (sid, audience, data.get("title") or s.get("title") or "", data.get("title_hi") or s.get("title_hi") or "",
+         data.get("story_en") or "", data.get("story_hi") or "", data.get("notes") or "", json.dumps(v["cited"]),
+         json.dumps(v), MODEL, ph, json.dumps({"from_story": sid, "story_status": s["status"], "written_at": now()}),
+         now(), now()))
+    con.commit()
+    return v
+
+
 # ------------------------------------------------------------------ CLI
 def _row(con, sid: int) -> dict:
     cols = [c[1] for c in con.execute("PRAGMA table_info(doc_stories)")]
@@ -644,6 +746,12 @@ def main() -> int:
     bk = sub.add_parser("book"); bk.add_argument("--ids", required=True); bk.add_argument("--title", required=True)
     bk.add_argument("--audience", default="general", choices=AUDIENCES); bk.add_argument("--no-hindi", action="store_true")
     bk.add_argument("--proof", action="store_true"); bk.add_argument("--out", default=None)
+    rt = sub.add_parser("retell"); rt.add_argument("--id", type=int, required=True)   # STORY_VARIANTS_2026_10_07
+    rt.add_argument("--audience", required=True, choices=VARIANT_AUDIENCES); rt.add_argument("--yes", action="store_true")
+    rt.add_argument("--force", action="store_true", help="also from a draft story")
+    va = sub.add_parser("variant"); va.add_argument("--id", type=int, required=True)
+    va.add_argument("--audience", required=True, choices=VARIANT_AUDIENCES)
+    va.add_argument("--action", required=True, choices=["approve", "force", "retire", "verify"])
     bsx = sub.add_parser("booksmith-source"); bsx.add_argument("--ids", required=True)
     bsx.add_argument("--title", required=True); bsx.add_argument("--out", required=True)
     args = ap.parse_args()
@@ -695,6 +803,38 @@ def main() -> int:
                 bad += 0 if res["ok"] else 1
             print("Next: show --id N, then approve --id N (a failed check needs --force after you read it).")
             return 0
+        if args.cmd == "retell":   # STORY_VARIANTS_2026_10_07
+            s = _row(con, args.id)
+            print("retell #%d %s for %s with %s, about $0.01" % (args.id, s.get("title") or "",
+                                                                 AUDIENCE_SPEC[args.audience][0], MODEL))
+            if not args.yes:
+                print("Dry run. Add --yes."); return 0
+            if not budget_ok(args.db):
+                print("Refusing: the spend cap is reached."); return 1
+            res = retell(con, args.id, args.audience, args.db, force=args.force)
+            print("  #%d %s: %s %s" % (args.id, args.audience, "verified" if res["ok"] else "NEEDS REVIEW:",
+                                       "; ".join(res["problems"])))
+            return 0
+        if args.cmd == "variant":
+            s = _row(con, args.id)
+            v = _variant_row(con, args.id, args.audience)
+            if not v:
+                print("No %s version of #%d yet (retell --id %d --audience %s)." % (args.audience, args.id, args.id,
+                                                                                    args.audience)); return 1
+            if args.action == "verify":
+                res = variant_verify(con, s, v)
+                con.execute("UPDATE doc_story_variants SET verify=?, updated_at=? WHERE id=?", (json.dumps(res), now(), v["id"]))
+                con.commit(); print(json.dumps(res, ensure_ascii=False, indent=1)); return 0 if res["ok"] else 1
+            if args.action == "retire":
+                con.execute("UPDATE doc_story_variants SET status='retired', updated_at=? WHERE id=?", (now(), v["id"]))
+                con.commit(); print("#%d %s version retired" % (args.id, args.audience)); return 0
+            if v["status"] != "draft":
+                print("Refusing: the %s version of #%d is %s." % (args.audience, args.id, v["status"])); return 1
+            if not (json.loads(v["verify"] or "{}").get("ok")) and args.action != "force":
+                print("Refusing: the check failed. Read it; --action force approves anyway."); return 1
+            con.execute("UPDATE doc_story_variants SET status='approved', approved_at=?, updated_at=? WHERE id=?",
+                        (now(), now(), v["id"]))
+            con.commit(); print("#%d %s version approved" % (args.id, args.audience)); return 0
         if args.cmd == "illustrate":   # STORY_BOOKS_2026_10_07
             s = _row(con, args.id)
             print("illustrate #%d %s: one image idea with %s, about $0.003" % (args.id, s.get("title") or "",

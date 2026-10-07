@@ -55,6 +55,20 @@ Use the Supabase project that already serves the Srangam site (Lovable Cloud) as
 - It is the cheapest option at scale. But it is a second platform beside the Supabase that Srangam uses, and the reader would have to move or call across.
 - Revisit it if the site leaves Lovable.
 
+## Revision 2026-10-07 (2): what the Srangam repository shows (CLOUD_BRAIN_REV2_2026_10_07)
+
+I read `D:\srangam-42267` read-only: `supabase/migrations` (66 files), `supabase/functions` (29), `docs/CURRENT_STATUS.md` and `docs/CORPUS_BRIDGE_FINDINGS_2026-09-08.md`. That reading changes four points above.
+
+1. **pgvector is already enabled there.** An earlier migration runs `CREATE EXTENSION IF NOT EXISTS vector`. `srangam_article_metadata.embeddings` is `vector(1536)` with an ivfflat index. Whether halfvec is available depends on the installed version (0.7.0 or later). `docs/cloud/C0_preflight_2026-10-07.sql` asks P1 and P2 before anything is built.
+2. **Text reaches the site through the SQL-editor bridge, not a key.** B1 (`srangam_texts`, `srangam_text_passages`) was applied in the Lovable SQL editor on 2026-09-08. Passages go up as pasteable SQL from `publish_srangam.py --emit-sql`. AphorismsOfSandilya is live at /texts (439 passages). Pasting 21,015 vectors that way would mean about 100 MB of SQL.
+   - **So vectors are made in the cloud.** An edge function (phase C2) embeds the published passages with the Gemini key held as a Supabase secret.
+   - **Only text travels.** Nothing new is needed on this machine.
+   - **Cost scales with what is published.** It covers only the passages a person has published. Today that is 439 passages, a fraction of a cent.
+3. **Stories go up the same way as passages** (`--emit-sql`) into `srangam_stories`, with `published=false` until an admin flips it. Pictures ship with the site (`public/corpus-images/`, approved pictures only, as JPEG). No upload key is needed.
+4. **C1 is drafted and tested.** `docs/cloud/C1_corpus_brain_DRAFT_2026-10-07.sql` holds `srangam_passage_vectors` (halfvec(768), HNSW), `srangam_stories`, RLS and `match_text_passages()` (SECURITY INVOKER).
+   - It was applied to PostgreSQL 16 + pgvector 0.8.0 on top of B1: 13 of 13 objects present. An anonymous caller sees only published texts and stories, and cannot write.
+   - It is not applied to the live database. C0 comes first, then a reading of the file, then the editor, then the V1 count.
+
 ## Design: one-way and incremental, local first
 
 ```
@@ -76,7 +90,7 @@ this PC (authoring)                              cloud (serving, read-only to th
 | Phase | What | Gate |
 |---|---|---|
 | C0 | Run the read-only audit Q1-Q6 (`srangam_migration_audit_2026_10_04.sql`) and verify block_BE | Already pending |
-| C1 | Migrations for `srangam_passage_vectors` (halfvec 768, HNSW), `srangam_stories`, `srangam_images`, `brain_items`, and the RPC `match_passages` | Migration reviewed in the Lovable editor |
-| C2 | Push vectors, then approved stories and images, through the bridge (incremental, hashed) | Recall check (768 vs 3,072) passes |
+| C1 | `docs/cloud/C1_corpus_brain_DRAFT_2026-10-07.sql`: `srangam_passage_vectors` (halfvec 768, HNSW), `srangam_stories`, RLS, `match_text_passages` (drafted and tested 2026-10-07) | C0 P1-P4 as expected; the file read through; then the V1 count |
+| C2 | Edge function `embed-published-passages`: embeds published passages in the cloud (768 dimensions, md5 of the translation as the hash, incremental); stories pushed with `--emit-sql` | Recall check (768 vs 3,072) on 50 questions passes |
 | C3 | Ask Edge Function behind sign-in, with a per-user and a global cap | Spend cap mirrored |
 | C4 | Story library and book maker on the site (HTML) | Approved-only data |

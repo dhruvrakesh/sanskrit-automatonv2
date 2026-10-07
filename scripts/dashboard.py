@@ -2862,6 +2862,7 @@ def _ask_retrieve(con, q, k=12):
                WHERE passages_fts MATCH ?
                  AND TRIM(COALESCE(p.translation,'')) <> ''
                  AND d.code NOT LIKE '%-RETIRED'
+                 AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')   -- ASK_NOISE_2026_10_07
                ORDER BY bm25(passages_fts) LIMIT ?""",
             (m, k),
         ).fetchall()
@@ -2952,13 +2953,14 @@ def _ask_semantic_retrieve(con, q, k=12):
         _ASK_VEC_CACHE.update(key=_key, ids=ids, mat=np.vstack(mats))
     ids = _ASK_VEC_CACHE["ids"]
     sims = _ASK_VEC_CACHE["mat"] @ qv    # both L2-normalised → dot == cosine
-    order = np.argsort(-sims)[: max(k * 3, k)]   # over-fetch, then filter retired
+    order = np.argsort(-sims)[: k * 3 + 64]   # over-fetch, then filter retired and noise (ASK_NOISE_2026_10_07)
     top_ids = [ids[j] for j in order]
     ph = ",".join("?" * len(top_ids))
     got = {r[0]: r for r in con.execute(
         f"""SELECT p.id, d.code, p.verse_ref, p.page_no, p.idx, p.translation
             FROM passages p JOIN docs d ON d.id = p.doc_id
             WHERE p.id IN ({ph}) AND d.code NOT LIKE '%-RETIRED'
+              AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')   -- ASK_NOISE_2026_10_07
               AND TRIM(COALESCE(p.translation,'')) <> ''""", top_ids)}
     out = []
     for pid in top_ids:
