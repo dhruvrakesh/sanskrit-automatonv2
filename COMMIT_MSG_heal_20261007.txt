@@ -1,0 +1,17 @@
+Heal after the 2026-10-07 audit: bulk story re-check and greyed-button hints, brain_items reads .env, never-sent gaps, Srangam S1 (STORY_RECHECK_2026_10_07, BRAIN_ENV_2026_10_07, GAPS2_2026_10_07, DOCS13_2026_10_07)
+
+stories.py (patch_story_recheck): verify-all --doc CODE [--status] re-runs the check on every
+written story of a text and its younger-reader versions (no API, 60-passage window, approves
+nothing) and prints now passing / still failing / unchanged; verify --id uses the same window.
+Stories #3-#13 of markandeya_purana carried check results from before the 2026-10-05 verify fix.
+stories_web.py: POST /api/stories/verify-all. stories_static.html: "Check all again (free)",
+filters "draft, check passes" / "draft, check fails", a "Next:" line, and explanations in the
+Book and Graphic novels tabs of why their buttons are greyed (nothing approved; Proof option).
+brain_items.py: load_env() at import; CLI and maintenance step b2 said "GEMINI_API_KEY not set".
+corpus_status.py (patch_gaps2): rows translate_passages never sends (page < 1, should_translate
+false, clean_for_mt empty) count as gaps, "N never sent", so markandeya reads CURRENT.
+docs/cloud/S1_srangam_heal_2026-10-07.sql: H1 inspect recorded 20260201064547, H2 pre-flight,
+H3 apply srangam_cross_reference_stats verbatim from 20260910120000 (never applied), H4 verify.
+Audit Q1: 55 version pairs differ by <= 6 s (same migrations), the real differences are three.
+docs: PLATFORM s16, RUNBOOK, ENTERPRISE_PATH addendum (3).
+Tests: tests/test_heal_2026_10_07.py.

@@ -528,6 +528,23 @@ def register(app, *, launch, root, py, script, db=None):
                         "error": d.get("error"), "mtime": side.stat().st_mtime})
         return jsonify(out)
 
+    # ---------------------------------------------------------------- STORY_RECHECK_2026_10_07
+    @app.post("/api/stories/verify-all")
+    @guarded
+    def stories_verify_all():
+        """The check again on every written story of a text (no API, a few ms a story). Approves nothing."""
+        doc = (request.get_json(force=True) or {}).get("doc", "")
+        if not DOC_RE.match(doc):
+            return bad("invalid doc")
+        c = con()
+        try:
+            if not c.execute("SELECT 1 FROM docs WHERE code=?", (doc,)).fetchone():
+                return bad("unknown doc", 404)
+            r = st.verify_all(c, doc)
+        finally:
+            c.close()
+        return jsonify(r)
+
     # ---------------------------------------------------------------- STORY_VARIANTS_2026_10_07
     @app.post("/api/stories/<int:sid>/retell")
     @guarded

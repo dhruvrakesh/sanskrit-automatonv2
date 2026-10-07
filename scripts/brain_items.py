@@ -40,6 +40,15 @@ import warnings
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# BRAIN_ENV_2026_10_07: load the repo's .env as every other paid script does (build_embeddings, images,
+# stories). Without it a run from PowerShell or from maintenance_runner.ps1 said "GEMINI_API_KEY not set"
+# and embedded nothing; only the dashboard's "Update brain" (which inherits the dashboard's environment)
+# worked. Measured 2026-10-07 13:1x: CLI run failed, the button run embedded 32.
+try:
+    from env_loader import load_env
+    load_env()
+except Exception:
+    pass
 
 MARK = "BRAIN_ITEMS_2026_10_05"
 SCHEMA = """

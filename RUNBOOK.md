@@ -1099,3 +1099,15 @@ Every step is a dry run unless `--yes` is given.
   - From the command line, `python scripts\novel.py plan --story N --pages 12 --yes`, then `cast --id K --yes`, `draw --id K --yes`, `approve-page`, `approve`, `build`.
 - **Before restarting the dashboard,** look at the header: a running translation is killed by a restart, and it resumes when started again. Keep the machine awake (lid open, sleep off) for long runs.
 - **Cloud.** Paste `docs\cloud\C0_preflight_2026-10-07.sql` into the Lovable Cloud SQL editor one query at a time (read-only) and keep the results. C1 is applied only after that, and only after the file has been read through.
+
+
+## Greyed-out story buttons, the brain from the command line, Srangam S1 (DOCS13_2026_10_07)
+
+- **The Book, Graphic novel or "For younger readers" buttons are greyed.** Nothing of that text is approved yet.
+  - On the Stories page press "Check all again (free)". Then choose the status filter "draft, check passes", read each story (click a citation to see its passages) and press Approve.
+  - Drafts in "draft, check fails" need Edit, Rewrite or "Approve anyway".
+  - From the command line: `python scripts\stories.py verify-all --doc markandeya_purana`.
+  - For a proof copy before anything is approved, tick Proof in the Book tab.
+- **Update the brain from PowerShell.** Run `python scripts\brain_items.py --db data\context.db`. It now reads `.env` itself. Maintenance step b2 does the same every 3 hours when the dashboard is idle.
+- **A translation gap that never closes.** If corpus_status says "N never sent", those rows are page 0 or carry no translatable Sanskrit (a lone danda, a stray mark). The translator will not send them, and that is correct; they are not work.
+- **Srangam S1.** Paste `docs\cloud\S1_srangam_heal_2026-10-07.sql` into the Lovable Cloud SQL editor one block at a time: H1, H2, H3, H4. Then run `block_BE_reader.ps1 -Verify`. Never insert into supabase_migrations.schema_migrations by hand.

@@ -212,3 +212,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | C0 | Read-only pre-flight (`docs/cloud/C0_preflight_2026-10-07.sql`) | Ready to run |
 | C1 | Vectors, stories, RLS, `match_text_passages` (`docs/cloud/C1_corpus_brain_DRAFT_2026-10-07.sql`) | Drafted and tested on PostgreSQL 16 + pgvector 0.8.0; not applied |
 | C2 | Edge function `embed-published-passages` in the Srangam repo | Next, after C1 |
+
+
+## Addendum 2026-10-07 (3): healing after the audit (DOCS13_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| 2.17 | Bulk re-check of stories, "draft passes / fails" filters, "Next:" line, greyed-button explanations (STORY_RECHECK) | Built 2026-10-07 |
+| 1.14 | brain_items loads `.env` (CLI and maintenance b2 failed with "GEMINI_API_KEY not set") | Built 2026-10-07 |
+| 1.15 | corpus_status counts rows the translator never sends as gaps (GAPS2) | Built 2026-10-07 |
+| S1 | Srangam: inspect 20260201064547 (H1), apply `srangam_cross_reference_stats` (H3), verify (H4) | Ready to run in the SQL editor |
+| T1 | Ganita_Yukti_Bhasa translate_both: 709 of 1,460, stopped by the 12:16 restart on 2026-10-07 | Open: resume from the dashboard, machine kept awake |
+| 1.12 | Maintenance alongside long translations | Open: measure concurrent writes first |
+| 1.13 | Delete the vectors of noise rows | Open; Ask already filters them |
+| C0 / C1 / C2 | Cloud pre-flight, corpus brain schema, `embed-published-passages` | C0 ready to run; C1 drafted and tested, not applied; C2 next |

@@ -197,6 +197,23 @@ def tried_unusable(path) -> dict:
     return out
 
 
+def _never_sent(page, text) -> bool:
+    """GAPS2_2026_10_07: True when translate_passages.py would skip this passage silently (no call, no
+    outcome record): page below 1, should_translate() false, or clean_for_mt() empty. Same functions."""
+    try:
+        from normalize_text import normalize_sanskrit
+        from text_filters import should_translate, clean_for_mt
+    except Exception:
+        return False
+    try:
+        if int(page or 0) < 1:
+            return True
+        normed = normalize_sanskrit(text or "")
+        return (not should_translate(normed, min_dev=0.05)) or not clean_for_mt(normed)
+    except Exception:
+        return False
+
+
 def gap_measures(con: sqlite3.Connection, doc: str, tried: dict) -> dict:
     """en_gap / hi_gap: untranslated in-scope passages that were tried with unusable output, or that
     translate_passages skips for OCR quality. *_gap_tried, *_gap_lowq split them; *_gap_refs: examples."""
@@ -204,25 +221,29 @@ def gap_measures(con: sqlite3.Connection, doc: str, tried: dict) -> dict:
     q = "p.quality_score" if "quality_score" in cols else "NULL"
     res: dict = {}
     for lang in ("en", "hi"):
-        res.update({lang + "_gap": 0, lang + "_gap_tried": 0, lang + "_gap_lowq": 0, lang + "_gap_refs": []})
+        res.update({lang + "_gap": 0, lang + "_gap_tried": 0, lang + "_gap_lowq": 0, lang + "_gap_refs": [],
+                    lang + "_gap_never": 0})   # GAPS2_2026_10_07
     rows = con.execute(
         f"""SELECT p.page_no, p.idx, {q}, TRIM(COALESCE(p.translation,'')) <> '',
-                   TRIM(COALESCE(l.translation,'')) <> ''
+                   TRIM(COALESCE(l.translation,'')) <> '', COALESCE(p.text,'')
             FROM passages p JOIN docs d ON d.id = p.doc_id
             LEFT JOIN translations_l10n l ON l.passage_id = p.id AND l.lang = 'hi'
             WHERE d.code = ? AND {SCOPE}""", (doc,)).fetchall()
-    for page, idx, qs, has_en, has_hi in rows:
+    for page, idx, qs, has_en, has_hi, text in rows:
         try:
             low = qs is not None and 0.0 < float(qs) < GAP_MIN_QUALITY
         except (TypeError, ValueError):
             low = False
+        never = None   # computed only for an untranslated row (GAPS2_2026_10_07)
         for lang, has in (("en", has_en), ("hi", has_hi)):
             if has:
                 continue
             was_tried = (int(page or 0), int(idx or 0)) in tried.get((doc, lang), ())
-            if was_tried or low:
+            if not (was_tried or low) and never is None:
+                never = _never_sent(page, text)
+            if was_tried or low or never:
                 res[lang + "_gap"] += 1
-                res[lang + ("_gap_tried" if was_tried else "_gap_lowq")] += 1
+                res[lang + ("_gap_tried" if was_tried else "_gap_lowq" if low else "_gap_never")] += 1
                 if len(res[lang + "_gap_refs"]) < 8:
                     res[lang + "_gap_refs"].append("%s.%s" % (page, idx))
     return res
@@ -521,9 +542,9 @@ def verdict(s: dict, lacuna_ok: float, debris_ok: float = 5.0, cpp: float | None
             continue
         share = pct(gap + s.get(lang + "_lacuna", 0), n)
         what = ("%d passage(s) without %s cannot be translated as printed (%d tried with unusable output, "
-                "%d below OCR quality %.2f; e.g. %s)" % (gap, name, s.get(lang + "_gap_tried", 0),
-                                                        s.get(lang + "_gap_lowq", 0), GAP_MIN_QUALITY,
-                                                        ", ".join(s.get(lang + "_gap_refs") or [])))
+                "%d below OCR quality %.2f, %d never sent: page 0 or no translatable Sanskrit; e.g. %s)"
+                % (gap, name, s.get(lang + "_gap_tried", 0), s.get(lang + "_gap_lowq", 0), GAP_MIN_QUALITY,
+                   s.get(lang + "_gap_never", 0), ", ".join(s.get(lang + "_gap_refs") or [])))   # GAPS2_2026_10_07
         if share > lacuna_ok:
             reasons.append("%s; with the lacunae that is %.1f%% of passages > %.1f%%" % (what, share, lacuna_ok))
             v = "NEEDS-TRANSLATION"

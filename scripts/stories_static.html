@@ -118,7 +118,7 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
     <h1>Stories</h1>
     <div class="tabs"><button id="tReview" class="on">Review</button><button id="tBook">Make a book</button><button id="tNovel">Graphic novels</button></div>
     <select id="doc" title="text"></select>
-    <select id="status"><option value="">all</option><option>candidate</option><option>draft</option><option>approved</option><option>retired</option></select>
+    <select id="status"><option value="">all</option><option>candidate</option><option>draft</option><option value="draft-ok">draft, check passes</option><option value="draft-bad">draft, check fails</option><option>approved</option><option>retired</option></select>
     <span class="sp"></span>
     <span class="note" id="summary"></span>
     <span class="chip" id="brain" title="Stories, found episodes and drawn images in the Ask index (brain_items.py)">Brain: ...</span>
@@ -135,8 +135,10 @@ sup.cite{color:var(--gold);cursor:pointer;font-size:10.5px}
   <button id="wImages" title="One story for every drawn image of this text (paid, about $0.01 each)">Write for drawn images</button>
   <button id="wCands" title="Write the found episodes (paid, about $0.01 each)">Write found episodes</button>
   <input id="wMax" type="number" min="1" max="30" value="6" style="width:64px" title="at most">
+  <button id="recheck" title="Run the check again on every written story of this text with today's rules (free, no API call). Checks stored before 2026-10-05 evening used the older rules.">Check all again (free)</button>
 </div>
 <div class="note" style="padding:8px 16px">Stories are drafted by a model from the cited passages only, then checked here without any paid call: every sentence cited, citations inside the episode, the Sanskrit quotation found word for word, and every name present in the passages. Read the passages (click a citation) and the editorial notes before approving. A damaged reading should be fixed in the source, not only in the story. Pictures: "Propose image" writes one idea from the story (about $0.003); "Draw" makes it (one image, about $0.09 at 1K, $0.13 at 2K).</div>
+<div id="nextStep" class="note" style="padding:0 16px 8px"></div>
 <div id="list"></div>
 </div>
 
@@ -326,7 +328,11 @@ function render(){
   const open = {}; document.querySelectorAll('.card .edit, .card .vedit').forEach(b => { if(b.innerHTML.trim()) open[b.closest('.card').dataset.id] = true; });
   if(Object.keys(open).length) return;   // never wipe an edit in progress; the next refresh catches up
   const f = $('#status').value;
-  const rows = S.filter(s => !f || s.status === f);
+  const passes = s => s.verify && s.verify.ok;   /* STORY_RECHECK_2026_10_07 */
+  const rows = S.filter(s => !f || s.status === f || (f === 'draft-ok' && s.status === 'draft' && passes(s)) ||
+                              (f === 'draft-bad' && s.status === 'draft' && !passes(s)));
+  const nd = S.filter(s => s.status === 'draft'), nok = nd.filter(passes).length, napp = S.filter(s => s.status === 'approved').length;
+  $('#nextStep').innerHTML = nd.length ? `<b>Next:</b> ${napp} approved. ${nok} draft(s) pass the check - read each one (click a citation to see its passages) and press Approve <button data-go="draft-ok">show them</button>. ${nd.length - nok} fail - read the problems, then Edit, Rewrite or "Approve anyway" <button data-go="draft-bad">show them</button>. Books, versions for younger readers and graphic novels use approved stories only.` : '';
   const c = {}; S.forEach(s => c[s.status] = (c[s.status]||0) + 1);
   $('#summary').textContent = Object.entries(c).map(([k,n]) => n+' '+k).join(' - ') || 'no stories yet';
   $('#list').innerHTML = rows.length ? rows.map(card).join('') :
@@ -447,7 +453,12 @@ async function loadNovels(){
     $('#nStory').innerHTML = r.stories.length ? r.stories.map(x => `<option value="${x.id}" ${x.id === NOVEL_PICK ? 'selected' : ''}>#${x.id} ${esc(x.title)} (${esc(x.range)})</option>`).join('')
       : '<option value="">no approved story in this text yet</option>';
     $('#nPlan').disabled = !r.stories.length;
+    $('#nPlan').title = r.stories.length ? 'One call, about $0.01' : 'A graphic novel is planned from an approved story; approve one in Review first';
     renderNovels();
+    if(!r.stories.length){   /* STORY_RECHECK_2026_10_07 */
+      const d = S.filter(s => s.status === 'draft'), ok = d.filter(s => s.verify && s.verify.ok).length;
+      $('#nList').innerHTML = `<div class="notes">"Plan the pages" is greyed out because no story of this text is approved yet (${d.length} draft(s), ${ok} pass the check). Read and approve one in Review <button data-go="draft-ok">show the drafts that pass</button>; it then appears in the list above.</div>`;
+    }
   } catch(e){ $('#nList').textContent = e.message; }
 }
 function renderNovels(){
@@ -529,6 +540,11 @@ async function loadBookStories(){
     return head + `<label class="${ok?'':'off'}"><input type="checkbox" data-story="${s.id}" ${ok?'':'disabled'} ${BOOK.order.includes(s.id)?'checked':''}>
       <span class="t">${esc(s.title)}<br><span class="m">#${s.id} - ${esc(s.status)} - ${esc(s.range)} - ${s.words} words${s.image_ok ? ' - picture' : (s.image_id ? ' - picture not approved' : ' - no picture')}${s.check_ok === false ? ' - check failed' : ''}</span></span></label>`;
   }).join('') || 'These texts have no written stories yet.';
+  const usable = BOOK.stories.filter(s => s.status === 'approved' || proof).length;   /* STORY_RECHECK_2026_10_07 */
+  if(BOOK.stories.length && !usable){
+    const pass = BOOK.stories.filter(s => s.status === 'draft' && s.check_ok).length;
+    $('#bStories').insertAdjacentHTML('afterbegin', `<div class="notes" style="margin-bottom:8px">None of these stories is approved yet, so they are greyed out. ${pass} draft(s) pass the check: read and approve them in Review <button data-go="draft-ok">show them</button>, or tick <b>Proof</b> (right) to make a proof copy from drafts now.</div>`);
+  }
   renderOrder();
 }
 function renderOrder(){
@@ -537,6 +553,8 @@ function renderOrder(){
     <button data-up="${k}" ${k?'':'disabled'} title="earlier">&uarr;</button><button data-down="${k}" ${k<BOOK.order.length-1?'':'disabled'} title="later">&darr;</button></li>`).join('');
   $('#bCount').textContent = BOOK.order.length ? '(' + BOOK.order.length + ' stories)' : '';
   $('#bMake').disabled = $('#bSmith').disabled = !BOOK.order.length;
+  if(!BOOK.order.length) $('#bOrder').innerHTML = '<li class="note" style="list-style:none">Tick stories in 2.; they appear here in book order and the buttons below become active.</li>';
+  $('#bSmith').title = BOOK.order.length ? 'A Booksmith edition of the approved stories chosen (drafts are left out)' : 'Tick at least one approved story first';
 }
 async function loadFiles(){
   try {
@@ -577,6 +595,8 @@ document.addEventListener('click', ev => {
   const up = ev.target.closest('button[data-up]'), dn = ev.target.closest('button[data-down]');
   if(up || dn){ const k = +(up ? up.dataset.up : dn.dataset.down), j = up ? k - 1 : k + 1;
     [BOOK.order[k], BOOK.order[j]] = [BOOK.order[j], BOOK.order[k]]; return renderOrder(); }
+  const go = ev.target.closest('button[data-go]');   /* STORY_RECHECK_2026_10_07 */
+  if(go){ tab('review'); $('#status').value = go.dataset.go; render(); window.scrollTo(0, 0); return; }
   const nb = ev.target.closest('button[data-n]');
   if(nb){ novelAct(nb); return; }
   const pdf = ev.target.closest('button[data-pdf]');
@@ -593,6 +613,14 @@ document.addEventListener('change', ev => {
     return renderOrder(); }
 });
 $('#bProof').addEventListener('change', loadBookStories);
+$('#recheck').onclick = async () => {   /* STORY_RECHECK_2026_10_07 */
+  try {
+    $('#recheck').disabled = true;
+    const r = await api('/api/stories/verify-all', {doc: doc()});
+    toast(`Checked ${r.checked} stories again: ${r.ok} pass, ${r.failed} fail` + (r.now_ok.length ? `\nNow passing: #${r.now_ok.join(', #')}` : '') + (r.now_failing.length ? `\nNow failing: #${r.now_failing.map(x => x[0]).join(', #')}` : ''));
+    await load(); await loadDocs();
+  } catch(e){ toast(e.message); } finally { $('#recheck').disabled = false; }
+};
 $('#nPlan').onclick = async () => {
   try { const story = +$('#nStory').value; NOVEL_PICK = story;
         track(await api('/api/novels/plan', {story, pages: +$('#nPages').value, audience: $('#nAud').value}), 'Planning a graphic novel of story #' + story, {then: loadNovels}); }

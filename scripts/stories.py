@@ -708,6 +708,47 @@ def retell(con, sid: int, audience: str, db: str, http=None, cap: int = 60, forc
     return v
 
 
+# ------------------------------------------------------------------ STORY_RECHECK_2026_10_07
+def verify_all(con, code: str, statuses=("draft", "approved")) -> dict:
+    """Re-run the check on every written story of a text (and its versions for younger readers).
+    No API call. Stores each result; approves nothing. Returns a summary."""
+    did = im.doc_id(con, code)
+    rows = passages(con, code)
+    out = {"checked": 0, "ok": 0, "failed": 0, "now_ok": [], "now_failing": [], "still_failing": [], "variants": 0}
+    ph = ",".join("?" * len(statuses))
+    ids = [r[0] for r in con.execute(
+        "SELECT id FROM doc_stories WHERE doc_id=? AND status IN (%s) AND TRIM(COALESCE(story_en,''))<>'' "
+        "ORDER BY from_page, from_idx, id" % ph, (did, *statuses))]
+    for sid in ids:
+        s = _row(con, sid)
+        given = window(rows, (s["from_page"], s["from_idx"]), (s["to_page"], s["to_idx"]), pad=2, cap=60)
+        v = verify(s, given)
+        try:
+            was = (json.loads(s.get("verify") or "null") or {}).get("ok")
+        except ValueError:
+            was = None
+        con.execute("UPDATE doc_stories SET verify=?, updated_at=? WHERE id=?", (json.dumps(v), now(), sid))
+        out["checked"] += 1
+        out["ok" if v["ok"] else "failed"] += 1
+        if v["ok"] and not was:
+            out["now_ok"].append(sid)
+        elif not v["ok"] and was:
+            out["now_failing"].append((sid, v["problems"][0] if v["problems"] else ""))
+        elif not v["ok"]:
+            out["still_failing"].append((sid, v["problems"][0] if v["problems"] else ""))
+        vt = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if "doc_story_variants" in vt:
+            for (vid,) in con.execute("SELECT id FROM doc_story_variants WHERE story_id=? AND status IN ('draft','approved')",
+                                      (sid,)).fetchall():
+                cols = [c[1] for c in con.execute("PRAGMA table_info(doc_story_variants)")]
+                vrow = dict(zip(cols, con.execute("SELECT * FROM doc_story_variants WHERE id=?", (vid,)).fetchone()))
+                vv = variant_verify(con, s, vrow)
+                con.execute("UPDATE doc_story_variants SET verify=?, updated_at=? WHERE id=?", (json.dumps(vv), now(), vid))
+                out["variants"] += 1
+    con.commit()
+    return out
+
+
 # ------------------------------------------------------------------ CLI
 def _row(con, sid: int) -> dict:
     cols = [c[1] for c in con.execute("PRAGMA table_info(doc_stories)")]
@@ -735,6 +776,8 @@ def main() -> int:
     w.add_argument("--after", type=int, default=6, help="with --image/--images: passages after the anchor")
     w.add_argument("--cap", type=int, default=60, help="most passages sent for one story")
     v = sub.add_parser("verify"); v.add_argument("--id", type=int, required=True)
+    va_ = sub.add_parser("verify-all"); va_.add_argument("--doc", required=True)   # STORY_RECHECK_2026_10_07
+    va_.add_argument("--status", default="draft,approved", help="comma list, default draft,approved")
     ls = sub.add_parser("list"); ls.add_argument("--doc", required=True); ls.add_argument("--status", default=None)
     sh = sub.add_parser("show"); sh.add_argument("--id", type=int, required=True)
     a = sub.add_parser("approve"); a.add_argument("--id", type=int, required=True); a.add_argument("--force", action="store_true")
@@ -858,10 +901,22 @@ def main() -> int:
             path, n = book(con, ids, args.title, out, args.audience, not args.no_hindi, args.proof)
             print("wrote %s (%d stories, audience %s). PDF: python scripts\\export_pdf.py \"%s\"" % (path, n, args.audience, path))
             return 0 if n else 1
+        if args.cmd == "verify-all":   # STORY_RECHECK_2026_10_07
+            sts = tuple(x.strip() for x in args.status.split(",") if x.strip() in ("draft", "approved"))
+            r = verify_all(con, args.doc, sts or ("draft", "approved"))
+            print("checked %d stor(ies) of %s (and %d version(s) for younger readers): %d pass, %d fail. No API call."
+                  % (r["checked"], args.doc, r["variants"], r["ok"], r["failed"]))
+            if r["now_ok"]:
+                print("  now passing (read, then approve): " + ", ".join("#%d" % i for i in r["now_ok"]))
+            for i, p in r["now_failing"]:
+                print("  NOW FAILING #%d: %s" % (i, p))
+            for i, p in r["still_failing"]:
+                print("  still failing #%d: %s" % (i, p))
+            return 0
         if args.cmd == "verify":
             s = _row(con, args.id)
             rows = window(passages(con, _code_of(con, s["doc_id"])), (s["from_page"], s["from_idx"]),
-                          (s["to_page"], s["to_idx"]), pad=2)
+                          (s["to_page"], s["to_idx"]), pad=2, cap=60)   # STORY_RECHECK_2026_10_07: as write and the page
             res = verify(s, rows)
             con.execute("UPDATE doc_stories SET verify=?, updated_at=? WHERE id=?", (json.dumps(res), now(), args.id))
             con.commit()
