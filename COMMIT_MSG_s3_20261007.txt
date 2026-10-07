@@ -1,0 +1,16 @@
+Srangam function lockdown (S3), live-site state, C0 results, Ganita needs OCR first (SRANGAM_LOCKDOWN_S3_2026_10_07, DOCS15_2026_10_07)
+
+docs/cloud/S3_srangam_function_lockdown_2026-10-07.sql: S2 G5 showed an anonymous visitor can
+execute four SECURITY DEFINER functions the Srangam migrations meant to keep private:
+_cron_invoke_edge (reads CRON_SECRET from vault, POSTs to any edge function), reconcile_stuck_admin_jobs,
+get_corpus_correlations and get_corpus_correlations_v2 (all articles, drafts included). Later
+migrations revoked only FROM PUBLIC; Supabase default privileges grant anon and authenticated by name.
+L1 before, L2 one-transaction revoke (anon everywhere; authenticated where the design is
+service-role only), L3 after, L4 the G5 check, L5 pg_cron runs, L6 undo. Tested on PostgreSQL 16
+with Supabase-like default privileges; L2 is idempotent. Not applied by this commit.
+docs: PLATFORM s18 (S2 results, root cause, C0 results: vector 0.8.0 + halfvec, C1 objects absent,
+78 MB; the live site checked in a browser: /research-network exact 1,392, /texts live, status panel
+stale since 2026-09-27 and still saying there is no reading page, its regenerated version 6b15ee7
+local and unpushed on feat/s1-nartiang-backlink; Ganita is NEEDS-OCR, which corrects s16/s17),
+RUNBOOK (status-panel refresh by hand on main, S3, publishing a text, Ganita order),
+ENTERPRISE_PATH addendum (5).
