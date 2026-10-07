@@ -1,0 +1,21 @@
+Story corrections #3, #5, #10; W8 load-time and W5 reader patches for Srangam; C1c NULL guard; live-state record (STORY_FIX_2026_10_07, LOAD_W8_2026_10_07, READER_MARKS_2026_10_07, MATCH_NULL_GUARD_2026_10_07, DOCS18_2026_10_07)
+
+scripts/story_fix.py: applies a reviewed fix file to doc_stories the way the dashboard's Edit does
+(stories.verify on the same passage window, check and cites stored, back to draft, approval cleared);
+all or nothing, marker-idempotent, guarded by updated_at; anchors must be unique, whole-field
+replacements must match the reviewed md5, corrected text must pass the check; can also change 'why'.
+docs/stories/fix_markandeya_2026-10-07.json: #3 (the widow is Madamika, Vapuh is their daughter Taci,
+plus Taci's marriage), #5 ('the one daughter of Drupada' for 'Draupadi'), #10 (rewritten so every
+sentence carries its citation), English and Hindi. On a copy of the 13 stories: 13 pass after.
+tests/test_story_fix_2026_10_07.py: 9 tests, 8 fail without the script.
+
+scripts/patch_load_w8_2026_10_07.py (Srangam): hero preload on "/" only (was 172 KB at high priority on
+every route); AdminLayout lazy. Entry 505.47 -> 485.72 kB (176.64 -> 171.87 kB gzip); new vitest.
+scripts/patch_reader_marks_2026_10_07.py (Srangam): "<decorative line>" lines drawn as a rule in the
+reader (p1.4, p1.6 of the Markandeya Purana); new vitest.
+
+docs/cloud/C1c_match_null_guard_2026-10-07.sql: match_text_passages returns nothing for a NULL
+question vector (applied 2026-10-07; G2 grants unchanged, G3 = 0).
+scripts/patch_docs18_2026_10_07.py: PLATFORM section 21, RUNBOOK, ENTERPRISE_PATH addendum (8):
+search live and checked in a browser, C2 at 1,500 of 1,655, story fixes, W8 and W5 measurements,
+W6 (Hindi on the reader) planned.

@@ -289,3 +289,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | W8 | Load time: 505 kB entry chunk (177 kB gzip) | Open: measure what the entry pulls in before splitting |
 | W5 / W6 | "<decorative line>" markers on the reader; Hindi on the reader | Open |
 | T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |
+
+
+## Addendum 2026-10-07 (8): search live, stories, load time (DOCS18_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| C2 | embed-published-passages | 1,500 of 1,655; one more R3; NULL guard (C1c) applied |
+| C3a | Search the texts by meaning | Live: deployed 12:19 UTC; real search 10 hits; reader link lands and marks |
+| ST1 | Story corrections #3, #5, #10 | story_fix.py + fix file; on a copy 13/13 pass; run it, then approve after reading |
+| ST2 | Approved stories on the site (srangam_stories) | Next: an --emit-sql bridge for approved stories, like the passages |
+| W8 | Load time | Patch: entry 505 -> 486 kB, hero 172 KB off every non-home page; further cuts need Home changes |
+| W5 | "<decorative line>" on the reader | Patch ready; p8.1 running head needs a local noise mark, then a site DELETE |
+| W6 | Hindi on the reader | Planned: column, publisher, reader (coverage 99.7%) |
+| C3b | Ask (generated answer citing only matched passages) | After C3a has run for a while; signed-in users first |
+| T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |

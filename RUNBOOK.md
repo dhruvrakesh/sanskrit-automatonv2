@@ -1172,3 +1172,18 @@ Every step is a dry run unless `--yes` is given.
   6. Commit the 8 paths, push main yourself, then ask Lovable to deploy the edge functions and Publish.
   7. Open /texts and search, for example "why did the king sell his wife and son".
 - **The patch refuses** if any of its files already exists with other content, or if an anchor moved. Nothing is written in either case.
+
+
+## Finish C2; story fixes; Srangam W8 and W5 (DOCS18_2026_10_07)
+
+- **C2.** Run R3 once more, then R2: expect "taken":155 and "pending_after_estimate":0. Then R4: 1655 | 1 | 1536 | 1536, and no pending rows. R6 (nightly at 04:15 UTC) is optional.
+- **Story fixes**, from the automaton root, with the dashboard idle:
+  1. Back up: `python scripts\db_backup.py data\context.db D:\backups\context_pre_storyfix_20261007.db`.
+  2. `python scripts\story_fix.py --file docs\stories\fix_markandeya_2026-10-07.json --check`, then the same without `--check`.
+  3. `python scripts\stories.py verify-all --doc markandeya_purana`: expect 13 pass, 0 fail.
+  4. Read each story (`stories.py show --id N` or the Stories page), then approve it: `python scripts\stories.py approve --id N`. Approval stays a person's decision.
+- **Srangam**, in `D:\srangam-42267` on main after `git pull --ff-only origin main`:
+  1. `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_load_w8_2026_10_07.py" --check`, then the same without `--check`.
+  2. The same two steps for `patch_reader_marks_2026_10_07.py`.
+  3. Checks: `npm run typecheck`; `npx vitest run src/__tests__/load-w8.test.ts src/__tests__/reader-marks.test.ts src/__tests__/texts-reader.test.tsx src/__tests__/corpus-search.test.ts src/__tests__/query-bounds.test.ts`; `npm run build`.
+  4. Commit the 6 paths, push main yourself, then click Publish in Lovable. No edge function changes.
