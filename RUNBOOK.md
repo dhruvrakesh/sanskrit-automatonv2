@@ -1158,3 +1158,17 @@ Every step is a dry run unless `--yes` is given.
   4. Confirm the function is listed in Lovable Cloud (Edge functions); if it is not, ask Lovable in its chat to deploy it.
   5. Then run `docs\cloud\C2_run_and_schedule_2026-10-07.sql` R1-R5.
 - **Recall check, any time:** `python scripts\recall_check_768.py --db "D:\backups\<a backup>.db" --immutable` (add `--dims 1536` to measure 1536).
+
+
+## Finish C2; install search by meaning (C3a) (DOCS17_2026_10_07)
+
+- **C2.** Run `docs\cloud\C2_run_and_schedule_2026-10-07.sql` R3, then R2, three more times, until R4 shows 1,655 vectors. Then run R5, and R6 if you want it nightly.
+- **C3a**, in `D:\srangam-42267` on main:
+  1. `git pull --ff-only origin main`.
+  2. `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_texts_search_2026_10_07.py" --check`, then the same without `--check`.
+  3. `npm run typecheck`.
+  4. `npx vitest run src/__tests__/corpus-search.test.ts src/__tests__/corpus-texts-loader.test.ts src/__tests__/query-bounds.test.ts`.
+  5. `npm run build`.
+  6. Commit the 8 paths, push main yourself, then ask Lovable to deploy the edge functions and Publish.
+  7. Open /texts and search, for example "why did the king sell his wife and son".
+- **The patch refuses** if any of its files already exists with other content, or if an anchor moved. Nothing is written in either case.

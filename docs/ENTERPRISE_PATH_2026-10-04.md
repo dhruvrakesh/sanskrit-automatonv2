@@ -274,3 +274,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | W6 | Hindi on the reader (B1 has no Hindi column) | Open: needs a column, the publisher and the reader page |
 | W3 | Article titled "....docx (1)" | S4 M4/M5 ready |
 | T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |
+
+
+## Addendum 2026-10-07 (7): live state and search (DOCS17_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| S3 | Function lockdown | Done and confirmed: cron ran at every 5-minute run after the revoke |
+| W1 | Status panel | Live, measured 2026-10-07 |
+| W3 / W7 | Article title; Markandeya label and IAST title | Done |
+| C2 | embed-published-passages | Deployed (Lovable redeploy 596aaf80); 500 of 1,655 vectors stored; three more R3 calls |
+| C3a | Search the published texts by meaning: `search-texts` edge function + /texts card + reader anchor | Built and checked on a copy (tsc, vitest 18/18, vite build, browser with mocked APIs); patch ready for the Srangam repo |
+| C3b | Ask: a generated answer that cites only the matched passages (signed-in users first, as it costs per answer) | Next, after C3a is live |
+| W8 | Load time: 505 kB entry chunk (177 kB gzip) | Open: measure what the entry pulls in before splitting |
+| W5 / W6 | "<decorative line>" markers on the reader; Hindi on the reader | Open |
+| T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |

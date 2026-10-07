@@ -1,0 +1,15 @@
+C3a search the published texts by meaning; live-state record after C2's first production run (SEARCH_TEXTS_C3A_2026_10_07, DOCS17_2026_10_07)
+
+docs/cloud/C3_search-texts/ (index.ts, lib.ts, lib_test.ts, site/): edge function search-texts
+(public; RETRIEVAL_QUERY, gemini-embedding-001, 1536 dims; match_text_passages with the anon key so
+RLS shows published texts only; 3-300 characters, k <= 20, 20 a minute per client per instance,
+query cache; each hit carries its position in the text; nothing generated) and the site side:
+corpusSearch.ts (failure never shown as "nothing found"; readerHref to ?p=<page>#p<page_no>-<idx>),
+TextSearch.tsx (card on /texts), corpus-search.test.ts. 7 Deno tests.
+scripts/patch_texts_search_2026_10_07.py: installs it in the Srangam repo (5 new files; TextsIndex
+renders the card; TextReader scrolls to and marks the linked passage once the passages arrive;
+config.toml verify_jwt = false as the others). Checked on a copy of the Srangam source: tsc no new
+error, vitest 18/18, vite build, a browser run with mocked APIs (links ?p=21#p60-10, reader
+scrolled to 96 px and marked, no page errors). Not applied by this commit.
+docs: PLATFORM s20 (site and repos verified live at 17:10; C2 500 of 1,655 vectors after the
+Lovable redeploy 596aaf80; first dry run 404 before deploy), RUNBOOK, ENTERPRISE_PATH addendum (7).
