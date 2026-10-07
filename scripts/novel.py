@@ -347,7 +347,12 @@ def approve(con, nid: int, force: bool = False) -> None:
 
 
 # ------------------------------------------------------------------ the book
-def build(con, nid: int, out: Path) -> Path:
+def _mt_display(t: str) -> str:
+    """NOVEL_PRINT_2026_10_07: the translator ends each verse with '//'; a reader sees none (as on /texts)."""
+    return re.sub(r"\s+//(?:\s+|$)", " ", re.sub(r"\s*//\s*$", "", t or "")).strip()
+
+
+def build(con, nid: int, out: Path, cover_page: int = 1) -> Path:
     import export_html as ex
     n = get(con, nid)
     s = st._row(con, n["story_id"])
@@ -365,21 +370,31 @@ def build(con, nid: int, out: Path) -> Path:
                          % (html.escape(sp.get("who") or ""), html.escape(sp.get("line") or ""),
                             "" if young else " <sup class='cite'>[%s]</sup>" % html.escape(sp.get("cite") or ""))
                          for sp in p.get("speech") or [])
-        secs.append("<section class='pg'>%s<div class='cap'>%s%s<div class='hi'>%s</div></div><div class='no'>%d</div>"
-                    "</section>" % (pic, cap(p.get("caption") or ""), speech, cap(p.get("caption_hi") or ""), p["n"]))
+        # NOVEL_PRINT_2026_10_07: the number sits inside the caption box, so it can never spill onto a page
+        # of its own (two blank pages in the 16-page PDF of novel #1).
+        secs.append("<section class='pg'>%s<div class='cap'><span class='no'>%d</span>%s%s<div class='hi'>%s</div>"
+                    "</div></section>" % (pic, p["n"], cap(p.get("caption") or ""), speech,
+                                          cap(p.get("caption_hi") or "")))
     rows = {st.ref(r[0], r[1]): r for r in st.passages(con, code)}
-    src = "".join("<tr><td>%s</td><td>%s</td></tr>" % (c, html.escape(rows[c][4]))
+    src = "".join("<tr><td>%s</td><td>%s</td></tr>" % (c, html.escape(_mt_display(rows[c][4])))
                   for c in (n["verify"] or {}).get("cited", []) if c in rows)
-    first = (n["page_images"].get("1") or {}).get("path")
+    # NOVEL_PRINT_2026_10_07: --cover N; and the span the pages cite, not the story's own range (the
+    # pages may cite the two passages before it, which the story's window includes).
+    first = (n["page_images"].get(str(cover_page)) or {}).get("path")
+    _cited = sorted((n["verify"] or {}).get("cited") or [], key=lambda c: st.parse_ref(c) or (0, 0))
+    span = ((_cited[0], _cited[-1]) if _cited else
+            (st.ref(s["from_page"], s["from_idx"]), st.ref(s["to_page"], s["to_idx"])))
     cover_uri = ex._fig_embed(first) if first and Path(first).is_file() else None
     css = ("@page{size:A4;margin:12mm}body{font-family:Georgia,'Noto Serif',serif;margin:0;color:#1d1d1d}"
            ".hi{font-family:'Nirmala UI','Noto Serif Devanagari',serif;color:#444;margin-top:.3rem}"
-           ".cover,.pg{page-break-after:always;min-height:95vh;display:flex;flex-direction:column;align-items:center;"
-           "justify-content:center;padding:0 6mm}.cover h1{font-size:2.2rem;text-align:center;margin:.6rem 0}"
-           ".cover img,.pg img{max-width:100%;max-height:72vh;border-radius:4px}.cap{max-width:42rem;font-size:"
+           ".cover,.pg{break-after:page;page-break-after:always;height:96vh;box-sizing:border-box;display:flex;"
+           "flex-direction:column;align-items:center;justify-content:center;padding:0 6mm}"
+           ".cover h1{font-size:2.2rem;text-align:center;margin:.6rem 0}"
+           ".cover img,.pg img{flex:0 1 auto;min-height:0;max-width:100%;max-height:100%;object-fit:contain;"
+           "border-radius:4px}.cap{flex:0 0 auto;break-inside:avoid;max-width:42rem;font-size:"
            + ("1.3rem" if young else "1.08rem") + ";line-height:1.55;margin-top:.8rem;background:#fbf6ea;border:1px "
            "solid #e3d4ad;border-radius:6px;padding:.6rem .9rem}.say{margin-top:.4rem;font-style:italic}.no{color:#999;"
-           "font-size:.8rem;margin-top:.4rem}.cite{color:#8a6d1d;font-size:.7rem}.nopic{width:60%;height:50vh;border:2px "
+           "font-size:.8rem;float:right;margin:0 0 .2rem .6rem}.cite{color:#8a6d1d;font-size:.7rem}.nopic{width:60%;height:50vh;border:2px "
            "dashed #ccc;display:flex;align-items:center;justify-content:center;color:#999}.proof{color:#a33;"
            "font-weight:bold;letter-spacing:.08em}table{border-collapse:collapse;font-size:.85rem;margin:0 8mm}td{border-top:"
            "1px solid #ddd;padding:.3rem;vertical-align:top}")
@@ -390,8 +405,7 @@ def build(con, nid: int, out: Path) -> Path:
             % ("<div class='proof'>PROOF - not yet approved</div>" if proof else "",
                "<img src='%s' alt='cover'/>" % cover_uri if cover_uri else "", html.escape(n.get("title") or ""),
                "<div class='hi'>%s</div>" % html.escape(n["title_hi"]) if n.get("title_hi") else "",
-               html.escape(s.get("title") or ""), html.escape(book_t), st.ref(s["from_page"], s["from_idx"]),
-               st.ref(s["to_page"], s["to_idx"]), "".join(secs),
+               html.escape(s.get("title") or ""), html.escape(book_t), span[0], span[1], "".join(secs),
                "Where this story comes from" if young else "Sources (machine English of the cited passages)", src))
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("<!doctype html><html lang='en'><head><meta charset='utf-8'><title>%s</title><style>%s</style></head>"
@@ -428,6 +442,7 @@ def main() -> int:
     a = sub.add_parser("approve"); a.add_argument("--id", type=int, required=True); a.add_argument("--force", action="store_true")
     r = sub.add_parser("retire"); r.add_argument("--id", type=int, required=True)
     b = sub.add_parser("build"); b.add_argument("--id", type=int, required=True); b.add_argument("--out", default=None)
+    b.add_argument("--cover", type=int, default=1, help="page whose picture goes on the cover (NOVEL_PRINT_2026_10_07)")
     sh = sub.add_parser("show"); sh.add_argument("--id", type=int, required=True)
     ls = sub.add_parser("list"); ls.add_argument("--doc", default=None)
     args = ap.parse_args()
@@ -481,7 +496,7 @@ def main() -> int:
             n = get(con, args.id)
             out = Path(args.out) if args.out else ROOT / "exports" / ("novel_%s_%s.html" % (
                 st._slug(n.get("title") or "novel"), datetime.date.today().strftime("%Y%m%d")))
-            path = build(con, args.id, out)
+            path = build(con, args.id, out, args.cover)
             print("wrote %s. PDF: python scripts\\export_pdf.py \"%s\"" % (path, path)); return 0
         if args.cmd == "show":
             print(json.dumps(get(con, args.id), ensure_ascii=False, indent=1)); return 0

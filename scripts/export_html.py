@@ -152,9 +152,11 @@ def _provenance(con, doc, hi_lang):
             pass
     pc = _colnames(con, "passages")
     def _agg(where, params, table="passages", tjoin=""):
-        eng_col = "engine" if "engine" in _colnames(con, table) else "NULL"
-        pv_col  = "mt_prompt_version" if "mt_prompt_version" in _colnames(con, table) else "NULL"
-        qa_col  = "translation_qa" if "translation_qa" in _colnames(con, table) else "NULL"
+        # EXPORT_EMPTY_2026_10_07: qualified. translations_l10n is joined to passages, which has the same
+        # three columns; unqualified they were ambiguous and the Hindi line of the title page vanished.
+        eng_col = "p.engine" if "engine" in _colnames(con, table) else "NULL"
+        pv_col  = "p.mt_prompt_version" if "mt_prompt_version" in _colnames(con, table) else "NULL"
+        qa_col  = "p.translation_qa" if "translation_qa" in _colnames(con, table) else "NULL"
         try:
             row = con.execute(
                 f"""SELECT COUNT(*), GROUP_CONCAT(DISTINCT {eng_col}),
@@ -340,6 +342,20 @@ def _html(title: str, body_html: str, lang_attr="en") -> str:
 {body_html}
 </body></html>"""
 
+def _display_title(title, doc):
+    """EXPORT_EMPTY_2026_10_07: the dashboard and the pipeline pass '<doc code> - English Translation', so
+    the title page showed the raw code (siddhanta_shiromani). The code is replaced by the curated title in
+    configs/doc_titles.json, else by the code made readable. A title without the code is kept as given."""
+    if not title or not doc or not title.startswith(doc):
+        return title
+    nice = None
+    try:
+        import collections_cfg as _cc
+        nice = _cc.load_titles().get(doc)
+    except Exception:
+        nice = None
+    return (nice or doc.replace("_", " ").title()) + title[len(doc):]
+
 def _safe_filename(s: str) -> str:
     s = re.sub(r"[^\w\-]+", "_", s.strip()); s = re.sub(r"_+","_", s); return s.strip("._")
 
@@ -403,6 +419,19 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                "the critical edition are omitted). A scholar's reading edition, not a "
                "substitute for the critical text.</div>")
     out.append("</div>")
+
+    # EXPORT_EMPTY_2026_10_07: a section whose rows all have nothing to show in the chosen languages
+    # used to keep its heading and its line in the contents (an untranslated text exported as 180
+    # empty "Page N" headings). It is left out, unless an approved picture is anchored on its pages.
+    def _shows(r):
+        en_ = (r["en"] or "").strip()
+        if include_en and drop_junk_en and _is_junk_en(en_):
+            en_ = ""
+        return bool((include_san and (r["san"] or "").strip()) or (include_en and en_)
+                    or (include_hi and (r["loc"] or "").strip()))
+    _fig_pages = {k[0] for k in (figures or {})}
+    sections = OrderedDict((k, v) for k, v in sections.items()
+                           if any(_shows(r) for r in v) or any(r["page"] in _fig_pages for r in v))
 
     # ── TOC ──
     sec_meta = []
@@ -485,8 +514,11 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                            f"<a href='#fnr-{n}' class='fn-ref'>&#8617;</a></li>")
             out.append("</ol></div>")
         out.append("</section>")
-    if kept == 0:
-        out.append("<p class='note'>(No content matched your filters.)</p>")
+    if kept == 0:   # EXPORT_EMPTY_2026_10_07: say what is missing
+        want = [x for x, on in (("English", include_en), (hi_label, include_hi), ("Sanskrit", include_san)) if on]
+        out.append("<p class='note'>Nothing to show yet: no passage in this range has %s text%s.</p>"
+                   % (html.escape(" or ".join(want) or "any"),
+                      "" if include_san else " (an export with --sanskrit shows the Sanskrit)"))
     return "\n".join(out), kept
 
 # --- EXPORT_IMAGES_2026_10_04: approved images as figures (opt-in) -----------
@@ -658,6 +690,7 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                 side_by_side, number_pages, drop_junk_en, force_san, force_en,
                 hi_lang=None, hi_label="Hindi", want_toc=True, want_footnotes=True, debug=False,
                 keep_frontmatter=False, images="none"):
+    title = _display_title(title, doc)   # EXPORT_EMPTY_2026_10_07
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
     figs = _load_figures(con, doc) if images == "approved" else {}   # EXPORT_IMAGES_2026_10_04
     cover = _load_cover(con, doc) if images == "approved" else ""   # COVERS_2026_10_04
@@ -672,7 +705,7 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                          want_toc=want_toc, want_footnotes=want_footnotes, title=title,
                          figures=_fig_copy(figs) if figs else None)
     if kept == 0 and include_en and not include_san and drop_junk_en:
-        body, _ = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
+        body, kept = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                           include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                           number_pages=number_pages, drop_junk_en=False,
                           want_toc=want_toc, want_footnotes=want_footnotes, title=title,
@@ -692,6 +725,11 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
         print(f"[export] images: {_fig_total} approved, {_n_in} placed, "
               f"{_fig_total - _n_in} outside pages {lo}-{hi}")
     if debug: print(f"[export] wrote {out_path} | recs={len(recs)} | san='{san_col}' en='{en_col}' hi='{hi_lang}'")
+    if kept == 0:   # EXPORT_EMPTY_2026_10_07
+        print(f"[export] WARNING {doc}: pages {lo}-{hi} have nothing to show in the chosen languages "
+              f"({len(recs)} passages read); {out_path} holds only the title page and a note.")
+    else:
+        print(f"[export] wrote {out_path}: {kept} passage(s)")
     return out_path
 
 def _list_docs(con):

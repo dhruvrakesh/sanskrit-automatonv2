@@ -1187,3 +1187,16 @@ Every step is a dry run unless `--yes` is given.
   2. The same two steps for `patch_reader_marks_2026_10_07.py`.
   3. Checks: `npm run typecheck`; `npx vitest run src/__tests__/load-w8.test.ts src/__tests__/reader-marks.test.ts src/__tests__/texts-reader.test.tsx src/__tests__/corpus-search.test.ts src/__tests__/query-bounds.test.ts`; `npm run build`.
   4. Commit the 6 paths, push main yourself, then click Publish in Lovable. No edge function changes.
+
+
+## Exports, novel layout and the publication gate (DOCS19_2026_10_07)
+
+- **Apply.** From the automaton root: `python scripts\patch_exports_gate_2026_10_07.py --check`, then the same without `--check`.
+- **Test.** `python -m unittest tests.test_exports_gate_2026_10_07 tests.test_publish_bridge tests.test_publish_engine_2026_10_07 tests.test_novel_2026_10_07 tests.test_export_images tests.test_export_pdf`.
+- **The ten withheld verses**, published without re-pasting whole texts:
+  1. `python scripts\publish_srangam.py --doc markandeya_purana --emit-sql D:\backups\srangam_sql --only 11.2,73.3,99.2`
+  2. `python scripts\publish_srangam.py --doc AphorismsOfSandilya --emit-sql D:\backups\srangam_sql --only 57.6,57.7,69.8,72.2,72.3,72.6,75.6`
+  3. Paste each doc's 00_text.sql, 01_passages.sql and 99_verify.sql in the Lovable Cloud SQL editor. 99_verify should show local = remote (1,219 and 446) and stale_on_site 0.
+  4. Cron job 9 embeds them at 04:15 UTC, or run R3 once now (expect "taken":10).
+  5. The folder for each doc then holds only these files (emit_sql writes a fresh set each time).
+- **Novel #1, rebuilt.** `python scripts\novel.py build --id 1 --cover 8`, then `python scripts\export_pdf.py "<the html it names>"`.

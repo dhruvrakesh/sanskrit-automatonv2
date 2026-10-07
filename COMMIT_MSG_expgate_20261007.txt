@@ -1,0 +1,17 @@
+Exports, novel layout and the publication gate, from reading today's outputs (EXPORT_EMPTY_2026_10_07, NOVEL_PRINT_2026_10_07, PUBLISH_GATE_LINES_2026_10_07, DOC_TITLES_2026_10_07, DOCS19_2026_10_07)
+
+scripts/export_html.py: sections with nothing to show are left out (siddhanta_shiromani, 1,146
+passages and none translated, exported as 180 empty pages); an empty run says what is missing and
+prints a WARNING; the Hindi provenance query is qualified (it was ambiguous against passages, so the
+Hindi line of every title page vanished); a title starting with the doc code uses doc_titles.json.
+scripts/novel.py: one page per novel page, the picture shrinks for the caption, the number sits in the
+caption box (the 16-page PDF of novel #1 had two blank pages); the cover states the cited span; the
+sources drop the "//" verse marks; build --cover N.
+scripts/publish_srangam.py: the gate withholds a passage only when every line is page furniture (the
+first line was enough, which withheld 402 passages with their verse, ten of them on published texts);
+the decoration class keeps its digit ranges (re.escape had reduced them to 0, - and 9);
+--emit-sql --only P.I,... writes just the named passages.
+configs/doc_titles.json: markandeya_purana (as on the site), nilamata_seg (proposed).
+scripts/patch_exports_gate_2026_10_07.py applies all of it; tests/test_exports_gate_2026_10_07.py
+(10 tests, all fail before, pass after). scripts/patch_docs19_2026_10_07.py: PLATFORM section 22,
+RUNBOOK, ENTERPRISE_PATH addendum (9).

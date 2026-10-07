@@ -304,3 +304,19 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | W6 | Hindi on the reader | Planned: column, publisher, reader (coverage 99.7%) |
 | C3b | Ask (generated answer citing only matched passages) | After C3a has run for a while; signed-in users first |
 | T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |
+
+
+## Addendum 2026-10-07 (9): end of day (DOCS19_2026_10_07)
+
+| # | Item | State |
+|---|---|---|
+| C2 | Passage vectors | Complete, 1,655; nightly cron job 9 |
+| W8 / W5 | Load time; reader marks | Live (a3600fe) |
+| ST1 | Story corrections | Applied; 13/13 pass; #3 approved, 12 drafts to read and approve |
+| EX1 | Empty exports, missing Hindi provenance, raw code titles | Fixed in patch_exports_gate (to apply) |
+| NV1 | Novel print layout, cover span, sources | Fixed (to apply); redraw the 4 pickaxe pictures; choose a cover with --cover |
+| G1 | Gate withheld verses below a furniture line | Fixed (to apply); republish 10 verses with --only |
+| ST2 | Approved stories on the site (srangam_stories) | Next |
+| W6 | Hindi on the reader | Next, planned in section 21 |
+| C3b | Ask | After C3a has run a while |
+| T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |
