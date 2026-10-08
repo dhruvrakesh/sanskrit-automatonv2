@@ -233,3 +233,14 @@ Live state on 2026-10-08:
   - Its check found 380 groups equal and 0 different, in 9.3 s.
   - New translations reach the mirror within two hours, and nothing is uploaded twice.
 - The log is `D:\backups\corpus_mirror_log.txt`. `python scripts\corpus_sync.py --status` compares counts on demand.
+
+
+## Contents for the corpus reader (C5b, DOCS25_2026_10_08)
+
+- **What it is.** `docs/cloud/C5b_corpus_reader_outline_2026-10-08.sql` adds `corpus_reader_outline(p_doc, p_per_page)`. It has the same gate as the C5 functions, and only signed-in callers may execute it.
+- **What it returns.**
+  - One 'page' row per 50 passages: the first passage and the last scan page reached.
+  - One 'colophon' row per passage typed colophon, with 160 characters of its English (or its Sanskrit).
+- **Used by.** The Contents panel and "go to a scan page" on `/corpus/:docCode`. It is read only when the panel opens.
+- **Speed.** 30 ms on 21,128 passages.
+- **Rollback.** `DROP FUNCTION public.corpus_reader_outline(text, integer);`

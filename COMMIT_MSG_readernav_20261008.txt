@@ -1,0 +1,20 @@
+Reading the texts: navigation and layout of /texts and /corpus readers (READER_NAV_2026_10_08); search-corpus deployable; docs (DOCS25_2026_10_08)
+
+docs/srangam/READER_NAV_2026-10-08/: the Srangam files, under the paths they take there, applied by
+scripts/patch_reader_nav_2026_10_08.py (writes over only the exact versions they were made from, md5;
+all-or-nothing; backups). A shared passage block, reading bar and contents panel for /texts/:docCode
+and /corpus/:docCode: Previous/Next, any page, arrow keys, a bar that stays in view from tablet
+width; contents with scan-page ranges and colophons, and "go to a scan page"; find in this text
+(words or meaning); the Sanskrit and IAST beside the English and Hindi on wide screens, the
+reference in the margin; misread lines (Latin, no Devanagari letter) muted and labelled, scanner
+noise folded; tooltips and a popover per passage (OCR confidence, engine, check); the next page
+fetched ahead; readable titles for codes without one. Nothing stored is changed.
+search-corpus: Lovable could not deploy it (cross-folder import of ../search-texts/lib.ts); it now
+carries a verbatim copy (embed.ts) with a drift test; docs/cloud/C5_search-corpus updated.
+docs/cloud/C5b_corpus_reader_outline_2026-10-08.sql: corpus_reader_outline(), gated like C5,
+signed-in only; tests/test_corpus_reader_nav_pg_2026_10_08.py (5; 21,128 passages in 30 ms).
+scripts/patch_docs25_2026_10_08.py: PLATFORM section 28, RUNBOOK, ENTERPRISE_PATH addendum (15),
+CORPUS_MIRROR C5b; the evening's checks (C5 R1, M3 360 MB / 453 MB, cron job 9 succeeded).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

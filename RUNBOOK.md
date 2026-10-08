@@ -1261,3 +1261,21 @@ Every step is a dry run unless `--yes` is given.
   - /auth sends it to /corpus.
   - Admins are no longer bounced through /auth after signing in.
   - To apply, in `D:\srangam-42267`, run `patch_auth_role_2026_10_08.py --check`, then the same without `--check`; then typecheck, the tests and the build; then push, then Publish.
+
+
+## Reading the texts: apply READER_NAV; search-corpus deploy (DOCS25_2026_10_08)
+
+1. **Lovable Cloud SQL editor.** Paste `docs/cloud/C5b_corpus_reader_outline_2026-10-08.sql`, then run N1: anon false, authenticated true.
+2. **Srangam, in `D:\srangam-42267` on main.**
+   - Run `git pull --ff-only origin main`.
+   - Run `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_reader_nav_2026_10_08.py" --check`, then the same without `--check`.
+   - Run `npm run typecheck`, `npx vitest run` and `npm run build`.
+   - Add the 16 paths it names, commit, and push main yourself.
+3. **Lovable.** Deploy `search-corpus` (it now imports only from its own folder), then Publish.
+4. **Check.**
+   - Open `/corpus/nirukta` and choose Contents: pages with scan ranges.
+   - Go to scan page 18.
+   - Find "earth" by words, then by meaning.
+   - Read `/texts/markandeya_purana` with "Side by side" on a wide screen.
+- **If Contents says "not available yet".** C5b is not applied. The pages are still listed.
+- **If find by meaning says "not switched on yet".** search-corpus is not deployed.

@@ -368,3 +368,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | C5 | /corpus for signed-in readers | SQL applied, mode signed_in; Srangam 60fe0551 pushed. To confirm: search-corpus deployed, Publish, /corpus signed in |
 | D3 | Runs die when the console closes | Fixed in code (DASH_HIDDEN_2026_10_08): no window, logs in D:\backups\dashboard_logs, refuses to restart mid-job. To apply: the patch, then a restart while idle |
 | A1 | Sign-in loop for signed-in non-admins; admins bounced after sign-in | Fixed in code (AUTH_ROLE_2026_10_08). To apply: the patch in Srangam, push, Publish |
+
+
+## Addendum 2026-10-08 (15) (DOCS25_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| A1 | Sign-in loop | Applied: Srangam 4ffb5cbf |
+| D3 | Runs die with the console | Released (a0e4515a); in effect at the next idle restart of the dashboard |
+| C2 | Cron job 9 | Ran 2026-10-08 04:15 UTC, succeeded |
+| C5 | Reader functions | R1 confirmed; search-corpus failed to deploy (cross-folder import). Fixed in code (embed.ts). To apply: the Srangam patch, push, deploy |
+| R1 | Navigation and layout of the readers | Built (READER_NAV_2026_10_08, C5b). To apply: C5b SQL, the Srangam patch, push, Publish |
+| R2 | Next for the readers | Hindi on the published reader (W6), entity tooltips from mentions, and a chapter list once the chapter field carries numbers |
