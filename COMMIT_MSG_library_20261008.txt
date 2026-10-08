@@ -1,0 +1,22 @@
+The desk's library on the site: Shelf, Stories, Names (CORPUS_LIBRARY_C6_2026_10_08); docs (DOCS26_2026_10_08)
+
+docs/cloud/C6_corpus_library_2026-10-08.sql: five read-only reader functions over the mirror tables
+already present, each behind corpus._reader_gate() and executable by signed-in callers only:
+corpus_reader_progress (13 pipeline stages per text with the desk's reasons), corpus_reader_stories
+(approved for readers; drafts and candidates also for admins; never retired or rejected),
+corpus_reader_names / corpus_reader_name (the names index; every passage naming one, in reading order),
+corpus_reader_page_names (the names of one reader page); index corpus_mentions_canonical.
+The mirror run is unchanged. tests/test_corpus_library_pg_2026_10_08.py (7; 8,000 names and 32,000
+mentions: 27 ms, 21 ms, 4 ms).
+scripts/emit_corpus_shelf.py: writes Srangam src/data/corpusShelf.json from configs/collections.json
+(shelves, derived titles, series), --check first.
+docs/srangam/LIBRARY_L1_2026-10-08/ + scripts/patch_library_l1_2026_10_08.py: /corpus as the Shelf
+(shelves, confirmed or derived titles, series, coverage, stage dots with reasons, stories, filter,
+sort), /corpus/stories (list and reader: Sanskrit line, English and Hindi, citations as links, check),
+/corpus/names (index by kind, one name's passages), name chips in the corpus reader, ?at=<page>.<passage>
+links, a section nav; md5-guarded replacements, anchored App.tsx routes, all-or-nothing.
+scripts/patch_docs26_2026_10_08.py: PLATFORM section 29 (with a parity map of the desk's app and the
+site), RUNBOOK, ENTERPRISE_PATH addendum (16), CORPUS_MIRROR "The library (C6)".
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

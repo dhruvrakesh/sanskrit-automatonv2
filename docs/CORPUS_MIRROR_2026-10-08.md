@@ -244,3 +244,16 @@ Live state on 2026-10-08:
 - **Used by.** The Contents panel and "go to a scan page" on `/corpus/:docCode`. It is read only when the panel opens.
 - **Speed.** 30 ms on 21,128 passages.
 - **Rollback.** `DROP FUNCTION public.corpus_reader_outline(text, integer);`
+
+
+## The library (C6, DOCS26_2026_10_08)
+
+- **What it adds.** `docs/cloud/C6_corpus_library_2026-10-08.sql` adds five gated, signed-in-only functions over the mirror tables that were already here:
+  - corpus.stages: `corpus_reader_progress`;
+  - corpus.stories: `corpus_reader_stories`;
+  - corpus.entities and corpus.mentions: `corpus_reader_names`, `corpus_reader_name` and `corpus_reader_page_names`.
+  - It also adds one index, `corpus_mentions_canonical`.
+- **No change to the mirror run.** The mirror run itself is unchanged: no new table, no new row hash, nothing re-sent.
+- **Stories.** Readers see status 'approved'. Admins also see 'draft' and 'candidate'. Retired and rejected stories are never returned.
+- **Shelves.** These are configuration, not corpus data, so they reach the site as a generated file (`scripts/emit_corpus_shelf.py`).
+- **Rollback.** At the head of the C6 file.

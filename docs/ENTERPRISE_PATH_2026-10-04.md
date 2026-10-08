@@ -380,3 +380,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | C5 | Reader functions | R1 confirmed; search-corpus failed to deploy (cross-folder import). Fixed in code (embed.ts). To apply: the Srangam patch, push, deploy |
 | R1 | Navigation and layout of the readers | Built (READER_NAV_2026_10_08, C5b). To apply: C5b SQL, the Srangam patch, push, Publish |
 | R2 | Next for the readers | Hindi on the published reader (W6), entity tooltips from mentions, and a chapter list once the chapter field carries numbers |
+
+
+## Addendum 2026-10-08 (16) (DOCS26_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| C5b | Contents for the reader | Applied (N1 confirmed) |
+| R1 | Reader navigation and layout | Applied: Srangam 4b853181; search-corpus deployed (anon 401 as designed) |
+| L1 | The desk's library on the site (Shelf, Stories, Names, name chips, ?at=) | Built (C6, CORPUS_LIBRARY_C6_2026_10_08). To apply: C6 SQL, the Srangam patch, push, Publish |
+| L2 | Covers, images and editions (HTML, PDF, Booksmith) on the site | Next: a private Storage bucket filled by the mirror run, read through signed URLs |
+| L3 | Ask over the corpus (C3b) | Next: answers with citations over corpus_reader_match |
+| L4 | Editor actions from the site (approve, titles, shelves) | Design: a request queue the desk pulls and applies; the desk stays the source of truth |
+| P1 | Panchang/Jyotish (Streamlit) | A separate app; /jyotish-horoscope describes it. Compare before porting anything |
+| V10 | The 10 withheld verses | Still 1,655 on 2026-10-08 evening: paste the six --only files |

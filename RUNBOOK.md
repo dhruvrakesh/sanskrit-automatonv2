@@ -1279,3 +1279,17 @@ Every step is a dry run unless `--yes` is given.
    - Read `/texts/markandeya_purana` with "Side by side" on a wide screen.
 - **If Contents says "not available yet".** C5b is not applied. The pages are still listed.
 - **If find by meaning says "not switched on yet".** search-corpus is not deployed.
+
+
+## The library on the site: apply C6 and the Srangam patch (DOCS26_2026_10_08)
+
+1. **Lovable Cloud SQL editor.** Paste `docs/cloud/C6_corpus_library_2026-10-08.sql`. Then run L1 at its end: anon false and authenticated true on all five functions.
+2. **Srangam, in `D:\srangam-42267` on main.**
+   - Run `git pull --ff-only origin main`.
+   - Run `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_library_l1_2026_10_08.py" --check`, then the same without `--check`.
+   - Run `npm run typecheck`, `npx vitest run` and `npm run build`.
+   - Add the 15 paths it names, commit, push, then Publish in Lovable. There is no edge function in this one.
+3. **When the shelves change** (the Shelf page's "move to", or an edit of collections.json):
+   - Run `python scripts\emit_corpus_shelf.py --srangam D:\srangam-42267 --check`.
+   - If it says STALE, run it without `--check`, then commit `src/data/corpusShelf.json` in Srangam.
+4. **Stories appear on the site** when they are approved on the desk. Use `python scripts\stories.py approve --id N`, or the Stories page; the next mirror run carries the approval. Editors (admins) see drafts on the site, marked as drafts.
