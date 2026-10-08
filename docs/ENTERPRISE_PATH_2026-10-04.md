@@ -338,3 +338,12 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 |---|---|---|
 | C4 | Private corpus mirror: all 63 live documents in PostgreSQL, kept current, idempotent (docs/CORPUS_MIRROR_2026-10-08.md) | Built and tested. To apply: P1, C4 SQL, the secret, deploy corpus-ingest, the text push, the vector gate (M4), the vectors, then the 2-hourly task |
 | C4b | Ask over the whole corpus (admin-only scope in search-texts using corpus.match_passages) | Open, after C4 |
+
+
+## Addendum 2026-10-08 (12) (DOCS22_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| C4 | Private corpus mirror | Schema applied, function deployed. Text pushed 10:09 UTC (75,734 passages, 13,040 translations, 317 groups equal). markandeya_purana vectors 1,258. Next: M4, then all vectors, then the 2-hourly task |
+| C4p | A push showed nothing until its end | Fixed: [m:ss] progress lines and --status (PROGRESS_2026_10_08) |
+| T1 | test_export_mode_joblog race on Windows | Fixed in the test (JOBLOG_RACE_2026_10_08); dashboard unchanged |

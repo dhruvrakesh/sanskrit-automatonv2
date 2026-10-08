@@ -1219,3 +1219,10 @@ Every step is a dry run unless `--yes` is given.
 - **"stopped=budget".** `--max-mb` was reached; the next run carries on.
 - **The scheduled tick.** `scripts\corpus_mirror_task.ps1`, every 2 hours, logs to `D:\backups\corpus_mirror_log.txt`. It skips quietly until CORPUS_SYNC_SECRET is in .env.
 - **Rotating the secret.** Make a new one, replace it in .env and in Lovable Cloud -> Secrets. Requests signed with the old one get 401.
+
+
+## Watching a mirror push (DOCS22_2026_10_08)
+
+- **Lines while it runs.** A run prints `[m:ss]` lines: what the mirror holds, each document as it is sent, batches of large ones, and "compared N/63 documents".
+- **From a second window.** `python scripts\corpus_sync.py --status` shows mirror rows against rows here, per table. It is read-only and safe during a push.
+- **No new line for several minutes?** Run --status twice, a minute apart. If the mirror's counts rise, it is working. If they do not, press Ctrl+C and run it again; it sends only what is missing.

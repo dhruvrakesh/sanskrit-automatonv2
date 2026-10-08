@@ -175,3 +175,19 @@ The DROP statements are in the header of `C4_corpus_mirror_2026-10-08.sql`. Noth
   - a foreign-key refusal got 422 with no retry.
 - **Full size.** A 75,720-passage, 22,040-vector copy took 248 s in one push and 3.1 s for the run after it, 374 groups equal.
 - **The real backup.** Planned with `--sink none` in 19 s. A type audit of every row found 0 values that PostgreSQL would refuse.
+
+
+## Watching a push (DOCS22_2026_10_08)
+
+A first push takes minutes. While it runs:
+- **The run's own lines.** It prints `[m:ss]` lines: what the mirror holds, each table and document as it is sent, the batches of large ones, every 10 documents compared, and the final check.
+- **Status from a second window.** `python scripts\corpus_sync.py --status` prints, per table, the rows in the mirror against the rows here, with the share. It is read-only on both sides. Equal counts are not proof of equal content; the digest check at the end of an `--apply` run is.
+- **Stopping and resuming.** Ctrl+C is safe at any point; the next run sends only what is missing.
+
+Live state on 2026-10-08:
+- P1 showed PostgreSQL 17.6, 93 MB, vector 0.8.0 in public, schema corpus absent, and 1,655 published passages with 1,655 vectors.
+- C4 was applied at 15:21 IST.
+- corpus-ingest was deployed with verify_jwt off. An unsigned request gets 401.
+- The signed hello answered docs_in_mirror 0 at 10:03:54 UTC.
+- **The text push** finished at 10:09:41 UTC: 343 s, 101.4 MB, 317 groups equal, 0 different. It sent 63 documents, 75,734 passages, 13,040 translations, 8,269 entities, 32,861 mentions, 44 stories and 767 stages.
+- **markandeya_purana vectors.** 1,258 in 38 s.

@@ -200,6 +200,7 @@ class Base(unittest.TestCase):
         con = self.ro()
         docs = cs.live_docs(con)
         only = kw.pop("only", None)
+        kw.setdefault("progress", lambda m: None)
         run = cs.Run(con, sink or FakeSink(self.server), apply, **kw)
         return run.execute(list(cs.TABLES), docs, only)
 
@@ -356,6 +357,41 @@ class Guards(Base):
         con = self.ro()
         with self.assertRaises(sqlite3.OperationalError):
             con.execute("UPDATE docs SET category='x'")
+
+
+class Progress(Base):
+    """PROGRESS_2026_10_08: a first push printed nothing for minutes and looked stuck."""
+
+    def test_a_push_says_what_it_is_doing(self):
+        lines = []
+        s = self.sync(progress=lines.append, batch_bytes=1500)
+        self.assertEqual(s["stopped"], "done")
+        text = "\n".join(lines)
+        self.assertIn("mirror holds 0 rows; 2 live documents here; sending changes", text)
+        self.assertIn("passages markandeya_purana: 9 to send, 0 gone here", text)
+        self.assertIn("passages markandeya_purana: done in", text)
+        self.assertRegex(text, r"batch 1/\d+: \d+ rows")
+        self.assertIn("compared 2/2 documents", text)
+        self.assertIn("checking every group against the mirror", text)
+        self.assertTrue(all(l.startswith("[") for l in lines))
+
+    def test_a_run_with_nothing_to_send_stays_short(self):
+        self.sync()
+        lines = []
+        self.sync(progress=lines.append)
+        self.assertFalse([l for l in lines if "to send" in l])
+        self.assertLessEqual(len(lines), 4)
+
+    def test_status_compares_mirror_with_here(self):
+        out = []
+        before = cs.status(self.ro(), FakeSink(self.server), cs.live_docs(self.ro()), out=out.append)
+        self.assertEqual(before["passages"], {"mirror": 0, "here": 15})
+        self.sync()
+        after = cs.status(self.ro(), FakeSink(self.server), cs.live_docs(self.ro()), out=out.append)
+        for t, v in after.items():
+            self.assertEqual(v["mirror"], v["here"], t)
+        self.assertEqual(after["vectors"]["here"], 10)
+        self.assertEqual(after["entities"]["here"], 2)
 
 
 class Formats(Base):

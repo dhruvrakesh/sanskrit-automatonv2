@@ -60,9 +60,18 @@ class ExportModeJobLog(unittest.TestCase):
         e = self.d.launch("export", "UNITTEST_PERSIST", quick, mode="tri")
         o = self.d.launch("ocr", "UNITTEST_PERSIST", quick)
         wait_done(self.d, e); wait_done(self.d, o)
-        time.sleep(0.3)
-        recs = [json.loads(l) for l in self.d.JOBS_LOG_PATH.read_text(encoding="utf-8").splitlines() if l.strip()]
-        by_id = {r["id"]: r for r in recs}
+        # JOBLOG_RACE_2026_10_08: job.ok is set before the end record is appended (finally: in
+        # _run_job), so poll the log for both records; a fixed 0.3 s sleep lost the race on a
+        # busy Windows machine (KeyError, 2026-10-08).
+        by_id = {}
+        t0 = time.time()
+        while time.time() - t0 < 10:
+            if self.d.JOBS_LOG_PATH.exists():
+                recs = [json.loads(l) for l in self.d.JOBS_LOG_PATH.read_text(encoding="utf-8").splitlines() if l.strip()]
+                by_id = {r["id"]: r for r in recs}
+                if e in by_id and o in by_id:
+                    break
+            time.sleep(0.05)
         self.assertEqual(by_id[e].get("mode"), "tri")
         self.assertNotIn("mode", by_id[o], "non-export records must keep their exact shape")
 

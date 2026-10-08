@@ -37,6 +37,8 @@ Sinks:
   python scripts\\corpus_sync.py --apply --doc markandeya_purana
   python scripts\\corpus_sync.py --apply --max-mb 50 --if-configured   # the maintenance step
   python scripts\\corpus_sync.py --sink none --db "D:\\backups\\context_20261008.db" --immutable
+  python scripts\\corpus_sync.py --status                 # mirror rows against rows here, per table
+A run prints what it is doing as it goes ([m:ss] lines, flushed): a first push takes minutes.
 Test: python -m unittest tests.test_corpus_sync_2026_10_08 -v
 """
 from __future__ import annotations
@@ -628,8 +630,12 @@ def batches(rows: list, max_bytes: int, max_rows: int):
 
 class Run:
     def __init__(self, con, sink, apply: bool, max_bytes_total=None, batch_bytes=DEFAULT_BATCH_BYTES,
-                 allow_mass_retire=False, no_retire=False, out=print):
+                 allow_mass_retire=False, no_retire=False, out=print, progress=None):
         self.con, self.sink, self.apply = con, sink, apply
+        # PROGRESS_2026_10_08: a first push takes minutes; say what is happening as it happens,
+        # flushed, so a console or a log never sits silent (it looked "stuck" on 2026-10-08).
+        self.progress = progress if progress is not None else (lambda m: print(m, flush=True))
+        self.t0 = time.time()
         self.max_bytes_total = max_bytes_total
         self.batch_bytes = batch_bytes
         self.allow_mass_retire, self.no_retire = allow_mass_retire, no_retire
@@ -641,6 +647,13 @@ class Run:
         self.held = []
         self.hold_docs = False
         self.expected = {}       # (table, group) -> (count, digest), or None for "absent"
+
+    def _p(self, msg: str):
+        e = int(time.time() - self.t0)
+        try:
+            self.progress("[%3d:%02d] %s" % (e // 60, e % 60, msg))
+        except Exception:
+            pass
 
     def _send(self, table: str, rows: list):
         if not rows:
@@ -654,15 +667,21 @@ class Run:
         if table == "vectors":
             rows = fill_vectors(self.con, rows)
         max_rows = MAX_VEC_ROWS_PER_CALL if table == "vectors" else MAX_ROWS_PER_CALL
-        for chunk, size in batches(rows, self.batch_bytes, max_rows):
+        plan = list(batches(rows, self.batch_bytes, max_rows))
+        for i, (chunk, size) in enumerate(plan, 1):
             if (self.max_bytes_total is not None and self.bytes_total > 0
                     and self.bytes_total + size > self.max_bytes_total):
+                self._p("--max-mb reached after %.1f MB; the next run carries on" % (self.bytes_total / 1e6))
                 raise Budget()
+            tb = time.time()
             res = self.sink.ingest(table, chunk, self.run_id) or {}
             st["upsert"] += len(chunk)
             st["changed"] += int(res.get("changed", 0))
             st["bytes"] += size
             self.bytes_total += size
+            if len(plan) > 1:
+                self._p("    %s batch %d/%d: %d rows, %.1f MB, %.1f s (run total %.1f MB)"
+                        % (table, i, len(plan), len(chunk), size / 1e6, time.time() - tb, self.bytes_total / 1e6))
 
     def _retire(self, table: str, group: str, keys: list, remote_n: int, local_n: int, whole_doc=False) -> bool:
         """True when the keys were retired (or would be, in a plan); False when held."""
@@ -702,16 +721,26 @@ class Run:
         remote_keys = self.sink.keys(g.table, g.group) if rem else {}
         send = [g.rows[k] for k, h in g.hashes.items() if remote_keys.get(k) != h]
         gone = sorted(k for k in remote_keys if k not in g.hashes)
+        if self.apply and (send or gone):
+            self._p("%s %s: %d to send, %d gone here (mirror had %d, here %d)"
+                    % (g.table, g.group, len(send), len(gone), len(remote_keys), local_n))
+        tg = time.time()
         self._send(g.table, send)
         if retire and gone and not self._retire(g.table, g.group, gone, len(remote_keys), local_n):
             self.expected.pop((g.table, g.group), None)
+        if self.apply and (send or gone):
+            self._p("%s %s: done in %.1f s" % (g.table, g.group, time.time() - tg))
 
     def execute(self, tables, docs, only_docs=None):
         t0 = time.time()
         stopped, error = "done", None
         partial = bool(only_docs)
         sel_docs = [d for d in docs if not partial or d[1] in only_docs]
+        self._p("asking the mirror what it holds (%s) ..." % self.sink.name)
         remote = self.sink.manifest(TABLES)
+        held_rows = sum(int(v[0]) for t in remote.values() for v in t.values())
+        self._p("mirror holds %d rows; %d live documents here; %s"
+                % (held_rows, len(sel_docs), "sending changes" if self.apply else "plan only, nothing is sent"))
         live = {d[1] for d in docs}
         gone_docs = [] if partial else sorted(
             {g for t in PER_DOC_TABLES if t in tables for g in remote.get(t, {}) if g not in live})
@@ -736,10 +765,13 @@ class Run:
                     self.diff_group(ge, remote, retire=not partial)
             per_doc = [t for t in PER_DOC_TABLES if t in tables]
             if per_doc:
-                for doc in sel_docs:
+                for n_doc, doc in enumerate(sel_docs, 1):
                     groups = build_doc_groups(self.con, doc, set(per_doc), ent_ok)
                     for t in per_doc:
                         self.diff_group(groups[t], remote)
+                    if n_doc % 10 == 0 or n_doc == len(sel_docs):
+                        self._p("compared %d/%d documents (%.1f MB sent so far)"
+                                % (n_doc, len(sel_docs), self.bytes_total / 1e6))
             if gone_docs and not self.hold_docs:
                 for code in gone_docs:
                     for t in reversed(per_doc):
@@ -753,6 +785,8 @@ class Run:
             stopped = "budget"
         except SinkError as e:
             stopped, error = "error", str(e)
+        if self.apply and stopped == "done":
+            self._p("checking every group against the mirror ...")
         verified = self.verify() if (self.apply and stopped == "done") else None
         summary = {"run_id": self.run_id, "sink": self.sink.name, "apply": self.apply, "stopped": stopped,
                    "error": error, "seconds": round(time.time() - t0, 1), "bytes": self.bytes_total,
@@ -778,6 +812,54 @@ class Run:
             if not same:
                 bad.append("%s/%s" % (t, g))
         return {"groups_equal": len(self.expected) - len(bad), "groups_different": len(bad), "different": bad[:20]}
+
+
+def local_counts(con, docs) -> dict:
+    """Rows this PC would mirror, counted cheaply (no hashing), for --status."""
+    ids = [d[0] for d in docs]
+    codes = [d[1] for d in docs]
+    out = {t: 0 for t in TABLES}
+    out["docs"] = len(docs)
+    if not ids:
+        return out
+    q = ",".join("?" * len(ids))
+    one = lambda sql, args=(): con.execute(sql, args).fetchone()[0] or 0
+    out["passages"] = one("SELECT count(*) FROM passages WHERE doc_id IN (%s)" % q, ids)
+    if _has_table(con, "entities"):
+        out["entities"] = one("SELECT count(*) FROM entities WHERE trim(coalesce(canonical,'')) <> ''")
+    if _has_table(con, "translations_l10n"):
+        out["translations"] = one("SELECT count(*) FROM translations_l10n l JOIN passages p ON p.id = l.passage_id "
+                                  "WHERE p.doc_id IN (%s)" % q, ids)
+    if _has_table(con, "entity_mentions") and _has_table(con, "entities"):
+        out["mentions"] = one("SELECT count(*) FROM entity_mentions m JOIN passages p ON p.id = m.passage_id "
+                              "JOIN entities e ON e.id = m.entity_id WHERE p.doc_id IN (%s) "
+                              "AND trim(coalesce(e.canonical,'')) <> ''" % q, ids)
+    if _has_table(con, "doc_stories"):
+        out["stories"] = one("SELECT count(*) FROM doc_stories WHERE doc_id IN (%s)" % q, ids)
+    if _has_table(con, "doc_stage"):
+        out["stages"] = one("SELECT count(*) FROM doc_stage WHERE stage IS NOT NULL AND doc_code IN (%s)"
+                            % ",".join("?" * len(codes)), codes)
+    if _has_table(con, "passage_embeddings"):
+        out["vectors"] = one("SELECT count(*) FROM passage_embeddings e JOIN passages p ON p.id = e.passage_id "
+                             "WHERE p.doc_id IN (%s) AND e.dim >= ? AND length(e.vec) = 4 * e.dim" % q,
+                             ids + [VEC_DIMS])
+    return out
+
+
+def status(con, sink, docs, out=print) -> dict:
+    """PROGRESS_2026_10_08: what the mirror holds against what is here (read-only both sides)."""
+    m = sink.manifest(TABLES)
+    here = local_counts(con, docs)
+    rows = {}
+    out("corpus mirror status  sink=%s  (read-only; counts, not hashes)" % sink.name)
+    out("  %-13s %10s %10s %7s" % ("table", "mirror", "here", "share"))
+    for t in TABLES:
+        n = sum(int(v[0]) for v in m.get(t, {}).values())
+        rows[t] = {"mirror": n, "here": here[t]}
+        share = ("%6.1f%%" % (100.0 * n / here[t])) if here[t] else "      -"
+        out("  %-13s %10d %10d %7s" % (t, n, here[t], share))
+    out("  Equal counts are not proof of equal content: the digest check of an --apply run is.")
+    return rows
 
 
 def print_summary(s: dict, out=print):
@@ -832,6 +914,8 @@ def main(argv=None) -> int:
     ap.add_argument("--if-configured", action="store_true",
                     help="exit 0 quietly when the edge sink is not configured (for the maintenance runner)")
     ap.add_argument("--hello", action="store_true", help="check the sink answers, then exit")
+    ap.add_argument("--status", action="store_true",
+                    help="rows in the mirror against rows here, per table (read-only), then exit")
     ap.add_argument("--json", action="store_true", help="print the summary as JSON")
     a = ap.parse_args(argv)
 
@@ -855,6 +939,13 @@ def main(argv=None) -> int:
             return 2
     con = open_ro(a.db, a.immutable)
     docs = live_docs(con, a.include_retired_docs)
+    if a.status:
+        try:
+            status(con, sink, docs)
+            return 0
+        except SinkError as e:
+            print("status failed: %s" % e)
+            return 2
     only = set(a.doc) if a.doc else None
     if only:
         known = {d[1] for d in docs}

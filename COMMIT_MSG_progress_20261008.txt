@@ -1,0 +1,12 @@
+Mirror push shows its progress; --status; job-log test race fixed (PROGRESS_2026_10_08, JOBLOG_RACE_2026_10_08, DOCS22_2026_10_08)
+
+scripts/corpus_sync.py: a run prints flushed [m:ss] lines as it goes (what the mirror holds, each
+table and document sent, batch counts and sizes for large ones, every 10 documents compared, the
+final digest check); the first text push printed nothing until its end and looked stuck.
+--status prints mirror rows against rows here per table (read-only both sides; safe in a second
+window during a push). tests/test_corpus_sync_2026_10_08.py: 3 new tests (24).
+scripts/patch_joblog_race_2026_10_08.py: tests/test_export_mode_joblog.py polls the job log for
+both end records instead of sleeping 0.3 s (job.ok is set before the record is appended; KeyError
+on a busy Windows machine). Test-only; the dashboard is unchanged.
+scripts/patch_docs22_2026_10_08.py: PLATFORM section 25, RUNBOOK, ENTERPRISE_PATH addendum (12),
+CORPUS_MIRROR "Watching a push".
