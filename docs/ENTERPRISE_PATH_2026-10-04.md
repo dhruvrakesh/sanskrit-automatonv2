@@ -330,3 +330,11 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D2 | Spend cap from the dashboard | Added to the Usage tab (to apply) |
 | D3 | Runs die when the console closes (nine ended with exit 3221225786 since 2026-09-08; the 2026-10-07 run died with the dashboard) | Open: run the dashboard so a closed window cannot end it (a scheduled task, or pythonw with a log file) |
 | G1 | Ten withheld verses | SQL written; paste it (still 1,216 and 439 on the site) |
+
+
+## Addendum 2026-10-08 (11) (DOCS21_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| C4 | Private corpus mirror: all 63 live documents in PostgreSQL, kept current, idempotent (docs/CORPUS_MIRROR_2026-10-08.md) | Built and tested. To apply: P1, C4 SQL, the secret, deploy corpus-ingest, the text push, the vector gate (M4), the vectors, then the 2-hourly task |
+| C4b | Ask over the whole corpus (admin-only scope in search-texts using corpus.match_passages) | Open, after C4 |

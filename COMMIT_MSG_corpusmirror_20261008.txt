@@ -1,0 +1,17 @@
+Private corpus mirror: the whole brain in PostgreSQL, kept current idempotently (CORPUS_MIRROR_C4_2026_10_08, DOCS21_2026_10_08)
+
+scripts/corpus_sync.py: reads data/context.db read-only and keeps a private PostgreSQL copy of all
+63 live documents current: passages (without raw OCR), Hindi, entities and mentions, stories,
+stages, and the passage vectors cut to 1,536 dims. Every row carries a content hash; per table and
+document the server's digest is compared with the local one, so only rows that changed travel;
+upserts ignore unchanged rows, rows gone locally are retired (never deleted), large retires are
+held, and each run ends with a digest check. Sinks: the corpus-ingest edge function (HMAC-signed;
+no Supabase key on the PC), a PostgreSQL you own (--sink pg), or none (plan only).
+docs/cloud/C4_corpus_mirror_2026-10-08.sql: schema corpus (RLS on, no policy, nothing for anon or
+authenticated), corpus_manifest / _keys / _ingest / _retire / _run (service_role only),
+corpus.search, corpus.match_passages, corpus.v_docs. C4_preflight and C4_verify (M1-M7, M4 is the
+vector gate). docs/cloud/C4_corpus-ingest/: the edge function (index.ts, lib.ts) and lib_test.ts.
+scripts/corpus_mirror_task.ps1: the 2-hourly tick (read-only, at most 80 MB, skips until configured).
+tests/test_corpus_sync_2026_10_08.py (21) and tests/test_corpus_sync_pg_2026_10_08.py (7, with
+CORPUS_TEST_DSN). docs/CORPUS_MIRROR_2026-10-08.md; scripts/patch_docs21_2026_10_08.py: PLATFORM
+section 24, RUNBOOK, ENTERPRISE_PATH addendum (11), .gitignore data/corpus_sync_log.jsonl.

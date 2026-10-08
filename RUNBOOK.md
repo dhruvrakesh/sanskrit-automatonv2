@@ -1207,3 +1207,15 @@ Every step is a dry run unless `--yes` is given.
 - **"Stopped."** The run ended without finishing. Start Translate for that text again: verses already translated are skipped. Keep the dashboard's console open while a translation runs; closing it ends the run (exit code 3221225786).
 - **Spend cap.** In the dashboard, open Usage, press Reload, set "New cap" and press Set cap; Resume appears when the cap has paused paid work. From a terminal: `python scripts\set_budget.py --cap 40 --unpause`.
 - **Load the dashboard change.** `python scripts\patch_live_budget_2026_10_08.py --check`, then the same without `--check`, then restart the dashboard while it is idle.
+
+
+## The private corpus mirror (DOCS21_2026_10_08)
+
+- **What it is.** A private PostgreSQL copy of the whole brain, for querying from anywhere: `docs/CORPUS_MIRROR_2026-10-08.md`, steps 1-9.
+- **The plan.** `python scripts\corpus_sync.py` prints what would be sent and sends nothing. Add `--apply` to send.
+- **Check the connection.** `python scripts\corpus_sync.py --hello`.
+- **One document.** `python scripts\corpus_sync.py --apply --doc markandeya_purana`. A partial run never retires documents.
+- **HELD lines.** A large retire (a re-segmented or emptied document) is held. Read the line, then re-run with `--allow-mass-retire` if it is right.
+- **"stopped=budget".** `--max-mb` was reached; the next run carries on.
+- **The scheduled tick.** `scripts\corpus_mirror_task.ps1`, every 2 hours, logs to `D:\backups\corpus_mirror_log.txt`. It skips quietly until CORPUS_SYNC_SECRET is in .env.
+- **Rotating the secret.** Make a new one, replace it in .env and in Lovable Cloud -> Secrets. Requests signed with the old one get 401.

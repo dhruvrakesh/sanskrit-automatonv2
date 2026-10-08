@@ -118,3 +118,6 @@ data/images/
 data/images/
 # LIVE_BUDGET_2026_10_08: the budget change log stays local
 data/budget_changes.jsonl
+
+# CORPUS_MIRROR_C4_2026_10_08 (DOCS21_2026_10_08): the mirror's run log stays local
+data/corpus_sync_log.jsonl

@@ -1,0 +1,177 @@
+# The whole brain in PostgreSQL, kept current (2026-10-08)
+
+Marker: CORPUS_MIRROR_C4_2026_10_08. Built and tested; not yet applied to Lovable Cloud.
+
+## Why this is new
+
+Until today only **published** text reached PostgreSQL.
+- `publish_srangam.py --emit-sql` fills `srangam_texts` and `srangam_text_passages`.
+- C2 makes vectors in the cloud for those passages.
+- That covers 2 texts and about 1,655 passages.
+
+The cloud plan (`docs/CLOUD_BRAIN_2026-10-07.md`) deliberately left the rest at home. The rest of the brain lives only in `data/context.db`: 63 live documents, 75,734 passages, the Hindi, the entities, the stories and the vectors.
+
+C4 adds a **private mirror** of all of it. You can query it in SQL from anywhere, and it is kept current while translation goes on.
+
+## What moves, measured
+
+Measured on 2026-10-08 from `context_20261008.db`, opened read-only and immutable: `corpus_sync.py --sink none`.
+
+| Part of the 983 MB file | Size | Mirrored? |
+|---|---|---|
+| `passages`, without the two OCR columns: 75,734 rows | about 85 MB as JSON | yes |
+| `passages.norm`: the raw OCR page, repeated on every passage of that page | 286 MB | no |
+| `passages.ocr_variants` | 1.7 MB | no |
+| `passage_embeddings`: 21,931 x 3,072 float32 | 281 MB | yes, cut to 1,536 dims (about 290 MB as text, about 85 MB gzipped) |
+| SQLite's own search index (`passages_fts_*`) | 216 MB | no; PostgreSQL builds its own |
+| `mt_cache` | 48 MB | no (translation stays local) |
+| `translations_l10n` (Hindi): 12,517 rows | 11.8 MB | yes |
+| entities 8,269, with 22,427 variants; mentions 32,861 | 7.4 MB | yes |
+| stories 44, pipeline stages 767 | 0.8 MB | yes |
+| usage, budget and job tables | 9 MB | no |
+| 3 retired documents | | no |
+
+The first push sends about 115 MB over the wire. After that, each run sends only what changed.
+
+**In PostgreSQL.** A full-size test copy took 265 MB (75,720 passages, 22,040 vectors with their HNSW index, 12,500 Hindi rows). Real text makes the word-search index larger, so plan on 300 to 400 MB. Check the space first with P1.
+
+## How it works
+
+```
+this PC (source of truth)                         Lovable Cloud (Supabase)
+  data/context.db  --read only-->  corpus_sync.py  --HTTPS, signed-->  edge fn corpus-ingest
+                                    (row hashes,                          | service_role
+                                     digests)                             v
+                                                       public.corpus_manifest / _keys / _ingest / _retire / _run
+                                                                          |
+                                                       schema corpus: docs, passages, translations, entities,
+                                                       mentions, stories, stages, passage_vectors, sync_runs
+                                                       (private: no Data API, no anon, RLS on, no policy)
+```
+
+**Idempotent by construction.**
+- **Row hashes.** Every row carries `row_hash`, the md5 of its mirrored columns.
+- **Digests.** `corpus_manifest()` returns, per table and per document, a count and a digest: the md5 of the "key row_hash" lines in byte order.
+- **What is sent.** `corpus_sync.py` makes the same digest locally. Equal digests mean nothing to send. For a document that differs, it fetches the server's keys and sends only the rows whose hash differs.
+- **Repeats are harmless.** `corpus_ingest()` upserts with `ON CONFLICT ... WHERE row_hash IS DISTINCT FROM ...`, so sending a batch twice changes nothing. An interrupted run is finished by the next one.
+- **No local ledger.** The server is compared afresh every run, so nothing can drift.
+- **Retire, never delete.** A row gone locally is marked `retired_at` in the mirror. If it comes back, it is restored.
+- **Guards.** These are held unless you pass `--allow-mass-retire`:
+  - more than half of a group of over 100 rows retired at once;
+  - a group emptied entirely when it held more than 5 rows;
+  - more than 3 documents (or 10 percent) vanishing at once.
+- **Verify.** At the end of a run, every group the run settled is compared with the server again; it reports "N groups equal, 0 different".
+
+**Keys that survive re-ingest.** Passages are keyed by (document, page_no, idx), the local UNIQUE key, not by the local id. The local id changes when a document is re-ingested: the highest id is 229,781 for 75,734 rows.
+
+**No Supabase key on this PC.**
+- The edge function runs as service_role inside Supabase.
+- The PC holds only `CORPUS_SYNC_SECRET`, a random 64-character value. It signs each request: HMAC-SHA256 over the timestamp and the body, with 5 minutes allowed for clock difference. It can write to the mirror and nothing else.
+- The URL and the publishable key come from the Srangam repo's `.env`; both are already public.
+- Schema changes still go through the SQL editor.
+
+**What the site sees.** Nothing.
+- The reader keeps reading `srangam_texts` and `srangam_text_passages`, which only the publish gate fills.
+- anon and authenticated have no privilege on the schema, the tables, the view or the functions. C4's V2 check shows this.
+
+## Steps
+
+1. **Pre-flight.** Run `docs/cloud/C4_preflight_2026-10-08.sql` (P1, then P2). Expect:
+   - vector 0.8.0 in public;
+   - schema corpus absent;
+   - service_role present.
+
+   Note the database size. Then check the room left in Lovable Cloud: Advanced settings, and the Usage page.
+2. **Build.** Paste `docs/cloud/C4_corpus_mirror_2026-10-08.sql` into the SQL editor and run it once. Then run V1 to V4 one at a time:
+   - V1: 31 rows, all true;
+   - V2: every column false;
+   - V3: 5 rows, true;
+   - V4: eight empty objects.
+3. **The secret.**
+   - In PowerShell, in the automaton folder, make it once. The value goes into `.env` and onto the clipboard, and never into a chat.
+   - In Lovable Cloud, open Secrets and add `CORPUS_SYNC_SECRET`, pasting the value.
+4. **The edge function.**
+   - `supabase/functions/corpus-ingest/` (index.ts, lib.ts) is in the Srangam repo. Push it.
+   - Ask Lovable to deploy `corpus-ingest` without changing its code. `verify_jwt = false` is fine, because the function checks its own signature.
+   - The tests are `docs/cloud/C4_corpus-ingest/lib_test.ts` here, run with `deno test`.
+5. **Hello.** Run `python scripts\corpus_sync.py --hello`. It should answer with the version and `docs_in_mirror` 0.
+6. **Plan, then the text.**
+   - `python scripts\corpus_sync.py` prints the plan.
+   - Then: `python scripts\corpus_sync.py --apply --tables docs,entities,passages,translations,mentions,stories,stages`
+7. **The vector gate.**
+   - Run `python scripts\corpus_sync.py --apply --tables vectors --doc markandeya_purana`.
+   - Then run M4 in `docs/cloud/C4_verify_2026-10-08.sql`. It compares the mirror's vectors (local, cut to 1,536 dims) with the site's (made in the cloud by C2). They share the model, task type and text.
+   - Expect avg_cos >= 0.99 and min_cos >= 0.95.
+   - If they fall short, keep vectors out: leave `vectors` off `--tables` and add `--tables` to the scheduled task. Then a cloud-side embedder for the mirror would be the next step, about $1 for everything at the ledger's rate.
+8. **Everything.** Run `python scripts\corpus_sync.py --apply`. It ends with "verify: N groups equal, 0 different".
+9. **Keep it current.**
+   - Register `scripts\corpus_mirror_task.ps1` as a scheduled task every 2 hours. It sends at most 80 MB per tick.
+   - It is read-only on `context.db`, so it runs while translation runs and does not wait for an idle dashboard.
+   - Log: `D:\backups\corpus_mirror_log.txt`; each run is also recorded in `data\corpus_sync_log.jsonl` and in `corpus.sync_runs`.
+
+## Querying
+
+In the Lovable Cloud SQL editor (`docs/cloud/C4_verify_2026-10-08.sql`):
+- M1 `corpus.v_docs`: per document, the counts of passages, English, Hindi, vectors and stories.
+- M5 `corpus.search('cremation ground', 20)`: words in the English (stemmed) and the IAST.
+- M6 `corpus.match_passages(vector, k)`: passages nearest in meaning, across all documents.
+- M7: what is still untranslated, per document.
+
+**Your own PostgreSQL** works the same way, for example a local one or DBeaver.
+- Apply the same C4 file there.
+- Then run `python scripts\corpus_sync.py --sink pg --dsn postgresql://user:pw@host/db --apply`.
+- The same five functions are used, so the behaviour is identical. This needs `psycopg`.
+
+## Cost
+
+- **Database.** About 300 to 400 MB more.
+- **Edge function calls.** About 300 for the first push; after that, a handful every 2 hours (two manifest calls, the keys of documents that changed, and the batches).
+- **AI.** No call to an AI model. Nothing is embedded in the cloud for the mirror.
+- **Where it is billed.** Lovable Cloud bills usage through Lovable. Read the Usage page after the first push.
+
+## Limits
+
+- **One way, PC to cloud.** Nothing is pulled back.
+- **Formats kept as they are.** `translated_at` and the other local times are kept verbatim as text, because their formats are mixed.
+- **Vectors are the local ones.** A passage is in the mirror's vector table only after maintenance has embedded it here.
+- **No Ask yet.** Ask over the whole corpus is not wired. `corpus.match_passages` is ready for an admin-only scope in `search-texts` (C3b).
+
+## If something fails
+
+| What you see | Meaning | What to do |
+|---|---|---|
+| `HTTP 404` on `--hello` | The function is not deployed | Step 4 (ask Lovable to deploy `corpus-ingest`) |
+| `HTTP 503 ... CORPUS_SYNC_SECRET is not set` | The secret is missing in Lovable Cloud | Step 3, second half |
+| `HTTP 401 bad signature` | The two secrets differ | Paste the `.env` value into Lovable Cloud again |
+| `HTTP 401 ... more than 5 minutes off` | The PC clock is wrong | Settings -> Time -> Sync now |
+| `HTTP 422 ... Could not find the function public.corpus_manifest` | The API has not seen C4 yet | In the SQL editor: `NOTIFY pgrst, 'reload schema';` |
+| `HTTP 422 ... statement timeout` | A batch was too big for the instance | Add `--batch-kb 500` |
+| `HTTP 422 ... violates foreign key` | A child row came before its passage, for example with `--tables` but without passages | Run without `--tables`, or include `passages` |
+| `HELD: ...` | A large retire is waiting for you | Read it; re-run with `--allow-mass-retire` if it is right |
+
+None of these leaves the mirror half-written in a harmful way. Fix the cause and re-run; the run sends only what is still missing.
+
+## Rollback
+
+The DROP statements are in the header of `C4_corpus_mirror_2026-10-08.sql`. Nothing else depends on the mirror. Delete the scheduled task and the secret.
+
+## Tests
+
+- **`tests/test_corpus_sync_2026_10_08.py`: 21 tests.** No PostgreSQL and no network.
+  - An in-memory server follows the C4 rules.
+  - An HTTP stub on 127.0.0.1 checks signature and gzip as the edge function does.
+  - Golden values tie the digest to PostgreSQL 16 and the signature to `lib_test.ts`.
+- **`tests/test_corpus_sync_pg_2026_10_08.py`: 7 tests.** They run only when `CORPUS_TEST_DSN` names a throwaway database.
+  - C4 is applied twice.
+  - A full sync is followed by a second one that sends 0.
+  - Changes and removals travel.
+  - Stray values do not block a batch.
+  - Search and vectors answer.
+  - anon and authenticated are refused.
+- **`docs/cloud/C4_corpus-ingest/lib_test.ts`: 7 Deno tests.**
+- **End to end in the sandbox.** The real `index.ts` ran with stand-ins only for its two web imports, in front of PostgreSQL as service_role:
+  - first push, then a second push sending 0;
+  - a wrong secret got 401 with no retry;
+  - a foreign-key refusal got 422 with no retry.
+- **Full size.** A 75,720-passage, 22,040-vector copy took 248 s in one push and 3.1 s for the run after it, 374 groups equal.
+- **The real backup.** Planned with `--sink none` in 19 s. A type audit of every row found 0 values that PostgreSQL would refuse.
