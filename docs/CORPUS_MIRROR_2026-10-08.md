@@ -223,3 +223,13 @@ Live state on 2026-10-08:
   - Wired by `scripts/patch_corpus_reader_2026_10_08.py` (App.tsx routes, Auth.tsx next, a link on /texts).
 - **Meaning search.** `supabase/functions/search-corpus` embeds the question as search-texts does and calls `corpus_reader_match` as the reader. M4 showed the mirror's vectors and the cloud's are the same (cosine 1.0000), so questions and passages share one space.
 - **Sign-up on Srangam is open.** `signed_in` means anyone with an account. The pages say that nothing is reviewed, and they are marked noindex.
+
+
+## Kept current: the first scheduled runs (DOCS24_2026_10_08)
+
+- After C4b and the 8 rebuilds, K1 showed indexed = digested in all 8 tables, and K2 showed none.
+- The two-hourly task ran at 16:35 (rc=0) and again at 17:18.
+  - At 17:18 it sent 4 new Ganita translations and nothing else.
+  - Its check found 380 groups equal and 0 different, in 9.3 s.
+  - New translations reach the mirror within two hours, and nothing is uploaded twice.
+- The log is `D:\backups\corpus_mirror_log.txt`. `python scripts\corpus_sync.py --status` compares counts on demand.

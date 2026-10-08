@@ -357,3 +357,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | C4b | Manifest timed out on the full mirror | Fixed: incremental order-free digests (row_index, group_digest); client 4.2. To apply: C4b SQL, the 8 rebuilds, then a run |
 | C5 | The working corpus on the site for signed-in readers | Built: reader functions (C5 SQL), /corpus pages, search-corpus edge function. To apply: C5 SQL, the Srangam files and patch, push, deploy search-corpus |
 | T2 | Scheduled mirror task did not start | Check its battery conditions and last result (commands in the reply of 2026-10-08) |
+
+
+## Addendum 2026-10-08 (14) (DOCS24_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| C4b | Mirror digests | Applied: K1 indexed = digested in all 8 tables, K2 none |
+| T2 | Scheduled mirror task | Fixed (battery conditions). 16:35 and 17:18 runs rc=0; 17:18 sent only 4 changed translations, verify 380 equal |
+| C5 | /corpus for signed-in readers | SQL applied, mode signed_in; Srangam 60fe0551 pushed. To confirm: search-corpus deployed, Publish, /corpus signed in |
+| D3 | Runs die when the console closes | Fixed in code (DASH_HIDDEN_2026_10_08): no window, logs in D:\backups\dashboard_logs, refuses to restart mid-job. To apply: the patch, then a restart while idle |
+| A1 | Sign-in loop for signed-in non-admins; admins bounced after sign-in | Fixed in code (AUTH_ROLE_2026_10_08). To apply: the patch in Srangam, push, Publish |

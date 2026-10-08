@@ -1,0 +1,22 @@
+Dashboard with no window to close (DASH_HIDDEN_2026_10_08, D3); Srangam sign-in loop fix (AUTH_ROLE_2026_10_08); docs (DOCS24_2026_10_08)
+
+scripts/patch_dash_hidden_2026_10_08.py: runs died when a console closed (exit 3221225786,
+STATUS_CONTROL_C_EXIT: nine since 2026-09-08). restart_dashboard.ps1 is replaced (only if it is the
+2026-08-28 version): by default the dashboard runs in a console with no window (CreateNoWindow via
+cmd /s /c), output to D:\backups\dashboard_logs\dashboard_<stamp>.out.log/.err.log in UTF-8, kept 14
+days; it refuses to restart or stop while a job is running or queued (-Force overrides); -Status,
+-Stop, -Window (the old visible window); -NoNewWindow still accepted. dashboard.py: one anchored
+insertion before app.run; with SA_QUIET_REQUESTS=1 (set only by the launcher) werkzeug request lines
+are left out of the log; errors and tracebacks are still written.
+tests/test_dash_hidden_2026_10_08.py (8).
+scripts/patch_auth_role_2026_10_08.py, for the Srangam repo: AuthContext roleChecked (a late has_role
+answer for a signed-out user is dropped); ProtectedRoute waits for the role, sends signed-out visitors
+to /auth?next=, and tells a signed-in non-admin "This area is for the site's editors" instead of
+looping through /auth; Auth.tsx goes on once the role is known (next, else admins /admin/tags, others
+/corpus).
+scripts/patch_docs24_2026_10_08.py: PLATFORM section 27, RUNBOOK, ENTERPRISE_PATH addendum (14),
+CORPUS_MIRROR "Kept current": C4b applied (K1 equal, K2 none), T2 fixed (17:18 run sent only 4 changed
+translations, verify 380 equal), C5 applied (mode signed_in), D3 and A1.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

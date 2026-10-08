@@ -3335,4 +3335,11 @@ if __name__ == "__main__":
             sys.exit(3)
     except OSError:
         pass
+    # DASH_HIDDEN_2026_10_08. scripts\restart_dashboard.ps1 now runs this server with no window
+    # and its output in a log file. The page polls several times a second, so the launcher asks
+    # (SA_QUIET_REQUESTS=1) for the per-request lines to be left out. Errors still reach the log.
+    if os.environ.get("SA_QUIET_REQUESTS") == "1":
+        import logging as _dh_logging
+        _dh_logging.getLogger("werkzeug").setLevel(_dh_logging.WARNING)
+        print("[log] request lines left out (SA_QUIET_REQUESTS=1); errors are still written")
     app.run(host=args.host, port=args.port, debug=False)

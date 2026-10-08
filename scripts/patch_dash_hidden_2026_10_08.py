@@ -1,4 +1,52 @@
-# Sanskrit Automaton - restart the dashboard DETACHED, then health-check it.
+#!/usr/bin/env python3
+# -*- coding: ascii -*-
+"""
+patch_dash_hidden_2026_10_08.py  DASH_HIDDEN_2026_10_08  (ENTERPRISE_PATH D3)
+
+Runs closed when their console closed: nine ended with exit 3221225786 (0xC000013A,
+STATUS_CONTROL_C_EXIT) since 2026-09-08, and on 2026-10-07 a run died with the dashboard.
+The dashboard ran in a visible window; the runs it starts share that console; closing the
+window ended them all.
+
+  scripts/restart_dashboard.ps1  replaced (only if it is exactly the 2026-08-28 version):
+      - by default the dashboard runs in a console with no window (cmd /s /c with
+        CreateNoWindow), its output in D:\backups\dashboard_logs\dashboard_<stamp>.out.log
+        and .err.log (UTF-8, kept 14 days);
+      - it refuses to restart or stop while a job is running or queued (-Force overrides);
+      - -Status (read-only), -Stop, -Window (the old visible window); -NoNewWindow is accepted.
+  scripts/dashboard.py           one anchored insertion before app.run: when
+      SA_QUIET_REQUESTS=1 (set only by the launcher) the werkzeug request lines are left out
+      of the log. Errors and tracebacks are still written. Nothing else changes.
+
+All-or-nothing: both files are checked before either is written; backups first
+(.bak_dashhidden_<date>); dashboard.py is compiled before it replaces the old one; each
+file keeps its line endings. Re-running changes nothing.
+
+  python scripts/patch_dash_hidden_2026_10_08.py --check
+  python scripts/patch_dash_hidden_2026_10_08.py
+Then, with the dashboard idle:
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1
+"""
+from __future__ import annotations
+import argparse, datetime, hashlib, os, py_compile, shutil, sys, tempfile
+from pathlib import Path
+
+MARK = "DASH_HIDDEN_2026_10_08"
+PS1 = Path("scripts/restart_dashboard.ps1")
+DASH = Path("scripts/dashboard.py")
+PS1_OLD_MD5 = "a92ec0e1a778ed17560771730c77392c"     # LF-normalised, the 2026-08-28 version
+ANCHOR = "    app.run(host=args.host, port=args.port, debug=False)\n"
+INSERT = (
+    "    # DASH_HIDDEN_2026_10_08. scripts\\restart_dashboard.ps1 now runs this server with no window\n"
+    "    # and its output in a log file. The page polls several times a second, so the launcher asks\n"
+    "    # (SA_QUIET_REQUESTS=1) for the per-request lines to be left out. Errors still reach the log.\n"
+    "    if os.environ.get(\"SA_QUIET_REQUESTS\") == \"1\":\n"
+    "        import logging as _dh_logging\n"
+    "        _dh_logging.getLogger(\"werkzeug\").setLevel(_dh_logging.WARNING)\n"
+    "        print(\"[log] request lines left out (SA_QUIET_REQUESTS=1); errors are still written\")\n"
+)
+
+NEW_PS1 = r'''# Sanskrit Automaton - restart the dashboard DETACHED, then health-check it.
 # ASCII ONLY (Windows PowerShell 5.1 reads a BOM-less .ps1 in the system codepage).
 #
 # NOTE: param() MUST be the first executable statement in a .ps1 - only comments may
@@ -199,3 +247,95 @@ if ($ok) {
     }
     exit 1
 }
+'''
+
+
+def nl_of(raw: bytes) -> str:
+    return "\r\n" if raw.count(b"\r\n") > raw.count(b"\n") // 2 else "\n"
+
+
+def plan():
+    """Return ([(path, new_bytes)], messages) or raise SystemExit(2) on any refusal."""
+    todo, msgs = [], []
+    for p in (PS1, DASH):
+        if not p.exists():
+            print("FAIL: %s not found. Run from the automaton root." % p); raise SystemExit(2)
+    if not NEW_PS1.isascii() or MARK not in NEW_PS1:
+        print("FAIL: the embedded launcher is not ASCII or lacks the marker."); raise SystemExit(2)
+
+    raw = PS1.read_bytes()
+    if MARK.encode() in raw:
+        msgs.append("skip %s (already carries %s)" % (PS1, MARK))
+    else:
+        md5 = hashlib.md5(raw.replace(b"\r\n", b"\n")).hexdigest()
+        if md5 != PS1_OLD_MD5:
+            print("FAIL: %s is not the version this patch replaces (md5 %s, expected %s)."
+                  " Nothing written." % (PS1, md5, PS1_OLD_MD5)); raise SystemExit(2)
+        nl = nl_of(raw)
+        todo.append((PS1, NEW_PS1.replace("\n", nl).encode("ascii")))
+        msgs.append("replace %s (%s line endings)" % (PS1, "CRLF" if nl == "\r\n" else "LF"))
+
+    raw = DASH.read_bytes()
+    if MARK.encode() in raw:
+        msgs.append("skip %s (already carries %s)" % (DASH, MARK))
+    else:
+        nl = nl_of(raw)
+        text = raw.decode("utf-8")
+        anchor = ANCHOR.replace("\n", nl)
+        n = text.count(anchor)
+        if n != 1:
+            print("FAIL: the anchor occurs %d times in %s (expected 1). Nothing written." % (n, DASH))
+            raise SystemExit(2)
+        if "import os" not in text and "import os," not in text:
+            print("FAIL: %s does not import os. Nothing written." % DASH); raise SystemExit(2)
+        new = text.replace(anchor, INSERT.replace("\n", nl) + anchor, 1)
+        try:
+            compile(new, str(DASH), "exec")
+        except SyntaxError as e:
+            print("FAIL: the patched %s does not compile: %s. Nothing written." % (DASH, e))
+            raise SystemExit(2)
+        todo.append((DASH, new.encode("utf-8")))
+        msgs.append("insert %d lines in %s before app.run" % (INSERT.count("\n"), DASH))
+    return todo, msgs
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(); ap.add_argument("--check", action="store_true")
+    args = ap.parse_args()
+    todo, msgs = plan()
+    for m in msgs:
+        print(m)
+    if args.check:
+        print("CHECK OK: %d file(s) to write. Nothing written." % len(todo)); return 0
+    if not todo:
+        print("Nothing to do."); return 0
+    stamp = datetime.date.today().strftime("%Y%m%d")
+    done = []
+    try:
+        for p, data in todo:
+            bak = p.with_name(p.name + ".bak_dashhidden_" + stamp)
+            shutil.copy2(p, bak)
+            tmp = p.with_name(p.name + ".tmp_dashhidden")
+            tmp.write_bytes(data)
+            if p.suffix == ".py":
+                py_compile.compile(str(tmp), cfile=os.path.join(tempfile.gettempdir(), "dashhidden.pyc"),
+                                   doraise=True)
+            os.replace(tmp, p)
+            done.append((p, bak))
+            print("wrote %s (backup %s)" % (p, bak.name))
+    except Exception as e:
+        print("FAIL while writing: %s: %s. Restoring." % (type(e).__name__, e))
+        for p, bak in done:
+            shutil.copy2(bak, p); print("restored %s" % p)
+        for p, _ in todo:
+            t = p.with_name(p.name + ".tmp_dashhidden")
+            if t.exists():
+                t.unlink()
+        return 2
+    print("Done. Restart the dashboard while it is idle:")
+    print("  powershell -NoProfile -ExecutionPolicy Bypass -File scripts\\restart_dashboard.ps1")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

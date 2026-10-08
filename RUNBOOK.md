@@ -1237,3 +1237,27 @@ Every step is a dry run unless `--yes` is given.
   - Add a reader: `INSERT INTO corpus.readers (user_id, note) VALUES ('<id from auth.users>', 'name');`
   - Admins only: mode `'admins'`.
 - **"Meaning search is not switched on yet" on /corpus.** Deploy the edge function `search-corpus` through Lovable. Word search and reading work without it.
+
+
+## The dashboard runs with no window; signing in on Srangam (DOCS24_2026_10_08)
+
+- **Apply, from the automaton root.**
+  1. `python scripts\patch_dash_hidden_2026_10_08.py --check`, then the same without `--check`.
+  2. `python -m unittest tests.test_dash_hidden_2026_10_08`.
+  3. With the dashboard idle: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1`.
+- **Every day.** Each of these is `scripts\restart_dashboard.ps1` with:
+  - no switch: restart. It refuses while a job runs.
+  - `-Status`: who listens, the jobs, the newest logs. It changes nothing.
+  - `-Stop`: stop it. It refuses while a job runs.
+  - `-Force`: cut running jobs off.
+  - `-Window`: the old visible window.
+- **The log.** `Get-Content -Wait -Tail 40 -Encoding UTF8 <the .err.log it names>`. The logs are in `D:\backups\dashboard_logs` and are kept 14 days.
+- **What this changes about closing windows.** It replaces the DOCS20 advice to keep the dashboard's console open.
+  - A dashboard started by the script has no window to close.
+  - A dashboard started any other way (`python scripts\dashboard.py` in a terminal, or `-Window`) still ends with its window, and so do its runs.
+- **It does not come up.** The script prints the last lines of both logs.
+- **Srangam sign-in.**
+  - A signed-in account that is not an admin sees "This area is for the site's editors" at /admin.
+  - /auth sends it to /corpus.
+  - Admins are no longer bounced through /auth after signing in.
+  - To apply, in `D:\srangam-42267`, run `patch_auth_role_2026_10_08.py --check`, then the same without `--check`; then typecheck, the tests and the build; then push, then Publish.
