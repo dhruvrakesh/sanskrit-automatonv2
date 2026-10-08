@@ -1,0 +1,10 @@
+Docs: how the roles SQL is applied, and RELIABILITY_AUDIT Phase X (RBAC_DOCS_2026_10_08)
+
+docs/RBAC_RESEARCHERS_2026-10-08.md: the order (checks P1-P7, C7a alone, V0, C7, V1-V7), why C7a
+shares its paste with nothing, and that the site behaves as before until C7 is applied.
+docs/RELIABILITY_AUDIT.md Phase X: the super_admin and researcher roles, "Only super admins can
+manage roles", invitations stored as SHA-256 only, the RPCs callable by anon (research_invite_peek)
+and authenticated (Invariant 15), and invariants 23-26. Documentation only.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

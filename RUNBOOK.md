@@ -1322,3 +1322,23 @@ Every step is a dry run unless `--yes` is given.
 
    To reopen, set the mode back to signed_in.
 6. **Rollback.** At the head of the C7 file. The site needs no rollback: without C7 it behaves as before.
+
+
+## Roles on Srangam: apply C7 (corrected order) and the docs follow-up (DOCS28_2026_10_08)
+
+Srangam 4d70389f already carries the pages. Only the database and the docs remain.
+
+1. **Preflight.** Open `docs/cloud/C7_checks_2026-10-08.sql`. In the Lovable Cloud SQL editor, run P1 to P7, one query per paste, and Export CSV each result into `D:\backups\rbac_2026-10-08\`.
+2. **C7a, alone.** Clear the editor. Paste ONLY `docs/cloud/C7a_rbac_roles_2026-10-08.sql` and run it.
+   - Then clear the editor and run V0 on its own. Expect {admin,moderator,user,super_admin,researcher}.
+   - Never add anything to C7a's paste. A SELECT there is error 55P04, and the whole paste rolls back.
+3. **C7, in one paste.** Clear the editor. Paste the whole `docs/cloud/C7_rbac_researchers_2026-10-08.sql` and run it.
+   - If it says "run C7a first", step 2 did not commit: repeat step 2.
+4. **Verify.** Run V1 to V7, one query per paste, and export each result.
+5. **Srangam docs (D:\srangam-42267).**
+   - Run `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_rbac_docs_2026_10_08.py" --check`, then without --check.
+   - `git add` the two docs, commit, push. Publish is not needed for docs.
+6. **Check on the site** (after Publish of 4d70389f).
+   - Sign in. /admin/researchers shows the Super admin badge, and no notice that the roles functions are missing.
+   - Invite an address you can read. Open the link in a private window, create the account, confirm it, and accept. The person appears under People with access.
+7. **Close the corpus to plain sign-ups,** only after step 6. Choose "Invited researchers" on /admin/researchers; this is audited.

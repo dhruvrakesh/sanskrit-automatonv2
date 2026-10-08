@@ -1,0 +1,20 @@
+Roles: the C7 order made explicit after a clean rollback (RBAC_RESEARCHERS_2026_10_08); Srangam docs follow-up (RBAC_DOCS_2026_10_08); docs (DOCS28_2026_10_08)
+
+The first attempt in the SQL editor (21:14) pasted C7a together with SELECT enum_range(...): the
+editor runs a paste as one transaction and PostgreSQL will not read a new enum value inside it
+(55P04), so the paste rolled back whole; C7's guard then refused. Nothing changed. No SQL statement
+changes here.
+docs/cloud/C7_checks_2026-10-08.sql: the read-only checks, one per paste (P1-P7 before, with the
+policy expressions and the reader gate's definition as the rollback source; V0 after C7a; V1-V7
+after C7, V4 new: the rbac tables closed to anon and authenticated). C7a and C7 headers: the order,
+and C7a pasted alone.
+tests/test_rbac_researchers_pg_2026_10_08.py: 16 (was 14); replays the 21:14 sequence on a fresh
+database and runs every check.
+scripts/patch_rbac_docs_2026_10_08.py + docs/srangam/RBAC_DOCS_2026-10-08/: Srangam
+docs/RBAC_RESEARCHERS_2026-10-08.md (the order; replaced only over the version 4d70389f wrote) and
+docs/RELIABILITY_AUDIT.md Phase X (roles, the user_roles policy, RPCs callable by anon and
+authenticated under Invariant 15, invariants 23-26).
+scripts/patch_docs28_2026_10_08.py: PLATFORM section 31, RUNBOOK, ENTERPRISE_PATH addendum (18).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

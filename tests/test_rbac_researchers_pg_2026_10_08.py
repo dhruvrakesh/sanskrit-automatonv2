@@ -1,9 +1,11 @@
 # -*- coding: ascii -*-
 """RBAC_RESEARCHERS_2026_10_08 against a real PostgreSQL: docs/cloud/C7a and C7 (the super admin,
 research invitations, the audit log, the reader gate with researchers, the user_roles policy).
-Applies the Supabase stand-ins, C4, C4b, C5, C7a, then C7 once WITHOUT the super admin's account
-(it must change nothing), then C7 twice with it, and calls the functions as anon, as signed-in
-users, as an admin and as the super admin.
+Applies the Supabase stand-ins, C4, C4b and C5. On a fresh database it then replays what the SQL
+editor did on 2026-10-08 at 21:14: C7 before C7a (its guard refuses, nothing is created) and C7a
+pasted together with a SELECT of the enum (55P04, nothing kept). Then C7a alone, C7 once WITHOUT
+the super admin's account (it must change nothing), C7 twice with it, and calls the functions as
+anon, as signed-in users, as an admin and as the super admin.
 
 Skipped unless CORPUS_TEST_DSN names a THROWAWAY database you own. Never points at the live one.
   python -m unittest tests.test_rbac_researchers_pg_2026_10_08
@@ -16,8 +18,10 @@ DSN = os.environ.get("CORPUS_TEST_DSN", "")
 CLOUD = REPO / "docs" / "cloud"
 BASE = [REPO / "tests" / "supabase_stubs_2026_10_08.sql", REPO / "tests" / "supabase_stubs_rbac_2026_10_08.sql",
         CLOUD / "C4_corpus_mirror_2026-10-08.sql", CLOUD / "C4b_mirror_digests_2026-10-08.sql",
-        CLOUD / "C5_corpus_reader_2026-10-08.sql", CLOUD / "C7a_rbac_roles_2026-10-08.sql"]
+        CLOUD / "C5_corpus_reader_2026-10-08.sql"]
+C7A = CLOUD / "C7a_rbac_roles_2026-10-08.sql"
 C7 = CLOUD / "C7_rbac_researchers_2026-10-08.sql"
+CHECKS = CLOUD / "C7_checks_2026-10-08.sql"
 SUPER = "aaaaaaaa-0000-0000-0000-000000000001"
 ADMIN = "aaaaaaaa-0000-0000-0000-000000000002"
 SCHOLAR = "aaaaaaaa-0000-0000-0000-000000000003"
@@ -47,6 +51,24 @@ class Rbac(unittest.TestCase):
             x(f.read_text(encoding="utf-8"))
         x("TRUNCATE public.user_roles, auth.users, corpus.readers")
         x("DROP POLICY IF EXISTS \"Only super admins can manage roles\" ON public.user_roles")
+        enum = lambda: x("SELECT enum_range(NULL::public.app_role)::text").fetchone()[0]
+        cls.fresh = "super_admin" not in enum()
+        cls.guard_error = cls.paste_error = cls.enum_after_bad_paste = None
+        if cls.fresh:
+            try:                                   # C7 first: refused by its own guard
+                x(C7.read_text(encoding="utf-8"))
+            except Exception as e:
+                cls.guard_error = str(e)
+                x("ROLLBACK")
+            cls.after_guard = x("SELECT to_regnamespace('rbac') IS NULL").fetchone()[0]
+            try:                                   # C7a with a check in the same paste
+                x(C7A.read_text(encoding="utf-8") + "\nSELECT enum_range(NULL::public.app_role);")
+            except Exception as e:
+                cls.paste_error = str(e)
+            cls.enum_after_bad_paste = enum()
+        x(C7A.read_text(encoding="utf-8"))          # C7a alone
+        x(C7A.read_text(encoding="utf-8"))          # and again: harmless
+        cls.enum_after_c7a = enum()
         # The super admin's account is not there yet: C7 must refuse and leave everything as it was.
         cls.first_error = None
         try:
@@ -103,6 +125,25 @@ class Rbac(unittest.TestCase):
         return r[0]
 
     # ---- applying it
+
+    def test_the_2114_sequence_changes_nothing_and_c7a_alone_works(self):
+        if not self.fresh:
+            self.skipTest("the enum was extended by an earlier run; use a fresh database for this one")
+        self.assertIn("run C7a first, on its own", self.guard_error or "")
+        self.assertTrue(self.after_guard)
+        self.assertIn("unsafe use of new value", self.paste_error or "")
+        self.assertEqual(self.enum_after_bad_paste, "{admin,moderator,user}")
+        self.assertEqual(self.enum_after_c7a, "{admin,moderator,user,super_admin,researcher}")
+
+    def test_every_check_is_one_statement_and_runs(self):
+        text = CHECKS.read_text(encoding="utf-8")
+        body = "\n".join(l for l in text.splitlines() if not l.lstrip().startswith("--"))
+        stmts = [q.strip() for q in body.split(";") if q.strip()]
+        self.assertEqual(len(stmts), 15)                 # P1-P7, V0, V1-V7
+        for q in stmts:
+            with self.subTest(q=q[:50]):
+                self.assertTrue(q.upper().startswith("SELECT"))
+                self.pg.execute(q).fetchall()
 
     def test_refuses_without_the_super_admins_account_and_changes_nothing(self):
         self.assertIn("no account with the email dhruv.rakesh@gmail.com", self.first_error or "")

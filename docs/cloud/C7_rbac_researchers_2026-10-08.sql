@@ -1,6 +1,10 @@
 -- ============================================================
 -- C7 - roles for Srangam: one super admin, invited researchers (RBAC_RESEARCHERS_2026_10_08)
--- Run C7a first, alone (the two enum values). Then this whole file in one paste.
+-- STEP 3 of 4. The order (docs/cloud/C7_checks_2026-10-08.sql, one query per paste):
+--   1. Preflight P1-P7.  2. C7a ALONE, then V0 as a separate run.  3. THIS FILE, whole, in one
+--   paste.  4. Verify V1-V7.
+-- This file is one transaction: if any statement fails, nothing in it is kept. It refuses to run
+-- (and changes nothing) until C7a's two values are committed, and until C5 is in place.
 --
 -- The roles (public.app_role, rows in public.user_roles, checked by public.has_role):
 --   super_admin  dhruv.rakesh@gmail.com (granted below). Invites researchers, removes them, sets
@@ -510,30 +514,7 @@ COMMIT;
 NOTIFY pgrst, 'reload schema';
 
 -- ============================================================
--- Checks (one at a time).
--- V1 the roles (expect your email with admin and super_admin):
--- SELECT u.email, r.role, r.created_at FROM public.user_roles r JOIN auth.users u ON u.id = r.user_id
--- ORDER BY u.email, r.role;
--- V2 the policies on user_roles (expect "Admins can view all roles" SELECT and
---    "Only super admins can manage roles" ALL):
--- SELECT policyname, cmd, qual FROM pg_policies WHERE schemaname = 'public' AND tablename = 'user_roles';
--- V3 who may call the new functions (expect anon true only for research_invite_peek, authenticated true on all 12):
--- SELECT p.oid::regprocedure, has_function_privilege('anon', p.oid, 'EXECUTE') AS anon,
---        has_function_privilege('authenticated', p.oid, 'EXECUTE') AS authenticated
--- FROM pg_proc p JOIN pg_namespace n ON n.oid = p.pronamespace
--- WHERE n.nspname = 'public' AND p.proname IN ('my_roles', 'is_super_admin', 'research_invite_create',
---   'research_invites_list', 'research_invite_revoke', 'research_invite_peek', 'research_invite_accept',
---   'rbac_members_list', 'researcher_remove', 'rbac_audit_list', 'corpus_access_mode', 'corpus_access_mode_set')
--- ORDER BY 1;
--- V4 the trigger (expect one row, rbac_log_role_change):
--- SELECT tgname FROM pg_trigger WHERE tgrelid = 'public.user_roles'::regclass AND NOT tgisinternal;
--- V5 the audit log so far (expect role_granted super_admin, with no actor: it came from this editor):
--- SELECT at, action, target_email, detail FROM rbac.audit ORDER BY id;
--- V6 the access mode (expect signed_in: C7 does not change it):
--- SELECT mode, updated_at FROM corpus.reader_access;
---
--- Step C - ONLY when the first researcher has accepted and can read: close the corpus to anyone
--- who merely signs up. (The same switch is on /admin/researchers.)
--- UPDATE corpus.reader_access SET mode = 'readers', updated_at = now();
--- To reopen: UPDATE corpus.reader_access SET mode = 'signed_in', updated_at = now();
+-- Checks: docs/cloud/C7_checks_2026-10-08.sql, V1-V7, one query per paste.
+-- Closing the corpus to plain sign-ups is a separate, later decision (the end of that file, or the
+-- switch on /admin/researchers once the first researcher has accepted).
 -- ============================================================

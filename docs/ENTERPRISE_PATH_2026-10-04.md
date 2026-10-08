@@ -406,3 +406,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | A3 | Automatic invitation email | Next: edge function (service role or Resend); needs the /invite/* redirect allowed and a sending domain |
 | A4 | Researchers' requests (corrections, texts) | With L4: the request queue the desk pulls |
 | V10 | The 10 withheld verses | In progress: markandeya_purana passage_count 1,219, published; the remaining --only files to paste |
+
+
+## Addendum 2026-10-08 (18) (DOCS28_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| A1 | Roles: super admin, invited researchers, audit log | Site: Srangam 4d70389f, pushed. Database: first attempt 21:14 rolled back cleanly, so C7 is still to apply: P1-P7, C7a ALONE, V0, C7, V1-V7 (C7_checks) |
+| A1d | Srangam docs: the order; RELIABILITY_AUDIT Phase X and invariants 23-26 | patch_rbac_docs_2026_10_08.py, after A1 or before it (documentation only) |
+| A2 | Close the corpus to plain sign-ups (mode 'readers') | After the first researcher has accepted: the switch on /admin/researchers |
+| A3 | Invitation email sent by the site | Next: an edge function on `_shared/auth-gate.ts` (requireUser, then `is_super_admin()`), using the service role for `auth.admin.inviteUserByEmail` (new accounts) or a provider such as Resend. Needs `/invite/*` allowed as an auth redirect URL in Lovable Cloud |
+| A4 | Researchers' requests (corrections, texts) | With L4: a request queue the desk pulls |
+| A5 | Types | Lovable regenerates `types.ts` with the new enum values and functions when it next syncs the schema; the site does not depend on it (typed wrappers in `src/lib/rbac.ts`) |
