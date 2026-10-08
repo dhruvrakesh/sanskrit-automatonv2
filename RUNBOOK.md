@@ -1200,3 +1200,10 @@ Every step is a dry run unless `--yes` is given.
   4. Cron job 9 embeds them at 04:15 UTC, or run R3 once now (expect "taken":10).
   5. The folder for each doc then holds only these files (emit_sql writes a fresh set each time).
 - **Novel #1, rebuilt.** `python scripts\novel.py build --id 1 --cover 8`, then `python scripts\export_pdf.py "<the html it names>"`.
+
+
+## When the Live tab says "stopped"; the spend cap (DOCS20_2026_10_08)
+
+- **"Stopped."** The run ended without finishing. Start Translate for that text again: verses already translated are skipped. Keep the dashboard's console open while a translation runs; closing it ends the run (exit code 3221225786).
+- **Spend cap.** In the dashboard, open Usage, press Reload, set "New cap" and press Set cap; Resume appears when the cap has paused paid work. From a terminal: `python scripts\set_budget.py --cap 40 --unpause`.
+- **Load the dashboard change.** `python scripts\patch_live_budget_2026_10_08.py --check`, then the same without `--check`, then restart the dashboard while it is idle.

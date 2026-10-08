@@ -929,34 +929,116 @@ def api_budget_get():
 
 @app.post("/api/budget")
 def api_budget_set():
-    """Set/resume budget. Body: {budget_usd: 15.0} or {resume: true}."""
+    """Set the cap or resume. Body: {budget_usd: 30} or {resume: true}. LIVE_BUDGET_2026_10_08: the
+    value is checked (a number above 0, at most BUDGET_MAX_USD), the connection is always closed,
+    the answer carries the new state, and every change is appended to data/budget_changes.jsonl."""
     db_path = request.args.get("db", "data/context.db")
-    data = request.get_json(force=True) or {}
+    data = request.get_json(force=True, silent=True) or {}
+    if not data.get("resume") and "budget_usd" not in data:
+        return jsonify({"error": "specify budget_usd or resume:true"}), 400
+    new = None
+    if "budget_usd" in data:
+        try:
+            new = float(data["budget_usd"])
+        except (TypeError, ValueError):
+            return jsonify({"error": "budget_usd must be a number"}), 400
+        if new != new or new <= 0 or new > BUDGET_MAX_USD:   # NaN, zero, negative, or absurd
+            return jsonify({"error": "budget_usd must be above 0 and at most %g" % BUDGET_MAX_USD}), 400
+    con = None
     try:
         import sys as _sys; _sys.path.insert(0, str(SCRIPTS))
-        from cost_tracker import ensure_usage_schema, set_budget, resume_budget
-        con = sqlite3.connect(db_path)
+        from cost_tracker import ensure_usage_schema, set_budget, resume_budget, get_summary
+        con = sqlite3.connect(db_path, timeout=30)
         ensure_usage_schema(con)
-        if data.get("resume"):
+        before = dict(get_summary(con)["budget"])
+        if new is None:
             resume_budget(con)
-            return jsonify({"resumed": True})
-        if "budget_usd" in data:
-            set_budget(con, float(data["budget_usd"]))
-            return jsonify({"budget_usd": float(data["budget_usd"]), "set": True})
-        con.close()
-        return jsonify({"error": "specify budget_usd or resume:true"}), 400
+        else:
+            set_budget(con, new)
+        after = dict(get_summary(con)["budget"])
+        _log_budget_change("resume" if new is None else "set", before, after)
+        out = {"budget_usd": after["budget_usd"], "spent_usd": after["spent_usd"], "paused": after["paused"],
+               "remaining_usd": round(after["budget_usd"] - after["spent_usd"], 6)}
+        out["resumed" if new is None else "set"] = True
+        if after["spent_usd"] >= after["budget_usd"]:
+            out["warning"] = "the cap is at or below what is already spent, so paid steps stop at once"
+        return jsonify(out)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    finally:
+        if con is not None:
+            con.close()
 
+
+
+
+# LIVE_BUDGET_2026_10_08 ------------------------------------------------------------------------
+PROGRESS_PATH = ROOT / "data" / "translation_progress.json"
+BUDGET_LOG_PATH = ROOT / "data" / "budget_changes.jsonl"
+PROGRESS_STALE_S = 20 * 60
+BUDGET_MAX_USD = 1000.0
+
+
+def _translation_job_live() -> bool:
+    with JOBS_LOCK:
+        return any(j.ok is None and (j.kind.startswith("translate") or j.kind in ("pipeline", "advance_pipeline"))
+                   for j in JOBS.values())
+
+
+def _progress_truth(d):
+    """translation_progress.json says 'running' until the run itself rewrites it. A run that dies
+    with the dashboard or the computer never does, so the Live tab kept showing 'Calling API' (Ganita,
+    from 2026-10-07 14:18 UTC to the next morning, with no job running). With no translation-family
+    job unfinished here and the file unchanged for PROGRESS_STALE_S, it is reported as 'interrupted'.
+    A recent file is left alone: a run started from a terminal writes it too."""
+    if not isinstance(d, dict) or d.get("status") not in ("running", "paused") or _translation_job_live():
+        return d
+    import datetime as _dt
+    try:
+        ts = _dt.datetime.fromisoformat(str(d.get("updated_at") or "").replace("Z", "+00:00"))
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=_dt.timezone.utc)
+        age = (_dt.datetime.now(_dt.timezone.utc) - ts).total_seconds()
+    except ValueError:
+        age = None
+    if age is not None and age < PROGRESS_STALE_S:
+        return d
+    if age is None:
+        ago = "at an unknown time"
+    elif age >= 3600:
+        ago = "%.0f h ago" % (age / 3600)
+    else:
+        ago = "%.0f min ago" % (age / 60)
+    out = dict(d)
+    out["status"] = "interrupted"
+    out["stale_since"] = d.get("updated_at")
+    out["message"] = ("No translation is running. This run stopped at p%s.%s with %s of %s verses done and last "
+                      "wrote its progress %s: the dashboard or the computer was closed, or the process was "
+                      "stopped, while it ran. Start Translate for this text again; verses already translated "
+                      "are kept and skipped." % (d.get("current_page"), d.get("current_idx"),
+                                                 d.get("verses_done", 0), d.get("verses_total", 0), ago))
+    return out
+
+
+def _log_budget_change(action, before, after):
+    try:
+        BUDGET_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(BUDGET_LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"at": time.strftime("%Y-%m-%dT%H:%M:%S"), "action": action,
+                                "cap_before": before.get("budget_usd"), "cap_after": after.get("budget_usd"),
+                                "spent_usd": after.get("spent_usd"), "paused_after": after.get("paused"),
+                                "from": request.remote_addr}) + "\n")
+    except Exception:
+        pass
 
 
 @app.get("/api/progress")
 def api_progress():
     """Return live translation progress from data/translation_progress.json."""
-    prog_path = ROOT / "data" / "translation_progress.json"
+    prog_path = PROGRESS_PATH   # LIVE_BUDGET_2026_10_08
     try:
         if prog_path.exists():
-            return jsonify(json.loads(prog_path.read_text(encoding="utf-8")))
+            return jsonify(_progress_truth(json.loads(prog_path.read_text(encoding="utf-8"))))
         return jsonify({"status": "idle"})
     except Exception as e:
         return jsonify({"status": "idle", "error": str(e)})

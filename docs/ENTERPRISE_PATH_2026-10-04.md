@@ -320,3 +320,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | W6 | Hindi on the reader | Next, planned in section 21 |
 | C3b | Ask | After C3a has run a while |
 | T1 / T2 / 1.12 | Ganita OCR first; translation throughput; maintenance alongside long jobs | Open |
+
+
+## Addendum 2026-10-08 (10) (DOCS20_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| D1 | Live tab showed a dead run as "Calling API" | Fixed: "stopped" with how to continue (to apply; restart the dashboard) |
+| D2 | Spend cap from the dashboard | Added to the Usage tab (to apply) |
+| D3 | Runs die when the console closes (nine ended with exit 3221225786 since 2026-09-08; the 2026-10-07 run died with the dashboard) | Open: run the dashboard so a closed window cannot end it (a scheduled task, or pythonw with a log file) |
+| G1 | Ten withheld verses | SQL written; paste it (still 1,216 and 439 on the site) |

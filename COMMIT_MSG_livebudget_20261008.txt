@@ -1,0 +1,14 @@
+Live tab tells a stopped run from a running one; spend cap on the dashboard; Windows-safe tests (LIVE_BUDGET_2026_10_08, DOCS20_2026_10_08)
+
+scripts/dashboard.py: /api/progress reports a progress file left by a run that died as "interrupted"
+(no translation-family job unfinished, file older than 20 minutes) with what was done and how to
+continue. The Ganita run of 2026-10-07 died with the dashboard at 14:18 UTC and the Live tab showed
+"Calling API" for 17 hours. /api/budget POST checks the value (above 0, at most $1000), always closes
+its connection, returns the new state, warns when the cap is at or below the spend, and logs every
+change to data/budget_changes.jsonl (git-ignored).
+scripts/dashboard_static.html: Usage tab shows the spend cap (spent, cap, left, paused) with Set cap and
+Resume; the Live tab shows "stopped" instead of "Calling API" for an interrupted run.
+scripts/patch_live_budget_2026_10_08.py applies it; tests/test_live_budget_2026_10_08.py (5 tests, all
+fail before, pass after). tests/test_exports_gate_2026_10_07.py closes its SQLite connections (four
+tearDown PermissionErrors on Windows). scripts/patch_docs20_2026_10_08.py: PLATFORM section 23,
+RUNBOOK, ENTERPRISE_PATH addendum (10).

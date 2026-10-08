@@ -17,9 +17,13 @@ FOLIO = "\u0969\u0969"      # a bare page number, Devanagari digits
 HI = "\u0930\u093e\u092e \u0935\u0928 \u0917\u090f\u0964"
 
 
+OPEN = []   # connections the tests opened; closed before the temp folder goes (Windows cannot delete an open file)
+
+
 def export_db(d, translated_pages=(4,), with_hi=False):
     db = os.path.join(d, "context.db")
     con = sqlite3.connect(db)
+    OPEN.append(con)
     con.executescript("""
         CREATE TABLE docs(id INTEGER PRIMARY KEY, code TEXT, category TEXT, src_path TEXT);
         CREATE TABLE passages(id INTEGER PRIMARY KEY, doc_id INTEGER, page_no INTEGER, idx INTEGER, text TEXT,
@@ -58,6 +62,8 @@ class Export(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
 
     def tearDown(self):
+        while OPEN:
+            OPEN.pop().close()
         self.tmp.cleanup()
 
     def test_empty_pages_are_left_out(self):

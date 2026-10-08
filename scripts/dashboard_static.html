@@ -1192,6 +1192,52 @@ async function loadHistory() {
 }
 
 // ── Usage stats ────────────────────────────────────────────────────────────
+// LIVE_BUDGET_2026_10_08: the spend cap, shown and set from the Usage tab
+var BUDGET_MSG = '';
+function budgetHtml(b) {
+  if (!b || b.budget_usd == null) return '';
+  const spent = Number(b.spent_usd || 0), cap = Number(b.budget_usd || 0), left = cap - spent;
+  const pct = cap > 0 ? Math.min(100, Math.round(100 * spent / cap)) : 100;
+  const col = b.paused || left <= 0 ? 'var(--red)' : pct >= 90 ? 'var(--gold)' : 'var(--green)';
+  return '<div style="margin-bottom:10px;padding:8px;border:1px solid var(--border-v);border-radius:6px">'
+    + '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">Spend cap'
+    + (b.paused ? ' <span style="color:var(--red)">&middot; paused</span>' : '') + '</div>'
+    + '<div>Spent <b>$' + spent.toFixed(2) + '</b> of <b>$' + cap.toFixed(2) + '</b> &middot; left <b style="color:' + col + '">$'
+    + left.toFixed(2) + '</b></div>'
+    + '<div style="height:5px;background:var(--bg4);border-radius:999px;overflow:hidden;margin-top:4px">'
+    + '<div style="height:100%;width:' + pct + '%;background:' + col + '"></div></div>'
+    + '<div style="display:flex;gap:6px;margin-top:6px;align-items:center">'
+    + '<label for="budgetCap" style="font-size:10px;color:var(--muted)">New cap $</label>'
+    + '<input id="budgetCap" type="number" min="1" max="1000" step="1" value="' + Math.ceil(Math.max(cap, spent + 5)) + '"'
+    + ' style="width:70px;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:4px;padding:3px 6px;font-size:11px">'
+    + '<button class="btn-batch" onclick="setBudget()">Set cap</button>'
+    + (b.paused ? '<button class="btn-batch" onclick="resumeBudget()">Resume</button>' : '')
+    + '</div><div id="budgetMsg" style="font-size:9px;color:var(--muted);margin-top:3px">'
+    + esc(BUDGET_MSG || 'Every paid step (translation, OCR, pictures, stories, novels) stops at the cap.') + '</div></div>';
+}
+async function postBudget(body) {
+  const msg = document.getElementById('budgetMsg');
+  try {
+    const r = await fetch('/api/budget', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+    const j = await r.json();
+    if (j.error) { if (msg) msg.textContent = 'Not changed: ' + j.error; return; }
+    BUDGET_MSG = (body.resume ? 'Resumed. ' : 'Saved. ') + 'Cap $' + Number(j.budget_usd).toFixed(2) + ', left $'
+      + Number(j.remaining_usd).toFixed(2) + (j.warning ? ' - ' + j.warning : '') + '.';
+    if (msg) msg.textContent = BUDGET_MSG;
+    setTimeout(loadUsage, 800);
+  } catch (e) { if (msg) msg.textContent = 'Not changed: ' + e; }
+}
+function setBudget() {
+  const v = parseFloat((document.getElementById('budgetCap') || {}).value);
+  if (!(v > 0) || v > 1000) {
+    const msg = document.getElementById('budgetMsg');
+    if (msg) msg.textContent = 'Enter a cap above $0 and at most $1000.';
+    return;
+  }
+  postBudget({budget_usd: v});
+}
+function resumeBudget() { postBudget({resume: true}); }
+
 async function loadUsage() {
   const el = document.getElementById('usageBody');
   el.innerHTML = '<span style="color:var(--muted)">Loading&hellip;</span>';
@@ -1199,7 +1245,7 @@ async function loadUsage() {
     const r = await fetch('/api/usage');
     const d = await r.json();
     if (d.error) { el.innerHTML = '<span style="color:var(--muted)">' + esc(d.error) + '</span>'; return; }
-    let html = '<div style="margin-bottom:8px">' +
+    let html = budgetHtml(d.budget) + '<div style="margin-bottom:8px">' +
       '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">Translation Cache</div>' +
       '<div>Total API calls: <b>' + d.total_calls + '</b></div>' +
       '<div>Total output chars: <b>' + (d.total_out_chars||0).toLocaleString() + '</b></div>' +
@@ -1407,6 +1453,15 @@ function renderProgress(d) {
             + 'then <b style="color:var(--gold)">Ingest</b>, then Translate.</div>'
           : '')
       + '</div>';
+    return;
+  }
+  if (d.status === 'interrupted') {   // LIVE_BUDGET_2026_10_08: a run that died, not one that is calling the API
+    el.innerHTML = '<div style="padding:12px;border:1px solid var(--red);border-radius:8px;background:#f8717112">'
+      + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap">'
+      + '<span class="pstat-idle" style="color:var(--red)">&#9632; stopped</span>'
+      + '<span style="font-size:10px;color:var(--muted);font-family:JetBrains Mono,monospace">' + esc(d.doc || '') + '</span>'
+      + '<span style="font-size:10px;color:var(--muted)">' + (d.verses_done || 0) + '/' + (d.verses_total || 0) + ' verses</span></div>'
+      + '<div style="font-size:11px;color:var(--ink);line-height:1.5">' + esc(d.message || 'This run is not running.') + '</div></div>';
     return;
   }
   const isRun = d.status === 'running';

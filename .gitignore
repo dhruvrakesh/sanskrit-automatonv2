@@ -116,3 +116,5 @@ data/images/
 
 # IMAGE_LIBRARY_2026_10_03
 data/images/
+# LIVE_BUDGET_2026_10_08: the budget change log stays local
+data/budget_changes.jsonl
