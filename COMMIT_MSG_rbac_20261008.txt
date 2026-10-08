@@ -1,0 +1,23 @@
+Roles on the site: a super admin and invited researchers (RBAC_RESEARCHERS_2026_10_08); docs (DOCS27_2026_10_08)
+
+docs/cloud/C7a_rbac_roles_2026-10-08.sql: app_role gains super_admin and researcher (run alone,
+first). docs/cloud/C7_rbac_researchers_2026-10-08.sql, one transaction: super_admin (and admin) for
+dhruv.rakesh@gmail.com, refusing to run without that account; schema rbac (not exposed; RLS, no
+grants): invites keep only the SHA-256 of each link token, one open invitation per email, and an
+audit log fed by the functions and by a trigger on user_roles; corpus_reader_allowed() as in C5 plus
+the super admin always and researchers in mode 'readers' (the mode itself unchanged); the user_roles
+write policy from admins to super admins; 12 SECURITY DEFINER functions (peek for anyone, accept and
+my_roles for signed-in users, the rest for the super admin). tests/test_rbac_researchers_pg_2026_10_08.py
+(14) with tests/supabase_stubs_rbac_2026_10_08.sql.
+docs/srangam/RBAC_2026-10-08/ + scripts/patch_rbac_2026_10_08.py: /admin/researchers (who may read,
+invite with a link shown once, copy and mailto, withdraw, remove, the audit log), /invite/:token
+(sign up or sign in and come back, accept, on to /corpus), AuthContext roles/isSuperAdmin/
+isResearcher/refreshRoles with my_roles() beside has_role (before C7: has_role alone), sign-up that
+returns to the page it came from, ?tab=signup, the Researchers link and Super admin badge, an admin
+header that fits a phone, a corpus refusal that says how researchers get in; 26 vitest tests;
+md5-guarded replacements, anchored App.tsx routes, all-or-nothing.
+scripts/patch_docs27_2026_10_08.py: PLATFORM section 30, RUNBOOK, ENTERPRISE_PATH addendum (17),
+CORPUS_MIRROR "Researchers (C7)".
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

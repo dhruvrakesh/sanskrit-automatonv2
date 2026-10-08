@@ -1293,3 +1293,32 @@ Every step is a dry run unless `--yes` is given.
    - Run `python scripts\emit_corpus_shelf.py --srangam D:\srangam-42267 --check`.
    - If it says STALE, run it without `--check`, then commit `src/data/corpusShelf.json` in Srangam.
 4. **Stories appear on the site** when they are approved on the desk. Use `python scripts\stories.py approve --id N`, or the Stories page; the next mirror run carries the approval. Editors (admins) see drafts on the site, marked as drafts.
+
+
+## Roles on Srangam: apply C7 and the RBAC patch (DOCS27_2026_10_08)
+
+1. **Lovable Cloud SQL editor.**
+   - Run `SELECT enum_range(NULL::public.app_role);`. Expect {admin,moderator,user}.
+   - Run `docs/cloud/C7a_rbac_roles_2026-10-08.sql` ALONE.
+   - Run the check again. Expect {admin,moderator,user,super_admin,researcher}.
+2. **Run C7.** Paste the whole `docs/cloud/C7_rbac_researchers_2026-10-08.sql`, then run the checks V1 to V6 at its end:
+   - V1: your email with admin and super_admin;
+   - V2: two policies;
+   - V3: anon true only for research_invite_peek;
+   - V4: one trigger;
+   - V5: the audit log;
+   - V6: the mode is still signed_in.
+3. **Srangam (D:\srangam-42267, on main).**
+   - Run `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_rbac_2026_10_08.py" --check`, then without --check.
+   - Then `npm run typecheck`, `npx vitest run` and `npm run build`.
+   - `git add` the explicit paths, commit, push, and Publish in Lovable.
+4. **First invitation.**
+   - Sign in. Open /admin/researchers (the sidebar shows Researchers and the badge says Super admin).
+   - Invite an address you can read. Open the link in a private window. Create the account, confirm it if asked, and accept.
+   - Check that the person appears under People with access.
+5. **Close the corpus to plain sign-ups** (only after step 4 works). On /admin/researchers choose "Invited researchers", or run:
+
+   `UPDATE corpus.reader_access SET mode = 'readers', updated_at = now();`
+
+   To reopen, set the mode back to signed_in.
+6. **Rollback.** At the head of the C7 file. The site needs no rollback: without C7 it behaves as before.

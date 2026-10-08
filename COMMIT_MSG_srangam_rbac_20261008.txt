@@ -1,0 +1,12 @@
+Roles: the super admin's Researchers page and invitations for fellow researchers (RBAC_RESEARCHERS_2026_10_08)
+
+/admin/researchers (super admin only): who may read the working corpus, invite a researcher (the
+link is shown once; copy, or open it in your own mail program), withdraw, remove, the audit log.
+/invite/:token: sign up or sign in with the invited address, accept, on to /corpus.
+AuthContext: roles, isSuperAdmin, isResearcher, refreshRoles (my_roles() beside has_role; before
+C7 the roles follow has_role). signUp returns to the page it came from; /auth?tab=signup.
+Admin sidebar: Researchers link and Super admin badge; the header fits a phone. The corpus refusal
+says how researchers get in. Needs docs/cloud/C7a and C7 (automaton repo). 26 new tests.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -257,3 +257,15 @@ Live state on 2026-10-08:
 - **Stories.** Readers see status 'approved'. Admins also see 'draft' and 'candidate'. Retired and rejected stories are never returned.
 - **Shelves.** These are configuration, not corpus data, so they reach the site as a generated file (`scripts/emit_corpus_shelf.py`).
 - **Rollback.** At the head of the C6 file.
+
+
+## Researchers (C7, DOCS27_2026_10_08)
+
+- **Who reads, by mode.** `corpus_reader_allowed()` now reads:
+  - mode 'signed_in': anyone signed in;
+  - mode 'readers': researchers (role 'researcher', by invitation), users on corpus.readers, admins and the super admin;
+  - mode 'admins': admins and the super admin.
+- **Signed out.** No one reads while signed out.
+- **Setting the mode.** The super admin sets it on /admin/researchers (`corpus_access_mode_set`), and every change goes to rbac.audit.
+- **Researchers and stories.** Researchers see approved stories, like any reader. Drafts and candidates stay for admins (C6).
+- **No change to the mirror run.**

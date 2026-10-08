@@ -394,3 +394,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | L4 | Editor actions from the site (approve, titles, shelves) | Design: a request queue the desk pulls and applies; the desk stays the source of truth |
 | P1 | Panchang/Jyotish (Streamlit) | A separate app; /jyotish-horoscope describes it. Compare before porting anything |
 | V10 | The 10 withheld verses | Still 1,655 on 2026-10-08 evening: paste the six --only files |
+
+
+## Addendum 2026-10-08 (17) (DOCS27_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| L1 | The desk's library on the site | Applied: C6 in the DB; automaton 5113170a; Srangam f9fbde31 |
+| A1 | Roles: super admin, invited researchers, audit log (C7a, C7, RBAC_RESEARCHERS_2026_10_08) | Built and tested (14 PG, 26 vitest). To apply: C7a alone, C7, the Srangam patch, push, Publish |
+| A2 | Close the corpus to plain sign-ups (mode 'readers') | After the first researcher has accepted: one switch on /admin/researchers |
+| A3 | Automatic invitation email | Next: edge function (service role or Resend); needs the /invite/* redirect allowed and a sending domain |
+| A4 | Researchers' requests (corrections, texts) | With L4: the request queue the desk pulls |
+| V10 | The 10 withheld verses | In progress: markandeya_purana passage_count 1,219, published; the remaining --only files to paste |
