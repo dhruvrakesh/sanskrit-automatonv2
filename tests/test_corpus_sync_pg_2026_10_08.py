@@ -19,8 +19,14 @@ from tests.test_corpus_sync_2026_10_08 import Base, OPEN, GOLDEN_DIGEST  # noqa:
 
 DSN = os.environ.get("CORPUS_TEST_DSN", "")
 SQL = REPO / "docs" / "cloud" / "C4_corpus_mirror_2026-10-08.sql"
+SQL_B = REPO / "docs" / "cloud" / "C4b_mirror_digests_2026-10-08.sql"
 TABLES = ["sync_runs", "passage_vectors", "mentions", "translations", "stories", "stages", "passages",
-          "entities", "docs"]
+          "entities", "docs", "row_index", "group_digest"]
+K2 = """SELECT g.tbl, g.grp FROM corpus.group_digest g
+LEFT JOIN (SELECT tbl, grp, count(*) n, sum(corpus._h64(k || ' ' || row_hash, 0)) s1,
+                  sum(corpus._h64(k || ' ' || row_hash, 1)) s2 FROM corpus.row_index GROUP BY tbl, grp) r
+  USING (tbl, grp)
+WHERE corpus._digest(g.n, g.s1, g.s2) IS DISTINCT FROM corpus._digest(coalesce(r.n, 0), coalesce(r.s1, 0), coalesce(r.s2, 0))"""
 
 
 @unittest.skipUnless(DSN, "CORPUS_TEST_DSN is not set")
@@ -33,6 +39,8 @@ class PgMirror(Base):
             raise unittest.SkipTest("refusing to run against a Supabase host")
         cls.pg.execute(SQL.read_text(encoding="utf-8"))
         cls.pg.execute(SQL.read_text(encoding="utf-8"))      # twice: the file is re-runnable
+        cls.pg.execute(SQL_B.read_text(encoding="utf-8"))    # C4b on top, twice as well
+        cls.pg.execute(SQL_B.read_text(encoding="utf-8"))
 
     @classmethod
     def tearDownClass(cls):
@@ -62,7 +70,8 @@ class PgMirror(Base):
         self.assertEqual(self.q("SELECT count(*) FROM corpus.sync_runs WHERE finished_at IS NOT NULL")[0][0], 2)
 
     def test_digest_is_the_same_in_sql(self):
-        v = self.q("SELECT md5(string_agg(k || ' ' || h, E'\\n' ORDER BY k COLLATE \"C\")) FROM (VALUES "
+        v = self.q("SELECT corpus._digest(count(*), sum(corpus._h64(k || ' ' || h, 0)), "
+                   "sum(corpus._h64(k || ' ' || h, 1))) FROM (VALUES "
                    "('10|2','aaa'),('1|20','bbb'),('9|1','ccc'),(U&'\\015Aiva','ddd'),('agni','eee'),"
                    "('Agni','fff'),(U&'\\1E5B\\1E63i','ggg')) v(k, h)")[0][0]
         self.assertEqual(v, GOLDEN_DIGEST)
@@ -104,6 +113,48 @@ class PgMirror(Base):
         self.assertEqual(float(r[0][3]), 1.0)
         n = self.q("SELECT vector_dims(embedding::vector) FROM corpus.passage_vectors LIMIT 1")[0][0]
         self.assertEqual(n, 1536)
+
+    def test_running_digests_stay_equal_to_a_fresh_sum(self):
+        self.sync(sink=self.sink)
+        con = self.rw()
+        con.execute("UPDATE passages SET translation='again' WHERE doc_id=1 AND page_no=1 AND idx=1")
+        con.execute("DELETE FROM passages WHERE doc_id=2 AND page_no=1 AND idx=1")
+        con.execute("DELETE FROM translations_l10n WHERE passage_id NOT IN (SELECT id FROM passages)")
+        con.commit()
+        s = self.sync(sink=self.sink)
+        self.assertEqual(s["verified"]["groups_different"], 0, s["verified"])
+        self.assertEqual(self.q(K2), [])
+        live = self.q("SELECT count(*) FROM corpus.passages WHERE retired_at IS NULL")[0][0]
+        idx = self.q("SELECT count(*) FROM corpus.row_index WHERE tbl='passages'")[0][0]
+        self.assertEqual((live, idx), (14, 14))
+        m = self.q("SELECT public.corpus_manifest(ARRAY['passages'])")[0][0]
+        self.assertEqual(m["_scheme"], cs.DIGEST_SCHEME)
+
+    def test_rebuild_matches_the_running_sums_and_a_resend_heals_the_index(self):
+        self.sync(sink=self.sink)
+        before = self.q("SELECT public.corpus_manifest()")[0][0]
+        for t in cs.TABLES:
+            self.q("SELECT corpus._rebuild_index(%s)", t)
+        self.assertEqual(self.q("SELECT public.corpus_manifest()")[0][0], before)
+        # lose part of the index: the next run re-sends those rows and the index is whole again
+        self.pg.execute("DELETE FROM corpus.row_index WHERE tbl='passages' AND grp='markandeya_purana' AND k LIKE '1|%'")
+        for t in cs.TABLES:
+            self.q("SELECT corpus._rebuild_index(%s)", t) if t != "passages" else None
+        self.pg.execute("DELETE FROM corpus.group_digest WHERE tbl='passages'")
+        self.pg.execute("INSERT INTO corpus.group_digest SELECT 'passages', grp, count(*), sum(corpus._h64(k||' '||row_hash,0)), "
+                        "sum(corpus._h64(k||' '||row_hash,1)) FROM corpus.row_index WHERE tbl='passages' GROUP BY grp")
+        s = self.sync(sink=self.sink)
+        self.assertEqual(s["tables"]["passages"]["upsert"], 3)
+        self.assertEqual(s["tables"]["passages"]["changed"], 0)       # the rows were there; only the index lacked them
+        self.assertEqual(s["verified"]["groups_different"], 0)
+        self.assertEqual(self.q("SELECT public.corpus_manifest()")[0][0], before)
+
+    def test_a_batch_naming_a_key_twice_is_refused(self):
+        import psycopg
+        row = '{"doc_code": "x", "row_hash": "h"}'
+        with self.assertRaises(psycopg.Error) as e:
+            self.pg.execute("SELECT public.corpus_ingest('docs', '[%s, %s]'::jsonb)" % (row, row))
+        self.assertIn("names a key twice", str(e.exception))
 
     def test_site_roles_are_refused(self):
         roles = [r[0] for r in self.q("SELECT rolname FROM pg_roles WHERE rolname IN ('anon','authenticated')")]

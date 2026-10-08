@@ -191,3 +191,35 @@ Live state on 2026-10-08:
 - The signed hello answered docs_in_mirror 0 at 10:03:54 UTC.
 - **The text push** finished at 10:09:41 UTC: 343 s, 101.4 MB, 317 groups equal, 0 different. It sent 63 documents, 75,734 passages, 13,040 translations, 8,269 entities, 32,861 mentions, 44 stories and 767 stages.
 - **markandeya_purana vectors.** 1,258 in 38 s.
+
+
+## C4b: digests that do not re-read the mirror (DOCS23_2026_10_08)
+
+- **The timeout.** After all 21,931 vectors were in, the run's final check failed with `corpus_manifest: canceling statement due to statement timeout`. The C4 manifest re-read and sorted every row of every table on every call.
+- **The cure.** `docs/cloud/C4b_mirror_digests_2026-10-08.sql` keeps `corpus.row_index` (key and row_hash) and `corpus.group_digest` (count and running sums) current inside `corpus_ingest`/`corpus_retire`.
+  - The digest is order-free: `count:sum1:sum2` over md5(key + ' ' + row_hash), modulo 2^64. A change subtracts the old row and adds the new one.
+  - The manifest reads a few hundred small rows (8 ms on a full-size copy), and `corpus_keys` reads an index range.
+- **Apply.**
+  - Step A: the file once.
+  - Step B: `SELECT corpus._rebuild_index('<table>');` for each of the 8 tables, one at a time.
+  - Then K1-K3. Then corpus_sync.py 4.2, which checks `"_scheme": "sum64.1"` and refuses an older server.
+
+## Reading it: /corpus for signed-in readers (DOCS23_2026_10_08)
+
+- **SQL.** `docs/cloud/C5_corpus_reader_2026-10-08.sql` adds six functions:
+  - `corpus_reader_allowed`;
+  - `corpus_reader_docs`, `corpus_reader_page`, `corpus_reader_search`;
+  - `corpus_reader_similar`, `corpus_reader_match`.
+- **Access.** Each reads the closed schema for the caller after one check:
+  - an admin may always read;
+  - otherwise `corpus.reader_access.mode` decides: `signed_in` (default), `readers` (the list in `corpus.readers`) or `admins`.
+  - Not signed in is refused. Nothing in the schema is granted to anyone.
+- **Site (Srangam repo).**
+  - `src/lib/corpusMirror.ts`.
+  - `src/pages/corpus/CorpusHome.tsx` (/corpus: documents with counts, search by words and by meaning).
+  - `src/pages/corpus/CorpusDoc.tsx` (/corpus/:docCode: Sanskrit, IAST, English, Hindi, similar passages).
+  - `src/components/corpus/CorpusGate.tsx`.
+  - `src/lib/safeNext.ts` (/auth?next= brings a reader back).
+  - Wired by `scripts/patch_corpus_reader_2026_10_08.py` (App.tsx routes, Auth.tsx next, a link on /texts).
+- **Meaning search.** `supabase/functions/search-corpus` embeds the question as search-texts does and calls `corpus_reader_match` as the reader. M4 showed the mirror's vectors and the cloud's are the same (cosine 1.0000), so questions and passages share one space.
+- **Sign-up on Srangam is open.** `signed_in` means anyone with an account. The pages say that nothing is reviewed, and they are marked noindex.

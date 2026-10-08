@@ -61,7 +61,9 @@ from pathlib import Path
 
 MARK = "CORPUS_MIRROR_C4_2026_10_08"
 SCHEMA_VERSION = "c4.1"          # part of every row_hash: changing the mirrored columns re-sends all
-CLIENT = "corpus_sync.py " + SCHEMA_VERSION
+DIGEST_SCHEME = "sum64.1"        # CORPUS_MIRROR_C4B_2026_10_08: must match corpus_manifest()'s "_scheme"
+CLIENT_VERSION = "4.2"
+CLIENT = "corpus_sync.py %s (rows %s, digests %s)" % (CLIENT_VERSION, SCHEMA_VERSION, DIGEST_SCHEME)
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "context.db"
 LOG_PATH = ROOT / "data" / "corpus_sync_log.jsonl"
@@ -127,10 +129,17 @@ def row_hash(table: str, values: list) -> str:
 
 
 def digest(keyed: dict) -> str:
-    """Same as the server: md5 of 'key row_hash' lines joined by newlines, keys in code-point
-    order (PostgreSQL ORDER BY ... COLLATE "C" compares UTF-8 bytes, which is the same order)."""
-    s = "\n".join("%s %s" % (k, keyed[k]) for k in sorted(keyed))
-    return hashlib.md5(s.encode("utf-8")).hexdigest()
+    """Same as the server (C4b, corpus._digest): 'count:sum1:sum2', where every row adds the two
+    64-bit halves of md5(key + ' ' + row_hash) and the sums are taken modulo 2^64. Order-free, so
+    the server keeps it current row by row and never re-reads a table (the C4 digest sorted every
+    key on every call and timed out on 2026-10-08 once the vectors were in)."""
+    m64 = 1 << 64
+    s1 = s2 = 0
+    for k, h in keyed.items():
+        d = hashlib.md5(("%s %s" % (k, h)).encode("utf-8")).hexdigest()
+        s1 += int(d[:16], 16)
+        s2 += int(d[16:], 16)
+    return "%d:%d:%d" % (len(keyed), s1 % m64, s2 % m64)
 
 
 def load_titles() -> dict:
@@ -423,7 +432,9 @@ class NoneSink:
         return {"ok": True, "fn": "none"}
 
     def manifest(self, tables):
-        return {t: {} for t in tables}
+        out = {t: {} for t in tables}
+        out["_scheme"] = DIGEST_SCHEME
+        return out
 
     def keys(self, table, group):
         return {}
@@ -628,6 +639,15 @@ def batches(rows: list, max_bytes: int, max_rows: int):
         yield cur, size
 
 
+def check_scheme(manifest: dict):
+    """C4B: refuse to compare digests made two different ways (that would re-send everything)."""
+    got = manifest.get("_scheme") if isinstance(manifest, dict) else None
+    if got != DIGEST_SCHEME:
+        raise SinkError("the mirror answers with digest scheme %r, this client needs %r: apply "
+                        "docs/cloud/C4b_mirror_digests_2026-10-08.sql (steps A and B) first"
+                        % (got, DIGEST_SCHEME))
+
+
 class Run:
     def __init__(self, con, sink, apply: bool, max_bytes_total=None, batch_bytes=DEFAULT_BATCH_BYTES,
                  allow_mass_retire=False, no_retire=False, out=print, progress=None):
@@ -738,7 +758,8 @@ class Run:
         sel_docs = [d for d in docs if not partial or d[1] in only_docs]
         self._p("asking the mirror what it holds (%s) ..." % self.sink.name)
         remote = self.sink.manifest(TABLES)
-        held_rows = sum(int(v[0]) for t in remote.values() for v in t.values())
+        check_scheme(remote)
+        held_rows = sum(int(v[0]) for t in TABLES for v in remote.get(t, {}).values())
         self._p("mirror holds %d rows; %d live documents here; %s"
                 % (held_rows, len(sel_docs), "sending changes" if self.apply else "plan only, nothing is sent"))
         live = {d[1] for d in docs}
@@ -787,7 +808,14 @@ class Run:
             stopped, error = "error", str(e)
         if self.apply and stopped == "done":
             self._p("checking every group against the mirror ...")
-        verified = self.verify() if (self.apply and stopped == "done") else None
+        verified = None
+        if self.apply and stopped == "done":
+            try:
+                verified = self.verify()
+            except SinkError as e:
+                # the rows are in; only the final check could not run. Say so, keep the record.
+                verified = {"groups_equal": 0, "groups_different": None, "different": [],
+                            "error": str(e)[:300]}
         summary = {"run_id": self.run_id, "sink": self.sink.name, "apply": self.apply, "stopped": stopped,
                    "error": error, "seconds": round(time.time() - t0, 1), "bytes": self.bytes_total,
                    "tables": {t: s for t, s in self.stats.items() if t in tables}, "held": self.held,
@@ -804,6 +832,7 @@ class Run:
         """After a run, the server's digest of every group this run settled must equal what was
         read here at the start of the run (a fresh read could differ while translation runs)."""
         remote = self.sink.manifest(TABLES)
+        check_scheme(remote)
         bad = []
         for (t, g), exp in sorted(self.expected.items()):
             rem = remote.get(t, {}).get(g)
@@ -849,9 +878,10 @@ def local_counts(con, docs) -> dict:
 def status(con, sink, docs, out=print) -> dict:
     """PROGRESS_2026_10_08: what the mirror holds against what is here (read-only both sides)."""
     m = sink.manifest(TABLES)
+    check_scheme(m)
     here = local_counts(con, docs)
     rows = {}
-    out("corpus mirror status  sink=%s  (read-only; counts, not hashes)" % sink.name)
+    out("corpus mirror status  sink=%s  digests %s  (read-only; counts, not hashes)" % (sink.name, m.get("_scheme")))
     out("  %-13s %10s %10s %7s" % ("table", "mirror", "here", "share"))
     for t in TABLES:
         n = sum(int(v[0]) for v in m.get(t, {}).values())
@@ -864,7 +894,7 @@ def status(con, sink, docs, out=print) -> dict:
 
 def print_summary(s: dict, out=print):
     mode = "SENT" if s["apply"] else "PLAN (nothing sent; add --apply)"
-    out("corpus_sync %s  sink=%s  %s" % (SCHEMA_VERSION, s["sink"], mode))
+    out("corpus_sync %s  sink=%s  %s" % (CLIENT_VERSION, s["sink"], mode))
     out("  %-13s %8s %9s %9s %8s %6s %8s %9s" % ("table", "groups", "upsert", "changed", "retire", "held", "skipped", "MB"))
     for t, st in s["tables"].items():
         out("  %-13s %8d %9d %9s %8d %6d %8d %9.1f" % (
@@ -875,7 +905,10 @@ def print_summary(s: dict, out=print):
         out("  coerced (a value that did not fit its column was sent as empty): %s" % coerced)
     for h in s["held"]:
         out("  HELD: " + h)
-    if s["verified"]:
+    if s["verified"] and s["verified"].get("error"):
+        out("  verify: COULD NOT RUN (%s). The rows above were sent; run --status, then run again."
+            % s["verified"]["error"])
+    elif s["verified"]:
         v = s["verified"]
         out("  verify: %d groups equal, %d different%s" % (
             v["groups_equal"], v["groups_different"], (" (" + ", ".join(v["different"]) + ")") if v["different"] else ""))
@@ -959,11 +992,19 @@ def main(argv=None) -> int:
         s = run.execute(tables, docs, only)
     except SinkError as e:
         print("corpus_sync: %s" % e)
+        if a.apply:
+            log_run({"run_id": run.run_id, "sink": sink.name, "apply": True, "stopped": "error",
+                     "error": str(e)[:500], "seconds": round(time.time() - run.t0, 1), "bytes": run.bytes_total,
+                     "tables": {t: st for t, st in run.stats.items() if t in tables}, "held": run.held,
+                     "verified": None, "client": CLIENT})
         return 2
     print(json.dumps(s, indent=1)) if a.json else print_summary(s)
     if a.apply:
+        s["client"] = CLIENT
         log_run(s)
-    return 2 if s["stopped"] == "error" else 0
+    if s["stopped"] == "error" or (s["verified"] or {}).get("error"):
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

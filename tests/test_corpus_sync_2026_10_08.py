@@ -18,7 +18,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 import corpus_sync as cs  # noqa: E402
 
-GOLDEN_DIGEST = "3c45b2b6931764f9259ed4a12f6add95"   # PostgreSQL 16, see test_digest_matches_postgres
+GOLDEN_DIGEST = "7:3068082714699967717:8494930923899577788"   # C4b corpus._digest on PostgreSQL 16
 GOLDEN_SIG = "ebbbca6a429aed3e2a14acb6a414b9954119895f96c2640427664324ddc43e16"
 OPEN = []
 
@@ -107,9 +107,11 @@ class FakeServer:
                 "stages": lambda: (r["doc_code"], r["stage"]),
                 "vectors": lambda: (r["doc_code"], "%d|%d" % (r["page_no"], r["idx"]))}[table]()
 
+    scheme = cs.DIGEST_SCHEME
+
     def manifest(self, tables):
         self.calls.append(("manifest",))
-        out = {}
+        out = {"_scheme": self.scheme} if self.scheme else {}
         for t in tables:
             out[t] = {}
             for g, rows in self.t[t].items():
@@ -392,6 +394,43 @@ class Progress(Base):
             self.assertEqual(v["mirror"], v["here"], t)
         self.assertEqual(after["vectors"]["here"], 10)
         self.assertEqual(after["entities"]["here"], 2)
+
+
+class DigestScheme(Base):
+    """CORPUS_MIRROR_C4B_2026_10_08: order-free digests kept by the server; a client and a server
+    that make digests differently must not compare them (that would re-send everything)."""
+
+    def test_digest_is_order_free_and_counts_rows(self):
+        a = {"1|1": "x", "1|2": "y", "2|1": "z"}
+        b = dict(reversed(list(a.items())))
+        self.assertEqual(cs.digest(a), cs.digest(b))
+        self.assertTrue(cs.digest(a).startswith("3:"))
+        self.assertNotEqual(cs.digest(a), cs.digest({"1|1": "x", "1|2": "y", "2|1": "w"}))
+        self.assertEqual(cs.digest({}), "0:0:0")
+
+    def test_old_server_is_refused_before_anything_is_sent(self):
+        self.server.scheme = None
+        s = None
+        with self.assertRaises(cs.SinkError) as e:
+            s = self.sync()
+        self.assertIn("C4b_mirror_digests_2026-10-08.sql", str(e.exception))
+        self.assertEqual([c for c in self.server.calls if c[0] in ("ingest", "retire")], [])
+
+    def test_a_failed_final_check_is_reported_not_raised(self):
+        class Flaky(FakeSink):
+            n = 0
+            def manifest(self, tables):
+                Flaky.n += 1
+                if Flaky.n > 1:
+                    raise cs.SinkError("corpus-ingest HTTP 422: canceling statement due to statement timeout")
+                return super().manifest(tables)
+        s = self.sync(sink=Flaky(self.server))
+        self.assertEqual(s["stopped"], "done")
+        self.assertIn("statement timeout", s["verified"]["error"])
+        self.assertEqual(s["tables"]["passages"]["changed"], 15)
+        out = []
+        cs.print_summary(s, out=out.append)
+        self.assertTrue(any("COULD NOT RUN" in l for l in out))
 
 
 class Formats(Base):

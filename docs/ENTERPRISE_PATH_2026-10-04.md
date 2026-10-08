@@ -347,3 +347,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | C4 | Private corpus mirror | Schema applied, function deployed. Text pushed 10:09 UTC (75,734 passages, 13,040 translations, 317 groups equal). markandeya_purana vectors 1,258. Next: M4, then all vectors, then the 2-hourly task |
 | C4p | A push showed nothing until its end | Fixed: [m:ss] progress lines and --status (PROGRESS_2026_10_08) |
 | T1 | test_export_mode_joblog race on Windows | Fixed in the test (JOBLOG_RACE_2026_10_08); dashboard unchanged |
+
+
+## Addendum 2026-10-08 (13) (DOCS23_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| C4 | Private corpus mirror | All in: 63 documents, 75,734 passages, 13,269 translations, 21,931 vectors; M4 cosine 1.0000 |
+| C4b | Manifest timed out on the full mirror | Fixed: incremental order-free digests (row_index, group_digest); client 4.2. To apply: C4b SQL, the 8 rebuilds, then a run |
+| C5 | The working corpus on the site for signed-in readers | Built: reader functions (C5 SQL), /corpus pages, search-corpus edge function. To apply: C5 SQL, the Srangam files and patch, push, deploy search-corpus |
+| T2 | Scheduled mirror task did not start | Check its battery conditions and last result (commands in the reply of 2026-10-08) |

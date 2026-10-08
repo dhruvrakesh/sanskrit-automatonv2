@@ -1,0 +1,19 @@
+Mirror digests without full scans (C4b); the working corpus for signed-in readers (C5) (CORPUS_MIRROR_C4B_2026_10_08, CORPUS_READER_C5_2026_10_08, DOCS23_2026_10_08)
+
+docs/cloud/C4b_mirror_digests_2026-10-08.sql: after all 21,931 vectors were in, corpus_manifest timed
+out (it re-read and sorted every mirror row on every call), so every later run would have failed at
+its first call. corpus.row_index and corpus.group_digest are now kept by corpus_ingest/corpus_retire
+in the same statement as the change; the digest is order-free (count and two 64-bit sums of
+md5(key, row_hash) modulo 2^64); manifest 274 ms -> 8 ms on a full-size copy, independent of size.
+Re-sending a row heals a missing index entry; a batch naming a key twice is refused; writers take
+one advisory lock; corpus._rebuild_index(table) recomputes from the rows.
+scripts/corpus_sync.py 4.2: the same digest; refuses a server on the old scheme; a final check that
+cannot run is reported and the run is logged anyway. Row hashes unchanged (c4.1): nothing re-sent.
+docs/cloud/C5_corpus_reader_2026-10-08.sql: six reader functions over the closed schema, each checking
+corpus_reader_allowed() (admins always; corpus.reader_access.mode signed_in / readers / admins).
+docs/cloud/C5_search-corpus/: the meaning-search edge function for the Srangam repo, with tests.
+scripts/patch_corpus_reader_2026_10_08.py: Srangam App.tsx routes /corpus and /corpus/:docCode (lazy),
+Auth.tsx ?next=, a link on /texts. tests: test_corpus_sync (27), test_corpus_sync_pg (10),
+test_corpus_reader_pg (6, new), supabase_stubs_2026_10_08.sql (test-only stand-ins).
+scripts/patch_docs23_2026_10_08.py: PLATFORM section 26, RUNBOOK, ENTERPRISE_PATH addendum (13),
+CORPUS_MIRROR C4b and "Reading it".

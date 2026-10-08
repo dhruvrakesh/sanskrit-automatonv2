@@ -1226,3 +1226,14 @@ Every step is a dry run unless `--yes` is given.
 - **Lines while it runs.** A run prints `[m:ss]` lines: what the mirror holds, each document as it is sent, batches of large ones, and "compared N/63 documents".
 - **From a second window.** `python scripts\corpus_sync.py --status` shows mirror rows against rows here, per table. It is read-only and safe during a push.
 - **No new line for several minutes?** Run --status twice, a minute apart. If the mirror's counts rise, it is working. If they do not, press Ctrl+C and run it again; it sends only what is missing.
+
+
+## The mirror after C4b; reading it on the site (DOCS23_2026_10_08)
+
+- **"_scheme" error from corpus_sync.py.** The mirror is on the old digest: apply `docs/cloud/C4b_mirror_digests_2026-10-08.sql` (steps A and B in its header), then run again.
+- **Check the digests in the SQL editor.** K1-K3 at the end of the C4b file. If K2 lists a table, run `SELECT corpus._rebuild_index('<table>');` for it.
+- **Who may read /corpus.** `SELECT mode FROM corpus.reader_access;`
+  - Readers only: `UPDATE corpus.reader_access SET mode = 'readers', updated_at = now();`
+  - Add a reader: `INSERT INTO corpus.readers (user_id, note) VALUES ('<id from auth.users>', 'name');`
+  - Admins only: mode `'admins'`.
+- **"Meaning search is not switched on yet" on /corpus.** Deploy the edge function `search-corpus` through Lovable. Word search and reading work without it.
