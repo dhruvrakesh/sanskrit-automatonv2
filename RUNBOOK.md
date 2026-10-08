@@ -1342,3 +1342,13 @@ Srangam 4d70389f already carries the pages. Only the database and the docs remai
    - Sign in. /admin/researchers shows the Super admin badge, and no notice that the roles functions are missing.
    - Invite an address you can read. Open the link in a private window, create the account, confirm it, and accept. The person appears under People with access.
 7. **Close the corpus to plain sign-ups,** only after step 6. Choose "Invited researchers" on /admin/researchers; this is audited.
+
+
+## Health of everything scheduled (DOCS29_2026_10_08)
+
+1. **On the PC (PowerShell).**
+   - `Get-ScheduledTaskInfo` for SanskritCorpusMirror, SanskritMaintenance and SanskritDBBackup: LastTaskResult 0.
+   - Then the tails of `D:\backups\corpus_mirror_log.txt`, `maintenance_log.txt` and `backup_log.txt`.
+2. **In the Lovable Cloud SQL editor.** `docs/cloud/OPS_health_2026-10-08.sql`, H1 to H9, one per paste, read-only. Export the results to `D:\backups\ops_<date>\`.
+3. **If H3 shows passages > vectors, or H4 shows rows pending:** the nightly job 9 has not run since they were pasted. Wait for 04:15 UTC, or run C2's R3 once (`docs/cloud/C2_run_and_schedule_2026-10-07.sql`) and then R2.
+4. **If H7 lists a text:** its English is newer than the last idle maintenance run. The next SanskritMaintenance run embeds it, and the mirror carries it two hours later at most.

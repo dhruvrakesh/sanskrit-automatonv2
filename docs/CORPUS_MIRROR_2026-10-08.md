@@ -269,3 +269,11 @@ Live state on 2026-10-08:
 - **Setting the mode.** The super admin sets it on /admin/researchers (`corpus_access_mode_set`), and every change goes to rbac.audit.
 - **Researchers and stories.** Researchers see approved stories, like any reader. Drafts and candidates stay for admins (C6).
 - **No change to the mirror run.**
+
+
+## Health on 2026-10-08 evening (DOCS29_2026_10_08)
+
+- **Runs.** 16:35, 18:32 and 20:33 IST, all rc=0. At 20:33: 14,458 passages, 374 translations and 21 stories sent; the check found 392 groups equal and 0 different.
+- **Vectors.** No new vectors since the full push, because maintenance at 21:00 found nothing to embed among the 21,915 translated passages. A passage gets a mirror vector only after an idle maintenance run embeds it on the PC.
+- **Checking it from the cloud side.** `docs/cloud/OPS_health_2026-10-08.sql`: H5 for the runs, H6 for the totals, H7 for English without vectors, H8 for the digests.
+- **C7.** Nothing in the mirror changed. `corpus_reader_allowed()` now also admits the super admin always, and researchers in mode 'readers'. The mode is still signed_in.

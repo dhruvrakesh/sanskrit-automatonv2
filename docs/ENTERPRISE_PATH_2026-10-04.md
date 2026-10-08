@@ -418,3 +418,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | A3 | Invitation email sent by the site | Next: an edge function on `_shared/auth-gate.ts` (requireUser, then `is_super_admin()`), using the service role for `auth.admin.inviteUserByEmail` (new accounts) or a provider such as Resend. Needs `/invite/*` allowed as an auth redirect URL in Lovable Cloud |
 | A4 | Researchers' requests (corrections, texts) | With L4: a request queue the desk pulls |
 | A5 | Types | Lovable regenerates `types.ts` with the new enum values and functions when it next syncs the schema; the site does not depend on it (typed wrappers in `src/lib/rbac.ts`) |
+
+
+## Addendum 2026-10-08 (19) (DOCS29_2026_10_08)
+
+| # | Item | State |
+|---|---|---|
+| A1 | Roles: super admin, invited researchers, audit log | Applied: C7 at 21:41 IST, V0-V7 as expected; automaton 455522a2, Srangam bdc5b797 pushed |
+| A1p | Publish and one invitation end to end | Next: Publish in Lovable; invite an address you can read; accept in a private window |
+| A2 | Mode 'readers' | After A1p, if wanted (the switch on /admin/researchers) |
+| D3 | The dashboard without a window | Done: running through the launcher since 19:52; the error log is empty |
+| O1 | Health of everything scheduled | PC side healthy (mirror, maintenance embeddings, backup, dashboard). Cloud side: OPS_health H1-H4 to confirm |
+| V10 | The 10 withheld verses | In progress: H3 shows passage_count against passages and vectors per text; job 9 embeds them the night after |

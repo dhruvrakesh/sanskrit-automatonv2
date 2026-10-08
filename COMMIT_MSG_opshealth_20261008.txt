@@ -1,0 +1,15 @@
+Roles applied and verified; health of everything scheduled (OPS_HEALTH_2026_10_08); docs (DOCS29_2026_10_08)
+
+C7 applied in the SQL editor at 21:41 IST in the documented order (P1-P7, C7a alone, V0, C7,
+V1-V7); every result as expected and exported to D:\backups\rbac_2026-10-08.
+docs/cloud/OPS_health_2026-10-08.sql: read-only health checks, one per paste: H1 the srangam
+pg_cron jobs with their last run (CRON_OPS_PLAYBOOK's query), H2 the nightly embed (job 9), H3
+published passages against vectors, H4 pending, H5 the mirror's runs, H6 its totals, H7 English
+without vectors, H8 the digests (C4b K1), H9 the database size. Run against stand-ins: all 9 execute.
+scripts/patch_docs29_2026_10_08.py: PLATFORM section 32 (C7 results; a table of everything that runs
+on a schedule with its evidence: mirror 16:35/18:32/20:33 rc=0 and 392 groups equal, maintenance
+21:00 nothing to embed over 21,915 translated passages, backup 07:27 consistent, dashboard on the
+D3 launcher since 19:52), RUNBOOK health steps, ENTERPRISE_PATH addendum (19), CORPUS_MIRROR health.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
