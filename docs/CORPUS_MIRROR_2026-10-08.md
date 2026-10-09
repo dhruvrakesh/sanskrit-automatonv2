@@ -277,3 +277,14 @@ Live state on 2026-10-08:
 - **Vectors.** No new vectors since the full push, because maintenance at 21:00 found nothing to embed among the 21,915 translated passages. A passage gets a mirror vector only after an idle maintenance run embeds it on the PC.
 - **Checking it from the cloud side.** `docs/cloud/OPS_health_2026-10-08.sql`: H5 for the runs, H6 for the totals, H7 for English without vectors, H8 for the digests.
 - **C7.** Nothing in the mirror changed. `corpus_reader_allowed()` now also admits the super admin always, and researchers in mode 'readers'. The mode is still signed_in.
+
+
+## The pictures in the same tick (DOCS30_2026_10_09)
+
+- After the mirror, `corpus_mirror_task.ps1` runs `scripts\corpus_media.py --apply --if-configured --max-mb 40`, once `scripts/patch_media_task_2026_10_09.py` is applied.
+  - It uses the same secret, URL and key, and the same signature, against the function `corpus-media`.
+  - It is read-only on `context.db`.
+  - When nothing changed, it only asks the site what it has.
+- Its log lines go to the same `D:\backups\corpus_mirror_log.txt` ("DONE - corpus media rc=..."), and each run is also recorded in `data\corpus_media_log.jsonl`.
+- A picture can travel only for a text that is already in schema corpus, so the mirror runs first.
+- The tick keeps the PC awake while it runs. The night tick of 2026-10-08 stretched to 7.5 h when the PC slept in the middle of it.

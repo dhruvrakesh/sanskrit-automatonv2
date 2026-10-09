@@ -121,3 +121,6 @@ data/budget_changes.jsonl
 
 # CORPUS_MIRROR_C4_2026_10_08 (DOCS21_2026_10_08): the mirror's run log stays local
 data/corpus_sync_log.jsonl
+
+# CORPUS_MEDIA_C8_2026_10_09 (DOCS30_2026_10_09): the pictures' run log stays local
+data/corpus_media_log.jsonl

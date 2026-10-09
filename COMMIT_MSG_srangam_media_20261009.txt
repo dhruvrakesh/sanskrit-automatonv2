@@ -1,0 +1,15 @@
+Pictures and graphic novels in the working corpus (CORPUS_MEDIA_C8_2026_10_09)
+
+/corpus/images: the desk's pictures by text, each linked to its passage (?at=), one opened by
+?pic= with its English and Hindi caption, its story and the generated label; drafts marked for
+editors. /corpus/novels and /corpus/novels/:id: cast, then each page's picture beside its caption
+(English, Hindi or both) with every citation a link, speech with its verse, the scene asked for,
+the check against the citations. Each story shows its picture and "Read it as a graphic novel".
+Pictures and Graphic novels tabs; the Library tab is not lit on them. supabase/functions/
+corpus-media: pictures from the private Drive folder, as the reader (the token in a header, never
+in a URL), cached by the browser. Needs docs/cloud/C8 (automaton repo) and corpus-media deployed;
+before them the pages say the pictures are not available yet and the stories read as before.
+docs/CORPUS_MEDIA_2026-10-09.md; RELIABILITY_AUDIT Phase Y (invariants 27-29). 12 new tests.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

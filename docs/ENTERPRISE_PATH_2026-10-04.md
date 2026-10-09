@@ -430,3 +430,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D3 | The dashboard without a window | Done: running through the launcher since 19:52; the error log is empty |
 | O1 | Health of everything scheduled | PC side healthy (mirror, maintenance embeddings, backup, dashboard). Cloud side: OPS_health H1-H4 to confirm |
 | V10 | The 10 withheld verses | In progress: H3 shows passage_count against passages and vectors per text; job 9 embeds them the night after |
+
+
+## Addendum 2026-10-09 (20) (DOCS30_2026_10_09)
+
+| # | Item | State |
+|---|---|---|
+| M1 | Pictures and graphic novels on the site, private in the Shared Drive | Built and tested: C8 (8 PG tests), corpus-media (10 Deno tests), corpus_media.py (15), the site (12 vitest, typecheck, build). Next: the RUNBOOK steps (C8, Srangam patch, deploy, the first push) |
+| M1s | The pictures in the two-hourly tick, and the PC kept awake for it | `patch_media_task_2026_10_09.py`, after the first manual push |
+| M2 | Editors approve, retire or redraw from the site; the desk applies it | Next after M1 |
+| R1 | The Researchers' Corner `/corpus/corner`: saved passages, notes, my requests | Designed (docs/MEDIA_AND_CORNER_2026-10-09.md, section 3) |
+| R2 | Requests (story, picture, novel, correction), with approval for spend | Designed; defaults in section 3 |
+| R3 | The desk worker runs requests with the existing CLIs, within the live budget | Designed |
+| R4 | Spend, caps and audit per request and researcher | Designed |
+| A1p | Publish and one invitation end to end | Still open |
+| V10 | The withheld verses (markandeya 01/99; Sandilya 00/01/99) | Still open |

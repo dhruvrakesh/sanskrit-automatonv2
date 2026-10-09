@@ -1,0 +1,30 @@
+Pictures and graphic novels in the working corpus, private in the Shared Drive (CORPUS_MEDIA_C8_2026_10_09); docs (DOCS30_2026_10_09)
+
+docs/cloud/C8_corpus_media_2026-10-09.sql, one transaction, purely additive: corpus.media (library
+pictures img:<id>, novel pages and cast sheets novel:<id>:page|cast:<n>), corpus.media_files (thumb
+480 px and display 1600 px renditions per sha256, Drive file ids), corpus.novels (plan, check,
+status), corpus.media_config; all closed (RLS, no grants). Readers: corpus_reader_media, _novels,
+_novel, _media_file, each behind corpus._reader_gate(); approved for readers, drafts for admins and
+the super admin, retired never. Desk (service_role only): state, upsert, novels upsert, retire,
+file get/put, config get/set. tests/test_corpus_media_pg_2026_10_09.py (8).
+docs/cloud/C8_checks_2026-10-09.sql: P1-P3, V1-V3, D1-D5, read-only, one per paste.
+docs/cloud/C8_corpus-media/: the edge function corpus-media. POST from the desk signed with
+CORPUS_SYNC_SECRET as corpus-ingest (upload checks the bytes against their sha256; the folder
+"Srangam corpus media" is made once; nothing is shared by link). GET for a reader with the JWT in a
+header: the database is asked as that reader, Drive only after a yes; private, a month, immutable,
+ETag/304. deno test: lib_test.ts (6), _test/handler_test.ts (4).
+scripts/corpus_media.py: plan by default, --apply, --hello, --status, --max-mb, --if-configured;
+renditions with Pillow; a row travels only when both renditions are on Drive; novels before their
+pictures; gone here is retired there; a missing file is kept, not retired; mass retire refused;
+read-only on context.db; log data/corpus_media_log.jsonl. tests/test_corpus_media_2026_10_09.py (15).
+docs/srangam/MEDIA_M1_2026-10-09/ + scripts/patch_srangam_media_2026_10_09.py: the site's pages and
+the function for Srangam, md5-guarded, anchored App.tsx routes, Phase Y appended to RELIABILITY_AUDIT.
+scripts/patch_media_task_2026_10_09.py: the pictures after the mirror in corpus_mirror_task.ps1, and
+the PC kept awake for the tick.
+docs/MEDIA_AND_CORNER_2026-10-09.md: the Drive decision and its numbers, M1, the path to the
+Researchers' Corner (M2, R1-R4, P1), guardrails, rollback.
+scripts/patch_docs30_2026_10_09.py: PLATFORM section 33, RUNBOOK, ENTERPRISE_PATH addendum (20),
+CORPUS_MIRROR "The pictures in the same tick", .gitignore (the pictures' run log stays local).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

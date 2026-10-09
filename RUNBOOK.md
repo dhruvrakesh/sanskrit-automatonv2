@@ -1352,3 +1352,38 @@ Srangam 4d70389f already carries the pages. Only the database and the docs remai
 2. **In the Lovable Cloud SQL editor.** `docs/cloud/OPS_health_2026-10-08.sql`, H1 to H9, one per paste, read-only. Export the results to `D:\backups\ops_<date>\`.
 3. **If H3 shows passages > vectors, or H4 shows rows pending:** the nightly job 9 has not run since they were pasted. Wait for 04:15 UTC, or run C2's R3 once (`docs/cloud/C2_run_and_schedule_2026-10-07.sql`) and then R2.
 4. **If H7 lists a text:** its English is newer than the last idle maintenance run. The next SanskritMaintenance run embeds it, and the mirror carries it two hours later at most.
+
+
+## Pictures and graphic novels on the site (DOCS30_2026_10_09)
+
+**Switching it on, once.** Each step's commands are in `docs/MEDIA_AND_CORNER_2026-10-09.md` and in the reply of 2026-10-09.
+1. **Back up.** `python scripts\db_backup.py`.
+2. **In the SQL editor.** `docs/cloud/C8_checks_2026-10-09.sql` P1-P3, then C8 in one paste, then V1-V3. One query per paste; export each to `D:\backups\media_2026-10-09\`.
+3. **Srangam.**
+   - `scripts\patch_srangam_media_2026_10_09.py --check`, then without `--check`.
+   - `npm run typecheck`, `npx vitest run` and `npm run build`.
+   - Commit the listed paths and push.
+4. **Lovable.** Ask Lovable to deploy `corpus-media` without changing its code. No new secret is needed.
+5. **The desk.**
+   - `python scripts\corpus_media.py --hello`. Expect `corpus-media c8.1` and `drive: true`.
+   - Then `python scripts\corpus_media.py` (the plan).
+   - Then `--apply`.
+6. **Check.** D1-D5 in the SQL editor. Publish in Lovable.
+   - `/corpus/images` as an admin shows drafts.
+   - In a private window, as a reader, only approved pictures appear.
+7. **The schedule.**
+   - `python scripts\patch_media_task_2026_10_09.py --check`, then without `--check`.
+   - The next SanskritCorpusMirror tick logs "DONE - corpus media rc=0".
+
+**When something is wrong.**
+
+| Seen | Meaning | Do |
+|---|---|---|
+| `--hello`: HTTP 404 | The function is not deployed | Step 4 |
+| HTTP 422 `corpus_media_state ... Could not find` | C8 is not applied | Step 2 |
+| HTTP 401 `bad signature` | The secret in `.env` and in Lovable Secrets differ | Make them the same, as for the mirror |
+| `HELD: ... not in the mirror yet` | That text is not in schema corpus | `corpus_sync.py --apply` first |
+| HTTP 502 `Drive upload failed` | The service account cannot write to the Shared Drive | Check `GOOGLE_SERVICE_ACCOUNT_JSON` and that the account is a member of the Shared Drive (as for `tts-save-drive`) |
+| The site says "not available here yet" | C8 is not applied, or not published | Steps 2 and 6 |
+| A picture shows "This picture is not available" | No rendition for it, or it is not visible to this reader | D2; run `--apply` again |
+| `refusing to retire N of the site's M pictures` | `--db` points at the wrong database | Check `--db`; `--allow-mass-retire` only if it is right |
