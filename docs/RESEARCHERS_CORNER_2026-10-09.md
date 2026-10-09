@@ -110,3 +110,32 @@ The commands are in the reply of 2026-10-09 and in RUNBOOK ("The Researchers' Co
 | P2 | A public page for a published anthology, outside sign-in, on srangam.nartiang.org | The pictures would need a public path: a public rendition, or a signed link per published picture. Making anything public is a decision for you |
 | B1 | The desk's typeset books (`stories.py book`, Booksmith PDFs, `novel.py build`) on the site | The files run to tens of MB (pictures embedded), above one request's 6 MB. It needs chunked uploads to Drive. Until then the site's own print does the job |
 | R6 | Notifications (an email when a request is done) | Optional. It needs a mail provider decision |
+
+
+## 7. Live, and what the Corner does not do yet (DOCS32_2026_10_09)
+
+**Live on 2026-10-09.**
+- C9 is applied and `corpus-desk` deployed.
+- SanskritCornerWorker comes every 10 minutes; the Corner's status strip shows when.
+- The checks are in PLATFORM section 35.
+
+**A correction to C9's check V2.** service_role may call all 16 functions, not only the 4 for the desk. The reason is Supabase's default privileges. It is harmless: the 12 for the site refuse any caller without a signed-in user.
+
+**The desk's own pages do more than the Corner does now** (phase C10). From `scripts/stories_web.py`, `scripts/images_web.py`, `stories.py`, `images.py` and `novel.py`:
+
+| On the desk | In the Corner | Plan |
+|---|---|---|
+| Edit a story by hand: title, English, Hindi. It is checked again and goes back to draft | No | C10 `story_edit` (free) |
+| Check a story against its citations again (`stories.py verify`, no model call) | No | C10 `story_verify` (free) |
+| Edit a picture's title, brief, captions, passage or licence (`images.py edit`) | No | C10 `picture_edit` (free) |
+| Picture ideas for a text from the model (`images.py brief --doc --max N`) | No; only the researcher's own brief | C10 `picture_ideas` |
+| A cover for a text (`images.py cover`) | No | C10 `picture_cover` |
+| Edit a novel page's scene or captions; its picture is then marked to draw again | No | C10 `novel_page_edit` (free) |
+| Draw a novel's pages or cast again (`--redo`) | No: only pages not yet drawn | C10: "draw again" on `novel_draw` and `novel_cast` |
+| Restore a retired picture | No | C10 |
+| Young and teen versions (`retell`, `variant`) | No | R5 |
+| Typeset books, Booksmith PDFs, the novel print build | No (the site prints anthologies itself) | B1 |
+| Upload edition plates and photos (`images.py add`) | No | With B1 |
+| Duplicate pictures (`images.py dedupe`) | No | Stays on the desk |
+
+**The guardrail is unchanged.** Edited text travels as data, through the desk's own Python functions, never on a command line.

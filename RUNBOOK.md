@@ -1410,3 +1410,33 @@ Srangam 4d70389f already carries the pages. Only the database and the docs remai
 - **When the desk last came.** The Corner's status strip, or C9 D3.
 - **What it did.** `D:\backups\corner_worker_log.txt`.
 - **Every sync command.** `docs/SYNC_COMMANDS_2026-10-09.md`.
+
+
+## Srangam: pull before you push; LOAD_L1 (DOCS32_2026_10_09)
+
+**Lovable pushes its own commits.** For example, it regenerates `src/integrations/supabase/types.ts` after a database change. A push from the desk is then refused ("fetch first"). Before every Srangam push:
+
+    git fetch origin
+    git log --oneline -3 origin/main
+    git diff --stat HEAD...origin/main
+    git pull --rebase --autostash origin main
+    npm run typecheck ; npx vitest run ; npm run build
+    git push origin main
+
+`--autostash` puts the local `bun.lock` aside and back. If a rebase stops, `git rebase --abort` returns to where you were.
+
+**LOAD_L1_2026_10_09** (fewer questions per page):
+1. `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_srangam_load_l1_2026_10_09.py" --check`, from `D:\srangam-42267`.
+2. The same without `--check`.
+3. Typecheck, tests and build.
+4. Commit the five files it names, pull before you push, push, and Publish in Lovable.
+
+Afterwards a page asks `has_role` and `my_roles` once each.
+
+**Was the database slow?** Run this read-only check in the SQL editor. If `extensions.pg_stat_statements` is not found, use `pg_stat_statements`.
+
+    SELECT calls, round(mean_exec_time::numeric, 1) AS mean_ms, round(max_exec_time::numeric, 1) AS max_ms,
+           left(regexp_replace(query, '\s+', ' ', 'g'), 100) AS query
+    FROM extensions.pg_stat_statements
+    WHERE query ILIKE '%corpus_reader_%' OR query ILIKE '%corner_%' OR query ILIKE '%my_roles%'
+    ORDER BY max_exec_time DESC LIMIT 20;

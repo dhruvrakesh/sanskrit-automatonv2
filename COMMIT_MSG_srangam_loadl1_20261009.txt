@@ -1,0 +1,13 @@
+Fewer questions per page (LOAD_L1_2026_10_09)
+
+AuthContext: one role check (has_role + my_roles) per user at a time. On every page load the auth
+listener and getSession() asked both three times within a few milliseconds (seen on the live site,
+2026-10-09); calls that arrive while the check is on its way now share its answer. refreshRoles()
+always asks anew, signing out forgets the check on its way, and a later event (a token refresh,
+signing in again) still asks again. /corpus/images: with no text chosen, the list is the first rows
+of the index (the same function and order), so corpus_reader_media is asked once instead of twice.
+4 new tests (auth-role, corpus-media), each failing on the old code. RELIABILITY_AUDIT Phase AA
+(invariants 34-35).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

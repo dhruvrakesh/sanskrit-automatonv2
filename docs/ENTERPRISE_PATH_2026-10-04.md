@@ -458,3 +458,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | B1 | The desk's typeset books (Booksmith, `stories.py book`, `novel.py build`) on the site | Next: chunked uploads to Drive; the site's print covers it until then |
 | A1p | Publish and one invitation end to end | Still open |
 | V10 | The withheld verses | Still open |
+
+
+## Addendum 2026-10-09 (22) (DOCS32_2026_10_09)
+
+| # | Item | State |
+|---|---|---|
+| R1-R3, M2 | The Researchers' Corner | Switched on: C9 applied and checked, corpus-desk deployed, the worker live, the site published, two researchers invited. Next: the first story, picture and novel plan through it |
+| L1 | Fewer questions per page | Built: one role check per user at a time; the Pictures page asks once (Srangam LOAD_L1, 4 new tests) |
+| C10 | The Corner level with the desk's own pages | Next, after the first round trip. Free kinds: edit a story, check it again, edit a picture, restore a picture, edit a novel page. Paid kinds: picture ideas for a text, a cover. A "draw again" option for a novel's pages and cast (`--redo`) |
+| L2 | The first load | Next: the entry chunk is 498 KB (175 KB gzip) on every first visit. Measure what the home and corpus pages load before changing any chunking |
+| R5, B1, P2, R6 | Young and teen versions; the desk's books on the site; a public anthology page; notifications | As in addendum 21 |
+| A1p | Publish and one invitation end to end | Done for the invitations (Kanika, Parth) |
+| V10 | The withheld verses | Still open |

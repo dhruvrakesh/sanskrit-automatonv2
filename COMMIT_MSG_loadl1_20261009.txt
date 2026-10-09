@@ -1,0 +1,17 @@
+Fewer questions per page for the site (LOAD_L1_2026_10_09); the Corner switched on, recorded (DOCS32_2026_10_09)
+
+docs/srangam/LOAD_L1_2026-10-09/ + scripts/patch_srangam_load_l1_2026_10_09.py: for Srangam, md5-guarded
+over the versions CORNER_C9_2026_10_09 left. AuthContext asks has_role and my_roles once per user at a
+time (the live site asked them three times each on every page load); refreshRoles always asks anew;
+signing out forgets the check on its way. The Pictures page takes its first rows from the index when no
+text is chosen (corpus_reader_media was asked twice for the same rows). 4 new tests, each failing on the
+old code; RELIABILITY_AUDIT Phase AA (invariants 34-35).
+scripts/patch_docs32_2026_10_09.py: PLATFORM section 35 (C9 applied and checked: P1-P2, V1-V4, with the
+V2 note on service_role; corpus-desk deployed; the worker live; the site published after Lovable's
+commit 3524708; Kanika and Parth invited; what the live site showed), RUNBOOK (pull before you push;
+LOAD_L1; the pg_stat_statements check), ENTERPRISE_PATH addendum (22: L1, C10, L2),
+RESEARCHERS_CORNER section 7 (live; the V2 correction; what the Corner does not do yet, from the desk's
+own pages and scripts: phase C10).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
