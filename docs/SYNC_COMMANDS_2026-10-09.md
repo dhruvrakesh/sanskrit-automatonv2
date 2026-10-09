@@ -117,3 +117,27 @@ Client 4.3 (SYNC_SPLIT_2026_10_09) halves a timed-out batch by itself, down to o
 With desk worker 1.1, every 10-minute round tells the site the last run of the mirror and of the pictures (the last line of `data\corpus_sync_log.jsonl` and `data\corpus_media_log.jsonl`).
 - **Where editors see it:** the Corner's strip and its Sync tab, with the command to run when a channel is out of step.
 - **In the SQL editor:** `SELECT info FROM corner.worker;`
+
+
+## 10. Corrections and the sleeping desk (DOCS34_2026_10_09)
+
+**The backup.** In section 1 and in `docs/RESEARCHERS_CORNER_2026-10-09.md` section 4, step 1, `db_backup.py` needs a source and a destination:
+
+```powershell
+python scripts\db_backup.py "D:\Sanksrit Automatons\sanskrit-automatonv2\data\context.db" "D:\backups\context_$(Get-Date -Format yyyyMMdd_HHmm).db"
+powershell -ExecutionPolicy Bypass -File scripts\backup_runner.ps1     # the nightly SanskritDBBackup
+```
+
+A name of the form `context_2*.db` is kept with the 14 newest.
+
+**A sleeping PC.**
+- The desk works only while the PC is awake. On 9 Oct no round ran from 17:18 to 19:37 IST.
+- Task Scheduler makes up a missed mirror run when the PC wakes: the 18:31 run ran at 19:38.
+- What to look at:
+  - The Corner's strip says "Desk last seen" and when the next round is due.
+  - On the desk:
+
+```powershell
+Get-ScheduledTask -TaskName SanskritCornerWorker, SanskritCorpusMirror | Get-ScheduledTaskInfo | Format-List TaskName, LastRunTime, LastTaskResult, NextRunTime
+Get-Content data\corner_worker_log.jsonl -Tail 3
+```

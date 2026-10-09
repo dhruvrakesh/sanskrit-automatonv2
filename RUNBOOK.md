@@ -1466,3 +1466,22 @@ The order matters: C10a goes in before the desk gets worker 1.1.
 - Send that table in small batches: `python scripts\corpus_sync.py --apply --doc <code> --tables vectors --batch-kb 120`.
 - Client 4.3 does the halving by itself.
 - If one row times out, check for locks and long transactions (`docs/RESEARCHER_EXPERIENCE_2026-10-09.md`; the Sync Console's "Diagnose a timeout").
+
+
+## State and Learn: if worker 1.1 went on before C10a (DOCS34_2026_10_09)
+
+C10a must go in before the desk runs worker 1.1. Without C10a, C9's `corner_desk_report` takes each progress report as the request's result and as a new start.
+1. **SQL editor, read-only:** `SELECT id, status FROM corner.requests WHERE status IN ('claimed', 'running');`
+2. **No rows:** nothing was touched. Paste C10a (`docs/cloud/C10a_corner_state_2026-10-09.sql`) in one paste, then its V1 and V2.
+3. **A request ran under 1.1 before C10a:**
+   - Its result is right once it is done, because the done report carries the whole result.
+   - Its `started_at` is the time of its last progress report.
+   - `corner.events` has one `desk_running` row per report.
+   - Nothing needs repairing by hand. Paste C10a as in step 2.
+
+**A backup by hand.** `db_backup.py` takes a source and a destination:
+
+```powershell
+python scripts\db_backup.py "D:\Sanksrit Automatons\sanskrit-automatonv2\data\context.db" "D:\backups\context_$(Get-Date -Format yyyyMMdd_HHmm).db"
+powershell -ExecutionPolicy Bypass -File scripts\backup_runner.ps1     # what SanskritDBBackup runs nightly
+```

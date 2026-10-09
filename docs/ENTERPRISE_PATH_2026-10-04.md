@@ -485,3 +485,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | L2 | The first load (entry 491 KB, 173 KB gzip) | Next: measure first |
 | T2 | Learn, second round | After C10 |
 | R5, B1, P2, R6 | As in addendum 21 | As before |
+
+
+## Addendum 2026-10-09 (24) (DOCS34_2026_10_09)
+
+| # | Item | State |
+|---|---|---|
+| C10a, S1 | The Corner as it happens | Live: ffdacb5f, Srangam 84409ca, C10a, desk worker 1.1 |
+| T1 | Learn: quests, XP, levels, badges, toolbox, Team panel | Live: C11, Srangam 84409ca |
+| C10 | The Corner level with the desk's own pages | Next |
+| L2 | The first load: entry 498.92 kB (175.78 kB gzip) | Next: measure what the home and corpus pages fetch first |
+| T2 | Learn, second round | After C10 |
+| R5, B1, P2, R6 | As in addendum 21 | As before |

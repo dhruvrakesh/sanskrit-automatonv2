@@ -1,0 +1,13 @@
+The evening of 9 Oct recorded: State and Learn live, the order slip and its remedy, the sleeping desk (DOCS34_2026_10_09)
+
+scripts/patch_docs34_2026_10_09.py, run after C10a's V1 and V2 pass, appends PLATFORM section 37 (what
+went live: ffdacb5f, desk worker 1.1 with its sync heartbeat, C11 and /corpus/learn, Srangam 84409ca
+published; worker 1.1 went on before C10a with no request in between, so nothing was overwritten, and
+the site fell back to the C9 view on corner_request_track's 404; the PC asleep from 17:18 to 19:37 IST
+and the 18:31 mirror run made up at 19:38, 392 groups equal, all eight tables at 100%; the first load
+as built, 498.92 kB entry, 175.78 kB gzip), a RUNBOOK section for when worker 1.1 goes on before C10a,
+ENTERPRISE_PATH addendum 24, and SYNC_COMMANDS section 10: db_backup.py takes a source and a
+destination (the earlier one-word command only prints its usage), and how to see a sleeping desk.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
