@@ -1440,3 +1440,29 @@ Afterwards a page asks `has_role` and `my_roles` once each.
     FROM extensions.pg_stat_statements
     WHERE query ILIKE '%corpus_reader_%' OR query ILIKE '%corner_%' OR query ILIKE '%my_roles%'
     ORDER BY max_exec_time DESC LIMIT 20;
+
+
+## State and Learn: switching on (DOCS33_2026_10_09)
+
+The order matters: C10a goes in before the desk gets worker 1.1.
+1. **SQL editor.**
+   - `docs/cloud/C10a_checks_2026-10-09.sql` P1, then C10a in one paste, then V1-V2.
+   - `docs/cloud/C11_checks_2026-10-09.sql` P1-P2, then C11 in one paste, then V1-V3.
+2. **The desk.**
+   - `python scripts\patch_corner_worker_state_2026_10_09.py --check`, then without `--check`.
+   - Then `python -m unittest tests.test_corner_worker_2026_10_09 tests.test_corner_worker_state_2026_10_09`.
+   - Release.
+   - The next SanskritCornerWorker round runs 1.1.
+3. **Srangam.**
+   - `patch_srangam_state_learn_2026_10_09.py --check`, then without `--check`.
+   - Typecheck, tests and build.
+   - Commit the paths it names, pull before you push, push, then Publish.
+4. **Look.**
+   - The Corner says "Next round about HH:MM".
+   - Editors see the Mirror, Pictures and Desk spend chips and the Sync tab.
+   - `/corpus/learn` shows 20 quests to a researcher, 23 to an editor.
+
+**When a mirror run stops with a statement timeout.** The database allows each write 8 seconds.
+- Send that table in small batches: `python scripts\corpus_sync.py --apply --doc <code> --tables vectors --batch-kb 120`.
+- Client 4.3 does the halving by itself.
+- If one row times out, check for locks and long transactions (`docs/RESEARCHER_EXPERIENCE_2026-10-09.md`; the Sync Console's "Diagnose a timeout").

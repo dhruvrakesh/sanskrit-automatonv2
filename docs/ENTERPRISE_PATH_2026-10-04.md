@@ -471,3 +471,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | R5, B1, P2, R6 | Young and teen versions; the desk's books on the site; a public anthology page; notifications | As in addendum 21 |
 | A1p | Publish and one invitation end to end | Done for the invitations (Kanika, Parth) |
 | V10 | The withheld verses | Still open |
+
+
+## Addendum 2026-10-09 (23) (DOCS33_2026_10_09)
+
+| # | Item | State |
+|---|---|---|
+| L1 | Fewer questions per page | Live (e2d53dd): one role check per page |
+| S0 | The mirror past a timed-out batch | Live (client 4.3, 67b45ce3); the mirror back in step at 15:30 (392 groups equal, 0 different) |
+| C10a, S1 | The Corner as it happens | Built and tested: progress, stages, next steps, live refresh; editors' Sync tab. Next: switch on (RUNBOOK) |
+| T1 | Learn: quests, XP, levels, badges, toolbox, Team panel | Built and tested (C11 + the site). Next: switch on |
+| C10 | The Corner level with the desk's own pages | Next: story_edit, story_verify, picture_edit, picture_restore, novel_page_edit, picture_ideas, picture_cover, draw again |
+| L2 | The first load (entry 491 KB, 173 KB gzip) | Next: measure first |
+| T2 | Learn, second round | After C10 |
+| R5, B1, P2, R6 | As in addendum 21 | As before |

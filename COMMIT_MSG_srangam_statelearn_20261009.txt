@@ -1,0 +1,18 @@
+The Corner as it happens, and Learn (STATE_LEARN_2026_10_09)
+
+/corpus/corner (CORNER_STATE_S1_2026_10_09): the strip says when the desk's next round is due (or that a
+round is due, or that the desk is away); every request shows its stages (Asked, Approved, Taken by the
+desk, Working, Done, or how it stopped) with their times and, while the desk works, its progress
+("Drawing page 3 of 12") as a progress bar; a finished request offers its next steps; while a request
+is open the lists refresh every 20 s and a notice says when one finishes. Editors see the desk's report
+of the mirror, the pictures on Drive and its spend as chips and on a Sync tab with the command to run
+when one is out of step. The new parts are in src/lib/cornerState.ts and
+src/components/corpus/CornerState.tsx, imported by the Corner only; corner.ts gains links to
+story_mine's proposed episodes. /corpus/learn and a Learn tab (LEARN_T1_2026_10_09): 23 quests in five
+tracks with XP, levels and badges, "Your toolbox", "How the desk works", and the editors' Team panel.
+Needs docs/cloud/C10a and C11 (automaton repo); before them both pages behave as before and say so
+quietly. docs/RESEARCHER_EXPERIENCE_2026-10-09.md; RELIABILITY_AUDIT Phase AB (invariants 36-39).
+35 new tests.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -99,3 +99,21 @@ After the paste:
   UPDATE public.srangam_texts SET published = true WHERE doc_code = '<code>';
   ```
 - The night's job 9 embeds the new passages.
+
+
+## 8. When the mirror stops on a statement timeout (DOCS33_2026_10_09)
+
+The database gives each write 8 seconds (the `authenticator` role). On 9 Oct a batch of 50 vectors took longer; the vector index is 87 MB against 224 MB of shared buffers.
+
+```powershell
+python scripts\corpus_sync.py --apply --doc nilamata_seg --tables vectors --batch-kb 120   # about 10 a call
+python scripts\corpus_sync.py --apply                                                     # then everything else
+```
+
+Client 4.3 (SYNC_SPLIT_2026_10_09) halves a timed-out batch by itself, down to one row, and sends vectors 25 to a call.
+
+## 9. The desk's own report on the site (DOCS33_2026_10_09)
+
+With desk worker 1.1, every 10-minute round tells the site the last run of the mirror and of the pictures (the last line of `data\corpus_sync_log.jsonl` and `data\corpus_media_log.jsonl`).
+- **Where editors see it:** the Corner's strip and its Sync tab, with the command to run when a channel is out of step.
+- **In the SQL editor:** `SELECT info FROM corner.worker;`

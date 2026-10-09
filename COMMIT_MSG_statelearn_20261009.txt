@@ -1,0 +1,30 @@
+The Corner as it happens, and Learn (STATE_LEARN_2026_10_09); the mirror's stop and recovery recorded (DOCS33_2026_10_09)
+
+docs/cloud/C10a_corner_state_2026-10-09.sql (CORNER_STATE_C10A_2026_10_09), one paste: corner.requests.
+progress (an object of at most 1000 characters); corner_desk_report keeps its signature and grants but
+sets started_at once, stores a 'running' report's {"progress": {...}} (made safe) without overwriting
+the result, and writes an event only when the status changes; corner_request_track(ids) gives the site
+up to 100 requests' claim, start and finish times and progress (own requests; editors any). Checks
+docs/cloud/C10a_checks_2026-10-09.sql. tests/test_corner_state_pg_2026_10_09.py (16, with C9's 7 on top).
+Desk worker 1.1 (docs/desk/CORNER_STATE_C10A_2026-10-09/corner_worker.py, put in by
+scripts/patch_corner_worker_state_2026_10_09.py, md5-guarded over 1.0): reports each step of a request
+("Drawing page 3 of 12"), at most every 5 s, best effort, and stops after one failed report; novel_draw
+counts its pages from context.db and reads novel.py's output as it comes (still one call); the
+heartbeat carries the last run of the mirror and of the pictures. tests/test_corner_worker_state_2026_10_09.py
+(22); the C9 worker tests pass unchanged. Apply C10a before the desk gets 1.1.
+docs/cloud/C11_learn_2026-10-09.sql (LEARN_T1_2026_10_09), one paste: schema learn (closed), 23 quests in
+five tracks, marks; learn_me, learn_summary, learn_mark (exploration quests only), learn_team (editors).
+Checks docs/cloud/C11_checks_2026-10-09.sql. tests/test_learn_pg_2026_10_09.py (9).
+docs/srangam/STATE_LEARN_2026-10-09/ + scripts/patch_srangam_state_learn_2026_10_09.py: the site's
+state-aware Corner (next round, stages, progress, next steps, live refresh, notices; editors' chips and
+Sync tab) in cornerState.ts and CornerState.tsx so the shared parts stay small, and /corpus/learn with
+a Learn tab; md5-guarded, anchored App.tsx edits, Phase AB of RELIABILITY_AUDIT.
+docs/RESEARCHER_EXPERIENCE_2026-10-09.md: why, what, the order, the Learn rules, the path after (C10,
+L2, R5, B1, P2, R6, T2). scripts/patch_docs33_2026_10_09.py: PLATFORM section 36 (the mirror's stop at
+12:32 and 14:32 on 50 vectors under the authenticator's 8 s statement timeout with an 87 MB vector index
+and 224 MB of shared buffers, the recovery at 15:30 with 392 groups equal; the first round trip),
+RUNBOOK (switching on; statement timeouts), ENTERPRISE_PATH addendum (23), RESEARCHERS_CORNER section 8,
+SYNC_COMMANDS sections 8 and 9.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

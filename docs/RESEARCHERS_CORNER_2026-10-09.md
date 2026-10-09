@@ -139,3 +139,19 @@ The commands are in the reply of 2026-10-09 and in RUNBOOK ("The Researchers' Co
 | Duplicate pictures (`images.py dedupe`) | No | Stays on the desk |
 
 **The guardrail is unchanged.** Edited text travels as data, through the desk's own Python functions, never on a command line.
+
+
+## 8. The Corner as it happens; Learn (DOCS33_2026_10_09)
+
+**The first round trip (9 Oct).** Request #1 (story_mine, Markandeya) took 1 min 30 s from the ask to done. Its 6 proposed episodes appeared at once under "Write a proposed episode".
+
+**State (C10a, worker 1.1, the site).**
+- The desk tells the site each step of a request. The site shows:
+  - the stages with their times and the step;
+  - when the next round is due;
+  - what to do next.
+- Editors see the mirror's and the pictures' last run, both on the strip and on the Sync tab.
+
+**Learn (C11, the site).** `/corpus/learn` teaches every tool with 23 quests. The Corner's quests are checked from its own records, and a quest never starts a paid request.
+
+The design, the rules and the order to switch it on are in `docs/RESEARCHER_EXPERIENCE_2026-10-09.md`.
