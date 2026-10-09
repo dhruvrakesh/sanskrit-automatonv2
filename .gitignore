@@ -124,3 +124,8 @@ data/corpus_sync_log.jsonl
 
 # CORPUS_MEDIA_C8_2026_10_09 (DOCS30_2026_10_09): the pictures' run log stays local
 data/corpus_media_log.jsonl
+
+# CORNER_C9_2026_10_09 (DOCS31_2026_10_09): the Corner worker's run log, lock and ledger stay local
+data/corner_worker_log.jsonl
+data/corner_worker.lock
+data/corner_worker_made.jsonl

@@ -288,3 +288,12 @@ Live state on 2026-10-08:
 - Its log lines go to the same `D:\backups\corpus_mirror_log.txt` ("DONE - corpus media rc=..."), and each run is also recorded in `data\corpus_media_log.jsonl`.
 - A picture can travel only for a text that is already in schema corpus, so the mirror runs first.
 - The tick keeps the PC awake while it runs. The night tick of 2026-10-08 stretched to 7.5 h when the PC slept in the middle of it.
+
+
+## The Corner sends its results on (DOCS31_2026_10_09)
+
+- After each request, `scripts/corner_worker.py` runs these, so a result is on the site within a minute of the desk finishing, not two hours later:
+  - `corpus_sync.py --apply --if-configured --doc <code> --tables docs,stories` for stories;
+  - `corpus_media.py --apply --if-configured --doc <code>` for pictures and novels.
+- Both are the same idempotent pushes the two-hourly task runs, limited to that text.
+- Every sync command is in `docs/SYNC_COMMANDS_2026-10-09.md`.

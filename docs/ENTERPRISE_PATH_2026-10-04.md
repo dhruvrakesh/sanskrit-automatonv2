@@ -445,3 +445,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | R4 | Spend, caps and audit per request and researcher | Designed |
 | A1p | Publish and one invitation end to end | Still open |
 | V10 | The withheld verses (markandeya 01/99; Sandilya 00/01/99) | Still open |
+
+
+## Addendum 2026-10-09 (21) (DOCS31_2026_10_09)
+
+| # | Item | State |
+|---|---|---|
+| M1 | Pictures and graphic novels on the site | Live: C8 applied and checked, corpus-media deployed, 57 pictures / 114 renditions / 2 novels pushed; the task carries them every 2 h |
+| R1-R3, M2 | The Researchers' Corner: requests carried out on the desk, the editors' queue and decisions, anthologies, print | Built and tested (C9 7, corpus-desk 19, worker 10, site 20). Next: the RUNBOOK steps |
+| R5 | Young and teen versions on the site | Next: mirror `doc_story_variants` (a C4 addition) |
+| P2 | A public page for published anthologies | Your decision: it needs a public path for their pictures |
+| B1 | The desk's typeset books (Booksmith, `stories.py book`, `novel.py build`) on the site | Next: chunked uploads to Drive; the site's print covers it until then |
+| A1p | Publish and one invitation end to end | Still open |
+| V10 | The withheld verses | Still open |

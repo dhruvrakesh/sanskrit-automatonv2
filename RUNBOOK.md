@@ -1387,3 +1387,26 @@ Srangam 4d70389f already carries the pages. Only the database and the docs remai
 | The site says "not available here yet" | C8 is not applied, or not published | Steps 2 and 6 |
 | A picture shows "This picture is not available" | No rendition for it, or it is not visible to this reader | D2; run `--apply` again |
 | `refusing to retire N of the site's M pictures` | `--db` points at the wrong database | Check `--db`; `--allow-mass-retire` only if it is right |
+
+
+## The Researchers' Corner (DOCS31_2026_10_09)
+
+**Switching it on, once.** The commands are in `docs/RESEARCHERS_CORNER_2026-10-09.md` and in the reply of 2026-10-09.
+1. **Back up.** `python scripts\db_backup.py`.
+2. **SQL editor.** C9 checks P1-P2, then C9 in one paste, then V1-V4.
+3. **Srangam.**
+   - `patch_srangam_corner_2026_10_09.py --check`, then without `--check`.
+   - Typecheck, tests and build.
+   - Commit the listed paths and push.
+4. **Lovable.** Ask Lovable to deploy `corpus-desk` unchanged, then Publish.
+5. **The desk.**
+   - `python scripts\corner_worker.py --hello`.
+   - Register SanskritCornerWorker (every 10 minutes, `scripts\corner_task.ps1`).
+   - `Start-ScheduledTask -TaskName SanskritCornerWorker`.
+6. **The first request.** Ask for a story from passages as the super admin. Approve it from its page once written.
+
+**Every day.**
+- **Corner, Queue.** Approve or reject researchers' requests.
+- **When the desk last came.** The Corner's status strip, or C9 D3.
+- **What it did.** `D:\backups\corner_worker_log.txt`.
+- **Every sync command.** `docs/SYNC_COMMANDS_2026-10-09.md`.

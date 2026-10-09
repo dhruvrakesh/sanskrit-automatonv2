@@ -1,0 +1,41 @@
+The Researchers' Corner: requests from the site carried out on the desk, anthologies (CORNER_C9_2026_10_09); every sync command in one place; docs (DOCS31_2026_10_09)
+
+docs/cloud/C9_researchers_corner_2026-10-09.sql, one transaction, purely additive: schema corner
+(closed: RLS on, no grants): kinds (16: 9 paid with their estimates, 7 editors' decisions), settings
+(daily_cap_usd 2.00 India time, researchers_need_approval, max_pending_per_person 20), requests,
+collections, collection_items, worker, events. Every parameter checked by corner._clean (texts,
+translated passage references, at most 60 passages, an approved story for a novel, no second
+picture for a story). Site (authenticated, behind the reader gate): corner_me, _kinds,
+_request_create (a researcher's paid request waits for an editor; an editor's is approved within
+the day's cap; a duplicate open request is refused), _requests (mine | queue | all), _request_decide,
+_request_cancel, _settings_set (super admin), _collection_save, _collections, _collection,
+_collection_publish (every story approved), _collection_retire. Desk (service_role only):
+corner_desk_pull (FOR UPDATE SKIP LOCKED; a claim older than 3 h is taken again, failed after 3
+attempts), _report, _heartbeat, _state. tests/test_corner_pg_2026_10_09.py (7).
+docs/cloud/C9_checks_2026-10-09.sql: P1-P2, V1-V4, D1-D6, read-only, one per paste.
+docs/cloud/C9_corpus-desk/: the edge function corpus-desk, POST from the desk only, signed with
+CORPUS_SYNC_SECRET as corpus-ingest and corpus-media are: hello, state, pull, report, heartbeat.
+deno test: lib_test.ts (9), _test/handler_test.ts (10).
+scripts/corner_worker.py: the state by default; --apply --max N takes approved requests, re-checks
+each against context.db, runs stories.py / images.py / novel.py with an argument list (no shell; a
+title, brief or reason is stored as data, never on a command line), refuses a paid request the
+desk's cap cannot cover, sends the text on at once (corpus_sync --doc --tables docs,stories;
+corpus_media --doc), reports the result and the cost measured in usage_log. One run at a time
+(data/corner_worker.lock); a ledger (data/corner_worker_made.jsonl) so a retried request does not
+make its rows twice; log data/corner_worker_log.jsonl. tests/test_corner_worker_2026_10_09.py (10).
+scripts/corner_task.ps1: the task SanskritCornerWorker every 10 minutes, the PC kept awake while
+it works, log D:\backups\corner_worker_log.txt.
+docs/srangam/CORNER_C9_2026-10-09/ + scripts/patch_srangam_corner_2026_10_09.py: the site's
+Corner (/corpus/corner: ask the desk, my requests, the editors' queue, settings), anthologies
+(/corpus/anthologies/new, /corpus/anthologies/:id, print or save as PDF), the "Ask the desk" bar
+under stories, pictures and novels; corpus-desk for Srangam; md5-guarded, anchored App.tsx routes,
+Phase Z appended to RELIABILITY_AUDIT.
+docs/RESEARCHERS_CORNER_2026-10-09.md: what a researcher can do, how a request moves, money,
+switching it on, troubleshooting, security, the next phases (R5, P2, B1, R6).
+docs/SYNC_COMMANDS_2026-10-09.md: the mirror, pictures, the Corner, published texts, tasks, checks.
+scripts/patch_docs31_2026_10_09.py: PLATFORM section 34 (M1 live, the Corner), RUNBOOK "The
+Researchers' Corner", ENTERPRISE_PATH addendum (21), CORPUS_MIRROR "The Corner sends its results
+on", .gitignore (the worker's log, lock and ledger stay local).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

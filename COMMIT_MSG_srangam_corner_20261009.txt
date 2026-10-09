@@ -1,0 +1,19 @@
+The Researchers' Corner and anthologies in the working corpus (CORNER_C9_2026_10_09)
+
+/corpus/corner: invited researchers, admins and the super admin ask the desk for a story from
+passages they choose, episodes found in a text, an episode written, a picture for a passage (from
+their own brief) or a story, a picture drawn again, a graphic novel planned from an approved story,
+its cast and its pages; each with its estimate. A researcher's paid request waits for an editor;
+editors see the queue with the person's note and approve or reject it within the day's cap; the
+super admin sets the cap. My requests shows what the desk made, with links. Under every story,
+picture and novel, an "Ask the desk" bar for the same requests and the editors' decisions (approve,
+retire, approve a page). /corpus/anthologies/new and /corpus/anthologies/:id: approved stories
+across texts in the order chosen, with a title, an introduction and the readers it is for;
+published to the working corpus's readers once every story is approved; print or save as PDF.
+A Corner tab. supabase/functions/corpus-desk: the desk's signed door (hello, state, pull, report,
+heartbeat). Needs docs/cloud/C9 (automaton repo) and corpus-desk deployed; before them the Corner
+says it is not available here yet and every other page reads as before.
+docs/RESEARCHERS_CORNER_2026-10-09.md; RELIABILITY_AUDIT Phase Z (invariants 30-33). 20 new tests.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
