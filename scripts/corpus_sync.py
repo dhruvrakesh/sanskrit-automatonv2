@@ -62,7 +62,7 @@ from pathlib import Path
 MARK = "CORPUS_MIRROR_C4_2026_10_08"
 SCHEMA_VERSION = "c4.1"          # part of every row_hash: changing the mirrored columns re-sends all
 DIGEST_SCHEME = "sum64.1"        # CORPUS_MIRROR_C4B_2026_10_08: must match corpus_manifest()'s "_scheme"
-CLIENT_VERSION = "4.2"
+CLIENT_VERSION = "4.3"          # SYNC_SPLIT_2026_10_09: a timed-out batch is sent again in halves
 CLIENT = "corpus_sync.py %s (rows %s, digests %s)" % (CLIENT_VERSION, SCHEMA_VERSION, DIGEST_SCHEME)
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "context.db"
@@ -73,7 +73,8 @@ GLOBAL_TABLES = ["docs", "entities"]
 PER_DOC_TABLES = ["passages", "translations", "mentions", "stories", "stages", "vectors"]
 VEC_DIMS = 1536
 MAX_ROWS_PER_CALL = 1000         # server limit is 2000
-MAX_VEC_ROWS_PER_CALL = 150      # about 12 KB of text per vector
+MAX_VEC_ROWS_PER_CALL = 25       # about 12 KB of text per vector; SYNC_SPLIT_2026_10_09: 150 (and 50)
+                                 # timed out on 2026-10-09, each row an insert into the HNSW index
 MAX_KEYS_PER_RETIRE = 5000
 DEFAULT_BATCH_BYTES = 1_500_000  # JSON bytes per call, before gzip
 
@@ -694,7 +695,7 @@ class Run:
                 self._p("--max-mb reached after %.1f MB; the next run carries on" % (self.bytes_total / 1e6))
                 raise Budget()
             tb = time.time()
-            res = self.sink.ingest(table, chunk, self.run_id) or {}
+            res = self._ingest(table, chunk)   # SYNC_SPLIT_2026_10_09
             st["upsert"] += len(chunk)
             st["changed"] += int(res.get("changed", 0))
             st["bytes"] += size
@@ -702,6 +703,23 @@ class Run:
             if len(plan) > 1:
                 self._p("    %s batch %d/%d: %d rows, %.1f MB, %.1f s (run total %.1f MB)"
                         % (table, i, len(plan), len(chunk), size / 1e6, time.time() - tb, self.bytes_total / 1e6))
+
+    def _ingest(self, table: str, chunk: list) -> dict:
+        """SYNC_SPLIT_2026_10_09: a batch the database cancels for its statement timeout was rolled
+        back whole, and corpus_ingest is idempotent, so it is sent again as two halves, down to one
+        row. Any other error, and a one-row timeout, is raised as before."""
+        try:
+            return self.sink.ingest(table, chunk, self.run_id) or {}
+        except SinkError as e:
+            if "statement timeout" not in str(e) or len(chunk) <= 1:
+                raise
+            half = len(chunk) // 2
+            self._p("    %s: the database timed out on %d rows; sending them as %d + %d"
+                    % (table, len(chunk), half, len(chunk) - half))
+            a = self._ingest(table, chunk[:half])
+            b = self._ingest(table, chunk[half:])
+            return {"received": len(chunk),
+                    "changed": int(a.get("changed", 0)) + int(b.get("changed", 0))}
 
     def _retire(self, table: str, group: str, keys: list, remote_n: int, local_n: int, whole_doc=False) -> bool:
         """True when the keys were retired (or would be, in a plan); False when held."""

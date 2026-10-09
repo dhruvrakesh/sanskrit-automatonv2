@@ -1,0 +1,14 @@
+The mirror carries on past a timed-out batch (SYNC_SPLIT_2026_10_09)
+
+The two-hourly mirror stopped at 12:32 and 14:32 IST on 2026-10-09 at "vectors nilamata_seg: 50 to
+send" with "corpus_ingest: canceling statement due to statement timeout"; entities, passages,
+mentions and the Corner's stories went through, and the documents after nilamata_seg were not
+compared on those ticks. scripts/patch_corpus_sync_split_2026_10_09.py changes scripts/corpus_sync.py
+(client 4.3): a batch the database cancels for its statement timeout (rolled back whole; ingest is
+idempotent) is sent again as two halves, down to one row; any other error, and a one-row timeout,
+stops the run as before; vectors travel 25 to a call instead of 150. Anchored, md5-guarded,
+marker-idempotent, py_compile before the atomic replace. tests/test_corpus_sync_split_2026_10_09.py
+(4; three fail on the old client), with the 27 of test_corpus_sync_2026_10_08 unchanged.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
