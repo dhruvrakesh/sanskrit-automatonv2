@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srangam Hub</title>
+<!-- HUB_V2_2026_10_10: the corpus end to end - this PC makes it, the cloud carries it, the site serves it -->
+<style>
+  :root{--bg:#faf7f2;--card:#fff;--ink:#2a2118;--muted:#6f6455;--accent:#b3541e;
+        --ok:#1e6f5c;--warn:#a86b00;--bad:#a33;--line:#e8e0d4;--chip:#f0e9dd}
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#171410;--card:#211d17;--ink:#efe8dc;--muted:#a89e90;--accent:#e08a4e;
+          --ok:#4dbfa3;--warn:#e0b04e;--bad:#e07b7b;--line:#37312a;--chip:#2c261f}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Georgia,'Noto Serif',serif;background:var(--bg);color:var(--ink)}
+  header{max-width:1240px;margin:0 auto;padding:22px 16px 4px}
+  h1{font-size:1.45rem;margin:0}
+  .sub{color:var(--muted);font-size:.92rem;margin-top:4px;max-width:70ch}
+  main{max-width:1240px;margin:0 auto;padding:0 16px 60px}
+  h2.sec{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+    font-family:sans-serif;margin:26px 0 8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+  .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .col h3{font-family:sans-serif;font-size:.8rem;color:var(--muted);margin:0 0 8px;font-weight:600}
+  .col h3 b{color:var(--ink)}
+  .stack{display:grid;gap:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+  .card h4{margin:0 0 6px;font-size:1.02rem;display:flex;align-items:center;gap:8px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--muted);display:inline-block;flex:none}
+  .dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)} .dot.bad{background:var(--bad)}
+  .facts{font-family:sans-serif;font-size:.8rem;line-height:1.55;color:var(--ink)}
+  .facts .m{color:var(--muted)}
+  .facts .w{color:var(--warn)} .facts .b{color:var(--bad)}
+  .facts ul{margin:4px 0 0;padding-left:16px}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  button,a.btn{font-family:sans-serif;font-size:.8rem;padding:6px 11px;border-radius:8px;border:1px solid var(--line);
+    background:var(--chip);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-block}
+  button.primary,a.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  button:disabled{opacity:.45;cursor:default}
+  .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .links a{font-family:sans-serif;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid var(--line);
+    border-radius:999px;padding:3px 9px}
+  .links a:hover{border-color:var(--accent)}
+  .arow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  pre#log{background:#161310;color:#ece4d4;border-radius:10px;padding:12px;font-size:.78rem;
+    font-family:Consolas,monospace;white-space:pre-wrap;max-height:280px;overflow-y:auto;margin-top:12px;min-height:44px}
+  .tabbar{display:flex;gap:6px;flex-wrap:wrap}
+  .tabbar button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  iframe{width:100%;height:70vh;border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:10px;display:none}
+  iframe.show{display:block}
+  .note{color:var(--muted);font-size:.78rem;font-family:sans-serif;margin-top:8px}
+  code{font-size:.85em}
+  @media (max-width:900px){ .cols{grid-template-columns:minmax(0,1fr)} }
+</style>
+</head>
+<body>
+<header>
+  <h1>&#x0950; Srangam Hub</h1>
+  <div class="sub">The corpus end to end. <b>This PC makes it</b>: scans, OCR, translation, the database and the Gemini brain.
+    <b>The cloud carries it</b>: the mirror to Supabase every two hours, the pictures on Drive, the Corner's requests.
+    <b>The site serves it</b>: the working corpus on srangam.nartiang.org.</div>
+</header>
+<main>
+  <h2 class="sec">The corpus, end to end</h2>
+  <div class="cols">
+    <section class="col">
+      <h3><b>This PC</b> &middot; makes it</h3>
+      <div class="stack">
+        <div class="card">
+          <h4><span class="dot" id="d-engine"></span> Translation engine</h4>
+          <div class="facts" id="f-engine">checking&hellip;</div>
+          <div class="btns">
+            <a class="btn primary" href="http://127.0.0.1:5057" target="_blank">Open dashboard</a>
+            <a class="btn" href="http://127.0.0.1:5057/library" target="_blank">Library</a>
+            <button id="b-automaton" onclick="run('start-automaton')" style="display:none">Start</button>
+          </div>
+        </div>
+        <div class="card">
+          <h4><span class="dot" id="d-db"></span> The database</h4>
+          <div class="facts" id="f-db">counting&hellip;</div>
+        </div>
+        <div class="card">
+          <h4><span class="dot" id="d-brain"></span> The brain (Gemini)</h4>
+          <div class="facts" id="f-brain">&hellip;</div>
+        </div>
+      </div>
+    </section>
+    <section class="col">
+      <h3><b>The cloud</b> &middot; carries it</h3>
+      <div class="stack">
+        <div class="card">
+          <h4><span class="dot" id="d-mirror"></span> Mirror to Supabase</h4>
+          <div class="facts" id="f-mirror">&hellip;</div>
+        </div>
+        <div class="card">
+          <h4><span class="dot" id="d-media"></span> Pictures on Drive</h4>
+          <div class="facts" id="f-media">&hellip;</div>
+        </div>
+        <div class="card">
+          <h4><span class="dot" id="d-corner"></span> The Corner desk</h4>
+          <div class="facts" id="f-corner">&hellip;</div>
+        </div>
+      </div>
+    </section>
+    <section class="col">
+      <h3><b>The site</b> &middot; serves it</h3>
+      <div class="stack">
+        <div class="card">
+          <h4><span class="dot" id="d-srangam"></span> srangam.nartiang.org</h4>
+          <div class="facts" id="f-srangam">checking&hellip;</div>
+          <div class="facts m" id="f-sitemap"></div>
+          <div class="links" aria-label="The working corpus">
+            <a href="https://srangam.nartiang.org/corpus" target="_blank">Library</a>
+            <a href="https://srangam.nartiang.org/corpus/stories" target="_blank">Stories</a>
+            <a href="https://srangam.nartiang.org/corpus/names" target="_blank">Names</a>
+            <a href="https://srangam.nartiang.org/corpus/images" target="_blank">Pictures</a>
+            <a href="https://srangam.nartiang.org/corpus/novels" target="_blank">Graphic novels</a>
+            <a href="https://srangam.nartiang.org/corpus/corner" target="_blank">Researchers' Corner</a>
+            <a href="https://srangam.nartiang.org/corpus/corner?tab=sync" target="_blank">Corner: Sync</a>
+            <a href="https://srangam.nartiang.org/corpus/learn" target="_blank">Learn</a>
+            <a href="https://srangam.nartiang.org/texts" target="_blank">Published texts</a>
+            <a href="https://srangam.nartiang.org/admin" target="_blank">Admin</a>
+          </div>
+          <div class="note">The working corpus is the mirror of this PC's database, for invited researchers and the
+            editors. Translation and the database stay here; the site never writes them.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <h2 class="sec">Other local apps</h2>
+  <div class="grid">
+    <div class="card">
+      <h4><span class="dot" id="d-panchang"></span> Panchang / Jyotish</h4>
+      <div class="facts" id="f-panchang">checking&hellip;</div>
+      <div class="btns">
+        <button class="primary" id="b-panchang" onclick="run('start-panchang')">Start</button>
+        <a class="btn" href="http://127.0.0.1:8501" target="_blank">Open app</a>
+        <button onclick="showFrame('panchang')">Embed</button>
+      </div>
+    </div>
+    <!-- BOOKSMITH_PANE_2026_09_08 -->
+    <div class="card">
+      <h4><span class="dot" id="d-booksmith"></span> Booksmith (proofs)</h4>
+      <div class="facts" id="f-booksmith">checking&hellip;</div>
+      <div class="btns">
+        <button class="primary" id="b-booksmith" onclick="run('start-booksmith')">Start</button>
+        <a class="btn" href="http://127.0.0.1:8765" target="_blank">Open Booksmith</a>
+        <button onclick="showFrame('booksmith')">Embed</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec">Sources: the wisdomlib crawl</h2>
+  <div class="card">
+    <div class="facts m" id="m-corpus">loading&hellip;</div>
+    <div class="arow">
+      <button class="primary" onclick="run('morning-run')">Morning run (reprioritize, crawl, adapter)</button>
+      <button onclick="run('crawl-burst')">Crawl burst (500 pages)</button>
+      <button onclick="run('reprioritize-dry')">Reprioritize queue (preview)</button>
+      <button onclick="run('reprioritize')">Reprioritize queue (apply)</button>
+      <button onclick="run('adapter-dry')">Adapter to JSONL (preview)</button>
+      <button onclick="run('adapter-run')">Adapter to JSONL (write)</button>
+    </div>
+    <div class="note">These feed the dashboard's inbox; ingest, translation and export run in the dashboard as usual.
+      Guided checklist: <code>srangam_pipeline_console.html</code> in the automaton folder.</div>
+    <pre id="log">Action output appears here.</pre>
+  </div>
+
+  <h2 class="sec">Embedded</h2>
+  <div class="tabbar">
+    <button id="t-none" class="active" onclick="showFrame(null)">No embed</button>
+    <button id="t-srangam" onclick="showFrame('srangam')">Srangam</button>
+    <button id="t-automaton" onclick="showFrame('automaton')">Automaton</button>
+    <button id="t-panchang" onclick="showFrame('panchang')">Panchang</button>
+    <button id="t-booksmith" onclick="showFrame('booksmith')">Booksmith</button>
+  </div>
+  <iframe id="f-srangam-frame" data-src="https://srangam.nartiang.org"></iframe>
+  <iframe id="f-automaton-frame" data-src="http://127.0.0.1:5057"></iframe>
+  <iframe id="f-panchang-frame" data-src="http://127.0.0.1:8501/?embed=true"></iframe>
+  <iframe id="f-booksmith-frame" data-src="http://127.0.0.1:8765"></iframe>
+  <div class="note">If an embed stays blank, that app refuses framing: use its Open button instead. Local apps must be started first.</div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = n => (Number(n) || 0).toLocaleString('en-IN');
+let watching = null;
+let BUDGET_HTML = '', BUDGET_AT = 0;
+
+function when(ts) {
+  if (!ts) return 'never';
+  const t = new Date(String(ts).replace(' ', 'T'));
+  if (isNaN(t)) return esc(ts);
+  return t.toLocaleString('en-IN', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false});
+}
+function ago(ts) {
+  const t = new Date(String(ts || '').replace(' ', 'T'));
+  if (isNaN(t)) return '';
+  const m = Math.round((Date.now() - t) / 60000);
+  if (m < 1) return 'just now';
+  if (m < 90) return m + ' min ago';
+  if (m < 48 * 60) return Math.round(m / 60) + ' h ago';
+  return Math.round(m / 1440) + ' days ago';
+}
+function dur(s) {
+  s = Math.round(Number(s) || 0);
+  if (s < 90) return s + ' s';
+  if (s < 5400) return Math.round(s / 60) + ' min';
+  return Math.floor(s / 3600) + ' h ' + Math.round((s % 3600) / 60) + ' min';
+}
+function dot(id, state) { $(id).className = 'dot ' + (state || ''); }
+function task(t, name) { const x = (t || {})[name]; return x && x.next ? 'next run ' + when(x.next) : ''; }
+
+// ---- services: every 15 s (the hub asks each app at most once every 8 s, however many pages are open)
+async function services() {
+  try {
+    const s = await (await fetch('/api/services')).json();
+    const a = s.automaton || {};
+    const jobs = (a.jobs && a.jobs.running) || [];
+    let h = '';
+    if (a.state === 'up') h += 'Running &middot; answers in ' + a.ms + ' ms';
+    else if (a.state === 'busy') h += '<span class="w">Running, but slow to answer (' + esc(a.error) + '): it is busy, not down. What it runs shows when it answers again.</span>';
+    else if (a.state === 'error') h += '<span class="b">Running, but it answers with an error (HTTP ' + esc(a.code) + ').</span> Open the dashboard; its log is in <code>D:\\backups\\dashboard_logs</code>.';
+    else h += '<span class="b">Not running.</span> Start runs <code>scripts\\restart_dashboard.ps1</code>: no window, logs in <code>D:\\backups\\dashboard_logs</code>.';
+    if (a.state === 'up' && jobs.length) {
+      h += '<ul>' + jobs.map(j => '<li>' + esc(j.state || 'running') + ': <b>' + esc(j.kind) + '</b> ' + esc(j.doc) +
+        ' <span class="m">(' + dur(j.elapsed_s) + ')</span>' +
+        (j.kind === 'ocr' && j.elapsed_s > 6 * 3600 ? ' <span class="m">- OCR writes page files only; maintenance and translation are not held by it</span>' : '') +
+        '</li>').join('') + '</ul>';
+    } else if (a.state === 'up') {
+      h += '<div class="m">No job running.</div>';
+    }
+    h += '<div id="f-budget" class="m">' + BUDGET_HTML + '</div>';
+    $('f-engine').innerHTML = h;
+    dot('d-engine', a.state === 'up' ? 'ok' : a.state === 'busy' ? 'warn' : 'bad');
+    $('b-automaton').style.display = a.state === 'down' ? 'inline-block' : 'none';   // the hub refuses a second start
+    if (a.state === 'up' && Date.now() - BUDGET_AT > 55000) { BUDGET_AT = Date.now(); budget(); }   // once a minute
+
+    const site = s.srangam || {};
+    dot('d-srangam', site.up ? 'ok' : 'bad');
+    $('f-srangam').innerHTML = site.up ? 'Up &middot; ' + site.ms + ' ms' : '<span class="b">Not reachable (' + esc(site.error || site.code) + ')</span>';
+    for (const k of ['panchang', 'booksmith']) {
+      const st = s[k] || {};
+      dot('d-' + k, st.up ? 'ok' : '');
+      $('f-' + k).innerHTML = st.up ? 'Running &middot; ' + st.ms + ' ms' : '<span class="m">Not running.</span>';
+      $('b-' + k).disabled = !!st.up;
+    }
+  } catch (e) { /* the hub is restarting */ }
+}
+
+async function budget() {
+  try {
+    const b = await (await fetch('/proxy/automaton/api/budget')).json();
+    if (b.error || b.budget_usd == null) return;   // on an error the dashboard answers a default cap: not the real one
+    const left = Number(b.remaining_usd != null ? b.remaining_usd : b.budget_usd - b.spent_usd);
+    BUDGET_HTML = 'Spend cap: $' + Number(b.spent_usd).toFixed(2) + ' of $' + Number(b.budget_usd).toFixed(2) +
+      ' spent &middot; <span class="' + (left < 1 ? 'b' : left < 5 ? 'w' : '') + '">$' + left.toFixed(2) + ' left</span>' +
+      (b.paused ? ' &middot; <span class="b">paused</span>' : '');
+    const el = $('f-budget');
+    if (el) el.innerHTML = BUDGET_HTML;
+  } catch (e) {}
+}
+
+// ---- what the desk did: every 60 s
+async function online() {
+  let o;
+  try { o = await (await fetch('/api/online')).json(); } catch (e) { return; }
+  const t = o.tasks || {};
+
+  const db = o.db || {};
+  if (db.error) { $('f-db').innerHTML = '<span class="b">' + esc(db.error) + '</span>'; dot('d-db', 'bad'); }
+  else if (!db.at) { $('f-db').innerHTML = '<span class="m">Counting (read-only, in the background)&hellip;</span>'; }
+  else {
+    const v = db.verses || {}, st = db.stories || {}, pic = db.pictures || {}, nov = db.novels || {};
+    const share = v.all ? Math.round(100 * v.english / v.all) : 0;
+    $('f-db').innerHTML = '<b>' + num(db.texts) + '</b> texts &middot; <b>' + num(v.all) + '</b> verses &middot; English <b>' + num(v.english) +
+      '</b> (' + share + '%) &middot; Hindi <b>' + num(db.hindi) + '</b><br>' +
+      'Names ' + num(db.names) + ' in ' + num(db.mentions) + ' mentions<br>' +
+      'Stories: ' + num(st.approved) + ' approved, ' + num(st.draft) + ' draft, ' + num(st.candidate) + ' proposed<br>' +
+      'Pictures: ' + num(pic.approved) + ' approved, ' + num(pic.draft) + ' draft, ' + num((pic.brief || 0) + (pic['brief-approved'] || 0)) + ' ideas &middot; ' +
+      'graphic novels: ' + num(Object.values(nov).reduce((a, n) => a + n, 0)) + '<br>' +
+      '<span class="m">data\\context.db, counted ' + ago(new Date(db.at * 1000).toISOString()) + (db.counting ? ' (counting again)' : '') + '</span>';
+    dot('d-db', 'ok');
+  }
+
+  const mt = o.maintenance || {};
+  if (db.at && !db.error) {
+    const v = db.verses || {};
+    const gap = db.to_embed != null ? db.to_embed : Math.max(0, (v.english || 0) - (db.vectors || 0));
+    let h = '<b>' + num(db.vectors) + '</b> passage vectors for ' + num(v.english) + ' English verses' +
+      (gap > 0 ? ' <span class="' + (gap > 200 ? 'w' : 'm') + '">(' + num(gap) + ' new or retranslated, to embed)</span>' : ' <span class="m">(all embedded)</span>') +
+      ' &middot; editorial items ' + num(db.brain_items) + '<br>';
+    if (mt.last_done) h += 'Last kept current: ' + when(mt.last_done.at) + ' (QA, vectors, names)';
+    if (mt.skips_since_done > 0 && mt.last_skip) h += '<br><span class="' + (mt.skips_since_done > 2 ? 'w' : 'm') + '">Skipped ' + mt.skips_since_done +
+      ' time(s) since: ' + esc(mt.last_skip.text.replace(/^SKIP: /, '')) + ' (last ' + when(mt.last_skip.at) + ')</span>';
+    if (mt.unfinished_start) {
+      const mins = (Date.now() - new Date(String(mt.unfinished_start).replace(' ', 'T'))) / 60000;
+      h += '<br><span class="' + (mins > 65 ? 'w' : 'm') + '">' + (mins > 65
+        ? 'A run started ' + when(mt.unfinished_start) + ' and never finished: the task stops a run after 1 h.'
+        : 'A run is under way (started ' + when(mt.unfinished_start) + ').') + '</span>';
+    }
+    const nt = task(t, 'SanskritMaintenance');
+    h += '<br><span class="m">SanskritMaintenance, every 3 h' + (nt ? ', ' + nt : '') + '. The vectors travel to the site with the mirror.</span>';
+    $('f-brain').innerHTML = h;
+    const stuck = mt.unfinished_start && (Date.now() - new Date(String(mt.unfinished_start).replace(' ', 'T'))) / 60000 > 65;
+    dot('d-brain', mt.skips_since_done > 2 || stuck || gap > 200 ? 'warn' : 'ok');
+  }
+
+  const mi = o.mirror || {};
+  if (mi.error) { $('f-mirror').innerHTML = '<span class="m">' + esc(mi.error) + '</span>'; }
+  else {
+    const L = mi.last || {}, K = mi.last_ok;
+    let h = 'Last run ' + when(L.ts) + ' (' + ago(L.ts) + '): ' + (L.stopped === 'done' ? '<b>done</b>' : '<span class="b">' + esc(L.stopped) + '</span>');
+    if (L.stopped === 'done' && L.verify_error) h += ', ' + num(L.changed) + ' rows sent; <span class="w">the final check could not run (' + esc(L.verify_error) + ')</span>';
+    else if (L.stopped === 'done') h += ', ' + num(L.equal) + ' groups equal, ' + num(L.different) + ' different, ' + num(L.changed) + ' rows sent';
+    if (L.error) h += '<br><span class="b">' + esc(L.error) + '</span>' + (/getaddrinfo|unreachable|timed out/i.test(L.error) ? ' <span class="m">(the network: the next run retries)</span>' : '');
+    if (L.stopped !== 'done' && K) h += '<br>Last good run ' + when(K.ts) + ': ' + num(K.equal) + ' groups equal, ' + num(K.different) + ' different';
+    const nt = task(t, 'SanskritCorpusMirror');
+    h += '<br><span class="m">SanskritCorpusMirror, every 2 h' + (nt ? ', ' + nt : '') + ' &middot; ' + esc(L.client || '') + '</span>';
+    $('f-mirror').innerHTML = h;
+    const okAge = K ? (Date.now() - new Date(K.ts)) / 3600000 : 99;
+    const checked = L.stopped === 'done' && !L.verify_error && L.different === 0;
+    dot('d-mirror', checked ? 'ok' : okAge < 4.5 ? 'warn' : 'bad');
+  }
+
+  const me = o.media || {};
+  if (me.error) { $('f-media').innerHTML = '<span class="m">' + esc(me.error) + '</span>'; }
+  else {
+    const L = me.last || {}, K = me.last_ok || {};
+    const f = K.files || {}, here = K.here || {};
+    let h = 'Last run ' + when(L.ts) + ': ' + (L.stopped === 'done' ? '<b>done</b>' : '<span class="b">' + esc(L.stopped) + '</span>');
+    if (L.error) h += '<br><span class="b">' + esc(L.error) + '</span>';
+    const onDrive = f.on_drive_after != null ? f.on_drive_after : f.on_drive;
+    h += '<br>Files on Drive: <b>' + num(onDrive) + '</b> of ' + num(f.needed) + ' &middot; pictures ' + num(here.pictures) + ' (' + num(here.approved) + ' approved), graphic novels ' + num(here.novels);
+    h += '<br><span class="m">Right after each mirror run.</span>';
+    $('f-media').innerHTML = h;
+    dot('d-media', L.stopped === 'done' && f.needed === onDrive ? 'ok' : 'warn');
+  }
+
+  const co = o.corner || {};
+  if (co.error) { $('f-corner').innerHTML = '<span class="m">' + esc(co.error) + '</span>'; }
+  else {
+    const L = co.last || {}, mail = L.mail || {};
+    let h = 'Last round ' + when(L.ts) + ' (' + ago(L.ts) + '): ' + (L.stopped === 'done' ? 'done' : '<span class="b">' + esc(L.stopped) + '</span>') +
+      ' &middot; taken ' + num(L.taken) + ', done ' + num(L.done) + ', failed ' + num(L.failed) + ', queued ' + num(L.queued);
+    if (L.error) h += '<br><span class="b">' + esc(L.error) + '</span>';
+    h += '<br>Today: ' + num((co.today || {}).rounds) + ' rounds, ' + num((co.today || {}).done) + ' requests done';
+    h += '<br>Email: ' + (mail.configured ? 'configured, ' + num(mail.sent) + ' sent this round' : '<span class="w">not configured</span>');
+    const nt = task(t, 'SanskritCornerWorker');
+    h += '<br><span class="m">SanskritCornerWorker, every 10 min' + (nt ? ', ' + nt : '') + ' &middot; ' + esc(L.client || '') + '</span>';
+    $('f-corner').innerHTML = h;
+    const age = (Date.now() - new Date(L.ts)) / 60000;
+    dot('d-corner', L.stopped === 'done' && age < 30 ? 'ok' : age < 120 ? 'warn' : 'bad');
+  }
+}
+
+async function corpus() {
+  try {
+    const c = await (await fetch('/api/corpus-stats')).json();
+    const cr = c.crawl.error ? 'crawl: ' + c.crawl.error : 'crawl: ' + num(c.crawl.visited) + ' pages visited, ' + num(c.crawl.queued) + ' queued';
+    $('m-corpus').textContent = cr;
+  } catch (e) {}
+}
+
+async function sitemap() {
+  try {
+    const s = await (await fetch('/api/sitemap-stats')).json();
+    $('f-sitemap').textContent = s.ok ? 'Public sitemap: ' + s.urls + ' URLs (' + s.article_urls + ' articles)' : 'Public sitemap unreachable';
+  } catch (e) {}
+}
+
+async function run(action) {
+  $('log').textContent = '> ' + action + ' ...';
+  const r = await fetch('/api/run/' + action, {method: 'POST'});
+  const j = await r.json();
+  if (!r.ok) { $('log').textContent = (j.already ? 'i ' : 'x ') + action + ': ' + j.error; return; }
+  watching = action;
+  poll();
+}
+
+async function poll() {
+  if (!watching) return;
+  const j = await (await fetch('/api/job/' + watching)).json();
+  if (j.exists) {
+    $('log').textContent = '> ' + watching + '  (' + j.elapsed_s + ' s' + (j.done ? ', done rc=' + j.rc : '') + ')\n' + (j.tail || []).join('\n');
+    $('log').scrollTop = $('log').scrollHeight;
+    if (!j.done) { setTimeout(poll, 1500); return; }
+  }
+  watching = j.done ? null : watching;
+  services();
+}
+
+function showFrame(which) {
+  for (const k of ['srangam', 'automaton', 'panchang', 'booksmith']) {
+    const f = $('f-' + k + '-frame'), t = $('t-' + k);
+    const on = (k === which);
+    t.classList.toggle('active', on);
+    if (on && !f.src) f.src = f.dataset.src;   // lazy-load on first show
+    f.classList.toggle('show', on);
+  }
+  $('t-none').classList.toggle('active', which === null);
+}
+
+services(); online(); sitemap(); corpus();
+setInterval(services, 15000);
+setInterval(online, 60000);
+setInterval(sitemap, 600000);
+setInterval(corpus, 120000);
+</script>
+</body>
+</html>

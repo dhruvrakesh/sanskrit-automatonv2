@@ -535,3 +535,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | U4 (P2) | Sharing what is published | Your decision: pictures need a public path |
 | U5 | The editors' queue, by value | Later |
 | L2 | The first visit | P2 after a check in Hindi and Tamil, as before |
+
+
+## Addendum 2026-10-10 (28) (DOCS38_2026_10_10)
+
+| # | Item | State |
+|---|---|---|
+| D1 | The dashboard: one status read at a time, `/api/health`, the Library says why and follows its runs, Usage, History, Queue | Built and tested (DESK_HEAL_2026_10_10). Next: patch; restart when idle |
+| D2 | Maintenance beside an OCR job, looking again between steps | Built and tested. Next: patch (takes effect at the next run) |
+| H2 | The Srangam Hub v2: the corpus end to end (this PC, the cloud, the site); light checks; detached Start | Built and tested (HUB_V2_2026_10_10). Next: patch; restart the hub; commit in the hub's repository |
+| O1 | Karan Aagama's source | Held by the debris guard. Next: the OCR consensus plan (no spend), then translate |
+| O2 | Ganita Yukti Bhasa | Its last English run: 1 of 180 translated, 180 below the OCR quality bar. Next: re-OCR, not translation |
+| C13 | Researchers see the work in progress | As in addendum 27: your paste, when chosen |

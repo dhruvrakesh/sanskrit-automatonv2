@@ -166,3 +166,20 @@ Get-Content data\corner_worker_log.jsonl -Tail 3
 In the Lovable Cloud SQL editor, read-only, one query per paste, from `docs/cloud/C13_checks_2026-10-10.sql`:
 - **D1** gives the numbers of the Corner's strip ("the offering so far"), straight from the tables. The site calls `corner_offering()`, which the SQL editor (not signed in) may not.
 - **D2** gives the email settings as saved, Reply-to included. The site does not show Reply-to back.
+
+
+## 13. The desk at a glance: the hub (DOCS38_2026_10_10)
+
+- **Where:** the Srangam Hub (http://127.0.0.1:5050, v2 HUB_V2_2026_10_10). Its middle column shows
+  what the mirror, the pictures and the Corner desk last did. Each comes from its own log:
+  - `data\corpus_sync_log.jsonl`: the last run and the last good run, groups equal and different,
+    rows sent, a final check that could not run;
+  - `data\corpus_media_log.jsonl`: files on Drive at the end of the run;
+  - `data\corner_worker_log.jsonl`: rounds today, requests, mail.
+- **When the tasks run next:** from the Task Scheduler.
+- **A network error** (`getaddrinfo`, unreachable, timed out) is marked as such: the next run retries.
+- **Without the hub:**
+  ```powershell
+  Get-Content -Tail 1 -Encoding UTF8 data\corpus_sync_log.jsonl
+  Get-ScheduledTaskInfo -TaskName SanskritCorpusMirror
+  ```

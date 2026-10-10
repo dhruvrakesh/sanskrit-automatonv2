@@ -167,6 +167,10 @@ def _run_job(job: Job):
         job.end  = time.time()
         job.proc = None  # clear reference
         _persist_job(job)  # write to disk immediately
+        try:
+            _status_forget()   # DESK_HEAL_2026_10_10: the counts changed
+        except NameError:
+            pass
 
 # ── Job concurrency limits ───────────────────────────────────────────────────
 # Max parallel OCR jobs (Tesseract is RAM/CPU heavy — 2 is the safe max on most machines)
@@ -650,6 +654,10 @@ def _do_import(inbox_dir, files, auto_split):
             results.append({"doc": doc_name, "pages": (n_pages or 1),
                             "action": "copied", "dest": dest.name})
     _invalidate_corpus_cache()
+    try:
+        _status_forget()   # DESK_HEAL_2026_10_10: a copied page shows on the next status read
+    except NameError:
+        pass
     return results
 
 
@@ -733,13 +741,64 @@ def api_upload():
 def index():
     return send_from_directory(str(SCRIPTS), "dashboard_static.html")
 
+# DESK_HEAL_2026_10_10 -------------------------------------------------------------------------
+# /api/status is the dashboard's heaviest read: the inbox, data/raw and two queries per text (7.2 s
+# on 2026-10-10 with 68 texts, 2,166 inbox pages and 10,903 page files). The page asked for it every
+# 5 s while a job ran and the Srangam Hub every 5 s more, so the reads overlapped and each slowed the
+# next ("Automaton down (ReadTimeout)" in the hub). It is now worked out once at a time, shared by
+# every caller that arrives meanwhile, and kept STATUS_TTL_S seconds; a job that ends clears it.
+STATUS_TTL_S = 10.0
+_STATUS_LOCK = threading.Lock()
+_STATUS_CACHE: dict = {}      # (inbox, raw, db, exports) -> (time, rows)
+_STATUS_GEN = [0]             # bumped by _status_forget: a read that began before it is not kept
+_STARTED_AT = time.time()
+
+
+def _status_forget() -> None:
+    _STATUS_GEN[0] += 1
+    _STATUS_CACHE.clear()
+
+
+def _status_cached(inbox, raw, dbp, exports):
+    key = (str(inbox), str(raw), str(dbp), str(exports))
+    hit = _STATUS_CACHE.get(key)
+    if hit and time.time() - hit[0] < STATUS_TTL_S:
+        return hit[1]
+    with _STATUS_LOCK:        # one read at a time; a caller that waited finds the fresh answer here
+        hit = _STATUS_CACHE.get(key)
+        if hit and time.time() - hit[0] < STATUS_TTL_S:
+            return hit[1]
+        gen = _STATUS_GEN[0]
+        rows = build_status(inbox, raw, dbp, exports)
+        if gen == _STATUS_GEN[0]:   # nothing ended or was imported meanwhile
+            _STATUS_CACHE[key] = (time.time(), rows)
+        return rows
+
+
 @app.get("/api/status")
 def api_status():
     inbox   = pathlib.Path(request.args.get("inbox")   or "inbox")
     raw     = pathlib.Path(request.args.get("raw")     or "data/raw")
     dbp     = pathlib.Path(request.args.get("db")      or "data/context.db")
     exports = pathlib.Path(request.args.get("exports") or "exports")
-    return jsonify(build_status(inbox, raw, dbp, exports))
+    if request.args.get("fresh") == "1":
+        _status_forget()
+    return jsonify(_status_cached(inbox, raw, dbp, exports))
+
+
+@app.get("/api/health")
+def api_health():
+    """DESK_HEAL_2026_10_10: is the dashboard up, and what is it doing - from memory only (no disk, no
+    database), so it answers in milliseconds while jobs run. For the Srangam Hub and the scripts."""
+    now = time.time()
+    with JOBS_LOCK:
+        running = [{"id": j.id, "kind": j.kind, "doc": j.doc, "state": "running" if j.active else "queued",
+                    "elapsed_s": round(now - j.start, 1)} for j in JOBS.values() if j.ok is None]
+    active = sum(1 for r in running if r["state"] == "running")
+    return jsonify({"ok": True, "mark": "DESK_HEAL_2026_10_10", "pid": os.getpid(),
+                    "up_s": round(now - _STARTED_AT, 1),
+                    "jobs": {"count": len(running), "active": active, "queued": len(running) - active,
+                             "running": running}})
 
 @app.get("/api/job/<jid>")
 def api_job(jid):
@@ -2046,6 +2105,79 @@ em{{color:var(--muted)}} strong{{color:var(--cream)}} a{{color:var(--gold)}}
 <main>{inner}</main></body></html>"""
 
 
+# DESK_HEAL_2026_10_10 -------------------------------------------------------------------------
+_HELD_RE = re.compile(r"TRANSLATE_DEBRIS_GUARD|allow-debris|ocr_consensus\.py --doc")
+_DONE_RE = re.compile(r"Done\. (\d+)/(\d+) translated \| (\d+) quality-skipped")
+_PIPE_TR_RE = re.compile(r"Translate\s+: (OK|FAIL)")    # pipeline_queue.py's summary line
+
+
+def _library_notes() -> Dict[str, list]:
+    """What the last translation run of each text and language said when it could not do the work:
+    held by the OCR-debris guard (exit 3: Tesseract debris in the source while its page PDFs are in
+    the inbox), nothing left to translate, or nearly all of what is left below the OCR quality bar.
+    The Library shows it under the text's buttons, so that a press that cannot help says so first.
+    From data/jobs.jsonl, newest first; never the database."""
+    notes: Dict[str, list] = {}
+    seen = set()
+    try:
+        recs = _load_job_history(limit=3000)
+    except Exception:
+        return notes
+    held: Dict[tuple, dict] = {}
+    for r in recs:
+        kind = r.get("kind") or ""
+        if kind not in ("translate", "translate_hi", "translate_both", "pipeline"):
+            continue
+        tail = "%s\n%s" % (r.get("out_tail") or "", r.get("err_preview") or "")
+        if kind == "pipeline" and not (_PIPE_TR_RE.search(tail) or _HELD_RE.search(tail)):
+            continue                        # a pipeline run that did not translate says nothing here
+        doc = r.get("doc") or ""
+        langs = ("en", "hi") if kind == "translate_both" else (("hi",) if kind == "translate_hi" else ("en",))
+        langs = tuple(x for x in langs if (doc, x) not in seen)
+        if not langs:
+            continue
+        seen.update((doc, x) for x in langs)
+        lines = [ln.strip() for ln in tail.strip().splitlines() if ln.strip()]
+        detail = " ".join(lines[-3:])[:600]
+        try:
+            at = time.strftime("%d %b %H:%M", time.localtime(float(r.get("end") or r.get("start") or 0)))
+        except (TypeError, ValueError):
+            at = "?"
+        if r.get("ok") is False and (r.get("rc") == 3 or _HELD_RE.search(tail)):
+            for x in langs:
+                held[(doc, x)] = {"at": at, "detail": detail}
+            continue
+        for x in langs:
+            name = "Hindi" if x == "hi" else "English"
+            text = None
+            if kind in ("translate_both", "pipeline"):
+                pass                        # several runs in one tail: only a hold is read from it
+            elif r.get("ok") and "[NOTHING]" in tail:
+                text = ("%s: nothing left that can be translated (%s). What is left is illegible OCR: re-OCR it "
+                        "rather than translate." % (name, at))
+            elif r.get("ok"):
+                m = _DONE_RE.search(tail)
+                if m:
+                    done, total, skipped = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                    if total and skipped >= 0.8 * total:
+                        text = ("%s: the last run (%s) translated %d of %d; %d are below the OCR quality bar and "
+                                "were not sent. Re-OCR those pages first." % (name, at, done, total, skipped))
+            if text:
+                notes.setdefault(doc, []).append({"lang": x, "text": text, "detail": detail})
+    for doc in sorted({d for d, _ in held}):
+        langs = [x for x in ("en", "hi") if (doc, x) in held]
+        h = held[(doc, langs[0])]
+        what = "English and Hindi" if len(langs) == 2 else ("Hindi" if langs[0] == "hi" else "English")
+        text = ("%s held (%s): the OCR of this text carries Tesseract debris (Latin letters inside the "
+                "Devanagari) and its page PDFs are in the inbox, so the source is repaired first. Plan the "
+                "repair, no spend: python scripts\\ocr_consensus.py --doc %s --threshold 101 "
+                "--include-unassessed. To translate anyway, start the dashboard with SA_ALLOW_DEBRIS=1."
+                % (what, h["at"], doc))
+        notes.setdefault(doc, []).insert(0, {"lang": "both" if len(langs) == 2 else langs[0], "text": text,
+                                             "detail": h["detail"]})
+    return notes
+
+
 @app.get("/library")
 def library():
     """Reader front door: every translated text, grouped by category, with
@@ -2097,6 +2229,7 @@ def library():
         con.close()
     except Exception as e:
         return f"<pre>Library error: {_html.escape(str(e))}</pre>", 500
+    notes = _library_notes()   # DESK_HEAL_2026_10_10
 
     cats = OrderedDict()
     total_docs = total_en = total_hi = 0
@@ -2133,6 +2266,13 @@ def library():
                 acts += (f'<button class="tr-rest hi" title="Translate Hindi for verses that have English but no Hindi"'
                          f' onclick="translateRest(\'{code}\',\'hi\',this)">&#2361;&#2367; Add Hindi</button>')
             acts_html = f'<div class="cardacts">{acts}</div>' if acts else ''
+            # DESK_HEAL_2026_10_10: what the last run said, when it could not do the work
+            for _n in notes.get(code, []):
+                if ((_n["lang"] == "en" and pct >= 100) or (_n["lang"] == "hi" and h >= en)
+                        or (_n["lang"] == "both" and pct >= 100 and h >= en)):
+                    continue
+                acts_html += (f'<div class="cardnote" title="{_html.escape(_n["detail"])}">'
+                              f'{_html.escape(_n["text"])}</div>')
             # Filled in by refreshBooksmith() once /api/booksmith/state answers.
             acts_html += f'<div class="bsacts" id="bs-{_html.escape(code)}"></div>'
             body += (
@@ -2190,6 +2330,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 .tr-rest:hover{{border-color:var(--gold);color:var(--gold)}}
 .tr-rest.hi{{font-family:'Noto Serif Devanagari',serif}}
 .tr-rest:disabled{{opacity:.6;cursor:default}}
+.cardnote{{margin-top:6px;font-family:'Inter',sans-serif;font-size:10.5px;line-height:1.45;color:#d9b36a;border-left:2px solid #6b5420;padding:2px 0 2px 7px;cursor:help}}
 /* BOOKSMITH_WIRING_2026_09_12 */
 .card-wrap{{position:relative}}
 .pick{{position:absolute;top:8px;right:8px;z-index:3;cursor:pointer;padding:4px}}
@@ -2245,15 +2386,38 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 <div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;display:none;z-index:50"></div>
 <script>
 function _toast(m){{var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){{t.style.display='none';}},4200);}}
-async function translateRest(doc, lang, btn){{
-  btn.disabled=true; var orig=btn.textContent; btn.textContent='starting…';
+async function translateRest(doc, lang, btn){{   // DESK_HEAL_2026_10_10: says what the run did, not only that it started
+  btn.disabled=true; var orig=btn.textContent; btn.textContent='starting...';
   try{{
     var r=await fetch('/api/translate',{{method:'POST',headers:{{'Content-Type':'application/json'}},
       body:JSON.stringify({{doc:doc,lang:lang,limit:100000}})}});
     var d=await r.json();
-    if(d.job){{ _toast('Translating '+(lang==='both'?'EN+हि':lang.toUpperCase())+' for '+doc+' — watch the Dashboard for progress.'); btn.textContent='queued ✓'; }}
-    else{{ _toast('Could not start: '+(d.error||'unknown')); btn.textContent=orig; btn.disabled=false; }}
+    if(!d.job){{ _toast('Could not start: '+(d.error||'unknown')); btn.textContent=orig; btn.disabled=false; return; }}
+    btn.textContent='queued...';
+    _watchJob(d.job, doc, lang, btn, orig, 0);
   }}catch(e){{ _toast('Request failed: '+e); btn.textContent=orig; btn.disabled=false; }}
+}}
+function _jobVerdict(j){{
+  var out=(j.out||'')+' '+(j.err||'');
+  if(j.ok===false && /allow-debris|ocr_consensus|TRANSLATE_DEBRIS_GUARD/.test(out)) return {{word:'held', text:'Held: the OCR of this text carries Tesseract debris and its page PDFs are in the inbox, so the source is repaired first (OCR consensus, no spend). Reload the Library: the note under the text has the command.'}};
+  if(j.ok===false && /KILLED/.test(out)) return {{word:'stopped', text:'Stopped by hand.'}};
+  if(j.ok===false) return {{word:'failed', text:'It failed: the Dashboard History has the reason.'}};
+  if(out.indexOf('[NOTHING]')>=0) return {{word:'nothing to do', text:'Nothing to translate: every verse has it already, or what is left is illegible OCR (re-OCR it rather than translate).'}};
+  var m=out.match(/Done[.] ([0-9]+)[/]([0-9]+) translated [|] ([0-9]+) quality-skipped/);
+  if(m) return {{word:'done: '+m[1]+' of '+m[2], text:m[1]+' of '+m[2]+' verses translated; '+m[3]+' below the OCR quality bar were not sent.'}};
+  return {{word:'done', text:'Done.'}};
+}}
+async function _watchJob(id, doc, lang, btn, orig, n){{
+  try{{
+    var j=await (await fetch('/api/job/'+encodeURIComponent(id))).json();
+    if(j.state==='done'){{
+      var v=_jobVerdict(j); btn.textContent=v.word; btn.title=v.text; btn.disabled=false;
+      _toast(doc+' ('+lang.toUpperCase()+'): '+v.text); return;
+    }}
+    btn.textContent = j.state==='queued' ? 'queued: after the running one' : 'translating...';
+    if(n===45) _toast(doc+' ('+lang.toUpperCase()+') is still running: this button follows it; so does the Dashboard.');
+  }}catch(e){{ if(n>400) {{ btn.textContent=orig; btn.disabled=false; return; }} }}
+  setTimeout(function(){{ _watchJob(id, doc, lang, btn, orig, n+1); }}, n<45 ? 2000 : 10000);
 }}
 
 /* BOOKSMITH_WIRING_2026_09_12

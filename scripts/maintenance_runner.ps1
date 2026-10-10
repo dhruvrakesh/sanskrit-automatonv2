@@ -17,6 +17,23 @@ function Log($m) {
     Add-Content -Path $log -Value ("[" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + "] " + $m)
 }
 
+# DESK_HEAL_2026_10_10: the guard below lets maintenance run beside an OCR job. When that OCR ends the
+# dashboard may start its ingest and translation stage, and a person may start a run meanwhile. So
+# between the steps it looks again, and leaves the rest for the next tick when a database writer has
+# started. (A writer that starts inside a step waits on SQLite's lock: WAL, busy_timeout 30-60 s.)
+function Test-Writer($after) {
+    try {
+        $now = Invoke-RestMethod -Uri "http://127.0.0.1:5057/api/jobs/running" -TimeoutSec 6
+    } catch {
+        return $false
+    }
+    $w = @(@($now.running) | Where-Object { $_.kind -ne "ocr" })
+    if ($w.Count -eq 0) { return $false }
+    $what = (@($w | Select-Object -First 3 | ForEach-Object { [string]$_.kind + " " + [string]$_.doc }) -join ", ")
+    Log ("SKIP rest after step " + $after + ": the dashboard started " + $what + " - the next tick goes on")
+    return $true
+}
+
 # Always record that the runner fired, before any guard, so a silent task is
 # never a mystery again.
 Log "TICK - maintenance runner started (user=$env:USERNAME)"
@@ -25,8 +42,13 @@ Log "TICK - maintenance runner started (user=$env:USERNAME)"
 try {
     $r = Invoke-RestMethod -Uri "http://127.0.0.1:5057/api/jobs/running" -TimeoutSec 6
     $busy = [int]$r.count
-    if ($busy -gt 0) { Log "SKIP: dashboard busy ($busy job(s) running/queued)"; exit 0 }
-    Log "dashboard idle (0 jobs) - ok to maintain"
+    # DESK_HEAL_2026_10_10: an OCR job writes page files only, never the database, so it does not hold
+    # maintenance. One OCR of 1,983 pages (Yoga Vasistha) held every run from 2026-10-09 15:00: no new
+    # vectors, QA or names for a day.
+    $writers = @(@($r.running) | Where-Object { $_.kind -ne "ocr" })
+    if ($writers.Count -gt 0) { Log "SKIP: dashboard busy ($busy job(s) running/queued)"; exit 0 }
+    if ($busy -gt 0) { Log "dashboard runs $busy OCR job(s) only (page files, not the database) - ok to maintain" }
+    else { Log "dashboard idle (0 jobs) - ok to maintain" }
 } catch {
     Log "dashboard not reachable - proceeding (no in-process writer)"
 }
@@ -45,11 +67,13 @@ try {
     $ta = Get-Date
     & $py scripts\qa_scan.py --db data\context.db --lang en --write 2>&1 | Add-Content $log
     Log ("STEP a qa_scan      {0:n0}s" -f ((Get-Date) - $ta).TotalSeconds)
+    if (Test-Writer "a") { exit 0 }   # DESK_HEAL_2026_10_10
 
     # b) incremental semantic index (CHEAP) - embeds only new/changed verses
     $tb = Get-Date
     & $py scripts\build_embeddings.py --db data\context.db 2>&1 | Add-Content $log
     Log ("STEP b embeddings   {0:n0}s" -f ((Get-Date) - $tb).TotalSeconds)
+    if (Test-Writer "b") { exit 0 }   # DESK_HEAL_2026_10_10
 
     # b2) BRAIN_ITEMS_2026_10_07: stories, found episodes and drawn images into the Ask index (CHEAP,
     #     incremental: only new or changed items are embedded; retired ones are dropped)
@@ -61,6 +85,7 @@ try {
     } catch {
         Log ("STEP b2 brain items SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $tb2).TotalSeconds, $_)
     }
+    if (Test-Writer "b2") { exit 0 }   # DESK_HEAL_2026_10_10
 
     # c) incremental entity layer (MODERATE) - NEW verses only.
     #

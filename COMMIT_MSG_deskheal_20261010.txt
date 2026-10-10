@@ -1,0 +1,28 @@
+The desk, healed (DESK_HEAL_2026_10_10); the Srangam Hub v2, the corpus end to end (HUB_V2_2026_10_10); recorded (DOCS38_2026_10_10)
+
+docs/DESK_HEAL_2026-10-10.md: what was reported and found at midday on 10 Oct. The translator worked. Hub
+v1 checked the dashboard with /api/status (7.2 s) every 5 s with a 2.5 s limit, so it showed "down" and
+slowed it. Karan Aagama is held by the debris guard (exit 3). Ganita's last English run sent 1 of 180.
+Usage read the old cache's fields. Maintenance skipped six times behind one OCR. The 10:32 mirror failed
+on DNS.
+scripts/patch_desk_heal_2026_10_10.py (anchored, all or nothing, marker-idempotent, line endings kept):
+- dashboard.py: /api/status built once at a time, shared and kept 10 s, cleared by a job that ends, an
+  import or ?fresh=1, never keeping an answer begun before; /api/health from memory; the Library says
+  why a press cannot help (held, nothing left, below the OCR bar) and follows the run a button starts to
+  its outcome.
+- dashboard_static.html: Usage reads cost_tracker's summary; History tells held and nothing from fail,
+  opens a row to its last lines and loads when opened; the Queue is never empty; one status read at a
+  time, Refresh asks a fresh one.
+- maintenance_runner.ps1: an OCR job (page files only) no longer holds maintenance; between steps it
+  looks again and leaves the rest when a database writer has started.
+docs/hub/HUB_V2_2026-10-10/ + scripts/patch_hub_v2_2026_10_10.py (md5-guarded over hub v1; the hub is its
+own repository): /api/health or /api/jobs/running, never /api/status; one round of checks per 8 s for
+every page; busy is not down; Start through restart_dashboard.ps1; this PC (engine, database, brain),
+the cloud (mirror, pictures, Corner desk, from their logs, with the tasks' next runs) and the site; the
+database counted read-only in the background.
+tests/test_desk_heal_2026_10_10.py (13), tests/test_hub_v2_2026_10_10.py (16); the existing dashboard
+tests still pass.
+scripts/patch_docs38_2026_10_10.py: PLATFORM 41, RUNBOOK, ENTERPRISE_PATH addendum 28, SYNC_COMMANDS 13.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

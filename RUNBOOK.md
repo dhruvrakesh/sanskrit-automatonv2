@@ -1546,3 +1546,24 @@ The order matters: the desk's worker 1.2 before C10b.
    - V1, V2, V3;
    - D2, to see Reply-to as saved.
 4. **Settings:** Reply-to = an inbox you read; Save. Then ask, as yourself, for "An idea for a cover" ($0.01): its email arrives after the desk's next round.
+
+
+## The desk, healed; the hub v2 (DOCS38_2026_10_10)
+
+1. **The hub, at once.** From the automaton folder:
+   - `python scripts\patch_hub_v2_2026_10_10.py --check`, then without `--check`.
+   - Close the hub's console window and run `start-hub.bat`.
+   - The hub works against the dashboard as it runs now.
+2. **The dashboard's files.**
+   - `python scripts\patch_desk_heal_2026_10_10.py --check`, then without `--check`.
+   - Reload the dashboard page and the Library (Ctrl+F5).
+   - The maintenance task takes it at its next run.
+3. **The dashboard itself, only when idle.** `scripts\restart_dashboard.ps1` refuses while jobs run.
+   - While the OCR of Yoga Vasistha runs (about a day at a page a minute), you can wait: maintenance no
+     longer waits for it.
+   - Or press Pause All, restart, then start that text's OCR again. It resumes from the missing pages.
+4. **A text the Library marks "held":** run the OCR consensus plan it shows (no spend). Translate it
+   after the repair, or start the dashboard with `SA_ALLOW_DEBRIS=1` to translate it anyway.
+5. **Check:**
+   - `Invoke-RestMethod http://127.0.0.1:5057/api/health` (after the restart).
+   - `Get-Content D:\backups\maintenance_log.txt -Tail 6` (after the next tick).

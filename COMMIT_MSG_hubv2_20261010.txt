@@ -1,0 +1,19 @@
+Hub v2: the corpus end to end; light checks; Start without a window (HUB_V2_2026_10_10)
+
+v1 checked the Sanskrit Automaton dashboard with /api/status, its heaviest read (7.2 s), every 5 s with
+a 2.5 s limit: the hub showed it "down (ReadTimeout)" while it ran, and slowed it. v2:
+- asks /api/health (or /api/jobs/running on an older dashboard), never /api/status, and its proxy no
+  longer forwards it;
+- runs one round of checks side by side, shared by every page for 8 s; a dashboard that holds its port
+  but answers slowly is busy, not down;
+- starts the dashboard with scripts\restart_dashboard.ps1 (no window, logs in D:\backups\dashboard_logs)
+  instead of run.bat, and still never twice;
+- shows the corpus end to end: this PC (the engine, the database, the Gemini brain), the cloud (the mirror
+  to Supabase, the pictures on Drive, the Corner desk, from their own logs, with the scheduled tasks' next
+  runs) and the site (srangam.nartiang.org and its working corpus);
+- counts the database read-only (mode=ro) in the background every 10 min, never in a request.
+README.md: section U4. Installed by sanskrit-automatonv2/scripts/patch_hub_v2_2026_10_10.py (md5-guarded
+over v1); tests in sanskrit-automatonv2/tests/test_hub_v2_2026_10_10.py.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

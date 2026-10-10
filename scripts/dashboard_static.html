@@ -237,7 +237,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
     <a class="btn-refresh" href="/ask" target="_blank" style="text-decoration:none;margin-right:6px" title="Ask questions answered from the corpus, with cited verses">&#128172; Ask the Corpus</a>
     <button class="btn-refresh" onclick="openDatabase(this)" style="margin-right:6px" title="Open the corpus in Datasette for SQL querying (snapshots first, then launches)">&#128190; Database</button>
-    <button class="btn-refresh" onclick="refresh()">&#x27F3; Refresh</button>
+    <button class="btn-refresh" onclick="refresh(true)">&#x27F3; Refresh</button>
   </header>
 
   <!-- Corpus browser sidebar -->
@@ -341,8 +341,8 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <div id="pipelineWrap">
       <div class="empty-state">
         <div class="e-icon">&#x1F4C2;</div>
-        <h3>No documents in inbox</h3>
-        <p>Use the corpus browser on the left to select scriptures from the D: drive and import them.</p>
+        <h3>Loading the documents&hellip;</h3>
+        <p>The list takes a few seconds while jobs run. <!-- DESK_HEAL_2026_10_10 --></p>
       </div>
     </div>
   </main>
@@ -514,7 +514,7 @@ async function uploadPicked(input) {
     if (copied.length)    msg.push(copied.length+' added');
     toast('Uploaded ' + (d.count||0) + ' — ' + (msg.join(' · ') || 'done') + '. Refreshing…');
     var jumpDoc = (copied[0] && copied[0].doc);
-    setTimeout(function(){ refresh(); if (jumpDoc) setTimeout(function(){ flashDoc(jumpDoc); }, 900); }, 1500);
+    setTimeout(function(){ refresh(true); if (jumpDoc) setTimeout(function(){ flashDoc(jumpDoc); }, 900); }, 1500);
   } catch(e) { toast('Upload error: ' + e); }
 }
 async function importFromDisk() {
@@ -541,7 +541,7 @@ async function importFromDisk() {
     el.value = '';
     // For a doc that landed immediately (single-page copy), jump to & flash its row.
     var jumpDoc = (copied[0] && copied[0].doc);
-    setTimeout(function(){ refresh(); if (jumpDoc) setTimeout(function(){ flashDoc(jumpDoc); }, 900); }, 1200);
+    setTimeout(function(){ refresh(true); if (jumpDoc) setTimeout(function(){ flashDoc(jumpDoc); }, 900); }, 1200);
   } catch(e) { toast('Import error: ' + e); }
 }
 async function openDatabase(el) {
@@ -587,14 +587,26 @@ function applyPipeFilter() {
 }
 
 // ── Pipeline status ────────────────────────────────────────────────────────
-async function refresh() {
+// DESK_HEAL_2026_10_10: never two status reads at once. A call that comes while one runs is kept and
+// run once after it (the dashboard keeps the answer 10 s, so that is cheap); refresh(true), the
+// Refresh button and an import, asks the dashboard to work it out again.
+let _refreshing = false, _refreshAgain = false, _refreshFresh = false;
+async function refresh(force) {
+  if (force === true) _refreshFresh = true;
+  if (_refreshing) { _refreshAgain = true; return; }
+  _refreshing = true;
+  const fresh = _refreshFresh; _refreshFresh = false;
   try {
     const r = await fetch('/api/status?inbox=' + encodeURIComponent(cfg.inbox) +
       '&raw=' + encodeURIComponent(cfg.raw) +
       '&db=' + encodeURIComponent(cfg.db) +
-      '&exports=' + encodeURIComponent(cfg.exports));
+      '&exports=' + encodeURIComponent(cfg.exports) + (fresh ? '&fresh=1' : ''));
     renderPipeline(await r.json());
   } catch(e) { toast('Refresh failed: ' + e, 'fail'); }
+  finally {
+    _refreshing = false;
+    if (_refreshAgain) { _refreshAgain = false; refresh(); }
+  }
 }
 
 // ---- PHASE_G_JS_2026_09_06 -------------------------------------------------
@@ -1163,9 +1175,26 @@ function switchTab(name) {
   });
   if (name === 'queue') populateQueueDocSelect();
   if (name === 'qa') loadQa();
+  if (name === 'history') loadHistory();   // DESK_HEAL_2026_10_10: a tab shows its content when opened
+  if (name === 'usage') loadUsage();
 }
 
 // ── Job history ────────────────────────────────────────────────────────────
+// DESK_HEAL_2026_10_10: a run held on purpose, or one with nothing to do, is not a failure; a row opens
+// to the run's last lines
+function histStatus(j) {
+  const out = String(j.out_tail || '') + '\n' + String(j.err_preview || '');
+  if (j.ok === true && /\[NOTHING\]/.test(out)) return '<span style="color:var(--muted)" title="Nothing was left to do">&#x2713; nothing</span>';
+  if (j.ok === true) return '<span style="color:#4ade80">&#x2713; ok</span>';
+  if (j.ok === false && (j.rc === 3 || /allow-debris|ocr_consensus/.test(out))) return '<span style="color:var(--gold)" title="Held on purpose: open the row for why">&#x23F8; held</span>';
+  if (j.ok === false && /KILLED/.test(out)) return '<span style="color:var(--muted)">&#x25A0; stopped</span>';
+  if (j.ok === false) return '<span style="color:#f87171">&#x2717; fail</span>';
+  return '<span style="color:var(--muted)">?</span>';
+}
+function histToggle(i) {
+  const r = document.getElementById('hist-d-' + i);
+  if (r) r.style.display = r.style.display === 'none' ? '' : 'none';
+}
 async function loadHistory() {
   const el = document.getElementById('historyBody');
   el.innerHTML = '<span style="color:var(--muted)">Loading&hellip;</span>';
@@ -1175,16 +1204,18 @@ async function loadHistory() {
     if (!rows.length) { el.innerHTML = '<span style="color:var(--muted)">No job history yet.</span>'; return; }
     let html = '<table style="width:100%;border-collapse:collapse">' +
       '<tr style="color:var(--muted);border-bottom:1px solid var(--border)"><th style="text-align:left;padding:2px 4px">Kind</th><th style="text-align:left;padding:2px 4px">Doc</th><th style="padding:2px 4px">Status</th><th style="padding:2px 4px">Duration</th><th style="padding:2px 4px">When</th></tr>';
-    rows.forEach(function(j) {
+    rows.forEach(function(j, i) {
       const when = j.start ? new Date(j.start * 1000).toLocaleString('en-IN', {hour12:false,month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
       const dur  = j.duration_s ? (j.duration_s >= 60 ? Math.round(j.duration_s/60) + 'm' : j.duration_s + 's') : '';
-      const ok   = j.ok === true ? '<span style="color:#4ade80">&#x2713; ok</span>' : j.ok === false ? '<span style="color:#f87171">&#x2717; fail</span>' : '<span style="color:var(--muted)">?</span>';
-      html += '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">' +
+      const last = String((j.out_tail || '') + '\n' + (j.err_preview || '')).trim().split(/\r?\n/).filter(function(x) { return x.trim(); }).slice(-6).join('\n');
+      html += '<tr style="border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer" title="Open: the run\'s last lines" onclick="histToggle(' + i + ')">' +
         '<td style="padding:3px 4px;color:var(--gold)">' + esc(j.kind||'') + '</td>' +
         '<td style="padding:3px 4px;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(j.doc||'') + '</td>' +
-        '<td style="padding:3px 4px;text-align:center">' + ok + '</td>' +
+        '<td style="padding:3px 4px;text-align:center">' + histStatus(j) + '</td>' +
         '<td style="padding:3px 4px;text-align:center;color:var(--muted)">' + dur + '</td>' +
-        '<td style="padding:3px 4px;color:var(--muted)">' + when + '</td></tr>';
+        '<td style="padding:3px 4px;color:var(--muted)">' + when + '</td></tr>' +
+        '<tr id="hist-d-' + i + '" style="display:none"><td colspan="5" style="padding:4px 6px 8px;color:var(--muted);white-space:pre-wrap;word-break:break-word;font-family:JetBrains Mono,monospace;font-size:9px">' +
+        esc(j.doc || '') + '\n' + esc(last || '(no output kept)') + '</td></tr>';
     });
     html += '</table>';
     el.innerHTML = html;
@@ -1238,29 +1269,49 @@ function setBudget() {
 }
 function resumeBudget() { postBudget({resume: true}); }
 
-async function loadUsage() {
+async function loadUsage() {   // DESK_HEAL_2026_10_10: cost_tracker's summary as it is (by_engine is an object)
   const el = document.getElementById('usageBody');
   el.innerHTML = '<span style="color:var(--muted)">Loading&hellip;</span>';
   try {
     const r = await fetch('/api/usage');
     const d = await r.json();
     if (d.error) { el.innerHTML = '<span style="color:var(--muted)">' + esc(d.error) + '</span>'; return; }
+    const eng = d.by_engine || {};
+    const rows = Array.isArray(eng) ? eng.slice() : Object.keys(eng).map(function(k) { return Object.assign({engine: k}, eng[k]); });
+    rows.sort(function(a, b) { return (+b.cost_usd || 0) - (+a.cost_usd || 0); });
+    const sum = function(f) { return rows.reduce(function(a, e) { return a + (+e[f] || 0); }, 0); };
+    const usd = function(v) { return '$' + (+v || 0).toFixed(2); };
+    const spent = d.budget && d.budget.spent_usd != null ? d.budget.spent_usd : (d.cost_estimate_usd != null ? d.cost_estimate_usd : sum('cost_usd'));
+    const calls = rows.length ? sum('calls') : (+d.total_calls || 0);
     let html = budgetHtml(d.budget) + '<div style="margin-bottom:8px">' +
-      '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">Translation Cache</div>' +
-      '<div>Total API calls: <b>' + d.total_calls + '</b></div>' +
-      '<div>Total output chars: <b>' + (d.total_out_chars||0).toLocaleString() + '</b></div>' +
-      '<div style="margin-top:4px;color:var(--gold)">Est. cost: <b>$' + (d.budget && d.budget.spent_usd != null ? d.budget.spent_usd : d.cost_estimate_usd) + '</b></div>' +
-      '<div style="color:var(--muted);font-size:9px;margin-top:2px">' + esc(d.note||'') + '</div></div>';
-    if (d.by_engine && d.by_engine.length) {
-      html += '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Engine</th><th>Calls</th><th>Chars</th><th>Cost</th></tr>';
-      d.by_engine.forEach(function(e) {
+      '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">What the paid steps used</div>' +
+      '<div>API calls: <b>' + calls.toLocaleString() + '</b> &middot; passages: <b>' + sum('passages').toLocaleString() + '</b></div>' +
+      '<div>Characters sent: <b>' + sum('in_chars').toLocaleString() + '</b> &middot; received: <b>' + (rows.length ? sum('out_chars') : (+d.total_out_chars || 0)).toLocaleString() + '</b></div>' +
+      '<div style="margin-top:4px;color:var(--gold)">Spent, all time: <b>' + usd(spent) + '</b></div>' +
+      '<div style="color:var(--muted);font-size:9px;margin-top:2px">' + esc(d.note || 'Translation, OCR, pictures, stories, names and the brain, as cost_tracker records them.') + '</div></div>';
+    if (rows.length) {
+      html += '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Engine</th><th>Calls</th><th>Chars out</th><th>Cost</th></tr>';
+      rows.forEach(function(e) {
         html += '<tr style="border-top:1px solid rgba(255,255,255,.05)">' +
-          '<td style="color:var(--gold);padding:3px 0">' + esc(e.engine) + '</td>' +
-          '<td style="text-align:center">' + e.calls + '</td>' +
-          '<td style="text-align:center">' + (e.out_chars||0).toLocaleString() + '</td>' +
-          '<td style="text-align:center">$' + e.cost_usd + '</td></tr>';
+          '<td style="color:var(--gold);padding:3px 0;word-break:break-all">' + esc(e.engine) + '</td>' +
+          '<td style="text-align:center">' + (+e.calls || 0).toLocaleString() + '</td>' +
+          '<td style="text-align:center">' + (+e.out_chars || 0).toLocaleString() + '</td>' +
+          '<td style="text-align:center">' + usd(e.cost_usd) + '</td></tr>';
       });
       html += '</table>';
+    }
+    if (d.recent && d.recent.length) {
+      html += '<div style="color:var(--gold);font-weight:600;margin:10px 0 4px">Last paid calls</div>';
+      d.recent.slice(0, 10).forEach(function(c) {
+        const t = new Date(c.ts);
+        const at = isNaN(t) ? String(c.ts || '') : t.toLocaleString('en-IN', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false});
+        html += '<div style="display:flex;gap:6px;border-top:1px solid rgba(255,255,255,.04);padding:2px 0">' +
+          '<span style="color:var(--muted);white-space:nowrap">' + esc(at) + '</span>' +
+          '<span style="color:var(--gold)">' + esc(c.kind || '') + '</span>' +
+          '<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(c.doc || '') + '</span>' +
+          '<span>' + (c.cost_usd ? '$' + (+c.cost_usd).toFixed(4) : '') + '</span>' +
+          (c.ok === false ? '<span style="color:#f87171">&#x2717;</span>' : '') + '</div>';
+      });
     }
     el.innerHTML = html;
   } catch(e) { el.innerHTML = '<span style="color:#f87171">Error: ' + esc(String(e)) + '</span>'; }
@@ -1539,30 +1590,23 @@ function renderProgress(d) {
 // ── Queue panel ────────────────────────────────────────────────────────────
 let _queueData = [];
 
-function populateQueueDocSelect() {
+function populateQueueDocSelect() {   // DESK_HEAL_2026_10_10: also from the last status; opens on the text being translated
   const sel = document.getElementById('queueDocSelect');
-  if (sel.options.length > 1) return; // already populated
-  // Pull from pipeline table rows
-  document.querySelectorAll('.pipeline-table tr[data-doc]').forEach(function(tr) {
-    const doc = tr.getAttribute('data-doc');
-    if (doc) {
-      const opt = document.createElement('option');
-      opt.value = doc;
-      opt.textContent = doc;
-      sel.appendChild(opt);
-    }
-  });
-  // Also try from corpusData
-  if (window.corpusData) {
-    const existing = new Set(Array.from(sel.options).map(function(o){ return o.value; }));
-    (window.corpusData.docs || []).forEach(function(d) {
-      if (d.code && !existing.has(d.code)) {
-        const opt = document.createElement('option');
-        opt.value = d.code; opt.textContent = d.code;
-        sel.appendChild(opt);
-      }
-    });
-  }
+  const have = new Set(Array.from(sel.options).map(function(o) { return o.value; }));
+  const add = function(doc) {
+    if (!doc || have.has(doc)) return;
+    const opt = document.createElement('option');
+    opt.value = doc; opt.textContent = doc;
+    sel.appendChild(opt); have.add(doc);
+  };
+  document.querySelectorAll('.pipeline-table tr[data-doc]').forEach(function(tr) { add(tr.getAttribute('data-doc')); });
+  (window._lastPipeRows || []).forEach(function(r) { add(r && r.doc); });
+  if (window.corpusData) (window.corpusData.docs || []).forEach(function(d) { add(d && d.code); });
+  if (sel.value) return;
+  fetch('/api/jobs/running').then(function(r) { return r.json(); }).then(function(d) {
+    const t = (d.running || []).find(function(j) { return /^translate|pipeline/.test(j.kind || '') && j.state === 'running'; });
+    if (t && !sel.value && have.has(t.doc)) { sel.value = t.doc; loadQueue(); }
+  }).catch(function() {});
 }
 
 async function loadQueue() {
