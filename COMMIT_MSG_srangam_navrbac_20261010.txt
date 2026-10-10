@@ -1,0 +1,13 @@
+The working corpus and Learn in the navigation, by role (NAV_RBAC_2026_10_10)
+
+The header linked to the working corpus nowhere. Now: a "Corpus" menu (Library, Stories, Names,
+Pictures, Graphic novels, Researchers' Corner, Learn, Published texts) for whoever may read it, the same
+section in the phone's menu sheet and a "Corpus" tab in its bottom bar; "Admin" for admins only;
+"Sign in" while signed out. A "Working corpus" group (Library, Corner, Learn) in the admin sidebar.
+The corpus home says where to start. src/lib/corpusAccess.ts: the roles already held decide
+(researcher, admin, super_admin); any other signed-in account asks corpus_reader_allowed() once; the
+pages still ask the database. src/__tests__/nav-rbac.test.tsx (11). Phase AD of docs/RELIABILITY_AUDIT.md.
+Made in the automaton repo (docs/srangam/NAV_RBAC_2026-10-10).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

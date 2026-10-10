@@ -509,3 +509,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | L2 | The first visit | Two cuts built (P3, P4). Next: P2 after a check in Hindi and Tamil; P1 by traffic mix |
 | T2 | Learn quests for C10's kinds | Next |
 | R5, B1, P2 | As in addendum 21 | As before |
+
+
+## Addendum 2026-10-10 (26) (DOCS36_2026_10_10)
+
+| # | Item | State |
+|---|---|---|
+| C10 | The Corner level with the desk | Live: worker 1.2 (07:28), C10b, Srangam 852d852 |
+| R6, A3 | Email from nartiang.org | Database and site live; RESEND_API_KEY added; next: Lovable deploys corner-mail, then Reply-to and Email on |
+| L2 | The first visit | P3 and P4 live (852d852). Next: P2 after a check in Hindi and Tamil |
+| N1 | The working corpus and Learn in the navigation, by role | Built and tested (NAV_RBAC_2026_10_10). Next: push and Publish |
+| T2 | Learn quests for C10's kinds | Next |

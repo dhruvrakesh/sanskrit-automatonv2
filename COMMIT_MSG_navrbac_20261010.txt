@@ -1,0 +1,15 @@
+The working corpus and Learn in the site's navigation, by role (NAV_RBAC_2026_10_10); the morning of 10 Oct recorded (DOCS36_2026_10_10)
+
+docs/srangam/NAV_RBAC_2026-10-10/ + scripts/patch_srangam_nav_rbac_2026_10_10.py (md5-guarded over
+Srangam 852d852): the header had no link to the working corpus. Now a "Corpus" menu (Library, Stories,
+Names, Pictures, Graphic novels, Researchers' Corner, Learn, Published texts) for whoever may read it,
+the same in the phone's menu sheet and a "Corpus" tab in its bottom bar; "Admin" for admins only and
+"Sign in" while signed out; a "Working corpus" group in the admin sidebar; the corpus home says where
+to start. Roles researcher/admin/super_admin decide with no request; any other signed-in account asks
+corpus_reader_allowed() once. No database change. 11 new tests; Phase AD of RELIABILITY_AUDIT.
+scripts/patch_docs36_2026_10_10.py: PLATFORM 39 (worker 1.2 live at 07:28 with the mail flush waiting
+for corner-mail to be deployed; C10b and C12 checks as expected; 852d852 published), RUNBOOK,
+ENTERPRISE_PATH addendum 26, RESEARCHERS_CORNER 10.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -1513,3 +1513,17 @@ The order matters: the desk's worker 1.2 before C10b.
    - then Email on.
 
 **To stop all email at once:** Settings -> Email off, or in the SQL editor `UPDATE corner.settings SET value = 'false', updated_at = now() WHERE key = 'mail_enabled';`. The outbox keeps what is waiting.
+
+
+## The corpus in the navigation; mail still to switch on (DOCS36_2026_10_10)
+
+1. **Srangam:**
+   - `patch_srangam_nav_rbac_2026_10_10.py --check`, then without `--check`;
+   - typecheck, tests and build;
+   - commit the paths it prints;
+   - pull before you push; push; Publish.
+2. **Look, signed in as a researcher:** the header shows "Corpus" (with Learn and the Corner) and no "Admin". Signed out it shows "Sign in". On a phone the bottom bar has a "Corpus" tab.
+3. **Email:**
+   - Lovable: deploy the edge function corner-mail without changing its code.
+   - The next desk round's log has `"mail": {"configured": true, ...}`.
+   - Then Corner -> Settings: Reply-to, then Email on.

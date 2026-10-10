@@ -175,3 +175,15 @@ The design, the rules and the order to switch it on are in `docs/RESEARCHER_EXPE
 - Everyone can turn their emails off in Corner -> Settings.
 
 The design, the DNS review and the order are in `docs/CORNER_C10_MAIL_2026-10-09.md`.
+
+
+## 10. How researchers find the corpus, the Corner and Learn (DOCS36_2026_10_10)
+
+**Signed in as a researcher, an admin or the super admin:**
+- the header has a "Corpus" menu: Library, Stories, Names, Pictures, Graphic novels, Researchers' Corner, Learn, Published texts;
+- on a phone, the menu sheet has the same section and the bottom bar a "Corpus" tab;
+- admins also find Library, Corner and Learn in the admin sidebar.
+
+**Signed out,** the header offers "Sign in". After signing in, an admin goes to the admin pages and anyone else to the corpus.
+
+The database still decides who reads: the menus only follow it.
