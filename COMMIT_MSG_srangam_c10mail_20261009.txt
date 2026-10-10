@@ -1,0 +1,15 @@
+The Corner level with the desk, email from nartiang.org, L2's first cuts (CORNER_C10_MAIL_2026_10_09, LOAD_L2_2026_10_09)
+
+Edit forms for a story, a picture's words and a novel page (DeskEdit, loaded only when used); "Check
+again"; ideas for pictures and covers, and "Draw this idea"; retired pictures for editors; "Draw the cast
+again" and "Draw every page again"; email settings in Corner -> Settings, a Mail line on the Sync tab, and
+"Send it from nartiang.org" for invitations (src/lib/cornerMail.ts; the edge function
+supabase/functions/corner-mail sends through Resend). The new kinds appear once C10b lists them; the mail
+parts stay hidden until C12 is in. L2: the home page no longer downloads the cultural-terms dataset for
+"samudra", a word not in it (-548 kB a home visit); the toast hosts load after the first render
+(entry 607.3 -> 560.6 kB). Tests: corpus-corner-c10 (19), corner-mail (14), load-l2 (3).
+Phase AC of docs/RELIABILITY_AUDIT.md. Made in the automaton repo (docs/srangam/C10_MAIL_2026-10-09,
+docs/srangam/LOAD_L2_2026-10-09).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

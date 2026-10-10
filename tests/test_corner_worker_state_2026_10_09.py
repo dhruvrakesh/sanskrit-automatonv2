@@ -300,7 +300,7 @@ class Unit(unittest.TestCase):
         cm.log_run(media_summary(), self.media)
         info = cw.heartbeat_info({"cap": 10.0, "spent": 1.0, "left": 9.0, "paused": False}, (self.mirror, self.media))
         self.assertEqual(sorted(info), ["at", "budget", "client", "sync"])
-        self.assertEqual(info["client"], "corner_worker.py 1.1")
+        self.assertEqual(info["client"], cw.CLIENT)   # WORKER_TEST_CLIENT_2026_10_09
         sync = info["sync"]
         at_m, at_p = sync["mirror"].pop("at"), sync["media"].pop("at")
         self.assertRegex(at_m, r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$")
@@ -526,7 +526,7 @@ class PgEndToEnd(base.Base):
         self.assertEqual(ev, ["desk_running", "desk_done"])
         info = x("SELECT info, length(info::text) FROM corner.worker").fetchone()
         self.assertEqual((info[0]["client"], info[0]["sync"]["mirror"]["ok"], info[0]["sync"]["mirror"]["equal"],
-                          info[0]["sync"]["media"]["files_on_drive"]), ("corner_worker.py 1.1", True, 9, 10))
+                          info[0]["sync"]["media"]["files_on_drive"]), (cw.CLIENT, True, 9, 10))   # WORKER_TEST_CLIENT_2026_10_09
         self.assertLess(info[1], 4000)
 
 

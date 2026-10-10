@@ -497,3 +497,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | L2 | The first load: entry 498.92 kB (175.78 kB gzip) | Next: measure what the home and corpus pages fetch first |
 | T2 | Learn, second round | After C10 |
 | R5, B1, P2, R6 | As in addendum 21 | As before |
+
+
+## Addendum 2026-10-09 (25) (DOCS35_2026_10_09)
+
+| # | Item | State |
+|---|---|---|
+| C10a, S1, T1 | The Corner as it happens; Learn | Live (C10a pasted 9 Oct evening; corner_request_track answers) |
+| C10 | The Corner level with the desk: edits, check again, ideas, covers, draw an idea, restore, novel page edits, redo | Built and tested (worker 1.2, C10b, the site). Next: switch on (RUNBOOK) |
+| R6, A3 | Email from nartiang.org: requests done/failed/waiting/not approved, invitations | Built and tested (C12, corner-mail, the site). Needs RESEND_API_KEY and Email on |
+| L2 | The first visit | Two cuts built (P3, P4). Next: P2 after a check in Hindi and Tamil; P1 by traffic mix |
+| T2 | Learn quests for C10's kinds | Next |
+| R5, B1, P2 | As in addendum 21 | As before |

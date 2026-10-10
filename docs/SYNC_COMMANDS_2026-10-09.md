@@ -141,3 +141,21 @@ A name of the form `context_2*.db` is kept with the 14 newest.
 Get-ScheduledTask -TaskName SanskritCornerWorker, SanskritCorpusMirror | Get-ScheduledTaskInfo | Format-List TaskName, LastRunTime, LastTaskResult, NextRunTime
 Get-Content data\corner_worker_log.jsonl -Tail 3
 ```
+
+
+## 11. The Corner's email (DOCS35_2026_10_09)
+
+| What | From | To | How | When |
+|---|---|---|---|---|
+| A Corner email | `corner.outbox` (written by the database) | the person's inbox, through Resend | the edge function corner-mail | each desk round (worker 1.2), and right after a request, a decision or an invitation on the site |
+
+**On the desk:**
+- The worker's run log shows the mail flush: `Get-Content data\corner_worker_log.jsonl -Tail 1`, its "mail" entry.
+- `{"configured": false}`: RESEND_API_KEY is not in Lovable Secrets.
+- "corner-mail is not deployed": ask Lovable to deploy it.
+
+**In the SQL editor, read-only:** `docs/cloud/C12_checks_2026-10-09.sql`:
+- D1: waiting, sent and failed, by kind;
+- D2: the last 20, without addresses or bodies.
+
+**On the site (editors):** the Sync tab's Mail line (`corner_mail_state`).

@@ -155,3 +155,23 @@ The commands are in the reply of 2026-10-09 and in RUNBOOK ("The Researchers' Co
 **Learn (C11, the site).** `/corpus/learn` teaches every tool with 23 quests. The Corner's quests are checked from its own records, and a quest never starts a paid request.
 
 The design, the rules and the order to switch it on are in `docs/RESEARCHER_EXPERIENCE_2026-10-09.md`.
+
+
+## 9. The Corner level with the desk; email (DOCS35_2026_10_09)
+
+**New kinds (C10b, worker 1.2), with their estimates:**
+- **Free:** "Edit" (a story's titles, English, Hindi), "Check again", "Edit words" (a picture's title, captions and context; the licence for editors), "Edit page" (a novel page's scene and captions), "Restore" (editors, a retired picture).
+- **Paid:** "Ideas for pictures in a text" ($0.02), "An idea for a cover" ($0.01), "Draw this idea" ($0.10), "Draw the cast again" ($0.40), "Draw every page again" ($0.10 a page).
+
+**The rules:**
+- A researcher never changes an approved story, picture or novel.
+- A proposed episode changes only its titles.
+- Ideas are not mirrored: they come back in the request's result, and `corner_ideas` lists them for the text.
+
+**Email (C12, corner-mail):** off until the super admin turns it on.
+- **Researchers:** email when a paid request is done, when one fails, or when one is not approved.
+- **Editors:** email when a researcher's request waits.
+- **Invitations** can be sent from nartiang.org.
+- Everyone can turn their emails off in Corner -> Settings.
+
+The design, the DNS review and the order are in `docs/CORNER_C10_MAIL_2026-10-09.md`.

@@ -1,0 +1,28 @@
+The Corner level with the desk, email from nartiang.org, and L2's first cuts (CORNER_C10_2026_10_09, MAIL_E1_2026_10_09, LOAD_L2_2026_10_09)
+
+Desk worker 1.2 (docs/desk/CORNER_C10_2026-10-09/corner_worker.py, put in by
+scripts/patch_corner_worker_c10_2026_10_09.py, md5-guarded over 1.1): eight new kinds (story_edit,
+story_verify, picture_ideas, picture_cover, picture_draw, picture_edit, picture_restore,
+novel_page_edit) carried out in-process with the desk's own functions (no free text on a command line;
+every edit re-checked against context.db), redo for novel_cast and novel_draw, and the mail flush once a
+round through the edge function corner-mail (never fails a round). tests/test_corner_worker_c10_2026_10_09.py;
+scripts/patch_tests_worker_client_2026_10_09.py makes the two version checks of the 1.1 tests compare
+with cw.CLIENT (61 worker tests pass with the database).
+docs/cloud/C10b_corner_kinds_2026-10-09.sql (+ checks): the kinds, corner._clean and _estimate (C9's
+kinds unchanged but for "redo"), corner_ideas, corner_retired_pictures. tests/test_corner_kinds_pg_2026_10_09.py (33).
+docs/cloud/C12_corner_mail_2026-10-09.sql (+ checks): corner.outbox, corner.mail_prefs, a trigger on
+corner.requests that never fails a request, corner_mail_claim/done (service role only), prefs, state,
+invitations, four settings (mail off by default). tests/test_corner_mail_pg_2026_10_09.py (51).
+docs/cloud/E1_corner-mail/: the edge function corner-mail (Resend; the desk signs as for corpus-desk,
+a person sends their JWT and must be able to ask the desk); deno test 14.
+docs/srangam/C10_MAIL_2026-10-09/ + scripts/patch_srangam_c10_mail_2026_10_09.py: the site's edit forms
+(lazy), "Check again", ideas and "Draw this idea", retired pictures, "again" for a novel, email settings
+and invitations from nartiang.org; Phase AC of RELIABILITY_AUDIT.
+docs/srangam/LOAD_L2_2026-10-09/ + scripts/patch_srangam_load_l2_2026_10_09.py: the home page no longer
+downloads the 548 kB terms dataset for a word not in it; the toast hosts leave the entry (607.3 -> 560.6 kB).
+docs/CORNER_C10_MAIL_2026-10-09.md (with the review of the nartiang.org DNS zone), docs/LOAD_L2_2026-10-09.md;
+scripts/patch_docs35_2026_10_09.py: PLATFORM 38, RUNBOOK, ENTERPRISE_PATH addendum 25,
+RESEARCHERS_CORNER 9, SYNC_COMMANDS 11.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

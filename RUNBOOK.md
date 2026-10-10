@@ -1485,3 +1485,31 @@ C10a must go in before the desk runs worker 1.1. Without C10a, C9's `corner_desk
 python scripts\db_backup.py "D:\Sanksrit Automatons\sanskrit-automatonv2\data\context.db" "D:\backups\context_$(Get-Date -Format yyyyMMdd_HHmm).db"
 powershell -ExecutionPolicy Bypass -File scripts\backup_runner.ps1     # what SanskritDBBackup runs nightly
 ```
+
+
+## C10, email and L2: switching on (DOCS35_2026_10_09)
+
+The order matters: the desk's worker 1.2 before C10b.
+1. **The desk**, between two rounds:
+   - `python scripts\patch_corner_worker_c10_2026_10_09.py --check`, then without `--check`;
+   - `python scripts\patch_tests_worker_client_2026_10_09.py`;
+   - `python -m unittest tests.test_corner_worker_c10_2026_10_09 tests.test_corner_worker_state_2026_10_09 tests.test_corner_worker_2026_10_09`.
+2. **`python scripts\patch_docs35_2026_10_09.py`, then release.**
+3. **The SQL editor** (in either order):
+   - `docs/cloud/C10b_checks_2026-10-09.sql` P1, then C10b in one paste, then V1-V3;
+   - `docs/cloud/C12_checks_2026-10-09.sql` P1, then C12 in one paste, then V1-V3.
+
+   Re-run both after any re-run of C9.
+4. **Srangam:**
+   - `patch_srangam_c10_mail_2026_10_09.py`, then `patch_srangam_load_l2_2026_10_09.py`;
+   - typecheck, tests and build;
+   - commit the paths they print;
+   - pull before you push; push; Publish.
+5. **Lovable:**
+   - deploy the edge function corner-mail without changing its code;
+   - Cloud -> Secrets: `RESEND_API_KEY` (a Resend key with sending access for nartiang.org).
+6. **Corner -> Settings (super admin):**
+   - Reply-to: an inbox you read (nartiang.org receives no mail);
+   - then Email on.
+
+**To stop all email at once:** Settings -> Email off, or in the SQL editor `UPDATE corner.settings SET value = 'false', updated_at = now() WHERE key = 'mail_enabled';`. The outbox keeps what is waiting.
