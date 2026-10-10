@@ -1,0 +1,18 @@
+The Researchers' Corner, guided (CORNER_UX_U1_2026_10_10)
+
+/corpus/corner, Ask the desk: one line on the working corpus so far (corner_offering() once the database
+has C13, else from the texts); before a text is chosen, where to begin (texts with English and no story
+yet, the text chosen last time on this browser, "Surprise me") and no forms; the list of texts grouped
+(waiting for their first story, with stories); after, what the text has, "What would you like to make?"
+(a story, a picture, a graphic novel, everything; ?goal=, or the goal of ?kind=) and "Ready in this
+text", whose "Set it up" fills the form and goes to it, asking nothing. Passages chosen in the text
+itself (src/components/corpus/PassagePicker.tsx, its own chunk, corpus_reader_page as the reader asks
+it); placeholders that no longer look like values; a line to Learn after a request. Settings: Reply-to's
+placeholder and hint (nartiang.org has no MX). Anthologies: a researcher is offered approved stories
+only, as corner_collection_save accepts from her. New: src/lib/cornerGuide.ts,
+src/components/corpus/CornerGuide.tsx, src/__tests__/corner-ux-u1.test.tsx (17).
+RELIABILITY_AUDIT Phase AE (invariants 47-49). Every form, deep link and estimate as before; the entry is
+unchanged.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

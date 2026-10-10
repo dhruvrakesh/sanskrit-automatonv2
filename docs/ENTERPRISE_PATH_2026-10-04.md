@@ -520,3 +520,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | L2 | The first visit | P3 and P4 live (852d852). Next: P2 after a check in Hindi and Tamil |
 | N1 | The working corpus and Learn in the navigation, by role | Built and tested (NAV_RBAC_2026_10_10). Next: push and Publish |
 | T2 | Learn quests for C10's kinds | Next |
+
+
+## Addendum 2026-10-10 (27) (DOCS37_2026_10_10)
+
+| # | Item | State |
+|---|---|---|
+| N1 | The working corpus and Learn in the navigation, by role | Live (Srangam ab15244) |
+| R6, A3 | Email from nartiang.org | Live: corner-mail deployed, email on. Next: Reply-to set to a real inbox, and a first email |
+| U1 | The Corner, guided (`docs/CORNER_UX_U1_2026-10-10.md`) | Built and tested (CORNER_UX_U1_2026_10_10). Next: push and Publish |
+| C13 | Researchers see the work in progress; the offering so far | Built and tested. Next: your paste (recommended) |
+| U2 | Sparks across the corpus; a weekly team goal | Next: one read-only function; the goal is your decision |
+| U3 (T2) | Learn, second round | Next: C10's kinds; the first story of a text |
+| U4 (P2) | Sharing what is published | Your decision: pictures need a public path |
+| U5 | The editors' queue, by value | Later |
+| L2 | The first visit | P2 after a check in Hindi and Tamil, as before |

@@ -159,3 +159,10 @@ Get-Content data\corner_worker_log.jsonl -Tail 3
 - D2: the last 20, without addresses or bodies.
 
 **On the site (editors):** the Sync tab's Mail line (`corner_mail_state`).
+
+
+## 12. The Corner's strip and its email settings (DOCS37_2026_10_10)
+
+In the Lovable Cloud SQL editor, read-only, one query per paste, from `docs/cloud/C13_checks_2026-10-10.sql`:
+- **D1** gives the numbers of the Corner's strip ("the offering so far"), straight from the tables. The site calls `corner_offering()`, which the SQL editor (not signed in) may not.
+- **D2** gives the email settings as saved, Reply-to included. The site does not show Reply-to back.

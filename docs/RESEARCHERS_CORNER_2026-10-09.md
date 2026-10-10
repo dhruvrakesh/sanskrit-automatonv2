@@ -187,3 +187,22 @@ The design, the DNS review and the order are in `docs/CORNER_C10_MAIL_2026-10-09
 **Signed out,** the header offers "Sign in". After signing in, an admin goes to the admin pages and anyone else to the corpus.
 
 The database still decides who reads: the menus only follow it.
+
+
+## 11. Ask the desk, guided (DOCS37_2026_10_10)
+
+**Ask the desk, step by step:**
+- It opens with one line on the working corpus so far, the team's, with no names.
+- Then the text:
+  - the list shows first the texts waiting for their first story;
+  - "Where to begin" offers the ones with the most English;
+  - "Continue with" offers the text chosen last time on this browser;
+  - "Surprise me" picks one.
+- No form appears until a text is chosen.
+- Then "What would you like to make?": a story, a picture, a graphic novel, or everything.
+- "Ready in this text" says what can be asked for now. "Set it up" fills that form and goes to it; the desk is still asked only by the form's own button.
+- A story's passages, or a picture's, can be chosen in the text itself: "From here", "To here", "This one".
+
+**Drafts:**
+- Before C13, researchers see approved work only, so "Ready in this text" never offers them a proposed episode.
+- After C13, researchers see the proposed episodes, drafts and novels in progress that the Corner already lets them act on. Readers who are not invited still see approved work only.

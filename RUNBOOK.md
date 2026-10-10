@@ -1527,3 +1527,22 @@ The order matters: the desk's worker 1.2 before C10b.
    - Lovable: deploy the edge function corner-mail without changing its code.
    - The next desk round's log has `"mail": {"configured": true, ...}`.
    - Then Corner -> Settings: Reply-to, then Email on.
+
+
+## The Corner, guided; C13 (DOCS37_2026_10_10)
+
+1. **Srangam:**
+   - `patch_srangam_corner_ux_u1_2026_10_10.py --check`, then without `--check`;
+   - typecheck, tests and build;
+   - commit the paths it prints;
+   - pull before you push; push; Publish.
+2. **Look, as a researcher:**
+   - Ask the desk starts with "Where to begin" and shows no form;
+   - choosing a text shows what it has, the goals and "Ready in this text";
+   - "Choose them in the text" fills From and To.
+3. **C13 (when you choose):** in the Lovable Cloud SQL editor, one query per paste:
+   - `C13_checks` P1;
+   - the whole of C13 in one paste;
+   - V1, V2, V3;
+   - D2, to see Reply-to as saved.
+4. **Settings:** Reply-to = an inbox you read; Save. Then ask, as yourself, for "An idea for a cover" ($0.01): its email arrives after the desk's next round.

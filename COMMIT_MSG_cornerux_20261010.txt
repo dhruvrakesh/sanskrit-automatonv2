@@ -1,0 +1,22 @@
+The Corner, guided (CORNER_UX_U1_2026_10_10); researchers see the work in progress (CORNER_C13_2026_10_10); the rest of 10 Oct recorded (DOCS37_2026_10_10)
+
+docs/CORNER_UX_U1_2026-10-10.md: what we found on Ask the desk and in the database, the principles
+(guide, never push; nothing is asked but by a form's own button; shared, not competitive), the ideas by
+phase (U1 now; C13 now; U2 sparks across the corpus and a weekly team goal; U3 Learn T2; U4 sharing,
+P2; U5 the editors' queue), and the order.
+docs/srangam/CORNER_UX_U1_2026-10-10/ + scripts/patch_srangam_corner_ux_u1_2026_10_10.py (md5-guarded
+over Srangam ab15244): the offering so far; before a text, where to begin and no forms; after, what
+the text has, "What would you like to make?" and "Ready in this text" ("Set it up" fills a form and
+asks nothing); passages chosen in the text (its own chunk); Reply-to's placeholder and hint mended; a
+researcher's anthology offers approved stories only. 17 new tests; Phase AE of RELIABILITY_AUDIT
+(invariants 47-49). The entry is unchanged.
+docs/cloud/C13_corner_drafts_offering_2026-10-10.sql + C13_checks: corpus._sees_drafts() (editors and
+invited researchers) in the five reader functions (stories, media, novels, novel, media_file), each
+rewritten from its live definition, one line, all or none, marker-idempotent, rollback in the header;
+public.corner_offering() for the strip. Readers who are not invited see approved work only, as before.
+tests/test_corner_drafts_pg_2026_10_10.py (6) against every file the live database has, then C13 twice.
+scripts/patch_docs37_2026_10_10.py: PLATFORM 40, RUNBOOK, ENTERPRISE_PATH addendum 27,
+RESEARCHERS_CORNER 11, SYNC_COMMANDS 12.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
