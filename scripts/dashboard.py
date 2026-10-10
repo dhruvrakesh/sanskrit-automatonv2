@@ -144,6 +144,26 @@ def _child_env() -> dict:
     env["PYTHONIOENCODING"] = "utf-8:replace"
     return env
 
+LIVE_LINES = 200   # LIVE_LOG_2026_10_10: how many of a running job's last lines /api/job shows
+
+
+def _pump(stream, chunks: list, job: Job, attr: str) -> None:
+    """LIVE_LOG_2026_10_10: read one of a job's pipes line by line while it runs. Every line is kept for
+    the end, as communicate() kept them, and the job's .out/.err show the last LIVE_LINES meanwhile, so
+    /api/job and the page's Log follow the run instead of waiting for it to end."""
+    try:
+        for raw in iter(stream.readline, b""):
+            chunks.append(raw)
+            setattr(job, attr, b"".join(chunks[-LIVE_LINES:]).decode("utf-8", "replace"))
+    except (OSError, ValueError):
+        pass
+    finally:
+        try:
+            stream.close()
+        except Exception:
+            pass
+
+
 def _run_job(job: Job):
     try:
         proc = subprocess.Popen(
@@ -151,10 +171,21 @@ def _run_job(job: Job):
             cwd=str(ROOT), env=_child_env()
         )
         job.proc = proc  # store so it can be killed
-        out, err = proc.communicate()
+        # LIVE_LOG_2026_10_10: two readers, as communicate() has, so neither pipe fills and blocks the job
+        out_chunks: list = []
+        err_chunks: list = []
+        readers = [threading.Thread(target=_pump, args=(proc.stdout, out_chunks, job, "out"), daemon=True),
+                   threading.Thread(target=_pump, args=(proc.stderr, err_chunks, job, "err"), daemon=True)]
+        for t in readers:
+            t.start()
+        proc.wait()
+        for t in readers:
+            t.join(timeout=15)
+        out, err = b"".join(out_chunks), b"".join(err_chunks)
         job.rc = proc.returncode          # (JOB_DIAG_2026_09_06)
         if job.killed:
             job.ok  = False
+            job.out = (out or b"").decode("utf-8", "replace")   # LIVE_LOG_2026_10_10: what it did before
             job.err = "[KILLED by user]"
         else:
             job.ok  = proc.returncode == 0

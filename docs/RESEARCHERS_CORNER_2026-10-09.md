@@ -206,3 +206,19 @@ The database still decides who reads: the menus only follow it.
 **Drafts:**
 - Before C13, researchers see approved work only, so "Ready in this text" never offers them a proposed episode.
 - After C13, researchers see the proposed episodes, drafts and novels in progress that the Corner already lets them act on. Readers who are not invited still see approved work only.
+
+
+## 12. C13 live (DOCS39_2026_10_10)
+
+- **C13 was applied on 10 Oct at 13:04 and checked** (P1, V1, V2, V3):
+  - Kanika and Parth (researchers, reader mode readers) now see the proposed episodes, drafts and
+    novels in progress that the Corner lets them act on.
+  - Readers who are not invited still see approved work only.
+- **The strip at the top of Ask the desk reads from the database** (`corner_offering()`): "51 texts in
+  English, 22,368 passages translated, 27 stories told, 18 pictures, 1 request done this week. 47
+  texts are waiting for their first story."
+- **Still to do:**
+  - Reply-to: D2 shows it empty; enter an inbox you read and press Save.
+  - A first email: ask for "An idea for a cover" ($0.01).
+  - Two editions each of Vasishtha and Shiva Dhanur Veda share a title in the list (38 and 39
+    passages; 19 and 25). U1.1 is to tell them apart.

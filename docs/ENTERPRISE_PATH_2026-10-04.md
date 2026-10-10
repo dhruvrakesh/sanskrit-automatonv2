@@ -547,3 +547,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | O1 | Karan Aagama's source | Held by the debris guard. Next: the OCR consensus plan (no spend), then translate |
 | O2 | Ganita Yukti Bhasa | Its last English run: 1 of 180 translated, 180 below the OCR quality bar. Next: re-OCR, not translation |
 | C13 | Researchers see the work in progress | As in addendum 27: your paste, when chosen |
+
+
+## Addendum 2026-10-10 (29) (DOCS39_2026_10_10)
+
+| # | Item | State |
+|---|---|---|
+| C13 | Researchers see the work in progress; the offering so far | **Live** (13:04), checked P1, V1-V3; the strip reads from the database |
+| U1 | The Corner, guided | **Live** (Srangam d1752d4, published) |
+| R6, A3 | Email from nartiang.org | Reply-to still empty (D2). Next: set it, then a first email |
+| D3 | Every press visible: the Log follows every job and says what it did; live output | Built and tested (LIVE_LOG_2026_10_10). Next: patch, reload; live output on the restart |
+| H3 | The hub's last runs, held texts, OCR progress | Built and tested (HUB_V2_1_2026_10_10). Next: patch, restart the hub |
+| O1 | Karan Aagama | Consensus run: 145 of 183 pages stale. Your decision: re-ingest (replaces 1,603 English and 1,425 Hindi) or translate the rest with `--allow-debris` |
+| O3 | Natyasastra, Tantric Texts | Held; nothing to lose. Next: consensus plan, then vision, re-ingest, translate |
+| O4 | Hayashirsha | Held; 1,174 Hindi exist. Your decision, as O1 |
+| U1.1 | Two editions with one title in the Corner's list (Vasishtha and Shiva Dhanur Veda) | Next: tell them apart |

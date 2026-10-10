@@ -1,0 +1,13 @@
+Hub v2.1: the last runs and what each did; texts held for an OCR repair; OCR progress (HUB_V2_1_2026_10_10)
+
+Presses in the dashboard's Library made runs that the OCR-debris guard held in 0.3 s, too fast to be
+seen running, so the hub looked as if nothing had been queued. The Translation engine card now lists
+the last runs from the dashboard's data/jobs.jsonl (done N of M, held, nothing, stopped, failed) with
+today's totals, names the texts held for an OCR repair, and shows page N of M for a running OCR (its
+page files against its inbox pages, counted at most once a minute). The page asks /api/online every
+30 s, and first after its first look at the services. README.md: section U5. Installed by
+sanskrit-automatonv2/scripts/patch_hub_v2_1_2026_10_10.py (md5-guarded over v2); tests in
+sanskrit-automatonv2/tests/test_hub_v2_1_2026_10_10.py.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

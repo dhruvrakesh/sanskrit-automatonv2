@@ -147,6 +147,8 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .log-line-ok{color:var(--green)}
 .log-line-err{color:var(--red)}
 .log-line-info{color:var(--gold)}
+.log-line-held{color:var(--gold);font-weight:600}
+.log-line-past{color:var(--muted)}
 .log-clear{padding:8px 12px;border-top:1px solid var(--border-v)}
 .btn-clear{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer}
 .btn-clear:hover{color:var(--red)}
@@ -941,7 +943,7 @@ function trackJob(jid, label, kind, doc) {
 
 async function pollJob(jid, label) {
   // Adaptive backoff: fast (1.4s) for first 20s, medium (4s) up to 2min, slow (8s) thereafter
-  let lastOutLen = 0;
+  let lastLine   = '';   // LIVE_LOG_2026_10_10
   let elapsed    = 0;
   while (true) {
     const delay = elapsed < 20000 ? 1400 : elapsed < 120000 ? 4000 : 8000;
@@ -951,19 +953,20 @@ async function pollJob(jid, label) {
       const r = await fetch('/api/job/' + jid);
       const j = await r.json();
       if (activeJobs[jid]) activeJobs[jid].active = !!j.active;  // running vs queued
-      // Only show new output lines
-      if (j.out && j.out.length > lastOutLen) {
-        const newText = j.out.slice(lastOutLen);
-        lastOutLen = j.out.length;
-        newText.split('\n').filter(function(l) { return l.trim(); }).slice(-6)
-          .forEach(function(l) { addLog('  ' + l); });
-      }
+      // Only show new output lines. LIVE_LOG_2026_10_10: /api/job sends the last 6,000 characters, so
+      // comparing lengths stopped once a job had written that much; the last line shown marks the place
+      const lines = _outLines(j.out);
+      _newLines(lastLine, lines).slice(-12).forEach(function(l) { addLog('  ' + l); });
+      if (lines.length) lastLine = lines[lines.length - 1];
       if (!j.running) {
         activeJobs[jid].done = true;
         activeJobs[jid].ok   = j.ok;
-        addLog((j.ok ? '[OK] ' : '[FAIL] ') + label, j.ok ? 'log-line-ok' : 'log-line-err');
-        if (j.err && !j.ok) addLog(j.err.slice(0, 400), 'log-line-err');
-        toast(label + ': ' + (j.ok ? 'done' : 'FAILED'), j.ok ? 'ok' : 'fail');
+        const v = jobVerdict(j.ok, (j.out || '') + '\n' + (j.err || ''));
+        activeJobs[jid].verdict = v.word;
+        _seenFinished.add(jid);
+        addLog(v.tag + ' ' + label + ' - ' + v.text, v.cls);
+        if (j.err && j.ok === false && v.word === 'failed') addLog(j.err.slice(0, 400), 'log-line-err');
+        toast(label + ': ' + v.word, v.word === 'failed' || v.word === 'stopped' ? 'fail' : 'ok');
         renderBadges();
         updateDocChips();
         refresh();
@@ -990,7 +993,10 @@ function renderBadges() {
       + (queued ? ' title="Waiting for the translate lock (one translation writes the DB at a time)"' : '')
       + '><span class="badge-dot"></span>' + (queued ? '&#9203; ' : '') + esc(j.label) + '</span>';
   }).concat(recent.map(function(j) {
-    return '<span class="badge ' + (j.ok ? 'ok' : 'fail') + '"><span class="badge-dot"></span>' + esc(j.label) + '</span>';
+    // LIVE_LOG_2026_10_10: a run held on purpose is not shown as a failure
+    const held = j.verdict === 'held';
+    return '<span class="badge ' + (held ? 'queued' : (j.ok ? 'ok' : 'fail')) + '"' + (j.verdict ? ' title="' + esc(j.verdict) + '"' : '')
+      + '><span class="badge-dot"></span>' + esc(j.label) + (held ? ' (held)' : '') + '</span>';
   })).join('');
 }
 
@@ -1522,10 +1528,13 @@ function renderProgress(d) {
                   : isPause ? '<span class="pstat-idle">&#9646;&#9646; paused</span>'
                   : isDone  ? '<span class="pstat-done">&#10003; done</span>'
                   : '<span class="pstat-idle">' + esc(d.status) + '</span>';
-  let elapsed = '';
+  let elapsed = '';   // LIVE_LOG_2026_10_10: started_at carries its offset (+00:00); a finished run shows its time
   if (d.started_at) {
-    const s = Math.round((Date.now() - new Date(d.started_at + 'Z').getTime()) / 1000);
-    elapsed = s < 60 ? s + 's' : Math.floor(s/60) + 'm ' + (s%60) + 's';
+    const t0 = _isoMs(d.started_at);
+    const t1 = (isDone || isPause) && d.updated_at ? _isoMs(d.updated_at) : Date.now();
+    const s = Math.max(0, Math.round((t1 - t0) / 1000));
+    if (!isNaN(s)) elapsed = (s < 60 ? s + 's' : s < 3600 ? Math.floor(s/60) + 'm ' + (s%60) + 's'
+                              : Math.floor(s/3600) + 'h ' + Math.floor((s%3600)/60) + 'm') + (isDone ? ' taken' : '');
   }
   let html = '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap">'
     + statBadge
@@ -1816,9 +1825,14 @@ async function pollRunningJobs() {
         window._fastRefresh = setInterval(refresh, 5000);
       }
       d.running.forEach(function(sj) {
-        const found = Object.values(activeJobs).find(function(j) { return j.doc === sj.doc && !j.done; });
-        if (!found) {
-          activeJobs[sj.id] = {label: sj.kind + ' ' + sj.doc, kind: sj.kind, doc: sj.doc, done: false, ok: null};
+        // LIVE_LOG_2026_10_10: a job started outside this page (the Library, another tab, before the page
+        // loaded) is followed like one started here: its lines, its outcome, and its badge ends with it
+        if (!activeJobs[sj.id]) {
+          const label = sj.kind + ' ' + sj.doc;
+          activeJobs[sj.id] = {label: label, kind: sj.kind, doc: sj.doc, done: false, ok: null, active: sj.active};
+          addLog('> ' + label + ' (' + (sj.state || 'running') + '; started outside this page)', 'log-line-info');
+          renderBadges();
+          pollJob(sj.id, label);
         }
       });
       updateDocChips();
@@ -1969,6 +1983,83 @@ setInterval(pollRunningJobs, 3000);
 setInterval(pollProgress, 2000);
 pollRunningJobs();
 pollProgress();
+
+// LIVE_LOG_2026_10_10 ---------------------------------------------------------------------------
+// The Log tells what each run did. A hold by the OCR-debris guard is not a failure, and "nothing to do"
+// is not a translation. Runs that start and end between two looks (a hold takes 0.3 s) are caught from
+// the job history, so a press in the Library shows here too.
+function _isoMs(x) {
+  x = String(x || '');
+  return new Date(/(Z|[+-]\d\d:?\d\d)$/.test(x) ? x : x + 'Z').getTime();
+}
+function _outLines(out) {
+  return String(out || '').split('\n').map(function(l) { return l.replace(/\r$/, ''); })
+    .filter(function(l) { return l.trim(); });
+}
+function _newLines(prev, lines) {
+  if (!prev) return lines.slice(-6);
+  const i = lines.lastIndexOf(prev);
+  return i < 0 ? lines.slice(-6) : lines.slice(i + 1);
+}
+function jobVerdict(ok, out) {
+  out = String(out || '');
+  if (ok === false && /TRANSLATE_DEBRIS_GUARD|allow-debris/.test(out)) {
+    const m = out.match(/ocr_consensus\.py --doc (\S+)/);
+    return {word: 'held', tag: '[HELD]', cls: 'log-line-held',
+            text: 'held by the OCR-debris guard: its scan carries Tesseract debris, so the source is repaired first'
+                  + (m ? '. Plan the repair, no spend: python scripts\\ocr_consensus.py --doc ' + m[1]
+                         + ' --threshold 101 --include-unassessed' : '')};
+  }
+  if (ok === false && /KILLED/.test(out)) return {word: 'stopped', tag: '[STOPPED]', cls: 'log-line-err', text: 'stopped by hand'};
+  if (ok === false) return {word: 'failed', tag: '[FAIL]', cls: 'log-line-err', text: 'failed: History has its last lines'};
+  const done = Array.from(out.matchAll(/Done\. (\d+)\/(\d+) translated \| (\d+) quality-skipped/g));
+  if (done.length) {
+    const sent = done.reduce(function(a, m) { return a + (+m[1]); }, 0);
+    return {word: sent ? 'done' : 'nothing sent', tag: sent ? '[OK]' : '[NOTHING]', cls: sent ? 'log-line-ok' : 'log-line-info',
+            text: done.map(function(m) { return m[1] + ' of ' + m[2] + ' translated' + (+m[3] ? ', ' + m[3] + ' below the OCR quality bar' : ''); }).join('; ')};
+  }
+  if (/\[NOTHING\]/.test(out)) return {word: 'nothing to do', tag: '[NOTHING]', cls: 'log-line-info',
+                                       text: 'nothing to translate: every verse has it, or what is left is illegible OCR'};
+  return {word: 'done', tag: '[OK]', cls: 'log-line-ok', text: 'done'};
+}
+const _seenFinished = new Set();
+let _historySeeded = false;
+function _logFinished(r, past) {
+  const v = jobVerdict(r.ok, String(r.out_tail || '') + '\n' + String(r.err_preview || ''));
+  const at = r.end ? new Date(r.end * 1000).toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit', hour12: false}) : '';
+  addLog(v.tag + ' ' + at + ' ' + (r.kind || '') + ' ' + (r.doc || '') + ' - ' + v.text, past ? 'log-line-past' : v.cls);
+  return v;
+}
+async function watchFinished() {
+  if (document.hidden && _historySeeded) return;
+  try {
+    const rows = await (await fetch('/api/jobs/history?limit=15')).json();
+    if (!Array.isArray(rows)) return;
+    if (!_historySeeded) {
+      _historySeeded = true;
+      rows.forEach(function(r) { _seenFinished.add(r.id); });
+      const last = rows.slice(0, 5).reverse();
+      if (last.length) {
+        addLog('-- the last ' + last.length + ' runs, from the job history --', 'log-line-past');
+        last.forEach(function(r) { _logFinished(r, true); });
+      }
+      return;
+    }
+    rows.slice().reverse().forEach(function(r) {
+      if (_seenFinished.has(r.id)) return;
+      const a = activeJobs[r.id];
+      if (a && !a.done) return;                 // pollJob follows it and writes its outcome
+      _seenFinished.add(r.id);
+      if (a && a.done) return;                  // written already
+      const v = _logFinished(r, false);
+      activeJobs[r.id] = {label: (r.kind || '') + ' ' + (r.doc || ''), kind: r.kind, doc: r.doc, done: true, ok: r.ok, verdict: v.word};
+      toast((r.kind || '') + ' ' + (r.doc || '') + ': ' + v.word, v.word === 'failed' ? 'fail' : 'ok');
+      renderBadges();
+    });
+  } catch (e) {}
+}
+watchFinished();
+setInterval(watchFinished, 8000);
 
 </script>
 </body>

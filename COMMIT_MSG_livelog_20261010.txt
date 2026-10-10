@@ -1,0 +1,23 @@
+Every press makes a run, and the console says what it did (LIVE_LOG_2026_10_10); the hub's last runs (HUB_V2_1_2026_10_10); the afternoon recorded (DOCS39_2026_10_10)
+
+docs/LIVE_LOG_2026-10-10.md: "jobs are not queued; the console is not live" (16:31). Every press made a
+job and every job ran: Ganita and Vasishtha Dhanur Veda translated; Hayashirsha, Natyasastra, Karan and
+the Tantric Texts were held by the OCR-debris guard in 0.2-0.3 s. Nothing said so: communicate() kept
+a job's output until its end, jobs started outside the page were never followed, a 0.3 s run fell
+between two looks, and the Log knew only [OK] and [FAIL]. The held texts, with what a re-ingest would
+replace.
+scripts/patch_live_log_2026_10_10.py (needs DESK_HEAL; anchored, all or nothing, marker-idempotent):
+- dashboard.py: _run_job reads its two pipes while the job runs; /api/job shows the last 200 lines;
+  a job stopped by hand keeps its output.
+- dashboard_static.html: the Log follows every job wherever it was started; outcomes [HELD] (with the
+  consensus command), [NOTHING], [OK] N of M, [STOPPED], [FAIL]; short runs caught from the job
+  history; opens with the last five runs; new lines past 6,000 characters; a held badge is not red;
+  the Live tab's time without NaN.
+docs/hub/HUB_V2_1_2026-10-10/ + scripts/patch_hub_v2_1_2026_10_10.py (md5-guarded over the released
+v2): the last runs and what each did, the texts held for an OCR repair, page N of M for a running OCR.
+tests/test_live_log_2026_10_10.py (9), tests/test_hub_v2_1_2026_10_10.py (6).
+scripts/patch_docs39_2026_10_10.py: PLATFORM 42 (C13 applied and checked, U1 live, Reply-to empty,
+Karan's consensus run), RUNBOOK, ENTERPRISE_PATH addendum 29, RESEARCHERS_CORNER 12.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

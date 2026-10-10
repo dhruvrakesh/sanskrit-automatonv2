@@ -1567,3 +1567,25 @@ The order matters: the desk's worker 1.2 before C10b.
 5. **Check:**
    - `Invoke-RestMethod http://127.0.0.1:5057/api/health` (after the restart).
    - `Get-Content D:\backups\maintenance_log.txt -Tail 6` (after the next tick).
+
+
+## Every press makes a run; the console says what it did (DOCS39_2026_10_10)
+
+1. **The page:**
+   - `python scripts\patch_live_log_2026_10_10.py --check`, then without `--check`.
+   - Reload the dashboard with Ctrl+F5.
+   - The Log opens with the last runs. A press in the Library shows in it within 8 s, as what it did.
+2. **The hub:**
+   - `python scripts\patch_hub_v2_1_2026_10_10.py --check`, then without `--check`.
+   - Close the hub's console and run `start-hub.bat`.
+3. **A run marked [HELD]** is the OCR-debris guard, not a fault.
+   - Plan the repair: `python scripts\ocr_consensus.py --doc <code> --threshold 101 --include-unassessed`.
+     This is a plan, with no spend; add `--yes` to run vision.
+   - Re-ingesting a repaired text replaces its passages and their translations. Do it only while the
+     dashboard is idle, after `scripts\db_backup.py`, and only for a text you have decided on
+     (docs/LIVE_LOG_2026-10-10.md section 4).
+4. **Restart the dashboard** when idle, to bring in DESK_HEAL's Library and LIVE_LOG's live output.
+   While an OCR runs:
+   - press Pause All;
+   - run `scripts\restart_dashboard.ps1`;
+   - press Full on the OCR's row. It resumes from the missing pages.
