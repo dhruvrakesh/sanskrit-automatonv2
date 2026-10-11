@@ -1219,7 +1219,8 @@ def api_ingest():
 # with no English offered their translation, and the Source desk (scripts/source_desk.py): a better
 # edition found on archive.org, the local wisdomlib archive and the e-text sites, previewed in the page.
 _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "accept", "hold", "release",
-                 "find", "fetch", "judge_all", "witness")   # JUDGE_DESK_2026_10_11: judge_all; ETEXT_WITNESS_2026_10_11: witness
+                 "find", "fetch", "judge_all", "witness",   # JUDGE_DESK_2026_10_11: judge_all; ETEXT_WITNESS_2026_10_11: witness
+                 "benchmark", "benchmark_all")              # BENCHMARK_2026_10_11
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
 _REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness")   # ETEXT_WITNESS_2026_10_11: witness
 SOURCES_DIR = ROOT / "sources"                       # ETEXT_WITNESS_2026_10_11: what source_desk.py and etext_witness.py fetch
@@ -1254,7 +1255,8 @@ var _RP_DOING = {assess: 'assessing...', repair: 'repairing the scan...', use: '
                  set_aside: 'setting it aside...', restore: 'restoring...', as_is: 'noting: translate as is...',
                  accept: 'noting: complete...', hold: 'holding it from the site...', release: 'publishing...',
                  find: 'looking for a better edition...', fetch: 'fetching...', translate: 'translating...',
-                 judge_all: 'judging the texts (about a minute)...', witness: 'reading the e-text as a witness...'};
+                 judge_all: 'judging the texts (about a minute)...', witness: 'reading the e-text as a witness...',
+                 benchmark: 'benchmarking the readings (free)...', benchmark_all: 'benchmarking every text (a minute or two)...'};
 var _RP_NL = String.fromCharCode(10), _RP_CR = String.fromCharCode(13), _RP_BS = String.fromCharCode(92);
 function _rpLines(s){
   return String(s || '').split(_RP_NL).map(function(l){ return l.split(_RP_CR).join(''); })
@@ -1437,9 +1439,9 @@ async function _watchRepair(id, doc, step, btn, orig, n){
       text = text || (j.ok ? 'done' : 'it did not finish: the Dashboard History has its last lines');
       _rpSay(doc, text); _rpJudge(doc, v.judged); _rpOffer(doc, v.next, v.also);
       _toast(doc + ': ' + text);
-      if ((step === 'find' || step === 'fetch' || step === 'witness') && document.getElementById('srclist-' + doc)) _rpSources(doc);
+      if ((step === 'find' || step === 'fetch' || step === 'witness' || step === 'benchmark') && document.getElementById('srclist-' + doc)) _rpSources(doc);
       if (j.ok && pre && step === 'translate') repairStep(doc, 'assess', null);
-      if (j.ok && !pre && /^(set_aside|restore|use|as_is|accept|hold|release|translate|judge_all)$/.test(step))
+      if (j.ok && !pre && /^(set_aside|restore|use|as_is|accept|hold|release|translate|judge_all|benchmark_all)$/.test(step))
         setTimeout(function(){ location.reload(); }, 3000);
       return;
     }
@@ -1454,7 +1456,7 @@ async function _rpSources(doc){
   if (!list) return;
   var d;
   try { d = await (await fetch('/api/repair/sources?doc=' + encodeURIComponent(doc))).json(); } catch (e) { return; }
-  if (!d || d.missing){ list.innerHTML = '<p class="srcnone">No search yet. Press Find a better source.</p>' + _rpWitness(doc, d || {}); list._data = d || {}; return; }
+  if (!d || d.missing){ list.innerHTML = '<p class="srcnone">No search yet. Press Find a better source.</p>' + _rpWitness(doc, d || {}) + _rpBench(doc, d || {}); list._data = d || {}; return; }
   var h = '<div class="srclinks">Search by hand: ' + (d.links || []).map(function(l){
     return '<a href="' + _rpEsc(l.url) + '" target="_blank" rel="noopener">' + _rpEsc(l.name) + '</a>'; }).join(' &middot; ')
     + '</div>';
@@ -1481,7 +1483,7 @@ async function _rpSources(doc){
   if (!(d.candidates || []).length) h += '<p class="srcnone">archive.org offered nothing' + ((d.errors || []).length ? ' (' + _rpEsc(d.errors[0]) + ')' : '')
     + '. Try the e-text sites above.</p>';
   h += '<p class="srcnone">Searched ' + _rpEsc(d.at || '') + ' as: ' + _rpEsc((d.words || []).join(' ')) + '</p>';
-  h += _rpWitness(doc, d);
+  h += _rpWitness(doc, d) + _rpBench(doc, d);   // BENCHMARK_2026_10_11
   list.innerHTML = h; list._data = d;
 }
 function _rpWitness(doc, d){
@@ -1524,6 +1526,25 @@ function _rpWitness(doc, d){
     }
     h += '</div>';
   });
+  return h;
+}
+function _rpBench(doc, d){
+  /* BENCHMARK_2026_10_11: the readings of the text compared (benchmark_sources.py), and the opinion */
+  var b = d && d.benchmark;
+  if (!b || !(b.readings || []).length)
+    return '<div class="srcsub">Benchmark</div><p class="srcnone">Not benchmarked yet: press Benchmark the readings (free).</p>';
+  var f = function(v, k){ return v == null ? '-' : (+v).toFixed(k == null ? 2 : k); };
+  var h = '<div class="srcsub">Benchmark, ' + _rpEsc(String(b.at || '').replace('T', ' ').slice(0, 16))
+        + (b.reference ? ', against ' + _rpEsc(b.reference) : '') + '</div><div class="benchwrap"><table class="bench"><thead><tr>'
+        + '<th>Reading</th><th>Pages</th><th>Letters</th><th>Misread</th><th>Pages hit</th><th>Level</th><th>F1 with ours</th>'
+        + '<th>F1 with the critical text</th></tr></thead><tbody>';
+  (b.readings || []).forEach(function(x){
+    h += '<tr><td>' + _rpEsc(x.label) + '</td><td>' + x.pages + '</td><td>' + x.letters + '</td><td>' + f(x.misread_letters_pct)
+       + '%</td><td>' + f(x.pages_misread_pct, 0) + '%</td><td><span class="lv" data-level="' + _rpEsc(x.level || '') + '">'
+       + _rpEsc(x.level || '-') + '</span></td><td>' + f(x.f1_ours) + '</td><td>' + f(x.f1_ref) + '</td></tr>';
+  });
+  h += '</tbody></table></div>';
+  (b.lines || []).forEach(function(l){ h += '<p class="benchline">' + _rpEsc(l) + '</p>'; });
   return h;
 }
 function _rpPreview(doc, i){
@@ -1670,7 +1691,7 @@ def api_repair():
                         "steps": list(_REPAIR_STEPS), "max_usd": _REPAIR_MAX_USD})
     data = request.get_json(silent=True) or {}
     step = str(data.get("step") or "assess")
-    doc = "corpus" if step == "judge_all" else _validate_doc(data.get("doc"))   # JUDGE_DESK_2026_10_11
+    doc = "corpus" if step in ("judge_all", "benchmark_all") else _validate_doc(data.get("doc"))   # JUDGE_DESK_2026_10_11; BENCHMARK_2026_10_11
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
     if step not in _REPAIR_STEPS:
@@ -1733,6 +1754,10 @@ def api_repair():
             return jsonify({"error": "witness needs a file, a url, or a witness to ingest"}), 400
         if data.get("write") and not ing:
             argv.append("--write")
+    elif step == "benchmark":   # BENCHMARK_2026_10_11: free and read-only
+        argv = [script("benchmark_sources.py"), "--doc", doc, "--from-dashboard"]
+    elif step == "benchmark_all":
+        argv = [script("benchmark_sources.py"), "--all", "--from-dashboard"]
     elif step == "judge_all":   # JUDGE_DESK_2026_10_11
         argv = [script("repair_text.py"), "--judge-all"]
     kind = "repair_use" if step == "use" or (step == "witness" and data.get("ingest")) else "repair"   # ETEXT_WITNESS_2026_10_11
@@ -1798,6 +1823,111 @@ def _witness_info(doc: str) -> dict:
     return {"fetched": fetched, "witnesses": wits}
 
 
+# BENCHMARK_2026_10_11 -------------------------------------------------------------------------
+# The readings of each text compared (scripts/benchmark_sources.py: Tesseract, vision, the repair, the
+# database, the text before its repair, archive.org's OCR, the witnesses and the critical e-texts), and
+# the effect of the debris on the translation, measured. Small files only (data/benchmarks/).
+BENCH_DIR = ROOT / "data" / "benchmarks"
+
+
+def _bench(doc: str):
+    """The last benchmark of a text (data/benchmarks/<doc>.json), or None."""
+    try:
+        r = json.loads((BENCH_DIR / ("%s.json" % doc)).read_text(encoding="utf-8"))
+        return r if isinstance(r, dict) else None
+    except (OSError, ValueError):
+        return None
+
+
+@app.get("/benchmarks")
+def benchmarks_page():
+    """Every text benchmarked: misread letters in Tesseract, in ours (the repair, else the database) and in
+    archive.org's OCR; the critical e-text's F1; the English before the repair and how much of it was made
+    from damaged text; the English now; and the opinion. Reads small files only."""
+    import html as _html
+    e = _html.escape
+    rows = []
+    try:
+        for p in sorted(BENCH_DIR.glob("*.json")):
+            if p.name.startswith("_"):
+                continue
+            try:
+                r = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if isinstance(r, dict) and r.get("doc") and r.get("readings"):
+                rows.append(r)
+    except OSError:
+        pass
+
+    def red(r, label):
+        return next((x for x in r.get("readings") or [] if x.get("label") == label), None)
+
+    pct = lambda x: ("%.2f%%" % float(x.get("misread_letters_pct") or 0)) if x else "-"
+    trs, improved = "", 0
+    for r in rows:
+        te, ours = red(r, "tesseract"), (red(r, "consensus") or red(r, "database"))
+        if te and ours and ours.get("label") == "consensus" and ours["misread_letters_pct"] < te["misread_letters_pct"]:
+            improved += 1
+        tr = r.get("translations") or {}
+        b, n = tr.get("before") or {}, tr.get("now") or {}
+        arch = [x for x in r.get("readings") or [] if x.get("kind") == "archive-ocr"]
+        ref = ("%s: ours %s" % (r.get("reference"), "-" if not ours or ours.get("f1_ref") is None else "%.2f" % ours["f1_ref"])
+               if r.get("reference") else "-")
+        before = "-"
+        if b.get("english"):
+            before = "%s EN; %s%% of it from damaged text" % (b["english"], "?" if b.get("translated_misread_pct") is None
+                                                               else "%.0f" % float(b["translated_misread_pct"]))
+        trs += ('<tr><td><a href="/repair/%s">%s</a></td><td>%s</td><td>%s%s</td><td>%s</td><td>%s</td><td>%s</td>'
+                '<td>%s</td></tr>' % (e(r["doc"], quote=True), e(r["doc"]), pct(te), pct(ours),
+                                      ('<br><span class="muted">%s</span>' % e(ours["label"])) if ours else "",
+                                      e("; ".join("%s %s" % (x["label"], pct(x)) for x in arch)) or "-", e(ref), e(before),
+                                      e("%s of %s EN, %s HI" % (n.get("english", 0), n.get("passages", 0), n.get("hindi", 0)))
+                                      if n else "-"))
+        if r.get("lines"):
+            trs += '<tr><td colspan="7" class="muted" style="line-height:1.55">%s</td></tr>' % "<br>".join(
+                e(x) for x in r["lines"])
+    body = ('<div class="srcpage"><p class="rpintro" style="margin:0">Each text\'s readings compared on the same pages: '
+            'Tesseract, vision, the repair (ours), the text before its repair, archive.org\'s OCR and the critical '
+            'e-texts, by the share of letters misread and, where a critical text is fetched, by how much of it each '
+            'reading has. The translation: how much of the English made before the repair came from damaged text, '
+            'and how much there is now. %d text(s) benchmarked; the repair cut the misreading in %d.</p>'
+            '<div class="repairbar" id="rp-corpus" style="margin-top:10px"><button class="tr-rest rp" data-doc="corpus" '
+            'onclick="repairStep(this.dataset.doc,&#39;benchmark_all&#39;,this)">Benchmark every text again (free, a minute '
+            'or two)</button><div class="rpout"></div></div>'
+            '<div class="srcwrap" style="margin-top:12px"><table class="srct"><thead><tr><th>Text</th><th>Tesseract '
+            'misreads</th><th>Ours misreads</th><th>archive.org OCR</th><th>Critical e-text</th><th>English before the '
+            'repair</th><th>Now</th></tr></thead><tbody>%s</tbody></table></div>%s</div>'
+            % (len(rows), improved, trs, "" if rows else '<p class="srcnone">Nothing benchmarked yet. Press Benchmark '
+                                                           'every text again.</p>'))
+    return ("""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Benchmarks</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;min-height:100vh}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+header a{color:var(--muted);font-size:12px;text-decoration:none}
+header a:hover{color:var(--gold)}
+header h1{font-size:18px;color:var(--gold);font-weight:700}
+.tr-rest{background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 9px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer}
+.tr-rest:hover{border-color:var(--gold);color:var(--gold)}
+.tr-rest:disabled{opacity:.6;cursor:default}
+.srcnone{color:var(--muted);font-size:12px;margin:10px 0}
+""" + _REPAIR_CSS + _SOURCES_CSS + """
+</style></head><body>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/sources">Sources &amp; repairs</a><h1>Benchmarks</h1></header>
+""" + body + """
+<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
+<script>
+function _toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none';},6000);}
+""" + _REPAIR_JS + """
+</script>
+</body></html>""")
+
+
 @app.get("/api/repair/sources")
 def api_repair_sources():
     """The Source desk's last search for a text (data/source_desk/<doc>.json), for the repair page."""
@@ -1811,6 +1941,7 @@ def api_repair_sources():
         out = {"doc": doc, "missing": True, "candidates": []}
     if isinstance(out, dict):   # ETEXT_WITNESS_2026_10_11
         out.update(_witness_info(doc))
+        out["benchmark"] = _bench(doc)   # BENCHMARK_2026_10_11
     return jsonify(out)
 
 
@@ -1866,6 +1997,16 @@ pre.rplog:empty{display:none}
 .srccard.wit{border-color:#3d5a3a}
 .srcoffer{margin:4px 0;font-size:12px}
 .srcoffer summary{cursor:pointer;color:var(--cream)}
+.benchwrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px;margin-top:4px}
+table.bench{border-collapse:collapse;width:100%;font-size:11.5px;min-width:640px}
+table.bench th,table.bench td{border-bottom:1px solid var(--border);padding:5px 8px;text-align:right;white-space:nowrap}
+table.bench th:first-child,table.bench td:first-child{text-align:left}
+table.bench th{color:var(--muted);font-weight:600;background:var(--card)}
+.benchline{font-size:12.5px;line-height:1.5;margin:7px 0;color:var(--cream)}
+.lv{display:inline-block;border-radius:5px;padding:0 6px;font-size:10.5px;border:1px solid var(--border)}
+.lv[data-level=material]{border-color:#7a3a3a;color:#e8a3a3}
+.lv[data-level=moderate]{border-color:#6b5420;color:#e6c27a}
+.lv[data-level=cosmetic]{border-color:#2f6b4a;color:#9fd8b5}
 .srcpre{white-space:pre-wrap;word-break:break-word;background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:8px;margin-top:4px;font-family:'EB Garamond',Georgia,serif;font-size:15px;line-height:1.5}
 </style></head><body>
 <header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><h1>Repair path</h1></header>
@@ -1886,7 +2027,8 @@ __BAR__
 <h2>Source desk</h2>
 <p class="srcintro">A better edition: archive.org (previewed here), the local wisdomlib archive, and the e-text sites (GRETIL, sanskritdocuments.org), where a Unicode text needs no OCR at all. A fetched PDF goes to sources\__CODE__\, not to the inbox: import it as a second witness once you have looked at it.</p>
 <div class="srcbar"><button class="tr-rest rp" data-doc="__CODE__" onclick="repairStep(this.dataset.doc,'find',this)">Find a better source</button>
-<label class="srcai"><input type="checkbox" id="srcai-__CODE__"/> let the AI judge the editions (about $0.002)</label></div>
+<label class="srcai"><input type="checkbox" id="srcai-__CODE__"/> let the AI judge the editions (about $0.002)</label>
+<button class="tr-rest rp" data-doc="__CODE__" onclick="repairStep(this.dataset.doc,'benchmark',this)">Benchmark the readings (free)</button></div>
 <div class="srcbar"><input class="srcurl" id="srcurl-__CODE__" placeholder="Paste an e-text link (a .htm or .txt file on GRETIL, sanskritdocuments.org or archive.org)"/>
 <button class="tr-rest rp" data-doc="__CODE__" onclick="var u=document.getElementById('srcurl-'+this.dataset.doc).value.trim(); if(u) repairStep(this.dataset.doc,'witness',this,{url:u});">Fetch it and read it as a witness</button></div>
 <div class="srclist" id="srclist-__CODE__"></div>
@@ -2068,7 +2210,7 @@ header h1{font-size:18px;color:var(--gold);font-weight:700}
 .srcnone{color:var(--muted);font-size:12px;margin:10px 0}
 """ + _REPAIR_CSS + _SOURCES_CSS + _JUDGED_CSS + """
 </style></head><body>
-<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><h1>Sources &amp; repairs</h1></header>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/benchmarks">Benchmarks</a><h1>Sources &amp; repairs</h1></header>
 """ + body + """
 <div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
 <script>

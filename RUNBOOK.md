@@ -1676,3 +1676,19 @@ The order matters: the desk's worker 1.2 before C10b.
 6. **Only if the witness replaces the scan:**
    - `python scripts\diag_retire_check.py --src <doc> --keep <doc>__w_<site>`;
    - then `python scripts\retire_doc.py --doc <doc> --supersedes <doc>__w_<site> --dry-run`.
+
+
+## Benchmark the readings (DOCS44_2026_10_11)
+
+1. **Patch:**
+   - `python scripts\patch_benchmark_2026_10_11.py --check`, then without `--check`;
+   - restart the dashboard when idle.
+2. **One text:** `python scripts\benchmark_sources.py --doc <doc>`. It is free and read-only; it
+   prints the table, the opinion and the next step.
+3. **Every text:** `python scripts\benchmark_sources.py --all`, then open
+   `http://127.0.0.1:5057/benchmarks`.
+4. **To compare with archive.org's own OCR of the scan:**
+   `python scripts\source_desk.py --doc <doc> --fetch <the scan's identifier> --kind text --force`
+   (the benchmark's ALSO line names it), then benchmark again. The file stays in `sources\<doc>\`
+   and is not ingested.
+5. **Never paste a command with a `<placeholder>` in it.** Fill it in first.

@@ -615,3 +615,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | R3 | The in-place re-ingest: keeps passage ids, takes an offered page | Next |
 | C14 | Sources wanted on the site | Designed: a corpus table from the judged cache, the Source desk and the witnesses; SQL next |
 | O2 | Tantric Texts: use the repaired text; Natyasastra: repair with a higher cap; Hayashirsha: let it finish; Karan Aagama: translate, then release | The user's |
+
+
+## Addendum 2026-10-11 (34) (DOCS44_2026_10_11)
+
+| # | Item | State |
+|---|---|---|
+| S2/S3 | E-text witness; the missing page offered | **Released** (73f426b) |
+| J2 | Judge v2 | **Released**; 26 material, 12 moderate, 9 cosmetic of 47 |
+| O3 | Tantric Texts repaired (57.4% to 3.9% debris); Hayashirsha re-ingested, in repair; Natyasastra vision running; Ganita complete | The user's: translate the Tantric Texts, Karan Aagama and Hayashirsha; release Karan and Hayashirsha after |
+| B1 | The benchmark: readings against each other, archive.org's OCR and a critical e-text; the debris's effect on the translation | Built and tested (BENCHMARK_2026_10_11) |
+| T1 | The translation judged against the critical text (judge_sample.py's judge, the witness as the source) | Next; paid, capped, dry-run first |
+| R3 | The in-place re-ingest; taking an offered page | Next |
+| C14 | Sources wanted on the site | Designed; with the benchmarks as a fourth input |

@@ -787,11 +787,11 @@ def write(a, doc, wcode, parsed, pages, verses, m, src, info, site, engine, op) 
             "offered": len([o for o in (m or {}).get("offers", []) if o.get("text")]), "opinion": op,
             "at": meta["at"], "mark": MARK}
     _append(Path(a.witnesses), line)
-    cur = rt.verdicts(Path(a.verdicts)).get(wcode) or {}
-    if cur.get("status") != "released":
-        _append(Path(a.verdicts), {"doc": wcode, "status": "witness", "of": doc, "site": site,
-                                   "reason": "an e-text witness of %s (%s): local only until it is adopted" % (doc, site),
-                                   "at": meta["at"], "by": "etext_witness.py", "mark": MARK})
+    # BENCHMARK_2026_10_11: always. The witness is not in the database (refused above), so a "released" of its
+    # name is stale (on 11 Oct a placeholder command wrote one for Bodhicaryavatara__w_gretil)
+    _append(Path(a.verdicts), {"doc": wcode, "status": "witness", "of": doc, "site": site,
+                               "reason": "an e-text witness of %s (%s): local only until it is adopted" % (doc, site),
+                               "at": meta["at"], "by": "etext_witness.py", "mark": MARK})
     print("wrote %d page file(s), %d verses, to %s (witness.json and align.json beside them)" % (len(recs), len(verses), out))
     say("%s is written: %d verses in %d pages; local only (the register says witness, so the mirror leaves it alone); "
         "the database is not touched" % (wcode, len(verses), len(recs)),

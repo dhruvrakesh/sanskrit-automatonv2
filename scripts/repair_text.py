@@ -735,6 +735,12 @@ def main(argv=None) -> int:
         # JUDGE_DESK_2026_10_11: publishing a text whose translation is not back would put it on the site
         # without its English (as on 11 Oct, 19:47); say so, unless --force
         cur = verdicts(Path(a.verdicts)).get(a.doc) or {}
+        if not a.force and cur.get("status") != "witness":   # BENCHMARK_2026_10_11: nothing to publish
+            r00 = assess(a)
+            if r00.get("error"):
+                print("REFUSE: %s: %s; nothing is published. --force writes the record all the same." % (a.doc, r00["error"]))
+                print("VERDICT: not published: %s is not in the database" % a.doc); print("NEXT: ")
+                return 1
         if cur.get("status") in ("in_repair", "witness") and not a.force:   # ETEXT_WITNESS_2026_10_11: a witness too
             r0 = assess(a)
             if r0.get("error") and cur.get("status") == "witness":

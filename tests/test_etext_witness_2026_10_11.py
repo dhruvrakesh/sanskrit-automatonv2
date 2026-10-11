@@ -413,7 +413,7 @@ class Dashboard(unittest.TestCase):
         (t / "sources" / "Scan" / "sa_text.htm").write_text("x")
         (t / "sources" / "Scan" / "sa_text.htm.json").write_text(json.dumps({"url": "https://gretil.sub.uni-goettingen.de/x.htm"}))
         (t / "sources" / "Scan" / "scan.pdf").write_bytes(b"%PDF")
-        (t / "sources" / "Scan" / 'bad"name.txt').write_text("x")
+        (t / "sources" / "Scan" / "bad;name.txt").write_text("x")   # a name Windows allows that the page will not offer
         (t / "data" / "raw_witness" / "Scan__w_gretil").mkdir(parents=True)
         (t / "data" / "raw_witness" / "Scan__w_gretil" / "align.json").write_text(json.dumps({"offers": [
             {"page": 15, "why": "the scan cannot read it", "refs": "1.141-1.150", "text": "\u0915\u0916 \u0965", "lo": 140, "hi": 149},
@@ -468,8 +468,8 @@ class Dashboard(unittest.TestCase):
         j = self.c.get("/api/repair/sources?doc=Scan").get_json()
         self.assertTrue(j["missing"])
         f = {x["name"]: x for x in j["fetched"]}
-        self.assertEqual(sorted(f), ['bad"name.txt', "sa_text.htm", "scan.pdf"])
-        self.assertTrue(f["sa_text.htm"]["ok"]); self.assertFalse(f['bad"name.txt']["ok"])
+        self.assertEqual(sorted(f), ["bad;name.txt", "sa_text.htm", "scan.pdf"])
+        self.assertTrue(f["sa_text.htm"]["ok"]); self.assertFalse(f["bad;name.txt"]["ok"])
         self.assertEqual(f["scan.pdf"]["kind"], "pdf")
         self.assertEqual(f["sa_text.htm"]["url"], "https://gretil.sub.uni-goettingen.de/x.htm")
         w = j["witnesses"][0]
@@ -534,7 +534,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_benchmark_*"))   # BENCHMARK_2026_10_11 came after
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             g = (t / ".gitignore").read_bytes()
             self.assertIn(b"data/raw_witness/\r\ndata/source_judged/\r\n", g, "its line endings kept")
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)

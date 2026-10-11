@@ -1,0 +1,23 @@
+The readings benchmarked: where the automaton improved the text and its translation (BENCHMARK_2026_10_11); recorded (DOCS44_2026_10_11)
+
+docs/BENCHMARK_2026-10-11.md. After 73f426b: the Tantric Texts repaired (debris 57.4% to 3.9%, vision 95.8%);
+Hayashirsha re-ingested and in repair; the Natyasastra's vision run started; judge v2 on 47 texts (26 material,
+12 moderate, 9 cosmetic); a placeholder command wrote "released" for a text that does not exist.
+- scripts/benchmark_sources.py (new, free, read-only): every reading of a text on the scan's pages (Tesseract,
+  vision, the repair, the database, the text before its repair from the oldest repair backup read immutable,
+  the witnesses, archive.org's OCR and critical e-texts in sources\<doc>\): Devanagari letters, Latin share,
+  letters misread and pages damaged (repair_text.judge), F1 with ours and with the critical text (skeleton
+  n-grams); the translation now and before (English, Hindi, QA, mt_reviews), and the share of the English made
+  from damaged text (material from 10%); the opinion in plain lines; data\benchmarks\<doc>.json; --all.
+- scripts/patch_benchmark_2026_10_11.py:
+  repair_text.py: --release refuses a text that is not in the database (unless --force);
+  etext_witness.py: --write always marks a new witness local (a stale "released" of its name no longer counts);
+  dashboard.py: "Benchmark the readings (free)" on the repair page, with the table and the opinion; /benchmarks
+    for every text, with "Benchmark every text again"; steps benchmark and benchmark_all; a link from Sources;
+  .gitignore: data/benchmarks/.
+Tests: tests/test_benchmark_2026_10_11.py (13); tests/test_etext_witness_2026_10_11.py: a fixture name Windows
+allows (bad;name.txt), and its patcher replay compares with this patch's backups.
+Docs: scripts/patch_docs44_2026_10_11.py (PLATFORM 47, RUNBOOK, EP 34).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
