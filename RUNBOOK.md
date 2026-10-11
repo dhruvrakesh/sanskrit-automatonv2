@@ -1589,3 +1589,48 @@ The order matters: the desk's worker 1.2 before C10b.
    - press Pause All;
    - run `scripts\restart_dashboard.ps1`;
    - press Full on the OCR's row. It resumes from the missing pages.
+
+
+## The repair path (DOCS40_2026_10_10)
+
+1. **Patch:**
+   - `python scripts\patch_repair_path_2026_10_10.py --check`, then without `--check`.
+   - Reload the dashboard with Ctrl+F5.
+2. **Restart the dashboard when idle** (`scripts\restart_dashboard.ps1`) for the Library's repair bars
+   and `/repair/<doc>`.
+3. **A text a run could not translate because of its scan:**
+   - In the Library press *Repair path: what now?*, or open `http://127.0.0.1:5057/repair/<code>`.
+   - Press the button it offers next:
+     - Repair the scan (capped);
+     - Use the repaired text (a backup first);
+     - Set aside.
+   - By hand: `python scripts\repair_text.py --doc <code>`, then the step its NEXT line names.
+4. **Put a database back after a failed re-ingest:**
+   - the step prints its backup (`context_pre_repair_<code>_<stamp>.db`);
+   - stop the dashboard (`scripts\restart_dashboard.ps1 -Stop`);
+   - copy the backup over `data\context.db`;
+   - start the dashboard.
+5. **The texts set aside:** `python scripts\repair_text.py --list`. Restore one with `--restore` when a
+   better scan is in the inbox.
+
+
+## The repair path, healed (DOCS41_2026_10_11)
+
+1. **Before a re-ingest replaces translations,** the text is held from the site. `--use-repaired` does
+   this by itself. By hand: `python scripts\repair_text.py --doc <code> --hold`.
+   - Publish it when it is translated again: `--release`.
+   - A text in repair is named in the mirror run's *held* list.
+2. **Debris that is cosmetic:**
+   - `python scripts\repair_text.py --doc <code>` judges it;
+   - `--as-is "debris judged cosmetic"` lets the guard pass it;
+   - `--restore` undoes that.
+3. **What is left is not Sanskrit** (English front and back matter, lone dandas): `--accept "what is
+   left is not Sanskrit"`.
+4. **A better edition:**
+   - On the repair page, the Source desk: *Find a better source*, *Preview here*, *Fetch the PDF*.
+   - By hand: `python scripts\source_desk.py --doc <code>`, then `--fetch <identifier> --kind pdf`.
+   - A fetched PDF lands in `sources\<code>\`. Import it as a new witness (Import path to inbox) once
+     you have looked at it.
+5. **Pause the mirror** while a text is being rebuilt and the patch is not in place:
+   - `Disable-ScheduledTask -TaskName SanskritCorpusMirror`;
+   - `Enable-ScheduledTask -TaskName SanskritCorpusMirror` afterwards.

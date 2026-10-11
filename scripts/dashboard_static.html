@@ -149,6 +149,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .log-line-info{color:var(--gold)}
 .log-line-held{color:var(--gold);font-weight:600}
 .log-line-past{color:var(--muted)}
+.log-act{color:inherit;text-decoration:underline;cursor:pointer}  /* REPAIR_PATH_2026_10_10 */
 .log-clear{padding:8px 12px;border-top:1px solid var(--border-v)}
 .btn-clear{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer}
 .btn-clear:hover{color:var(--red)}
@@ -455,15 +456,17 @@ function toast(msg, type) {
   t.style.display = 'block';
   setTimeout(() => t.style.display = 'none', 2800);
 }
-function addLog(line, cls) {
-  logLines.push({line, cls: cls || ''});
+function addLog(line, cls, href) {
+  logLines.push({line, cls: cls || '', href: href || ''});   // REPAIR_PATH_2026_10_10: a line may open a page
   if (logLines.length > 600) logLines.shift();
   renderLog();
 }
 function renderLog() {
   const el = document.getElementById('logBody');
   el.innerHTML = logLines.map(function(l) {
-    return '<span' + (l.cls ? ' class="' + l.cls + '"' : '') + '>' + esc(l.line) + '</span>\n';
+    return '<span' + (l.cls ? ' class="' + l.cls + '"' : '') + '>'
+      + (l.href ? '<a class="log-act" href="' + esc(l.href) + '" target="_blank" rel="noopener">' + esc(l.line) + '</a>'
+                : esc(l.line)) + '</span>\n';
   }).join('');
   el.scrollTop = el.scrollHeight;
 }
@@ -965,6 +968,7 @@ async function pollJob(jid, label) {
         activeJobs[jid].verdict = v.word;
         _seenFinished.add(jid);
         addLog(v.tag + ' ' + label + ' - ' + v.text, v.cls);
+        _repairHint(v, activeJobs[jid].doc || v.doc, false);   // REPAIR_PATH_2026_10_10
         if (j.err && j.ok === false && v.word === 'failed') addLog(j.err.slice(0, 400), 'log-line-err');
         toast(label + ': ' + v.word, v.word === 'failed' || v.word === 'stopped' ? 'fail' : 'ok');
         renderBadges();
@@ -1479,6 +1483,41 @@ async function pollProgress() {
     if (!r.ok) return;
     renderProgress(await r.json());
   } catch(e) {}
+  _liveOthers();   // REPAIR_HEAL_2026_10_11
+}
+
+// REPAIR_HEAL_2026_10_11: the Live tab also shows the jobs that are not translations (a repair, an OCR, an
+// ingest), with their last lines, so a press in the Library or on a repair page is seen running here.
+let _liveOthersTick = 0;
+async function _liveOthers() {
+  if ((_liveOthersTick++) % 2) return;            // every other poll: about every 4 s
+  const host = document.getElementById('progressContent');
+  if (!host || !host.parentNode) return;
+  let box = document.getElementById('liveOthers');
+  if (!box) { box = document.createElement('div'); box.id = 'liveOthers'; host.parentNode.insertBefore(box, host); }
+  try {
+    const d = await (await fetch('/api/jobs/running')).json();
+    const jobs = (d.running || []).filter(function(j) { return !/^translate/.test(j.kind || ''); }).slice(0, 3);
+    if (!jobs.length) { box.innerHTML = ''; return; }
+    const parts = await Promise.all(jobs.map(async function(j) {
+      let tail = [];
+      try { const x = await (await fetch('/api/job/' + j.id)).json(); tail = _outLines(x.out).slice(-3); } catch (e) {}
+      const t = Math.round(j.elapsed_s || 0);
+      return '<div style="border:1px solid var(--border-v);border-radius:6px;padding:7px 9px;margin-bottom:8px">'
+        + '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:10px">'
+        + '<span class="' + (j.state === 'queued' ? 'pstat-idle' : 'pstat-run') + '">'
+        + (j.state === 'queued' ? '&#9203; queued' : '&#9654; running') + '</span>'
+        + '<b>' + esc((j.kind || '') + (j.mode ? ' (' + j.mode + ')' : '')) + '</b>'
+        + '<span style="color:var(--muted);font-family:JetBrains Mono,monospace;overflow:hidden;text-overflow:ellipsis;'
+        + 'white-space:nowrap;max-width:160px">' + esc(j.doc || '') + '</span>'
+        + '<span style="color:var(--muted)">' + (t < 60 ? t + 's' : Math.floor(t / 60) + 'm ' + (t % 60) + 's') + '</span></div>'
+        + (tail.length ? '<div style="margin-top:4px;font-family:JetBrains Mono,monospace;font-size:9.5px;color:var(--muted);'
+           + 'white-space:pre-wrap;word-break:break-word">' + esc(tail.join('\n')) + '</div>' : '')
+        + '</div>';
+    }));
+    box.innerHTML = '<div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">'
+      + 'Running now</div>' + parts.join('');
+  } catch (e) {}
 }
 
 function renderProgress(d) {
@@ -2003,9 +2042,15 @@ function _newLines(prev, lines) {
 }
 function jobVerdict(ok, out) {
   out = String(out || '');
+  // REPAIR_PATH_2026_10_10: a step of a repair path says what it found on its VERDICT: line
+  const rv = out.match(/(?:^|\n)VERDICT: [^\n]*/g);
+  if (rv && !/KILLED/.test(out)) {
+    return {word: ok === false ? 'repair: not done' : 'repair', tag: '[REPAIR]', cls: ok === false ? 'log-line-held' : 'log-line-ok',
+            text: rv[rv.length - 1].replace(/^\n?VERDICT: /, '').replace(/\r$/, '')};
+  }
   if (ok === false && /TRANSLATE_DEBRIS_GUARD|allow-debris/.test(out)) {
     const m = out.match(/ocr_consensus\.py --doc (\S+)/);
-    return {word: 'held', tag: '[HELD]', cls: 'log-line-held',
+    return {word: 'held', tag: '[HELD]', cls: 'log-line-held', doc: m ? m[1] : '',
             text: 'held by the OCR-debris guard: its scan carries Tesseract debris, so the source is repaired first'
                   + (m ? '. Plan the repair, no spend: python scripts\\ocr_consensus.py --doc ' + m[1]
                          + ' --threshold 101 --include-unassessed' : '')};
@@ -2015,19 +2060,40 @@ function jobVerdict(ok, out) {
   const done = Array.from(out.matchAll(/Done\. (\d+)\/(\d+) translated \| (\d+) quality-skipped/g));
   if (done.length) {
     const sent = done.reduce(function(a, m) { return a + (+m[1]); }, 0);
-    return {word: sent ? 'done' : 'nothing sent', tag: sent ? '[OK]' : '[NOTHING]', cls: sent ? 'log-line-ok' : 'log-line-info',
+    const tot = done.reduce(function(a, m) { return a + (+m[2]); }, 0);    // REPAIR_PATH_2026_10_10
+    const skip = done.reduce(function(a, m) { return a + (+m[3]); }, 0);
+    return {stuck: tot > 0 && skip >= 0.8 * tot,
+            word: sent ? 'done' : 'nothing sent', tag: sent ? '[OK]' : '[NOTHING]', cls: sent ? 'log-line-ok' : 'log-line-info',
             text: done.map(function(m) { return m[1] + ' of ' + m[2] + ' translated' + (+m[3] ? ', ' + m[3] + ' below the OCR quality bar' : ''); }).join('; ')};
   }
   if (/\[NOTHING\]/.test(out)) return {word: 'nothing to do', tag: '[NOTHING]', cls: 'log-line-info',
                                        text: 'nothing to translate: every verse has it, or what is left is illegible OCR'};
   return {word: 'done', tag: '[OK]', cls: 'log-line-ok', text: 'done'};
 }
+// REPAIR_PATH_2026_10_10: a run that stops because of its scan points at its repair path, there and then:
+// a line that opens /repair/<doc> (assess, repair the scan, use it, or set it aside). Until the dashboard
+// is restarted with the path, the line gives the command instead.
+let _repairReady = false;
+const _repairProbe = fetch('/api/repair').then(function(r) { return r.ok ? r.json() : null; })
+  .then(function(d) { _repairReady = !!(d && d.mark); }).catch(function() {});
+function _repairHint(v, doc, past) {
+  if (!doc || !(v.word === 'held' || v.stuck || (v.tag === '[REPAIR]' && !past))) return;
+  const cls = past ? 'log-line-past' : 'log-line-held';
+  if (_repairReady) {
+    addLog('  -> ' + doc + ': its repair path, there and then (assess, repair the scan, use it, or set it aside)', cls,
+           '/repair/' + encodeURIComponent(doc));
+  } else {
+    addLog('  -> its repair path: python scripts\\repair_text.py --doc ' + doc + '   (buttons come with the dashboard restart)', cls);
+  }
+}
 const _seenFinished = new Set();
 let _historySeeded = false;
 function _logFinished(r, past) {
-  const v = jobVerdict(r.ok, String(r.out_tail || '') + '\n' + String(r.err_preview || ''));
+  const v = jobVerdict(r.ok, String(r.out_tail || '') + '\n' + String(r.err_preview || '')
+                            + (r.verdict ? '\nVERDICT: ' + r.verdict : ''));   // REPAIR_HEAL_2026_10_11: in full
   const at = r.end ? new Date(r.end * 1000).toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit', hour12: false}) : '';
   addLog(v.tag + ' ' + at + ' ' + (r.kind || '') + ' ' + (r.doc || '') + ' - ' + v.text, past ? 'log-line-past' : v.cls);
+  _repairHint(v, r.doc || v.doc, past);   // REPAIR_PATH_2026_10_10
   return v;
 }
 async function watchFinished() {
@@ -2037,6 +2103,7 @@ async function watchFinished() {
     if (!Array.isArray(rows)) return;
     if (!_historySeeded) {
       _historySeeded = true;
+      await _repairProbe;   // REPAIR_PATH_2026_10_10: know whether /repair/<doc> answers before linking to it
       rows.forEach(function(r) { _seenFinished.add(r.id); });
       const last = rows.slice(0, 5).reverse();
       if (last.length) {

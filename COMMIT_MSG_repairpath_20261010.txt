@@ -1,0 +1,24 @@
+The repair path, there and then (REPAIR_PATH_2026_10_10); the evening recorded (DOCS40_2026_10_10)
+
+docs/REPAIR_PATH_2026-10-10.md: "rather than crashing, the resolution path and action should be there
+and then; else we discard that PDF and look for a better resolution". A translation stops for its
+scan: held by the OCR-debris guard, or most of what is left below the OCR quality bar. The next step
+is now a button where the stop is seen. The enterprise path from repair to a critical edition (R1-R4).
+scripts/repair_text.py (new): assess (free, read-only) | --repair (ocr_consensus --yes, capped by
+--max-usd; above the cap it spends nothing and names the cap it needs) | --use-repaired [--replace N]
+(backup, wipe, ingest the repaired pages, classify, drift; refuses unless every page is covered and
+readable, nothing is lost or N is named, and no other writer runs) | --set-aside "why" / --restore
+(data/source_verdicts.jsonl; files kept) | --list. Every step ends with VERDICT: and NEXT:.
+scripts/patch_repair_path_2026_10_10.py (needs DESK_HEAL and LIVE_LOG; anchored, all or nothing,
+marker-idempotent):
+- dashboard.py: POST /api/repair (each step a run of repair_text.py; use under the translate lock;
+  at most $5.00 a press); /repair/<doc> with live output; the Library's repair bar under a hold or a
+  quality note, a text set aside with why and Restore, and "Waiting for a better source" for texts
+  with no English yet.
+- dashboard_static.html: a [HELD] run, a run stuck below the OCR bar and a repair step's [REPAIR]
+  verdict are followed in the Log by a line to the text's repair page.
+tests/test_repair_text_2026_10_10.py (9), tests/test_repair_path_2026_10_10.py (12).
+scripts/patch_docs40_2026_10_10.py: PLATFORM 43, RUNBOOK, ENTERPRISE_PATH addendum 30.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

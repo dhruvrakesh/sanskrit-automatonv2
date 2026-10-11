@@ -154,8 +154,32 @@ def _archive_previous_translation(con, cur, rowid, reason="retranslate-overwrite
 
 
 # TRANSLATE_DEBRIS_GUARD_2026_10_04 -------------------------------------------
+def _source_state(doc):
+    """REPAIR_HEAL_2026_10_11: the text's latest record in data/source_verdicts.jsonl (repair_text.py's
+    register), or None. SA_SOURCE_VERDICTS names another file (the tests)."""
+    p = Path(os.environ.get("SA_SOURCE_VERDICTS") or (Path(__file__).resolve().parent.parent / "data" / "source_verdicts.jsonl"))
+    last = None
+    try:
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(r, dict) and r.get("doc") == doc:
+                    last = r
+    except OSError:
+        return None
+    return last
+
+
 def _debris_guard(con, doc, debris_max, inbox=None):
     """A refusal message when the doc's stored text is repairable Tesseract debris, else None."""
+    _st = _source_state(doc)   # REPAIR_HEAL_2026_10_11: "translate as is" was decided for this text
+    if _st and _st.get("status") == "translate_as_is":
+        print("debris guard: %s is to be translated as is (data/source_verdicts.jsonl, %s: %s)"
+              % (doc, str(_st.get("at") or "?")[:16], _st.get("reason") or ""))
+        return None
     import re as _re
     junk = _re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")     # = diag_hindi_ab.JUNK
     dev = _re.compile(r"[\u0900-\u097f]")

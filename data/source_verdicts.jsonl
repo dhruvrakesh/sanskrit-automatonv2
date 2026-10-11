@@ -1,0 +1,5 @@
+{"doc": "tantric_texts_series_edited_by_arthur_av", "status": "set_aside", "reason": "needs a better scan", "at": "2026-10-11T18:47:54", "by": "repair_text.py", "mark": "REPAIR_PATH_2026_10_10"}
+{"doc": "tantric_texts_series_edited_by_arthur_av", "status": "set_aside", "reason": "needs a better scan", "at": "2026-10-11T18:48:11", "by": "repair_text.py", "mark": "REPAIR_PATH_2026_10_10"}
+{"doc": "Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi", "status": "in_repair", "reason": "re-translating after the repair", "at": "2026-10-11T19:46:50", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11", "en_before": 0, "hi_before": 0}
+{"doc": "Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi", "status": "released", "reason": "", "at": "2026-10-11T19:47:36", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
+{"doc": "tantric_texts_series_edited_by_arthur_av", "status": "restored", "reason": "", "at": "2026-10-11T19:47:49", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}

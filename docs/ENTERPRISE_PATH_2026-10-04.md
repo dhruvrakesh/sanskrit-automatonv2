@@ -562,3 +562,31 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | O3 | Natyasastra, Tantric Texts | Held; nothing to lose. Next: consensus plan, then vision, re-ingest, translate |
 | O4 | Hayashirsha | Held; 1,174 Hindi exist. Your decision, as O1 |
 | U1.1 | Two editions with one title in the Corner's list (Vasishtha and Shiva Dhanur Veda) | Next: tell them apart |
+
+
+## Addendum 2026-10-10 (30) (DOCS40_2026_10_10)
+
+| # | Item | State |
+|---|---|---|
+| R1 | The repair path, there and then: assess, repair the scan (capped), use the repaired text (backup first), set aside | Built and tested (REPAIR_PATH_2026_10_10). Next: patch, reload, restart when idle |
+| O3 | Natyasastra, Tantric Texts | Next: Repair path, then Repair the scan, then Use the repaired text, then translate |
+| O1, O4 | Karan Aagama, Hayashirsha | Your decision, now one press with its cost named: replace N English, or `--allow-debris`, or wait for R3 |
+| R2 | Sources wanted: the texts set aside listed in the hub and the Corner; a better scan as a new witness; a second vision try at a higher resolution | Next |
+| R3 | In-place re-ingest that keeps passage ids (and the Hindi, vectors and pictures), clearing only changed translations | Designed (docs/REPAIR_PATH_2026-10-10.md section 6); needs its own tests |
+| R4 | The distillate: per passage the best reading among witnesses and the best translation, with provenance; the corpus publishes it | Charted |
+
+
+## Addendum 2026-10-11 (31) (DOCS41_2026_10_11)
+
+| # | Item | State |
+|---|---|---|
+| R1.1 | The repair path healed: the repair no longer refuses itself; states (as is, complete, in repair, set aside); Translate it now; the site keeps its version while a text is rebuilt | Built and tested (REPAIR_HEAL_2026_10_11). Next: patch, hold Karan, restart when idle |
+| J1 | The debris judged: furniture, notes, numbering, misread letters; vision agreement; cosmetic, moderate, material | Built and tested; shown on the repair page and in the assessment |
+| S1 | The Source desk: archive.org, the wisdomlib archive and the e-text sites; ranking with reasons; AI judgement (about $0.002); preview in the page; fetch to `sources\` | Built and tested (SOURCE_DESK_2026_10_11) |
+| O1 | Karan Aagama | Re-ingested at 18:51 (moderate; agreement 0.95). Next: hold from the site, translate English and Hindi, release |
+| O3 | Natyasastra, Tantric Texts, Hayashirsha | Material. Next: repair the scan (Tantric: restore first, 72 pages left); else the Source desk |
+| O5 | Ganita | What is left is not Sanskrit. Next: accept as complete |
+| S2 | An e-text (GRETIL, sanskritdocuments.org, wisdomlib) ingested as a witness, no OCR | Next |
+| S3 | The missing page sourced from a fetched witness (n-gram alignment), offered on the repair page | Designed |
+| R3 | In-place re-ingest that keeps passage ids and re-anchors pictures and stories | Designed |
+| C14 | "Sources wanted" in the Researchers' Corner, from the register and the Source desk | Designed; needs a table and the mirror |

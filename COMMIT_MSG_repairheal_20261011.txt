@@ -1,0 +1,27 @@
+The repair path, there and then, and healed (REPAIR_PATH_2026_10_10, REPAIR_HEAL_2026_10_11); the debris judged; the Source desk (SOURCE_DESK_2026_10_11); recorded (DOCS40, DOCS41)
+
+REPAIR_PATH_2026_10_10 (docs/REPAIR_PATH_2026-10-10.md): a translation that stops for its scan offers
+its next step as a button: scripts/repair_text.py (assess, repair the scan, use the repaired text with a
+backup first, set aside), /api/repair, /repair/<doc>, the Library's repair bar, the Log's line to it.
+REPAIR_HEAL_2026_10_11 (docs/REPAIR_HEAL_2026-10-11.md), after the first evening of use (11 Oct):
+- every "Repair the scan" refused itself: ocr_consensus.py now looks past the job that asked
+  (SA_CONSENSUS_SELF_KIND);
+- the debris judged: furniture (watermarks, running heads), notes, numbering and misread letters, with
+  vision agreement; cosmetic, moderate, material. Natyasastra, Tantric Texts and Hayashirsha are
+  material; Karan Aagama was moderate (two-thirds of its debris the eGangotri watermark; 0.95
+  agreement); Ganita's leftovers are English front and back matter;
+- states in data/source_verdicts.jsonl: translate as is (translate_passages.py's guard lets it
+  through), complete, in repair (corpus_sync.py does not send it: the site keeps its last version until
+  --release), set aside;
+- the Library: "Translate it now" after a repair; "Not yet readable" offers its texts their
+  translation; the repair page shows the debris judged and the Source desk;
+- scripts/source_desk.py: archive.org, the local wisdomlib archive and the e-text sites; ranking with
+  reasons; optional AI judgement (~$0.002); preview in the page; fetch into sources\<doc>\ (ignored);
+- the job record keeps a verdict in full; the Live tab shows the jobs that are not translations.
+Tests: tests/test_repair_text_2026_10_10.py (9), tests/test_repair_path_2026_10_10.py (12),
+tests/test_repair_heal_2026_10_11.py (28).
+Docs: scripts/patch_docs40_2026_10_10.py (PLATFORM 43, RUNBOOK, EP 30), scripts/patch_docs41_2026_10_11.py
+(PLATFORM 44, RUNBOOK, EP 31).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

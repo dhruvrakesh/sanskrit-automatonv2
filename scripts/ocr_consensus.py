@@ -218,7 +218,10 @@ def dashboard_jobs(doc: str) -> list[dict] | None:
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))  # never via a proxy
         with opener.open("http://127.0.0.1:5057/api/jobs/running", timeout=2) as r:
             data = json.loads(r.read().decode("utf-8"))
-        return [j for j in data.get("running", []) if j.get("doc") == doc]
+        # REPAIR_HEAL_2026_10_11: repair_text.py runs this as the dashboard's own job (kind "repair"); it names
+        # its kind here, so the job that asked for the repair is not taken for one in its way
+        skip = {k.strip() for k in os.environ.get("SA_CONSENSUS_SELF_KIND", "").split(",") if k.strip()}
+        return [j for j in data.get("running", []) if j.get("doc") == doc and j.get("kind") not in skip]
     except Exception:
         return None
 

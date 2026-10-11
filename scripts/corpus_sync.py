@@ -151,6 +151,26 @@ def load_titles() -> dict:
         return {}
 
 
+def _in_repair_docs() -> set:
+    """REPAIR_HEAL_2026_10_11: the texts whose latest record in data/source_verdicts.jsonl (repair_text.py's
+    register) is "in_repair": their passages were replaced and are being translated again, so the site
+    keeps its last version of them. SA_SOURCE_VERDICTS names another file (the tests)."""
+    p = Path(os.environ.get("SA_SOURCE_VERDICTS") or (ROOT / "data" / "source_verdicts.jsonl"))
+    last = {}
+    try:
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(r, dict) and r.get("doc"):
+                    last[r["doc"]] = r.get("status")
+    except OSError:
+        return set()
+    return {d for d, s in last.items() if s == "in_repair"}
+
+
 def live_docs(con, include_retired: bool = False):
     """[(id, code, category, src_path, glossary, created_at)] of documents to mirror."""
     cols = _cols(con, "docs")
@@ -804,7 +824,12 @@ class Run:
                     self.diff_group(ge, remote, retire=not partial)
             per_doc = [t for t in PER_DOC_TABLES if t in tables]
             if per_doc:
+                in_repair = _in_repair_docs()   # REPAIR_HEAL_2026_10_11
                 for n_doc, doc in enumerate(sel_docs, 1):
+                    if doc[1] in in_repair:
+                        self.held.append("%s: in repair (data/source_verdicts.jsonl): not compared or sent; the site "
+                                         "keeps its last version until repair_text.py --release" % doc[1])
+                        continue
                     groups = build_doc_groups(self.con, doc, set(per_doc), ent_ok)
                     for t in per_doc:
                         self.diff_group(groups[t], remote)

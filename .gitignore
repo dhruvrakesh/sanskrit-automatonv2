@@ -129,3 +129,8 @@ data/corpus_media_log.jsonl
 data/corner_worker_log.jsonl
 data/corner_worker.lock
 data/corner_worker_made.jsonl
+
+# SOURCE_DESK_2026_10_11: editions fetched by scripts/source_desk.py are large and can be fetched
+# again (each has its provenance beside it); the search results are regenerated on every search
+sources/
+data/source_desk/
