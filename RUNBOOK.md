@@ -1634,3 +1634,18 @@ The order matters: the desk's worker 1.2 before C10b.
 5. **Pause the mirror** while a text is being rebuilt and the patch is not in place:
    - `Disable-ScheduledTask -TaskName SanskritCorpusMirror`;
    - `Enable-ScheduledTask -TaskName SanskritCorpusMirror` afterwards.
+
+
+## The debris judged; Sources & repairs (DOCS42_2026_10_11)
+
+1. **Patch:**
+   - `python scripts\patch_judge_desk_2026_10_11.py --check`, then without `--check`;
+   - restart the dashboard when idle;
+   - `python scripts\repair_text.py --judge-all` (free, read-only, about a minute).
+2. **Open `http://127.0.0.1:5057/sources`.** Held texts come first, then material, moderate, cosmetic.
+   Each row links to the text's repair page.
+3. **Publish a text in repair** only when it is translated again:
+   - `python scripts\repair_text.py --doc <code> --release` refuses until then;
+   - `--release --force` publishes as it is.
+4. **Tests without pytest:** `python -m unittest tests.test_judge_desk_2026_10_11 tests.test_repair_heal_2026_10_11 -v`.
+   Or `python -m pip install pytest` once.

@@ -1,0 +1,48 @@
+{
+ "doc": "yajur_veda_shukla_yajur_veda",
+ "mark": "JUDGE_DESK_2026_10_11",
+ "at": "2026-10-11T20:14:23",
+ "level": "material",
+ "judged": "material: misread letters in 44% of verses (3.0% of the letters: ae, aa, aaa, Ae, ASAT); page furniture in 24% of verses (\"adhyaya\"); English notes in 9%; numbering in 1%. Repair first: translating now translates the OCR's errors.",
+ "verdict": "held by the OCR-debris guard (77% of its verses carry Latin letters, 0% from vision OCR); the scan can be repaired: vision OCR on about 295 page(s), about $0.12",
+ "next": "python scripts\\repair_text.py --doc yajur_veda_shukla_yajur_veda --repair   (capped at --max-usd 1.00)",
+ "also": [
+  "python scripts\\repair_text.py --doc yajur_veda_shukla_yajur_veda --find-source"
+ ],
+ "state": null,
+ "misread_pct": 43.9,
+ "misread_letters_pct": 2.99,
+ "furniture_pct": 24.1,
+ "notes_pct": 9.2,
+ "numbering_pct": 0.6,
+ "misread_top": [
+  "ae",
+  "aa",
+  "aaa",
+  "Ae",
+  "ASAT",
+  "US",
+  "Te",
+  "ay",
+  "AAT",
+  "feu"
+ ],
+ "furniture_top": [
+  "adhyaya",
+  "yajur",
+  "vedic literaturecollection"
+ ],
+ "passages": 1223,
+ "english": 951,
+ "hindi": 0,
+ "pictures": 0,
+ "debris_pct": 77.3,
+ "vision_pct": 0.0,
+ "below_quality": 5,
+ "guard": true,
+ "held": true,
+ "quality_stuck": false,
+ "pdfs": 295,
+ "vision_pages": 0,
+ "merged_pages": 0
+}

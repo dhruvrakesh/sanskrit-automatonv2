@@ -1,0 +1,46 @@
+{
+ "doc": "smriti_06yagyavalkya_smriti",
+ "mark": "JUDGE_DESK_2026_10_11",
+ "at": "2026-10-11T20:14:20",
+ "level": "cosmetic",
+ "judged": "cosmetic: misread letters in 6% of verses (1.5% of the letters: ded, eas, aad, Sa, CUS); page furniture in 50% of verses (\"yagyavalkya\"); English notes in 13%; numbering in 4%. Translate as is.",
+ "verdict": "held by the OCR-debris guard (100% of its verses carry Latin letters, 0% from vision OCR); but the debris is cosmetic: cosmetic: misread letters in 6% of verses (1.5% of the letters: ded, eas, aad, Sa, CUS); page furniture in 50% of verses (\"yagyavalkya\"); English notes in 13%; numbering in 4%. Translate as is.",
+ "next": "python scripts\\repair_text.py --doc smriti_06yagyavalkya_smriti --as-is \"debris judged cosmetic\"",
+ "also": [
+  "python scripts\\repair_text.py --doc smriti_06yagyavalkya_smriti --repair   (for the critical edition)"
+ ],
+ "state": null,
+ "misread_pct": 6.1,
+ "misread_letters_pct": 1.48,
+ "furniture_pct": 50.0,
+ "notes_pct": 13.4,
+ "numbering_pct": 3.7,
+ "misread_top": [
+  "ded",
+  "eas",
+  "aad",
+  "Sa",
+  "CUS",
+  "ad",
+  "fe",
+  "Tat",
+  "TATA",
+  "Wd"
+ ],
+ "furniture_top": [
+  "yagyavalkya"
+ ],
+ "passages": 82,
+ "english": 52,
+ "hindi": 0,
+ "pictures": 0,
+ "debris_pct": 100.0,
+ "vision_pct": 0.0,
+ "below_quality": 1,
+ "guard": true,
+ "held": true,
+ "quality_stuck": false,
+ "pdfs": 82,
+ "vision_pages": 0,
+ "merged_pages": 0
+}

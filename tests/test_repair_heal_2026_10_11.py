@@ -228,7 +228,9 @@ class Path_(unittest.TestCase):
         rc, out = self.tool("--doc", "G")
         self.assertIn("in repair since", self.line(out, "VERDICT")); self.assertIn("Finish EN", self.line(out, "NEXT"))
         self.assertIn("--release", " ".join(self.line(out, "ALSO", last=False)))
-        rc, out = self.tool("--doc", "G", "--release")
+        rc, out = self.tool("--doc", "G", "--release")   # JUDGE_DESK_2026_10_11: not before the translation is back
+        self.assertEqual(rc, 1); self.assertIn("still in repair", self.line(out, "VERDICT"))
+        rc, out = self.tool("--doc", "G", "--release", "--force")
         self.assertIn("published", self.line(out, "VERDICT"))
         rc, out = self.tool("--doc", "G")
         self.assertIn("nothing holds it", self.line(out, "VERDICT"))
@@ -635,7 +637,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_judgedesk_*"))   # JUDGE_DESK_2026_10_11 came after
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             # a REPAIR_PATH block that is not the released one is not replaced, and nothing is written
             for f in self.FILES:

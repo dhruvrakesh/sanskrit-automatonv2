@@ -1219,7 +1219,7 @@ def api_ingest():
 # with no English offered their translation, and the Source desk (scripts/source_desk.py): a better
 # edition found on archive.org, the local wisdomlib archive and the e-text sites, previewed in the page.
 _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "accept", "hold", "release",
-                 "find", "fetch")
+                 "find", "fetch", "judge_all")   # JUDGE_DESK_2026_10_11: judge_all
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
 _REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair")
 SOURCE_DESK_DIR = ROOT / "data" / "source_desk"
@@ -1250,7 +1250,8 @@ _REPAIR_JS = r"""/* REPAIR_PATH_2026_10_10, REPAIR_HEAL_2026_10_11: the repair p
 var _RP_DOING = {assess: 'assessing...', repair: 'repairing the scan...', use: 're-ingesting the repaired text...',
                  set_aside: 'setting it aside...', restore: 'restoring...', as_is: 'noting: translate as is...',
                  accept: 'noting: complete...', hold: 'holding it from the site...', release: 'publishing...',
-                 find: 'looking for a better edition...', fetch: 'fetching...', translate: 'translating...'};
+                 find: 'looking for a better edition...', fetch: 'fetching...', translate: 'translating...',
+                 judge_all: 'judging the texts (about a minute)...'};
 var _RP_NL = String.fromCharCode(10), _RP_CR = String.fromCharCode(13), _RP_BS = String.fromCharCode(92);
 function _rpLines(s){
   return String(s || '').split(_RP_NL).map(function(l){ return l.split(_RP_CR).join(''); })
@@ -1408,7 +1409,7 @@ async function _watchRepair(id, doc, step, btn, orig, n){
       _toast(doc + ': ' + text);
       if ((step === 'find' || step === 'fetch') && document.getElementById('srclist-' + doc)) _rpSources(doc);
       if (j.ok && pre && step === 'translate') repairStep(doc, 'assess', null);
-      if (j.ok && !pre && /^(set_aside|restore|use|as_is|accept|hold|release|translate)$/.test(step))
+      if (j.ok && !pre && /^(set_aside|restore|use|as_is|accept|hold|release|translate|judge_all)$/.test(step))
         setTimeout(function(){ location.reload(); }, 3000);
       return;
     }
@@ -1514,7 +1515,7 @@ def _repair_bar(code: str, mode="standard") -> str:
             % (c, btns, c))
 
 
-def _repair_html(code: str, acts_html: str, shown: list, rec) -> str:
+def _repair_html(code: str, acts_html: str, shown: list, rec, jd=None) -> str:   # JUDGE_DESK_2026_10_11: jd
     """The Library card's notes (as DESK_HEAL wrote them) and the repair bar under a note that the scan
     stopped the run. The text's state in the register changes what is shown."""
     import html as _html
@@ -1525,7 +1526,7 @@ def _repair_html(code: str, acts_html: str, shown: list, rec) -> str:
     if st == "set_aside":
         return ('<div class="cardnote aside" title="data/source_verdicts.jsonl">Set aside on %s: %s. A better scan is '
                 'wanted; its files are kept, and its translation is not offered until it is restored.</div>%s'
-                % (at, why or "needs a better scan", _repair_bar(code, "aside")))
+                % (at, why or "needs a better scan", _judged_note(jd, (), st) + _repair_bar(code, "aside")))
     if st == "complete":
         shown = [n for n in shown if n.get("kind") not in ("quality", "nothing")]
         acts_html += '<div class="cardnote state">Accepted as complete on %s: %s.</div>' % (at, why)
@@ -1542,6 +1543,7 @@ def _repair_html(code: str, acts_html: str, shown: list, rec) -> str:
                       % (" repaired" if n.get("kind") == "repaired" else "",
                          _html.escape(n.get("detail") or ""), _html.escape(n.get("text") or "")))
     kinds = {n.get("kind") for n in shown}
+    acts_html += _judged_note(jd, kinds, st)   # JUDGE_DESK_2026_10_11
     if st == "in_repair":
         acts_html += _repair_bar(code, "in_repair")
     elif "repaired" in kinds:
@@ -1551,7 +1553,7 @@ def _repair_html(code: str, acts_html: str, shown: list, rec) -> str:
     return acts_html
 
 
-def _repair_waiting(rows, cats, notes, aside) -> str:
+def _repair_waiting(rows, cats, notes, aside, judged=None) -> str:   # JUDGE_DESK_2026_10_11: judged
     """The texts the Library does not list (no English yet) whose last run stopped because of the scan,
     that were repaired, or that are in the register: each with its notes, its translate buttons (unless
     set aside) and its repair path."""
@@ -1568,7 +1570,7 @@ def _repair_waiting(rows, cats, notes, aside) -> str:
             'onclick="translateRest(this.dataset.doc,&#39;en&#39;,this)">&#9889; Finish EN</button>'
             '<button class="tr-rest hi" data-doc="%s" title="Translate its Hindi" '
             'onclick="translateRest(this.dataset.doc,&#39;hi&#39;,this)">&#2361;&#2367; Add Hindi</button></div>' % (c, c))
-        inner = _repair_html(code, acts, list(notes.get(code, [])), aside.get(code))
+        inner = _repair_html(code, acts, list(notes.get(code, [])), aside.get(code), (judged or {}).get(code))
         if not inner:
             continue
         cards += ('<div class="card-wrap waiting"><div class="card"><div class="ttl">%s</div><div class="code">%s</div>'
@@ -1590,8 +1592,8 @@ def api_repair():
         return jsonify({"ok": True, "mark": "REPAIR_PATH_2026_10_10", "heal": "REPAIR_HEAL_2026_10_11",
                         "steps": list(_REPAIR_STEPS), "max_usd": _REPAIR_MAX_USD})
     data = request.get_json(silent=True) or {}
-    doc = _validate_doc(data.get("doc"))
     step = str(data.get("step") or "assess")
+    doc = "corpus" if step == "judge_all" else _validate_doc(data.get("doc"))   # JUDGE_DESK_2026_10_11
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
     if step not in _REPAIR_STEPS:
@@ -1635,6 +1637,8 @@ def api_repair():
         if not re.match(r"^[A-Za-z0-9._\-]{1,120}$", ident) or kind not in ("pdf", "text"):
             return jsonify({"error": "fetch needs an archive.org identifier and kind pdf or text"}), 400
         argv = [script("source_desk.py"), "--doc", doc, "--fetch", ident, "--kind", kind]
+    elif step == "judge_all":   # JUDGE_DESK_2026_10_11
+        argv = [script("repair_text.py"), "--judge-all"]
     kind = "repair_use" if step == "use" else "repair"
     return jsonify({"job": launch(kind, doc, py(*argv), mode=step), "kind": kind, "step": step})
 
@@ -1733,6 +1737,181 @@ _rpSources('__CODE__');
 </body></html>"""
 
 
+# JUDGE_DESK_2026_10_11 -----------------------------------------------------------------------
+# The debris judged, shown where it is needed: on the Library's cards (from the last assessment, cached
+# by repair_text.py in data/source_judged/<doc>.json) and on /sources, every text whose scan stops its
+# translation in one place, with what it is, what is next, and the best edition the Source desk found.
+_JUDGE_LEVELS = ("cosmetic", "moderate", "material")
+
+
+def _judged(folder=None) -> Dict[str, dict]:
+    """doc -> the last assessment repair_text.py cached (data/source_judged/<doc>.json, beside the
+    database). Small files, read on each Library request; a missing folder is none."""
+    d = pathlib.Path(folder if folder is not None else (ROOT / "data")) / "source_judged"
+    out: Dict[str, dict] = {}
+    try:
+        for p in d.glob("*.json"):
+            try:
+                r = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if isinstance(r, dict) and r.get("doc"):
+                out[str(r["doc"])] = r
+    except OSError:
+        return {}
+    return out
+
+
+def _judged_note(jd, kinds=(), st=None) -> str:
+    """One line under a card: the debris judged, when the card says the scan stopped a run, the text has
+    a state, or the debris is not cosmetic."""
+    import html as _html
+    if not jd or jd.get("level") not in _JUDGE_LEVELS or not jd.get("debris_pct"):
+        return ""
+    if not (set(kinds) & {"held", "quality", "nothing", "repaired"} or st or jd.get("level") != "cosmetic"):
+        return ""
+    bits = ["misread letters in %.0f%% of verses" % float(jd.get("misread_pct") or 0)]
+    if jd.get("agree_pages"):
+        bits.append("vision agreement %.2f" % float(jd.get("agree_median") or 0))
+    if jd.get("furniture_pct"):
+        bits.append("page furniture %.0f%%" % float(jd.get("furniture_pct") or 0))
+    return ('<div class="cardnote judged" data-level="%s" title="%s">Debris judged %s (%s): %s.</div>'
+            % (jd["level"], _html.escape(str(jd.get("judged") or "")), jd["level"].upper(),
+               _html.escape(str(jd.get("at") or "?")[:10]), _html.escape("; ".join(bits))))
+
+
+_SOURCES_CSS = r"""
+.srcpage{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+.srcsum{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+.srcsum span{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:12px}
+.srcsum span[data-level=material]{border-color:#7a3a3a;color:#e8a3a3}
+.srcsum span[data-level=moderate]{border-color:#6b5420;color:#e6c27a}
+.srcsum span[data-level=cosmetic]{border-color:#2f6b4a;color:#9fd8b5}
+.srcwrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px}
+table.srct{width:100%;border-collapse:collapse;font-size:12px;min-width:860px}
+table.srct th{text-align:left;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--border);background:var(--card)}
+table.srct td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45}
+table.srct td a{color:var(--gold);text-decoration:none}
+.lv{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11px;border:1px solid var(--border)}
+.lv[data-level=material]{border-color:#7a3a3a;color:#e8a3a3}
+.lv[data-level=moderate]{border-color:#6b5420;color:#e6c27a}
+.lv[data-level=cosmetic]{border-color:#2f6b4a;color:#9fd8b5}
+.muted{color:var(--muted)}"""
+_JUDGED_CSS = r"""
+.cardnote.judged[data-level=material]{color:#e8a3a3;border-left-color:#7a3a3a}
+.cardnote.judged[data-level=moderate]{color:#e6c27a;border-left-color:#6b5420}
+.cardnote.judged[data-level=cosmetic]{color:#9fd8b5;border-left-color:#2f6b4a}"""
+
+
+@app.get("/sources")
+def sources_page():
+    """Every text whose scan stops its translation, in one place: the debris judged (cached by
+    repair_text.py), its state, what is next, and the best edition the Source desk found. Reads small
+    files only (never the database); "Judge the texts again" runs repair_text.py --judge-all."""
+    import html as _html
+    db_path = request.args.get("db", "data/context.db")
+    folder = pathlib.Path(db_path).parent
+    jd = _judged(folder)
+    reg = _source_verdicts(folder)
+    rows = []
+    for code in sorted(set(jd) | set(reg)):
+        j, r = jd.get(code) or {}, reg.get(code) or {}
+        keep = (r or j.get("held") or j.get("guard") or j.get("quality_stuck")
+                or (j.get("level") in ("moderate", "material") and j.get("debris_pct")))
+        if keep:
+            rows.append((code, j, r))
+    order = {"material": 0, "moderate": 1, "cosmetic": 2}
+    rows.sort(key=lambda x: (0 if x[1].get("held") else 1, order.get(x[1].get("level"), 3), x[0]))
+    counts = {}
+    for _c, j, _r in rows:
+        lv = j.get("level") if j.get("debris_pct") else None
+        counts[lv] = counts.get(lv, 0) + 1
+    last = max([str(j.get("at") or "") for j in jd.values()] or [""])
+    e = _html.escape
+    trs = ""
+    for code, j, r in rows:
+        c = e(code, quote=True)
+        st = r.get("status") or j.get("state") or ""
+        lv = j.get("level") if j.get("debris_pct") else ""
+        judged = ""
+        if lv:
+            judged = ('<span class="lv" data-level="%s">%s</span><br><span class="muted">misread %.0f%% of verses%s</span>'
+                      % (lv, lv, float(j.get("misread_pct") or 0),
+                         ("; vision %.2f" % float(j.get("agree_median"))) if j.get("agree_pages") else ""))
+        elif j:
+            judged = '<span class="muted">no debris</span>'
+        best = ""
+        try:
+            sd = json.loads((SOURCE_DESK_DIR / ("%s.json" % code)).read_text(encoding="utf-8"))
+            b = next((x for x in sd.get("candidates") or [] if not x.get("current_scan")), None)
+            if b:
+                best = ('<a href="%s" target="_blank" rel="noopener">%s</a><br><span class="muted">score %.0f; %s</span>'
+                        % (e(b.get("details_url") or "#"), e((b.get("title") or b.get("identifier") or "")[:80]),
+                           float(b.get("score") or 0), e("; ".join((b.get("why") or [])[:2]))))
+            else:
+                best = '<span class="muted">searched: nothing better on archive.org</span>'
+        except (OSError, ValueError):
+            best = '<span class="muted">not searched</span>'
+        nxt = str(j.get("next") or "")
+        nxt_label = ""
+        for key, label in (("--use-repaired", "use the repaired text"), ("--as-is", "translate as is"),
+                           ("--accept", "accept as complete"), ("--set-aside", "set aside"), ("--restore", "restore"),
+                           ("--release", "publish"), ("--find-source", "find a better source"), ("--repair", "repair the scan"),
+                           ("Finish EN", "translate it")):
+            if key in nxt:
+                nxt_label = label
+                break
+        trs += ('<tr><td><a href="/repair/%s">%s</a><br><span class="muted">EN %s/%s &middot; HI %s</span></td>'
+                '<td>%s</td><td>%s</td><td>%s%s</td><td>%s</td>'
+                '<td><div class="repairbar" id="rp-%s"><button class="tr-rest rp" data-doc="%s" '
+                'onclick="repairStep(this.dataset.doc,&#39;find&#39;,this)">Find a better source</button>'
+                '<div class="rpout"></div></div></td></tr>'
+                % (c, e(code), j.get("english", "?"), j.get("passages", "?"), j.get("hindi", "?"),
+                   e(st.replace("_", " ")) or ('<span class="muted">held by the guard</span>' if j.get("held") else ""),
+                   judged, ("<b>%s</b><br>" % e(nxt_label)) if nxt_label else "", e(str(j.get("verdict") or "")[:220]),
+                   best, c, c))
+    summary = "".join('<span data-level="%s">%d %s</span>' % (k or "none", v, k or "without debris")
+                      for k, v in sorted(counts.items(), key=lambda x: order.get(x[0], 3)))
+    body = ('<div class="srcpage"><p class="rpintro" style="margin:0">Every text whose scan stops its translation: what '
+            'its debris is and whether it touches the text, its state, what is next, and the best edition the Source desk '
+            'found. Judged last: %s. Open a text for its repair path, the debris in full and the Source desk.</p>'
+            '<div class="srcsum">%s</div>'
+            '<div class="repairbar" id="rp-corpus"><button class="tr-rest rp" data-doc="corpus" onclick="repairStep('
+            'this.dataset.doc,&#39;judge_all&#39;,this)">Judge the texts again (free, about a minute)</button>'
+            '<div class="rpout"></div></div>'
+            '<div class="srcwrap" style="margin-top:12px"><table class="srct"><thead><tr><th>Text</th><th>State</th>'
+            '<th>Debris, judged</th><th>Next</th><th>Best edition found</th><th></th></tr></thead><tbody>%s</tbody>'
+            '</table></div>%s</div>'
+            % (e(last[:16].replace("T", " ")) or "never: press Judge the texts again", summary, trs,
+               "" if rows else '<p class="srcnone">Nothing judged yet. Press Judge the texts again.</p>'))
+    return ("""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Sources &amp; repairs</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;min-height:100vh}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+header a{color:var(--muted);font-size:12px;text-decoration:none}
+header a:hover{color:var(--gold)}
+header h1{font-size:18px;color:var(--gold);font-weight:700}
+.tr-rest{background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 9px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer}
+.tr-rest:hover{border-color:var(--gold);color:var(--gold)}
+.tr-rest:disabled{opacity:.6;cursor:default}
+.srcnone{color:var(--muted);font-size:12px;margin:10px 0}
+""" + _REPAIR_CSS + _SOURCES_CSS + _JUDGED_CSS + """
+</style></head><body>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><h1>Sources &amp; repairs</h1></header>
+""" + body + """
+<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
+<script>
+function _toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none';},6000);}
+""" + _REPAIR_JS + """
+</script>
+</body></html>""")
+
+
 @app.get("/repair/<doc>")
 def repair_page(doc):
     """One text's repair path: what it holds, the steps, the debris judged, each run's output, and the
@@ -1772,13 +1951,14 @@ def repair_page(doc):
     except Exception:
         shown = []
     st = (rec or {}).get("status")
+    jd = _judged(pathlib.Path(db_path).parent).get(doc)   # JUDGE_DESK_2026_10_11
     if st == "set_aside":
-        notes = _repair_html(doc, "", shown, rec)
+        notes = _repair_html(doc, "", shown, rec, jd)
         bar = ""
     else:
-        notes = _repair_html(doc, "", shown, rec)
+        notes = _repair_html(doc, "", shown, rec, jd)
         bar = "" if 'class="repairbar"' in notes else _repair_bar(doc, "standard")
-    page = (_REPAIR_PAGE.replace("__REPAIR_CSS__", _REPAIR_CSS)
+    page = (_REPAIR_PAGE.replace("__REPAIR_CSS__", _REPAIR_CSS + _JUDGED_CSS)
             .replace("__NOTES__", notes).replace("__BAR__", bar)
             .replace("__TITLE__", _html.escape(str(title))).replace("__TOTAL__", "{:,}".format(int(total or 0)))
             .replace("__EN__", "{:,}".format(int(en or 0))).replace("__HI__", "{:,}".format(int(hi or 0)))
@@ -2864,6 +3044,7 @@ def library():
         return f"<pre>Library error: {_html.escape(str(e))}</pre>", 500
     notes = _library_notes()   # DESK_HEAL_2026_10_10
     aside = _source_verdicts(pathlib.Path(db_path).parent)   # REPAIR_PATH_2026_10_10: the texts set aside
+    judged = _judged(pathlib.Path(db_path).parent)   # JUDGE_DESK_2026_10_11: the last assessments
 
     cats = OrderedDict()
     total_docs = total_en = total_hi = 0
@@ -2908,7 +3089,7 @@ def library():
                     continue
                 _shown.append(_n)
             # REPAIR_PATH_2026_10_10: the notes, and the repair path under them; a text set aside says why
-            acts_html = _repair_html(code, acts_html, _shown, aside.get(code))
+            acts_html = _repair_html(code, acts_html, _shown, aside.get(code), judged.get(code))
             # Filled in by refreshBooksmith() once /api/booksmith/state answers.
             acts_html += f'<div class="bsacts" id="bs-{_html.escape(code)}"></div>'
             body += (
@@ -2928,7 +3109,7 @@ def library():
                 f'{acts_html}</div>'
             )
         body += '</div>'
-    body += _repair_waiting(rows, cats, notes, aside)   # REPAIR_PATH_2026_10_10: no English yet, held by its scan
+    body += _repair_waiting(rows, cats, notes, aside, judged)   # REPAIR_PATH_2026_10_10: no English yet, held by its scan
 
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -2969,6 +3150,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 .tr-rest:disabled{{opacity:.6;cursor:default}}
 .cardnote{{margin-top:6px;font-family:'Inter',sans-serif;font-size:10.5px;line-height:1.45;color:#d9b36a;border-left:2px solid #6b5420;padding:2px 0 2px 7px;cursor:help}}
 {_REPAIR_CSS}
+{_JUDGED_CSS}
 /* BOOKSMITH_WIRING_2026_09_12 */
 .card-wrap{{position:relative}}
 .pick{{position:absolute;top:8px;right:8px;z-index:3;cursor:pointer;padding:4px}}
@@ -3001,7 +3183,8 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
   <a class="back" href="/">&#8592; Dashboard</a>
   <h1>&#2384; Srangam Library</h1>
   <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses</span>
-  <a class="back" href="/methodology" title="How source and translation quality are measured" style="margin-left:auto;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
+  <a class="back" href="/sources" title="JUDGE_DESK_2026_10_11: every text whose scan stops its translation, judged, with the editions found" style="margin-left:auto;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128269; Sources &amp; repairs</a>
+  <a class="back" href="/methodology" title="How source and translation quality are measured" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
   <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
 </header>
 <main>{body}</main>

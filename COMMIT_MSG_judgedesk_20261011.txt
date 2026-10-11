@@ -1,0 +1,16 @@
+The debris judged on the cards; Sources & repairs (JUDGE_DESK_2026_10_11); the night recorded (DOCS42_2026_10_11)
+
+docs/JUDGE_DESK_2026-10-11.md. The heal works (Tantric Texts' vision ran its 72 pages left); Karan Aagama
+was released at 19:47 before its translation was back and held again at 19:54.
+- scripts/repair_text.py: every assessment cached in data/source_judged/<doc>.json; --judge-all judges
+  every text with untranslated passages or a state; --release refuses until English and Hindi are back
+  (95% of what the text had; --force to override).
+- scripts/patch_judge_desk_2026_10_11.py: the Library's cards and the repair page show "Debris judged
+  LEVEL (date): misread letters in N% of verses; vision agreement A"; /sources (Sources & repairs) lists
+  every text whose scan stops its translation with its state, the debris judged, what is next and the
+  best edition the Source desk found; Judge the texts again (judge_all); links from both headers.
+Tests: tests/test_judge_desk_2026_10_11.py (11); tests/test_repair_heal_2026_10_11.py updated.
+Docs: scripts/patch_docs42_2026_10_11.py (PLATFORM 45, RUNBOOK, EP 32).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

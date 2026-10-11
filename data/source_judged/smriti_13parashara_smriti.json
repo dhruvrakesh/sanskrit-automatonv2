@@ -1,0 +1,46 @@
+{
+ "doc": "smriti_13parashara_smriti",
+ "mark": "JUDGE_DESK_2026_10_11",
+ "at": "2026-10-11T20:14:20",
+ "level": "cosmetic",
+ "judged": "cosmetic: misread letters in 6% of verses (1.7% of the letters: ad, URIS, Ud, AA, ast); page furniture in 49% of verses (\"parashara\"); English notes in 28%. Translate as is.",
+ "verdict": "held by the OCR-debris guard (100% of its verses carry Latin letters, 0% from vision OCR); but the debris is cosmetic: cosmetic: misread letters in 6% of verses (1.7% of the letters: ad, URIS, Ud, AA, ast); page furniture in 49% of verses (\"parashara\"); English notes in 28%. Translate as is.",
+ "next": "python scripts\\repair_text.py --doc smriti_13parashara_smriti --as-is \"debris judged cosmetic\"",
+ "also": [
+  "python scripts\\repair_text.py --doc smriti_13parashara_smriti --repair   (for the critical edition)"
+ ],
+ "state": null,
+ "misread_pct": 6.4,
+ "misread_letters_pct": 1.74,
+ "furniture_pct": 48.9,
+ "notes_pct": 27.7,
+ "numbering_pct": 0.0,
+ "misread_top": [
+  "ad",
+  "URIS",
+  "Ud",
+  "AA",
+  "ast",
+  "fe",
+  "qed",
+  "TA",
+  "SAT",
+  "ASAT"
+ ],
+ "furniture_top": [
+  "parashara"
+ ],
+ "passages": 47,
+ "english": 0,
+ "hindi": 0,
+ "pictures": 0,
+ "debris_pct": 100.0,
+ "vision_pct": 0.0,
+ "below_quality": 0,
+ "guard": true,
+ "held": true,
+ "quality_stuck": false,
+ "pdfs": 47,
+ "vision_pages": 0,
+ "merged_pages": 0
+}

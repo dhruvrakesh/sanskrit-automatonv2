@@ -422,7 +422,32 @@ def advise(r: dict, doc: str):
             q + " --repair   (compares them; costs nothing for pages already read)", also)
 
 
-def report(r: dict, doc: str) -> int:
+def write_judged(a, r: dict, verdict: str, nxt: str, also: list):
+    """JUDGE_DESK_2026_10_11: the last assessment of a text, for the Library's cards and the Sources page
+    (data/source_judged/<doc>.json). Small, rewritten on every assessment; never the database."""
+    if a is None or not getattr(a, "judged_dir", None):
+        return
+    j = r.get("judged") or {}
+    rec = {"doc": r["doc"], "mark": "JUDGE_DESK_2026_10_11", "at": datetime.datetime.now().isoformat(timespec="seconds"),
+           "level": j.get("level"), "judged": explain(j) if j.get("verses") and r.get("debris_pct") else "",
+           "verdict": verdict, "next": nxt, "also": also, "state": (r.get("state") or {}).get("status")}
+    for k in ("misread_pct", "misread_letters_pct", "furniture_pct", "notes_pct", "numbering_pct", "agree_median",
+              "agree_pages", "misread_top", "furniture_top"):
+        if k in j:
+            rec[k] = j[k]
+    for k in ("passages", "english", "hindi", "pictures", "debris_pct", "vision_pct", "below_quality", "guard", "held",
+              "quality_stuck", "pdfs", "vision_pages", "merged_pages"):
+        rec[k] = r.get(k)
+    try:
+        d = Path(a.judged_dir); d.mkdir(parents=True, exist_ok=True)
+        t = d / ("%s.json.part" % r["doc"])
+        t.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+        os.replace(t, d / ("%s.json" % r["doc"]))
+    except OSError as e:
+        print("  note: the judgement was not cached (%s)" % e)
+
+
+def report(r: dict, doc: str, a=None) -> int:
     if r.get("error"):
         print("VERDICT: " + r["error"]); print("NEXT: "); return 1
     print("%s  %s  %s" % (doc, MARK, HEAL))
@@ -453,6 +478,7 @@ def report(r: dict, doc: str) -> int:
         print("  below the OCR bar: %(below)d | English pages read as Devanagari %(misread_english)d | lone dandas and "
               "numbers %(punctuation)d | Latin %(latin)d" % lo)
     v, n, also = advise(r, doc)
+    write_judged(a, r, v, n, also)
     print("VERDICT: " + v)
     print("NEXT: " + n)
     for x in also:
@@ -597,6 +623,44 @@ def say_state(a, rec: dict) -> int:
     return 0
 
 
+def judge_all(a) -> int:
+    """JUDGE_DESK_2026_10_11: every text with untranslated passages, or a state in the register, assessed and
+    judged (read-only), each cached for the Library's cards and the Sources page."""
+    try:
+        con = sqlite3.connect("file:%s?mode=ro" % Path(a.db).as_posix(), uri=True, timeout=10)
+    except sqlite3.Error as e:
+        print("VERDICT: cannot open %s read-only: %s" % (a.db, e)); print("NEXT: "); return 1
+    try:
+        cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        scope = " AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')" if "text_type" in cols else ""
+        rows = con.execute("SELECT d.code, COUNT(p.id), SUM(CASE WHEN TRIM(COALESCE(p.translation,''))<>'' THEN 1 ELSE 0 END) "
+                           "FROM docs d JOIN passages p ON p.doc_id=d.id%s GROUP BY d.code" % scope).fetchall()
+    finally:
+        con.close()
+    reg = {d for d, r in verdicts(Path(a.verdicts)).items() if r.get("status") in STATES}
+    todo = sorted(code for code, n, en in rows if code and not code.endswith("-RETIRED")
+                  and ((n or 0) > (en or 0) or code in reg))
+    counts, out = {}, []
+    t0 = datetime.datetime.now()
+    for i, code in enumerate(todo, 1):
+        a.doc = code
+        r = assess(a)
+        if r.get("error"):
+            continue
+        v, n, also = advise(r, code)
+        write_judged(a, r, v, n, also)
+        lvl = (r.get("judged") or {}).get("level") if r.get("debris_pct") else "-"
+        counts[lvl] = counts.get(lvl, 0) + 1
+        out.append((code, r, lvl, v))
+        print("  [%d/%d] %-60s %-9s debris %5.1f%% | %s" % (i, len(todo), code[:60], lvl, r["debris_pct"], v[:90]), flush=True)
+    held = sum(1 for _, r, _, _ in out if r.get("held"))
+    print("VERDICT: judged %d text(s) in %ds: %d material, %d moderate, %d cosmetic, %d without debris; %d held by the guard"
+          % (len(out), (datetime.datetime.now() - t0).seconds, counts.get("material", 0), counts.get("moderate", 0),
+             counts.get("cosmetic", 0), counts.get("-", 0), held))
+    print("NEXT: open the Sources page (http://127.0.0.1:5057/sources) or each text's repair page")
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="The repair path for one text (REPAIR_PATH_2026_10_10, REPAIR_HEAL_2026_10_11)")
     ap.add_argument("--doc")
@@ -620,14 +684,20 @@ def main(argv=None) -> int:
     g.add_argument("--find-source", action="store_true", help="look for a better edition (scripts/source_desk.py)")
     g.add_argument("--restore", action="store_true")
     g.add_argument("--list", action="store_true")
+    g.add_argument("--judge-all", action="store_true", help="assess and judge every text with something untranslated or "
+                   "a state in the register; cache each for the Library and the Sources page")
     ap.add_argument("--replace", type=int, default=None, help="with --use-repaired: the English translations it replaces")
     ap.add_argument("--max-usd", type=float, default=1.00)
     ap.add_argument("--ai", action="store_true", help="with --find-source: let the AI judge the editions (about $0.002)")
+    ap.add_argument("--force", action="store_true", help="with --release: publish even before the translation is back")
+    ap.add_argument("--judged-dir", default="data/source_judged")
     ap.add_argument("--threshold", type=float, default=None, help="OCR confidence below which a page goes to vision "
                     "(default: 101, every page, when held by the guard; else 72)")
     ap.add_argument("--from-dashboard", action="store_true", help=argparse.SUPPRESS)
     a = ap.parse_args(argv)
     os.chdir(ROOT)
+    if a.judge_all:
+        return judge_all(a)
     if a.list:
         v = [r for r in verdicts(Path(a.verdicts)).values() if r.get("status") in STATES]
         for r in sorted(v, key=lambda x: x.get("at", "")):
@@ -649,6 +719,21 @@ def main(argv=None) -> int:
     if a.restore:
         return say_state(a, write_state(a, "restored"))
     if a.release:
+        # JUDGE_DESK_2026_10_11: publishing a text whose translation is not back would put it on the site
+        # without its English (as on 11 Oct, 19:47); say so, unless --force
+        cur = verdicts(Path(a.verdicts)).get(a.doc) or {}
+        if cur.get("status") == "in_repair" and not a.force:
+            r0 = assess(a)
+            if not r0.get("error"):
+                enb, hib = int(cur.get("en_before") or 0), int(cur.get("hi_before") or 0)
+                t_en = enb or int(0.9 * r0["passages"]); t_hi = hib or int(0.9 * t_en)
+                if r0["english"] < 0.95 * t_en or r0["hindi"] < 0.95 * t_hi:
+                    print("REFUSE: not yet: English %d of %d passages (it had %d), Hindi %d (it had %d). Publishing now puts "
+                          "it on the site without its translation. Translate it first, or add --force to publish it as "
+                          "it is." % (r0["english"], r0["passages"], enb, r0["hindi"], hib))
+                    print("VERDICT: still in repair: the translation is not back (English %d, Hindi %d)" % (r0["english"], r0["hindi"]))
+                    print("NEXT: translate it: Finish EN and Add Hindi in the Library")
+                    return 1
         return say_state(a, write_state(a, "released"))
     if a.find_source:
         argv2 = [PY, SCRIPTS / "source_desk.py", "--doc", a.doc, "--db", a.db]
@@ -683,10 +768,10 @@ def main(argv=None) -> int:
             print("VERDICT: the repair stopped (ocr_consensus.py exit %d): its lines above say why" % rc)
             print("NEXT: python scripts\\repair_text.py --doc %s" % a.doc)
             return 1
-        return report(assess(a), a.doc)
+        return report(assess(a), a.doc, a)
     if a.use_repaired:
         return use_repaired(a, r)
-    return report(r, a.doc)
+    return report(r, a.doc, a)
 
 
 if __name__ == "__main__":

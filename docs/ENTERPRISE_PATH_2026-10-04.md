@@ -590,3 +590,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | S3 | The missing page sourced from a fetched witness (n-gram alignment), offered on the repair page | Designed |
 | R3 | In-place re-ingest that keeps passage ids and re-anchors pictures and stories | Designed |
 | C14 | "Sources wanted" in the Researchers' Corner, from the register and the Source desk | Designed; needs a table and the mirror |
+
+
+## Addendum 2026-10-11 (32) (DOCS42_2026_10_11)
+
+| # | Item | State |
+|---|---|---|
+| R1.1 | The heal | **Released** (79aedee); repair running (Tantric 72 pages; Natyasastra, Hayashirsha next) |
+| J1.1 | The debris judged on the Library's cards and on the repair page; Sources & repairs (`/sources`); judge all | Built and tested (JUDGE_DESK_2026_10_11). Next: patch, restart, judge all |
+| O1 | Karan Aagama | Held again 19:54 (released early at 19:47). Next: translate English and Hindi; release when back |
+| S2 | An e-text (GRETIL, sanskritdocuments.org, archive.org OCR text) as a witness | Next, against the first fetched file |
+| S3 | The missing page from a witness, offered on the repair page (local) | Designed |
+| C14 | Sources wanted on the site: a corpus table filled by the mirror, shown in the Corner | Designed; the corpus-ingest function and schema are read first |

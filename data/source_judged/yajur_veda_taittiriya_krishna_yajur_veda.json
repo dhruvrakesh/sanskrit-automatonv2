@@ -1,0 +1,46 @@
+{
+ "doc": "yajur_veda_taittiriya_krishna_yajur_veda",
+ "mark": "JUDGE_DESK_2026_10_11",
+ "at": "2026-10-11T20:14:23",
+ "level": "material",
+ "judged": "material: misread letters in 51% of verses (2.7% of the letters: cat, ad, aa, ag, Gera); page furniture in 10% of verses (\"yajur\"); English notes in 10%; numbering in 2%. Repair first: translating now translates the OCR's errors.",
+ "verdict": "held by the OCR-debris guard (86% of its verses carry Latin letters, 0% from vision OCR); the scan can be repaired: vision OCR on about 496 page(s), about $0.20",
+ "next": "python scripts\\repair_text.py --doc yajur_veda_taittiriya_krishna_yajur_veda --repair   (capped at --max-usd 1.00)",
+ "also": [
+  "python scripts\\repair_text.py --doc yajur_veda_taittiriya_krishna_yajur_veda --find-source"
+ ],
+ "state": null,
+ "misread_pct": 51.0,
+ "misread_letters_pct": 2.72,
+ "furniture_pct": 9.8,
+ "notes_pct": 9.8,
+ "numbering_pct": 2.0,
+ "misread_top": [
+  "cat",
+  "ad",
+  "aa",
+  "ag",
+  "Gera",
+  "ast",
+  "aes",
+  "St",
+  "SAN",
+  "BAHT"
+ ],
+ "furniture_top": [
+  "yajur"
+ ],
+ "passages": 51,
+ "english": 42,
+ "hindi": 0,
+ "pictures": 0,
+ "debris_pct": 86.3,
+ "vision_pct": 0.0,
+ "below_quality": 0,
+ "guard": true,
+ "held": true,
+ "quality_stuck": false,
+ "pdfs": 496,
+ "vision_pages": 0,
+ "merged_pages": 0
+}
