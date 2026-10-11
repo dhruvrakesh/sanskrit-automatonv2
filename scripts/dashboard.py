@@ -1219,9 +1219,12 @@ def api_ingest():
 # with no English offered their translation, and the Source desk (scripts/source_desk.py): a better
 # edition found on archive.org, the local wisdomlib archive and the e-text sites, previewed in the page.
 _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "accept", "hold", "release",
-                 "find", "fetch", "judge_all")   # JUDGE_DESK_2026_10_11: judge_all
+                 "find", "fetch", "judge_all", "witness")   # JUDGE_DESK_2026_10_11: judge_all; ETEXT_WITNESS_2026_10_11: witness
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
-_REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair")
+_REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness")   # ETEXT_WITNESS_2026_10_11: witness
+SOURCES_DIR = ROOT / "sources"                       # ETEXT_WITNESS_2026_10_11: what source_desk.py and etext_witness.py fetch
+WITNESS_DIR = ROOT / "data" / "raw_witness"          # the witnesses' pages, witness.json and align.json
+WITNESSES_LOG = ROOT / "data" / "witnesses.jsonl"
 SOURCE_DESK_DIR = ROOT / "data" / "source_desk"
 
 _REPAIR_CSS = r"""/* REPAIR_PATH_2026_10_10, REPAIR_HEAL_2026_10_11 */
@@ -1251,7 +1254,7 @@ var _RP_DOING = {assess: 'assessing...', repair: 'repairing the scan...', use: '
                  set_aside: 'setting it aside...', restore: 'restoring...', as_is: 'noting: translate as is...',
                  accept: 'noting: complete...', hold: 'holding it from the site...', release: 'publishing...',
                  find: 'looking for a better edition...', fetch: 'fetching...', translate: 'translating...',
-                 judge_all: 'judging the texts (about a minute)...'};
+                 judge_all: 'judging the texts (about a minute)...', witness: 'reading the e-text as a witness...'};
 var _RP_NL = String.fromCharCode(10), _RP_CR = String.fromCharCode(13), _RP_BS = String.fromCharCode(92);
 function _rpLines(s){
   return String(s || '').split(_RP_NL).map(function(l){ return l.split(_RP_CR).join(''); })
@@ -1272,6 +1275,17 @@ function _rpVerdict(out){
 function _rpQuoted(n){ var m = String(n || '').match(/"([^"]*)"/); return m ? m[1] : ''; }
 function _rpNext(next){
   var n = String(next || ''), m;
+  if (n.indexOf('etext_witness.py') >= 0){   /* ETEXT_WITNESS_2026_10_11 */
+    if (n.indexOf('--ingest') >= 0){
+      m = n.match(/--witness ([A-Za-z0-9_-]+)/);
+      return m ? {step: 'witness', ingest: m[1], label: 'Ingest the witness as its own text'} : null;
+    }
+    m = n.match(/--file "([^"]+)"/);
+    if (!m || n.indexOf('--page') >= 0) return null;
+    var fname = m[1].split(_RP_BS).pop().split('/').pop();
+    return n.indexOf('--write') >= 0 ? {step: 'witness', write: 1, file: fname, label: 'Make it a witness (its pages; not the database)'}
+                                     : {step: 'witness', file: fname, label: 'Read it as a witness (free)'};
+  }
   if (n.indexOf('--use-repaired') >= 0){
     m = n.match(/--replace ([0-9]+)/);
     return {step: 'use', replace: m ? +m[1] : null,
@@ -1372,6 +1386,22 @@ async function repairStep(doc, step, btn, opt){
                  + opt.identifier + ' from archive.org into sources' + _RP_BS + doc + '? Nothing goes into the inbox: '
                  + 'import it as a witness once you have looked at it.')) return;
   }
+  if (step === 'witness'){   /* ETEXT_WITNESS_2026_10_11 */
+    if (opt.file) body.file = opt.file;
+    if (opt.url) body.url = opt.url;
+    if (opt.write){
+      body.write = 1;
+      if (!confirm('Make the witness of ' + doc + ': its pages go to data' + _RP_BS + 'raw_witness, a line to data' + _RP_BS
+                   + 'witnesses.jsonl, and the register keeps it off the site until you adopt it. The database is not '
+                   + 'touched. Go?')) return;
+    }
+    if (opt.ingest){
+      body.ingest = opt.ingest;
+      if (!confirm('Ingest ' + opt.ingest + ' as its own text: a backup first, then its passages go into the database '
+                   + '(after the running translation). The scan is not touched, and the site does not have it until you '
+                   + 'adopt it. Go?')) return;
+    }
+  }
   var orig = btn ? btn.textContent : '';
   if (btn){ btn.disabled = true; btn.textContent = 'starting...'; }
   try{
@@ -1407,7 +1437,7 @@ async function _watchRepair(id, doc, step, btn, orig, n){
       text = text || (j.ok ? 'done' : 'it did not finish: the Dashboard History has its last lines');
       _rpSay(doc, text); _rpJudge(doc, v.judged); _rpOffer(doc, v.next, v.also);
       _toast(doc + ': ' + text);
-      if ((step === 'find' || step === 'fetch') && document.getElementById('srclist-' + doc)) _rpSources(doc);
+      if ((step === 'find' || step === 'fetch' || step === 'witness') && document.getElementById('srclist-' + doc)) _rpSources(doc);
       if (j.ok && pre && step === 'translate') repairStep(doc, 'assess', null);
       if (j.ok && !pre && /^(set_aside|restore|use|as_is|accept|hold|release|translate|judge_all)$/.test(step))
         setTimeout(function(){ location.reload(); }, 3000);
@@ -1424,7 +1454,7 @@ async function _rpSources(doc){
   if (!list) return;
   var d;
   try { d = await (await fetch('/api/repair/sources?doc=' + encodeURIComponent(doc))).json(); } catch (e) { return; }
-  if (!d || d.missing){ list.innerHTML = '<p class="srcnone">No search yet. Press Find a better source.</p>'; return; }
+  if (!d || d.missing){ list.innerHTML = '<p class="srcnone">No search yet. Press Find a better source.</p>' + _rpWitness(doc, d || {}); list._data = d || {}; return; }
   var h = '<div class="srclinks">Search by hand: ' + (d.links || []).map(function(l){
     return '<a href="' + _rpEsc(l.url) + '" target="_blank" rel="noopener">' + _rpEsc(l.name) + '</a>'; }).join(' &middot; ')
     + '</div>';
@@ -1451,7 +1481,50 @@ async function _rpSources(doc){
   if (!(d.candidates || []).length) h += '<p class="srcnone">archive.org offered nothing' + ((d.errors || []).length ? ' (' + _rpEsc(d.errors[0]) + ')' : '')
     + '. Try the e-text sites above.</p>';
   h += '<p class="srcnone">Searched ' + _rpEsc(d.at || '') + ' as: ' + _rpEsc((d.words || []).join(' ')) + '</p>';
+  h += _rpWitness(doc, d);
   list.innerHTML = h; list._data = d;
+}
+function _rpWitness(doc, d){
+  /* ETEXT_WITNESS_2026_10_11: the e-texts fetched for this text, its witnesses, and the pages they offer */
+  var f = (d && d.fetched) || [], w = (d && d.witnesses) || [], h = '';
+  if (f.length) h += '<div class="srcsub">Fetched into sources' + _RP_BS + _rpEsc(doc) + _RP_BS + '</div>';
+  f.forEach(function(x){
+    var act = (x.kind === 'text' && x.ok)
+      ? '<button class="tr-rest rp" data-f="' + _rpEsc(x.name) + '" onclick="repairStep(&#39;' + doc
+        + '&#39;,&#39;witness&#39;,this,{file:this.dataset.f})">Read it as a witness (free)</button>'
+      : (x.kind === 'pdf' ? '<span class="srcwhy">A PDF: import it from the dashboard (Import path to inbox) as its own '
+                            + 'text, and OCR it with vision.</span>' : '');
+    h += '<div class="srccard"><div class="srchead"><b>' + _rpEsc(x.name) + '</b><span class="srcmeta">'
+       + Math.max(1, Math.round((x.bytes || 0) / 1024)) + ' KB' + (x.url ? ' &middot; <a href="' + _rpEsc(x.url)
+       + '" target="_blank" rel="noopener">its source</a>' : '') + '</span></div><div class="srcacts">' + act + '</div></div>';
+  });
+  w.forEach(function(x){
+    var offers = (x.offers || []).filter(function(o){ return o.text; });
+    h += '<div class="srccard wit"><div class="srchead"><b>Witness</b><span>' + _rpEsc(x.witness) + '</span>'
+       + (x.state ? '<span class="srctag">' + _rpEsc(x.state) + '</span>' : '') + '</div>'
+       + '<div class="srcmeta">' + _rpEsc(x.site || '') + ' &middot; ' + (x.verses || 0) + ' verses in ' + (x.pages || 0) + ' pages'
+       + (x.coverage != null ? ' &middot; it reads ' + Math.round(100 * x.coverage) + '% of the scan&#39;s readable pages, in order '
+          + Math.round(100 * (x.order || 0)) + '%' : '')
+       + (x.ingested != null ? ' &middot; ingested: ' + x.ingested + ' passages' : '') + '</div>'
+       + '<div class="srcwhy">' + _rpEsc(x.opinion || '') + '</div>'
+       + '<div class="repairbar wbar" id="rp-' + _rpEsc(x.witness) + '">'
+       + (x.ingested == null
+          ? '<button class="tr-rest rp" data-w="' + _rpEsc(x.witness) + '" onclick="repairStep(&#39;' + doc
+            + '&#39;,&#39;witness&#39;,this,{ingest:this.dataset.w})">Ingest it as its own text</button>'
+          : '<button class="tr-rest rp" data-w="' + _rpEsc(x.witness) + '" onclick="repairStep(this.dataset.w,&#39;translate&#39;,this)">'
+            + 'Translate it: English, then Hindi</button><button class="tr-rest rp" data-w="' + _rpEsc(x.witness)
+            + '" onclick="repairStep(this.dataset.w,&#39;release&#39;,this)">Adopt it: publish it to the site</button>')
+       + '<div class="rpout"></div></div>';
+    if (offers.length){
+      h += '<div class="srcsub">The pages the scan cannot read, as this witness reads them (' + offers.length + ')</div>';
+      offers.slice(0, 40).forEach(function(o){
+        h += '<details class="srcoffer"><summary>page ' + o.page + (o.refs ? ' &middot; ' + _rpEsc(o.refs) : '')
+           + ' &middot; ' + _rpEsc(o.why) + '</summary><pre class="srcpre">' + _rpEsc(o.text) + '</pre></details>';
+      });
+    }
+    h += '</div>';
+  });
+  return h;
 }
 function _rpPreview(doc, i){
   var list = document.getElementById('srclist-' + doc), view = document.getElementById('srcview-' + doc);
@@ -1534,6 +1607,10 @@ def _repair_html(code: str, acts_html: str, shown: list, rec, jd=None) -> str:  
         shown = [n for n in shown if n.get("kind") != "held"]
         acts_html += ('<div class="cardnote state">To be translated as is (since %s): %s. The debris guard lets it '
                       'through.</div>' % (at, why))
+    elif st == "witness":   # ETEXT_WITNESS_2026_10_11
+        acts_html += ('<div class="cardnote state">A witness of %s (%s), made on %s: an e-text, local only. The site '
+                      'does not have it until you adopt it (publish it), once it is translated.</div>'
+                      % (_html.escape(str(rec.get("of") or "?")), _html.escape(str(rec.get("site") or "e-text")), at))
     elif st == "in_repair":
         acts_html += ('<div class="cardnote state">In repair since %s (%s): the site keeps its last version (%s English, '
                       '%s Hindi) until you publish this one.</div>'
@@ -1544,7 +1621,7 @@ def _repair_html(code: str, acts_html: str, shown: list, rec, jd=None) -> str:  
                          _html.escape(n.get("detail") or ""), _html.escape(n.get("text") or "")))
     kinds = {n.get("kind") for n in shown}
     acts_html += _judged_note(jd, kinds, st)   # JUDGE_DESK_2026_10_11
-    if st == "in_repair":
+    if st in ("in_repair", "witness"):   # ETEXT_WITNESS_2026_10_11: a witness too
         acts_html += _repair_bar(code, "in_repair")
     elif "repaired" in kinds:
         acts_html += _repair_bar(code, "repaired")
@@ -1637,10 +1714,88 @@ def api_repair():
         if not re.match(r"^[A-Za-z0-9._\-]{1,120}$", ident) or kind not in ("pdf", "text"):
             return jsonify({"error": "fetch needs an archive.org identifier and kind pdf or text"}), 400
         argv = [script("source_desk.py"), "--doc", doc, "--fetch", ident, "--kind", kind]
+    elif step == "witness":   # ETEXT_WITNESS_2026_10_11: read, write or ingest an e-text witness
+        argv = [script("etext_witness.py"), "--doc", doc, "--from-dashboard"]
+        f, url, ing = str(data.get("file") or ""), str(data.get("url") or "").strip(), str(data.get("ingest") or "")
+        if ing:
+            if not re.match(r"^[A-Za-z0-9_\-]{1,200}$", ing) or not ing.startswith(doc + "__w_"):
+                return jsonify({"error": "ingest needs a witness of this text (<doc>__w_<site>)"}), 400
+            argv += ["--ingest", "--witness", ing]
+        elif f:
+            if not re.match(r"^[A-Za-z0-9._\- ()]{1,160}$", f) or f.startswith("."):
+                return jsonify({"error": "file must be the name of a file in sources\\<doc>\\"}), 400
+            argv += ["--file", str(SOURCES_DIR / doc / f)]
+        elif url:
+            if not re.match(r"^https?://[^\s\"'<>]{4,500}$", url):
+                return jsonify({"error": "url must be an http(s) link"}), 400
+            argv += ["--url", url]
+        else:
+            return jsonify({"error": "witness needs a file, a url, or a witness to ingest"}), 400
+        if data.get("write") and not ing:
+            argv.append("--write")
     elif step == "judge_all":   # JUDGE_DESK_2026_10_11
         argv = [script("repair_text.py"), "--judge-all"]
-    kind = "repair_use" if step == "use" else "repair"
+    kind = "repair_use" if step == "use" or (step == "witness" and data.get("ingest")) else "repair"   # ETEXT_WITNESS_2026_10_11
     return jsonify({"job": launch(kind, doc, py(*argv), mode=step), "kind": kind, "step": step})
+
+
+def _witness_info(doc: str) -> dict:
+    """ETEXT_WITNESS_2026_10_11: the files fetched into sources/<doc>/ and the witnesses of the text (from
+    data/witnesses.jsonl, their align.json and the register), for the repair page. Small files only."""
+    import re as _re
+    ok_name = _re.compile(r"^[A-Za-z0-9._\- ()]{1,160}$")
+    ok_url = _re.compile(r"^https?://[^\s\"'<>]{4,500}$")
+    fetched, wits = [], []
+    try:
+        for f in sorted((SOURCES_DIR / doc).iterdir()):
+            if not f.is_file() or f.name.endswith((".json", ".part")):
+                continue
+            side = {}
+            try:
+                side = json.loads(f.with_name(f.name + ".json").read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                pass
+            url = str(side.get("url") or side.get("details") or "")
+            fetched.append({"name": f.name, "bytes": f.stat().st_size, "ok": bool(ok_name.match(f.name)) and not f.name.startswith("."),
+                            "kind": "pdf" if f.suffix.lower() == ".pdf" else "text", "url": url if ok_url.match(url) else ""})
+    except OSError:
+        pass
+    seen = {}
+    try:
+        for line in WITNESSES_LOG.read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if isinstance(r, dict) and r.get("doc") == doc and r.get("witness"):
+                seen[r["witness"]] = dict(seen.get(r["witness"], {}), **r)
+    except OSError:
+        pass
+    reg = {}
+    try:
+        for line in (WITNESSES_LOG.parent / "source_verdicts.jsonl").read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if isinstance(r, dict) and r.get("doc") in seen:
+                reg[r["doc"]] = r.get("status")
+    except OSError:
+        pass
+    for w, r in sorted(seen.items(), key=lambda x: str(x[1].get("at") or "")):
+        al = {}
+        try:
+            al = json.loads((WITNESS_DIR / w / "align.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            pass
+        offers = [dict(o, text=str(o.get("text") or "")[:1500]) for o in (al.get("offers") or [])[:40] if isinstance(o, dict)]
+        url = str(r.get("url") or "")
+        wits.append({"witness": w, "site": r.get("site"), "verses": r.get("verses"), "pages": r.get("pages"),
+                     "coverage": r.get("coverage"), "order": r.get("order"), "opinion": r.get("opinion"),
+                     "ingested": r.get("ingested"), "at": r.get("at"), "url": url if ok_url.match(url) else "",
+                     "state": {"witness": "local only", "released": "adopted"}.get(reg.get(w), reg.get(w) or ""),
+                     "offers": offers})
+    return {"fetched": fetched, "witnesses": wits}
 
 
 @app.get("/api/repair/sources")
@@ -1651,9 +1806,12 @@ def api_repair_sources():
         return jsonify({"error": "invalid or missing doc"}), 400
     p = SOURCE_DESK_DIR / ("%s.json" % doc)
     try:
-        return jsonify(json.loads(p.read_text(encoding="utf-8")))
+        out = json.loads(p.read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return jsonify({"doc": doc, "missing": True, "candidates": []})
+        out = {"doc": doc, "missing": True, "candidates": []}
+    if isinstance(out, dict):   # ETEXT_WITNESS_2026_10_11
+        out.update(_witness_info(doc))
+    return jsonify(out)
 
 
 _REPAIR_PAGE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
@@ -1703,6 +1861,12 @@ pre.rplog:empty{display:none}
 .srcview iframe{width:100%;height:560px;border:1px solid var(--border);border-radius:8px;background:#fff;margin-top:8px}
 .srcviewbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12px;margin-top:12px}
 .srcviewbar a{color:var(--gold)}
+.srcurl{flex:1 1 320px;min-width:0;background:var(--card);border:1px solid var(--border);color:var(--cream);border-radius:7px;padding:6px 9px;font-size:12px}
+.srcsub{font-size:11px;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;margin:14px 0 4px}
+.srccard.wit{border-color:#3d5a3a}
+.srcoffer{margin:4px 0;font-size:12px}
+.srcoffer summary{cursor:pointer;color:var(--cream)}
+.srcpre{white-space:pre-wrap;word-break:break-word;background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:8px;margin-top:4px;font-family:'EB Garamond',Georgia,serif;font-size:15px;line-height:1.5}
 </style></head><body>
 <header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><h1>Repair path</h1></header>
 <main>
@@ -1723,6 +1887,8 @@ __BAR__
 <p class="srcintro">A better edition: archive.org (previewed here), the local wisdomlib archive, and the e-text sites (GRETIL, sanskritdocuments.org), where a Unicode text needs no OCR at all. A fetched PDF goes to sources\__CODE__\, not to the inbox: import it as a second witness once you have looked at it.</p>
 <div class="srcbar"><button class="tr-rest rp" data-doc="__CODE__" onclick="repairStep(this.dataset.doc,'find',this)">Find a better source</button>
 <label class="srcai"><input type="checkbox" id="srcai-__CODE__"/> let the AI judge the editions (about $0.002)</label></div>
+<div class="srcbar"><input class="srcurl" id="srcurl-__CODE__" placeholder="Paste an e-text link (a .htm or .txt file on GRETIL, sanskritdocuments.org or archive.org)"/>
+<button class="tr-rest rp" data-doc="__CODE__" onclick="var u=document.getElementById('srcurl-'+this.dataset.doc).value.trim(); if(u) repairStep(this.dataset.doc,'witness',this,{url:u});">Fetch it and read it as a witness</button></div>
 <div class="srclist" id="srclist-__CODE__"></div>
 <div class="srcview" id="srcview-__CODE__"></div>
 </section>

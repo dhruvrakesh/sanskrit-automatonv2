@@ -1,0 +1,27 @@
+An e-text as a witness; the missing page offered; judge v2 (ETEXT_WITNESS_2026_10_11); recorded (DOCS43_2026_10_11)
+
+docs/ETEXT_WITNESS_2026-10-11.md. The judge desk was released (0e352ff) and judged 47 texts (24 material);
+two verdicts were not exact (Shatpath on two vision pages; upapurana_saura cut a passage a page).
+- scripts/etext_witness.py (new): a GRETIL, sanskritdocuments.org or archive.org OCR text (Devanagari,
+  IAST, Harvard-Kyoto, Velthuis, ITRANS) becomes a text of its own (<doc>__w_<site>): verses by their
+  references, Devanagari, pages; measured against the scan page by page (six-letter n-grams of the
+  consonant skeleton): how much it reads, in what order, and for each page the scan cannot read the
+  witness's verses between its neighbours. Preview by default; --page N; --url (listed hosts) into
+  sources\<doc>\; --write (data/raw_witness, data/witnesses.jsonl, the register: witness); --ingest
+  (a backup, then ingest_jsonl_fast.py; the scan untouched); --list.
+- scripts/patch_etext_witness_2026_10_11.py:
+  repair_text.py: judge v2 (failed or short vision pages are no disagreement; five pages before the
+    agreement sets the level; in texts cut into long passages the letters misread count, 2% material,
+    1% moderate; --judge-all prints each kind); --release waits for a witness's translation;
+  corpus_sync.py: a witness is not live (not mirrored, nor its pictures, nor the Corner's) until released;
+  source_desk.py: a fetched OCR text's next step is etext_witness.py;
+  dashboard.py: the repair page's Source desk lists the files fetched, takes a pasted e-text link, shows
+    each witness (Ingest, under the translate lock; Translate; Adopt) and the pages the scan cannot
+    read as the witness reads them; the Library's card of a witness;
+  .gitignore: data/raw_witness/ and data/source_judged/ stay local (git rm -r --cached data/source_judged).
+Tests: tests/test_etext_witness_2026_10_11.py (23); the patcher replays in tests/test_repair_heal_2026_10_11.py
+and tests/test_judge_desk_2026_10_11.py compare with this patch's backups.
+Docs: scripts/patch_docs43_2026_10_11.py (PLATFORM 46, RUNBOOK, EP 33).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

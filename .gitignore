@@ -134,3 +134,8 @@ data/corner_worker_made.jsonl
 # again (each has its provenance beside it); the search results are regenerated on every search
 sources/
 data/source_desk/
+
+# ETEXT_WITNESS_2026_10_11: the witnesses' pages are made again from sources/ (etext_witness.py --write);
+# the debris judged is made again by repair_text.py --judge-all (it changed on every run)
+data/raw_witness/
+data/source_judged/

@@ -602,3 +602,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | S2 | An e-text (GRETIL, sanskritdocuments.org, archive.org OCR text) as a witness | Next, against the first fetched file |
 | S3 | The missing page from a witness, offered on the repair page (local) | Designed |
 | C14 | Sources wanted on the site: a corpus table filled by the mirror, shown in the Corner | Designed; the corpus-ingest function and schema are read first |
+
+
+## Addendum 2026-10-11 (33) (DOCS43_2026_10_11)
+
+| # | Item | State |
+|---|---|---|
+| J1.1 | The debris judged; Sources & repairs | **Released** (0e352ff); judge all: 47 texts, 24 material |
+| J2 | Judge v2: failed vision pages, five pages for agreement, letters misread | Built and tested (ETEXT_WITNESS_2026_10_11) |
+| S2 | An e-text as a witness (GRETIL, sanskritdocuments.org, archive.org OCR text) | Built and tested. Next: the first real file (its preview calibrates the thresholds) |
+| S3 | The missing page from a witness, offered on the repair page | Offered (shown); taking it into the scan's passages is R3 |
+| R3 | The in-place re-ingest: keeps passage ids, takes an offered page | Next |
+| C14 | Sources wanted on the site | Designed: a corpus table from the judged cache, the Source desk and the witnesses; SQL next |
+| O2 | Tantric Texts: use the repaired text; Natyasastra: repair with a higher cap; Hayashirsha: let it finish; Karan Aagama: translate, then release | The user's |

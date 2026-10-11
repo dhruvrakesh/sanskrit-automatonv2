@@ -171,6 +171,26 @@ def _in_repair_docs() -> set:
     return {d for d, s in last.items() if s == "in_repair"}
 
 
+def _witness_docs() -> set:
+    """ETEXT_WITNESS_2026_10_11: e-text witnesses (scripts/etext_witness.py) stay local until they are adopted:
+    the latest record of their code in data/source_verdicts.jsonl is "witness" (repair_text.py --release, once
+    translated, makes it "released"). SA_SOURCE_VERDICTS names another file (the tests)."""
+    p = Path(os.environ.get("SA_SOURCE_VERDICTS") or (ROOT / "data" / "source_verdicts.jsonl"))
+    last = {}
+    try:
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(r, dict) and r.get("doc"):
+                    last[r["doc"]] = r.get("status")
+    except OSError:
+        return set()
+    return {d for d, s in last.items() if s == "witness"}
+
+
 def live_docs(con, include_retired: bool = False):
     """[(id, code, category, src_path, glossary, created_at)] of documents to mirror."""
     cols = _cols(con, "docs")
@@ -181,11 +201,14 @@ def live_docs(con, include_retired: bool = False):
         retired = {r[0] for r in con.execute(
             "SELECT doc_code FROM doc_stage WHERE stage='retired' AND status='done'")}
     out = []
+    witness = _witness_docs()   # ETEXT_WITNESS_2026_10_11: local until adopted
     for r in rows:
         code = r[1]
         if not code:
             continue
         if not include_retired and (code.endswith("-RETIRED") or code in retired):
+            continue
+        if code in witness:
             continue
         out.append(r)
     return out

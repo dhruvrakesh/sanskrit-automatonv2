@@ -1649,3 +1649,30 @@ The order matters: the desk's worker 1.2 before C10b.
    - `--release --force` publishes as it is.
 4. **Tests without pytest:** `python -m unittest tests.test_judge_desk_2026_10_11 tests.test_repair_heal_2026_10_11 -v`.
    Or `python -m pip install pytest` once.
+
+
+## An e-text as a witness (DOCS43_2026_10_11)
+
+1. **Patch:**
+   - `python scripts\patch_etext_witness_2026_10_11.py --check`, then without `--check`;
+   - restart the dashboard when idle;
+   - `python scripts\repair_text.py --judge-all`.
+2. **Stop tracking the judged cache:** `git rm -r --cached data/source_judged`. It is in
+   `.gitignore` now; the files stay on disk.
+3. **Find an e-text:**
+   - the repair page's Source desk: *Find a better source*, then a GRETIL or sanskritdocuments.org
+     link;
+   - or download the file into `sources\<doc>\`.
+4. **Read it as a witness (free, read-only):**
+   `python scripts\etext_witness.py --doc <doc> --file "sources\<doc>\<file>"`. Or paste the link on
+   the repair page.
+   - `WITNESS:` says whether it is the same work.
+   - `--page N` shows the witness's reading of one page of the scan.
+5. **Make it a witness:**
+   - `--write`, then `python scripts\etext_witness.py --doc <doc> --ingest` (a backup first; the scan
+     is not touched);
+   - translate the witness from the Library;
+   - `python scripts\repair_text.py --doc <doc>__w_<site> --release` to adopt it.
+6. **Only if the witness replaces the scan:**
+   - `python scripts\diag_retire_check.py --src <doc> --keep <doc>__w_<site>`;
+   - then `python scripts\retire_doc.py --doc <doc> --supersedes <doc>__w_<site> --dry-run`.

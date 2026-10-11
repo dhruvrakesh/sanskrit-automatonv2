@@ -185,12 +185,15 @@ def judge(rows: list, vision_dir: Path, doc: str, max_pages: int = 40) -> dict:
            "misread_top": [t for t, _ in sorted(gtok.items(), key=lambda x: -x[1])[:10]],
            "furniture_top": [k for k, _ in sorted(ftop.items(), key=lambda x: -x[1])[:3]]}
     # vision agreement: pages whose stored text is not vision OCR and that have a vision page on disk
-    stored = {}
+    stored, skip = {}, set()
     for pg, text, eng, has_tr, q in rows:
-        if "vision" not in (eng or "").lower():
+        e = (eng or "").lower()
+        if "fallback" in e:          # ETEXT_WITNESS_2026_10_11 (judge v2): the merge kept Tesseract, vision failed there
+            skip.add(pg)
+        elif "vision" not in e:
             stored.setdefault(pg, []).append(text or "")
     vis = pages_in(vision_dir, doc, "jsonl") if max_pages else set()
-    both = sorted(int(p) for p in vis if int(p) in stored)
+    both = sorted(int(p) for p in vis if int(p) in stored and int(p) not in skip)
     if len(both) > max_pages:
         step = len(both) / float(max_pages)
         both = [both[int(i * step)] for i in range(max_pages)]
@@ -198,8 +201,8 @@ def judge(rows: list, vision_dir: Path, doc: str, max_pages: int = 40) -> dict:
     for pg in both:
         a = " ".join(DEVW.findall(" ".join(stored[pg])))
         b = " ".join(DEVW.findall(_vision_text(vision_dir / ("%s_%04d.jsonl" % (doc, pg)))))
-        if len(a) < 80 or len(b) < 80 or len(a) > 8000:
-            continue
+        if len(a) < 80 or len(b) < 80 or len(a) > 8000 or len(b) < 0.5 * len(a):
+            continue                 # a short vision page is a failed one, not a disagreement (judge v2)
         sims.append(SequenceMatcher(None, a, b, autojunk=False).ratio())
     if sims:
         sims.sort()
@@ -210,7 +213,13 @@ def judge(rows: list, vision_dir: Path, doc: str, max_pages: int = 40) -> dict:
         lvl = 2
     elif out["misread_pct"] >= 10:
         lvl = 1
-    if sims:
+    # ETEXT_WITNESS_2026_10_11 (judge v2): a text cut into long passages (a page each) hides its misreadings
+    # under the 3% a verse; there the share of all letters misread counts (2% material, 1% moderate: where
+    # 25% of verses are misread, 2.0-2.5% of the letters are, on the 47 texts judged on 11 Oct). Not for
+    # verses, where 1.5% of letters would have made ten of the eleven moderate texts, and three cosmetic, material.
+    if nv and tchars / float(nv) >= 600:
+        lvl = max(lvl, 2 if out["misread_letters_pct"] >= 2.0 else (1 if out["misread_letters_pct"] >= 1.0 else 0))
+    if len(sims) >= 5:               # two pages are not a measurement
         lvl = max(lvl, 2 if out["agree_median"] < 0.90 else (1 if out["agree_median"] < 0.97 else 0))
     out["level"] = LEVELS[lvl]
     return out
@@ -652,7 +661,11 @@ def judge_all(a) -> int:
         lvl = (r.get("judged") or {}).get("level") if r.get("debris_pct") else "-"
         counts[lvl] = counts.get(lvl, 0) + 1
         out.append((code, r, lvl, v))
-        print("  [%d/%d] %-60s %-9s debris %5.1f%% | %s" % (i, len(todo), code[:60], lvl, r["debris_pct"], v[:90]), flush=True)
+        j = r.get("judged") or {}   # ETEXT_WITNESS_2026_10_11 (judge v2): each kind of debris
+        print("  [%d/%d] %-56s %-9s debris %5.1f%% (misread %4.1f%% of verses, %4.2f%% of letters; furniture %4.1f%%; "
+              "notes %4.1f%%) | %s" % (i, len(todo), code[:56], lvl, r["debris_pct"], j.get("misread_pct", 0),
+                                       j.get("misread_letters_pct", 0), j.get("furniture_pct", 0), j.get("notes_pct", 0),
+                                       v[:70]), flush=True)
     held = sum(1 for _, r, _, _ in out if r.get("held"))
     print("VERDICT: judged %d text(s) in %ds: %d material, %d moderate, %d cosmetic, %d without debris; %d held by the guard"
           % (len(out), (datetime.datetime.now() - t0).seconds, counts.get("material", 0), counts.get("moderate", 0),
@@ -722,8 +735,13 @@ def main(argv=None) -> int:
         # JUDGE_DESK_2026_10_11: publishing a text whose translation is not back would put it on the site
         # without its English (as on 11 Oct, 19:47); say so, unless --force
         cur = verdicts(Path(a.verdicts)).get(a.doc) or {}
-        if cur.get("status") == "in_repair" and not a.force:
+        if cur.get("status") in ("in_repair", "witness") and not a.force:   # ETEXT_WITNESS_2026_10_11: a witness too
             r0 = assess(a)
+            if r0.get("error") and cur.get("status") == "witness":
+                print("REFUSE: %s is a witness not yet in the database: ingest it (python scripts\\etext_witness.py "
+                      "--doc %s --ingest --witness %s), then translate it" % (a.doc, cur.get("of") or "?", a.doc))
+                print("VERDICT: a witness, not yet ingested"); print("NEXT: ")
+                return 1
             if not r0.get("error"):
                 enb, hib = int(cur.get("en_before") or 0), int(cur.get("hi_before") or 0)
                 t_en = enb or int(0.9 * r0["passages"]); t_hi = hib or int(0.9 * t_en)

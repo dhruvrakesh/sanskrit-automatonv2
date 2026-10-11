@@ -400,7 +400,8 @@ def fetch(a) -> int:
         print("NEXT: import it as a new witness: Dashboard, Import path to inbox: %s (it becomes its own text; OCR it "
               "with vision)" % target)
     else:
-        print("NEXT: read it beside the scan; ingesting an e-text as a witness is the next build (SOURCE_DESK S2)")
+        print('NEXT: python scripts\\etext_witness.py --doc %s --file "%s"   (ETEXT_WITNESS_2026_10_11: read it as a '
+              'witness, free)' % (a.doc, target))
     return 0
 
 
