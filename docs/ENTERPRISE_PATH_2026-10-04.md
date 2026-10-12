@@ -641,3 +641,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | T1 | The translation judged on a sample: judge_sample.py (built in August; mt_reviews holds no review of these texts), then against a clean e-text; a person's spot check | Next; the user's first runs |
 | R3 | The in-place re-ingest | Next |
 | C14 | Sources wanted on the site | Designed; not started |
+
+
+## Addendum 2026-10-12 (36) (DOCS46_2026_10_12)
+
+| # | Item | State |
+|---|---|---|
+| Q1 | The Devanagari measured; the merge refuses Tesseract's garbage | **Released** (76a8b5c) |
+| R3 | The in-place re-ingest (reingest_pages.py) | Built and tested (REINGEST_2026_10_12) |
+| T1 | The translation judged on a sample | **First run**: 200 passages, a wrong meaning in 5-18% (vision texts), 38% (Bodhicaryavatara) |
+| T2 | The marked passages translated again (gemini-2.5-pro), then judged again | Next; paid, capped, dry run first |
+| B2 | The spend cap ($32) reached | The user's decision |
+| VC1 | Vision's artefacts cleaned before ingest | Next |
+| C14 | Sources wanted on the site | Designed; not started |

@@ -81,6 +81,20 @@ read reads see text texts that the this to var verse verses vol was were which w
 also all one two here there these those than then after before into upon""".split())
 
 LEVELS = ("cosmetic", "moderate", "material")
+# REINGEST_2026_10_12: the in-place re-ingest, offered where --use-repaired would replace translations or pictures
+REINGEST = ("python scripts\\reingest_pages.py --doc %s   (only the pages that changed: the rest keep their translations "
+            "and pictures; the plan is free)")
+
+
+def measured_cost_per_page(db: str, doc: str) -> float:
+    """REINGEST_2026_10_12: what a vision page of this text really costs, from usage_log (ocr_consensus.py's measure,
+    as ocr_vision.py prices its pre-flight). The assessment said "269 pages, about $0.11" for the Natyasastra on
+    12 Oct, at COST_PER_PAGE; its pages had cost $0.011 each, 27 times as much. COST_PER_PAGE when nothing is measured."""
+    try:
+        import ocr_consensus as _oc
+        return float(_oc.measured_cost_per_page(db, fallback=COST_PER_PAGE, doc=doc))
+    except Exception:
+        return COST_PER_PAGE
 
 
 def page_rx(doc: str, ext: str):
@@ -342,6 +356,7 @@ def assess(a) -> dict:
         "merged_complete": bool(rawp) and rawp <= mergedp, "queued": queued, "consensus": summary,
         "nothing_to_lose": en <= NOTHING_TO_LOSE_EN and hi == 0 and pictures == 0 and stories == 0,
         "aside": state, "state": state,
+        "cost_per_page": measured_cost_per_page(a.db, a.doc),   # REINGEST_2026_10_12
     })
     res["held"] = res["guard"] and not (state and state.get("status") == "translate_as_is")
     untranslated = max(0, n - en)
@@ -411,7 +426,9 @@ def advise(r: dict, doc: str):
     if not r["merged_complete"]:
         pages = r["queued"] or r["pdfs"]
         left = max(0, pages - r["vision_pages"]) if r["vision_pages"] else pages
-        return (why + "; the scan can be repaired: vision OCR on about %d page(s), about $%.2f" % (left, left * COST_PER_PAGE),
+        cpp = r.get("cost_per_page") or COST_PER_PAGE   # REINGEST_2026_10_12: measured on this text where it can be
+        return (why + "; the scan can be repaired: vision OCR on about %d page(s), about $%.2f ($%.4f a page)"
+                % (left, left * cpp, cpp),
                 q + " --repair   (capped at --max-usd 1.00)", also)
     if r["queued"] and r["vision_pages"] < 0.8 * r["queued"]:
         return (why + "; vision read only %d of the %d queued pages: the scan resists repair" % (r["vision_pages"], r["queued"]),
@@ -422,6 +439,8 @@ def advise(r: dict, doc: str):
                 "it replaces %d English translations; %d Hindi rows, %d vectors, %d pictures and %d stories point "
                 "at the old passages" % (r["english"], r["hindi"], r["vectors"], r["pictures"], r["stories"]))
         nxt = q + " --use-repaired" + ("" if r["nothing_to_lose"] else " --replace %d" % r["english"])
+        if not r["nothing_to_lose"]:   # REINGEST_2026_10_12: only the pages that changed
+            also = [REINGEST % doc] + also
         return (why + "; the repaired text is ready (%s pages differ from the database); %s" % (s.get("stale", 0), lose),
                 nxt, also)
     if s:
@@ -559,6 +578,7 @@ def use_repaired(a, r: dict) -> int:
                                                           r["stories"], r["english"]))
         print("VERDICT: a decision is needed")
         print("NEXT: python scripts\\repair_text.py --doc %s --use-repaired --replace %d" % (doc, r["english"]))
+        print("ALSO: " + REINGEST % doc)   # REINGEST_2026_10_12
         return 1
     w = writers_running(a.from_dashboard, doc)
     if w:

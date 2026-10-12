@@ -113,10 +113,12 @@ def db_reading(db: Path, doc: str, immutable: bool = False):
         rev = None
         if "mt_reviews" in tables:
             try:
-                r = con.execute("SELECT COUNT(*), AVG(m.score_fidelity), AVG(m.score_fluency) FROM mt_reviews m JOIN passages p "
+                r = con.execute("SELECT COUNT(*), AVG(m.score_fidelity), AVG(m.score_fluency), SUM(CASE WHEN m.score_fidelity "
+                                "<= 2 THEN 1 ELSE 0 END) FROM mt_reviews m JOIN passages p "
                                 "ON p.id=m.passage_id WHERE p.doc_id=? AND m.lang='en'", (did,)).fetchone()
                 if r and r[0]:
-                    rev = {"n": int(r[0]), "fidelity": round(float(r[1] or 0), 2), "fluency": round(float(r[2] or 0), 2)}
+                    rev = {"n": int(r[0]), "fidelity": round(float(r[1] or 0), 2), "fluency": round(float(r[2] or 0), 2),
+                           "serious": int(r[3] or 0)}   # REINGEST_2026_10_12: fidelity 2 or less, a wrong meaning
             except sqlite3.Error:
                 rev = None
     except sqlite3.Error:
@@ -440,8 +442,17 @@ def opine(res: dict, doc: str, a) -> dict:
                                                   ("; heuristic QA %.2f" % n["qa_mean"]) if n.get("qa_mean") is not None else "",
                                                   share, nzs, lv, "" if n.get("reviews") else "; no LLM judge has read it yet"))
         if n.get("reviews"):
-            L.append("The LLM judge (mt_reviews) graded %d English passages: fidelity %.2f, fluency %.2f of 5." % (
-                n["reviews"]["n"], n["reviews"]["fidelity"], n["reviews"]["fluency"]))
+            rv = n["reviews"]
+            line = "The LLM judge (mt_reviews) graded %d English passages: fidelity %.2f, fluency %.2f of 5." % (
+                rv["n"], rv["fidelity"], rv["fluency"])
+            if rv.get("serious") is not None:   # REINGEST_2026_10_12: the share with a wrong meaning, and what it is
+                sh = 100.0 * rv["serious"] / rv["n"]
+                lv = "material" if sh >= 10 else ("moderate" if sh >= 5 else "cosmetic")
+                line += (" %d of them (%.0f%%) have a serious error of meaning (fidelity 2 or less: an omission, a "
+                         "negation lost, a word misread): %s. It is a sample, judged by a model of the translator's "
+                         "family; read the passages it marks (python scripts\\judge_sample.py --report)." % (
+                             rv["serious"], sh, lv))
+            L.append(line)
     elif n.get("passages"):
         L.append("Translation now: none of its %d passages has English yet." % n["passages"])
     q = "python scripts\\repair_text.py --doc %s" % doc

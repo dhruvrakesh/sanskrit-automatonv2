@@ -296,7 +296,8 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                later = sorted(SCRIPTS.glob(f + ".bak_quality_*"))   # QUALITY_2026_10_11 came after
+                # QUALITY_2026_10_11 came after, then REINGEST_2026_10_12: the first later backup is this patch's result
+                later = sorted(SCRIPTS.glob(f + ".bak_quality_*")) or sorted(SCRIPTS.glob(f + ".bak_reingest_*"))
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn(b"data/benchmarks/\r\n", (t / ".gitignore").read_bytes())

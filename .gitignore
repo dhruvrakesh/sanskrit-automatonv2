@@ -142,3 +142,5 @@ data/source_judged/
 
 # BENCHMARK_2026_10_11: the benchmarks are made again by scripts/benchmark_sources.py (free, read-only)
 data/benchmarks/
+# REINGEST_2026_10_12: what the in-place re-ingest removed stays local (data/reingest/<doc>_<stamp>.jsonl)
+data/reingest/

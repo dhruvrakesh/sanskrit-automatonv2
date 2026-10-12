@@ -1,0 +1,29 @@
+Only the pages that changed: the in-place re-ingest; the judge's first reading (REINGEST_2026_10_12); recorded (DOCS46_2026_10_12)
+
+docs/REINGEST_2026-10-12.md. After 76a8b5c: the spend cap ($32) was reached overnight (the Natyasastra's vision
+stopped at page 297 of 546; the Tantric Texts' translation after 1,333 English); --use-repaired refused the
+Tantric Texts (1,333 English) and Karan (13 pictures), as it should, though only 7 pages of each had changed; the
+LLM judge read 200 English passages of five texts: a wrong meaning (fidelity 2 or less) in 5-18% of the vision
+texts' passages, 38% of the Bodhicaryavatara's.
+- scripts/reingest_pages.py (new, R3): each page of data/raw_merged cut as the ingest would (upsert_passages on a
+  scratch table), compared with the database; only the changed pages change: a passage whose text is unchanged
+  keeps its row, translations, vector and reviews (and its picture or story moves with it), the others are
+  deleted (logged to data/reingest/) or inserted untranslated; the result equals a full re-ingest; the plan is
+  free; --apply: a backup, a check that the database is still what was planned on, one transaction, --replace N
+  for what it removes, refused while the dashboard writes; then classify_doc.py and the drift check.
+- scripts/judge_review.py (new, read-only): the judge's figures by text, the passages it marks (with its reason,
+  the Sanskrit and the English; a reason blaming the Sanskrit counted apart), --html.
+- scripts/patch_reingest_2026_10_12.py:
+  merge_ocr_sources.py: the stray-mark pattern without an invalid escape (Python 3.13 warned on every merge);
+  repair_text.py: vision priced from usage_log by text ($0.0111 a page for the Natyasastra, not $0.0004);
+    reingest_pages.py offered where --use-repaired would replace translations or pictures;
+  benchmark_sources.py: the judge's share of wrong meanings, and its level;
+  dashboard.py: "Plan: only the changed pages" and "Re-ingest the changed pages" (steps reingest_plan,
+    reingest); Use the repaired text sends --replace 0; /benchmarks shows the judge;
+  .gitignore: data/reingest/.
+Tests: tests/test_reingest_2026_10_12.py (13); the patcher replays in tests/test_quality_2026_10_11.py and
+tests/test_benchmark_2026_10_11.py compare with this patch's backups.
+Docs: scripts/patch_docs46_2026_10_12.py (PLATFORM 49, RUNBOOK, EP 36).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

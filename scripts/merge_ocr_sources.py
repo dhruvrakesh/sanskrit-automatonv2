@@ -61,7 +61,8 @@ FRAGMENT_MAX = 2.0
 FRAGMENT_STRAY = 0.08
 DEV_LETTER = re.compile("[\u0904-\u0939\u0958-\u0961]")
 LATIN_WORD = re.compile(r"[A-Za-z]+")
-STRAY = re.compile("[~^=+*<>|\\{}\[\]_`$#@%&\u00a2\u00a3\u00a5\u2020\u2021\u00a9\u00ae\u00b6\u00a7"
+# REINGEST_2026_10_12: "\\[" and "\\]" (Python 3.13 warned "invalid escape sequence '\\['" on every run); the same pattern
+STRAY = re.compile("[~^=+*<>|\\{}\\[\\]_`$#@%&\u00a2\u00a3\u00a5\u2020\u2021\u00a9\u00ae\u00b6\u00a7"
                    "\u201c\u201d\u2018\u2019\u201e\u00bb\u00ab\u2022]")
 
 

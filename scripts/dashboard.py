@@ -1220,7 +1220,8 @@ def api_ingest():
 # edition found on archive.org, the local wisdomlib archive and the e-text sites, previewed in the page.
 _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "accept", "hold", "release",
                  "find", "fetch", "judge_all", "witness",   # JUDGE_DESK_2026_10_11: judge_all; ETEXT_WITNESS_2026_10_11: witness
-                 "benchmark", "benchmark_all")              # BENCHMARK_2026_10_11
+                 "benchmark", "benchmark_all",              # BENCHMARK_2026_10_11
+                 "reingest_plan", "reingest")               # REINGEST_2026_10_12: only the pages that changed
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
 _REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness")   # ETEXT_WITNESS_2026_10_11: witness
 SOURCES_DIR = ROOT / "sources"                       # ETEXT_WITNESS_2026_10_11: what source_desk.py and etext_witness.py fetch
@@ -1256,7 +1257,8 @@ var _RP_DOING = {assess: 'assessing...', repair: 'repairing the scan...', use: '
                  accept: 'noting: complete...', hold: 'holding it from the site...', release: 'publishing...',
                  find: 'looking for a better edition...', fetch: 'fetching...', translate: 'translating...',
                  judge_all: 'judging the texts (about a minute)...', witness: 'reading the e-text as a witness...',
-                 benchmark: 'benchmarking the readings (free)...', benchmark_all: 'benchmarking every text (a minute or two)...'};
+                 benchmark: 'benchmarking the readings (free)...', benchmark_all: 'benchmarking every text (a minute or two)...',
+                 reingest_plan: 'planning the re-ingest (free)...', reingest: 're-ingesting the changed pages...'};   /* REINGEST_2026_10_12 */
 var _RP_NL = String.fromCharCode(10), _RP_CR = String.fromCharCode(13), _RP_BS = String.fromCharCode(92);
 function _rpLines(s){
   return String(s || '').split(_RP_NL).map(function(l){ return l.split(_RP_CR).join(''); })
@@ -1277,6 +1279,13 @@ function _rpVerdict(out){
 function _rpQuoted(n){ var m = String(n || '').match(/"([^"]*)"/); return m ? m[1] : ''; }
 function _rpNext(next){
   var n = String(next || ''), m;
+  if (n.indexOf('reingest_pages.py') >= 0){   /* REINGEST_2026_10_12: only the pages that changed */
+    m = n.match(/--replace ([0-9]+)/);
+    var pg = n.match(/--pages ([0-9,-]+)/);
+    if (n.indexOf('--apply') < 0) return {step: 'reingest_plan', pages: pg ? pg[1] : '', label: 'Plan: only the changed pages (free)'};
+    return {step: 'reingest', pages: pg ? pg[1] : '', replace: m ? +m[1] : null,
+            label: (m && +m[1]) ? 'Re-ingest the changed pages (removes ' + m[1] + ' English)' : 'Re-ingest the changed pages'};
+  }
   if (n.indexOf('etext_witness.py') >= 0){   /* ETEXT_WITNESS_2026_10_11 */
     if (n.indexOf('--ingest') >= 0){
       m = n.match(/--witness ([A-Za-z0-9_-]+)/);
@@ -1360,7 +1369,17 @@ async function repairStep(doc, step, btn, opt){
            + 'Hindi, vectors and pictures that point at the old passages, go with them. A backup is made first, and the '
            + 'site keeps its last version until you publish the new one. Go?')
         : ('Use the repaired text of ' + doc + '. Nothing translated is lost; a backup is made first. Go?'))) return;
-    if (opt.replace) body.replace = opt.replace;
+    if (opt.replace != null) body.replace = opt.replace;   /* REINGEST_2026_10_12: --replace 0 (pictures) was never sent */
+  }
+  if (step === 'reingest_plan' || step === 'reingest'){   /* REINGEST_2026_10_12 */
+    if (opt.pages) body.pages = opt.pages;
+    if (step === 'reingest'){
+      if (!confirm('Re-ingest the pages of ' + doc + ' that differ from its repaired text. A backup first; on those pages a '
+                   + 'passage whose text is unchanged keeps its translations, the others are replaced'
+                   + (opt.replace ? ' (' + opt.replace + ' English translations go)' : '') + '; the other pages are not '
+                   + 'touched. Go?')) return;
+      if (opt.replace != null) body.replace = opt.replace;
+    }
   }
   if (step === 'set_aside' || step === 'as_is' || step === 'accept' || step === 'hold'){
     var ask = {set_aside: 'Set ' + doc + ' aside: why? Its files are kept; the Library stops offering its translation until '
@@ -1441,7 +1460,7 @@ async function _watchRepair(id, doc, step, btn, orig, n){
       _toast(doc + ': ' + text);
       if ((step === 'find' || step === 'fetch' || step === 'witness' || step === 'benchmark') && document.getElementById('srclist-' + doc)) _rpSources(doc);
       if (j.ok && pre && step === 'translate') repairStep(doc, 'assess', null);
-      if (j.ok && !pre && /^(set_aside|restore|use|as_is|accept|hold|release|translate|judge_all|benchmark_all)$/.test(step))
+      if (j.ok && !pre && /^(set_aside|restore|use|reingest|as_is|accept|hold|release|translate|judge_all|benchmark_all)$/.test(step))
         setTimeout(function(){ location.reload(); }, 3000);
       return;
     }
@@ -1762,7 +1781,21 @@ def api_repair():
         argv = [script("benchmark_sources.py"), "--all", "--from-dashboard"]
     elif step == "judge_all":   # JUDGE_DESK_2026_10_11
         argv = [script("repair_text.py"), "--judge-all"]
-    kind = "repair_use" if step == "use" or (step == "witness" and data.get("ingest")) else "repair"   # ETEXT_WITNESS_2026_10_11
+    elif step in ("reingest_plan", "reingest"):   # REINGEST_2026_10_12: the plan is read-only; the re-ingest a writer
+        argv = [script("reingest_pages.py"), "--doc", doc, "--from-dashboard"]
+        pages = str(data.get("pages") or "")
+        if pages:
+            if not re.match(r"^[0-9][0-9,\-]{0,199}$", pages):
+                return jsonify({"error": "pages must be numbers and ranges: 2,20-21"}), 400
+            argv += ["--pages", pages]
+        if step == "reingest":
+            argv.append("--apply")
+            if data.get("replace") not in (None, ""):
+                try:
+                    argv += ["--replace", str(int(data.get("replace")))]
+                except (TypeError, ValueError):
+                    return jsonify({"error": "replace must be a whole number"}), 400
+    kind = "repair_use" if step in ("use", "reingest") or (step == "witness" and data.get("ingest")) else "repair"   # ETEXT_WITNESS_2026_10_11; REINGEST_2026_10_12
     return jsonify({"job": launch(kind, doc, py(*argv), mode=step), "kind": kind, "step": step})
 
 
@@ -1885,7 +1918,11 @@ def benchmarks_page():
                 '<td>%s</td></tr>' % (e(r["doc"], quote=True), e(r["doc"]), pct(te), pct(ours),
                                       ('<br><span class="muted">%s</span>' % e(ours["label"])) if ours else "",
                                       e("; ".join("%s %s" % (x["label"], pct(x)) for x in arch)) or "-", e(ref), e(before),
-                                      e("%s of %s EN, %s HI" % (n.get("english", 0), n.get("passages", 0), n.get("hindi", 0)))
+                                      e(("%s of %s EN, %s HI" % (n.get("english", 0), n.get("passages", 0), n.get("hindi", 0)))
+                                        + (("; judged %.2f of 5 on %d, %d%% a wrong meaning" % (   # REINGEST_2026_10_12
+                                            n["reviews"]["fidelity"], n["reviews"]["n"],
+                                            round(100.0 * n["reviews"]["serious"] / n["reviews"]["n"])))
+                                           if (n.get("reviews") or {}).get("serious") is not None else ""))
                                       if n else "-"))
         if r.get("lines"):
             trs += '<tr><td colspan="7" class="muted" style="line-height:1.55">%s</td></tr>' % "<br>".join(
@@ -2020,6 +2057,7 @@ table.bench th{color:var(--muted);font-weight:600;background:var(--card)}
 <li><b>Assess</b>: free. It reads the database and the page files, judges the debris (what it is, and whether it touches the text), and says what the scan needs.</li>
 <li><b>Repair the scan</b>: vision OCR on its pages, with a cap on the spend. The database is not touched.</li>
 <li><b>Use the repaired text</b>: a backup first; then its passages are replaced by the repaired text, under the translate lock. The site keeps its last version until you publish the new one.</li>
+<li><b>Re-ingest the changed pages</b> (REINGEST_2026_10_12): when the text has translations or pictures, only the pages that differ from the repaired text change; a passage whose text is unchanged keeps its translations. The plan is free.</li>
 <li><b>Translate as is</b>, when the debris is cosmetic; <b>set aside</b> and <b>find a better source</b>, when the scan cannot be repaired.</li>
 </ol>
 __NOTES__

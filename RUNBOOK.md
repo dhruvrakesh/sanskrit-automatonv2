@@ -1713,3 +1713,26 @@ The order matters: the desk's worker 1.2 before C10b.
 4. **The translation's QA figure is structural.** The meaning is read by `scripts\judge_sample.py`
    (an LLM judge of fidelity and fluency on a sample, into mt_reviews; a dry run first, `--yes` to
    call it, capped by `--limit`), and by a person's spot check of about 20 passages.
+
+
+## Re-ingest only the pages that changed (DOCS46_2026_10_12)
+
+1. **Plan (free, read-only):** `python scripts\reingest_pages.py --doc tantric_texts_series_edited_by_arthur_av`.
+   It lists each changed page: passages kept, new and gone, and what goes with them.
+2. **Apply:** the same with `--apply`.
+   - A backup is made first.
+   - If it removes English, Hindi, a picture or a story, it refuses and prints the exact line with
+     `--replace N`.
+   - It is refused while the dashboard runs a database writer.
+3. **Restarted, the dashboard** has *Plan: only the changed pages* and *Re-ingest the changed pages* on
+   the repair page.
+4. **After it:** the drift check should find the changed pages current. The site gets the change at the
+   next mirror run.
+
+## The judge's reading (DOCS46_2026_10_12)
+
+1. **A dry run first:** `python scripts\judge_sample.py --doc Mallapurana --sample-pct 4 --limit 40`
+   prints its cost (about $0.00015 a passage). Then the same with `--yes`.
+2. **The figures, and the passages it marks:**
+   `python scripts\judge_review.py --html exports\judge_review.html`.
+3. **A person reads what it marks** before a translation is called wrong or right.
