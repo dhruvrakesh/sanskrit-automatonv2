@@ -191,6 +191,27 @@ def _witness_docs() -> set:
     return {d for d, s in last.items() if s == "witness"}
 
 
+def _withdrawn_docs() -> set:
+    """PATH_2026_10_12: the texts withdrawn from the site (repair_text.py --withdraw): the latest record of their code in
+    data/source_verdicts.jsonl is "withdrawn". They are not live here, so a full run retires their rows on the site, as
+    for a retired text (and the guard on many texts gone at once holds); --restore makes them live again, and the
+    next run sends them back. SA_SOURCE_VERDICTS names another file (the tests)."""
+    p = Path(os.environ.get("SA_SOURCE_VERDICTS") or (ROOT / "data" / "source_verdicts.jsonl"))
+    last = {}
+    try:
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(r, dict) and r.get("doc"):
+                    last[r["doc"]] = r.get("status")
+    except OSError:
+        return set()
+    return {d for d, s in last.items() if s == "withdrawn"}
+
+
 def live_docs(con, include_retired: bool = False):
     """[(id, code, category, src_path, glossary, created_at)] of documents to mirror."""
     cols = _cols(con, "docs")
@@ -202,13 +223,14 @@ def live_docs(con, include_retired: bool = False):
             "SELECT doc_code FROM doc_stage WHERE stage='retired' AND status='done'")}
     out = []
     witness = _witness_docs()   # ETEXT_WITNESS_2026_10_11: local until adopted
+    withdrawn = _withdrawn_docs()   # PATH_2026_10_12: off the site until restored
     for r in rows:
         code = r[1]
         if not code:
             continue
         if not include_retired and (code.endswith("-RETIRED") or code in retired):
             continue
-        if code in witness:
+        if code in witness or code in withdrawn:
             continue
         out.append(r)
     return out

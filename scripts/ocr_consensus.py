@@ -162,6 +162,114 @@ def plan_vision(queue_lines: list[str], vision_dir: Path, retry_refused: bool = 
     return todo, done
 
 
+# PATH_2026_10_12: the pages vision failed on. On 12 Oct the Natyasastra's repair (278 pages to read, $3.08) read
+# none: its queue began with five pages vision had failed on the night before (0026, 0032, 0038, 0040, 0044), they
+# failed again, and five failures in a row stopped the run as "quota or key?" - after about half an hour of billed
+# retries. A page vision fails on is now written down (data/ocr_consensus/<doc>_vision_failed.json); it is tried
+# after the others, its failures do not stop a run, and after VISION_GIVE_UP failed runs it is left to Tesseract
+# (--retry-refused tries it again). The spend cap is asked before each page: a cap reached stops the run as such.
+# The ledger is new: a page below the last page vision read that has no reading failed before (the runs go in page
+# order), and is written down once on the first run, so the Natyasastra's 24 such pages (below page 292) go last.
+VISION_GIVE_UP = 2
+
+
+def failed_ledger(work: Path, doc: str) -> Path:
+    return work / ("%s_vision_failed.json" % doc)
+
+
+def read_failed(work: Path, doc: str) -> dict:
+    try:
+        d = json.loads(failed_ledger(work, doc).read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def write_failed(work: Path, doc: str, led: dict) -> None:
+    p = failed_ledger(work, doc)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    tmp = p.with_name(p.name + ".tmp")
+    tmp.write_text(json.dumps(led, indent=1, sort_keys=True), encoding="utf-8")
+    os.replace(tmp, p)
+
+
+def last_read_page(vdir: Path, doc: str) -> int:
+    """The highest page vision has read for this text (0 when none)."""
+    rx = re.compile(r"^%s_(\d{4})\.jsonl$" % re.escape(doc))
+    pages = []
+    try:
+        for e in os.scandir(vdir):
+            m = rx.match(e.name)
+            if m:
+                pages.append(int(m.group(1)))
+    except OSError:
+        return 0
+    for pg in sorted(pages, reverse=True):
+        if nonempty_jsonl(vdir / ("%s_%04d.jsonl" % (doc, pg))):
+            return pg
+    return 0
+
+
+def seed_failed(todo: list, led: dict, last_read: int) -> int:
+    """A page to read below the last page vision read, and not in the ledger, was tried before and failed: it is
+    written down once (fails 1), so it goes after the others. -> how many were written down."""
+    n = 0
+    for q in todo:
+        stem = Path(q.replace("\\", "/")).stem
+        tail = stem[-4:]
+        if stem not in led and tail.isdigit() and int(tail) < last_read:
+            led[stem] = {"fails": 1, "last": "", "inferred": "no reading below page %d" % last_read}
+            n += 1
+    return n
+
+
+def order_vision(todo: list, led: dict, retry: bool = False):
+    """(the pages to read: never failed first, then those that failed before; the pages left to Tesseract)."""
+    fresh, again, skipped = [], [], []
+    for q in todo:
+        n = int((led.get(Path(q.replace("\\", "/")).stem) or {}).get("fails") or 0)
+        if n >= VISION_GIVE_UP and not retry:
+            skipped.append(q)
+        else:
+            (again if n else fresh).append(q)
+    return fresh + again, skipped
+
+
+def run_vision(todo: list, vdir: Path, doc: str, led: dict, model=None, budget=None, runner=None):
+    """Vision on each page -> (read, failed, why it stopped or ""). A failed page goes into led; only pages
+    that never failed before count towards the five failures in a row that stop the run. The cap (budget) is
+    asked before each page, and after a failure: ocr_vision.py exits 0 with nothing when the cap refuses it."""
+    runner = runner or run
+    ok = fails = consec = 0
+    stopped = ""
+    for i, pdf in enumerate(todo, 1):
+        stem = Path(pdf.replace("\\", "/")).stem
+        if budget is not None and not budget():
+            stopped = "the spend cap is reached (python scripts\\set_budget.py shows it)"
+            break
+        before = int((led.get(stem) or {}).get("fails") or 0)
+        out = vdir / (stem + ".jsonl")
+        argv = [PY, str(SCRIPTS / "ocr_vision.py"), "--pdf", pdf, "--out", str(out), "--doc", doc, "--yes"] + (
+            ["--model", model] if model else [])
+        print("  (%d/%d)%s" % (i, len(todo), ("  (vision failed on it %d time(s) before)" % before) if before else ""))
+        if runner(argv) != 0 or not nonempty_jsonl(out):
+            if budget is not None and not budget():   # ocr_vision.py refused it for the cap: not the page's fault
+                stopped = "the spend cap is reached (python scripts\\set_budget.py shows it)"
+                break
+            fails += 1
+            led[stem] = {"fails": before + 1, "last": datetime.datetime.now().isoformat(timespec="seconds")}
+            if not before:
+                consec += 1
+                if consec >= 5:
+                    stopped = "5 vision failures in a row on pages never failed before (quota or key?)"
+                    break
+        else:
+            ok += 1
+            consec = 0
+            led.pop(stem, None)
+    return ok, fails, stopped
+
+
 def dev_tokens(t: str) -> list[str]:
     return [w for w in DEV_WORD.findall(t or "") if len(w) >= 3]
 
@@ -406,6 +514,15 @@ def main() -> int:
                         queue.append(os.path.join(args.inbox, stem + ".pdf"))
         # 2. VISION (metered, skip-existing)
         todo, done = plan_vision(queue, vdir, args.retry_refused)
+        led = read_failed(work, doc)   # PATH_2026_10_12
+        seeded = seed_failed(todo, led, last_read_page(vdir, doc))
+        if seeded:
+            print("  %d page(s) below the last page vision read have no reading: vision failed on them before, so they "
+                  "go after the others" % seeded)
+        todo, gave = order_vision(todo, led, args.retry_refused)
+        if gave:
+            print("  %d page(s) left to Tesseract: vision failed on them in %d runs or more (%s). --retry-refused to "
+                  "try again." % (len(gave), VISION_GIVE_UP, ", ".join(Path(x.replace("\\", "/")).stem[-4:] for x in gave[:12])))
         n_ref = sum(1 for q in done if refused(vdir / (Path(q.replace("\\", "/")).stem + ".jsonl")))
         if n_ref:
             print("  %d page(s) skipped: the provider refused them before (RECITATION/SAFETY); "
@@ -421,20 +538,19 @@ def main() -> int:
                 print("  REFUSING: estimate $%.4f exceeds --max-usd %.4f" % (est, args.max_usd))
                 return 1
             vdir.mkdir(parents=True, exist_ok=True)
-            fails = consec = 0
-            for i, pdf in enumerate(todo, 1):
-                stem = Path(pdf.replace("\\", "/")).stem
-                argv = [PY, str(SCRIPTS / "ocr_vision.py"), "--pdf", pdf, "--out", str(vdir / (stem + ".jsonl")),
-                        "--doc", doc, "--yes"] + (["--model", args.model] if args.model else [])
-                print("  (%d/%d)" % (i, len(todo)))
-                if run(argv) != 0 or not nonempty_jsonl(vdir / (stem + ".jsonl")):
-                    fails += 1; consec += 1
-                    if consec >= 5:
-                        print("  STOPPING: 5 consecutive vision failures (quota or key?). Re-run later; done pages are kept.")
-                        break
-                else:
-                    consec = 0
-            print("  vision failures: %d" % fails)
+            try:   # PATH_2026_10_12: the cap is asked before each page
+                import usage_meter as _um
+                _budget = lambda: _um.budget_ok(args.db)
+            except Exception:
+                _budget = None
+            try:
+                n_ok, fails, stopped = run_vision(todo, vdir, doc, led, args.model, _budget)
+            finally:
+                write_failed(work, doc, led)
+            if stopped:
+                print("  STOPPING: %s. Re-run later; done pages are kept." % stopped)
+            print("  vision: %d page(s) read, %d failed%s" % (n_ok, fails, (" (written down in %s: tried last next "
+                  "time, left to Tesseract after %d failed runs)" % (failed_ledger(work, doc), VISION_GIVE_UP)) if fails else ""))
         # 3. AUDIT / REPAIR (lossless) with one redo round
         vis = page_map(vdir, doc, "jsonl")
         if vis:

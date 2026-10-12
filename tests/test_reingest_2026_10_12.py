@@ -404,7 +404,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_path_*"))   # PATH_2026_10_12 came after
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:
                 shutil.copy2(baks[f][0], t / "scripts" / f)

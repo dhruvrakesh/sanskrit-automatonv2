@@ -654,3 +654,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | B2 | The spend cap ($32) reached | The user's decision |
 | VC1 | Vision's artefacts cleaned before ingest | Next |
 | C14 | Sources wanted on the site | Designed; not started |
+
+
+## Addendum 2026-10-12 (37) (DOCS47_2026_10_12)
+
+| # | Item | State |
+|---|---|---|
+| R3 | The in-place re-ingest (reingest_pages.py) | **Released** (9d4eb66); the Tantric Texts, Karan and Hayashirsha wait for their translations |
+| P1 | The path of every text (text_path.py, /path) | Built and tested (PATH_2026_10_12) |
+| P2 | A failed vision page written down, tried last | Built and tested (PATH_2026_10_12) |
+| P3 | Withdraw a damaged text from the site (reversible) | Built and tested; the Bodhicaryavatara is the user's decision |
+| T2 | The marked passages translated again, then judged again | Next; paid, capped, dry run first |
+| B2 | The spend: $45 cap, $32.41 recorded, $55.45 repriced | The user's decision |
+| VC1 | Vision's artefacts cleaned before ingest | Next |
+| C14 | Sources wanted on the site | Designed; not started |

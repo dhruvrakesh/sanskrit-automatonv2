@@ -1,0 +1,29 @@
+The path of every text; a failed vision page tried last; withdraw a damaged text (PATH_2026_10_12); recorded (DOCS47_2026_10_12)
+
+docs/PATH_2026-10-12.md. After 9d4eb66: asked for each text to be fixable, retirable, or sourced from a critical
+edition or a better scan. The Natyasastra's repair read no page (five pages vision had failed on the night before
+came first, failed again, and the five-in-a-row stop ended the run); its NEXT said --max-usd 1.00 under an estimate
+of $3.08; the site still holds the Tantric Texts' 145 garbage passages until their re-ingest is applied.
+- scripts/text_path.py (new, read-only): one way forward for every text in the database, the inbox and data/raw,
+  with its reason in numbers, its next command and its cost (use the repair, retire, ingest, repair the scan, find
+  a source, translate, translate again, judge a sample, in repair, done); a repair not all in the database goes in
+  before anything is translated; vision priced by text where measured, else the corpus price with the dearest
+  text's as the bound; --doc, --html; data/text_path.json for the dashboard. On the 11 Oct 22:30 backup: 69 texts.
+- scripts/patch_path_2026_10_12.py:
+  ocr_consensus.py: a page vision fails on is written down (data/ocr_consensus/<doc>_vision_failed.json), tried
+    after the others, not counted towards the five failures in a row, left to Tesseract after two failed runs
+    (--retry-refused tries it again); a page below the last page read with no reading is written down once (it
+    failed before the ledger existed); the spend cap is asked before each page and after a failure;
+  repair_text.py: the repair's NEXT gives a cap the estimate fits under; --withdraw REASON (state "withdrawn"):
+    off the site and out of Ask the Corpus, kept here; --restore undoes it;
+  corpus_sync.py: a withdrawn text is not live (a full run retires it on the site; restored, it is sent back);
+  dashboard.py: /path with "Chart the path again"; "Withdraw it from the site"; withdrawn texts left out of Ask
+    (words and meaning); links to /path from the Library, /sources and /benchmarks;
+  .gitignore: data/text_path.json.
+Tests: tests/test_path_2026_10_12.py (28); the patcher replays in tests/test_reingest_2026_10_12.py,
+tests/test_quality_2026_10_11.py, tests/test_etext_witness_2026_10_11.py and tests/test_repair_heal_2026_10_11.py
+compare with this patch's backups.
+Docs: scripts/patch_docs47_2026_10_12.py (PLATFORM 50, RUNBOOK, EP 37).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

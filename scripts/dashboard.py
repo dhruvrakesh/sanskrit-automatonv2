@@ -1221,9 +1221,11 @@ def api_ingest():
 _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "accept", "hold", "release",
                  "find", "fetch", "judge_all", "witness",   # JUDGE_DESK_2026_10_11: judge_all; ETEXT_WITNESS_2026_10_11: witness
                  "benchmark", "benchmark_all",              # BENCHMARK_2026_10_11
-                 "reingest_plan", "reingest")               # REINGEST_2026_10_12: only the pages that changed
+                 "reingest_plan", "reingest",               # REINGEST_2026_10_12: only the pages that changed
+                 "withdraw", "path_all")                    # PATH_2026_10_12: off the site; the path of every text
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
-_REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness")   # ETEXT_WITNESS_2026_10_11: witness
+_REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness",   # ETEXT_WITNESS_2026_10_11: witness
+                  "withdrawn")                                                          # PATH_2026_10_12
 SOURCES_DIR = ROOT / "sources"                       # ETEXT_WITNESS_2026_10_11: what source_desk.py and etext_witness.py fetch
 WITNESS_DIR = ROOT / "data" / "raw_witness"          # the witnesses' pages, witness.json and align.json
 WITNESSES_LOG = ROOT / "data" / "witnesses.jsonl"
@@ -1258,7 +1260,8 @@ var _RP_DOING = {assess: 'assessing...', repair: 'repairing the scan...', use: '
                  find: 'looking for a better edition...', fetch: 'fetching...', translate: 'translating...',
                  judge_all: 'judging the texts (about a minute)...', witness: 'reading the e-text as a witness...',
                  benchmark: 'benchmarking the readings (free)...', benchmark_all: 'benchmarking every text (a minute or two)...',
-                 reingest_plan: 'planning the re-ingest (free)...', reingest: 're-ingesting the changed pages...'};   /* REINGEST_2026_10_12 */
+                 reingest_plan: 'planning the re-ingest (free)...', reingest: 're-ingesting the changed pages...',   /* REINGEST_2026_10_12 */
+                 withdraw: 'withdrawing it from the site...', path_all: 'charting the path of every text (a few minutes)...'};   /* PATH_2026_10_12 */
 var _RP_NL = String.fromCharCode(10), _RP_CR = String.fromCharCode(13), _RP_BS = String.fromCharCode(92);
 function _rpLines(s){
   return String(s || '').split(_RP_NL).map(function(l){ return l.split(_RP_CR).join(''); })
@@ -1305,6 +1308,7 @@ function _rpNext(next){
   if (n.indexOf('--as-is') >= 0) return {step: 'as_is', reason: _rpQuoted(n), label: 'Translate as is'};
   if (n.indexOf('--accept') >= 0) return {step: 'accept', reason: _rpQuoted(n), label: 'Accept as complete'};
   if (n.indexOf('--set-aside') >= 0) return {step: 'set_aside', label: 'Set aside: a better scan is wanted'};
+  if (n.indexOf('--withdraw') >= 0) return {step: 'withdraw', reason: _rpQuoted(n), label: 'Withdraw it from the site'};   /* PATH_2026_10_12 */
   if (n.indexOf('--restore') >= 0) return {step: 'restore', label: 'Restore'};
   if (n.indexOf('--release') >= 0) return {step: 'release', label: 'Publish it to the site'};
   if (n.indexOf('--find-source') >= 0) return {step: 'find', label: 'Find a better source'};
@@ -1381,14 +1385,17 @@ async function repairStep(doc, step, btn, opt){
       if (opt.replace != null) body.replace = opt.replace;
     }
   }
-  if (step === 'set_aside' || step === 'as_is' || step === 'accept' || step === 'hold'){
+  if (step === 'set_aside' || step === 'as_is' || step === 'accept' || step === 'hold' || step === 'withdraw'){   /* PATH_2026_10_12: withdraw */
     var ask = {set_aside: 'Set ' + doc + ' aside: why? Its files are kept; the Library stops offering its translation until '
                           + 'it is restored.',
                as_is: 'Translate ' + doc + ' as is: the debris guard will let it through. Why?',
                accept: 'Accept ' + doc + ' as complete: what is left is not to be translated. Why?',
-               hold: 'Hold ' + doc + ' from the site: the site keeps its last version until you publish. Why?'}[step];
+               hold: 'Hold ' + doc + ' from the site: the site keeps its last version until you publish. Why?',
+               withdraw: 'Withdraw ' + doc + ' from the site: at the next mirror run the site retires its passages, English '
+                         + 'and Hindi (Restore brings them back); they are kept here, out of Ask the Corpus. Why?'}[step];
     var dflt = opt.reason || {set_aside: 'needs a better scan', as_is: 'debris judged cosmetic',
-                              accept: 'what is left is not Sanskrit', hold: 're-translating after the repair'}[step];
+                              accept: 'what is left is not Sanskrit', hold: 're-translating after the repair',
+                              withdraw: 'its text is damaged: a better source is wanted'}[step];
     var why = prompt(ask, dflt);
     if (why === null) return;
     body.reason = why || dflt;
@@ -1460,7 +1467,7 @@ async function _watchRepair(id, doc, step, btn, orig, n){
       _toast(doc + ': ' + text);
       if ((step === 'find' || step === 'fetch' || step === 'witness' || step === 'benchmark') && document.getElementById('srclist-' + doc)) _rpSources(doc);
       if (j.ok && pre && step === 'translate') repairStep(doc, 'assess', null);
-      if (j.ok && !pre && /^(set_aside|restore|use|reingest|as_is|accept|hold|release|translate|judge_all|benchmark_all)$/.test(step))
+      if (j.ok && !pre && /^(set_aside|restore|use|reingest|withdraw|as_is|accept|hold|release|translate|judge_all|benchmark_all|path_all)$/.test(step))
         setTimeout(function(){ location.reload(); }, 3000);
       return;
     }
@@ -1657,6 +1664,10 @@ def _repair_html(code: str, acts_html: str, shown: list, rec, jd=None) -> str:  
         acts_html += ('<div class="cardnote state">In repair since %s (%s): the site keeps its last version (%s English, '
                       '%s Hindi) until you publish this one.</div>'
                       % (at, why, rec.get("en_before", "?"), rec.get("hi_before", "?")))
+    elif st == "withdrawn":   # PATH_2026_10_12
+        acts_html += ('<div class="cardnote aside" title="data/source_verdicts.jsonl">Withdrawn from the site on %s: %s. The '
+                      'site has retired its passages; they are kept here, out of Ask the Corpus, until a better source '
+                      'replaces them (Restore sends them back).</div>' % (at, why))
     for n in shown:
         acts_html += ('<div class="cardnote%s" title="%s">%s</div>'
                       % (" repaired" if n.get("kind") == "repaired" else "",
@@ -1665,6 +1676,8 @@ def _repair_html(code: str, acts_html: str, shown: list, rec, jd=None) -> str:  
     acts_html += _judged_note(jd, kinds, st)   # JUDGE_DESK_2026_10_11
     if st in ("in_repair", "witness"):   # ETEXT_WITNESS_2026_10_11: a witness too
         acts_html += _repair_bar(code, "in_repair")
+    elif st == "withdrawn":   # PATH_2026_10_12: Restore, Find a better source
+        acts_html += _repair_bar(code, "aside")
     elif "repaired" in kinds:
         acts_html += _repair_bar(code, "repaired")
     elif kinds & {"held", "quality", "nothing"}:
@@ -1712,7 +1725,7 @@ def api_repair():
                         "steps": list(_REPAIR_STEPS), "max_usd": _REPAIR_MAX_USD})
     data = request.get_json(silent=True) or {}
     step = str(data.get("step") or "assess")
-    doc = "corpus" if step in ("judge_all", "benchmark_all") else _validate_doc(data.get("doc"))   # JUDGE_DESK_2026_10_11; BENCHMARK_2026_10_11
+    doc = "corpus" if step in ("judge_all", "benchmark_all", "path_all") else _validate_doc(data.get("doc"))   # PATH_2026_10_12: path_all   # JUDGE_DESK_2026_10_11; BENCHMARK_2026_10_11
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
     if step not in _REPAIR_STEPS:
@@ -1781,6 +1794,10 @@ def api_repair():
         argv = [script("benchmark_sources.py"), "--all", "--from-dashboard"]
     elif step == "judge_all":   # JUDGE_DESK_2026_10_11
         argv = [script("repair_text.py"), "--judge-all"]
+    elif step == "withdraw":   # PATH_2026_10_12: off the site (the mirror retires it there), out of Ask here
+        argv += ["--withdraw", reason or "its text is damaged: a better source is wanted"]
+    elif step == "path_all":   # PATH_2026_10_12: free and read-only
+        argv = [script("text_path.py"), "--from-dashboard"]
     elif step in ("reingest_plan", "reingest"):   # REINGEST_2026_10_12: the plan is read-only; the re-ingest a writer
         argv = [script("reingest_pages.py"), "--doc", doc, "--from-dashboard"]
         pages = str(data.get("pages") or "")
@@ -1958,7 +1975,95 @@ header h1{font-size:18px;color:var(--gold);font-weight:700}
 .srcnone{color:var(--muted);font-size:12px;margin:10px 0}
 """ + _REPAIR_CSS + _SOURCES_CSS + """
 </style></head><body>
-<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/sources">Sources &amp; repairs</a><h1>Benchmarks</h1></header>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/sources">Sources &amp; repairs</a><a href="/path">The path</a><h1>Benchmarks</h1></header>
+""" + body + """
+<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
+<script>
+function _toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none';},6000);}
+""" + _REPAIR_JS + """
+</script>
+</body></html>""")
+
+
+PATH_FILE = ROOT / "data" / "text_path.json"   # PATH_2026_10_12: written by scripts/text_path.py
+
+
+@app.get("/path")
+def path_page():
+    """PATH_2026_10_12: the path of every text (scripts/text_path.py): use the repair, retire, ingest, repair the scan,
+    find a source, translate, translate again, judge a sample, in repair, done; each with its reason in numbers, its
+    next command and its cost. Reads one small file."""
+    import html as _html
+    e = _html.escape
+    try:
+        res = json.loads(PATH_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        res = None
+    money = lambda x: ("$%.2f" % x) if x >= 0.995 else ("$%.3f" % x)
+    chips, groups = "", ""
+    if res:
+        tot = res.get("totals") or {}
+        for key, label, desc in res.get("paths") or []:
+            rows = [t for t in res.get("texts") or [] if t.get("path") == key and not t.get("retired")]
+            if not rows:
+                continue
+            tt = tot.get(key) or {}
+            hi = tt.get("cost_hi") or 0
+            cost = ((" &middot; about %s now" % money(tt["cost"])) if tt.get("cost") else "") + (
+                (" (up to %s at the dearest text's price)" % money(hi)) if tt.get("cost") and hi > 1.05 * tt["cost"] else "") + (
+                (" &middot; then %s to translate" % money(tt["then"])) if tt.get("then") else "")
+            chips += '<a class="pchip" href="#p-%s">%s <b>%d</b></a>' % (e(key, quote=True), e(label), len(rows))
+            trs = ""
+            for t in rows:
+                lines = "".join('<div class="pnext">NEXT %s</div>' % e(n) for n in t.get("next") or [])
+                lines += "".join('<div class="palso">ALSO %s</div>' % e(n) for n in t.get("also") or [])
+                link = ('<a href="/repair/%s">%s</a>' % (e(t["doc"], quote=True), e(t["doc"]))) if not t.get("new") else e(t["doc"])
+                trs += '<tr><td class="pdoc">%s</td><td>%s%s</td><td class="pcost">%s</td></tr>' % (
+                    link, e(t.get("why") or ""), lines, (money(t["cost"]) if t.get("cost") else "") + (
+                        ("<br><span class=\"muted\">then %s</span>" % money(t["then"])) if t.get("then") else ""))
+            groups += ('<h2 id="p-%s" class="ph">%s <span>%d</span></h2><p class="pdesc">%s%s</p><div class="srcwrap">'
+                       '<table class="srct"><tbody>%s</tbody></table></div>' % (e(key, quote=True), e(label), len(rows),
+                                                                              e(desc), cost, trs))
+        pr = res.get("prices") or {}
+        head = ('Charted %s: vision %s a page at the corpus price (%d text(s) priced from their own calls; the dearest '
+                'so far %s a page), translation %s a passage, measured in usage_log.'
+                % (e(str(res.get("at", "?")).replace("T", " ")), "$%.4f" % (pr.get("vision_page") or 0),
+                   len(pr.get("measured") or []), "$%.4f" % (pr.get("vision_dear") or 0), "$%.5f" % (pr.get("passage") or 0)))
+    else:
+        head = "Not charted yet: press Chart the path again, or run python scripts\\text_path.py (free, read-only)."
+    body = ('<div class="srcpage"><p class="rpintro" style="margin:0">Every text has one way forward: use the repair '
+            'vision has made, retire a duplicate, ingest what is not in yet, repair the scan with vision, find a critical '
+            'e-text or a better scan, translate a clean reading, translate again what the judge marks, judge a sample, '
+            'or nothing. %s</p><div class="pchips">%s</div><div class="repairbar" id="rp-corpus" style="margin-top:10px">'
+            '<button class="tr-rest rp" data-doc="corpus" onclick="repairStep(this.dataset.doc,&#39;path_all&#39;,this)">'
+            'Chart the path again (free, read-only; a few minutes)</button><div class="rpout"></div></div>%s</div>'
+            % (head, chips, groups))
+    css = (".pchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pchip{border:1px solid var(--border);"
+           "border-radius:7px;padding:4px 10px;font-size:12px;color:var(--cream);text-decoration:none}.pchip b{color:var(--gold)}"
+           ".ph{font-size:15px;color:var(--gold);margin:22px 0 2px}.ph span{color:var(--muted);font-weight:400}"
+           ".pdesc{color:var(--muted);font-size:12px;margin-bottom:6px}.pdoc{width:28%;word-break:break-all;font-weight:600}"
+           ".pdoc a{color:var(--cream)}.pnext,.palso{font-family:ui-monospace,monospace;font-size:11px;margin-top:3px;"
+           "word-break:break-all}.pnext{color:#9ec3ff}.palso{color:#d9a35b}.pcost{white-space:nowrap;text-align:right}"
+           ".muted{color:var(--muted)}")
+    return ("""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The path</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;min-height:100vh}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+header a{color:var(--muted);font-size:12px;text-decoration:none}
+header a:hover{color:var(--gold)}
+header h1{font-size:18px;color:var(--gold);font-weight:700}
+.tr-rest{background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 9px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer}
+.tr-rest:hover{border-color:var(--gold);color:var(--gold)}
+.tr-rest:disabled{opacity:.6;cursor:default}
+.srcnone{color:var(--muted);font-size:12px;margin:10px 0}
+""" + _REPAIR_CSS + _SOURCES_CSS + css + """
+</style></head><body>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/sources">Sources &amp; repairs</a><a href="/benchmarks">Benchmarks</a><h1>The path</h1></header>
 """ + body + """
 <div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
 <script>
@@ -2251,7 +2356,7 @@ header h1{font-size:18px;color:var(--gold);font-weight:700}
 .srcnone{color:var(--muted);font-size:12px;margin:10px 0}
 """ + _REPAIR_CSS + _SOURCES_CSS + _JUDGED_CSS + """
 </style></head><body>
-<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/benchmarks">Benchmarks</a><h1>Sources &amp; repairs</h1></header>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/benchmarks">Benchmarks</a><a href="/path">The path</a><h1>Sources &amp; repairs</h1></header>
 """ + body + """
 <div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
 <script>
@@ -3533,6 +3638,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
   <h1>&#2384; Srangam Library</h1>
   <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses</span>
   <a class="back" href="/sources" title="JUDGE_DESK_2026_10_11: every text whose scan stops its translation, judged, with the editions found" style="margin-left:auto;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128269; Sources &amp; repairs</a>
+  <a class="back" href="/path" title="PATH_2026_10_12: the way forward for every text: repair, find a source, retire, translate, judge" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#129517; The path</a>
   <a class="back" href="/methodology" title="How source and translation quality are measured" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
   <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
 </header>
@@ -4266,12 +4372,25 @@ def _ask_fts_query(q: str):
         return None
     return " OR ".join('"%s"' % t.replace('"', '') for t in toks[:12])
 
+def _ask_withdrawn(con=None) -> set:
+    """PATH_2026_10_12: the texts withdrawn from the site (repair_text.py --withdraw) are left out of Ask here too;
+    the register beside the database asked (as the Library reads it), else data/."""
+    try:
+        folder = None
+        if con is not None:
+            f = (con.execute("PRAGMA database_list").fetchone() or (None, None, ""))[2]
+            folder = pathlib.Path(f).parent if f else None
+        return {d for d, r in _source_verdicts(folder).items() if r.get("status") == "withdrawn"}
+    except Exception:
+        return set()
+
+
 def _ask_retrieve(con, q, k=12):
     m = _ask_fts_query(q)
     if not m:
         return []
     try:
-        return con.execute(
+        rows = con.execute(
             """SELECT d.code, p.verse_ref, p.page_no, p.idx, p.translation
                FROM passages_fts f
                JOIN passages p ON p.rowid = f.rowid
@@ -4283,6 +4402,8 @@ def _ask_retrieve(con, q, k=12):
                ORDER BY bm25(passages_fts) LIMIT ?""",
             (m, k),
         ).fetchall()
+        wd = _ask_withdrawn(con)   # PATH_2026_10_12
+        return [r for r in rows if r[0] not in wd]
     except sqlite3.OperationalError:
         return []
 
@@ -4379,10 +4500,10 @@ def _ask_semantic_retrieve(con, q, k=12):
             WHERE p.id IN ({ph}) AND d.code NOT LIKE '%-RETIRED'
               AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')   -- ASK_NOISE_2026_10_07
               AND TRIM(COALESCE(p.translation,'')) <> ''""", top_ids)}
-    out = []
+    out, wd = [], _ask_withdrawn(con)   # PATH_2026_10_12: withdrawn texts left out
     for pid in top_ids:
         r = got.get(pid)
-        if r:
+        if r and r[1] not in wd:
             out.append((r[1], r[2], r[3], r[4], r[5]))
         if len(out) >= k:
             break

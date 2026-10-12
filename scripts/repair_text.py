@@ -65,7 +65,7 @@ MIN_QUALITY = 0.35                                              # as translate_p
 NOTHING_TO_LOSE_EN = 5          # at most this many English translations count as nothing to lose
 COST_PER_PAGE = 0.0004          # measured on Karan Aagama, 2026-10-10 ($0.00017-0.00038 a page)
 DASHBOARD = os.environ.get("SA_DASHBOARD_URL") or "http://127.0.0.1:5057"
-STATES = ("set_aside", "translate_as_is", "complete", "in_repair")    # the rest ("restored", "released") are ordinary
+STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "withdrawn")   # the rest ("restored", "released") are ordinary; withdrawn: PATH_2026_10_12
 
 JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")      # = translate_passages._debris_guard
 DEV = re.compile(r"[\u0900-\u097f]")
@@ -379,6 +379,10 @@ def advise(r: dict, doc: str):
     if status == "set_aside":
         return ("set aside on %s: %s. A better scan is wanted; its files are kept." % (s_at, s_why),
                 q + " --restore   (when a better scan is in the inbox)", [q + " --find-source"])
+    if status == "withdrawn":   # PATH_2026_10_12
+        return ("withdrawn from the site on %s: %s. The site has retired its passages; they are kept here, out of Ask the "
+                "Corpus, until a better source replaces them" % (s_at, s_why), q + " --find-source",
+                [q + " --restore   (send it to the site again as it is)"])
     if status == "complete":
         return ("accepted as complete on %s: %s. %d of %d passages have English; what is left is not translated."
                 % (s_at, s_why, r["english"], r["passages"]), "", [q + " --restore"])
@@ -427,9 +431,10 @@ def advise(r: dict, doc: str):
         pages = r["queued"] or r["pdfs"]
         left = max(0, pages - r["vision_pages"]) if r["vision_pages"] else pages
         cpp = r.get("cost_per_page") or COST_PER_PAGE   # REINGEST_2026_10_12: measured on this text where it can be
+        cap = max(1.0, math.ceil(left * cpp * 1.25 * 10) / 10.0)   # PATH_2026_10_12: a cap the estimate fits under
         return (why + "; the scan can be repaired: vision OCR on about %d page(s), about $%.2f ($%.4f a page)"
                 % (left, left * cpp, cpp),
-                q + " --repair   (capped at --max-usd 1.00)", also)
+                q + " --repair --max-usd %.2f   (it stops before spending more)" % cap, also)
     if r["queued"] and r["vision_pages"] < 0.8 * r["queued"]:
         return (why + "; vision read only %d of the %d queued pages: the scan resists repair" % (r["vision_pages"], r["queued"]),
                 q + ' --set-aside "needs a better scan"   (or --repair again for the pages that failed)',
@@ -638,6 +643,9 @@ def say_state(a, rec: dict) -> int:
     msg = {
         "set_aside": ("%s set aside: %s. Its files are kept; the Library stops offering its translation." % (doc, rec["reason"]),
                       "put a better scan's page PDFs in the inbox (OCR them), then %s --restore" % q),
+        "withdrawn": ("%s withdrawn from the site: %s. At the next mirror run the site retires its passages, English and "
+                      "Hindi (--restore brings them back); they are kept here, and Ask the Corpus here leaves them out."
+                      % (doc, rec["reason"]), "%s --find-source   (a critical e-text or a better scan)" % q),   # PATH_2026_10_12
         "translate_as_is": ("%s is to be translated as is: %s. The debris guard lets it through." % (doc, rec["reason"]),
                             "translate it: Finish EN and Add Hindi in the Library"),
         "complete": ("%s accepted as complete: %s. The Library stops offering what is left." % (doc, rec["reason"]), ""),
@@ -714,6 +722,8 @@ def main(argv=None) -> int:
     g.add_argument("--hold", metavar="REASON", nargs="?", const="re-translating after the repair",
                    help="the site keeps its last version of this text (corpus_sync.py skips it)")
     g.add_argument("--release", action="store_true", help="publish the text to the site again")
+    g.add_argument("--withdraw", metavar="REASON", help="PATH_2026_10_12: take the text off the site (the mirror retires "
+                   "it there) and out of Ask the Corpus, keeping it here; --restore undoes it")
     g.add_argument("--find-source", action="store_true", help="look for a better edition (scripts/source_desk.py)")
     g.add_argument("--restore", action="store_true")
     g.add_argument("--list", action="store_true")
@@ -741,7 +751,7 @@ def main(argv=None) -> int:
     if not a.doc or not re.match(r"^[A-Za-z0-9_\-]+$", a.doc):
         print("FAIL: --doc <code> is needed (letters, digits, _ and -)."); return 2
     for flag, status in (("set_aside", "set_aside"), ("as_is", "translate_as_is"), ("accept", "complete"),
-                         ("hold", "in_repair")):
+                         ("hold", "in_repair"), ("withdraw", "withdrawn")):   # PATH_2026_10_12: withdraw
         reason = getattr(a, flag)
         if reason is not None:
             extra = {}

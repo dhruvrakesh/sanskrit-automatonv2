@@ -1736,3 +1736,22 @@ The order matters: the desk's worker 1.2 before C10b.
 2. **The figures, and the passages it marks:**
    `python scripts\judge_review.py --html exports\judge_review.html`.
 3. **A person reads what it marks** before a translation is called wrong or right.
+
+
+## The path of every text (DOCS47_2026_10_12)
+
+1. **Chart it (free, read-only):** `python scripts\text_path.py --html exports\text_path.html`, or
+   *Chart the path again* on `http://127.0.0.1:5057/path` (after a restart). One text with every fact:
+   `--doc nirukta`.
+2. **Follow each text's NEXT**, in the order of the groups. The free ones first: use the repair, retire
+   (dry run first), ingest. Then the paid ones, each capped: repair the scan, translate, judge.
+3. **Chart it again** after a run: the next step and the price change with what was done (a repaired text's
+   own price replaces the corpus price after its first 20 pages).
+
+## Withdraw a damaged text from the site (DOCS47_2026_10_12)
+
+1. `python scripts\repair_text.py --doc Bodhicaryavatara --withdraw "its text is damaged: a better source is wanted"`
+   writes the register; nothing is deleted.
+2. **The next full mirror run** (`python scripts\corpus_sync.py`, then `--apply`; not `--doc`) retires its
+   rows on the site. Ask the Corpus here leaves it out at once.
+3. **`--restore`** undoes it; the next mirror run sends it back.
