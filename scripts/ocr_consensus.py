@@ -235,10 +235,59 @@ def order_vision(todo: list, led: dict, retry: bool = False):
     return fresh + again, skipped
 
 
-def run_vision(todo: list, vdir: Path, doc: str, led: dict, model=None, budget=None, runner=None):
+# MIRROR_CAP_2026_10_12: --max-usd refused a run whose estimate was above it, and nothing more: a text dearer than
+# its estimate (the Natyasastra's pages cost $0.0111, not the corpus's $0.0024) could spend past it. What this run
+# has spent is now read from usage_log (the calls after its start, priced as measured_cost_per_page prices them)
+# before each page, and the run stops before a page would take it past --max-usd.
+def usage_mark(db) -> int:
+    """The last usage_log id (0 when none or unreadable): this run's calls are the ones after it."""
+    try:
+        con = sqlite3.connect(Path(db).resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+        try:
+            r = con.execute("SELECT MAX(id) FROM usage_log").fetchone()
+        finally:
+            con.close()
+        return int((r or [0])[0] or 0)
+    except Exception:
+        return 0
+
+
+def spent_since(db, doc: str, mark: int) -> float:
+    """USD of this text's vision calls in usage_log after mark (0.0 when unreadable)."""
+    try:
+        sys.path.insert(0, str(SCRIPTS))
+        import cost_tracker
+        con = sqlite3.connect(Path(db).resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+        try:
+            rows = con.execute("SELECT engine, in_tokens, out_tokens FROM usage_log WHERE kind='ocr_vision' AND doc=? "
+                               "AND id > ?", (doc, int(mark or 0))).fetchall()
+        finally:
+            con.close()
+        usd = 0.0
+        for eng, tin, tout in rows:
+            pin, pout = cost_tracker._get_pricing(eng or "")
+            usd += ((tin or 0) * pin + (tout or 0) * pout) / 1e6
+        return usd
+    except Exception:
+        return 0.0
+
+
+def run_cap(db, doc: str, max_usd: float, per_page: float, mark: int):
+    """-> a callable: "" while one more page fits under --max-usd, else why the run stops."""
+    def check() -> str:
+        spent = spent_since(db, doc, mark)
+        if spent + max(0.0, per_page) > max_usd:
+            return ("this run's --max-usd $%.2f is reached ($%.2f spent; a page costs about $%.4f)"
+                    % (max_usd, spent, per_page))
+        return ""
+    return check
+
+
+def run_vision(todo: list, vdir: Path, doc: str, led: dict, model=None, budget=None, runner=None, cap=None):
     """Vision on each page -> (read, failed, why it stopped or ""). A failed page goes into led; only pages
-    that never failed before count towards the five failures in a row that stop the run. The cap (budget) is
-    asked before each page, and after a failure: ocr_vision.py exits 0 with nothing when the cap refuses it."""
+    that never failed before count towards the five failures in a row that stop the run. The spend cap (budget)
+    is asked before each page, and after a failure: ocr_vision.py exits 0 with nothing when the cap refuses it.
+    cap (MIRROR_CAP_2026_10_12) is this run's --max-usd, asked before each page."""
     runner = runner or run
     ok = fails = consec = 0
     stopped = ""
@@ -246,6 +295,10 @@ def run_vision(todo: list, vdir: Path, doc: str, led: dict, model=None, budget=N
         stem = Path(pdf.replace("\\", "/")).stem
         if budget is not None and not budget():
             stopped = "the spend cap is reached (python scripts\\set_budget.py shows it)"
+            break
+        why = cap() if cap is not None else ""
+        if why:
+            stopped = why
             break
         before = int((led.get(stem) or {}).get("fails") or 0)
         out = vdir / (stem + ".jsonl")
@@ -529,6 +582,7 @@ def main() -> int:
                   "Tesseract is kept. --retry-refused to try again." % n_ref)
         if args.max_pages and len(todo) > args.max_pages:
             todo = todo[:args.max_pages]
+        _mark = usage_mark(args.db)   # MIRROR_CAP_2026_10_12: what this run spends comes after it
         cpp = measured_cost_per_page(args.db, doc=doc)   # COST_RATIO_2026_10_05: this text's own rate
         est = len(todo) * cpp
         print("\n[2] vision    queued %d | already done %d | to run %d | est $%.4f at $%.5f/page"
@@ -543,8 +597,9 @@ def main() -> int:
                 _budget = lambda: _um.budget_ok(args.db)
             except Exception:
                 _budget = None
+            _cap = run_cap(args.db, doc, args.max_usd, cpp, _mark)   # MIRROR_CAP_2026_10_12
             try:
-                n_ok, fails, stopped = run_vision(todo, vdir, doc, led, args.model, _budget)
+                n_ok, fails, stopped = run_vision(todo, vdir, doc, led, args.model, _budget, cap=_cap)
             finally:
                 write_failed(work, doc, led)
             if stopped:
@@ -566,6 +621,10 @@ def main() -> int:
                     stem = Path(pdf.replace("\\", "/")).stem
                     if not stem.startswith(doc + "_"):
                         continue
+                    why = run_cap(args.db, doc, args.max_usd, measured_cost_per_page(args.db, doc=doc), _mark)()
+                    if why:   # MIRROR_CAP_2026_10_12: the redo round is under the same --max-usd
+                        print("  STOPPING the redo round: %s. The pages not redone keep their reading." % why)
+                        break
                     old = vdir / (stem + ".jsonl")
                     if old.exists():
                         shutil.move(str(old), str(rej / ("%s.%s.jsonl" % (stem, ts))))

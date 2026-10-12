@@ -35,6 +35,11 @@ Prices: a text with 20 or more vision pages in usage_log is priced from its own 
 corpus price, with the dearest text's price as the upper bound (pages differ by book: $0.0011 to $0.0111
 a page so far). --max-usd is set from the estimate; a run that reaches it stops before spending more, and
 its first pages measure the text's own price for the next chart.
+MIRROR_CAP_2026_10_12: the corpus price is that of the last 300 vision calls, so one dear text read last
+raises it for all (on 12 Oct, $0.0100 a page after the Natyasastra's run; the median text $0.0024). The
+estimate and the cap stay at the corpus price (ocr_consensus.py refuses a run whose estimate is above
+--max-usd, and since this patch stops a run before a page would take it past), and the median of the
+texts measured is given beside it, as what a text not yet measured most likely costs.
 
 It opens the database read-only (repair_text.assess, as the Sources page does), reads the page folders, the
 register, the judge's reviews and the price of vision and translation in usage_log. It writes
@@ -132,16 +137,32 @@ def prices(db: str, codes=None) -> dict:
         except Exception:
             pass
     out["vision_dear"] = round(max(dear, out["vision_page"] or 0.0), 5)
+    each = []   # MIRROR_CAP_2026_10_12: the median of the texts measured
+    for d in mine:
+        try:
+            x = float(oc.measured_cost_per_page(db, fallback=0.0, doc=d)) if oc else 0.0
+        except Exception:
+            x = 0.0
+        if x > 0:
+            each.append(x)
+    each.sort()
+    out["vision_median"] = (round(each[len(each) // 2] if len(each) % 2 else
+                                  (each[len(each) // 2 - 1] + each[len(each) // 2]) / 2.0, 5) if len(each) >= 3 else None)
     return out
 
 
 def money_line(tt: dict) -> str:
-    """'about $X now (up to $Y at the dearest text's price); then about $Z to translate', the parts that are not 0."""
+    """'about $X now (from $W at the median text's price; up to $Y at the dearest text's price); then about $Z to
+    translate', the parts that are not 0."""
     parts = []
     if tt.get("cost"):
-        hi = tt.get("cost_hi") or 0.0
-        parts.append("about %s now%s" % (usd(tt["cost"]), (" (up to %s at the dearest text's price)" % usd(hi))
-                                         if hi > 1.05 * tt["cost"] else ""))
+        hi, lo = tt.get("cost_hi") or 0.0, tt.get("cost_lo")
+        side = []
+        if lo is not None and lo < 0.95 * tt["cost"]:   # MIRROR_CAP_2026_10_12
+            side.append("from %s at the median text's price" % usd(lo))
+        if hi > 1.05 * tt["cost"]:
+            side.append("up to %s at the dearest text's price" % usd(hi))
+        parts.append("about %s now%s" % (usd(tt["cost"]), (" (%s)" % "; ".join(side)) if side else ""))
     if tt.get("then"):
         parts.append("then about %s to translate" % usd(tt["then"]))
     return "; ".join(parts)
@@ -362,16 +383,20 @@ def decide(f: dict, pr: dict) -> dict:
             own = f.get("price_from") == "this text"
             dear = max(cpp, pr.get("vision_dear") or cpp)
             est_hi = est if own else todo * dear
+            med = pr.get("vision_median")
+            est_lo = est if (own or not med) else min(est, todo * med)   # MIRROR_CAP_2026_10_12
             note = ("about %d pages at %s a page, measured on this text" % (todo, per_page(cpp)) if own else
                     "about %d pages at %s a page, the corpus price: not measured on this text yet; up to %s at the "
-                    "dearest text's %s; it stops at the cap" % (todo, per_page(cpp), usd(est_hi), per_page(dear)))
+                    "dearest text's %s%s; it stops at the cap" % (
+                        todo, per_page(cpp), usd(est_hi), per_page(dear),
+                        ("; about %s at the median text's %s" % (usd(todo * med), per_page(med))) if med else ""))
             o.update(path="repair", why=("Tesseract's text: %s; %s; vision has read %d of its %d pages"
                                          % (lvl, ("%d of %d passages translated from it" % (en, n)) if en else
                                                  "nothing translated: vision first, so the English is made from a clean "
                                                  "reading", vpages, pdfs)),
                      next=[q0 + " --repair --max-usd %.2f   (%s)" % (cap, note),
                            rp + "   (after it: the changed pages, the plan, free)"],
-                     cost=est, cost_hi=est_hi, then=tr_cost(n, n, pr))
+                     cost=est, cost_hi=est_hi, cost_lo=est_lo, then=tr_cost(n, n, pr))
             if f.get("changed", 0) > 0 and vpages:
                 o["also"].append("the %d page(s) vision has read can go in now: %s   (the plan, free)" % (f["changed"], rp))
             if f.get("vectors") and damaged:
@@ -543,19 +568,21 @@ def chart(a) -> dict:
     for t in texts:
         if t.get("retired"):
             continue
-        x = totals.setdefault(t["path"], {"texts": 0, "cost": 0.0, "cost_hi": 0.0, "then": 0.0})
+        x = totals.setdefault(t["path"], {"texts": 0, "cost": 0.0, "cost_hi": 0.0, "cost_lo": 0.0, "then": 0.0})
         x["texts"] += 1; x["cost"] += t.get("cost") or 0.0; x["then"] += t.get("then") or 0.0
         x["cost_hi"] += t.get("cost_hi") or t.get("cost") or 0.0
+        x["cost_lo"] += t["cost_lo"] if t.get("cost_lo") is not None else (t.get("cost") or 0.0)
     return {"mark": MARK, "at": datetime.datetime.now().isoformat(timespec="seconds"), "prices": pr, "texts": texts,
             "totals": totals, "paths": [list(p) for p in PATHS]}
 
 
 def show(res: dict, one: bool) -> None:
     pr = res["prices"]
-    print("text_path.py  %s  (read-only)   vision %s a page (the corpus; %d text(s) priced from their own calls, the "
-          "dearest %s), translation %s a passage (%s)"
-          % (MARK, per_page(pr["vision_page"] or 0), len(pr.get("measured") or []), per_page(pr.get("vision_dear") or 0),
-             "$%.5f" % pr["passage"], pr["passage_from"]))
+    print("text_path.py  %s  (read-only)   vision %s a page (the corpus, its last 300 calls; %d text(s) priced from "
+          "their own calls, the median %s, the dearest %s), translation %s a passage (%s)"
+          % (MARK, per_page(pr["vision_page"] or 0), len(pr.get("measured") or []),
+             per_page(pr.get("vision_median") or 0) if pr.get("vision_median") else "-",
+             per_page(pr.get("vision_dear") or 0), "$%.5f" % pr["passage"], pr["passage_from"]))
     names = {k: label for k, label, _ in PATHS}
     cur = None
     for t in res["texts"]:
@@ -575,11 +602,13 @@ def show(res: dict, one: bool) -> None:
             print("  facts: " + json.dumps(t.get("facts"), ensure_ascii=False, sort_keys=True))
     c = sum(v["cost"] for v in res["totals"].values())
     hi = sum(v.get("cost_hi") or v["cost"] for v in res["totals"].values())
+    lo = sum(v["cost_lo"] if v.get("cost_lo") is not None else v["cost"] for v in res["totals"].values())
     th = sum(v["then"] for v in res["totals"].values())
-    print("\nVERDICT: %d text(s) charted: %s; about %s now%s, then about %s of translation"
+    ml = money_line({"cost": c, "cost_hi": hi, "cost_lo": lo})
+    print("\nVERDICT: %d text(s) charted: %s; %s, then about %s of translation"
           % (sum(v["texts"] for v in res["totals"].values()),
              ", ".join("%d %s" % (res["totals"][k]["texts"], names[k].lower()) for k, _, _ in PATHS if k in res["totals"]),
-             usd(c), (" (up to %s at the dearest text's price)" % usd(hi)) if hi > 1.05 * c else "", usd(th)))
+             ml or "about $0.0000 now", usd(th)))
 
 
 def page(res: dict) -> str:
@@ -606,9 +635,10 @@ def page(res: dict) -> str:
             "font-weight:600;word-break:break-all}.n{font-family:monospace;font-size:12px;color:#174ea6;margin-top:3px;"
             "word-break:break-all}.a{font-family:monospace;font-size:12px;color:#8a3b12;margin-top:3px;word-break:"
             "break-all}</style></head><body><h1>The path of every text</h1><p>Charted %s by text_path.py (%s): vision "
-            "%s a page at the corpus price (a text with its own vision calls is priced from them; the dearest so far "
-            "%s), translation %s a passage.</p>%s</body></html>"
+            "%s a page at the corpus price (a text with its own vision calls is priced from them; the median so far "
+            "%s, the dearest %s), translation %s a passage.</p>%s</body></html>"
             % (e(res["at"]), MARK, per_page(res["prices"]["vision_page"] or 0),
+               per_page(res["prices"].get("vision_median") or 0) if res["prices"].get("vision_median") else "-",
                per_page(res["prices"].get("vision_dear") or 0), "$%.5f" % res["prices"]["passage"], body))
 
 

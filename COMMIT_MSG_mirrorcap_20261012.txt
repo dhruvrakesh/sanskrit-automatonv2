@@ -1,0 +1,21 @@
+The mirror's retire of vectors no longer times out; --max-usd stops a run; the median price (MIRROR_CAP_2026_10_12); recorded (DOCS48_2026_10_12)
+
+docs/MIRROR_CAP_2026-10-12.md. After 408e11b: the mirror run that was to retire the withdrawn Bodhicaryavatara and
+the two retired Dhanur Veda copies stopped twice (13:57, and the scheduled 14:32) with "corpus_retire: canceling
+statement due to statement timeout": the Bodhicaryavatara's 824 vectors went in one call, each a new entry in the
+HNSW index. Their docs rows were retired on the site, their passages are still live.
+- scripts/patch_mirror_cap_2026_10_12.py:
+  corpus_sync.py: vectors are retired 25 to a call; a retire the database cancels for its timeout is sent again in
+    halves, down to one key (corpus_retire retires only live rows); any other error stops the run as before;
+  ocr_consensus.py: --max-usd checked the estimate only; a run now stops before a page would take it past, from
+    what usage_log says this text's vision calls have cost since the run began; the redo round too;
+  text_path.py: the median price of the texts measured ($0.0024) beside the corpus price (the last 300 calls,
+    $0.0100 after the Natyasastra's run); the estimate and the cap stay at the corpus price;
+  dashboard.py: /path shows the median price beside the corpus's.
+Tests: tests/test_mirror_cap_2026_10_12.py (11); the PATH patcher replay in tests/test_path_2026_10_12.py compares
+with this patch's backups.
+Docs: scripts/patch_docs48_2026_10_12.py (PLATFORM 51, RUNBOOK, EP 38); Hayashirsha's repair was in the live
+database already (docs/PATH_2026-10-12.md section 3 charted a backup that predated it).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

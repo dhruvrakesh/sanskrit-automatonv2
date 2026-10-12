@@ -1755,3 +1755,17 @@ The order matters: the desk's worker 1.2 before C10b.
 2. **The next full mirror run** (`python scripts\corpus_sync.py`, then `--apply`; not `--doc`) retires its
    rows on the site. Ask the Corpus here leaves it out at once.
 3. **`--restore`** undoes it; the next mirror run sends it back.
+
+
+## When the mirror says "corpus_retire: ... statement timeout" (DOCS48_2026_10_12)
+
+1. **Nothing is lost:** the call was rolled back whole, and the rows it was to retire are still live on the site.
+2. **After MIRROR_CAP_2026_10_12:** vectors are retired 25 to a call, and a timed-out call is sent again in halves.
+   Run the plan, then `--apply`: `python scripts\corpus_sync.py`, then `python scripts\corpus_sync.py --apply`.
+3. **Check** in the SQL editor that the text's live passages are 0.
+
+## --max-usd (DOCS48_2026_10_12)
+
+- `repair_text.py --repair --max-usd X` refuses a run whose estimate is above X, and stops a run before a page
+  would take it past X (what this run has spent, from usage_log). The spend cap (`set_budget.py`) still stops
+  everything.

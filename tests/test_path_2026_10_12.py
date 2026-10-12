@@ -356,7 +356,7 @@ class TheVisionLedger(unittest.TestCase):
         s = (SCRIPTS / "ocr_consensus.py").read_text(encoding="utf-8")
         self.assertIn("seeded = seed_failed(todo, led, last_read_page(vdir, doc))", s)
         self.assertIn("todo, gave = order_vision(todo, led, args.retry_refused)", s)
-        self.assertIn("n_ok, fails, stopped = run_vision(todo, vdir, doc, led, args.model, _budget)", s)
+        self.assertIn("n_ok, fails, stopped = run_vision(todo, vdir, doc, led, args.model, _budget", s)
         self.assertIn("write_failed(work, doc, led)", s)
 
 
@@ -519,7 +519,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_mirrorcap_*"))   # MIRROR_CAP_2026_10_12 came after
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn(b"data/reingest/\r\n# PATH_2026_10_12", (t / ".gitignore").read_bytes())
             self.assertIn(b"data/text_path.json\r\n", (t / ".gitignore").read_bytes(), "its line endings kept")
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)

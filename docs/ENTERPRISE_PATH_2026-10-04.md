@@ -668,3 +668,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | B2 | The spend: $45 cap, $32.41 recorded, $55.45 repriced | The user's decision |
 | VC1 | Vision's artefacts cleaned before ingest | Next |
 | C14 | Sources wanted on the site | Designed; not started |
+
+
+## Addendum 2026-10-12 (38) (DOCS48_2026_10_12)
+
+| # | Item | State |
+|---|---|---|
+| P1 | The path of every text (text_path.py, /path) | **Released** (408e11b); `/path` after a dashboard restart |
+| P3 | Withdraw a damaged text (reversible) | **Released**; the Bodhicaryavatara withdrawn on 12 Oct |
+| M1 | The mirror's retire of vectors (25 to a call, halved on a timeout) | Built and tested (MIRROR_CAP_2026_10_12) |
+| M2 | `--max-usd` stops a run before it passes | Built and tested (MIRROR_CAP_2026_10_12) |
+| T2 | The marked passages translated again, then judged again | Next; paid, capped, dry run first |
+| B2 | The spend | The user's decision |
+| VC1 | Vision's artefacts cleaned before ingest | Next |
+| C14 | Sources wanted on the site | Designed; not started |

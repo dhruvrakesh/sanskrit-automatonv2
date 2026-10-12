@@ -76,6 +76,8 @@ MAX_ROWS_PER_CALL = 1000         # server limit is 2000
 MAX_VEC_ROWS_PER_CALL = 25       # about 12 KB of text per vector; SYNC_SPLIT_2026_10_09: 150 (and 50)
                                  # timed out on 2026-10-09, each row an insert into the HNSW index
 MAX_KEYS_PER_RETIRE = 5000
+MAX_VEC_KEYS_PER_RETIRE = 25     # MIRROR_CAP_2026_10_12: a vector retired is a new entry in the HNSW index, as an
+                                 # insert is: the Bodhicaryavatara's 824 in one call timed out on 2026-10-12
 DEFAULT_BATCH_BYTES = 1_500_000  # JSON bytes per call, before gzip
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -802,10 +804,25 @@ class Run:
             return False
         st["retire"] += len(keys)
         if self.apply:
-            for i in range(0, len(keys), MAX_KEYS_PER_RETIRE):
-                res = self.sink.retire(table, group, keys[i:i + MAX_KEYS_PER_RETIRE], self.run_id) or {}
-                st["retired"] += int(res.get("retired", 0))
+            step = MAX_VEC_KEYS_PER_RETIRE if table == "vectors" else MAX_KEYS_PER_RETIRE
+            for i in range(0, len(keys), step):
+                st["retired"] += self._retire_keys(table, group, keys[i:i + step])
         return True
+
+    def _retire_keys(self, table: str, group: str, keys: list) -> int:
+        """MIRROR_CAP_2026_10_12: as _ingest: a call the database cancels for its statement timeout was rolled back
+        whole, and corpus_retire is idempotent (it retires only rows still live), so it is sent again as two
+        halves, down to one key. Any other error, and a one-key timeout, is raised as before."""
+        try:
+            res = self.sink.retire(table, group, keys, self.run_id) or {}
+            return int(res.get("retired", 0))
+        except SinkError as e:
+            if "statement timeout" not in str(e) or len(keys) <= 1:
+                raise
+            half = len(keys) // 2
+            self._p("    %s %s: the database timed out retiring %d rows; sending them as %d + %d"
+                    % (table, group, len(keys), half, len(keys) - half))
+            return self._retire_keys(table, group, keys[:half]) + self._retire_keys(table, group, keys[half:])
 
     def diff_group(self, g: Group, remote_manifest: dict, retire: bool = True):
         st = self.stats[g.table]

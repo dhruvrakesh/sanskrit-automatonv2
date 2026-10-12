@@ -2008,9 +2008,14 @@ def path_page():
             if not rows:
                 continue
             tt = tot.get(key) or {}
-            hi = tt.get("cost_hi") or 0
+            hi, lo = tt.get("cost_hi") or 0, tt.get("cost_lo")
+            side = []   # MIRROR_CAP_2026_10_12: the median text's price beside the corpus's
+            if tt.get("cost") and lo is not None and lo < 0.95 * tt["cost"]:
+                side.append("from %s at the median text's price" % money(lo))
+            if tt.get("cost") and hi > 1.05 * tt["cost"]:
+                side.append("up to %s at the dearest text's price" % money(hi))
             cost = ((" &middot; about %s now" % money(tt["cost"])) if tt.get("cost") else "") + (
-                (" (up to %s at the dearest text's price)" % money(hi)) if tt.get("cost") and hi > 1.05 * tt["cost"] else "") + (
+                (" (%s)" % "; ".join(side)) if side else "") + (
                 (" &middot; then %s to translate" % money(tt["then"])) if tt.get("then") else "")
             chips += '<a class="pchip" href="#p-%s">%s <b>%d</b></a>' % (e(key, quote=True), e(label), len(rows))
             trs = ""
@@ -2025,10 +2030,12 @@ def path_page():
                        '<table class="srct"><tbody>%s</tbody></table></div>' % (e(key, quote=True), e(label), len(rows),
                                                                               e(desc), cost, trs))
         pr = res.get("prices") or {}
-        head = ('Charted %s: vision %s a page at the corpus price (%d text(s) priced from their own calls; the dearest '
-                'so far %s a page), translation %s a passage, measured in usage_log.'
+        head = ('Charted %s: vision %s a page at the corpus price, its last 300 calls (%d text(s) priced from their own '
+                'calls; the median %s, the dearest %s a page), translation %s a passage, measured in usage_log.'
                 % (e(str(res.get("at", "?")).replace("T", " ")), "$%.4f" % (pr.get("vision_page") or 0),
-                   len(pr.get("measured") or []), "$%.4f" % (pr.get("vision_dear") or 0), "$%.5f" % (pr.get("passage") or 0)))
+                   len(pr.get("measured") or []),
+                   ("$%.4f" % pr["vision_median"]) if pr.get("vision_median") else "-",   # MIRROR_CAP_2026_10_12
+                   "$%.4f" % (pr.get("vision_dear") or 0), "$%.5f" % (pr.get("passage") or 0)))
     else:
         head = "Not charted yet: press Chart the path again, or run python scripts\\text_path.py (free, read-only)."
     body = ('<div class="srcpage"><p class="rpintro" style="margin:0">Every text has one way forward: use the repair '
