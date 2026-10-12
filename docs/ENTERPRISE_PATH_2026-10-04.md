@@ -628,3 +628,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | T1 | The translation judged against the critical text (judge_sample.py's judge, the witness as the source) | Next; paid, capped, dry-run first |
 | R3 | The in-place re-ingest; taking an offered page | Next |
 | C14 | Sources wanted on the site | Designed; with the benchmarks as a fourth input |
+
+
+## Addendum 2026-10-11 (35) (DOCS45_2026_10_11)
+
+| # | Item | State |
+|---|---|---|
+| B1 | The benchmark | **Released** (26d0806) |
+| Q1 | The Devanagari measured (noise, plausibility); the merge refuses Tesseract's garbage; a noisy witness refused | Built and tested (QUALITY_2026_10_11) |
+| O4 | Tantric Texts and Karan merged again and re-ingested; Hayashirsha, the Tantric Texts and Karan translated | The user's |
+| VC1 | Vision's artefacts cleaned before ingest (the Rgveda's "V", Hayashirsha's sup tags) | Next |
+| T1 | The translation judged on a sample: judge_sample.py (built in August; mt_reviews holds no review of these texts), then against a clean e-text; a person's spot check | Next; the user's first runs |
+| R3 | The in-place re-ingest | Next |
+| C14 | Sources wanted on the site | Designed; not started |

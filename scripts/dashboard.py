@@ -1536,12 +1536,14 @@ function _rpBench(doc, d){
   var f = function(v, k){ return v == null ? '-' : (+v).toFixed(k == null ? 2 : k); };
   var h = '<div class="srcsub">Benchmark, ' + _rpEsc(String(b.at || '').replace('T', ' ').slice(0, 16))
         + (b.reference ? ', against ' + _rpEsc(b.reference) : '') + '</div><div class="benchwrap"><table class="bench"><thead><tr>'
-        + '<th>Reading</th><th>Pages</th><th>Letters</th><th>Misread</th><th>Pages hit</th><th>Level</th><th>F1 with ours</th>'
+        + '<th>Reading</th><th>Pages</th><th>Letters</th><th>Misread</th><th>Pages hit</th><th>Level</th><th>Noise</th>'
+        + '<th>Plausible</th><th>F1 with ours</th>'   /* QUALITY_2026_10_11: noise in the Devanagari, plausibility */
         + '<th>F1 with the critical text</th></tr></thead><tbody>';
   (b.readings || []).forEach(function(x){
     h += '<tr><td>' + _rpEsc(x.label) + '</td><td>' + x.pages + '</td><td>' + x.letters + '</td><td>' + f(x.misread_letters_pct)
        + '%</td><td>' + f(x.pages_misread_pct, 0) + '%</td><td><span class="lv" data-level="' + _rpEsc(x.level || '') + '">'
-       + _rpEsc(x.level || '-') + '</span></td><td>' + f(x.f1_ours) + '</td><td>' + f(x.f1_ref) + '</td></tr>';
+       + _rpEsc(x.level || '-') + '</span></td><td>' + (x.noise_pct == null ? '-' : f(x.noise_pct, 1) + '%') + '</td><td>'
+       + (x.plausible_pct == null ? '-' : f(x.plausible_pct, 1) + '%') + '</td><td>' + f(x.f1_ours) + '</td><td>' + f(x.f1_ref) + '</td></tr>';
   });
   h += '</tbody></table></div>';
   (b.lines || []).forEach(function(l){ h += '<p class="benchline">' + _rpEsc(l) + '</p>'; });
@@ -1863,7 +1865,8 @@ def benchmarks_page():
     def red(r, label):
         return next((x for x in r.get("readings") or [] if x.get("label") == label), None)
 
-    pct = lambda x: ("%.2f%%" % float(x.get("misread_letters_pct") or 0)) if x else "-"
+    pct = lambda x: (("%.2f%%" % float(x.get("misread_letters_pct") or 0)) + (   # QUALITY_2026_10_11: and the noise
+        " / %.1f%%" % float(x["noise_pct"]) if x.get("noise_pct") is not None else "")) if x else "-"
     trs, improved = "", 0
     for r in rows:
         te, ours = red(r, "tesseract"), (red(r, "consensus") or red(r, "database"))
@@ -1896,7 +1899,7 @@ def benchmarks_page():
             'onclick="repairStep(this.dataset.doc,&#39;benchmark_all&#39;,this)">Benchmark every text again (free, a minute '
             'or two)</button><div class="rpout"></div></div>'
             '<div class="srcwrap" style="margin-top:12px"><table class="srct"><thead><tr><th>Text</th><th>Tesseract '
-            'misreads</th><th>Ours misreads</th><th>archive.org OCR</th><th>Critical e-text</th><th>English before the '
+            'misreads / noise</th><th>Ours misreads / noise</th><th>archive.org OCR</th><th>Critical e-text</th><th>English before the '
             'repair</th><th>Now</th></tr></thead><tbody>%s</tbody></table></div>%s</div>'
             % (len(rows), improved, trs, "" if rows else '<p class="srcnone">Nothing benchmarked yet. Press Benchmark '
                                                            'every text again.</p>'))

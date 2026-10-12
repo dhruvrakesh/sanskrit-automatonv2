@@ -637,8 +637,10 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                # JUDGE_DESK_2026_10_11 came after, then ETEXT_WITNESS_2026_10_11: the first later backup is this patch's result
-                later = sorted(SCRIPTS.glob(f + ".bak_judgedesk_*")) or sorted(SCRIPTS.glob(f + ".bak_etextwitness_*"))
+                # the patches that came after, in order: the first later backup of a file is this patch's result
+                later = []
+                for tag in ("judgedesk", "etextwitness", "benchmark", "quality"):
+                    later = later or sorted(SCRIPTS.glob(f + ".bak_%s_*" % tag))
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)

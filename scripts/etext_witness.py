@@ -47,7 +47,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import repair_text as rt  # noqa: E402  (run, writers_running, verdicts, PY, SCRIPTS: one way of doing each)
 
 UA = {"User-Agent": "SanskritAutomaton-EtextWitness/1.0 (scholarly, non-commercial)"}
-HOSTS = ["gretil.sub.uni-goettingen.de", "sanskritdocuments.org", "archive.org", "raw.githubusercontent.com"] + [
+HOSTS = ["gretil.sub.uni-goettingen.de", "sanskritdocuments.org", "archive.org", "raw.githubusercontent.com",
+         "dsbcproject.org"] + [   # QUALITY_2026_10_11: the Digital Sanskrit Buddhist Canon
     h.strip().lower() for h in (os.environ.get("SA_ETEXT_HOSTS") or "").split(",") if h.strip()]
 MAX_BYTES = 40_000_000
 K = 6                     # n-gram length on the consonant skeleton
@@ -495,6 +496,7 @@ def measure(verses: list, scan: dict) -> dict:
                        "refs": ("%s-%s" % (refs[0], refs[-1]) if len(refs) > 1 else (refs[0] if refs else "")),
                        "text": "\n".join(verses[i]["text"] for i in range(v0, v1 + 1))[:4000], "note": ""})
     return {"pages": res, "scan_pages": len(pages_all), "readable": len(readable_pages), "matched": len(matched),
+            "matched_readable": len([p for p in readable_pages if res[p]["status"] == "match"]),   # QUALITY_2026_10_11
             "coverage": round(cov, 3), "order": round(order, 3), "span": span, "verses": n_v, "offers": offers,
             "verses_per_page": round(vpp, 2)}
 
@@ -510,18 +512,132 @@ def judged_level(doc: str) -> str:
 def opinion(m, doc: str) -> str:
     if m is None:
         return "the scan is not in the database: nothing to measure; the witness can still be its own text"
-    if m["readable"] < 3:
-        return ("the scan has %d readable page(s) of %d: too few to tell whether it is the same text; the witness "
-                "can stand in for it" % (m["readable"], m["scan_pages"]))
+    mr, rd, n = m.get("matched_readable", m["matched"]), m["readable"], m["scan_pages"]
+    if rd < max(3, 0.1 * n):
+        # QUALITY_2026_10_11: a scan this damaged is measured by all its pages; the witness still finds a damaged
+        # page when enough of its letters survive (on 11 Oct the Bodhicaryavatara read 3 of 253 pages, and
+        # "159 of 3 readable pages" was printed)
+        share = m["matched"] / float(n) if n else 0.0
+        if m["matched"] >= 10 and share >= 0.5 and m["order"] >= 0.8:
+            return ("the same work, in the same order, by the scan's damaged pages: the scan reads %d of its %d pages, and "
+                    "the witness still finds %d of them (%.0f%%, in order %.0f%%)" % (rd, n, m["matched"], 100 * share,
+                                                                                   100 * m["order"]))
+        if m["matched"] >= 10 and share >= 0.2:
+            return ("probably the same work, in part: the scan reads %d of its %d pages, and the witness finds %d of them "
+                    "(%.0f%%, in order %.0f%%)" % (rd, n, m["matched"], 100 * share, 100 * m["order"]))
+        return ("the scan reads %d of its %d pages: too few to tell whether it is the same text (the witness finds %d); "
+                "the witness can stand in for it" % (rd, n, m["matched"]))
     if m["coverage"] >= 0.6 and m["order"] >= 0.8:
         return "the same work, in the same order: it reads %d of the scan's %d readable pages (%.0f%%, in order %.0f%%)" % (
-            m["matched"], m["readable"], 100 * m["coverage"], 100 * m["order"])
+            mr, rd, 100 * m["coverage"], 100 * m["order"])
     if m["coverage"] >= 0.25:
         return ("the same work in part, or another recension: it reads %d of %d readable pages (%.0f%%, in order %.0f%%)"
-                % (m["matched"], m["readable"], 100 * m["coverage"], 100 * m["order"]))
+                % (mr, rd, 100 * m["coverage"], 100 * m["order"]))
     lv = judged_level(doc)
     return ("not the same text as the scan, or the scan is too garbled to tell (%d of %d readable pages read%s)"
-            % (m["matched"], m["readable"], "; its debris is judged %s" % lv if lv else ""))
+            % (mr, rd, "; its debris is judged %s" % lv if lv else ""))
+
+
+# ---- the Devanagari judged (QUALITY_2026_10_11) ---------------------------------------------------
+# A reading can be free of Latin letters and still be noise: archive.org's OCR of the 1960 Bodhicaryavatara
+# has no Latin, and noise in 9.4% of its words (malformed 3.2%, stray marks 5.5%). Three measures; the first two need
+# no reference text:
+#   glued      a Latin letter or a stray mark stuck to Devanagari in one word: the vision model's "V" for
+#              a printed pratika mark (Rgveda vol. ii: 8,602 words on 230 of its 446 vision pages), OCR's "^", "~", "+"
+#   malformed  a Devanagari word that cannot be written so: it starts with a vowel sign, an anusvara or a
+#              virama, or has two vowel signs, a vowel sign after a virama or after an independent vowel;
+#              and the marks that are no Sanskrit (^ ~ + = < > ...) standing alone
+#   plausible  the share of its letter trigrams (within words) that occur twice or more in a clean Sanskrit
+#              text: the BORI Mahabharata, Adiparvan, from GRETIL (data/raw/MBh01_*, SA_QUALITY_REF names
+#              another). It depends on the genre (an agama reads 87-89%, the Shatapatha 93%), so it compares
+#              readings of one text; it is no grade by itself.
+# Critical apparatus ("-B, C."), Vedic accents, numerals and dandas are not counted as noise.
+QA_ACCENTS = re.compile("[\u0951-\u0954\u1cd0-\u1cff\ua8e0-\ua8ff]")
+QA_STRIP = re.compile("[\u0964\u0965\u0966-\u096f\u0970\u0971.,;:!?()\\[\\]{}'\"\u2018\u2019\u201c\u201d\u2013\u2014\\-_*|/\\\\0-9\u00b7\u2022]")
+QA_START = re.compile("^[\u0900-\u0903\u093a\u093b\u093c\u093e-\u094d\u094e\u094f\u0955-\u0957\u0962\u0963]")
+QA_MATRA = "[\u093e-\u094c\u0962\u0963]"
+QA_BAD = re.compile(QA_MATRA + QA_MATRA + "|\u094d" + QA_MATRA + "|\u094d\u094d|[\u0905-\u0914]" + QA_MATRA)
+QA_GLUED = re.compile("[\u0900-\u097f][A-Za-z^~`$#@%&=+<>]|[A-Za-z^~`$#@%&=+<>][\u0900-\u097f]")
+QA_GLUE = re.compile(r"[A-Za-z^~`$#@%&=+<>]+")
+QA_JUNKSYM = re.compile(r"^[\^~`$#@%&=+<>]+$")
+QA_WORD = re.compile("[\u0900-\u0963\u0971-\u097f]+")
+QA_REF = os.environ.get("SA_QUALITY_REF") or "data/raw/MBh01_*.jsonl"
+# Measured on 11 Oct: the GRETIL Adiparvan 0.0% of its words; vision OCR of a clean print 0.06-0.86% (the Shatapatha,
+# Karan, the Markandeya, the Mallapurana, Sandilya, Hayashirsha, the Tantric Texts); Tesseract 2.7-7.4%; archive.org's
+# OCR of the 1960 Bodhicaryavatara 9.4%. A witness no cleaner than Tesseract adds nothing to the scan.
+NOISY, NOISE_WARN = 3.0, 1.5      # % of words: a damaged OCR text (Tesseract's grade) / some noise (above vision's)
+_REF = []
+
+
+def _trigrams(text: str) -> list:
+    out = []
+    for w in QA_WORD.findall(QA_ACCENTS.sub("", text or "")):
+        w = " " + w + " "
+        out.extend(w[i:i + 3] for i in range(len(w) - 2))
+    return out
+
+
+def reference_trigrams() -> set:
+    """The letter trigrams seen twice or more in the clean reference text (read once); empty when it is not there."""
+    if _REF:
+        return _REF[0]
+    import glob as _glob
+    counts = {}
+    for p in sorted(_glob.glob(QA_REF)):
+        try:
+            with open(p, encoding="utf-8", errors="replace") as fh:
+                for line in fh:
+                    if line.strip():
+                        try:
+                            for g in _trigrams(json.loads(line).get("text") or ""):
+                                counts[g] = counts.get(g, 0) + 1
+                        except ValueError:
+                            continue
+        except OSError:
+            continue
+    _REF.append({g for g, c in counts.items() if c >= 2})
+    return _REF[0]
+
+
+def quality(texts, plausible: bool = True) -> dict:
+    """The noise in the Devanagari of a reading (see above): {words, glued_pct, malformed_pct, symbols_pct,
+    noise_pct, plausible_pct, glued_top}. Latin-only words are the judge's (repair_text.judge), not counted here."""
+    words = glued = malformed = junk = tg = hit = 0
+    ref = reference_trigrams() if plausible else set()
+    top = {}
+    for t in texts:
+        for tok in (t or "").split():
+            raw = QA_ACCENTS.sub("", tok)
+            if QA_JUNKSYM.match(raw):
+                words += 1; junk += 1
+                continue
+            if not DEV_LETTER.search(raw):
+                continue
+            words += 1
+            if QA_GLUED.search(raw):
+                glued += 1
+                for g in QA_GLUE.findall(raw):
+                    top[g] = top.get(g, 0) + 1
+                continue
+            core = QA_STRIP.sub("", raw)
+            if core and (QA_START.search(core) or QA_BAD.search(core)):
+                malformed += 1
+        if ref:
+            for g in _trigrams(t):
+                tg += 1
+                hit += g in ref
+    pct = lambda x: round(100.0 * x / words, 2) if words else 0.0
+    return {"words": words, "glued_pct": pct(glued), "malformed_pct": pct(malformed), "symbols_pct": pct(junk),
+            "noise_pct": pct(glued + malformed + junk), "plausible_pct": round(100.0 * hit / tg, 1) if (ref and tg) else None,
+            "glued_top": [g for g, _ in sorted(top.items(), key=lambda x: -x[1])[:3]]}
+
+
+def quality_line(label: str, q) -> str:
+    if not q:
+        return "%s: -" % label
+    return ("%s: noise in %.1f%% of its words (glued %.1f, malformed %.1f, stray marks %.1f)%s"
+            % (label, q["noise_pct"], q["glued_pct"], q["malformed_pct"], q["symbols_pct"],
+               (", plausible %.1f%%" % q["plausible_pct"]) if q.get("plausible_pct") is not None else ""))
 
 
 # ---- the files -------------------------------------------------------------------------------------
@@ -705,9 +821,14 @@ def preview_or_write(a) -> int:
         return 1
     scan = load_scan(a.db, doc)
     m = measure(verses, scan) if scan else None
+    wq = quality(v["text"] for v in verses)                      # QUALITY_2026_10_11: the witness's own Devanagari
+    info["quality"] = wq
+    sq = quality(scan.values()) if scan else None
+    print("  quality: " + quality_line("the witness", wq) + ((" | " + quality_line("the scan", sq)) if sq else ""))
     if m:
-        print("  against the scan (%s): %d pages, %d readable; the witness reads %d of them (%.0f%%), in the scan's "
-              "order %.0f%%" % (a.db, m["scan_pages"], m["readable"], m["matched"], 100 * m["coverage"], 100 * m["order"]))
+        print("  against the scan (%s): %d pages, %d readable; the witness finds %d of the readable ones (%.0f%%) and %d "
+              "pages in all, in the scan's order %.0f%%" % (a.db, m["scan_pages"], m["readable"], m.get("matched_readable", 0),
+                                                         100 * m["coverage"], m["matched"], 100 * m["order"]))
         if m["span"]:
             print("  the scan's pages run over the witness's verses %d-%d of %d" % (m["span"][0] + 1, m["span"][1] + 1, len(verses)))
         got = [o for o in m["offers"] if o.get("text")]
@@ -729,16 +850,27 @@ def preview_or_write(a) -> int:
             % (100 * lat), q + " --scheme hk   (or iast, velthuis, itrans; or clean the file)")
         return 1
     weak = bool(m) and m["readable"] >= 10 and m["coverage"] < 0.10
+    # QUALITY_2026_10_11: an OCR text as damaged as the scan does not repair it; it trades the scan's Latin debris
+    # for its own Devanagari debris
+    noisy = wq["noise_pct"] > NOISY
+    if noisy:
+        print("  the witness is itself a damaged OCR text: %.1f%% of its words are malformed or carry stray marks "
+              "(vision OCR of a clean print has under 1.5%%; a clean e-text none)" % wq["noise_pct"])
+    elif wq["noise_pct"] > NOISE_WARN:
+        print("  the witness has some noise of its own (%.1f%% of its words): read its pages beside the scan" % wq["noise_pct"])
     if not a.write:
-        if weak:
+        if weak or noisy:
             print("  (--write --force makes it a witness all the same)")
-            say("%s: %s; it should not be made a witness of this text" % (src.name, op), "")
+            say("%s: %s; it should not be made a witness of this text%s" % (
+                src.name, op, ": its own text is damaged (noise %.1f%%)" % wq["noise_pct"] if noisy else ""), "",
+                [q + " --page N   (the witness's reading of one page of the scan)"])
             return 0
         say("%s reads as %d verses in %d pages: %s" % (src.name, len(verses), len(pages), op), q + " --write",
             [q + " --page N   (the witness's reading of one page of the scan)"])
         return 0
-    if weak and not a.force:
-        say("refused: %s; --force makes it a witness all the same" % op, "")
+    if (weak or noisy) and not a.force:
+        say("refused: %s; --force makes it a witness all the same" % (
+            op if weak else "the witness is itself a damaged OCR text (noise in %.1f%% of its words)" % wq["noise_pct"]), "")
         return 1
     return write(a, doc, wcode, parsed, pages, verses, m, src, info, site, engine, op)
 
@@ -773,7 +905,8 @@ def write(a, doc, wcode, parsed, pages, verses, m, src, info, site, engine, op) 
     meta = {"witness": wcode, "doc": doc, "site": site, "engine": engine, "mode": parsed["mode"],
             "scheme": parsed["scheme"], "file": str(src), "url": a.url or side.get("url") or side.get("details") or "",
             "sha256": info["sha256"], "bytes": info["bytes"], "pages": len(recs), "verses": len(verses),
-            "category": scan_facts.get("category"), "stats": parsed["stats"], "opinion": op, "at": _now(), "mark": MARK}
+            "category": scan_facts.get("category"), "stats": parsed["stats"], "opinion": op, "at": _now(), "mark": MARK,
+            "quality": info.get("quality")}   # QUALITY_2026_10_11
     (out / "witness.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
     align = {"doc": doc, "witness": wcode, "at": meta["at"], "mark": MARK, "k": K, "opinion": op}
     if m:
@@ -785,6 +918,7 @@ def write(a, doc, wcode, parsed, pages, verses, m, src, info, site, engine, op) 
             "url": meta["url"], "sha256": info["sha256"], "pages": len(recs), "verses": len(verses),
             "coverage": m["coverage"] if m else None, "order": m["order"] if m else None,
             "offered": len([o for o in (m or {}).get("offers", []) if o.get("text")]), "opinion": op,
+            "noise_pct": (info.get("quality") or {}).get("noise_pct"),   # QUALITY_2026_10_11
             "at": meta["at"], "mark": MARK}
     _append(Path(a.witnesses), line)
     # BENCHMARK_2026_10_11: always. The witness is not in the database (refused above), so a "released" of its

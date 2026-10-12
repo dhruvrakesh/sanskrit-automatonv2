@@ -1692,3 +1692,24 @@ The order matters: the desk's worker 1.2 before C10b.
    (the benchmark's ALSO line names it), then benchmark again. The file stays in `sources\<doc>\`
    and is not ingested.
 5. **Never paste a command with a `<placeholder>` in it.** Fill it in first.
+
+
+## Are we sure of a text? (DOCS45_2026_10_11)
+
+1. **The figures:** `python scripts\benchmark_sources.py --all` (free, read-only). Read the noise
+   beside the misread letters:
+   - vision OCR of a clean print is under 1%;
+   - Tesseract is 2.7-7.4%;
+   - over 3% is a damaged text.
+2. **A repaired text merged before QUALITY_2026_10_11, with no English yet:**
+   - merge again: `python scripts\merge_ocr_sources.py --doc tantric_texts_series_edited_by_arthur_av`,
+     then the same with `--apply`;
+   - use the repaired text through the dashboard (its translate lock): the repair page's button when
+     Assess offers it, or `Invoke-RestMethod -Method Post -Uri http://127.0.0.1:5057/api/repair` with
+     the body `{"doc": "...", "step": "use"}` (by hand, `--use-repaired` refuses while the dashboard
+     runs another job);
+   - a text with English waits for R3.
+3. **A witness** with noise over 3% is refused. It is no cleaner than Tesseract; look for an e-text.
+4. **The translation's QA figure is structural.** The meaning is read by `scripts\judge_sample.py`
+   (an LLM judge of fidelity and fluency on a sample, into mt_reviews; a dry run first, `--yes` to
+   call it, capped by `--limit`), and by a person's spot check of about 20 passages.

@@ -41,6 +41,11 @@ from pathlib import Path
 MARK = "SOURCE_DESK_2026_10_11"
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:   # QUALITY_2026_10_11: the AI judge's key is in .env, as ocr_vision.py's ("AI: GEMINI_API_KEY is not set" on 11 Oct)
+    from env_loader import load_env
+    load_env()
+except Exception:
+    pass
 UA = {"User-Agent": "SanskritAutomaton-SourceDesk/1.0 (scholarly, non-commercial)"}
 BASE = "https://archive.org"
 WISDOMLIB_ARCHIVE = Path(os.environ.get("SA_WISDOMLIB_ARCHIVE") or r"D:\wisdomlib\wisdomlib_archive")
@@ -224,6 +229,7 @@ def links(words: list) -> list:
     return [
         {"name": "GRETIL (Unicode e-texts)", "url": "https://www.google.com/search?q=" + e("site:gretil.sub.uni-goettingen.de " + q)},
         {"name": "sanskritdocuments.org", "url": "https://www.google.com/search?q=" + e("site:sanskritdocuments.org " + q)},
+        {"name": "Digital Sanskrit Buddhist Canon", "url": "https://www.google.com/search?q=" + e("site:dsbcproject.org " + q)},
         {"name": "wisdomlib.org", "url": "https://www.wisdomlib.org/index.php?type=search&query=" + e(q)},
         {"name": "archive.org", "url": BASE + "/search?query=" + e(q) + "&sin=TXT"},
     ]
@@ -380,7 +386,12 @@ def fetch(a) -> int:
     else:
         if not info.get("txt_url"):
             print("VERDICT: %s has no OCR text; try --kind pdf" % ident); print("NEXT: "); return 1
-        sample = _http(info["txt_url"], timeout=60, rng=PURITY_BYTES).decode("utf-8", "replace")
+        try:   # QUALITY_2026_10_11: archive.org answered 500 for the Natyasastra's OCR text on 11 Oct (a traceback)
+            sample = _http(info["txt_url"], timeout=60, rng=PURITY_BYTES).decode("utf-8", "replace")
+        except Exception as e:
+            print("VERDICT: archive.org did not give %s's OCR text (%s): %s" % (ident, str(e)[:120], info["txt_url"]))
+            print("NEXT: python scripts\\source_desk.py --doc %s --fetch %s --kind pdf   (or try again later)" % (a.doc, ident))
+            return 1
         pur = asf.dev_ratio(sample)
         if pur < 0.85 and not a.force:
             print("VERDICT: refused: its OCR text is %.0f%% Devanagari (under 85%%); it would pollute the corpus. "
@@ -389,7 +400,12 @@ def fetch(a) -> int:
         name, url = "%s_djvu.txt" % ident, info["txt_url"]
     target = dest / name
     print("fetching %s (%s MB) ..." % (url, info.get("pdf_mb") if a.kind == "pdf" else "?"), flush=True)
-    data = _http(url, timeout=600)
+    try:   # QUALITY_2026_10_11
+        data = _http(url, timeout=600)
+    except Exception as e:
+        print("VERDICT: the download of %s failed (%s); nothing was saved" % (url, str(e)[:160]))
+        print("NEXT: python scripts\\source_desk.py --doc %s --fetch %s --kind %s   (try again later)" % (a.doc, ident, a.kind))
+        return 1
     tmp = target.with_name(target.name + ".part"); tmp.write_bytes(data); os.replace(tmp, target)
     side = {"doc": a.doc, "identifier": ident, "kind": a.kind, "url": url, "details": BASE + "/details/" + ident,
             "title": info.get("title"), "year": info.get("year"), "language": info.get("language"),

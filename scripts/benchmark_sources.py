@@ -140,7 +140,30 @@ def db_reading(db: Path, doc: str, immutable: bool = False):
         j = rt.judge(translated, Path("/nonexistent"), doc, max_pages=0)
         facts["translated_misread_pct"] = j["misread_pct"]          # of the translated passages
         facts["translated_letters_misread_pct"] = j["misread_letters_pct"]
+        # QUALITY_2026_10_11: and the passages translated whose Devanagari is noise (10% of their words or more)
+        nz = sum(1 for _pg, t, _k, _h, _q in translated if ew.quality([t], plausible=False)["noise_pct"] >= 10.0)
+        facts["translated_noise_pct"] = round(100.0 * nz / len(translated), 1)
     return {p: "\n".join(v) for p, v in pages.items()}, facts
+
+
+def page_engines(folder: Path, doc: str) -> dict:
+    """QUALITY_2026_10_11: {engine: pages} of a folder of page JSONL (the repair's: vision, tesseract-fallback, blank)."""
+    out = {}
+    if not folder.is_dir():
+        return out
+    rx = rt.page_rx(doc, "jsonl")
+    for e in os.scandir(folder):
+        if rx.match(e.name):
+            try:
+                with open(e.path, encoding="utf-8", errors="replace") as fh:
+                    line = next((x for x in fh if x.strip()), "")
+                eng = (json.loads(line).get("engine") or "?") if line else "?"
+            except (OSError, ValueError):
+                eng = "?"
+            key = "tesseract-fallback" if "fallback" in eng else ("blank" if eng == "blank" else (
+                "vision" if "vision" in eng else eng))
+            out[key] = out.get(key, 0) + 1
+    return out
 
 
 def oldest_backup(backup_dir: Path, doc: str):
@@ -173,10 +196,13 @@ def describe(label: str, kind: str, pages: dict, doc: str) -> dict:
     dev = sum(len(ew.DEV_LETTER.findall(t)) for t in pages.values())
     lat = sum(len(ew.ASCII_LETTER.findall(t)) for t in pages.values())
     j = rt.judge(rows, Path("/nonexistent"), doc, max_pages=0) if rows else {}
+    q = ew.quality(pages.values())   # QUALITY_2026_10_11: the Devanagari itself, not only the Latin in it
     return {"label": label, "kind": kind, "pages": len(pages), "letters": dev,
             "latin_pct": round(100.0 * lat / (lat + dev), 2) if lat + dev else 0.0,
             "misread_letters_pct": j.get("misread_letters_pct", 0.0), "pages_misread_pct": j.get("misread_pct", 0.0),
-            "level": j.get("level") if rows else None, "misread_top": (j.get("misread_top") or [])[:6]}
+            "level": j.get("level") if rows else None, "misread_top": (j.get("misread_top") or [])[:6],
+            "noise_pct": q["noise_pct"], "glued_pct": q["glued_pct"], "malformed_pct": q["malformed_pct"],
+            "symbols_pct": q["symbols_pct"], "plausible_pct": q["plausible_pct"], "glued_top": q["glued_top"]}
 
 
 def witness_readings(doc: str, wfile: Path, wdir: Path) -> list:
@@ -287,7 +313,29 @@ def benchmark(a, doc: str) -> dict:
             d["ref_pages"] = len(v)
         res["readings"].append(d)
     res["translations"] = {"now": now, "before": before}
+    res["merged_engines"] = page_engines(merged, doc)   # QUALITY_2026_10_11
     return opine(res, doc, a)
+
+
+def _p(x, k, fmt="%.1f%%"):
+    return (fmt % x[k]) if x and x.get(k) is not None else "-"
+
+
+def compare(a: dict, b: dict):
+    """QUALITY_2026_10_11: which of two readings of the same pages is the less damaged, by the Latin misread, the noise
+    in the Devanagari and the plausibility; -> (score > 0 when a is, [the reasons])."""
+    score, why = 0, []
+    for k, better, margin, name in (("misread_letters_pct", -1, 0.3, "Latin misread"), ("noise_pct", -1, 1.0, "noise in the "
+                                    "Devanagari"), ("plausible_pct", 1, 1.0, "plausible")):
+        x, y = a.get(k), b.get(k)
+        if x is None or y is None:
+            continue
+        d = (x - y) * better
+        if d > margin:
+            score += 1; why.append("%s %.1f%% against %.1f%%" % (name, x, y))
+        elif d < -margin:
+            score -= 1; why.append("%s %.1f%% against %.1f%%" % (name, x, y))
+    return score, why
 
 
 def _r(res, label):
@@ -302,16 +350,21 @@ def opine(res: dict, doc: str, a) -> dict:
         t, o = te["misread_letters_pct"], ours["misread_letters_pct"]
         cut = (100.0 * (t - o) / t) if t else 0.0
         more = (100.0 * (ours["letters"] - te["letters"]) / te["letters"]) if te["letters"] else 0.0
-        if ours["label"] != "consensus":
+        nz = "; noise in the Devanagari %s against Tesseract's %s" % (_p(ours, "noise_pct"), _p(te, "noise_pct"))
+        if ours["label"] != "consensus" and o < 0.5 * t and (ours.get("noise_pct") or 0) <= (te.get("noise_pct") or 0):
+            # QUALITY_2026_10_11: a text ingested from vision earlier is no unrepaired text
+            L.append("OCR: the text in the database is already a better reading than Tesseract's (it was ingested from "
+                     "vision): misread letters %.2f%% against %.2f%%%s." % (o, t, nz))
+        elif ours["label"] != "consensus":
             L.append("OCR: not repaired: the text in the database misreads %.2f%% of the letters (Tesseract's pages %.2f%%, "
-                     "%.0f%% of them damaged)." % (o, t, te["pages_misread_pct"]))
+                     "%.0f%% of them damaged)%s." % (o, t, te["pages_misread_pct"], nz))
         elif t >= 0.3 and o < t:
             L.append("OCR: Tesseract misread %.2f%% of the letters (%.0f%% of its pages damaged); the repair %.2f%% (%.0f%% "
-                     "of pages): it removed %.0f%% of the misreading%s." % (
+                     "of pages): it removed %.0f%% of the misreading%s%s." % (
                          t, te["pages_misread_pct"], o, ours["pages_misread_pct"], cut,
-                         ("; it reads %+.0f%% Devanagari letters" % more) if abs(more) >= 3 else ""))
+                         ("; it reads %+.0f%% Devanagari letters" % more) if abs(more) >= 3 else "", nz))
         else:
-            L.append("OCR: Tesseract misread %.2f%% of the letters, the repair %.2f%%: little to gain here." % (t, o))
+            L.append("OCR: Tesseract misread %.2f%% of the letters, the repair %.2f%%%s: little to gain here." % (t, o, nz))
     arch = [x for x in res["readings"] if x["kind"] == "archive-ocr"]
     for x in arch:
         if not ours:
@@ -320,11 +373,25 @@ def opine(res: dict, doc: str, a) -> dict:
             d = x["f1_ref"] - ours["f1_ref"]
             how = "F1 with the critical text %.2f, ours %.2f" % (x["f1_ref"], ours["f1_ref"])
         else:
-            d = ours["misread_letters_pct"] - x["misread_letters_pct"]
-            d = d / 10.0 if abs(d) >= 0.1 else 0.0     # a tenth of a point of letters is level
-            how = "misread letters %.2f%%, ours %.2f%%" % (x["misread_letters_pct"], ours["misread_letters_pct"])
-        word = ("archive.org's reading is the better one here: make it a witness" if d > 0.02 else
-                ("ours is the better one" if d < -0.02 else "the two are level"))
+            # QUALITY_2026_10_11: by the Latin misread alone, archive.org's 1960 Bodhicaryavatara (no Latin, noise in 9.4%
+            # of its words) was called the better reading; the Devanagari counts too
+            sc, why = compare(x, ours)
+            d = 0.03 if sc > 0 else (-0.03 if sc < 0 else 0.0)
+            how = "; ".join(why) or "misread letters %.2f%%, ours %.2f%%" % (x["misread_letters_pct"], ours["misread_letters_pct"])
+            how = "archive.org's " + how if why else how
+        if d > 0.02 and (x.get("noise_pct") or 0) <= ew.NOISE_WARN:
+            word = "archive.org's reading is the better one here: make it a witness"
+        elif d > 0.02:
+            word = ("archive.org's reading is the less damaged, but its own Devanagari is noise in %.1f%% of its words: "
+                    "neither is clean; look for an e-text or OCR a better scan with vision" % x["noise_pct"])
+        elif d < -0.02 and (ours.get("misread_letters_pct") or 0) < 1.0 and (ours.get("noise_pct") or 0) <= ew.NOISE_WARN:
+            word = "ours is the better one"
+        elif d < -0.02:
+            # the Bodhicaryavatara: ours misreads 11.5% of its letters; archive.org's has noise in 9.4% of its words
+            word = ("ours is the less damaged by these measures, but it is damaged too (misread %.1f%%, noise %s): neither "
+                    "is clean; look for an e-text or OCR a better scan with vision" % (ours["misread_letters_pct"], _p(ours, "noise_pct")))
+        else:
+            word = "the two are level, each damaged in its own way"
         L.append("archive.org's OCR (%s), on the %d pages it shares with this scan: %s; %s." % (x["label"], x["pages"], how, word))
     if res["reference"]:
         ranked = sorted([x for x in res["readings"] if x.get("f1_ref") is not None], key=lambda x: -x["f1_ref"])
@@ -336,21 +403,42 @@ def opine(res: dict, doc: str, a) -> dict:
         if vi and co and vi.get("f1_ref") is not None and co.get("f1_ref") is not None and vi["f1_ref"] > co["f1_ref"] + 0.02:
             L.append("Vision alone reads the critical text better than the consensus (F1 %.2f against %.2f): the merge "
                      "keeps some Tesseract readings it should not." % (vi["f1_ref"], co["f1_ref"]))
+    # QUALITY_2026_10_11: without a critical text too. On 11 Oct the Tantric Texts' repair misread 1.90% of its letters
+    # where vision misread 0.17%: on 7 plates and title pages vision read nothing or a line, and the merge took
+    # Tesseract's garbage of the picture
+    vi, co = _r(res, "vision"), _r(res, "consensus")
+    eng = res.get("merged_engines") or {}
+    if vi and co and co["misread_letters_pct"] > vi["misread_letters_pct"] + 0.3:
+        L.append("The repair misreads more than vision alone: %.2f%% of the letters against %.2f%%. %d of its pages are "
+                 "Tesseract's (vision read nothing there, or far less)%s. Merged again under QUALITY_2026_10_11, a plate or "
+                 "a title page keeps vision's line, or is blank, instead of Tesseract's garbage of the picture." % (
+                     co["misread_letters_pct"], vi["misread_letters_pct"], eng.get("tesseract-fallback", 0),
+                     ("; %d are blank" % eng["blank"]) if eng.get("blank") else ""))
+    if ours and (ours.get("glued_pct") or 0) >= 1.0:
+        L.append("%.1f%% of ours' Devanagari words have a Latin letter or a stray mark glued to them (most often %s): a "
+                 "printed sign read as a letter; it goes into the translation as written." % (
+                     ours["glued_pct"], ", ".join('"%s"' % g for g in ours.get("glued_top") or []) or "-"))
     tr = res.get("translations") or {}
     b, n = tr.get("before") or {}, tr.get("now") or {}
     if b.get("english"):
         share = b.get("translated_misread_pct") or 0.0
-        lv = "material" if share >= MATERIAL_TR else ("moderate" if share >= MODERATE_TR else "cosmetic")
+        nzs = b.get("translated_noise_pct") or 0.0      # QUALITY_2026_10_11: and the malformed Devanagari
+        lv = "material" if max(share, nzs) >= MATERIAL_TR else ("moderate" if max(share, nzs) >= MODERATE_TR else "cosmetic")
         L.append("Translation before the repair: %d English, %d Hindi; %.0f%% of the passages translated carried misread "
-                 "letters (%.2f%% of their letters): the debris's effect on that translation was %s." % (
-                     b["english"], b.get("hindi", 0), share, b.get("translated_letters_misread_pct") or 0.0, lv.upper()))
+                 "letters (%.2f%% of their letters) and %.0f%% had noise in a tenth of their Devanagari words or more: the debris's "
+                 "effect on that translation "
+                 "was %s." % (b["english"], b.get("hindi", 0), share, b.get("translated_letters_misread_pct") or 0.0, nzs,
+                              lv.upper()))
     if n.get("english"):
         share = n.get("translated_misread_pct") or 0.0
-        lv = "material" if share >= MATERIAL_TR else ("moderate" if share >= MODERATE_TR else "cosmetic")
+        nzs = n.get("translated_noise_pct") or 0.0
+        lv = "material" if max(share, nzs) >= MATERIAL_TR else ("moderate" if max(share, nzs) >= MODERATE_TR else "cosmetic")
         L.append("Translation now: %d English of %d passages, %d Hindi%s; %.0f%% of the passages translated carry misread "
-                 "letters: %s." % (n["english"], n["passages"], n.get("hindi", 0),
-                                   ("; heuristic QA %.2f" % n["qa_mean"]) if n.get("qa_mean") is not None else "",
-                                   share, lv))
+                 "letters and %.0f%% had noise in a tenth of their Devanagari words or more: %s. The QA figure is structural "
+                 "(length, residue, script), not "
+                 "a reading of the meaning%s." % (n["english"], n["passages"], n.get("hindi", 0),
+                                                  ("; heuristic QA %.2f" % n["qa_mean"]) if n.get("qa_mean") is not None else "",
+                                                  share, nzs, lv, "" if n.get("reviews") else "; no LLM judge has read it yet"))
         if n.get("reviews"):
             L.append("The LLM judge (mt_reviews) graded %d English passages: fidelity %.2f, fluency %.2f of 5." % (
                 n["reviews"]["n"], n["reviews"]["fidelity"], n["reviews"]["fluency"]))
@@ -390,13 +478,14 @@ def current_scan(doc: str, sd_dir: Path):
 
 def show(res: dict):
     print("%s  %s" % (res["doc"], MARK))
-    hdr = "  %-22s %-11s %6s %9s %7s %8s %7s %-9s %7s %7s %7s"
-    print(hdr % ("reading", "kind", "pages", "letters", "latin%", "misread%", "pages%", "level", "F1ours", "F1ref", "ref%"))
+    hdr = "  %-22s %-11s %6s %9s %7s %8s %7s %-9s %6s %6s %7s %7s %7s"   # QUALITY_2026_10_11: noise, plausible
+    print(hdr % ("reading", "kind", "pages", "letters", "latin%", "misread%", "pages%", "level", "noise%", "plaus%",
+                 "F1ours", "F1ref", "ref%"))
     for x in res["readings"]:
         f = lambda k, fmt="%.2f": (fmt % x[k]) if x.get(k) is not None else "-"
         print(hdr % (x["label"][:22], x["kind"], x["pages"], x["letters"], f("latin_pct"), f("misread_letters_pct"),
-                     f("pages_misread_pct", "%.0f"), x.get("level") or "-", f("f1_ours"), f("f1_ref"),
-                     ("%.0f" % (100 * x["recall_ref"])) if x.get("recall_ref") is not None else "-"))
+                     f("pages_misread_pct", "%.0f"), x.get("level") or "-", f("noise_pct", "%.1f"), f("plausible_pct", "%.1f"),
+                     f("f1_ours"), f("f1_ref"), ("%.0f" % (100 * x["recall_ref"])) if x.get("recall_ref") is not None else "-"))
     for line in res.get("lines") or []:
         print("  " + line)
 
@@ -460,13 +549,14 @@ def main(argv=None) -> int:
             b = (res.get("translations") or {}).get("before") or {}
             n = (res.get("translations") or {}).get("now") or {}
             rows.append({"doc": d, "tesseract": te and te["misread_letters_pct"], "ours": ours and ours["misread_letters_pct"],
+                         "ours_noise": ours and ours.get("noise_pct"), "tesseract_noise": te and te.get("noise_pct"),
                          "ours_label": ours and ours["label"], "reference": res.get("reference"),
                          "f1_ref": ours and ours.get("f1_ref"), "en_before": b.get("english"),
                          "before_misread_pct": b.get("translated_misread_pct"), "en_now": n.get("english"),
                          "passages": n.get("passages"), "lines": res.get("lines")})
             print("  [%d/%d] %-56s tesseract %s | ours %s | English before %s (%s%% from damaged text) | now %s/%s" % (
-                i, len(docs), d[:56], "-" if te is None else "%.2f%%" % te["misread_letters_pct"],
-                "-" if ours is None else "%.2f%% (%s)" % (ours["misread_letters_pct"], ours["label"]),
+                i, len(docs), d[:56], "-" if te is None else "%.2f%%/%s" % (te["misread_letters_pct"], _p(te, "noise_pct")),
+                "-" if ours is None else "%.2f%%/%s (%s)" % (ours["misread_letters_pct"], _p(ours, "noise_pct"), ours["label"]),
                 b.get("english", "-"), "-" if b.get("translated_misread_pct") is None else "%.0f" % b["translated_misread_pct"],
                 n.get("english", "-"), n.get("passages", "-")), flush=True)
         Path(a.bench_dir).mkdir(parents=True, exist_ok=True)

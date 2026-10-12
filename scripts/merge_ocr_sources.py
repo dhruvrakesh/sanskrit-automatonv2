@@ -44,6 +44,49 @@ DEFINITELY_EMPTY = 5
 SHORTFALL = 10.0        # vision this many times shorter than Tesseract = failure
 LOOP_RATIO = 0.08       # see BENCHMARKS.md; degenerate <=0.029, ordinary >=0.135
 LOOP_MIN_CHARS = 3000
+# QUALITY_2026_10_11: Tesseract is a fallback only where it read text. On a plate (a yantra, a figure), a title
+# page or a blank page, vision rightly returns nothing or a line, and Tesseract makes Devanagari-and-Latin garbage
+# of the picture; the merge took that garbage (on 11 Oct: Tantric Texts pages 1, 2, 19, 20, 157, 158, 211;
+# Karan Aagama 8, 152, 154; Shatapatha 149, 213, 222; Rgveda vol. ii 9; Mallapurana 32). Measured on the 678
+# fallback pages then in the corpus: the 655 that are text are 70% Devanagari or more (Shatapatha 0009, the page
+# this fallback was made for, 83%); the 8 English pages Tesseract read right (Mallapurana's introduction,
+# Hayashirsha's notes, the Rgveda's preface) have Latin words 4.5-5.4 letters long and under 1% stray marks; the 15
+# garbage pages are under half Devanagari, with "words" of 1.4-2.6 letters and 9-55% stray marks. Garbage can also
+# be mostly Devanagari fragments among marks (Karan Aagama 2, 16, 26, 182: 1.1-1.2 letters a word, 14-27% stray
+# marks), where the 650 pages of text have 2.85 letters a word or more and under 4% stray marks.
+TESS_MIN_DEV = 0.5
+ENGLISH_MIN_WORD = 3.5
+STRAY_MAX = 0.10
+FRAGMENT_MAX = 2.0
+FRAGMENT_STRAY = 0.08
+DEV_LETTER = re.compile("[\u0904-\u0939\u0958-\u0961]")
+LATIN_WORD = re.compile(r"[A-Za-z]+")
+STRAY = re.compile("[~^=+*<>|\\{}\[\]_`$#@%&\u00a2\u00a3\u00a5\u2020\u2021\u00a9\u00ae\u00b6\u00a7"
+                   "\u201c\u201d\u2018\u2019\u201e\u00bb\u00ab\u2022]")
+
+
+def tesseract_garbage(t: str) -> tuple[bool, str]:
+    """(True, why) when Tesseract's page is neither Devanagari nor English: OCR of a picture."""
+    t = t or ""
+    d = len(DEV_LETTER.findall(t))
+    words = LATIN_WORD.findall(t)
+    lat = sum(len(w) for w in words)
+    if len(t.strip()) < DEFINITELY_EMPTY or d + lat == 0:
+        return False, ""
+    share = d / float(d + lat)
+    stray = len(STRAY.findall(t)) / float(max(1, len(re.sub(r"\s", "", t))))
+    if share >= TESS_MIN_DEV:
+        toks = [w for w in t.split() if DEV_LETTER.search(w)]
+        per = sum(len(DEV_LETTER.findall(w)) for w in toks) / float(len(toks))
+        if per < FRAGMENT_MAX and stray > FRAGMENT_STRAY:
+            return True, ("Tesseract's page is Devanagari fragments among marks (%.1f letters a word, %.0f%% stray marks)"
+                          % (per, 100 * stray))
+        return False, ""
+    avg = lat / float(len(words)) if words else 0.0
+    if avg >= ENGLISH_MIN_WORD and stray <= STRAY_MAX:
+        return False, ""                     # English that Tesseract read: an introduction, a note
+    return True, ("Tesseract's page is %.0f%% Devanagari, its Latin words %.1f letters long, %.0f%% stray marks"
+                  % (100 * share, avg, 100 * stray))
 
 
 def collapse_runs(s, keep=8):
@@ -113,6 +156,11 @@ def verdict(vtext: str, ttext: str) -> tuple[str, str]:
     """Which source to use for this page, and why."""
     v = collapse_runs(vtext or "").strip()
     t = (ttext or "").strip()
+    garbage, gwhy = tesseract_garbage(t)   # QUALITY_2026_10_11
+    if garbage:
+        if len(v) < DEFINITELY_EMPTY or (len(v) >= LOOP_MIN_CHARS and compress_ratio(v) < LOOP_RATIO):
+            return "blank", "neither engine read text: vision found none, and " + gwhy + " (a plate or a blank page)"
+        return "vision", gwhy + ": vision's %d chars kept" % len(v)
     if len(v) < DEFINITELY_EMPTY:
         return ("tesseract-fallback" if len(t) >= DEFINITELY_EMPTY else "none",
                 "vision returned nothing")
@@ -149,7 +197,7 @@ def main():
     if not pages:
         sys.exit(f"no pages found for {args.doc}")
 
-    counts = {"vision": 0, "tesseract-fallback": 0, "none": 0}
+    counts = {"vision": 0, "tesseract-fallback": 0, "none": 0, "blank": 0}   # QUALITY_2026_10_11: blank
     notes = []
     n_variants = 0
     if args.apply:
@@ -162,7 +210,7 @@ def main():
         ttext = (trec or {}).get("text") or ""
         src, why = verdict(vtext, ttext)
         counts[src] += 1
-        if src != "vision":
+        if src != "vision" or why:   # QUALITY_2026_10_11: and a page where Tesseract's garbage was refused
             notes.append((pg, src, why, len(vtext), len(ttext)))
         if not args.apply:
             continue
@@ -170,9 +218,11 @@ def main():
             continue                       # never fabricate a page
         if src == "vision":
             text, engine = collapse_runs(vtext), (vrec or {}).get("engine") or "gemini-vision"
+        elif src == "blank":   # QUALITY_2026_10_11: written empty, so the page is accounted for and nothing false goes in
+            text, engine = "", "blank"
         else:
             text, engine = ttext, "tesseract-fallback"
-        vars_ = variants(ttext, vtext) if (ttext and vtext) else []
+        vars_ = variants(ttext, vtext) if (ttext and vtext and not tesseract_garbage(ttext)[0]) else []
         out = {
             "engine": engine,
             "page_no": int(pg),
@@ -192,15 +242,18 @@ def main():
     print(f"OCR SOURCE MERGE  {args.doc}   {total} pages   "
           f"{'WRITING' if args.apply else 'DRY RUN'}")
     print("=" * 74)
-    for k in ("vision", "tesseract-fallback", "none"):
+    for k in ("vision", "tesseract-fallback", "blank", "none"):   # QUALITY_2026_10_11: blank
         pct = 100.0 * counts[k] / total
         print(f"  {k:20s} {counts[k]:>5}  ({pct:5.1f}%)")
     if notes:
-        print("\n  pages NOT taken from vision:")
+        print("\n  pages not simply taken from vision:")   # QUALITY_2026_10_11: and why
         for pg, src, why, nv, nt in notes[:25]:
             print(f"    page {pg}  {src:19s} {why}")
         if len(notes) > 25:
             print(f"    ... and {len(notes)-25} more")
+    if counts["blank"]:   # QUALITY_2026_10_11
+        print(f"\n  {counts['blank']} page(s) are blank: vision found no text, and Tesseract's is the garbage it makes of")
+        print("  a picture (a plate, a yantra, a title page). They are written empty: nothing false goes in.")
     if counts["none"]:
         print(f"\n  {counts['none']} page(s) have NO usable text from either engine.")
         print("  They are omitted rather than filled with something false.")

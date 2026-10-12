@@ -1,0 +1,29 @@
+Are we sure of the texts? The Devanagari measured; the merge refuses Tesseract's garbage (QUALITY_2026_10_11); recorded (DOCS45_2026_10_11)
+
+docs/QUALITY_2026-10-11.md. After 26d0806 the benchmark called archive.org's OCR of the 1960 Bodhicaryavatara
+"the better reading" because it measured Latin debris only; and the Tantric Texts' repair misread 1.90% of its
+letters where vision alone misread 0.17%: the merge had taken Tesseract's garbage of plates and title pages.
+Measured on the page files (read-only): vision's Devanagari has noise in 0.06-0.86% of its words, Tesseract's
+2.7-7.4%, the GRETIL Adiparvan 0.0%; the repair's noise came from 19 garbage pages in 5 texts.
+- scripts/patch_quality_2026_10_11.py:
+  merge_ocr_sources.py: Tesseract is a fallback only where it read Devanagari or English (calibrated on the 678
+    fallback pages); on its garbage vision's line is kept, or the page is written blank (engine "blank", empty);
+    no variants against garbage; the report says why for every page not simply vision's;
+  ocr_consensus.py: the drift counts a blank page current without rows, stale with them;
+  etext_witness.py: quality() (glued, malformed, stray marks; plausibility of letter trigrams against
+    data/raw/MBh01_*); the preview shows the witness's and the scan's; a witness with noise over 3% (no cleaner
+    than Tesseract) is refused unless --force, 1.5-3% warned; a scan too damaged to read is measured by all its
+    pages; witness.json and witnesses.jsonl carry the noise; dsbcproject.org an e-text host;
+  benchmark_sources.py: noise, glued and plausibility for every reading; archive.org's OCR compared by all three
+    ("neither is clean" when both are damaged); the repair against vision alone; the glued letter named; the
+    English made from noisy passages counted; every translation line says the QA is structural and whether an
+    LLM judge has read it;
+  source_desk.py: loads .env (--ai); an archive.org error is a verdict; the DSBC link;
+  dashboard.py: Noise and Plausible on the repair page's benchmark, misreads / noise on /benchmarks.
+Nothing in the database changes until a text is merged again and its repaired text used.
+Tests: tests/test_quality_2026_10_11.py (18); the patcher replays in tests/test_etext_witness_2026_10_11.py,
+tests/test_benchmark_2026_10_11.py and tests/test_repair_heal_2026_10_11.py compare with this patch's backups.
+Docs: scripts/patch_docs45_2026_10_11.py (PLATFORM 48, RUNBOOK, EP 35).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

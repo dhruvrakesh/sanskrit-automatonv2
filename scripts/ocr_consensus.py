@@ -249,7 +249,12 @@ def drift(db: Path, doc: str, merged: dict[str, Path]) -> list[dict]:
         entry = {"page": pg, "consensus_engine": rec.get("engine"),
                  "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()[:16],
                  "variants": len(((rec.get("meta") or {}).get("variants")) or [])}
-        if n not in db_pages:
+        if rec.get("engine") == "blank" and not text.strip():
+            # QUALITY_2026_10_11: a blank page (a plate): current when the database has nothing for it; stale when it
+            # still has Tesseract's garbage of the picture
+            entry.update(similarity=None, db_engine=(",".join(sorted(db_pages[n][1])) or None) if n in db_pages else None,
+                         status="stale" if n in db_pages else "current")
+        elif n not in db_pages:
             entry.update(similarity=None, db_engine=None, status="missing-in-db")
         else:
             s = similarity("\n".join(db_pages[n][0]), ingest_view(text))
