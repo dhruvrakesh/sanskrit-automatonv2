@@ -1769,3 +1769,20 @@ The order matters: the desk's worker 1.2 before C10b.
 - `repair_text.py --repair --max-usd X` refuses a run whose estimate is above X, and stops a run before a page
   would take it past X (what this run has spent, from usage_log). The spend cap (`set_budget.py`) still stops
   everything.
+
+
+## Before a re-ingest: is anything writing? (DOCS49_2026_10_13)
+
+1. `(Invoke-RestMethod http://127.0.0.1:5057/api/jobs/running).running | Select-Object kind, doc, state`
+2. **Only OCR jobs (or none):** a re-ingest may run. A translation, classify or ingest job running or queued: it is
+   refused; wait for the job to finish.
+3. **Then:** a backup, the plan, the `--apply` line the plan prints, and the mirror.
+
+## Does the site leave retired rows out? (DOCS49_2026_10_13)
+
+In the Lovable SQL editor, read-only: every `corpus_reader_*` function's definition should mention `retired_at`:
+
+    SELECT p.proname, position('retired_at' in pg_get_functiondef(p.oid)) > 0 AS filters_retired
+    FROM pg_proc p JOIN pg_namespace n ON n.oid = p.pronamespace
+    WHERE n.nspname = 'public' AND p.proname LIKE 'corpus\_reader\_%' AND p.prokind = 'f'
+    ORDER BY p.proname;

@@ -472,6 +472,14 @@ def explain(db: Path, doc: str, page: str, merged_path: Path, n_ops: int = 15) -
 def reingest_commands(doc: str) -> str:
     stamp = "$(Get-Date -Format yyyyMMdd_HHmmss)"
     return "\n".join([
+        # READ_IN_2026_10_13: the changed pages only, in place (REINGEST_2026_10_12) come first; the whole text again
+        # (below) deletes every translation, vector and review of the text
+        "# --- the changed pages only: the unchanged passages keep their translations, vectors and reviews ---",
+        "python scripts\\reingest_pages.py --doc %s                  # the plan, free" % doc,
+        "python scripts\\reingest_pages.py --doc %s --apply          # a backup first; it asks for --replace N "
+        "if it removes English" % doc,
+        "python scripts\\ocr_consensus.py --doc %s --drift-only     # expect: 0 stale" % doc,
+        "# --- or the whole text again: its translations, vectors and reviews are deleted ---",
         '# --- only when the dashboard header reads "idle" (RUNBOOK 1). Backup first. ---',
         'python scripts\\db_backup.py "data\\context.db" "D:\\backups\\context_pre_consensus_%s_%s.db"' % (doc, stamp),
         "python scripts\\wipe_doc.py --db data\\context.db --doc %s --dry-run" % doc,

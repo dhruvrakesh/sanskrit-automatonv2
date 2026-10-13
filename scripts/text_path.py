@@ -288,7 +288,12 @@ def decide(f: dict, pr: dict) -> dict:
     rp = "python scripts\\reingest_pages.py --doc %s" % doc
     mg = "python scripts\\merge_ocr_sources.py --doc %s" % doc
     o = {"path": "", "why": "", "next": [], "also": [], "cost": 0.0, "then": 0.0}
-    merged_ok = bool(f.get("merged_complete")) and vpages >= 0.8 * max(1, raw)
+    # READ_IN_2026_10_13: a merge without its blank pages is a merge (the Natyasastra: 538 of 546 merged, 513 read by
+    # vision; "merged_complete" asks for every page, so it was charted "repair the scan" for ever)
+    merged_ok = (bool(f.get("merged_complete")) or (f.get("merged_pages") or 0) >= 0.95 * max(1, raw)) and \
+        vpages >= 0.8 * max(1, raw)
+    gave = int(f.get("vision_gave_up") or 0)   # pages vision failed on twice: left to Tesseract (the ledger)
+    tryable = max(0, pdfs - vpages - gave)
     chg = f.get("changed", -1)
     if merged_ok and chg == 0:
         tesseract = False   # the database already holds the repaired reading, page for page
@@ -372,12 +377,26 @@ def decide(f: dict, pr: dict) -> dict:
         if en:
             o["also"].append("its %d English were made from Tesseract's text; the changed passages are translated again"
                              % en)
+        if tryable:   # READ_IN_2026_10_13: the pages vision may still read, after
+            cap2 = max(1.0, math.ceil(tryable * cpp * 1.25 * 10) / 10.0)
+            o["also"].append("%d page(s) vision has not read yet%s: %s --repair --max-usd %.2f   (after; their pages go in "
+                             "the same way)" % (tryable, (" (%d more left to Tesseract)" % gave) if gave else "", q0, cap2))
+        elif gave:
+            o["also"].append("%d page(s) keep Tesseract's reading: vision failed on them twice (--retry-refused tries them "
+                             "again)" % gave)
         return o
     if tesseract:
         scan_here = pdfs and pdfs >= 0.9 * max(1, raw)
         damaged = level in ("moderate", "material")
+        if scan_here and (damaged or en < 0.95 * n) and gave and not tryable:   # READ_IN_2026_10_13
+            o.update(path="source", why=("Tesseract's text: %s; vision read %d of its %d pages and failed twice on the "
+                                         "other %d: the scan resists repair" % (lvl, vpages, pdfs, gave)),
+                     next=[q0 + " --find-source   (free: archive.org, the wisdomlib archive, GRETIL, the DSBC; "
+                           "--ai about $0.002)"],
+                     also=["the pages vision read can go in now: %s   (the plan, free)" % rp] if f.get("changed", 0) > 0 else [])
+            return o
         if scan_here and (damaged or en < 0.95 * n):
-            todo = max(0, pdfs - vpages)
+            todo = max(0, pdfs - vpages - gave)   # READ_IN_2026_10_13: not the pages left to Tesseract
             est = todo * cpp
             cap = max(1.0, math.ceil(est * 1.25 * 10) / 10.0)
             own = f.get("price_from") == "this text"
@@ -464,7 +483,7 @@ def facts_of(a, code: str, extra: dict) -> dict:
     st = r.get("state") or {}
     f = {k: r.get(k) for k in ("passages", "english", "hindi", "vectors", "pictures", "stories", "debris_pct",
                                 "vision_pct", "below_quality", "pdfs", "raw_pages", "vision_pages", "merged_pages",
-                                "merged_complete", "cost_per_page")}
+                                "merged_complete", "cost_per_page", "vision_gave_up")}
     f.update(doc=code, level=j.get("level") if r.get("debris_pct") else "-",
              misread_letters_pct=j.get("misread_letters_pct"), state=st.get("status"), reason=st.get("reason"),
              at=str(st.get("at") or "")[:10], en_before=st.get("en_before"))

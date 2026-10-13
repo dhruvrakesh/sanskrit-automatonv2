@@ -97,6 +97,17 @@ def measured_cost_per_page(db: str, doc: str) -> float:
         return COST_PER_PAGE
 
 
+def vision_gave_up(work: Path, doc: str) -> int:
+    """READ_IN_2026_10_13: the pages vision failed on in two runs or more, left to Tesseract (PATH_2026_10_12's
+    ledger, data/ocr_consensus/<doc>_vision_failed.json); 0 when there is none."""
+    try:
+        import ocr_consensus as _oc
+        return sum(1 for v in _oc.read_failed(Path(work), doc).values()
+                   if int((v or {}).get("fails") or 0) >= _oc.VISION_GIVE_UP)
+    except Exception:
+        return 0
+
+
 def page_rx(doc: str, ext: str):
     return re.compile(r"^%s_(\d{4})(?:_norm)?\.%s$" % (re.escape(doc), ext), re.I)
 
@@ -357,6 +368,7 @@ def assess(a) -> dict:
         "nothing_to_lose": en <= NOTHING_TO_LOSE_EN and hi == 0 and pictures == 0 and stories == 0,
         "aside": state, "state": state,
         "cost_per_page": measured_cost_per_page(a.db, a.doc),   # REINGEST_2026_10_12
+        "vision_gave_up": vision_gave_up(work, a.doc),   # READ_IN_2026_10_13
     })
     res["held"] = res["guard"] and not (state and state.get("status") == "translate_as_is")
     untranslated = max(0, n - en)
@@ -431,7 +443,20 @@ def advise(r: dict, doc: str):
         pages = r["queued"] or r["pdfs"]
         left = max(0, pages - r["vision_pages"]) if r["vision_pages"] else pages
         cpp = r.get("cost_per_page") or COST_PER_PAGE   # REINGEST_2026_10_12: measured on this text where it can be
+        gave = int(r.get("vision_gave_up") or 0)   # READ_IN_2026_10_13
+        left = max(0, left - gave)
         cap = max(1.0, math.ceil(left * cpp * 1.25 * 10) / 10.0)   # PATH_2026_10_12: a cap the estimate fits under
+        if (r["vision_pages"] >= 0.8 * max(1, r["pdfs"]) and
+                (r.get("merged_pages") or 0) >= 0.95 * max(1, r.get("raw_pages") or r["pdfs"])):
+            # READ_IN_2026_10_13: the scan is read (the Natyasastra: 513 of 546 pages, 538 merged; the merge leaves
+            # out blank pages, so it is never "complete"): the pages read go in now, in place
+            more = ([q + " --repair --max-usd %.2f   (the %d page(s) vision has not read yet; after)" % (cap, left)]
+                    if left else [])
+            return (why + "; vision has read %d of its %d pages%s and %d are merged: they can go in now; the others keep "
+                    "Tesseract's reading" % (r["vision_pages"], r["pdfs"],
+                                             (" (%d left to Tesseract: vision failed on them twice)" % gave) if gave else "",
+                                             r.get("merged_pages") or 0),
+                    REINGEST % doc, more + also)
         return (why + "; the scan can be repaired: vision OCR on about %d page(s), about $%.2f ($%.4f a page)"
                 % (left, left * cpp, cpp),
                 q + " --repair --max-usd %.2f   (it stops before spending more)" % cap, also)

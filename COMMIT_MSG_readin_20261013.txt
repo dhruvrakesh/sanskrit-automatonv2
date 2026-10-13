@@ -1,0 +1,18 @@
+A scan that is read goes in, in place; the pages left to Tesseract are not priced (READ_IN_2026_10_13); recorded (DOCS49_2026_10_13)
+
+docs/READ_IN_2026-10-13.md. After e51422b: the mirror healed (the Bodhicaryavatara's 1,677 passages retired in two
+halves; 383 groups equal). The Natyasastra's vision read 513 of 546 pages, and every tool still said "repair the
+scan": the merge leaves out blank pages (538 merged), so it is never "complete", and the 22 pages vision failed on
+twice were counted as pages to read. The drift check printed the wipe-and-re-ingest block first.
+- scripts/patch_read_in_2026_10_13.py:
+  repair_text.py: the assessment counts the pages left to Tesseract (the ledger); a scan vision has read (80% of its
+    pages, 95% merged) has the in-place re-ingest of the pages read as its NEXT, the rest as an ALSO;
+  text_path.py: the same rule (such a text is "use the repair"); the pages left to Tesseract are not priced; a scan
+    whose every remaining page failed twice is "find a source";
+  ocr_consensus.py: the drift check gives reingest_pages.py first, the whole text again (what it deletes said) second.
+Tests: tests/test_read_in_2026_10_13.py (9); the patcher replays in tests/test_mirror_cap_2026_10_12.py and
+tests/test_path_2026_10_12.py compare with this patch's backups.
+Docs: scripts/patch_docs49_2026_10_13.py (PLATFORM 52, RUNBOOK, EP 39).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

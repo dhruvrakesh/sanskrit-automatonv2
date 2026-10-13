@@ -682,3 +682,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | B2 | The spend | The user's decision |
 | VC1 | Vision's artefacts cleaned before ingest | Next |
 | C14 | Sources wanted on the site | Designed; not started |
+
+
+## Addendum 2026-10-13 (39) (DOCS49_2026_10_13)
+
+| # | Item | State |
+|---|---|---|
+| M1 | The mirror's retire of vectors and passages (halved on a timeout) | **Released** (e51422b); healed on 12 Oct |
+| M2 | `--max-usd` stops a run before it passes | **Released** (e51422b) |
+| R4 | A scan that is read goes in, in place | Built and tested (READ_IN_2026_10_13) |
+| D1 | The re-ingests (Tantric Texts, Karan, the Natyasastra, 12 texts, 6 Tesseract texts) | Free; waiting for the translation jobs |
+| T2 | The marked passages translated again, then judged again | Next; paid, capped, dry run first |
+| VC1 | Vision's artefacts cleaned before ingest | Next |
+| C14 | Sources wanted on the site | Designed; not started |
