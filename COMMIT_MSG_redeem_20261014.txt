@@ -1,0 +1,24 @@
+What of the translation is redeemed, text by text (REDEEM_2026_10_14); the judge's marked passages translated again (T2_2026_10_14); recorded (DOCS50_2026_10_14)
+
+docs/REDEEM_2026-10-14.md. After 13bcfbb, asked: what of the translation already paid for can be kept, and what
+cannot, clearly marked. On the backup of 14 Oct: 23,334 English verses in 47 texts, 19,172 kept (82%), 4,128 made
+from misread Sanskrit, 34 judged wrong; $30.59 spent on the texts here (repriced), $7.66 of it on English that
+cannot be kept as it is and $2.67 on English a better reading replaced; making it all again costs about $3.56.
+- scripts/redeem.py (new, read-only): each English verse judged sound / judged wrong / vision / no debris seen /
+  debris; each text redeemed, mostly redeemed, to translate again, not redeemable as it is, replaced by a better
+  reading, or withdrawn, with its money (usage_log repriced); data/redeem.json, --html, --csv, --doc.
+- scripts/retranslate_marked.py (new, T2): the passages the judge marks (fidelity 2 or less, unchanged since)
+  translated again with gemini-2.5-pro, judged again (judge-v1), their Hindi made again; a dry run by default;
+  --yes capped by --max-usd, the spend cap and the dashboard's writers; logged to data/retranslate/.
+- scripts/patch_redeem_2026_10_14.py:
+  dashboard.py: a line under each Library card (and under a "Not yet readable" card that was paid for) saying how
+    much of its English is kept and what the rest needs; the English kept in the header; /redeem with Count again
+    (step redeem_all); data/redeem.json read again only when it changes;
+  text_path.py: a text the judge marks has retranslate_marked.py as its NEXT, and the line to judge more;
+  .gitignore: data/redeem.json, data/retranslate/.
+Tests: tests/test_redeem_2026_10_14.py (21); the patcher replays in tests/test_read_in_2026_10_13.py and
+tests/test_mirror_cap_2026_10_12.py compare with this patch's backups.
+Docs: scripts/patch_docs50_2026_10_14.py (PLATFORM 53, RUNBOOK, EP 40).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

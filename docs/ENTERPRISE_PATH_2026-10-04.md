@@ -695,3 +695,19 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | T2 | The marked passages translated again, then judged again | Next; paid, capped, dry run first |
 | VC1 | Vision's artefacts cleaned before ingest | Next |
 | C14 | Sources wanted on the site | Designed; not started |
+
+
+## Addendum 2026-10-14 (40) (DOCS50_2026_10_14)
+
+| # | Item | State |
+|---|---|---|
+| R4 | A scan that is read goes in, in place | **Released** (13bcfbb) |
+| RD1 | What of the translation is redeemed, text by text (the ledger, the Library, /redeem) | Built and tested (REDEEM_2026_10_14) |
+| T2 | The marked passages translated again, then judged again | Built and tested (T2_2026_10_14); 18 passages, about $0.03 |
+| D1 | The re-ingests (Tantric Texts, Karan, the Natyasastra, 12 texts, 6 Tesseract texts) | Free; waiting for the jobs |
+| D2 | Karan and the Hayashirsha translated, then released | About $1.61 for the English |
+| S1 | Srangam: a mark on a verse made from a misread page | Next; no database change |
+| S2 | Srangam: the reading's engine on each verse | Next; the RUNBOOK's SQL check first |
+| S3 | Srangam: each text's verdict on its card | Designed after S1 and S2 |
+| VC1 | Vision's artefacts cleaned before ingest | Next |
+| C14 | Sources wanted on the site | Designed; not started |

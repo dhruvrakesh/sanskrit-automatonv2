@@ -1222,7 +1222,8 @@ _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "ac
                  "find", "fetch", "judge_all", "witness",   # JUDGE_DESK_2026_10_11: judge_all; ETEXT_WITNESS_2026_10_11: witness
                  "benchmark", "benchmark_all",              # BENCHMARK_2026_10_11
                  "reingest_plan", "reingest",               # REINGEST_2026_10_12: only the pages that changed
-                 "withdraw", "path_all")                    # PATH_2026_10_12: off the site; the path of every text
+                 "withdraw", "path_all",                    # PATH_2026_10_12: off the site; the path of every text
+                 "redeem_all")                              # REDEEM_2026_10_14: what of the translation is kept
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
 _REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness",   # ETEXT_WITNESS_2026_10_11: witness
                   "withdrawn")                                                          # PATH_2026_10_12
@@ -1261,7 +1262,8 @@ var _RP_DOING = {assess: 'assessing...', repair: 'repairing the scan...', use: '
                  judge_all: 'judging the texts (about a minute)...', witness: 'reading the e-text as a witness...',
                  benchmark: 'benchmarking the readings (free)...', benchmark_all: 'benchmarking every text (a minute or two)...',
                  reingest_plan: 'planning the re-ingest (free)...', reingest: 're-ingesting the changed pages...',   /* REINGEST_2026_10_12 */
-                 withdraw: 'withdrawing it from the site...', path_all: 'charting the path of every text (a few minutes)...'};   /* PATH_2026_10_12 */
+                 withdraw: 'withdrawing it from the site...', path_all: 'charting the path of every text (a few minutes)...',   /* PATH_2026_10_12 */
+                 redeem_all: 'counting what of the translation is kept (free, a minute)...'};   /* REDEEM_2026_10_14 */
 var _RP_NL = String.fromCharCode(10), _RP_CR = String.fromCharCode(13), _RP_BS = String.fromCharCode(92);
 function _rpLines(s){
   return String(s || '').split(_RP_NL).map(function(l){ return l.split(_RP_CR).join(''); })
@@ -1467,7 +1469,7 @@ async function _watchRepair(id, doc, step, btn, orig, n){
       _toast(doc + ': ' + text);
       if ((step === 'find' || step === 'fetch' || step === 'witness' || step === 'benchmark') && document.getElementById('srclist-' + doc)) _rpSources(doc);
       if (j.ok && pre && step === 'translate') repairStep(doc, 'assess', null);
-      if (j.ok && !pre && /^(set_aside|restore|use|reingest|withdraw|as_is|accept|hold|release|translate|judge_all|benchmark_all|path_all)$/.test(step))
+      if (j.ok && !pre && /^(set_aside|restore|use|reingest|withdraw|as_is|accept|hold|release|translate|judge_all|benchmark_all|path_all|redeem_all)$/.test(step))
         setTimeout(function(){ location.reload(); }, 3000);
       return;
     }
@@ -1692,6 +1694,7 @@ def _repair_waiting(rows, cats, notes, aside, judged=None) -> str:   # JUDGE_DES
     import html as _html
     listed = {d[0] for docs in cats.values() for d in docs}
     cards = ""
+    rdm = _redeem()   # REDEEM_2026_10_14: a text paid for whose English a better reading replaced says so
     for code, title, _cat, total, en in rows:
         if code in listed or not (notes.get(code) or code in aside):
             continue
@@ -1706,8 +1709,9 @@ def _repair_waiting(rows, cats, notes, aside, judged=None) -> str:   # JUDGE_DES
         if not inner:
             continue
         cards += ('<div class="card-wrap waiting"><div class="card"><div class="ttl">%s</div><div class="code">%s</div>'
-                  '<div class="meta"><span class="badge en">EN %d/%d</span></div></div>%s</div>'
-                  % (_html.escape(str(title)), _html.escape(str(code)), int(en or 0), int(total or 0), inner))
+                  '<div class="meta"><span class="badge en">EN %d/%d</span></div></div>%s%s</div>'
+                  % (_html.escape(str(title)), _html.escape(str(code)), int(en or 0), int(total or 0),
+                     _redeem_note(code, rdm), inner))   # REDEEM_2026_10_14
     if not cards:
         return ""
     return ('<h2 class="cat">Not yet readable</h2><p class="rpintro">No English yet. Each card says what held its last run '
@@ -1725,7 +1729,7 @@ def api_repair():
                         "steps": list(_REPAIR_STEPS), "max_usd": _REPAIR_MAX_USD})
     data = request.get_json(silent=True) or {}
     step = str(data.get("step") or "assess")
-    doc = "corpus" if step in ("judge_all", "benchmark_all", "path_all") else _validate_doc(data.get("doc"))   # PATH_2026_10_12: path_all   # JUDGE_DESK_2026_10_11; BENCHMARK_2026_10_11
+    doc = "corpus" if step in ("judge_all", "benchmark_all", "path_all", "redeem_all") else _validate_doc(data.get("doc"))   # REDEEM_2026_10_14: redeem_all   # PATH_2026_10_12: path_all   # JUDGE_DESK_2026_10_11; BENCHMARK_2026_10_11
     if not doc:
         return jsonify({"error": "invalid or missing doc"}), 400
     if step not in _REPAIR_STEPS:
@@ -1798,6 +1802,8 @@ def api_repair():
         argv += ["--withdraw", reason or "its text is damaged: a better source is wanted"]
     elif step == "path_all":   # PATH_2026_10_12: free and read-only
         argv = [script("text_path.py"), "--from-dashboard"]
+    elif step == "redeem_all":   # REDEEM_2026_10_14: free and read-only
+        argv = [script("redeem.py"), "--from-dashboard"]
     elif step in ("reingest_plan", "reingest"):   # REINGEST_2026_10_12: the plan is read-only; the re-ingest a writer
         argv = [script("reingest_pages.py"), "--doc", doc, "--from-dashboard"]
         pages = str(data.get("pages") or "")
@@ -2070,7 +2076,135 @@ header h1{font-size:18px;color:var(--gold);font-weight:700}
 .srcnone{color:var(--muted);font-size:12px;margin:10px 0}
 """ + _REPAIR_CSS + _SOURCES_CSS + css + """
 </style></head><body>
-<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/sources">Sources &amp; repairs</a><a href="/benchmarks">Benchmarks</a><h1>The path</h1></header>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/sources">Sources &amp; repairs</a><a href="/benchmarks">Benchmarks</a><a href="/redeem">What is redeemed</a><h1>The path</h1></header>
+""" + body + """
+<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
+<script>
+function _toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none';},6000);}
+""" + _REPAIR_JS + """
+</script>
+</body></html>""")
+
+
+REDEEM_FILE = ROOT / "data" / "redeem.json"   # REDEEM_2026_10_14: written by scripts/redeem.py
+_REDEEM_CACHE = {"key": None, "res": None}
+_REDEEM_CLS = {"redeemed": "r-ok", "mostly": "r-mid", "redo": "r-lo", "source": "r-lo", "replaced": "r-mid",
+               "withdrawn": "r-off"}
+
+
+def _redeem() -> dict:
+    """REDEEM_2026_10_14: the last count of what of the translation is kept (data/redeem.json), read again only when
+    the file changes; {} when there is none."""
+    try:
+        st = REDEEM_FILE.stat()
+        key = (st.st_mtime, st.st_size)
+    except OSError:
+        return {}
+    if _REDEEM_CACHE["key"] != key:
+        try:
+            _REDEEM_CACHE["res"] = json.loads(REDEEM_FILE.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _REDEEM_CACHE["res"] = None
+        _REDEEM_CACHE["key"] = key
+    return _REDEEM_CACHE["res"] or {}
+
+
+def _redeem_note(code: str, res: dict) -> str:
+    """The Library card's line: how much of this text's English is kept, and what the rest needs."""
+    import html as _html
+    for t in (res or {}).get("texts") or []:
+        if t.get("doc") == code:
+            c = t.get("classes") or {}
+            tip = ("judged sound %s, vision %s, no debris seen %s, debris %s, judged wrong %s; translation spent %s, of "
+                   "it %s on English that cannot be kept as it is (redeem.py, %s)"
+                   % (c.get("judged_sound", 0), c.get("vision", 0), c.get("no_debris", 0), c.get("debris", 0),
+                      c.get("judged_wrong", 0), "$%.3f" % (t.get("spent") or 0), "$%.3f" % (t.get("at_risk") or 0),
+                      str(res.get("at") or "?")[:16].replace("T", " ")))
+            return ('<a class="rdm %s" href="/redeem#r-%s" title="%s">%s</a>'
+                    % (_REDEEM_CLS.get(t.get("verdict"), "r-mid"), _html.escape(t.get("verdict") or "", quote=True),
+                       _html.escape(tip, quote=True), _html.escape(t.get("line") or "")))
+    return ""
+
+
+_REDEEM_CSS = (".rdm{display:block;margin-top:6px;font-family:'Inter',sans-serif;font-size:10.5px;line-height:1.45;"
+               "border-left:2px solid;padding:2px 0 2px 7px;text-decoration:none}.rdm:hover{text-decoration:underline}"
+               ".rdm.r-ok{color:#7cc497;border-color:#2f6b45}.rdm.r-mid{color:#d9b36a;border-color:#6b5420}"
+               ".rdm.r-lo{color:#e09a9a;border-color:#7a2f2f}.rdm.r-off{color:#8a8070;border-color:#3a352b}")
+
+
+@app.get("/redeem")
+def redeem_page():
+    """REDEEM_2026_10_14: what of the translation already paid for is kept, and what is not, text by text
+    (scripts/redeem.py). Reads one small file."""
+    import html as _html
+    e = _html.escape
+    res = _redeem()
+    money = lambda x: ("$%.2f" % x) if x >= 0.995 else ("$%.3f" % x)
+    groups, chips = "", ""
+    if res:
+        t = res.get("totals") or {}
+        for key, label, desc in res.get("verdicts") or []:
+            rows = [x for x in res.get("texts") or [] if x.get("verdict") == key]
+            if not rows:
+                continue
+            chips += '<a class="pchip %s" href="#r-%s">%s <b>%d</b></a>' % (_REDEEM_CLS.get(key, ""), e(key, quote=True),
+                                                                          e(label), len(rows))
+            trs = ""
+            for x in rows:
+                c = x.get("classes") or {}
+                n_ = lambda v: "{:,}".format(int(v or 0))
+                trs += ('<tr><td class="pdoc"><a href="/repair/%s">%s</a><div class="rdm %s" style="margin-top:3px">%s</div>'
+                        '</td><td class="num">%s</td><td class="num">%s</td><td class="num">%s</td>'
+                        '<td class="num">%d of %d</td><td class="num">%s</td><td class="num">%s</td></tr>'
+                        % (e(x["doc"], quote=True), e(x["doc"]), _REDEEM_CLS.get(key, ""), e(x.get("line") or ""),
+                           n_(x.get("english")), n_(x.get("keep")), n_(c.get("debris")), c.get("judged_wrong", 0),
+                           x.get("judged", 0), money(x.get("spent") or 0), money(x.get("at_risk") or 0)))
+            groups += ('<h2 id="r-%s" class="ph">%s <span>%d</span></h2><p class="pdesc">%s</p><div class="srcwrap">'
+                       '<table class="srct"><thead><tr><th>Text</th><th>English</th><th>Kept</th><th>Debris</th>'
+                       '<th>Judged wrong</th><th>Spent</th><th>At risk</th></tr></thead><tbody>%s</tbody></table></div>'
+                       % (e(key, quote=True), e(label), len(rows), e(desc), trs))
+        n_ = lambda v: "{:,}".format(int(v or 0))
+        rep = t.get("spent_replaced") or 0.0
+        head = ('Counted %s: <b>%s</b> English; <b>%s</b> kept (%.0f%%); %s made from misread Sanskrit; %s judged wrong. '
+                'The translation cost %s (repriced at today\'s prices), %s of it on English that cannot be kept as it '
+                'is%s; translating those again costs about %s. What lasts is the clean reading.'
+                % (e(str(res.get("at", "?")).replace("T", " ")), n_(t.get("english")), n_(t.get("keep")),
+                   (100.0 * t.get("keep", 0) / t["english"]) if t.get("english") else 0.0, n_(t.get("debris")),
+                   n_(t.get("judged_wrong")), money(t.get("spent") or 0), money((t.get("at_risk") or 0) - rep),
+                   (", %s on English a better reading replaced" % money(rep)) if rep else "",
+                   money(t.get("redo_cost") or 0)))
+    else:
+        head = "Not counted yet: press Count again, or run python scripts\\redeem.py (free, read-only)."
+    body = ('<div class="srcpage"><p class="rpintro" style="margin:0">What of the translation already paid for can be '
+            'kept, and what cannot. %s</p><div class="pchips">%s</div><div class="repairbar" id="rp-corpus" '
+            'style="margin-top:10px"><button class="tr-rest rp" data-doc="corpus" '
+            'onclick="repairStep(this.dataset.doc,&#39;redeem_all&#39;,this)">Count again (free, a minute)</button>'
+            '<div class="rpout"></div></div>%s</div>' % (head, chips, groups))
+    css = (".pchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pchip{border:1px solid var(--border);"
+           "border-radius:7px;padding:4px 10px;font-size:12px;color:var(--cream);text-decoration:none}.pchip b{color:var(--gold)}"
+           ".pchip.r-ok{border-color:#2f6b45}.pchip.r-lo{border-color:#7a2f2f}.pchip.r-mid{border-color:#6b5420}"
+           ".ph{font-size:15px;color:var(--gold);margin:22px 0 2px}.ph span{color:var(--muted);font-weight:400}"
+           ".pdesc{color:var(--muted);font-size:12px;margin-bottom:6px}.pdoc{width:46%;word-break:break-word;font-weight:600}"
+           ".pdoc a{color:var(--cream)}.num{white-space:nowrap;text-align:right}th{text-align:left;color:var(--muted);"
+           "font-weight:600;font-size:11px}" + _REDEEM_CSS)
+    return ("""<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>What is redeemed</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0b0a08;--card:#161410;--card2:#1e1b16;--border:#2a271f;--gold:#c9952a;--cream:#ede4cc;--muted:#7a6d58}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;min-height:100vh}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+header a{color:var(--muted);font-size:12px;text-decoration:none}
+header a:hover{color:var(--gold)}
+header h1{font-size:18px;color:var(--gold);font-weight:700}
+.tr-rest{background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 9px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer}
+.tr-rest:hover{border-color:var(--gold);color:var(--gold)}
+.tr-rest:disabled{opacity:.6;cursor:default}
+""" + _REPAIR_CSS + _SOURCES_CSS + css + """
+</style></head><body>
+<header><a href="/library">&larr; Library</a><a href="/">Dashboard</a><a href="/path">The path</a><a href="/sources">Sources &amp; repairs</a><h1>What is redeemed</h1></header>
 """ + body + """
 <div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--gold);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:13px;display:none;z-index:50;max-width:90vw"></div>
 <script>
@@ -3504,6 +3638,7 @@ def library():
     except Exception as e:
         return f"<pre>Library error: {_html.escape(str(e))}</pre>", 500
     notes = _library_notes()   # DESK_HEAL_2026_10_10
+    rdm = _redeem()   # REDEEM_2026_10_14: what of each text's English is kept
     aside = _source_verdicts(pathlib.Path(db_path).parent)   # REPAIR_PATH_2026_10_10: the texts set aside
     judged = _judged(pathlib.Path(db_path).parent)   # JUDGE_DESK_2026_10_11: the last assessments
 
@@ -3567,7 +3702,7 @@ def library():
                 f'<div class="bar"><i style="width:{pct}%"></i></div>'
                 f'<div class="meta"><span class="badge en">EN {en}/{total}</span>{hi_badge}{qa_badge}'
                 f'<span class="pct">{pct}%</span></div></a>'
-                f'{acts_html}</div>'
+                f'{_redeem_note(code, rdm)}{acts_html}</div>'   # REDEEM_2026_10_14
             )
         body += '</div>'
     body += _repair_waiting(rows, cats, notes, aside, judged)   # REPAIR_PATH_2026_10_10: no English yet, held by its scan
@@ -3612,6 +3747,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 .cardnote{{margin-top:6px;font-family:'Inter',sans-serif;font-size:10.5px;line-height:1.45;color:#d9b36a;border-left:2px solid #6b5420;padding:2px 0 2px 7px;cursor:help}}
 {_REPAIR_CSS}
 {_JUDGED_CSS}
+{_REDEEM_CSS}
 /* BOOKSMITH_WIRING_2026_09_12 */
 .card-wrap{{position:relative}}
 .pick{{position:absolute;top:8px;right:8px;z-index:3;cursor:pointer;padding:4px}}
@@ -3643,9 +3779,10 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
 <header>
   <a class="back" href="/">&#8592; Dashboard</a>
   <h1>&#2384; Srangam Library</h1>
-  <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses</span>
+  <span class="sub">{total_docs} readable texts &middot; {total_en:,} English &middot; {total_hi:,} Hindi verses{(" &middot; <a href='/redeem' style='color:var(--green);text-decoration:none' title='REDEEM_2026_10_14: what of the English is kept, and what is not'>" + format((rdm.get("totals") or {}).get("keep", 0), ",") + " kept</a>") if rdm else ""}</span>
   <a class="back" href="/sources" title="JUDGE_DESK_2026_10_11: every text whose scan stops its translation, judged, with the editions found" style="margin-left:auto;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128269; Sources &amp; repairs</a>
   <a class="back" href="/path" title="PATH_2026_10_12: the way forward for every text: repair, find a source, retire, translate, judge" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#129517; The path</a>
+  <a class="back" href="/redeem" title="REDEEM_2026_10_14: what of the translation already paid for is kept, and what is not" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878; What is redeemed</a>
   <a class="back" href="/methodology" title="How source and translation quality are measured" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
   <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
 </header>

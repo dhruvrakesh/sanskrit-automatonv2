@@ -146,3 +146,6 @@ data/benchmarks/
 data/reingest/
 # PATH_2026_10_12: the path of every text (scripts/text_path.py) is charted here, and stays local
 data/text_path.json
+# REDEEM_2026_10_14: what of the translation is kept (scripts/redeem.py) and the T2 logs stay local
+data/redeem.json
+data/retranslate/

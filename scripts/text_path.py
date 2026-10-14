@@ -85,6 +85,7 @@ SERIOUS = 10.0          # % of a judged sample with fidelity <= 2: translate aga
 CLEAN_VISION = 80.0     # % of passages read by vision: a clean reading
 DUP_SHARE = 0.5         # share of letter 4-grams two readings share: the same work
 JUDGE_SAMPLE = 40
+T2_PER_PASSAGE = 0.0017  # REDEEM_2026_10_14: a marked passage translated again (pro), judged again, its Hindi again
 WITHDRAW_MISREAD = 5.0  # % of letters misread (or a judged sample 25% wrong): withdrawing it from the site is offered
 EN_PER_PASSAGE = 0.00063   # measured on 12 Oct (gemini-2.5-flash, the last 2,258 calls); usage_log decides
 W = re.compile("[\u0900-\u0963\u0971-\u097f]+")
@@ -465,8 +466,13 @@ def decide(f: dict, pr: dict) -> dict:
     if serious >= SERIOUS:
         o.update(path="retranslate", why=("the judge read %d passages: fidelity %.2f of 5, a wrong meaning in %d (%.0f%%)"
                                           % (rv["n"], rv["fidelity"], rv["serious"], serious)),
-                 next=["python scripts\\judge_review.py --doc %s   (read what it marks)" % doc],
-                 also=["T2 (next): translate the marked passages again with the stronger engine, then judge them again"])
+                 next=["python scripts\\judge_review.py --doc %s   (read what it marks)" % doc,
+                       "python scripts\\retranslate_marked.py --doc %s   (T2: the marked passages again with the stronger "
+                       "engine, then judged again; the dry run, free)" % doc],   # REDEEM_2026_10_14
+                 also=["the judge read %d of %d English: judge more to find the rest: python scripts\\judge_sample.py --doc %s "
+                       "--sample-pct %d --limit 40   (the dry run, free)"
+                       % (rv["n"], en, doc, max(1, min(100, int(math.ceil(100.0 * 2 * JUDGE_SAMPLE / max(1, en))))))],
+                 cost=rv["serious"] * T2_PER_PASSAGE)
         return o
     o.update(path="done", why="translated (English %d of %d, Hindi %d); %s; the judge: fidelity %.2f, a wrong meaning in "
              "%.0f%% of %d" % (en, n, hi, lvl, rv["fidelity"], serious, rv["n"]))

@@ -1786,3 +1786,29 @@ In the Lovable SQL editor, read-only: every `corpus_reader_*` function's definit
     FROM pg_proc p JOIN pg_namespace n ON n.oid = p.pronamespace
     WHERE n.nspname = 'public' AND p.proname LIKE 'corpus\_reader\_%' AND p.prokind = 'f'
     ORDER BY p.proname;
+
+
+## What is redeemed (DOCS50_2026_10_14)
+
+1. `python scripts\redeem.py --html exports\redeem.html --csv exports\redeem.csv`: free and read-only. It
+   writes `data/redeem.json`, which the Library and `/redeem` show. Count again on `/redeem` does the same.
+2. `python scripts\redeem.py --doc Mallapurana`: one text, with the passages the judge marks.
+3. Green is kept; amber is mostly kept, or replaced by a better reading (translate it); red is to translate
+   again after the repair, or a source first.
+
+## The passages the judge marks, translated again (T2) (DOCS50_2026_10_14)
+
+1. `python scripts\retranslate_marked.py`: the dry run (free). It shows what it would do, what it leaves out and
+   why, and the price.
+2. `python scripts\retranslate_marked.py --yes --max-usd 0.10`: the run. It stops before the cap, at the spend
+   cap, or while the dashboard writes the same text. The log is in `data/retranslate/`.
+3. `python scripts\judge_review.py`: what the judge says now. A passage still marked goes to a person.
+
+## Does the reader return the reading's engine? (Srangam S2) (DOCS50_2026_10_14)
+
+In the Lovable SQL editor, read-only:
+
+    SELECT p.proname, position('ocr_engine' in pg_get_functiondef(p.oid)) > 0 AS returns_engine
+    FROM pg_proc p JOIN pg_namespace n ON n.oid = p.pronamespace
+    WHERE n.nspname = 'public' AND p.proname IN ('corpus_reader_page', 'corpus_reader_outline') AND p.prokind = 'f'
+    ORDER BY p.proname;

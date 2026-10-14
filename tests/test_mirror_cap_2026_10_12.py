@@ -246,7 +246,8 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                later = sorted(SCRIPTS.glob(f + ".bak_readin_*"))   # READ_IN_2026_10_13 came after
+                # READ_IN_2026_10_13 came after (text_path.py), then REDEEM_2026_10_14 (dashboard.py, text_path.py)
+                later = sorted(SCRIPTS.glob(f + ".bak_readin_*")) or sorted(SCRIPTS.glob(f + ".bak_redeem_*"))
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
