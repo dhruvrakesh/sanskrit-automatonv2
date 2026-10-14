@@ -149,3 +149,5 @@ data/text_path.json
 # REDEEM_2026_10_14: what of the translation is kept (scripts/redeem.py) and the T2 logs stay local
 data/redeem.json
 data/retranslate/
+# SCHOLAR_2026_10_14: the scholarly English runs' logs stay local
+data/scholar/

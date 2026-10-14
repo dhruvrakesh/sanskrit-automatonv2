@@ -727,3 +727,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | S3 | Srangam: each text's verdict on its card | After S2 |
 | D2 | Translate what the repairs gave; then release Karan and the Hayashirsha | About $7.73 |
 | O1 | The Yoga Vasistha's OCR, stopped with the dashboard (1,542 of 1,982 pages) | Free; start it again |
+
+
+## Addendum 2026-10-14 (42) (DOCS52_2026_10_14)
+
+| # | Item | State |
+|---|---|---|
+| SC1 | A scholarly English (context, glossary, notes, critic, revisions, judge of both) | Built and tested (SCHOLAR_2026_10_14); the pilot is MBh01 1.1.0-1.1.23, about $1.23 |
+| SC2 | A person's review and glossary | Built (`--review`, `--term`) |
+| H1 | No paid translation where the scan or the source comes first | Built and tested (HOLD_2026_10_14) |
+| MB1 | MBh01's lost prose | Importer fixed (MBH_PROSE_2026_10_14); the e-text is saved by a person, then the plan |
+| YV1 | The Yoga Vasistha is a Hindi book with the Sanskrit in it | Withdraw it from the site; finish the OCR; separate the Sanskrit (vision), or find a Sanskrit edition |
+| L1 | BORI's terms on the e-text and the site's MBh01 | A decision for the owner |
+| S4 | Srangam: the scholarly English in the reader (C16; only rows passed and accepted by a person) | After the pilot is read |
+| SC3 | A chapter-level pass for consistency (names, epithets, terms across a chapter) | After the pilot |

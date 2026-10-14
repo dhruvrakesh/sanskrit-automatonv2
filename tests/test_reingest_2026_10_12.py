@@ -142,7 +142,8 @@ class ThePlan(Base):
         self.assertIn("what goes with them: English 1, Hindi 1, reviews 1, vectors 1", out)
         self.assertIn("(approved, page 3 passage 1): moves to passage 2", out)
         self.assertIn("(draft, page 4 passage 2): loses its passage", out)
-        self.assertTrue(self.last(out, "NEXT").endswith("--doc R --apply --replace 1"), out)
+        # MBH_PROSE_2026_10_14: the NEXT line says where it read (--merged-dir), so a paste reads the same pages
+        self.assertTrue(self.last(out, "NEXT").endswith("--doc R --merged-dir %s --apply --replace 1" % self.merged), out)
         con = self.con(); self.assertEqual(rows(con, self.did), before); con.close()
         self.assertFalse((self.t / "backups").exists())
 
@@ -150,7 +151,8 @@ class ThePlan(Base):
         rc, out = self.tool("--pages", "3")
         self.assertEqual(rc, 0, out)
         self.assertIn("changed 1", out); self.assertNotIn("page 0004", out)
-        self.assertTrue(self.last(out, "NEXT").endswith("--pages 3 --apply"), "nothing translated is lost on page 3")
+        self.assertTrue(self.last(out, "NEXT").endswith("--pages 3 --merged-dir %s --apply" % self.merged),
+                        "nothing translated is lost on page 3")
 
 
 class TheApply(Base):

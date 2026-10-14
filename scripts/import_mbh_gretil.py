@@ -45,7 +45,12 @@ from indic_transliteration import sanscript
 GRETIL_URL = "http://gretil.sub.uni-goettingen.de/gretil/1_sanskr/2_epic/mbh/mbh_{book:02d}_u.htm"
 
 # Constituted-text line:  01,001.003a <text>   (pāda letter optional for prose)
-MAIN_RE = re.compile(r"^(\d{2}),(\d{3})\.(\d{3})([a-z]?)\s+(.*)$")
+# MBH_PROSE_2026_10_14: a prose line's last letter is a capital (01,003.001A; the e-text's readme, MBh00.txt), and
+# [a-z] left every prose passage of the critical edition out (1.1.1, 1.3.2-59, 1.4.1-3 ...). The BORI form of the
+# reference (01003001A) is read too. PROSE: the (chapter, verse) that were prose in the last parse.
+MAIN_RE = re.compile(r"^(\d{2}),?(\d{3})\.?(\d{3})([A-Za-z]?)\s+(.*)$")
+REF_RE = re.compile(r"^\d{2},?\d{3}\.?\d{3}")
+PROSE = set()
 TAG_RE = re.compile(r"<[^>]+>")
 
 
@@ -63,7 +68,9 @@ def parse(raw: str, book: int):
     """Return {chapter_int: [ {verse_ref, iast_text} ]} — constituted text only."""
     text = html_mod.unescape(TAG_RE.sub("", raw))
     chapters: dict[int, dict[int, list[str]]] = {}
-    kept = skipped_star = 0
+    kept = skipped_star = prose_lines = 0
+    unread = []   # MBH_PROSE_2026_10_14: lines that look like a reference and were not read
+    PROSE.clear()
     for line in text.splitlines():
         line = line.strip()
         if not line:
@@ -73,6 +80,8 @@ def parse(raw: str, book: int):
             continue  # star-passage / apparatus — not constituted text
         m = MAIN_RE.match(line)
         if not m:
+            if REF_RE.match(line):
+                unread.append(line[:60])
             continue
         b, ch, vs = int(m.group(1)), int(m.group(2)), int(m.group(3))
         if b != book:
@@ -82,9 +91,15 @@ def parse(raw: str, book: int):
             continue
         chapters.setdefault(ch, {}).setdefault(vs, []).append(payload)
         kept += 1
+        if m.group(4).isupper():   # MBH_PROSE_2026_10_14
+            PROSE.add((ch, vs))
+            prose_lines += 1
     print(f"Parsed: {kept} constituted pāda/prose lines kept, "
           f"{skipped_star} star-passage lines excluded, "
           f"{len(chapters)} adhyāyas found.")
+    print("  of them prose: %d lines in %d passages (MBH_PROSE_2026_10_14)" % (prose_lines, len(PROSE)))
+    if unread:
+        print("  NOT READ: %d lines that look like a reference (the first: %s)" % (len(unread), unread[0]))
     return chapters
 
 
@@ -108,7 +123,7 @@ def write_jsonl(chapters, book: int, out_dir: pathlib.Path, doc_code: str,
                 "text": dev_verse,
                 "verse_ref": f"{book}.{ch}.{vs}",
                 "chapter": str(ch),
-                "text_type": "verse" if len(iast_lines) > 1 else "prose",
+                "text_type": "prose" if (ch, vs) in PROSE else ("verse" if len(iast_lines) > 1 else "prose"),
                 "padas": len(iast_lines) * 2,
                 "meta": {"source": "GRETIL/BORI e-text (Tokunaga/Smith)",
                          "iast_source": iast_verse},

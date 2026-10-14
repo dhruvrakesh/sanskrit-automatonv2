@@ -173,6 +173,20 @@ def _source_state(doc):
     return last
 
 
+def _hold_message(doc):
+    """HOLD_2026_10_14: the refusal when the register has this text withdrawn or set aside, else None. Its pages are
+    kept, and one page (--only-page) is never held. Exit 4, so that the Library does not take it for the debris
+    guard's hold (exit 3)."""
+    st = _source_state(doc) or {}
+    if st.get("status") not in ("withdrawn", "set_aside"):
+        return None
+    w = st["status"] == "withdrawn"
+    return ("REFUSING (HOLD_2026_10_14): %s is %s in data/source_verdicts.jsonl (%s: %s). Nothing was sent. A better "
+            "%s first.\n  Translate it anyway: add --allow-held (dashboard: set SA_ALLOW_HELD=1)."
+            % (doc, "withdrawn from the site" if w else "set aside", str(st.get("at") or "?")[:16],
+               st.get("reason") or "", "source" if w else "scan"))
+
+
 def _debris_guard(con, doc, debris_max, inbox=None):
     """A refusal message when the doc's stored text is repairable Tesseract debris, else None."""
     _st = _source_state(doc)   # REPAIR_HEAL_2026_10_11: "translate as is" was decided for this text
@@ -270,6 +284,9 @@ def main():
     ap.add_argument("--allow-debris", action="store_true",
                     help="TRANSLATE_DEBRIS_GUARD_2026_10_04: translate even when the source is repairable "
                          "Tesseract debris (env SA_ALLOW_DEBRIS=1 does the same)")
+    ap.add_argument("--allow-held", action="store_true",
+                    help="HOLD_2026_10_14: translate a whole text the register (data/source_verdicts.jsonl) has "
+                         "withdrawn or set aside (env SA_ALLOW_HELD=1 does the same)")
     ap.add_argument("--debris-max", type=float, default=float(os.environ.get("SA_DEBRIS_MAX") or 30.0),
                     help="TRANSLATE_DEBRIS_GUARD_2026_10_04: refuse above this %% of debris passages")
     ap.add_argument("--reference", choices=["auto", "none"], default="auto",
@@ -299,6 +316,12 @@ def main():
     if doc_meta["id"] is None:
         print(f"ERROR: doc '{args.doc}' not found in DB")
         sys.exit(1)
+    if (args.only_page is None and not args.allow_held
+            and os.environ.get("SA_ALLOW_HELD", "") not in ("1", "true", "yes")):   # HOLD_2026_10_14 (SCHOLAR_2026_10_14)
+        _held = _hold_message(args.doc)
+        if _held:
+            print(_held)
+            sys.exit(4)
     if (args.only_page is None and not args.allow_debris
             and os.environ.get("SA_ALLOW_DEBRIS", "") not in ("1", "true", "yes")):   # TRANSLATE_DEBRIS_GUARD_2026_10_04
         _msg = _debris_guard(con, args.doc, args.debris_max)

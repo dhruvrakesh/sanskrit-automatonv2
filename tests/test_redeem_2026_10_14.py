@@ -568,7 +568,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_scholar_*"))   # SCHOLAR_2026_10_14 came after (dashboard.py)
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             g = (t / ".gitignore").read_bytes()
             self.assertIn(b"data/text_path.json\r\n# REDEEM_2026_10_14", g)
             self.assertIn(b"data/redeem.json\r\ndata/retranslate/\r\n", g, "its line endings kept")

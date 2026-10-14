@@ -639,7 +639,7 @@ class ThePatcher(unittest.TestCase):
             for f in self.FILES:
                 # the patches that came after, in order: the first later backup of a file is this patch's result
                 later = []
-                for tag in ("judgedesk", "etextwitness", "benchmark", "quality", "reingest", "path"):
+                for tag in ("judgedesk", "etextwitness", "benchmark", "quality", "reingest", "path", "scholar"):
                     later = later or sorted(SCRIPTS.glob(f + ".bak_%s_*" % tag))
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)

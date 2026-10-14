@@ -1700,7 +1700,8 @@ def _repair_waiting(rows, cats, notes, aside, judged=None) -> str:   # JUDGE_DES
             continue
         rec = aside.get(code) or {}
         c = _html.escape(str(code), quote=True)
-        acts = "" if rec.get("status") == "set_aside" else (
+        _hold = _hold_reason(code, rec, rdm)   # HOLD_2026_10_14: no translate buttons while the scan or the source comes first
+        acts = _hold_note(code, _hold, rec) if (rec.get("status") == "set_aside" or _hold) else (
             '<div class="cardacts"><button class="tr-rest" data-doc="%s" title="Translate its English" '
             'onclick="translateRest(this.dataset.doc,&#39;en&#39;,this)">&#9889; Finish EN</button>'
             '<button class="tr-rest hi" data-doc="%s" title="Translate its Hindi" '
@@ -2130,6 +2131,101 @@ _REDEEM_CSS = (".rdm{display:block;margin-top:6px;font-family:'Inter',sans-serif
                "border-left:2px solid;padding:2px 0 2px 7px;text-decoration:none}.rdm:hover{text-decoration:underline}"
                ".rdm.r-ok{color:#7cc497;border-color:#2f6b45}.rdm.r-mid{color:#d9b36a;border-color:#6b5420}"
                ".rdm.r-lo{color:#e09a9a;border-color:#7a2f2f}.rdm.r-off{color:#8a8070;border-color:#3a352b}")
+
+
+# SCHOLAR_2026_10_14 / HOLD_2026_10_14 -------------------------------------------------------------------------
+_PATH_CACHE = {"key": None, "by": {}}
+_HOLD_PATHS = {"repair": "repair its scan first", "source": "a better source first", "retire": "it is to be retired"}
+
+
+def _path_texts() -> Dict[str, dict]:
+    """HOLD_2026_10_14: the last chart of the path (data/text_path.json) as {doc: its row}, read again only when the
+    file changes; {} when there is none."""
+    try:
+        st = PATH_FILE.stat()
+        key = (str(PATH_FILE), st.st_mtime, st.st_size)
+    except OSError:
+        return {}
+    if _PATH_CACHE["key"] != key:
+        try:
+            res = json.loads(PATH_FILE.read_text(encoding="utf-8"))
+            _PATH_CACHE["by"] = {str(t.get("doc")): t for t in (res.get("texts") or []) if isinstance(t, dict)}
+        except (OSError, ValueError, AttributeError):
+            _PATH_CACHE["by"] = {}
+        _PATH_CACHE["key"] = key
+    return _PATH_CACHE["by"]
+
+
+def _hold_reason(code: str, rec=None, rdm=None) -> str:
+    """HOLD_2026_10_14: why the Library does not offer Finish EN and Add Hindi on this text now ('' when it does).
+    The register first (withdrawn, set aside); then the path (repair the scan, a better source, retire); for a text
+    the path has not charted, the count (redeem.py: to translate again after the repair, a source first). Translating
+    now would pay for English made from the same misreading."""
+    st = (rec or {}).get("status")
+    if st == "withdrawn":
+        return "withdrawn from the site: a better source first"
+    if st == "set_aside":
+        return "set aside: a better scan first"
+    p = _path_texts().get(code)
+    if p is not None:
+        step = p.get("path")
+        return ("%s (the path: %s)" % (_HOLD_PATHS[step], p.get("why") or step)) if step in _HOLD_PATHS else ""
+    for t in (rdm or {}).get("texts") or []:
+        if t.get("doc") == code:
+            if t.get("verdict") == "redo":
+                return "repair its scan first (less than half of its English can be kept)"
+            if t.get("verdict") == "source":
+                return "a better source first (its scan is not here)"
+            return ""
+    return ""
+
+
+def _hold_note(code: str, reason: str, rec=None) -> str:
+    """HOLD_2026_10_14: the card's line for a hold ('' for a text whose register state the card already explains)."""
+    import html as _html
+    if not reason or (rec or {}).get("status") in ("withdrawn", "set_aside"):
+        return ""
+    return ('<div class="cardnote state" title="HOLD_2026_10_14: data/text_path.json, data/redeem.json">Finish EN and Add '
+            'Hindi are not offered now: %s. <a href="/path" style="color:inherit">The path</a> has the next step; chart '
+            'it again there after a repair.</div>' % _html.escape(reason))
+
+
+@app.get("/scholar")
+def scholar_index_page():
+    """SCHOLAR_2026_10_14: the scholarly English (scripts/scholar_translate.py), text by text. Reads the database
+    read-only."""
+    return _scholar_page(None)
+
+
+@app.get("/scholar/<doc>")
+def scholar_doc_page(doc):
+    """SCHOLAR_2026_10_14: one text's scholarly English beside its Sanskrit and its working English, verse by verse."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return "invalid doc", 400
+    return _scholar_page(doc)
+
+
+def _scholar_page(doc):
+    import html as _html
+    db_path = request.args.get("db", "data/context.db")
+    try:
+        if str(SCRIPTS) not in sys.path:
+            sys.path.insert(0, str(SCRIPTS))
+        import scholar_translate as _st
+        con = sqlite3.connect(pathlib.Path(db_path).resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+        try:
+            if doc:
+                try:
+                    off = max(0, int(request.args.get("offset", 0) or 0))
+                except ValueError:
+                    off = 0
+                return _st.render_doc(con, doc, offset=off, limit=200, nav=True)
+            return _st.render_index(con, nav=True)
+        finally:
+            con.close()
+    except Exception as e:
+        return "<pre>Scholarly English: %s</pre>" % _html.escape("%s: %s" % (type(e).__name__, e)), 500
 
 
 @app.get("/redeem")
@@ -3670,13 +3766,15 @@ def library():
             # "Proceed with pending translation" affordance: offer to finish the
             # English, and to add Hindi wherever English exists but Hindi does not.
             acts = ''
-            if pct < 100:
+            _hold = _hold_reason(code, aside.get(code), rdm) if (pct < 100 or h < en) else ''   # HOLD_2026_10_14
+            if pct < 100 and not _hold:
                 acts += (f'<button class="tr-rest" title="Translate the remaining English verses"'
                          f' onclick="translateRest(\'{code}\',\'en\',this)">&#9889; Finish EN</button>')
-            if h < en:
+            if h < en and not _hold:
                 acts += (f'<button class="tr-rest hi" title="Translate Hindi for verses that have English but no Hindi"'
                          f' onclick="translateRest(\'{code}\',\'hi\',this)">&#2361;&#2367; Add Hindi</button>')
             acts_html = f'<div class="cardacts">{acts}</div>' if acts else ''
+            acts_html += _hold_note(code, _hold, aside.get(code))   # HOLD_2026_10_14
             # DESK_HEAL_2026_10_10: what the last run said, when it could not do the work
             _shown = []
             for _n in notes.get(code, []):
@@ -3783,6 +3881,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
   <a class="back" href="/sources" title="JUDGE_DESK_2026_10_11: every text whose scan stops its translation, judged, with the editions found" style="margin-left:auto;color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128269; Sources &amp; repairs</a>
   <a class="back" href="/path" title="PATH_2026_10_12: the way forward for every text: repair, find a source, retire, translate, judge" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#129517; The path</a>
   <a class="back" href="/redeem" title="REDEEM_2026_10_14: what of the translation already paid for is kept, and what is not" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878; What is redeemed</a>
+  <a class="back" href="/scholar" title="SCHOLAR_2026_10_14: the scholarly English, verse by verse: drafted with its context and glossary, read by a critic, revised, judged" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128220; Scholarly English</a>
   <a class="back" href="/methodology" title="How source and translation quality are measured" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
   <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
 </header>
@@ -3820,6 +3919,7 @@ async function translateRest(doc, lang, btn){{   // DESK_HEAL_2026_10_10: says w
 function _jobVerdict(j){{
   var out=(j.out||'')+' '+(j.err||'');
   if(j.ok===false && /allow-debris|ocr_consensus|TRANSLATE_DEBRIS_GUARD/.test(out)) return {{word:'held', text:'Held: the OCR of this text carries Tesseract debris and its page PDFs are in the inbox, so the source is repaired first (OCR consensus, no spend). Reload the Library: the note under the text has the command.'}};
+  if(j.ok===false && /HOLD_2026_10_14/.test(out)) return {{word:'held', text:'Held: this text is withdrawn or set aside (data/source_verdicts.jsonl), so it is not translated further: a better source first. Nothing was spent.'}};
   if(j.ok===false && /KILLED/.test(out)) return {{word:'stopped', text:'Stopped by hand.'}};
   if(j.ok===false) return {{word:'failed', text:'It failed: the Dashboard History has the reason.'}};
   if(out.indexOf('[NOTHING]')>=0) return {{word:'nothing to do', text:'Nothing to translate: every verse has it already, or what is left is illegible OCR (re-OCR it rather than translate).'}};

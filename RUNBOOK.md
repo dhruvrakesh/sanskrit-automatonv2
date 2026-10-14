@@ -1836,3 +1836,48 @@ and a Latin word among them. A change to one is a change to the other, with the 
 
 The number after `--replace` is the plan's, not the chart's: translations made since the chart change it. Run
 the plan, and use the `--apply` line it prints.
+
+
+## The scholarly English (DOCS52_2026_10_14)
+
+`scripts/scholar_translate.py` is a dry run unless `--yes`: what it sends, what it leaves out, what it costs.
+
+1. The dry run, and the prompt the first verse gets (free):
+
+       python scripts\scholar_translate.py --doc MBh01 --pages 1 --limit 24 --show-prompt
+
+2. The run, capped: the `NEXT:` line it prints, or `--yes --max-usd 1.50`.
+3. Read it: http://127.0.0.1:5057/scholar/MBh01, or `--report` (exports\scholar_MBh01.html).
+4. A person's word:
+   - `--review 1.1.8 --verdict accept --by NAME` on the current version;
+   - `--term T --rendering R --kind K --note N` for a glossary entry that wins.
+5. A verse the critic calls a **source doubt** wants another edition, not another run.
+
+It refuses a text withdrawn, set aside or in repair (exit 3). It stops at `--max-usd`, at the spend cap, and while
+the dashboard changes the text's Sanskrit or English. A Hindi job does not stop it.
+
+## A text held by the register (DOCS52_2026_10_14)
+
+`translate_passages.py` refuses a whole-text run on a text withdrawn or set aside: "REFUSING (HOLD_2026_10_14)",
+exit 4.
+- One page (`--only-page`) is not held.
+- To translate it anyway: `--allow-held`, or start the dashboard with `SA_ALLOW_HELD=1`.
+
+The Library holds the buttons of a text whose path is repair the scan, a better source or retire. Chart again on
+The path after a repair.
+
+## MBh01's prose (DOCS52_2026_10_14)
+
+1. Save the book's e-text by hand from the GRETIL or BORI page to `sources\mbh_01_u.htm`. Mind BORI's terms: not to
+   be passed on.
+2. The dry run:
+
+       python scripts\import_mbh_gretil.py --book 1 --src sources\mbh_01_u.htm --out data\raw_mbh01_ce --dry-run
+
+   It says how many prose lines it read, and "NOT READ" if a reference-like line was not.
+3. The same without `--dry-run`.
+4. The plan (free):
+
+       python scripts\reingest_pages.py --doc MBh01 --merged-dir data\raw_mbh01_ce --no-segment
+
+5. Its `--apply` line only when the verses stay and only the prose comes in.

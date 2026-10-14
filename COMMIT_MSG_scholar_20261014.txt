@@ -1,0 +1,26 @@
+A scholarly English beside the working one (SCHOLAR_2026_10_14); no paid translation where the scan or the source comes first (HOLD_2026_10_14); MBh01's lost prose can be read (MBH_PROSE_2026_10_14); recorded (DOCS52_2026_10_14)
+
+docs/SCHOLAR_2026-10-14.md. Asked on 14 Oct whether a Debroy-grade translation is done: no. The working English is
+one gemini-2.5-flash pass with five verses of context, no glossary kept, no notes, no critic; in MBh01 1.1.8 it makes
+Janamejaya's patronymic a second man, and in 1.1.5 it calls the narrator by his father's name.
+- scripts/scholar_translate.py (new): for each verse, the verse with 6 verses before (Sanskrit and English) and 2
+  after, the text's glossary (entities, earlier passed verses, a person's entries), then a draft, a critic word by
+  word and up to two revisions (gemini-2.5-pro), and the judge of both the scholarly and the working English
+  (judge-v1). Not sent: noise, debris, low quality, indexes and apparatus, Hindi prose; a text withdrawn, set aside
+  or in repair is refused. Stored append-only in scholar_translations with the Sanskrit's hash (a changed reading
+  makes a row stale); scholar_glossary; data/scholar/ logs; usage_log kind "scholar"/"judge". A dry run by default;
+  --yes capped by --max-usd, the spend cap and the dashboard's writers; --review, --term, --report.
+- scripts/patch_scholar_2026_10_14.py: dashboard.py /scholar and /scholar/<doc> (read-only) and a Library link; the
+  Library holds Finish EN / Add Hindi where the register or the path says withdrawn, set aside, repair the scan, a
+  better source or retire (31 cards on 14 Oct), and says why; translate_passages.py refuses a whole-text run on a
+  withdrawn or set-aside text (exit 4; --allow-held, SA_ALLOW_HELD=1); .gitignore data/scholar/.
+- scripts/patch_mbh_prose_2026_10_14.py: import_mbh_gretil.py read [a-z] only, and a prose line of the e-text ends in
+  a capital (01003001A), so every prose passage of the critical edition was passed over (1.1.1, 1.3.2-59 ...); it
+  reads it now, and says what it did not read. reingest_pages.py --no-segment (an e-text one record a passage); its
+  NEXT lines carry --merged-dir and --no-segment when given.
+Tests: tests/test_scholar_2026_10_14.py (17), tests/test_mbh_prose_2026_10_14.py (6); the replay chains of
+test_redeem_2026_10_14 and test_repair_heal_2026_10_11, and the NEXT lines of test_reingest_2026_10_12, follow.
+Docs: scripts/patch_docs52_2026_10_14.py (PLATFORM 55, RUNBOOK, EP 42).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

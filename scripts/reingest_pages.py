@@ -76,15 +76,16 @@ def parse_pages(spec: str) -> set:
     return want
 
 
-def cut(live: sqlite3.Connection, files: dict) -> dict:
-    """{page_no: [row]} as ingest_jsonl_fast would write them, on a scratch table in memory."""
+def cut(live: sqlite3.Connection, files: dict, segment: bool = True) -> dict:
+    """{page_no: [row]} as ingest_jsonl_fast would write them, on a scratch table in memory. segment=False: each
+    record one passage, as ingest_jsonl_fast.py --no-segment (MBH_PROSE_2026_10_14: an e-text, MBh01)."""
     import ingest_jsonl_fast as ij
     sql = live.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name='passages'").fetchone()[0]
     mem = sqlite3.connect(":memory:")
     mem.execute(sql)
     mem.execute("CREATE TABLE passages_fts(text, iast, translation)")   # a plain table: the ingest writes it too
     for pg, path in sorted(files.items()):
-        ij.upsert_passages(mem, 1, pg, ij.read_jsonl(path))
+        ij.upsert_passages(mem, 1, pg, ij.read_jsonl(path), do_segment=segment)
     cols = [r[1] for r in mem.execute("PRAGMA table_info(passages)")]
     out = {pg: [] for pg in files}
     for row in mem.execute("SELECT * FROM passages ORDER BY page_no, idx"):
@@ -172,7 +173,7 @@ def anchors(con, doc_id: int, pages) -> dict:
     return out
 
 
-def plan(con, doc: str, merged: Path, only: set):
+def plan(con, doc: str, merged: Path, only: set, segment: bool = True):
     row = con.execute("SELECT id FROM docs WHERE code=?", (doc,)).fetchone()
     if not row:
         return None, "%s is not in the database" % doc
@@ -185,7 +186,7 @@ def plan(con, doc: str, merged: Path, only: set):
         if not files:
             return None, "none of the pages asked for is in %s" % merged
     db_pages = {r[0] for r in con.execute("SELECT DISTINCT page_no FROM passages WHERE doc_id=?", (doc_id,))}
-    new = cut(con, files)
+    new = cut(con, files, segment)
     old = live_rows(con, doc_id, files)
     pages = {pg: plan_page(old[pg], new.get(pg, [])) for pg in sorted(files)}
     changed = [pg for pg, p in pages.items() if p["changed"]]
@@ -351,9 +352,16 @@ def main() -> int:
     ap.add_argument("--backup-dir", default=os.environ.get("SA_BACKUP_DIR") or r"D:\backups")
     ap.add_argument("--log-dir", default="data/reingest")
     ap.add_argument("--from-dashboard", action="store_true")
+    ap.add_argument("--no-segment", action="store_true",
+                    help="MBH_PROSE_2026_10_14: an e-text's records as they are, one passage each, as "
+                         "ingest_jsonl_fast.py --no-segment cut them (MBh01)")
     a = ap.parse_args()
     doc = a.doc
     q = "python scripts\\reingest_pages.py --doc %s" % doc + ((" --pages %s" % a.pages) if a.pages else "")
+    if Path(a.merged_dir) != Path("data/raw_merged"):   # MBH_PROSE_2026_10_14: the NEXT lines say where it read
+        q += " --merged-dir %s" % a.merged_dir
+    if a.no_segment:
+        q += " --no-segment"
     if not Path(a.db).exists():
         print("REFUSE: %s not found" % a.db); print("VERDICT: no database"); return 1
     try:
@@ -363,7 +371,7 @@ def main() -> int:
     uri = Path(a.db).resolve().as_uri() + "?mode=ro"
     ro = sqlite3.connect(uri, uri=True, timeout=30)
     try:
-        p, err = plan(ro, doc, Path(a.merged_dir), only)
+        p, err = plan(ro, doc, Path(a.merged_dir), only, not a.no_segment)
     finally:
         ro.close()
     if not p:
