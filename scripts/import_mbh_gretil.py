@@ -56,6 +56,9 @@ TAG_RE = re.compile(r"<[^>]+>")
 
 def fetch(book: int, src: str | None) -> str:
     if src:
+        if not pathlib.Path(src).is_file():   # SCHOLAR_V2_2026_10_14: said, not a traceback
+            sys.exit("REFUSE: %s not found. Save the book's e-text there first (from the GRETIL or the BORI page), or "
+                     "leave --src out to download it from GRETIL." % src)
         return pathlib.Path(src).read_text(encoding="utf-8", errors="ignore")
     url = GRETIL_URL.format(book=book)
     print(f"Downloading {url} …")

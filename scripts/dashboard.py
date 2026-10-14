@@ -2206,7 +2206,17 @@ def scholar_doc_page(doc):
     return _scholar_page(doc)
 
 
-def _scholar_page(doc):
+@app.get("/scholar/<doc>/prose")
+def scholar_prose_page(doc):
+    """SCHOLAR_V2_2026_10_14: one text's scholarly English read as prose, chapter by chapter, its notes at each
+    chapter's end. Reads the database read-only."""
+    doc = _validate_doc(doc)
+    if not doc:
+        return "invalid doc", 400
+    return _scholar_page(doc, prose=True)
+
+
+def _scholar_page(doc, prose=False):
     import html as _html
     db_path = request.args.get("db", "data/context.db")
     try:
@@ -2215,6 +2225,8 @@ def _scholar_page(doc):
         import scholar_translate as _st
         con = sqlite3.connect(pathlib.Path(db_path).resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
         try:
+            if doc and prose:   # SCHOLAR_V2_2026_10_14
+                return _st.render_prose(con, doc, nav=True)
             if doc:
                 try:
                     off = max(0, int(request.args.get("offset", 0) or 0))

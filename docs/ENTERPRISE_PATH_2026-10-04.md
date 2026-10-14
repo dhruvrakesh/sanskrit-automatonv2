@@ -741,3 +741,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | L1 | BORI's terms on the e-text and the site's MBh01 | A decision for the owner |
 | S4 | Srangam: the scholarly English in the reader (C16; only rows passed and accepted by a person) | After the pilot is read |
 | SC3 | A chapter-level pass for consistency (names, epithets, terms across a chapter) | After the pilot |
+
+
+## Addendum 2026-10-14 (43) (DOCS53_2026_10_14)
+
+| # | Item | State |
+|---|---|---|
+| SC1 | A scholarly English | Pilot done (scholar-v1): 24 verses, 23 passed, $0.238 |
+| SC3 | Sentences over verses; a second judge; notes held | Built and tested (SCHOLAR_V2_2026_10_14); the pilot again with v2, about $0.36 |
+| SC4 | The prose view (the text read as a book) | Built (`/scholar/<doc>/prose`, `--report`) |
+| SC5 | MBh01 chapter 1, then the whole book | After the v2 pilot is read: about $3, then about $105 |
+| EM1 | An e-text's passages say they are one (MBh01's Q:53%) | Built and tested (ETEXT_META_2026_10_14); plan, apply, then the mirror |
+| MB1 | MBh01's lost prose | The e-text is not in sources yet; the importer can fetch it (no `--src`) |
+| YV1 | The Yoga Vasistha | Withdrawn here; the full mirror retires it on the site |
+| S2 | Srangam: name the reading (e-text, vision OCR, Tesseract), not "OCR confidence" for all | A read-only function; after EM1 |
+| S4 | Srangam: the scholarly English in the reader (rows a person accepted) | After SC3's pilot is read |

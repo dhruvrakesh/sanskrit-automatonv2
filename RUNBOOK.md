@@ -1881,3 +1881,41 @@ The path after a repair.
        python scripts\reingest_pages.py --doc MBh01 --merged-dir data\raw_mbh01_ce --no-segment
 
 5. Its `--apply` line only when the verses stay and only the prose comes in.
+
+
+## The scholarly English, version 2 (DOCS53_2026_10_14)
+
+`scholar_translate.py` now reads sentences, not only verses, and asks a second judge. Both are on by default.
+
+1. The dry run says how many sentences run over verses, and what it costs (free):
+
+       python scripts\scholar_translate.py --doc MBh01 --pages 1 --limit 24 --redo
+
+2. The run, capped: its `NEXT:` line, or `--redo --yes --max-usd 0.75` (about $0.36 for the pilot's 24 verses).
+3. Read it two ways:
+   - as verses: http://127.0.0.1:5057/scholar/MBh01 (the earlier version is under each verse);
+   - as prose: http://127.0.0.1:5057/scholar/MBh01/prose;
+   - or `--report`: exports\scholar_MBh01.html and exports\scholar_MBh01_prose.html.
+4. A verse the second judge calls worse, or flags, is read by a person (`--review`).
+5. `--no-groups` and `--no-compare` give the v1 behaviour.
+
+The dashboard serves `/scholar/<doc>/prose` only after a restart. Restart when it is idle:
+
+    .\scripts\restart_dashboard.ps1 -Status
+    .\scripts\restart_dashboard.ps1
+
+`-Force` cuts the running jobs off; `--force` is not a PowerShell form.
+
+## An e-text that says it is one (DOCS53_2026_10_14)
+
+A text that came in from an e-text before 20 Jul 2026 has the OCR formula's quality (no dandas: 0.6 at most) and no
+engine. The site then calls it "OCR confidence" and marks verses "hard to read".
+
+1. The plan (free, read-only):
+
+       python scripts\heal_etext_meta.py --doc MBh01
+
+2. `--apply` (a backup to D:\backups first, the values before to data\heal\). Refused while the dashboard changes
+   that text; a Hindi job does not stop it.
+3. The mirror: `python scripts\corpus_sync.py`, then its `--apply`.
+4. To put it back: `--undo data\heal\etext_meta_MBh01_<stamp>.jsonl` (the file the apply printed).

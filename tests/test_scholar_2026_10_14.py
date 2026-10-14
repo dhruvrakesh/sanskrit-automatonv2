@@ -297,7 +297,7 @@ class TheRun(unittest.TestCase):
         self.assertEqual((r8["fidelity"], r8["fluency"], r8["working_fidelity"], r8["working_fluency"]), (5, 5, 2, 3))
         self.assertAlmostEqual(r8["cost_usd"], 0.0404, places=6)
         self.assertEqual(r8["src_hash"], ST.src_hash(V8)); self.assertEqual(r8["engine"], "gemini:gemini-2.5-pro")
-        self.assertEqual(r8["prompt_version"], "scholar-v1+scholar-critic-v1")
+        self.assertEqual(r8["prompt_version"], "%s+%s" % (ST.PROMPT_VERSION, ST.CRITIC_VERSION))   # v2 since SCHOLAR_V2
         r9 = rows[3]
         self.assertEqual((r9["passes"], r9["status"]), (3, "flagged"), "two revisions at most, then a person reads it")
         self.assertEqual(r9["doubts"], "vai: a filler")
@@ -600,7 +600,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_scholarv2_*"))   # SCHOLAR_V2_2026_10_14 came after (dashboard.py)
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             g = (t / ".gitignore").read_bytes()
             self.assertTrue(g.endswith(b"# SCHOLAR_2026_10_14: the scholarly English runs' logs stay local\r\ndata/scholar/\r\n"),
                             "its line endings kept")
