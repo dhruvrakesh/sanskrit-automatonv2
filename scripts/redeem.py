@@ -278,6 +278,9 @@ def ledger(a) -> dict:
     try:
         classes = classify(con, a.only)
         spent, flash, pro = spend_by_doc(con)
+        # REDEEM_FIX_2026_10_14: "no longer in the database" is a text missing from docs, not from this count
+        # (with --doc the count holds one text: every other text's spend was called gone, $30.33 on 14 Oct)
+        in_db = {c for (c,) in con.execute("SELECT code FROM docs WHERE code NOT LIKE '%-RETIRED'")}
     finally:
         con.close()
     reg = register(Path(a.verdicts))
@@ -304,7 +307,7 @@ def ledger(a) -> dict:
                spent_all=round(sum(spent.values()), 4),
                spent_replaced=round(sum(t["spent"] for t in texts if not t["english"]), 4),
                replaced=sum(1 for t in texts if not t["english"]),
-               spent_gone=round(sum(v for k, v in spent.items() if k not in classes), 4))
+               spent_gone=round(sum(v for k, v in spent.items() if k not in in_db), 4))
     by = {}
     for t in texts:
         by[t["verdict"]] = by.get(t["verdict"], 0) + 1
@@ -344,7 +347,7 @@ def show(res: dict, one: bool) -> None:
              usd(t["spent"]), usd(t["at_risk"] - rep),
              (", %s on English a better reading replaced (%d text(s), no English here now)" % (usd(rep), t["replaced"]))
              if t.get("replaced") else "", usd(t["redo_cost"])))
-    if t.get("spent_gone"):
+    if t.get("spent_gone") and not one:   # REDEEM_FIX_2026_10_14: a corpus fact, not one text's
         print("  and %s was spent on texts no longer in the database (retired or re-segmented)" % usd(t["spent_gone"]))
 
 

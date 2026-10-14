@@ -1,0 +1,14 @@
+English made from a misread reading is marked "provisional English" (PROVISIONAL_EN_2026_10_14)
+
+docs/PROVISIONAL_2026-10-14.md in the automaton repo. Its ledger (scripts/redeem.py) found 4,062 of 23,264 English
+verses (17%) made from Sanskrit the scanner misread: Latin letters among the Devanagari. The reader muted a
+whole misread line, but a verse with a few Latin letters in its Devanagari, and its English, looked like any
+other. src/lib/corpusDisplay.ts: madeFromMisread() (eight or more Devanagari signs and a Latin word among them,
+the automaton's own test) and PROVISIONAL_NOTE. src/components/reader/PassageBlock.tsx: a "provisional English"
+chip with its reason at the foot of such a passage, and the same in About this passage (both readers). Not
+marked: a clean verse, a verse without English, the book's own English, one stray letter. New:
+src/__tests__/reader-provisional.test.tsx (4). RELIABILITY_AUDIT Phase AF (invariants 50-51). No database
+change; nothing stored is changed; the entry chunk is unchanged.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

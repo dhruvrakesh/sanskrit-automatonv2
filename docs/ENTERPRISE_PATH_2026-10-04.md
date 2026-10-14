@@ -711,3 +711,19 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | S3 | Srangam: each text's verdict on its card | Designed after S1 and S2 |
 | VC1 | Vision's artefacts cleaned before ingest | Next |
 | C14 | Sources wanted on the site | Designed; not started |
+
+
+## Addendum 2026-10-14 (41) (DOCS51_2026_10_14)
+
+| # | Item | State |
+|---|---|---|
+| RD1 | What of the translation is redeemed (the ledger, the Library, /redeem) | **Released** (5cf03b0); REDEEM_FIX built and tested |
+| T2 | The marked passages translated again, then judged again | **Released** (5cf03b0); not run yet (18 passages, about $0.03) |
+| D1 | The re-ingests | Karan, the Natyasastra, 12 texts, 4 Upapuranas in; the Tantric Texts wait for `--replace 6` |
+| M3 | The mirror's held retire of seven re-ingested texts | `--allow-mass-retire` with those texts named |
+| S1 | Srangam: "provisional English" on English made from a misread reading | Built and tested (PROVISIONAL_EN_2026_10_14) |
+| C15 | The reader's meaning search leaves retired passages out | Built and tested (Lovable SQL, one paste) |
+| S2 | Srangam: the reading's engine on each verse | Next; a new read-only reader function (corpus_reader_page does not return it) |
+| S3 | Srangam: each text's verdict on its card | After S2 |
+| D2 | Translate what the repairs gave; then release Karan and the Hayashirsha | About $7.73 |
+| O1 | The Yoga Vasistha's OCR, stopped with the dashboard (1,542 of 1,982 pages) | Free; start it again |

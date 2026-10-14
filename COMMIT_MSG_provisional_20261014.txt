@@ -1,0 +1,20 @@
+redeem.py --doc no longer calls the others' spend gone (REDEEM_FIX_2026_10_14); the Srangam reader marks provisional English (PROVISIONAL_EN_2026_10_14); the reader's search leaves retired passages out (C15_READER_GUARD_2026_10_14); recorded (DOCS51_2026_10_14)
+
+docs/PROVISIONAL_2026-10-14.md. After 5cf03b0, on 14 Oct: Karan, the Natyasastra, the 12 texts to use the repair
+and 4 Upapuranas went in, in place; the Tantric Texts were refused (6 English and 6 Hindi go: --replace 6); the
+mirror held the retire of every mention and vector of seven re-ingested texts; the dashboard was found stopped,
+and the Yoga Vasistha's OCR with it (1,542 of 1,982 pages). The ledger: 23,264 English, 82% kept, $30.59 spent.
+- scripts/patch_redeem_fix_2026_10_14.py: redeem.py's "no longer in the database" is a text missing from docs
+  (or retired), whatever is counted; with --doc that corpus line is not printed ($30.33 was printed for one text).
+- scripts/patch_srangam_provisional_2026_10_14.py, with docs/srangam/PROVISIONAL_EN_2026-10-14/: the reader's
+  "provisional English" chip and its reason on a passage whose English was made from a misread reading, by the
+  automaton's own test (redeem.py, repair_text.JUNK); src/__tests__/reader-provisional.test.tsx (4); Srangam's
+  RELIABILITY_AUDIT Phase AF (invariants 50-51). No database change.
+- docs/cloud/C15_reader_retired_guard_2026-10-14.sql and C15_checks_2026-10-14.sql: corpus_reader_match and
+  corpus_reader_similar join only live passages (one line each, rewritten from the live definition, all or
+  none; rollback in the file). Tested on PostgreSQL 16 with C5's functions.
+Tests: tests/test_provisional_2026_10_14.py (7).
+Docs: scripts/patch_docs51_2026_10_14.py (PLATFORM 54, RUNBOOK, EP 41).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

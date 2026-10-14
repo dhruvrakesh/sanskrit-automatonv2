@@ -1812,3 +1812,27 @@ In the Lovable SQL editor, read-only:
     FROM pg_proc p JOIN pg_namespace n ON n.oid = p.pronamespace
     WHERE n.nspname = 'public' AND p.proname IN ('corpus_reader_page', 'corpus_reader_outline') AND p.prokind = 'f'
     ORDER BY p.proname;
+
+
+## The mirror held a retire (DOCS51_2026_10_14)
+
+`corpus_sync.py` holds a retire of most or all of a text's rows ("HELD: ... use --allow-mass-retire if that is
+right"). After a re-ingest, that is right: the old passages' mentions and vectors go.
+
+1. Name only the texts the HELD lines name, and plan first:
+
+       python scripts\corpus_sync.py --doc smriti_04daksha_smriti --allow-mass-retire
+
+2. Then the same with `--apply`. Never `--allow-mass-retire` without `--doc`.
+
+## English made from a misread reading, on the site (DOCS51_2026_10_14)
+
+The reader marks such a passage "provisional English". The rule is `redeem.py`'s: eight or more Devanagari signs
+and a Latin word among them. A change to one is a change to the other, with the tests of both:
+- `tests/test_provisional_2026_10_14.py`;
+- Srangam `src/__tests__/reader-provisional.test.tsx`.
+
+## Before a re-ingest's --replace (DOCS51_2026_10_14)
+
+The number after `--replace` is the plan's, not the chart's: translations made since the chart change it. Run
+the plan, and use the `--apply` line it prints.
