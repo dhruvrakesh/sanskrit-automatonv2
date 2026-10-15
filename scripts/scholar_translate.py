@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
 """
-scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14
+scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -19,6 +19,17 @@ SCHOLAR_V2_2026_10_14 (after the pilot of 14 Oct: MBh01 1.1.0-1.1.24, $0.238, 23
   - the price measured: the scholar-v2 rows' mean after 10, before that scholar-v1's with a compare at half of it;
   - render_prose (/scholar/<doc>/prose; --report writes it too): the text read as prose, chapter by chapter, the notes
     at each chapter's end.
+
+SCHOLAR_V21_2026_10_14 (after scholar-v2's pilot of 14 Oct, 21:13: 15 passed, 5 flagged, 4 failed, $0.256):
+  - a sentence's passage is kept as the draft wrote it, in the order English needs (scholar-v2.1); its segments say
+    which words render which verse. scholar-v2 joined the segments, which hold the Sanskrit's order, so 1.1.15-1.1.19
+    read as fragments again and the critic flagged it after two revisions;
+  - an answer cut off at the token limit is asked again with room, even when some text came back; a draft that is still
+    not JSON is asked once more; a sentence whose draft fails is translated verse by verse (1.1.20-1.1.23 failed whole);
+    a failure says how the answer ended;
+  - priced by the scholar-v2 rows until 10 of scholar-v2.1 are measured;
+  - the pages order the rows by their passage's place now (a re-ingest moves it), and a sentence whose passage is not
+    its segments joined is shown whole after its verse range, the segments under the fold.
 
 Why: the working English was made in one pass by gemini-2.5-flash, with the five verses before it as its only
 context: no glossary kept between verses, no notes, no review. A judge reads a sample of it. That is a draft. The
@@ -76,7 +87,8 @@ from pathlib import Path
 
 MARK = "SCHOLAR_2026_10_14"
 MARK2 = "SCHOLAR_V2_2026_10_14"
-PROMPT_VERSION = "scholar-v2"          # SCHOLAR_V2_2026_10_14 (scholar-v1 made the pilot's rows of 14 Oct)
+MARK3 = "SCHOLAR_V21_2026_10_14"
+PROMPT_VERSION = "scholar-v2.1"        # SCHOLAR_V21_2026_10_14 (scholar-v2: 14 Oct 21:13; scholar-v1: the pilot of 18:25)
 CRITIC_VERSION = "scholar-critic-v2"
 GROUPS_VERSION = "scholar-groups-v1"
 COMPARE_VERSION = "scholar-compare-v1"
@@ -131,7 +143,7 @@ Rules:
 7. BRACKETS. [Square brackets] only for a word the Sanskrit implies but does not say, needed for the English to parse. Never an explanation in brackets: explanations go in the notes.
 8. NOTES. Short, factual notes, only where a reader needs one: an epithet or patronymic, an allusion to a story told elsewhere, a technical or ritual term, a word with two possible readings, a textual problem. At most three a verse. No note for a common word (king, sage, great-souled, lord, best of men), and none that says again what the translation makes plain. Spell every Sanskrit word in a note exactly as the IAST given spells it. Each note: {"anchor": the English word or words it explains, exactly as they stand in your translation, "kind": one of name|epithet|term|allusion|grammar|textual, "note": the note}.
 9. DOUBTS. When a word can be read more than one way, or the Sanskrit looks corrupt or misprinted, say so in "doubts": the word, the readings, the one you chose and why. Otherwise leave "doubts" empty.
-10. WHAT TO TRANSLATE. Translate only THE VERSE TO TRANSLATE, or THE VERSES TO TRANSLATE when one Sanskrit sentence runs over several verses. The verses before (with an English that may be a working draft, and may be wrong) and after are there only so that you understand: do not translate or repeat them. One verse whose sentence runs on into the next: translate its words as the opening of that sentence. Several verses: write their English as one passage of natural English prose, in the order English needs, and give it cut at the verse boundaries in "segments", [{"ref": the verse, "english": its part}], one for each verse, in order; joined with spaces the segments must read as that passage. Where English must move a word or a clause into another verse's part, do so, and say what moved in "moved". End the translation (the last segment) with " //".
+10. WHAT TO TRANSLATE. Translate only THE VERSE TO TRANSLATE, or THE VERSES TO TRANSLATE when one Sanskrit sentence runs over several verses. The verses before (with an English that may be a working draft, and may be wrong) and after are there only so that you understand: do not translate or repeat them. One verse whose sentence runs on into the next: translate its words as the opening of that sentence. Several verses: write "translation" as one passage of natural English prose in the order English needs (the main clause may come first, as English wants it), and give in "segments", [{"ref": the verse, "english": its part}], one for each verse, in order, the words of your passage that render that verse. The segments need not read as the passage, nor in its order; together they hold all of it. Say in "moved" what English moved, and from which verse. End the passage with " //".
 11. GLOSSARY. Propose an entry for each name or term this verse brings in that the glossary does not have: {"term": the IAST stem, "rendering": how the translation writes it, "kind": person|place|people|deity|term|epithet|other, "note": a gloss of a few words}.
 12. SPEAKERS. A speaker's line (... uv\u0101ca) opens the translation ("The s\u016bta said:"), and the speech follows it with no " //" after the speaker's line.
 
@@ -610,7 +622,11 @@ def clean_unit(d, refs: list):
         segs = cur.get("segment_list") or []
         if [s_["ref"] for s_ in segs] == list(refs) and any(s_["english"] for s_ in segs):
             cur["segments"] = {s_["ref"]: s_["english"] for s_ in segs}
-            cur["translation"] = " ".join(s_["english"] for s_ in segs if s_["english"])
+            joined = " ".join(s_["english"] for s_ in segs if s_["english"])
+            # SCHOLAR_V21_2026_10_14: the passage stays as the draft wrote it (in the order English needs); only one much
+            # shorter than its segments, which is no passage, gives way to them
+            if len(cur["translation"]) < 0.6 * len(joined):
+                cur["translation"] = joined
     return cur
 
 
@@ -674,6 +690,18 @@ def _charge(kind, doc, engine, resp, in_chars, out_chars, dt, ok, con) -> float:
     except Exception:
         pass
     return float(cost or 0.0)
+
+
+_FINISH = {"1": "STOP", "2": "MAX_TOKENS", "3": "SAFETY", "4": "RECITATION", "5": "OTHER"}
+
+
+def _finish_name(f) -> str:
+    """SCHOLAR_V21_2026_10_14: how an answer ended, by name (the SDK gives an enum, or its number)."""
+    n = getattr(f, "name", None)
+    if n:
+        return str(n)
+    s = str(f if f is not None else "")
+    return _FINISH.get(s, s.split(".")[-1] or "?")
 
 
 class Gemini:
@@ -754,12 +782,21 @@ class Gemini:
         raise CallFailed("%s: %s" % (type(last).__name__, str(last)[:160]))
 
     def ask(self, kind: str, msg: str) -> tuple:
-        """(the JSON answer or None, $)."""
+        """(the JSON answer or None, $). SCHOLAR_V21_2026_10_14: an answer cut off at the token limit and not JSON is asked
+        again with room, even when some text came back; a draft still not JSON is asked once more; self.last says how
+        the last answer ended."""
         txt, finish, cost = self._once(kind, msg, 8192)
-        if not txt and ("MAX_TOKENS" in str(finish) or str(finish) == "2"):
+        d = parse_json(txt)
+        if d is None and _finish_name(finish) == "MAX_TOKENS":
             txt, finish, more = self._once(kind, msg, 16384)   # its thinking took the budget: once more, with room
             cost += more
-        return parse_json(txt), cost
+            d = parse_json(txt)
+        if d is None and kind == "draft":
+            txt, finish, more = self._once(kind, msg, 16384)
+            cost += more
+            d = parse_json(txt)
+        self.last = {"kind": kind, "finish": _finish_name(finish), "chars": len(txt or ""), "json": d is not None}
+        return d, cost
 
     def judge(self, src: str, iast: str, english: str) -> tuple:
         """(fidelity, fluency, reason, $) by judge-v1."""
@@ -823,8 +860,13 @@ def prices(con, a, first_msg_chars: int) -> dict:
             q = ("SELECT COUNT(*), AVG(cost_usd), MAX(cost_usd) FROM scholar_translations WHERE engine = ? AND "
                  "cost_usd > 0 AND prompt_version LIKE ?")
             n, avg, mx = con.execute(q, (a.engine, PROMPT_VERSION + "+%")).fetchone()
+            fam = PROMPT_VERSION.split(".")[0]   # SCHOLAR_V21_2026_10_14: scholar-v2.1 is priced by scholar-v2's rows
+            nf, avgf, mxf = (con.execute(q, (a.engine, fam + "+%")).fetchone() if fam != PROMPT_VERSION
+                             else (0, None, None))
             if n and n >= MEASURED_AFTER:
                 typ, top, how = float(avg), float(mx), "measured on %d %s verses" % (n, PROMPT_VERSION)
+            elif nf and nf >= MEASURED_AFTER:
+                typ, top, how = float(avgf), float(mxf), "measured on %d %s verses" % (nf, fam)
             else:
                 n1, avg1, mx1 = con.execute(q, (a.engine, "scholar-v1+%")).fetchone()
                 if n1 and n1 >= MEASURED_AFTER:
@@ -880,7 +922,10 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
     d, _c = asker.ask("draft", base)
     cur = clean_unit(d, refs)
     if cur is None:
-        raise CallFailed("the draft came back without a translation")
+        last = getattr(asker, "last", None) or {}   # SCHOLAR_V21_2026_10_14: how it ended
+        raise CallFailed("the draft came back without a translation%s" % (
+            (" (it ended %s, %s characters%s)" % (last.get("finish") or "?", "{:,}".format(last.get("chars") or 0),
+                                                 "" if last.get("json") else ", not JSON")) if last else ""))
     draft = cur["translation"]
     crits, revisions, note = [], 0, ""
     while True:
@@ -1000,14 +1045,17 @@ def store(con, rec: dict) -> int:
 
 
 def run(a, allp: list, picked: list, meta: dict, done: dict, asker, con, price: dict, budget_ok=None) -> dict:
-    out = {"passed": [], "flagged": [], "source_doubt": [], "failed": [], "stopped": "", "spent": 0.0, "grouped": 0}
+    out = {"passed": [], "flagged": [], "source_doubt": [], "failed": [], "stopped": "", "spent": 0.0, "grouped": 0,
+           "split": 0}   # SCHOLAR_V21_2026_10_14: split, the sentences that failed whole and went verse by verse
     logp = Path(a.log_dir) / ("%s_%s.jsonl" % (re.sub(r"[^A-Za-z0-9_.-]", "_", a.doc),
                                               datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
     logp.parent.mkdir(parents=True, exist_ok=True)
     out["log"] = str(logp)
     units = units_of(a, allp, picked, meta, asker, out, price["call"])   # SCHOLAR_V2_2026_10_14: sentences
     fails = n = 0
-    for u in units:
+    queue = list(units)   # SCHOLAR_V21_2026_10_14: a sentence that fails whole goes back verse by verse
+    while queue:
+        u = queue.pop(0)
         xs = [allp[i] for i in u]
         need = price["typical"] * len(u)
         if budget_ok is not None and not budget_ok(con, need):
@@ -1025,6 +1073,11 @@ def run(a, allp: list, picked: list, meta: dict, done: dict, asker, con, price: 
             recs = one_unit(a, allp, u, meta, done, asker, con, price["call"])
         except CallFailed as e:
             out["spent"] = asker.spent
+            if len(u) > 1:   # SCHOLAR_V21_2026_10_14: the sentence failed whole: each of its verses alone
+                out["split"] += 1
+                print("  %s to %s: the sentence failed (%s); each verse alone" % (ref_of(xs[0]), ref_of(xs[-1]), e))
+                queue[0:0] = [[i] for i in u]
+                continue
             fails += 1
             for x in xs:
                 n += 1
@@ -1254,6 +1307,26 @@ def _crits_html(crits: list) -> str:
     return iss
 
 
+def _ws(t) -> str:
+    return " ".join(str(t or "").split())
+
+
+def _inline(u: list) -> bool:
+    """SCHOLAR_V21_2026_10_14: a sentence's English is shown part by part after each verse's number only when its parts
+    joined are its passage (scholar-v2's rows); a scholar-v2.1 passage, in the order English needs, is shown whole."""
+    if len(u) < 2 or not any(r.get("translation") for r in u[1:]):
+        return False
+    whole = u[0].get("group_translation")
+    return not whole or _ws(" ".join(r.get("translation") or "" for r in u)) == _ws(whole)
+
+
+def _range(u: list) -> str:
+    """SCHOLAR_V21_2026_10_14: '1.1.15\u201319', the first verse and the last one's number (_marks_html shows what follows
+    the last dot)."""
+    a_, b_ = str(u[0].get("verse_ref") or ""), str(u[-1].get("verse_ref") or "")
+    return a_ if len(u) < 2 or a_ == b_ else "%s\u2013%s" % (a_, b_.split(".")[-1])
+
+
 def _group_article(u: list) -> str:
     """SCHOLAR_V2_2026_10_14: one Sanskrit sentence over several verses, as one block."""
     e = html.escape
@@ -1279,10 +1352,10 @@ def _group_article(u: list) -> str:
     left = "".join('<div class="gv"><span class="vref">%s</span><div class="sa">%s</div><div class="ia">%s</div></div>'
                    % (e(r["verse_ref"] or ""), e((r.get("p_text") or "").strip()), e((r.get("p_iast") or "").strip()))
                    for r in u)
-    if any(r.get("translation") for r in u[1:]):
+    if _inline(u):
         english = _marks_html([(r["verse_ref"], r.get("translation") or "") for r in u], notes)
-    else:
-        english = _marks_html([(r0["verse_ref"], r0.get("group_translation") or r0.get("translation") or "")], notes)
+    else:   # SCHOLAR_V21_2026_10_14: the passage whole, after its verse range; its segments under the fold
+        english = _marks_html([(_range(u), r0.get("group_translation") or r0.get("translation") or "")], notes)
     notes_html = ("<ol class=\"notes\">%s</ol>" % "".join(
         '<li><span class="k">%s</span> <b>%s</b>: %s</li>' % (e(n.get("kind") or ""), e(n.get("anchor") or ""),
                                                                e(n.get("note") or "")) for n in notes)) if notes else ""
@@ -1291,6 +1364,11 @@ def _group_article(u: list) -> str:
         extra += '<div class="doubt">Doubts: %s</div>' % e(r0["doubts"])
     if r0.get("moved"):
         extra += '<div class="doubt">Moved between the verses: %s</div>' % e(r0["moved"])
+    if not _inline(u) and any(r.get("translation") for r in u[1:]):   # SCHOLAR_V21_2026_10_14
+        extra += ('<details class="segs"><summary>Verse by verse: the words of the passage that render each verse'
+                  '</summary>%s</details>' % "".join('<p class="wk"><span class="vr">%s</span>%s</p>'
+                                                     % (e(r["verse_ref"] or ""), e(r.get("translation") or "-"))
+                                                     for r in u))
     working = "".join('<p class="wk"><span class="vr">%s</span>%s</p>' % (e(r["verse_ref"] or ""), e(r.get("p_english") or "-"))
                       for r in u)
     earlier = "".join('<p class="wk"><span class="vr">%s</span>%s</p>' % (e(r["verse_ref"] or ""), e(r["prev_translation"]))
@@ -1320,7 +1398,8 @@ def render_doc(con, doc: str, offset: int = 0, limit=200, nav: bool = False) -> 
              "prev_translation, (SELECT s2.prompt_version FROM scholar_translations s2 WHERE s2.passage_id = "
              "s.passage_id AND s2.version = s.version - 1) AS prev_prompt FROM scholar_translations s LEFT "
              "JOIN passages p ON p.id = s.passage_id WHERE s.doc_code = ? AND s.id IN (SELECT MAX(id) FROM "
-             "scholar_translations WHERE doc_code = ? GROUP BY passage_id) ORDER BY s.page_no, s.idx")
+             "scholar_translations WHERE doc_code = ? GROUP BY passage_id) ORDER BY COALESCE(p.page_no, s.page_no), "
+             "COALESCE(p.idx, s.idx), s.id")   # SCHOLAR_V21_2026_10_14: the passage's place now
         cur = con.execute(q + (" LIMIT %d OFFSET %d" % (int(limit), int(offset)) if limit else ""), (doc, doc))
         names = [d[0] for d in cur.description]
         rows = [dict(zip(names, r)) for r in cur.fetchall()]
@@ -1451,8 +1530,8 @@ def render_prose(con, doc: str, nav: bool = False) -> str:
     if has_table(con, "scholar_translations"):
         cur = con.execute("SELECT s.*, p.text AS p_text, p.chapter AS p_chapter FROM scholar_translations s LEFT JOIN "
                           "passages p ON p.id = s.passage_id WHERE s.doc_code = ? AND s.id IN (SELECT MAX(id) FROM "
-                          "scholar_translations WHERE doc_code = ? GROUP BY passage_id) ORDER BY s.page_no, s.idx",
-                          (doc, doc))
+                          "scholar_translations WHERE doc_code = ? GROUP BY passage_id) ORDER BY COALESCE(p.page_no, "
+                          "s.page_no), COALESCE(p.idx, s.idx), s.id", (doc, doc))   # SCHOLAR_V21_2026_10_14
         names = [d[0] for d in cur.description]
         rows = [dict(zip(names, r)) for r in cur.fetchall()]
     live = [r for r in rows if r.get("p_text") is not None and src_hash(r["p_text"]) == r.get("src_hash")]
@@ -1475,10 +1554,10 @@ def render_prose(con, doc: str, nav: bool = False) -> str:
         for u in us:
             r0 = u[0]
             notes = _loads(r0.get("notes"), [])
-            if len(u) > 1 and any(r.get("translation") for r in u[1:]):
+            if _inline(u):
                 pairs = [(r["verse_ref"], r.get("translation") or "") for r in u]
-            else:
-                pairs = [(r0["verse_ref"], r0.get("group_translation") or r0.get("translation") or "")]
+            else:   # SCHOLAR_V21_2026_10_14: the passage whole, after its verse range
+                pairs = [(_range(u), r0.get("group_translation") or r0.get("translation") or "")]
             pairs = [(ref, re.sub(r"\s*//\s*", " ", t).strip()) for ref, t in pairs]
             text = _marks_html(pairs, notes, base=len(fns))
             fns.extend((r0["verse_ref"], n) for n in notes)
@@ -1622,7 +1701,8 @@ def main(argv=None) -> int:
     finally:
         con.close()
     print("scholar_translate.py  %s  %s   %s and its critic, up to %d revision(s); the judge %s"
-          % (MARK, "RUN" if a.yes else "DRY RUN (nothing called, nothing written)", a.engine, a.rounds, a.judge_engine))
+          % ("%s (%s)" % (MARK3, PROMPT_VERSION), "RUN" if a.yes else "DRY RUN (nothing called, nothing written)",
+             a.engine, a.rounds, a.judge_engine))
     print("  %s: %s passages; the source: %s (%s)" % (a.doc, "{:,}".format(len(allp)), meta["source"], meta["engine"] or "?"))
     if st in HELD:
         print("REFUSE: %s is %s (the register, %s: %s)" % (a.doc, HELD[st], str((reg.get(a.doc) or {}).get("at") or "?")[:16],
@@ -1681,6 +1761,8 @@ def main(argv=None) -> int:
         con.close()
     if res.get("grouped"):   # SCHOLAR_V2_2026_10_14
         print("  sentences over several verses, each translated whole: %d" % res["grouped"])
+    if res.get("split"):   # SCHOLAR_V21_2026_10_14
+        print("  sentences that failed whole, then translated verse by verse: %d" % res["split"])
     if res["stopped"]:
         print("  STOPPED: %s" % res["stopped"])
     print("VERDICT: %d passed, %d flagged (a person reads them), %d source doubt(s), %d failed; %s spent; the log: %s"

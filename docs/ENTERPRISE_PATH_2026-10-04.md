@@ -756,3 +756,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | YV1 | The Yoga Vasistha | Withdrawn here; the full mirror retires it on the site |
 | S2 | Srangam: name the reading (e-text, vision OCR, Tesseract), not "OCR confidence" for all | A read-only function; after EM1 |
 | S4 | Srangam: the scholarly English in the reader (rows a person accepted) | After SC3's pilot is read |
+
+
+## Addendum 2026-10-14 (44) (DOCS54_2026_10_14)
+
+| # | Item | State |
+|---|---|---|
+| SC3 | Sentences over verses; a second judge | Run (scholar-v2): 15 passed, 5 flagged, 4 failed; the flags and failures mended in SCHOLAR_V21 |
+| SC6 | A failed sentence verse by verse; how an answer ended | Built and tested (SCHOLAR_V21_2026_10_14) |
+| MB1 | MBh01's lost prose | The e-text read (7,197 passages); the plan: 241 in, 1 out; apply when no writer runs |
+| S2 | Srangam: name the reading | Built and tested (READER_SOURCES_2026_10_14, C17); C17 to paste, Srangam to push |
+| HI2 | A Debroy-grade Hindi, from the accepted scholarly English | Not built; after a chapter's English is accepted |
+| JR1 | The judge's marks that are the scan's misreading (Shatapatha) | Read the Sanskrit first: an e-text witness or a scan repair |
+| Q1 | The translate lock: small texts behind a 13-hour job | Queue small texts first; a priority for short jobs is a later change |

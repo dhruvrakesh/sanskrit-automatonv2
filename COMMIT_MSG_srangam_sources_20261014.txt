@@ -1,0 +1,17 @@
+The reader names where a passage's Sanskrit comes from; an e-text is not called OCR (READER_SOURCES_2026_10_14)
+
+docs/SCHOLAR_V21_2026-10-14.md in the automaton repo. The reader said "OCR confidence 52%" for every passage of
+MBh01, the BORI Critical Edition's own e-text, and marked 267 of its verses "the printed page was hard to read":
+the score was the automaton's OCR formula on a text without dandas. src/lib/corpusDisplay.ts: readingOf() names
+the reading from the mirror's ocr_engine (the BORI Critical Edition e-text; read from the scan by a vision model,
+by Tesseract; cut into verses again) and readingsByPage() takes the engine of most of a page.
+src/lib/corpusMirror.ts: loadMirrorSources() calls public.corpus_reader_sources (C17, docs/cloud in the automaton
+repo; signed-in readers only, read-only). src/pages/corpus/CorpusDoc.tsx asks it once a text and gives each
+passage its page's reading. src/components/reader/PassageBlock.tsx: an e-text shows "Source: ..." and no OCR
+confidence, and is never marked hard to read; a scan names its reader beside its confidence; a passage without
+a recorded engine is as before. Before C17 is pasted the call fails and nothing changes. New:
+src/__tests__/reader-sources.test.tsx (8). RELIABILITY_AUDIT Phase AG (invariants 52-53). Nothing stored is
+changed; the entry chunk does not carry it.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

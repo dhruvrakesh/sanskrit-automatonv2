@@ -1,0 +1,24 @@
+The scholarly English keeps a sentence's passage as written and survives a failed sentence (SCHOLAR_V21_2026_10_14); the site's reader names where the Sanskrit comes from (READER_SOURCES_2026_10_14, C17); recorded (DOCS54_2026_10_14)
+
+docs/SCHOLAR_V21_2026-10-14.md. scholar-v2 on MBh01 1.1.0-1.1.24 (14 Oct 21:13, $0.256): 15 passed, 5 flagged
+(1.1.15-1.1.19, one sentence), 4 failed (1.1.20-1.1.23, one sentence); the second judge preferred the scholarly
+English 13 times in 20. v2 replaced a sentence's passage with its segments joined, which hold the Sanskrit's
+order, so 1.1.15-1.1.19 read as fragments; a reply cut off at the token limit was asked again only when empty,
+and how an answer ended was not logged.
+- scripts/patch_scholar_v21_2026_10_14.py: scholar_translate.py (scholar-v2.1): clean_unit keeps the draft's
+  passage (the segments say which words render which verse); rule 10 says the main clause may come first;
+  Gemini.ask asks again with room when a cut-off answer is not JSON, a draft once more, and records how it ended
+  (a failure says it); run() translates a failed sentence verse by verse ("split"); prices() takes scholar-v2's
+  rows until scholar-v2.1 has 10; the pages order rows by their passage's place now and show a passage that is not
+  its segments joined whole after its verse range, its segments in a fold; the header names the prompt.
+  import_mbh_gretil.py: the e-text's appendix passages ('@', 5,028 lines in book 1) are counted as excluded, not
+  "NOT READ"; the Next lines name --out and give the reingest plan for a book already in the database.
+- docs/cloud/C17_reader_sources_2026-10-14.sql (+ C17_checks): public.corpus_reader_sources(p_doc), one read-only
+  function behind the C5 gate (signed-in readers only): a text's live passages by page and ocr_engine. The Srangam
+  side (its own commit): docs/srangam/READER_SOURCES_2026-10-14/.
+Tests: tests/test_scholar_v21_2026_10_14.py (14), tests/test_reader_sources_pg_2026_10_14.py (2, CORPUS_TEST_DSN);
+tests/test_scholar_v2_2026_10_14.py follows (the prompt version, the passage kept, the replay chain).
+Docs: scripts/patch_docs54_2026_10_14.py (PLATFORM 57, RUNBOOK, EP 44).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -1919,3 +1919,27 @@ engine. The site then calls it "OCR confidence" and marks verses "hard to read".
    that text; a Hindi job does not stop it.
 3. The mirror: `python scripts\corpus_sync.py`, then its `--apply`.
 4. To put it back: `--undo data\heal\etext_meta_MBh01_<stamp>.jsonl` (the file the apply printed).
+
+
+## The scholarly English 2.1 (DOCS54_2026_10_14)
+
+1. A sentence flagged or failed under scholar-v2 is made again with v2.1, the dry run first (free):
+
+       python scripts\scholar_translate.py --doc MBh01 --pages 1 --from-ref 1.1.15 --limit 9 --redo
+
+2. Its `NEXT:` line runs it (capped).
+3. A failure now says how the answer ended ("it ended MAX_TOKENS, ..."); a sentence that fails is translated verse by
+   verse, and the summary counts it ("split").
+4. The pages show a v2.1 sentence whole after its range (1.1.15-19); "Verse by verse" opens its segments.
+
+## The reading on the site (DOCS54_2026_10_14)
+
+1. In the Lovable Cloud SQL editor: docs/cloud/C17_checks_2026-10-14.sql E1 and P1, then
+   docs/cloud/C17_reader_sources_2026-10-14.sql in one paste, then V1 and V2.
+2. Srangam's reader then names each page's reading. Before C17 it shows what it showed before.
+3. Rollback: `DROP FUNCTION IF EXISTS public.corpus_reader_sources(text);`
+
+## Queueing translations (DOCS54_2026_10_14)
+
+The dashboard runs one translate job at a time. Queue the small texts first and a long one (MBh01's Hindi, about 13
+hours) last, or the small ones wait behind it.

@@ -123,7 +123,7 @@ class TheRun(unittest.TestCase):
         self.assertEqual(p9 % 2, 0)
         self.assertEqual(by["1.1.9"]["compare_better"], "working")
         self.assertEqual(by["1.1.9"]["status"], "flagged", "the second judge found a major error in the scholarly English")
-        self.assertEqual(r7["prompt_version"], "scholar-v2+scholar-critic-v2")
+        self.assertEqual(r7["prompt_version"], "%s+%s" % (ST.PROMPT_VERSION, ST.CRITIC_VERSION))   # v2.1 since
 
     def test_the_groups_answer_must_fit_or_each_verse_stands_alone(self):
         idxs = [10, 11, 12]
@@ -139,7 +139,8 @@ class TheRun(unittest.TestCase):
         self.assertIsNone(u["segments"]); self.assertEqual(u["translation"], "whole", "out of order: kept whole")
         u = ST.clean_unit({"translation": "whole", "segments": [{"ref": "a", "english": "one"}, {"ref": "b", "english": ""}]},
                           ["a", "b"])
-        self.assertEqual(u["segments"], {"a": "one", "b": ""}); self.assertEqual(u["translation"], "one")
+        self.assertEqual(u["segments"], {"a": "one", "b": ""})
+        self.assertEqual(u["translation"], "whole", "SCHOLAR_V21_2026_10_14: the passage stays as the draft wrote it")
 
     def test_without_an_answer_the_sentence_stays_on_its_first_verse(self):
         groups = {"groups": [["1.1.6", "1.1.7"], ["1.1.8"], ["1.1.9"]]}
@@ -371,7 +372,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_scholarv21_*"))   # SCHOLAR_V21_2026_10_14 came after
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f, b in baks.items():
                 shutil.copy2(b[0], t / "scripts" / f)

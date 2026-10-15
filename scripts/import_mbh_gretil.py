@@ -50,6 +50,9 @@ GRETIL_URL = "http://gretil.sub.uni-goettingen.de/gretil/1_sanskr/2_epic/mbh/mbh
 # reference (01003001A) is read too. PROSE: the (chapter, verse) that were prose in the last parse.
 MAIN_RE = re.compile(r"^(\d{2}),?(\d{3})\.?(\d{3})([A-Za-z]?)\s+(.*)$")
 REF_RE = re.compile(r"^\d{2},?\d{3}\.?\d{3}")
+# SCHOLAR_V21_2026_10_14: an appendix passage of the e-text (01,001.053b@002_0001): the critical edition prints it in its
+# appendix, not in the constituted text. It is left out as the star passages are, and counted, not "NOT READ".
+APPX_RE = re.compile(r"^\d{2},?\d{3}\.?\d{3}[A-Za-z]?@\d")
 PROSE = set()
 TAG_RE = re.compile(r"<[^>]+>")
 
@@ -71,7 +74,7 @@ def parse(raw: str, book: int):
     """Return {chapter_int: [ {verse_ref, iast_text} ]} — constituted text only."""
     text = html_mod.unescape(TAG_RE.sub("", raw))
     chapters: dict[int, dict[int, list[str]]] = {}
-    kept = skipped_star = prose_lines = 0
+    kept = skipped_star = prose_lines = appendix = 0   # SCHOLAR_V21_2026_10_14: appendix
     unread = []   # MBH_PROSE_2026_10_14: lines that look like a reference and were not read
     PROSE.clear()
     for line in text.splitlines():
@@ -83,7 +86,9 @@ def parse(raw: str, book: int):
             continue  # star-passage / apparatus — not constituted text
         m = MAIN_RE.match(line)
         if not m:
-            if REF_RE.match(line):
+            if APPX_RE.match(line):   # SCHOLAR_V21_2026_10_14
+                appendix += 1
+            elif REF_RE.match(line):
                 unread.append(line[:60])
             continue
         b, ch, vs = int(m.group(1)), int(m.group(2)), int(m.group(3))
@@ -101,6 +106,9 @@ def parse(raw: str, book: int):
           f"{skipped_star} star-passage lines excluded, "
           f"{len(chapters)} adhyāyas found.")
     print("  of them prose: %d lines in %d passages (MBH_PROSE_2026_10_14)" % (prose_lines, len(PROSE)))
+    if appendix:   # SCHOLAR_V21_2026_10_14
+        print("  appendix passages excluded: %d lines (the edition prints them in its appendix, not in the constituted "
+              "text)" % appendix)
     if unread:
         print("  NOT READ: %d lines that look like a reference (the first: %s)" % (len(unread), unread[0]))
     return chapters
@@ -142,8 +150,10 @@ def write_jsonl(chapters, book: int, out_dir: pathlib.Path, doc_code: str,
     verb = "Would write" if dry_run else "Wrote"
     print(f"{verb} {n_files} adhyāya files, {n_verses} verses → {out_dir}/{doc_code}_NNNN.jsonl")
     if not dry_run:
-        print(f"\nNext:\n  python scripts/ingest_jsonl_fast.py --doc {doc_code} "
-              f'--glob "data/raw/{doc_code}_*.jsonl" --category mahabharata --no-segment')
+        print(f"\nNext, a book not yet in the database:\n  python scripts/ingest_jsonl_fast.py --doc {doc_code} "
+              f'--glob "{out_dir.as_posix()}/{doc_code}_*.jsonl" --category mahabharata --no-segment')
+        print(f"Next, a book already in the database (the plan, free):\n  python scripts/reingest_pages.py --doc {doc_code} "
+              f"--merged-dir {out_dir} --no-segment")   # SCHOLAR_V21_2026_10_14
         print(f"  python scripts/benchmark_mbh01.py --doc {doc_code} --n 30 --dry-run")
 
 
