@@ -2019,3 +2019,14 @@ on disk.
 - **When the credit is spent or expires,** the job stops ("the Claude credit is spent or expired"). Run it again with
   the default engine.
 - **Watch:** `claude_engine.py --credit`; `spend_audit.py --days 30` against AI Studio's Spend page.
+
+
+## A Claude run, checked by Gemini (DOCS61_2026_10_15)
+
+- **The standing flags:** `--engine anthropic:claude-sonnet-5-5 --compare-engine anthropic:claude-opus-5-5`, and the
+  default --judge-engine (gemini-2.5-flash). The dry run says "the judge gemini:gemini-2.5-flash (Google's bill, in
+  the spend cap); the second judge and the audit anthropic:claude-opus-5-5 (the Claude credit)".
+- **The spend cap:** a run stops when Google's spend cap is reached; `set_budget.py` shows it.
+- **Rows a Claude judge read:** `--engine anthropic:claude-sonnet-5-5 --rejudge` (a dry run: counted, free), then with
+  `--limit 2000 --yes`. Run it when the windows of that text are stopped or done, or let it leave the verses they
+  redo alone.

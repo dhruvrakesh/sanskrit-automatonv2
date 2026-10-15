@@ -838,3 +838,11 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | CF3 | The working English on Claude: the benchmark on three texts of the backlog (137,755 passages) | To run; a person reads it |
 | CF4 | Entities and stories on Claude | Possible; not built |
 | SP1 | The ledger against the bill: spend_audit.py --days 30 against AI Studio's Spend page, weekly | Standing |
+
+
+## Addendum 2026-10-15 (51) (DOCS61_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| CF2 | --rejudge: a Gemini judge for the rows a Claude judge read (REJUDGE_2026_10_15) | Built and tested |
+| CF5 | The standing checks of a Claude run: the flash judge (Gemini), the audit and the second judge (Opus) | Decided 15 Oct |

@@ -1,0 +1,18 @@
+Gemini checks a Claude English: the flash judge on every verse, Opus for the audit and the second judge; --rejudge gives the verses a Claude judge read the Gemini reading (REJUDGE_2026_10_15); recorded (DOCS61_2026_10_15)
+
+docs/GEMINI_CHECKS_2026-10-15.md. Decided 15 Oct, about 18:55 IST (Dhruv): "Gemini being used to check makes sense."
+A Claude run is checked by gemini-2.5-flash on every verse (the default --judge-engine; another family, some Rs 80 for
+the rest of both texts), and by claude-opus-5-5 for the audit and the second judge (--compare-engine), on the credit.
+The Claude-only windows (Haiku judging, from 18:47) were not stuck: 82 verses by 18:58, 65 passed, none failed.
+- scripts/patch_rejudge_2026_10_15.py (scholar_translate.py): --rejudge with --engine anthropic:...: the latest rows
+  of that engine whose judge was a Claude model, the Sanskrit unchanged, not reviewed, within --pages, a sentence
+  whole; the Gemini judge reads them again (and the working English); the status decided again as a run decides it
+  (the last critique, the audit included; the judge; the second judge's major error); a new version of each, the
+  same English, the reason saying what it was; a verse redone meanwhile, or a judge that does not answer, left
+  alone; Google's spend cap gates it; the dry run counts and prices it, free.
+Tests: tests/test_rejudge_2026_10_15.py (7); test_claude_first_2026_10_15 (its replay chain ends at the .bak_rejudge_
+copy) follows.
+Docs: scripts/patch_docs61_2026_10_15.py (PLATFORM 64, RUNBOOK, EP 51).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
