@@ -1,0 +1,24 @@
+The thinking is metered as Google bills it (COST_TRUTH_2026_10_15); the e-text import and the heal logs leave the repo (REPO_HYGIENE_2026_10_15); recorded (DOCS55_2026_10_15)
+
+docs/COST_TRUTH_2026-10-15.md. In usage_log, five gemini-2.5-pro drafts of 14 Oct came back empty at the 8,192-token
+limit and were metered as their input alone: the SDK here does not name thoughts_token_count, and total_token_count
+was not read. Google bills thinking as output, so the run that recorded $0.256 cost at least $0.67, and the spend
+recorded, the spend cap and the scholarly English's price left the thinking out.
+- scripts/patch_cost_truth_2026_10_15.py:
+  - usage_meter.py, infer_mt.py: the output billed is total_token_count - prompt_token_count when that is more than
+    the candidates and the thoughts named; source_desk.py meters through usage_from_response;
+  - scholar_translate.py: the price counts only rows metered so (METERED_SINCE 2026-10-15), the prior assumes 3,000
+    output tokens a call; a job that only adds working English (translate, translate_both, translate_one) does not
+    stop a run;
+  - dashboard.py: a job stopped while it waits for its lock does not start (it ran in full, then was called killed);
+    /api/job/<id>/kill says "queued".
+- scripts/patch_repo_hygiene_2026_10_15.py: .gitignore data/raw_*_ce/ and data/heal/; release.ps1 refuses them and
+  never refuses a removal (a D in the status). data/raw_mbh01_ce (MBh01's critical-edition e-text, BORI's) and
+  data/heal leave the repo here (git rm --cached); they stay on disk.
+Tests: tests/test_cost_truth_2026_10_15.py (9), tests/test_repo_hygiene_2026_10_15.py (4);
+test_scholar_v2_2026_10_14 and test_scholar_v21_2026_10_14 (the price rows carry created_at; the replay chains end at
+the .bak_costtruth_ copies) and test_quality_2026_10_11 (source_desk.py's chain) follow.
+Docs: scripts/patch_docs55_2026_10_15.py (PLATFORM 58, RUNBOOK, EP 45).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

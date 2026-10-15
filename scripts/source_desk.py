@@ -280,12 +280,14 @@ def ai_judge(doc: str, words: list, cands: list, max_usd: float, errors: list) -
         import cost_tracker
         con = sqlite3.connect(str(ROOT / "data" / "context.db"), timeout=30)
         try:
-            u = getattr(resp, "usage_metadata", None)
+            try:   # COST_TRUTH_2026_10_15: the thinking too, as the meter reads it
+                from usage_meter import usage_from_response
+                _in, _out = usage_from_response(resp)
+            except Exception:
+                _in = _out = None
             cost_tracker.log_api_call(con, kind="source_desk", doc=doc, engine="gemini:gemini-2.5-flash",
                                       in_chars=len(prompt), out_chars=len(text), duration_s=time.time() - t0,
-                                      passages=0, ok=bool(by),
-                                      in_tokens=getattr(u, "prompt_token_count", None) if u else None,
-                                      out_tokens=getattr(u, "candidates_token_count", None) if u else None)
+                                      passages=0, ok=bool(by), in_tokens=_in, out_tokens=_out)
             con.commit()
         finally:
             con.close()

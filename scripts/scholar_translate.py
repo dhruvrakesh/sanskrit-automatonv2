@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
 """
-scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14
+scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
+COST_TRUTH_2026_10_15
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -30,6 +31,11 @@ SCHOLAR_V21_2026_10_14 (after scholar-v2's pilot of 14 Oct, 21:13: 15 passed, 5 
   - priced by the scholar-v2 rows until 10 of scholar-v2.1 are measured;
   - the pages order the rows by their passage's place now (a re-ingest moves it), and a sentence whose passage is not
     its segments joined is shown whole after its verse range, the segments under the fold.
+
+COST_TRUTH_2026_10_15: the meter now counts gemini-2.5-pro's thinking (billed as output; the SDK here does not name
+it, and the 14 Oct runs were metered for their visible output only). The price counts only rows metered so (from
+METERED_SINCE); before 10 of them, the prior of 3,000 output tokens a call. A job that only adds working English does
+not stop a run.
 
 Why: the working English was made in one pass by gemini-2.5-flash, with the five verses before it as its only
 context: no glossary kept between verses, no notes, no review. A judge reads a sample of it. That is a draft. The
@@ -103,12 +109,15 @@ JUDGE_PROMPT = "judge-v1"
 CONTEXT_BEFORE = 6
 CONTEXT_AFTER = 2
 GLOSSARY_MAX = 40
-OUT_TOKENS_PRIOR = 1500      # a pro call's output with its thinking, before 10 verses are measured
+OUT_TOKENS_PRIOR = 3000      # a pro call's output with its thinking, before 10 verses are measured (COST_TRUTH_2026_10_15:
+                             # was 1500; on 14 Oct a group's draft spent 8,192 thinking tokens and was cut off)
+METERED_SINCE = "2026-10-15"   # COST_TRUTH_2026_10_15: rows made before it were metered without the thinking
 JUDGE_COST_PRIOR = 0.0002    # $ a judged verse (12 Oct: 200 calls, $0.0377)
 MEASURED_AFTER = 10
 # The dashboard's jobs that do not change a text's Sanskrit or English: they do not stop a run
 QUIET_KINDS = ("translate_hi", "ocr", "judge", "judge_all", "benchmark", "benchmark_all", "redeem_all", "path_all",
-               "export", "pdf", "booksmith")
+               "export", "pdf", "booksmith",
+               "translate", "translate_both", "translate_one")   # COST_TRUTH_2026_10_15: they add working English
 
 DEV = re.compile("[\u0900-\u097f]")
 JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")       # = redeem.JUNK, repair_text.JUNK
@@ -858,17 +867,17 @@ def prices(con, a, first_msg_chars: int) -> dict:
     try:   # SCHOLAR_V2_2026_10_14: this prompt's rows when there are 10; before, scholar-v1's with a compare at half
         if has_table(con, "scholar_translations"):
             q = ("SELECT COUNT(*), AVG(cost_usd), MAX(cost_usd) FROM scholar_translations WHERE engine = ? AND "
-                 "cost_usd > 0 AND prompt_version LIKE ?")
-            n, avg, mx = con.execute(q, (a.engine, PROMPT_VERSION + "+%")).fetchone()
+                 "cost_usd > 0 AND prompt_version LIKE ? AND created_at >= ?")   # COST_TRUTH_2026_10_15
+            n, avg, mx = con.execute(q, (a.engine, PROMPT_VERSION + "+%", METERED_SINCE)).fetchone()
             fam = PROMPT_VERSION.split(".")[0]   # SCHOLAR_V21_2026_10_14: scholar-v2.1 is priced by scholar-v2's rows
-            nf, avgf, mxf = (con.execute(q, (a.engine, fam + "+%")).fetchone() if fam != PROMPT_VERSION
+            nf, avgf, mxf = (con.execute(q, (a.engine, fam + "+%", METERED_SINCE)).fetchone() if fam != PROMPT_VERSION
                              else (0, None, None))
             if n and n >= MEASURED_AFTER:
                 typ, top, how = float(avg), float(mx), "measured on %d %s verses" % (n, PROMPT_VERSION)
             elif nf and nf >= MEASURED_AFTER:
                 typ, top, how = float(avgf), float(mxf), "measured on %d %s verses" % (nf, fam)
             else:
-                n1, avg1, mx1 = con.execute(q, (a.engine, "scholar-v1+%")).fetchone()
+                n1, avg1, mx1 = con.execute(q, (a.engine, "scholar-v1+%", METERED_SINCE)).fetchone()
                 if n1 and n1 >= MEASURED_AFTER:
                     k = 1.5 if getattr(a, "compare", False) else 1.0
                     typ, top = float(avg1) * k, float(mx1) * k

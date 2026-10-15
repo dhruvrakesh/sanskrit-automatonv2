@@ -151,3 +151,8 @@ data/redeem.json
 data/retranslate/
 # SCHOLAR_2026_10_14: the scholarly English runs' logs stay local
 data/scholar/
+
+# REPO_HYGIENE_2026_10_15: an e-text's import (data/raw_mbh01_ce: the BORI critical edition, "do not provide copies of
+# the text to others") and the heal logs are working files, made again from their sources
+data/raw_*_ce/
+data/heal/

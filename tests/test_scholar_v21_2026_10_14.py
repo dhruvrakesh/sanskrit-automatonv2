@@ -114,8 +114,8 @@ class ThePrice(unittest.TestCase):
             ST.ensure_schema(con)
             pid = con.execute("SELECT id FROM passages LIMIT 1").fetchone()[0]
             ins = lambda v, pv, c: con.execute("INSERT INTO scholar_translations(passage_id, doc_code, src_hash, version, "
-                                               "engine, prompt_version, cost_usd) VALUES (?, 'MBh01', 'h', ?, ?, ?, ?)",
-                                               (pid, v, ST.ENGINE, pv, c))
+                                               "engine, prompt_version, cost_usd, created_at) VALUES (?, 'MBh01', 'h', ?, "
+                                               "?, ?, ?, '2026-10-15T01:00:00+00:00')", (pid, v, ST.ENGINE, pv, c))
             for v in range(10):
                 ins(v + 1, "scholar-v2+scholar-critic-v2", 0.012)
             con.commit()
@@ -231,7 +231,9 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_costtruth_*"))   # COST_TRUTH_2026_10_15 came after
+                want = later[0] if later else (SCRIPTS / f)
+                self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f, b in baks.items():
                 shutil.copy2(b[0], t / "scripts" / f)

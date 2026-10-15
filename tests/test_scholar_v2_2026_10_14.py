@@ -197,8 +197,8 @@ class ThePrice(unittest.TestCase):
             pid = con.execute("SELECT id FROM passages LIMIT 1").fetchone()[0]
             for v in range(10):
                 con.execute("INSERT INTO scholar_translations(passage_id, doc_code, src_hash, version, engine, prompt_version, "
-                            "cost_usd) VALUES (?, 'MBh01', 'h', ?, ?, 'scholar-v1+scholar-critic-v1', 0.01)",
-                            (pid, v + 1, ST.ENGINE))
+                            "cost_usd, created_at) VALUES (?, 'MBh01', 'h', ?, ?, 'scholar-v1+scholar-critic-v1', 0.01, "
+                            "'2026-10-15T01:00:00+00:00')", (pid, v + 1, ST.ENGINE))   # metered with the thinking
             con.commit()
             p = ST.prices(con, args(db), 1000)
             self.assertAlmostEqual(p["typical"], 0.015)
@@ -206,8 +206,8 @@ class ThePrice(unittest.TestCase):
             self.assertAlmostEqual(ST.prices(con, args(db, compare=False), 1000)["typical"], 0.01)
             for v in range(10):
                 con.execute("INSERT INTO scholar_translations(passage_id, doc_code, src_hash, version, engine, prompt_version, "
-                            "cost_usd) VALUES (?, 'MBh01', 'h', ?, ?, 'scholar-v2+scholar-critic-v2', 0.02)",
-                            (pid, v + 11, ST.ENGINE))
+                            "cost_usd, created_at) VALUES (?, 'MBh01', 'h', ?, ?, 'scholar-v2+scholar-critic-v2', 0.02, "
+                            "'2026-10-15T01:00:00+00:00')", (pid, v + 11, ST.ENGINE))
             con.commit()
             p = ST.prices(con, args(db), 1000)
             self.assertAlmostEqual(p["typical"], 0.02); self.assertEqual(p["how"], "measured on 10 scholar-v2 verses")
@@ -372,7 +372,8 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                later = sorted(SCRIPTS.glob(f + ".bak_scholarv21_*"))   # SCHOLAR_V21_2026_10_14 came after
+                later = sorted(SCRIPTS.glob(f + ".bak_scholarv21_*")) \
+                    or sorted(SCRIPTS.glob(f + ".bak_costtruth_*"))   # SCHOLAR_V21, then COST_TRUTH (dashboard.py)
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)

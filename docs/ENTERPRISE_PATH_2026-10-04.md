@@ -769,3 +769,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | HI2 | A Debroy-grade Hindi, from the accepted scholarly English | Not built; after a chapter's English is accepted |
 | JR1 | The judge's marks that are the scan's misreading (Shatapatha) | Read the Sanskrit first: an e-text witness or a scan repair |
 | Q1 | The translate lock: small texts behind a 13-hour job | Queue small texts first; a priority for short jobs is a later change |
+
+
+## Addendum 2026-10-15 (45) (DOCS55_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| CT1 | The thinking metered as it is billed | Built and tested (COST_TRUTH_2026_10_15); measure the old gap against the bill |
+| CT2 | The scholarly English priced from rows metered with the thinking | Built (prior about $0.10 a verse until 10 rows) |
+| CT3 | Cheaper scholarly English (the second judge on a sample, one revision, a flash draft, batch mode) | Each measured on 1.1.15-1.1.23 first |
+| DQ1 | A queued job stopped does not start | Built and tested; live after the next idle restart |
+| RH1 | MBh01's e-text import and the heal logs out of the repo | Built and tested (REPO_HYGIENE_2026_10_15); git rm --cached by hand; the history is the owner's call |
+| MB1 | MBh01's lost prose | Waits for the translate queue to end, then the re-ingest |

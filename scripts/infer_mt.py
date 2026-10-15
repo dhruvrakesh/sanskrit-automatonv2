@@ -380,8 +380,12 @@ def _usage_add(resp):
         think = getattr(um, "thoughts_token_count", None) or 0
         if pin is None and out is None:
             return
+        billed = float((out or 0) + think)
+        total = getattr(um, "total_token_count", None)   # COST_TRUTH_2026_10_15: the thinking, where it is not named
+        if total and pin is not None and float(total) - float(pin) > billed:
+            billed = float(total) - float(pin)
         _USAGE["in"] += float(pin or 0)
-        _USAGE["out"] += float((out or 0) + think)
+        _USAGE["out"] += billed
         _USAGE["calls"] += 1
     except Exception:
         pass

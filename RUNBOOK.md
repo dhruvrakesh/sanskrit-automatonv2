@@ -1943,3 +1943,18 @@ engine. The site then calls it "OCR confidence" and marks verses "hard to read".
 
 The dashboard runs one translate job at a time. Queue the small texts first and a long one (MBh01's Hindi, about 13
 hours) last, or the small ones wait behind it.
+
+
+## What a call really costs (DOCS55_2026_10_15)
+
+1. One call shows the thinking (a fraction of a cent): its usage_metadata's total minus prompt minus candidates.
+2. usage_log by day beside Google's bill for the same days shows how far the meter of before 15 Oct was off.
+3. The cap: `python scripts\set_budget.py` shows it; from COST_TRUTH_2026_10_15 it counts the thinking.
+4. The scholarly English's dry run prices by the prior (about $0.10 a verse) until 10 rows are metered with the
+   thinking; use the cap its `NEXT:` line gives.
+
+## Keeping working files out of the repo (DOCS55_2026_10_15)
+
+release.ps1 stages everything. A directory of working files goes into .gitignore before the release, and into the
+safety check's list. One committed by mistake leaves the repo with `git rm -r --cached` and a release; the file stays
+on disk.

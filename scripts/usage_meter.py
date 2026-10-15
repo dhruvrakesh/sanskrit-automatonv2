@@ -72,7 +72,14 @@ def usage_from_response(resp) -> tuple[float | None, float | None]:
         think = getattr(um, "thoughts_token_count", None) or 0
         if pin is None and out is None:
             return None, None
-        return float(pin or 0), float((out or 0) + (think or 0))
+        billed = float((out or 0) + (think or 0))
+        # COST_TRUTH_2026_10_15: an SDK that does not name thoughts_token_count still counts the thinking in
+        # total_token_count (prompt + candidates + thoughts), and Google bills it as output. Without this a
+        # gemini-2.5 call was metered for its input and its visible output only.
+        total = getattr(um, "total_token_count", None)
+        if total and pin is not None and float(total) - float(pin) > billed:
+            billed = float(total) - float(pin)
+        return float(pin or 0), billed
     except Exception:
         return None, None
 

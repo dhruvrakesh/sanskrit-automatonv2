@@ -75,7 +75,11 @@ Say "`n[safety] checking for large or excluded paths..."
 $bad = @()
 foreach ($line in $status) {
     $p = $line.Substring(3).Trim('"')
+    # REPO_HYGIENE_2026_10_15: a path being taken out of the repo (git rm --cached: a D) is never refused
+    if ($line.Substring(0, 2) -match 'D') { continue }
     if ($p -match '(^|/|\\)(backups|raw_vision|raw_merged|probe)(/|\\)') { $bad += "excluded dir: $p"; continue }
+    # REPO_HYGIENE_2026_10_15: an e-text's import (data/raw_<book>_ce) and the heal logs stay out too
+    if ($p -match '(^|/|\\)data(/|\\)(raw_[A-Za-z0-9]+_ce|heal)(/|\\)') { $bad += "excluded dir: $p"; continue }
     if ($p -match 'context\.db') { $bad += "database: $p"; continue }
     if ($p.EndsWith("/") -or $p.EndsWith("\")) { continue }
     if (Test-Path $p) {

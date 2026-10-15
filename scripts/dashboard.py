@@ -170,6 +170,15 @@ def _pump(stream, chunks: list, job: Job, attr: str) -> None:
 
 
 def _run_job(job: Job):
+    if job.killed:   # COST_TRUTH_2026_10_15: stopped while it waited for its lock: it never starts
+        job.ok, job.out, job.err = False, "", "[KILLED by user] while queued: it never started"
+        job.end = time.time()
+        _persist_job(job)
+        try:
+            _status_forget()
+        except NameError:
+            pass
+        return
     try:
         proc = subprocess.Popen(
             job.cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -863,7 +872,8 @@ def api_job_kill(jid):
         return jsonify({"message": "job already finished", "ok": job.ok})
     job.killed = True
     killed = _kill_proc(job.proc)
-    return jsonify({"killed": killed, "jid": jid, "doc": job.doc, "kind": job.kind})
+    return jsonify({"killed": killed, "jid": jid, "doc": job.doc, "kind": job.kind,
+                    "queued": not job.active})   # COST_TRUTH_2026_10_15: a queued job will not start
 
 @app.post("/api/jobs/kill_all")
 def api_jobs_kill_all():
