@@ -1958,3 +1958,20 @@ hours) last, or the small ones wait behind it.
 release.ps1 stages everything. A directory of working files goes into .gitignore before the release, and into the
 safety check's list. One committed by mistake leaves the repo with `git rm -r --cached` and a release; the file stays
 on disk.
+
+
+## The Claude credit (DOCS56_2026_10_15)
+
+1. `python scripts\claude_engine.py --credit` (free): spent, left, the expiry. The Console's Billing page is the truth.
+2. `python scripts\claude_engine.py --probe` (about $0.001): the key, the SDK and the meter answer.
+3. A scholarly run on Claude: `--engine anthropic:claude-sonnet-5-5` (an effort after "@"); the dry run prints the
+   credit; the run stops before the cap ($190) and from 11 Nov.
+4. A text in repair (in_repair) needs `--held-ok`; a benchmark run `--no-glossary-adds --redo`.
+
+## Reading engines side by side (DOCS56_2026_10_15)
+
+1. `python scripts\scholar_duel.py --doc HAYASHIRSHA_PANCARATRA --pages 20-21 --limit 12` (the dry run, free), then
+   its NEXT line.
+2. `--report` writes exports\scholar_duel_HAYASHIRSHA_PANCARATRA.html, blind; read it before opening the folds.
+3. `--pick` with span=number pairs (the page's Translation number) and `--by` with your name records your choice; the
+   tally counts it.

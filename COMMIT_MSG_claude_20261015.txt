@@ -1,0 +1,26 @@
+Claude as an engine of the scholarly English, capped by its credit and judged by Gemini; the Agamas and Tantras read as such; the engines read side by side, blind (CLAUDE_ENGINE_2026_10_15); recorded (DOCS56_2026_10_15)
+
+docs/CLAUDE_ENGINE_2026-10-15.md. The $200 of Claude API credit that came with the Max plan (to 11 Nov 2026) is put to
+the scholarly English of the Agamas and Tantras. The code was written by Claude, one of the contestants, so the engine
+is chosen blind: a judge of each family and a person.
+- scripts/claude_engine.py (new): one streamed call (no temperature, top_p or top_k; the effort in output_config, named
+  after an "@": anthropic:claude-sonnet-5-5@medium); the price from the usage reported (cache, batch, the thinking as
+  output); a row in usage_log and usage_totals, not in budget_state; the credit's own cap ($190 of $200, nothing from
+  11 Nov, failing closed); --credit (free), --probe.
+- scripts/scholar_duel.py (new): each engine's current scholarly English, span by span (a sentence one engine
+  translated whole is read whole by all), read by gemini-2.5-pro and claude-opus-5-5, blind and shuffled; fidelity,
+  prose, notes, errors, a ranking (duel-v1); scholar_duels, append-only; a blind page; the person's pick.
+- scripts/patch_claude_engine_2026_10_15.py:
+  - scholar_translate.py: --engine anthropic:... (class Claude); the judge stays judge-v1 and the second judge
+    gemini-2.5-pro, never Claude; the run capped by the credit and by the spend cap for Google's part; one place for the
+    system prompts (system_for); the Agamas and Tantras: rule 13 (agama-1: a mantra stays in IAST, a footnote digit is
+    left out) and the edition's apparatus with the verse; the texts' names; 30 Hindi-only words (the Karanagama's Hindi
+    rendering was sent as Sanskrit); --held-ok, --no-glossary-adds, --compare-engine, --title; the NEXT line keeps
+    them; two runs that number the same verse at once number it again;
+  - cost_tracker.py: the Claude models in the price table.
+Tests: tests/test_claude_engine_2026_10_15.py (23); test_cost_truth_2026_10_15 (its replay chain ends at the
+.bak_claude_ copies) and test_scholar_2026_10_14 (its file check finds the title's replace in system_for) follow.
+Docs: scripts/patch_docs56_2026_10_15.py (PLATFORM 59, RUNBOOK, EP 46).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

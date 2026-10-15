@@ -42,6 +42,12 @@ _PRICING: dict[str, tuple[float, float]] = {
     "gemini-vision:gemini-2.5-flash": (0.30, 2.50),   # SPEND_TRUTH_2026_10_04
     "gemini-vision:gemini-2.5-pro":   (1.25, 10.00),
     "tesseract":                   (0.00,   0.00),   # local compute, no API cost
+    # CLAUDE_ENGINE_2026_10_15: Anthropic's API, $ a million tokens (platform.claude.com pricing, 2026-10-15); an effort
+    # after "@" (anthropic:claude-sonnet-5-5@medium) finds its model here by name. claude_engine.py prices the cache and
+    # the Batch API itself.
+    "anthropic:claude-opus-5-5":   (4.00,  20.00),
+    "anthropic:claude-sonnet-5-5": (2.00,  10.00),
+    "anthropic:claude-haiku-5-5":  (0.10,   0.50),
 }
 _CHARS_PER_TOKEN = 4.0  # approximate for Sanskrit/English mixed content
 

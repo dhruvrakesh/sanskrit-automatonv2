@@ -636,7 +636,8 @@ class TheFiles(unittest.TestCase):
             self.assertIn(b"SCHOLAR_2026_10_14", b, f); self.assertIn(b"HOLD_2026_10_14", b, f)
         s = (SCRIPTS / "scholar_translate.py").read_text(encoding="ascii")
         self.assertIn('JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z\'!\\"]{1,}")', s, "redeem.py's rule")
-        self.assertIn("SYSTEM_DRAFT.replace(\"{title}\"", s, "the prompts are not str.format()ed (their JSON braces)")
+        self.assertIn(".replace(\"{title}\", meta[\"title\"])", s, "the prompts are not str.format()ed (their JSON "
+                      "braces); CLAUDE_ENGINE_2026_10_15: in system_for, for every engine")
 
 
 if __name__ == "__main__":

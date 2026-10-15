@@ -2,7 +2,7 @@
 # -*- coding: ascii -*-
 """
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
-COST_TRUTH_2026_10_15
+COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -36,6 +36,15 @@ COST_TRUTH_2026_10_15: the meter now counts gemini-2.5-pro's thinking (billed as
 it, and the 14 Oct runs were metered for their visible output only). The price counts only rows metered so (from
 METERED_SINCE); before 10 of them, the prior of 3,000 output tokens a call. A job that only adds working English does
 not stop a run.
+
+CLAUDE_ENGINE_2026_10_15: Claude as the translator and the critic (--engine anthropic:claude-sonnet-5-5, or
+anthropic:claude-opus-5-5@medium: the effort after the "@"), by scripts/claude_engine.py: metered in usage_log as
+Anthropic bills it, paid from the API credit and capped by it, not by the spend cap. The judge stays judge-v1
+(gemini-2.5-flash) and the second judge gemini-2.5-pro (--compare-engine): a Claude English is never judged by Claude.
+A text of the Agamas and Tantras gets a rule more (agama-1): a mantra or a seed-syllable stays in IAST, a Latin digit in
+a word is the edition's footnote number; the edition's apparatus on the page goes with the verse. --held-ok translates a
+text held from the site while its working English is redone (nothing is written to the site or to its passages).
+--no-glossary-adds: a benchmark run. scripts/scholar_duel.py reads the engines side by side, blind.
 
 Why: the working English was made in one pass by gemini-2.5-flash, with the five verses before it as its only
 context: no glossary kept between verses, no notes, no review. A judge reads a sample of it. That is a draft. The
@@ -94,6 +103,7 @@ from pathlib import Path
 MARK = "SCHOLAR_2026_10_14"
 MARK2 = "SCHOLAR_V2_2026_10_14"
 MARK3 = "SCHOLAR_V21_2026_10_14"
+MARK4 = "CLAUDE_ENGINE_2026_10_15"
 PROMPT_VERSION = "scholar-v2.1"        # SCHOLAR_V21_2026_10_14 (scholar-v2: 14 Oct 21:13; scholar-v1: the pilot of 18:25)
 CRITIC_VERSION = "scholar-critic-v2"
 GROUPS_VERSION = "scholar-groups-v1"
@@ -118,6 +128,23 @@ MEASURED_AFTER = 10
 QUIET_KINDS = ("translate_hi", "ocr", "judge", "judge_all", "benchmark", "benchmark_all", "redeem_all", "path_all",
                "export", "pdf", "booksmith",
                "translate", "translate_both", "translate_one")   # COST_TRUTH_2026_10_15: they add working English
+# CLAUDE_ENGINE_2026_10_15
+COMPARE_ENGINE = "gemini:gemini-2.5-pro"   # the second judge of a Claude English: never Claude
+CLAUDE_MAX_TOKENS = 16000                  # the thinking and the answer; twice it when an answer is cut off
+AGAMA_VERSION = "agama-1"
+AGAMA = re.compile(r"(?i)agam|tantr|pancar|bhairav")   # a category or a name of the Agamas and Tantras
+TITLES = {
+    "HAYASHIRSHA_PANCARATRA": "the Haya\u015b\u012br\u1e63a Pa\u00f1car\u0101tra (\u0100dik\u0101\u1e47\u1e0da), a "
+                              "P\u0101\u00f1car\u0101tra \u0100gama of the Vai\u1e63\u1e47avas",
+    "Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi":
+        "the K\u0101ra\u1e47\u0101gama, Kriy\u0101p\u0101da, a \u015aaiva \u0100gama (edited by R\u0101macandra "
+        "P\u0101\u1e47\u1e0deya, \u015aaivabh\u0101rat\u012b \u015aodhaprati\u1e63\u1e6dh\u0101na, V\u0101r\u0101\u1e47as\u012b, 1994)",
+    "tantric_texts_series_edited_by_arthur_av":
+        "the Tantr\u0101bhidh\u0101na with the B\u012bjanigha\u1e47\u1e6du, B\u012bj\u0101bhidh\u0101na, "
+        "Mantr\u0101rth\u0101bhidh\u0101na, Var\u1e47ab\u012bjako\u1e63a and Mudr\u0101nigha\u1e47\u1e6du, lexicons of the "
+        "Tantras: the code-names of letters, seed-syllables and gestures (Tantrik Texts, vol. I, Arthur Avalon's series)",
+}
+APPARATUS_RE = re.compile(r"-[A-Z](?:,\s?[A-Z])*\s?[.;]")   # "7 yat (?)-B,C.": a variant and its manuscripts
 
 DEV = re.compile("[\u0900-\u097f]")
 JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")       # = redeem.JUNK, repair_text.JUNK
@@ -135,10 +162,22 @@ HINDI_WORDS = frozenset((
     "\u0939\u094b\u0924\u093e", "\u0939\u094b\u0924\u0940", "\u0915\u0930\u0915\u0947", "\u0915\u093f\u092f\u093e",
     "\u0932\u093f\u092f\u0947", "\u0907\u0938\u0932\u093f\u092f\u0947", "\u0915\u0939\u093e", "\u092f\u0939",
     "\u0935\u0939", "\u091c\u094b"))
+# CLAUDE_ENGINE_2026_10_15: words that are Hindi only (lie, chahie, vala, vale, vali, hone, karana, jata, jati, jate, hua,
+# hue, hui, iske, uske, iska, uska, apane, sakata, sakate, karen, hoga, hogi, diya, gaye, gayi, bhi, ne, is, thik): the
+# Karanagama's Hindi under each verse had two of the old ones only
+HINDI_WORDS = HINDI_WORDS | frozenset((
+    "\u0932\u093f\u090f", "\u091a\u093e\u0939\u093f\u090f", "\u0935\u093e\u0932\u093e", "\u0935\u093e\u0932\u0947",
+    "\u0935\u093e\u0932\u0940", "\u0939\u094b\u0928\u0947", "\u0915\u0930\u0928\u093e", "\u091c\u093e\u0924\u093e",
+    "\u091c\u093e\u0924\u0940", "\u091c\u093e\u0924\u0947", "\u0939\u0941\u0906", "\u0939\u0941\u090f",
+    "\u0939\u0941\u0908", "\u0907\u0938\u0915\u0947", "\u0909\u0938\u0915\u0947", "\u0907\u0938\u0915\u093e",
+    "\u0909\u0938\u0915\u093e", "\u0905\u092a\u0928\u0947", "\u0938\u0915\u0924\u093e", "\u0938\u0915\u0924\u0947",
+    "\u0915\u0930\u0947\u0902", "\u0939\u094b\u0917\u093e", "\u0939\u094b\u0917\u0940", "\u0926\u093f\u092f\u093e",
+    "\u0917\u092f\u0947", "\u0917\u092f\u0940", "\u092d\u0940", "\u0928\u0947", "\u0907\u0938", "\u0920\u0940\u0915"))
 WORD = re.compile("[\u0900-\u0963\u0971-\u097f]+")
 HELD = {"withdrawn": "withdrawn from the site: a better source first",
         "set_aside": "set aside: a better scan first",
         "in_repair": "in repair: its reading may still change (repair_text.py --release first)"}
+HELD_OK = "--held-ok translates it while it is held from the site: nothing is written to the site or to its passages"
 
 SYSTEM_DRAFT = """You are a Sanskritist preparing a scholarly English translation of {title}, for a critical-edition translation series. The register is that of an unabridged translation made from a critical edition, as Bibek Debroy's Mahabharata is from the BORI Critical Edition: complete, faithful to every word, in plain modern English prose, with Sanskrit names and key terms kept and explained in notes. Translate afresh from the Sanskrit given. Never quote or reconstruct any published translation.
 
@@ -185,6 +224,47 @@ SYSTEM_COMPARE = """You are a senior Sanskritist comparing two English translati
 For each of A and B: "fidelity", 1 to 5 (5 = every word's meaning and every grammatical relation kept, every person rightly named), and "errors", each {"where": the Sanskrit word or words, "error": what is wrong, "severity": major|minor}. Major: a wrong meaning, a wrong person, a word that matters left out or added. Do not invent errors: an empty list is right for a faithful translation. Then "better": "A", "B" or "equal", and "reason", in a sentence.
 Reply with one JSON object and nothing else:
 {"A": {"fidelity": 0, "errors": []}, "B": {"fidelity": 0, "errors": []}, "better": "equal", "reason": ""}"""
+
+# CLAUDE_ENGINE_2026_10_15: one place for the system prompts, so that every engine sends the same; and the Agamas'
+AGAMA_DRAFT = """13. AGAMA AND TANTRA. This is a text of the \u0100gamas and Tantras. A mantra, a seed-syllable (b\u012bja) or a ritual formula (o\u1e43, hr\u012b\u1e43, hu\u1e43, pha\u1e6d, sv\u0101h\u0101, nama\u1e25) stays in IAST exactly as the text has it and is never translated; what it is for may go in a note. A term of ritual, iconography, architecture or measure (ma\u1e47\u1e0dapa, ku\u1e47\u1e0da, ved\u012b, stha\u1e47\u1e0dila, hasta, a\u1e45gula, ny\u0101sa, mudr\u0101, d\u012bk\u1e63\u0101, p\u012b\u1e6dha) follows Rule 6, and a measure is given as the text gives it. A Latin digit inside or just after a Devanagari word (as in \u0935\u093e24) is the printed edition's footnote number, not the text: leave it out of the translation. A word the reading plainly misprints (a letter misread) is translated as it must be read, and the reading you chose is said in "doubts"."""
+AGAMA_JUDGE = """This is a text of the \u0100gamas and Tantras: a mantra, a seed-syllable or a ritual formula kept in IAST and not translated is right, not an issue; a Latin digit inside or just after a Devanagari word (as in \u0935\u093e24) is the printed edition's footnote number, not the text, and its absence from a translation is no issue."""
+SYSTEMS = {"draft": SYSTEM_DRAFT, "critic": SYSTEM_CRITIC, "groups": SYSTEM_GROUPS, "compare": SYSTEM_COMPARE}
+JUDGING = ("critic", "compare", "duel")
+_REPLY = "Reply with one JSON object and nothing else:"
+
+
+def system_for(kind: str, meta: dict) -> str:
+    """The system prompt of a call of this kind for this text: its title in it; for the Agamas and Tantras, rule 13 in the
+    draft's and the note in the judging ones, before the reply's shape."""
+    s = SYSTEMS.get(kind, SYSTEM_CRITIC).replace("{title}", meta["title"])
+    add = AGAMA_DRAFT if kind == "draft" else (AGAMA_JUDGE if kind in JUDGING else "")
+    if meta.get("agama") and add:
+        for gap in ("\n\n", "\n"):
+            if gap + _REPLY in s:
+                s = s.replace(gap + _REPLY, "\n" + add + gap + _REPLY, 1)
+                break
+    return s
+
+
+def apparatus_of(allp: list, xs: list) -> str:
+    """The edition's apparatus on these verses' pages: a passage on the page that lists variants by manuscript
+    ("7 yat (?)-B,C."), three at least. Empty when there is none."""
+    pages = {x.get("page") for x in xs}
+    ids = {x.get("id") for x in xs}
+    out = []
+    for y in allp:
+        if y.get("page") in pages and y.get("id") not in ids and len(APPARATUS_RE.findall(y.get("text") or "")) >= 3:
+            out.append(" ".join(str(y.get("text") or "").split()))
+    return "\n".join(out)
+
+
+def with_apparatus(base: str, allp: list, xs: list) -> str:
+    ap = apparatus_of(allp, xs)
+    if not ap:
+        return base
+    return (base + "\n\nTHE EDITION'S APPARATUS ON THIS PAGE (for understanding only; do not translate it: the variant "
+            "readings of the manuscripts A, B, C ..., by the footnote numbers in the verses, which are not the text. "
+            "Where a variant would change the meaning, say so in a note of kind textual):\n" + ap)
 
 
 # --------------------------------------------------------------------------------------------- small things
@@ -311,7 +391,9 @@ def doc_meta(con, doc: str, allp: list, raw_dir=None) -> dict:
         source = "a Tesseract OCR reading of a printed edition (letters may be misread)"
     else:
         source = "a reading of a printed edition"
-    return {"doc": doc, "category": cat, "title": title, "source": source, "engine": top}
+    title = TITLES.get(doc) or title   # CLAUDE_ENGINE_2026_10_15
+    return {"doc": doc, "category": cat, "title": title, "source": source, "engine": top,
+            "agama": bool(AGAMA.search("%s %s" % (cat or "", doc)))}
 
 
 def latest_rows(con, doc: str) -> dict:
@@ -756,16 +838,14 @@ class Gemini:
                     model_name=name(self.a.judge_engine), generation_config=self._cfg(0.0, 2048),
                     system_instruction=self.js._SYS.format(lang_name="English"))
             else:
-                system = {"draft": SYSTEM_DRAFT, "groups": SYSTEM_GROUPS, "compare": SYSTEM_COMPARE}.get(
-                    kind, SYSTEM_CRITIC).replace("{title}", self.meta["title"])   # SCHOLAR_V2_2026_10_14
+                system = system_for(kind, self.meta)   # CLAUDE_ENGINE_2026_10_15 (SCHOLAR_V2_2026_10_14)
                 self.models[key] = self.genai.GenerativeModel(
                     model_name=name(self.a.engine), generation_config=self._cfg(0.1 if kind == "draft" else 0.0, maxtok),
                     safety_settings=self.safety, system_instruction=system)
         return self.models[key]
 
     def _once(self, kind, msg, maxtok):
-        system_len = len({"draft": SYSTEM_DRAFT, "groups": SYSTEM_GROUPS, "compare": SYSTEM_COMPARE}.get(
-            kind, SYSTEM_CRITIC))   # SCHOLAR_V2_2026_10_14
+        system_len = len(system_for(kind, self.meta))   # CLAUDE_ENGINE_2026_10_15 (SCHOLAR_V2_2026_10_14)
         last = None
         for k in range(3):
             t0 = time.time()
@@ -784,8 +864,8 @@ class Gemini:
                 finish = resp.candidates[0].finish_reason
             except Exception:
                 pass
-            cost = _charge("scholar", self.meta["doc"], self.a.engine, resp, system_len + len(msg), len(txt),
-                           time.time() - t0, bool(txt), self.con)
+            cost = _charge(getattr(self, "meter_kind", "scholar"), self.meta["doc"], self.a.engine, resp,
+                           system_len + len(msg), len(txt), time.time() - t0, bool(txt), self.con)   # CLAUDE_ENGINE
             self.spent += cost
             return txt, finish, cost
         raise CallFailed("%s: %s" % (type(last).__name__, str(last)[:160]))
@@ -819,6 +899,88 @@ class Gemini:
                        self.con)
         self.spent += cost
         return fid, flu, why, cost
+
+
+class Claude:
+    """CLAUDE_ENGINE_2026_10_15: the translator, the critic and the groups call by Claude (scripts/claude_engine.py);
+    the judge (judge-v1) and the second judge by Gemini (--judge-engine, --compare-engine), so that a Claude English is
+    never judged by Claude. Built first: without either key or SDK nothing is called or written."""
+
+    def __init__(self, a, meta: dict, con, sdk=None):
+        import claude_engine as ce
+        model, effort = ce.parse_engine(a.engine)
+        self.ce, self.a, self.meta = ce, a, meta
+        self.client = ce.Client(model, effort, sdk=sdk)
+        ga = argparse.Namespace(**vars(a))
+        ga.engine = getattr(a, "compare_engine", None) or COMPARE_ENGINE
+        self.gem = Gemini(ga, meta, con)
+        self.own = 0.0            # the Claude calls of this run, as charged
+        self.meter_kind = "scholar"
+        self.con = con
+
+    @property
+    def con(self):
+        return self._con
+
+    @con.setter
+    def con(self, v):
+        self._con = v
+        if getattr(self, "gem", None) is not None:
+            self.gem.con = v
+
+    @property
+    def spent(self) -> float:
+        return self.own + self.gem.spent
+
+    def _once(self, kind, msg, maxtok):
+        t0 = time.time()
+        try:
+            resp = self.client.create(system_for(kind, self.meta), msg, maxtok)
+        except Exception as e:   # the SDK asked again already (a rate limit, an overload, a server error)
+            raise CallFailed("%s: %s" % (type(e).__name__, str(e)[:200]))
+        txt = self.ce.text_of(resp)
+        cost = self.ce.meter(self.con, self.meter_kind, self.meta["doc"], self.client.model, getattr(resp, "usage", None),
+                             time.time() - t0, bool(txt))
+        self.own += cost
+        return txt, self.ce.stop_of(resp), cost
+
+    def ask(self, kind: str, msg: str) -> tuple:
+        """(the JSON answer or None, $), as Gemini.ask: an answer cut off at max_tokens and not JSON is asked again with
+        twice the room; a draft still not JSON once more. The second judge (compare) is Gemini's."""
+        if kind == "compare":
+            return self.gem.ask(kind, msg)
+        txt, stop, cost = self._once(kind, msg, CLAUDE_MAX_TOKENS)
+        d = parse_json(txt)
+        if d is None and stop == "max_tokens":
+            txt, stop, more = self._once(kind, msg, 2 * CLAUDE_MAX_TOKENS)
+            cost += more
+            d = parse_json(txt)
+        if d is None and kind == "draft" and stop != "refusal":
+            txt, stop, more = self._once(kind, msg, 2 * CLAUDE_MAX_TOKENS)
+            cost += more
+            d = parse_json(txt)
+        self.last = {"kind": kind, "finish": stop, "chars": len(txt or ""), "json": d is not None}
+        return d, cost
+
+    def judge(self, src: str, iast: str, english: str) -> tuple:
+        return self.gem.judge(src, iast, english)
+
+
+class CreditGate:
+    """CLAUDE_ENGINE_2026_10_15: run()'s cap for a Claude run: the Claude credit for its calls, the spend cap for the
+    judges' part (Google's); why says which stopped it."""
+
+    def __init__(self, ce, google_ok=None, judge_share: float = 0.05):
+        self.ce, self.google_ok, self.share, self.why = ce, google_ok, judge_share, ""
+
+    def __call__(self, con, need: float) -> bool:
+        if not self.ce.budget_ok(con, need):
+            self.why = "the Claude credit is spent or expired (python scripts\\claude_engine.py --credit shows it)"
+            return False
+        if self.google_ok is not None and not self.google_ok(con, need * self.share):
+            self.why = "the spend cap is reached (python scripts\\set_budget.py shows it)"
+            return False
+        return True
 
 
 # --------------------------------------------------------------------------------------------- the run
@@ -927,6 +1089,7 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
         after = context(allp, idxs[-1], done)[1]
     gl = glossary(con, a.doc, x, before + [(y, "") for y in xs[1:]])
     base = verse_message(meta, x, before, after, gl) if len(xs) == 1 else group_message(meta, xs, before, after, gl)
+    base = with_apparatus(base, allp, xs)   # CLAUDE_ENGINE_2026_10_15: the edition's variants on the page
     spent0 = asker.spent
     d, _c = asker.ask("draft", base)
     cur = clean_unit(d, refs)
@@ -990,12 +1153,13 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
                      "critique": json.dumps(crits, ensure_ascii=False), "passes": 1 + revisions, "fidelity": fid,
                      "fluency": flu, "judge_reason": (why or "")[:200], "working_fidelity": wfid, "working_fluency": wflu,
                      "status": st, "engine": a.engine, "judge_engine": a.judge_engine,
-                     "prompt_version": "%s+%s" % (PROMPT_VERSION, CRITIC_VERSION), "cost_usd": round(cost / len(xs), 6),
+                     "prompt_version": "%s+%s%s" % (PROMPT_VERSION, CRITIC_VERSION, ("+" + AGAMA_VERSION) if meta.get(
+                         "agama") else ""), "cost_usd": round(cost / len(xs), 6),   # CLAUDE_ENGINE_2026_10_15
                      "created_at": at, "group_ref": gref, "group_translation": cur["translation"] if gref else None,
                      "moved": cur.get("moved") or None,
                      "compare": json.dumps(cmp_, ensure_ascii=False) if cmp_ else None,
                      "compare_better": cmp_["better"] if cmp_ else None,
-                     "_glossary": cur["glossary"] if k == 0 else []})
+                     "_glossary": cur["glossary"] if k == 0 and not getattr(a, "no_glossary_adds", False) else []})
     return rows
 
 
@@ -1039,11 +1203,19 @@ COLS = ("passage_id", "doc_code", "page_no", "idx", "verse_ref", "src_hash", "ve
 
 
 def store(con, rec: dict) -> int:
-    v = (con.execute("SELECT MAX(version) FROM scholar_translations WHERE passage_id = ?",
-                     (rec["passage_id"],)).fetchone()[0] or 0) + 1
-    rec["version"] = v
-    con.execute("INSERT INTO scholar_translations(%s) VALUES (%s)" % (", ".join(COLS), ",".join("?" * len(COLS))),
-                [rec.get(c) for c in COLS])
+    for k in range(5):   # CLAUDE_ENGINE_2026_10_15: runs side by side may number the same verse at once: number it again
+        v = (con.execute("SELECT MAX(version) FROM scholar_translations WHERE passage_id = ?",
+                         (rec["passage_id"],)).fetchone()[0] or 0) + 1
+        rec["version"] = v
+        try:
+            con.execute("INSERT INTO scholar_translations(%s) VALUES (%s)" % (", ".join(COLS), ",".join("?" * len(COLS))),
+                        [rec.get(c) for c in COLS])
+            break
+        except sqlite3.IntegrityError:
+            if k == 4:
+                raise
+            con.rollback()
+            time.sleep(0.2 * (k + 1))
     if rec["status"] == "passed":   # the glossary grows only from verses that passed
         for g in rec.get("_glossary") or []:
             con.execute("INSERT OR IGNORE INTO scholar_glossary(doc_code, term, rendering, kind, note, source, created_at) "
@@ -1068,7 +1240,8 @@ def run(a, allp: list, picked: list, meta: dict, done: dict, asker, con, price: 
         xs = [allp[i] for i in u]
         need = price["typical"] * len(u)
         if budget_ok is not None and not budget_ok(con, need):
-            out["stopped"] = "the spend cap is reached (python scripts\\set_budget.py shows it)"
+            out["stopped"] = (getattr(budget_ok, "why", "") or   # CLAUDE_ENGINE_2026_10_15: the credit's own
+                              "the spend cap is reached (python scripts\\set_budget.py shows it)")
             break
         if asker.spent + need > a.max_usd:
             out["stopped"] = "this run's --max-usd $%.2f is reached (%s spent)" % (a.max_usd, usd(asker.spent))
@@ -1650,9 +1823,26 @@ def main(argv=None) -> int:
     ap.add_argument("--log-dir", default="data/scholar")
     ap.add_argument("--no-groups", action="store_true", help="SCHOLAR_V2_2026_10_14: every verse alone")
     ap.add_argument("--no-compare", action="store_true", help="SCHOLAR_V2_2026_10_14: no second judge")
+    ap.add_argument("--compare-engine", default=COMPARE_ENGINE, help="CLAUDE_ENGINE_2026_10_15: the second judge of a "
+                    "Claude English (a Gemini model)")
+    ap.add_argument("--held-ok", action="store_true", help="CLAUDE_ENGINE_2026_10_15: translate a text held from the site "
+                    "while its working English is redone (in_repair); nothing is written to the site")
+    ap.add_argument("--no-glossary-adds", action="store_true", help="CLAUDE_ENGINE_2026_10_15: a benchmark run; the "
+                    "glossary does not grow from it")
+    ap.add_argument("--title", default=None, help="CLAUDE_ENGINE_2026_10_15: the text's name in the prompts")
     ap.add_argument("--yes", action="store_true")
     a = ap.parse_args(argv)
     a.groups, a.compare = not a.no_groups, not a.no_compare   # SCHOLAR_V2_2026_10_14
+    claude = str(a.engine).startswith("anthropic:")   # CLAUDE_ENGINE_2026_10_15
+    if claude:
+        try:
+            import claude_engine
+            claude_engine.parse_engine(a.engine)
+        except ValueError as e:
+            print("REFUSE: --engine %s: %s" % (a.engine, e)); print("VERDICT: nothing sent"); print("NEXT: "); return 1
+        if str(a.compare_engine).startswith("anthropic:") or str(a.judge_engine).startswith("anthropic:"):
+            print("REFUSE: the judges of a Claude English are Gemini's (--judge-engine, --compare-engine): it is not judged "
+                  "by Claude"); print("VERDICT: nothing sent"); print("NEXT: "); return 1
     if not Path(a.db).exists():
         print("REFUSE: %s not found" % a.db); print("VERDICT: no database"); print("NEXT: "); return 1
     reg = register(Path(a.verdicts) if a.verdicts else Path(a.db).resolve().parent / "source_verdicts.jsonl")
@@ -1699,6 +1889,8 @@ def main(argv=None) -> int:
         if not allp:
             print("REFUSE: %s has no passages" % a.doc); print("VERDICT: nothing to do"); print("NEXT: "); return 1
         meta = doc_meta(con, a.doc, allp, Path(a.db).resolve().parent / "raw")
+        if getattr(a, "title", None):   # CLAUDE_ENGINE_2026_10_15
+            meta["title"] = a.title
         done = latest_rows(con, a.doc)
         picked, left, skipped = choose(a, allp, done)
         first = None
@@ -1706,18 +1898,31 @@ def main(argv=None) -> int:
             i = picked[0]
             b, af = context(allp, i, done)
             first = verse_message(meta, allp[i], b, af, glossary(con, a.doc, allp[i], b))
+            first = with_apparatus(first, allp, [allp[i]])   # CLAUDE_ENGINE_2026_10_15
         price = prices(con, a, len(first or ""))
+        credit = None
+        if claude:   # CLAUDE_ENGINE_2026_10_15
+            try:
+                credit = claude_engine.credit(con)
+            except RuntimeError as e:
+                credit = {"error": str(e)}
     finally:
         con.close()
     print("scholar_translate.py  %s  %s   %s and its critic, up to %d revision(s); the judge %s"
           % ("%s (%s)" % (MARK3, PROMPT_VERSION), "RUN" if a.yes else "DRY RUN (nothing called, nothing written)",
              a.engine, a.rounds, a.judge_engine))
     print("  %s: %s passages; the source: %s (%s)" % (a.doc, "{:,}".format(len(allp)), meta["source"], meta["engine"] or "?"))
-    if st in HELD:
+    if st == "in_repair" and getattr(a, "held_ok", False):   # CLAUDE_ENGINE_2026_10_15
+        print("  NOTE: %s is held from the site (the register, %s: %s); --held-ok: the scholarly English writes nothing "
+              "to the site or to its passages, and a row goes stale, not wrong, if its reading changes"
+              % (a.doc, str((reg.get(a.doc) or {}).get("at") or "?")[:16], (reg.get(a.doc) or {}).get("reason") or ""))
+    elif st in HELD:
         print("REFUSE: %s is %s (the register, %s: %s)" % (a.doc, HELD[st], str((reg.get(a.doc) or {}).get("at") or "?")[:16],
                                                            (reg.get(a.doc) or {}).get("reason") or ""))
         print("VERDICT: nothing sent, nothing written")
         print("NEXT: python scripts\\text_path.py --doc %s   (its path)" % a.doc)
+        if st == "in_repair":   # CLAUDE_ENGINE_2026_10_15
+            print("ALSO: " + HELD_OK)
         return 3
     if picked:
         print("  chosen: %d verse(s), %s to %s" % (len(picked), ref_of(allp[picked[0]]), ref_of(allp[picked[-1]])))
@@ -1730,7 +1935,7 @@ def main(argv=None) -> int:
         print("  already done, the Sanskrit unchanged: %d (--redo makes a new version)" % len(skipped))
     if a.show_prompt and first:
         print("\n----- the system prompt (%s) -----\n%s\n----- the first verse's message -----\n%s\n-----"
-              % (PROMPT_VERSION, SYSTEM_DRAFT.replace("{title}", meta["title"]), first))
+              % (PROMPT_VERSION, system_for("draft", meta), first))   # CLAUDE_ENGINE_2026_10_15: as it is sent
     if not picked:
         print("VERDICT: nothing to send%s" % ("; %d left out" % len(left) if left else ""))
         print("NEXT: python scripts\\scholar_translate.py --doc %s --report   (what is there)" % a.doc)
@@ -1742,6 +1947,15 @@ def main(argv=None) -> int:
         ("one over several verses is translated whole (%s)" % GROUPS_VERSION) if a.groups else "every verse alone",
         ("the scholarly and the working English side by side (%s)" % COMPARE_VERSION) if a.compare else "none",
         MARK2))
+    if meta.get("agama"):   # CLAUDE_ENGINE_2026_10_15
+        print("  the Agamas and Tantras: one rule more (%s): a mantra stays in IAST; a digit in a word is a footnote number"
+              % AGAMA_VERSION)
+    if credit is not None:
+        print("  " + (claude_engine.credit_line(credit) if "error" not in credit else "the Claude credit: " + credit["error"]))
+        print("  the judge %s and the second judge %s: Google's bill, in the spend cap" % (a.judge_engine, a.compare_engine))
+        if "error" not in credit and (credit["expired"] or credit["left"] < est):
+            print("  WARNING: the credit left ($%.2f) does not cover this run (about %s)%s"
+                  % (max(0.0, credit["left"]), usd(est), "; it has expired" if credit["expired"] else ""))
     if not a.yes:
         cap = max(0.25, round(est * 1.25 + 0.005, 2))
         print("VERDICT: %d verse(s) ready, about %s; %d left out" % (len(picked), usd(est), len(left)))
@@ -1750,10 +1964,14 @@ def main(argv=None) -> int:
             " --only-idx %d" % a.only_idx if a.only_idx is not None else "")
         print("NEXT: python scripts\\scholar_translate.py --doc %s%s --limit %d%s --yes --max-usd %.2f"
               % (a.doc, sel, a.limit, (" --redo" if a.redo else "") + (" --no-groups" if a.no_groups else "")
-                 + (" --no-compare" if a.no_compare else ""), cap))
+                 + (" --no-compare" if a.no_compare else "") + ((" --engine %s" % a.engine) if a.engine != ENGINE else "")
+                 + (" --held-ok" if getattr(a, "held_ok", False) else "")
+                 + (" --no-glossary-adds" if getattr(a, "no_glossary_adds", False) else "")
+                 + ((' --title "%s"' % a.title) if getattr(a, "title", None) else ""), cap))   # CLAUDE_ENGINE_2026_10_15
         return 0
     try:
-        asker = Gemini(a, meta, None)   # first: without a key or the SDK nothing is called, and the database is not opened
+        asker = (Claude if claude else Gemini)(a, meta, None)   # first: without a key or the SDK nothing is called, and
+        # the database is not opened (CLAUDE_ENGINE_2026_10_15: Claude, or Gemini)
     except RuntimeError as e:
         print("REFUSE: %s" % e); print("VERDICT: nothing called, nothing written"); print("NEXT: "); return 1
     import db_utils
@@ -1765,7 +1983,14 @@ def main(argv=None) -> int:
             from usage_meter import budget_ok
         except Exception:
             budget_ok = None
+        if claude:   # CLAUDE_ENGINE_2026_10_15: the credit pays the Claude calls, Google the judges
+            budget_ok = CreditGate(asker.ce, budget_ok)
         res = run(a, allp, picked, meta, done, asker, con, price, budget_ok)
+        if claude:
+            try:
+                res["credit"] = asker.ce.credit_line(asker.ce.credit(con))
+            except Exception:
+                pass
     finally:
         con.close()
     if res.get("grouped"):   # SCHOLAR_V2_2026_10_14
@@ -1774,6 +1999,8 @@ def main(argv=None) -> int:
         print("  sentences that failed whole, then translated verse by verse: %d" % res["split"])
     if res["stopped"]:
         print("  STOPPED: %s" % res["stopped"])
+    if res.get("credit"):   # CLAUDE_ENGINE_2026_10_15
+        print("  " + res["credit"])
     print("VERDICT: %d passed, %d flagged (a person reads them), %d source doubt(s), %d failed; %s spent; the log: %s"
           % (len(res["passed"]), len(res["flagged"]), len(res["source_doubt"]), len(res["failed"]), usd(res["spent"]),
              res["log"]))

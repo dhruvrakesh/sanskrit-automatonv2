@@ -781,3 +781,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | DQ1 | A queued job stopped does not start | Built and tested; live after the next idle restart |
 | RH1 | MBh01's e-text import and the heal logs out of the repo | Built and tested (REPO_HYGIENE_2026_10_15); git rm --cached by hand; the history is the owner's call |
 | MB1 | MBh01's lost prose | Waits for the translate queue to end, then the re-ingest |
+
+
+## Addendum 2026-10-15 (46) (DOCS56_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| CE1 | Claude as an engine of the scholarly English, metered and capped by its credit | Built and tested (CLAUDE_ENGINE_2026_10_15) |
+| CE2 | The head to head, blind (two judges of two families, the person's pick) | Built and tested; the pilot of 18 verses, four engines |
+| CE3 | The Batch API (half the price) for the engine chosen | After the pilot |
+| AG1 | The Agamas and Tantras read as such (rule 13, the apparatus, the Hindi left out) | Built and tested |
+| AG2 | The Hayasirsa Pancaratra and the Karanagama whole (about 2,600 passages) | After CE3; --release after their working English |
+| AG3 | The Tantrik Texts vol. I, the Akasabhairavakalpa, the Saradatilaka | After the re-ingest, the vision OCR, the ingest |
