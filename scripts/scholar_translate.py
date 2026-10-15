@@ -3,7 +3,7 @@
 """
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
 COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
-AUDIT_2026_10_15, RUN_FIX_2026_10_15
+AUDIT_2026_10_15, RUN_FIX_2026_10_15, CLAUDE_FIRST_2026_10_15
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -58,6 +58,10 @@ sentence in N; its reading decides the status (a person reads what it flags). --
 RUN_FIX_2026_10_15: an answer's first whole JSON object is read whatever follows it; a Claude critic not answering in
 JSON is asked once more, and an answer still unread is kept (data/scholar/unparsed_<doc>.jsonl); a dashboard pipeline
 past its ingest (translating or exporting) does not stop a run.
+
+CLAUDE_FIRST_2026_10_15: the checks of a Claude run may be another Claude model's (--judge-engine, --compare-engine
+anthropic:...), on the Claude credit; never the translator's own model. A run with no Gemini engine is gated by the
+Claude credit only (Google's spend cap is not consulted, no Gemini key is needed).
 
 Why: the working English was made in one pass by gemini-2.5-flash, with the five verses before it as its only
 context: no glossary kept between verses, no notes, no review. A judge reads a sample of it. That is a draft. The
@@ -957,9 +961,12 @@ class Claude:
         model, effort = ce.parse_engine(a.engine)
         self.ce, self.a, self.meta = ce, a, meta
         self.client = ce.Client(model, effort, sdk=sdk)
-        ga = argparse.Namespace(**vars(a))
-        ga.engine = getattr(a, "compare_engine", None) or COMPARE_ENGINE
-        self.gem = Gemini(ga, meta, con)
+        if claude_checks(a):   # CLAUDE_FIRST_2026_10_15: a check by another Claude model, on the credit
+            self.gem = Checks(a, meta, con, sdk)
+        else:
+            ga = argparse.Namespace(**vars(a))
+            ga.engine = getattr(a, "compare_engine", None) or COMPARE_ENGINE
+            self.gem = Gemini(ga, meta, con)
         self.own = 0.0            # the Claude calls of this run, as charged
         self.meter_kind = "scholar"
         self.con = con
@@ -1023,6 +1030,155 @@ class Claude:
         if c is not None:
             c["by"] = self.gem.a.engine
         return c
+
+
+def is_claude(engine) -> bool:
+    """CLAUDE_FIRST_2026_10_15."""
+    return str(engine or "").startswith("anthropic:")
+
+
+def claude_checks(a) -> bool:
+    """CLAUDE_FIRST_2026_10_15: a check of this run (the judge, or the second judge and the audit) is Claude's."""
+    return is_claude(getattr(a, "judge_engine", None)) or is_claude(getattr(a, "compare_engine", None))
+
+
+def no_gemini(a) -> bool:
+    """CLAUDE_FIRST_2026_10_15: nothing in this run is Gemini's: Google's spend cap is not its gate."""
+    return is_claude(a.engine) and is_claude(getattr(a, "judge_engine", None)) and is_claude(
+        getattr(a, "compare_engine", None))
+
+
+def own_model_check(a) -> str:
+    """CLAUDE_FIRST_2026_10_15: the check engine that is the translator's own model ("" when none is). ValueError for
+    an engine that cannot be read."""
+    import claude_engine as ce
+    mine = ce.parse_engine(a.engine)[0]
+    for e in (getattr(a, "judge_engine", None), getattr(a, "compare_engine", None)):
+        if is_claude(e) and ce.parse_engine(e)[0] == mine:
+            return str(e)
+    return ""
+
+
+def bill_of(engine) -> str:
+    """CLAUDE_FIRST_2026_10_15."""
+    return "the Claude credit" if is_claude(engine) else "Google's bill, in the spend cap"
+
+
+def checks_line(a) -> str:
+    """CLAUDE_FIRST_2026_10_15: the dry run's line on the checks; as before when both are Gemini's."""
+    j, c = getattr(a, "judge_engine", None) or JUDGE, getattr(a, "compare_engine", None) or COMPARE_ENGINE
+    if not (is_claude(j) or is_claude(c)):
+        return "the judge %s and the second judge %s: Google's bill, in the spend cap" % (j, c)
+    s = "the judge %s (%s); the second judge and the audit %s (%s)" % (j, bill_of(j), c, bill_of(c))
+    if no_gemini(a):
+        s += "; no Gemini call: Google's spend cap is not consulted"
+    return s
+
+
+CLAUDE_JUDGE_MAX_TOKENS = 4000   # CLAUDE_FIRST_2026_10_15: judge-v1 answers one line; twice it when cut off
+
+
+class ClaudeCheck:
+    """CLAUDE_FIRST_2026_10_15: one check of a Claude run by another Claude model: ask() for the second judge and the
+    audit (the critic's prompt), judge() for judge-v1 (judge_sample.py's prompt and reading). Each call is metered on
+    the Claude credit (usage_log; kind "scholar" or "judge")."""
+
+    def __init__(self, engine: str, meta: dict, con, sdk=None):
+        import claude_engine as ce
+        model, effort = ce.parse_engine(engine)
+        self.ce, self.meta, self.engine = ce, meta, engine
+        self.client = ce.Client(model, effort, sdk=sdk)
+        self.a = argparse.Namespace(engine=engine)   # Claude.audit names the reader by a.engine
+        self.spent, self.con, self.last, self._jcost = 0.0, con, None, 0.0
+
+    def _once(self, system: str, msg: str, maxtok: int, kind: str):
+        t0 = time.time()
+        try:
+            resp = self.client.create(system, msg, maxtok)
+        except Exception as e:   # the SDK asked again already
+            raise CallFailed("%s: %s" % (type(e).__name__, str(e)[:200]))
+        txt = self.ce.text_of(resp)
+        cost = self.ce.meter(self.con, kind, self.meta["doc"], self.client.model, getattr(resp, "usage", None),
+                             time.time() - t0, bool(txt))
+        self.spent += cost
+        return txt, self.ce.stop_of(resp), cost
+
+    def ask(self, kind: str, msg: str) -> tuple:
+        system = system_for(kind, self.meta)
+        txt, stop, cost = self._once(system, msg, CLAUDE_MAX_TOKENS, "scholar")
+        d = parse_json(txt)
+        if d is None and stop != "refusal":   # cut off, or not JSON: once more, with room
+            txt, stop, more = self._once(system, msg, 2 * CLAUDE_MAX_TOKENS, "scholar")
+            cost += more
+            d = parse_json(txt)
+        self.last = {"kind": kind, "finish": stop, "chars": len(txt or ""), "json": d is not None}
+        return d, cost
+
+    def judge(self, src: str, iast: str, english: str) -> tuple:
+        """(fidelity, fluency, reason, $) by judge-v1, as Gemini.judge: None scores when it does not answer."""
+        import judge_sample as js
+        system, chk = js._SYS.format(lang_name="English"), self
+
+        class _Model:
+            def generate_content(self, prompt):
+                txt, stop, cost = chk._once(system, prompt, CLAUDE_JUDGE_MAX_TOKENS, "judge")
+                chk._jcost += cost
+                if stop == "max_tokens" and not re.search(r'"fluency"\s*:\s*[1-5]', txt or ""):   # its scores not read
+                    txt, stop, cost = chk._once(system, prompt, 2 * CLAUDE_JUDGE_MAX_TOKENS, "judge")
+                    chk._jcost += cost
+                return argparse.Namespace(text=txt, candidates=[argparse.Namespace(finish_reason=stop)])
+
+        self._jcost = 0.0
+        try:
+            fid, flu, why = js._judge_one(_Model(), "English", src, iast, english)
+        except Exception as e:
+            return None, None, "[judge failed: %s]" % type(e).__name__, self._jcost
+        return fid, flu, why, self._jcost
+
+
+class Checks:
+    """CLAUDE_FIRST_2026_10_15: a Claude run's checks when one of them is Claude's: the judge (--judge-engine) and the
+    second judge and the audit (--compare-engine), each by Gemini or by another Claude model. As Gemini is to Claude:
+    ask(), judge(), spent, con, a.engine."""
+
+    def __init__(self, a, meta: dict, con, sdk=None):
+        j = getattr(a, "judge_engine", None) or JUDGE
+        c = getattr(a, "compare_engine", None) or COMPARE_ENGINE
+        self.a = argparse.Namespace(engine=c, judge_engine=j)
+        gem = None
+        if not (is_claude(j) and is_claude(c)):
+            ga = argparse.Namespace(**vars(a))
+            ga.engine = COMPARE_ENGINE if is_claude(c) else c
+            ga.judge_engine = JUDGE if is_claude(j) else j
+            gem = Gemini(ga, meta, con)
+        self.asker = ClaudeCheck(c, meta, con, sdk) if is_claude(c) else gem
+        self.judger = ClaudeCheck(j, meta, con, sdk) if is_claude(j) else gem
+        self._parts = [self.asker] + ([self.judger] if self.judger is not self.asker else [])
+        self._con = con
+
+    @property
+    def spent(self) -> float:
+        return sum(p.spent for p in self._parts)
+
+    @property
+    def con(self):
+        return self._con
+
+    @con.setter
+    def con(self, v):
+        self._con = v
+        for p in getattr(self, "_parts", []):
+            p.con = v
+
+    @property
+    def last(self):
+        return getattr(self.asker, "last", None)
+
+    def ask(self, kind: str, msg: str) -> tuple:
+        return self.asker.ask(kind, msg)
+
+    def judge(self, src: str, iast: str, english: str) -> tuple:
+        return self.judger.judge(src, iast, english)
 
 
 def keep_unparsed(a, meta: dict, kind: str, stop, txt, engine):
@@ -2017,9 +2173,17 @@ def main(argv=None) -> int:
             claude_engine.parse_engine(a.engine)
         except ValueError as e:
             print("REFUSE: --engine %s: %s" % (a.engine, e)); print("VERDICT: nothing sent"); print("NEXT: "); return 1
-        if str(a.compare_engine).startswith("anthropic:") or str(a.judge_engine).startswith("anthropic:"):
-            print("REFUSE: the judges of a Claude English are Gemini's (--judge-engine, --compare-engine): it is not judged "
-                  "by Claude"); print("VERDICT: nothing sent"); print("NEXT: "); return 1
+        try:   # CLAUDE_FIRST_2026_10_15: another Claude model may check it; its own may not
+            own = own_model_check(a)
+        except ValueError as e:
+            print("REFUSE: --judge-engine / --compare-engine: %s" % e); print("VERDICT: nothing sent"); print("NEXT: ")
+            return 1
+        if own:
+            print("REFUSE: %s is the translator's own model: a Claude English is checked by another model "
+                  "(--judge-engine, --compare-engine)" % own); print("VERDICT: nothing sent"); print("NEXT: "); return 1
+    elif claude_checks(a):   # CLAUDE_FIRST_2026_10_15
+        print("REFUSE: Claude checks (--judge-engine, --compare-engine anthropic:...) are for a Claude run")
+        print("VERDICT: nothing sent"); print("NEXT: "); return 1
     if not Path(a.db).exists():
         print("REFUSE: %s not found" % a.db); print("VERDICT: no database"); print("NEXT: "); return 1
     reg = register(Path(a.verdicts) if a.verdicts else Path(a.db).resolve().parent / "source_verdicts.jsonl")
@@ -2160,7 +2324,7 @@ def main(argv=None) -> int:
               % AGAMA_VERSION)
     if credit is not None:
         print("  " + (claude_engine.credit_line(credit) if "error" not in credit else "the Claude credit: " + credit["error"]))
-        print("  the judge %s and the second judge %s: Google's bill, in the spend cap" % (a.judge_engine, a.compare_engine))
+        print("  " + checks_line(a))   # CLAUDE_FIRST_2026_10_15
         if "error" not in credit and (credit["expired"] or credit["left"] < est):
             print("  WARNING: the credit left ($%.2f) does not cover this run (about %s)%s"
                   % (max(0.0, credit["left"]), usd(est), "; it has expired" if credit["expired"] else ""))
@@ -2179,7 +2343,9 @@ def main(argv=None) -> int:
                  + ((" --compare-every %d" % a.compare_every) if getattr(a, "compare_every", 1) > 1 else "")
                  + ((" --audit-every %d" % a.audit_every) if getattr(a, "audit_every", 0) else "")   # AUDIT_2026_10_15
                  + ((" --min-quality %.2f" % a.min_quality) if a.min_quality != 0.35 else "")
-                 + ((' --title "%s"' % a.title) if getattr(a, "title", None) else ""), cap))   # CLAUDE_ENGINE_2026_10_15
+                 + ((' --title "%s"' % a.title) if getattr(a, "title", None) else "")
+                 + ((" --judge-engine %s" % a.judge_engine) if a.judge_engine != JUDGE else "")   # CLAUDE_FIRST_2026_10_15
+                 + ((" --compare-engine %s" % a.compare_engine) if a.compare_engine != COMPARE_ENGINE else ""), cap))
         return 0
     try:
         asker = (Claude if claude else Gemini)(a, meta, None)   # first: without a key or the SDK nothing is called, and
@@ -2196,7 +2362,7 @@ def main(argv=None) -> int:
         except Exception:
             budget_ok = None
         if claude:   # CLAUDE_ENGINE_2026_10_15: the credit pays the Claude calls, Google the judges
-            budget_ok = CreditGate(asker.ce, budget_ok)
+            budget_ok = CreditGate(asker.ce, None if no_gemini(a) else budget_ok)   # CLAUDE_FIRST_2026_10_15
         res = run(a, allp, picked, meta, done, asker, con, price, budget_ok)
         if claude:
             try:

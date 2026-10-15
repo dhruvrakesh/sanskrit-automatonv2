@@ -827,3 +827,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | AG2 | The Hayasirsa whole (about 1,387 verses left) | Three windows: pages 17-61, 62-110, 111-189 |
 | AG2b | The Karanagama whole (1,018) | After its canary: pages 27-79, 80-122, 123-183 |
 | CE5 | Prompt caching of the draft's system prompt | Left for after the Hayasirsa (about 7%, some $7) |
+
+
+## Addendum 2026-10-15 (50) (DOCS60_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| CF1 | Claude checks for a Claude run; the engine anthropic: in infer_mt (CLAUDE_FIRST_2026_10_15) | Built and tested |
+| CF2 | A Gemini flash re-judge of the rows the Claude checks passed, after the credit | To build (about $0.0004 a verse) |
+| CF3 | The working English on Claude: the benchmark on three texts of the backlog (137,755 passages) | To run; a person reads it |
+| CF4 | Entities and stories on Claude | Possible; not built |
+| SP1 | The ledger against the bill: spend_audit.py --days 30 against AI Studio's Spend page, weekly | Standing |

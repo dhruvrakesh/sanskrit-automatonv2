@@ -1,0 +1,24 @@
+The Claude credit first, Gemini after it: a Claude run's checks by another Claude model, no Gemini and no spend-cap stop when none is asked; the engine anthropic: for the working English and the Hindi, on the credit (CLAUDE_FIRST_2026_10_15); recorded (DOCS60_2026_10_15)
+
+docs/CLAUDE_FIRST_2026-10-15.md. Decided 15 Oct (Dhruv): the free Claude credit ($190 of it, to 11 Nov) pays for the
+translation work, and Gemini comes after it. Google's spend cap ($45, reached at 16:56 IST) had stopped the
+Karanagama's canary, a Claude run, because its checks were Gemini's. The ledger (usage_log) recorded Gemini at $5.24
+in September and $29.94 in 1-15 October; it read low (the thinking was not counted before COST_TRUTH, and most rows
+were priced from characters). The bill is AI Studio's.
+- scripts/patch_claude_first_2026_10_15.py:
+  - scholar_translate.py: --judge-engine and --compare-engine may be anthropic: in a Claude run (ClaudeCheck, Checks:
+    judge-v1 and the critic's prompt, metered on the credit), never the translator's own model (refused); a run
+    with no Gemini engine is gated by the credit only and needs no Gemini key; a Gemini run may not have Claude
+    checks; the dry run says whose bill each check is; the NEXT line keeps both;
+  - infer_mt.py: the engine anthropic:<model>[@effort] (claude_engine.Client): the same prompts as Gemini's; each
+    call metered on the credit (usage_log, kind translation; never budget_state); the credit asked before each
+    passage, failing closed (BudgetBlocked); cut off: once more with twice the room, else an honest gap; a refusal,
+    a missing key, an account that refuses to bill: empty, or the job stops (ClaudeUnavailable). MT_ENGINE stays
+    gemini-2.5-flash.
+Tests: tests/test_claude_first_2026_10_15.py (13); test_claude_engine_2026_10_15 (another Claude model may check it,
+its own may not), test_cost_truth_2026_10_15 and test_run_fix_2026_10_15 (their replay chains end at the
+.bak_claudefirst_ copies) follow.
+Docs: scripts/patch_docs60_2026_10_15.py (PLATFORM 63, RUNBOOK, EP 50).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

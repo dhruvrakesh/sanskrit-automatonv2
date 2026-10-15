@@ -250,7 +250,8 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(p.read_bytes(), baks[0].read_bytes(), "--check writes nothing")
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            self.assertEqual(p.read_bytes(), (SCRIPTS / "scholar_translate.py").read_bytes())
+            later = sorted(SCRIPTS.glob("scholar_translate.py.bak_claudefirst_*"))   # CLAUDE_FIRST_2026_10_15 came after
+            self.assertEqual(p.read_bytes(), (later[0] if later else SCRIPTS / "scholar_translate.py").read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             shutil.copy2(baks[0], p)
             p.write_bytes(p.read_bytes().replace(b"not in QUIET_KINDS]\n", b"not in QUIET_KINDS]  # changed\n"))

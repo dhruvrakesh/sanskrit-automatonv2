@@ -457,8 +457,13 @@ class TheScholar(unittest.TestCase):
             self.assertIn("NEXT: python scripts\\scholar_translate.py --doc %s --limit 24 --engine %s@medium --held-ok "
                           "--no-glossary-adds --yes --max-usd" % (HAYA, SONNET), o)
             self.assertEqual(base.md5(db), before, "the dry run writes nothing")
-            r = self.run_cli(db, "--doc", HAYA, "--engine", SONNET, "--held-ok", "--compare-engine", "anthropic:claude-opus-5-5")
-            self.assertEqual(r.returncode, 1); self.assertIn("it is not judged by Claude", r.stdout)
+            if hasattr(ST, "ClaudeCheck"):   # CLAUDE_FIRST_2026_10_15: another Claude model may check it; its own may not
+                r = self.run_cli(db, "--doc", HAYA, "--engine", SONNET, "--held-ok", "--compare-engine", SONNET + "@low")
+                self.assertEqual(r.returncode, 1); self.assertIn("is the translator's own model", r.stdout)
+            else:
+                r = self.run_cli(db, "--doc", HAYA, "--engine", SONNET, "--held-ok", "--compare-engine",
+                                 "anthropic:claude-opus-5-5")
+                self.assertEqual(r.returncode, 1); self.assertIn("it is not judged by Claude", r.stdout)
             r = self.run_cli(db, "--doc", HAYA, "--engine", SONNET + "@huge", "--held-ok")
             self.assertEqual(r.returncode, 1); self.assertIn("REFUSE: --engine", r.stdout)
             r = self.run_cli(db, "--doc", HAYA, "--engine", SONNET, "--held-ok", "--yes",

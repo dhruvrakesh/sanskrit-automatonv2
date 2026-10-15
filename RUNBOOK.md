@@ -2005,3 +2005,17 @@ on disk.
 - "the critic's answer could not be read" in a verse's doubts: the answer is in data\scholar\unparsed_<doc>.jsonl.
   Redo that verse alone, as 20.6 was: `--only-page 20 --only-idx 6 --redo --fill-engine --audit-every 1`.
 - Watch every window with `--status` (free); a person reads the flagged and the source doubts (`--report`).
+
+
+## The Claude credit first (DOCS60_2026_10_15)
+
+- **A scholarly run, no Gemini:** `--engine anthropic:claude-sonnet-5-5 --judge-engine anthropic:claude-haiku-5-5
+  --compare-engine anthropic:claude-opus-5-5`. The dry run says "no Gemini call: Google's spend cap is not
+  consulted". With the flash judge kept (the default --judge-engine), Google's cap still gates the run.
+- **The working English on Claude, one text at a time:** only after the benchmark (`benchmark_mbh01.py --engines
+  gemini:gemini-2.5-flash anthropic:claude-haiku-5-5 anthropic:claude-sonnet-5-5@low`). Then the dashboard's
+  `/api/pipeline/translate-doc` with `"engine": "anthropic:claude-haiku-5-5"`. Never set MT_ENGINE to an anthropic:
+  engine: Ask and extract_entities call Gemini with it.
+- **When the credit is spent or expires,** the job stops ("the Claude credit is spent or expired"). Run it again with
+  the default engine.
+- **Watch:** `claude_engine.py --credit`; `spend_audit.py --days 30` against AI Studio's Spend page.

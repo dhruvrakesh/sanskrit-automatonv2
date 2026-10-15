@@ -19,6 +19,7 @@ Supported engine strings:
   openai:<model>      e.g.  openai:gpt-4o-mini
   gemini:<model>      e.g.  gemini:gemini-2.5-pro   (default quality)
                              gemini:gemini-2.0-flash  (fast/cheap)
+  anthropic:<model>[@effort]  e.g. anthropic:claude-haiku-5-5 (CLAUDE_FIRST_2026_10_15: on the Claude credit)
   echo                passthrough for testing
 """
 from __future__ import annotations
@@ -26,6 +27,10 @@ import os, re, time, sqlite3, hashlib, json
 from typing import List, Tuple, Dict, Optional
 
 DEFAULT_ENGINE = os.environ.get("MT_ENGINE", "gemini:gemini-2.5-flash")
+# CLAUDE_FIRST_2026_10_15: "anthropic:<model>[@effort]" translates by Claude (scripts/claude_engine.py) on the Claude
+# credit; the default stays Gemini's. A cut-off answer gets twice the room once.
+ANTHROPIC_MAX_TOKENS = int(os.environ.get("MT_ANTHROPIC_MAX_TOKENS") or 8192)
+ANTHROPIC_TIMEOUT = float(os.environ.get("MT_ANTHROPIC_TIMEOUT") or 300)
 SLEEP  = float(os.environ.get("MT_SLEEP",   "0.8"))
 RETRIES = 3
 
@@ -616,6 +621,89 @@ def _gemini_translate(
 
 # ── Echo (test) engine ────────────────────────────────────────────────────────
 
+class ClaudeUnavailable(QuotaExhausted):
+    """CLAUDE_FIRST_2026_10_15: no key, no SDK, an engine that cannot be read, or the provider's own refusal to bill:
+    the run stops at once with the reason."""
+    pass
+
+
+_ANTHROPIC = {}
+
+
+def _anthropic_client(engine: str):
+    """CLAUDE_FIRST_2026_10_15: (claude_engine, one Client per model and effort); ClaudeUnavailable without the key or
+    the SDK."""
+    try:
+        import claude_engine as ce
+        model, effort = ce.parse_engine(engine)
+        if (model, effort) not in _ANTHROPIC:
+            _ANTHROPIC[(model, effort)] = ce.Client(model, effort, timeout=ANTHROPIC_TIMEOUT)
+        return ce, _ANTHROPIC[(model, effort)]
+    except (ImportError, RuntimeError, ValueError) as e:
+        raise ClaudeUnavailable("%s: %s" % (engine, e))
+
+
+def _anthropic_once(ce, client, system: str, msg: str, maxtok: int, con, doc: str):
+    t0 = time.time()
+    resp = client.create(system, msg, maxtok)
+    text = ce.text_of(resp)
+    cost = ce.meter(con, "translation", doc, client.model, getattr(resp, "usage", None), time.time() - t0, bool(text), 1)
+    return text, ce.stop_of(resp), cost
+
+
+def _anthropic_translate(texts: List[str], *, engine: str, system_prompt: str, user_messages: List[str] = None,
+                         con=None, doc: str = "") -> List[str]:
+    """CLAUDE_FIRST_2026_10_15: each passage by Claude, as _gemini_translate does it: the system prompt and the
+    passage's message; the answer's text is the translation. Every call is metered on the Claude credit (usage_log,
+    kind "translation"; not budget_state). The credit is asked before each passage and fails closed: BudgetBlocked
+    stops the run (translate with Gemini again). Cut off: asked once more with twice the room, else empty (an honest
+    gap, as the Gemini ladder ends); a refusal: empty."""
+    ce, client = _anthropic_client(engine)
+    outs: List[str] = []
+    msgs_to_use = user_messages or texts
+    t_all, spent = time.time(), 0.0
+    for i, t in enumerate(texts):
+        if con is not None and not ce.budget_ok(con, 0.01):
+            raise BudgetBlocked("the Claude credit is spent or expired (python scripts\\claude_engine.py --credit): "
+                                "translate with a gemini: engine again")
+        out = ""
+        for attempt in range(RETRIES):
+            try:
+                text, stop, cost = _anthropic_once(ce, client, system_prompt, msgs_to_use[i].strip(),
+                                                   ANTHROPIC_MAX_TOKENS, con, doc)
+                spent += cost
+                if stop == "max_tokens":
+                    print(f"[claude] MAX_TOKENS p{i} ({len(text)} chars): asked again with twice the room")
+                    text, stop, cost = _anthropic_once(ce, client, system_prompt, msgs_to_use[i].strip(),
+                                                       2 * ANTHROPIC_MAX_TOKENS, con, doc)
+                    spent += cost
+                if stop == "max_tokens":
+                    print(f"[claude] p{i} still cut off: left untranslated (an honest gap)")
+                    text = ""
+                elif stop == "refusal":
+                    print(f"[claude] p{i}: a refusal: left untranslated")
+                    text = ""
+                elif not text:
+                    print(f"[claude] No text (stop={stop}) p{i}: returning empty.")
+                out = text
+                break
+            except Exception as exc:
+                low = str(exc).lower()
+                if "credit balance" in low or "billing" in low:
+                    raise ClaudeUnavailable("the Anthropic account refuses to bill: %s" % str(exc)[:300])
+                if attempt + 1 >= RETRIES:
+                    if any(k in low for k in ("429", "rate limit", "rate_limit", "overloaded", "529")):
+                        raise QuotaExhausted(f"Claude rate limit or overload persists after {RETRIES} attempts: {exc}")
+                    print(f"[claude] FAILED after {RETRIES} attempts: {exc}")
+                    break
+                time.sleep(SLEEP * (2 ** attempt))
+        outs.append(out)
+        time.sleep(SLEEP)
+    print(f"[COST] {len(texts)} passages | {time.time() - t_all:.1f}s | ${spent:.5f} | the Claude credit | "
+          f"engine={engine}")
+    return outs
+
+
 def _echo_translate(texts: List[str]) -> List[str]:
     return [f"[ECHO] {t[:80]}" for t in texts]
 
@@ -699,7 +787,7 @@ def translate_batch(
     generated: List[str] = []
     if missing_texts:
         # ── Budget gate ──────────────────────────────────────────────────────
-        if _cost_tracker_ok:
+        if _cost_tracker_ok and not engine.startswith("anthropic:"):   # CLAUDE_FIRST_2026_10_15: the credit gates it
             # Estimate cost of this batch before proceeding
             total_in  = sum(len(m) for m in missing_msgs) + len(system_prompt) * len(missing_msgs)
             total_out = total_in * 2  # conservative estimate: output ~ 2× input for translations
@@ -733,6 +821,9 @@ def translate_batch(
                 system_prompt=system_prompt,
                 user_messages=missing_msgs,
             )
+        elif engine.startswith("anthropic:"):   # CLAUDE_FIRST_2026_10_15
+            generated = _anthropic_translate(missing_texts, engine=engine, system_prompt=system_prompt,
+                                             user_messages=missing_msgs, con=con, doc=doc_code)
         elif engine.startswith("echo"):
             generated = _echo_translate(missing_texts)
         else:
@@ -742,7 +833,7 @@ def translate_batch(
         duration = time.time() - t_start
 
         # ── Log actual cost ──────────────────────────────────────────────────
-        if _cost_tracker_ok and not engine.startswith("echo"):
+        if _cost_tracker_ok and not engine.startswith(("echo", "anthropic:")):   # CLAUDE_FIRST_2026_10_15: metered a call
             actual_in  = sum(len(m) for m in missing_msgs) + len(system_prompt) * len(missing_msgs)
             actual_out = sum(len(g) for g in generated)
             if _USAGE["calls"] and (_USAGE["in"] + _USAGE["out"]) > 0:   # SPEND_TRUTH_2026_10_04
