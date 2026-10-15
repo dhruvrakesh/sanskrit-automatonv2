@@ -1,0 +1,24 @@
+The two Agamas go to claude-sonnet-5-5 with an independent audit and a watch (AUDIT_2026_10_15); a stopped run goes on, an OCR reading's verse number is not a reference, a span is its verses (PILOT_FIX_2026_10_15); recorded (DOCS57_2026_10_15, DOCS58_2026_10_15)
+
+docs/PILOT_2026-10-15.md, docs/SONNET_RUN_2026-10-15.md. The pilot of 15 Oct (the Hayasirsa 20.5-21.4): claude-sonnet-5-5
+10 verses, 8 passed, $0.036 a verse, about 20 seconds; Opus $0.063, 1.4 minutes; gemini-2.5-pro $0.071, 2.4 minutes
+(cut off at 2). The Gemini judge read Sonnet best in 3 of 5 spans, with no major error. Decided (Dhruv): Sonnet for the
+Hayasirsa Pancaratra and the Karanagama, on guardrails: a canary, the audit, caps, a person's review.
+- scripts/patch_pilot_fix_2026_10_15.py:
+  - scholar_translate.py: ref_of takes a verse_ref only where the edition numbers its verses (an e-text), else page.idx
+    (the Hayasirsa's 20.10 was "4"); --fill-engine (only this engine's rows as done and as context); --compare-every N
+    (by hash);
+  - scholar_duel.py: a reading counts as done by its rows; one span on the page for the same verses; --pick takes the
+    old name; the tally gives each judge's best with its own model left out.
+- scripts/patch_audit_2026_10_15.py (scholar_translate.py): --audit-every N: in a Claude run gemini-2.5-pro's critic
+  reads the last version of one sentence in N and decides its status (the last critique, "by"; it does not revise);
+  --status: per engine, what a text has, and the credit (free, read-only); the pages say "The audit by"; the NEXT
+  line keeps --audit-every and --min-quality.
+Tests: tests/test_pilot_fix_2026_10_15.py (10), tests/test_audit_2026_10_15.py (9); test_claude_engine_2026_10_15 and
+test_pilot_fix_2026_10_15 (their replay chains end at the .bak_pilotfix_ and .bak_audit_ copies) and
+test_scholar_2026_10_14 (its .gitignore replay ends at .bak_hygiene_) follow.
+Docs: scripts/patch_docs57_2026_10_15.py (PLATFORM 60, RUNBOOK, EP 47), scripts/patch_docs58_2026_10_15.py (PLATFORM 61,
+RUNBOOK, EP 48).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

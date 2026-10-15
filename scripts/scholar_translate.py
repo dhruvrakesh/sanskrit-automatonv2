@@ -2,7 +2,8 @@
 # -*- coding: ascii -*-
 """
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
-COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15
+COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
+AUDIT_2026_10_15
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -45,6 +46,14 @@ A text of the Agamas and Tantras gets a rule more (agama-1): a mantra or a seed-
 a word is the edition's footnote number; the edition's apparatus on the page goes with the verse. --held-ok translates a
 text held from the site while its working English is redone (nothing is written to the site or to its passages).
 --no-glossary-adds: a benchmark run. scripts/scholar_duel.py reads the engines side by side, blind.
+
+PILOT_FIX_2026_10_15: an OCR reading's verse_ref is not a reference (page.idx instead); --fill-engine goes on where a
+run of this engine stopped, with only its own rows as done and as context; --compare-every N puts the second judge on
+one sentence in N.
+
+AUDIT_2026_10_15: --audit-every N: in a Claude run, Gemini's critic (gemini-2.5-pro) reads the last version of one
+sentence in N; its reading decides the status (a person reads what it flags). --status: what a text has, per engine
+(free, read-only).
 
 Why: the working English was made in one pass by gemini-2.5-flash, with the five verses before it as its only
 context: no glossary kept between verses, no notes, no review. A judge reads a sample of it. That is a draft. The
@@ -288,8 +297,18 @@ def has_table(con, name: str) -> bool:
     return con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchone() is not None
 
 
+REF_TRUSTED = ("etext", "gretil", "bori")   # PILOT_FIX_2026_10_15: the engines whose verse numbers are the edition's
+
+
 def ref_of(x: dict) -> str:
-    return str(x.get("ref") or "%s.%s" % (x.get("page"), x.get("idx")))
+    """The verse's reference: its verse_ref where the edition numbers its verses (an e-text), or one with a dot when the
+    engine is not known; else page.idx. PILOT_FIX_2026_10_15: an OCR reading's verse_ref is a number it found (the
+    Hayasirsa's 20.10 was called "4"), not a reference."""
+    r = x.get("ref")
+    eng = str(x.get("engine") or "").lower()
+    if r and (any(k in eng for k in REF_TRUSTED) or (not eng and "." in str(r))):
+        return str(r)
+    return "%s.%s" % (x.get("page"), x.get("idx"))
 
 
 def register(path: Path) -> dict:
@@ -396,12 +415,17 @@ def doc_meta(con, doc: str, allp: list, raw_dir=None) -> dict:
             "agama": bool(AGAMA.search("%s %s" % (cat or "", doc)))}
 
 
-def latest_rows(con, doc: str) -> dict:
-    """{passage_id: the latest scholar row} of this text."""
+def latest_rows(con, doc: str, engine=None) -> dict:
+    """{passage_id: the latest scholar row} of this text (PILOT_FIX_2026_10_15: of one engine, when it is named)."""
     if not has_table(con, "scholar_translations"):
         return {}
-    cur = con.execute("SELECT * FROM scholar_translations WHERE doc_code = ? AND id IN (SELECT MAX(id) FROM "
-                      "scholar_translations WHERE doc_code = ? GROUP BY passage_id)", (doc, doc))
+    if engine:
+        cur = con.execute("SELECT * FROM scholar_translations WHERE doc_code = ? AND engine = ? AND id IN (SELECT MAX(id) "
+                          "FROM scholar_translations WHERE doc_code = ? AND engine = ? GROUP BY passage_id)",
+                          (doc, engine, doc, engine))
+    else:
+        cur = con.execute("SELECT * FROM scholar_translations WHERE doc_code = ? AND id IN (SELECT MAX(id) FROM "
+                          "scholar_translations WHERE doc_code = ? GROUP BY passage_id)", (doc, doc))
     names = [d[0] for d in cur.description]
     rows = [dict(zip(names, row)) for row in cur.fetchall()]
     return {r["passage_id"]: r for r in rows}
@@ -965,6 +989,18 @@ class Claude:
     def judge(self, src: str, iast: str, english: str) -> tuple:
         return self.gem.judge(src, iast, english)
 
+    def audit(self, base: str, cur: dict):
+        """AUDIT_2026_10_15: Gemini's critic (--compare-engine) reads the last version: an independent reading of a
+        Claude English. The critique, with "by"; None when it does not answer."""
+        try:
+            d, _c = self.gem.ask("critic", critic_message(base, cur))
+        except CallFailed:
+            return None
+        c = clean_critique(d)
+        if c is not None:
+            c["by"] = self.gem.a.engine
+        return c
+
 
 class CreditGate:
     """CLAUDE_ENGINE_2026_10_15: run()'s cap for a Claude run: the Claude credit for its calls, the spend cap for the
@@ -1116,6 +1152,14 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
             break
         cur = rv
         revisions += 1
+    audit = None   # AUDIT_2026_10_15: another family reads the last version; its reading decides the status
+    if getattr(a, "audit_every", 0) and hasattr(asker, "audit") and audit_this(a, x):
+        if asker.spent + call > a.max_usd:
+            note = "; ".join(s_ for s_ in (note, "not audited: --max-usd $%.2f would be passed" % a.max_usd) if s_)
+        else:
+            audit = asker.audit(base, cur)
+            if audit is not None:
+                crits.append(audit)
     final = crits[-1] if crits else None
     src = "\n".join((y["text"] or "").strip() for y in xs)
     ia = "\n".join(iast_of(y) for y in xs)
@@ -1126,7 +1170,7 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
     if working:
         wfid, wflu, _w, _c = asker.judge(src, ia, working)
     cmp_ = None
-    if getattr(a, "compare", False) and working:
+    if getattr(a, "compare", False) and working and compare_this(a, x):   # PILOT_FIX_2026_10_15: one in N
         if asker.spent + call > a.max_usd:
             note = "; ".join(s_ for s_ in (note, "not compared: --max-usd $%.2f would be passed" % a.max_usd) if s_)
         else:
@@ -1159,8 +1203,62 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
                      "moved": cur.get("moved") or None,
                      "compare": json.dumps(cmp_, ensure_ascii=False) if cmp_ else None,
                      "compare_better": cmp_["better"] if cmp_ else None,
-                     "_glossary": cur["glossary"] if k == 0 and not getattr(a, "no_glossary_adds", False) else []})
+                     "_glossary": cur["glossary"] if k == 0 and not getattr(a, "no_glossary_adds", False) else [],
+                     "_audit": audit["verdict"] if audit else None})   # AUDIT_2026_10_15
     return rows
+
+
+def audit_this(a, x) -> bool:
+    """AUDIT_2026_10_15: whether Gemini's critic reads this sentence (its first passage x): one in --audit-every, by
+    hash (another seed than the second judge's)."""
+    n = int(getattr(a, "audit_every", 0) or 0)
+    return n > 0 and (n == 1 or int(src_hash("audit:%s" % x["id"]), 16) % n == 0)
+
+
+def status_lines(con, doc: str, allp: list, a) -> list:
+    """AUDIT_2026_10_15: per engine, what this text has: verses (of those ready), passed, flagged, source doubts, stale,
+    audited, $ spent, the last row's time."""
+    pages = parse_pages(getattr(a, "pages", None))
+    sel = [x for x in allp if pages is None or x["page"] in pages]
+    ready = sum(1 for x in sel if not readiness(x["text"], x["type"], x["quality"], a.min_quality))
+    ids = {x["id"] for x in sel}
+    if not has_table(con, "scholar_translations"):
+        return ["  no scholarly English yet; %s verse(s) ready" % "{:,}".format(ready)]
+    text = {x["id"]: x["text"] for x in allp}
+    per = {}
+    for eng, pid, st_, h, crit, at in con.execute(
+            "SELECT engine, passage_id, status, src_hash, critique, created_at FROM scholar_translations WHERE doc_code = ? "
+            "AND id IN (SELECT MAX(id) FROM scholar_translations WHERE doc_code = ? GROUP BY engine, passage_id)",
+            (doc, doc)):
+        if pid not in ids:
+            continue
+        e = per.setdefault(eng, {"n": 0, "passed": 0, "flagged": 0, "source_doubt": 0, "stale": 0, "audited": 0,
+                                 "last": ""})
+        e["n"] += 1
+        if text.get(pid) is None or src_hash(text.get(pid)) != h:
+            e["stale"] += 1
+        elif st_ in e:
+            e[st_] += 1
+        if '"by":' in (crit or ""):
+            e["audited"] += 1
+        e["last"] = max(e["last"], at or "")
+    spent = dict(con.execute("SELECT engine, COALESCE(SUM(cost_usd), 0) FROM scholar_translations WHERE doc_code = ? "
+                             "GROUP BY engine", (doc,)).fetchall())
+    out = []
+    for eng, e in sorted(per.items()):
+        out.append("  %s: %s of %s verses (%d%%); passed %d, flagged %d, source doubts %d, stale %d; audited %d; %s spent "
+                   "(all its rows here); the last at %s"
+                   % (eng, "{:,}".format(e["n"]), "{:,}".format(ready), round(100.0 * e["n"] / max(1, ready)), e["passed"],
+                      e["flagged"], e["source_doubt"], e["stale"], e["audited"], usd(spent.get(eng) or 0.0),
+                      (e["last"] or "?")[:16].replace("T", " ")))
+    return out or ["  no scholarly English yet; %s verse(s) ready" % "{:,}".format(ready)]
+
+
+def compare_this(a, x) -> bool:
+    """PILOT_FIX_2026_10_15: whether the second judge reads this sentence (its first passage x): every one, or one in
+    --compare-every, chosen by the hash of the passage id (its parity sets the order A/B in compare())."""
+    n = max(1, int(getattr(a, "compare_every", 1) or 1))
+    return n == 1 or int(src_hash("compare:%s" % x["id"]), 16) % n == 0
 
 
 def one_verse(a, allp, i, meta, done, asker, con, call: float) -> dict:
@@ -1283,7 +1381,8 @@ def run(a, allp: list, picked: list, meta: dict, done: dict, asker, con, price: 
                   % (n, len(picked), ref_of(x), rec["status"], rec["fidelity"], rec["fluency"], rec["working_fidelity"],
                      rec["working_fluency"], rec["passes"], "" if rec["passes"] == 1 else "es", usd(rec["cost_usd"]),
                      ("  (one sentence: %s)" % rec["group_ref"]) if rec.get("group_ref") else "",
-                     ("  [the second judge: %s]" % rec["compare_better"]) if rec.get("compare_better") else ""))
+                     (("  [the second judge: %s]" % rec["compare_better"]) if rec.get("compare_better") else "")
+                     + (("  [the audit: %s]" % rec["_audit"]) if rec.get("_audit") else "")))   # AUDIT_2026_10_15
             log = {k: rec[k] for k in COLS if k not in ("draft",)}
             log.update(version=v, where=ref_of(x), mark=MARK, working_english=x.get("english") or "", draft=rec["draft"])
             with open(logp, "a", encoding="utf-8") as f:
@@ -1483,9 +1582,10 @@ def _crits_html(crits: list) -> str:
                                                                    e(i.get("severity", "")), e(i.get("type", "")),
                                                                    e(i.get("where", "")), e(i.get("fix", "")))
                         for i in c.get("issues") or [])
-        iss += ('<div>Critic, reading %d: fidelity %s, completeness %s, %s%s</div>'
-                % (k, c.get("fidelity"), c.get("completeness"), e(c.get("verdict") or ""),
-                   ('<ul class="iss">%s</ul>' % items) if items else ""))
+        iss += ('<div>%s: fidelity %s, completeness %s, %s%s</div>'
+                % (("Critic, reading %d" % k) if not c.get("by") else ("The audit by %s" % e(str(c["by"]))),
+                   c.get("fidelity"), c.get("completeness"), e(c.get("verdict") or ""),
+                   ('<ul class="iss">%s</ul>' % items) if items else ""))   # AUDIT_2026_10_15
     return iss
 
 
@@ -1667,9 +1767,10 @@ def render_doc(con, doc: str, offset: int = 0, limit=200, nav: bool = False) -> 
                                                                        e(i.get("severity", "")), e(i.get("type", "")),
                                                                        e(i.get("where", "")), e(i.get("fix", "")))
                             for i in c.get("issues") or [])
-            iss += ('<div>Critic, reading %d: fidelity %s, completeness %s, %s%s</div>'
-                    % (k, c.get("fidelity"), c.get("completeness"), e(c.get("verdict") or ""),
-                       ('<ul class="iss">%s</ul>' % items) if items else ""))
+            iss += ('<div>%s: fidelity %s, completeness %s, %s%s</div>'
+                    % (("Critic, reading %d" % k) if not c.get("by") else ("The audit by %s" % e(str(c["by"]))),
+                       c.get("fidelity"), c.get("completeness"), e(c.get("verdict") or ""),
+                       ('<ul class="iss">%s</ul>' % items) if items else ""))   # AUDIT_2026_10_15
         chip, cmp_lines = _compare_html(_loads(r.get("compare"), {}) or None)   # SCHOLAR_V2_2026_10_14
         if chip:
             head += chip
@@ -1830,6 +1931,13 @@ def main(argv=None) -> int:
     ap.add_argument("--no-glossary-adds", action="store_true", help="CLAUDE_ENGINE_2026_10_15: a benchmark run; the "
                     "glossary does not grow from it")
     ap.add_argument("--title", default=None, help="CLAUDE_ENGINE_2026_10_15: the text's name in the prompts")
+    ap.add_argument("--fill-engine", action="store_true", help="PILOT_FIX_2026_10_15: only this engine's own rows count "
+                    "as done and as context: a run stopped half way goes on where it stopped")
+    ap.add_argument("--compare-every", type=int, default=1, help="PILOT_FIX_2026_10_15: the second judge on one sentence "
+                    "in N (1: every one)")
+    ap.add_argument("--audit-every", type=int, default=0, help="AUDIT_2026_10_15: in a Claude run, Gemini's critic reads "
+                    "one sentence in N after the critic; its reading decides the status (0: none)")
+    ap.add_argument("--status", action="store_true", help="AUDIT_2026_10_15: what this text has, per engine (free)")
     ap.add_argument("--yes", action="store_true")
     a = ap.parse_args(argv)
     a.groups, a.compare = not a.no_groups, not a.no_compare   # SCHOLAR_V2_2026_10_14
@@ -1864,6 +1972,29 @@ def main(argv=None) -> int:
                                                                                out2.stat().st_size))
         print("NEXT: start %s   (or http://127.0.0.1:5057/scholar/%s)" % (out, a.doc))
         return 0
+    if getattr(a, "status", False):   # AUDIT_2026_10_15: free, read-only
+        con = open_ro(a.db)
+        try:
+            allp = load_text(con, a.doc)
+            lines = status_lines(con, a.doc, allp, a)
+            cl = ""
+            if any(" anthropic:" in ln for ln in lines) or claude:
+                try:
+                    import claude_engine
+                    cl = claude_engine.credit_line(claude_engine.credit(con))
+                except Exception:
+                    cl = ""
+        finally:
+            con.close()
+        print("scholar_translate.py  %s  the status of %s%s (read-only)" % (MARK, a.doc, (" pages %s" % a.pages) if a.pages
+                                                                            else ""))
+        for ln in lines:
+            print(ln)
+        if cl:
+            print("  " + cl)
+        print("VERDICT: %d engine(s) here" % sum(1 for ln in lines if ln.startswith("  ") and " verses (" in ln))
+        print("NEXT: python scripts\\scholar_translate.py --doc %s --report   (the pages: the flagged first to read)" % a.doc)
+        return 0
     if a.review or a.term:
         if a.review and not a.by:
             print("REFUSE: --review needs --by (who read them)"); print("VERDICT: nothing written"); print("NEXT: ")
@@ -1891,7 +2022,7 @@ def main(argv=None) -> int:
         meta = doc_meta(con, a.doc, allp, Path(a.db).resolve().parent / "raw")
         if getattr(a, "title", None):   # CLAUDE_ENGINE_2026_10_15
             meta["title"] = a.title
-        done = latest_rows(con, a.doc)
+        done = latest_rows(con, a.doc, a.engine if getattr(a, "fill_engine", False) else None)   # PILOT_FIX_2026_10_15
         picked, left, skipped = choose(a, allp, done)
         first = None
         if picked:
@@ -1947,6 +2078,14 @@ def main(argv=None) -> int:
         ("one over several verses is translated whole (%s)" % GROUPS_VERSION) if a.groups else "every verse alone",
         ("the scholarly and the working English side by side (%s)" % COMPARE_VERSION) if a.compare else "none",
         MARK2))
+    if getattr(a, "fill_engine", False):   # PILOT_FIX_2026_10_15
+        print("  --fill-engine: only %s's own rows count as done and as the context" % a.engine)
+    if a.compare and getattr(a, "compare_every", 1) > 1:
+        print("  the second judge: one sentence in %d (--compare-every)" % a.compare_every)
+    if getattr(a, "audit_every", 0):   # AUDIT_2026_10_15
+        print("  the audit: %s" % (("%s reads one sentence in %d after the critic; its reading decides the status"
+                                    % (a.compare_engine, a.audit_every)) if claude else
+                                   "--audit-every is for a Claude engine: nothing is audited"))
     if meta.get("agama"):   # CLAUDE_ENGINE_2026_10_15
         print("  the Agamas and Tantras: one rule more (%s): a mantra stays in IAST; a digit in a word is a footnote number"
               % AGAMA_VERSION)
@@ -1967,6 +2106,10 @@ def main(argv=None) -> int:
                  + (" --no-compare" if a.no_compare else "") + ((" --engine %s" % a.engine) if a.engine != ENGINE else "")
                  + (" --held-ok" if getattr(a, "held_ok", False) else "")
                  + (" --no-glossary-adds" if getattr(a, "no_glossary_adds", False) else "")
+                 + (" --fill-engine" if getattr(a, "fill_engine", False) else "")   # PILOT_FIX_2026_10_15
+                 + ((" --compare-every %d" % a.compare_every) if getattr(a, "compare_every", 1) > 1 else "")
+                 + ((" --audit-every %d" % a.audit_every) if getattr(a, "audit_every", 0) else "")   # AUDIT_2026_10_15
+                 + ((" --min-quality %.2f" % a.min_quality) if a.min_quality != 0.35 else "")
                  + ((' --title "%s"' % a.title) if getattr(a, "title", None) else ""), cap))   # CLAUDE_ENGINE_2026_10_15
         return 0
     try:

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
 """
-scholar_duel.py  (2026-10-15)  CLAUDE_ENGINE_2026_10_15 (duel-v1)
+scholar_duel.py  (2026-10-15)  CLAUDE_ENGINE_2026_10_15 (duel-v1), PILOT_FIX_2026_10_15
+
+PILOT_FIX_2026_10_15: a span is its verses (a reading counts as done by its rows, whatever the span was called; the page
+shows one span for the same verses; --pick takes its old name too); the tally gives each judge's best with its own
+model's translations left out.
 
 The scholarly Englishes of the same verses by different engines (gemini-2.5-pro, Claude Sonnet 5.5, Claude Opus 5.5 ...),
 read side by side by judges of both families, blind: who made each is not said, and the order is shuffled for each judge.
@@ -254,9 +258,10 @@ def duel_one(asker, judge: str, base: str, texts: dict, seed: str):
 
 
 def already(con, doc: str, sref: str, judge: str, row_ids: dict) -> bool:
+    """PILOT_FIX_2026_10_15: the same rows read by the same judge, whatever the span was called then."""
     want = json.dumps(row_ids, sort_keys=True)
-    for (r,) in con.execute("SELECT row_ids FROM scholar_duels WHERE doc_code = ? AND span_ref = ? AND judge_engine = ? "
-                            "AND prompt_version = ?", (doc, sref, judge, DUEL_VERSION)):
+    for (r,) in con.execute("SELECT row_ids FROM scholar_duels WHERE doc_code = ? AND judge_engine = ? "
+                            "AND prompt_version = ?", (doc, judge, DUEL_VERSION)):
         try:
             if json.dumps(json.loads(r), sort_keys=True) == want:
                 return True
@@ -284,20 +289,35 @@ def make_judge(engine: str, a, meta: dict):
 
 
 # --------------------------------------------------------------------------------------------- the person
-def canonical(con, doc: str) -> dict:
-    """{span_ref: the judges' latest row with the most engines} (the rows the page shows)."""
-    out = {}
+def span_key(r) -> str:
+    """PILOT_FIX_2026_10_15: a span is its verses."""
+    return json.dumps(ST._loads(r.get("passage_ids"), []))
+
+
+def canonical(con, doc: str, aliases=None) -> dict:
+    """{span_ref: the judges' latest row with the most engines} (the rows the page shows), one for the same verses
+    (PILOT_FIX_2026_10_15), under the name of its latest reading; aliases (a dict) gets every name a span was read
+    under."""
+    by = {}
     if not ST.has_table(con, "scholar_duels"):
-        return out
+        return {}
     cur = con.execute("SELECT * FROM scholar_duels WHERE doc_code = ? AND judge_engine NOT LIKE ? ORDER BY id",
                       (doc, PERSON + "%"))
     names = [d[0] for d in cur.description]
+    seen = {}
     for r in cur.fetchall():
         r = dict(zip(names, r))
+        k = span_key(r)
+        seen.setdefault(k, set()).add(r["span_ref"])
         n = len(ST._loads(r.get("row_ids"), {}))
-        old = out.get(r["span_ref"])
+        old = by.get(k)
         if old is None or n >= len(ST._loads(old.get("row_ids"), {})):
-            out[r["span_ref"]] = r
+            by[k] = r
+    out = {r["span_ref"]: r for r in by.values()}
+    if aliases is not None:
+        for k, refs in seen.items():
+            for ref in refs:
+                aliases[ref] = by[k]["span_ref"]
     return out
 
 
@@ -306,11 +326,12 @@ def person_order(doc: str, sref: str, row_ids: dict) -> list:
 
 
 def pick(con, a) -> int:
-    canon = canonical(con, a.doc)
+    alias = {}
+    canon = canonical(con, a.doc, alias)
     n = 0
     for part in [p.strip() for p in a.pick.split(",") if p.strip()]:
         sref, _, num = part.rpartition("=")
-        c = canon.get(sref.strip())
+        c = canon.get(alias.get(sref.strip(), sref.strip()))   # PILOT_FIX_2026_10_15: its old name too
         if not c:
             print("  %s: no span read by the judges (python scripts\\scholar_duel.py --doc %s --report lists them)"
                   % (sref, a.doc)); continue
@@ -390,8 +411,8 @@ def render(con, doc: str, named: bool = False) -> str:
         want = json.dumps(rid, sort_keys=True)
         verdicts, persons = {}, {}
         for d in alld:
-            if d["span_ref"] != sref or json.dumps(ST._loads(d.get("row_ids"), {}), sort_keys=True) != want:
-                continue
+            if span_key(d) != span_key(c) or json.dumps(ST._loads(d.get("row_ids"), {}), sort_keys=True) != want:
+                continue   # PILOT_FIX_2026_10_15: the same verses, whatever the span was called
             (persons if d["judge_engine"].startswith(PERSON) else verdicts)[d["judge_engine"]] = d
         order = person_order(doc, sref, rid)
         pids = ST._loads(c.get("passage_ids"), [])
@@ -441,8 +462,10 @@ def render(con, doc: str, named: bool = False) -> str:
                           % ('<span class="best">best</span> ' if v.get("best") == eng else "", e(jn),
                              s.get("fidelity"), s.get("prose"), s.get("notes"), rank or "-",
                              ('<ul class="iss">%s</ul>' % errs) if errs else ""))
-                tj = t["judges"].setdefault(jn, {"best": 0, "rank": [], "fid": [], "prose": [], "notes": [], "major": 0})
+                tj = t["judges"].setdefault(jn, {"best": 0, "rank": [], "fid": [], "prose": [], "notes": [], "major": 0,
+                                                 "best_wo": 0})
                 tj["best"] += 1 if v.get("best") == eng else 0
+                tj["best_wo"] += 1 if best_without_own(v, jn) == eng else 0   # PILOT_FIX_2026_10_15
                 tj["rank"].append(rank)
                 tj["fid"].append(s.get("fidelity")); tj["prose"].append(s.get("prose")); tj["notes"].append(s.get("notes"))
                 tj["major"] += sum(1 for x in s.get("errors") or [] if x.get("severity") == "major")
@@ -470,8 +493,10 @@ def render(con, doc: str, named: bool = False) -> str:
     trs = ""
     judges = sorted({j for t in tally.values() for j in t["judges"]})
     for eng, t in sorted(tally.items()):
-        js = "".join('<td class="num">%d</td><td class="num">%s</td><td class="num">%s / %s / %s</td><td class="num">%d</td>'
-                     % (t["judges"].get(j, {}).get("best", 0), _f(_mean(t["judges"].get(j, {}).get("rank", []))),
+        js = "".join('<td class="num">%d</td><td class="num">%d</td><td class="num">%s</td><td class="num">%s / %s / %s</td>'
+                     '<td class="num">%d</td>'
+                     % (t["judges"].get(j, {}).get("best", 0), t["judges"].get(j, {}).get("best_wo", 0),
+                        _f(_mean(t["judges"].get(j, {}).get("rank", []))),
                         _f(_mean(t["judges"].get(j, {}).get("fid", [])), "%.1f"),
                         _f(_mean(t["judges"].get(j, {}).get("prose", [])), "%.1f"),
                         _f(_mean(t["judges"].get(j, {}).get("notes", [])), "%.1f"),
@@ -480,8 +505,8 @@ def render(con, doc: str, named: bool = False) -> str:
                 '<td class="num">%s</td><td class="num">%s</td>%s<td class="num">%d</td></tr>'
                 % (e(eng), t["spans"], t["verses"], e(", ".join("%s %d" % kv for kv in sorted(t["status"].items()))),
                    _f(_mean(t["jf"]), "%.2f"), ST.usd(t["cost"] / max(1, t["verses"])), js, t["person"]))
-    jh = "".join("<th>%s: best</th><th>mean rank</th><th>fidelity / prose / notes</th><th>major errors</th>" % e(j)
-                 for j in judges)
+    jh = "".join("<th>%s: best</th><th>best, its own model left out</th><th>mean rank</th><th>fidelity / prose / notes</th>"
+                 "<th>major errors</th>" % e(j) for j in judges)   # PILOT_FIX_2026_10_15
     tally_html = ('<details><summary>The tally (open it after reading)</summary><div class="wrap"><table class="tally">'
                   '<thead><tr><th>Engine</th><th>Spans</th><th>Verses</th><th>Status</th><th>judge-v1 fidelity</th>'
                   '<th>$ a verse</th>%s<th>Picked by a person</th></tr></thead><tbody>%s</tbody></table></div>'
@@ -494,6 +519,21 @@ def render(con, doc: str, named: bool = False) -> str:
              'its own. The tool that made this page was written by Claude, one of the contestants: weigh the Gemini '
              'judge at least as much as the Claude one, and your own reading above both.</p>' % (e(doc), e(doc)))
     return _page("Head to head: " + doc, intro + arts + tally_html)
+
+
+def _model(engine) -> str:
+    return str(engine or "").split("@")[0]
+
+
+def best_without_own(v: dict, judge: str):
+    """PILOT_FIX_2026_10_15: the judge's best among the translations not made by its own model (any effort); None when
+    it called them equal or ranked none else."""
+    if not isinstance(v, dict) or v.get("best") == "equal":
+        return None
+    for eng in v.get("ranking") or []:
+        if _model(eng) != _model(judge):
+            return eng
+    return None
 
 
 def Counter_(it) -> dict:

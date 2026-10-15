@@ -793,3 +793,26 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | AG1 | The Agamas and Tantras read as such (rule 13, the apparatus, the Hindi left out) | Built and tested |
 | AG2 | The Hayasirsa Pancaratra and the Karanagama whole (about 2,600 passages) | After CE3; --release after their working English |
 | AG3 | The Tantrik Texts vol. I, the Akasabhairavakalpa, the Saradatilaka | After the re-ingest, the vision OCR, the ingest |
+
+
+## Addendum 2026-10-15 (47) (DOCS57_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| CE2 | The head to head, blind | The Hayasirsa read on 5 spans; the Karanagama and gemini-2.5-pro's 8 verses to finish; then the person's picks |
+| PF1 | An OCR reading's verse number is not a reference | Built and tested (PILOT_FIX_2026_10_15) |
+| PF2 | --fill-engine, --compare-every | Built and tested |
+| PF3 | A judge's own model left out of its tally | Built and tested |
+| AG2 | The Hayasirsa (1,437 verses) and the Karanagama (1,043) whole | After the picks: about $90 on Sonnet, $155 on Opus, by the pilot |
+| AG4 | The 139 and 172 passages left out as OCR debris | A vision repair; some are the editor's English notes |
+
+
+## Addendum 2026-10-15 (48) (DOCS58_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| CE4 | The engine for the Agamas: claude-sonnet-5-5 | Decided 15 Oct; guardrails in docs/SONNET_RUN_2026-10-15.md |
+| AU1 | An independent reading of a Claude run (--audit-every) | Built and tested (AUDIT_2026_10_15) |
+| AU2 | --status, to watch a run | Built and tested |
+| AG2 | The Hayasirsa (1,418) and the Karanagama (1,019) whole | The canary first; then three windows a text |
+| AG3 | The Tantrik Texts vol. I (2,538 verses) | After its re-ingest; about $91 of the credit left after AG2 |

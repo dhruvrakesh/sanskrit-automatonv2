@@ -1975,3 +1975,22 @@ on disk.
 2. `--report` writes exports\scholar_duel_HAYASHIRSHA_PANCARATRA.html, blind; read it before opening the folds.
 3. `--pick` with span=number pairs (the page's Translation number) and `--by` with your name records your choice; the
    tally counts it.
+
+
+## Engines side by side, without stopping them (DOCS57_2026_10_15)
+
+1. Start each run in its own window (Start-Process powershell -ArgumentList "-NoExit", ...): its progress shows, and
+   Ctrl-C in one window stops only that run.
+2. A run that stopped goes on with the same command and `--fill-engine` (no `--redo`, which redoes everything).
+3. Never set MT_ENGINE to an anthropic: engine: the working translation would fall back to echo.
+
+
+## A long scholarly run (DOCS58_2026_10_15)
+
+1. Back up first, under the run's name: `python scripts\db_backup.py data\context.db
+   D:\backups\context_pre_sonnet_20261015.db`.
+2. The canary: a few pages with `--audit-every 3`; read the flagged verses and the audits (`--report`) before the
+   whole.
+3. The whole: one window a range (Start-Process powershell -ArgumentList "-NoExit", ...), each with `--fill-engine
+   --audit-every 10 --compare-every 10` and its own `--max-usd`.
+4. Watch from another window: `--status` (free). A window that stopped goes on with its own command.

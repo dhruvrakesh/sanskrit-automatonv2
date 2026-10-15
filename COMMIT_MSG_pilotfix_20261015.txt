@@ -1,0 +1,20 @@
+An OCR reading's verse number is not a reference; a stopped run goes on (--fill-engine); the second judge on a sample (--compare-every); a span is its verses, and a judge's own model is left out of its tally (PILOT_FIX_2026_10_15); recorded (DOCS57_2026_10_15)
+
+docs/PILOT_2026-10-15.md. The pilot of 15 Oct, 15:18 to 15:40 IST: the Hayasirsa 20.5-21.4 on claude-sonnet-5-5 (10
+verses, 8 passed, $0.036 a verse), claude-sonnet-5-5@medium (10, 8, $0.032), claude-opus-5-5 (10, 7, $0.063) and
+gemini-2.5-pro (2 before Ctrl-C, $0.071); the head to head on five spans (the Gemini judge's best: Sonnet in 3; the
+Opus judge's: Opus in 3; they agree in 1 of 4).
+- scripts/patch_pilot_fix_2026_10_15.py:
+  - scholar_translate.py: ref_of takes a verse_ref only where the edition numbers its verses (an e-text), or with a
+    dot when the engine is not known; else page.idx (the Hayasirsa's 20.10 was "4", a sentence "20.5-4");
+    --fill-engine (only this engine's rows as done and as context; latest_rows takes an engine); --compare-every N
+    (the second judge on one sentence in N, by hash); the dry run and the NEXT line say both;
+  - scholar_duel.py: a reading counts as done by its rows, whatever its span was called; one span on the page for the
+    same verses; --pick takes the old name; the tally gives each judge's best with its own model left out.
+Tests: tests/test_pilot_fix_2026_10_15.py (10); test_claude_engine_2026_10_15 (its replay chain ends at the
+.bak_pilotfix_ copies) and test_scholar_2026_10_14 (its .gitignore replay ends at .bak_hygiene_: the one failure
+after 88370ae) follow.
+Docs: scripts/patch_docs57_2026_10_15.py (PLATFORM 60, RUNBOOK, EP 47).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

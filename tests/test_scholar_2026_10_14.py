@@ -611,7 +611,9 @@ class ThePatcher(unittest.TestCase):
                 shutil.copy2(gib[0], t / ".gitignore")
                 r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
                 self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-                self.assertEqual((t / ".gitignore").read_bytes(), (REPO / ".gitignore").read_bytes())
+                later = sorted(REPO.glob(".gitignore.bak_hygiene_*"))   # REPO_HYGIENE_2026_10_15 came after (PILOT_FIX)
+                want = later[0] if later else (REPO / ".gitignore")
+                self.assertEqual((t / ".gitignore").read_bytes(), want.read_bytes())
             for f in self.FILES:
                 shutil.copy2(baks[f][0], t / "scripts" / f)
             p = t / "scripts" / "dashboard.py"
