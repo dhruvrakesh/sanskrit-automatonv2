@@ -3,7 +3,7 @@
 """
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
 COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
-AUDIT_2026_10_15
+AUDIT_2026_10_15, RUN_FIX_2026_10_15
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -54,6 +54,10 @@ one sentence in N.
 AUDIT_2026_10_15: --audit-every N: in a Claude run, Gemini's critic (gemini-2.5-pro) reads the last version of one
 sentence in N; its reading decides the status (a person reads what it flags). --status: what a text has, per engine
 (free, read-only).
+
+RUN_FIX_2026_10_15: an answer's first whole JSON object is read whatever follows it; a Claude critic not answering in
+JSON is asked once more, and an answer still unread is kept (data/scholar/unparsed_<doc>.jsonl); a dashboard pipeline
+past its ingest (translating or exporting) does not stop a run.
 
 Why: the working English was made in one pass by gemini-2.5-flash, with the five verses before it as its only
 context: no glossary kept between verses, no notes, no review. A judge reads a sample of it. That is a draft. The
@@ -658,14 +662,32 @@ def parse_json(txt: str):
     try:
         d = json.loads(s)
     except ValueError:
-        m = re.search(r"\{.*\}", s, re.S)
-        if not m:
-            return None
-        try:
-            d = json.loads(m.group(0))
-        except ValueError:
-            return None
+        d = first_object(s)   # RUN_FIX_2026_10_15: the first whole object, whatever follows it
+        if d is None:
+            m = re.search(r"\{.*\}", s, re.S)
+            if not m:
+                return None
+            try:
+                d = json.loads(m.group(0))
+            except ValueError:
+                return None
     return d if isinstance(d, dict) else None
+
+
+def first_object(s: str, tries: int = 20):
+    """RUN_FIX_2026_10_15: the first JSON object that decodes whole from a "{" of s (at most tries of them); None."""
+    dec = json.JSONDecoder()
+    i = s.find("{")
+    while i >= 0 and tries > 0:
+        try:
+            d, _end = dec.raw_decode(s[i:])
+            if isinstance(d, dict):
+                return d
+        except ValueError:
+            pass
+        i = s.find("{", i + 1)
+        tries -= 1
+    return None
 
 
 def _s(v, n: int) -> str:
@@ -979,11 +1001,12 @@ class Claude:
             txt, stop, more = self._once(kind, msg, 2 * CLAUDE_MAX_TOKENS)
             cost += more
             d = parse_json(txt)
-        if d is None and kind == "draft" and stop != "refusal":
+        if d is None and kind in ("draft", "critic") and stop != "refusal":   # RUN_FIX_2026_10_15: a critic too
             txt, stop, more = self._once(kind, msg, 2 * CLAUDE_MAX_TOKENS)
             cost += more
             d = parse_json(txt)
         self.last = {"kind": kind, "finish": stop, "chars": len(txt or ""), "json": d is not None}
+        self.kept = keep_unparsed(self.a, self.meta, kind, stop, txt, self.client.model) if d is None else None
         return d, cost
 
     def judge(self, src: str, iast: str, english: str) -> tuple:
@@ -1000,6 +1023,26 @@ class Claude:
         if c is not None:
             c["by"] = self.gem.a.engine
         return c
+
+
+def keep_unparsed(a, meta: dict, kind: str, stop, txt, engine):
+    """RUN_FIX_2026_10_15: an answer that is not JSON, kept so that it can be read (unparsed_<doc>.jsonl in --log-dir,
+    data/scholar by default): its kind, how it ended, its length, its first and last 300 characters. The file, or None
+    (no log folder, or it could not be written). Never raises."""
+    d = getattr(a, "log_dir", None)
+    if not d:
+        return None
+    try:
+        p = Path(d) / ("unparsed_%s.jsonl" % _safe(meta.get("doc") or "x"))
+        p.parent.mkdir(parents=True, exist_ok=True)
+        t = str(txt or "")
+        with open(p, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"at": now(), "doc": meta.get("doc"), "kind": kind, "engine": engine, "stop": str(stop),
+                                "chars": len(t), "head": t[:300], "tail": t[-300:], "mark": "RUN_FIX_2026_10_15"},
+                               ensure_ascii=False) + "\n")
+        return p
+    except Exception:
+        return None
 
 
 class CreditGate:
@@ -1094,7 +1137,29 @@ def busy_with(doc: str):
         return None
     if jobs is None:
         return None
-    return [j for j in jobs if j.get("doc") == doc and j.get("kind") not in QUIET_KINDS]
+    return [j for j in jobs if j.get("doc") == doc and j.get("kind") not in QUIET_KINDS
+            and not (j.get("kind") == "pipeline" and pipeline_past_ingest(j, doc))]   # RUN_FIX_2026_10_15
+
+
+def job_out(jid) -> str:
+    """RUN_FIX_2026_10_15: a dashboard job's output, as /api/job/<id> gives it (read-only); "" when it does not answer."""
+    try:
+        import urllib.request
+        import repair_text as rt
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        with opener.open(rt.DASHBOARD + "/api/job/%s" % jid, timeout=6) as f:
+            return str(json.loads(f.read().decode("utf-8")).get("out") or "")
+    except Exception:
+        return ""
+
+
+def pipeline_past_ingest(j: dict, doc: str) -> bool:
+    """RUN_FIX_2026_10_15: a running pipeline job (pipeline_queue.py) whose output has reached its translate or export
+    stage, after its OCR and ingest: it changes no Sanskrit any more. False when it is queued, earlier, or unknown."""
+    if j.get("state") != "running" or not j.get("id"):
+        return False
+    out = job_out(j["id"])
+    return ("  Translate %s" % doc) in out or ("  Export %s" % doc) in out
 
 
 def compare(asker, base: str, scholarly: str, working: str, pid: int):
@@ -1140,6 +1205,10 @@ def one_unit(a, allp, idxs, meta, done, asker, con, call: float) -> list:
         cr, _c = asker.ask("critic", critic_message(base, cur))
         cr = clean_critique(cr)
         crits.append(cr)
+        if cr is None:   # RUN_FIX_2026_10_15: say so; the status is flagged, unless the audit reads it
+            kept = getattr(asker, "kept", None)
+            note = "; ".join(s_ for s_ in (note, "the critic's answer could not be read" + (
+                " (it is kept in %s beside the run's log)" % kept.name if kept else "")) if s_)
         if accepted(cr) or revisions >= a.rounds or cr is None:
             break
         if asker.spent + 2 * call > a.max_usd:

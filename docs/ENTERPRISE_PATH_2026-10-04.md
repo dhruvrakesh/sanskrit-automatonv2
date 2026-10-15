@@ -816,3 +816,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | AU2 | --status, to watch a run | Built and tested |
 | AG2 | The Hayasirsa (1,418) and the Karanagama (1,019) whole | The canary first; then three windows a text |
 | AG3 | The Tantrik Texts vol. I (2,538 verses) | After its re-ingest; about $91 of the credit left after AG2 |
+
+
+## Addendum 2026-10-15 (49) (DOCS59_2026_10_15)
+
+| # | Item | State |
+|---|---|---|
+| AG1 | The canary | The Hayasirsa passed (25 of 31); the Karanagama's to run again after RUN_FIX |
+| RF1 | An unread critic; a pipeline past its ingest (RUN_FIX_2026_10_15) | Built and tested |
+| AG2 | The Hayasirsa whole (about 1,387 verses left) | Three windows: pages 17-61, 62-110, 111-189 |
+| AG2b | The Karanagama whole (1,018) | After its canary: pages 27-79, 80-122, 123-183 |
+| CE5 | Prompt caching of the draft's system prompt | Left for after the Hayasirsa (about 7%, some $7) |

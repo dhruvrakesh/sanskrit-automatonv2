@@ -1994,3 +1994,14 @@ on disk.
 3. The whole: one window a range (Start-Process powershell -ArgumentList "-NoExit", ...), each with `--fill-engine
    --audit-every 10 --compare-every 10` and its own `--max-usd`.
 4. Watch from another window: `--status` (free). A window that stopped goes on with its own command.
+
+
+## A scholarly run that stops (DOCS59_2026_10_15)
+
+- "the dashboard changes <doc> now (...)": see the dashboard's jobs (`Invoke-RestMethod
+  http://127.0.0.1:5057/api/jobs/running`, read-only). A pipeline that is translating or exporting no longer stops a
+  run (RUN_FIX_2026_10_15); anything else that changes the text does. Run the same command again when it is done.
+- "this run's --max-usd ... is reached": the same command again goes on (--fill-engine); the cap is a window's.
+- "the critic's answer could not be read" in a verse's doubts: the answer is in data\scholar\unparsed_<doc>.jsonl.
+  Redo that verse alone, as 20.6 was: `--only-page 20 --only-idx 6 --redo --fill-engine --audit-every 1`.
+- Watch every window with `--status` (free); a person reads the flagged and the source doubts (`--report`).

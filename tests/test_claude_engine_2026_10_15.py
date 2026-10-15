@@ -335,8 +335,10 @@ class TheScholar(unittest.TestCase):
             self.assertAlmostEqual(cost, 2 * (4000 * 2e-6 + 1500 * 10e-6))
             c2 = claude_asker([msg("not json"), good], {"doc": HAYA, "title": "t"}, con)
             self.assertEqual(c2.ask("draft", "M")[0]["translation"], "T //", "a draft not JSON is asked once more")
-            c3 = claude_asker([msg("not json")], {"doc": HAYA, "title": "t"}, con)
-            self.assertIsNone(c3.ask("critic", "M")[0], "a critic is not")
+            c3 = claude_asker([msg("not json"), msg("not json")], {"doc": HAYA, "title": "t"}, con)
+            self.assertIsNone(c3.ask("critic", "M")[0])
+            self.assertEqual(len(c3.client.sdk.requests), 2 if hasattr(ST, "first_object") else 1,
+                             "a critic is asked once more since RUN_FIX_2026_10_15")
             self.assertEqual(c3.last, {"kind": "critic", "finish": "end_turn", "chars": 8, "json": False})
             c4 = claude_asker([msg("I cannot", stop="refusal")], {"doc": HAYA, "title": "t"}, con)
             self.assertIsNone(c4.ask("draft", "M")[0]); self.assertEqual(len(c4.client.sdk.requests), 1)

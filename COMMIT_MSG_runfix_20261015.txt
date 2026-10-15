@@ -1,0 +1,21 @@
+A critic whose answer cannot be read is asked once more and kept; a dashboard pipeline past its ingest does not stop a scholarly run (RUN_FIX_2026_10_15); the canary of 15 Oct recorded (DOCS59_2026_10_15)
+
+docs/CANARY_2026-10-15.md. The canary at 16:27 IST on claude-sonnet-5-5, the audit on 1 in 3: the Hayasirsa pages
+17-19 and 20.5-21.4, 31 verses, 25 passed (81%), 5 flagged, 1 source doubt, $1.63 by the rows ($0.052 a verse), 32 to
+39 seconds a verse. The gate passes; the cost is at the line (about $0.046 expected at 1 audit in 10). The Karanagama
+stopped before its first verse: a dashboard pipeline job was making its working English.
+- scripts/patch_run_fix_2026_10_15.py (scholar_translate.py):
+  - parse_json reads the first whole JSON object of an answer whatever follows it (first_object), then the old match;
+  - a Claude critic not answering in JSON is asked once more, as a draft was (3 of 29 critiques were not read; 20.6
+    and 20.8 were flagged for that alone); an answer still unread is kept in unparsed_<doc>.jsonl beside the run's
+    log, and the row's doubts say so;
+  - busy_with leaves out a running pipeline job whose output (/api/job/<id>, read-only) has reached "Translate <doc>"
+    or "Export <doc>": translate_passages.py and export_html.py write no Sanskrit. Queued, at its OCR or ingest, or
+    a dashboard that does not answer: the run stops as before.
+Tests: tests/test_run_fix_2026_10_15.py (12: a scripted SDK, a dashboard of its own on 127.0.0.1);
+test_claude_engine_2026_10_15 (a critic is asked once more) and test_audit_2026_10_15 (its replay chain ends at the
+.bak_runfix_ copy) follow.
+Docs: scripts/patch_docs59_2026_10_15.py (PLATFORM 62, RUNBOOK, EP 49).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
