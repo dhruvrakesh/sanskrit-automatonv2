@@ -899,3 +899,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | BM2 | Our own gold set, read by a person | A person's time |
 | OR1 | A printed ornament not taken for debris (ORNAMENT_2026_10_16), the automaton and Srangam alike | Built and tested |
 | J2 | A judge told the emendations, the thinking off | After the baseline, as asked |
+
+
+## Addendum 2026-10-16 (56) (DOCS66_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| BD1 | The dashboard shows BM1 and runs its steps; the Claude credit and the spend cap apart; a text's register state and scholarly English on its row (BENCH_DESK_2026_10_16) | Built and tested |
+| BM1 | Mitrasamgraha, 200 verses, three arms | scholar and sonnet1 done; flash 150 of 200; the judge and the full report to run |
+| BM3 | The blind side-by-side of the arms by judges of both families | After BM1's judge |
+| BM2 | Our own gold set, read by a person | A person's time |

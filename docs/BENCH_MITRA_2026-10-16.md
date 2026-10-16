@@ -125,7 +125,7 @@ python scripts\bench_mitra.py --arm scholar --yes --max-usd 11.00
 python scripts\bench_mitra.py --score --judge-reference
 python scripts\bench_mitra.py --score --judge-reference --yes --max-usd 2.75
 python scripts\bench_mitra.py --report
-start "" "D:\Sanksrit Automatons\benchmarks\bm1\BM1_report.html"
+Start-Process "D:\Sanksrit Automatons\benchmarks\bm1\BM1_report.html"   # BENCH_DESK_2026_10_16 (or the Benchmarks page)
 ```
 
 - `--files GSD36manu,GV01rvh` runs some texts only (a canary, or the scholarly arm in parts).

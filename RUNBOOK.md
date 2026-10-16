@@ -2077,3 +2077,12 @@ on disk.
 4. `--score --judge-reference --yes --max-usd N`, then `--report` (free): BM1_report.html (private) and
    BM1_summary.json (numbers only).
 5. A step stopped half way: run it again (it goes on), or `--settle` (free) to put its spend in the ledger.
+
+
+## BM1 from the dashboard (DOCS66_2026_10_16)
+
+1. The Benchmarks page (the header's link): BM1's Next line names the step to take and its price.
+2. A paid button (Run an arm, Judge them) asks first, then runs bench_mitra.py with --yes --max-usd (the estimate and
+   a third more); its last lines show below the buttons; the page reads BM1 again when it ends.
+3. Make the report again (free), then "The full report" (served on this computer only).
+4. The same steps by hand: docs/BENCH_MITRA_2026-10-16.md, section 6.

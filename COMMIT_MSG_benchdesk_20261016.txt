@@ -1,0 +1,25 @@
+The dashboard shows BM1 and runs its steps, the Claude credit apart from the spend cap, a text's state on its row (BENCH_DESK_2026_10_16); recorded (DOCS66_2026_10_16)
+
+docs/BENCH_DESK_2026-10-16.md. Asked: "UI/UX on the dashboard here needs to reflect the latest state and intuitive
+wiring."
+- scripts/dashboard.py: the Benchmarks page opens with BM1 (the caps; the next step with its price; what each arm
+  has made per text, its spend and the measured price of a verse; the judge's line; the last report's numbers with
+  their 95% intervals, marked partial or stale; the steps as buttons, each a job of kind "bench", doc BM1, a paid
+  one asking first and running with --yes --max-usd, at most $12.00 a press). /api/bench (GET the state, POST a
+  step); /benchmarks/bm1/report (the private report, no-store, noindex, on 127.0.0.1 only). /api/status: each row
+  with its register state ("held") and its scholarly English ("scholar"). /api/usage: the Claude credit, the steps
+  since it began by kind and bill, BM1's line.
+- scripts/dashboard_static.html: a Benchmarks link in the header; two chips on each row (the register's state, the
+  scholarly English with a link to /scholar/<doc>); the Usage tab with the spend cap (Google) and the Claude credit
+  side by side, Google and Claude apart in the totals and the engines, the steps by name, the last calls with their
+  step and engine.
+- scripts/bench_mitra.py: prices(mcon, out) prices an arm by its own spend once it has made 10 verses
+  (gemini-2.5-flash cost $0.005 a BM1 verse, twice the corpus's, so the flash arm had stopped at --max-usd 0.75 with
+  150 of 200); the report's NEXT line is PowerShell's Start-Process, as in docs/BENCH_MITRA_2026-10-16.md.
+No database change; nothing reaches the site.
+Tests: tests/test_bench_desk_2026_10_16.py (9); the replay chains of test_classify_hindi_2026_10_16 (dashboard.py)
+and test_judge_desk_2026_10_11 (dashboard_static.html) follow (.bak_benchdesk_).
+Docs: scripts/patch_docs66_2026_10_16.py (PLATFORM 69, RUNBOOK, EP 56).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

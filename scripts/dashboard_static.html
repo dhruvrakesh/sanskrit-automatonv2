@@ -239,6 +239,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <a class="btn-refresh" href="/translate" target="_blank" style="text-decoration:none;margin-right:6px" title="Translate any Sanskrit into English + Hindi on demand">&#9889; Translate</a>
     <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
     <a class="btn-refresh" href="/sources" target="_blank" style="text-decoration:none;margin-right:6px" title="JUDGE_DESK_2026_10_11: the texts whose scan stops their translation, the debris judged, the editions found">&#128269; Sources</a>
+    <a class="btn-refresh" href="/benchmarks" target="_blank" style="text-decoration:none;margin-right:6px" title="BENCH_DESK_2026_10_16: BM1 (our English against published translations), and the readings of each text compared">&#128207; Benchmarks</a>
     <a class="btn-refresh" href="/ask" target="_blank" style="text-decoration:none;margin-right:6px" title="Ask questions answered from the corpus, with cited verses">&#128172; Ask the Corpus</a>
     <button class="btn-refresh" onclick="openDatabase(this)" style="margin-right:6px" title="Open the corpus in Datasette for SQL querying (snapshots first, then launches)">&#128190; Database</button>
     <button class="btn-refresh" onclick="refresh(true)">&#x27F3; Refresh</button>
@@ -722,6 +723,31 @@ function wirePipelineSort(){
   }
 })();
 
+// BENCH_DESK_2026_10_16: what the register and the scholarly English say of a text, on its row
+var HELD_LABEL = {withdrawn: 'withdrawn from the site', in_repair: 'held from the site (in repair)',
+                  set_aside: 'set aside: a better scan', translate_as_is: 'translated as is', complete: 'complete',
+                  witness: 'a witness (local only)'};
+function docStateHtml(r) {
+  var h = '', g = r.held, s = r.scholar;
+  if (g && g.status) {
+    var bad = g.status === 'withdrawn' || g.status === 'set_aside' || g.status === 'in_repair';
+    h += '<span title="' + esc((g.reason || '') + (g.at ? ' (' + g.at + ')' : '')) + '" style="display:inline-block;margin:3px 4px 0 0;'
+      + 'padding:1px 6px;border-radius:3px;font-size:9.5px;' + (bad ? 'background:rgba(220,90,90,.15);color:#e8a3a3'
+      : 'background:rgba(120,160,200,.15);color:#a9c7e8') + '">' + esc(HELD_LABEL[g.status] || g.status)
+      + (g.at ? ' &middot; ' + esc(String(g.at).slice(5)) : '') + '</span>';
+  }
+  if (s && s.verses) {
+    var t = s.verses + ' verses in scholarly English: ' + (s.passed || 0) + ' passed, ' + (s.flagged || 0) + ' flagged, '
+      + (s.source_doubt || 0) + ' source doubts' + (s.stale ? ', ' + s.stale + ' stale' : '') + (s.set_aside ? ', ' + s.set_aside
+      + ' set aside (not verse)' : '') + '. Open its pages.';
+    h += '<a href="/scholar/' + encodeURIComponent(r.doc) + '" target="_blank" title="' + esc(t) + '" style="display:inline-block;'
+      + 'margin:3px 4px 0 0;padding:1px 6px;border-radius:3px;font-size:9.5px;background:rgba(201,149,42,.15);color:var(--gold);'
+      + 'text-decoration:none">SC ' + s.verses + ' &middot; ' + (s.passed || 0) + ' passed' + (s.flagged ? ' &middot; ' + s.flagged
+      + ' flagged' : '') + '</a>';
+  }
+  return h ? '<div style="line-height:1.2">' + h + '</div>' : '';
+}
+
 function renderPipeline(rows) {
   window._lastPipeRows = rows;
   rows = sortRows(rows);
@@ -780,7 +806,7 @@ function renderPipeline(rows) {
         '</div>';
     }
     const docCell =
-      '<div class="doc-name">' + esc(r.doc) + '</div>' + ocrLine + compLine +
+      '<div class="doc-name">' + esc(r.doc) + '</div>' + ocrLine + compLine + docStateHtml(r) +   // BENCH_DESK_2026_10_16
       '<div class="doc-status-chip">' +
         (isRun ? '<span class="chip-run">&#9898; running</span>' : '') +
       '</div>';
@@ -1242,7 +1268,7 @@ function budgetHtml(b) {
   const pct = cap > 0 ? Math.min(100, Math.round(100 * spent / cap)) : 100;
   const col = b.paused || left <= 0 ? 'var(--red)' : pct >= 90 ? 'var(--gold)' : 'var(--green)';
   return '<div style="margin-bottom:10px;padding:8px;border:1px solid var(--border-v);border-radius:6px">'
-    + '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">Spend cap'
+    + '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">The spend cap (Google)'
     + (b.paused ? ' <span style="color:var(--red)">&middot; paused</span>' : '') + '</div>'
     + '<div>Spent <b>$' + spent.toFixed(2) + '</b> of <b>$' + cap.toFixed(2) + '</b> &middot; left <b style="color:' + col + '">$'
     + left.toFixed(2) + '</b></div>'
@@ -1255,7 +1281,7 @@ function budgetHtml(b) {
     + '<button class="btn-batch" onclick="setBudget()">Set cap</button>'
     + (b.paused ? '<button class="btn-batch" onclick="resumeBudget()">Resume</button>' : '')
     + '</div><div id="budgetMsg" style="font-size:9px;color:var(--muted);margin-top:3px">'
-    + esc(BUDGET_MSG || 'Every paid step (translation, OCR, pictures, stories, novels) stops at the cap.') + '</div></div>';
+    + esc(BUDGET_MSG || 'Every Gemini step (translation, OCR, pictures, stories, novels, the judge) stops at the cap; a Claude step stops at the credit below.') + '</div></div>';
 }
 async function postBudget(body) {
   const msg = document.getElementById('budgetMsg');
@@ -1280,7 +1306,39 @@ function setBudget() {
 }
 function resumeBudget() { postBudget({resume: true}); }
 
-async function loadUsage() {   // DESK_HEAL_2026_10_10: cost_tracker's summary as it is (by_engine is an object)
+// BENCH_DESK_2026_10_16: the Claude credit beside the spend cap; the steps by their names; BM1's line
+function creditHtml(c) {
+  if (!c) return '';
+  if (c.cap == null) return c.error ? '<div style="margin-bottom:10px;color:var(--muted)">The Claude credit could not be read: ' + esc(c.error) + '</div>' : '';
+  const spent = +c.spent || 0, cap = +c.cap || 0, left = Math.max(0, cap - spent);
+  const pct = cap > 0 ? Math.min(100, Math.round(100 * spent / cap)) : 100;
+  const col = c.expired || left <= 0 ? 'var(--red)' : pct >= 90 ? 'var(--gold)' : 'var(--green)';
+  return '<div style="margin-bottom:10px;padding:8px;border:1px solid var(--border-v);border-radius:6px">'
+    + '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">The Claude credit'
+    + (c.expired ? ' <span style="color:var(--red)">&middot; expired</span>' : '') + '</div>'
+    + '<div>Spent <b>$' + spent.toFixed(2) + '</b> of <b>$' + cap.toFixed(2) + '</b> since ' + esc(c.since || '') + ' &middot; left <b style="color:' + col + '">$'
+    + left.toFixed(2) + '</b></div>'
+    + '<div style="height:5px;background:var(--bg4);border-radius:999px;overflow:hidden;margin-top:4px">'
+    + '<div style="height:100%;width:' + pct + '%;background:' + col + '"></div></div>'
+    + '<div style="font-size:9px;color:var(--muted);margin-top:3px">Sonnet, Opus and Haiku calls (' + (+c.calls || 0).toLocaleString()
+    + '); it expires on ' + esc(c.expires || '') + '. Every Claude step stops at it. Its size is SA_CLAUDE_CREDIT_USD in .env.</div></div>';
+}
+var KIND_LABEL = {translation: 'working English', translate_hi: 'Hindi', scholar: 'scholarly English', judge: 'the judge',
+                  entities: 'names (entities)', ocr_vision: 'vision OCR', ocr: 'OCR', embedding: 'vectors', probe: 'probes',
+                  ask: 'Ask the Corpus', image: 'pictures', story: 'stories',
+                  bench_translation: 'BM1: one pass', bench_scholar: 'BM1: scholarly', bench_judge: 'BM1: the judge'};
+function kindLabel(k) { return KIND_LABEL[k] || k || ''; }
+function engineShort(e) { return String(e || '').replace(/^anthropic:claude-/, '').replace(/^gemini(-vision|-image)?:gemini-/, 'gemini ').replace(/^models\//, ''); }
+function bm1UsageHtml(b) {
+  if (!b || !b.made) return '';
+  return '<div style="margin-bottom:10px;padding:8px;border:1px solid var(--border-v);border-radius:6px">'
+    + '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">BM1, the benchmark</div>'
+    + '<div>' + esc(b.line || '') + '</div>'
+    + (b.next ? '<div style="margin-top:2px">Next: ' + esc(b.next) + '</div>' : '')
+    + '<a href="/benchmarks#bm1" target="_blank" style="color:var(--gold);font-size:10px">Open it on the Benchmarks page &rarr;</a></div>';
+}
+
+async function loadUsage() {   // DESK_HEAL_2026_10_10: cost_tracker's summary as it is (by_engine is an object); BENCH_DESK_2026_10_16: the two bills
   const el = document.getElementById('usageBody');
   el.innerHTML = '<span style="color:var(--muted)">Loading&hellip;</span>';
   try {
@@ -1290,24 +1348,40 @@ async function loadUsage() {   // DESK_HEAL_2026_10_10: cost_tracker's summary a
     const eng = d.by_engine || {};
     const rows = Array.isArray(eng) ? eng.slice() : Object.keys(eng).map(function(k) { return Object.assign({engine: k}, eng[k]); });
     rows.sort(function(a, b) { return (+b.cost_usd || 0) - (+a.cost_usd || 0); });
-    const sum = function(f) { return rows.reduce(function(a, e) { return a + (+e[f] || 0); }, 0); };
+    const sum = function(f, xs) { return (xs || rows).reduce(function(a, e) { return a + (+e[f] || 0); }, 0); };
     const usd = function(v) { return '$' + (+v || 0).toFixed(2); };
-    const spent = d.budget && d.budget.spent_usd != null ? d.budget.spent_usd : (d.cost_estimate_usd != null ? d.cost_estimate_usd : sum('cost_usd'));
+    const isClaude = function(e) { return String(e.engine || '').indexOf('anthropic:') === 0; };
     const calls = rows.length ? sum('calls') : (+d.total_calls || 0);
-    let html = budgetHtml(d.budget) + '<div style="margin-bottom:8px">' +
-      '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">What the paid steps used</div>' +
+    const google = rows.filter(function(e) { return !isClaude(e); }), claude = rows.filter(isClaude);
+    let html = budgetHtml(d.budget) + creditHtml(d.credit) + bm1UsageHtml(d.bm1) + '<div style="margin-bottom:8px">' +
+      '<div style="color:var(--gold);font-weight:600;margin-bottom:4px">What the paid steps used, all time</div>' +
       '<div>API calls: <b>' + calls.toLocaleString() + '</b> &middot; passages: <b>' + sum('passages').toLocaleString() + '</b></div>' +
       '<div>Characters sent: <b>' + sum('in_chars').toLocaleString() + '</b> &middot; received: <b>' + (rows.length ? sum('out_chars') : (+d.total_out_chars || 0)).toLocaleString() + '</b></div>' +
-      '<div style="margin-top:4px;color:var(--gold)">Spent, all time: <b>' + usd(spent) + '</b></div>' +
-      '<div style="color:var(--muted);font-size:9px;margin-top:2px">' + esc(d.note || 'Translation, OCR, pictures, stories, names and the brain, as cost_tracker records them.') + '</div></div>';
+      '<div style="margin-top:4px;color:var(--gold)">Google: <b>' + usd(sum('cost_usd', google)) + '</b> &middot; Claude: <b>' + usd(sum('cost_usd', claude)) + '</b></div>' +
+      '<div style="color:var(--muted);font-size:9px;margin-top:2px">' + esc(d.note || 'As the meters record each call: Google against the spend cap, Claude against its credit (the cap above counts only what it has counted since it was set).') + '</div></div>';
     if (rows.length) {
-      html += '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Engine</th><th>Calls</th><th>Chars out</th><th>Cost</th></tr>';
+      html += '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Engine</th><th>Bill</th><th>Calls</th><th>Chars out</th><th>Cost</th></tr>';
       rows.forEach(function(e) {
         html += '<tr style="border-top:1px solid rgba(255,255,255,.05)">' +
           '<td style="color:var(--gold);padding:3px 0;word-break:break-all">' + esc(e.engine) + '</td>' +
+          '<td style="text-align:center;color:var(--muted)">' + (isClaude(e) ? 'Claude' : 'Google') + '</td>' +
           '<td style="text-align:center">' + (+e.calls || 0).toLocaleString() + '</td>' +
           '<td style="text-align:center">' + (+e.out_chars || 0).toLocaleString() + '</td>' +
           '<td style="text-align:center">' + usd(e.cost_usd) + '</td></tr>';
+      });
+      html += '</table>';
+    }
+    const ks = d.kinds_since && d.kinds_since.rows ? d.kinds_since.rows : [];
+    if (ks.length) {
+      html += '<div style="color:var(--gold);font-weight:600;margin:10px 0 4px">Since ' + esc(d.kinds_since.since) + ', by step</div>' +
+        '<table style="width:100%;border-collapse:collapse"><tr style="color:var(--muted)"><th style="text-align:left">Step</th><th>Bill</th><th>Calls</th><th>Cost</th></tr>';
+      ks.forEach(function(k) {
+        const bench = String(k.kind || '').indexOf('bench_') === 0;
+        html += '<tr style="border-top:1px solid rgba(255,255,255,.05)">' +
+          '<td style="padding:3px 0;color:' + (bench ? '#a9c7e8' : 'var(--gold)') + '">' + esc(kindLabel(k.kind)) + '</td>' +
+          '<td style="text-align:center;color:var(--muted)">' + (k.bill === 'claude' ? 'Claude' : 'Google') + '</td>' +
+          '<td style="text-align:center">' + (+k.calls || 0).toLocaleString() + '</td>' +
+          '<td style="text-align:center">' + usd(k.cost_usd) + '</td></tr>';
       });
       html += '</table>';
     }
@@ -1316,9 +1390,11 @@ async function loadUsage() {   // DESK_HEAL_2026_10_10: cost_tracker's summary a
       d.recent.slice(0, 10).forEach(function(c) {
         const t = new Date(c.ts);
         const at = isNaN(t) ? String(c.ts || '') : t.toLocaleString('en-IN', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false});
+        const bench = String(c.kind || '').indexOf('bench_') === 0;
         html += '<div style="display:flex;gap:6px;border-top:1px solid rgba(255,255,255,.04);padding:2px 0">' +
           '<span style="color:var(--muted);white-space:nowrap">' + esc(at) + '</span>' +
-          '<span style="color:var(--gold)">' + esc(c.kind || '') + '</span>' +
+          '<span style="color:' + (bench ? '#a9c7e8' : 'var(--gold)') + '" title="' + esc(c.kind || '') + '">' + esc(kindLabel(c.kind)) + '</span>' +
+          '<span style="color:var(--muted);white-space:nowrap">' + esc(engineShort(c.engine)) + '</span>' +
           '<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(c.doc || '') + '</span>' +
           '<span>' + (c.cost_usd ? '$' + (+c.cost_usd).toFixed(4) : '') + '</span>' +
           (c.ok === false ? '<span style="color:#f87171">&#x2717;</span>' : '') + '</div>';

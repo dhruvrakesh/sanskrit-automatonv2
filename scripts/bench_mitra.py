@@ -469,8 +469,11 @@ def caps(mcon) -> dict:
             "paused": bool(b[2]), "cap_left": max(0.0, float(b[0] or 0.0) - float(b[1] or 0.0))}
 
 
-def prices(mcon) -> dict:
-    """$ a verse for each arm and $ a judge call, measured in data/context.db where there are enough rows."""
+def prices(mcon, out=None) -> dict:
+    """$ a verse for each arm and $ a judge call, measured in data/context.db where there are enough rows.
+    BENCH_DESK_2026_10_16: with out (the bench folder), an arm that has made 10 verses or more is priced by its own
+    spend (spend.jsonl): on 16 Oct gemini-2.5-flash cost $0.005 a BM1 verse, twice the corpus's $0.00247, and the flash
+    arm stopped at --max-usd before its last two texts."""
     p = dict(PRIOR, judge=ST.JUDGE_COST_NOW)
     how = {k: "the price of 16 Oct" for k in PRIOR}
     how["sonnet1"] = "a guess (no Sonnet one-pass rows yet)"
@@ -493,6 +496,20 @@ def prices(mcon) -> dict:
                 p["scholar"], how["scholar"] = float(avg), "measured on %s verses" % "{:,}".format(int(n))
     except sqlite3.Error:
         pass
+    if out is not None:   # BENCH_DESK_2026_10_16: an arm's own price, once it has made 10 verses or more
+        try:
+            sample = load_sample(Path(out))
+            sp = spend(Path(out))
+            if sample:
+                total = sum(1 for x in sample["lines"] if x["role"] == "window")
+                for arm in ARMS:
+                    v = sp.get(arm)
+                    done = total - sum(todo_of(Path(out), sample, list(FILES), arm).values())
+                    if v and done >= 10 and (v["claude"] + v["google"]) > 0:
+                        p[arm] = (v["claude"] + v["google"]) / done
+                        how[arm] = "measured on BM1's own %d verses" % done
+        except Exception:
+            pass
     p["how"] = how
     return p
 
@@ -928,7 +945,7 @@ def run_arm(a, out: Path, sample: dict, specs, mdb: str) -> int:
     (work / "register.jsonl").touch()
     mcon = main_ledger(mdb)
     try:
-        p = prices(mcon)
+        p = prices(mcon, out)   # BENCH_DESK_2026_10_16: an arm's own price once it has one
         todo = todo_of(out, sample, specs, arm)
         n_all = sum(todo.values())
         cl, gg = split_cost(arm, n_all, p)
@@ -1131,7 +1148,7 @@ def status(a, out: Path, data: Path, specs, mdb: str) -> int:
         if v.get("refused"):
             print("    %-11s REFUSED: %s" % (k, v["refused"]))
     mcon = open_ro(mdb) if Path(mdb).exists() else None
-    p = prices(mcon) if mcon else dict(PRIOR, judge=ST.JUDGE_COST_NOW, how={})
+    p = prices(mcon, out) if mcon else dict(PRIOR, judge=ST.JUDGE_COST_NOW, how={})   # BENCH_DESK_2026_10_16
     cp = caps(mcon) if mcon else None
     if mcon:
         mcon.close()
@@ -1276,7 +1293,7 @@ def main(argv=None) -> int:
                     k, v["units"], v["verses"], v.get("misaligned", 0), json.dumps(v["chrf"]), json.dumps(v["chrf_folded"]),
                     json.dumps({x: (y["fidelity"], y["fluency"], y["pass"]) for x, y in v.get("judge", {}).items()})))
         print("VERDICT: written %s and %s%s" % (hp, jp, "" if al.get("units") else " (nothing scored yet)"))
-        print("NEXT: start \"\" \"%s\"" % hp)
+        print('NEXT: Start-Process "%s"   (BENCH_DESK_2026_10_16: or the Benchmarks page)' % hp)
         return 0
     return status(a, out, data, specs, a.db)
 

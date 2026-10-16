@@ -234,6 +234,7 @@ class TheStageAndThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in files:
                 later = sorted(SCRIPTS.glob(f + ".bak_ornament_*"))   # ORNAMENT_2026_10_16 came after (scholar_translate.py)
+                later = later or sorted(SCRIPTS.glob(f + ".bak_benchdesk_*"))   # BENCH_DESK_2026_10_16 (dashboard.py)
                 self.assertEqual((t / "scripts" / f).read_bytes(), (later[0] if later else SCRIPTS / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in files:
