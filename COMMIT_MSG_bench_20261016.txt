@@ -1,0 +1,29 @@
+BM1: our English against published translations, the pipeline unchanged (BENCH_MITRA_2026_10_16); a printed ornament is not OCR debris (ORNAMENT_2026_10_16); recorded (DOCS65_2026_10_16)
+
+docs/BENCH_MITRA_2026-10-16.md. Asked: benchmark against what exists, and "establish a worthy baseline" without
+changing too many variables.
+- scripts/bench_mitra.py: 200 verses (25 in a row from each of eight Mitrasamgraha test files of the Hindu
+  traditions: not the Gita, not the Buddhist files), the 6 lines before and the 2 after as context; three arms run
+  by the pipeline's own scripts as they are: gemini-2.5-flash one pass and Sonnet 5.5 one pass (translate_passages.py),
+  the scholarly pipeline as on 15 Oct (scholar_translate.py --engine anthropic:claude-sonnet-5-5 --compare-engine
+  anthropic:claude-opus-5-5 --audit-every 10 --no-compare). Scored by chrF against the published English (as
+  sacrebleu 2.6.0; also with the diacritics and the case folded) and by judge-v1 on the Sanskrit (unchanged; the
+  published English too with --judge-reference), the scholarly sentences as units for every arm, paired bootstrap
+  intervals; units whose published English seems a neighbour's are counted and a scope is given without them.
+  Each arm runs on its own bench database outside the repository (D:\Sanksrit Automatons\benchmarks\bm1), whose
+  ledger is the real one's (the credit's rows and the spend cap copied in before each text); after each text its
+  calls go into data/context.db's usage_log as kind bench_<kind>, doc BM1:<text>, with usage_totals and (Gemini)
+  the spend cap, never twice: the credit and the cap count them, the Library's prices do not. Private evaluation
+  only: nothing of the dataset is committed, and nothing reaches the site. A dry run by default; about $13.9 in all.
+- scripts/patch_ornament_2026_10_16.py: a line that is exactly the vision OCR's ornament marker ("<decorative
+  line>") is set aside before the debris test in scholar_translate.readiness and redeem.classify (three verses
+  carry it: the Markandeya Purana 1.4 and 1.6, the Tantric Texts 135.1).
+- scripts/patch_srangam_ornament_2026_10_16.py (for Srangam; payload docs/srangam/ORNAMENT_2026-10-16/): the
+  reader's provisional test sets the same lines aside (found by Lovable on clean verses).
+Tests: tests/test_bench_mitra_2026_10_16.py (12), tests/test_ornament_2026_10_16.py (4); the replay chains of
+test_ready_price_2026_10_16 (redeem.py) and test_classify_hindi_2026_10_16 (scholar_translate.py) follow
+(.bak_ornament_).
+Docs: scripts/patch_docs65_2026_10_16.py (PLATFORM 68, RUNBOOK, EP 55).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

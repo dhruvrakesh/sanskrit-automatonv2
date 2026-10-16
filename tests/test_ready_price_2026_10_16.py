@@ -79,6 +79,7 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
                 later = sorted(SCRIPTS.glob(f + ".bak_hindi_*"))   # CLASSIFY_HINDI_2026_10_16 came after (scholar_translate.py)
+                later = later or sorted(SCRIPTS.glob(f + ".bak_ornament_*"))   # ORNAMENT_2026_10_16 (redeem.py)
                 self.assertEqual((t / "scripts" / f).read_bytes(), (later[0] if later else SCRIPTS / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:

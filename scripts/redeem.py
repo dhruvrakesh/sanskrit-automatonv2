@@ -59,6 +59,7 @@ sys.path.insert(0, str(SCRIPTS))
 
 JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")   # = repair_text.JUNK (Latin letters in Devanagari)
 DEV = re.compile("[\u0900-\u097f]")
+ORNAMENT = re.compile(r"(?im)^[ \t\r]*<decorative line>[ \t\r]*$")   # ORNAMENT_2026_10_16: = scholar_translate.ORNAMENT
 SOURCE_BLAMED = re.compile(r"garbl|corrupt|typo|ocr|illegib|damaged|unclear w|source (text )?is", re.I)  # = judge_review
 CLASSES = ("judged_sound", "judged_wrong", "vision", "no_debris", "debris")
 LABEL = {"judged_sound": "judged sound", "judged_wrong": "judged wrong", "vision": "vision", "no_debris": "no debris seen",
@@ -189,7 +190,7 @@ def classify(con, only: str | None = None) -> dict:
         if not (tr or "").strip():
             continue
         r["en"] += 1
-        junk = len(DEV.findall(text or "")) >= 8 and bool(JUNK.search(text or ""))
+        junk = len(DEV.findall(text or "")) >= 8 and bool(JUNK.search(ORNAMENT.sub(" ", text or "")))   # ORNAMENT_2026_10_16
         if pid in rev and rev[pid][0] is not None:
             fid, why = rev[pid]
             if fid <= 2:

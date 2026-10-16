@@ -2066,3 +2066,14 @@ on disk.
 4. `--undo --apply` puts back what the log says; `python scripts\build_embeddings.py --doc <code>` remakes the
    vectors of English put back.
 5. New texts: classify_doc.py runs it after every ingest (only what carries no English).
+
+
+## BM1, the benchmark against published translations (DOCS65_2026_10_16)
+
+1. `python scripts\bench_mitra.py --sample` (free): the 200 verses and the bench databases, in
+   D:\Sanksrit Automatons\benchmarks\bm1 (outside the repository; private).
+2. `python scripts\bench_mitra.py` (free): what each arm would send and cost, the credit and the cap.
+3. `--arm flash`, `--arm sonnet1`, `--arm scholar`, each with `--yes --max-usd N` (they can run at once).
+4. `--score --judge-reference --yes --max-usd N`, then `--report` (free): BM1_report.html (private) and
+   BM1_summary.json (numbers only).
+5. A step stopped half way: run it again (it goes on), or `--settle` (free) to put its spend in the ledger.

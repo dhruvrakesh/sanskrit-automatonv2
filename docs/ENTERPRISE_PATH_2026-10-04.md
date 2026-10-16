@@ -888,3 +888,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | A2 | The editor's footnotes cut as verses (the Karanagama's Vedic sources) | To tag, as classify_apparatus.py does |
 | OP1 | Opus on the serious flags | Waits for H1, J2 and a person |
 | BM1 | Mitrasamgraha: the 8 files of the Hindu tradition only, judged on the Sanskrit | After a go |
+
+
+## Addendum 2026-10-16 (55) (DOCS65_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| BM1 | Mitrasamgraha, 8 files of the Hindu traditions, 200 verses, three arms, chrF and judge-v1 (BENCH_MITRA_2026_10_16) | Built and tested; to run (about $13.9) |
+| BM3 | The blind side-by-side of the arms by judges of both families | After BM1's numbers |
+| BM2 | Our own gold set, read by a person | A person's time |
+| OR1 | A printed ornament not taken for debris (ORNAMENT_2026_10_16), the automaton and Srangam alike | Built and tested |
+| J2 | A judge told the emendations, the thinking off | After the baseline, as asked |

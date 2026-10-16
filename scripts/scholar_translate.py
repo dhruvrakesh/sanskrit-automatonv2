@@ -4,7 +4,7 @@
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
 COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
 AUDIT_2026_10_15, RUN_FIX_2026_10_15, CLAUDE_FIRST_2026_10_15, REJUDGE_2026_10_15,
-TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16
+TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16, ORNAMENT_2026_10_16
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -173,6 +173,7 @@ APPARATUS_RE = re.compile(r"-[A-Z](?:,\s?[A-Z])*\s?[.;]")   # "7 yat (?)-B,C.": 
 DEV = re.compile("[\u0900-\u097f]")
 JUNK = re.compile(r"(?<![A-Za-z])[A-Za-z][A-Za-z'!\"]{1,}")       # = redeem.JUNK, repair_text.JUNK
 SUP_TAG = re.compile(r"(?i)</?sup>")   # READY_PRICE_2026_10_16: a vision OCR's footnote mark, <sup>6</sup>, is not debris
+ORNAMENT = re.compile(r"(?im)^[ \t\r]*<decorative line>[ \t\r]*$")   # ORNAMENT_2026_10_16: a printed rule, not debris
 _DIG = "\u0966-\u096f0-9"
 VERSE_NO = re.compile("[\u0964\u0965|]+\\s*[%s.]+\\s*[\u0964\u0965|]+" % _DIG)
 SUTRA_NO = re.compile("(?m)^\\s*[%s]+(?:\\.[%s]+)+\\s*" % (_DIG, _DIG))
@@ -380,7 +381,7 @@ def readiness(text, text_type=None, quality=None, min_quality: float = 0.35):
         return "noise or front matter"
     if len(DEV.findall(t)) < 8:
         return "fewer than 8 Devanagari signs"
-    if JUNK.search(SUP_TAG.sub(" ", t)):   # READY_PRICE_2026_10_16: <sup>n</sup> is the edition's footnote number
+    if JUNK.search(ORNAMENT.sub(" ", SUP_TAG.sub(" ", t))):   # READY_PRICE_2026_10_16: <sup>n</sup>; ORNAMENT_2026_10_16
         return "OCR debris (Latin letters in the Devanagari): mend the reading first"
     if quality is not None and float(quality) < min_quality:
         return "a reading below quality %.2f" % min_quality

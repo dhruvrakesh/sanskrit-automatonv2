@@ -1,0 +1,12 @@
+A printed ornament is not the scanner's debris: clean verses beside one are no longer "provisional English" (ORNAMENT_2026_10_16)
+
+Found by Lovable on 16 Oct. The vision OCR writes an ornamental rule of the page as a line of its own, "<decorative
+line>"; the reader hides it and draws a rule (READER_MARKS_2026_10_07), but madeFromMisread() looked for a Latin
+word in the whole Sanskrit, the marker included. src/lib/corpusDisplay.ts: it now sets aside the lines that are only
+the marker (splitDecoration, the reader's own rule); the marker inside a line of text, and any other Latin word, is
+debris as before. The automaton's tests are mended in the same release (scholar_translate.readiness,
+redeem.classify), so the two stay one rule (invariant 51). New: src/__tests__/reader-ornament.test.tsx (4).
+RELIABILITY_AUDIT Phase AI (invariant 56). No database change; nothing stored is changed.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -233,7 +233,8 @@ class TheStageAndThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in files:
-                self.assertEqual((t / "scripts" / f).read_bytes(), (SCRIPTS / f).read_bytes(), f)
+                later = sorted(SCRIPTS.glob(f + ".bak_ornament_*"))   # ORNAMENT_2026_10_16 came after (scholar_translate.py)
+                self.assertEqual((t / "scripts" / f).read_bytes(), (later[0] if later else SCRIPTS / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in files:
                 shutil.copy2(baks[f][0], t / "scripts" / f)
