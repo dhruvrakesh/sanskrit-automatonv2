@@ -1,0 +1,23 @@
+BM2, your blind reading on the dashboard (BENCH_GOLD_2026_10_16); BM3's check with the scholarly arm's notes withheld (BENCH_DUEL_NOTES_2026_10_16); BM3's pilot recorded (DOCS68_2026_10_16)
+
+docs/BENCH_GOLD_2026-10-16.md, docs/BM3_PILOT_2026-10-16.md.
+- BM3's pilot (40 units, both duel-v1 judges, $3.26): the scholarly pipeline above Sonnet alone 0.80 [0.68, 0.91]
+  by gemini-2.5-pro and 0.79 [0.65, 0.90] by Claude Opus; above flash 0.89 and 0.83; major errors per ten verses 0.24
+  against flash's 3.6 to 3.8. Recorded with its limits: five units a text; only the scholarly arm has notes.
+- scripts/bench_gold.py (new): BM3's units in its order, each with its Sanskrit and four translations as Translation
+  1 to 4 (an order of its own; no names; the scholarly notes kept back), a person's best (or equal), the translations
+  marked wrong in meaning and a note, stored append-only in BM2's folder (refused when the unit's English has changed);
+  then who made each and what each judge chose. The report: the reader's best per arm, the pairs, each judge against
+  the reader (the same best, with the chance level; the wrong ones it caught; its false alarms). Free.
+- scripts/patch_bench_duel_notes_2026_10_16.py: bench_duel.py --no-notes, the check: the scholarly arm's notes
+  withheld (they name it); its readings stored apart (notes_shown), its own report (BM3_nonotes_*).
+- scripts/patch_bench_gold_desk_2026_10_16.py: /benchmarks/bm2 (the reading; keys 1 to 4, E, Enter), /api/bm2/next,
+  /api/bm2/pick, /benchmarks/bm2/report (private, 127.0.0.1); the Benchmarks page's BM2 section (its report a job of
+  kind bench2) and BM3's check (its run and report as buttons, --no-notes, its numbers beside the pilot's).
+Tests: tests/test_bench_gold_2026_10_16.py (5), tests/test_bench_gold_desk_2026_10_16.py (6),
+tests/test_bench_duel_notes_2026_10_16.py (3); the replay chain of test_bench_duel_desk_2026_10_16 follows
+(.bak_benchgold_).
+Docs: scripts/patch_docs68_2026_10_16.py (PLATFORM 71, RUNBOOK, EP 58).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
