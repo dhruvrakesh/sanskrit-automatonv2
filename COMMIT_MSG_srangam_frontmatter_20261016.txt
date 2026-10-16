@@ -1,0 +1,12 @@
+The edition's own matter is folded in the reader, and never "Not translated yet" (CLASSIFY_HINDI_2026_10_16)
+
+docs/CLASSIFY_HINDI_2026-10-16.md in the automaton repo. Its classification stage now tags an edition's own Hindi
+(the editor's translation under each verse, his preface) 'frontmatter', so it is not translated; the Karanagama's
+copy in the mirror had 291 English rows made from such Hindi. src/components/reader/PassageBlock.tsx: a passage
+typed frontmatter is folded like scanner noise ("The edition's own matter, not the Sanskrit.", Show it), never says
+"Not translated yet.", and its note says what it is. A verse and scanner noise are as before; the public reader never
+receives such passages. New: src/__tests__/reader-frontmatter.test.tsx (2). RELIABILITY_AUDIT Phase AH (invariants
+54-55). No database change; nothing stored is changed.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

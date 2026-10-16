@@ -4,7 +4,7 @@
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
 COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
 AUDIT_2026_10_15, RUN_FIX_2026_10_15, CLAUDE_FIRST_2026_10_15, REJUDGE_2026_10_15,
-TRIAGE_2026_10_16, READY_PRICE_2026_10_16
+TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -363,6 +363,16 @@ def hindi_words(text: str) -> set:
     return set(WORD.findall(text or "")) & HINDI_WORDS
 
 
+def edition_hindi(text) -> bool:
+    """CLASSIFY_HINDI_2026_10_16: scripts/edition_hindi.py's reading of a passage as an edition's own Hindi (six words
+    or more; Hindi words Sanskrit does not have; more of them than Sanskrit marks); False when it cannot be read."""
+    try:
+        import edition_hindi as _eh
+        return bool(_eh.is_hindi(text))
+    except Exception:
+        return False
+
+
 def readiness(text, text_type=None, quality=None, min_quality: float = 0.35):
     """Why this passage is not sent (None: it is ready)."""
     t = text or ""
@@ -376,7 +386,7 @@ def readiness(text, text_type=None, quality=None, min_quality: float = 0.35):
         return "a reading below quality %.2f" % min_quality
     if is_index(t):
         return "numbers among the words: an index, errata, apparatus or notation, not verse"
-    if len(hindi_words(t)) >= 3:
+    if len(hindi_words(t)) >= 3 or edition_hindi(t):   # CLASSIFY_HINDI_2026_10_16
         return "Hindi prose (the edition's own Hindi), not Sanskrit"
     return None
 
@@ -1460,7 +1470,8 @@ def status_lines(con, doc: str, allp: list, a) -> list:
     pages = parse_pages(getattr(a, "pages", None))
     sel = [x for x in allp if pages is None or x["page"] in pages]
     ready = sum(1 for x in sel if not readiness(x["text"], x["type"], x["quality"], a.min_quality))
-    ids = {x["id"] for x in sel}
+    ids = {x["id"] for x in sel if (x.get("type") or "") not in ("noise", "frontmatter")}   # CLASSIFY_HINDI_2026_10_16
+    aside_ids, aside = {x["id"] for x in sel} - ids, 0
     if not has_table(con, "scholar_translations"):
         return ["  no scholarly English yet; %s verse(s) ready" % "{:,}".format(ready)]
     text = {x["id"]: x["text"] for x in allp}
@@ -1470,6 +1481,7 @@ def status_lines(con, doc: str, allp: list, a) -> list:
             "AND id IN (SELECT MAX(id) FROM scholar_translations WHERE doc_code = ? GROUP BY engine, passage_id)",
             (doc, doc)):
         if pid not in ids:
+            aside += 1 if pid in aside_ids else 0   # CLASSIFY_HINDI_2026_10_16
             continue
         e = per.setdefault(eng, {"n": 0, "passed": 0, "flagged": 0, "source_doubt": 0, "stale": 0, "audited": 0,
                                  "last": ""})
@@ -1502,6 +1514,9 @@ def status_lines(con, doc: str, allp: list, a) -> list:
         out = ext
     except Exception:
         pass
+    if aside:   # CLASSIFY_HINDI_2026_10_16
+        out.append("  set aside: %d row(s) on passages that are not verse (front matter, noise, an edition's own Hindi)"
+                   % aside)
     return out or ["  no scholarly English yet; %s verse(s) ready" % "{:,}".format(ready)]
 
 
@@ -1555,7 +1570,7 @@ def triage_rows(con, doc: str, engine: str, sel: list) -> list:
     out = []
     for pid, r in latest_rows(con, doc, engine).items():
         x = byid.get(pid)
-        if x is None or not current(r, x):
+        if x is None or not current(r, x) or (x.get("type") or "") in ("noise", "frontmatter"):   # CLASSIFY_HINDI_2026_10_16
             continue
         tier, rs = triage_of(r)
         if tier:

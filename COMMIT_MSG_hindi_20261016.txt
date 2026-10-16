@@ -1,0 +1,30 @@
+An edition's own Hindi is kept out of the translation, at the classification stage after every ingest (CLASSIFY_HINDI_2026_10_16); recorded (DOCS64_2026_10_16)
+
+docs/CLASSIFY_HINDI_2026-10-16.md. classify_doc.py promised to sort "English/Hindi body text and front matter" from
+the Sanskrit, but classify_frontmatter.py reads Latin letters only: an edition's Hindi in Devanagari stayed 'mula'
+and was translated. On the 15 Oct backup the Karanagama had 815 passages of Prof. Pandey's Hindi, 194 of them with
+working English and 99 with scholarly English made from it (89 passed by the flash judge; $3.75 of the credit); the
+site's copy 291 English rows on such passages.
+- scripts/edition_hindi.py: hindi_of(text): six words; Hindi words Sanskrit does not have (STRONG), with those that
+  are Sanskrit forms too (WEAK) counted but not deciding; 12% of the words; more than the Sanskrit marks (visarga, a
+  final virama); no OCR debris once a scan's watermark is taken out. Nothing in the Hayasirsa, MBh01, the Tantrik Texts.
+- scripts/classify_hindi.py: tags them 'frontmatter' (the label classify_doc.py gives an edition's own body text);
+  by default only what carries no English; --with-english archives (translation_history), clears, re-indexes and
+  drops the vector of English made from the Hindi; --reject-scholarly --by: a person's 'reject' on their scholarly
+  rows; translations_l10n untouched; logged; --undo; a dry run by default.
+- scripts/patch_classify_hindi_2026_10_16.py: classify_doc.py runs classify_hindi.py as a stage; scholar_translate's
+  readiness reads Hindi with the new rule too, --status sets aside and --triage leaves out rows on noise and front
+  matter; the Library sets them aside and says so, and the reader neither shows scholarly English on them nor offers
+  to translate them.
+- scripts/patch_srangam_frontmatter_2026_10_16.py (for Srangam; payload docs/srangam/FRONTMATTER_FOLD_2026-10-16/):
+  the corpus reader folds a passage typed frontmatter.
+- Also recorded: the serious flags, read (most are corrupt readings the translator emended; another model would
+  re-emend them), the thinking probe (the judge without thinking costs 4%; pass or flag the same in 11 of 12), and
+  what Mitrasamgraha is made of (11% of its pairs Buddhist; its test set 8 files of the Hindu tradition, the Gita
+  with a sectarian reference, 3 Buddhist files).
+Tests: tests/test_classify_hindi_2026_10_16.py (8); the replay chains of test_library_scholar_2026_10_16 and
+test_ready_price_2026_10_16 follow (.bak_hindi_).
+Docs: scripts/patch_docs64_2026_10_16.py (PLATFORM 67, RUNBOOK, EP 54).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

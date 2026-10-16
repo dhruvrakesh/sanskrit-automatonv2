@@ -2235,14 +2235,20 @@ def _scholar_cover(con) -> Dict[str, dict]:
             return _SCHOLAR_COVER["res"]
         _st = _scholar_st()
         res: Dict[str, dict] = {}
-        for doc, st, h, rv, eng, ptext in con.execute(
-                "SELECT s.doc_code, s.status, s.src_hash, s.review_verdict, s.engine, p.text FROM scholar_translations s "
+        _tt = ("COALESCE(p.text_type, 'mula')" if "text_type" in {r_[1] for r_ in con.execute("PRAGMA table_info(passages)")}
+               else "'mula'")   # CLASSIFY_HINDI_2026_10_16
+        for doc, st, h, rv, eng, ptext, ptype in con.execute(
+                "SELECT s.doc_code, s.status, s.src_hash, s.review_verdict, s.engine, p.text, %s FROM scholar_translations s "
                 "LEFT JOIN passages p ON p.id = s.passage_id WHERE s.id IN (SELECT MAX(id) FROM scholar_translations "
-                "GROUP BY passage_id)"):
+                "GROUP BY passage_id)" % _tt):
             c = res.setdefault(doc, {"verses": 0, "passed": 0, "flagged": 0, "source_doubt": 0, "accepted": 0,
-                                     "rejected": 0, "stale": 0, "engines": {}, "spent": 0.0, "last": ""})
+                                     "rejected": 0, "stale": 0, "set_aside": 0, "engines": {}, "spent": 0.0,
+                                     "last": ""})
             if ptext is None or _st.src_hash(ptext) != h:
                 c["stale"] += 1
+                continue
+            if ptype in ("noise", "frontmatter"):   # CLASSIFY_HINDI_2026_10_16: not verse (an edition's own Hindi ...)
+                c["set_aside"] += 1
                 continue
             c["verses"] += 1
             if st in ("passed", "flagged", "source_doubt"):
@@ -2277,7 +2283,7 @@ def _scholar_line(code: str, sc: dict) -> str:
     import html as _html
     from urllib.parse import quote
     c = (sc or {}).get(code)
-    if not c or not (c.get("verses") or c.get("stale")):
+    if not c or not (c.get("verses") or c.get("stale") or c.get("set_aside")):   # CLASSIFY_HINDI_2026_10_16
         return ""
     n_ = lambda v: "{:,}".format(int(v or 0))
     top = sorted(c["engines"].items(), key=lambda kv: (-kv[1], kv[0]))
@@ -2290,6 +2296,9 @@ def _scholar_line(code: str, sc: dict) -> str:
         parts.append("%s accepted and %s rejected by a person" % (n_(c["accepted"]), n_(c["rejected"])))
     if c["stale"]:
         parts.append("%s stale (the Sanskrit changed)" % n_(c["stale"]))
+    if c.get("set_aside"):   # CLASSIFY_HINDI_2026_10_16
+        parts.append("%s set aside (not Sanskrit verse: front matter, noise, the edition's own Hindi)"
+                     % n_(c["set_aside"]))
     q = quote(code, safe="")
     tip = ("The scholarly English, verse by verse (scholar_translate.py): drafted with its context and glossary, read by "
            "a critic, revised, judged. It is kept beside the working English (EN, which the site shows) and is not on "
@@ -2337,7 +2346,13 @@ def _scholar_rows(con, doc: str, type_clause: str = "", type_params=(), limit: i
                 "GROUP BY passage_id)" % ",".join("?" * len(ids)), ids):
             got[pid] = (tr, st, h, eng, gref, ref, rv)
         out, q = {}, quote(doc, safe="")
+        kinds = {}   # CLASSIFY_HINDI_2026_10_16: no scholarly English shown on a passage that is not verse
+        if "text_type" in {r_[1] for r_ in con.execute("PRAGMA table_info(passages)")}:
+            kinds = dict(con.execute("SELECT id, COALESCE(text_type, 'mula') FROM passages WHERE id IN (%s)"
+                                     % ",".join("?" * len(ids)), ids).fetchall())
         for pid, page, idx, text in listed:
+            if kinds.get(pid) in ("noise", "frontmatter"):
+                continue
             g = got.get(pid)
             if not g or not (g[0] or "").strip() or _st.src_hash(text) != g[2]:
                 continue
@@ -4763,7 +4778,9 @@ async function loadPage(p){{
           '<div class="col-label col-label-en">' + (LANG_LABELS[activeLang] || activeLang) + (p.scholar ? ' &middot; the working English' : '') + '</div>' +
           (hasTr
             ? '<div class="' + (activeLang === 'en' ? 'en-text' : 'hi-text') + '">' + esc(p.translation) + '</div>'
-            : (looksEnglish(p.text)
+            : ((ttype === 'frontmatter' || ttype === 'noise')
+                ? '<div class="en-source">&#128196; The edition&#39;s own matter (front matter, noise, or its translation or commentary in a modern language): not the Sanskrit, so not translated</div>'
+                : looksEnglish(p.text)
                 ? '<div class="en-source">&#128196; Source is English &mdash; no translation needed</div>'
                 : looksIllegible(p.text)
                 ? '<div class="en-illegible">&#9888; Source illegible &mdash; needs re-OCR, not translation</div>'

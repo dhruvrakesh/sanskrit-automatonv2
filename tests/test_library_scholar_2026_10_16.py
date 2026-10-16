@@ -166,8 +166,8 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            # a later patch of dashboard.py adds its .bak_<tag>_ copy here: the chain then ends at that copy
-            self.assertEqual(p.read_bytes(), (SCRIPTS / "dashboard.py").read_bytes())
+            later = sorted(SCRIPTS.glob("dashboard.py.bak_hindi_*"))   # CLASSIFY_HINDI_2026_10_16 came after
+            self.assertEqual(p.read_bytes(), (later[0] if later else SCRIPTS / "dashboard.py").read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             shutil.copy2(baks[0], p)
             p.write_bytes(p.read_bytes().replace(b"function looksEnglish(t){{", b"function looksEnglish2(t){{"))

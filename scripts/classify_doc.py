@@ -39,7 +39,11 @@ SCRIPTS = ROOT / "scripts"
 
 STAGES = [
     ("frontmatter", "classify_frontmatter.py",
-     "English / Hindi body text and front matter"),
+     "English body text and front matter"),
+    # CLASSIFY_HINDI_2026_10_16: classify_frontmatter.py reads Latin letters only, so an edition's own Hindi
+    # (Devanagari) stayed 'mula' and was translated. Without --with-english this tags only what carries no English.
+    ("frontmatter", "classify_hindi.py",
+     "an edition's own Hindi: its translation, commentary, preface"),
     ("noise", "classify_noise.py",
      "OCR fragments, page numbers, running heads"),
 ]

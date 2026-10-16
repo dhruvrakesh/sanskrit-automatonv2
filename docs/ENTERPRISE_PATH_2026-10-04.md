@@ -875,3 +875,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | BM4 | The person's review of the triage CSVs (the KPI) | Ongoing |
 | S4 | The scholarly English on the site, as a layer of its own | Design next |
 | IN1 | Hindi from the scholarly English and the Sanskrit, on a Hindi gold set | After BM1-BM3 |
+
+
+## Addendum 2026-10-16 (54) (DOCS64_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| H1 | An edition's own Hindi kept out of the translation (CLASSIFY_HINDI_2026_10_16) | Built and tested; to apply per text |
+| H1b | The Karanagama on the site (291 English rows on its Hindi) | Withdraw now, or replace at its release: a person decides |
+| SH1 | A scholarly Hindi from the Sanskrit (with the passed scholarly English as a reference) | After BM; a 20-verse canary first |
+| J2 | A judge told the translator's emendations, with the thinking off | Proposed; a 60-verse probe first |
+| A2 | The editor's footnotes cut as verses (the Karanagama's Vedic sources) | To tag, as classify_apparatus.py does |
+| OP1 | Opus on the serious flags | Waits for H1, J2 and a person |
+| BM1 | Mitrasamgraha: the 8 files of the Hindu tradition only, judged on the Sanskrit | After a go |

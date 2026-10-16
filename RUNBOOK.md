@@ -2056,3 +2056,13 @@ on disk.
 - After READY_PRICE_2026_10_16: `python scripts\redeem.py` (free) writes the Library's estimates at the measured price.
 - Do not press Finish EN or Add Hindi on a bilingual edition (the Karanagama) until H1 is decided: the working English
   would translate the editor's Hindi.
+
+
+## An edition's own Hindi (DOCS64_2026_10_16)
+
+1. `python scripts\classify_hindi.py --show 3` (free): every text, what reads as Hindi, and what carries English.
+2. A text whose Hindi carries no English: `python scripts\classify_hindi.py --doc <code> --apply`.
+3. A text whose Hindi was translated: back up first, then `--with-english --reject-scholarly --by <name> --apply`.
+4. `--undo --apply` puts back what the log says; `python scripts\build_embeddings.py --doc <code>` remakes the
+   vectors of English put back.
+5. New texts: classify_doc.py runs it after every ingest (only what carries no English).
