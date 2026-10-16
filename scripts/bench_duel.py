@@ -42,6 +42,10 @@ the Claude part in the Claude credit; both checked before each call, settled eve
   python scripts\\bench_duel.py --units 40 --with-reference --yes --max-usd 6.00
   python scripts\\bench_duel.py --report                                          BM3_report.html (free)
   python scripts\\bench_duel.py --settle                                          what a stopped run left (free)
+  python scripts\\bench_duel.py --units 40 --with-reference --no-notes --yes --max-usd 4.50
+      BENCH_DUEL_NOTES_2026_10_16: the check of the pilot, the scholarly arm's notes withheld (only it has notes, so
+      they name it, and a judge may rank an annotated translation higher for its notes); its own report,
+      BM3_nonotes_report.html and BM3_nonotes_summary.json (python scripts\\bench_duel.py --report --no-notes).
 """
 from __future__ import annotations
 
@@ -77,6 +81,8 @@ PAIRS = (("scholar", "flash"), ("scholar", "sonnet1"), ("sonnet1", "flash"),
          ("scholar", "reference"), ("sonnet1", "reference"), ("flash", "reference"))
 PRIOR_CALL = {"gemini:gemini-2.5-pro": 0.065, "anthropic:claude-opus-5-5": 0.047}   # $ a duel call, 15 Oct (Hayasirsa)
 SOURCE = "a digital e-text"
+NOTES_SHOWN = True   # BENCH_DUEL_NOTES_2026_10_16: --no-notes withholds the scholarly arm's notes (a check)
+NAME = "BM3"         # the report's files: BM3_report.html, BM3_summary.json (BM3_nonotes_* with --no-notes)
 ME = "python scripts\\bench_duel.py"
 
 
@@ -127,7 +133,7 @@ def texts_of(it: dict, m: list, with_ref: bool):
         if not t:
             return None
         notes = []
-        if arm == "scholar":
+        if arm == "scholar" and NOTES_SHOWN:   # BENCH_DUEL_NOTES_2026_10_16: --no-notes withholds them
             notes = ST._loads((it["outs"]["scholar"].get(m[0]) or {}).get("notes"), [])
         got[arm] = {"text": t, "notes": notes}
     return got
@@ -296,6 +302,8 @@ def run(a, out: Path, bm1: Path, items: list, judges: list) -> int:
         print("  %-28s about %s (%s a call, %s; %s)" % (j, usd(v["usd"]), usd(v["each"]), v["how"], v["bill"]))
     print("  the Claude credit: %s left; the spend cap: %s left of %s%s; --max-usd %s"
           % (usd(cp["credit_left"]), usd(cp["cap_left"]), usd(cp["cap"]), ", paused" if cp["paused"] else "", usd(cap)))
+    if not NOTES_SHOWN:   # BENCH_DUEL_NOTES_2026_10_16
+        print("  the scholarly arm's notes are withheld (the check: only it has notes, so they name it)")
     if a.with_reference:
         print("  the published English is the fourth translation: it is sent to both judges (a private evaluation)")
     if not todo:
@@ -374,7 +382,8 @@ def run(a, out: Path, bm1: Path, items: list, judges: list) -> int:
                 else:
                     fails[j] = 0
                     rec = {"key": t["it"]["f"]["key"], "unit": bm.unit_name(t["m"]), "n": len(t["m"]), "judge": j,
-                           "version": SD.DUEL_VERSION, "contestants": sorted(t["texts"]), "shas": t["shas"],
+                           "version": SD.DUEL_VERSION, "notes_shown": NOTES_SHOWN,   # BENCH_DUEL_NOTES_2026_10_16
+                           "contestants": sorted(t["texts"]), "shas": t["shas"],
                            "labels": v["labels"], "by_arm": v["by_engine"], "ranking": v["ranking"], "best": v["best"],
                            "reason": v["reason"], "cost": round(cost, 6), "at": bm.now(), "mark": MARK}
                     with open(out / "duel.jsonl", "a", encoding="utf-8") as f:
@@ -550,12 +559,13 @@ def report(out: Path, bm1: Path, items: list, judges: list, with_ref) -> tuple:
     summary = {"mark": MARK, "bench": BENCH, "made_at": bm.now(), "seed": SEED, "version": SD.DUEL_VERSION,
                "judges": used, "families": {j: family(j) for j in used}, "arm_family": FAMILY,
                "units_total": len(order_of(items)), "with_reference": with_ref, "scopes": nums, "spend": sp,
+               "notes_shown": NOTES_SHOWN,   # BENCH_DUEL_NOTES_2026_10_16
                "how": "each judge ranks the translations of a unit, blind, in its own shuffled order; a pair's share is "
                       "how often the first is ranked above the second (a tie a half), weighted by verses; intervals "
                       "by %d bootstrap resamples of the units" % BOOT}
-    jp = out / "BM3_summary.json"
+    jp = out / (NAME + "_summary.json")   # BENCH_DUEL_NOTES_2026_10_16: BM3_nonotes_* with --no-notes
     jp.write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
-    hp = out / "BM3_report.html"
+    hp = out / (NAME + "_report.html")
     hp.write_text(page(summary, units, used), encoding="utf-8")
     return jp, hp, summary
 
@@ -578,7 +588,8 @@ def page(summary: dict, units: list, used: list) -> str:
            ".sa{font-size:13px;color:#555;font-style:italic}.small{font-size:12px;color:#666}")
     h = ["<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,"
          "initial-scale=1'><title>BM3 report</title><style>%s</style></head><body>" % css,
-         "<h1>BM3: the blind side-by-side of BM1's English</h1>",
+         "<h1>BM3: the blind side-by-side of BM1's English%s</h1>" % ("" if NOTES_SHOWN else ": the check, the scholarly "
+                                                                         "arm's notes withheld"),
          "<p class='warn'><b>Private evaluation.</b> This page holds the Mitrasamgraha test set's Sanskrit and, where it "
          "was read, its published English: it stays in this folder and is never published or put on the site.</p>",
          "<p class='small'>%s. The judges: %s (%s). Made %s.</p>" % (
@@ -712,17 +723,20 @@ def main(argv=None) -> int:
     ap.add_argument("--judges", default=",".join(SD.JUDGES))
     ap.add_argument("--units", type=int, default=None, help="the first N units of the order of reading")
     ap.add_argument("--with-reference", action="store_true", help="the published English as a fourth translation")
+    ap.add_argument("--no-notes", action="store_true", help="the scholarly arm's notes withheld (a check: they name it); "
+                    "its report is BM3_nonotes_report.html")   # BENCH_DUEL_NOTES_2026_10_16
     ap.add_argument("--report", action="store_true", help="BM3_report.html and BM3_summary.json (free)")
     ap.add_argument("--settle", action="store_true", help="what a stopped run left, into the ledger (free)")
     ap.add_argument("--max-usd", type=float, default=None)
     ap.add_argument("--yes", action="store_true")
     a = ap.parse_args(argv)
     out, bm1 = Path(a.out), Path(a.bm1)
-    global ME
+    global ME, NOTES_SHOWN, NAME
+    NOTES_SHOWN, NAME = (False, "BM3_nonotes") if a.no_notes else (True, "BM3")   # BENCH_DUEL_NOTES_2026_10_16
     ME = "python scripts\\bench_duel.py" + ((' --out "%s"' % a.out) if out != OUT_DEFAULT else "") + (
         (' --bm1 "%s"' % a.bm1) if bm1 != BM1_DEFAULT else "") + ((' --db "%s"' % a.db) if a.db != "data/context.db"
                                                                    else "") + (
-        (" --judges %s" % a.judges) if a.judges != ",".join(SD.JUDGES) else "")
+        (" --judges %s" % a.judges) if a.judges != ",".join(SD.JUDGES) else "") + (" --no-notes" if a.no_notes else "")
     judges = [x.strip() for x in a.judges.split(",") if x.strip()]
     if not bm.outside_repos(out):
         print("REFUSE: --out %s is inside a repository: the dataset's text must not be committed" % out)

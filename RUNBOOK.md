@@ -2097,3 +2097,13 @@ on disk.
 4. More units: the button reads 40 more a press, when the spend cap can hold its Google part
    (`python scripts\set_budget.py` shows the cap).
 5. A run stopped half way: `python scripts\bench_duel.py --settle` (free).
+
+
+## BM2, your blind reading; BM3's check (DOCS68_2026_10_16)
+
+1. The Benchmarks page, BM2's section: Read blind (or http://127.0.0.1:5057/benchmarks/bm2). Say who is reading
+   (kept in this browser), pick the best of the four (keys 1 to 4, E for equal), mark any wrong in meaning, Enter.
+2. Make the report (free) when you stop; read each judge against you.
+3. BM3's check (once the pilot is read): Run the check (about $3.0), then Make the check's report (free); or
+   `python scripts\bench_duel.py --units 40 --with-reference --no-notes --yes --max-usd 4.50` and
+   `python scripts\bench_duel.py --report --no-notes`.

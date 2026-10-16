@@ -920,3 +920,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | BM2 | A person's blind reading of the same units | Its page on the dashboard, next |
 | TW1 | Srangam's tests: the waits set once (TEST_WAIT_2026_10_16) | Built and tested |
 | J2 | A judge told the emendations, the thinking off | After the baseline, as agreed |
+
+
+## Addendum 2026-10-16 (58) (DOCS68_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| BM3 | The blind side-by-side, duel-v1 judges of both families | The pilot done (40 units, $3.26): the scholarly pipeline first; more units need the spend cap |
+| BM3c | The check, the scholarly arm's notes withheld (BENCH_DUEL_NOTES_2026_10_16) | Built and tested; to run (about $3.0) |
+| BM2 | Your blind reading on the dashboard (BENCH_GOLD_2026_10_16) | Built and tested; a person's time (40 units first) |
+| J2 | A judge told the emendations, the thinking off | After the baseline, as agreed |
