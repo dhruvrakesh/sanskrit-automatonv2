@@ -846,3 +846,32 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 |---|---|---|
 | CF2 | --rejudge: a Gemini judge for the rows a Claude judge read (REJUDGE_2026_10_15) | Built and tested |
 | CF5 | The standing checks of a Claude run: the flash judge (Gemini), the audit and the second judge (Opus) | Decided 15 Oct |
+
+
+## Addendum 2026-10-16 (52) (DOCS62_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| AG2 | The Hayasirsa and the Karanagama whole | Done 15 Oct (1,418 and 1,018 verses) |
+| TR1 | The triage; another model on the serious (TRIAGE_2026_10_16) | Built and tested |
+| AG3 | The Tantrik Texts vol. I: the verse texts, pages 75-156 (849) | The canary first (pages 75-77) |
+| AG3b | Its code tables, pages 157-210 (403) | After AG3, if the credit allows |
+| MP1 | A person's text_type for a page (mark_passages.py); the Tantrik Texts' page 18 | Built and tested |
+| TB1 | Gemini 2.5 Flash's thinking: the probe, then a person's decision per kind | The probe built; not decided |
+| WE1 | The working English of the two Agamas (about 2,900 passages) | After the benchmark (CF3) |
+
+
+## Addendum 2026-10-16 (53) (DOCS63_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| LS1 | The scholarly English in the Library and the reader (LIBRARY_SCHOLAR_2026_10_16) | Built and tested |
+| RP1 | The footnote marks are not debris; the working English priced as measured (READY_PRICE_2026_10_16) | Built and tested |
+| AG2b | The Agamas' remainder: 17 + 10 verses | After RP1 (the dry run says which) |
+| H1 | The edition's own Hindi: a guard in translate_passages.py, a text_type, the site's copy | Found; a person decides |
+| BM1 | External: 200 pairs of Mitrasamgraha's test set, three Englishes, chrF and a judge | After the dataset is seen |
+| BM2 | Our gold set: 60 verses of the two Agamas, a person's reference | To start |
+| BM3 | Blind, pairwise, with the context: 100 verses, scholarly against working | After BM2's sample is drawn |
+| BM4 | The person's review of the triage CSVs (the KPI) | Ongoing |
+| S4 | The scholarly English on the site, as a layer of its own | Design next |
+| IN1 | Hindi from the scholarly English and the Sanskrit, on a Hindi gold set | After BM1-BM3 |

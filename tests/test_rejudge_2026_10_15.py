@@ -194,7 +194,9 @@ class TheRejudge(unittest.TestCase):
         r = run("--engine", SONNET, "--rejudge")
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("DRY RUN", r.stdout)
-        self.assertIn("MBh01: 3 sentence(s), 4 verse(s); about $0.0012 (Google's bill, in the spend cap)", r.stdout)
+        est = (ST.usd(ST.JUDGE_COST_NOW * 5) if hasattr(ST, "judge_price")   # TRIAGE_2026_10_16: priced as measured
+               else "$0.0012")
+        self.assertIn("MBh01: 3 sentence(s), 4 verse(s); about %s (Google's bill, in the spend cap)" % est, r.stdout)
         self.assertIn("NEXT: python scripts\\scholar_translate.py --doc MBh01 --engine %s --rejudge --limit 24 --yes"
                       % SONNET, r.stdout)
         r = run("--rejudge")
@@ -220,7 +222,8 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            self.assertEqual(p.read_bytes(), (SCRIPTS / "scholar_translate.py").read_bytes())
+            later = sorted(SCRIPTS.glob("scholar_translate.py.bak_triage_*"))   # TRIAGE_2026_10_16 came after
+            self.assertEqual(p.read_bytes(), (later[0] if later else SCRIPTS / "scholar_translate.py").read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             shutil.copy2(baks[0], p)
             p.write_bytes(p.read_bytes().replace(b"    if a.review or a.term:\n", b"    if a.review:\n"))

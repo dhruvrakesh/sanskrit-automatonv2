@@ -67,6 +67,7 @@ T2_SHARE = 10.0          # % of a judged sample wrong: translate again what it m
 KEPT_ALL = 97.0          # % of the English kept: redeemed
 KEPT_MOST = 50.0         # % of the English kept: mostly redeemed (below it: translated again, or a source first)
 FLASH_DEFAULT, PRO_DEFAULT = 0.00048, 0.00099   # $ a passage, measured on 13 Oct; usage_log decides
+METERED_SINCE = "2026-10-15"   # READY_PRICE_2026_10_16: = scholar_translate.METERED_SINCE (COST_TRUTH_2026_10_15)
 VERDICTS = (
     ("redeemed", "Redeemed", "kept as it is: 97% or more made from a clean reading, and the judge marks less than 10% "
                              "of what it read"),
@@ -105,21 +106,31 @@ def price(engine: str, tin, tout, recorded) -> float:
 
 
 def spend_by_doc(con) -> tuple:
-    """({doc: $ of its translation calls}, $ a passage on flash, $ a passage on pro), from usage_log."""
+    """({doc: $ of its translation calls}, $ a passage on flash, $ a passage on pro), from usage_log.
+    READY_PRICE_2026_10_16: a passage's price is measured on the rows since METERED_SINCE (the thinking counted) when
+    there are enough of them (flash 100 passages, pro 50), else on all the rows as before; since METERED_SINCE only
+    Gemini's flash rows price flash, and its pro rows pro (a Claude engine's rows price neither)."""
     by, flash, pro = {}, [0.0, 0], [0.0, 0]
+    flash_now, pro_now = [0.0, 0], [0.0, 0]
     try:
-        rows = con.execute("SELECT doc, engine, in_tokens, out_tokens, cost_usd, passages FROM usage_log "
+        rows = con.execute("SELECT doc, engine, in_tokens, out_tokens, cost_usd, passages, ts FROM usage_log "
                            "WHERE kind='translation'").fetchall()
     except sqlite3.Error:
         return by, FLASH_DEFAULT, PRO_DEFAULT
-    for doc, eng, tin, tout, cost, n in rows:
+    for doc, eng, tin, tout, cost, n, ts in rows:
         x = price(eng, tin, tout, cost)
         by[doc] = by.get(doc, 0.0) + x
         acc = pro if "pro" in (eng or "") else flash
         acc[0] += x
         acc[1] += max(0, n or 0)
-    f = (flash[0] / flash[1]) if flash[1] >= 100 else FLASH_DEFAULT
-    p = (pro[0] / pro[1]) if pro[1] >= 50 else PRO_DEFAULT
+        e = (eng or "").lower()   # READY_PRICE_2026_10_16: the rows since the thinking is counted, Gemini's only
+        if str(ts or "") >= METERED_SINCE and "gemini" in e and ("pro" in e or "flash" in e):
+            now_ = pro_now if "pro" in e else flash_now
+            now_[0] += x
+            now_[1] += max(0, n or 0)
+    f = (flash_now[0] / flash_now[1]) if flash_now[1] >= 100 else (
+        (flash[0] / flash[1]) if flash[1] >= 100 else FLASH_DEFAULT)
+    p = (pro_now[0] / pro_now[1]) if pro_now[1] >= 50 else ((pro[0] / pro[1]) if pro[1] >= 50 else PRO_DEFAULT)
     return by, round(f, 6), round(p, 6)
 
 

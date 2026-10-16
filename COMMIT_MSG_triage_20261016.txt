@@ -1,0 +1,23 @@
+The verses that did not pass, sorted for a person and read again by another model (TRIAGE_2026_10_16); a person's text_type for a page (MARK_PASSAGES_2026_10_16); what gemini-2.5-flash's thinking costs, measured (THINKING_PROBE_2026_10_16); recorded (DOCS62_2026_10_16)
+
+docs/TRIAGE_2026-10-16.md. The Hayasirsa Pancaratra (1,418 verses: 1,176 passed, 220 flagged, 22 source doubts) and
+the Karanagama (1,018: 867, 147, 4) were done on claude-sonnet-5-5 on 15 Oct. The credit: $80.51 left. Gemini on
+15 Oct, by the ledger: $19.54, the thinking most of it (the flash judge $0.00274 a call; the Rs 80 estimated for it
+on 15 Oct did not count the thinking). The Tantrik Texts vol. I: pages 19-74 the index, 75-156 the verse texts (849),
+157-210 the code tables (403); page 18's two passages are a vision OCR's invention (the opening of the Mahabharata
+on a faded title page).
+- scripts/patch_triage_2026_10_16.py (scholar_translate.py): triage_of (rejected, source, serious, mild); --triage
+  (exports/scholar_triage_<doc>.csv, UTF-8 with a BOM; free, read-only); --only-flagged ENGINE [--serious] (another
+  engine reads again only what ENGINE did not pass; a verse read again since is left; the context every engine's);
+  --status counts the tiers; the re-judge prices a judge call as measured (judge_price; else $0.0027).
+- scripts/mark_passages.py: a person's text_type (noise, frontmatter) for the passages of some pages; a dry run by
+  default; --apply logs the old type (data/mark_passages_log.jsonl); --undo puts it back; only text_type changes.
+- scripts/gemini_thinking_probe.py: the judge on N verses with gemini-2.5-flash's thinking and with thinkingBudget 0
+  (the REST API; the key in a header), metered (kind probe), gated by the spend cap: both costs and how far the
+  scores agree; whether the installed SDK can carry a thinking budget. A dry run by default.
+Tests: tests/test_triage_2026_10_16.py (6), tests/test_mark_probe_2026_10_16.py (5); test_rejudge_2026_10_15 (its
+replay chain ends at the .bak_triage_ copy; the re-judge priced as measured) follows.
+Docs: scripts/patch_docs62_2026_10_16.py (PLATFORM 65, RUNBOOK, EP 52).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

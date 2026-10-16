@@ -53,7 +53,9 @@ class TheRedeemFix(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            self.assertEqual((t / "scripts" / "redeem.py").read_bytes(), (SCRIPTS / "redeem.py").read_bytes())
+            later = sorted(SCRIPTS.glob("redeem.py.bak_readyprice_*"))   # READY_PRICE_2026_10_16 came after
+            self.assertEqual((t / "scripts" / "redeem.py").read_bytes(),
+                             (later[0] if later else SCRIPTS / "redeem.py").read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             p = t / "scripts" / "redeem.py"
             shutil.copy2(baks[0], p)

@@ -2030,3 +2030,29 @@ on disk.
 - **Rows a Claude judge read:** `--engine anthropic:claude-sonnet-5-5 --rejudge` (a dry run: counted, free), then with
   `--limit 2000 --yes`. Run it when the windows of that text are stopped or done, or let it leave the verses they
   redo alone.
+
+
+## The verses that did not pass (DOCS62_2026_10_16)
+
+1. `--engine anthropic:claude-sonnet-5-5 --rejudge --limit 2000` (a dry run), then with `--yes`: the verses a Claude
+   judge read get the Gemini judge's reading.
+2. `--engine anthropic:claude-sonnet-5-5 --triage` (free): exports\scholar_triage_<doc>.csv; rejected, source,
+   serious, mild.
+3. `--engine anthropic:claude-opus-5-5 --only-flagged anthropic:claude-sonnet-5-5 --serious --compare-engine
+   anthropic:claude-sonnet-5-5 --audit-every 1`: another model reads the serious again (a dry run first).
+4. A person reads (`--report`), and marks what was read (`--review ... --verdict accept|reject --by ...`).
+
+## A page whose reading is not what it prints (DOCS62_2026_10_16)
+
+- `python scripts\mark_passages.py --doc <doc> --pages <n> --type noise --reason "..."` (a dry run), then
+  `--apply`; `--undo --apply` puts it back. Only text_type changes; the log is data\mark_passages_log.jsonl.
+
+
+## The scholarly English in the Library (DOCS63_2026_10_16)
+
+- The Library's cards: "SC n" is the scholarly English (scholar_translations); "EN n/N" is the working English, the
+  one the site shows. The reader shows both, the scholarly above. Read-only; restart the dashboard (when no job runs)
+  after the patch.
+- After READY_PRICE_2026_10_16: `python scripts\redeem.py` (free) writes the Library's estimates at the measured price.
+- Do not press Finish EN or Add Hindi on a bilingual edition (the Karanagama) until H1 is decided: the working English
+  would translate the editor's Hindi.

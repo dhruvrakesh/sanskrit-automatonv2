@@ -1,0 +1,32 @@
+The Library and the reader show the scholarly English (LIBRARY_SCHOLAR_2026_10_16); a vision OCR's footnote mark is not debris, and the working English is priced as measured (READY_PRICE_2026_10_16); the verses not passed sorted for a person and read again by another model (TRIAGE_2026_10_16); a person's text_type for a page (MARK_PASSAGES_2026_10_16); what gemini-2.5-flash's thinking costs (THINKING_PROBE_2026_10_16); recorded (DOCS62_2026_10_16, DOCS63_2026_10_16)
+
+docs/LIBRARY_SCHOLAR_2026-10-16.md and docs/TRIAGE_2026-10-16.md. This one commit carries the TRIAGE package of 16 Oct
+too (COMMIT_MSG_triage_20261016.txt, not released on its own).
+
+- scripts/patch_library_scholar_2026_10_16.py (dashboard.py): the Library's cards count the scholarly English beside
+  the working English ("SC n"; a line with passed, flagged, source doubts and the links); a text with only scholarly
+  English is listed; the header counts it (2,460 verses); the reader shows a verse's scholarly English above its
+  working English, with its status and a link to its checks. Read-only.
+- scripts/patch_ready_price_2026_10_16.py: scholar_translate's readiness does not take <sup>n</sup> for debris (15
+  verses of the Hayasirsa); redeem.py prices a passage of working English on the rows since 15 Oct ($0.00247 on
+  flash), when there are enough, else as before.
+- scripts/patch_triage_2026_10_16.py (scholar_translate.py): triage_of (rejected, source, serious, mild); --triage
+  (a CSV, free); --only-flagged ENGINE [--serious]; --status counts the tiers; the re-judge priced as measured.
+- scripts/mark_passages.py: a person's text_type (noise, frontmatter) for some pages; a dry run by default; logged;
+  --undo.
+- scripts/gemini_thinking_probe.py: the judge with and without gemini-2.5-flash's thinking, metered, gated; a dry run
+  by default.
+- Found: the two Agamas are done for their verse but for 17 + 10 verses; 159 of the Karanagama's 368 passages of
+  working English were made from the edition's own Hindi (H1, a person decides); the flash judge cannot tell the
+  scholarly English from the working English, the blind pairwise judge favours the scholarly (23 to 5 on 37), so the
+  gain is measured next (BM1-BM4, Mitrasamgraha the external benchmark).
+- A correction: a working-English call cost $0.00247 on 15 Oct, not $0.0052 (docs/TRIAGE_2026-10-16.md, the probe's
+  docstring).
+Tests: tests/test_library_scholar_2026_10_16.py (6), tests/test_ready_price_2026_10_16.py (5),
+tests/test_triage_2026_10_16.py (6), tests/test_mark_probe_2026_10_16.py (5); the replay chains of
+test_cost_truth_2026_10_15, test_rejudge_2026_10_15, test_triage_2026_10_16 and test_provisional_2026_10_14 follow.
+Docs: scripts/patch_docs62_2026_10_16.py (PLATFORM 65, RUNBOOK, EP 52), scripts/patch_docs63_2026_10_16.py
+(PLATFORM 66, RUNBOOK, EP 53).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
