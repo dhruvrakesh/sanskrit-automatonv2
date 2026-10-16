@@ -909,3 +909,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | BM1 | Mitrasamgraha, 200 verses, three arms | scholar and sonnet1 done; flash 150 of 200; the judge and the full report to run |
 | BM3 | The blind side-by-side of the arms by judges of both families | After BM1's judge |
 | BM2 | Our own gold set, read by a person | A person's time |
+
+
+## Addendum 2026-10-16 (57) (DOCS67_2026_10_16)
+
+| # | Item | State |
+|---|---|---|
+| BM1 | Mitrasamgraha, 200 verses, three arms, chrF and judge-v1 | Done (2 judgements to read again); results in docs/BM1_RESULTS_2026-10-16.md |
+| BM3 | The blind side-by-side, duel-v1 judges of both families (BENCH_DUEL_2026_10_16) | Built and tested; the pilot to run (about $4.5) |
+| BM2 | A person's blind reading of the same units | Its page on the dashboard, next |
+| TW1 | Srangam's tests: the waits set once (TEST_WAIT_2026_10_16) | Built and tested |
+| J2 | A judge told the emendations, the thinking off | After the baseline, as agreed |

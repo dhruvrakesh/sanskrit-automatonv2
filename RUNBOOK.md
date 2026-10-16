@@ -2086,3 +2086,14 @@ on disk.
    a third more); its last lines show below the buttons; the page reads BM1 again when it ends.
 3. Make the report again (free), then "The full report" (served on this computer only).
 4. The same steps by hand: docs/BENCH_MITRA_2026-10-16.md, section 6.
+
+
+## BM3, the blind side-by-side (DOCS67_2026_10_16)
+
+1. BM1 complete (the Benchmarks page says Done), then BM3's section: Next names the part to read and its price.
+2. The pilot (40 units, both judges, the published English among the translations): the button, or
+   `python scripts\bench_duel.py --units 40 --with-reference --yes --max-usd 6.00`.
+3. Make the report again (free); read each judge apart, then where both agree.
+4. More units: the button reads 40 more a press, when the spend cap can hold its Google part
+   (`python scripts\set_budget.py` shows the cap).
+5. A run stopped half way: `python scripts\bench_duel.py --settle` (free).

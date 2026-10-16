@@ -1,0 +1,14 @@
+The tests wait as a busy computer needs: findBy* and waitFor 5 s, a test 20 s (TEST_WAIT_2026_10_16)
+
+On 16 Oct the suite was run while the automaton's benchmark ran: six tests failed in one run (reader-nav and
+texts-reader at Vitest's 5 s, a link not yet shown), one other in the next (corner-mail: the Settings checkbox not found
+within Testing Library's 1 s), the jsdom environment taking 527 s over 41 files. The failures moved between runs and
+none was in the code the ornament release changed.
+- src/test/setup.ts: configure({ asyncUtilTimeout: 5000 }) from @testing-library/react;
+- vitest.config.ts: testTimeout 20000;
+- src/__tests__/test-wait.test.ts: new, the two settings asserted (2 tests);
+- docs/RELIABILITY_AUDIT.md: Phase AJ (invariant 57).
+A wrong test still fails, a few seconds later. Nothing the site builds or serves changes.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

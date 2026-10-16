@@ -81,6 +81,12 @@ The dataset is for **private evaluation** here: never trained on, never publishe
   marks a unit whose published English fits the arms' English better at a neighbouring line (by 10 chrF points or
   more, on the average of the arms: the same test for every arm), counts them, and gives a scope without them
   ("aligned"). The judge, which reads the Sanskrit alone, is not touched by it.
+  *Measured on the full run (BENCH_DUEL_2026_10_16):* the test marks none of the 200. The Satapatha's pairs drift
+  rather than shift one for one: line 156's published English renders lines 155 and 156 together, and line 155's
+  seems to close the sentence before; a neighbour's English, longer, does not fit better by 10 points (chrF weighs
+  recall). So that text's chrF is lower for every arm alike, and the paired differences stand. Scored over each
+  text's whole window (its lines joined, so that a boundary does not count), chrF orders the arms as before
+  (docs/BM1_RESULTS_2026-10-16.md).
 - **The Rgveda's Sanskrit is the dataset's word-split form**, with its own slips ("suvrkt i bhih" for suvrktibhih)
   and its own spellings (the particle u before iti written "om iti", which the transliterator writes as the sign
   om). It is given to every arm as the dataset has it: BM1 measures our pipeline on the dataset's Sanskrit, not a

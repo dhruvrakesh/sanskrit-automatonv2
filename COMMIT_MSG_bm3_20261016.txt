@@ -1,0 +1,24 @@
+BM3, the blind side-by-side of BM1's English, built and on the dashboard (BENCH_DUEL_2026_10_16); BM1's results recorded; Srangam's test waits (TEST_WAIT_2026_10_16, its patcher); (DOCS67_2026_10_16)
+
+docs/BENCH_DUEL_2026-10-16.md, docs/BM1_RESULTS_2026-10-16.md.
+- scripts/bench_duel.py (new): BM1's 190 units, the three arms' English and (--with-reference) the published English
+  side by side, blind, shuffled for each unit and judge, read by scholar_duel.py's duel-v1 judges unchanged
+  (gemini-2.5-pro, Claude Opus 5.5: the Debroy register); a fixed balanced order of reading (any part read is a random
+  part; --units N); a reading never bought twice. Its own ledger copy (bm3\db\D.db), checked before each call against
+  the Claude credit, the spend cap and --max-usd, settled every 10 calls into data/context.db as kind bench_duel, doc
+  BM3:<text>. The report: per judge the pairs' shares (ties a half, by verses) with bootstrap intervals, fidelity,
+  prose, notes, errors per ten verses, first places, the order's effect; both judges' agreement, consensus and splits
+  by family. BM3_summary.json holds numbers only; the report and the folder stay outside every repository.
+- scripts/patch_bench_duel_desk_2026_10_16.py: the Benchmarks page's BM3 section (what each judge has read, the
+  price, the next part as a capped button, withheld when the spend cap cannot hold its Google part; the last report),
+  /api/bench steps duel, duel_report, duel_settle (a job of kind bench3, doc BM3), /benchmarks/bm3/report (private,
+  127.0.0.1); the page's script writes to the section pressed; on a phone the sections scroll; the Usage tab names
+  bench_duel; docs/BENCH_MITRA_2026-10-16.md: the misalignment test as the full run measured it (none marked; the
+  Satapatha's pairs drift).
+- scripts/patch_srangam_testwait_2026_10_16.py (for Srangam): findBy*/waitFor 5 s, a test 20 s, asserted.
+Tests: tests/test_bench_duel_2026_10_16.py (7), tests/test_bench_duel_desk_2026_10_16.py (8); the replay chain of
+test_bench_desk_2026_10_16 follows (.bak_benchduel_).
+Docs: scripts/patch_docs67_2026_10_16.py (PLATFORM 70, RUNBOOK, EP 57).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

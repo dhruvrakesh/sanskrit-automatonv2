@@ -1326,7 +1326,8 @@ function creditHtml(c) {
 var KIND_LABEL = {translation: 'working English', translate_hi: 'Hindi', scholar: 'scholarly English', judge: 'the judge',
                   entities: 'names (entities)', ocr_vision: 'vision OCR', ocr: 'OCR', embedding: 'vectors', probe: 'probes',
                   ask: 'Ask the Corpus', image: 'pictures', story: 'stories',
-                  bench_translation: 'BM1: one pass', bench_scholar: 'BM1: scholarly', bench_judge: 'BM1: the judge'};
+                  bench_translation: 'BM1: one pass', bench_scholar: 'BM1: scholarly', bench_judge: 'BM1: the judge',
+                  bench_duel: 'BM3: the side-by-side'};   // BENCH_DUEL_2026_10_16
 function kindLabel(k) { return KIND_LABEL[k] || k || ''; }
 function engineShort(e) { return String(e || '').replace(/^anthropic:claude-/, '').replace(/^gemini(-vision|-image)?:gemini-/, 'gemini ').replace(/^models\//, ''); }
 function bm1UsageHtml(b) {
