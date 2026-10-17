@@ -133,3 +133,19 @@ The desk that carries this SOP on the dashboard: docs/TRANSLATION_DESK_2026-10-1
 ## 9. What this SOP does not decide
 
 Tier R; S4's design; raising either cap; the order of the source-first queue; the Karanagama's path. Each is yours.
+
+
+## Addendum (17 Oct, evening): BM2's first reading (DOCS70_2026_10_17)
+
+docs/BM2_FIRST_READING_2026-10-17.md. A person read 24 units blind: Sonnet in one pass was the best in 50% (by verses),
+flash 19%, the published English 19%, the scholarly English read without its notes 8%.
+- **Tier R is recommended** for the working English, a job at a time (the engine `anthropic:claude-sonnet-5-5` given to
+  the job; `MT_ENGINE` unchanged): the reader, both judges of BM3 and BM1's chrF agree, at flash's price. Your
+  decision; I am Claude, and the arm is Claude's.
+- **Tier S is read with its notes.** Its English without them is the reader's least preferred: it puts its
+  explanations in the notes. The scholarly edition (SCHOLAR_EDITION_2026_10_17) prints them; a short gloss inline is
+  one variable to measure before it is changed.
+- **The judges are a screen, not a verdict:** their best was this reader's at or near chance.
+- **"Done" is not "correct":** a flash verse of the Markandeya Purana with an invented gloss passed with a QA of 1.0;
+  the Ganita Yukti Bhasa, "complete" in the register, is a Tesseract reading with 474 [ILLEGIBLE] passages in its
+  English. A book is made from a clean reading (the gate, section 1) and read by a person (section 5).

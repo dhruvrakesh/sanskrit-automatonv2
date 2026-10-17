@@ -391,6 +391,9 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
     if include_hi: langs.append(hi_label)
     if include_san and not (include_en or include_hi): langs.append("Sanskrit")
     subtitle = " / ".join(langs) + (" edition" if langs else "")
+    if prov.get("scholar") is not None:   # SCHOLAR_EDITION_2026_10_17
+        subtitle = "The scholarly English" + (", with the Sanskrit" if include_san else "") + (
+            " and the working " + hi_label if include_hi else "")
     out.append("<div class='titlepage'>")
     out.append(f"<h1>{html.escape(disp_title)}</h1>")
     if subtitle.strip(): out.append(f"<div class='subtitle'>{html.escape(subtitle)}</div>")
@@ -399,7 +402,8 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
     if prov.get("category"): pv.append(f"<b>Category:</b> {html.escape(str(prov['category']))}")
     en, loc = prov.get("en") or {}, prov.get("loc") or {}
     if include_en and en.get("count"):
-        pv.append(f"<b>English:</b> {en['count']} verses"
+        pv.append(("<b>Working English:</b> " if prov.get("scholar") is not None else "<b>English:</b> ")   # SCHOLAR_EDITION_2026_10_17
+                  + f"{en['count']} verses"
                   + (f", engine {html.escape(str(en.get('engine')))}" if en.get('engine') else "")
                   + (f", prompt {html.escape(str(en.get('prompt')))}" if en.get('prompt') else "")
                   + (f", mean QA {en.get('qa')}" if en.get('qa') is not None else ""))
@@ -408,8 +412,11 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                   + (f", engine {html.escape(str(loc.get('engine')))}" if loc.get('engine') else "")
                   + (f", prompt {html.escape(str(loc.get('prompt')))}" if loc.get('prompt') else "")
                   + (f", mean QA {loc.get('qa')}" if loc.get('qa') is not None else ""))
+    if prov.get("scholar") is not None:   # SCHOLAR_EDITION_2026_10_17
+        pv.append(_sch_prov(prov["scholar"]))
     if pv:
         out.append("<div class='prov'>" + "<br/>".join(pv) + "</div>")
+    _meth_at = len(out)   # SCHOLAR_EDITION_2026_10_17: the methodology's place, for the scholarly edition's own
     out.append("<div class='methodology'>Machine translation produced by the Sanskrit "
                "Automaton pipeline (context-aware, verse-by-verse) in the tradition of "
                "Bibek Debroy's critical-edition renderings. Italicized words are "
@@ -418,6 +425,8 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                "(e.g. 1.1.0 is the benedictory maṅgala verse; star-passages excluded by "
                "the critical edition are omitted). A scholar's reading edition, not a "
                "substitute for the critical text.</div>")
+    if prov.get("scholar") is not None:   # SCHOLAR_EDITION_2026_10_17
+        out[_meth_at] = _sch_meth(prov["scholar"])
     out.append("</div>")
 
     # EXPORT_EMPTY_2026_10_07: a section whose rows all have nothing to show in the chosen languages
@@ -464,6 +473,8 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
             vref = r.get("vref")
             vlabel = html.escape(str(vref)) if vref not in (None,"","None") else ""
             def _en_html():
+                if r.get("sch") is not None:   # SCHOLAR_EDITION_2026_10_17
+                    return _sch_en_html(en, r["sch"], fn_counter, fn_notes, want_footnotes)
                 base = _inline_format(html.escape(en))
                 return _extract_footnotes(base, fn_counter, fn_notes) if want_footnotes else base
             def _hi_html():
@@ -684,12 +695,171 @@ def _with_fig_css(doc_html, on):
     return doc_html.replace("</style>", _FIG_CSS + "</style>", 1) if on else doc_html
 
 
+# --- SCHOLAR_EDITION_2026_10_17: the scholarly English as an edition ----------
+# Asked on 17 Oct for "authoritative and scholarly books from our corpus in our good html format like ganita
+# yuktibhasa": this exporter's edition (the Sanskrit, its IAST, the English, the notes at each chapter's end), with
+# the scholarly English (scripts/scholar_translate.py) in place of the working English. Per verse: its latest row
+# (as /scholar/<doc>/prose reads it), kept only while the Sanskrit it was made from is the Sanskrit here (its
+# src_hash); a sentence made over several verses stands once, after its verse range, the verses after it saying so;
+# its notes become the chapter's numbered notes, its doubts about the reading too. A verse a person rejected, or with
+# no current scholarly English, shows the working English, marked as such. A verse flagged by the judge or doubted
+# for its reading, and not yet accepted by a person, carries a dagger. Read only: nothing is written but the file.
+
+_SCH_CSS = (".sch-flag { color: #a0522d; font-size: .8em; margin-left: .15em; cursor: help; }"
+            ".sch-rng { font-size: .72rem; color: var(--muted); font-family: 'JetBrains Mono',ui-monospace,monospace; "
+            "margin-right: .35em; }"
+            ".sch-wk { color: #555; }"
+            ".sch-wk::before { content: 'working English, a draft: '; font-size: .72rem; color: var(--muted); "
+            "font-style: italic; }"
+            ".sch-with { color: var(--muted); font-style: italic; font-size: .85rem; }")
+
+
+def _sch_meth(stats: dict) -> str:
+    """The title page's methodology, for the scholarly edition."""
+    return ("<div class='methodology'>The scholarly English of the Sanskrit Automaton (scholar_translate.py): each "
+            "verse translated afresh from the Sanskrit given here, in the register of an unabridged translation made "
+            "from a critical edition, with the verses around it and a glossary kept across the text; at most three "
+            "notes a verse, at the end of each chapter, with the translator's doubts about the reading. A critic "
+            "reads each draft, which is revised where it finds a fault; a judge reads every verse; the models are "
+            "named above. A verse marked &#8224; was flagged by the judge or doubted for its reading and has not yet "
+            "been read by a person. Square brackets hold a word the Sanskrit implies; italics, an untranslated term. "
+            "A verse with no current scholarly English shows the working English (one pass), marked as a draft. A "
+            "machine translation, to be read beside the Sanskrit and checked by a person: not a substitute for the "
+            "critical text.</div>")
+
+
+def _sch_prov(stats: dict) -> str:
+    """The title page's line on the scholarly English."""
+    if not stats.get("verses"):
+        return ("<b>Scholarly English:</b> none current for this text%s; every verse shows the working English."
+                % ((" (%d rejected by a person)" % stats["rejected"]) if stats.get("rejected") else " yet"))
+    eng = ", ".join("%s (%d)" % (html.escape(str(k)), v) for k, v in sorted(stats["engines"].items(), key=lambda kv: -kv[1]))
+    jud = ", ".join(html.escape(str(k)) for k in sorted(stats["judges"]))
+    pv = ", ".join(html.escape(str(k)) for k in sorted(stats["prompts"]))
+    return ("<b>Scholarly English:</b> %d of %d verses (passed %d, flagged %d, doubted for the reading %d; accepted by a "
+            "person %d, rejected %d%s); made by %s; judged by %s; prompt %s.%s"
+            % (stats["verses"], stats["shown"], stats["passed"], stats["flagged"], stats["doubt"], stats["accepted"],
+               stats["rejected"], ("; %d left out, their Sanskrit changed since" % stats["stale"]) if stats["stale"] else "",
+               eng or "-", jud or "-", pv or "-",
+               (" The working English stands for %d other verse(s), marked." % stats["working"]) if stats["working"] else ""))
+
+
+def _scholar_recs(con, doc, recs):
+    """(recs, stats): each record's English replaced by its scholarly English where there is a current one."""
+    import scholar_translate as ST
+    stats = {"verses": 0, "shown": len(recs), "passed": 0, "flagged": 0, "doubt": 0, "accepted": 0, "rejected": 0,
+             "stale": 0, "working": 0, "engines": {}, "judges": set(), "prompts": set()}
+    if not doc or "scholar_translations" not in _tables(con):
+        for r in recs:
+            r["sch"] = {"working": True}
+        stats["working"] = len(recs)
+        return recs, stats
+    ptext, pkey = {}, {}
+    for pid, pg, ix, tx in con.execute("SELECT p.id, p.page_no, p.idx, p.text FROM passages p JOIN docs d ON d.id = p.doc_id "
+                                       "WHERE d.code = ?", (doc,)):
+        ptext[pid] = tx
+        try:
+            pkey[(int(pg), int(ix))] = pid
+        except (TypeError, ValueError):
+            pkey[(pg, ix)] = pid
+    cur = con.execute("SELECT * FROM scholar_translations WHERE doc_code = ? AND id IN (SELECT MAX(id) FROM "
+                      "scholar_translations WHERE doc_code = ? GROUP BY passage_id) ORDER BY page_no, idx, id", (doc, doc))
+    names = [d_[0] for d_ in cur.description]
+    rows = [dict(zip(names, tuple(x))) for x in cur.fetchall()]
+    live = []
+    for r in rows:
+        t = ptext.get(r.get("passage_id"))
+        if t is not None and ST.src_hash(t) == r.get("src_hash"):
+            live.append(r)
+        else:
+            stats["stale"] += 1
+    by_pid = {}
+    for u in ST._units(live):
+        r0 = u[0]
+        notes = [n for n in ST._loads(r0.get("notes"), []) if isinstance(n, dict)]
+        doubt = str(r0.get("doubts") or "").strip()
+        flag = r0.get("status") in ("flagged", "source_doubt") and r0.get("review_verdict") != "accept"
+        inline = ST._inline(u)
+        rng = ST._range(u) if len(u) > 1 else ""
+        for k, r in enumerate(u):
+            meta = {"status": r0.get("status"), "flag": flag, "rejected": r0.get("review_verdict") == "reject",
+                    "accepted": r.get("review_verdict") == "accept", "engine": str(r.get("engine") or "?"),
+                    "judge": str(r.get("judge_engine") or ""), "prompt": str(r.get("prompt_version") or "")}
+            if inline:
+                meta.update(text=r.get("translation") or "", notes=notes if k == 0 else [], doubts=doubt if k == 0 else "")
+            elif k == 0:
+                meta.update(text=r0.get("group_translation") or r0.get("translation") or "", notes=notes, doubts=doubt,
+                            range=rng)
+            else:
+                meta.update({"with": rng})
+            by_pid[r["passage_id"]] = meta
+    for rec in recs:
+        try:
+            pid = pkey.get((int(rec["page"]), int(rec["idx"])))
+        except (TypeError, ValueError):
+            pid = pkey.get((rec["page"], rec["idx"]))
+        s = by_pid.get(pid)
+        if s is not None and s.get("rejected"):
+            stats["rejected"] += 1
+            s = None
+        if s is None or (not s.get("with") and not (s.get("text") or "").strip()):
+            rec["sch"] = {"working": True}
+            if (rec.get("en") or "").strip():
+                stats["working"] += 1
+            continue
+        rec["sch"] = s
+        rec["en"] = ("with " + s["with"]) if s.get("with") else re.sub(r"\s*//\s*", " ", s["text"]).strip()
+        stats["verses"] += 1
+        stats["passed"] += 1 if s["status"] == "passed" else 0
+        stats["flagged"] += 1 if s["status"] == "flagged" else 0
+        stats["doubt"] += 1 if s["status"] == "source_doubt" else 0
+        stats["accepted"] += 1 if s["accepted"] else 0
+        stats["engines"][s["engine"]] = stats["engines"].get(s["engine"], 0) + 1
+        if s["judge"]:
+            stats["judges"].add(s["judge"])
+        if s["prompt"]:
+            stats["prompts"].add(s["prompt"])
+    return recs, stats
+
+
+def _sch_en_html(en, sch, counter, notes_out, want_footnotes=True):
+    """The scholarly English of a verse: italics for *terms*, each note's number after its anchor's first appearance,
+    the dagger of a verse not yet read by a person; the working English marked as a draft."""
+    if sch.get("working"):
+        base = _inline_format(html.escape(en))
+        base = _extract_footnotes(base, counter, notes_out) if want_footnotes else base
+        return "<span class='sch-wk'>%s</span>" % base
+    if sch.get("with"):
+        return "<span class='sch-with'>Its English is given with %s, above.</span>" % html.escape(sch["with"])
+    s = _inline_format(html.escape(en))
+    if want_footnotes:
+        for n in sch.get("notes") or []:
+            counter[0] += 1
+            k = counter[0]
+            notes_out.append((k, "%s: %s" % (str(n.get("anchor") or "").strip(), str(n.get("note") or "").strip())))
+            mark = "<sup class='fn-ref' id='fnr-%d'><a href='#fn-%d'>%d</a></sup>" % (k, k, k)
+            a = html.escape(str(n.get("anchor") or "").strip())
+            pos = s.find(a) if a else -1
+            s = (s[:pos + len(a)] + mark + s[pos + len(a):]) if pos >= 0 else s + mark
+        if sch.get("doubts"):
+            counter[0] += 1
+            k = counter[0]
+            notes_out.append((k, "The reading: " + sch["doubts"]))
+            s += "<sup class='fn-ref' id='fnr-%d'><a href='#fn-%d'>%d</a></sup>" % (k, k, k)
+    if sch.get("range"):
+        s = "<span class='sch-rng'>%s</span>%s" % (html.escape(sch["range"]), s)
+    if sch.get("flag"):
+        s += ("<span class='sch-flag' title='%s: not yet read by a person'>&#8224;</span>"
+              % html.escape(str(sch.get("status") or "flagged").replace("_", " "), quote=True))
+    return s
+
+
 # --- export core -------------------------------------------------------------
 
 def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                 side_by_side, number_pages, drop_junk_en, force_san, force_en,
                 hi_lang=None, hi_label="Hindi", want_toc=True, want_footnotes=True, debug=False,
-                keep_frontmatter=False, images="none"):
+                keep_frontmatter=False, images="none", scholar=False):   # SCHOLAR_EDITION_2026_10_17: scholar
     title = _display_title(title, doc)   # EXPORT_EMPTY_2026_10_07
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
     figs = _load_figures(con, doc) if images == "approved" else {}   # EXPORT_IMAGES_2026_10_04
@@ -699,6 +869,8 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
     recs = _fetch(con, doc, lo, hi, san_col, en_col, hi_lang=hi_lang,
                   keep_frontmatter=keep_frontmatter)
     prov = _provenance(con, doc, hi_lang)
+    if scholar:   # SCHOLAR_EDITION_2026_10_17: the scholarly English in place of the working English
+        recs, prov["scholar"] = _scholar_recs(con, doc, recs)
     body, kept = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                          include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                          number_pages=number_pages, drop_junk_en=drop_junk_en,
@@ -712,6 +884,8 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                          figures=_fig_copy(figs) if figs else None)
     os.makedirs(dest, exist_ok=True)
     suffix = f"_{hi_lang}" if (include_hi and not include_en) else ("_tri" if include_hi else "")
+    if scholar:   # SCHOLAR_EDITION_2026_10_17: never overwrite the working edition
+        suffix += "_scholar"
     if images == "approved":   # EXPORT_IMAGES_2026_10_04: never overwrite the plain edition
         suffix += "_img"
     out_path = os.path.join(dest, f"{_safe_filename(doc or 'export')}_{lo}-{hi}{suffix}.html")
@@ -719,7 +893,10 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
     with open(out_path, "w", encoding="utf-8") as f:
         if cover:   # COVERS_2026_10_04
             body = body.replace("<div class='titlepage'>", "<div class='titlepage'>" + cover, 1)
-        f.write(_with_fig_css(_html(title or (doc or "Export"), body, lang_attr=lang_attr), bool(figs) or bool(cover)))
+        _doc_html = _with_fig_css(_html(title or (doc or "Export"), body, lang_attr=lang_attr), bool(figs) or bool(cover))
+        if scholar:   # SCHOLAR_EDITION_2026_10_17
+            _doc_html = _doc_html.replace("</style>", _SCH_CSS + "</style>", 1)
+        f.write(_doc_html)
     if images == "approved":   # EXPORT_IMAGES_2026_10_04
         _n_in = body.count("<figure class='plate'")
         print(f"[export] images: {_fig_total} approved, {_n_in} placed, "
@@ -772,6 +949,10 @@ def main():
     ap.add_argument("--images", choices=["none", "approved"], default="none",
                     help="EXPORT_IMAGES_2026_10_04: approved = place approved images from the "
                          "image library at their verses (file name gains _img).")
+    ap.add_argument("--scholar", action="store_true",
+                    help="SCHOLAR_EDITION_2026_10_17: the scholarly English (scholar_translate.py) with its notes in "
+                         "place of the working English, which stands, marked, where there is none (file name "
+                         "gains _scholar)")
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
 
@@ -801,7 +982,8 @@ def main():
                             number_pages=number_pages, drop_junk_en=drop_junk_en,
                             force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
                             hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
-                            keep_frontmatter=args.keep_frontmatter, images=args.images)
+                            keep_frontmatter=args.keep_frontmatter, images=args.images,
+                            scholar=args.scholar)   # SCHOLAR_EDITION_2026_10_17
         else:
             if args.doc:
                 lo,hi = (_page_span(con, args.doc) if (args.pg_from is None or args.pg_to is None) else (args.pg_from, args.pg_to))
@@ -814,7 +996,8 @@ def main():
                         number_pages=number_pages, drop_junk_en=drop_junk_en,
                         force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
                         hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
-                        keep_frontmatter=args.keep_frontmatter, images=args.images)
+                        keep_frontmatter=args.keep_frontmatter, images=args.images,
+                        scholar=args.scholar)   # SCHOLAR_EDITION_2026_10_17
 
 if __name__ == "__main__":
     main()

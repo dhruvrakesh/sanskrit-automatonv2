@@ -1,0 +1,25 @@
+The scholarly edition (SCHOLAR_EDITION_2026_10_17); the main page's buttons (BUTTONS_2026_10_17); the repair's next step (REPAIR_NEXT_2026_10_17); BM2 against the judges as the reader read (BENCH_GOLD_FAIR_2026_10_17); BM2's first reading recorded (DOCS70_2026_10_17)
+
+docs/BM2_FIRST_READING_2026-10-17.md, docs/EDITIONS_2026-10-17.md, docs/BUTTONS_2026-10-17.md.
+- scripts/patch_scholar_edition_2026_10_17.py: export_html.py --scholar, the scholarly English in the exporter's
+  edition (the Sanskrit, its IAST, the English side by side), its notes and doubts as each chapter's notes, a dagger
+  on what is flagged and not yet read by a person, the working English marked where there is none or a person
+  rejected it, a stale row left out, the file named _scholar; /api/export mode scholar; the desk's edition box and
+  /desk/<doc>/edition; Export As "The scholarly edition".
+- scripts/patch_buttons_2026_10_17.py: Translate All OCR'd retired (/api/pipeline/advance answers 410; the button
+  links to the desk); /api/ingest and /api/queue/run ask first (409) for a text with English, Full also the path's
+  question; the buttons ask and go on with force; Ingest All leaves and names the texts with English.
+- scripts/patch_repair_next_2026_10_17.py: repair_text.py's "nothing holds it" gives the path's next step for a
+  Tesseract reading with moderate or material debris and its scan here (the pages vision has not read, at the
+  measured price; the re-ingest of the changed pages), not "translate it".
+- scripts/patch_bench_gold_fair_2026_10_17.py: BM2's report also sets the reader beside BM3's check (the notes
+  withheld, as the reader reads): judges_as_read in the summary, the report, the command and the Benchmarks page.
+- BM2's first reading (24 units): Sonnet in one pass the reader's best in 50%, flash 19%, the published 19%, the
+  scholarly English without its notes 8%; the judges at or near chance. The SOP's addendum: Tier R recommended.
+Tests: tests/test_scholar_edition_2026_10_17.py (7), tests/test_buttons_2026_10_17.py (7),
+tests/test_repair_next_2026_10_17.py (5), tests/test_bench_gold_fair_2026_10_17.py (3); the replay chains of
+test_translation_desk_2026_10_17 and test_read_in_2026_10_13 follow (.bak_scholaredition_, .bak_repairnext_).
+Docs: scripts/patch_docs70_2026_10_17.py (PLATFORM 73, RUNBOOK, EP 60, the SOP's addendum).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -1195,6 +1195,39 @@ def api_ocr():
     return jsonify({"job": jid, "pages": len(missing), "manifest": str(manifest)})
 
 
+# BUTTONS_2026_10_17 -----------------------------------------------------------------------------------------------
+# The main page's buttons, read on 17 Oct against what they run (docs/BUTTONS_2026-10-17.md). Ingest (and Full, whose
+# second step is the same ingest) writes a text's pages into the database again: ingest_jsonl_fast.py updates each
+# passage in place by its page and its place on the page and keeps its English, so when the pages read differently
+# now (a repair, a new OCR) an English can stand beside a verse it was not made from. For a text that has English the
+# re-ingest of the changed pages (reingest_pages.py: the Repair page, the plan free) is the safe way; Ingest asks
+# first. Translate All OCR'd (advance_pipeline.py, 8 Sep) is retired: it re-ingested 22 texts named then from
+# Tesseract's pages, some since repaired, renamed or retired, and translated them with flash whatever their path.
+def _ingest_warning(doc: str, db: str):
+    """Why an ingest of doc asks first ({"say", "english", "passages", "mark"}), or None. Never raises."""
+    try:
+        p = pathlib.Path(db)
+        if not p.exists():
+            return None
+        con = sqlite3.connect(p.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+        try:
+            n, en = con.execute("SELECT COUNT(*), SUM(CASE WHEN TRIM(COALESCE(p.translation, '')) <> '' THEN 1 ELSE 0 "
+                                "END) FROM passages p JOIN docs d ON d.id = p.doc_id WHERE d.code = ?", (doc,)).fetchone()
+        finally:
+            con.close()
+    except Exception:
+        return None
+    n, en = int(n or 0), int(en or 0)
+    if not en:
+        return None
+    return {"passages": n, "english": en, "mark": "BUTTONS_2026_10_17",
+            "say": ("%s has %d passages, %d of them with English. Ingesting its pages again writes their reading over the "
+                    "passages in place and keeps each English where it stands: where the pages now read differently (a "
+                    "repair, a new OCR), an English can stand beside a verse it was not made from. The safe way is the "
+                    "re-ingest of the changed pages: the Repair page plans it, free (python scripts\\reingest_pages.py "
+                    "--doc %s)." % (doc, n, en, doc))}
+
+
 @app.post("/api/ingest")
 def api_ingest():
     data = request.get_json(force=True) or {}
@@ -1203,6 +1236,10 @@ def api_ingest():
         return jsonify({"error": "invalid or missing doc"}), 400
     db   = data.get("db")  or "data/context.db"
     raw  = data.get("raw") or "data/raw"
+    if not data.get("force"):   # BUTTONS_2026_10_17: a text with English: the re-ingest of the changed pages first
+        _w = _ingest_warning(doc, db)
+        if _w:
+            return jsonify(dict(_w, error=_w["say"], needs_force=True)), 409
     glob = str(pathlib.Path(raw) / f"{doc}_*.jsonl")
     cmd = py(script("ingest_jsonl_fast.py"), "--doc", doc, "--glob", glob, "--db", db)
     # Phase L1 (2026-08-29): classification is now an automatic pipeline stage,
@@ -2539,8 +2576,12 @@ def _bm2_html() -> str:
             rows += '<tr><td>%s</td><td>%s</td><td class="n">%d</td><td class="bmsmall">%s</td><td class="bmsmall">%s</td></tr>' % (
                 e(v.get("name") or k), e(p), pn["units"],
                 e("; ".join("%s %.0f%%" % (a, 100 * x) for a, x in (pn.get("best") or {}).items())),
-                e("; ".join("%s: same best %.2f (chance %.2f); caught %d of %d you marked wrong" % (
-                    _BM3_SHORT.get(j, j), d["same_best"], d["chance"], d["judge_caught"], d["wrong_marked"])
+                e("; ".join("%s: same best %.2f with the notes shown%s (chance %.2f); caught %d of %d you marked wrong" % (
+                    _BM3_SHORT.get(j, j), d["same_best"],
+                    (", %.2f with them withheld, as you read (%d units)" % (
+                        (pn.get("judges_as_read") or {})[j]["same_best"], (pn.get("judges_as_read") or {})[j]["units"]))
+                    if j in (pn.get("judges_as_read") or {}) else "",   # BENCH_GOLD_FAIR_2026_10_17
+                    d["chance"], d["judge_caught"], d["wrong_marked"])
                     for j, d in (pn.get("judges") or {}).items())))
     if rows:
         h.append('<h3 class="bmh3">The last report (%s)%s</h3>' % (e(s.get("summary_at") or ""), (
@@ -3065,6 +3106,16 @@ async function deskTranslate(doc, btn){
   var d = await r.json();
   document.getElementById('dkout').textContent = d.job ? 'Started: the main dashboard\'s job log follows it.' : ('Could not start: ' + (d.error || 'unknown'));
 }
+async function deskEdition(doc, btn){   /* SCHOLAR_EDITION_2026_10_17 */
+  var o = document.getElementById('dkedout'); btn.disabled = true; o.textContent = 'making the edition (free)...';
+  try{
+    var r = await fetch('/api/export', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({doc: doc, mode: 'scholar'})});
+    var d = await r.json();
+    if (!d.job){ o.textContent = 'Could not start: ' + (d.error || 'unknown'); btn.disabled = false; return; }
+    _dkWatch(d.job, function(j){ btn.disabled = false; var w = _dkLine(String(j.out || ''), '[export] ');
+      o.innerHTML = j.ok ? 'Made: ' + w.replace(/</g, '&lt;') + ' <a href="/desk/' + encodeURIComponent(doc) + '/edition" target="_blank">Open it</a>' : 'It did not finish: the History has why.'; }, null);
+  }catch(e){ o.textContent = 'Request failed: ' + e; btn.disabled = false; }
+}
 (function(){ var r = document.getElementById('dkrunning'); if (r && r.getAttribute('data-job')){ _dkWatch(r.getAttribute('data-job'), function(){ location.reload(); }, document.getElementById('dklog')); } })();
 </script>"""
 
@@ -3192,8 +3243,35 @@ def desk_text(doc):
              '(15 Oct; BM1 and BM3 measured them): %s. A plan is the dry run: what it would send, what it leaves out, '
              'and its price; nothing is called. The run asks first and stops at its cap.</p></div>' % (
                  e(sc_line), ctl, e(" ".join(td.SCHOLAR_SOP))))
+    if sc.get("verses"):   # SCHOLAR_EDITION_2026_10_17: the edition, in the exporter's own format
+        h.append('<div class="box"><h3>The edition (HTML)</h3><p class="small">The Sanskrit, its IAST and the '
+                 'scholarly English side by side, its notes and doubts at the end of each chapter, a dagger on what '
+                 'is flagged and not yet read by a person; where there is no current scholarly English, the working '
+                 'English, marked as a draft. Free: nothing is called. The file: exports\\%s_<pages>_scholar.html.</p>'
+                 '<div class="row"><button class="btn go dkbtn" onclick="deskEdition(\'%s\', this)">Make the '
+                 'edition (free)</button> <a href="/desk/%s/edition" target="_blank">Open the newest</a></div>'
+                 '<div class="out" id="dkedout"></div></div>' % (e(r["doc"]), e(r["doc"], quote=True),
+                                                                 e(r["doc"], quote=True)))
     h.append("</main>" + _DESK_JS + "</body></html>")
     return Response("".join(h), mimetype="text/html")
+
+
+@app.get("/desk/<doc>/edition")
+def desk_edition(doc):
+    """SCHOLAR_EDITION_2026_10_17: the newest scholarly edition of a text (exports/<doc>_<pages>[_tri]_scholar.html, made
+    by the desk's "Make the edition" or Export As: the scholarly edition), served as it is. Read only."""
+    import export_html as _ex
+    d = _validate_doc(doc)
+    if not d:
+        return Response("invalid doc", status=400, mimetype="text/plain")
+    out = ROOT / "exports"
+    stem = _ex._safe_filename(d)
+    got = sorted((p for p in out.glob(stem + "_*_scholar.html") if p.is_file()), key=lambda p: p.stat().st_mtime) \
+        if out.is_dir() else []
+    if not got:
+        return Response("No scholarly edition of %s yet: make it on its desk page (free)." % d, status=404,
+                        mimetype="text/plain")
+    return send_from_directory(str(out), got[-1].name)
 
 
 @app.post("/api/desk/scholar")
@@ -4466,6 +4544,9 @@ def api_export():
     cmd = py(script("export_html.py"), "--db", db, "--doc", doc, "--out", out)
     if mode == "hi":
         cmd += ["--hindi-only", "--title", data.get("title") or f"{doc} — Hindi Translation"]
+    elif mode == "scholar":   # SCHOLAR_EDITION_2026_10_17: the scholarly English, its notes, the Sanskrit beside it
+        cmd += ["--scholar", "--sanskrit", "--side-by-side",
+                "--title", data.get("title") or f"{doc} - the scholarly English"]
     elif mode == "tri":
         cmd += ["--sanskrit", "--hindi", "--side-by-side",
                 "--title", data.get("title") or f"{doc} — Sanskrit / English / Hindi"]
@@ -4724,6 +4805,13 @@ def api_queue_run():
     skip_ingest    = bool(data.get("skip_ingest"))
     skip_translate = bool(data.get("skip_translate"))
     skip_export    = bool(data.get("skip_export"))
+    if not data.get("force"):   # BUTTONS_2026_10_17: Full ingests again and translates: the same questions first
+        _g = None if skip_translate else _desk_guard(doc)
+        _w = None if skip_ingest else _ingest_warning(doc, db)
+        if _g or _w:
+            _say = " ".join(x["say"] for x in (_g, _w) if x)
+            return jsonify({"error": _say, "say": _say, "needs_force": True, "mark": "BUTTONS_2026_10_17",
+                            "label": (_g or {}).get("label") or "it has English"}), 409
 
     base = [script("pipeline_queue.py"),
             "--doc",     doc,
@@ -4815,9 +4903,12 @@ def api_pipeline_advance():
     Runs Re-ingest (safe) -> Translate -> Export for all 22 docs.
     Does NOT trigger new OCR. Already-translated passages are skipped.
     """
-    cmd = py(script("advance_pipeline.py"))
-    jid = launch("advance_pipeline", "all_docs", cmd)
-    return jsonify({"job": jid, "message": "Advancing all OCRd docs through pipeline"})
+    # BUTTONS_2026_10_17: retired. advance_pipeline.py (8 Sep) re-ingested 22 texts named then from data/raw
+    # (Tesseract), some since repaired, renamed or retired, and translated them with flash whatever their path.
+    return jsonify({"error": "Translate All OCR'd is retired (17 Oct): it re-ingested 22 texts named on 8 Sep from "
+                             "Tesseract's pages and translated them whatever their path. The desk (/desk) has each "
+                             "text's next step; Translate ALL leaves the texts whose path says the reading comes "
+                             "first.", "retired": True, "desk": "/desk", "mark": "BUTTONS_2026_10_17"}), 410
 
 
 # ──────────────────────────────────────────────────────────────────────────────

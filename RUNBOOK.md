@@ -2119,3 +2119,14 @@ on disk.
    `python scripts\scholar_translate.py --doc ... --review 1.1.8,1.1.9 --verdict accept --by Dhruv`.
 4. Translate on a text the path holds: the button says why and asks; going on sends force.
 5. The SOP: docs/SOP_TRANSLATION_2026-10-17.md.
+
+
+## The scholarly edition; the buttons; the repair's next step (DOCS70_2026_10_17)
+
+1. The edition of a text with scholarly English: its desk page, "Make the edition (free)", then "Open the newest";
+   or Export As "The scholarly edition"; or
+   `python scripts\export_html.py --db data\context.db --doc HAYASHIRSHA_PANCARATRA --scholar --sanskrit --side-by-side`.
+2. Translate All OCR'd is retired; the desk has each text's next step.
+3. Ingest or Full on a text with English asks first: the Repair page's re-ingest of the changed pages (the plan free)
+   is the safe way.
+4. BM2: read on (/benchmarks/bm2), then `python scripts\bench_gold.py --report` (free): both comparisons.

@@ -80,8 +80,9 @@ def units(bm1: Path) -> tuple:
         if t is None:
             continue
         sh = bd.shas(t)
+        sh0 = bd.shas({a: {"text": v["text"], "notes": []} for a, v in t.items()})   # BENCH_GOLD_FAIR_2026_10_17
         got.append({"it": it, "m": m, "key": it["f"]["key"], "unit": bm.unit_name(m), "n": len(m), "texts": t,
-                    "shas": sh, "token": bm.sha(json.dumps(sh, sort_keys=True))})
+                    "shas": sh, "shas0": sh0, "token": bm.sha(json.dumps(sh, sort_keys=True))})
     return sample, got
 
 
@@ -238,13 +239,24 @@ def person_numbers(us: list, by: str, rng) -> dict:
         if rows:
             out["pairs"]["%s>%s" % (x, y)] = {"share": round(_share(rows), 3), "units": len(rows),
                                               "ci": bm.boot_ci(len(rows), lambda ix: _share([rows[i] for i in ix]), rng)}
-    for j in sorted({j for u in xs for j in u["j"]}):
-        both = [u for u in xs if j in u["j"]]
-        rows = [(1.0 if u["j"][j]["best"] == u["p"][by]["best"] else 0.0, u["n"]) for u in both]
+    out["judges"] = judge_numbers(xs, by, rng, "j")
+    out["judges_as_read"] = judge_numbers(xs, by, rng, "j0")   # BENCH_GOLD_FAIR_2026_10_17
+    return out
+
+
+def judge_numbers(xs: list, by: str, rng, field: str = "j") -> dict:
+    """Each judge against the person. BENCH_GOLD_FAIR_2026_10_17: field "j" holds the judges' readings of BM3's pilot,
+    the scholarly arm's notes shown to them; "j0" those of BM3's check, the notes withheld, as the person reads them
+    here (the notes would name the arm). On 17 Oct the first was the only one: the person's 24 units were set beside
+    judges who had read notes the person had not."""
+    res = {}
+    for j in sorted({j for u in xs for j in (u.get(field) or {})}):
+        both = [u for u in xs if j in (u.get(field) or {})]
+        rows = [(1.0 if u[field][j]["best"] == u["p"][by]["best"] else 0.0, u["n"]) for u in both]
         chance = sum(1.0 / (len(u["p"][by]["order"]) + 1) for u in both) / len(both)
         caught = alarm = marked = clean = 0
         for u in both:
-            for a, v in (u["j"][j].get("by_arm") or {}).items():
+            for a, v in (u[field][j].get("by_arm") or {}).items():
                 maj = any(e.get("severity") == "major" for e in v.get("errors") or [])
                 if a in u["p"][by].get("majors", []):
                     marked += 1
@@ -252,11 +264,11 @@ def person_numbers(us: list, by: str, rng) -> dict:
                 else:
                     clean += 1
                     alarm += 1 if maj else 0
-        out["judges"][j] = {"units": len(both), "same_best": round(_share(rows), 3),
-                            "same_best_ci": bm.boot_ci(len(rows), lambda ix: _share([rows[i] for i in ix]), rng),
-                            "chance": round(chance, 3), "wrong_marked": marked, "judge_caught": caught,
-                            "not_marked": clean, "judge_major_anyway": alarm}
-    return out
+        res[j] = {"units": len(both), "same_best": round(_share(rows), 3),
+                  "same_best_ci": bm.boot_ci(len(rows), lambda ix: _share([rows[i] for i in ix]), rng),
+                  "chance": round(chance, 3), "wrong_marked": marked, "judge_caught": caught,
+                  "not_marked": clean, "judge_major_anyway": alarm}
+    return res
 
 
 def gather(bm1: Path, out: Path, bm3: Path) -> list:
@@ -270,7 +282,10 @@ def gather(bm1: Path, out: Path, bm3: Path) -> list:
         if not p:
             continue
         j = {jj: r for (k, un, jj, s), r in jx.items() if k == u["key"] and un == u["unit"] and s == sh}
-        got.append(dict(u, p=p, j=j))
+        sh0 = json.dumps(u.get("shas0") or {}, sort_keys=True)   # BENCH_GOLD_FAIR_2026_10_17: as the person read
+        j0 = {jj: r for (k, un, jj, s), r in jx.items() if k == u["key"] and un == u["unit"] and s == sh0
+              and (r.get("notes_shown") is False or sh0 == sh)}
+        got.append(dict(u, p=p, j=j, j0=j0))
     return got
 
 
@@ -329,6 +344,17 @@ def page(summary: dict, us: list) -> str:
                                                               d["chance"], d["judge_caught"], d["wrong_marked"],
                                                               d["judge_major_anyway"], d["not_marked"])
                          for j, d in pn["judges"].items()))
+            if pn.get("judges_as_read"):   # BENCH_GOLD_FAIR_2026_10_17
+                h.append("<p class='small'>Above: the judges of BM3's pilot, who were shown the scholarly arm's notes. "
+                         "Below: the judges of BM3's check, the notes withheld from them as from the reader.</p>")
+                h.append("<table><tr><th>Judge, the notes withheld</th><th>Units</th><th>Its best is the person's [95%%] "
+                         "(chance)</th><th>Marked wrong by the person: the judge found a major error</th><th>Not marked: "
+                         "the judge found one anyway</th></tr>%s</table>" % "".join(
+                             "<tr><td>%s</td><td class='n'>%d</td><td class='n'>%.2f %s (%.2f)</td><td class='n'>%d of %d"
+                             "</td><td class='n'>%d of %d</td></tr>" % (
+                                 e(j), d["units"], d["same_best"], bd._ci(d["same_best_ci"]), d["chance"],
+                                 d["judge_caught"], d["wrong_marked"], d["judge_major_anyway"], d["not_marked"])
+                             for j, d in pn["judges_as_read"].items()))
     h.append("<h2>Unit by unit</h2>")
     for u in us:
         dev = {x["idx"]: x["dev"] for x in u["it"]["w"]}
@@ -411,6 +437,9 @@ def main(argv=None) -> int:
     for p, pn in summ["scopes"]["all"]["by_person"].items():
         print("  %s, %d units: best %s; judges: %s" % (p, pn["units"], json.dumps(pn["best"]), "; ".join(
             "%s same best %.2f (chance %.2f)" % (j, d["same_best"], d["chance"]) for j, d in pn["judges"].items())))
+        if pn.get("judges_as_read"):   # BENCH_GOLD_FAIR_2026_10_17
+            print("    the judges as the reader read (the notes withheld): %s" % "; ".join(
+                "%s same best %.2f of %d units" % (j, d["same_best"], d["units"]) for j, d in pn["judges_as_read"].items()))
     print("VERDICT: written %s and %s" % (hp, jp))
     print('NEXT: Start-Process "%s"   (or the Benchmarks page)' % hp)
     return 0

@@ -379,6 +379,39 @@ def assess(a) -> dict:
     return res
 
 
+def repair_first(r: dict, doc: str, q: str, tr: str):
+    """REPAIR_NEXT_2026_10_17: the debris guard lets a text through (it is under the guard's threshold), but its reading
+    is Tesseract's, its debris judged moderate or material and its scan is here. The path (text_path.py,
+    PATH_2026_10_12) says repair first; so does this now, with the same reckoning: the pages vision has not read, less
+    those it failed on twice, at the price measured on this text where there is one. (why, next, also), or None.
+    On 17 Oct the Padma Purana's Patala Khanda was assessed "nothing holds it ... NEXT: translate it" with 146 of its
+    364 pages unread by vision (the run had stopped at its cap) and 203 pages of the repair not in the database."""
+    j = r.get("judged") or {}
+    if j.get("level") not in ("moderate", "material") or float(r.get("vision_pct") or 0) >= 50.0:
+        return None
+    pdfs, vp, raw = int(r.get("pdfs") or 0), int(r.get("vision_pages") or 0), int(r.get("raw_pages") or 0)
+    if not pdfs or pdfs < 0.9 * max(1, raw):
+        return None
+    gave = int(r.get("vision_gave_up") or 0)
+    todo = max(0, pdfs - vp - gave)
+    stale = int((r.get("consensus") or {}).get("stale") or 0)
+    then = "then: " + tr
+    if todo:
+        cpp = float(r.get("cost_per_page") or COST_PER_PAGE)
+        cap = max(1.0, math.ceil(todo * cpp * 1.25 * 10) / 10.0)
+        why = ("but its reading is Tesseract's and its debris %s: repair first, as its path says, so that the English is "
+               "made from a clean reading; vision has read %d of its %d pages%s, %d to go, about $%.2f at $%.4f a page"
+               % (j["level"], vp, pdfs, (" (%d left to Tesseract: vision failed on them twice)" % gave) if gave else "",
+                  todo, todo * cpp, cpp))
+        also = ([REINGEST % doc + "   (the %d page(s) of the repair that differ from the database can go in now)" % stale]
+                if stale else []) + [then]
+        return (why, q + " --repair --max-usd %.2f   (the pages vision has not read; it stops before spending more)" % cap,
+                also)
+    if stale:
+        return ("but %d page(s) of its repair differ from the database: they go in first" % stale, REINGEST % doc, [then])
+    return None
+
+
 def advise(r: dict, doc: str):
     """(verdict, next, also) for the assessment."""
     q = 'python scripts\\repair_text.py --doc %s' % doc
@@ -434,6 +467,9 @@ def advise(r: dict, doc: str):
     else:
         v = ("nothing holds it: %d passages, %d with English, %d with Hindi; debris %.0f%%, vision %.0f%%"
              % (r["passages"], r["english"], r["hindi"], r["debris_pct"], r["vision_pct"]))
+        rf = repair_first(r, doc, q, tr)   # REPAIR_NEXT_2026_10_17: as the path, repair first
+        if rf:
+            return (v + "; " + rf[0], rf[1], rf[2])
         return (v, tr if r["untranslated"] or r["hindi"] < r["english"] else "", [])
     if not r["pdfs"]:
         return (why + "; its page PDFs are not in the inbox, so it cannot be repaired here",

@@ -944,3 +944,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D5 | S4, the scholarly layer on the site | Design first; after Srangam's TEST_WAIT and D3 |
 | D6 | The source-first queue (34 repairs, vision about $24 then about $71 of English) | Needs the cap and an order, yours |
 | D7 | The chart charted again after OCR, repair and ingest jobs | Next; free |
+
+
+## Addendum 2026-10-17 (60) (DOCS70_2026_10_17)
+
+| # | Item | State |
+|---|---|---|
+| BM2 | Your blind reading | 24 units read: Sonnet in one pass first (50%), the scholarly English without notes last (8%); 16 more of the 40 to read |
+| BM2f | The judges as the reader read (BENCH_GOLD_FAIR_2026_10_17) | Built and tested; to apply |
+| E1 | The scholarly edition (SCHOLAR_EDITION_2026_10_17) | Built and tested; the Hayasirsa's made; to apply |
+| B1 | The buttons (BUTTONS_2026_10_17) | Built and tested; to apply |
+| R1 | The repair's next step (REPAIR_NEXT_2026_10_17) | Built and tested; to apply |
+| D4 | Tier R, Sonnet in one pass for the working English | Recommended by BM1, BM3 and BM2; your decision; the credit ends 11 Nov |
+| E2 | The next scholarly book (the Markandeya Purana about $43 to $52, the Sandilya Bhakti Sutra about $19 to $35) | Your choice; the desk plans it free |
+| G1 | The Ganita Yukti Bhasa's vision repair (about $1.4 to $3.0) | Its register's "complete" to be reopened; your decision |
