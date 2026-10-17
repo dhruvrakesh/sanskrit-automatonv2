@@ -2107,3 +2107,15 @@ on disk.
 3. BM3's check (once the pilot is read): Run the check (about $3.0), then Make the check's report (free); or
    `python scripts\bench_duel.py --units 40 --with-reference --no-notes --yes --max-usd 4.50` and
    `python scripts\bench_duel.py --report --no-notes`.
+
+
+## The translation desk (DOCS69_2026_10_17)
+
+1. http://127.0.0.1:5057/desk: every text by its stage. If the chart is old (three days or more), Chart the path
+   again (free) or `python scripts\text_path.py`.
+2. A text's page (/desk/<doc>): its path's next step first (the repair page for the reading first).
+3. The scholarly English: Plan them (free), read the verdict and the price, then Run these verses (the plan's own cap,
+   at most $12.00; it asks). Then Triage and Report (free); accept or reject by hand:
+   `python scripts\scholar_translate.py --doc ... --review 1.1.8,1.1.9 --verdict accept --by Dhruv`.
+4. Translate on a text the path holds: the button says why and asks; going on sends force.
+5. The SOP: docs/SOP_TRANSLATION_2026-10-17.md.

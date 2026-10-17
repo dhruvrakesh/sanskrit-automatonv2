@@ -1,0 +1,22 @@
+The translation desk: the scholarly English from the dashboard, the path asked before every translation (TRANSLATION_DESK_2026_10_17); BM3's check and the SOP recorded (DOCS69_2026_10_17)
+
+docs/TRANSLATION_DESK_2026-10-17.md, docs/SOP_TRANSLATION_2026-10-17.md, docs/BM3_CHECK_2026-10-17.md.
+- scripts/translation_desk.py (new): the desk's rules. A stage for every text from the path chart, the register and
+  the scholarly English (the scholarly edition, ready, translated: to judge, done, the reading first, not charted);
+  the guard (a working translation held when the path says the reading comes first); the scholarly English's
+  arguments with the standard flags of 15 Oct (= bench_mitra.SCHOLAR_FLAGS), at most 400 verses and $12.00 a press;
+  the chart read again only when its file changes.
+- scripts/patch_translation_desk_2026_10_17.py (dashboard.py, dashboard_static.html): /desk and /desk/<doc>
+  (Plan them, free; Run, the plan's own cap, it asks; Status, Report, Triage, free); /api/desk/scholar (jobs of kind
+  scholar, doc scholar:<doc>); /api/translate and /api/pipeline/translate-doc answer 409 with the path's reason for a
+  text whose reading comes first, unless force (the buttons ask); the path on each row of /api/status and as a chip
+  on the main page; Desk links. No database change; MT_ENGINE unchanged.
+- BM3's check (the pilot's 40 units, the scholarly notes withheld, $3.14): scholar above sonnet1 0.51 and 0.52
+  (0.80 and 0.79 with the notes); both above flash. The SOP (a draft until BM2): the gate, Tier W, Tier R (a
+  proposal), Tier S, review, publishing, money, the benchmarks as the regression test.
+Tests: tests/test_translation_desk_2026_10_17.py (13); the replay chains of test_bench_duel_desk_2026_10_16 and
+test_bench_gold_desk_2026_10_16 follow (.bak_transdesk_).
+Docs: scripts/patch_docs69_2026_10_17.py (PLATFORM 72, RUNBOOK, EP 59).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

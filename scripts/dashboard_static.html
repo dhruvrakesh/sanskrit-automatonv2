@@ -240,6 +240,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
     <a class="btn-refresh" href="/sources" target="_blank" style="text-decoration:none;margin-right:6px" title="JUDGE_DESK_2026_10_11: the texts whose scan stops their translation, the debris judged, the editions found">&#128269; Sources</a>
     <a class="btn-refresh" href="/benchmarks" target="_blank" style="text-decoration:none;margin-right:6px" title="BENCH_DESK_2026_10_16: BM1 (our English against published translations), and the readings of each text compared">&#128207; Benchmarks</a>
+    <a class="btn-refresh" href="/desk" target="_blank" style="text-decoration:none;margin-right:6px" title="TRANSLATION_DESK_2026_10_17: every text by its stage (the scholarly edition, ready to translate, translated, the reading first), and the scholarly English begun from its page">&#128221; Desk</a>
     <a class="btn-refresh" href="/ask" target="_blank" style="text-decoration:none;margin-right:6px" title="Ask questions answered from the corpus, with cited verses">&#128172; Ask the Corpus</a>
     <button class="btn-refresh" onclick="openDatabase(this)" style="margin-right:6px" title="Open the corpus in Datasette for SQL querying (snapshots first, then launches)">&#128190; Database</button>
     <button class="btn-refresh" onclick="refresh(true)">&#x27F3; Refresh</button>
@@ -745,6 +746,14 @@ function docStateHtml(r) {
       + 'text-decoration:none">SC ' + s.verses + ' &middot; ' + (s.passed || 0) + ' passed' + (s.flagged ? ' &middot; ' + s.flagged
       + ' flagged' : '') + '</a>';
   }
+  var p = r.path;   // TRANSLATION_DESK_2026_10_17: the path of the text, linked to its page on the desk
+  if (p && p.path) {
+    h += '<a href="/desk/' + encodeURIComponent(r.doc) + '" target="_blank" title="' + esc('The path (' + (p.at || '') + '): '
+      + (p.label || p.path) + '. Next: ' + (p.next || '-')) + '" style="display:inline-block;margin:3px 4px 0 0;padding:1px 6px;'
+      + 'border-radius:3px;font-size:9.5px;text-decoration:none;' + (p.held ? 'background:rgba(220,90,90,.15);color:#e8a3a3'
+      : 'background:rgba(120,200,160,.12);color:#9fd8b5') + '">' + (p.held ? 'the reading first: ' : 'path: ')
+      + esc(p.label || p.path) + '</a>';
+  }
   return h ? '<div style="line-height:1.2">' + h + '</div>' : '';
 }
 
@@ -913,10 +922,17 @@ async function doAction(act, doc) {
     const eng   = getEngine(doc);
     const limit = (document.getElementById('xlateLimit') || {}).value || '';  // blank => whole doc
     const lang  = getLang();
-    const r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
+    let r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({doc, db: cfg.db, engine: eng, limit, lang})});
-    const j = await r.json();
+    let j = await r.json();
+    if (r.status === 409 && j.needs_force) {   // TRANSLATION_DESK_2026_10_17: the path says the reading comes first
+      if (!confirm(j.say + '\n\nTranslate it anyway?')) { toast('Held: ' + doc + ' (' + (j.label || 'the reading first') + '): the desk has its steps', 'fail'); return; }
+      r = await fetch('/api/translate', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({doc, db: cfg.db, engine: eng, limit, lang, force: true})});
+      j = await r.json();
+    }
     if (j.job) { trackJob(j.job, 'Translate ' + doc + (lang!=='en'?' ['+lang+']':''), 'translate', doc); toast('Translation started (' + eng + ', ' + lang + ')'); }
+    else if (j.error) toast(j.error, 'fail');
   }
   if (act === 'export') {
     const mode = getExportMode();
@@ -949,7 +965,9 @@ async function batchAction(act) {
     }).filter(Boolean);
     if (!docs.length) { toast('No documents loaded', 'fail'); return; }
     if (!confirm('Start translation for ALL ' + docs.length + ' docs?\n\nJobs are rate-limited to 1 at a time. Each will queue behind the previous.')) return;
-    for (var i = 0; i < docs.length; i++) { await startDoc(docs[i]); }
+    var _held = [];   // TRANSLATION_DESK_2026_10_17: the texts whose path says the reading comes first are left
+    for (var i = 0; i < docs.length; i++) { if (await startDoc(docs[i], {bulk: true}) === 'held') _held.push(docs[i]); }
+    if (_held.length) toast(_held.length + ' text(s) left: their path says the reading comes first (the desk has their steps): ' + _held.slice(0, 6).join(', ') + (_held.length > 6 ? ' ...' : ''), 'fail');
     return;
   }
   if (act === 'export') {  // EXPORT_MODE_VISIBLE_2026_09_30
@@ -1853,7 +1871,7 @@ async function advancePipeline() {
 }
 
 // ── Per-doc enterprise start / stop ───────────────────────────────────────
-async function startDoc(doc) {
+async function startDoc(doc, opts) {   // TRANSLATION_DESK_2026_10_17: opts.bulk holds a guarded text quietly
   const eng = getEngine(doc);
   const lang = getLang();
   try {
@@ -1862,7 +1880,13 @@ async function startDoc(doc) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({doc: doc, engine: eng, context: 5, sleep: 0.8, db: cfg.db, lang: lang})
     });
-    const d = await r.json();
+    let d = await r.json();
+    if (r.status === 409 && d.needs_force) {   // TRANSLATION_DESK_2026_10_17: the path says the reading comes first
+      if ((opts || {}).bulk || !confirm(d.say + '\n\nTranslate it anyway?')) { if (!(opts || {}).bulk) toast('Held: ' + doc + ' (' + (d.label || 'the reading first') + '): the desk has its steps', 'fail'); return 'held'; }
+      const r2 = await fetch('/api/pipeline/translate-doc', {method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({doc: doc, engine: eng, context: 5, sleep: 0.8, db: cfg.db, lang: lang, force: true})});
+      d = await r2.json();
+    }
     if (d.error) { toast('Error: ' + d.error, 'fail'); return; }
     trackJob(d.job, 'Translate ' + doc + (lang!=='en'?' ['+lang+']':''), 'translate', doc);
     toast('&#9654; Started: ' + doc + ' (' + lang + ')', 'ok');

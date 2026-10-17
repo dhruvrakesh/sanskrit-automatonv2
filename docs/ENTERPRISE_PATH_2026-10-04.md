@@ -930,3 +930,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | BM3c | The check, the scholarly arm's notes withheld (BENCH_DUEL_NOTES_2026_10_16) | Built and tested; to run (about $3.0) |
 | BM2 | Your blind reading on the dashboard (BENCH_GOLD_2026_10_16) | Built and tested; a person's time (40 units first) |
 | J2 | A judge told the emendations, the thinking off | After the baseline, as agreed |
+
+
+## Addendum 2026-10-17 (59) (DOCS69_2026_10_17)
+
+| # | Item | State |
+|---|---|---|
+| BM3c | BM3's check, the notes withheld | Done (40 units, $3.14): the scholarly lead over Sonnet was its notes |
+| SOP | The translation SOP (docs/SOP_TRANSLATION_2026-10-17.md) | Drafted; confirmed after BM2 |
+| D0-D2 | The guard, the chips, the desk, the scholarly steps (TRANSLATION_DESK_2026_10_17) | Built and tested; to apply |
+| D3 | The review in the browser (accept, reject, glossary) | Next; free |
+| D4 | BM2's 40 units read; Tier R decided (the credit ends 11 Nov) | A person's time; your decision |
+| D5 | S4, the scholarly layer on the site | Design first; after Srangam's TEST_WAIT and D3 |
+| D6 | The source-first queue (34 repairs, vision about $24 then about $71 of English) | Needs the cap and an order, yours |
+| D7 | The chart charted again after OCR, repair and ingest jobs | Next; free |
