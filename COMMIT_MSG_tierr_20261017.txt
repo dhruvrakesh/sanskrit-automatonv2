@@ -1,0 +1,17 @@
+Tier R on the desk: the working English by Sonnet in one pass, and the scholarly English begun at a verse (TIER_R_2026_10_17); the next books planned (DOCS71_2026_10_17)
+
+docs/NEXT_BOOKS_2026-10-17.md.
+- scripts/patch_tier_r_2026_10_17.py (translation_desk.py, dashboard.py, dashboard_static.html): on a text's desk
+  page, the working English by Claude Sonnet 5.5 in one pass, the rest or every verse again (the English before kept
+  in translation_history), priced at BM1's $0.0052 a verse beside the Claude credit left; /api/translate takes
+  retranslate; the scholarly English begins at a verse ("Begin at": --from-ref, as 81.1 of an e-text); Sonnet among
+  the main page's engines for one text at a time, Translate All refusing Claude. MT_ENGINE unchanged.
+- The plan: the Devimahatmya (Markandeya Purana 81 to 93) from GRETIL's e-text as a witness, scholarly, before
+  Ashtami; our scan holds adhyayas 1 to 15 only. The Surya Siddhanta: the Kashi edition in the inbox is a cut-short
+  download; GRETIL's e-text (Michio Yano) to preview. The Ganita Yukti Bhasa: restore, vision repair, re-ingest first.
+Tests: tests/test_tier_r_2026_10_17.py (8); test_buttons_2026_10_17 and test_bench_gold_fair_2026_10_17 follow
+(.bak_tierr_).
+Docs: scripts/patch_docs71_2026_10_17.py (PLATFORM 74, RUNBOOK, EP 61).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

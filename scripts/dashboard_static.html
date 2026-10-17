@@ -232,6 +232,7 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
         <option value="gemini:gemini-2.0-flash">&#x26A1; Gemini 2.0 Flash (fast)</option>
         <option value="openai:gpt-4o">&#x1F535; GPT-4o</option>
         <option value="openai:gpt-4o-mini">&#x1F535; GPT-4o-mini (cheap)</option>
+        <option value="anthropic:claude-sonnet-5-5" title="TIER_R_2026_10_17: the working English by Claude Sonnet 5.5 in one pass (BM1, BM3, BM2); it bills the Claude credit; one text at a time">&#9670; Claude Sonnet 5.5, one pass (Tier R; the Claude credit)</option>
         <option value="echo">&#x1F501; Echo (test)</option>
       </select>
     </div>
@@ -853,6 +854,7 @@ function renderPipeline(rows) {
           '<option value="gemini:gemini-2.5-flash">⚡ Flash</option>' +
           '<option value="gemini:gemini-2.5-pro">✦ Pro</option>' +
           '<option value="openai:gpt-4o-mini">🔵 4o-mini</option>' +
+          '<option value="anthropic:claude-sonnet-5-5" title="Tier R: the Claude credit">&#9670; Sonnet</option>' +   // TIER_R_2026_10_17
           '<option value="openai:gpt-4o">🔵 4o</option>' +
         '</select>' +
       '</td></tr>';
@@ -981,6 +983,8 @@ async function batchAction(act) {
       return tr.getAttribute('data-doc');
     }).filter(Boolean);
     if (!docs.length) { toast('No documents loaded', 'fail'); return; }
+    var _cl = docs.filter(function(d) { return String(getEngine(d) || '').indexOf('anthropic:') === 0; });   // TIER_R_2026_10_17
+    if (_cl.length) { toast('Translate All does not run Claude (' + _cl.length + ' text(s) would): one text at a time, from its row or the desk, as the credit is spent verse by verse.', 'fail'); return; }
     if (!confirm('Start translation for ALL ' + docs.length + ' docs?\n\nJobs are rate-limited to 1 at a time. Each will queue behind the previous.')) return;
     var _held = [];   // TRANSLATION_DESK_2026_10_17: the texts whose path says the reading comes first are left
     for (var i = 0; i < docs.length; i++) { if (await startDoc(docs[i], {bulk: true}) === 'held') _held.push(docs[i]); }

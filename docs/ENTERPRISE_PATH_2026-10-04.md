@@ -958,3 +958,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D4 | Tier R, Sonnet in one pass for the working English | Recommended by BM1, BM3 and BM2; your decision; the credit ends 11 Nov |
 | E2 | The next scholarly book (the Markandeya Purana about $43 to $52, the Sandilya Bhakti Sutra about $19 to $35) | Your choice; the desk plans it free |
 | G1 | The Ganita Yukti Bhasa's vision repair (about $1.4 to $3.0) | Its register's "complete" to be reopened; your decision |
+
+
+## Addendum 2026-10-17 (61) (DOCS71_2026_10_17)
+
+| # | Item | State |
+|---|---|---|
+| D4 | Tier R on the desk (TIER_R_2026_10_17) | Built and tested; to apply |
+| E3 | The Devimahatmya (MkP 81 to 93) from GRETIL, scholarly | About $25 to $30; before Ashtami (19 Oct) |
+| E4 | The Surya Siddhanta: GRETIL's e-text, or the Kashi edition downloaded again | The preview first (free) |
+| G1 | The Ganita Yukti Bhasa: restore, vision repair, re-ingest | About $1.4 to $3.0 (Google); its English after |

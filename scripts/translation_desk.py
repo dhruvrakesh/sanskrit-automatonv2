@@ -53,6 +53,9 @@ SCHOLAR_ENGINE = "anthropic:claude-sonnet-5-5"
 STEP_VERSES = 40          # a plan's verses by default
 MAX_VERSES = 400          # the most verses a press plans or runs
 MAX_USD = 12.0            # the most one press may spend (as the benchmarks' buttons)
+TIER_R_ENGINE = "anthropic:claude-sonnet-5-5"   # TIER_R_2026_10_17: the working English, Sonnet in one pass
+TIER_R_PER_VERSE = 0.0052                        # $ a verse, BM1's measure (the Claude credit)
+REF_RE = re.compile(r"^\d{1,4}(\.\d{1,4}){0,3}$")   # TIER_R_2026_10_17: a verse to begin at (81.1)
 SOURCE_FIRST = ("repair", "use_repair", "ingest", "source", "retire")
 HOLDS = ("withdrawn", "set_aside")
 STALE_DAYS = 3
@@ -170,7 +173,7 @@ def next_step(stage: str, prow=None, cover=None, mula: int = 0) -> str:
 
 
 def scholar_argv(doc: str, step: str, pages: str = "", limit: int = STEP_VERSES, max_usd: float = 0.0,
-                 held_ok: bool = False):
+                 held_ok: bool = False, from_ref: str = ""):   # TIER_R_2026_10_17: from_ref
     """The arguments of scholar_translate.py for a step of the desk: plan (the dry run), run (paid, --yes --max-usd),
     report, triage, status (free). (argv, None) or (None, why)."""
     if step in ("report", "triage", "status"):
@@ -180,13 +183,17 @@ def scholar_argv(doc: str, step: str, pages: str = "", limit: int = STEP_VERSES,
     pages = str(pages or "").strip()
     if pages and not PAGES_RE.match(pages):
         return None, "pages: a page, a range or a list (2, or 1-3,5)"
+    from_ref = str(from_ref or "").strip()   # TIER_R_2026_10_17
+    if from_ref and not REF_RE.match(from_ref):
+        return None, "begin at: a verse's reference (81.1)"
     try:
         limit = int(limit)
     except (TypeError, ValueError):
         return None, "verses: a whole number"
     if not 1 <= limit <= MAX_VERSES:
         return None, "verses: 1 to %d a press" % MAX_VERSES
-    argv = ["--doc", doc, "--limit", str(limit)] + (["--pages", pages] if pages else []) + list(SCHOLAR_SOP)
+    argv = ["--doc", doc, "--limit", str(limit)] + (["--pages", pages] if pages else []) + (
+        ["--from-ref", from_ref] if from_ref else []) + list(SCHOLAR_SOP)
     if held_ok:
         argv.append("--held-ok")
     if step == "run":

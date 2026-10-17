@@ -2130,3 +2130,14 @@ on disk.
 3. Ingest or Full on a text with English asks first: the Repair page's re-ingest of the changed pages (the plan free)
    is the safe way.
 4. BM2: read on (/benchmarks/bm2), then `python scripts\bench_gold.py --report` (free): both comparisons.
+
+
+## Tier R; the Devimahatmya from GRETIL (DOCS71_2026_10_17)
+
+1. Tier R: a text's desk page, "The working English by Sonnet in one pass": the rest, or every verse again. It asks,
+   bills the Claude credit, stops when the credit does.
+2. The Devimahatmya: `python scripts\etext_witness.py --doc markandeya_purana --url https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_mArkaNDeyapurANa1-93.htm` (the
+   preview, free; the file is kept in sources\markandeya_purana), then
+   `python scripts\etext_witness.py --doc markandeya_purana --file sources\markandeya_purana\sa_mArkaNDeyapurANa1-93.htm --write`,
+   then `python scripts\etext_witness.py --doc markandeya_purana --ingest`; `python scripts\text_path.py`; on the desk
+   page of markandeya_purana__w_gretil: Begin at 81.1, Plan them (free), Run.

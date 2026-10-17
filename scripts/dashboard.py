@@ -3066,7 +3066,7 @@ function _dkLine(out, tag){
 async function deskStep(doc, step, btn){
   var o = document.getElementById('dkout'), pre = document.getElementById('dklog');
   var pages = (document.getElementById('dkpages') || {}).value || '', limit = +((document.getElementById('dklimit') || {}).value || 40);
-  var body = {doc: doc, step: step, pages: pages, limit: limit};
+  var body = {doc: doc, step: step, pages: pages, limit: limit, from_ref: (document.getElementById('dkfrom') || {}).value || ''};   /* TIER_R_2026_10_17 */
   if (step === 'run'){
     var cap = +(btn.getAttribute('data-cap') || 0);
     if (!confirm('Run the scholarly English of ' + doc + (pages ? ', pages ' + pages : '') + ', ' + limit + ' verse(s): Claude Sonnet 5.5 drafts and criticises, Claude Opus 5.5 audits one sentence in ten, judge-v1 reads each. It spends at most $' + cap.toFixed(2) + ' (the Claude credit, the judge on the spend cap) and stops before spending more. Go?')) return;
@@ -3099,10 +3099,16 @@ async function deskStep(doc, step, btn){
     }, pre);
   }catch(e){ o.textContent = 'Request failed: ' + e; for (var k3 = 0; k3 < all.length; k3++) all[k3].disabled = false; }
 }
-async function deskTranslate(doc, btn){
-  if (!confirm('The working English of ' + doc + ': one pass, gemini-2.5-flash, the verses not yet translated. Go?')) return;
+async function deskTranslate(doc, btn, engine, again){   /* TIER_R_2026_10_17: engine, again */
+  var claude = !!engine && engine.indexOf('anthropic:') === 0;
+  var ask = claude ? ('The working English of ' + doc + ' by Claude Sonnet 5.5 in one pass, ' + (again ? 'every verse again (the English before is kept in the history)' : 'the verses not yet translated') + '. It bills the Claude credit and stops when the credit does. Go?')
+                   : ('The working English of ' + doc + ': one pass, gemini-2.5-flash, the verses not yet translated. Go?');
+  if (!confirm(ask)) return;
   btn.disabled = true;
-  var r = await fetch('/api/translate', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({doc: doc, lang: 'en', limit: 0})});
+  var body = {doc: doc, lang: 'en', limit: 0};
+  if (engine) body.engine = engine;
+  if (again) body.retranslate = true;
+  var r = await fetch('/api/translate', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
   var d = await r.json();
   document.getElementById('dkout').textContent = d.job ? 'Started: the main dashboard\'s job log follows it.' : ('Could not start: ' + (d.error || 'unknown'));
 }
@@ -3200,6 +3206,24 @@ def desk_text(doc):
          '(working English)</button> <span class="small">the path\'s estimate, English and Hindi: about $%.2f</span> '
          '<a href="/library">or from the Library</a></div>' % (e(r["doc"], quote=True), r["cost"])) if r["stage"] in ("ready", "edition") and r["en"] < r["mula"]
         and not r.get("guard") and r.get("held") not in td.HOLDS else ""))
+    if not r.get("guard") and r.get("held") not in td.HOLDS and r["mula"]:   # TIER_R_2026_10_17
+        _left = max(0, r["mula"] - r["en"])
+        _cp = s.get("caps") or {}
+        _cr = ("$%.2f left, until %s" % (_cp["credit_left"], str(_cp.get("credit_expires") or "?")[:10])
+               if _cp.get("credit_left") is not None else "its state not read")
+        _b = ""
+        if _left:
+            _b += ('<button class="btn dkbtn" onclick="deskTranslate(\'%s\', this, \'%s\', false)">The rest: %d verse(s), '
+                   'about $%.2f</button> ' % (e(r["doc"], quote=True), td.TIER_R_ENGINE, _left, _left * td.TIER_R_PER_VERSE))
+        if r["en"]:
+            _b += ('<button class="btn dkbtn" onclick="deskTranslate(\'%s\', this, \'%s\', true)">Every verse again: %d, about '
+                   '$%.2f (the English before is kept in the history)</button>' % (
+                       e(r["doc"], quote=True), td.TIER_R_ENGINE, r["mula"], r["mula"] * td.TIER_R_PER_VERSE))
+        h.append('<div class="box"><h3>The working English by Sonnet in one pass (Tier R)</h3><p class="small">BM1 (nearness '
+                 'to published translations), BM3 (both judges) and BM2 (a person, blind) put Claude Sonnet 5.5 in one pass '
+                 'above flash for the working English, at about its price ($%.4f a verse, BM1). It bills the Claude credit '
+                 '(%s) and stops when the credit does. English only; one text at a time; MT_ENGINE stays flash.</p>'
+                 '<div class="row">%s</div></div>' % (td.TIER_R_PER_VERSE, e(_cr), _b))
     run = _desk_jobs(r["doc"])
     sc_line = ("%d of %d verses: %d passed, %d flagged (a person reads them), %d source doubts; %d accepted, %d rejected "
                "by a person%s; spent %s; by %s" % (
@@ -3225,7 +3249,8 @@ def desk_text(doc):
         ctl += '<p class="warn">Not offered: %s.</p>' % e(blocked)
     else:
         ctl += ('<div class="row">Pages <input type="text" id="dkpages" placeholder="all" title="a page, a range or a list: '
-                '2, or 1-3,5"> Verses <input type="number" id="dklimit" value="%d" min="1" max="%d"> '
+                '2, or 1-3,5"> Begin at <input type="text" id="dkfrom" placeholder="the first" title="TIER_R_2026_10_17: a '
+                'verse reference, as 81.1 (an e-text\'s numbering)" style="width:80px"> Verses <input type="number" id="dklimit" value="%d" min="1" max="%d"> '
                 '<button class="btn go dkbtn" onclick="deskStep(\'%s\', \'plan\', this)">Plan them (free)</button> '
                 '<button class="btn go dkbtn" id="dkrun" style="display:none" data-cap="0" onclick="deskStep(\'%s\', \'run\', '
                 'this)">Run</button></div>%s' % (
@@ -3305,7 +3330,8 @@ def api_desk_scholar():
                 td.PATH_LABEL.get((prow or {}).get("path") or "", ""), td.guard(prow, reg, chart["at"])["say"]
                 if td.guard(prow, reg, chart["at"]) else "")}), 409
     argv, why = td.scholar_argv(doc, step, data.get("pages") or "", data.get("limit") or td.STEP_VERSES,
-                                data.get("max_usd") or 0, reg.get("status") == "in_repair")
+                                data.get("max_usd") or 0, reg.get("status") == "in_repair",
+                                from_ref=str(data.get("from_ref") or ""))   # TIER_R_2026_10_17
     if why:
         return jsonify({"error": why}), 400
     _DESK_CACHE.update(res=None)
@@ -4493,6 +4519,8 @@ def api_translate():
              "--db", db, "--doc", doc, "--engine", engine,
              "--sleep", sleep, "--limit", limit, "--context", context,
              "--min-quality", min_quality) + _win
+    if data.get("retranslate"):   # TIER_R_2026_10_17: every verse again; the English before goes to translation_history
+        cmd.append("--retranslate")
     kind = "translate"
     if lang != "en":
         cmd += ["--lang", lang]

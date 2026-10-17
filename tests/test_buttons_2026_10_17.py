@@ -149,6 +149,7 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
                 later = sorted((REPO / f).parent.glob(Path(f).name + ".bak_goldfair_*"))   # BENCH_GOLD_FAIR_2026_10_17 came after
+                later = later or sorted((REPO / f).parent.glob(Path(f).name + ".bak_tierr_*"))   # TIER_R_2026_10_17 came after
                 self.assertEqual((t / f).read_bytes(), (later[0] if later else REPO / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:
