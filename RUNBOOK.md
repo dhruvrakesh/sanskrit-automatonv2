@@ -2141,3 +2141,23 @@ on disk.
    `python scripts\etext_witness.py --doc markandeya_purana --file sources\markandeya_purana\sa_mArkaNDeyapurANa1-93.htm --write`,
    then `python scripts\etext_witness.py --doc markandeya_purana --ingest`; `python scripts\text_path.py`; on the desk
    page of markandeya_purana__w_gretil: Begin at 81.1, Plan them (free), Run.
+
+
+## The flash corpus redeemed; GRETIL by PowerShell (DOCS72_2026_10_17)
+
+1. **The calibration (free dry run; then about $0.06 on the credit):**
+   `python scripts\judge_sample.py --all --calibrate --engine anthropic:claude-haiku-5-5`, then the same with
+   `--yes --max-usd 0.20`. The referee on where they disagree:
+   `python scripts\judge_sample.py --all --calibrate --engine anthropic:claude-opus-5-5 --only-ids data\retranslate\judge_screen\calibrate_claude-haiku-5-5_disagree.jsonl`,
+   then with `--yes --max-usd 2.00`. The rule (docs/JUDGE_SCREEN_2026-10-17.md, section 4) decides.
+2. **The screen, a text at a time:** `python scripts\judge_sample.py --doc markandeya_purana --sample-pct 100 --limit 2000
+   --skip-judged --clean-only --engine anthropic:claude-haiku-5-5` (dry run), then with `--yes --max-usd 0.50`. The
+   others likewise (MBh01, the Natyasastra, the Tantric Texts, the Shatapatha, the Mallapurana, Sandilya).
+3. **The fix:** `python scripts\retranslate_marked.py --doc markandeya_purana --engine anthropic:claude-sonnet-5-5
+   --judge-engine anthropic:claude-haiku-5-5` (dry run); its NEXT. Then `python scripts\judge_review.py --doc
+   markandeya_purana`, `python scripts\redeem.py`, `python scripts\text_path.py`, the mirror's plan and --apply.
+4. **GRETIL (the Markandeya Purana, 1 to 93):** in PowerShell, from the repo root:
+   `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12`, then
+   `Invoke-WebRequest -Uri https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_mArkaNDeyapurANa1-93.htm -OutFile sources\markandeya_purana\sa_mArkaNDeyapurANa1-93.htm -UseBasicParsing`;
+   then `python scripts\etext_witness.py --doc markandeya_purana --file sources\markandeya_purana\sa_mArkaNDeyapurANa1-93.htm --slug gretil`
+   (the preview, free), the same with `--write`, then `python scripts\etext_witness.py --doc markandeya_purana --ingest`.

@@ -4,7 +4,7 @@ Benchmarks page (what each arm has made, the judge, the spend, the report, the n
 private report served here); each row of /api/status with its register state and its scholarly English; /api/usage
 with the Claude credit, the steps by kind, BM1's line; bench_mitra's arms priced by their own spend; the report's NEXT
 in PowerShell. A made-up dataset and temp folders; the scripts and the judge are stand-ins; nothing is called."""
-import importlib.util, json, re, shutil, sqlite3, subprocess, sys, tempfile, unittest
+import gc, importlib.util, json, re, shutil, sqlite3, subprocess, sys, tempfile, unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -46,7 +46,7 @@ class TheDesk(unittest.TestCase):
         cls.jt.cleanup()
 
     def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
+        self.tmp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)   # TEST_ISOLATION_2026_10_17
         self.td = Path(self.tmp.name)
         self.ds = TB.dataset(self.td)
         self.main = TB.ledger(self.td)
@@ -56,6 +56,14 @@ class TheDesk(unittest.TestCase):
         B.FILES = tuple(f for f in B.FILES if f["key"] in KEYS)   # the made-up dataset has two texts
         self.d.BM1_DIR, self.d.BM1_LEDGER = self.out, str(self.main)
         self.d._BM1_CACHE.update(res=None)
+        self.saved23 = (getattr(self.d, "BM2_DIR", None), getattr(self.d, "BM3_DIR", None))   # TEST_ISOLATION_2026_10_17: not the real BM2, BM3
+        if hasattr(self.d, "BM2_DIR"):
+            self.d.BM2_DIR = self.td / "bm2"
+        if hasattr(self.d, "BM3_DIR"):
+            self.d.BM3_DIR = self.td / "bm3"
+        for c in ("_BM2_CACHE", "_BM3_CACHE"):
+            if hasattr(self.d, c):
+                getattr(self.d, c).update(res=None)
         child = self.td / "child.py"
         child.write_text(TB.FAKE_CHILD, encoding="utf-8")
         B.arm_cmd = lambda arm, f, bpath, work, logs, max_usd, n: [sys.executable, str(child), arm, str(bpath), f["code"],
@@ -65,6 +73,13 @@ class TheDesk(unittest.TestCase):
     def tearDown(self):
         B.FILES, B.arm_cmd, B.ST.Gemini, self.d.BM1_DIR, self.d.BM1_LEDGER = self.saved
         self.d._BM1_CACHE.update(res=None)
+        for name, v in zip(("BM2_DIR", "BM3_DIR"), self.saved23):   # TEST_ISOLATION_2026_10_17
+            if v is not None:
+                setattr(self.d, name, v)
+        for c in ("_BM2_CACHE", "_BM3_CACHE"):
+            if hasattr(self.d, c):
+                getattr(self.d, c).update(res=None)
+        gc.collect()   # a connection the page left open is closed before its folder goes (Windows)
         self.tmp.cleanup()
 
     def page(self):

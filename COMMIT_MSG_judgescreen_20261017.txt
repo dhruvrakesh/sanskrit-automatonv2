@@ -1,0 +1,20 @@
+The English already paid for: Claude's judge-v1 as a calibrated screen, and the marked verses fixed by cause (JUDGE_SCREEN_2026_10_17); test_bench_desk independent of the real BM2 and BM3 (TEST_ISOLATION_2026_10_17); recorded (DOCS72_2026_10_17)
+
+docs/JUDGE_SCREEN_2026-10-17.md. Measured on all of the flash corpus: the reading (84% of 26,589 English from a clean
+reading); the meaning on 0.9% (240 verdicts; 11 wrong of 188 in five texts on the site, most of the wrong blamed on
+the Sanskrit). The flash judge, its thinking billed, is $0.00274 a verdict (every kept verse: about $60 on the cap);
+Haiku's judge-v1 $0.000247, on the credit, of the other family.
+- scripts/patch_judge_screen_2026_10_17.py:
+  - judge_sample.py: --engine anthropic:<model> (judge-v1 by Claude, metered on and stopped by the credit),
+    --skip-judged, --clean-only, --only-ids, --max-usd, --calibrate (beside another judge's verdicts; files in
+    data/retranslate/judge_screen/, local; nothing in mt_reviews; a referee's sides); the dry run priced as measured; --report by judge.
+    A run as before runs as before.
+  - retranslate_marked.py: Claude's engines priced by their rows and stopped by the credit; the spend cap left alone
+    when nothing bills Google; the dry run's NEXT carries its options.
+- tests/test_bench_desk_2026_10_16.py: TheDesk points BM2 and BM3 at its own temp folders; the ledger closed before
+  its folder goes (WinError 32 on Windows).
+Tests: tests/test_judge_screen_2026_10_17.py (13); test_redeem_2026_10_14 and test_meter_gates_2026_10_04 unchanged.
+Docs: scripts/patch_docs72_2026_10_17.py (PLATFORM 75, RUNBOOK, EP 62, the SOP's addendum).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

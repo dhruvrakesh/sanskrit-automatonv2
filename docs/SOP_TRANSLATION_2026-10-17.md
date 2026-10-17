@@ -149,3 +149,10 @@ flash 19%, the published English 19%, the scholarly English read without its not
 - **"Done" is not "correct":** a flash verse of the Markandeya Purana with an invented gloss passed with a QA of 1.0;
   the Ganita Yukti Bhasa, "complete" in the register, is a Tesseract reading with 474 [ILLEGIBLE] passages in its
   English. A book is made from a clean reading (the gate, section 1) and read by a person (section 5).
+
+
+## Addendum (17 Oct, late): the English already made (DOCS72_2026_10_17)
+
+docs/JUDGE_SCREEN_2026-10-17.md. Tier R is for English not yet made, or a text measured to need it; English already
+made is kept, read by a judge of the other family, and fixed where it is marked, by its cause. "Every verse again" is
+for a text whose screen marks a fifth or more of its verses (your threshold to set), or whose Sanskrit changed.

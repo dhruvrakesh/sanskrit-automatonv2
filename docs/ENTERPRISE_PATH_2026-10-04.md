@@ -968,3 +968,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | E3 | The Devimahatmya (MkP 81 to 93) from GRETIL, scholarly | About $25 to $30; before Ashtami (19 Oct) |
 | E4 | The Surya Siddhanta: GRETIL's e-text, or the Kashi edition downloaded again | The preview first (free) |
 | G1 | The Ganita Yukti Bhasa: restore, vision repair, re-ingest | About $1.4 to $3.0 (Google); its English after |
+
+
+## Addendum 2026-10-17 (62) (DOCS72_2026_10_17)
+
+| # | Item | State |
+|---|---|---|
+| Q1 | The flash corpus: the meaning measured on every clean verse (JUDGE_SCREEN_2026_10_17) | Built and tested; the calibration first (about $0.06) |
+| Q2 | The screen of the seven texts on the site | About $4.30 on the credit, if Haiku passes the calibration |
+| Q3 | The marked verses fixed by cause (Sonnet; the source path) | About $3 by Sonnet at the sample's rate; the Hindi after |
+| T4 | test_bench_desk independent of the real BM2 and BM3 (TEST_ISOLATION_2026_10_17) | Built; to run on the PC |

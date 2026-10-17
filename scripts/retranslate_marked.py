@@ -25,6 +25,12 @@ is reached, and it stops while the dashboard writes the same text. The Hindi of 
   python scripts\\retranslate_marked.py                               every marked passage: the dry run, free
   python scripts\\retranslate_marked.py --doc Mallapurana             one text
   python scripts\\retranslate_marked.py --doc Mallapurana --yes --max-usd 0.10
+
+JUDGE_SCREEN_2026_10_17 (docs/JUDGE_SCREEN_2026-10-17.md): --engine and --judge-engine may be Claude's
+(anthropic:claude-sonnet-5-5, anthropic:claude-haiku-5-5): priced by their own rows in usage_log (else by the model's
+prices on BM1's one pass), stopped when the Claude credit is; a run in which nothing bills Google (both Claude's, and
+--no-hindi) is not stopped by the spend cap. The dry run's NEXT carries the options it was given.
+  python scripts\\retranslate_marked.py --doc markandeya_purana --engine anthropic:claude-sonnet-5-5 --judge-engine anthropic:claude-haiku-5-5 --no-hindi
 """
 from __future__ import annotations
 
@@ -125,6 +131,61 @@ def prices(con) -> tuple:
     return pro, judge, flash
 
 
+def claude_prices(con, engine: str, judge_engine: str, pro: float, judge: float) -> tuple:
+    """JUDGE_SCREEN_2026_10_17: ($ a passage translated, $ a verdict) when either engine is Claude's: usage_log's own
+    rows of the model since the credit began (20 or more), else the model's prices on BM1's one pass (1,584 tokens in,
+    202 out a verse: Sonnet $0.0052) and judge_sample.py's price of a verdict. Gemini's, as they were."""
+    def measured(kind, eng):
+        try:
+            r = con.execute("SELECT COUNT(*), SUM(cost_usd) FROM usage_log WHERE kind = ? AND engine = ? AND ts >= ?",
+                            (kind, eng, "2026-10-15")).fetchone()
+            if r and r[0] and r[0] >= 20 and r[1]:
+                return float(r[1]) / r[0]
+        except sqlite3.Error:
+            pass
+        return None
+    if str(engine or "").startswith("anthropic:"):
+        try:
+            import claude_engine as ce
+            model, _effort = ce.parse_engine(engine)
+            p = ce.prices_of(model)
+            pro = measured("translation", ce.PREFIX + model) or (1584 * p[0] + 202 * p[1]) / 1e6
+        except Exception:
+            pro = 0.0052
+    if str(judge_engine or "").startswith("anthropic:"):
+        try:
+            import judge_sample as js
+            judge = js.judge_price(con, judge_engine)
+        except Exception:
+            judge = 0.00025
+    return pro, judge
+
+
+def credit_ok(con, next_cost: float) -> bool:
+    """JUDGE_SCREEN_2026_10_17: the Claude credit allows the next passage (claude_engine.budget_ok; it fails closed)."""
+    try:
+        import claude_engine as ce
+    except ImportError:
+        return False
+    return ce.budget_ok(con, next_cost)
+
+
+def same_flags(a) -> str:
+    """JUDGE_SCREEN_2026_10_17: the options of this dry run that its NEXT must carry (none with the defaults)."""
+    out = ""
+    if a.engine != ENGINE:
+        out += " --engine %s" % a.engine
+    if a.judge_engine != JUDGE:
+        out += " --judge-engine %s" % a.judge_engine
+    if a.max_fidelity != 2:
+        out += " --max-fidelity %d" % a.max_fidelity
+    if a.limit != 200:
+        out += " --limit %d" % a.limit
+    if a.no_hindi:
+        out += " --no-hindi"
+    return out
+
+
 def spent_since(db: str, doc: str, mark: int) -> float:
     """$ of this text's translation and judge calls in usage_log after mark, as recorded."""
     try:
@@ -163,6 +224,9 @@ def translate_one(a, x: dict, lang: str = "en") -> int:
 def judge_model(engine: str):
     """judge_sample.py's model, as it builds it (its system prompt, JSON out, temperature 0). RuntimeError when the
     key or the SDK is missing: nothing is called."""
+    if str(engine or "").startswith("anthropic:"):   # JUDGE_SCREEN_2026_10_17: judge-v1 by Claude, on the Claude credit
+        import judge_sample as js
+        return js.ClaudeJudge(engine, "English", None)
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         raise RuntimeError("GEMINI_API_KEY is not set (.env)")
@@ -184,13 +248,17 @@ def judge_model(engine: str):
 def judge_one(a, model, x: dict, english: str, con) -> tuple:
     """(fidelity, fluency, reason) of the new English; the verdict replaces the old (judge-v1), as judge_sample does."""
     import judge_sample as js
+    claude = bool(getattr(model, "credit_metered", False))   # JUDGE_SCREEN_2026_10_17: a Claude judge meters itself
+    if claude:
+        model.con, model.doc = con, x["doc"]
     t0 = time.time()
     fid, flu, why = js._judge_one(model, "English", x["text"], x["iast"], english)
     try:
         from usage_meter import meter
         r, inc, outc = getattr(js._judge_one, "last", (None, 0, 0))
-        meter(kind="judge", doc=x["doc"], engine=a.judge_engine, resp=r, in_chars=inc, out_chars=outc, units=1,
-              duration_s=time.time() - t0, con=con)
+        if not claude:
+            meter(kind="judge", doc=x["doc"], engine=a.judge_engine, resp=r, in_chars=inc, out_chars=outc, units=1,
+                  duration_s=time.time() - t0, con=con)
     except Exception:
         pass
     now = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -232,9 +300,14 @@ def run(a, todo: list, pro: float, judge_cost: float, translate=None, judge=None
     import db_utils
     con = db_utils.connect(a.db)
     try:
+        claude = [e for e in (a.engine, a.judge_engine) if str(e or "").startswith("anthropic:")]   # JUDGE_SCREEN_2026_10_17
+        google = not (len(claude) == 2 and a.no_hindi)   # nothing in this run bills Google: its spend cap does not stop it
         for i, x in enumerate(todo, 1):
-            if budget_ok is not None and not budget_ok(a.db):
+            if google and budget_ok is not None and not budget_ok(a.db):
                 out["stopped"] = "the spend cap is reached (python scripts\\set_budget.py shows it)"
+                break
+            if claude and not credit_ok(con, each):
+                out["stopped"] = "the Claude credit is spent or expired (python scripts\\claude_engine.py --credit shows it)"
                 break
             spent = sum(spent_since(a.db, d, mark) for d in {y["doc"] for y in todo})
             if spent + each > a.max_usd:
@@ -293,6 +366,7 @@ def main(argv=None) -> int:
     try:
         todo, left = marked(con, a.only, a.max_fidelity, withdrawn(Path(a.verdicts)))
         pro, judge_cost, flash = prices(con)
+        pro, judge_cost = claude_prices(con, a.engine, a.judge_engine, pro, judge_cost)   # JUDGE_SCREEN_2026_10_17
     finally:
         con.close()
     todo = todo[:a.limit]
@@ -322,8 +396,8 @@ def main(argv=None) -> int:
         cap = max(0.10, round(est * 1.25 + 0.005, 2))
         print("VERDICT: %d passage(s) to translate again and judge again, about %s; %d left out"
               % (len(todo), usd(est), len(left)))
-        print("NEXT: python scripts\\retranslate_marked.py%s --yes --max-usd %.2f"
-              % ((" --doc %s" % a.only) if a.only else "", cap))
+        print("NEXT: python scripts\\retranslate_marked.py%s%s --yes --max-usd %.2f"
+              % ((" --doc %s" % a.only) if a.only else "", same_flags(a), cap))   # JUDGE_SCREEN_2026_10_17: its options
         return 0
     try:
         res = run(a, todo, pro, judge_cost, flash=flash)
