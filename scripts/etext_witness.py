@@ -743,6 +743,24 @@ def say(verdict: str, nxt: str = "", also=()):
         print("ALSO: " + x)
 
 
+def page_example(m) -> list:
+    """ETEXT_PAGE_2026_10_18: a real page for the ALSO line (on 18 Oct its "--page N" was run as it stood): the first
+    page of the scan the witness reads, else the first it offers for a page the scan cannot read, else the scan's first
+    page; [] with no scan to compare (--page would refuse)."""
+    if not m:
+        return []
+    pages = m.get("pages") or {}
+    hit = sorted(p for p, r in pages.items() if (r or {}).get("status") == "match")
+    off = sorted(o.get("page") for o in (m.get("offers") or []) if o.get("text") and o.get("page") is not None)
+    first = hit or off or sorted(pages)
+    return [first[0]] if first else []
+
+
+def also_page(q: str, m, what: str) -> list:
+    """ETEXT_PAGE_2026_10_18: the ALSO line, with a page that exists, or none."""
+    return [q + " --page %d   (%s)" % (p, what) for p in page_example(m)]
+
+
 def show_page(m: dict, verses: list, page: int):
     r = m["pages"].get(page)
     offer = next((o for o in m["offers"] if o["page"] == page), None)
@@ -863,10 +881,10 @@ def preview_or_write(a) -> int:
             print("  (--write --force makes it a witness all the same)")
             say("%s: %s; it should not be made a witness of this text%s" % (
                 src.name, op, ": its own text is damaged (noise %.1f%%)" % wq["noise_pct"] if noisy else ""), "",
-                [q + " --page N   (the witness's reading of one page of the scan)"])
+                also_page(q, m, "the witness's reading of one page of the scan"))   # ETEXT_PAGE_2026_10_18
             return 0
         say("%s reads as %d verses in %d pages: %s" % (src.name, len(verses), len(pages), op), q + " --write",
-            [q + " --page N   (the witness's reading of one page of the scan)"])
+            also_page(q, m, "the witness's reading of one page of the scan"))   # ETEXT_PAGE_2026_10_18
         return 0
     if (weak or noisy) and not a.force:
         say("refused: %s; --force makes it a witness all the same" % (
@@ -930,7 +948,8 @@ def write(a, doc, wcode, parsed, pages, verses, m, src, info, site, engine, op) 
     say("%s is written: %d verses in %d pages; local only (the register says witness, so the mirror leaves it alone); "
         "the database is not touched" % (wcode, len(verses), len(recs)),
         "python scripts\\etext_witness.py --doc %s --ingest --witness %s" % (doc, wcode),
-        ["python scripts\\etext_witness.py --doc %s --file \"%s\" --page N   (the witness's reading of a page)" % (doc, src)])
+        also_page('python scripts\\etext_witness.py --doc %s --file "%s"' % (doc, src), m,
+                  "the witness's reading of a page"))   # ETEXT_PAGE_2026_10_18
     return 0
 
 

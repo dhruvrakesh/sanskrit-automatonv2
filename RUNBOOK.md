@@ -2174,3 +2174,22 @@ on disk.
 3. **The editions:** `python scripts\export_html.py --db data\context.db --doc markandeya_purana__w_gretil --scholar
    --sanskrit --side-by-side --from 626 --to 780` (the Devimahatmya) and `--from 81 --to 124` (adhyayas 19 to 31); the
    prose: `python scripts\scholar_translate.py --doc markandeya_purana__w_gretil --report`.
+
+
+## The day's order: the Devimahatmya's editions, the mirror, the Ganita, the Surya (DOCS74_2026_10_18)
+
+docs/STATE_2026-10-18.md, section 6. One Gemini job at a time.
+1. **The Devimahatmya:** the editions and the prose again (DOCS73 above, step 3, free); its 37 flagged verses on the
+   desk (Triage); the re-judge (DOCS73 above, step 2: the dry run, then its NEXT).
+2. **The mirror:** `python scripts\corpus_sync.py --doc Mallapurana` (the plan, free), then the same with `--apply`.
+3. **The Sandilya:** `python scripts\retranslate_marked.py --doc AphorismsOfSandilya --engine anthropic:claude-sonnet-5-5
+   --judge-engine anthropic:claude-haiku-5-5` (the dry run), its NEXT; then `python scripts\corpus_sync.py --doc
+   AphorismsOfSandilya` and `--apply`.
+4. **The Ganita Yukti Bhasa:** `python scripts\reingest_pages.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` (the
+   plan, free), its NEXT (`--apply --replace`, as the plan counts); then on its desk page "The working English by Sonnet
+   in one pass", the rest (Plan, free; then Run); then the screen (DOCS72 above, step 2, `--doc
+   Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V`) and T2 (step 3).
+5. **The Surya Siddhanta:** `python scripts\scholar_translate.py --doc jyotish_surya_siddhanta__w_etext --pages 1-28
+   --limit 20 --engine anthropic:claude-sonnet-5-5 --compare-engine anthropic:claude-opus-5-5 --audit-every 10
+   --no-compare` (the plan, free: its first verse is the text's first), then `--yes --max-usd 1.50`; then the same with
+   `--limit 600` and `--yes --max-usd 16.00`.

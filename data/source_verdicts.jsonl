@@ -13,3 +13,4 @@
 {"doc": "2015_405693_Shatpath-Brahmanam", "status": "complete", "reason": "what is left is not Sanskrit", "at": "2026-10-17T00:35:00", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
 {"doc": "markandeya_purana__w_gretil", "status": "witness", "of": "markandeya_purana", "site": "gretil", "reason": "an e-text witness of markandeya_purana (gretil): local only until it is adopted", "at": "2026-10-17T21:40:01", "by": "etext_witness.py", "mark": "ETEXT_WITNESS_2026_10_11"}
 {"doc": "Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V", "status": "restored", "reason": "", "at": "2026-10-18T08:03:20", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
+{"doc": "jyotish_surya_siddhanta__w_etext", "status": "witness", "of": "jyotish_surya_siddhanta", "site": "etext", "reason": "an e-text witness of jyotish_surya_siddhanta (etext): local only until it is adopted", "at": "2026-10-18T15:15:05", "by": "etext_witness.py", "mark": "ETEXT_WITNESS_2026_10_11"}

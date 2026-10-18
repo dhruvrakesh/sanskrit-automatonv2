@@ -1,0 +1,15 @@
+The state of every repo in one page (DOCS74_2026_10_18), and a real page in the witness's ALSO line (ETEXT_PAGE_2026_10_18)
+
+docs/STATE_2026-10-18.md: the repos and folders (HEADs read from their logs), the thread a verse follows from the
+source to Srangam and back, the brain's counts on the PC and on the site, the engines and rules, the money, what
+remains in order and the open decisions; it replaces docs/PIPELINE_STATE_2026-09-30.md as the page that says where
+everything is. 18 Oct afternoon: the Devimahatmya's scholarly English made (669 passages, 632 passed, 37 flagged,
+$19.63); T2 on the Mallapurana (52 of 58 mended); the Surya Siddhanta's e-text in (515 verses, local).
+- scripts/patch_etext_page_2026_10_18.py (etext_witness.py): the ALSO line names a page that exists (the first the
+  witness reads, else the first it offers, else the scan's first), not "--page N", which was run as it stood; with no
+  scan to compare, no line. tests/test_quality_2026_10_11.py's replay chain follows .bak_etextpage_.
+Tests: tests/test_etext_page_2026_10_18.py (7).
+Docs: scripts/patch_docs74_2026_10_18.py (PLATFORM 77, RUNBOOK, EP 64).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

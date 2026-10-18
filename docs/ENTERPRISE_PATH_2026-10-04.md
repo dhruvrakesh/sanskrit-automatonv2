@@ -988,3 +988,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | E3 | The Devimahatmya, scholarly | The first run began at adhyaya 19 (SCHOLAR_REF_2026_10_18 mends it); again, about $19 |
 | E3b | Adhyayas 19 to 31, scholarly (740 verses) | Made; 482 to judge again (--rejudge) |
 | G1 | The Ganita Yukti Bhasa | Vision read 109 pages; the re-ingest of 108 (--replace 138) next |
+
+
+## Addendum 2026-10-18 (64) (DOCS74_2026_10_18)
+
+| # | Item | State |
+|---|---|---|
+| E3 | The Devimahatmya, scholarly | Made: 669 passages, 632 passed, 37 flagged ($19.63); editions again; the 37 read |
+| E3b | Adhyayas 19 to 31 (740) | The re-judge of the 482 next (about $1.30, Google) |
+| T2m | The Mallapurana | 52 of 58 mended; a mirror run |
+| T2s | The Sandilya | 30 marked; T2 next |
+| G1 | The Ganita Yukti Bhasa | The re-ingest, Tier R, the screen; its scholarly English (about $72) yours to decide |
+| S1 | The Surya Siddhanta | The e-text in (515); its scholarly English next (about $14) |
+| D74 | The state of all repos | docs/STATE_2026-10-18.md |
+| X1 | The scholarly English on the site | To build (a docs/cloud SQL file, a corpus_sync step, a reader patch) |
