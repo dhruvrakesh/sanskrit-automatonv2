@@ -4,12 +4,14 @@
     "MBh01": "the Srangam status panel's own wording before it was generated (quoted in Lovable's issue report, 2026-09-27)",
     "AphorismsOfSandilya": "Booksmith projects/aphorismsofsandilya/book.yaml title, set with block_AX -SetTitle",
     "markandeya_purana": "DOC_TITLES_2026_10_07: the title on the Srangam site since S4 M3 (2026-10-07)",
-    "nilamata_seg": "DOC_TITLES_2026_10_07: proposed; the retired upapurana_nilamata_purana is the same work and its story 22 is the draining of the lake and Jalodbhava. Remove if wrong."
+    "nilamata_seg": "DOC_TITLES_2026_10_07: proposed; the retired upapurana_nilamata_purana is the same work and its story 22 is the draining of the lake and Jalodbhava. Remove if wrong.",
+    "markandeya_purana__w_gretil": "DOCS76_2026_10_18: GRETIL's own title of the file, Mārkaṇḍeyapurāṇa 1-93 (data entry by the Sansknet Project); confirmed by applying patch_docs76_2026_10_18.py on 18 Oct"
   },
   "titles": {
     "MBh01": "Mahābhārata, Book I",
     "AphorismsOfSandilya": "Śāṇḍilya Bhakti Sūtra",
     "markandeya_purana": "Mārkaṇḍeya Purāṇa",
-    "nilamata_seg": "Nīlamata Purāṇa"
+    "nilamata_seg": "Nīlamata Purāṇa",
+    "markandeya_purana__w_gretil": "Mārkaṇḍeya Purāṇa (GRETIL e-text)"
   }
 }

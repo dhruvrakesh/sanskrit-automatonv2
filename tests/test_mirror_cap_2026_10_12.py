@@ -247,7 +247,8 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
                 # READ_IN_2026_10_13 came after (text_path.py), then REDEEM_2026_10_14 (dashboard.py, text_path.py)
-                later = sorted(SCRIPTS.glob(f + ".bak_readin_*")) or sorted(SCRIPTS.glob(f + ".bak_redeem_*"))
+                later = sorted(SCRIPTS.glob(f + ".bak_readin_*")) or sorted(SCRIPTS.glob(f + ".bak_redeem_*")) \
+                    or sorted(SCRIPTS.glob(f + ".bak_scholarmirror_*"))   # SCHOLAR_MIRROR_2026_10_18 (corpus_sync.py)
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)

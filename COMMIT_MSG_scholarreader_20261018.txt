@@ -1,0 +1,18 @@
+The scholarly English in the mirror and in Srangam's reader (SCHOLAR_MIRROR_2026_10_18, C18, DOCS76)
+
+Asked on 18 Oct: why only one scholarly text on Srangam when the mirror is complete. The mirror (8 Oct)
+carried everything but the scholarly English (14 Oct); editions go up only for a finished, judged text;
+and both Markandeya texts in scholarly English are a GRETIL witness, local until adopted.
+
+- scripts/corpus_sync.py (patch_scholar_mirror_2026_10_18.py): two rows of corpus.translations a verse,
+  en-x-scholar (the English, fidelity, fluency) and en-x-scholar-meta (status, flag, review, notes,
+  doubts, range); the latest current version, not rejected. Nothing else re-sent. test_mirror_cap's
+  replay chain follows .bak_scholarmirror_.
+- docs/cloud/C18: corpus_reader_scholar and corpus_reader_scholar_count behind the reader's gate.
+- docs/srangam/SCHOLAR_READER_2026-10-18 + patch_srangam_scholar_reader_2026_10_18.py: the reader shows
+  the scholarly English first, labelled, with its notes; the working English folds under it.
+- configs/editions.json: adhyayas 19 to 31 on; configs/doc_titles.json: the GRETIL Markandeya's title.
+- docs/SCHOLAR_READER_2026-10-18.md; PLATFORM 79, RUNBOOK, ENTERPRISE_PATH 66, STATE 11 (DOCS76).
+
+Tests: test_scholar_mirror_2026_10_18 (8), test_reader_scholar_pg_2026_10_18 (4, PostgreSQL),
+test_srangam_scholar_reader_kit_2026_10_18 (4), test_docs76_2026_10_18 (3).

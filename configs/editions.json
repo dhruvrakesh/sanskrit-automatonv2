@@ -48,12 +48,12 @@
   },
   {
    "slug": "markandeya-purana-19-31",
-   "enabled": false,
-   "why_off": "482 of its 740 verses wait for the judge (scholar_translate.py --rejudge); turn it on after the re-judge",
+   "enabled": true,
+   "why_on": "DOCS76_2026_10_18: judged on 18 Oct (659 passed, 76 flagged, 4 doubted of 739)",
    "doc": "markandeya_purana__w_gretil",
    "pages": [81, 124],
    "title": "Mārkaṇḍeya Purāṇa, adhyāyas 19 to 31",
-   "subtitle": "the Dattātreya and Alarka chapters: the Sanskrit with a scholarly English and notes",
+   "subtitle": "Kārtavīrya and Dattātreya; Kuvalayāśva and Madālasā; Madālasā's teaching of Alarka on the householder's duties and the śrāddha: the Sanskrit with a scholarly English and notes",
    "audit": ", every tenth sentence audited by Claude Opus 5.5",
    "source": {
     "name": "Mārkaṇḍeyapurāṇa 1-93, GRETIL (Göttingen Register of Electronic Texts in Indian Languages, SUB Göttingen)",

@@ -131,7 +131,8 @@ class TheFiles(unittest.TestCase):
             self.assertEqual(len(slugs), len(set(slugs)))
             for e in c["editions"]:
                 self.assertEqual(P.check_entry(e, {}), "", e["slug"])
-            self.assertEqual([e["slug"] for e in c["editions"] if e.get("enabled", True)], ["devimahatmya"])
+            self.assertEqual([e["slug"] for e in c["editions"] if e.get("enabled", True)],
+                             ["devimahatmya", "markandeya-purana-19-31"])   # DOCS76_2026_10_18
 
 
 if __name__ == "__main__":

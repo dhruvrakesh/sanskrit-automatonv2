@@ -11,6 +11,9 @@ other translations (translations_l10n: Hindi), entities and mentions, stories (a
 pipeline stages, and the passage vectors cut from 3,072 to their first 1,536 dims and
 renormalised. What stays at home: raw OCR (passages.norm), OCR variants, the SQLite search
 index, mt_cache, usage and budget tables, retired documents.
+SCHOLAR_MIRROR_2026_10_18: the scholarly English (scholar_translations) travels too, as two translation rows a verse:
+en-x-scholar (its English; translation_score its fidelity, translation_qa its fluency) and en-x-scholar-meta (JSON:
+status, review, notes, doubts, a sentence's range). The site reads them with public.corpus_reader_scholar (C18).
 
 How it is idempotent:
   - every row gets row_hash = md5 of its mirrored columns;
@@ -347,6 +350,116 @@ def _sel(cols_present: set, wanted, prefix: str) -> str:
     return ", ".join(("%s.%s" % (prefix, c)) if c in cols_present else "NULL" for c in wanted)
 
 
+# --- SCHOLAR_MIRROR_2026_10_18: the scholarly English, as rows of the translations table ----------
+SCHOLAR_LANG = "en-x-scholar"            # a verse's scholarly English (scholar_translations, scholar_translate.py)
+SCHOLAR_META_LANG = "en-x-scholar-meta"  # its status, review, notes, doubts and range, as JSON in `translation`
+SCHOLAR_META_VERSION = "scholar-meta-1"  # in mt_prompt_version of a meta row
+_SCHOLAR_COLS = ("id", "passage_id", "verse_ref", "src_hash", "translation", "notes", "doubts", "fidelity", "fluency",
+                 "status", "engine", "judge_engine", "prompt_version", "created_at", "review_verdict", "group_ref",
+                 "group_translation")
+_L10N_OUT = ("doc_code", "page_no", "idx", "lang") + L10N_COLS
+
+
+def _scholar_range(u, pinfo) -> str:
+    """SCHOLAR_MIRROR_2026_10_18: a sentence's range from its verses' own references (81.18-19), as the edition gives it
+    (export_html.py, EDITION_REFS_2026_10_18); scholar_translate's _range when none has one."""
+    import scholar_translate as ST
+    refs = [str((pinfo.get(r.get("passage_id")) or (None, None))[1] or "").strip() for r in u]
+    refs = [x for x in refs if x]
+    if not refs:
+        return ST._range(u)
+    a_, b_ = refs[0], refs[-1]
+    return a_ if a_ == b_ else "%s\u2013%s" % (a_, b_.split(".")[-1])
+
+
+def scholar_rows(con, code, passages, pinfo) -> list:
+    """SCHOLAR_MIRROR_2026_10_18: [(key, values, row)] of one text's scholarly English, for its translations group.
+    A verse with a current scholarly English gets an en-x-scholar row (its English; translation_score its fidelity and
+    translation_qa its fluency, as the judge gave them) and an en-x-scholar-meta row (JSON: status, flag, a person's
+    acceptance, the judge; notes and doubts on a sentence's first verse; a sentence over several verses has its range
+    on the first verse and "with" on the others, which have no English row of their own). As the edition takes them
+    (export_html.py --scholar): a verse's latest version, made from its Sanskrit as it reads now, not rejected by a
+    person. passages: id -> (page, idx); pinfo: id -> (Sanskrit, verse_ref)."""
+    if not passages or not _has_table(con, "scholar_translations"):
+        return []
+    import scholar_translate as ST
+    have = _cols(con, "scholar_translations")
+    sel = ", ".join(c if c in have else "NULL" for c in _SCHOLAR_COLS)
+    order = "page_no, idx, id" if {"page_no", "idx"} <= have else "id"
+    rows = [dict(zip(_SCHOLAR_COLS, r)) for r in con.execute(
+        "SELECT %s FROM scholar_translations WHERE doc_code = ? AND id IN (SELECT MAX(id) FROM scholar_translations "
+        "WHERE doc_code = ? GROUP BY passage_id) ORDER BY %s" % (sel, order), (code, code))]
+    live = []
+    for r in rows:
+        t = (pinfo.get(r["passage_id"]) or (None, None))[0]
+        if r["passage_id"] in passages and t is not None and ST.src_hash(t) == r["src_hash"]:
+            live.append(r)
+    out = []
+    for u in ST._units(live):
+        r0 = u[0]
+        if r0.get("review_verdict") == "reject":
+            continue
+        notes = []
+        for n in ST._loads(r0.get("notes"), []):
+            if isinstance(n, dict) and str(n.get("note") or "").strip():
+                notes.append({k: str(n.get(k) or "").strip() for k in ("anchor", "note", "kind")
+                              if str(n.get(k) or "").strip()})
+        doubt = str(r0.get("doubts") or "").strip()
+        status = str(r0.get("status") or "")
+        flag = status in ("flagged", "source_doubt") and r0.get("review_verdict") != "accept"
+        inline = ST._inline(u)
+        rng = _scholar_range(u, pinfo) if len(u) > 1 else ""
+        for k, r in enumerate(u):
+            page, idx = passages[r["passage_id"]]
+            meta = {"status": status, "flag": flag, "accepted": r.get("review_verdict") == "accept"}
+            if r.get("judge_engine"):
+                meta["judge"] = str(r["judge_engine"])
+            if inline or k == 0:
+                text = str((r.get("translation") if inline else (r0.get("group_translation") or r0.get("translation")))
+                           or "")
+                if k == 0:
+                    if notes:
+                        meta["notes"] = notes
+                    if doubt:
+                        meta["doubts"] = doubt
+                    if rng and not inline:
+                        meta["range"] = rng
+            else:
+                text = ""
+                meta["with"] = rng
+            if not text.strip() and not meta.get("with"):
+                continue
+            at = _clean(r.get("created_at"))
+            if text.strip():
+                vals = [code, page, idx, SCHOLAR_LANG, _clean(text), _clean(r.get("engine")),
+                        _clean(r.get("prompt_version")), _clean(r.get("fidelity")), _clean(r.get("fluency")), at]
+                out.append(("%d|%d|%s" % (page, idx, SCHOLAR_LANG), vals, dict(zip(_L10N_OUT, vals))))
+            mj = json.dumps(meta, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            vals = [code, page, idx, SCHOLAR_META_LANG, _clean(mj), None, SCHOLAR_META_VERSION, None, None, at]
+            out.append(("%d|%d|%s" % (page, idx, SCHOLAR_META_LANG), vals, dict(zip(_L10N_OUT, vals))))
+    return out
+
+
+def scholar_count(con, docs) -> int:
+    """SCHOLAR_MIRROR_2026_10_18: the scholarly English's translation rows of these texts (for --status)."""
+    if not _has_table(con, "scholar_translations"):
+        return 0
+    have = {r[0] for r in con.execute("SELECT DISTINCT doc_code FROM scholar_translations")}
+    pcols = _cols(con, "passages")
+    n = 0
+    for d in docs:
+        if d[1] not in have:
+            continue
+        pos_, info_ = {}, {}
+        for pid_, page_, idx_, text_, vref_ in con.execute(
+                "SELECT p.id, p.page_no, p.idx, %s FROM passages p WHERE p.doc_id=?"
+                % _sel(pcols, ("text", "verse_ref"), "p"), (d[0],)):
+            pos_[pid_] = (page_, idx_)
+            info_[pid_] = (text_, vref_)
+        n += len({k for k, _v, _r in scholar_rows(con, d[1], pos_, info_)})
+    return n
+
+
 def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
     """All per-document groups of one document, read inside one read transaction so that the
     child rows match the passages they point to."""
@@ -356,6 +469,7 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
     try:
         pcols = _cols(con, "passages")
         passages = {}
+        pinfo = {}   # SCHOLAR_MIRROR_2026_10_18: id -> (Sanskrit, verse_ref), for the scholarly English
         rows = con.execute(
             "SELECT p.id, p.page_no, p.idx, %s FROM passages p WHERE p.doc_id=? ORDER BY p.page_no, p.idx"
             % _sel(pcols, PASSAGE_COLS, "p"), (did,)).fetchall()
@@ -364,6 +478,7 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
             pid, page, idx = r[0], r[1], r[2]
             key = "%d|%d" % (page, idx)
             passages[pid] = (page, idx)
+            pinfo[pid] = (r[3 + PASSAGE_COLS.index("text")], r[3 + PASSAGE_COLS.index("verse_ref")])
             vals = [code, page, idx, pid] + [_clean(x) for x in r[3:]]
             row = dict(zip(("doc_code", "page_no", "idx", "local_id") + PASSAGE_COLS, vals))
             g.add(key, vals, row)
@@ -384,6 +499,11 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
                     vals = [code, pos[0], pos[1], r[1]] + [_clean(x) for x in r[2:]]
                     row = dict(zip(("doc_code", "page_no", "idx", "lang") + L10N_COLS, vals))
                     g.add(key, vals, row)
+            for key, vals, row in scholar_rows(con, code, passages, pinfo):   # SCHOLAR_MIRROR_2026_10_18
+                if key in g.rows:
+                    g.skipped += 1
+                    continue
+                g.add(key, vals, row)
             out["translations"] = g
 
         if "mentions" in tables:
@@ -964,6 +1084,8 @@ def local_counts(con, docs) -> dict:
     if _has_table(con, "translations_l10n"):
         out["translations"] = one("SELECT count(*) FROM translations_l10n l JOIN passages p ON p.id = l.passage_id "
                                   "WHERE p.doc_id IN (%s)" % q, ids)
+    if _has_table(con, "scholar_translations"):   # SCHOLAR_MIRROR_2026_10_18: and the scholarly English's rows
+        out["translations"] += scholar_count(con, docs)
     if _has_table(con, "entity_mentions") and _has_table(con, "entities"):
         out["mentions"] = one("SELECT count(*) FROM entity_mentions m JOIN passages p ON p.id = m.passage_id "
                               "JOIN entities e ON e.id = m.entity_id WHERE p.doc_id IN (%s) "

@@ -1013,3 +1013,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | E3c | An e-text's chapters in its edition | Done: EDITION_REFS_2026_10_18 |
 | U1 | The dashboard's top bar | Done: NAV_MENUS_2026_10_18 (six menus) |
 | L1 | GRETIL's licence | Decided: published with credit, CC BY-NC-SA 4.0, our English on the same terms |
+
+
+## Addendum 2026-10-18 (66) (DOCS76_2026_10_18)
+
+| # | Item | State |
+|---|---|---|
+| X1b | The scholarly English in the reader | Built: SCHOLAR_MIRROR_2026_10_18, C18, SCHOLAR_READER_2026_10_18 |
+| X1c | The scholarly English in search (words and meaning) | To build |
+| X1d | The scholarly English in the published reader (/texts) | To build |
+| E4 | Adhyayas 19 to 31 as an edition | On (configs/editions.json) |
+| W1 | The GRETIL Markandeya adopted as a text of its own | Yours: repair_text.py --release --force |

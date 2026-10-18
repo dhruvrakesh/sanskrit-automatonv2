@@ -2207,3 +2207,25 @@ docs/EDITIONS_SITE_2026-10-18.md.
 3. **The commit (yours):** `git add -- public/scholarly` and the files the kit printed; `git commit`; `git push`. Then
    https://srangam.nartiang.org/editions.
 4. **After a new scholarly run:** step 1 again, then `git add -- public/scholarly`, commit, push.
+
+
+## The scholarly English in the reader (DOCS76_2026_10_18)
+
+docs/SCHOLAR_READER_2026-10-18.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`,
+`$S = "D:\srangam-42267"`.
+1. **The automaton:** `Set-Location $A`; `python scripts\patch_scholar_mirror_2026_10_18.py --check`, then without
+   --check; the same for `scripts\patch_docs76_2026_10_18.py`; `python -m unittest tests.test_scholar_mirror_2026_10_18
+   tests.test_corpus_sync_2026_10_08 tests.test_mirror_cap_2026_10_12 tests.test_publish_editions_2026_10_18
+   tests.test_srangam_scholar_reader_kit_2026_10_18 tests.test_docs76_2026_10_18`; `python scripts\corpus_sync.py` (the
+   plan: the scholarly rows of MBh01 and the Tantrabhidhana); release.ps1 with COMMIT_MSG_scholarreader_20261018.txt.
+2. **The site's SQL** (Lovable Cloud SQL editor): docs/cloud/C18_checks_2026-10-18.sql E1 and P1, one per paste; then
+   `Get-Content -Raw -Encoding UTF8 "$A\docs\cloud\C18_reader_scholar_2026-10-18.sql" | Set-Clipboard`, paste it whole,
+   Run; then V1 and V2.
+3. **Srangam:** `Set-Location $S`; `git pull --rebase --autostash`; `python
+   "$A\scripts\patch_srangam_scholar_reader_2026_10_18.py" --check`, then without --check; `npm run typecheck`; `npx
+   vitest run`; `npm run build`. Then the editions: `Set-Location $A`; `python scripts\publish_editions.py`, then
+   `--apply`. Then `Set-Location $S`; `git add --` the files the kit printed and `public/scholarly`; `git commit -F
+   "$A\docs\srangam\SCHOLAR_READER_2026-10-18\COMMIT_MSG.txt"`; `git push`.
+4. **The GRETIL Markandeya on the site (your decision):** `python scripts\repair_text.py --doc
+   markandeya_purana__w_gretil --release --force`; `python scripts\corpus_sync.py` (the plan); the scheduled mirror
+   sends it. Then E1 and E2 of the checks.
