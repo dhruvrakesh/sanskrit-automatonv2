@@ -2193,3 +2193,17 @@ docs/STATE_2026-10-18.md, section 6. One Gemini job at a time.
    --limit 20 --engine anthropic:claude-sonnet-5-5 --compare-engine anthropic:claude-opus-5-5 --audit-every 10
    --no-compare` (the plan, free: its first verse is the text's first), then `--yes --max-usd 1.50`; then the same with
    `--limit 600` and `--yes --max-usd 16.00`.
+
+
+## The scholarly editions on Srangam (DOCS75_2026_10_18)
+
+docs/EDITIONS_SITE_2026-10-18.md.
+1. **The editions (the automaton):** `python scripts\publish_editions.py` (the plan, free; it lists each edition and
+   what it would write), then `python scripts\publish_editions.py --apply`. An edition is turned on or off in
+   configs/editions.json (`"enabled"`).
+2. **The site (once):** in D:\srangam-42267, `git pull --rebase --autostash`; `python "D:\Sanksrit
+   Automatons\sanskrit-automatonv2\scripts\patch_srangam_editions_2026_10_18.py" --check`, then without --check;
+   `npm run typecheck`; `npx vitest run`; `npm run build`.
+3. **The commit (yours):** `git add -- public/scholarly` and the files the kit printed; `git commit`; `git push`. Then
+   https://srangam.nartiang.org/editions.
+4. **After a new scholarly run:** step 1 again, then `git add -- public/scholarly`, commit, push.

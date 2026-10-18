@@ -521,7 +521,7 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
         if want_footnotes and fn_notes:
             out.append("<div class='footnotes'><ol>")
             for n, note in fn_notes:
-                out.append(f"<li id='fn-{n}'>{html.escape(note)} "
+                out.append(f"<li id='fn-{n}'>{_note_html(note)} "   # EDITION_REFS_2026_10_18: *terms* in italics
                            f"<a href='#fnr-{n}' class='fn-ref'>&#8617;</a></li>")
             out.append("</ol></div>")
         out.append("</section>")
@@ -695,6 +695,54 @@ def _with_fig_css(doc_html, on):
     return doc_html.replace("</style>", _FIG_CSS + "</style>", 1) if on else doc_html
 
 
+# --- EDITION_REFS_2026_10_18: an e-text's own references for its chapters and its sentences ----------
+_REF2_RE = re.compile(r"^\D*?(\d+)\.(\d+)$")
+_ITI = "\u0907\u0924\u093f"
+
+
+def _ref_chapters(recs):
+    """EDITION_REFS_2026_10_18: in an e-text whose verses carry their own two-part references (GRETIL's 81.1), the
+    chapter is the reference's, not the file's headings (the GRETIL Markandeya's speaker lines carried "77" within
+    adhyaya 81). A passage without a reference goes with the next verse that has one (a heading, a speaker's line), a
+    colophon (iti ...) with the one before. Only when half or more of the passages that show Sanskrit have such a reference; three-part
+    references (MBh 1.1.8) and texts without references are left as they were."""
+    chs = []
+    for r in recs:
+        m = _REF2_RE.match(str(r.get("vref") or "").strip())
+        chs.append(m.group(1) if m else None)
+    shown = [c for r, c in zip(recs, chs) if (r.get("san") or "").strip()]
+    if not shown or sum(1 for c in shown if c) < 0.5 * len(shown):
+        return recs
+    after, nxt = [None] * len(recs), None
+    for i in range(len(recs) - 1, -1, -1):
+        if chs[i]:
+            nxt = chs[i]
+        after[i] = nxt
+    prev = None
+    for i, r in enumerate(recs):
+        if chs[i]:
+            prev = r["chap"] = chs[i]
+            continue
+        san = (r.get("san") or "").strip()
+        if prev and (san.startswith(_ITI) or after[i] is None):
+            r["chap"] = prev
+        elif after[i]:
+            r["chap"] = after[i]
+    return recs
+
+
+def _own_range(u, pref):
+    """EDITION_REFS_2026_10_18: a sentence's range from its verses' own references, so that one begun by a speaker's line
+    (no reference of its own) is not labelled by that line's page.idx ("628.1-18"); ST._range when none has one."""
+    import scholar_translate as ST
+    refs = [pref.get(r.get("passage_id")) for r in u]
+    refs = [x for x in refs if x]
+    if not refs:
+        return ST._range(u)
+    a_, b_ = refs[0], refs[-1]
+    return a_ if a_ == b_ else "%s\u2013%s" % (a_, b_.split(".")[-1])
+
+
 # --- SCHOLAR_EDITION_2026_10_17: the scholarly English as an edition ----------
 # Asked on 17 Oct for "authoritative and scholarly books from our corpus in our good html format like ganita
 # yuktibhasa": this exporter's edition (the Sanskrit, its IAST, the English, the notes at each chapter's end), with
@@ -755,6 +803,12 @@ def _scholar_recs(con, doc, recs):
         stats["working"] = len(recs)
         return recs, stats
     ptext, pkey = {}, {}
+    pref = {}   # EDITION_REFS_2026_10_18: each passage's own reference
+    if "verse_ref" in _colnames(con, "passages"):
+        for pid_, vr_ in con.execute("SELECT p.id, p.verse_ref FROM passages p JOIN docs d ON d.id = p.doc_id "
+                                     "WHERE d.code = ?", (doc,)):
+            if vr_ not in (None, ""):
+                pref[pid_] = str(vr_).strip()
     for pid, pg, ix, tx in con.execute("SELECT p.id, p.page_no, p.idx, p.text FROM passages p JOIN docs d ON d.id = p.doc_id "
                                        "WHERE d.code = ?", (doc,)):
         ptext[pid] = tx
@@ -780,7 +834,7 @@ def _scholar_recs(con, doc, recs):
         doubt = str(r0.get("doubts") or "").strip()
         flag = r0.get("status") in ("flagged", "source_doubt") and r0.get("review_verdict") != "accept"
         inline = ST._inline(u)
-        rng = ST._range(u) if len(u) > 1 else ""
+        rng = _own_range(u, pref) if len(u) > 1 else ""   # EDITION_REFS_2026_10_18
         for k, r in enumerate(u):
             meta = {"status": r0.get("status"), "flag": flag, "rejected": r0.get("review_verdict") == "reject",
                     "accepted": r.get("review_verdict") == "accept", "engine": str(r.get("engine") or "?"),
@@ -822,6 +876,24 @@ def _scholar_recs(con, doc, recs):
     return recs, stats
 
 
+def _note_html(note):
+    # EDITION_REFS_2026_10_18: a chapter's note as printed: escaped, a *term* in italics as in the English
+    return _EM_RE.sub(r"<em>\1</em>", html.escape(note))
+
+
+def _note_at(s, raw_a):
+    # EDITION_REFS_2026_10_18: (position, form) of a note's anchor in a verse's English as printed (escaped, *terms* in
+    # italics), or (-1, '')
+    if not raw_a:
+        return -1, ""
+    for a in (html.escape(raw_a), _inline_format(html.escape(raw_a)), html.escape(raw_a.replace("*", ""))):
+        if a:
+            p = s.find(a)
+            if p >= 0:
+                return p, a
+    return -1, ""
+
+
 def _sch_en_html(en, sch, counter, notes_out, want_footnotes=True):
     """The scholarly English of a verse: italics for *terms*, each note's number after its anchor's first appearance,
     the dagger of a verse not yet read by a person; the working English marked as a draft."""
@@ -833,14 +905,25 @@ def _sch_en_html(en, sch, counter, notes_out, want_footnotes=True):
         return "<span class='sch-with'>Its English is given with %s, above.</span>" % html.escape(sch["with"])
     s = _inline_format(html.escape(en))
     if want_footnotes:
-        for n in sch.get("notes") or []:
+        # EDITION_REFS_2026_10_18: the notes numbered in the order their anchors are read (they came in the order the
+        # translator listed them: 1, 4, 3, 2 in the Devimahatmya's first sentence), an italic *term* found as printed;
+        # a note whose anchor is not found comes last
+        placed = []
+        for j, n in enumerate(sch.get("notes") or []):
+            pos, a = _note_at(s, str(n.get("anchor") or "").strip())
+            placed.append((pos if pos >= 0 else len(s) + 1 + j, j, n, pos, a))
+        placed.sort(key=lambda t: (t[0], t[1]))
+        marks = []
+        for _o, _j, n, pos, a in placed:
             counter[0] += 1
             k = counter[0]
             notes_out.append((k, "%s: %s" % (str(n.get("anchor") or "").strip(), str(n.get("note") or "").strip())))
-            mark = "<sup class='fn-ref' id='fnr-%d'><a href='#fn-%d'>%d</a></sup>" % (k, k, k)
-            a = html.escape(str(n.get("anchor") or "").strip())
-            pos = s.find(a) if a else -1
-            s = (s[:pos + len(a)] + mark + s[pos + len(a):]) if pos >= 0 else s + mark
+            marks.append((pos + len(a) if pos >= 0 else -1, "<sup class='fn-ref' id='fnr-%d'><a href='#fn-%d'>%d</a></sup>"
+                          % (k, k, k)))
+        for i_, (p_, m_) in sorted(enumerate(marks), key=lambda t: (-t[1][0], -t[0])):
+            if p_ >= 0:
+                s = s[:p_] + m_ + s[p_:]
+        s += "".join(m_ for p_, m_ in marks if p_ < 0)
         if sch.get("doubts"):
             counter[0] += 1
             k = counter[0]
@@ -871,6 +954,7 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
     prov = _provenance(con, doc, hi_lang)
     if scholar:   # SCHOLAR_EDITION_2026_10_17: the scholarly English in place of the working English
         recs, prov["scholar"] = _scholar_recs(con, doc, recs)
+        recs = _ref_chapters(recs)   # EDITION_REFS_2026_10_18: an e-text's chapters from its own references
     body, kept = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                          include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                          number_pages=number_pages, drop_junk_en=drop_junk_en,

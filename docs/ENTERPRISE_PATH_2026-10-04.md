@@ -1002,3 +1002,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | S1 | The Surya Siddhanta | The e-text in (515); its scholarly English next (about $14) |
 | D74 | The state of all repos | docs/STATE_2026-10-18.md |
 | X1 | The scholarly English on the site | To build (a docs/cloud SQL file, a corpus_sync step, a reader patch) |
+
+
+## Addendum 2026-10-18 (65) (DOCS75_2026_10_18)
+
+| # | Item | State |
+|---|---|---|
+| X1a | The scholarly editions on Srangam | Built: publish_editions.py and /editions (EDITIONS_SITE_2026_10_18); the Devimahatmya first |
+| X1b | The scholarly English in the reader and in search | To build (a site table, a mirror step, a reader change) |
+| E3c | An e-text's chapters in its edition | Done: EDITION_REFS_2026_10_18 |
+| U1 | The dashboard's top bar | Done: NAV_MENUS_2026_10_18 (six menus) |
+| L1 | GRETIL's licence | Decided: published with credit, CC BY-NC-SA 4.0, our English on the same terms |

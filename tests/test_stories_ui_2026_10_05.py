@@ -56,7 +56,8 @@ class Wiring(unittest.TestCase):
         self.assertLess(i, d.index('if __name__ == "__main__":'), "registered at import, before the CLI")
         self.assertEqual(d[:i].rstrip().splitlines()[-1].strip(), "try:")
         h = (ROOT / "scripts" / "dashboard_static.html").read_text(encoding="utf-8")
-        self.assertLess(h.index('href="/stories"'), h.index('href="/shelf"'))
+        bar = h[h.index('<header class="top-bar">'):h.index("</header>")]   # NAV_MENUS_2026_10_18: in its Make menu
+        self.assertIn('href="/stories"', bar)
 
 
 class Page(unittest.TestCase):

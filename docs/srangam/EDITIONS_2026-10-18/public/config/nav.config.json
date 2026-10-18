@@ -1,0 +1,54 @@
+{
+  "primary": [
+    {"label": "Articles", "href": "/articles", "desc": "All published research"},
+    {"label": "Editions", "href": "/editions", "desc": "Sanskrit texts with a scholarly English and notes"},
+    {
+      "label": "Themes",
+      "desc": "Browse by research topic",
+      "children": [
+        {"label": "Ancient India", "href": "/themes/ancient-india"},
+        {"label": "Indian Ocean World", "href": "/themes/indian-ocean-world"},
+        {"label": "Scripts & Inscriptions", "href": "/themes/scripts-inscriptions"},
+        {"label": "Geology & Deep Time", "href": "/themes/geology-deep-time"},
+        {"label": "Empires & Exchange", "href": "/themes/empires-exchange"}
+      ]
+    },
+    {
+      "label": "Research",
+      "desc": "Sources, methods & bibliography",
+      "children": [
+        {"label": "Epigraphic Evidence", "href": "/sources/epigraphy"},
+        {"label": "Multilingual Edicts", "href": "/sources/edicts"},
+        {"label": "Scripts that Sailed II: Atlas", "href": "/scripts-that-sailed-ii"},
+        {"label": "Methods & Data", "href": "/sources-method"},
+        {"label": "Bibliography (MLA)", "href": "/reading-room"},
+        {"label": "Sanskrit Terminology", "href": "/sources/sanskrit-terminology"}
+      ]
+    },
+    {
+      "label": "Tools",
+      "desc": "Sanskrit & Jyotish analysis",
+      "children": [
+        {"label": "Sanskrit Translator", "href": "/sanskrit-translator"},
+        {"label": "Jyotish Horoscope", "href": "/jyotish-horoscope"}
+      ]
+    },
+    {
+      "label": "Explore",
+      "desc": "Interactive maps & data",
+      "children": [
+        {"label": "Global Map", "href": "/maps-data"},
+        {"label": "Research Network", "href": "/research-network"},
+        {"label": "Data Visualizations", "href": "/data-viz"},
+        {"label": "Field Notes", "href": "/field-notes"},
+        {"label": "Site Map", "href": "/sitemap"}
+      ]
+    },
+    {"label": "About", "href": "/about", "desc": "Project overview"}
+  ],
+  "utilities": {
+    "searchPlaceholder": "Search articles, pins, sources…",
+    "languages": ["English","हिन्दी","தமிழ்","తెలుగু","ಕನ್ನಡ","বাংলা","অসমীয়া","Pnar"],
+    "i18nOptions": {"showIAST": true}
+  }
+}

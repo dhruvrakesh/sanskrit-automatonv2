@@ -1,0 +1,24 @@
+The scholarly editions for Srangam (EDITIONS_SITE_2026_10_18), an e-text's chapters from its own references (EDITION_REFS_2026_10_18), the dashboard's top bar in six menus (NAV_MENUS_2026_10_18)
+
+docs/EDITIONS_SITE_2026-10-18.md. Asked on 18 Oct for the scholarly works on Srangam "for max effect and
+distribution" and a fuller top bar; decided: GRETIL's texts published with their credit (CC BY-NC-SA 4.0, our
+English on the same terms), both bars extended.
+- scripts/publish_editions.py, configs/editions.json (new): each enabled edition exported as export_html.py --scholar
+  makes it, given a bar back to /editions, its credits, licence and canonical address, written into the Srangam repo
+  (public/scholarly/<slug>.html, index.json); the plan by default, --apply writes, never git; refuses a text in
+  repair, a witness without source and licence, an edition with no scholarly English. The Devimahatmya on; the Surya
+  and adhyayas 19 to 31 off until complete.
+- scripts/patch_srangam_editions_2026_10_18.py with docs/srangam/EDITIONS_2026-10-18/ (for the Srangam repo): /editions
+  (src/pages/Editions.tsx, src/lib/editions.ts, 4 tests), the route, "Editions" in the header, the Corpus menu, the
+  sitemap, RELIABILITY_AUDIT Phase AK.
+- scripts/patch_edition_refs_2026_10_18.py (export_html.py): the scholarly edition of an e-text takes its chapters
+  from its verses' own references (the Devimahatmya's contents read 77, 81, 78, 82 ...) and labels a sentence by them;
+  the notes are numbered in the order they are read, a *term* in a note in italics.
+- scripts/patch_nav_menus_2026_10_18.py (dashboard_static.html): Texts, Translate, Check, Make, Ask, Site; every link
+  kept; Scholarly English, Path, Redeem, BM2, Methodology, Srangam and the Hub linked; no script block added.
+Tests: tests/test_edition_refs_2026_10_18.py (6), tests/test_publish_editions_2026_10_18.py (5),
+tests/test_srangam_editions_kit_2026_10_18.py (4), tests/test_nav_menus_2026_10_18.py (5).
+Docs: scripts/patch_docs75_2026_10_18.py (PLATFORM 78, RUNBOOK, EP 65, STATE).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

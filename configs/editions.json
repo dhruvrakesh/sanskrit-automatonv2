@@ -1,0 +1,73 @@
+{
+ "about": "EDITIONS_SITE_2026_10_18: the scholarly editions that scripts/publish_editions.py writes into the Srangam repo (public/scholarly/). An entry with \"enabled\": false is kept here and not published. docs/EDITIONS_SITE_2026-10-18.md.",
+ "site_repo": "D:\\srangam-42267",
+ "editions": [
+  {
+   "slug": "devimahatmya",
+   "enabled": true,
+   "doc": "markandeya_purana__w_gretil",
+   "pages": [626, 780],
+   "title": "Devīmāhātmya",
+   "subtitle": "Mārkaṇḍeya Purāṇa, adhyāyas 81 to 93: the Sanskrit with a scholarly English and notes",
+   "audit": ", every tenth sentence audited by Claude Opus 5.5",
+   "source": {
+    "name": "Mārkaṇḍeyapurāṇa 1-93, GRETIL (Göttingen Register of Electronic Texts in Indian Languages, SUB Göttingen)",
+    "url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_mArkaNDeyapurANa1-93.htm",
+    "credit": "data entry by members of the Sansknet Project",
+    "licence": "CC BY-NC-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "note": "GRETIL notes that this e-text is not proof-read; the translator's doubts about its readings are in the notes"
+   },
+   "english_licence": {
+    "name": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "note": "made from the GRETIL text and shared on the same terms, for non-commercial use with credit"
+   }
+  },
+  {
+   "slug": "surya-siddhanta",
+   "enabled": false,
+   "why_off": "20 of its 515 verses are in scholarly English (18 Oct); turn it on when the rest is made",
+   "doc": "jyotish_surya_siddhanta__w_etext",
+   "pages": [1, 28],
+   "title": "Sūryasiddhānta",
+   "subtitle": "the Sanskrit with a scholarly English and notes",
+   "audit": ", every tenth sentence audited by Claude Opus 5.5",
+   "source": {
+    "name": "Sūryasiddhānta, GRETIL (Göttingen Register of Electronic Texts in Indian Languages, SUB Göttingen), file sa_sUryasiddhAnta",
+    "url": "https://gretil.sub.uni-goettingen.de/",
+    "credit": "input by Michio Yano, from the editions of F.-E. Hall (Bibliotheca Indica 79, Calcutta 1854), the Kashi Sanskrit Granthamala 144 (1987) and Sudhakara Dvivedi (Sampurnanand Sanskrit University, 1987)",
+    "licence": "CC BY-NC-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+   },
+   "english_licence": {
+    "name": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "note": "made from the GRETIL text and shared on the same terms, for non-commercial use with credit"
+   }
+  },
+  {
+   "slug": "markandeya-purana-19-31",
+   "enabled": false,
+   "why_off": "482 of its 740 verses wait for the judge (scholar_translate.py --rejudge); turn it on after the re-judge",
+   "doc": "markandeya_purana__w_gretil",
+   "pages": [81, 124],
+   "title": "Mārkaṇḍeya Purāṇa, adhyāyas 19 to 31",
+   "subtitle": "the Dattātreya and Alarka chapters: the Sanskrit with a scholarly English and notes",
+   "audit": ", every tenth sentence audited by Claude Opus 5.5",
+   "source": {
+    "name": "Mārkaṇḍeyapurāṇa 1-93, GRETIL (Göttingen Register of Electronic Texts in Indian Languages, SUB Göttingen)",
+    "url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_mArkaNDeyapurANa1-93.htm",
+    "credit": "data entry by members of the Sansknet Project",
+    "licence": "CC BY-NC-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "note": "GRETIL notes that this e-text is not proof-read; the translator's doubts about its readings are in the notes"
+   },
+   "english_licence": {
+    "name": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "note": "made from the GRETIL text and shared on the same terms, for non-commercial use with credit"
+   }
+  }
+ ]
+}
