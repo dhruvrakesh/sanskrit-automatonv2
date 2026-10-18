@@ -2161,3 +2161,16 @@ on disk.
    `Invoke-WebRequest -Uri https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_mArkaNDeyapurANa1-93.htm -OutFile sources\markandeya_purana\sa_mArkaNDeyapurANa1-93.htm -UseBasicParsing`;
    then `python scripts\etext_witness.py --doc markandeya_purana --file sources\markandeya_purana\sa_mArkaNDeyapurANa1-93.htm --slug gretil`
    (the preview, free), the same with `--write`, then `python scripts\etext_witness.py --doc markandeya_purana --ingest`.
+
+
+## The Devimahatmya, its re-judge and editions (DOCS73_2026_10_18)
+
+1. **The run:** `python scripts\scholar_translate.py --doc markandeya_purana__w_gretil --from-ref 81.1 --pages 627-780
+   --limit 20 --engine anthropic:claude-sonnet-5-5 --compare-engine anthropic:claude-opus-5-5 --audit-every 10
+   --no-compare` (the plan: its first verse must be MarkP_81.1, savarnih suryatanayo), then `--yes --max-usd 1.50`; then
+   the same with `--limit 700` and `--yes --max-usd 24.00`. No vision repair beside it.
+2. **The re-judge** of the verses no judge answered: `python scripts\scholar_translate.py --doc
+   markandeya_purana__w_gretil --engine anthropic:claude-sonnet-5-5 --rejudge --limit 900` (the dry run), then its NEXT.
+3. **The editions:** `python scripts\export_html.py --db data\context.db --doc markandeya_purana__w_gretil --scholar
+   --sanskrit --side-by-side --from 626 --to 780` (the Devimahatmya) and `--from 81 --to 124` (adhyayas 19 to 31); the
+   prose: `python scripts\scholar_translate.py --doc markandeya_purana__w_gretil --report`.

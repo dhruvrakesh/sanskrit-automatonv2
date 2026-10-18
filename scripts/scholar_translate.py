@@ -4,7 +4,7 @@
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
 COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
 AUDIT_2026_10_15, RUN_FIX_2026_10_15, CLAUDE_FIRST_2026_10_15, REJUDGE_2026_10_15,
-TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16, ORNAMENT_2026_10_16
+TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16, ORNAMENT_2026_10_16, SCHOLAR_REF_2026_10_18
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -328,6 +328,22 @@ def ref_of(x: dict) -> str:
     return "%s.%s" % (x.get("page"), x.get("idx"))
 
 
+def own_ref(x: dict) -> str:
+    """SCHOLAR_REF_2026_10_18: the verse's own reference, as ref_of trusts it (an e-text's, or one with a dot when the
+    engine is not known), or "": never the page.idx ref_of falls back to. On 17 Oct "--from-ref 81.1" meant MarkP_81.1
+    (page 627 of the GRETIL Markandeya) and found page 81, passage 1 first: a chapter heading with no reference."""
+    r = x.get("ref")
+    eng = str(x.get("engine") or "").lower()
+    if r and (any(k in eng for k in REF_TRUSTED) or (not eng and "." in str(r))):
+        return str(r)
+    return ""
+
+
+def judge_unanswered(r: dict) -> bool:
+    """SCHOLAR_REF_2026_10_18: a row with English whose judge gave no score (an error, a quota: "[judge failed: ...]")."""
+    return r.get("fidelity") is None and bool((r.get("translation") or "").strip())
+
+
 def register(path: Path) -> dict:
     """The latest record of each text in data/source_verdicts.jsonl."""
     last = {}
@@ -483,6 +499,7 @@ def choose(a, allp: list, done: dict) -> tuple:
     pages = parse_pages(a.pages)
     started = not a.from_ref
     picked, left, skipped = [], [], []
+    own = bool(a.from_ref) and any(own_ref(x) == a.from_ref for x in allp)   # SCHOLAR_REF_2026_10_18
     for i, x in enumerate(allp):
         if pages is not None and x["page"] not in pages:
             continue
@@ -491,7 +508,7 @@ def choose(a, allp: list, done: dict) -> tuple:
         if getattr(a, "only_ids", None) is not None and x["id"] not in a.only_ids:   # TRIAGE_2026_10_16
             continue
         if not started:
-            if ref_of(x) != a.from_ref:
+            if (own_ref(x) if own else ref_of(x)) != a.from_ref:   # SCHOLAR_REF_2026_10_18: its own reference first
                 continue
             started = True
         why = readiness(x["text"], x["type"], x["quality"], a.min_quality)
@@ -2295,7 +2312,7 @@ def rejudge_targets(con, a, allp: list) -> list:
     pages = parse_pages(getattr(a, "pages", None))
     byid = {x["id"]: x for x in allp}
     rows = [r for r in latest_rows(con, a.doc, a.engine).values()
-            if is_claude(r.get("judge_engine")) and not r.get("review_verdict")
+            if (is_claude(r.get("judge_engine")) or judge_unanswered(r)) and not r.get("review_verdict")   # SCHOLAR_REF_2026_10_18
             and r["passage_id"] in byid and current(r, byid[r["passage_id"]])
             and (pages is None or r.get("page_no") in pages)]
     rows.sort(key=lambda r: (r.get("page_no") or 0, r.get("idx") or 0))
@@ -2367,7 +2384,8 @@ def rejudge_main(a) -> int:
     n = sum(len(u) for u in units)
     byid_e = {x["id"]: x for x in allp}
     est = jp * sum(1 + (1 if all((byid_e[r["passage_id"]].get("english") or "").strip() for r in u) else 0) for u in units)
-    print("scholar_translate.py  %s  %s   the judge %s reads again the verses of %s that a Claude judge read"
+    print("scholar_translate.py  %s  %s   the judge %s reads again the verses of %s that a Claude judge read, or that no "
+          "judge answered"   # SCHOLAR_REF_2026_10_18
           % (MARK_REJUDGE, "RUN" if a.yes else "DRY RUN (nothing called, nothing written)", a.judge_engine, a.engine))
     print("  %s%s: %d sentence(s), %d verse(s); about %s (Google's bill, in the spend cap)"
           % (a.doc, (" pages %s" % a.pages) if a.pages else "", len(units), n, usd(est)))
@@ -2473,7 +2491,8 @@ def main(argv=None) -> int:
                     "one sentence in N after the critic; its reading decides the status (0: none)")
     ap.add_argument("--status", action="store_true", help="AUDIT_2026_10_15: what this text has, per engine (free)")
     ap.add_argument("--rejudge", action="store_true", help="REJUDGE_2026_10_15: the Gemini judge reads again the verses "
-                    "of --engine that a Claude judge read (a new version of each, the same English)")
+                    "of --engine that a Claude judge read, or whose judge did not answer (SCHOLAR_REF_2026_10_18); a "
+                    "new version of each, the same English")
     ap.add_argument("--triage", action="store_true", help="TRIAGE_2026_10_16: the verses of --engine not passed, sorted "
                     "for a person (exports/scholar_triage_<doc>.csv; free, read-only)")
     ap.add_argument("--only-flagged", default=None, metavar="ENGINE", help="TRIAGE_2026_10_16: read again only the "

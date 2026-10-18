@@ -978,3 +978,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | Q2 | The screen of the seven texts on the site | About $4.30 on the credit, if Haiku passes the calibration |
 | Q3 | The marked verses fixed by cause (Sonnet; the source path) | About $3 by Sonnet at the sample's rate; the Hindi after |
 | T4 | test_bench_desk independent of the real BM2 and BM3 (TEST_ISOLATION_2026_10_17) | Built; to run on the PC |
+
+
+## Addendum 2026-10-18 (63) (DOCS73_2026_10_18)
+
+| # | Item | State |
+|---|---|---|
+| Q1 | The screen's calibration | Done: Haiku is the screen (Opus with Haiku 16, flash 7) |
+| E3 | The Devimahatmya, scholarly | The first run began at adhyaya 19 (SCHOLAR_REF_2026_10_18 mends it); again, about $19 |
+| E3b | Adhyayas 19 to 31, scholarly (740 verses) | Made; 482 to judge again (--rejudge) |
+| G1 | The Ganita Yukti Bhasa | Vision read 109 pages; the re-ingest of 108 (--replace 138) next |

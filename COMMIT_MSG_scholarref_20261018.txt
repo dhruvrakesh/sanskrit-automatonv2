@@ -1,0 +1,14 @@
+The scholarly English begun at a verse's own reference, and the unanswered verdicts read again (SCHOLAR_REF_2026_10_18); the night of 17 Oct recorded (DOCS73_2026_10_18)
+
+docs/SCHOLAR_REF_2026-10-18.md. The screen's calibration: Haiku beside flash on 229 passages, Opus the referee on the
+disagreements (with Haiku 16, with flash 7): Haiku is the screen, by the rule set before the run. The scholarly run of
+17 Oct on the GRETIL Markandeya began at page 81 (a heading whose page.idx reads "81.1"), not MarkP_81.1 on page 627:
+740 verses of adhyayas 19 to 31 ($20.63, kept), 482 of them unjudged (Google's quota, "ResourceExhausted").
+- scripts/patch_scholar_ref_2026_10_18.py (scholar_translate.py): --from-ref matches a verse's own reference whenever
+  one has it (own_ref beside ref_of), the page.idx fallback only when none has; --rejudge reads again, too, the verses
+  whose judge did not answer.
+Tests: tests/test_scholar_ref_2026_10_18.py (5); tests/test_ornament_2026_10_16.py follows .bak_scholarref_.
+Docs: scripts/patch_docs73_2026_10_18.py (PLATFORM 76, RUNBOOK, EP 63).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
