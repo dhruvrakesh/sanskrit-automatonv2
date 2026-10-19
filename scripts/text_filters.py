@@ -325,6 +325,90 @@ def is_translation_boilerplate(en: str, lang: str = "en") -> bool:
     if _refusal_cut(en.strip(), lang, caveats=False) >= 0: return True
     return False
 
+# --- LEAK_GUARD_2026_10_19: the model's words to us are not the translation ----------
+# Found on 19 Oct in the working English (26,330 passages) and the Hindi: a preamble ("Here is the translation of the
+# verse, adhering to your specified principles:", yajur 38.5, nirukta 178.3), a second version after the first ("Let
+# me give a cleaner rendering:", markandeya 94.8; "Final rendering:", Mallapurana 112.4; "Correction to the above",
+# Ganita 229.12), and the model reasoning aloud ("I will translate `dagdham` as ...", harita 66.1). The prompt asks
+# for none of it (infer_mt rule 12). strip_model_chatter() keeps the translation: the text after the last
+# "... rendering:" line, without a leading preamble paragraph; model_chatter() names what is left that is not a
+# translation, else ''. Only the model's own phrases: "let me be suffering", "according to the rules", "Certainly, O
+# son", "I will provide you assistance" are the Sanskrit's words and are left alone.
+_CHAT_PREAMBLE = re.compile(
+    r"^\s*(?:(?:okay|ok|sure|certainly|of course)[,!.]?\s+)?"
+    r"(?:(?:here is|here's|here are|below is|the following is|following is)\b[^\n]{0,200}?"
+    r"\b(?:translation|rendering|version)s?\b[^\n]*"
+    r"|let'?s (?:translate|render)\b[^\n]*)$", re.I | re.M)
+_CHAT_ADDRESS = re.compile(   # only with a word of translating in the same opening paragraph (_CHAT_TRANSLAT)
+    r"\b(?:your|the) (?:specified|given|stated) (?:principles|instructions|guidelines|requirements|rules)\b"
+    r"|\b(?:applying|adhering to|following) your (?:principles|instructions|guidelines|rules)\b"
+    r"|\bthe provided (?:sanskrit|hindi|english|devanagari)\b", re.I)
+_CHAT_TRANSLAT = re.compile(r"\btranslat", re.I)
+_CHAT_REDRAFT = re.compile(
+    r"^[ \t]*(?:let me (?:give|offer|provide) (?:a |an )?(?:cleaner|better|clearer|smoother|more literal|more natural|"
+    r"revised|corrected|final)[^\n:]{0,40}|(?:a |the )?(?:final|revised|corrected|cleaner|improved|better|clearer) "
+    r"(?:rendering|translation|version)[^\n:]{0,40}|correction to the above[^\n:]{0,80})\s*:\s*$", re.I | re.M)
+_CHAT_RESIDUAL = re.compile(
+    r"\blet me (?:give|offer|provide) (?:a |an )?(?:cleaner|better|clearer|revised|corrected|final|more)\b"
+    r"|\blet me (?:re-?translate|refine|rephrase|revise)\b(?=[^\n]{0,40}\b(?:translation|rendering|reading|word|text|"
+    r"line|verse)\b|[^\n]{0,20}`)"
+    r"|\blet'?s (?:refine|re-?translate|rephrase|reconsider|re-?examine|try again)\b"
+    r"|\bI (?:will|'ll|shall) (?:translate|render|read|take) `"
+    r"|\bcorrection to the above\b|\bfinal rendering\s*:"
+    r"|\bas an AI\b|\b(?:a|the) language model\b", re.I)
+_CHAT_NOTE = re.compile(r"^[ \t]*note\s*:\s*(?:the text reads|I have|I've|this translation|the translation)\b[^\n]*$",
+                        re.I | re.M)
+
+
+def model_chatter(t: str) -> str:
+    """LEAK_GUARD_2026_10_19: the first phrase in t that is the model talking to us (a preamble, a second version, its
+    reasoning), else ''."""
+    if not t:
+        return ""
+    for rx in (_CHAT_REDRAFT, _CHAT_RESIDUAL, _CHAT_NOTE):
+        m = rx.search(t)
+        if m:
+            return m.group(0).strip()[:80]
+    first = re.split(r"\n\s*\n|\n", t.strip(), maxsplit=1)[0]
+    m = _CHAT_PREAMBLE.match(first)
+    if m:
+        return m.group(0).strip()[:80]
+    if len(first) < 300 and _CHAT_TRANSLAT.search(first):
+        m = _CHAT_ADDRESS.search(first)
+        if m:
+            return m.group(0).strip()[:80]
+    return ""
+
+
+def strip_model_chatter(out: str):
+    """LEAK_GUARD_2026_10_19: (text, what): the translation without the model's words around it. A second version
+    after a "... rendering:" line replaces the first; a leading paragraph that introduces the translation is dropped;
+    a "Note: the text reads ..." line is dropped. what names what went ('' when nothing did). What is left may still
+    hold the model's reasoning: model_chatter() says so, and the write path then keeps nothing."""
+    if not out or not out.strip():
+        return out or "", ""
+    t, what = out.strip(), []
+    marks = list(_CHAT_REDRAFT.finditer(t))
+    if marks:
+        rest = t[marks[-1].end():].strip()
+        if rest:
+            t = rest
+            what.append("first version")
+    parts = re.split(r"(\n\s*\n|\n)", t, maxsplit=1)
+    first = parts[0]
+    if len(parts) == 3 and parts[2].strip() and (
+            _CHAT_PREAMBLE.match(first) or (len(first) < 300 and _CHAT_TRANSLAT.search(first)
+                                             and _CHAT_ADDRESS.search(first))):
+        t = parts[2].strip()
+        what.append("preamble")
+    if _CHAT_NOTE.search(t):
+        t2 = _CHAT_NOTE.sub("", t).strip()
+        if t2:
+            t = re.sub(r"\n{3,}", "\n\n", t2)
+            what.append("note")
+    return t, " and ".join(what)
+
+
 def should_translate(s: str, *, min_dev: float = 0.05) -> bool:
     """Return True if this passage contains enough Sanskrit to warrant translation.
 

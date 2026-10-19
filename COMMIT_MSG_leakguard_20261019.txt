@@ -1,0 +1,19 @@
+The model's words kept out of translations, and an empty re-translation no longer wipes the English (LEAK_GUARD_2026_10_19, KEEP_ON_EMPTY_2026_10_19, HEAL_ENGLISH_2026_10_19, DOCS77)
+
+Found on 19 Oct reading the judge's lists and the T2 logs:
+- 14 of 41,932 stored translations held the model's words to us: a preamble ("Here is the translation
+  of the verse, adhering to your specified principles:"), a second version after the first ("Let me
+  give a cleaner rendering:", "Final rendering:", "Correction to the above"), or its reasoning.
+- translate_passages.py --retranslate wrote an empty answer over the English it was meant to improve,
+  with nothing in translation_history: four T2 passages (Mallapurana 11.5, 11.9; markandeya_purana
+  28.2; Ganita 217.6).
+
+- scripts/text_filters.py: model_chatter(), strip_model_chatter().
+- scripts/translate_passages.py: every answer through the guard; an empty attempt keeps the English;
+  English or Hindi that is the model's words is archived, then let go.
+- scripts/infer_mt.py: the model's words are never cached.
+- scripts/heal_english.py: mends what is stored through translate_passages.py, from mt_cache.
+- docs/LEAK_GUARD_2026-10-19.md; PLATFORM 80, RUNBOOK, ENTERPRISE_PATH 67, STATE 12 (DOCS77).
+
+Tests: test_leak_guard_2026_10_19 (9), test_heal_english_2026_10_19 (3), test_docs77_2026_10_19 (2);
+the replay chains of test_claude_first_2026_10_15 and test_scholar_2026_10_14 follow .bak_leakguard_.

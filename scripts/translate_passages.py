@@ -33,7 +33,8 @@ from text_filters import (should_translate, clean_for_mt,
                           is_translation_boilerplate, score_translation_quality,
                           is_source_echo, salvage_translation,
                           strip_leading_source_echo,   # FILTERS3_2026_09_27
-                          load_parked)                 # PARK_ILLEGIBLE_2026_09_27
+                          load_parked,                 # PARK_ILLEGIBLE_2026_09_27
+                          strip_model_chatter, model_chatter)   # LEAK_GUARD_2026_10_19
 from infer_mt import translate_batch, PROMPT_VERSION, PROMPT_VERSIONS, QuotaExhausted
 from db_utils import ensure_schema, migrate_schema
 
@@ -644,6 +645,16 @@ def main():
             translation = outs[0] if outs else ""
             raw_out = translation      # TRANSLATION_FILTERS_2026_09_27
             empty_why = None if translation else "model-empty"
+            if translation:   # LEAK_GUARD_2026_10_19: the model's words to us are not the translation
+                _unchat, _what = strip_model_chatter(translation)
+                if _what:
+                    print(f"  [UNCHATTER] p{page_no}.{idx}: dropped the model's {_what}")
+                    translation = _unchat
+                _chat = model_chatter(translation)
+                if _chat:
+                    print(f"  [SKIP-CHATTER] p{page_no}.{idx}: {_chat!r}")
+                    translation = ""
+                    empty_why = "chatter-filter"
 
             tr_score = None
             tr_qa    = None
@@ -711,33 +722,59 @@ def main():
                         (rowid, TGT, translation, active_engine, ver,
                          tr_score, tr_qa, now_iso),
                     )
+                if not translation and prev and model_chatter(prev[0] or ""):
+                    # LEAK_GUARD_2026_10_19: a row that is the model's words (its reasoning; a preamble over an echo of
+                    # the source) was never a translation: archived, then taken away, so it is made again
+                    cur.execute(
+                        "INSERT INTO translation_history(passage_id, translation, "
+                        "engine, mt_prompt_version, translation_score, "
+                        "translation_qa, translated_at, reason, lang) "
+                        "VALUES(?,?,?,?,?,?,?,?,?)",
+                        (rowid, prev[0], prev[1], prev[2], prev[3], prev[4],
+                         prev[5], "chatter-dropped", TGT),
+                    )
+                    cur.execute("DELETE FROM translations_l10n WHERE passage_id=? AND lang=?", (rowid, TGT))
+                    print(f"  [DROPPED] p{page_no}.{idx}: its {TGT} was the model's words; archived to translation_history")
                 # l10n rows are not in passages_fts (English FTS is unchanged).
                 con.commit()
             else:
+                # KEEP_ON_EMPTY_2026_10_19: an attempt that comes back empty (a refusal, an echo, the model's own words)
+                # never wipes the English a passage has. On 14 and 18 Oct four T2 re-translations emptied their passages
+                # and nothing went to translation_history. Only English that is itself the model's words is let go,
+                # archived first.
+                _prev_en = con.execute("SELECT translation FROM passages WHERE rowid=?", (rowid,)).fetchone()
+                _prev_en = (_prev_en[0] or "") if _prev_en else ""
+                _keep = not translation and bool(_prev_en.strip()) and not model_chatter(_prev_en)
+                if _keep:
+                    print(f"  [KEPT] p{page_no}.{idx}: the new attempt came back empty; the English it had is kept")
                 # Phase Q: archive any existing English translation before
                 # overwriting (no-op in default runs; preserves on --retranslate).
                 if translation:
                     _archive_previous_translation(con, cur, rowid)
+                elif _prev_en.strip() and not _keep:   # LEAK_GUARD_2026_10_19
+                    _archive_previous_translation(con, cur, rowid, reason="chatter-dropped")
+                    print(f"  [DROPPED] p{page_no}.{idx}: its English was the model's words; archived to translation_history")
 
-                update_parts = ["translation=?", "mt_prompt_version=?",
-                                "translated_at=?", "translation_qa=?"]
-                update_vals  = [translation,
-                                ver if translation else None,
-                                now_iso if translation else None,
-                                tr_qa]
-                if has_eng_col and active_engine:
-                    update_parts.append("engine=?")
-                    update_vals.append(active_engine)
-                if has_tr_score and tr_score is not None:
-                    update_parts.append("translation_score=?")
-                    update_vals.append(tr_score)
-                update_vals.append(rowid)
-                cur.execute(
-                    f"UPDATE passages SET {', '.join(update_parts)} WHERE rowid=?",
-                    update_vals,
-                )
-                iast_val = meta_row.get("iast") or ""
-                _update_fts(cur, rowid, cleaned, iast_val, translation or "")
+                if not _keep:   # KEEP_ON_EMPTY_2026_10_19
+                    update_parts = ["translation=?", "mt_prompt_version=?",
+                                    "translated_at=?", "translation_qa=?"]
+                    update_vals  = [translation,
+                                    ver if translation else None,
+                                    now_iso if translation else None,
+                                    tr_qa]
+                    if has_eng_col and active_engine:
+                        update_parts.append("engine=?")
+                        update_vals.append(active_engine)
+                    if has_tr_score and tr_score is not None:
+                        update_parts.append("translation_score=?")
+                        update_vals.append(tr_score)
+                    update_vals.append(rowid)
+                    cur.execute(
+                        f"UPDATE passages SET {', '.join(update_parts)} WHERE rowid=?",
+                        update_vals,
+                    )
+                    iast_val = meta_row.get("iast") or ""
+                    _update_fts(cur, rowid, cleaned, iast_val, translation or "")
                 con.commit()
             ok_count += 1
             if translation:

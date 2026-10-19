@@ -1024,3 +1024,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | X1d | The scholarly English in the published reader (/texts) | To build |
 | E4 | Adhyayas 19 to 31 as an edition | On (configs/editions.json) |
 | W1 | The GRETIL Markandeya adopted as a text of its own | Yours: repair_text.py --release --force |
+
+
+## Addendum 2026-10-19 (67) (DOCS77_2026_10_19)
+
+| # | Item | State |
+|---|---|---|
+| Q7 | The model's words in a stored translation | Guarded: LEAK_GUARD_2026_10_19; 14 found, mended by heal_english.py |
+| Q8 | An empty re-translation wipes the English | Fixed: KEEP_ON_EMPTY_2026_10_19; 4 lost, back from mt_cache |
+| S2 | The Surya Siddhanta's scholarly English | 422 of 515; 88 verses left (yours: Gemini 2.5 Pro now, or Sonnet with credit) |
+| G2 | The Ganita's scholarly English | Waiting: about $30 on Gemini 2.5 Pro; neither budget holds it |
+| U2 | Sanskrit terms in backticks (Gemini's working English, 1,687 passages) | Yours: italics in the reader, or as they are |

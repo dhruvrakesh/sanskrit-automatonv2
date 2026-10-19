@@ -2229,3 +2229,15 @@ docs/SCHOLAR_READER_2026-10-18.md. In a new PowerShell window: `$A = "D:\Sanksri
 4. **The GRETIL Markandeya on the site (your decision):** `python scripts\repair_text.py --doc
    markandeya_purana__w_gretil --release --force`; `python scripts\corpus_sync.py` (the plan); the scheduled mirror
    sends it. Then E1 and E2 of the checks.
+
+
+## The model's words in a translation, and the English a T2 run emptied (DOCS77_2026_10_19)
+
+docs/LEAK_GUARD_2026-10-19.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; `python scripts\patch_leak_guard_2026_10_19.py --check`, then without --check; the same for
+   `scripts\patch_docs77_2026_10_19.py`; `python -m unittest tests.test_leak_guard_2026_10_19 tests.test_heal_english_2026_10_19
+   tests.test_docs77_2026_10_19 tests.test_guards_2026_10_04 tests.test_claude_first_2026_10_15 tests.test_scholar_2026_10_14`.
+2. `python scripts\db_backup.py data\context.db D:\backups\context_pre_heal_20261019.db`; `python scripts\heal_english.py` (the plan, free); `python scripts\heal_english.py
+   --yes` (free: from mt_cache); `python scripts\heal_english.py --yes --fresh` (Sonnet, a few cents, for what was
+   emptied); `python scripts\corpus_sync.py` (the plan); the scheduled mirror sends it.
+3. Release with COMMIT_MSG_leakguard_20261019.txt.

@@ -276,6 +276,10 @@ def _cache_insert_many(
         from text_filters import is_source_echo as _is_echo
     except ImportError:
         _is_junk = None; _is_echo = None
+    try:   # LEAK_GUARD_2026_10_19
+        from text_filters import model_chatter as _chat
+    except ImportError:
+        _chat = None
     cur = con.cursor()
     for t, out in pairs:
         if not out or not out.strip():
@@ -284,6 +288,8 @@ def _cache_insert_many(
             continue  # never cache refusals/boilerplate (lang-aware)
         if _is_echo is not None and _is_echo(t, out, tgt):
             continue  # never cache source-echoes (2026-08-02)
+        if _chat is not None and _chat(out):
+            continue  # LEAK_GUARD_2026_10_19: never cache the model's words to us; a retry asks again
         cur.execute(
             """INSERT OR IGNORE INTO mt_cache(engine,lang_in,lang_out,text_hash,text,output)
                VALUES(?,?,?,?,?,?)""",
