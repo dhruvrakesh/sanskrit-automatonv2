@@ -1,0 +1,33 @@
+The claims of Raychaudhuri's Part I tied to our names; the brain page's counts corrected; the Satapatha and the Carmichael Lectures answered; B2 designed (CLAIMS_LINK_2026_10_21, DOCS81)
+
+Part I is complete (99 pages, 2,010 claims). Their names (3,917, subjects and objects) were matched to
+our entities only when --show was asked, by a key loose enough to tie Arittha to Artha, and nothing was
+stored, so the site could not be given what a name's page needs.
+
+- scripts/scholar_claims.py: --link (free; data/context.db only read) ties each name of the current
+  claims to our entities in tiers, the first that ties winning: exact (the shelf's key), a variant our
+  texts record, a vowel's length, a 1923 spelling (only a name without diacritics; the vowel r read as
+  ri; doubled letters kept), then a numbered namesake (Parikshit I and II) and an English plural (the
+  Mallas). Never a common English word (king, god, raja), never a variant or spelling of a name without a
+  capital, never a plural by a variant or with another last letter (the Gandharis are not Gandhari). A
+  name that could be more than one of ours keeps each, with how many. Stored in claims.db: claim_links,
+  claim_link_runs (a run replaces the work's ties in one transaction; a claim read since is reported by
+  its id). --show, --report and --csv (our_names) use the ties. On a copy: 1,706 of 3,917 names tied
+  (1,342 exact); 110 could be more than one of ours, among them our own doubles (the Satapatha Brahmana
+  twice), listed for the entity mender.
+- tests/test_claims_fix_2026_10_21.py: its replay ends at the copy CLAIMS_LINK backed up (the chain).
+- docs/BRAIN_PATH_2026-10-21.md: the table corrected (the site holds 99,966 live passages, not all
+  174,019: the withdrawn texts hold 73,878; mentions 40,054; the scholarly English 1,671 live rows; the
+  vectors' 28,166 counted the retired rows); GRETIL's Satapatha credit as its file's header gives it;
+  section 7: B1, the counts, the Satapatha for the translator (ours is kanda 14 only; Weber's edition is
+  the one of record; the Sanskrit Library's TEI text or GRETIL's; the dandas from Weber's print as a
+  witness, or marked as ours), D. R. Bhandarkar's Carmichael Lectures (NVLI AS-002576, HathiTrust
+  001867818), and B2 designed from corpus-ingest and C4, additive.
+- docs/cloud/CHECKS_brain_counts_2026-10-21.sql: read-only, B1 to B4 (the live rows of each layer; the
+  Hayasirsa held in repair; the withdrawn texts; every text's live passages).
+- DOCS81: PLATFORM 84, RUNBOOK, ENTERPRISE_PATH 71, STATE 16.
+
+Tests: test_claims_link_2026_10_21 (6), test_docs81_2026_10_21 (3).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

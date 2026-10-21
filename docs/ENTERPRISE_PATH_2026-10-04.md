@@ -1068,3 +1068,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | H5 | The claims' cites read (cites-v2) | Built: CLAIMS_FIX_2026_10_21; 83% of the cites read on a copy |
 | B1 to B4 | The scholars' layer linked, mirrored (C19), on the name page, and the Professor Bot | Planned: docs/BRAIN_PATH_2026-10-21.md |
 | D1 | GRETIL's Satapatha (kandas 1 to 11, 13, 14; Gardner's input) | Yours: the download |
+
+## Addendum 2026-10-21 (71) (DOCS81_2026_10_21)
+
+| # | Item | State |
+|---|---|---|
+| H3 | Raychaudhuri, Part I, as claims | Done: 99 pages, 2,010 claims |
+| B1 | The claims' names tied to our entities | Built: CLAIMS_LINK_2026_10_21 (free); yours to run on the PC |
+| B2 | The claims on the site (C19, corpus-ingest, corpus_sync) | Designed, additive: docs/BRAIN_PATH_2026-10-21.md section 7 |
+| E1 | Our own doubles among the entities (the Satapatha Brahmana twice, and more) | Found by --link; for the entity mender |
+| D1 | The Satapatha: the Sanskrit Library's TEI text or GRETIL's, Weber's scan as the witness | Yours: the choice and the download |
+| C1 | D. R. Bhandarkar's Carmichael Lectures (1918) | Found (NVLI AS-002576, HathiTrust 001867818); yours: the download |
+| K1 | The counts of section 1 | Corrected: 99,966 live passages on the site, not all 174,019 |
