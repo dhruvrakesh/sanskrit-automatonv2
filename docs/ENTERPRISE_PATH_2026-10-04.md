@@ -1035,3 +1035,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | S2 | The Surya Siddhanta's scholarly English | 422 of 515; 88 verses left (yours: Gemini 2.5 Pro now, or Sonnet with credit) |
 | G2 | The Ganita's scholarly English | Waiting: about $30 on Gemini 2.5 Pro; neither budget holds it |
 | U2 | Sanskrit terms in backticks (Gemini's working English, 1,687 passages) | Yours: italics in the reader, or as they are |
+
+
+## Addendum 2026-10-21 (68) (DOCS78_2026_10_21)
+
+| # | Item | State |
+|---|---|---|
+| S2 | The Surya Siddhanta's scholarly English | 485 of its 503 verses (394 passed, 90 flagged, 1 doubted); 18 verses of numbers left (yours: Gemini 2.5 Pro, about $0.30 of Google's cap, or Sonnet with new credit) |
+| S3 | The Surya's e-text read wrongly (visarga, avagraha, header) | Fixed: ETEXT_ORTHO_2026_10_21; mended in place by mend_witness.py (WITNESS_MEND_2026_10_21) |
+| H1 | The scholars' shelf, step 1: three indexes of names | Built: SHELF_2026_10_21; on the PC only |
+| H2 | The shelf on the site | Yours: CC BY-NC-SA 3.0 (non-commercial, the credit as given, the same licence for what is derived) |
+| H3 | Raychaudhuri's Political History (1923) as claims, page by page | Next: public domain in India; about $1 on Gemini Flash |

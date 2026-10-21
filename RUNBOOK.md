@@ -2241,3 +2241,20 @@ docs/LEAK_GUARD_2026-10-19.md. In a new PowerShell window: `$A = "D:\Sanksrit Au
    --yes` (free: from mt_cache); `python scripts\heal_english.py --yes --fresh` (Sonnet, a few cents, for what was
    emptied); `python scripts\corpus_sync.py` (the plan); the scheduled mirror sends it.
 3. Release with COMMIT_MSG_leakguard_20261019.txt.
+
+
+## The Surya's spelling, its verses of numbers, the scholars' shelf (DOCS78_2026_10_21)
+
+docs/SHELF_AND_SURYA_2026-10-21.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; each of `scripts\patch_etext_ortho_2026_10_21.py`, `scripts\patch_numeral_verse_2026_10_21.py`,
+   `scripts\patch_ops_guard_test_2026_10_21.py`, `scripts\patch_docs78_2026_10_21.py` with `--check`, then without
+   it; then `python -m unittest tests.test_ops_guard
+   tests.test_etext_ortho_2026_10_21 tests.test_numeral_verse_2026_10_21 tests.test_witness_mend_2026_10_21
+   tests.test_scholar_shelf_2026_10_21 tests.test_docs78_2026_10_21 tests.test_etext_page_2026_10_18
+   tests.test_scholar_ref_2026_10_18 tests.test_etext_witness_2026_10_11`.
+2. `python scripts\mend_witness.py --doc jyotish_surya_siddhanta__w_etext` (the plan), then `--yes` (a backup first);
+   the same for `markandeya_purana__w_gretil`. Both are released, so the scheduled mirror sends the mended text (do
+   not --hold a released text to mend it: the site would keep the misspelt version until it is released again).
+3. The shelf: download the three txt zips (the doc's section 2), `python scripts\scholar_shelf.py` (the plan), `--yes`,
+   `--show Janaka`.
+4. Release with COMMIT_MSG_orthoshelf_20261021.txt.

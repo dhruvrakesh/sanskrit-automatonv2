@@ -4,7 +4,8 @@
 scholar_translate.py  (2026-10-14)  SCHOLAR_2026_10_14, SCHOLAR_V2_2026_10_14, SCHOLAR_V21_2026_10_14,
 COST_TRUTH_2026_10_15, CLAUDE_ENGINE_2026_10_15, PILOT_FIX_2026_10_15,
 AUDIT_2026_10_15, RUN_FIX_2026_10_15, CLAUDE_FIRST_2026_10_15, REJUDGE_2026_10_15,
-TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16, ORNAMENT_2026_10_16, SCHOLAR_REF_2026_10_18
+TRIAGE_2026_10_16, READY_PRICE_2026_10_16, CLASSIFY_HINDI_2026_10_16, ORNAMENT_2026_10_16, SCHOLAR_REF_2026_10_18,
+NUMERAL_VERSE_2026_10_21
 
 A scholarly English beside the working one: verse by verse, with the context, a glossary that grows, notes, a critic
 and revisions, and an independent judge. The working English (passages.translation) is never touched.
@@ -362,13 +363,25 @@ def register(path: Path) -> dict:
 
 
 # --------------------------------------------------------------------------------------------- readiness
-def is_index(text: str) -> bool:
+PAREN_NUMS = re.compile("\\(\\s*[%s]+(?:\\s*,\\s*[%s]+)*\\s*\\)" % (_DIG, _DIG))   # NUMERAL_VERSE_2026_10_21: (224, 449)
+
+
+def typed_engine(engine) -> bool:
+    """NUMERAL_VERSE_2026_10_21: a typed edition (an e-text, GRETIL, BORI), as ref_of() trusts its numbers."""
+    eng = str(engine or "").lower()
+    return bool(eng) and any(k in eng for k in REF_TRUSTED)
+
+
+def is_index(text: str, typed: bool = False) -> bool:
     """Numbers among the words: an index, errata, an apparatus or a notation. Verse numbers between dandas and a
-    sutra's own number at the head of a line do not count."""
+    sutra's own number at the head of a line do not count. NUMERAL_VERSE_2026_10_21: in a typed edition (typed) the
+    numbers in brackets, the editor's values of the word-numerals (the Surya Siddhanta's "(57753336)"), do not count."""
     t = text or ""
     if any(m in t for m in INDEX_MARKS):
         return True
     s = SUTRA_NO.sub(" ", VERSE_NO.sub(" ", t))
+    if typed:
+        s = PAREN_NUMS.sub(" ", s)
     toks = [w for w in s.split() if w not in ("\u0964", "\u0965", "|", "||")]
     if not toks:
         return False
@@ -390,7 +403,7 @@ def edition_hindi(text) -> bool:
         return False
 
 
-def readiness(text, text_type=None, quality=None, min_quality: float = 0.35):
+def readiness(text, text_type=None, quality=None, min_quality: float = 0.35, engine=None):
     """Why this passage is not sent (None: it is ready)."""
     t = text or ""
     if (text_type or "") in ("noise", "frontmatter"):
@@ -401,7 +414,7 @@ def readiness(text, text_type=None, quality=None, min_quality: float = 0.35):
         return "OCR debris (Latin letters in the Devanagari): mend the reading first"
     if quality is not None and float(quality) < min_quality:
         return "a reading below quality %.2f" % min_quality
-    if is_index(t):
+    if is_index(t, typed_engine(engine)):   # NUMERAL_VERSE_2026_10_21: a typed edition's values in brackets
         return "numbers among the words: an index, errata, apparatus or notation, not verse"
     if len(hindi_words(t)) >= 3 or edition_hindi(t):   # CLASSIFY_HINDI_2026_10_16
         return "Hindi prose (the edition's own Hindi), not Sanskrit"
@@ -511,7 +524,7 @@ def choose(a, allp: list, done: dict) -> tuple:
             if (own_ref(x) if own else ref_of(x)) != a.from_ref:   # SCHOLAR_REF_2026_10_18: its own reference first
                 continue
             started = True
-        why = readiness(x["text"], x["type"], x["quality"], a.min_quality)
+        why = readiness(x["text"], x["type"], x["quality"], a.min_quality, engine=x.get("engine"))   # NUMERAL_VERSE_2026_10_21
         if why:
             left.append((x, why))
             continue
@@ -1487,7 +1500,8 @@ def status_lines(con, doc: str, allp: list, a) -> list:
     audited, $ spent, the last row's time."""
     pages = parse_pages(getattr(a, "pages", None))
     sel = [x for x in allp if pages is None or x["page"] in pages]
-    ready = sum(1 for x in sel if not readiness(x["text"], x["type"], x["quality"], a.min_quality))
+    ready = sum(1 for x in sel if not readiness(x["text"], x["type"], x["quality"], a.min_quality,
+                                                engine=x.get("engine")))   # NUMERAL_VERSE_2026_10_21
     ids = {x["id"] for x in sel if (x.get("type") or "") not in ("noise", "frontmatter")}   # CLASSIFY_HINDI_2026_10_16
     aside_ids, aside = {x["id"] for x in sel} - ids, 0
     if not has_table(con, "scholar_translations"):

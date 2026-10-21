@@ -22,7 +22,8 @@ It follows docs/SCHOLAR_READER_2026-10-18.md (`cf5217fa`; Srangam `beedafe5`).
 
 **The money.** The Claude credit: $185.84 of its $190 cap spent, **$4.16 left** (to 11 Nov). The Google cap: $75.31 of
 $85, **$9.69 left**. The last 88 verses of the Surya cost about $4.45 on Sonnet (more than is left) or about $1.45 on
-Gemini 2.5 Pro (judged by Claude Haiku, so that no family judges its own). The Ganita's scholarly English (about 1,800
+Gemini 2.5 Pro (judged by Gemini Flash: scholar_translate.py refuses a Claude judge for a Gemini run, CLAUDE_FIRST_2026_10_15;
+corrected on 21 Oct, DOCS78_2026_10_21). The Ganita's scholarly English (about 1,800
 verses) costs about $30 on Gemini 2.5 Pro and more on Sonnet: neither budget holds it now.
 
 ## 2. Fault 1: the model's words inside a translation (LEAK_GUARD_2026_10_19)
@@ -70,8 +71,9 @@ test_claude_first_2026_10_15 and test_scholar_2026_10_14 follow `.bak_leakguard_
 
 ## 6. Still to decide (yours)
 
-1. The Surya's last 88 verses: Gemini 2.5 Pro with a Claude Haiku judge now (about $1.45 Google), or Sonnet when there
-   is credit again (about $4.45).
+1. The Surya's last 88 verses: Gemini 2.5 Pro with the Gemini Flash judge now (about $1.45 Google), or Sonnet when there
+   is credit again (about $4.45). (21 Oct, DOCS78_2026_10_21: a Claude judge for a Gemini run is refused by
+   scholar_translate.py; 70 of them were done on Sonnet that day, docs/SHELF_AND_SURYA_2026-10-21.md.)
 2. The Ganita's scholarly English: raise the Google cap (scripts\set_budget.py), or wait for credit.
 3. The Hayasirsa (held in repair; 236 of its scholarly verses flagged or doubted and unread) and the Karanagama
    (withdrawn).

@@ -94,7 +94,8 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            self.assertEqual(f.read_bytes(), (SCRIPTS / "scholar_translate.py").read_bytes())
+            later = sorted(SCRIPTS.glob("scholar_translate.py.bak_numeral_*"))   # NUMERAL_VERSE_2026_10_21 came after
+            self.assertEqual(f.read_bytes(), (later[0] if later else SCRIPTS / "scholar_translate.py").read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             shutil.copy2(baks[0], f)
             f.write_bytes(f.read_bytes().replace(b"    started = not a.from_ref\n", b"    started = a.from_ref is None\n"))

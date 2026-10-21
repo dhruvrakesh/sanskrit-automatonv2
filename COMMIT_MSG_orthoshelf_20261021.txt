@@ -1,0 +1,29 @@
+The Surya Siddhanta's e-text read as GRETIL writes it, mended in place; its verses of numbers sent; the scholars' shelf, step 1 (ETEXT_ORTHO_2026_10_21, WITNESS_MEND_2026_10_21, NUMERAL_VERSE_2026_10_21, SHELF_2026_10_21, OPS_GUARD_TEST_2026_10_21, DOCS78)
+
+Found on 21 Oct reading the 18 verses the last Sonnet run had left:
+- GRETIL's Suryasiddhanta writes IAST with H for the visarga and +a for an a merged into the vowel
+  before it; etext_witness.to_deva() lowered the text first, so 362 of the witness's 515 passages had
+  h with a virama for the visarga, 101 kept "+", the pada labels and sigla became Devanagari
+  consonants, and 11 lines of GRETIL's English header stood on page 1 as verses (7 had been given a
+  scholarly English).
+- readiness() took the e-text's values in brackets after the word-numerals, (57753336), for an index:
+  18 verses were never sent.
+
+- scripts/etext_witness.py: gretil_marks(), kept_out(), gretil_header(); to_deva(..., ortho=True).
+- scripts/mend_witness.py: an ingested witness read again from its romanized lines; the ids stay; a
+  verse's scholarly English gets a new version made from the new spelling (the same English); the
+  header lines become noise in Latin letters.
+- scripts/scholar_translate.py: is_index(text, typed), readiness(..., engine), typed_engine().
+- scripts/scholar_shelf.py: the Vedic Index, Soerensen's Mahabharata names and Dikshitar's Purana
+  Index (Cologne, CC BY-NC-SA 3.0) in shelf_ tables tied to our names; on the PC only (data/shelf/ in
+  .gitignore; not mirrored).
+- tests/test_ops_guard.py (OPS_GUARD_TEST_2026_10_21): it had failed since SPEND_TRUTH_2026_10_04,
+  taking _gen()'s own calls for calls that bypass it; it now asserts that every generate_content call
+  is inside _gen().
+- docs/SHELF_AND_SURYA_2026-10-21.md; docs/cloud/CHECKS_surya_mend_2026-10-21.sql (read-only);
+  PLATFORM 81, RUNBOOK, ENTERPRISE_PATH 68, STATE 13; LEAK_GUARD_2026-10-19.md corrected (a Gemini
+  run has no Claude judge) (DOCS78).
+
+Tests: test_etext_ortho_2026_10_21 (5), test_numeral_verse_2026_10_21 (4), test_witness_mend_2026_10_21 (3),
+test_scholar_shelf_2026_10_21 (4), test_docs78_2026_10_21 (3); the replay chains of test_etext_page_2026_10_18
+(.bak_etextortho_) and test_scholar_ref_2026_10_18 (.bak_numeral_).

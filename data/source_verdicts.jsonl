@@ -16,3 +16,4 @@
 {"doc": "jyotish_surya_siddhanta__w_etext", "status": "witness", "of": "jyotish_surya_siddhanta", "site": "etext", "reason": "an e-text witness of jyotish_surya_siddhanta (etext): local only until it is adopted", "at": "2026-10-18T15:15:05", "by": "etext_witness.py", "mark": "ETEXT_WITNESS_2026_10_11"}
 {"doc": "markandeya_purana__w_gretil", "status": "released", "reason": "", "at": "2026-10-18T20:31:13", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
 {"doc": "markandeya_purana__w_gretil", "status": "released", "reason": "", "at": "2026-10-19T11:03:17", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
+{"doc": "jyotish_surya_siddhanta__w_etext", "status": "released", "reason": "", "at": "2026-10-21T16:03:39", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}

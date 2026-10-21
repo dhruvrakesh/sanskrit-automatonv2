@@ -49,7 +49,13 @@ class BoundedModelCall(unittest.TestCase):
 
     def test_no_direct_generate_calls_left(self):
         src = (REPO / "scripts" / "infer_mt.py").read_text(encoding="utf-8")
-        self.assertNotIn("resp = gm.generate_content(", src)   # every call goes through _gen
+        # OPS_GUARD_TEST_2026_10_21: every call goes through _gen, whose own calls (SPEND_TRUTH_2026_10_04 writes them
+        # "resp = gm.generate_content(...)" to count the tokens) are the only ones
+        parts = src.split("def _gen(gm, msg):", 1)
+        self.assertEqual(len(parts), 2, "_gen() is not in infer_mt.py")
+        gen = parts[1].split("\ndef ", 1)[0]
+        self.assertGreater(gen.count("gm.generate_content("), 0)
+        self.assertEqual(src.count("gm.generate_content("), gen.count("gm.generate_content("))
 
 
 class SecondDashboardRefuses(unittest.TestCase):
