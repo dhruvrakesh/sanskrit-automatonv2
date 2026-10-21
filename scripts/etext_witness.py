@@ -262,8 +262,22 @@ def norm_ref(r: str) -> str:
         return ""
 
 
-def take_ref(line: str):
-    """(text without its reference, ref, where): where is "end", "start" or "part" (a pada, a line of a verse)."""
+# ETEXT_REFS_2026_10_21: a line that begins with the e-text's pada label (1.31a: ... 1.31b: ...//(364220)) has its
+# reference there; the number in brackets at its end is the e-text's value of the verse's numerals (364220, Jupiter's
+# revolutions in a yuga), not a reference: read as one (R_PAR) until 21 Oct, it was taken out of the text of 18 of the
+# Surya Siddhanta's verses, and the chapter came from the colophons (1, then 2), not from the labels (1 to 14). A
+# chapter's first verse begins with its title in brackets ([spa\u1e63\u1e6d\u0101dhik\u0101raH] 2.01a: ...).
+G_LABEL_HEAD = re.compile(r"^\s*(?:\[[^\]\n]{1,80}\]\s*)?(\d+\.\d+)[a-f]?:")   # [bh\u016bgola] 12.01a: a chapter's first
+
+
+def take_ref(line: str, labels: bool = True):
+    """(text without its reference, ref, where): where is "end", "start" or "part" (a pada, a line of a verse).
+    ETEXT_REFS_2026_10_21: a line that begins with a pada label (1.31a:) keeps all its text, the label too, and its
+    reference is the label's verse; labels=False reads as before (mend_witness.py compares the two)."""
+    if labels:
+        m = G_LABEL_HEAD.match(line)
+        if m:
+            return line, norm_ref(m.group(1)), "part"
     m = R_ABBR.search(line)
     if m:
         where = "part" if (m.group(2) or m.group(3)) else ("start" if not line[:m.start()].strip() else "end")

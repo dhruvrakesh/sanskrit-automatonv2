@@ -1,0 +1,33 @@
+The Surya Siddhanta's references read from its pada labels, its values in brackets kept; Raychaudhuri's Political History read into claims with their pages (the shelf, step 2); an e-text's noise named (ETEXT_REFS_2026_10_21, CLAIMS_2026_10_21, ETEXT_NOISE_2026_10_21 kit, DOCS79)
+
+Found on the evening of 21 Oct, after the mend of the afternoon:
+- each verse of GRETIL's Suryasiddhanta is a line that begins with its pada label (1.31a: ...), and a
+  verse of numbers ends with the value of its word-numerals in brackets ((364220)). take_ref() read the
+  bracket as the verse's reference (R_PAR): 18 verses had a verse_ref of 364220, 225, 260.40 (chapter
+  "260") and had lost the value from their text; the other 485 had no reference; the chapters were the
+  colophons' count (1, then 2), not the labels' (1 to 14).
+
+- scripts/etext_witness.py: take_ref(line, labels=True): a line that begins with a pada label (after a
+  chapter's title in brackets, too) keeps its text and takes the label's reference; labels=False reads as
+  before.
+- scripts/mend_witness.py: the plan reads each line again from the witness's source file when its sha256
+  is the witness's: "the reference only", or "the value in brackets" put back (re-based, the same
+  English); the latest scholarly row of a verse whose reference alone changes gets the reference, its
+  English untouched; the e-text's doubled references named; --yes writes verse_ref and chapter and checks
+  them.
+- scripts/scholar_claims.py (new): H. C. Raychaudhuri, Political History of Ancient India (University of
+  Calcutta, 1923; public domain; the GIPE scan, md5 75e8d7bd...) read page by page with gemini-2.5-flash
+  into data/shelf/claims.db (not committed): each claim with its printed page, a quotation checked against
+  the page's own text, its cites read into the works they name and whether our corpus holds the place;
+  --show NAME beside the indexes of step 1 and our texts. Metered (kind "claims"); the cap asked before
+  each page; --max-usd.
+- The Srangam kit ETEXT_NOISE_2026_10_21 (docs/srangam/ETEXT_NOISE_2026-10-21/,
+  scripts/patch_srangam_etext_noise_2026_10_21.py): noise in an e-text is "Not the text: the e-text's own
+  header or notes.", not scanner noise; Phase AM, invariant 60.
+- docs/CLAIMS_AND_REFS_2026-10-21.md; docs/cloud/CHECKS_surya_refs_2026-10-21.sql (read-only); PLATFORM 82,
+  RUNBOOK, ENTERPRISE_PATH 69 (the estimate of the verses of numbers, $0.30, owned as wrong), STATE 14
+  (DOCS79).
+
+Tests: test_etext_refs_2026_10_21 (6), test_scholar_claims_2026_10_21 (8),
+test_srangam_etext_noise_kit_2026_10_21 (4), test_docs79_2026_10_21 (3); the replay chain of
+test_etext_ortho_2026_10_21 (.bak_etextrefs_).

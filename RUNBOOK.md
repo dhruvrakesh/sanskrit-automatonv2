@@ -2258,3 +2258,21 @@ docs/SHELF_AND_SURYA_2026-10-21.md. In a new PowerShell window: `$A = "D:\Sanksr
 3. The shelf: download the three txt zips (the doc's section 2), `python scripts\scholar_shelf.py` (the plan), `--yes`,
    `--show Janaka`.
 4. Release with COMMIT_MSG_orthoshelf_20261021.txt.
+
+
+## The Surya's references; Raychaudhuri as claims; an e-text's noise named (DOCS79_2026_10_21)
+
+docs/CLAIMS_AND_REFS_2026-10-21.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; `scripts\patch_etext_refs_2026_10_21.py` and `scripts\patch_docs79_2026_10_21.py`, each with
+   `--check`, then without it; then `python -m unittest tests.test_etext_refs_2026_10_21 tests.test_etext_ortho_2026_10_21
+   tests.test_witness_mend_2026_10_21 tests.test_etext_page_2026_10_18 tests.test_etext_witness_2026_10_11
+   tests.test_scholar_claims_2026_10_21 tests.test_srangam_etext_noise_kit_2026_10_21 tests.test_docs79_2026_10_21`.
+2. When the Gemini run of the verses of numbers has finished: `python scripts\mend_witness.py --doc
+   jyotish_surya_siddhanta__w_etext` (the plan: respelled 18, the reference only 485), then `--yes` (a backup first).
+   The scheduled mirror sends it; docs/cloud/CHECKS_surya_refs_2026-10-21.sql (read-only) before and after.
+3. The claims: `python scripts\scholar_claims.py --extract` (free), `--pages 1-3 --yes` (about $0.02), `--report`,
+   `--show Janamejaya`; then `--part 1 --yes` (about $0.69).
+4. Srangam (`Set-Location D:\srangam-42267`; `git pull --rebase --autostash`): `python
+   "$A\scripts\patch_srangam_etext_noise_2026_10_21.py" --check`, then without it; `npm run typecheck`; `npx vitest
+   run`; `npm run build`; then the `git add` line it prints, a commit and a push.
+5. Release the automaton with COMMIT_MSG_refsclaims_20261021.txt.

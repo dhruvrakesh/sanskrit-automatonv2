@@ -1046,3 +1046,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | H1 | The scholars' shelf, step 1: three indexes of names | Built: SHELF_2026_10_21; on the PC only |
 | H2 | The shelf on the site | Yours: CC BY-NC-SA 3.0 (non-commercial, the credit as given, the same licence for what is derived) |
 | H3 | Raychaudhuri's Political History (1923) as claims, page by page | Next: public domain in India; about $1 on Gemini Flash |
+
+
+## Addendum 2026-10-21 (69) (DOCS79_2026_10_21)
+
+| # | Item | State |
+|---|---|---|
+| S2 | The Surya's 18 verses of numbers | Done (Gemini 2.5 Pro, Gemini Flash judge, 17:08-17:48 IST): 15 passed, 3 flagged, $2.01. Addendum 68 had said "about $0.30 of Google's cap": wrong; the dry runs said $0.65 on Sonnet and $1.84 on Gemini 2.5 Pro |
+| S4 | The Surya's references and chapters | Fixed: ETEXT_REFS_2026_10_21; mended in place by mend_witness.py (18 values put back, 485 references, 14 chapters) |
+| H3 | Raychaudhuri's Political History (1923) as claims, page by page | Built: CLAIMS_2026_10_21 (data/shelf/claims.db, on the PC); Part I about $0.69: yours to run |
+| H4 | The claims on the site | Yours: the claims are Raychaudhuri's words (public domain); the indexes are CC BY-NC-SA 3.0 |
+| R1 | An e-text's noise named on the site | Kit: ETEXT_NOISE_2026_10_21 (Srangam; yours to apply, test and push) |
