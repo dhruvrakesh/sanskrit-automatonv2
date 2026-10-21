@@ -2276,3 +2276,16 @@ docs/CLAIMS_AND_REFS_2026-10-21.md. In a new PowerShell window: `$A = "D:\Sanksr
    "$A\scripts\patch_srangam_etext_noise_2026_10_21.py" --check`, then without it; `npm run typecheck`; `npx vitest
    run`; `npm run build`; then the `git add` line it prints, a commit and a push.
 5. Release the automaton with COMMIT_MSG_refsclaims_20261021.txt.
+
+## The claims mended; the brain's path (DOCS80_2026_10_21)
+
+docs/BRAIN_PATH_2026-10-21.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; `scripts\patch_claims_fix_2026_10_21.py` and `scripts\patch_docs80_2026_10_21.py`, each with
+   `--check`, then without it; then `python -m unittest tests.test_claims_fix_2026_10_21 tests.test_scholar_claims_2026_10_21
+   tests.test_docs80_2026_10_21 tests.test_docs79_2026_10_21`.
+2. `python scripts\scholar_claims.py --reparse` (free), `--recite` (free), `--part 1 --yes` (the last 4 pages, about
+   $0.03), `--report`, `--show Janamejaya`, `--csv data\shelf\phai1923_claims.csv`.
+3. After the 20:31 IST mirror run: docs/cloud/CHECKS_surya_refs_2026-10-21.sql, R1 to R4 (read-only).
+4. The Satapatha from GRETIL, if you approve the download: kandas 11 and 13 (or 1 to 11, 13, 14) into
+   `sources\satapatha_gretil\`, their sha256 recorded; nothing is ingested until its kit comes.
+5. Release with COMMIT_MSG_claimsfix_20261021.txt.

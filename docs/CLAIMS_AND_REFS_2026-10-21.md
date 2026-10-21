@@ -41,7 +41,7 @@ re-based verses' scholarly rows.
 
 **Order:** after the Gemini run of the verses of numbers, which wrote scholarly rows for some of the same verses. It
 finished at 17:48 IST (data/scholar/jyotish_surya_siddhanta__w_etext_20261021_170823.jsonl: 18 verses, 15 passed, 3
-flagged, $2.01); its rows still carry the old references (39, 3438, 115 among them), which the mend re-bases.
+flagged, $2.10 (the run's own count; DOCS80_2026_10_21: its log's rows sum to $2.01)); its rows still carry the old references (39, 3438, 115 among them), which the mend re-bases.
 
 ## 2. Raychaudhuri read into claims (CLAIMS_2026_10_21)
 
@@ -122,7 +122,7 @@ src/__tests__/reader-etext-noise.test.tsx (2).
 ENTERPRISE_PATH addendum 68 (DOCS78) said the Surya's 18 verses of numbers would cost "about $0.30 of Google's cap".
 That was wrong. The dry runs priced them at $0.65 on Sonnet (within the $0.92 left of the Claude credit) and $1.84 on
 Gemini 2.5 Pro (judged by Gemini Flash, the same family); the Gemini run was the one made: 18 verses, 15 passed, 3
-flagged, $2.01.
+flagged, $2.10 (the run's own count; DOCS80_2026_10_21: its log's rows sum to $2.01).
 
 ## 7. Still to decide (yours)
 

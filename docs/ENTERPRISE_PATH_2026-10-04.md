@@ -1052,8 +1052,19 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 
 | # | Item | State |
 |---|---|---|
-| S2 | The Surya's 18 verses of numbers | Done (Gemini 2.5 Pro, Gemini Flash judge, 17:08-17:48 IST): 15 passed, 3 flagged, $2.01. Addendum 68 had said "about $0.30 of Google's cap": wrong; the dry runs said $0.65 on Sonnet and $1.84 on Gemini 2.5 Pro |
+| S2 | The Surya's 18 verses of numbers | Done (Gemini 2.5 Pro, Gemini Flash judge, 17:08-17:48 IST): 15 passed, 3 flagged, $2.10 (the run's own count; DOCS80_2026_10_21: its log's rows sum to $2.01). Addendum 68 had said "about $0.30 of Google's cap": wrong; the dry runs said $0.65 on Sonnet and $1.84 on Gemini 2.5 Pro |
 | S4 | The Surya's references and chapters | Fixed: ETEXT_REFS_2026_10_21; mended in place by mend_witness.py (18 values put back, 485 references, 14 chapters) |
 | H3 | Raychaudhuri's Political History (1923) as claims, page by page | Built: CLAIMS_2026_10_21 (data/shelf/claims.db, on the PC); Part I about $0.69: yours to run |
 | H4 | The claims on the site | Yours: the claims are Raychaudhuri's words (public domain); the indexes are CC BY-NC-SA 3.0 |
 | R1 | An e-text's noise named on the site | Kit: ETEXT_NOISE_2026_10_21 (Srangam; yours to apply, test and push) |
+
+## Addendum 2026-10-21 (70) (DOCS80_2026_10_21)
+
+| # | Item | State |
+|---|---|---|
+| S2 | The Surya's verses of numbers: the figure | $2.10 by the run's own count (DOCS79 gave $2.01, its log's rows) |
+| S4 | The Surya's references and chapters | Mended 18:41 IST; sent with the 20:31 mirror run |
+| H3 | Raychaudhuri, Part I, as claims | 95 of 99 pages once --reparse is run; 4 to read (about $0.03); about $1.43 spent |
+| H5 | The claims' cites read (cites-v2) | Built: CLAIMS_FIX_2026_10_21; 83% of the cites read on a copy |
+| B1 to B4 | The scholars' layer linked, mirrored (C19), on the name page, and the Professor Bot | Planned: docs/BRAIN_PATH_2026-10-21.md |
+| D1 | GRETIL's Satapatha (kandas 1 to 11, 13, 14; Gardner's input) | Yours: the download |

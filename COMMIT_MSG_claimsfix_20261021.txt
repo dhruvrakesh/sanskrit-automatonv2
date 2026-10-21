@@ -1,0 +1,27 @@
+The claims of Raychaudhuri's Part I mended: the failed pages read again from their replies, the cites read through the scan's misreadings, every attempt's cost kept; the brain's wiring measured and its path charted (CLAIMS_FIX_2026_10_21, DOCS80)
+
+Found on the night of 21 Oct, reading data/shelf/claims.db after the run of Part I (83 pages, 1,703 claims):
+- 13 pages failed for one reason: the model copied the scan's own backslashes (l\Iahabharata, 1\fatsya:
+  the OCR's M) into a quotation, which JSON does not allow; the replies were whole.
+- a failed page's attempts were metered but its read recorded $0, and a read after failed attempts only
+  its last.
+- 678 of the 1,245 cites named no work the reader knew (Visht}u Puralfa, RamayaQ.a, the Jatakas by name,
+  the modern works, Ibid); a work with no number had its misread letters for a place.
+
+- scripts/scholar_claims.py: parse_reply() reads a backslash JSON does not allow as a backslash;
+  --reparse (free) reads a failed page again from its stored reply; every attempt's cost on its read and
+  the meter's sum in --report; cites-v2 (the scan's misreadings cleaned, the book's abbreviations and the
+  works it cites by whole words or a close spelling with its score, the Jatakas by name, Ibid, a bare
+  place after a cite, the place from its first number with its brackets balanced, a place the work cannot
+  have left unread, more texts of ours marked); --recite (free) reads the stored cites again; --show puts
+  Dikshitar's Purana Index first, each index with its credit.
+- tests/test_scholar_claims_2026_10_21.py: Hopkins's Great Epic of India is now read as the work it is.
+- docs/BRAIN_PATH_2026-10-21.md: what the brain holds and where, whose shoulders (Indian scholarship
+  first; what each scholar's copyright allows), tonight's audit, the Things to know answered (GRETIL's
+  Satapatha kandas 1 to 11, 13, 14; Dikshitar's abbreviations read from his references), and the path
+  (B1 links, B2 the mirror C19, B3 the name page, B4 the Professor Bot; more scholars; the texts they
+  cite).
+- DOCS80: PLATFORM 83, RUNBOOK, ENTERPRISE_PATH 70, STATE 15; the verses of numbers' figure corrected to
+  $2.10 (the run's own count) where DOCS79 gave $2.01.
+
+Tests: test_claims_fix_2026_10_21 (6), test_docs80_2026_10_21 (3).

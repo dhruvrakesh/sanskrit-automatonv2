@@ -100,8 +100,9 @@ class TheHelpers(unittest.TestCase):
         self.assertEqual(C.vei_page(C.read_cite("Ved. Ind., Vol. II, p. 12")), "2-012")
         self.assertEqual(C.read_cite("Asvalayana Grihya Sutra III. 4")["locus"], "III. 4")
         self.assertEqual(C.read_cite("I. 95. 85", "the Mahabharata says")["how"], "sentence")
-        self.assertEqual(C.read_cite("Hopkins, The Great Epic of India, p. 385", "the Mahabharata says")["work"], "",
-                         "a modern work, not the text the sentence names")
+        self.assertEqual(C.read_cite("Hopkins, The Great Epic of India, p. 385", "the Mahabharata says")["work"],
+                         "E. W. Hopkins, The Great Epic of India",
+                         "a modern work, not the text the sentence names (CLAIMS_FIX_2026_10_21: read as the work it is)")
         self.assertEqual(C.read_cite("Mat. 50. 57")["work"], "Matsya Pur\u0101\u1e47a")
         self.assertEqual(C.read_cite("Matsyas and Chedis", "")["work"], "", "the Matsyas are a people")
 
