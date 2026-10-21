@@ -1080,3 +1080,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D1 | The Satapatha: the Sanskrit Library's TEI text or GRETIL's, Weber's scan as the witness | Yours: the choice and the download |
 | C1 | D. R. Bhandarkar's Carmichael Lectures (1918) | Found (NVLI AS-002576, HathiTrust 001867818); yours: the download |
 | K1 | The counts of section 1 | Corrected: 99,966 live passages on the site, not all 174,019 |
+## Addendum 2026-10-21 (72) (DOCS82_2026_10_21)
+
+| # | Item | State |
+|---|---|---|
+| K1 | The 175 passages between the site and the PC | Explained: the Hayasirsa, held in repair; every other text equal |
+| K2 | The site's 246 more mentions and 158 more vectors | To check: the Hayasirsa's held version (CHECKS_held, H1) |
+| D1 | The Satapatha as prose, kandika by kandika | Built: ETEXT_PROSE_2026_10_21; yours: GRETIL's download (curl.exe) |
+| D1b | The Satapatha's dandas | Samasrami's Bibliotheca Indica print (Calcutta, 1903 to 1912), by vision OCR, as the witness |
+| C1 | D. R. Bhandarkar's Carmichael Lectures (1918) | Waiting: NVLI's host does not answer; HathiTrust in full only in the US |
+| B2 | The claims on the site | Next: C19, corpus-ingest's second list, corpus_sync |

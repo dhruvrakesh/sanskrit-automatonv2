@@ -35,6 +35,13 @@ file into sources\\<doc>\\ (with its provenance beside it), then previews it.
   python scripts\\etext_witness.py --doc X --ingest
   python scripts\\etext_witness.py --list
 
+ETEXT_PROSE_2026_10_21: a prose e-text whose units stand under their own reference lines (GRETIL's Satapatha:
+"13.1.1.[1]") is read unit by unit, each with its reference, never cut at 12 lines, with no danda added; --file may
+name a folder (its .htm, .html and .txt files in the order of their names are one text); --category names a new
+text's category when it is no scan's witness.
+
+  python scripts\\etext_witness.py --doc satapatha_madhyandina --file sources\\satapatha_gretil --category brahmana --per-page 10
+
 The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's, for the dashboard.
 """
 from __future__ import annotations
@@ -149,6 +156,30 @@ def read_text(path: Path):
         text = html_to_text(text)
     return text, {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(), "encoding": enc,
                   "kind": kind, "note": note}
+
+
+# ETEXT_PROSE_2026_10_21: a folder of files is one text, a break between them
+FILE_BREAK = "@@ETEXT_FILE_BREAK@@"
+
+
+def read_source(src: Path):
+    """(text, info) of a file (read_text), or of a folder: its .htm, .html and .txt files in the order of their names
+    (GRETIL's Satapatha, a file a kanda), joined with FILE_BREAK; info["files"]: each one's name, bytes and sha256."""
+    if not src.is_dir():
+        return read_text(src)
+    files = sorted(p for p in src.iterdir() if p.is_file() and p.suffix.lower() in (".htm", ".html", ".txt"))
+    texts, infos = [], []
+    for p in files:
+        t, i = read_text(p)
+        texts.append(t)
+        infos.append(dict(i, name=p.name))
+    info = {"bytes": sum(i["bytes"] for i in infos),
+            "sha256": hashlib.sha256("".join(i["sha256"] for i in infos).encode("ascii")).hexdigest(),
+            "encoding": ", ".join(sorted({i["encoding"] for i in infos})) or "-",
+            "kind": ", ".join(sorted({i["kind"] for i in infos})) or "-",
+            "note": "; ".join(i["note"] for i in infos if i["note"]),
+            "files": [{"name": i["name"], "bytes": i["bytes"], "sha256": i["sha256"]} for i in infos]}
+    return ("\n%s\n" % FILE_BREAK).join(texts), info
 
 
 def detect_scheme(lines: list) -> str:
@@ -269,6 +300,10 @@ def norm_ref(r: str) -> str:
 # chapter's first verse begins with its title in brackets ([spa\u1e63\u1e6d\u0101dhik\u0101raH] 2.01a: ...).
 G_LABEL_HEAD = re.compile(r"^\s*(?:\[[^\]\n]{1,80}\]\s*)?(\d+\.\d+)[a-f]?:")   # [bh\u016bgola] 12.01a: a chapter's first
 
+# ETEXT_PROSE_2026_10_21: a prose unit's reference on a line of its own (GRETIL's Satapatha: 13.1.1.[1], kanda, adhyaya,
+# brahmana, [kandika]), or followed by the unit's first words
+G_PROSE_REF = re.compile(r"^\s*(\d{1,3}(?:\.\d{1,3}){1,4})\.\[(\d{1,4})\](?:\s+(.*\S))?\s*$")
+
 
 def take_ref(line: str, labels: bool = True):
     """(text without its reference, ref, where): where is "end", "start" or "part" (a pada, a line of a verse).
@@ -335,6 +370,7 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
     verses = out["verses"]
     cur = {"lines": [], "roman": [], "ref": "", "src": 0}
     chap = [1]
+    prose = [False]   # ETEXT_PROSE_2026_10_21: a unit's reference line seen: each unit runs to the next
 
     def flush():
         if cur["lines"]:
@@ -342,6 +378,8 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
             if DEV_LETTER.search(deva):
                 ref = cur["ref"]
                 chapter = ".".join(ref.split(".")[:-1]) if ref.count(".") else ""
+                if prose[0] and ref.count(".") >= 2:   # ETEXT_PROSE_2026_10_21: the adhyaya (13.1), not the brahmana
+                    chapter = ".".join(ref.split(".")[:2])
                 colo = ITI in deva and COLOPHON.search(deva) is not None and len(deva) < 400
                 has_danda = DANDA in deva or DDANDA in deva
                 tt = "colophon" if colo else ("mula" if has_danda else
@@ -361,11 +399,25 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
         if i in skip and ln:
             st["dropped_english"] += 1
             continue
-        if not ln:
-            st["blank"] += 1
+        if raw.strip() == FILE_BREAK:   # ETEXT_PROSE_2026_10_21: the next file: what follows its title is a new unit
             flush()
             continue
-        body, ref, where = take_ref(ln)
+        pm = G_PROSE_REF.match(ln) if ln else None   # ETEXT_PROSE_2026_10_21: 13.1.1.[1], the unit's own line
+        if pm:
+            flush()
+            prose[0] = True
+            cur["ref"] = norm_ref(pm.group(1) + "." + pm.group(2))
+            st["refs"] += 1
+            st["prose_units"] = st.get("prose_units", 0) + 1
+            if not pm.group(3):
+                continue
+            ln = pm.group(3).strip()
+        if not ln:
+            st["blank"] += 1
+            if not prose[0]:   # ETEXT_PROSE_2026_10_21: a prose unit runs to the next reference, blank lines and all
+                flush()
+            continue
+        body, ref, where = take_ref(ln) if not prose[0] else (ln, "", "")
         d, l = _letters(body)
         if d + l < 3 and not ref:
             continue                                   # punctuation, a lone numeral
@@ -389,9 +441,13 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
             last = cur["lines"][-1].rstrip()          # a reference or a double danda on a line of its own
             if not last.endswith(DDANDA):
                 cur["lines"][-1] = last + " " + DDANDA
-        if _ends_verse(body) or (ref and where == "end") or len(cur["lines"]) >= 12:
-            flush()
+        if not prose[0] and (_ends_verse(body) or (ref and where == "end") or len(cur["lines"]) >= 12):
+            flush()   # ETEXT_PROSE_2026_10_21: a prose unit is not cut at 12 lines
     flush()
+    if prose[0]:   # ETEXT_PROSE_2026_10_21: what stands outside a unit (a file's title, its notes) is not the text
+        keep = [v for v in verses if v["ref"]]
+        st["outside"] = len(verses) - len(keep)
+        verses[:] = keep
     return out
 
 
@@ -867,10 +923,10 @@ def preview_or_write(a) -> int:
             say(err, "")
             return 1
         print("saved %s (%d bytes) with its provenance beside it" % (src, src.stat().st_size))
-    if not src or not src.is_file():
+    if not src or not (src.is_file() or src.is_dir()):   # ETEXT_PROSE_2026_10_21: a folder of files is one text
         say("no such file: %s" % (src or "(none)"), "")
         return 1
-    text, info = read_text(src)
+    text, info = read_source(src)
     parsed = parse(text, a.scheme, a.pages)
     st = parsed["stats"]
     site = a.slug or site_of(src, a.url or "")
@@ -879,6 +935,8 @@ def preview_or_write(a) -> int:
     print("%s: %s (%d bytes, %s, %s) as a witness of %s" % (MARK, src.name, info["bytes"], info["kind"], info["encoding"], doc))
     if info["note"]:
         print("  note: " + info["note"])
+    if info.get("files"):   # ETEXT_PROSE_2026_10_21
+        print("  files: %d, read in this order: %s" % (len(info["files"]), ", ".join(f["name"] for f in info["files"])))
     if parsed["scheme"] == "unknown":
         say("cannot tell the script of %s: it is not Devanagari, and no IAST marks, Harvard-Kyoto capitals or Velthuis "
             "dots were found" % src.name,
@@ -905,6 +963,11 @@ def preview_or_write(a) -> int:
         chs = len({v["chapter"] for v in verses})
         print("  verses: %d (with a reference %d; chapters %d; colophons %d); pages of up to %d verses: %d"
               % (len(verses), sum(1 for v in verses if v["ref"]), chs, st["colophons"], a.per_page, len(pages)))
+    if st.get("prose_units"):   # ETEXT_PROSE_2026_10_21
+        longest = max((len(v["text"]) for v in verses), default=0)
+        print("  prose: %d units by their reference lines (13.1.1.[1]); %d passage(s) outside a unit left out (a file's "
+              "title, its notes); the longest unit %d characters; no danda added" % (st["prose_units"],
+                                                                                    st.get("outside", 0), longest))
     for v in verses[:3]:
         print("  sample%s: %s" % ((" " + v["ref"]) if v["ref"] else "", v["text"].replace("\n", " ")[:160]))
     lat = leftover_latin(verses)
@@ -999,7 +1062,8 @@ def write(a, doc, wcode, parsed, pages, verses, m, src, info, site, engine, op) 
     meta = {"witness": wcode, "doc": doc, "site": site, "engine": engine, "mode": parsed["mode"],
             "scheme": parsed["scheme"], "file": str(src), "url": a.url or side.get("url") or side.get("details") or "",
             "sha256": info["sha256"], "bytes": info["bytes"], "pages": len(recs), "verses": len(verses),
-            "category": scan_facts.get("category"), "stats": parsed["stats"], "opinion": op, "at": _now(), "mark": MARK,
+            "category": scan_facts.get("category") or a.category or None,   # ETEXT_PROSE_2026_10_21: a new text's
+            "files": info.get("files"), "stats": parsed["stats"], "opinion": op, "at": _now(), "mark": MARK,
             "quality": info.get("quality")}   # QUALITY_2026_10_11
     (out / "witness.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
     align = {"doc": doc, "witness": wcode, "at": meta["at"], "mark": MARK, "k": K, "opinion": op}
@@ -1115,6 +1179,8 @@ def main(argv=None) -> int:
                     help="auto: the source's own pages when it has form feeds, else pages of --per-page verses")
     ap.add_argument("--per-page", type=int, default=20)
     ap.add_argument("--slug", default=None, help="the witness's name after __w_ (default: the site)")
+    ap.add_argument("--category", default=None,   # ETEXT_PROSE_2026_10_21
+                    help="a new text's category (brahmana, veda, ...), when it is no scan's witness")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--db", default="data/context.db")
     ap.add_argument("--sources", default="sources")
@@ -1131,6 +1197,8 @@ def main(argv=None) -> int:
         print("FAIL: --doc <code> is needed (letters, digits, _ and -)."); return 2
     if a.slug and not re.match(r"^[A-Za-z0-9]{1,20}$", a.slug):
         print("FAIL: --slug is letters and digits (up to 20)."); return 2
+    if a.category and not re.match(r"^[a-z][a-z_]{1,30}$", a.category):   # ETEXT_PROSE_2026_10_21
+        print("FAIL: --category is lower-case letters and _ (brahmana, veda, ...)."); return 2
     if a.ingest:
         return ingest(a)
     if not a.file and not a.url:

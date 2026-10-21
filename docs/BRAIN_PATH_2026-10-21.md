@@ -187,3 +187,46 @@ branch per table, and `corpus._spec` lists their keys. So B2 adds and replaces n
 3. corpus_sync.py: a claims group read from data/shelf/claims.db (only read), public-domain works only.
 4. B3: the name page (CorpusNames.tsx) gets "What the scholars say": the claim, its page, its quotation, its stance,
    its cites and where we hold them.
+## 8. The counts explained; the Satapatha's sources; the Carmichael Lectures' (DOCS82_2026_10_21)
+
+**The counts, explained** (your SQL of 21 Oct, 21:41 to 21:44 IST, beside the 18:41 backup and your list of the
+texts). Every live text has on the site exactly the passages it has here but one: the Hayasirsa, 1,531 there (sent on
+8 Oct, 10:07 UTC) and 1,706 here, held in repair, so the mirror keeps its last version. That is the 175. The withdrawn
+texts have no live passage there (the Yoga Vasistha 70,292 retired; the Karanagama 2,084 retired, its version before
+the repair; the Bodhicaryavatara's scan 1,677 retired). The site's live rows: 65 texts, 99,966 passages, 19,573
+translation rows (1,671 of them the scholarly English), 13,145 names, 40,054 mentions, 25,504 vectors (28,166 with the
+retired). Here, in the live texts but the Hayasirsa: 39,808 mentions and 25,346 vectors; the Hayasirsa's new passages
+have 0 mentions and 1 vector. So the site's 246 more mentions and 158 more vectors should be the Hayasirsa's held
+version: docs/cloud/CHECKS_held_2026-10-21.sql, H1, will say.
+
+**B1 on the PC** (21:32 IST): what the copy gave, 1,706 of 3,917 names tied, 1,816 tie rows, 110 to more than one of
+ours.
+
+**The Satapatha's sources, read again:**
+- Its makers: H. S. Anantanarayana typed kandas 1 to 11, 13 and 14 (GRETIL's file headers: "Data input by H.S.
+  Ananthanarayana and W. P. Lehman"), Makoto Fushimi kanda 12, and J. R. Gardner re-edited them; GRETIL's index names
+  Gardner, the Sanskrit Library all three. The edition: Weber's (Berlin, 1855; issued from 1849, the year the Sanskrit
+  Library gives; reprinted at Varanasi in 1964 as Chowkhamba Sanskrit Series 96).
+- GRETIL: thirteen files, sb_01_u.htm to sb_14_u.htm without 12, under gretil/1_sanskr/1_veda/2_bra/satapath/; each
+  kandika under its own line (13.1.1.[1]); IAST without the Vedic accents and without dandas; the pluti written 3, the
+  avagraha an apostrophe. etext_witness.py reads that shape now (ETEXT_PROSE_2026_10_21): each kandika a passage with
+  its reference, the adhyaya its chapter, no danda added.
+- The Sanskrit Library's XML edition (2010, version 0.1, CC BY-NC-SA 3.0) has all fourteen kandas; its page gives no
+  download. TITUS (Frankfurt) has Gippert's edition, its download restricted.
+- A print with its dandas, by an Indian editor: Satyavrata Samasrami's Satapatha with Sayana's commentary (Bibliotheca
+  Indica, the Asiatic Society, Calcutta, 1903 to 1912; Samasrami died in 1911: public domain), on archive.org in the
+  item Bibliotheca_Indica_Series (volumes 2 and 7 seen there). It is the witness for the dandas: its pages read by
+  vision OCR beside GRETIL's kandikas, the danda taken where the print has it.
+- The Vedic Heritage Portal (IGNCA, the Ministry of Culture) shows a Madhyandina Satapatha in two volumes as page
+  images; its copyright policy forbids reproducing them without IGNCA's written permission: to read beside ours, not
+  to ingest.
+
+**The Carmichael Lectures of 1918:** NVLI's host (icvtesting.nvli.in) does not answer, from the PC or from here;
+HathiTrust gives its copies in full only in the United States ("public domain only when viewed in the US"), and
+outside a member library a page at a time. Found on the way: D. R. Bhandarkar's Lectures on Ancient Indian
+Numismatics (the Carmichael Lectures of 1921; Calcutta, 1921) on rarebooksocietyofindia.org, public domain, for
+later. The 1918 lectures wait for NVLI's host or another scan.
+
+**Why the PC could not download:** Invoke-WebRequest gives "Unable to connect to the remote server" where curl.exe
+reaches GRETIL (HTTP 200): PowerShell goes through Windows' proxy settings and curl.exe does not. The RUNBOOK shows
+the settings; the downloads use curl.exe.

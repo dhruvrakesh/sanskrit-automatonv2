@@ -2303,3 +2303,19 @@ docs/BRAIN_PATH_2026-10-21.md, section 7. In a new PowerShell window: `$A = "D:\
    of each text here.
 4. The Carmichael Lectures and the Satapatha: the size first, then the download if you approve it.
 5. Release with COMMIT_MSG_claimslink_20261021.txt.
+## The Satapatha from GRETIL; the held counts (DOCS82_2026_10_21)
+
+docs/BRAIN_PATH_2026-10-21.md, section 8. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; `python scripts\patch_etext_prose_2026_10_21.py` and `python scripts\patch_docs82_2026_10_21.py`, each
+   with `--check`, then without it; then `python -m unittest tests.test_etext_prose_2026_10_21
+   tests.test_etext_refs_2026_10_21 tests.test_etext_ortho_2026_10_21 tests.test_etext_witness_2026_10_11
+   tests.test_docs82_2026_10_21 tests.test_docs81_2026_10_21`.
+2. Why Invoke-WebRequest fails: `netsh winhttp show proxy` and the Internet Settings' ProxyEnable, ProxyServer and
+   AutoConfigURL; the downloads below use curl.exe.
+3. GRETIL's Satapatha, the sizes first (curl.exe -sI), then, if you approve, the thirteen files into
+   `sources\satapatha_gretil\` with each one's provenance beside it.
+4. The preview (free, writes nothing): `python scripts\etext_witness.py --doc satapatha_madhyandina --file
+   sources\satapatha_gretil --category brahmana --per-page 10`; kanda 14 against our scan: `python scripts\etext_witness.py
+   --doc 2015_405693_Shatpath-Brahmanam --file sources\satapatha_gretil\sb_14_u.htm --per-page 10`.
+5. The held counts: docs/cloud/CHECKS_held_2026-10-21.sql, H1 to H3 (read-only).
+6. Release with COMMIT_MSG_etextprose_20261021.txt.

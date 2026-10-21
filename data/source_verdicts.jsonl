@@ -17,3 +17,4 @@
 {"doc": "markandeya_purana__w_gretil", "status": "released", "reason": "", "at": "2026-10-18T20:31:13", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
 {"doc": "markandeya_purana__w_gretil", "status": "released", "reason": "", "at": "2026-10-19T11:03:17", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
 {"doc": "jyotish_surya_siddhanta__w_etext", "status": "released", "reason": "", "at": "2026-10-21T16:03:39", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
+{"doc": "2015_405693_Shatpath-Brahmanam__w_gretil", "status": "witness", "of": "2015_405693_Shatpath-Brahmanam", "site": "gretil", "reason": "an e-text witness of 2015_405693_Shatpath-Brahmanam (gretil): local only until it is adopted", "at": "2026-10-21T22:08:31", "by": "etext_witness.py", "mark": "ETEXT_WITNESS_2026_10_11"}

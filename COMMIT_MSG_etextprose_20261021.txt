@@ -1,0 +1,28 @@
+The Satapatha readable as prose, kandika by kandika; the site's counts explained; the Satapatha's and the Carmichael Lectures' sources recorded (ETEXT_PROSE_2026_10_21, DOCS82)
+
+GRETIL's Satapatha (Madhyandina, from Weber's edition; kandas 1 to 11, 13 and 14, a file each) stands each
+kandika under its own line, 13.1.1.[1], with no danda. etext_witness.py read only verses: such a line has
+no letters and was skipped, the kandikas ran together, were cut every 12 lines and lost their numbers; it
+read one file at a time.
+
+- scripts/etext_witness.py: a unit's reference line (13.1.1.[1], alone or before the unit's first words)
+  starts a passage with that reference (13.1.1.1); it runs to the next, blank lines and all, never cut at
+  12 lines; the adhyaya is its chapter; what stands outside a unit (a file's title, its notes) is left
+  out and counted; no danda added (a kandika's end is its number). --file may name a folder: its .htm,
+  .html and .txt files in name order are one text, a break between files, each file's sha256 kept in
+  witness.json. --category for a new text that is no scan's witness. Verse texts read as before.
+- tests/test_etext_refs_2026_10_21.py: its replay ends at the copy ETEXT_PROSE backed up.
+- docs/BRAIN_PATH_2026-10-21.md section 8: the 175 passages are the Hayasirsa's, held in repair (1,531
+  there, 1,706 here), every other live text equal; the site's 246 more mentions and 158 more vectors to
+  be checked as its held version; the Satapatha's makers (Anantanarayana, Fushimi, Gardner) and
+  editions (Weber's; the Sanskrit Library's XML, TITUS's, neither openly downloadable; Samasrami's
+  Bibliotheca Indica print with its dandas, Calcutta 1903 to 1912; the Vedic Heritage Portal's images,
+  IGNCA's permission needed); the Carmichael Lectures' scans out of reach for now; why Invoke-WebRequest
+  fails where curl.exe works (Windows' proxy settings).
+- docs/cloud/CHECKS_held_2026-10-21.sql: read-only, H1 to H3.
+- DOCS82: PLATFORM 85, RUNBOOK, ENTERPRISE_PATH 72, STATE 17.
+
+Tests: test_etext_prose_2026_10_21 (5), test_docs82_2026_10_21 (3).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
