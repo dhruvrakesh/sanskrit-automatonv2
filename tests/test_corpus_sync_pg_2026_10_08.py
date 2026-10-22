@@ -20,6 +20,7 @@ from tests.test_corpus_sync_2026_10_08 import Base, OPEN, GOLDEN_DIGEST  # noqa:
 DSN = os.environ.get("CORPUS_TEST_DSN", "")
 SQL = REPO / "docs" / "cloud" / "C4_corpus_mirror_2026-10-08.sql"
 SQL_B = REPO / "docs" / "cloud" / "C4b_mirror_digests_2026-10-08.sql"
+STUBS = REPO / "tests" / "supabase_stubs_2026_10_08.sql"   # PG_TESTS_2026_10_22: pgvector, anon, authenticated
 TABLES = ["sync_runs", "passage_vectors", "mentions", "translations", "stories", "stages", "passages",
           "entities", "docs", "row_index", "group_digest"]
 K2 = """SELECT g.tbl, g.grp FROM corpus.group_digest g
@@ -37,6 +38,7 @@ class PgMirror(Base):
         cls.pg = psycopg.connect(DSN, autocommit=True)
         if "supabase.co" in DSN or "pooler" in DSN:
             raise unittest.SkipTest("refusing to run against a Supabase host")
+        cls.pg.execute(STUBS.read_text(encoding="utf-8"))  # PG_TESTS_2026_10_22: a fresh database has no halfvec
         cls.pg.execute(SQL.read_text(encoding="utf-8"))
         cls.pg.execute(SQL.read_text(encoding="utf-8"))      # twice: the file is re-runnable
         cls.pg.execute(SQL_B.read_text(encoding="utf-8"))    # C4b on top, twice as well

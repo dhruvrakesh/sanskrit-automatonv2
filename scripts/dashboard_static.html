@@ -78,6 +78,8 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
 .tn>summary::after{content:" \25BE";color:var(--muted)}
 .tn[open]>summary{color:var(--cream);background:#ffffff10}
 .tn-pop{position:absolute;top:calc(100% + 6px);left:0;z-index:1000;min-width:260px;background:var(--bg2);border:1px solid var(--border-v);border-radius:var(--r-sm);padding:6px;box-shadow:0 10px 30px #0009}
+/* UI_CLARITY_2026_10_22: a bridge over the 6px gap, so that the menu stays open on the way to it */
+.tn-pop::before{content:"";position:absolute;left:-8px;right:-8px;top:-12px;height:12px}
 .tn-pop>a,.tn-pop>button{display:block!important;width:100%;box-sizing:border-box;text-align:left;margin:0 0 2px!important;padding:7px 10px!important;border:0!important;border-radius:var(--r-sm);background:transparent;color:var(--cream)!important;font-size:12.5px!important;text-decoration:none!important;cursor:pointer;white-space:normal}
 .tn-pop>a:hover,.tn-pop>button:hover,.tn-pop>a:focus,.tn-pop>button:focus{background:#ffffff14;outline:none}
 .tn-d{display:block;font-size:10.5px;color:var(--muted);margin-top:1px}
@@ -234,32 +236,32 @@ select.engine-select:focus{outline:none;border-color:var(--gold)}
     </div>
     <div class="top-bar-spacer"></div>
     <nav class="topnav" aria-label="The Automaton's pages"><!-- NAV_MENUS_2026_10_18: every page in six menus -->
-    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseleave="this.open=false"><summary>&#128218; Texts</summary><div class="tn-pop">
+    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseenter="clearTimeout(this._tnT)" onmouseleave="var d=this;clearTimeout(d._tnT);d._tnT=setTimeout(function(){d.open=false},450)"><summary>&#128218; Texts</summary><div class="tn-pop">
       <a href="/shelf" title="Shelf: every text by collection, with covers and editions (SHELF_2026_10_04)" style="color:var(--gold);text-decoration:none;font-size:13px;margin-right:12px">&#x1F4DA; Shelf</a>
       <a class="btn-refresh" href="/library" target="_blank" style="text-decoration:none;margin-right:6px" title="Browse & read translated texts">&#128218; Library</a>
       <a class="btn-refresh" href="/desk" target="_blank" style="text-decoration:none;margin-right:6px" title="TRANSLATION_DESK_2026_10_17: every text by its stage (the scholarly edition, ready to translate, translated, the reading first), and the scholarly English begun from its page">&#128221; Desk</a>
       <a href="/path" target="_blank" title="NAV_MENUS_2026_10_18">&#129517; Path<span class="tn-d">each text's next step, and why</span></a>
       <a class="btn-refresh" href="/sources" target="_blank" style="text-decoration:none;margin-right:6px" title="JUDGE_DESK_2026_10_11: the texts whose scan stops their translation, the debris judged, the editions found">&#128269; Sources</a>
     </div></details>
-    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseleave="this.open=false"><summary>&#9889; Translate</summary><div class="tn-pop">
+    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseenter="clearTimeout(this._tnT)" onmouseleave="var d=this;clearTimeout(d._tnT);d._tnT=setTimeout(function(){d.open=false},450)"><summary>&#9889; Translate</summary><div class="tn-pop">
       <a class="btn-refresh" href="/translate" target="_blank" style="text-decoration:none;margin-right:6px" title="Translate any Sanskrit into English + Hindi on demand">&#9889; Translate</a>
       <a href="/scholar" target="_blank" title="NAV_MENUS_2026_10_18">&#128220; Scholarly English<span class="tn-d">every text with it, verse by verse and as prose</span></a>
       <a href="/redeem" target="_blank" title="NAV_MENUS_2026_10_18">&#129529; Redeem<span class="tn-d">the English to mend, by its cause</span></a>
     </div></details>
-    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseleave="this.open=false"><summary>&#128207; Check</summary><div class="tn-pop">
+    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseenter="clearTimeout(this._tnT)" onmouseleave="var d=this;clearTimeout(d._tnT);d._tnT=setTimeout(function(){d.open=false},450)"><summary>&#128207; Check</summary><div class="tn-pop">
       <a class="btn-refresh" href="/benchmarks" target="_blank" style="text-decoration:none;margin-right:6px" title="BENCH_DESK_2026_10_16: BM1 (our English against published translations), and the readings of each text compared">&#128207; Benchmarks</a>
       <a href="/benchmarks/bm2" target="_blank" title="NAV_MENUS_2026_10_18">&#128065; BM2<span class="tn-d">your blind reading</span></a>
       <a href="/methodology" target="_blank" title="NAV_MENUS_2026_10_18">&#128209; Methodology<span class="tn-d">how the English is made and judged</span></a>
     </div></details>
-    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseleave="this.open=false"><summary>&#127912; Make</summary><div class="tn-pop">
+    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseenter="clearTimeout(this._tnT)" onmouseleave="var d=this;clearTimeout(d._tnT);d._tnT=setTimeout(function(){d.open=false},450)"><summary>&#127912; Make</summary><div class="tn-pop">
       <a href="/stories" title="Stories: cited retellings beside the images, for the anthology (STORIES_UI_2026_10_05)" style="color:var(--gold);text-decoration:none;font-size:13px;margin-right:12px">&#x1F4DC; Stories</a>
       <a href="/images" title="Image library: ideas, generation, captions (IMAGES_UI_2026_10_03)" style="color:var(--gold);text-decoration:none;font-size:13px;margin-right:12px">&#x1F5BC; Images</a>
     </div></details>
-    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseleave="this.open=false"><summary>&#128172; Ask</summary><div class="tn-pop">
+    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseenter="clearTimeout(this._tnT)" onmouseleave="var d=this;clearTimeout(d._tnT);d._tnT=setTimeout(function(){d.open=false},450)"><summary>&#128172; Ask</summary><div class="tn-pop">
       <a class="btn-refresh" href="/ask" target="_blank" style="text-decoration:none;margin-right:6px" title="Ask questions answered from the corpus, with cited verses">&#128172; Ask the Corpus</a>
       <button class="btn-refresh" onclick="openDatabase(this)" style="margin-right:6px" title="Open the corpus in Datasette for SQL querying (snapshots first, then launches)">&#128190; Database</button>
     </div></details>
-    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseleave="this.open=false"><summary>&#127760; Site</summary><div class="tn-pop">
+    <details class="tn" ontoggle="if(this.open)document.querySelectorAll('details.tn[open]').forEach(function(d){if(d!==this)d.open=false},this)" onmouseenter="clearTimeout(this._tnT)" onmouseleave="var d=this;clearTimeout(d._tnT);d._tnT=setTimeout(function(){d.open=false},450)"><summary>&#127760; Site</summary><div class="tn-pop">
       <a href="https://srangam.nartiang.org/editions" target="_blank" rel="noopener" title="NAV_MENUS_2026_10_18">&#128214; Srangam: the scholarly editions<span class="tn-d">open to everyone</span></a>
       <a href="https://srangam.nartiang.org/corpus" target="_blank" rel="noopener" title="NAV_MENUS_2026_10_18">&#128218; Srangam: the working corpus<span class="tn-d">for signed-in readers</span></a>
       <a href="https://srangam.nartiang.org/corpus/corner" target="_blank" rel="noopener" title="NAV_MENUS_2026_10_18">&#128172; The Researchers' Corner<span class="tn-d">requests from researchers</span></a>

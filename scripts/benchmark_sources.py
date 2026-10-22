@@ -29,6 +29,13 @@ For the translation: the English and Hindi now and before the repair, the heuris
 fidelity (mt_reviews) where it ran, and the share of the passages translated that carried misread letters:
 that is the debris's effect on the translation, measured.
 
+BENCH_LETTERS_2026_10_22: and letter by letter. On a sample of pages (--letters-pages, 80; 40 with --all; 0: none) each
+reading is read against ours akshara by akshara (source_fidelity.py: folded alike, aligned, upper bounds), and Tesseract
+beside each other OCR reading: where the two agree with each other against ours, ours is most likely misread there
+("outvoted"); where one lacks what the other and ours have, it is that one's own misreading. A share of Devanagari, the
+Latin misread and the noise see the script; this sees the letters (on 22 Oct archive.org's text of the Satapatha's
+scan was 100% Devanagari and misread 25 aksharas in 100).
+
 Writes data\\benchmarks\\<doc>.json (and data\\benchmarks\\_summary.json with --all). Never writes the
 database. The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's, for the dashboard.
 
@@ -316,7 +323,70 @@ def benchmark(a, doc: str) -> dict:
         res["readings"].append(d)
     res["translations"] = {"now": now, "before": before}
     res["merged_engines"] = page_engines(merged, doc)   # QUALITY_2026_10_11
+    n_pages = getattr(a, "letters_pages", None)
+    if ours and n_pages:
+        try:
+            letters(res, readings, ours, n_pages)       # BENCH_LETTERS_2026_10_22
+        except Exception as ex:                         # an addition: never the benchmark's failure
+            res["letters_error"] = str(ex)[:200]
     return opine(res, doc, a)
+
+
+def letters(res: dict, readings: list, ours: tuple, n_pages: int) -> None:
+    """BENCH_LETTERS_2026_10_22: every reading against ours, akshara by akshara, on a sample of ours' pages; then
+    Tesseract beside each other OCR reading (vision, archive.org's text, the repair): own misreadings and where the
+    two agree against ours. Fills each reading's aksharas_ours (and own_per100) and res["letters"]."""
+    import source_fidelity as sf
+    pages = sorted(p for p, t in ours[3].items() if len(sf.norm(t)) >= sf.MIN_LETTERS)
+    if not pages:
+        return
+    step = max(1, len(pages) // n_pages)
+    sample = pages[::step][:n_pages]
+    units = [sf.norm(ours[3][p]) for p in sample]
+    refs = ["p%d" % p for p in sample]
+    per = {}
+    for label, kind, site, pg in readings:
+        if label == ours[0]:
+            continue
+        rs = [(sf.measure([u], [(p, pg[p])], False)[0] if pg.get(p) else None) for p, u in zip(sample, units)]
+        per[label] = rs
+        found = [r for r in rs if r]
+        n = sum(r["n"] for r in found)
+        d = _r(res, label)
+        if d is not None:
+            d["aksharas_ours"] = round(100.0 - 100.0 * sum(r["err"] for r in found) / n, 2) if n else None
+            d["aksharas_pages"] = len(found)
+    # the voters: OCR readings of the scan that are not ours' own text again: the repair is made from vision (and
+    # the database from the repair), so beside the repair they are its sources, not witnesses; a reading 99.9% alike
+    # is a copy of ours too
+    same, voters = [], []
+    for label in per:
+        d = _r(res, label) or {}
+        if d.get("kind") not in ("ocr", "archive-ocr", "ours", "db") or d.get("aksharas_ours") is None:
+            continue
+        derived = ours[0] == "consensus" and label in ("vision", "database")
+        (same if (derived or d["aksharas_ours"] >= 99.9) else voters).append(label)
+    if "tesseract" in voters:
+        combos = [("tesseract", x) for x in voters if x != "tesseract"]
+    else:
+        combos = [(voters[i], voters[j]) for i in range(len(voters)) for j in range(i + 1, len(voters))]
+    pairs = []
+    for la, lb in combos:
+        pr = sf.pair(units, per[la], per[lb], refs, keep=12)
+        if not pr["units"]:
+            continue
+        pr.update(a=la, b=lb)
+        pairs.append(pr)
+        d = _r(res, lb)
+        d["own_per100"] = pr["own_b_per100"]
+        d["outvoted_ours_per100"] = pr["outvoted_per100"]
+        d["independent_of_tesseract"] = pr["independent"] if la == "tesseract" else None
+    for la in {pr["a"] for pr in pairs}:
+        d = _r(res, la)
+        if d is not None:
+            d["own_per100"] = max((x for x in pairs if x["a"] == la), key=lambda x: x["aksharas"])["own_a_per100"]
+    res["letters"] = {"mark": "BENCH_LETTERS_2026_10_22", "pages": len(sample), "ours": ours[0], "pairs": pairs,
+                      "same_as_ours": same}
 
 
 def _p(x, k, fmt="%.1f%%"):
@@ -394,6 +464,12 @@ def opine(res: dict, doc: str, a) -> dict:
                     "is clean; look for an e-text or OCR a better scan with vision" % (ours["misread_letters_pct"], _p(ours, "noise_pct")))
         else:
             word = "the two are level, each damaged in its own way"
+        if x.get("own_per100") is not None and x.get("independent_of_tesseract") is False:   # BENCH_LETTERS_2026_10_22
+            word += ("; letter by letter it makes Tesseract's mistakes (one engine, or the same weak letters): it is no "
+                     "independent reading, and its agreement with Tesseract says nothing against ours")
+        elif x.get("own_per100") is not None:
+            word += ("; letter by letter, its own misreadings %s aksharas in 100, and where it and Tesseract agree "
+                     "against ours, %s in 100 (ours' likely misreadings)" % (x["own_per100"], x.get("outvoted_ours_per100")))
         L.append("archive.org's OCR (%s), on the %d pages it shares with this scan: %s; %s." % (x["label"], x["pages"], how, word))
     if res["reference"]:
         ranked = sorted([x for x in res["readings"] if x.get("f1_ref") is not None], key=lambda x: -x["f1_ref"])
@@ -405,6 +481,32 @@ def opine(res: dict, doc: str, a) -> dict:
         if vi and co and vi.get("f1_ref") is not None and co.get("f1_ref") is not None and vi["f1_ref"] > co["f1_ref"] + 0.02:
             L.append("Vision alone reads the critical text better than the consensus (F1 %.2f against %.2f): the merge "
                      "keeps some Tesseract readings it should not." % (vi["f1_ref"], co["f1_ref"]))
+    lt = res.get("letters") or {}
+    if lt.get("pages"):   # BENCH_LETTERS_2026_10_22
+        ag = [x for x in res["readings"] if x.get("aksharas_ours") is not None]
+        if ag:
+            L.append("Letter by letter, on %d of ours' pages: %s agree with ours (%s) in %s of the aksharas." % (
+                lt["pages"], ", ".join(x["label"] for x in ag), lt["ours"],
+                ", ".join("%.1f%%" % x["aksharas_ours"] for x in ag)))
+        if lt.get("same_as_ours"):
+            L.append("%s: ours' own text again (the repair's sources, or 99.9%% alike): no witness of it."
+                     % ", ".join(lt["same_as_ours"]))
+        if not lt.get("pairs"):
+            L.append("No two independent readings of the scan beside ours: its letters cannot be voted on here. A reading "
+                     "by another engine (vision, where ours is Tesseract's), or an e-text, measures it.")
+        for pr in lt.get("pairs") or []:
+            if not pr.get("independent", True):
+                L.append("%s and %s, letter by letter: their own misreadings %s and %s aksharas in 100, and they "
+                         "make the same mistakes (alike %.2f and %.2f): one engine, or the same weak letters; their "
+                         "agreement against ours is no evidence." % (pr["a"].capitalize(), pr["b"], pr["own_a_per100"],
+                                                                     pr["own_b_per100"], pr["own_overlap"],
+                                                                     pr["outvoted_overlap"]))
+                continue
+            L.append("%s and %s, letter by letter: their own misreadings %s and %s aksharas in 100; where they "
+                     "agree with each other against ours, %s in 100: there ours is most likely misread (%d places; read "
+                     "them beside the page: python scripts\\source_fidelity.py --ref db:%s --cand raw:%s --cand ...)." % (
+                         pr["a"].capitalize(), pr["b"], pr["own_a_per100"], pr["own_b_per100"], pr["outvoted_per100"],
+                         pr["outvoted"], res["doc"], res["doc"]))
     # QUALITY_2026_10_11: without a critical text too. On 11 Oct the Tantric Texts' repair misread 1.90% of its letters
     # where vision misread 0.17%: on 7 plates and title pages vision read nothing or a line, and the merge took
     # Tesseract's garbage of the picture
@@ -489,14 +591,15 @@ def current_scan(doc: str, sd_dir: Path):
 
 def show(res: dict):
     print("%s  %s" % (res["doc"], MARK))
-    hdr = "  %-22s %-11s %6s %9s %7s %8s %7s %-9s %6s %6s %7s %7s %7s"   # QUALITY_2026_10_11: noise, plausible
+    hdr = "  %-22s %-11s %6s %9s %7s %8s %7s %-9s %6s %6s %7s %7s %7s %7s %6s"   # QUALITY_2026_10_11; BENCH_LETTERS_2026_10_22
     print(hdr % ("reading", "kind", "pages", "letters", "latin%", "misread%", "pages%", "level", "noise%", "plaus%",
-                 "F1ours", "F1ref", "ref%"))
+                 "F1ours", "F1ref", "ref%", "aksh%", "own"))
     for x in res["readings"]:
         f = lambda k, fmt="%.2f": (fmt % x[k]) if x.get(k) is not None else "-"
         print(hdr % (x["label"][:22], x["kind"], x["pages"], x["letters"], f("latin_pct"), f("misread_letters_pct"),
                      f("pages_misread_pct", "%.0f"), x.get("level") or "-", f("noise_pct", "%.1f"), f("plausible_pct", "%.1f"),
-                     f("f1_ours"), f("f1_ref"), ("%.0f" % (100 * x["recall_ref"])) if x.get("recall_ref") is not None else "-"))
+                     f("f1_ours"), f("f1_ref"), ("%.0f" % (100 * x["recall_ref"])) if x.get("recall_ref") is not None else "-",
+                     f("aksharas_ours", "%.1f"), f("own_per100", "%.1f")))
     for line in res.get("lines") or []:
         print("  " + line)
 
@@ -548,7 +651,11 @@ def main(argv=None) -> int:
     ap.add_argument("--bench-dir", default="data/benchmarks")
     ap.add_argument("--backup-dir", default=os.environ.get("SA_BACKUP_DIR") or r"D:\backups")
     ap.add_argument("--from-dashboard", action="store_true", help=argparse.SUPPRESS)
+    ap.add_argument("--letters-pages", type=int, default=None,   # BENCH_LETTERS_2026_10_22
+                    help="pages read letter by letter against ours (80; 40 with --all; 0: none)")
     a = ap.parse_args(argv)
+    if a.letters_pages is None:
+        a.letters_pages = 40 if a.all else 80
     os.chdir(ROOT)
     if a.all:
         rows = []

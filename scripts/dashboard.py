@@ -1551,13 +1551,18 @@ async function _rpSources(doc){
        + (c.pdf_url && !c.current_scan ? '<button class="tr-rest rp" data-i="' + i + '" onclick="_rpFetch(&#39;' + doc
           + '&#39;,this.dataset.i,&#39;pdf&#39;,this)">Fetch the PDF' + (c.pdf_mb ? ' (' + c.pdf_mb + ' MB)' : '') + '</button>' : '')
        + (c.txt_url && c.purity != null && c.purity >= 0.85 && !c.current_scan ? '<button class="tr-rest rp" data-i="' + i
-          + '" onclick="_rpFetch(&#39;' + doc + '&#39;,this.dataset.i,&#39;text&#39;,this)">Fetch the OCR text ('
+          + '" title="The share of its letters that are Devanagari: its script, not its fidelity (UI_CLARITY_2026_10_22)"'
+          + ' onclick="_rpFetch(&#39;' + doc + '&#39;,this.dataset.i,&#39;text&#39;,this)">Fetch the OCR text ('
           + Math.round(100 * c.purity) + '% Devanagari)</button>' : '')
        + '</div></div>';
   });
   if (!(d.candidates || []).length) h += '<p class="srcnone">archive.org offered nothing' + ((d.errors || []).length ? ' (' + _rpEsc(d.errors[0]) + ')' : '')
     + '. Try the e-text sites above.</p>';
   h += '<p class="srcnone">Searched ' + _rpEsc(d.at || '') + ' as: ' + _rpEsc((d.words || []).join(' ')) + '</p>';
+  // UI_CLARITY_2026_10_22: a share of Devanagari is the script of an OCR text, not its fidelity
+  h += '<p class="srcnone">"% Devanagari" is the script of an OCR text, not its fidelity: archive.org&#39;s text of our '
+     + 'Satapatha scan is 100% Devanagari and misreads 25 aksharas in 100 (ours 3.3; FIDELITY_2026_10_22). Fetch a text, '
+     + 'then Benchmark the readings (free) to read it against ours, akshara by akshara.</p>';
   h += _rpWitness(doc, d) + _rpBench(doc, d);   // BENCHMARK_2026_10_11
   list.innerHTML = h; list._data = d;
 }
@@ -1711,7 +1716,11 @@ def _repair_html(code: str, acts_html: str, shown: list, rec, jd=None) -> str:  
                       % (_html.escape(str(rec.get("of") or "?")), _html.escape(str(rec.get("site") or "e-text")), at))
     elif st == "in_repair":
         acts_html += ('<div class="cardnote state">In repair since %s (%s): the site keeps its last version (%s English, '
-                      '%s Hindi) until you publish this one.</div>'
+                      '%s Hindi) until you publish this one. The repair replaced its Sanskrit, so the English and the '
+                      'Hindi made from the old reading were cleared (the backup taken before the repair keeps them): '
+                      'EN counts the working English made since, SC the scholarly English. Publishing waits for the '
+                      'working English and the Hindi (Finish EN, then Add Hindi), or publishes it now with what it '
+                      'has (repair_text.py --release --force).</div>'   # UI_CLARITY_2026_10_22
                       % (at, why, rec.get("en_before", "?"), rec.get("hi_before", "?")))
     elif st == "withdrawn":   # PATH_2026_10_12
         acts_html += ('<div class="cardnote aside" title="data/source_verdicts.jsonl">Withdrawn from the site on %s: %s. The '
@@ -3837,7 +3846,8 @@ def _scholar_badge(code: str, sc: dict) -> str:
     if not c or not c.get("verses"):
         return ""
     return ('<span class="badge sc" title="Verses in scholarly English (scholar_translate.py), beside the working '
-            'English (EN)">SC {:,}</span>'.format(c["verses"]))
+            'English (EN). The mirror sends them to the site with the text, not while the text is held in repair or '
+            'withdrawn (UI_CLARITY_2026_10_22).">SC {:,}</span>'.format(c["verses"]))
 
 
 def _scholar_line(code: str, sc: dict) -> str:
@@ -3863,8 +3873,9 @@ def _scholar_line(code: str, sc: dict) -> str:
                      % n_(c["set_aside"]))
     q = quote(code, safe="")
     tip = ("The scholarly English, verse by verse (scholar_translate.py): drafted with its context and glossary, read by "
-           "a critic, revised, judged. It is kept beside the working English (EN, which the site shows) and is not on "
-           "the site yet. $%.2f spent on all its rows; the last on %s." % (c["spent"], c["last"][:16].replace("T", " ")))
+           "a critic, revised, judged. It is kept beside the working English (EN) and goes to the site with the text "
+           "(SCHOLAR_MIRROR_2026_10_18), not while the text is held in repair or withdrawn (UI_CLARITY_2026_10_22). "
+           "$%.2f spent on all its rows; the last on %s." % (c["spent"], c["last"][:16].replace("T", " ")))
     return ('<div class="schl" title="%s">Scholarly English: <b>%s</b> verses by %s; %s. <a href="/scholar/%s">Verse by '
             'verse</a> &middot; <a href="/scholar/%s/prose">as prose</a></div>'
             % (_html.escape(tip, quote=True), n_(c["verses"]), _html.escape(eng), _html.escape(", ".join(parts)), q, q))
@@ -5584,7 +5595,10 @@ def library():
                 f'<div class="ttl">{_html.escape(title)}</div>'
                 f'<div class="code">{_html.escape(code)}</div>'
                 f'<div class="bar"><i style="width:{pct}%"></i></div>'
-                f'<div class="meta"><span class="badge en">EN {en}/{total}</span>{_scholar_badge(code, sc)}{hi_badge}{qa_badge}'
+                f'<div class="meta"><span class="badge en" title="The working English (Gemini): what the reader shows first, and '
+                f'what the names, the search by meaning and the Hindi are made from. SC beside it is the scholarly '
+                f'English, a separate translation (UI_CLARITY_2026_10_22).">EN {en}/{total}</span>'
+                f'{_scholar_badge(code, sc)}{hi_badge}{qa_badge}'
                 f'<span class="pct">{pct}%</span></div></a>'
                 f'{_scholar_line(code, sc)}{_redeem_note(code, rdm)}{acts_html}</div>'   # REDEEM_2026_10_14, LIBRARY_SCHOLAR_2026_10_16
             )

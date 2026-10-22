@@ -310,3 +310,28 @@ about $4.12 by the meter, against $4.42 left under the $85 cap). Our scans stay 
 Satapatha stays a local witness: its ch is lost, and Samasrami's archive.org text cannot restore it (D1b now reads
 Samasrami's images instead, if you download them). GRETIL also has the Nirukta, Aufrecht's Rgveda and the Samaveda:
 three more witnesses, then measured.
+## 11. The debt collected and resolved; any engine, our checks (DOCS85_2026_10_22)
+
+docs/DEBT_2026-10-22.md is the register: what was found, the evidence, the fix or whose decision it is.
+
+**The three questions of 22 Oct.** The top bar's menus closed on the way to them (a 6px gap): mended. The Hayasirsa's
+EN 1 of 1,614 and SC 1,431 are two Englishes: the repair of 11 Oct replaced its Sanskrit and cleared the working
+English made from the old misreading; the scholarly English was made after, from the new Sanskrit; the working English
+was not made again, so the release gate holds the text and the site keeps its last version. The source search works:
+for the Daivat-Sanhita it found 35 candidates, six close; but their "100% Devanagari" is the script, not the fidelity.
+
+**What decides fidelity is independence.** archive.org's OCR is Tesseract; its text of a scan we hold makes
+Tesseract's mistakes (alike 0.25 and 0.40, where independent pairs are 0.04 to 0.06), so it is no second witness.
+TRIANGULATE_2026_10_22 measures that before two readings may outvote a third.
+
+**The intake rule (proposed, yours to adopt).** A reading of a print becomes the Sanskrit we translate only when it is
+measured letter by letter: against an e-text, close or faithful (agreement 90% or more of the e-text's aksharas); or,
+where none exists, beside an independent second reading of the same print (not alike by TRIANGULATE's check), with
+5 or fewer own misread aksharas in 100. Otherwise it stays a witness, and the places two independent readings outvote
+it are the mends to read beside the page. Any engine qualifies the same way: ENGINES_2026_10_22 reads its pages from
+any folder (`pages:<dir>/<doc>`), so an open model, Gemini 2.5 Pro or another is measured by the checks ours passed
+(Gemini 2.5 Flash: 3.58 and 3.62 own; Tesseract 18.15 and 24.49) before a page of it is ingested. The rule is written
+here, not built into the ingest; building it is the next phase if you adopt it.
+
+**The witnesses.** GRETIL's Nirukta is now read as written (ETEXT_DOTS_2026_10_22: no danda between every two words,
+its quotation marks, its references and sigla in Latin); its witness is to be written again (free, local).

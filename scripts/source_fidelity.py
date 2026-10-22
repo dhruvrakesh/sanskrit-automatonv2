@@ -14,6 +14,10 @@ Read-only and free: no API is called, the database is opened read-only and nothi
   readings   --cand db:<doc>        what is translated: the text's passages, page by page
                    vision:<doc>     data/raw_vision/<doc>_NNNN.jsonl, the vision OCR of our scan
                    raw:<doc>        data/raw/<doc>_NNNN.jsonl, the first OCR of our scan (Tesseract, mostly)
+                   pages:<dir>/<doc> <dir>/<doc>_NNNN.jsonl, any other engine's OCR of our scan, one JSON line
+                                    with its "text" a line of the page (ENGINES_2026_10_22: another engine is
+                                    measured by the same checks as ours before its reading is trusted or ingested),
+                                    e.g. pages:data/raw_vision_pro/markandeya_purana
                    file:<path>      a text file: an archive.org OCR (_djvu.txt), an e-text
                    witness:<code>   another witness
   measured   each reference unit is found in each reading (7-letter anchors unique in the reference vote for one
@@ -191,8 +195,13 @@ def load(a, spec: str, as_ref: bool):
         for r in recs:
             pages.setdefault(int(r.get("page_no") or 0), []).append(r.get("text") or "")
         return sorted((p, "\n".join(v)) for p, v in pages.items()), "%d records" % len(recs)
-    if kind in ("vision", "raw"):
+    if kind in ("vision", "raw", "pages"):
         folder = root / "data" / ("raw_vision" if kind == "vision" else "raw")
+        if kind == "pages":   # ENGINES_2026_10_22: pages:<dir>/<doc>, the folder relative to --root or absolute
+            d, _, name = name.replace("\\", "/").rpartition("/")
+            if not d or not name:
+                raise SystemExit("pages: wants a folder and a doc: pages:data/raw_vision_pro/<doc>")
+            folder = Path(d) if Path(d).is_absolute() else root / d
         pages, engines = jsonl_pages(folder, name)
         if not pages:
             raise SystemExit("no pages: %s" % (folder / ("%s_NNNN.jsonl" % name)))
@@ -301,6 +310,7 @@ def align(u: str, S: str, where):
         return None
     ops = SequenceMatcher(None, tu, tw, autojunk=False).get_opcodes()
     ok, ins, err, diffs = bytearray(L), {}, 0, []
+    got = [""] * L                                     # TRIANGULATE_2026_10_22: what the reading has at each akshara
     first_k = last_k = None
     shift0 = 0
     for n, (tag, i1, i2, k1, k2) in enumerate(ops):
@@ -326,7 +336,10 @@ def align(u: str, S: str, where):
         if tag == "equal":
             for i in range(i1, i2):
                 ok[i] = 1
+                got[i] = tu[i]
         elif tag == "replace":
+            for d, i in enumerate(range(i1, i2)):
+                got[i] = tw[k1 + d] if k1 + d < k2 else ""
             err += max(i2 - i1, k2 - k1)
             if k2 - k1 > i2 - i1:
                 ins[i2] = ins.get(i2, 0) + (k2 - k1) - (i2 - i1)
@@ -342,7 +355,7 @@ def align(u: str, S: str, where):
         return None
     first_k = first_k or 0
     last_k = last_k if last_k is not None else 0
-    return {"err": err, "n": L, "ok": ok, "ins": ins, "diffs": diffs,
+    return {"err": err, "n": L, "ok": ok, "ins": ins, "diffs": diffs, "got": got,
             "at": lo + len("".join(tw[:first_k])) + shift0, "end": lo + len("".join(tw[:last_k]))}
 
 
@@ -421,31 +434,80 @@ def summarize(refs: list, units: list, res: list, depth: int, examples: int) -> 
     return out
 
 
-def pair(units: list, ra: list, rb: list) -> dict:
-    """Two readings of one print, over the units both read: each of the e-text's aksharas that one reading lacks
+def pair(units: list, ra: list, rb: list, refs: list = None, keep: int = 200) -> dict:
+    """Two readings of one print, over the units both read: each of the reference's aksharas that one reading lacks
     (misread or missing) and the other has is the first's own error; one both lack is shared. Aksharas a reading
-    adds are counted apart: where they go is less sure."""
+    adds are counted apart: where they go is less sure. TRIANGULATE_2026_10_22: where both lack it and both have the
+    same akshara instead, the two readings agree against the reference ("outvoted"): when the reference is one of our
+    own readings, that is where it is most likely misread (when it is an e-text, where the print reads otherwise);
+    the first `keep` of them are kept as the mends to read beside the page."""
     both = [i for i in range(len(units)) if ra[i] and rb[i]]
-    L = own_a = own_b = shared = add_a = add_b = add_shared = 0
+    L = own_a = own_b = shared = add_a = add_b = add_shared = outvoted = 0
+    mends = []
+    ca, cb, co = {}, {}, {}                            # the substitutions: a's own, b's own, the outvoted
     for i in both:
         oa, ob = ra[i]["ok"], rb[i]["ok"]
+        ga, gb = ra[i].get("got") or [], rb[i].get("got") or []
+        tu = aksharas(units[i])
         L += ra[i]["n"]
         for j in range(ra[i]["n"]):
             if not oa[j] and not ob[j]:
                 shared += 1
+                if j < len(ga) and j < len(gb) and ga[j] and ga[j] == gb[j]:
+                    outvoted += 1
+                    co[(tu_j(units, i, j, tu), ga[j])] = co.get((tu_j(units, i, j, tu), ga[j]), 0) + 1
+                    if len(mends) < keep:
+                        mends.append({"ref": refs[i] if refs else i, "page": ra[i].get("page"),
+                                      "before": "".join(tu[max(0, j - 4):j]), "reference": tu[j], "readings": ga[j],
+                                      "after": "".join(tu[j + 1:j + 5])})
             elif not oa[j]:
                 own_a += 1
+                if j < len(ga) and ga[j]:
+                    ca[(tu_j(units, i, j, tu), ga[j])] = ca.get((tu_j(units, i, j, tu), ga[j]), 0) + 1
             elif not ob[j]:
                 own_b += 1
+                if j < len(gb) and gb[j]:
+                    cb[(tu_j(units, i, j, tu), gb[j])] = cb.get((tu_j(units, i, j, tu), gb[j]), 0) + 1
         ia, ib = ra[i]["ins"], rb[i]["ins"]
         for j in set(ia) | set(ib):
             x, y = ia.get(j, 0), ib.get(j, 0)
             add_shared += min(x, y)
             add_a += x - min(x, y)
             add_b += y - min(x, y)
+    own_overlap = _overlap(ca, cb)
+    out_overlap = max(_overlap(co, ca), _overlap(co, cb))
+    # a reading that is the reference's own text again (the repair beside the vision it was made from) is no witness
+    same = "a" if L and (own_a + shared) < SAME_TEXT * L else ("b" if L and (own_b + shared) < SAME_TEXT * L else "")
     return {"units": len(both), "aksharas": L, "own_a_per100": _pct(own_a, L), "own_b_per100": _pct(own_b, L),
             "shared_per100": _pct(shared, L), "added_a_per100": _pct(add_a, L), "added_b_per100": _pct(add_b, L),
-            "added_shared_per100": _pct(add_shared, L), "own_a": own_a, "own_b": own_b, "shared": shared}
+            "added_shared_per100": _pct(add_shared, L), "outvoted_per100": _pct(outvoted, L), "outvoted": outvoted,
+            "own_a": own_a, "own_b": own_b, "shared": shared, "mends": mends,
+            "own_overlap": own_overlap, "outvoted_overlap": out_overlap, "same_text": same,
+            "independent": not same and own_overlap < SAME_OWN and out_overlap < SAME_OUTVOTED}
+
+
+# TRIANGULATE_2026_10_22: two readings that make the same mistakes are not two witnesses. On 22 Oct, Tesseract and
+# archive.org's text layer of the same scan (DLI 2015.405693): their own misreadings overlapped 0.25 and the places
+# they agreed against our vision text looked like their own mistakes, 0.40 (bha read ma, tha read ya); Tesseract and
+# GRETIL's Markandeya: 0.04 and 0.11. The vote of a pair over these is no evidence against the reference.
+# On 80 of its pages the same pair's own misreadings were alike 0.19; a pair of independent readings 0.04 to 0.06.
+SAME_OWN, SAME_OUTVOTED = 0.12, 0.30
+SAME_TEXT = 0.001          # a reading that lacks fewer than 1 in 1,000 of the reference's aksharas is its text again
+TOP = 30
+
+
+def tu_j(units, i, j, tu):
+    return tu[j] if tu is not None and j < len(tu) else ""
+
+
+def _overlap(x: dict, y: dict) -> float:
+    """How alike two profiles of substitutions are: the shared share of their 30 commonest, 0 to 1."""
+    def top(c):
+        t = sorted(c.items(), key=lambda kv: -kv[1])[:TOP]
+        s = float(sum(v for _, v in t)) or 1.0
+        return {k: v / s for k, v in t}
+    a, b = top(x), top(y)
+    return round(sum(min(a[k], b[k]) for k in set(a) & set(b)), 3) if a and b else 0.0
 
 
 def step_of(agree=None, own=None) -> str:
@@ -500,6 +562,27 @@ def verdict_of(name: str, s: dict, pairs: list = ()) -> str:
         s["agree_pct"], s["aksharas"], s["found"], s["units"])
 
 
+OUR_READINGS = ("db", "vision", "raw", "pages")   # ENGINES_2026_10_22: pages: is our scan too
+
+
+def verdict_of_ours(ref: str, pairs: list) -> str:
+    """TRIANGULATE_2026_10_22: no e-text, three readings of one print: the reference (ours) is judged by where the other
+    two agree against it, each of them by its own misreadings."""
+    p = pairs[0]
+    o = p["outvoted_per100"]
+    if p.get("same_text"):
+        return ("%s: not measured: %s is its own text again, no witness; a reading by another engine, or an e-text, "
+                "measures it" % (ref, p["a"] if p["same_text"] == "a" else p["b"]))
+    if not p.get("independent", True):
+        return ("%s: not measured: %s and %s make the same mistakes (alike %.2f and %.2f): their vote against it is no "
+                "evidence; a reading by another engine, or an e-text, measures it" % (
+                    ref, p["a"], p["b"], p["own_overlap"], p["outvoted_overlap"]))
+    return ("%s: %s; outvoted by %s and %s in %s aksharas per 100 (its likely misreadings, %d to read beside the page); "
+            "their own misreadings %s and %s per 100" % (
+                ref, STEP_WORDS[step_of(own=o)] if o is not None else "not measured", p["a"], p["b"], o,
+                p["outvoted"], p["own_a_per100"], p["own_b_per100"]))
+
+
 def _safe(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]+", "_", s).strip("_.")[:120]
 
@@ -522,7 +605,9 @@ def run(a) -> int:
     print("  folded on both sides: spaces, punctuation, numbers, accents, avagraha, nukta; a nasal before a consonant "
           "and a final m as the anusvara; a final consonant joined to the vowel after it; a colon as the visarga%s" % (
               "; ccha and cha as ca" if a.fold_ch else ""))
+    ours = a.ref.split(":", 1)[0] in OUR_READINGS       # TRIANGULATE_2026_10_22: the reference is one of our readings
     report = {"mark": MARK, "at": _now(), "ref": a.ref, "prefix": a.prefix or "", "fold_ch": bool(a.fold_ch),
+              "ours": ours,
               "units": len(units), "short_left_out": short, "readings": {}, "pairs": []}
     results = {}
     for spec in a.cand:
@@ -559,16 +644,31 @@ def run(a) -> int:
         if x not in results or y not in results:
             print("\npair %s: both must be among the --cand readings" % pr)
             continue
-        p = pair(units, results[x], results[y])
+        p = pair(units, results[x], results[y], refs)
         p.update(a=x, b=y)
         report["pairs"].append(p)
         print()
-        print("one print, two readings, over the %d units both read (%d aksharas of the e-text), per 100 aksharas:" % (
-            p["units"], p["aksharas"]))
+        print("one print, two readings, over the %d units both read (%d aksharas of the %s), per 100 aksharas:" % (
+            p["units"], p["aksharas"], "reference" if ours else "e-text"))
         print("  misread or missing: %s's own %s; %s's own %s; shared (the print's reading, the e-text's slip, or a "
               "page both fail) %s" % (x, p["own_a_per100"], y, p["own_b_per100"], p["shared_per100"]))
         print("  added: %s's own %s; %s's own %s; shared %s" % (
             x, p["added_a_per100"], y, p["added_b_per100"], p["added_shared_per100"]))
+        # TRIANGULATE_2026_10_22: both readings agree with each other against the reference
+        if p["same_text"]:
+            print("  NOT INDEPENDENT: %s is the reference's own text again (it lacks fewer than 1 akshara in 1,000 of "
+                  "it): no witness. The vote below is no evidence." % (x if p["same_text"] == "a" else y))
+        elif not p["independent"]:
+            print("  NOT INDEPENDENT: the two make the same mistakes (their own misreadings alike %.2f; where they agree "
+                  "against the reference, it looks like their mistakes, %.2f): one engine, or the same weak letters. "
+                  "Their vote below is no evidence against the reference." % (p["own_overlap"], p["outvoted_overlap"]))
+        print("  the two agree against the reference: %s per 100 (%d aksharas)%s" % (
+            p["outvoted_per100"], p["outvoted"],
+            ": the reference's likely misreadings, the mends to read beside the page" if ours else
+            ": where the print reads otherwise than the e-text (another edition, or the e-text's slip)"))
+        for m in p["mends"][:a.examples]:
+            print("    %s (page %s): %s[%s -> %s]%s" % (m["ref"], m["page"], m["before"], m["reference"],
+                                                       m["readings"], m["after"]))
     first = report["readings"].get(a.cand[0])
     if not a.no_write:
         out_dir = Path(a.out_dir) if a.out_dir else Path(a.root) / "data" / "source_fidelity"
@@ -582,7 +682,10 @@ def run(a) -> int:
         (out_dir / name).write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
         print("\nwritten: %s" % (out_dir / name))
     print()
-    print("VERDICT: " + verdict_of(a.cand[0], first, report["pairs"]))
+    if ours and report["pairs"]:
+        print("VERDICT: " + verdict_of_ours(a.ref, report["pairs"]))
+    else:
+        print("VERDICT: " + verdict_of(a.cand[0], first, report["pairs"]))
     print("NEXT: read the worst units beside the print, then decide per text (docs/FIDELITY_2026-10-22.md)")
     print("ALSO: python scripts\\source_fidelity.py --ledger")
     return 0
@@ -735,8 +838,9 @@ def main(argv=None) -> int:
     except (AttributeError, ValueError):
         pass
     ap = argparse.ArgumentParser(description="FIDELITY_2026_10_22: the letters of a reading against an e-text")
-    ap.add_argument("--ref", help="the reference: witness:CODE, db:DOC or file:PATH")
-    ap.add_argument("--cand", action="append", default=[], help="a reading: db:, vision:, raw:, file:, witness:")
+    ap.add_argument("--ref", help="the reference: witness:CODE, db:DOC, file:PATH (or a reading)")
+    ap.add_argument("--cand", action="append", default=[],
+                    help="a reading: db:, vision:, raw:, pages:, file:, witness:")
     ap.add_argument("--pair", action="append", help="A,B: two readings of one print (both among --cand)")
     ap.add_argument("--prefix", default="", help="only reference units whose reference starts so (14. for kanda 14)")
     ap.add_argument("--fold-ch", action="store_true", help="read cha as ca on both sides (GRETIL's Satapatha)")

@@ -223,6 +223,55 @@ G_MERGED_SIGLUM = re.compile("([\ue100-\ue1ff]\\s)\\+a")                # (C +an
 G_MERGED = re.compile(r"\s?\+a")                                        # puru\u1e63o +aya\u1e43, v\u0101 +arka
 G_NOTE = re.compile(r"(\(\s*\d[\d,\s]*\))\s*checked\b")                  # 1.30b: "(2296832) checked", the inputter's
 
+# ETEXT_DOTS_2026_10_22: GRETIL's Nirukta (sa_yAska-nirukta.htm, 22 Oct) separates its words with a full stop and no
+# space (samAmnAyaH.samAmnAtaH.sa.vyAkhyAtavyaH), quotes its mantras between `` and '', cites them in Latin
+# ((RV.X,84,2;.106,3)) and marks an edition's reading with its siglum ([etAni.Bh], (yugapad.Bh)). indic_transliteration
+# reads the full stop as a danda and each ` and ' as an avagraha: the witness had a danda between every two words, two
+# avagrahas at each quotation, and its references and sigla in Devanagari letters. A line whose words are joined by
+# full stops more often than they are spaced (its label not counted) is read as written: a full stop between two words
+# is a space, two or more together a danda, one at the line's end (the next word is on the next line) nothing; `` and
+# '' are its quotation marks; an h that ends a word after a vowel is the visarga (karmaNah, 62 times); a reference in
+# brackets (it has a numeral), a siglum and an English note in square brackets stay as the e-text writes them, put back
+# after the transliteration. Any other line is read as before: a full stop
+# there is the danda of other IAST e-texts, and '' two avagrahas (the Mahabharata's gartE ''rtAMs).
+G_DOT_WORD = re.compile(r"(?<=[^\W\d_])\.(?=[^\W\d_])")                       # a.b: words joined
+G_DOT_CITE = re.compile(r"\((?=[^()]*\d)([^()]{1,80})\)")                        # (RV.X,84,2;.106,3): a reference
+G_DOT_SIGLUM = re.compile(r"\.([A-Z][a-z]?)(?=[\])])")                            # [etAni.Bh], (yugapad.Bh): a siglum
+G_SPACED = re.compile(r"(?<=[^\W\d_]) +(?=[^\W\d_])")                           # a b: words spaced, not a label
+G_DOT_NOTE = re.compile(r"\[([^\[\]]{1,200})\]")                                 # [used.in.a.derivative.sense]
+G_DOT_RUN = re.compile(r"\.{2,}")                                                # su.Rtas..bhASA: more than a word
+G_DOT_END = re.compile(r"\.\s*$")
+G_DOT_JOIN = re.compile(r"(?<=\S)\.(?=\S)")                                    # a.b, a.[b, ''.(: a separator
+G_DOT_VISARGA = re.compile("(?<=[aeiou\u0101\u012b\u016b\u1e5b\u1e5d])h(?=[\\s,;/|]|$)")      # karmaNah,: the visarga
+Q_OPEN, Q_CLOSE = "\u201c", "\u201d"
+
+
+def latin_words(x: str) -> str:
+    """ETEXT_DOTS_2026_10_22: a reference or a note of a dotted line in Latin, its full stops spaces but for i.e., e.g.,
+    cf. and viz."""
+    x = re.sub(r"\b(i\.e|e\.g|cf|viz)\.", lambda m: m.group(0).replace(".", "\x00"), x)
+    return re.sub(r" {2,}", " ", re.sub(r"\.+", " ", x).replace("\x00", ".")).strip()
+
+
+def dotted_words(s: str, kept: list) -> str:
+    """ETEXT_DOTS_2026_10_22: an IAST line written with its words joined by full stops, read as written (see above);
+    what stays in Latin goes into kept, as gretil_marks() keeps its labels. Any other line as it was (in the
+    Mahabharata's e-text, gartE ''rtAMs: '' is two avagrahas, the long a elided)."""
+    def put(text):
+        kept.append(text)
+        return chr(KEEP0 + len(kept) - 1)
+    n = len(G_DOT_WORD.findall(s))
+    if not n or n <= len(G_SPACED.findall(s)):
+        return s
+    s = s.replace("``", Q_OPEN).replace("''", Q_CLOSE)   # not in another e-text: the Mahabharata's '' is two avagrahas
+    s = G_DOT_CITE.sub(lambda m: "(" + put(latin_words(m.group(1))) + ")", s)
+    s = G_DOT_SIGLUM.sub(lambda m: " " + put(m.group(1)), s)
+    s = G_DOT_NOTE.sub(lambda m: ("[" + put(latin_words(m.group(1))) + "]" if is_english(latin_words(m.group(1)))
+                                  else m.group(0)), s)
+    s = G_DOT_RUN.sub(" | ", G_DOT_END.sub("", s))
+    s = G_DOT_VISARGA.sub("\u1e25", G_DOT_JOIN.sub(" ", s))
+    return re.sub(r" {2,}", " ", s).replace(Q_OPEN + " ", Q_OPEN).replace(" " + Q_CLOSE, Q_CLOSE)
+
 
 def gretil_marks(s: str):
     """ETEXT_ORTHO_2026_10_21: (s, kept): an IAST line with the e-text's H (the visarga) and +a (an a merged into the
@@ -271,6 +320,7 @@ def to_deva(s: str, scheme: str, ortho: bool = True) -> str:
     if scheme == "iast":
         if ortho:   # ETEXT_ORTHO_2026_10_21: ortho=False reads as before 21 Oct (mend_witness.py compares the two)
             s, kept = gretil_marks(s)
+            s = dotted_words(s, kept)   # ETEXT_DOTS_2026_10_22: words joined by full stops; `` and '' quotes
         s = s.lower()
     s = re.sub(r"(?<=[^\W\d_])-(?=[^\W\d_])", "", s)          # compound hyphens: one word in Devanagari
     s = s.replace("||", "\x01").replace("|", "\x02")

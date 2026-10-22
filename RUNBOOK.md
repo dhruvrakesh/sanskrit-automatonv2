@@ -2352,3 +2352,39 @@ docs/FIDELITY_2026-10-22.md. In a new PowerShell window: `$A = "D:\Sanksrit Auto
    WITNESS --engine gemini:gemini-2.5-flash` (`--limit 20` first), `qa_scan.py --doc WITNESS --lang en --write`,
    `extract_entities.py --doc WITNESS`, `build_embeddings.py --doc WITNESS --plan`, then without `--plan`. The cap
    first: `python scripts\set_budget.py`.
+## Debt of 22 Oct: apply, test, measure (DOCS85_2026_10_22)
+
+docs/DEBT_2026-10-22.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`, then
+`Set-Location $A`. Nothing below spends unless it says so.
+1. Apply in this order, each with `--check` first, then without: `scripts\patch_ui_clarity_2026_10_22.py`,
+   `scripts\patch_triangulate_2026_10_22.py`, `scripts\patch_bench_letters_2026_10_22.py`,
+   `scripts\patch_engines_2026_10_22.py`, `scripts\patch_etext_dots_2026_10_22.py`,
+   `scripts\patch_pg_tests_2026_10_22.py`, `scripts\patch_docs85_2026_10_22.py`. Then `python -m unittest
+   tests.test_ui_clarity_2026_10_22 tests.test_triangulate_2026_10_22 tests.test_bench_letters_2026_10_22
+   tests.test_engines_2026_10_22 tests.test_etext_dots_2026_10_22 tests.test_pg_tests_2026_10_22
+   tests.test_docs85_2026_10_22`, then the whole suite. Restart the dashboard only when it reads idle.
+2. The Nirukta's witness again (free, local; it has no English): with the dashboard idle, `python scripts\db_backup.py
+   data\context.db D:\backups\context_pre_etextdots_nirukta_20261022.db`; `python scripts\wipe_doc.py --doc
+   nirukta__w_gretil --dry-run`, then `--yes`; `python scripts\etext_witness.py --doc nirukta --file
+   sources\nirukta\sa_yAska-nirukta.htm --category vedanga` (the preview), then the same with `--write --force` (the
+   pages before are kept beside, .bak_); `python scripts\etext_witness.py --doc nirukta --ingest --witness
+   nirukta__w_gretil`; then `python scripts\source_fidelity.py --ref db:nirukta__w_gretil --cand db:nirukta --cand
+   vision:nirukta --cand raw:nirukta --pair vision:nirukta,raw:nirukta`.
+3. The Daivat-Sanhita (free): on the Source desk, fetch the OCR text of the 2017 upload (DaivatSanhita_201702; the
+   download is yours), then `python scripts\benchmark_sources.py --doc Daivat-Sanhita`. Its rights and its repair
+   are yours (DEBT, Y2): `python scripts\repair_text.py --doc Daivat-Sanhita --repair --max-usd 5.30` (about $4.20).
+4. A second engine, a pilot (yours, DEBT Y3; paid): `python scripts\ocr_vision.py --glob
+   "inbox\markandeya_purana_*.pdf" --limit 20 --outdir data\raw_vision_pro --model gemini-2.5-pro --doc
+   markandeya_purana_pro_pilot` is a dry run (its pre-flight prices at Flash's metered rate; Pro's tokens cost about 4
+   times as much, so read about $0.27); `--yes` calls. Then `python scripts\source_fidelity.py --ref
+   db:markandeya_purana__w_gretil --cand pages:data/raw_vision_pro/markandeya_purana --cand vision:markandeya_purana
+   --cand raw:markandeya_purana --pair pages:data/raw_vision_pro/markandeya_purana,vision:markandeya_purana --pair
+   pages:data/raw_vision_pro/markandeya_purana,raw:markandeya_purana`: its own misreadings, and whether its mistakes
+   are Flash's (TRIANGULATE's check).
+5. The site, read-only: `docs\cloud\CHECKS_debt_2026-10-22.sql`, one block at a time (H1 the Hayasirsa, H2 the
+   witnesses, H3 the Daivat-Sanhita, H4 the mirror's runs).
+6. The PostgreSQL tests on this PC (optional): PostgreSQL 16 with pgvector 0.7 or later and a UTF8 database. With
+   Docker Desktop: `docker run --name corpus-test -e POSTGRES_PASSWORD=corpus_test_only -p 5433:5432 -d
+   pgvector/pgvector:pg16`; for each module a database (`docker exec corpus-test createdb -U postgres t1`) and
+   `$env:CORPUS_TEST_DSN = "postgresql://postgres:corpus_test_only@localhost:5433/t1"`, then `python -m unittest
+   tests.test_corpus_sync_pg_2026_10_08`. Never a Supabase host: the tests refuse one.

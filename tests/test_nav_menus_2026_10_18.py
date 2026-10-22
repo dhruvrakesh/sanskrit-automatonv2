@@ -53,7 +53,7 @@ class TheMenus(unittest.TestCase):
 
     def test_one_menu_at_a_time_without_a_script_block(self):
         self.assertEqual(self.bar.count("ontoggle="), 6)
-        self.assertEqual(self.bar.count('onmouseleave="this.open=false"'), 6)
+        self.assertEqual(self.bar.count('onmouseleave="'), 6)   # UI_CLARITY_2026_10_22: closed a moment after it is left
         self.assertNotIn("<script", self.bar)
         self.assertEqual(self.h.count("<script"), 1, "the page's one script block, as before")
         self.assertIn(".tn-pop>a,.tn-pop>button{display:block!important", self.h)
@@ -80,7 +80,8 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / f).read_bytes(), (REPO / f).read_bytes(), f)
+                later = sorted((REPO / f).parent.glob(Path(f).name + ".bak_uiclarity_*"))   # UI_CLARITY_2026_10_22 came after
+                self.assertEqual((t / f).read_bytes(), (later[0] if later else REPO / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:
                 shutil.copy2(baks[f][0], t / f)

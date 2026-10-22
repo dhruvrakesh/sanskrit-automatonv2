@@ -1111,3 +1111,18 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | F4 | The mend: Tesseract's reading offered where vision's own misreading is shown | Designed |
 | E2b | GRETIL's Markandeya in full (5,240 passages: English, names, vectors) | Yours: about $4.12 against $4.42 under the cap |
 | D1b | The Satapatha's ch | Revised: from our vision of Samasrami's images, not archive.org's text (49 to 55%) |
+## Addendum 2026-10-22 (75) (DOCS85_2026_10_22)
+
+| # | Item | State |
+|---|---|---|
+| T1 | The top bar's menus | Done: UI_CLARITY_2026_10_22 |
+| T2 | The vote of two readings; their independence | Done: TRIANGULATE_2026_10_22 |
+| T3 | The benchmark, letter by letter | Done: BENCH_LETTERS_2026_10_22 |
+| T4 | Any engine's pages, measured by our checks | Done: ENGINES_2026_10_22 |
+| T5 | GRETIL's Nirukta read as written | Done: ETEXT_DOTS_2026_10_22; yours: its witness written again (free) |
+| T6 | The PostgreSQL tests | Run: 283 pass; PG_TESTS_2026_10_22 for the one that failed on a fresh database |
+| T7 | The intake rule: measured, independent, or a witness | Proposed (the brain page, 11); yours to adopt, then built |
+| T8 | A second engine | Yours: Gemini 2.5 Pro (about $0.013 a page), an open model, or Claude; a 20-page pilot first |
+| H1 | The Hayasirsa | Yours: the 236 verses read; Finish EN (about $0.94), Add Hindi, release |
+| Y2 | The Daivat-Sanhita | Yours: Satavalekar's rights (to the end of 2028), then the vision repair (about $4.20) |
+| R1 | Srangam's other edge functions | Next round: not reviewed this round |

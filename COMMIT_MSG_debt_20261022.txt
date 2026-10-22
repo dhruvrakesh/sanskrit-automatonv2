@@ -1,0 +1,32 @@
+The debt of 22 Oct collected and resolved: the menus, the two Englishes, the vote of independent readings, any engine measured by our checks, GRETIL's Nirukta read as written, the PostgreSQL tests run (UI_CLARITY, TRIANGULATE, BENCH_LETTERS, ENGINES, ETEXT_DOTS, PG_TESTS, DOCS85)
+
+- UI_CLARITY_2026_10_22 (dashboard_static.html, dashboard.py): the top bar's menus closed crossing the 6px
+  gap to their list; a bridge over it and a close 450 ms after the pointer leaves. The Library card names
+  EN (the working English) and SC (the scholarly English); a text in repair says why its English was
+  cleared and how it is published; "% Devanagari" is an OCR text's script, not its fidelity.
+- TRIANGULATE_2026_10_22 (source_fidelity.py): --pair counts where two readings outvote the reference (the
+  mends to read) and refuses the vote of two readings that make the same mistakes (Tesseract and
+  archive.org's layer of one scan: alike 0.25 and 0.40; independent pairs 0.04 to 0.06).
+- BENCH_LETTERS_2026_10_22 (benchmark_sources.py): the readings letter by letter on sample pages, each
+  one's own misreadings and where two outvote ours, beside the consonant-skeleton F1.
+- ENGINES_2026_10_22 (source_fidelity.py): pages:<dir>/<doc>, any engine's page JSONL measured by the same
+  checks as ours, before its reading is trusted or ingested.
+- ETEXT_DOTS_2026_10_22 (etext_witness.py): GRETIL's Nirukta joins its words with full stops and quotes with
+  `` ''; it was read with a danda between every two words (34,183) and two avagrahas at each quotation
+  (3,439); now as written (4,676 and 57), its references, sigla and English notes in Latin; every other
+  e-text byte for byte as before.
+- PG_TESTS_2026_10_22 (tests/test_corpus_sync_pg_2026_10_08.py): the 19 PostgreSQL modules, never run here,
+  were run in a throwaway PostgreSQL 16 with pgvector 0.8.0: 18 passed as they are; this one applies the
+  test-only Supabase stand-ins first, as the others do; 283 tests pass.
+- DOCS85_2026_10_22: docs/DEBT_2026-10-22.md (the register); the brain page's section 11 (the intake rule,
+  proposed), PLATFORM 88, RUNBOOK, ENTERPRISE_PATH 75, STATE 20; FIDELITY section 6 corrected (the Surya's
+  "about $0.02" was the price of 12 Oct, before REINGEST_2026_10_12, not today's fallback);
+  docs/cloud/CHECKS_debt_2026-10-22.sql, read-only.
+
+Tests: test_ui_clarity_2026_10_22, test_triangulate_2026_10_22, test_bench_letters_2026_10_22,
+test_engines_2026_10_22, test_etext_dots_2026_10_22, test_pg_tests_2026_10_22, test_docs85_2026_10_22;
+the suite on a copy with the six code patches: 161 modules, 1,298 tests, 0 failures, 191 skipped; the 19
+PostgreSQL modules in a throwaway database: 283 tests, 0 failures.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
