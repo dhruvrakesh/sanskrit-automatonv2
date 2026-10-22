@@ -1,0 +1,28 @@
+GRETIL's two zips read as a library; the suite run as the dashboard runs jobs; verses read twice (GRETIL_LIBRARY, TEST_ENV, ETEXT_ANALYSIS, DOCS87)
+
+- GRETIL_LIBRARY_2026_10_22 (scripts/gretil_library.py, new; free, read-only): --catalog reads every text of
+  1_sanskr.zip from its own header: 801 TEI texts (800 CC BY-NC-SA 4.0, 1 CC BY-SA 4.0; 387 from an edition of
+  1960 or later) and the 380 legacy files the conversion did not take (332 texts, each "for reference purposes
+  only, copyright as for source file"), with the rights of 6_sres.zip's 23 resources (two under copyright, private
+  reading only). --match measures which GRETIL text reads which of our texts (the consonant skeleton in 6-letter
+  grams; the lift over each file's baseline and the ratio to it; a part or a parallel told from a witness; a TEI
+  file put before a legacy one within 0.05): 11 of our 64 texts have a witness, 8 of them new (the Yama, Manu,
+  Narasimha, Yajnavalkya, Parasara, Gautama, Samaveda, Bodhicaryavatara). --extract writes one member into
+  sources/<doc>/ with its provenance. The skeleton reads Aufrecht's Vedic l with a line below and an m with a
+  candrabindu.
+- ETEXT_ANALYSIS_2026_10_22 (scripts/etext_witness.py): html_to_text() leaves out the analysis column 43 of GRETIL's
+  html transformations print after each verse; the Manusmrti read as 5,748 verses, now 3,058; the Markandeya, the
+  Nirukta and the Surya read byte for byte as before.
+- TEST_ENV_2026_10_22: scripts/run_tests.ps1 (new) runs each test module with PYTHONUTF8=1 and
+  PYTHONIOENCODING=utf-8, as the dashboard runs jobs, for its window only: eight modules failed on the PC because
+  Python writes a pipe in cp1252. tests/test_repo_hygiene_2026_10_15.py's replay accepts a later patch's backup of
+  .gitignore.
+- DOCS87_2026_10_22: docs/DEBT_2026-10-22.md section 8, STATE 22, RUNBOOK (apply; the suite; the library; a witness
+  for each new match; the rights; Srangam's uncommitted SEO Phase AN with curl.exe checks), PLATFORM 90,
+  ENTERPRISE_PATH 77; .gitignore: data/gretil/.
+
+Tests: test_gretil_library_2026_10_22, test_etext_analysis_2026_10_22, test_test_env_2026_10_22,
+test_docs87_2026_10_22, with test_witness_fix_2026_10_22 and test_repo_hygiene_2026_10_15.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

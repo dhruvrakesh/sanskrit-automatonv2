@@ -161,3 +161,6 @@ data/shelf/
 # FIDELITY_2026_10_22 (DOCS84_2026_10_22): the letter-fidelity reports are made again by scripts/source_fidelity.py
 # (free, read-only)
 data/source_fidelity/
+# GRETIL_LIBRARY_2026_10_22 (DOCS87_2026_10_22): GRETIL's catalog and the match are made again by
+# scripts/gretil_library.py (free, read-only); the zips are under sources/, ignored above
+data/gretil/

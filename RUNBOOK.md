@@ -2409,3 +2409,35 @@ then `Set-Location $A`. Nothing below spends.
    vision:nirukta --cand raw:nirukta --pair vision:nirukta,raw:nirukta`). The witness's pages then hold 4,676 dandas.
 4. The site, read-only: `docs\cloud\CHECKS_followup_2026-10-22.sql`, one block at a time (J1 who may read the
    corpus, J2 whether the site lists the Daivat-Sanhita, J3 the Surya e-text after the mirror's runs).
+## GRETIL's library; the suite as the dashboard runs it (DOCS87_2026_10_22)
+
+docs/DEBT_2026-10-22.md, section 8. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`,
+then `Set-Location $A`. Nothing below spends.
+1. Apply, each with `--check` first: `scripts\patch_test_env_2026_10_22.py`, `scripts\patch_etext_analysis_2026_10_22.py`,
+   `scripts\patch_docs87_2026_10_22.py`. Then the whole suite: `powershell -ExecutionPolicy Bypass -File
+   scripts\run_tests.ps1` (it ends "every module passes"; `-Show` prints a failing module's output). A test piped in
+   a plain window (`python -m unittest ... 2>&1 | ...`) writes cp1252 and can fail for that alone.
+2. The library: `New-Item -ItemType Directory -Force sources\gretil`, `Move-Item inbox\1_sanskr.zip sources\gretil\`,
+   `Move-Item inbox\6_sres.zip sources\gretil\`; then `python scripts\gretil_library.py --catalog --csv
+   exports\gretil_catalog.csv` and `python scripts\gretil_library.py --match --csv exports\gretil_match.csv` (some
+   minutes; `--budget 600` stops it and the next run goes on).
+3. A witness for each text the match calls strong and has none yet; the html transformation of each:
+   smriti_18yama_smriti sa_yamasmRti-78v.htm; smriti_14manu_smriti_seg sa_manusmRti.htm; upapurana_narasimha_purana
+   sa_narasiMhapurANa.htm; smriti_06yagyavalkya_smriti sa_yAjJavalkyasmRti.htm; smriti_13parashara_smriti
+   sa_parAzarasmRti-AcAra-prAyazcitta.htm; smriti_17gautama_smriti sa_gautama-dharmasUtra.htm; sama_veda_sama_veda
+   sa_sAmavedasaMhitA.htm; Bodhicaryavatara sa_zAntideva-bodhicaryAvatAra.htm. For the Manu, and so for each:
+   `python scripts\gretil_library.py --extract 1_sanskr/tei/transformations/html/sa_manusmRti.htm --doc
+   smriti_14manu_smriti_seg`; the preview (it measures our scan against it, writes nothing): `python
+   scripts\etext_witness.py --doc smriti_14manu_smriti_seg --file sources\smriti_14manu_smriti_seg\sa_manusmRti.htm`;
+   with the dashboard idle, the same with `--write`, then `python scripts\etext_witness.py --doc
+   smriti_14manu_smriti_seg --ingest --witness smriti_14manu_smriti_seg__w_gretil` (its own backup first; a witness is
+   local, the mirror does not send it), then `python scripts\source_fidelity.py --ref
+   db:smriti_14manu_smriti_seg__w_gretil --cand db:smriti_14manu_smriti_seg`.
+4. Before any of it is adopted or published: its edition and licence in `exports\gretil_catalog.csv` (DEBT section 8,
+   the rights to weigh).
+5. Srangam (another session's SEO Phase AN): `git add` the nine files by name (not `-A`: their .bak_gsc_20261022
+   copies are not ignored), `git pull --rebase --autostash`, commit, push, Lovable Publish; then, read-only, SEO_GSC_STATUS
+   section 5's checks with `$h = curl.exe -s https://srangam.nartiang.org/ | Out-String` and `$s = curl.exe -s
+   https://srangam.nartiang.org/sitemap.xml | Out-String` in place of its two Invoke-WebRequest lines (expected:
+   static canonical gone: True, data-rh tags 5, sitemap urls 74, retired slugs left 0).
+6. The site, read-only: `docs\cloud\CHECKS_followup_2026-10-22.sql` J1 to J3, if not yet run.

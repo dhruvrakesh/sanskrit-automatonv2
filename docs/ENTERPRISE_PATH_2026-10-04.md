@@ -1136,3 +1136,16 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | T10 | test_mbh_prose: 3 errors on the PC alone | Open: its traceback |
 | F3b | GRETIL's Rgveda and Samaveda | Open: no directory listing (403); from GRETIL's own pages |
 | Y2b | The Daivat-Sanhita live in the corpus | Yours: J1 and J2, then keep or --withdraw |
+## Addendum 2026-10-22 (77) (DOCS87_2026_10_22)
+
+| # | Item | State |
+|---|---|---|
+| F4 | GRETIL's library: 801 TEI texts and 332 legacy texts catalogued, matched against our 64 | Done: GRETIL_LIBRARY_2026_10_22; yours: run it on the PC (free) |
+| F4a | Eight new witnesses: the Yama, Manu, Narasimha, Yajnavalkya, Parasara, Gautama, Samaveda, Bodhicaryavatara | Yours: extract, preview, write, ingest, measure (free) |
+| F4b | Translate from the better text: the Manu (0.7% English), the Samaveda (0%), the Narasimha (2.9%), the Parasara (0%); measure before any English is bought | Next, after F4a |
+| F4c | 34 texts GRETIL does not read | Open: other sources; our scans are their witness |
+| T11 | The suite on the PC: a cp1252 pipe | Mended: TEST_ENV_2026_10_22 (run_tests.ps1) |
+| T5c | Verses read twice (GRETIL's analysis column) | Mended: ETEXT_ANALYSIS_2026_10_22 |
+| Y3 | The Nirukta's text: GRETIL's (ours agrees 75.33% vision, 70.74% Tesseract) | Yours |
+| Y4 | GRETIL's terms (CC BY-NC-SA 4.0; legacy files: reference only) and the editions of 1960 or later | Yours |
+| S1 | Srangam's SEO Phase AN, uncommitted | Yours: add by name, commit, push, Publish, the curl.exe checks |

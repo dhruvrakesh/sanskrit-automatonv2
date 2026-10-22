@@ -133,8 +133,17 @@ def decode(data: bytes):
         return data.decode("cp1252", "replace"), "cp1252", "not UTF-8: read as Windows-1252, which is rarely right for Sanskrit"
 
 
+# ETEXT_ANALYSIS_2026_10_22: 43 of GRETIL's 802 TEI html transformations (the Manusmrti, the Yajnavalkyasmrti, the
+# Parasarasmrti among them) set each verse beside its analysis, the same verse with its sandhi undone, in a second
+# column (<p class="analysis">): read as text, every verse came twice (the Manusmrti read as 5,748 units; without the
+# analysis 3,058, its verses with its headings and contents). The analysis is left out; the e-texts read before (the
+# Markandeya, the Nirukta, the Surya Siddhanta) have none, and read byte for byte as before.
+G_ANALYSIS = re.compile(r"(?is)<p\b[^>]*class=\"analysis\"[^>]*>.*?</p\s*>")
+
+
 def html_to_text(s: str) -> str:
     s = re.sub(r"(?is)<(script|style|head)\b.*?</\1\s*>", " ", s)
+    s = G_ANALYSIS.sub(" ", s)   # ETEXT_ANALYSIS_2026_10_22
     if len(re.findall(r"(?i)<br\b", s)) >= 10:
         # the lines are marked by <br>: a newline in the source is only a space, except inside <pre>
         parts = re.split(r"(?is)(<pre\b.*?</pre\s*>)", s)
