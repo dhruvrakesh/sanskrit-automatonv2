@@ -1,0 +1,23 @@
+Our reading benchmarked against GRETIL's witnesses; the asks collated in one register; a command printed as its shape mended (OCR_BENCHMARK, DOC_REGISTER, GRETIL_NEXT, DOCS88)
+
+- OCR_BENCHMARK_2026_10_22 (scripts/ocr_benchmark.py, new; free, read-only): every source_fidelity report side by
+  side. On 22 Oct, 24 readings of 13 texts against 12 witnesses: where one print has two readings, vision misreads
+  4.33 aksharas in 100 on its own, Tesseract 12.02, archive.org's OCR 25.20; agreement by engine, the gaps each
+  witness fills, the commonest substitutions (those two engines make on one text marked), and the cost of a vision
+  pass for the texts read from Tesseract's pages alone (about $4.80 for eight). The database's copy of a reading is
+  counted once.
+- DOC_REGISTER_2026_10_22 (scripts/doc_register.py, new; free, read-only): the ENTERPRISE_PATH's tables as one
+  register. Its 471 rows are 329 items under 200 labels; 63 labels name more than one item; 97 items last recorded
+  before 15 Oct still read as open. It reads the register's stable keys too.
+- GRETIL_NEXT_2026_10_22 (scripts/gretil_library.py): --match printed "--extract MEMBER --doc DOC", which was run as
+  printed; it now prints the commands themselves for the strong matches without a witness.
+- DOCS88_2026_10_22: docs/ASKS_2026-10-22.md (new: the standing asks, this week's asks, the open ones under keys that
+  do not change, four corrections to the record); docs/DEBT_2026-10-22.md section 9 (the eight witnesses measured,
+  the benchmark, is it a learning system, the gaps and how a witness fills them, the site's corpus for those texts),
+  STATE 23, RUNBOOK, PLATFORM 91, ENTERPRISE_PATH 78 (T10, F3, F3b closed; Y4 superseded by L1).
+
+Tests: test_ocr_benchmark_2026_10_22, test_doc_register_2026_10_22, test_gretil_next_2026_10_22,
+test_docs88_2026_10_22, with test_gretil_library_2026_10_22.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

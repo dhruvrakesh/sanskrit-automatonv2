@@ -590,8 +590,21 @@ def match(a) -> int:
               "baseline, %d times what it reads of our texts at large; %d a part or a parallel; %d possible" % (
                   n_strong, int(STRONG * 100), RATIO, sum(1 for r in rows if r["verdict"] == "a part or a parallel"),
                   sum(1 for r in rows if r["verdict"].startswith("possible"))))
-    print("NEXT: python scripts\\gretil_library.py --extract MEMBER --doc DOC, then python scripts\\etext_witness.py "
-          "--doc DOC --file sources\\DOC\\FILE (the preview)")
+    # GRETIL_NEXT_2026_10_22: the commands themselves, for the strong matches that have no witness yet (on 22 Oct
+    # "--extract MEMBER --doc DOC" was run as printed)
+    todo = [r for r in sorted(rows, key=lambda r: -(r["top"][0]["lift"] if r["top"] else 0))
+            if r["verdict"] == "strong" and not any((ROOT / "data" / "raw_witness").glob(r["doc"] + "__w_*"))
+            ] if not stopped else []
+    for r in todo[:3]:
+        m = r["top"][0]["html"]
+        print("NEXT: python scripts\\gretil_library.py --extract %s --doc %s" % (m, r["doc"]))
+        print("      python scripts\\etext_witness.py --doc %s --file sources\\%s\\%s   (the preview)" % (
+            r["doc"], r["doc"], Path(m).name))
+    if len(todo) > 3:
+        print("ALSO: %d more strong matches without a witness: %s" % (len(todo) - 3, ", ".join(r["doc"] for r in todo[3:])))
+    if not todo and not stopped:
+        print("NEXT: every strong match has its witness (data\\raw_witness); python scripts\\ocr_benchmark.py measures "
+              "our readings against them all")
     return 0
 
 

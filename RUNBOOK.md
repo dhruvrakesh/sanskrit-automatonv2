@@ -2441,3 +2441,16 @@ then `Set-Location $A`. Nothing below spends.
    https://srangam.nartiang.org/sitemap.xml | Out-String` in place of its two Invoke-WebRequest lines (expected:
    static canonical gone: True, data-rh tags 5, sitemap urls 74, retired slugs left 0).
 6. The site, read-only: `docs\cloud\CHECKS_followup_2026-10-22.sql` J1 to J3, if not yet run.
+## The benchmark; the register (DOCS88_2026_10_22)
+
+docs/DEBT_2026-10-22.md, section 9; docs/ASKS_2026-10-22.md. In a new PowerShell window: `$A = "D:\Sanksrit
+Automatons\sanskrit-automatonv2"`, then `Set-Location $A`. Nothing below spends.
+1. Apply, each with `--check` first: `scripts\patch_gretil_next_2026_10_22.py`, then `scripts\patch_docs88_2026_10_22.py`.
+   Then `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. The benchmark: `python scripts\ocr_benchmark.py` (exports\ocr_benchmark.csv, ocr_confusions.csv,
+   ocr_benchmark.json). Run it again after any `source_fidelity.py` measure.
+3. The register's check: `python scripts\doc_register.py`, then `python scripts\doc_register.py --open --before
+   2026-10-15` (the old items, to close with the release that did them or to bring into ASKS section 3).
+4. Srangam: Lovable Publish first; only then SEO_GSC_STATUS section 5's checks with curl.exe (the DOCS87 section,
+   step 5); then Search Console (its section 4).
+5. The decisions: ASKS section 3 (Yours and Money).

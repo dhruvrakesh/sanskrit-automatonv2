@@ -1149,3 +1149,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | Y3 | The Nirukta's text: GRETIL's (ours agrees 75.33% vision, 70.74% Tesseract) | Yours |
 | Y4 | GRETIL's terms (CC BY-NC-SA 4.0; legacy files: reference only) and the editions of 1960 or later | Yours |
 | S1 | Srangam's SEO Phase AN, uncommitted | Yours: add by name, commit, push, Publish, the curl.exe checks |
+## Addendum 2026-10-22 (78) (DOCS88_2026_10_22)
+
+| Key | Item | State |
+|---|---|---|
+| witness-check | Our readings benchmarked against the e-texts (vision 4.33, Tesseract 12.02, archive.org 25.20 own misreadings in 100) | Done: OCR_BENCHMARK_2026_10_22 |
+| witness-adopt | The eight new GRETIL witnesses, written, ingested and measured on the PC | Yours, text by text, after its English (ASKS 3) |
+| witness-vision-pairs | A vision pass of the eight witnessed texts read from Tesseract's pages alone | Money: about $4.80 |
+| docs-coherence | The asks collated under keys that do not change | Done: docs/ASKS_2026-10-22.md; DOC_REGISTER_2026_10_22 |
+| F4a | Eight new witnesses: the Yama, Manu, Narasimha, Yajnavalkya, Parasara, Gautama, Samaveda, Bodhicaryavatara | Done: written, ingested and measured on the PC (22 Oct, 19:01 to 19:04); their adoption is witness-adopt |
+| T10 | test_mbh_prose: 3 errors on the PC alone | Closed: the cp1252 pipe, mended by TEST_ENV_2026_10_22 |
+| F3b | GRETIL's Rgveda and Samaveda | Closed: the cumulative zip is the listing |
+| F3 | GRETIL's Nirukta, Rgveda (Aufrecht) and Samaveda as witnesses | Done for the Nirukta and the Samaveda; the Rgveda is rgveda-witness |
+| Y4 | GRETIL's terms (CC BY-NC-SA 4.0; legacy files: reference only) and the editions of 1960 or later | Superseded: the TEI texts were decided on 18 Oct (L1); open are gretil-legacy-terms and witness-adopt |
+| srangam-seo-publish | Srangam's SEO Phase AN, pushed (c4849e8) | Yours: Lovable Publish, then the curl.exe checks |
