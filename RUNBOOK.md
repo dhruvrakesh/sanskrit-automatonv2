@@ -2454,3 +2454,14 @@ Automatons\sanskrit-automatonv2"`, then `Set-Location $A`. Nothing below spends.
 4. Srangam: Lovable Publish first; only then SEO_GSC_STATUS section 5's checks with curl.exe (the DOCS87 section,
    step 5); then Search Console (its section 4).
 5. The decisions: ASKS section 3 (Yours and Money).
+## The names, measured; the companion repositories (DOCS89_2026_10_22)
+
+docs/RELATIONS_AND_ASK_2026-10-22.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`,
+then `Set-Location $A`. Nothing below spends.
+1. Apply: `python scripts\patch_docs89_2026_10_22.py --check`, then without it. Then `powershell -ExecutionPolicy
+   Bypass -File scripts\run_tests.ps1`.
+2. The census (reads data\context.db read-only; the dashboard may run): `python scripts\relations_census.py`, then
+   `python scripts\relations_census.py --name Janaka --no-write`. exports\names_together.csv holds the pairs.
+3. The companion repositories, read before any commit: `git -C "D:\remix-of-dkegl-website" diff --stat` and
+   `git -C "D:\remix-of-dkegl-website" diff -- scripts/generate-sitemap.mjs`; the same for nartiang-legacy-web.
+4. The decisions: ASKS section 6.

@@ -1,0 +1,18 @@
+How the names are joined, measured; what Ask reads; the path to a better Ask (RELATIONS_CENSUS, DOCS89)
+
+- RELATIONS_CENSUS_2026_10_22 (scripts/relations_census.py, new; free, read-only, the database opened read-only or a
+  backup immutable): names by kind; the pairs named together in one passage, in how many passages and texts, with
+  places (a passage naming more than 12 is a list, left out; retired texts left out); one name's neighbours
+  (--name); the scholars' shelf's kinship phrases counted as printed, never stored. On the 22 Oct 19:04 backup:
+  13,233 names, 41,744 mentions in 15,394 passages; 45,994 pairs, 4,983 in two passages or more, 1,539 in two texts
+  or more; no kinship stored; the Purana Index prints "son of" in 4,759 entries.
+- DOCS89_2026_10_22: docs/RELATIONS_AND_ASK_2026-10-22.md (new: the names measured; what Ask reads on the PC and the
+  site; the path R1 to R4, A1, A2, U1 to U3, E; whether this is the enterprise way, and what CI, staging, alerts and
+  one current set of documents would take); docs/DEBT_2026-10-22.md section 10 (8f503ad2; Srangam's SEO Phase AN
+  published and checked; J1 the readers' list, J2 the Daivat-Sanhita not a site text; the companion repositories'
+  changes, read), STATE 24, RUNBOOK, PLATFORM 92, ENTERPRISE_PATH 79 (the new keys), docs/ASKS_2026-10-22.md section 6.
+
+Tests: test_relations_census_2026_10_22, test_docs89_2026_10_22.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

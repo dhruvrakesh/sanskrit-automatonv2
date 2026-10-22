@@ -1163,3 +1163,22 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | F3 | GRETIL's Nirukta, Rgveda (Aufrecht) and Samaveda as witnesses | Done for the Nirukta and the Samaveda; the Rgveda is rgveda-witness |
 | Y4 | GRETIL's terms (CC BY-NC-SA 4.0; legacy files: reference only) and the editions of 1960 or later | Superseded: the TEI texts were decided on 18 Oct (L1); open are gretil-legacy-terms and witness-adopt |
 | srangam-seo-publish | Srangam's SEO Phase AN, pushed (c4849e8) | Yours: Lovable Publish, then the curl.exe checks |
+## Addendum 2026-10-22 (79) (DOCS89_2026_10_22)
+
+| Key | Item | State |
+|---|---|---|
+| srangam-seo-publish | Srangam's SEO Phase AN | Done: c4849e8 published; the checks as expected |
+| daivat-rights | The Daivat-Sanhita | Yours: J1 (the readers' list) and J2 (not a site text) answered; keep for the readers or --withdraw |
+| companion-seo-commits | nartiang-legacy-web (3 files) and remix-of-dkegl-website (17 files) | Yours: read the diffs, then commit by name |
+| relations-together | The named-together links stored (entity_links) | Next: free |
+| relations-index | The shelf's kinships read whole and checked (a 100-entry trial) | Yours: the trial, priced by a dry run |
+| relations-check | Each kinship checked against our verses | Next, after relations-index |
+| relations-mirror | C19 (claims) and C20 (named together) on the site | Next, after relations-together; the index's kinships only by H2 |
+| ask-v2 | Ask on the PC reads the scholarly English, the Sanskrit, the names, their links and claims | Next, after relations-together |
+| ask-site | Ask on the site, behind the readers' gate, with a daily limit | Next, after ask-v2 is measured |
+| ask-ui | One Ask page on the PC and the site | Next: free |
+| names-ui | The name page: named together, the scholars, the indexes | Next, after relations-mirror |
+| load-measure | Measured before any cut (test:perf, EXPLAIN) | Next: free |
+| ci-tests | The suite on GitHub on every push (Ubuntu and Windows), never deploying | Yours: a standing configuration |
+| alerts | A mail when the mirror or a task fails | Yours: a mail you receive |
+| docs-consolidation | ASKS as the state; one ARCHITECTURE page; a RUNBOOK of current procedures | Next |
