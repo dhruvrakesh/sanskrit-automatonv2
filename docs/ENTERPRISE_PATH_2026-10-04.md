@@ -1090,3 +1090,14 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D1b | The Satapatha's dandas | Samasrami's Bibliotheca Indica print (Calcutta, 1903 to 1912), by vision OCR, as the witness |
 | C1 | D. R. Bhandarkar's Carmichael Lectures (1918) | Waiting: NVLI's host does not answer; HathiTrust in full only in the US |
 | B2 | The claims on the site | Next: C19, corpus-ingest's second list, corpus_sync |
+## Addendum 2026-10-22 (73) (DOCS83_2026_10_22)
+
+| # | Item | State |
+|---|---|---|
+| K2 | The site's 246 more mentions and 158 more vectors | Confirmed: the Hayasirsa's held version |
+| E2 | Vectors and names only from the working English (25% of the live passages) | Found; phase E: from the scholarly English too, then the large texts' English |
+| D1 | GRETIL's Satapatha in full (7,173 kandikas) | Built: ETEXT_PROSE2_2026_10_22; yours: write and ingest it as a local witness |
+| D1a | GRETIL's Satapatha lacks every ch | Found: about 1,200 words; the skeleton, not the text of record |
+| D1b | The ch and the dandas from Samasrami's print (Calcutta, 1903 to 1912) | Next: archive.org's readings measured; then vision where poor; then the alignment |
+| D1c | Kanda 12 | From the print (GRETIL has none) |
+| C1 | The Carmichael Lectures (1918) | Waiting: NVLI's server does not answer |

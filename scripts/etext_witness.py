@@ -303,6 +303,30 @@ G_LABEL_HEAD = re.compile(r"^\s*(?:\[[^\]\n]{1,80}\]\s*)?(\d+\.\d+)[a-f]?:")   #
 # ETEXT_PROSE_2026_10_21: a prose unit's reference on a line of its own (GRETIL's Satapatha: 13.1.1.[1], kanda, adhyaya,
 # brahmana, [kandika]), or followed by the unit's first words
 G_PROSE_REF = re.compile(r"^\s*(\d{1,3}(?:\.\d{1,3}){1,4})\.\[(\d{1,4})\](?:\s+(.*\S))?\s*$")
+# ETEXT_PROSE2_2026_10_22: GRETIL's Satapatha in full has its numbers in other shapes too, read once a bracketed one has
+# been seen: the brackets put in wrongly (1.1.3[.1]1, 1.1.3[[.]]5, 4.5.7.[9]]), none (14.4.1.1), a brahmana's own number
+# (14.6.4.), a number glued to its text (11.7.4.2prajapatirha); and an appendix after a line of asterisks
+G_PROSE_GLUED = re.compile(r"^\s*(\d{1,3}(?:\.\d{1,3}){3})(?=[^\W\d_])(.+)$")
+G_SEPARATOR = re.compile(r"^\s*[*=~_-]{5,}\s*$")
+
+
+def prose_ref(ln: str, on: bool):
+    """(ref, rest, kind) of a prose unit's reference line, or None. kind: "unit" (13.1.1.[1]; once on, 1.1.3[.1]1 and
+    14.4.1.1), "glued" (once on: 11.7.4.2text) or "heading" (once on: 14.6.4., a brahmana's own number)."""
+    m = G_PROSE_REF.match(ln)
+    if m:
+        return norm_ref(m.group(1) + "." + m.group(2)), (m.group(3) or "").strip(), "unit"
+    if not on:
+        return None
+    if re.fullmatch(r"[\d.\[\]\s]+", ln):
+        parts = re.sub(r"[\[\]\s]", "", ln).strip(".").split(".")
+        if all(p.isdigit() and len(p) <= 3 for p in parts) and len(parts) in (3, 4):
+            return ".".join(str(int(p)) for p in parts), "", ("unit" if len(parts) == 4 else "heading")
+        return None
+    m = G_PROSE_GLUED.match(ln)
+    if m:
+        return norm_ref(m.group(1)), m.group(2).strip(), "glued"
+    return None
 
 
 def take_ref(line: str, labels: bool = True):
@@ -371,6 +395,8 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
     cur = {"lines": [], "roman": [], "ref": "", "src": 0}
     chap = [1]
     prose = [False]   # ETEXT_PROSE_2026_10_21: a unit's reference line seen: each unit runs to the next
+    appendix, last_unit, top = [()], [""], [()]   # ETEXT_PROSE2_2026_10_22: the highest number before a separator line,
+                                                  # the last unit's number, the highest number so far
 
     def flush():
         if cur["lines"]:
@@ -384,9 +410,14 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
                 has_danda = DANDA in deva or DDANDA in deva
                 tt = "colophon" if colo else ("mula" if has_danda else
                                               ("frontmatter" if not verses and len(DEV_LETTER.findall(deva)) < 25 else "prose"))
+                if prose[0]:   # ETEXT_PROSE2_2026_10_22: a numbered kandika is prose, with its danda (kandas 1 to 9 put
+                    tt, has_danda, colo = "prose", False, False   # one after its first clause) or not; never a colophon
                 verses.append({"text": deva, "ref": ref, "chapter": chapter or str(chap[0]), "type": tt,
                                "padas": 2 * len(cur["lines"]) if has_danda else 0, "src_line": cur["src"],
                                "roman": "\n".join(cur["roman"]) if cur["roman"] else ""})
+                if appendix[0] and ref.replace(".", "").isdigit() and \
+                        tuple(int(x) for x in ref.split(".")) < appendix[0]:   # ETEXT_PROSE2_2026_10_22: an appendix,
+                    verses[-1]["appendix"] = True                              # numbered below what came before it
                 if colo:
                     st["colophons"] += 1
                     if not chapter:
@@ -401,17 +432,36 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
             continue
         if raw.strip() == FILE_BREAK:   # ETEXT_PROSE_2026_10_21: the next file: what follows its title is a new unit
             flush()
+            appendix[0] = ()   # ETEXT_PROSE2_2026_10_22: a separator's appendix ends with its file
             continue
-        pm = G_PROSE_REF.match(ln) if ln else None   # ETEXT_PROSE_2026_10_21: 13.1.1.[1], the unit's own line
-        if pm:
+        if prose[0] and G_SEPARATOR.match(ln or ""):   # ETEXT_PROSE2_2026_10_22: ****: what follows it, numbered below
+            flush()                                    # what came before it, is an appendix
+            appendix[0] = top[0]
+            st["separators"] = st.get("separators", 0) + 1
+            continue
+        pr = prose_ref(ln, prose[0]) if ln else None   # ETEXT_PROSE_2026_10_21 (13.1.1.[1]); ETEXT_PROSE2_2026_10_22
+        if pr:
             flush()
+            ref_, rest_, kind_ = pr
+            if kind_ == "glued" and last_unit[0]:   # ETEXT_PROSE2_2026_10_22: the typist's slip, 11.7.4.2 after 1.7.4.1
+                a_ = last_unit[0].split(".")
+                want = ".".join(a_[:-1] + [str(int(a_[-1]) + 1)])
+                if ref_ != want and ref_[1:] == want:
+                    ref_ = want
+                    st["repaired"] = st.get("repaired", 0) + 1
             prose[0] = True
-            cur["ref"] = norm_ref(pm.group(1) + "." + pm.group(2))
+            cur["ref"] = ref_
             st["refs"] += 1
-            st["prose_units"] = st.get("prose_units", 0) + 1
-            if not pm.group(3):
+            if ref_.replace(".", "").isdigit():
+                top[0] = max(top[0], tuple(int(x) for x in ref_.split(".")))
+            if kind_ == "heading":
+                st["headings"] = st.get("headings", 0) + 1
+            else:
+                st["prose_units"] = st.get("prose_units", 0) + 1
+                last_unit[0] = ref_
+            if not rest_:
                 continue
-            ln = pm.group(3).strip()
+            ln = rest_
         if not ln:
             st["blank"] += 1
             if not prose[0]:   # ETEXT_PROSE_2026_10_21: a prose unit runs to the next reference, blank lines and all
@@ -448,6 +498,18 @@ def parse(text: str, scheme: str = "auto", pages: str = "auto") -> dict:
         keep = [v for v in verses if v["ref"]]
         st["outside"] = len(verses) - len(keep)
         verses[:] = keep
+        seen, keep = set(), []   # ETEXT_PROSE2_2026_10_22: a unit repeated word for word (the appendix's 14.3.2) once
+        for v in verses:
+            key = (v["ref"], re.sub(r"\s+", " ", v["text"]).strip())
+            if key in seen:
+                st["repeats"] = st.get("repeats", 0) + 1
+                continue
+            seen.add(key)
+            keep.append(v)
+        verses[:] = keep
+        st["appendix_units"] = sum(1 for v in verses if v.get("appendix"))
+        order = [tuple(int(x) for x in v["ref"].split(".")) for v in verses if v["ref"].replace(".", "").isdigit()]
+        st["out_of_order"] = sum(1 for a_, b_ in zip(order, order[1:]) if b_ <= a_)
     return out
 
 
@@ -862,6 +924,8 @@ def records(parsed: dict, pages: list, engine: str, doc: str, src: str) -> list:
                  "quality_score": QUALITY, "meta": {"witness_of": doc, "src": src, "src_line": v["src_line"]}}
             if v.get("roman"):
                 r["meta"]["roman_source"] = v["roman"]
+            if v.get("appendix"):   # ETEXT_PROSE2_2026_10_22: after the e-text's separator line
+                r["meta"]["after_separator"] = True
             recs.append(r)
         out.append((n, recs))
     return out
@@ -968,6 +1032,13 @@ def preview_or_write(a) -> int:
         print("  prose: %d units by their reference lines (13.1.1.[1]); %d passage(s) outside a unit left out (a file's "
               "title, its notes); the longest unit %d characters; no danda added" % (st["prose_units"],
                                                                                     st.get("outside", 0), longest))
+        if any(st.get(k) for k in ("headings", "repeats", "repaired", "separators", "out_of_order")):   # ETEXT_PROSE2_2026_10_22
+            print("  prose, the e-text's other shapes: %d brahmana number(s) over its text or as a heading (14.6.4.); %d "
+                  "unit(s) repeated word for word left out; %d number(s) mistyped and read by their neighbours (11.7.4.2 "
+                  "for 1.7.4.2); %d separator line(s), %d unit(s) after one (an appendix: read them beside the text); %d "
+                  "unit(s) out of order" % (st.get("headings", 0), st.get("repeats", 0), st.get("repaired", 0),
+                                            st.get("separators", 0), st.get("appendix_units", 0),
+                                            st.get("out_of_order", 0)))
     for v in verses[:3]:
         print("  sample%s: %s" % ((" " + v["ref"]) if v["ref"] else "", v["text"].replace("\n", " ")[:160]))
     lat = leftover_latin(verses)

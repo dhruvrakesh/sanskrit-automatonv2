@@ -161,7 +161,7 @@ docs/cloud/CHECKS_brain_counts_2026-10-21.sql counts the live rows text by text;
   kanda 12 input by Makoto Fushimi; CC BY-NC-SA 3.0), the better text of record; and GRETIL's (kandas 1 to 11, 13 and
   14; 12 not available), unaccented IAST, numbered 11.1.1.[1], the numbers "added mechanically", "for reference
   purposes only", copyright and terms "as for source file".
-- The dandas: the Satapatha is prose and its unit is the kandika; neither e-text prints dandas within one. Ours would
+- The dandas: the Satapatha is prose and its unit is the kandika; GRETIL marks one pause a kandika (DOCS83_2026_10_22: section 9). Ours would
   take them from a scan of Weber's print as a witness (Weber died in 1901: public domain), or mark what we add as
   editorial, never as the edition's. A kandika's end, with its number, is certain.
 - With the whole text in, the Satapatha's cites in Part I can be located (the same numbering).
@@ -208,7 +208,8 @@ ours.
   Gardner, the Sanskrit Library all three. The edition: Weber's (Berlin, 1855; issued from 1849, the year the Sanskrit
   Library gives; reprinted at Varanasi in 1964 as Chowkhamba Sanskrit Series 96).
 - GRETIL: thirteen files, sb_01_u.htm to sb_14_u.htm without 12, under gretil/1_sanskr/1_veda/2_bra/satapath/; each
-  kandika under its own line (13.1.1.[1]); IAST without the Vedic accents and without dandas; the pluti written 3, the
+  kandika under its own line (13.1.1.[1]); IAST without the Vedic accents (DOCS83_2026_10_22: and without its ch; one danda a kandika in kandas 1 to 9, a
+  double space in its place in 10 to 14: section 9); the pluti written 3, the
   avagraha an apostrophe. etext_witness.py reads that shape now (ETEXT_PROSE_2026_10_21): each kandika a passage with
   its reference, the adhyaya its chapter, no danda added.
 - The Sanskrit Library's XML edition (2010, version 0.1, CC BY-NC-SA 3.0) has all fourteen kandas; its page gives no
@@ -228,5 +229,61 @@ Numismatics (the Carmichael Lectures of 1921; Calcutta, 1921) on rarebooksociety
 later. The 1918 lectures wait for NVLI's host or another scan.
 
 **Why the PC could not download:** Invoke-WebRequest gives "Unable to connect to the remote server" where curl.exe
-reaches GRETIL (HTTP 200): PowerShell goes through Windows' proxy settings and curl.exe does not. The RUNBOOK shows
-the settings; the downloads use curl.exe.
+reaches GRETIL (HTTP 200). DOCS83_2026_10_22: not a proxy, as this said: the PC has none (WinHTTP: direct access;
+ProxyEnable 0); why Invoke-WebRequest fails is not known. The downloads use curl.exe.
+## 9. The Satapatha read in full, and what it lacks; the held counts confirmed (DOCS83_2026_10_22)
+
+**The held counts, confirmed** (your H1 to H3, 22 Oct, 08:31 to 08:35 IST): the Hayasirsa's held version has 246
+mentions, 158 vectors and 1,184 translation rows on the site, and every other text's mentions and vectors equal the
+PC's, text by text. The site and the PC differ only where the mirror means them to.
+
+**What the brain reaches** (the backup of 21 Oct, 22:08): of 100,141 live passages, 25,335 have the working English
+(25%), and only those have a vector (25,347) and names (14,535 passages name someone), because build_embeddings.py and
+extract_entities.py read the working English only. Outside the search by meaning and the names: the Padma's Patala
+Khanda (21,128 passages, 2 with English), the Daivata Samhita (13,887, none), the Rgveda's volume ii (12,112, none),
+the Markandeya from GRETIL (5,240, none, though 1,408 have the scholarly English), the Lalitavistara (4,335, 47), the
+Manu and Harita smritis (2,568 and 2,477; 18 and 59), the Krishna Yajurveda (2,250, 42), the Akashabhairava Kalpa
+(2,113, none), the Siddhanta Shiromani (1,146, none); the Surya's scholarly English (510) reaches neither. Phase E, two
+ways: a vector and names from the scholarly English where there is no working English; the working English for the
+large texts, priced by the meter.
+
+**What the meter says each costs** (usage_log, the calls that succeeded): the working English with gemini-2.5-flash
+$0.00058 a passage in October ($0.00033 over July to October); the names $0.00019 a passage; a vector $0.000015; the
+scholarly English with Claude Sonnet $0.0128 (the Markandeya) to $0.0205 (the Surya) a passage. Google's cap: $80.39 of
+$85 spent at 21 Oct, 21:21 IST.
+
+**GRETIL's Satapatha, read in full (ETEXT_PROSE2_2026_10_22).** Its thirteen files (2,203,647 bytes, on the PC since
+21 Oct, 22:07 IST) give 7,173 kandikas: kandas 1 to 11, 13 and 14 (835, 548, 859, 649, 470, 529, 398, 437, 402, 369,
+437, 430, 810), 1,375,765 Devanagari characters, the longest 952. Beside the 13.1.1.[1] ETEXT_PROSE read, the numbers
+come in other shapes: 18 with their brackets put in wrongly (1.1.3[.1]1 is 1.1.3.11), 2 with one bracket too many, 64
+with none (all of 14.4.1, and the appendix's 14.3.2), 81 brahmanas' own numbers (as headings, or over a brahmana of one
+kandika: 14.6.4.; 14.8.13 three times), one number glued to its text and mistyped (11.7.4.2 for 1.7.4.2); and in
+kanda 14, after a line of asterisks, an appendix: five passages under 14.3.1. and 14.3.2.1 to 31 again, 21 word for
+word (left out) and 10 not (kept, marked). Every kandika is prose: five had been typed colophons for a word in them.
+The kanda 14 ingested on 21 Oct (2015_405693_Shatpath-Brahmanam__w_gretil, 745 passages, measured against our OCR:
+50% of its readable pages, in order 98%) was read before these were known: its 14.4.1, its brahmanas of one kandika
+and the appendix ran into the kandika before them (14.9.4.33 held 6,085 characters). It has no translation; the
+RUNBOOK writes the whole Satapatha again as one text.
+
+**What GRETIL's Satapatha lacks: its ch.** Not one ch or cch in the thirteen files: gacati for gacchati, candas for
+chandas, papraca for papraccha. GRETIL's Mahabharata and Markandeya, beside them, have theirs (1,279 and 501). At their
+share (0.8% of the words) about 1,200 words of the Satapatha have lost it; 246 of them could be put back from the words
+of those two texts alone (gacati, prayacati), the rest only from another witness. So GRETIL's Satapatha is the
+skeleton, every kandika with Weber's number, not yet the text of record: a witness, local, untranslated and
+unreleased, until its ch is restored.
+
+**The dandas GRETIL has:** one a kandika, after its first clause, written | in kandas 1 to 9 (801 in kanda 1's 835
+kandikas) and as a double space in 10 to 14 (365 in kanda 10's 369). Whether the print has more inside a kandika is
+to be seen on its pages.
+
+**The witness for both, an Indian edition:** Satyavrata Samasrami's Satapatha (Bibliotheca Indica, Calcutta, 1903 to
+1912) on archive.org, each volume as a PDF (volume 5 16.9 MB, 6 20.3 MB, 7 17.8 MB, 9 7.3 MB), a PDF with a text
+layer, and archive.org's own reading (volume 5 973 KB of text, 6 1.18 MB, 7 1.05 MB, 9 391 KB, 4 only 44 KB). The
+path: those readings first (free), measured against the skeleton; where poor, the pages by vision ($0.0034 a page);
+then the skeleton's kandikas aligned with the print, the ch and the dandas taken where the print has them, each change
+with its source. Kanda 12, not in GRETIL, comes from the print.
+
+**Raychaudhuri's Satapatha:** 72 cites in Part I; 40 read to a kandika (13.5.4.1, Janamejaya's horse sacrifice, among
+them), 5 of those in kanda 12; the rest misread by the scan (XIll. 5.1.11) or without a place.
+
+**The Carmichael Lectures:** NVLI's server does not answer (TCP to 117.250.156.42:443 failed; ping timed out).

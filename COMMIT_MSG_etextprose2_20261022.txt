@@ -1,0 +1,34 @@
+GRETIL's Satapatha read in full, every number's shape; its missing ch found; the held counts confirmed; the brain's reach measured (ETEXT_PROSE2_2026_10_22, DOCS83)
+
+GRETIL's Satapatha (13 files, kandas 1 to 11, 13, 14) numbers its kandikas in more shapes than 13.1.1.[1]:
+18 with the brackets put in wrongly (1.1.3[.1]1 is 1.1.3.11), 2 with one too many, 64 with none (all of
+14.4.1, the appendix's 14.3.2), 81 brahmanas' own numbers (14.6.4., over a brahmana of one kandika), one
+glued to its text and mistyped (11.7.4.2 for 1.7.4.2), and in kanda 14 an appendix after a line of
+asterisks that repeats 14.3.2. The kanda 14 ingested on 21 Oct (745 passages, local, untranslated) was
+read without them: 14.4.1, the one-kandika brahmanas and the appendix ran into the kandika before them.
+
+- scripts/etext_witness.py: once a bracketed number has been seen (verse texts read as before), each of
+  those shapes starts its own unit with its number; a brahmana's own number is the unit's when text
+  follows it, else a heading; a glued number one digit off its neighbours' sequence is read as the
+  sequence has it; after a separator line, what is numbered below what came before it is an appendix,
+  marked in each passage's meta; a unit repeated word for word is left out; every numbered kandika is
+  prose (no padas, never a colophon); the preview counts each shape. On the 13 files: 7,173 kandikas,
+  no Latin left, noise 0.1%.
+- tests/test_etext_prose_2026_10_21.py: its replay ends at the copy ETEXT_PROSE2 backed up.
+- docs/BRAIN_PATH_2026-10-21.md section 9: the held counts confirmed (the Hayasirsa's 246 mentions, 158
+  vectors, 1,184 translation rows; every other text equal); the brain's reach (25% of the live passages
+  have the working English, and only those a vector and names); the meter's costs per passage; GRETIL's
+  Satapatha lacks every ch (gacati for gacchati, about 1,200 words): the skeleton, a local witness, not
+  the text of record; its dandas (one a kandika in kandas 1 to 9, a double space in 10 to 14);
+  Samasrami's Bibliotheca Indica print (Calcutta, 1903 to 1912) as the witness for the ch and the
+  dandas; Raychaudhuri's 72 Satapatha cites; NVLI's server down. Corrected: no proxy is set on the PC
+  (DOCS82 said one was); GRETIL's Satapatha has dandas in kandas 1 to 9 (DOCS81 and DOCS82 said none).
+- DOCS83: PLATFORM 86, RUNBOOK, ENTERPRISE_PATH 73, STATE 18.
+
+Tests: test_etext_prose2_2026_10_22 (6), test_docs83_2026_10_22 (3); with them
+tests.test_etext_prose_2026_10_21 tests.test_etext_refs_2026_10_21 tests.test_etext_ortho_2026_10_21
+tests.test_etext_page_2026_10_18 tests.test_etext_witness_2026_10_11 tests.test_witness_mend_2026_10_21
+tests.test_docs82_2026_10_21.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

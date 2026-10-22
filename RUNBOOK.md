@@ -2319,3 +2319,17 @@ docs/BRAIN_PATH_2026-10-21.md, section 8. In a new PowerShell window: `$A = "D:\
    --doc 2015_405693_Shatpath-Brahmanam --file sources\satapatha_gretil\sb_14_u.htm --per-page 10`.
 5. The held counts: docs/cloud/CHECKS_held_2026-10-21.sql, H1 to H3 (read-only).
 6. Release with COMMIT_MSG_etextprose_20261021.txt.
+## The Satapatha written again in full; Samasrami's readings (DOCS83_2026_10_22)
+
+docs/BRAIN_PATH_2026-10-21.md, section 9. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; `python scripts\patch_etext_prose2_2026_10_22.py` and `python scripts\patch_docs83_2026_10_22.py`,
+   each with `--check`, then without it; then the tests named in COMMIT_MSG_etextprose2_20261022.txt.
+2. The kanda 14 of 21 Oct: what depends on its passages (read-only), a backup (db_backup.py), then `python
+   scripts\wipe_doc.py --doc 2015_405693_Shatpath-Brahmanam__w_gretil --dry-run` and, if nothing depends on it, `--yes`.
+3. The whole Satapatha, free, local: `python scripts\etext_witness.py --doc satapatha_madhyandina --file
+   sources\satapatha_gretil --slug gretil --category brahmana --per-page 10` (the preview), then `--write`, then `python
+   scripts\etext_witness.py --doc satapatha_madhyandina --ingest --witness satapatha_madhyandina__w_gretil`. Not to
+   be translated or released until its ch is restored.
+4. Samasrami's volumes: the listing, then, if you approve, archive.org's readings (_djvu.txt) into
+   `sources\satapatha_samasrami\`, and each previewed against the skeleton (free).
+5. Release with COMMIT_MSG_etextprose2_20261022.txt.
