@@ -2388,3 +2388,24 @@ docs/DEBT_2026-10-22.md. In a new PowerShell window: `$A = "D:\Sanksrit Automato
    pgvector/pgvector:pg16`; for each module a database (`docker exec corpus-test createdb -U postgres t1`) and
    `$env:CORPUS_TEST_DSN = "postgresql://postgres:corpus_test_only@localhost:5433/t1"`, then `python -m unittest
    tests.test_corpus_sync_pg_2026_10_08`. Never a Supabase host: the tests refuse one.
+## The afternoon's follow-up: the Nirukta again, the old tests (DOCS86_2026_10_22)
+
+docs/DEBT_2026-10-22.md, section 7. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`,
+then `Set-Location $A`. Nothing below spends.
+1. Apply, each with `--check` first: `scripts\patch_witness_fix_2026_10_22.py`, `scripts\patch_legacy_tests_2026_10_22.py`,
+   `scripts\patch_docs86_2026_10_22.py`. Then `python -m unittest tests.test_witness_fix_2026_10_22
+   tests.test_legacy_tests_2026_10_22 tests.test_docs86_2026_10_22 tests.test_etext_dots_2026_10_22
+   tests.test_engines_2026_10_22 tests.test_morph_parse tests.test_normalize tests.test_sandhi_split
+   tests.test_docs76_2026_10_18`.
+2. The whole suite, each module's verdict (the DOCS85 section's loop printed each module's last line instead):
+   `$fail = 0; Get-ChildItem tests\test_*.py | ForEach-Object { $m = "tests." + $_.BaseName; $o = (python -m unittest
+   $m 2>&1 | Out-String); if ($o -match "(?m)^FAILED.*$") { $fail++; "$m : " + $Matches[0] } elseif ($o -match
+   "NO TESTS RAN") { "$m : no tests" } }; "modules failing: $fail"`.
+3. The Nirukta's witness, the preview first: `python scripts\etext_witness.py --doc nirukta --file
+   sources\nirukta\sa_yAska-nirukta.htm --category vedanga` must end "reads as 649 verses in 54 pages" with NEXT
+   `--write`. Only then, with the dashboard idle: the backup (db_backup.py), `wipe_doc.py --doc nirukta__w_gretil
+   --yes`, the same preview with `--write --force`, `etext_witness.py --doc nirukta --ingest --witness
+   nirukta__w_gretil`, and the measure (`source_fidelity.py --ref db:nirukta__w_gretil --cand db:nirukta --cand
+   vision:nirukta --cand raw:nirukta --pair vision:nirukta,raw:nirukta`). The witness's pages then hold 4,676 dandas.
+4. The site, read-only: `docs\cloud\CHECKS_followup_2026-10-22.sql`, one block at a time (J1 who may read the
+   corpus, J2 whether the site lists the Daivat-Sanhita, J3 the Surya e-text after the mirror's runs).

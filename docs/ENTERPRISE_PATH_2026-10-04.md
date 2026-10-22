@@ -1126,3 +1126,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | H1 | The Hayasirsa | Yours: the 236 verses read; Finish EN (about $0.94), Add Hindi, release |
 | Y2 | The Daivat-Sanhita | Yours: Satavalekar's rights (to the end of 2028), then the vision repair (about $4.20) |
 | R1 | Srangam's other edge functions | Next round: not reviewed this round |
+## Addendum 2026-10-22 (76) (DOCS86_2026_10_22)
+
+| # | Item | State |
+|---|---|---|
+| T5b | The Nirukta's witness written again | Mended: WITNESS_FIX_2026_10_22; yours: preview, then wipe, write, ingest (free) |
+| T2b | An e-text reference read as ours | Mended: WITNESS_FIX_2026_10_22 |
+| T9 | Tests that never ran (pytest style); test_docs76 | Mended: LEGACY_TESTS_2026_10_22 |
+| T10 | test_mbh_prose: 3 errors on the PC alone | Open: its traceback |
+| F3b | GRETIL's Rgveda and Samaveda | Open: no directory listing (403); from GRETIL's own pages |
+| Y2b | The Daivat-Sanhita live in the corpus | Yours: J1 and J2, then keep or --withdraw |

@@ -291,9 +291,17 @@ def gretil_marks(s: str):
     return s, kept
 
 
+K_CITE_OUT = re.compile(r"\((?=[^()]*[A-Z])(?=[^()]*[0-9])[^()]{1,80}\)")       # WITNESS_FIX_2026_10_22: (RV X,84,2)
+K_SIGLUM_OUT = re.compile(r"(?<=\s)[A-Z][a-z]?(?=[\])])")                         # (ca Bh), [etAni Bh]
+K_NOTE_OUT = re.compile("\\[[^\\[\\]\u0900-\u097f]{3,200}\\]")                    # [used in a derivative sense]
+
+
 def kept_out(text: str) -> str:
-    """ETEXT_ORTHO_2026_10_21: a verse without the labels and sigla gretil_marks() keeps in Latin letters."""
-    return G_SIGLUM_OUT.sub("(", G_LABEL.sub(" ", text or ""))
+    """ETEXT_ORTHO_2026_10_21: a verse without the labels and sigla gretil_marks() keeps in Latin letters.
+    WITNESS_FIX_2026_10_22: nor what dotted_words() keeps so (a reference, a siglum, an English note): read as Latin
+    debris, 16.5% of the Nirukta's verses held some, and the guard (more than 10%) refused to write its witness."""
+    t = G_SIGLUM_OUT.sub("(", G_LABEL.sub(" ", text or ""))
+    return K_NOTE_OUT.sub(" ", K_SIGLUM_OUT.sub(" ", K_CITE_OUT.sub(" ", t)))
 
 
 def gretil_header(lines: list) -> set:

@@ -565,6 +565,14 @@ def verdict_of(name: str, s: dict, pairs: list = ()) -> str:
 OUR_READINGS = ("db", "vision", "raw", "pages")   # ENGINES_2026_10_22: pages: is our scan too
 
 
+def is_ours(spec: str) -> bool:
+    """WITNESS_FIX_2026_10_22: a reading of our scan: db:, vision:, raw:, pages:; but not a witness in the database
+    (db:<doc>__w_<site>: an e-text, or another's OCR), which TRIANGULATE read as ours: GRETIL's Nirukta was called
+    "usable: mend it" where two readings of our print agreed against it, which is where the print reads otherwise."""
+    kind, _, name = (spec or "").partition(":")
+    return kind in OUR_READINGS and not (kind == "db" and "__w_" in name)
+
+
 def verdict_of_ours(ref: str, pairs: list) -> str:
     """TRIANGULATE_2026_10_22: no e-text, three readings of one print: the reference (ours) is judged by where the other
     two agree against it, each of them by its own misreadings."""
@@ -605,7 +613,7 @@ def run(a) -> int:
     print("  folded on both sides: spaces, punctuation, numbers, accents, avagraha, nukta; a nasal before a consonant "
           "and a final m as the anusvara; a final consonant joined to the vowel after it; a colon as the visarga%s" % (
               "; ccha and cha as ca" if a.fold_ch else ""))
-    ours = a.ref.split(":", 1)[0] in OUR_READINGS       # TRIANGULATE_2026_10_22: the reference is one of our readings
+    ours = is_ours(a.ref)       # TRIANGULATE_2026_10_22: the reference is one of our readings; WITNESS_FIX_2026_10_22
     report = {"mark": MARK, "at": _now(), "ref": a.ref, "prefix": a.prefix or "", "fold_ch": bool(a.fold_ch),
               "ours": ours,
               "units": len(units), "short_left_out": short, "readings": {}, "pairs": []}

@@ -1,0 +1,23 @@
+After the release: the Nirukta's witness written again, an e-text reference no longer read as ours, three tests that never ran made to run, test_docs76's replay (WITNESS_FIX, LEGACY_TESTS, DOCS86)
+
+- WITNESS_FIX_2026_10_22 (etext_witness.py, source_fidelity.py): the run of 22 Oct, 14:05, wiped the Nirukta's
+  witness but could not write it again: the Latin guard counted the references, sigla and English notes ETEXT_DOTS
+  keeps in Latin as debris (16.5% of its verses; it refuses above 10%), and --ingest took the old pages again
+  (34,183 dandas). kept_out() leaves them out (1.1%); end to end: 649 verses in 54 pages, 4,676 dandas, 57
+  avagrahas. is_ours(): a witness in the database (db:<doc>__w_<site>, an e-text) is not one of our readings;
+  TRIANGULATE had called GRETIL's Nirukta "usable: mend it" where our print reads otherwise.
+- LEGACY_TESTS_2026_10_22: tests/test_morph_parse.py, test_normalize.py and test_sandhi_split.py were pytest
+  functions, which unittest never ran ("NO TESTS RAN"); test_normalize called a command line normalize_text.py no
+  longer has. Now unittest tests. tests/test_docs76_2026_10_18.py failed on the PC: its replay compared with docs
+  that DOCS77 to DOCS85 wrote again; it now accepts a later patch's backup, the exact bytes the patch wrote.
+- DOCS86_2026_10_22: docs/DEBT_2026-10-22.md section 7 (what the run showed: the release as tested, the site as the
+  register said, the Surya e-text's working English on its way; what is open), STATE 21, RUNBOOK (the loop that
+  prints each failing module's verdict; the Nirukta, the preview first), PLATFORM 89, ENTERPRISE_PATH 76;
+  docs/cloud/CHECKS_followup_2026-10-22.sql, read-only.
+
+Tests: test_witness_fix_2026_10_22, test_legacy_tests_2026_10_22, test_docs86_2026_10_22, test_morph_parse,
+test_normalize, test_sandhi_split, test_docs76_2026_10_18, with test_etext_dots_2026_10_22 and
+test_engines_2026_10_22.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

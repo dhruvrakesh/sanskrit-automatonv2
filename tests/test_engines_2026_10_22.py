@@ -111,7 +111,8 @@ class ThePatcher(unittest.TestCase):
             shutil.copy2(baks[0], t / "scripts" / "source_fidelity.py")
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            self.assertEqual((t / "scripts" / "source_fidelity.py").read_bytes(), TOOL.read_bytes())
+            later = sorted(SCRIPTS.glob("source_fidelity.py.bak_witnessfix_*"))   # WITNESS_FIX_2026_10_22
+            self.assertEqual((t / "scripts" / "source_fidelity.py").read_bytes(), (later[0] if later else TOOL).read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
 
     def test_it_needs_triangulate(self):

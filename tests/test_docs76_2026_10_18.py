@@ -52,8 +52,11 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            for f in FILES:
-                self.assertEqual((t / f).read_bytes(), (REPO / f).read_bytes(), f)
+            for f in FILES:   # LEGACY_TESTS_2026_10_22: DOCS77 to DOCS85 wrote these files again since: the patch's
+                got = (t / f).read_bytes()   # result is the file as it is, or a later patch's backup of it
+                later = [x.read_bytes() for x in sorted((REPO / f).parent.glob(Path(f).name + ".bak_*"))
+                         if ".bak_docs76_" not in x.name]
+                self.assertTrue(got == (REPO / f).read_bytes() or got in later, f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in FILES:
                 shutil.copy2(baks[f][0], t / f)
