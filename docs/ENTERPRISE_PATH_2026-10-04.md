@@ -1101,3 +1101,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | D1b | The ch and the dandas from Samasrami's print (Calcutta, 1903 to 1912) | Next: archive.org's readings measured; then vision where poor; then the alignment |
 | D1c | Kanda 12 | From the print (GRETIL has none) |
 | C1 | The Carmichael Lectures (1918) | Waiting: NVLI's server does not answer |
+## Addendum 2026-10-22 (74) (DOCS84_2026_10_22)
+
+| # | Item | State |
+|---|---|---|
+| F1 | Letter fidelity, akshara by akshara, against an e-text and a second reading | Built: source_fidelity.py (FIDELITY_2026_10_22); three texts and seven archive.org volumes measured |
+| F2 | archive.org's text layer of the very scans we read (DLI 2015.405693, 2015.368408) | Next: the listing, then yours to download |
+| F3 | GRETIL's Nirukta, Rgveda (Aufrecht) and Samaveda as witnesses | Next: preview, write, ingest; then F1 |
+| F4 | The mend: Tesseract's reading offered where vision's own misreading is shown | Designed |
+| E2b | GRETIL's Markandeya in full (5,240 passages: English, names, vectors) | Yours: about $4.12 against $4.42 under the cap |
+| D1b | The Satapatha's ch | Revised: from our vision of Samasrami's images, not archive.org's text (49 to 55%) |

@@ -1,0 +1,28 @@
+How faithfully our Sanskrit reads, akshara by akshara: our vision text, Tesseract, archive.org's text layers and the e-texts measured (FIDELITY_2026_10_22, DOCS84)
+
+scripts/source_fidelity.py (new, read-only, free): a text's letters against an e-text (a witness in the
+database or on disk, --prefix for a kanda), each reading (what we translate, the vision pages, the first
+OCR, a file such as an archive.org _djvu.txt) found by anchors unique in the reference and aligned akshara
+by akshara after folding what editions and typesetting change and the meaning does not; --pair A,B splits
+one print's two readings into each one's own misreadings and the shared ones (another edition's reading,
+the e-text's slip, a place both fail); --ledger lists every text with its source, English, judged level and
+the fidelity measured. The database is opened read-only; reports go to data/source_fidelity/ (ignored).
+
+Measured on the backup of 22 Oct: our vision text misreads or loses 3.58 aksharas in 100 of its own in the
+Markandeya and 3.62 in the Satapatha's kanda 14 (Tesseract on the same pages 18.15 and 24.49); its errors
+are fluent (a plausible word, a syllable written once), invisible to the judge's "cosmetic"; archive.org's
+text layers of Samasrami's Satapatha agree with GRETIL in 48.94 to 55.39 of 100 aksharas; the Surya's scan
+(Tesseract) in 78.79. Where an e-text exists it is the Sanskrit to translate; our scans stay as the prints.
+
+- docs/FIDELITY_2026-10-22.md: the method, the numbers, the errors, the decisions per text, the limits,
+  the path (F1 to F4, R4, D1b revised).
+- DOCS84: the brain page's section 10, PLATFORM 87, RUNBOOK, ENTERPRISE_PATH 74, STATE 19; a paragraph in
+  QUALITY_METHODOLOGY.md after section 1's known blind spot; data/source_fidelity/ in .gitignore.
+- docs/cloud/CHECKS_fidelity_2026-10-22.sql: read-only, what the site holds of the texts measured, and that
+  the local witnesses are not there.
+
+Tests: test_source_fidelity_2026_10_22 (20), test_docs84_2026_10_22 (3); with them
+tests.test_docs83_2026_10_22 tests.test_etext_prose2_2026_10_22 tests.test_etext_witness_2026_10_11.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

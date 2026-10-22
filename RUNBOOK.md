@@ -2333,3 +2333,22 @@ docs/BRAIN_PATH_2026-10-21.md, section 9. In a new PowerShell window: `$A = "D:\
 4. Samasrami's volumes: the listing, then, if you approve, archive.org's readings (_djvu.txt) into
    `sources\satapatha_samasrami\`, and each previewed against the skeleton (free).
 5. Release with COMMIT_MSG_etextprose2_20261022.txt.
+## Letter fidelity: measure a text against its e-text (DOCS84_2026_10_22)
+
+docs/FIDELITY_2026-10-22.md. In a new PowerShell window: `$A = "D:\Sanksrit Automatons\sanskrit-automatonv2"`.
+1. `Set-Location $A`; `python scripts\patch_docs84_2026_10_22.py --check`, then without `--check`; then `python -m
+   unittest tests.test_source_fidelity_2026_10_22 tests.test_docs84_2026_10_22`.
+2. Free, read-only: `python scripts\source_fidelity.py --ref db:markandeya_purana__w_gretil --cand db:markandeya_purana
+   --cand raw:markandeya_purana --pair db:markandeya_purana,raw:markandeya_purana`; the same for the Satapatha
+   (`--ref witness:satapatha_madhyandina__w_gretil --prefix 14. --fold-ch`) and the Surya (`--ref
+   db:jyotish_surya_siddhanta__w_etext --cand db:jyotish_surya_siddhanta`); then `python scripts\source_fidelity.py
+   --ledger --csv exports\source_ledger.csv`.
+3. The same scan: archive.org's metadata for `in.ernet.dli.2015.405693` (a listing); if it has a `_djvu.txt` and you
+   approve, it is saved as `sources\2015_405693_Shatpath-Brahmanam\archive_dli_2015_405693_djvu.txt` with its
+   provenance beside it, then read with `--cand file:sources/2015_405693_Shatpath-Brahmanam/archive_dli_2015_405693_djvu.txt`
+   and `--pair` against `db:2015_405693_Shatpath-Brahmanam`, the reference `witness:satapatha_madhyandina__w_gretil
+   --prefix 14. --fold-ch`.
+4. Where you replace a scan with its e-text, regenerate in full: a backup (db_backup.py), `translate_passages.py --doc
+   WITNESS --engine gemini:gemini-2.5-flash` (`--limit 20` first), `qa_scan.py --doc WITNESS --lang en --write`,
+   `extract_entities.py --doc WITNESS`, `build_embeddings.py --doc WITNESS --plan`, then without `--plan`. The cap
+   first: `python scripts\set_budget.py`.

@@ -287,3 +287,26 @@ with its source. Kanda 12, not in GRETIL, comes from the print.
 them), 5 of those in kanda 12; the rest misread by the scan (XIll. 5.1.11) or without a place.
 
 **The Carmichael Lectures:** NVLI's server does not answer (TCP to 117.250.156.42:443 failed; ping timed out).
+## 10. How faithfully the brain's Sanskrit reads (DOCS84_2026_10_22)
+
+docs/FIDELITY_2026-10-22.md has the method and every number; scripts/source_fidelity.py (FIDELITY_2026_10_22) measures
+it, read-only and free.
+
+**Our vision text is close, not faithful.** Against a second reading of the same page, so that another edition's
+readings do not count, it misreads or loses about 3.6 aksharas in 100 of its own: the Markandeya 3.58 (Tesseract on the
+same pages 18.15), the Satapatha's kanda 14 3.62 (Tesseract 24.49). About one akshara a sloka, and fluent: a plausible
+word for the printed one (gatvayodhyajanam read gatva yojanam), a syllable written once where the print has it twice.
+The judge called both texts "cosmetic"; it sees Latin debris, not these.
+
+**archive.org's text layers are worse than our OCR, by far.** Samasrami's Satapatha (seven volumes): 49 to 55 aksharas
+in 100 agree with GRETIL in the kandikas that can be found, and about two in three cannot be found at all. Our
+Tesseract on kanda 14 agrees in 58, our vision text in 82 (most of the rest the print's own way of printing each kandika
+twice, the second time with its sandhi undone). The same-scan test, archive.org's layer of the very scan we read (DLI
+2015.405693), is the RUNBOOK's next step.
+
+**What it means for the brain.** Where an e-text exists it is the Sanskrit to translate: the Surya's (released 21 Oct),
+GRETIL's Markandeya (5,240 passages, released, no working English yet; its working English, names and vectors cost
+about $4.12 by the meter, against $4.42 left under the $85 cap). Our scans stay as the prints, each a witness. GRETIL's
+Satapatha stays a local witness: its ch is lost, and Samasrami's archive.org text cannot restore it (D1b now reads
+Samasrami's images instead, if you download them). GRETIL also has the Nirukta, Aufrecht's Rgveda and the Samaveda:
+three more witnesses, then measured.

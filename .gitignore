@@ -158,3 +158,6 @@ data/raw_*_ce/
 data/heal/
 # DOCS78_2026_10_21: the scholars' shelf's indexes (Cologne, CC BY-NC-SA 3.0) stay on the PC
 data/shelf/
+# FIDELITY_2026_10_22 (DOCS84_2026_10_22): the letter-fidelity reports are made again by scripts/source_fidelity.py
+# (free, read-only)
+data/source_fidelity/

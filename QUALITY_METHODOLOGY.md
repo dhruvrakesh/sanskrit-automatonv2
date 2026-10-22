@@ -42,6 +42,16 @@ gain. For these editions the honest remedy is **not** more OCR but a clean e-tex
 (GRETIL / sanskritdocuments / wisdomlib). Treat a high source score on a pre-1900 scan as
 "probably readable", and confirm by eye or by the translation's own QA.
 
+**Measured letter by letter (2026-10-22, DOCS84_2026_10_22).** The blind spot holds for vision OCR too, in another
+form. `scripts/source_fidelity.py` (FIDELITY_2026_10_22) reads a text's letters against an e-text, akshara by akshara,
+and against a second reading of the same page, so that another edition's readings do not count as errors. Our vision
+text misreads or loses about **3.6 aksharas in 100** of its own (the Markandeya 3.58, the Satapatha's kanda 14 3.62),
+about one a sloka; Tesseract on the same pages 18 and 24. Vision's errors are well-formed Devanagari (a plausible word
+for the printed one, a syllable written once where the print has it twice), so `quality_score`, the noise measure and
+the judge's "cosmetic" do not see them. archive.org's text layers of the 1903 to 1911 Calcutta Satapatha agree with
+GRETIL in 49 to 55 aksharas in 100. Where an e-text exists it is the better text to translate; the method, its limits
+and the numbers are in `docs/FIDELITY_2026-10-22.md`.
+
 ---
 
 ## 2. Translation quality — "is the translation structurally sound?"
@@ -115,5 +125,5 @@ re‑translate a specific model/prompt generation and measure the improvement.
   human review, and we report those separately rather than letting a heuristic stand in for
   faithfulness.
 
-*Last reviewed 2026-08-28. Formulas are authoritative to `scripts/text_filters.py`; if the
+*Last reviewed 2026-08-28; the letter fidelity in section 1 on 2026-10-22 (DOCS84_2026_10_22). Formulas are authoritative to `scripts/text_filters.py`; if the
 code changes, this document is updated in the same commit.*
