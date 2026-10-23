@@ -2486,3 +2486,26 @@ From the repository root, in a PowerShell window (`Set-Location "D:\Sanksrit Aut
    --cand db:upapurana_narasimha_purana --cand vision:upapurana_narasimha_purana --pair
    vision:upapurana_narasimha_purana,db:upapurana_narasimha_purana`; at the end `python scripts\ocr_benchmark.py`.
    It writes data\raw_vision and data\raw_merged, never the database.
+## The kinships, the Professor, the links hourly, the health mail, named together online (DOCS91_2026_10_23)
+
+From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automatonv2"`), the dashboard idle for the
+patches to dashboard.py and corner_worker.py:
+
+1. `python scripts\patch_ask_prof_2026_10_23.py --check`, then without --check; the same for
+   `patch_links_sched_2026_10_23.py`, `patch_health_2026_10_23.py` and `patch_docs91_2026_10_23.py`. Then
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`. Restart the dashboard when it is idle.
+2. The kinship trial: `python scripts\kin_index.py` (the plan, free), `python scripts\kin_index.py --yes` (100 of each
+   index, --max-usd 0.50), then read exports\kin_cards.md and kin_agreement.csv; `--show Janamejaya` for one name.
+3. The Professor: http://127.0.0.1:5057/ask, Professor.
+4. The health: `python scripts\health_watch.py` (free). On the site, paste docs\cloud\C19_health_mail_2026-10-23.sql,
+   then its checks (C19_checks_2026-10-23.sql), one query a paste.
+5. Named together online: paste docs\cloud\C20_name_links_2026-10-23.sql and its checks; then in D:\srangam-42267
+   (`git pull --rebase --autostash` first): `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\
+   patch_srangam_name_links_2026_10_23.py" --check`, then without --check; `npm run typecheck`, `npx vitest run`,
+   `npm run build`; commit by name and push; Publish in Lovable.
+6. The Nirukta: `python scripts\translate_passages.py --db data\context.db --doc nirukta__w_gretil --engine
+   gemini:gemini-2.5-flash --limit 20` (a trial), then without --limit.
+7. The Daivat-Sanhita: `python scripts\repair_text.py --doc Daivat-Sanhita --withdraw "Satavalekar's compilation,
+   protected in India to the end of 2028: off the site until 1 January 2029"`; the next mirror run retires it.
+8. The vision round's rest: `python scripts\ocr_consensus.py --doc smriti_06yagyavalkya_smriti --threshold 101
+   --include-unassessed` (the plan), then with `--yes --max-usd 0.40`; the failed pages with `--retry-refused`.

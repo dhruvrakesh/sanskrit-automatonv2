@@ -6674,6 +6674,168 @@ _ASK_SYSTEM = (
     "for what it adds, such as where an episode is told or that a retelling or picture of it exists."
 )
 
+# ASK_PROF_2026_10_23: the Professor (BRAIN_PATH B4, RELATIONS_AND_ASK A1). Asked with mode "professor", Ask
+# gives the model more than the working English: the scholarly English where a verse has it (else the working), the
+# IAST, the names the verses name and whom our texts name them with (entity_links), what Raychaudhuri's Political
+# History says of those names (data/shelf/claims.db), and the relations the indexes state of them, already checked
+# (data/shelf/kin.db). Each statement of a scholar or an index is numbered [S1] ... and the model cites it so. All
+# read-only and free; the one paid call is the answer, metered as "ask_prof". Without the shelf's files the Professor
+# answers from the verses and the links alone, and says so.
+_ASK_SYSTEM_PROF = (
+    "You are the corpus's professor: a historian of ancient India and a scholar of Sanskrit, with the translator's "
+    "discipline (every word answerable to the text, a note where the text is uncertain) and the historian's method "
+    "(synchronisms, genealogies, the comparison of sources). Answer the question USING ONLY the evidence given: the "
+    "numbered PASSAGES (verses of our corpus, cited by their bracket tag exactly as given, e.g. [MBh01 1.89.47]), the "
+    "NAMES (whom our texts name together, and how often), and the SCHOLARS AND INDEXES (statements of printed "
+    "scholarship, cited by their number, e.g. [S2]). Keep three things apart and say which is which: what the verses "
+    "themselves say; what the scholars and the indexes state; what you infer from them, and how firm each inference "
+    "is. Where a scholar or an index and the verses differ, say so. Attribute to a scholar only what the SCHOLARS AND "
+    "INDEXES list gives; never quote or paraphrase a scholar from memory, and do not speak as any real person. If the "
+    "evidence does not answer the question, say so plainly and name what would settle it (a text the scholars cite "
+    "that is not among the passages). Begin with a short answer, then the evidence and the reasoning. English, "
+    "precise and plain; Sanskrit names in IAST."
+)
+_PROF_SHELF = {"pui": "Purana Index (Dikshitar)", "vei": "Vedic Index (Macdonell and Keith)",
+               "inm": "Soerensen, Index to the Mahabharata"}
+_PROF_CLAIM_RELS = ("contemporary_of", "son_of", "father_of", "pupil_of", "teacher_of", "priest_of", "king_of",
+                    "successor_of", "predecessor_of", "brother_of", "descendant_of", "ancestor_of", "married",
+                    "capital_of", "fought", "defeated", "dated_to")
+
+
+def _ask_scholarly(db, sources, max_names=8, per_name=3, max_items=24):
+    """ASK_PROF_2026_10_23: {"names": [{name, kind, in_sources, together: [{name, passages, texts}]}],
+    "items": [{n: "S1", kind: "claim"|"index", about, source, where, text, note}], "read": {...}}: read-only."""
+    out = {"names": [], "items": [], "read": {"links": False, "claims": False, "indexes": False}}
+    pids = [s["pid"] for s in sources if s.get("pid")]
+    if not pids:
+        return out
+    ids, shelf = [], pathlib.Path(db).resolve().parent / "shelf"
+    try:
+        con = sqlite3.connect(f"file:{db}?mode=ro", uri=True, timeout=10)
+    except Exception:
+        return out
+    try:
+        _f = (con.execute("PRAGMA database_list").fetchone() or (None, None, ""))[2]
+        if _f:   # the shelf beside the database asked, as _ask_withdrawn finds the register
+            shelf = pathlib.Path(_f).parent / "shelf"
+        tabs = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if not {"entity_mentions", "entities"} <= tabs:
+            return out
+        ph = ",".join("?" * len(pids))
+        top = con.execute(
+            "SELECT m.entity_id, e.canonical, e.kind, COUNT(DISTINCT m.passage_id) FROM entity_mentions m "
+            "JOIN entities e ON e.id = m.entity_id WHERE m.passage_id IN (%s) GROUP BY m.entity_id "
+            "ORDER BY COUNT(DISTINCT m.passage_id) DESC, CASE e.kind WHEN 'person' THEN 0 ELSE 1 END, e.canonical "
+            "LIMIT ?" % ph, pids + [max_names]).fetchall()
+        links = "entity_links" in tabs
+        out["read"]["links"] = links
+        for eid, canon, kind, n in top:
+            nb = []
+            if links:
+                nb = con.execute(
+                    "SELECT e.canonical, l.passages, l.texts FROM entity_links l JOIN entities e ON e.id = "
+                    "(CASE WHEN l.a = ? THEN l.b ELSE l.a END) WHERE (l.a = ? OR l.b = ?) AND l.rel = 'together' "
+                    "ORDER BY l.passages DESC, e.canonical LIMIT 5", (eid, eid, eid)).fetchall()
+            ids.append((eid, canon))
+            out["names"].append({"name": canon, "kind": kind or "", "in_sources": n,
+                                 "together": [{"name": c, "passages": p, "texts": t} for c, p, t in nb]})
+    except Exception as e:
+        print(f"[ask] the names were not read: {type(e).__name__}: {e}")
+    finally:
+        con.close()
+    items, seen = [], set()
+    cp = shelf / "claims.db"
+    if ids and cp.exists():
+        try:
+            c2 = sqlite3.connect(cp.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+            try:
+                rels = ",".join("'%s'" % r for r in _PROF_CLAIM_RELS)
+                for eid, canon in ids:
+                    for cid, printed, rel, claim, stance, hedge in c2.execute(
+                            "SELECT DISTINCT c.id, c.printed, c.relation, c.claim, c.stance, c.hedge FROM claim_links l "
+                            "JOIN claims c ON c.id = l.claim_id WHERE l.entity_id = ? AND c.read_id IN (SELECT MAX(id) "
+                            "FROM claim_reads WHERE status = 'ok' GROUP BY work, pdf_page) ORDER BY CASE WHEN "
+                            "c.relation IN (%s) THEN 0 ELSE 1 END, c.id LIMIT ?" % rels, (eid, per_name)):
+                        if ("c", cid) in seen:
+                            continue
+                        seen.add(("c", cid))
+                        items.append({"kind": "claim", "about": canon,
+                                      "source": "Raychaudhuri, Political History of Ancient India (1923)",
+                                      "where": "p. %s" % (printed or "?"), "text": claim or "",
+                                      "note": ", ".join(x for x in (stance, hedge) if x)})
+                out["read"]["claims"] = True
+            finally:
+                c2.close()
+        except Exception as e:
+            print(f"[ask] the claims were not read: {type(e).__name__}: {e}")
+    kp = shelf / "kin.db"
+    if ids and kp.exists():
+        try:
+            c3 = sqlite3.connect(kp.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+            try:
+                for eid, canon in ids:
+                    for kid, src, head, subj, rel, obj, words, refs, verdict in c3.execute(
+                            "SELECT k.id, k.source, k.head, k.subject, k.relation, k.object, k.words, k.refs, t.verdict "
+                            "FROM kin_ties t JOIN kin k ON k.id = t.kin_id WHERE (t.subject_entity = ? OR "
+                            "t.object_entity = ?) AND k.words_check IN ('exact', 'close') AND k.direction <> 'disagrees' "
+                            "ORDER BY CASE t.verdict WHEN 'named together' THEN 0 WHEN 'named near' THEN 1 ELSE 2 END, "
+                            "k.id LIMIT ?", (eid, eid, per_name)):
+                        if ("k", kid) in seen:
+                            continue
+                        seen.add(("k", kid))
+                        try:
+                            refs = "; ".join(json.loads(refs or "[]"))
+                        except ValueError:
+                            refs = ""
+                        items.append({"kind": "index", "about": canon, "source": _PROF_SHELF.get(src, src),
+                                      "where": "s.v. %s" % head, "text": "%s %s %s: \"%s\"%s" % (
+                                          subj, (rel or "").replace("_", " "), obj, words,
+                                          (" (%s)" % refs) if refs else ""),
+                                      "note": "our texts: %s" % (verdict or "unchecked")})
+                out["read"]["indexes"] = True
+            finally:
+                c3.close()
+        except Exception as e:
+            print(f"[ask] the indexes' relations were not read: {type(e).__name__}: {e}")
+    for i, it in enumerate(items[:max_items], 1):
+        it["n"] = "S%d" % i
+    out["items"] = items[:max_items]
+    return out
+
+
+def _ask_prof_message(q, sources, sch):
+    """ASK_PROF_2026_10_23: the Professor's evidence, in the order the system instruction names it."""
+    lines = ["PASSAGES:"]
+    for s in sources:
+        if s.get("kind") or s.get("link"):
+            lines.append(f"[{s['n']}] [{s['tag']}] (EDITORIAL: {s.get('label') or s.get('kind')}) {(s.get('english') or '')[:500]}")
+            continue
+        eng = s.get("scholar") or s.get("english") or ""
+        which = "scholarly English" if s.get("scholar") else "working English"
+        iast = (s.get("iast") or "")[:300]
+        lines.append(f"[{s['n']}] [{s['tag']}]" + (f" IAST: {iast} |" if iast else "") + f" {which}: {eng[:700]}")
+    lines.append("")
+    lines.append("NAMES (in these passages; whom our texts name them with, in one passage):")
+    for nm in sch.get("names") or []:
+        tog = "; ".join("%s (%d passages, %d texts)" % (t["name"], t["passages"], t["texts"]) for t in nm["together"])
+        lines.append("- %s (%s), in %d of the passages%s" % (nm["name"], nm["kind"] or "name", nm["in_sources"],
+                                                            (": named with " + tog) if tog else ""))
+    if not sch.get("names"):
+        lines.append("- (none read)")
+    lines.append("")
+    lines.append("SCHOLARS AND INDEXES (cite by number):")
+    for it in sch.get("items") or []:
+        lines.append("[%s] %s, %s, on %s: %s%s" % (it["n"], it["source"], it["where"], it["about"], it["text"],
+                                                   (" (%s)" % it["note"]) if it["note"] else ""))
+    if not sch.get("items"):
+        lines.append("(none for these names)")
+    lines.append("")
+    lines.append(f"QUESTION: {q}")
+    lines.append("")
+    lines.append("Answer as the professor, citing [tags] and [S numbers]:")
+    return "\n".join(lines)
+
+
 @app.post("/api/ask")
 def api_ask():
     data = request.get_json(force=True) or {}
@@ -6718,14 +6880,19 @@ def api_ask():
                         "label": it["label"]})
         ctx.append(f"[{j}] [{it['tag']}] ({it['label']}) {it['text'][:700]}")
     _ask_enrich(db, sources)   # ASK_UI_2026_10_22: shown beside each verse; the model is sent the same as before
-    user_msg = "PASSAGES:\n" + "\n".join(ctx) + f"\n\nQUESTION: {q}\n\nAnswer, citing [tags]:"
+    ask_mode = "professor" if str(data.get("mode") or "") == "professor" else "verses"   # ASK_PROF_2026_10_23
+    scholarly = _ask_scholarly(db, sources) if ask_mode == "professor" else None
+    if scholarly is not None:
+        user_msg = _ask_prof_message(q, sources, scholarly)
+    else:
+        user_msg = "PASSAGES:\n" + "\n".join(ctx) + f"\n\nQUESTION: {q}\n\nAnswer, citing [tags]:"
     # METER_GATES_2026_10_04: Ask is a paid call like any other. It asks the budget first and is metered.
     try:
         from usage_meter import budget_ok as _bok
         if not _bok(db):
             return jsonify({"error": "The spend cap is reached, so Ask is paused. The passages below were "
                                      "found without a paid call. Raise the cap with python scripts\\set_budget.py.",
-                            "sources": sources, "mode": mode}), 402
+                            "sources": sources, "mode": mode, "ask_mode": ask_mode, "scholarly": scholarly}), 402
     except Exception:
         pass
     # 2. LLM answer — self-contained Gemini config so the translation engine is untouched
@@ -6735,10 +6902,12 @@ def api_ask():
         if not key:
             return jsonify({"error": "GEMINI_API_KEY not set in .env", "sources": sources}), 500
         genai.configure(api_key=key)
+        _sys = _ASK_SYSTEM_PROF if ask_mode == "professor" else _ASK_SYSTEM   # ASK_PROF_2026_10_23
         kwargs = dict(model_name=model,
                       generation_config=genai.GenerationConfig(temperature=0.2,
-                                                               max_output_tokens=2048),
-                      system_instruction=_ASK_SYSTEM)
+                                                               max_output_tokens=(3072 if ask_mode == "professor"
+                                                                                  else 2048)),
+                      system_instruction=_sys)
         if _ASK_SAFETY is not None:
             kwargs["safety_settings"] = _ASK_SAFETY
         _t0 = time.time()
@@ -6749,7 +6918,8 @@ def api_ask():
                 _out = len(getattr(resp, "text", "") or "")
             except Exception:
                 _out = 0
-            _meter(kind="ask", doc="", engine=engine, resp=resp, in_chars=len(user_msg) + len(_ASK_SYSTEM),
+            _meter(kind=("ask_prof" if ask_mode == "professor" else "ask"), doc="", engine=engine, resp=resp,
+                   in_chars=len(user_msg) + len(_sys),
                    out_chars=_out, units=1, duration_s=time.time() - _t0, db=db)
         except Exception:
             pass
@@ -6758,7 +6928,8 @@ def api_ask():
     except Exception as e:
         return jsonify({"error": f"LLM error: {e}", "sources": sources}), 500
     return jsonify({"answer": answer, "sources": sources, "engine": engine,
-                    "k": k, "mode": mode, "editorial": len(extra)})   # BRAIN_ITEMS_2026_10_07
+                    "k": k, "mode": mode, "editorial": len(extra),   # BRAIN_ITEMS_2026_10_07
+                    "ask_mode": ask_mode, "scholarly": scholarly})   # ASK_PROF_2026_10_23
 
 
 @app.get("/ask")

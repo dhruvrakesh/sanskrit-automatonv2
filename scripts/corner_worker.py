@@ -104,6 +104,7 @@ MEDIA_LOG_PATH = ROOT / "data" / "corpus_media_log.jsonl"   # corpus_media.py lo
 SYNC_EVERY_MIN = 10
 LOG_TAIL_MAX_BYTES = 4 * 1024 * 1024    # a last line longer than this is not read
 INFO_MAX_CHARS = 3900                   # corner_desk_heartbeat and corpus-desk keep info up to 4000
+HEALTH = None                           # HEALTH_2026_10_23: main() sets it: the desk's health for the heartbeat
 ERROR_MAX_CHARS = 160
 PROGRESS_GAP_S = 5.0                    # at most one progress report this often (but the first and the last)
 PAGE_LINE_RE = re.compile(r"^\s*page (\d+): ")   # novel.py draw_pages: "  page %d: <path> (%.1f s)"
@@ -468,11 +469,19 @@ def info_chars(info: dict) -> int:
     return len(json.dumps(info, ensure_ascii=True))
 
 
-def heartbeat_info(budget, logs=None) -> dict:
+def heartbeat_info(budget, logs=None, health=None) -> dict:
     """What the desk says about itself on each round (corner.worker.info; editors see it in corner_me()),
-    always under INFO_MAX_CHARS: the errors go first, then the sync channels."""
+    always under INFO_MAX_CHARS: the errors go first, then the sync channels. HEALTH_2026_10_23: with `health`
+    (scripts/health_watch.py's compact()), it is there too, and it is the first to be cut (to its status)."""
     info = {"client": CLIENT, "budget": budget, "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "sync": sync_state(*(tuple(logs) if logs else (None, None)))}
+    if isinstance(health, dict):   # HEALTH_2026_10_23
+        info["health"] = health
+        if info_chars(info) > INFO_MAX_CHARS:
+            info["health"] = {"status": health.get("status"), "at": health.get("at"),
+                              "problems": [str(p)[:60] for p in (health.get("problems") or [])[:2]]}
+        if info_chars(info) > INFO_MAX_CHARS:
+            info["health"] = {"status": health.get("status")}
     sync = info["sync"]
     for cut in ("error", "channel"):
         if info_chars(info) <= INFO_MAX_CHARS:
@@ -1457,6 +1466,22 @@ class Lock:
                 pass
 
 
+def _desk_health():
+    """HEALTH_2026_10_23: the desk's health (scripts/health_watch.py), compact, for the heartbeat."""
+    import health_watch
+    return health_watch.compact(health_watch.health(ROOT))
+
+
+def _health_now():
+    """HEALTH_2026_10_23: best effort; never the round's failure. None unless main() set HEALTH."""
+    if HEALTH is None:
+        return None
+    try:
+        return HEALTH()
+    except Exception as e:
+        return {"status": "warn", "problems": ["the health check failed: %s" % type(e).__name__]}
+
+
 def run_once(desk, worker: Worker, limit: int, name: str = "desk", progress: bool = False, logs=None) -> dict:
     """One round. progress: tell the site where each request is (CORNER_STATE_C10A_2026_10_09); logs:
     (corpus_sync log, corpus_media log) for the heartbeat's sync. main() gives both; without them a round
@@ -1467,7 +1492,7 @@ def run_once(desk, worker: Worker, limit: int, name: str = "desk", progress: boo
         b = worker.budget(con)
     finally:
         con.close()
-    hb = desk.heartbeat(heartbeat_info(b, logs)) or {}
+    hb = desk.heartbeat(heartbeat_info(b, logs, _health_now())) or {}   # HEALTH_2026_10_23
     if hb.get("scheme") not in (None, SCHEME):
         raise SinkError("the site answers scheme %r, this script speaks %r" % (hb.get("scheme"), SCHEME))
     s["queued"] = hb.get("queued")
@@ -1576,6 +1601,7 @@ def main(argv=None) -> int:
             t0 = time.time()
             say = (lambda m: print("[%5.0fs] %s" % (time.time() - t0, m), flush=True)) if not a.json else None
             w = Worker(a.db, sync=not a.no_sync, say=say)
+            globals()["HEALTH"] = _desk_health   # HEALTH_2026_10_23: the round's heartbeat carries the desk's health
             s = run_once(desk, w, max(1, min(20, a.max)), "desk", progress=True, logs=(SYNC_LOG_PATH, MEDIA_LOG_PATH))
             s["seconds"] = round(time.time() - t0, 1)
     except SinkError as e:

@@ -1196,3 +1196,22 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | nirukta-source | The Nirukta's PDF is the Maharishi University of Management's typeset text; its terms | Yours to read |
 | texts-to-seek | The texts Raychaudhuri cites that we lack (Visnu, Matsya, Chandogya, Ramayana, Kausitaki in GRETIL) | Next: after nirukta-witness |
 | broken-script | scripts/backfill_missing.py does not parse | Next: mend or retire |
+## Addendum 2026-10-23 (81) (DOCS91_2026_10_23)
+
+| Key | Item | State |
+|---|---|---|
+| relations-index | The indexes' kinships read whole and checked | Built (kin_index.py): the trial (100 of each) yours |
+| relations-check | Each kinship against our verses and Raychaudhuri | Built, in kin_index.py's check |
+| ask-v2 | Ask on the PC reads the names, links, claims and kinships | Built: the Professor (ASK_PROF) |
+| links-sched | The links kept current by the hourly task | Built (ENTITY_LINKS_SCHED) |
+| alerts | A mail when the desk's tasks fail | Built (HEALTH, C19): C19 to paste |
+| names-ui | The name page: named together | Built (C20, NAME_LINKS_SITE): to paste, apply and Publish |
+| nirukta-witness | GRETIL's Nirukta translated, judged, released | Decided: the trial of 20, then 649 (about $2.40) |
+| nirukta-source | The Nirukta's PDF (MUM) | Decided: in use with credit for the Nighantu; never published |
+| nighantu-print | A public-domain print of the Nighantu (Sarup) | Next: sought |
+| h2 | The indexes' relations on the site | Decided: the derived relations with credit and the licence's notice |
+| daivat-rights | The Daivat-Sanhita | Decided: withdrawn until 1 January 2029 (your command) |
+| witness-vision-pairs | The vision round | 6 of 7 measured; Yajnavalkya and 7 pages to read again |
+| benchmark-label | ocr_benchmark lists Manu as Tesseract alone | Next: mend the label |
+| ask-site | The Professor on the site | Next (A2): an edge function behind the readers' gate |
+| claims-mirror | Raychaudhuri's claims on the site (B2) | Next |

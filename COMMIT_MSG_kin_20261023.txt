@@ -1,0 +1,30 @@
+The indexes' kinships read and checked; the Professor; the links kept current; the desk's health mailed; named together online (RELATIONS_INDEX, ASK_PROF, ENTITY_LINKS_SCHED, HEALTH, C19, C20, NAME_LINKS_SITE, DOCS91)
+
+- RELATIONS_INDEX_2026_10_23 (scripts/kin_index.py, new): the kinships, schools and rule that the Purana Index, the
+  Vedic Index and Soerensen state, read by Gemini Flash several entries to a call (metered; the cap asked before each
+  call; --max-usd), kept only when their words stand in the entry and their direction agrees with the words, tied to
+  our names, checked against entity_links and Raychaudhuri's claims; exports: edges, the matrix, the sources'
+  agreement, the father-to-son lines, sourced cards. data/shelf/kin.db. The trial: 100 entries of each index (about
+  $0.11); every candidate (11,202) about $3.97.
+- ASK_PROF_2026_10_23 (scripts/patch_ask_prof_2026_10_23.py): the Professor on the PC's Ask: the scholarly English and
+  the IAST, the names and whom our texts name them with, Raychaudhuri's claims and the indexes' checked relations, each
+  numbered [S1] ...; never a scholar from memory, never as any real person; metered as ask_prof. ask.html: Verses |
+  Professor, the [S] statements and the names under the answer.
+- ENTITY_LINKS_SCHED_2026_10_23 (scripts/patch_links_sched_2026_10_23.py): entity_links.py --scheduled (writes only
+  when the names changed; the 04:00 backup stands for its own) and the maintenance task's step d (the links, the
+  scholars' check, the kinships' check).
+- HEALTH_2026_10_23 (scripts/health_watch.py, new; scripts/patch_health_2026_10_23.py): the desk's health in its
+  heartbeat; docs/cloud/C19 mails the super admin on warn or fail, again after 12 hours or a change, and when all is
+  well again.
+- NAME_LINKS_C20_2026_10_23 (docs/cloud/C20): corpus.name_links on the site, from its own mentions, refreshed nightly;
+  corpus_reader_name_links for the readers. NAME_LINKS_SITE_2026_10_23 (scripts/patch_srangam_name_links_2026_10_23.py,
+  docs/srangam/NAME_LINKS_SITE_2026-10-23/): "Named together with" on a name's page.
+- DOCS91_2026_10_23: DEBT section 12, STATE 26, RUNBOOK, PLATFORM 94, ENTERPRISE_PATH 81, ASKS 8, RELATIONS_AND_ASK
+  6: the links applied, the vision round measured, the decisions (the Nirukta's PDF and translation, alerts, the
+  kinship trial, H2, the Daivat-Sanhita), what this release builds.
+
+Tests: test_kin_index_2026_10_23, test_ask_prof_2026_10_23, test_links_sched_2026_10_23, test_health_2026_10_23,
+test_srangam_name_links_2026_10_23, test_docs91_2026_10_23.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

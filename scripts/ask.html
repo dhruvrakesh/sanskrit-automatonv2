@@ -6,7 +6,10 @@
 <title>Ask the Corpus &mdash; Srangam</title>
 <!-- ASK_UI_2026_10_22: one Ask page (U1, docs/RELATIONS_AND_ASK_2026-10-22.md). The answer with numbered citations; the
      verses beside it in Devanagari, IAST and English (the scholarly English first, where it passed), with their
-     standing and the names they name. It reads /api/ask as before: a field the dashboard does not send is left out. -->
+     standing and the names they name. It reads /api/ask as before: a field the dashboard does not send is left out.
+     ASK_PROF_2026_10_23: and the Professor: asked so, the answer reads the scholarly English, the IAST, the names and
+     whom our texts name them with, Raychaudhuri's claims and the indexes' relations; each such statement is numbered
+     [S1] ... and shown under the answer. -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+Devanagari:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -87,6 +90,23 @@
     line-height:1.45;cursor:pointer;vertical-align:1px;margin:0 1px}
   .cite:hover,.cite.lit{background:rgba(224,176,98,.28);text-decoration:none}
   .cite.unknown{color:var(--faint);border-color:var(--border-v);background:none;cursor:default}
+  .cite.sch{color:var(--violet);border-color:var(--violet-dim);background:rgba(195,166,232,.10)}
+  .cite.sch:hover,.cite.sch.lit{background:rgba(195,166,232,.26)}
+  .seg{display:inline-flex;border:1px solid var(--border-v);border-radius:8px;overflow:hidden}
+  .segb{background:var(--bg3);border:none;color:var(--muted);padding:7px 11px;font-size:12.5px;cursor:pointer}
+  .segb+.segb{border-left:1px solid var(--border-v)}
+  .segb[aria-pressed="true"]{background:rgba(224,176,98,.14);color:var(--gold)}
+  .schbox{margin-top:14px;background:var(--bg2);border:1px solid var(--border-v);border-left:3px solid var(--violet-dim);
+    border-radius:12px;padding:12px 16px}
+  .schitem{padding:7px 0;border-top:1px solid var(--border);font-size:13.5px;line-height:1.5}
+  .schitem:first-of-type{border-top:none}
+  .schitem.flash{background:rgba(195,166,232,.10)}
+  .schitem .sn{font-family:var(--mono);font-size:11px;color:var(--violet);margin-right:6px}
+  .schitem .src2{color:var(--muted);font-size:12px}
+  .schitem .nt{color:var(--faint);font-size:11.5px}
+  .schnames{margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .schnames b{color:var(--blue);font-weight:500}
+  h3.sub2{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:12px 0 4px;font-weight:600}
   .meta{color:var(--faint);font-size:11.5px;margin-top:8px;font-family:var(--mono)}
   details.read{margin-top:12px;color:var(--muted);font-size:12.5px;background:var(--bg2);border:1px solid var(--border);
     border-radius:10px;padding:8px 12px}
@@ -162,6 +182,12 @@
       <span class="kwrap"><label class="lbl" for="k">Passages</label>
         <input type="range" id="k" min="4" max="24" value="12"/>
         <b id="kv" style="color:var(--gold)">12</b></span>
+      <span class="seg" role="group" aria-label="Who answers">
+        <button type="button" class="segb" data-mode="verses" aria-pressed="true"
+          title="The answer reads the working English of the verses found">Verses</button>
+        <button type="button" class="segb" data-mode="professor" aria-pressed="false"
+          title="The answer also reads the scholarly English, the IAST, the names and whom our texts name them with, Raychaudhuri's Political History and the indexes' relations">Professor</button>
+      </span>
       <span class="keys"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> asks &middot; <kbd>/</kbd> to type</span>
       <button class="ask-btn" id="askBtn" type="button">Ask &rarr;</button>
     </div>
@@ -190,6 +216,12 @@
         <summary>What this answer read</summary>
         <p id="readText"></p>
       </details>
+      <section class="schbox" id="schBox" aria-label="The scholars and the indexes" hidden>
+        <div class="panel-head"><h2>The scholars and the indexes</h2></div>
+        <div id="schItems"></div>
+        <h3 class="sub2">Names in these verses, and whom our texts name them with</h3>
+        <div id="schNames" class="schnames"></div>
+      </section>
     </section>
     <aside class="sources-col" aria-label="Sources">
       <div class="panel-head">
@@ -212,7 +244,7 @@
 (function(){
   "use strict";
   var $ = function(id){ return document.getElementById(id); };
-  var SOURCES = [], LAST = null, timer = null;
+  var SOURCES = [], LAST = null, timer = null, SCH = {}, MODE = "verses";
   var VIEW = {dev: true, iast: false, en: true};
 
   function store(k, v){ try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch(_){ return null; } }
@@ -232,6 +264,15 @@
     b.addEventListener("click", function(){ VIEW[b.dataset.view] = !VIEW[b.dataset.view]; store("askView", JSON.stringify(VIEW)); applyView(); });
   });
   applyView();
+
+  /* ASK_PROF_2026_10_23: who answers, remembered in this browser only */
+  function setMode(m){
+    MODE = m === "professor" ? "professor" : "verses";
+    document.querySelectorAll("[data-mode]").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.mode === MODE ? "true" : "false"); });
+    store("askMode", MODE);
+  }
+  document.querySelectorAll("[data-mode]").forEach(function(b){ b.addEventListener("click", function(){ setMode(b.dataset.mode); }); });
+  setMode(store("askMode") || "verses");
 
   $("k").addEventListener("input", function(){ $("kv").textContent = this.value; });
   $("q").addEventListener("keydown", function(ev){
@@ -278,6 +319,11 @@
   }
   function cites(html){
     return html.replace(/\[([^\[\]]{1,160})\]/g, function(m, inner){
+      var sp = inner.split(/\s*[;,]\s*/);
+      if (sp.length && sp.every(function(x){ return SCH[x.trim().toUpperCase()]; })) {
+        return sp.map(function(x){ var k = x.trim().toUpperCase();
+          return '<a class="cite sch" href="#sch-' + k + '" data-s="' + k + '" title="' + esc(SCH[k].source + ", " + SCH[k].where) + '">' + k + '</a>'; }).join("");
+      }
       var whole = findSource(inner);
       if (whole > 0) return '<a class="cite" href="#src-' + whole + '" data-n="' + whole + '" title="' + esc(SOURCES[whole - 1].tag) + '">' + whole + '</a>';
       var parts = inner.split(/\s*[;,]\s*(?=\S)/), out = [], any = false;
@@ -359,6 +405,9 @@
     if (num) { light(num.dataset.n); }
   });
   $("answerBody").addEventListener("click", function(ev){
+    var sc = ev.target.closest(".cite[data-s]");
+    if (sc) { ev.preventDefault(); var el = $("sch-" + sc.dataset.s); if (el) { el.scrollIntoView({behavior: smooth(), block: "nearest"});
+      el.classList.add("flash"); setTimeout(function(){ el.classList.remove("flash"); }, 1500); } return; }
     var c = ev.target.closest(".cite[data-n]"); if (!c) return;
     ev.preventDefault(); jump(c.dataset.n);
   });
@@ -381,10 +430,35 @@
   /* what the answer read: said plainly, from what came back */
   function readText(d){
     var v = (d.sources || []).filter(function(s){ return !(s.kind || s.link); }).length, e = d.editorial || 0;
+    if (d.ask_mode === "professor" && d.scholarly) {   /* ASK_PROF_2026_10_23 */
+      var sc = d.scholarly, it = sc.items || [], nc = it.filter(function(x){ return x.kind === "claim"; }).length;
+      return "The Professor was given the " + v + " passages listed (the scholarly English where a verse has it, else the working English; and the IAST), "
+        + (sc.names || []).length + " names they name with whom our texts name them" + (sc.read && sc.read.links ? "" : " (the links are not built here)")
+        + ", " + nc + " statement" + (nc === 1 ? "" : "s") + " of Raychaudhuri's Political History" + (sc.read && sc.read.claims ? "" : " (the claims are not on this computer)")
+        + " and " + (it.length - nc) + " relation" + (it.length - nc === 1 ? "" : "s") + " stated by the indexes" + (sc.read && sc.read.indexes ? "" : " (not read yet: kin_index.py)")
+        + ". It was told to keep apart what the verses say, what the scholars state and what it infers.";
+    }
     return "The model was given the working English of the " + v + " passages listed (up to 600 characters of each)"
       + (e ? " and " + e + " editorial item" + (e > 1 ? "s" : "") + " marked so" : "")
       + ", found by " + (d.mode === "semantic" ? "meaning" : "keyword") + " search. It was not given the Sanskrit, the scholarly English,"
       + " the names or the scholars' claims: they are shown here for you to check it (phase A1, ask-v2, gives the model these).";
+  }
+
+  function renderScholarly(d){   /* ASK_PROF_2026_10_23 */
+    SCH = {};
+    var box = $("schBox"), sc = (d && d.ask_mode === "professor") ? d.scholarly : null;
+    if (!sc) { box.hidden = true; $("schItems").innerHTML = ""; $("schNames").innerHTML = ""; return; }
+    (sc.items || []).forEach(function(x){ SCH[String(x.n).toUpperCase()] = x; });
+    $("schItems").innerHTML = (sc.items || []).length ? (sc.items || []).map(function(x){
+      return '<div class="schitem" id="sch-' + esc(x.n) + '"><span class="sn">' + esc(x.n) + '</span>'
+        + '<span class="src2">' + esc(x.source) + ", " + esc(x.where) + ", on " + esc(x.about) + ":</span> " + esc(x.text)
+        + (x.note ? ' <span class="nt">(' + esc(x.note) + ')</span>' : "") + "</div>";
+    }).join("") : '<div class="schitem nt">No statement of the scholars or the indexes for these names here.</div>';
+    $("schNames").innerHTML = (sc.names || []).map(function(n){
+      var t = (n.together || []).map(function(x){ return esc(x.name) + " " + x.passages; }).join(", ");
+      return "<div><b>" + esc(n.name) + "</b>" + (t ? " with " + t : "") + "</div>";
+    }).join("") || "<div>(none)</div>";
+    box.hidden = false;
   }
 
   $("copyBtn").addEventListener("click", function(){
@@ -407,7 +481,7 @@
   }
   function skeleton(){
     $("answerBody").innerHTML = '<div class="skel" style="width:92%"></div><div class="skel" style="width:85%"></div><div class="skel" style="width:60%"></div>';
-    $("sources").innerHTML = ""; $("answerMeta").textContent = ""; $("result").hidden = false;
+    $("sources").innerHTML = ""; $("answerMeta").textContent = ""; $("result").hidden = false; renderScholarly(null);
   }
 
   async function ask(){
@@ -416,7 +490,7 @@
     var btn = $("askBtn"); btn.disabled = true; busy(true); skeleton();
     try {
       var r = await fetch("/api/ask", {method: "POST", headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({q: q, engine: $("engine").value, k: parseInt($("k").value, 10)})});
+        body: JSON.stringify({q: q, engine: $("engine").value, k: parseInt($("k").value, 10), mode: MODE})});
       var d = {};
       try { d = await r.json(); } catch(_){ d = {error: "HTTP " + r.status}; }
       busy(false);
@@ -426,6 +500,7 @@
           + (d.error && d.error.indexOf("GEMINI_API_KEY") >= 0 ? "<br/>Set <code>GEMINI_API_KEY</code> in the project <code>.env</code> and restart the dashboard." : "") + "</div>";
         if (d.sources && d.sources.length) {
           renderSources(d.sources);
+          renderScholarly(d);
           $("answerBody").innerHTML = '<p style="color:var(--muted)">No answer was composed. The passages found are beside it.</p>';
           $("answerMeta").textContent = ""; $("readText").textContent = ""; $("result").hidden = false; LAST = null;
         } else { $("result").hidden = true; }
@@ -433,10 +508,12 @@
       }
       LAST = d;
       renderSources(d.sources);
+      renderScholarly(d);
       renderAnswer(d.answer || "");
       var nv = (d.sources || []).length;
       $("answerMeta").textContent = nv + " sources \u00b7 " + (d.mode === "semantic" ? "meaning search" : "keyword search")
-        + (d.editorial ? " \u00b7 " + d.editorial + " editorial" : "") + (d.engine ? " \u00b7 " + short(d.engine) : "");
+        + (d.editorial ? " \u00b7 " + d.editorial + " editorial" : "") + (d.engine ? " \u00b7 " + short(d.engine) : "")
+        + (d.ask_mode === "professor" ? " \u00b7 the Professor" : "");
       $("readText").textContent = readText(d);
       $("result").hidden = false;
       $("result").scrollIntoView({behavior: smooth(), block: "start"});

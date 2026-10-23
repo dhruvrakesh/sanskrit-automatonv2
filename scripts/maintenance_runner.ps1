@@ -104,6 +104,20 @@ try {
     $tc = Get-Date
     & $py scripts\extract_entities.py --db data\context.db --limit 1500 2>&1 | Add-Content $log
     Log ("STEP c entities     {0:n0}s" -f ((Get-Date) - $tc).TotalSeconds)
+    if (Test-Writer "c") { exit 0 }   # ENTITY_LINKS_SCHED_2026_10_23
+
+    # d) ENTITY_LINKS_SCHED_2026_10_23: the links our texts make between the names (FREE): entity_links rebuilt only
+    #    when the names changed (step c adds them), the day's backup standing for its own; then the scholars' claims
+    #    and, once read, the indexes' kinships checked against the links (FREE, read-only; the exports refreshed).
+    #    A failure here is logged and skipped. docs/RELATIONS_AND_ASK_2026-10-22.md.
+    $td = Get-Date
+    try {
+        & $py scripts\entity_links.py --scheduled --claims data\shelf\claims.db 2>&1 | Add-Content $log
+        if (Test-Path "data\shelf\kin.db") { & $py scripts\kin_index.py --check 2>&1 | Add-Content $log }
+        Log ("STEP d links        {0:n0}s" -f ((Get-Date) - $td).TotalSeconds)
+    } catch {
+        Log ("STEP d links SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $td).TotalSeconds, $_)
+    }
 
     Log ("DONE maintenance - total {0:n0}s" -f ((Get-Date) - $t0).TotalSeconds)
     exit 0

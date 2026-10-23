@@ -27,6 +27,13 @@ king, enemy): that is a kinship, read from the indexes and checked (relations-in
                                                       "named near", "both named, never near", "one not in our texts";
                                                       writes exports\\claims_in_our_texts.csv and .json
   python scripts\\entity_links.py --db D:\\backups\\some_backup.db --immutable --claims data\\shelf\\claims.db
+  python scripts\\entity_links.py --scheduled --claims data\\shelf\\claims.db
+                                                      ENTITY_LINKS_SCHED_2026_10_23: the maintenance runner's step (every
+                                                      tick): it writes only when the names changed since the last run
+                                                      (the counts differ), and the day's backup (D:\\backups\\
+                                                      context_daily.db, under 26 hours old) stands for the backup the
+                                                      table's rebuild wants, else one is made; a writer running in the
+                                                      dashboard leaves it to the next tick
 
 The tables (nothing else in the database is written; to undo: DROP TABLE entity_links; DROP TABLE entity_link_runs;
 or restore the backup):
@@ -168,22 +175,64 @@ def rows_of(c: dict, built_at: str):
                built_at, MARK)
 
 
-def apply(a, c: dict) -> int:
+DAILY_MAX_AGE_H = 26   # ENTITY_LINKS_SCHED_2026_10_23: the 04:00 backup task's copy stands for a scheduled rebuild's
+
+
+def recent_backup(bdir: Path, hours: float = DAILY_MAX_AGE_H):
+    """ENTITY_LINKS_SCHED_2026_10_23: the newest whole copy of the database in the backup folder made in the last
+    `hours` (the daily task's context_daily.db or context_YYYYMMDD.db, or this script's own), or None."""
+    best, now_ = None, datetime.datetime.now().timestamp()
+    for pat in ("context_daily.db", "context_2*.db", "context_pre_links_*.db"):
+        for f in bdir.glob(pat):
+            try:
+                t = f.stat().st_mtime
+            except OSError:
+                continue
+            if now_ - t <= hours * 3600 and (best is None or t > best[0]):
+                best = (t, f)
+    return best[1] if best else None
+
+
+def last_run(db: str):
+    """ENTITY_LINKS_SCHED_2026_10_23: the last --apply's counts, or None."""
+    con = connect_ro(db)
+    try:
+        if not has(con, "entity_link_runs"):
+            return None
+        r = con.execute("SELECT at, entities, mentions, passages_named, lists_left_out, together, near, window FROM "
+                        "entity_link_runs ORDER BY id DESC LIMIT 1").fetchone()
+    finally:
+        con.close()
+    if not r:
+        return None
+    return {"at": r[0], "counts": tuple(r[1:])}
+
+
+def counts_of(c: dict) -> tuple:
+    return (c["entities"], c["mentions"], c["passages_named"], c["lists_left_out"], c["together"], c["near"],
+            c["window"])
+
+
+def apply(a, c: dict, scheduled: bool = False) -> int:
     sys.path.insert(0, str(HERE))
     import repair_text as rt   # noqa: E402  (writers_running, run: one way of doing each)
     w = rt.writers_running(False)
     if w:
-        print("REFUSE: the dashboard runs a database writer (%s); nothing was changed" % ", ".join(
-            "%s %s" % (j.get("kind"), j.get("doc")) for j in w))
+        print("%s: the dashboard runs a database writer (%s); nothing was changed" % (
+            "SKIP" if scheduled else "REFUSE", ", ".join("%s %s" % (j.get("kind"), j.get("doc")) for j in w)))
         print("NEXT: python scripts\\entity_links.py --apply   (when the dashboard is idle)")
-        return 1
+        return 0 if scheduled else 1
     stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     bdir = Path(a.backup_dir)
     bdir.mkdir(parents=True, exist_ok=True)
-    backup = bdir / ("context_pre_links_%s.db" % stamp)
-    if rt.run([sys.executable, HERE / "db_backup.py", a.db, backup]) != 0 or not backup.exists():
-        print("REFUSE: the backup failed; nothing was changed")
-        return 1
+    backup = recent_backup(bdir) if scheduled else None
+    if backup is not None:
+        print("the backup: %s (made within %d hours) stands for this rebuild" % (backup, DAILY_MAX_AGE_H))
+    else:
+        backup = bdir / ("context_pre_links_%s.db" % stamp)
+        if rt.run([sys.executable, HERE / "db_backup.py", a.db, backup]) != 0 or not backup.exists():
+            print("REFUSE: the backup failed; nothing was changed")
+            return 1
     at = datetime.datetime.now().isoformat(timespec="seconds")
     con = sqlite3.connect(a.db, timeout=60)
     try:
@@ -310,6 +359,7 @@ def main(argv=None) -> int:
     ap.add_argument("--claims", default="", help="the scholars' claims (data\\shelf\\claims.db): the check")
     ap.add_argument("--window", type=int, default=WINDOW)
     ap.add_argument("--no-write", action="store_true", help="with --claims: write no export")
+    ap.add_argument("--scheduled", action="store_true", help="ENTITY_LINKS_SCHED_2026_10_23: the maintenance step")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):   # a pipe on Windows is cp1252: a name in IAST must not stop it
         try:
@@ -321,7 +371,7 @@ def main(argv=None) -> int:
     if not Path(a.db).exists():
         print("%s: no database at %s" % (MARK, a.db))
         return 2
-    if a.apply and a.immutable:
+    if (a.apply or a.scheduled) and a.immutable:
         print("REFUSE: --apply writes the database; an immutable copy is read only")
         return 2
     con = connect_ro(a.db, a.immutable)
@@ -335,6 +385,12 @@ def main(argv=None) -> int:
     finally:
         con.close()
     print(summary_line(c))
+    if a.scheduled:   # ENTITY_LINKS_SCHED_2026_10_23: nothing to write when the names did not change
+        last = last_run(a.db)
+        if last and last["counts"] == counts_of(c):
+            print("SCHEDULED: the names are as at the last rebuild (%s); nothing written" % last["at"])
+            return 0
+        a.apply = True
     if built:
         n = collections.Counter(k[2] for k in built)
         same = n["together"] == c["together"] and n["near"] == c["near"]
@@ -354,10 +410,12 @@ def main(argv=None) -> int:
         for r in nb:
             print("    %-8s %4d passages, %d texts  %-28s (%s)  e.g. %s" % (
                 r["rel"], r["passages"], r["texts"], r["with"][:28], r["kind"], "; ".join(r["places"][:2])))
-    if a.claims:
-        if not Path(a.claims).exists():
-            print("%s: no claims database at %s" % (MARK, a.claims))
+    if a.claims and not Path(a.claims).exists():
+        print("%s: no claims database at %s" % (MARK, a.claims))
+        if not a.scheduled:
             return 2
+        a.claims = ""   # ENTITY_LINKS_SCHED_2026_10_23: the links are rebuilt all the same
+    if a.claims:
         k = claims_check(c, a.claims)
         v = k["verdicts"]
         print("\n  the scholars' check: %d claims whose subject and object are both our names: %s" % (
@@ -385,7 +443,7 @@ def main(argv=None) -> int:
                                                           encoding="utf-8")
             print("written: %s, claims_in_our_texts.json" % (out / "claims_in_our_texts.csv"))
     if a.apply:
-        return apply(a, c)
+        return apply(a, c, scheduled=a.scheduled)
     if not built:
         print("NEXT: python scripts\\entity_links.py --apply   (a backup first; the dashboard idle)")
     return 0

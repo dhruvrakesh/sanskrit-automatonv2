@@ -96,3 +96,13 @@ is not yet, and each of those is a decision of yours before it is built.
 - **CI:** built (CI_TESTS_2026_10_22). Staging and alerts are still open (section 4).
 - **Order now:** apply R1; the claims on the site (B2) and the named-together links (C20) as one mirror step (R4); then
   A1 (Ask reads the links and the claims); the Nirukta witness translated; the texts to seek.
+## 6. 23 Oct: R2, R3, A1, U2 built; R4 by the site's own view (DOCS91_2026_10_23)
+
+- **R2 and R3** (relations-index, relations-check): scripts/kin_index.py, all three indexes, a trial of 100 entries
+  each (about $0.11), then the full run (11,202 candidate entries, about $3.97 by the plan). Nothing is taken on the
+  model's word: the words in the entry, the direction, the names tied, our verses, Raychaudhuri.
+- **A1** (ask-v2): the Professor (ASK_PROF_2026_10_23).
+- **R4** (relations-mirror) for the named-together links: the site counts them from its own mentions (C20), so nothing
+  new is mirrored; the claims (B2) and the indexes' relations (H2 decided) are mirrored next.
+- **U2** (names-ui): "Named together with" (NAME_LINKS_SITE_2026_10_23).
+- **Kept current:** the PC hourly (step d), the site nightly (pg_cron).

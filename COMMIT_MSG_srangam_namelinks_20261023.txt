@@ -1,0 +1,14 @@
+Named together with, on a name's page (NAME_LINKS_SITE_2026_10_23, Phase AO)
+
+- src/lib/corpusLibrary.ts: NameLink, loadNameLinks (corpus_reader_name_links, at most 50).
+- src/pages/corpus/CorpusNames.tsx: a name's page lists the names that one passage names beside it, most passages
+  first, each a link to its own page and "first together" to the first passage that names both; said plainly to be a
+  co-occurrence, not a kinship. Not shown until docs/cloud/C20 (the automaton repo) is applied, nor when empty.
+- src/__tests__/corpus-name-links.test.tsx: new (4 tests).
+- docs/RELIABILITY_AUDIT.md: Phase AO (invariant 64).
+
+Checked on a copy: npm run typecheck (only the error that predates it, Editions.tsx), npx vitest run: 46 files, 373
+tests passing.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
