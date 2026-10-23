@@ -3,219 +3,449 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Ask the Corpus — Srangam</title>
+<title>Ask the Corpus &mdash; Srangam</title>
+<!-- ASK_UI_2026_10_22: one Ask page (U1, docs/RELATIONS_AND_ASK_2026-10-22.md). The answer with numbered citations; the
+     verses beside it in Devanagari, IAST and English (the scholarly English first, where it passed), with their
+     standing and the names they name. It reads /api/ask as before: a field the dashboard does not send is left out. -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+Devanagari:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root{
     --bg:#100e0b; --bg2:#17140f; --bg3:#1e1a14; --bg4:#26211a;
-    --ink:#ece4d4; --muted:#9b8f7a; --faint:#6b6151;
-    --gold:#e0b062; --gold-dim:#7a5f2e; --border:#2a241b; --border-v:#332c22;
-    --green:#7bbf6a; --red:#d98b6a;
+    --ink:#ece4d4; --muted:#a3967f; --faint:#756a58;
+    --gold:#e0b062; --gold-dim:#7a5f2e; --border:#2a241b; --border-v:#3a3226;
+    --green:#7bbf6a; --red:#d98b6a; --violet:#c3a6e8; --violet-dim:#5a4380; --blue:#8fb4de;
+    --dev:"Noto Serif Devanagari","Nirmala UI",serif; --serif:"Cormorant Garamond",Georgia,serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.6}
+  [hidden]{display:none!important}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:15px;
+    line-height:1.6}
   a{color:var(--gold);text-decoration:none}
-  .wrap{max-width:900px;margin:0 auto;padding:0 22px 80px}
-  header{display:flex;align-items:center;gap:14px;padding:22px 0 14px;flex-wrap:wrap}
-  .om{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--gold);font-weight:600}
-  .title{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;color:var(--gold)}
+  a:hover{text-decoration:underline}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 20px 64px}
+  header.top{display:flex;align-items:center;gap:14px;padding:18px 0 12px;flex-wrap:wrap}
+  .om{font-family:var(--dev);font-size:30px;color:var(--gold)}
+  .title{font-family:var(--serif);font-size:27px;font-weight:600;color:var(--gold);line-height:1.1}
   .sub{color:var(--muted);font-size:12.5px}
-  .nav{margin-left:auto;display:flex;gap:6px}
-  .nav a{font-size:12.5px;color:var(--muted);border:1px solid var(--border-v);
-    padding:5px 11px;border-radius:7px}
-  .nav a:hover{color:var(--gold);border-color:var(--gold-dim)}
-  .askbox{background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;
-    padding:16px;margin-top:8px}
-  textarea{width:100%;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);
-    border-radius:10px;padding:12px 14px;font-family:inherit;font-size:15px;resize:vertical;
-    min-height:70px;line-height:1.5}
+  .nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .nav a{font-size:12.5px;color:var(--muted);border:1px solid var(--border-v);padding:5px 11px;border-radius:7px}
+  .nav a:hover{color:var(--gold);border-color:var(--gold-dim);text-decoration:none}
+  .askbox{background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;padding:14px;max-width:980px}
+  textarea{width:100%;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:10px;
+    padding:12px 14px;font-family:inherit;font-size:15.5px;resize:vertical;min-height:64px;line-height:1.5}
   textarea:focus{outline:none;border-color:var(--gold-dim)}
-  .controls{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
-  select,.kwrap{background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);
-    border-radius:8px;padding:8px 10px;font-family:"JetBrains Mono",monospace;font-size:12.5px}
+  .controls{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  select,.kwrap{background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);border-radius:8px;
+    padding:7px 9px;font-family:var(--mono);font-size:12.5px}
   .kwrap{display:flex;align-items:center;gap:8px;color:var(--muted)}
-  .kwrap input{accent-color:var(--gold)}
-  label.lbl{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
-    font-weight:600;margin-right:2px}
-  .ask-btn{margin-left:auto;background:linear-gradient(135deg,var(--gold),#c8922f);
-    color:#1a1509;border:none;border-radius:9px;padding:10px 22px;font-weight:700;font-size:14px;
-    cursor:pointer;font-family:inherit}
+  .kwrap input{accent-color:var(--gold);width:110px}
+  .lbl{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .keys{color:var(--faint);font-size:11.5px}
+  .keys kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--border-v);border-radius:4px;padding:0 4px;
+    color:var(--muted)}
+  .ask-btn{margin-left:auto;background:linear-gradient(135deg,var(--gold),#c8922f);color:#1a1509;border:none;
+    border-radius:9px;padding:10px 22px;font-weight:700;font-size:14px;cursor:pointer}
   .ask-btn:hover{filter:brightness(1.06)}
   .ask-btn:disabled{opacity:.5;cursor:default}
-  .hint{color:var(--faint);font-size:12px;margin-top:10px}
-  .hint b{color:var(--muted);font-weight:600}
-  .chip{display:inline-block;background:var(--bg3);border:1px solid var(--border-v);
-    color:var(--muted);border-radius:20px;padding:3px 11px;font-size:12px;cursor:pointer;
-    margin:4px 6px 0 0}
+  .chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .chip{background:var(--bg3);border:1px solid var(--border-v);color:var(--muted);border-radius:20px;padding:3px 11px;
+    font-size:12px;cursor:pointer}
   .chip:hover{color:var(--gold);border-color:var(--gold-dim)}
-  #status{margin-top:18px;color:var(--muted);font-size:13.5px;display:none}
-  .spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--border-v);
-    border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;
-    vertical-align:-2px;margin-right:8px}
+  .chip.clear{border-style:dashed}
+  #status{margin-top:16px;color:var(--muted);font-size:13.5px;min-height:1px}
+  .spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--border-v);border-top-color:var(--gold);
+    border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-right:8px}
   @keyframes spin{to{transform:rotate(360deg)}}
-  .answer{margin-top:22px;display:none}
+  .err{color:var(--red);background:rgba(217,139,106,.08);border:1px solid #6b3a2a;border-radius:8px;padding:12px 14px;
+    margin-top:14px;font-size:13.5px;max-width:980px}
+  .result{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:18px}
+  @media (min-width:1100px){
+    .result{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);align-items:start}
+    .sources-col{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding-right:4px}
+  }
+  .panel-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+  .panel-head h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin:0}
+  .panel-head .grow{flex:1}
+  .tbtn{background:var(--bg3);border:1px solid var(--border-v);color:var(--muted);border-radius:7px;padding:3px 9px;
+    font-size:11.5px;cursor:pointer}
+  .tbtn[aria-pressed="true"]{color:var(--gold);border-color:var(--gold-dim);background:rgba(224,176,98,.08)}
+  .tbtn:hover{color:var(--gold)}
   .answer-body{background:var(--bg2);border:1px solid var(--border-v);border-left:3px solid var(--gold);
-    border-radius:12px;padding:18px 20px;font-size:15.5px;line-height:1.72;white-space:pre-wrap}
-  .answer-body .cite{color:var(--gold);background:rgba(224,176,98,.11);border:1px solid var(--gold-dim);
-    border-radius:5px;padding:0 5px;font-family:"JetBrains Mono",monospace;font-size:12.5px;
-    cursor:pointer;white-space:nowrap}
-  .meta{color:var(--faint);font-size:11.5px;margin-top:8px;font-family:"JetBrains Mono",monospace}
-  h3.srch{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;
-    font-weight:600;margin:26px 0 10px}
-  .src{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;
-    margin-bottom:9px;display:block;transition:border-color .15s}
-  .src:target,.src.flash{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-dim)}
-  .src:hover{border-color:var(--border-v)}
-  .src .tag{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--gold);font-weight:500}
-  .src .num{color:var(--faint);font-family:"JetBrains Mono",monospace;font-size:11px;margin-right:8px}
-  .src .en{color:var(--ink);font-size:14px;margin-top:5px;font-family:"Cormorant Garamond",serif;
-    font-size:16px;line-height:1.5}
-  .src .open{float:right;color:var(--muted);font-size:11px}
-  .err{color:var(--red);background:rgba(217,139,106,.08);border:1px solid #6b3a2a;
-    border-radius:8px;padding:12px 14px;margin-top:16px;font-size:13.5px}
-  footer{color:var(--faint);font-size:11.5px;margin-top:40px;text-align:center;line-height:1.7}
+    border-radius:12px;padding:16px 20px;font-size:15.5px;line-height:1.75}
+  .answer-body p{margin:0 0 .8em}
+  .answer-body p:last-child{margin-bottom:0}
+  .answer-body h4{font-size:14px;color:var(--gold);margin:1em 0 .4em;letter-spacing:.02em}
+  .answer-body ul,.answer-body ol{margin:.2em 0 .9em;padding-left:1.4em}
+  .answer-body li{margin:.2em 0}
+  .cite{display:inline-block;min-width:1.55em;text-align:center;color:var(--gold);background:rgba(224,176,98,.11);
+    border:1px solid var(--gold-dim);border-radius:5px;padding:0 4px;font-family:var(--mono);font-size:11.5px;
+    line-height:1.45;cursor:pointer;vertical-align:1px;margin:0 1px}
+  .cite:hover,.cite.lit{background:rgba(224,176,98,.28);text-decoration:none}
+  .cite.unknown{color:var(--faint);border-color:var(--border-v);background:none;cursor:default}
+  .meta{color:var(--faint);font-size:11.5px;margin-top:8px;font-family:var(--mono)}
+  details.read{margin-top:12px;color:var(--muted);font-size:12.5px;background:var(--bg2);border:1px solid var(--border);
+    border-radius:10px;padding:8px 12px}
+  details.read summary{cursor:pointer;color:var(--muted)}
+  details.read p{margin:.5em 0 0}
+  .src{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-bottom:9px;
+    transition:border-color .15s,box-shadow .15s}
+  .src.flash{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-dim)}
+  .src.dim{opacity:.55}
+  .src-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .num{font-family:var(--mono);font-size:11px;color:#1a1509;background:var(--gold);border-radius:4px;padding:0 5px;
+    cursor:pointer;border:none}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:500}
+  .badge{font-size:10px;letter-spacing:.03em;border-radius:4px;padding:1px 6px;border:1px solid var(--border-v);
+    color:var(--muted);white-space:nowrap}
+  .badge.sc{color:var(--violet);border-color:var(--violet-dim)}
+  .badge.wit{color:var(--green);border-color:#3d5c35}
+  .badge.warn{color:var(--red);border-color:#6b3a2a}
+  .badge.ed{color:#d8b27a;border-color:var(--gold-dim)}
+  .open{margin-left:auto;font-size:11px;color:var(--muted)}
+  .dev{font-family:var(--dev);font-size:16px;line-height:1.75;color:#efe3c9;margin-top:7px;white-space:pre-wrap}
+  .iast{font-family:var(--serif);font-style:italic;font-size:15.5px;color:#d7cbb2;margin-top:5px;white-space:pre-wrap}
+  .clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .more{background:none;border:none;color:var(--faint);font-size:11px;cursor:pointer;padding:0;margin-top:2px}
+  .more:hover{color:var(--gold)}
+  .en{font-family:var(--serif);font-size:16.5px;line-height:1.5;margin-top:7px;color:var(--ink)}
+  .en .lab{display:block;font-family:"Inter",sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.07em;
+    color:var(--faint);margin-bottom:1px}
+  .en.sc .lab{color:var(--violet)}
+  details.working{margin-top:5px;font-size:12px;color:var(--faint)}
+  details.working summary{cursor:pointer}
+  details.working div{font-family:var(--serif);font-size:15px;color:var(--muted);margin-top:3px}
+  .names{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+  .name{background:none;border:1px solid var(--border-v);color:var(--blue);border-radius:14px;padding:1px 9px;
+    font-size:11.5px;cursor:pointer}
+  .name:hover{border-color:var(--blue)}
+  .name i{color:var(--faint);font-style:normal;font-size:10px;margin-left:4px}
+  .hide-dev .dev,.hide-dev .more.for-dev{display:none}
+  .hide-iast .iast,.hide-iast .more.for-iast{display:none}
+  .hide-en .en,.hide-en details.working{display:none}
+  .skel{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--bg3),var(--bg4),var(--bg3));
+    background-size:200% 100%;animation:sh 1.2s ease-in-out infinite;margin:9px 0}
+  @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  footer{color:var(--faint);font-size:11.5px;margin-top:36px;text-align:center;line-height:1.7}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  @media (max-width:600px){.wrap{padding:0 14px 48px}.ask-btn{margin-left:0;width:100%}.title{font-size:23px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <span class="om">&#x0950;</span>
+  <header class="top">
+    <span class="om" aria-hidden="true">&#x0950;</span>
     <div>
       <div class="title">Ask the Corpus</div>
-      <div class="sub">Retrieval-augmented Q&amp;A over the translated Sanskrit corpus &mdash; grounded in verses, cited by reference</div>
+      <div class="sub">An answer grounded in our verses, each claim cited; the verses beside it, in Sanskrit and English</div>
     </div>
-    <nav class="nav">
-      <a href="/">&#8592; Dashboard</a>
-      <a href="/library">&#128218; Library</a>
+    <nav class="nav" aria-label="Pages">
+      <a href="/">&larr; Dashboard</a>
+      <a href="/library">Library</a>
     </nav>
   </header>
 
-  <div class="askbox">
-    <textarea id="q" placeholder="Ask a question about the scriptures&hellip;  e.g.  What does the corpus say about the origin of the river Gaṅgā?"></textarea>
+  <section class="askbox" aria-label="Your question">
+    <label for="q" class="lbl">Question</label>
+    <textarea id="q" placeholder="e.g.  What does the corpus say about the origin of the river Ga&#7749;g&#257;?"></textarea>
     <div class="controls">
-      <label class="lbl">Engine</label>
+      <label class="lbl" for="engine">Engine</label>
       <select id="engine">
-        <option value="gemini:gemini-2.5-flash" selected>&#x26A1; 2.5 Flash</option>
-        <option value="gemini:gemini-2.5-pro">&#x2726; 2.5 Pro (deeper)</option>
-        <option value="gemini:gemini-2.0-flash">&#x26A1; 2.0 Flash</option>
+        <option value="gemini:gemini-2.5-flash" selected>2.5 Flash</option>
+        <option value="gemini:gemini-2.5-pro">2.5 Pro (deeper)</option>
+        <option value="gemini:gemini-2.0-flash">2.0 Flash</option>
       </select>
-      <span class="kwrap"><label class="lbl">Passages</label>
-        <input type="range" id="k" min="4" max="24" value="12" oninput="kv.textContent=this.value"/>
+      <span class="kwrap"><label class="lbl" for="k">Passages</label>
+        <input type="range" id="k" min="4" max="24" value="12"/>
         <b id="kv" style="color:var(--gold)">12</b></span>
-      <button class="ask-btn" id="askBtn" onclick="ask()">Ask &#8594;</button>
+      <span class="keys"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> asks &middot; <kbd>/</kbd> to type</span>
+      <button class="ask-btn" id="askBtn" type="button">Ask &rarr;</button>
     </div>
-    <div class="hint">
-      <b>How it works:</b> full-text search finds the most relevant translated verses, then the model answers
-      <b>using only those verses</b> and cites each one. It will say when the corpus doesn&rsquo;t contain the answer &mdash; it does not invent.
-      <div>
-        <span class="chip" onclick="setQ(this)">the duties of a king toward his subjects</span>
-        <span class="chip" onclick="setQ(this)">what is said about Naimiṣāraṇya</span>
-        <span class="chip" onclick="setQ(this)">how did the rivers become goddesses</span>
-      </div>
+    <div class="chips" id="examples" aria-label="Examples">
+      <span class="lbl">Try</span>
+      <button class="chip" type="button">the duties of a king toward his subjects</button>
+      <button class="chip" type="button">what is said about Naimi&#7779;&#257;ra&#7751;ya</button>
+      <button class="chip" type="button">Janaka and Y&#257;j&ntilde;avalkya</button>
+      <button class="chip" type="button">how did the rivers become goddesses</button>
     </div>
-  </div>
+    <div class="chips" id="recent" aria-label="Your recent questions" hidden></div>
+  </section>
 
-  <div id="status"></div>
+  <div id="status" role="status" aria-live="polite"></div>
   <div id="errBox"></div>
 
-  <div class="answer" id="answer">
-    <div class="answer-body" id="answerBody"></div>
-    <div class="meta" id="answerMeta"></div>
-    <h3 class="srch">Sources &mdash; the verses this answer is grounded in</h3>
-    <div id="sources"></div>
-  </div>
+  <main class="result" id="result" hidden>
+    <section class="answer-col" aria-label="Answer">
+      <div class="panel-head">
+        <h2>Answer</h2><span class="grow"></span>
+        <button class="tbtn" id="copyBtn" type="button" title="Copy the answer with its sources">Copy with sources</button>
+      </div>
+      <article class="answer-body" id="answerBody"></article>
+      <div class="meta" id="answerMeta"></div>
+      <details class="read" id="readBox">
+        <summary>What this answer read</summary>
+        <p id="readText"></p>
+      </details>
+    </section>
+    <aside class="sources-col" aria-label="Sources">
+      <div class="panel-head">
+        <h2 id="srcTitle">Sources</h2><span class="grow"></span>
+        <button class="tbtn" type="button" data-view="dev" aria-pressed="true">Devanagari</button>
+        <button class="tbtn" type="button" data-view="iast" aria-pressed="false">IAST</button>
+        <button class="tbtn" type="button" data-view="en" aria-pressed="true">English</button>
+      </div>
+      <div id="sources"></div>
+    </aside>
+  </main>
 
   <footer>
-    Answers are generated from the corpus translations and may reflect their limits.<br/>
-    Always verify against the cited verses in the reader.
+    The answer is generated from the corpus's English and may carry its limits; the verses beside it are the evidence.<br/>
+    Read each cited verse in the reader before you rely on it.
   </footer>
 </div>
 
 <script>
-  var LAST_SOURCES = [];
-  try { var e = localStorage.getItem('askEngine'); if (e) document.getElementById('engine').value = e; } catch(_){}
-  document.getElementById('engine').addEventListener('change', function(){
-    try { localStorage.setItem('askEngine', this.value); } catch(_){}
-  });
-  document.getElementById('q').addEventListener('keydown', function(ev){
-    if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); ask(); }
-  });
-  function setQ(el){ document.getElementById('q').value = el.textContent; document.getElementById('q').focus(); }
-  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var SOURCES = [], LAST = null, timer = null;
+  var VIEW = {dev: true, iast: false, en: true};
 
-  function renderAnswer(text){
-    // Highlight [tag] citations and make them jump to the matching source card.
-    var html = esc(text).replace(/\[([^\]]+)\]/g, function(m, tag){
-      var idx = LAST_SOURCES.findIndex(function(s){ return s.tag === tag.trim(); });
-      if (idx >= 0) return '<span class="cite" onclick="jumpSrc('+(idx+1)+')">['+esc(tag)+']</span>';
-      return '<span class="cite">['+esc(tag)+']</span>';
-    });
-    document.getElementById('answerBody').innerHTML = html;
+  function store(k, v){ try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch(_){ return null; } }
+  function esc(s){ return (s == null ? "" : String(s)).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
+
+  /* preferences: the engine and the views, this browser only */
+  var e0 = store("askEngine"); if (e0) $("engine").value = e0;
+  $("engine").addEventListener("change", function(){ store("askEngine", this.value); });
+  try { var v0 = JSON.parse(store("askView") || "null"); if (v0) VIEW = Object.assign(VIEW, v0); } catch(_){}
+  function applyView(){
+    var s = $("sources");
+    s.classList.toggle("hide-dev", !VIEW.dev); s.classList.toggle("hide-iast", !VIEW.iast); s.classList.toggle("hide-en", !VIEW.en);
+    document.querySelectorAll("[data-view]").forEach(function(b){ b.setAttribute("aria-pressed", VIEW[b.dataset.view] ? "true" : "false"); });
   }
-  function jumpSrc(n){
-    var el = document.getElementById('src-'+n);
-    if (!el) return;
-    el.scrollIntoView({behavior:'smooth', block:'center'});
-    el.classList.add('flash'); setTimeout(function(){ el.classList.remove('flash'); }, 1400);
+  document.querySelectorAll("[data-view]").forEach(function(b){
+    b.addEventListener("click", function(){ VIEW[b.dataset.view] = !VIEW[b.dataset.view]; store("askView", JSON.stringify(VIEW)); applyView(); });
+  });
+  applyView();
+
+  $("k").addEventListener("input", function(){ $("kv").textContent = this.value; });
+  $("q").addEventListener("keydown", function(ev){
+    if (ev.key === "Enter" && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); ask(); }
+  });
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target && ev.target.tagName;
+    if (ev.key === "/" && t !== "TEXTAREA" && t !== "INPUT" && t !== "SELECT") { ev.preventDefault(); $("q").focus(); }
+  });
+  $("askBtn").addEventListener("click", ask);
+  $("examples").addEventListener("click", function(ev){
+    var b = ev.target.closest(".chip"); if (b) { setQ(b.textContent); }
+  });
+  function setQ(text){ $("q").value = text; $("q").focus(); }
+
+  /* recent questions, this browser only */
+  function recent(){ try { return JSON.parse(store("askRecent") || "[]") || []; } catch(_){ return []; } }
+  function remember(q){
+    var r = recent().filter(function(x){ return x !== q; }); r.unshift(q); store("askRecent", JSON.stringify(r.slice(0, 8))); drawRecent();
+  }
+  function drawRecent(){
+    var r = recent(), box = $("recent");
+    if (!r.length) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false;
+    box.innerHTML = '<span class="lbl">Recent</span>' + r.map(function(x){
+      return '<button class="chip" type="button" data-q="' + esc(x) + '">' + esc(x.length > 60 ? x.slice(0, 58) + "\u2026" : x) + '</button>';
+    }).join("") + '<button class="chip clear" type="button" data-clear="1">clear</button>';
+  }
+  $("recent").addEventListener("click", function(ev){
+    var b = ev.target.closest(".chip"); if (!b) return;
+    if (b.dataset.clear) { store("askRecent", "[]"); drawRecent(); return; }
+    setQ(b.dataset.q || b.textContent);
+  });
+  drawRecent();
+
+  /* the answer: a little markdown, and each [tag] or [n] a numbered citation */
+  function findSource(tag){
+    var t = tag.trim(); if (!t) return -1;
+    if (/^\d{1,2}$/.test(t)) { var n = parseInt(t, 10); return (n >= 1 && n <= SOURCES.length) ? n : -1; }
+    for (var i = 0; i < SOURCES.length; i++) { if (SOURCES[i].tag === t) return SOURCES[i].n; }
+    var lt = t.toLowerCase();
+    for (var j = 0; j < SOURCES.length; j++) { if (String(SOURCES[j].tag).toLowerCase() === lt) return SOURCES[j].n; }
+    return -1;
+  }
+  function cites(html){
+    return html.replace(/\[([^\[\]]{1,160})\]/g, function(m, inner){
+      var whole = findSource(inner);
+      if (whole > 0) return '<a class="cite" href="#src-' + whole + '" data-n="' + whole + '" title="' + esc(SOURCES[whole - 1].tag) + '">' + whole + '</a>';
+      var parts = inner.split(/\s*[;,]\s*(?=\S)/), out = [], any = false;
+      parts.forEach(function(p){
+        var n = findSource(p);
+        if (n > 0) { any = true; out.push('<a class="cite" href="#src-' + n + '" data-n="' + n + '" title="' + esc(SOURCES[n - 1].tag) + '">' + n + '</a>'); }
+        else out.push(null);
+      });
+      if (!any) return '<span class="cite unknown" title="not among the sources">' + m + '</span>';
+      return out.map(function(x, i){ return x || ('<span class="cite unknown">' + parts[i] + '</span>'); }).join("");
+    });
+  }
+  function inline(s){
+    return cites(s).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/(^|[\s(])\*([^*\s][^*]*)\*(?=[\s).,;:!?]|$)/g, "$1<em>$2</em>");
+  }
+  function renderAnswer(text){
+    var lines = esc(text).replace(/\r/g, "").split("\n"), html = "", para = [], list = null;
+    function flushP(){ if (para.length) { html += "<p>" + inline(para.join("<br/>")) + "</p>"; para = []; } }
+    function flushL(){ if (list) { html += "<" + list.t + ">" + list.items.map(function(x){ return "<li>" + inline(x) + "</li>"; }).join("") + "</" + list.t + ">"; list = null; } }
+    lines.forEach(function(raw){
+      var l = raw.replace(/\s+$/, ""), m;
+      if (!l.trim()) { flushP(); flushL(); return; }
+      if ((m = l.match(/^\s*#{1,4}\s+(.*)$/))) { flushP(); flushL(); html += "<h4>" + inline(m[1]) + "</h4>"; return; }
+      if ((m = l.match(/^\s*(?:[-*\u2022])\s+(.*)$/))) { flushP(); if (!list || list.t !== "ul") { flushL(); list = {t: "ul", items: []}; } list.items.push(m[1]); return; }
+      if ((m = l.match(/^\s*\d{1,2}[.)]\s+(.*)$/))) { flushP(); if (!list || list.t !== "ol") { flushL(); list = {t: "ol", items: []}; } list.items.push(m[1]); return; }
+      flushL(); para.push(l);
+    });
+    flushP(); flushL();
+    $("answerBody").innerHTML = html || '<p style="color:var(--muted)">(no text)</p>';
+  }
+
+  /* the sources */
+  function badge(cls, text, title){ return '<span class="badge ' + cls + '"' + (title ? ' title="' + esc(title) + '"' : "") + ">" + esc(text) + "</span>"; }
+  function short(engine){ return String(engine || "").replace(/^[a-z-]+:/, ""); }
+  function clampBlock(cls, text, lang, forWhat){
+    var long = text.length > 260;
+    return '<div class="' + cls + (long ? " clamp" : "") + '" lang="' + lang + '">' + esc(text) + "</div>"
+      + (long ? '<button class="more for-' + forWhat + '" type="button">more</button>' : "");
   }
   function renderSources(sources){
-    LAST_SOURCES = sources || [];
-    var html = '';
-    (sources||[]).forEach(function(s){
-      // BRAIN_ITEMS_2026_10_07: an editorial item opens its story, episode or picture
-      html += '<a class="src" id="src-'+s.n+'" href="'+(s.link ? esc(s.link) : '/reader/'+encodeURIComponent(s.doc))+'" target="_blank">'
-            + '<span class="open">'+(s.link ? 'open &#8599;' : 'open in reader &#8599;')+'</span>'
-            + '<span class="num">'+s.n+'</span><span class="tag">['+esc(s.tag)+']</span>'
-            + (s.label ? ' <i style="color:#b18a45">'+esc(s.label)+'</i>' : '')
-            + '<div class="en">'+esc(s.english||'')+'</div></a>';
-    });
-    document.getElementById('sources').innerHTML = html;
+    SOURCES = sources || [];
+    $("srcTitle").textContent = SOURCES.length ? "Sources (" + SOURCES.length + ")" : "Sources";
+    $("sources").innerHTML = SOURCES.map(function(s){
+      var ed = !!(s.kind || s.link), b = [];
+      if (ed) b.push(badge("ed", "editorial: " + (s.label || s.kind || "item"), "made from this corpus by the project; not scripture"));
+      if (s.witness) b.push(badge("wit", "e-text witness", "a typed edition read beside our scan"));
+      if (s.scholar) b.push(badge("sc", "scholarly " + (s.scholar_state || ""), short(s.scholar_engine)));
+      if (s.ocr) b.push(badge("", "read by " + short(s.ocr), "how the Sanskrit was read"));
+      if (s.state) b.push(badge(s.state === "withdrawn" || s.state === "set_aside" ? "warn" : "", s.state.replace(/_/g, " "), "its state in the register"));
+      /* BRAIN_ITEMS_2026_10_07: an editorial item opens its story, episode or picture */
+      var href = s.link ? esc(s.link) : "/reader/" + encodeURIComponent(s.doc || "");
+      var h = '<article class="src" id="src-' + s.n + '" data-n="' + s.n + '" tabindex="-1">'
+        + '<div class="src-head"><button class="num" type="button" data-n="' + s.n + '" title="show where the answer cites it">' + s.n + "</button>"
+        + '<span class="tag">' + esc(s.tag) + "</span>" + b.join("")
+        + '<a class="open" href="' + href + '" target="_blank" rel="noopener">' + (s.link ? "open" : "reader") + " \u2197</a></div>";
+      if (s.sanskrit) h += clampBlock("dev", s.sanskrit, "sa", "dev");
+      if (s.iast) h += clampBlock("iast", s.iast, "sa-Latn", "iast");
+      if (s.scholar) {
+        h += '<div class="en sc"><span class="lab">Scholarly English</span>' + esc(s.scholar) + "</div>";
+        if (s.english) h += '<details class="working"><summary>the working English' + (s.mt ? " (" + esc(short(s.mt)) + ")" : "") + ", which the answer read</summary><div>" + esc(s.english) + "</div></details>";
+      } else if (s.english) {
+        h += '<div class="en"><span class="lab">' + (ed ? "Editorial" : "Working English" + (s.mt ? " \u00b7 " + esc(short(s.mt)) : "")) + "</span>" + esc(s.english) + "</div>";
+      }
+      if (s.names && s.names.length) {
+        h += '<div class="names">' + s.names.map(function(x){
+          return '<button class="name" type="button" data-name="' + esc(x.name) + '" title="ask about ' + esc(x.name) + '">' + esc(x.name) + (x.kind ? "<i>" + esc(x.kind) + "</i>" : "") + "</button>";
+        }).join("") + "</div>";
+      }
+      return h + "</article>";
+    }).join("");
+    applyView();
+  }
+  $("sources").addEventListener("click", function(ev){
+    var more = ev.target.closest(".more");
+    if (more) { var blk = more.previousElementSibling; if (blk) { var open = blk.classList.toggle("clamp"); more.textContent = open ? "more" : "less"; } return; }
+    var nm = ev.target.closest(".name");
+    if (nm) { setQ("What does the corpus say about " + nm.dataset.name + "?"); window.scrollTo({top: 0, behavior: smooth()}); return; }
+    var num = ev.target.closest(".num");
+    if (num) { light(num.dataset.n); }
+  });
+  $("answerBody").addEventListener("click", function(ev){
+    var c = ev.target.closest(".cite[data-n]"); if (!c) return;
+    ev.preventDefault(); jump(c.dataset.n);
+  });
+  function smooth(){ return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
+  function jump(n){
+    var el = $("src-" + n); if (!el) return;
+    el.scrollIntoView({behavior: smooth(), block: "nearest"});
+    el.classList.add("flash"); el.focus({preventScroll: true});
+    setTimeout(function(){ el.classList.remove("flash"); }, 1500);
+    light(n);
+  }
+  function light(n){
+    document.querySelectorAll(".cite.lit").forEach(function(x){ x.classList.remove("lit"); });
+    var first = null;
+    document.querySelectorAll('.cite[data-n="' + n + '"]').forEach(function(x){ x.classList.add("lit"); first = first || x; });
+    if (first && !isVisible(first)) first.scrollIntoView({behavior: smooth(), block: "center"});
+  }
+  function isVisible(el){ var r = el.getBoundingClientRect(); return r.top >= 0 && r.bottom <= (window.innerHeight || 0); }
+
+  /* what the answer read: said plainly, from what came back */
+  function readText(d){
+    var v = (d.sources || []).filter(function(s){ return !(s.kind || s.link); }).length, e = d.editorial || 0;
+    return "The model was given the working English of the " + v + " passages listed (up to 600 characters of each)"
+      + (e ? " and " + e + " editorial item" + (e > 1 ? "s" : "") + " marked so" : "")
+      + ", found by " + (d.mode === "semantic" ? "meaning" : "keyword") + " search. It was not given the Sanskrit, the scholarly English,"
+      + " the names or the scholars' claims: they are shown here for you to check it (phase A1, ask-v2, gives the model these).";
+  }
+
+  $("copyBtn").addEventListener("click", function(){
+    if (!LAST) return;
+    var t = (LAST.answer || "") + "\n\nSources\n" + (LAST.sources || []).map(function(s){
+      return "[" + s.n + "] " + s.tag + " \u2014 " + String(s.scholar || s.english || "").slice(0, 180).replace(/\s+/g, " ");
+    }).join("\n");
+    var done = function(){ $("copyBtn").textContent = "Copied"; setTimeout(function(){ $("copyBtn").textContent = "Copy with sources"; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function(){});
+  });
+
+  function busy(on){
+    var st = $("status");
+    if (timer) { clearInterval(timer); timer = null; }
+    if (!on) { st.innerHTML = ""; return; }
+    var t0 = Date.now();
+    var draw = function(){ st.innerHTML = '<span class="spinner"></span>Finding the verses by meaning and composing a cited answer&hellip; '
+      + Math.round((Date.now() - t0) / 1000) + " s"; };
+    draw(); timer = setInterval(draw, 1000);
+  }
+  function skeleton(){
+    $("answerBody").innerHTML = '<div class="skel" style="width:92%"></div><div class="skel" style="width:85%"></div><div class="skel" style="width:60%"></div>';
+    $("sources").innerHTML = ""; $("answerMeta").textContent = ""; $("result").hidden = false;
   }
 
   async function ask(){
-    var q = document.getElementById('q').value.trim();
-    var errBox = document.getElementById('errBox'); errBox.innerHTML = '';
-    if (!q){ document.getElementById('q').focus(); return; }
-    var btn = document.getElementById('askBtn'); btn.disabled = true;
-    var st = document.getElementById('status'); st.style.display = 'block';
-    st.innerHTML = '<span class="spinner"></span>Searching the corpus and composing a grounded answer&hellip;';
-    document.getElementById('answer').style.display = 'none';
-    try{
-      var r = await fetch('/api/ask', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ q: q, engine: document.getElementById('engine').value,
-                               k: parseInt(document.getElementById('k').value,10) })
-      });
-      var d = await r.json();
-      st.style.display = 'none';
-      if (!r.ok || d.error){
-        errBox.innerHTML = '<div class="err"><b>Could not answer:</b> '+esc(d.error||('HTTP '+r.status))
-          + (d.error && d.error.indexOf('GEMINI_API_KEY')>=0
-             ? '<br/>Set <code>GEMINI_API_KEY</code> in the project <code>.env</code> and restart the dashboard.' : '')
-          +'</div>';
-        if (d.sources && d.sources.length){ renderSources(d.sources);
-          document.getElementById('answerBody').innerHTML = '<i style="color:var(--muted)">Retrieved passages are shown below.</i>';
-          document.getElementById('answerMeta').textContent = '';
-          document.getElementById('answer').style.display = 'block'; }
+    var q = $("q").value.trim(); $("errBox").innerHTML = "";
+    if (!q) { $("q").focus(); return; }
+    var btn = $("askBtn"); btn.disabled = true; busy(true); skeleton();
+    try {
+      var r = await fetch("/api/ask", {method: "POST", headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({q: q, engine: $("engine").value, k: parseInt($("k").value, 10)})});
+      var d = {};
+      try { d = await r.json(); } catch(_){ d = {error: "HTTP " + r.status}; }
+      busy(false);
+      remember(q);
+      if (!r.ok || d.error) {
+        $("errBox").innerHTML = '<div class="err"><b>Could not answer:</b> ' + esc(d.error || ("HTTP " + r.status))
+          + (d.error && d.error.indexOf("GEMINI_API_KEY") >= 0 ? "<br/>Set <code>GEMINI_API_KEY</code> in the project <code>.env</code> and restart the dashboard." : "") + "</div>";
+        if (d.sources && d.sources.length) {
+          renderSources(d.sources);
+          $("answerBody").innerHTML = '<p style="color:var(--muted)">No answer was composed. The passages found are beside it.</p>';
+          $("answerMeta").textContent = ""; $("readText").textContent = ""; $("result").hidden = false; LAST = null;
+        } else { $("result").hidden = true; }
         return;
       }
+      LAST = d;
       renderSources(d.sources);
-      renderAnswer(d.answer||'');
-      var modeLabel = d.mode === 'semantic' ? '◉ semantic (meaning) search'
-                     : '○ keyword search';
-      document.getElementById('answerMeta').textContent =
-        (d.sources? d.sources.length : 0) + ' passages retrieved · ' + modeLabel + ' · engine ' + (d.engine||'');
-      document.getElementById('answer').style.display = 'block';
-      document.getElementById('answer').scrollIntoView({behavior:'smooth', block:'start'});
-    }catch(e){
-      st.style.display = 'none';
-      errBox.innerHTML = '<div class="err">Request failed: '+esc(e.message||e)+'</div>';
-    }finally{ btn.disabled = false; }
+      renderAnswer(d.answer || "");
+      var nv = (d.sources || []).length;
+      $("answerMeta").textContent = nv + " sources \u00b7 " + (d.mode === "semantic" ? "meaning search" : "keyword search")
+        + (d.editorial ? " \u00b7 " + d.editorial + " editorial" : "") + (d.engine ? " \u00b7 " + short(d.engine) : "");
+      $("readText").textContent = readText(d);
+      $("result").hidden = false;
+      $("result").scrollIntoView({behavior: smooth(), block: "start"});
+    } catch (e) {
+      busy(false); $("result").hidden = true;
+      $("errBox").innerHTML = '<div class="err">The request failed: ' + esc(e.message || e) + "</div>";
+    } finally { btn.disabled = false; }
   }
+})();
 </script>
 </body>
 </html>

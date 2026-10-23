@@ -2465,3 +2465,24 @@ then `Set-Location $A`. Nothing below spends.
 3. The companion repositories, read before any commit: `git -C "D:\remix-of-dkegl-website" diff --stat` and
    `git -C "D:\remix-of-dkegl-website" diff -- scripts/generate-sitemap.mjs`; the same for nartiang-legacy-web.
 4. The decisions: ASKS section 6.
+## The links, the scholars' check, the Ask page, CI and the vision round (DOCS90_2026_10_22)
+
+From the repository root, in a PowerShell window (`Set-Location "D:\Sanksrit Automatons\sanskrit-automatonv2"`).
+
+1. The release's patches: `python scripts\patch_ask_ui_2026_10_22.py --check`, then without --check; the same for
+   `scripts\patch_docs90_2026_10_22.py`. Then `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. The links (free): `python scripts\entity_links.py --name Janaka` counts and writes nothing; with the dashboard idle,
+   `python scripts\entity_links.py --apply` (a backup to D:\backups first, then the table rebuilt whole).
+   Undo: restore the backup, or `DROP TABLE entity_links; DROP TABLE entity_link_runs;`.
+3. The scholars' check (free, read-only): `python scripts\entity_links.py --claims data\shelf\claims.db`; it writes
+   exports\claims_in_our_texts.csv and .json.
+4. The Ask page: open http://127.0.0.1:5057/ask; the Sanskrit, the names and the scholarly English beside each verse
+   come after the dashboard is restarted, when it is idle.
+5. CI: the workflow runs on GitHub after the push (Actions, "tests"); Windows: Actions, "tests", Run workflow. To stop
+   it, disable the workflow there, or delete .github\workflows\tests.yml.
+6. The vision round (paid, about $3.81): for each text, the plan first (free:
+   `python scripts\ocr_consensus.py --doc upapurana_narasimha_purana --threshold 101 --include-unassessed`), then with
+   `--yes --max-usd 1.40`; then `python scripts\source_fidelity.py --ref db:upapurana_narasimha_purana__w_gretil
+   --cand db:upapurana_narasimha_purana --cand vision:upapurana_narasimha_purana --pair
+   vision:upapurana_narasimha_purana,db:upapurana_narasimha_purana`; at the end `python scripts\ocr_benchmark.py`.
+   It writes data\raw_vision and data\raw_merged, never the database.

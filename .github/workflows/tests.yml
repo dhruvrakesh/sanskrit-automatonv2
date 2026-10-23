@@ -1,0 +1,64 @@
+# CI_TESTS_2026_10_22: the automaton's test suite on GitHub, run as on the PC (scripts/run_tests.ps1), never deploying.
+#
+# What it is for: a clean checkout of what was pushed, tested by itself. It finds what the PC cannot: a file the
+# tests need that was never committed (data/, exports/, inbox/, sources/ and the .bak_ copies are not in the
+# repository), a package missing from requirements.txt, a test that passes only because of something on the PC.
+# What it never does: deploy, push, publish, or call a paid API. No secret is given to it (the tests stub every
+# paid call), its token reads the repository and nothing more, and data/context.db is not in the repository.
+# Cost: Ubuntu on every push to main and on every pull request (the suite runs in about 3 minutes); Windows only
+# when run by hand (Actions > tests > Run workflow), since a private repository's Windows minutes count double.
+# To stop it: delete this file, or disable the workflow under Actions.
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      windows:
+        description: "Also run the suite on Windows"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ubuntu:
+    name: Suite (Ubuntu, Python 3.13)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install requirements.txt
+        run: python -m pip install -r requirements.txt
+      - name: The suite, one module at a time (scripts/run_tests.ps1)
+        shell: pwsh
+        run: ./scripts/run_tests.ps1 -Repo "${{ github.workspace }}" -Python python -Show
+
+  windows:
+    name: Suite (Windows, Python 3.13)
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.windows }}
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install requirements.txt
+        run: python -m pip install -r requirements.txt
+      - name: The suite, one module at a time (scripts/run_tests.ps1)
+        shell: pwsh
+        run: ./scripts/run_tests.ps1 -Repo "${{ github.workspace }}" -Python python -Show

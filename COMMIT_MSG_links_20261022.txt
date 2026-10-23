@@ -1,0 +1,25 @@
+The links our texts make between the names, stored; the scholars checked; one Ask page; the suite on GitHub (ENTITY_LINKS, ASK_UI, CI_TESTS, DOCS90)
+
+- ENTITY_LINKS_2026_10_22 (scripts/entity_links.py, new; free): the named-together links (one passage) and the near
+  ones (two passages of one text no more than 5 apart), lists of more than 12 names and retired texts left out, as
+  relations_census.py; a count writes nothing; --apply makes a backup (db_backup.py) and rebuilds the table
+  entity_links whole in one transaction, and refuses while the dashboard runs a writer; --claims checks the scholars'
+  claims against the links, read-only (exports/claims_in_our_texts.csv). On the 19:04 backup: 45,994 together,
+  235,002 near; of Raychaudhuri's Part I, 387 claims name two of our names: 78 together, 64 near, 237 not near, 8 not
+  ours.
+- ASK_UI_2026_10_22 (scripts/patch_ask_ui_2026_10_22.py): scripts/ask.html rewritten (numbered citations; the verses
+  beside the answer in Devanagari, IAST and English, the scholarly English first; badges; names; what the answer
+  read; copy; recent questions; phone) and _ask_enrich in scripts/dashboard.py (the sources also carry the Sanskrit,
+  the IAST, the engines, the register's state, the scholarly English where it passed, the names; read-only, free).
+  The model is sent the same as before.
+- CI_TESTS_2026_10_22 (.github/workflows/tests.yml, new): scripts/run_tests.ps1 with Python 3.13 on Ubuntu for each
+  push to main and pull request, on Windows by hand; read-only token, no secret, never deploys.
+- DOCS90_2026_10_22: DEBT section 11, STATE 25, RUNBOOK, PLATFORM 93, ENTERPRISE_PATH 80, ASKS 7, RELATIONS_AND_ASK 5:
+  the round recorded; the Nirukta answered (our PDF is the Maharishi University of Management's typeset text, its
+  first 15 pages the Nighantu; Sarup's GRETIL text the better text to translate for the Nirukta proper); the vision
+  round priced (7 texts, about $3.81); the texts Raychaudhuri cites that we lack.
+
+Tests: test_entity_links_2026_10_22, test_ask_ui_2026_10_22, test_ci_tests_2026_10_22, test_docs90_2026_10_22.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

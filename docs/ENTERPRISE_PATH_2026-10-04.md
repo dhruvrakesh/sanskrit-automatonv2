@@ -1182,3 +1182,17 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | ci-tests | The suite on GitHub on every push (Ubuntu and Windows), never deploying | Yours: a standing configuration |
 | alerts | A mail when the mirror or a task fails | Yours: a mail you receive |
 | docs-consolidation | ASKS as the state; one ARCHITECTURE page; a RUNBOOK of current procedures | Next |
+## Addendum 2026-10-22 (80) (DOCS90_2026_10_22)
+
+| Key | Item | State |
+|---|---|---|
+| relations-together | The named-together links stored (entity_links) | Built and tested: yours to apply (--apply, a backup first) |
+| claims-check | Raychaudhuri's claims checked against our verses | Done for Part I: 78 together, 64 near, 237 not near, 8 not ours |
+| ask-ui | One Ask page | Built for the PC (ASK_UI); the site waits for ask-site |
+| ci-tests | The suite on GitHub | Built: Ubuntu on each push, Windows by hand |
+| witness-vision-pairs | The vision round | Commands given: 7 texts, about $3.81; the Bodhicaryavatara waits for its scan |
+| nirukta-witness | The GRETIL Nirukta (Sarup) translated, judged against ours, released | Yours: about $2.40 by Flash |
+| nighantu-mend | The Nighantu (pages 1-15 of the Nirukta's PDF): its lists regrouped, read again from vision | Next |
+| nirukta-source | The Nirukta's PDF is the Maharishi University of Management's typeset text; its terms | Yours to read |
+| texts-to-seek | The texts Raychaudhuri cites that we lack (Visnu, Matsya, Chandogya, Ramayana, Kausitaki in GRETIL) | Next: after nirukta-witness |
+| broken-script | scripts/backfill_missing.py does not parse | Next: mend or retire |

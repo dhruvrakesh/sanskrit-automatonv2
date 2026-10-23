@@ -6595,6 +6595,72 @@ def _ask_semantic_retrieve(con, q, k=12):
     return out or None
 
 
+def _ask_enrich(db, sources):
+    """ASK_UI_2026_10_22: what the Ask page shows beside each verse it cites, read from the same database, free and
+    read-only: the Sanskrit (Devanagari, and IAST where stored), the scholarly English where it passed (or was accepted)
+    and its Sanskrit is unchanged since, the names the passage names, the engines, and the text's state in the register
+    (data/source_verdicts.jsonl). The model is sent nothing more than before: the answer is as before (phase A1,
+    ask-v2, is where the model reads more). Never stops Ask: on any error the sources stay as they were."""
+    try:
+        con = sqlite3.connect(f"file:{db}?mode=ro", uri=True, timeout=10)
+    except Exception:
+        return
+    try:
+        tabs = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        sh = None
+        if "scholar_translations" in tabs:
+            try:
+                sh = _scholar_st().src_hash
+            except Exception:
+                sh = None
+        try:
+            _f = (con.execute("PRAGMA database_list").fetchone() or (None, None, ""))[2]
+            reg = _source_verdicts(pathlib.Path(_f).parent if _f else None)
+        except Exception:
+            reg = {}
+        pick = ", ".join(["p.id", "p.text"] + [("p.%s" % c if c in cols else "NULL") for c in ("iast", "engine", "ocr_engine")])
+        q = ("SELECT %s FROM passages p JOIN docs d ON d.id = p.doc_id WHERE d.code = ? AND p.page_no = ? AND p.idx = ? "
+             "LIMIT 1" % pick)
+        names = "entity_mentions" in tabs and "entities" in tabs
+        for s in sources:
+            if s.get("kind") or s.get("link"):
+                continue                      # an editorial item: its own page shows it
+            r = con.execute(q, (s.get("doc"), s.get("page_no"), s.get("idx"))).fetchone()
+            if not r:
+                continue
+            pid, text, iast, mt, ocr = r
+            s["pid"] = pid
+            s["sanskrit"] = (text or "")[:700]
+            if iast:
+                s["iast"] = str(iast)[:700]
+            if mt:
+                s["mt"] = mt
+            if ocr:
+                s["ocr"] = ocr
+            s["witness"] = "__w_" in str(s.get("doc") or "")
+            st = reg.get(s.get("doc"))
+            if st:
+                s["state"] = st.get("status")
+            if sh is not None:
+                row = con.execute("SELECT translation, status, review_verdict, src_hash, engine FROM scholar_translations "
+                                  "WHERE passage_id = ? ORDER BY id DESC LIMIT 1", (pid,)).fetchone()
+                if (row and (row[0] or "").strip() and row[3] == sh(text) and row[2] != "reject"
+                        and (row[1] == "passed" or row[2] == "accept")):
+                    s["scholar"] = row[0][:1200]
+                    s["scholar_engine"] = row[4] or ""
+                    s["scholar_state"] = "accepted" if row[2] == "accept" else "passed"
+            if names:
+                s["names"] = [{"name": c, "kind": k or ""} for c, k in con.execute(
+                    "SELECT e.canonical, e.kind FROM entity_mentions m JOIN entities e ON e.id = m.entity_id "
+                    "WHERE m.passage_id = ? GROUP BY e.id ORDER BY CASE e.kind WHEN 'person' THEN 0 WHEN 'deity' THEN 1 "
+                    "WHEN 'place' THEN 2 ELSE 3 END, e.canonical LIMIT 8", (pid,))]
+    except Exception as e:
+        print(f"[ask] the sources were not enriched: {type(e).__name__}: {e}")
+    finally:
+        con.close()
+
+
 _ASK_SYSTEM = (
     "You are a careful scholar of Sanskrit scripture. Answer the user's question "
     "USING ONLY the numbered passages provided, which are English translations of "
@@ -6651,6 +6717,7 @@ def api_ask():
                         "idx": it["idx"], "english": it["text"][:600], "kind": it["kind"], "link": it["link"],
                         "label": it["label"]})
         ctx.append(f"[{j}] [{it['tag']}] ({it['label']}) {it['text'][:700]}")
+    _ask_enrich(db, sources)   # ASK_UI_2026_10_22: shown beside each verse; the model is sent the same as before
     user_msg = "PASSAGES:\n" + "\n".join(ctx) + f"\n\nQUESTION: {q}\n\nAnswer, citing [tags]:"
     # METER_GATES_2026_10_04: Ask is a paid call like any other. It asks the budget first and is metered.
     try:

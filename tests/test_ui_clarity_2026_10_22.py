@@ -89,7 +89,10 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / f).read_bytes(), (REPO / f).read_bytes(), f)
+                got = (t / f).read_bytes()   # the file as it is, or a later patch's backup of it (ASK_UI_2026_10_22)
+                later = [x.read_bytes() for x in sorted((REPO / f).parent.glob(Path(f).name + ".bak_*"))
+                         if ".bak_uiclarity_" not in x.name]
+                self.assertTrue(got == (REPO / f).read_bytes() or got in later, f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:
                 shutil.copy2(baks[f][0], t / f)

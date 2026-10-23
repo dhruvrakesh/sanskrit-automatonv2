@@ -81,3 +81,18 @@ row-level security and no service role in search-corpus; the mirror checks every
 
 So: the discipline is enterprise-grade; the process around it (CI, staging, alerts, one current set of documents)
 is not yet, and each of those is a decision of yours before it is built.
+## 5. 22 Oct, night: R1 built, the scholars checked, U1 and CI built (DOCS90_2026_10_22)
+
+- **R1:** `scripts\entity_links.py` (ENTITY_LINKS_2026_10_22). "Near" is added to "together" because a court or a
+  debate is told over several passages: in the Brhadaranyaka, Janaka is named where the debate opens and Uddalaka
+  Aruni where he questions Yajnavalkya, many passages on. The window is 5 passages (235,002 pairs); 10 and 25 were
+  measured (409,203 and 806,123) and not taken: more claims found, more noise. A chapter is the right unit once the
+  texts carry chapter numbers (the e-text witnesses do; the scans mostly do not).
+- **The scholars' check** (B, with R1): Part I's claims whose subject and object are both ours: 387. Named together
+  78, near 64, both named but never near 237, a name not ours 8. By relation: son_of 16 together, 6 near, 14 not;
+  king_of 9, 8, 26; contemporary_of 5, 1, 26; brother_of 3, 17, 0. The report: exports\claims_in_our_texts.csv.
+- **U1:** the PC's page is built (ASK_UI_2026_10_22). For the site, the same page waits for A2 (an Ask behind the
+  readers' gate); its search page can take the same source card meanwhile (a Srangam change, yours to ask Lovable for).
+- **CI:** built (CI_TESTS_2026_10_22). Staging and alerts are still open (section 4).
+- **Order now:** apply R1; the claims on the site (B2) and the named-together links (C20) as one mirror step (R4); then
+  A1 (Ask reads the links and the claims); the Nirukta witness translated; the texts to seek.
