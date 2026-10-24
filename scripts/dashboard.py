@@ -6693,7 +6693,11 @@ _ASK_SYSTEM_PROF = (
     "INDEXES list gives; never quote or paraphrase a scholar from memory, and do not speak as any real person. If the "
     "evidence does not answer the question, say so plainly and name what would settle it (a text the scholars cite "
     "that is not among the passages). Begin with a short answer, then the evidence and the reasoning. English, "
-    "precise and plain; Sanskrit names in IAST."
+    "precise and plain; Sanskrit names in IAST. "
+    # ASK_HOMONYM_2026_10_24: the indexes number the persons who share a name; one of our names stands for them all
+    "A name with a number, as Janamejaya (II) or Jaratkaru[2], is one of several persons of that name in its index "
+    "(the entry is given as s.v.): keep each numbered person apart, never join two of them into one life or one line "
+    "of descent, and say which person a statement is about."
 )
 _PROF_SHELF = {"pui": "Purana Index (Dikshitar)", "vei": "Vedic Index (Macdonell and Keith)",
                "inm": "Soerensen, Index to the Mahabharata"}

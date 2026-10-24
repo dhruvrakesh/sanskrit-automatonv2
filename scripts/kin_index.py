@@ -478,6 +478,7 @@ def check(a, store, root: Path, write: bool = True) -> dict:
         get, mentioned, how_links = link_lookup(con)
         titles = dict(con.execute("SELECT code, title FROM shelf_sources")) if has(con, "shelf_sources") else {}
         ci = claims_index(a.claims_db)
+        heads = heads_index(con)   # KIN_LINES_2026_10_24
 
         def tie(name: str, entry_id: int, head: str):
             base = strip_number(name)
@@ -522,7 +523,7 @@ def check(a, store, root: Path, write: bool = True) -> dict:
         con.close()
     summary = summarize(rows, how_links, titles)
     if write:
-        export(root, rows, summary)
+        export(root, rows, summary, heads)
     return summary
 
 
@@ -546,7 +547,12 @@ def summarize(rows: list, how_links: str, titles: dict) -> dict:
 
 
 def lineages(rows: list, min_len: int = 4, top: int = 25) -> list:
-    """The father-to-son lines the kept, tied parent relations make: (chain of entity names, the edges' sources)."""
+    """The father-to-son lines the kept, tied parent relations make: (chain of entity names, the edges' sources).
+    KIN_LINES_2026_10_24: NOT used for the export any more. It joins the relations by OUR entity ids, and one id stands
+    for every homonym of a name (among the entries read, 1,036 names are borne by more than one entry of the same
+    index), so its lines jump
+    from one person to another of the same name (a 40-step line from Narayana through Karna to Asvatthaman, 24 Oct).
+    lines() below joins only the index's own entries."""
     child = collections.defaultdict(set)
     has_parent = set()
     name, src = {}, collections.defaultdict(set)
@@ -582,6 +588,151 @@ def lineages(rows: list, min_len: int = 4, top: int = 25) -> list:
         if len(out) >= top:
             break
     return out
+
+
+# ---- KIN_LINES_2026_10_24: the lines of descent by the index's own entries ---------------------------------------
+ROMAN = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100}
+
+
+def _roman(t: str) -> int:
+    t, n, prev = t.lower(), 0, 0
+    for ch in reversed(t):
+        v = ROMAN.get(ch, 0)
+        n, prev = (n - v, prev) if v < prev else (n + v, v)
+    return n
+
+
+def split_mark(name: str) -> tuple:
+    """(the folded name, the homonym's number or 0): "Janamejaya (II)", "Jaratkaru[2]", "3. Rsabha", "Rsabha (3)" and
+    "Sraddha(devi) (IV)" (a gloss in brackets set aside) give the number the index gives its homonyms."""
+    s, mark = (name or "").strip(), 0
+    m = re.match(r"^(\d{1,2})\.\s+(.+)$", s)
+    if m:
+        mark, s = int(m.group(1)), m.group(2)
+    else:
+        m = re.search(r"\s*(?:\((\d{1,2}|[ivxlc]{1,6})\)|\[(\d{1,2})\])\s*$", s, flags=re.I)
+        if m:
+            g = m.group(1) or m.group(2)
+            mark, s = (int(g) if g.isdigit() else _roman(g)), s[:m.start()]
+    s = re.sub(r"\([^)]*\)|\[[^\]]*\]", " ", s)
+    return fold_loose(s), mark
+
+
+def heads_index(con, sources=SOURCES) -> dict:
+    """{source: {folded name: [(entry id, number)]}} and {(source, entry id): the head as printed}, from the shelf."""
+    by, shown = {s: collections.defaultdict(list) for s in sources}, {}
+    if not has(con, "shelf_entries"):
+        return {"by": by, "shown": shown}
+    q = "SELECT id, source, head FROM shelf_entries WHERE source IN (%s)" % ",".join("?" * len(sources))
+    for eid, src, head in con.execute(q, tuple(sources)):
+        base, mark = split_mark(head)
+        if base:
+            by[src][base].append((eid, mark))
+            shown[(src, eid)] = head
+    return {"by": by, "shown": shown}
+
+
+def heads_from_rows(rows: list) -> dict:
+    """The same index from the rows alone (their entries' heads), when the shelf is not at hand."""
+    by, shown = collections.defaultdict(lambda: collections.defaultdict(list)), {}
+    for r in rows:
+        k = (r["source"], r["entry_id"])
+        if k in shown:
+            continue
+        base, mark = split_mark(r["head"])
+        if base:
+            by[r["source"]][base].append((r["entry_id"], mark))
+            shown[k] = r["head"]
+    return {"by": by, "shown": shown}
+
+
+def lines(rows: list, heads: dict, min_len: int = 4, top: int = 20) -> dict:
+    """{source: [(the heads elder first, the steps stated in both entries, the lines much the same left out)]}: the
+    parent relations the index states,
+    joined only where a person is one entry of that index. A name is that entry when the index has one entry of that
+    name, or the number names one homonym, or (homonyms, no number) exactly one of them names the other person in its
+    own relations. Else the line ends there. Lines never cross from one index to another."""
+    by, shown = heads["by"], heads["shown"]
+    par = [r for r in rows if r["kept"] and CLASS[r["relation"]][0] == "parent"]
+    names_in = collections.defaultdict(set)
+    for r in par:
+        names_in[(r["source"], r["entry_id"])].add(split_mark(r["object"])[0])
+        names_in[(r["source"], r["entry_id"])].add(split_mark(r["subject"])[0])
+
+    def resolve(src: str, name: str, other: str):
+        base, mark = split_mark(name)
+        cands = by.get(src, {}).get(base, [])
+        if mark:
+            got = [e for e, m in cands if m == mark]
+            return got[0] if len(got) == 1 else None
+        if len(cands) == 1:
+            return cands[0][0]
+        got = [e for e, _m in cands if other and other in names_in.get((src, e), ())]
+        return got[0] if len(got) == 1 else None
+
+    out = {}
+    for src in sorted({r["source"] for r in par}):
+        child, has_parent, said = collections.defaultdict(set), set(), collections.defaultdict(set)
+        for r in (x for x in par if x["source"] == src):
+            hb, hm = split_mark(r["head"])
+            sb, sm = split_mark(r["subject"])
+            s = r["entry_id"] if sb == hb and sm in (0, hm) else resolve(src, r["subject"], hb)
+            o = resolve(src, r["object"], sb)
+            if s is None or o is None or s == o:
+                continue
+            _, p, c = norm(r["relation"], s, o)
+            child[p].add(c)
+            has_parent.add(c)
+            said[(p, c)].add(r["entry_id"])
+        best, steps = [], 0
+        for root_ in sorted(p for p in child if p not in has_parent):
+            stack = [[root_]]
+            while stack and steps < 200000:
+                steps += 1
+                path = stack.pop()
+                nxt = [c for c in child.get(path[-1], ()) if c not in path]
+                if not nxt or len(path) >= 60:
+                    if len(path) >= min_len:
+                        best.append(path)
+                    continue
+                stack.extend(path + [c] for c in sorted(nxt, reverse=True))
+        best.sort(key=lambda p: (-len(p), p))
+        got, seen = [], []
+        for p in best:
+            sp = set(p)
+            near = [i for i, q in enumerate(seen) if sp <= q or len(sp & q) >= 0.75 * len(sp)]
+            if near:   # the same line again, or with one name spelt another way (Mahadrti, Mahadhrti)
+                got[near[0]][2] += 1
+                continue
+            if len(got) >= top:
+                continue
+            seen.append(sp)
+            both = sum(1 for i in range(len(p) - 1) if {p[i], p[i + 1]} <= said[(p[i], p[i + 1])])
+            got.append([[shown.get((src, e), str(e)) for e in p], both, 0])
+        out[src] = [tuple(x) for x in got]
+    return out
+
+
+def lines_text(found: dict) -> str:
+    text = ["# Lines of descent in the indexes (KIN_LINES_2026_10_24)", "",
+            "Each line joins the parent relations one index states, elder first, and only where a person is one entry "
+            "of that index: the index has one entry of the name, or its number names one homonym, or exactly one "
+            "homonym names the other person in its own entry. A line never jumps from one person to another of the "
+            "same name, nor from one index to another. \"Both entries\" counts the steps stated by the parent's entry "
+            "and by the child's. Every step is in kin_edges.csv with its words and its reference.", ""]
+    for src in ("pui", "vei", "inm"):
+        if src not in found:
+            continue
+        text.append("## %s" % SHORT.get(src, src))
+        text.append("")
+        if not found[src]:
+            text.append("No line of four generations or more.")
+        for chain, both, variants in found[src]:
+            text.append("- %s  (%d generations; %d of %d steps in both entries%s)" % (
+                " > ".join(chain), len(chain), both, len(chain) - 1,
+                "; %d more line(s) much the same, a name spelt otherwise or a branch" % variants if variants else ""))
+        text.append("")
+    return "\n".join(text) + "\n"
 
 
 def agreement(rows: list) -> list:
@@ -648,7 +799,7 @@ def cards(rows: list, top: int = 80) -> str:
     return "\n".join(lines) + "\n"
 
 
-def export(root: Path, rows: list, summary: dict):
+def export(root: Path, rows: list, summary: dict, heads: dict = None):
     out = root / "exports"
     out.mkdir(parents=True, exist_ok=True)
     cols = ["kin_id", "source", "index", "entry_id", "head", "subject", "relation", "object", "words", "refs",
@@ -672,13 +823,9 @@ def export(root: Path, rows: list, summary: dict):
         w.writeheader()
         for r in ag:
             w.writerow(r)
-    lin = lineages(rows)
-    text = ["# Father-to-son lines in the indexes (%s)" % MARK, "",
-            "Each line joins the parent relations the indexes state (kept and tied to our names), elder first; the "
-            "sources of each step are in brackets (pui the Purana Index, vei the Vedic Index, inm Soerensen).", ""]
-    for chain, srcs in lin:
-        text.append("- " + " > ".join("%s [%s]" % (chain[i], srcs[i]) for i in range(len(srcs))) + " > " + chain[-1])
-    (out / "kin_lineages.md").write_text("\n".join(text) + "\n", encoding="utf-8")
+    found = lines(rows, heads if heads and heads.get("shown") else heads_from_rows(rows))   # KIN_LINES_2026_10_24
+    lin = [x for v in found.values() for x in v]
+    (out / "kin_lineages.md").write_text(lines_text(found), encoding="utf-8")
     (out / "kin_cards.md").write_text(cards(rows), encoding="utf-8")
     summary = dict(summary, agreement=collections.Counter(r["state"] for r in ag), lineages=len(lin))
     (out / "kin_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -825,11 +972,13 @@ def run(argv=None, caller=None) -> int:
     kept = sum(c.get("kept", 0) for c in s["by_source"].values())
     tied = sum(c.get("tied", 0) for c in s["by_source"].values())
     left = sum(len(v) for v in todo.values()) if not a.yes else 0
+    unread = sum(1 for src in sources for r in cands[src] if done.get(r[0]) != entry_sha(r[1], r[2])) \
+        if not a.yes else -1   # KIN_LINES_2026_10_24: the full run's NEXT only while entries are unread
     say("%d relations read, %d kept after the checks, %d tied to our names; our verses checked by %s" % (
         s["relations"], kept, tied, s["links"]),
         "read exports\\kin_cards.md and kin_agreement.csv; then the full run: python scripts\\kin_index.py --yes "
-        "--per-source 0 --max-usd 4.50 (the plan prices it first: about $4)" if a.per_source else
-        "python scripts\\kin_index.py --show Janamejaya",
+        "--per-source 0 --max-usd 4.50 (the plan prices it first: about $4)" if a.per_source and unread != 0 else
+        "read exports\\kin_lineages.md and kin_cards.md; one name: python scripts\\kin_index.py --show Janamejaya",
         ["%d entries of the trial are not read yet: python scripts\\kin_index.py --yes" % left] if left else [])
     return 0
 

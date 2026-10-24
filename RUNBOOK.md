@@ -2527,3 +2527,20 @@ From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automat
 5. The Shukla Yajurveda: `python scripts\translate_passages.py --db data\context.db --doc
    yajur_veda_shukla_yajur_veda --engine gemini:gemini-2.5-flash --limit 20` (a trial), then without --limit; then
    `python scripts\repair_text.py --doc yajur_veda_shukla_yajur_veda --release`.
+## 24 Oct, evening: the fast fill, the lines mended, the Professor's guard (DOCS93_2026_10_24)
+
+From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automatonv2"`), not in the minutes :00 to
+:03 when the hourly task runs:
+
+1. `python scripts\patch_kin_lines_2026_10_24.py --check`, then without --check; the same for
+   `patch_name_links_fast_2026_10_24.py`, `patch_ask_homonym_2026_10_24.py` and `patch_docs93_2026_10_24.py`. Then
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`, and the dashboard restarted when it is idle
+   (`powershell -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1 -Status`, then without -Status).
+2. `python scripts\kin_index.py --check` (free): the exports rewritten, kin_lineages.md by the index's own entries.
+3. On the site, one paste each: docs\cloud\C20d_name_links_fast_2026-10-24.sql; F1 of C20d_checks_2026-10-24.sql
+   (fast_query true, filled false); C20b_name_links_fill_2026-10-24.sql (seconds); F1 (filled true); F2 (the job's
+   command begins SET statement_timeout); V2, V3 and V5 of C20_checks_2026-10-24.sql. Then Publish Srangam.
+4. Paid, within the cap: `python scripts\kin_index.py --yes --per-source 0 --max-usd 2.00` (Soerensen's last
+   entries); `python scripts\judge_sample.py --doc nirukta__w_gretil --sample-pct 10` (the dry run), then with
+   `--yes --max-usd 0.30`.
+5. The Shukla Yajurveda (about $12.2) waits for your decision on the cap: `python scripts\set_budget.py` shows it.

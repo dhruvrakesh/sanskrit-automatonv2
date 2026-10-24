@@ -1227,3 +1227,19 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | nirukta-witness | GRETIL's Nirukta translated, judged, released | Translated ($5.51); judge next |
 | yajur-shukla | The Shukla Yajurveda repaired | Yours: translate, then --release |
 | daivat-rights | The Daivat-Sanhita | Withdrawn before the 03:03 UTC mirror; the 2017 scan local only until 2029 |
+## Addendum 2026-10-24 (83): the path from here (DOCS93_2026_10_24)
+
+| Phase | Key | Item | State | Cost |
+|---|---|---|---|---|
+| 1 now | names-ui | "Named together" on the site: C20d, C20b, Publish | Ready | free |
+| 1 now | relations-lines | Lines of descent by the index's entries (KIN_LINES) | Ready | free |
+| 1 now | ask-homonym | The Professor keeps numbered persons apart | Ready | free |
+| 1 now | relations-index | Soerensen's last 2,243 entries | Yours | about $1.13 |
+| 1 now | nirukta-judge | The Nirukta's translation judged, then adopted | Yours | about $0.30 |
+| 2 cap | yajur-shukla | The Shukla Yajurveda translated, then --release | Waits for the cap | about $12.2 |
+| 3 | vamsa-corpus | The Puranas' genealogical chapters (Visnu IV, Matsya, Vayu) from GRETIL's witnesses, translated: 90% of the indexes' persons are not named in our English | Next: count the verses, price them | to price |
+| 3 | relations-names | The indexes' persons as our names (variants), so the lines can be checked against the verses | Next | free |
+| 4 | h2 | The indexes' relations and lines on the site, with credit and the licence's notice | Decided; after phase 3 | free |
+| 4 | ask-site | The Professor on the site (A2), behind the readers' gate | Next | per question |
+| 4 | claims-mirror | Raychaudhuri's claims on the site (B2) | Next | free |
+| 5 | hygiene | Yajnavalkya vision and 7 failed pages; the benchmark's Manu label | Next | about $0.40 |

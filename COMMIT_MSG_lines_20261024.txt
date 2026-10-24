@@ -1,0 +1,25 @@
+Named together filled in seconds; the lines of descent by the index's own entries; the Professor keeps numbered persons apart; 24 Oct evening recorded (NAME_LINKS_FAST, KIN_LINES, ASK_HOMONYM, DOCS93)
+
+- NAME_LINKS_FAST_2026_10_24 (scripts/patch_name_links_fast_2026_10_24.py; docs/cloud/C20d and C20d_checks): the
+  site's fill of corpus.name_links could not finish ("Server error"): C20a's query joined each passage's names to
+  themselves and, on a copy the size of the site (48,491 mentions), the planner guessed one row and joined them pair
+  by pair (5 minutes and more). The query now takes each passage's names (2 to 12) as one sorted array and makes the
+  pairs from it, the passage checked through corpus_passages_live alone: 0.2 s, the same 58,913 pairs. C20a, C20c and
+  the preflight's P4 carry it; C20d replaces the view on the site; the nightly job gets a 5-minute limit.
+- KIN_LINES_2026_10_24 (scripts/patch_kin_lines_2026_10_24.py): exports/kin_lineages.md joined relations by our
+  entity ids, one id for every person of a name, so its lines hopped between persons (40 steps from Narayana to
+  Asvatthaman). lines() joins only the index's own entries (the homonym's number, or the one homonym that names the
+  other), never across indexes, counts the steps both entries state and folds near-identical lines. The NEXT line no
+  longer asks for the full run once every entry is read.
+- ASK_HOMONYM_2026_10_24 (scripts/patch_ask_homonym_2026_10_24.py): one sentence in the Professor's instruction: a
+  numbered name is one of several persons in its index; keep them apart.
+- DOCS93_2026_10_24: DEBT section 14, STATE 28 (and a "read first" line under its title), RUNBOOK, PLATFORM 96,
+  ENTERPRISE_PATH 83 (the path from here, by phase), ASKS 10, RELATIONS_AND_ASK 8: the site's C20 steps, the kinship
+  full run (15,773 read, 15,409 kept, 5,813 tied; Soerensen's last 2,243 entries unread), the coverage (90% of the
+  untied persons are not named in our English), the Shukla Yajurveda's price ($0.0101 a passage).
+
+Tests: test_name_links_fast_pg_2026_10_24, test_kin_lines_2026_10_24, test_ask_homonym_2026_10_24,
+test_docs93_2026_10_24.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

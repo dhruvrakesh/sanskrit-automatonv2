@@ -37,25 +37,31 @@ SELECT to_regnamespace('cron') IS NOT NULL AS cron_here,
 SELECT jobid, jobname, schedule, active, username FROM cron.job ORDER BY jobname;
 
 
--- P4 how long the fill takes on the site: the view's own query, counted, nothing kept. Read the last two lines
+-- P4 (NAME_LINKS_FAST_2026_10_24: the fast query; the first one ended "Server error" here on 24 Oct)
+--    how long the fill takes on the site: the view's own query, counted, nothing kept. Read the last two lines
 --    (Planning Time, Execution Time). Under about 20 seconds: go on to C20a. Longer, or "Server error" here too:
 --    stop and send the CSV (the fill then needs to be made in parts).
 EXPLAIN (ANALYZE, SUMMARY) SELECT count(*) FROM (
-WITH live AS (
+WITH named AS (
   SELECT m.doc_code, m.page_no, m.idx, m.canonical
   FROM corpus.mentions m
   JOIN corpus.docs d ON d.doc_code = m.doc_code AND d.retired_at IS NULL
-  JOIN corpus.passages p ON p.doc_code = m.doc_code AND p.page_no = m.page_no AND p.idx = m.idx
-                        AND p.retired_at IS NULL
   WHERE m.retired_at IS NULL AND m.doc_code NOT LIKE '%-RETIRED'
-), kept AS (
-  SELECT l.* FROM live l
-  JOIN (SELECT doc_code, page_no, idx FROM live GROUP BY doc_code, page_no, idx HAVING count(*) <= 12) s
-    ON s.doc_code = l.doc_code AND s.page_no = l.page_no AND s.idx = l.idx
+), few AS (
+  SELECT n.doc_code, n.page_no, n.idx, array_agg(n.canonical ORDER BY n.canonical) AS names
+  FROM named n
+  GROUP BY n.doc_code, n.page_no, n.idx
+  HAVING count(*) BETWEEN 2 AND 12
+), live AS (
+  SELECT f.doc_code, f.page_no, f.idx, f.names FROM few f
+  WHERE EXISTS (SELECT 1 FROM corpus.passages p WHERE p.doc_code = f.doc_code AND p.page_no = f.page_no
+                AND p.idx = f.idx AND p.retired_at IS NULL)
 ), pairs AS (
-  SELECT a.canonical AS name_a, b.canonical AS name_b, a.doc_code, a.page_no, a.idx
-  FROM kept a JOIN kept b ON b.doc_code = a.doc_code AND b.page_no = a.page_no AND b.idx = a.idx
-                         AND a.canonical < b.canonical
+  SELECT x.a AS name_a, y.b AS name_b, l.doc_code, l.page_no, l.idx
+  FROM live l
+  CROSS JOIN LATERAL unnest(l.names) WITH ORDINALITY AS x(a, i)
+  CROSS JOIN LATERAL unnest(l.names) WITH ORDINALITY AS y(b, j)
+  WHERE x.i < y.j
 )
 SELECT name_a, name_b, count(*)::integer AS passages, count(DISTINCT doc_code)::integer AS texts,
        (array_agg(doc_code ORDER BY doc_code, page_no, idx))[1] AS first_doc,

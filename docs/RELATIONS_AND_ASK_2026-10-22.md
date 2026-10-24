@@ -114,3 +114,11 @@ is not yet, and each of those is a decision of yours before it is built.
   glosses are set aside; counts of people ("four sons") are to be set aside as unnamed. The next free step: measure how
   many of those names our texts hold without our list naming them.
 - **R4 on the site:** C20 in three pastes (preflight, C20a, C20b, C20c), because the one paste ended "Server error".
+## 8. 24 Oct, evening: the full run, the lines, the coverage (DOCS93_2026_10_24)
+
+- **R2 and R3, the full run:** 15,773 relations, 15,409 kept, 5,813 tied (DEBT section 14); Soerensen 2,243 entries to go.
+- **The lines:** by the index's own entries only (KIN_LINES); 29 lines, the longest 20 generations, most steps stated
+  by both entries; the post-war Paurava line (Pariksit, Janamejaya, Satanika, Asvamedhaja, Asimakrsna, Nemicakra) among
+  them. These are the indexes' lines, not yet checked against our verses.
+- **The coverage:** 90% of the untied persons are not named in our English; the next step for the relations is the
+  corpus (the genealogical chapters), then our names for the indexes' persons.

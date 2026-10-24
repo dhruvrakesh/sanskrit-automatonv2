@@ -158,8 +158,10 @@ class NameLinks(unittest.TestCase):
         self.assertEqual(a, b, "pasted twice: one job")
         rows = self.pg.execute("SELECT schedule, command, active FROM cron.job WHERE jobname = "
                                "'srangam-corpus-name-links'").fetchall()
-        self.assertEqual(rows, [("40 4 * * *", "SELECT corpus._refresh_name_links();", True)])
+        self.assertEqual(rows, [("40 4 * * *", "SET statement_timeout = '5min'; SELECT corpus._refresh_name_links();",
+                                 True)], "NAME_LINKS_FAST_2026_10_24: the job stops itself after 5 minutes")
         self.pg.execute(rows[0][1])
+        self.pg.execute("RESET statement_timeout")
         self.assertTrue(self.filled(), "the job's own command fills the view")
 
 
@@ -175,19 +177,23 @@ class TheFiles(unittest.TestCase):
         a = statements(C20A)
         self.assertIn("WITH NO DATA;", a, "C20a fills nothing")
         self.assertNotIn("cron.schedule", a.split("BEGIN;", 1)[1], "the job is C20c's")
-        self.assertIn("HAVING count(*) <= 12", a, "the desk's list rule")
+        self.assertTrue("HAVING count(*) <= 12" in a or "HAVING count(*) BETWEEN 2 AND 12" in a,
+                        "the desk's list rule")   # NAME_LINKS_FAST_2026_10_24: 2 to 12, the pairs from a list
         self.assertIn("m.doc_code NOT LIKE '%-RETIRED'", a)
         self.assertIn("PERFORM corpus._reader_gate();", a)
         self.assertIn("REFRESH MATERIALIZED VIEW CONCURRENTLY corpus.name_links;", a)
         for f in (C20B, C20C):
             body = [ln for ln in statements(f).splitlines() if ln.strip() and not ln.startswith("--")]
             self.assertEqual(len(body), 1, "%s is one statement" % f.name)
-        view = a[a.index("WITH live AS ("):a.index("GROUP BY name_a, name_b") + len("GROUP BY name_a, name_b")]
+        start = a.index("AS\nWITH ") + 3
+        view = a[start:a.index("GROUP BY name_a, name_b", start) + len("GROUP BY name_a, name_b")]
         pre = statements(CLOUD / "C20_preflight_2026-10-24.sql")
         self.assertIn(view, pre, "P4 times the view's own query")
         old = CLOUD / "C20_name_links_2026-10-23.sql"
-        if old.exists():
+        if old.exists() and "NAME_LINKS_FAST_2026_10_24" not in a:
             self.assertIn(view, statements(old), "the same pairs as the 23 Oct C20 (and the site's own count)")
+        # NAME_LINKS_FAST_2026_10_24: since then the query differs from 23 Oct's and its pairs are proven equal to
+        # them in tests/test_name_links_fast_pg_2026_10_24.py
 
 
 if __name__ == "__main__":
