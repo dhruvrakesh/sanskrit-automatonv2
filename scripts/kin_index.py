@@ -283,10 +283,14 @@ def direction_check(rel: str, words: str) -> str:
     return "unknown"
 
 
+_STORES = []   # KIN_CLOSE_2026_10_24: every store this run opened; main() closes them all when the run ends
+
+
 def open_store(path: str):
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(path, timeout=60)
     con.executescript(SCHEMA)
+    _STORES.append(con)
     return con
 
 
@@ -708,6 +712,19 @@ def budget_left(db: str, immutable: bool) -> str:
 
 
 def main(argv=None, caller=None) -> int:
+    """KIN_CLOSE_2026_10_24: the run is run(); the stores it opened are closed here, whatever it returned or raised.
+    Windows will not delete, replace or back up a file that is still open, and the tests call main() in-process."""
+    try:
+        return run(argv, caller)
+    finally:
+        while _STORES:
+            try:
+                _STORES.pop().close()
+            except sqlite3.Error:
+                pass
+
+
+def run(argv=None, caller=None) -> int:
     ap = argparse.ArgumentParser(description="the indexes' kinships read and checked (%s)" % MARK)
     ap.add_argument("--db", default="")
     ap.add_argument("--immutable", action="store_true")

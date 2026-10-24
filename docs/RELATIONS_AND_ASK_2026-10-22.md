@@ -106,3 +106,11 @@ is not yet, and each of those is a decision of yours before it is built.
   new is mirrored; the claims (B2) and the indexes' relations (H2 decided) are mirrored next.
 - **U2** (names-ui): "Named together with" (NAME_LINKS_SITE_2026_10_23).
 - **Kept current:** the PC hourly (step d), the site nightly (pg_cron).
+## 7. 24 Oct: the trial measured; R4 in three pastes (DOCS92_2026_10_24)
+
+- **R2 and R3, the trial:** 300 entries, 470 relations, 448 kept, 182 tied to our names; of the kept, 60 named together
+  in our texts, 20 near, 94 never near, 8 with one side not in our texts, 266 not tied; Raychaudhuri agrees 9, differs 1.
+- **The names' coverage:** 358 of the 378 untied names are not in our names' list; 10 more tie once homonym marks and
+  glosses are set aside; counts of people ("four sons") are to be set aside as unnamed. The next free step: measure how
+  many of those names our texts hold without our list naming them.
+- **R4 on the site:** C20 in three pastes (preflight, C20a, C20b, C20c), because the one paste ended "Server error".

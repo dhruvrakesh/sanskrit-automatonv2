@@ -1,3 +1,4 @@
+-- SUPERSEDED 2026-10-24 (DOCS92_2026_10_24): use C20_checks_2026-10-24.sql.
 -- C20 checks (NAME_LINKS_C20_2026_10_23): read-only, one query per paste in the Lovable Cloud SQL editor.
 
 -- N1. The view's size (expect about 45,000 pairs; about 4,800 in two passages or more).

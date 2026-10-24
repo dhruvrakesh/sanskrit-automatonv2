@@ -1215,3 +1215,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | benchmark-label | ocr_benchmark lists Manu as Tesseract alone | Next: mend the label |
 | ask-site | The Professor on the site | Next (A2): an edge function behind the readers' gate |
 | claims-mirror | Raychaudhuri's claims on the site (B2) | Next |
+## Addendum 2026-10-24 (82) (DOCS92_2026_10_24)
+
+| Key | Item | State |
+|---|---|---|
+| relations-index | The indexes' kinships read and checked | Trial run (448 kept, 182 tied); the full run next (about $4) |
+| relations-names | Our names' coverage of the indexes' people | Measured: 358 of 378 untied names are not in our list; next |
+| names-ui | The name page: named together | C20 split to paste (preflight, C20a, C20b, C20c); Srangam pushed |
+| alerts | A mail when the desk's tasks fail | Live (C19 checked 24 Oct) |
+| kin-close | kin_index.py's store left open (Windows) | Fixed (KIN_CLOSE_2026_10_24) |
+| nirukta-witness | GRETIL's Nirukta translated, judged, released | Translated ($5.51); judge next |
+| yajur-shukla | The Shukla Yajurveda repaired | Yours: translate, then --release |
+| daivat-rights | The Daivat-Sanhita | Withdrawn before the 03:03 UTC mirror; the 2017 scan local only until 2029 |

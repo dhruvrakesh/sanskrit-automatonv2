@@ -1,3 +1,7 @@
+-- SUPERSEDED 2026-10-24 (DOCS92_2026_10_24): do not paste this file. On the site it ended "Query failed -
+-- Server error" and rolled back. Paste instead, one at a time: C20_preflight_2026-10-24.sql (P1-P4),
+-- C20a_name_links_view_2026-10-24.sql, C20b_name_links_fill_2026-10-24.sql,
+-- C20c_name_links_nightly_2026-10-24.sql, with C20_checks_2026-10-24.sql. Kept as the record of 23 Oct.
 -- ============================================================
 -- C20 - named together, on the site (NAME_LINKS_C20_2026_10_23)
 -- docs/RELATIONS_AND_ASK_2026-10-22.md, phases R4 and U2. Paste this whole file once in the Lovable Cloud SQL editor

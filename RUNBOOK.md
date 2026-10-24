@@ -2509,3 +2509,21 @@ patches to dashboard.py and corner_worker.py:
    protected in India to the end of 2028: off the site until 1 January 2029"`; the next mirror run retires it.
 8. The vision round's rest: `python scripts\ocr_consensus.py --doc smriti_06yagyavalkya_smriti --threshold 101
    --include-unassessed` (the plan), then with `--yes --max-usd 0.40`; the failed pages with `--retry-refused`.
+## 24 Oct: KIN_CLOSE, C20 in three pastes, the rest (DOCS92_2026_10_24)
+
+From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automatonv2"`):
+
+1. `python scripts\patch_kin_close_2026_10_24.py --check`, then without --check; the same for
+   `patch_docs92_2026_10_24.py`. Then `python -m unittest tests.test_kin_index_2026_10_23 tests.test_kin_close_2026_10_24`
+   and `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. Named together online, in the Lovable Cloud SQL editor, one paste each: docs\cloud\C20_preflight_2026-10-24.sql
+   P1, P2, P3, P4 (read-only; P4 says how long the fill takes); C20a_name_links_view_2026-10-24.sql; V1 of
+   C20_checks_2026-10-24.sql; C20b_name_links_fill_2026-10-24.sql; V1-V4; C20c_name_links_nightly_2026-10-24.sql; V5;
+   after a night V6. Then Publish Srangam in Lovable. C20_name_links_2026-10-23.sql is superseded: never paste it.
+3. The kinships' full run: `python scripts\kin_index.py --per-source 0` (the plan), then
+   `python scripts\kin_index.py --yes --per-source 0 --max-usd 4.50`.
+4. The Nirukta judged: `python scripts\judge_sample.py --doc nirukta__w_gretil --sample-pct 10` (the dry run prices
+   it), then the same with `--yes --max-usd 0.30`.
+5. The Shukla Yajurveda: `python scripts\translate_passages.py --db data\context.db --doc
+   yajur_veda_shukla_yajur_veda --engine gemini:gemini-2.5-flash --limit 20` (a trial), then without --limit; then
+   `python scripts\repair_text.py --doc yajur_veda_shukla_yajur_veda --release`.

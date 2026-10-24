@@ -1,0 +1,20 @@
+kin_index closes its store; C20 in three short pastes; 24 Oct recorded (KIN_CLOSE, NAME_LINKS_C20_SPLIT, DOCS92)
+
+- KIN_CLOSE_2026_10_24 (scripts/patch_kin_close_2026_10_24.py): kin_index.py's main() runs run() and closes every
+  store it opened, whatever it returned or raised. On Windows the two reading tests of test_kin_index_2026_10_23 left
+  data/shelf/kin.db open (two handles each), so their temp folders could not be removed (errors=2); Linux deletes open
+  files, so the VM and Ubuntu passed. tests/test_kin_close_2026_10_24.py counts open handles on Linux too.
+- NAME_LINKS_C20_SPLIT_2026_10_24 (docs/cloud): the one-paste C20 ended "Server error" on the site and rolled back;
+  it runs clean on PostgreSQL 16 with pg_cron 1.6 as a non-superuser. Now: C20_preflight (P1-P4, read-only, with
+  the fill's own time), C20a (the definitions, the view WITH NO DATA), C20b (the fill: pairs and ms), C20c (the
+  nightly job), C20_checks_2026-10-24 (V1-V6). The reader returns no rows while the view is empty; the refresh fills
+  an empty view plainly and a filled one CONCURRENTLY. tests/test_name_links_pg_2026_10_24.py (CORPUS_TEST_DSN).
+- DOCS92_2026_10_24: DEBT section 13, STATE 27, RUNBOOK, PLATFORM 95, ENTERPRISE_PATH 82, ASKS 9, RELATIONS_AND_ASK
+  7: what is done and running, the kinship trial measured (470 relations, 448 kept, 182 tied, $0.164), the Nirukta's
+  real cost ($5.51), the two failures and fixes, the Daivat-Sanhita scan local only until 2029; the 23 Oct C20 files
+  marked superseded.
+
+Tests: test_kin_close_2026_10_24, test_name_links_pg_2026_10_24, test_docs92_2026_10_24.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
