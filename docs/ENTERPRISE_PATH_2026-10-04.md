@@ -1243,3 +1243,13 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | 4 | ask-site | The Professor on the site (A2), behind the readers' gate | Next | per question |
 | 4 | claims-mirror | Raychaudhuri's claims on the site (B2) | Next | free |
 | 5 | hygiene | Yajnavalkya vision and 7 failed pages; the benchmark's Manu label | Next | about $0.40 |
+## Addendum 2026-10-24 (84): the relations, seen (DOCS94_2026_10_24)
+
+| Key | Item | State |
+|---|---|---|
+| names-ui | "Named together with" on the site | Filled (45,183 pairs) and refreshed nightly; Publish Srangam |
+| relations-ui-local | The Relations page on the PC (drawing, persons apart, lines, claims, selections) | Built (RELATIONS_UI) |
+| relations-ui-site (U3) | The same on the site's name page | Next, after H2: C21 (corpus.index_relations, a reader function behind the gate, the credit and the licence's notice), corpus_sync sending the kept relations, Srangam's name page reading them; free (no model) |
+| maint-guard | The maintenance task never stops in silence | Built (MAINT_GUARD) |
+| kin-also | kin_index's ALSO line names the right command | Built (KIN_ALSO) |
+| relations-index | Soerensen's last entries | Under way; what is left after the $2.00, about $0.60 |

@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Relations &mdash; Srangam</title>
+<!-- RELATIONS_UI_2026_10_24: the names and their relations, seen and chosen. For one of our names: whom our texts name
+     it with (entity_links), what the Purana Index, the Vedic Index and Soerensen state of each PERSON of that name (the
+     indexes number those who share a name; each is shown apart, by its own entry), the line of descent through each,
+     and Raychaudhuri's claims. It reads /api/relations (scripts/relations_view.py), read-only. Every statement shows
+     its source, its words and its reference, and how far our own verses bear it out. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#100e0b; --bg2:#17140f; --bg3:#1e1a14; --bg4:#26211a;
+    --ink:#ece4d4; --muted:#a3967f; --faint:#756a58;
+    --gold:#e0b062; --gold-dim:#7a5f2e; --border:#2a241b; --border-v:#3a3226;
+    --green:#7bbf6a; --red:#d98b6a; --violet:#c3a6e8; --blue:#8fb4de; --teal:#7cc4b8; --rose:#e39ab0;
+    --serif:"Cormorant Garamond",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:15px;
+    line-height:1.55}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 20px 64px}
+  header.top{display:flex;align-items:center;gap:14px;padding:18px 0 12px;flex-wrap:wrap}
+  .title{font-family:var(--serif);font-size:27px;font-weight:600;color:var(--gold);line-height:1.1}
+  .sub{color:var(--muted);font-size:12.5px}
+  .nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .nav a{font-size:12.5px;color:var(--muted);border:1px solid var(--border-v);padding:5px 11px;border-radius:7px}
+  .nav a:hover{color:var(--gold);border-color:var(--gold-dim);text-decoration:none}
+  .search{position:relative;background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;padding:12px;
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .search input{flex:1;min-width:220px;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);
+    border-radius:10px;padding:10px 13px;font-size:15.5px;font-family:inherit}
+  .search input:focus{outline:none;border-color:var(--gold-dim)}
+  .sugg{position:absolute;left:12px;right:12px;top:58px;background:var(--bg3);border:1px solid var(--border-v);
+    border-radius:10px;z-index:5;max-height:320px;overflow:auto}
+  .sugg button{display:flex;width:100%;gap:10px;align-items:baseline;background:none;border:0;color:var(--ink);
+    padding:8px 12px;text-align:left;cursor:pointer;font-size:14px}
+  .sugg button:hover,.sugg button.on{background:var(--bg4)}
+  .sugg .k{color:var(--faint);font-size:11.5px}
+  .filters{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:10px}
+  .fgroup{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+  .lbl{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .tog{background:var(--bg3);border:1px solid var(--border-v);color:var(--muted);border-radius:20px;padding:3px 11px;
+    font-size:12px;cursor:pointer}
+  .tog[aria-pressed="true"]{color:var(--ink);border-color:var(--gold-dim);background:var(--bg4)}
+  .tog .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+  .card{background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;padding:14px 16px}
+  .card h2{font-family:var(--serif);font-size:21px;color:var(--gold);margin:0 0 4px;font-weight:600}
+  .card h3{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+  .who{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .who .name{font-family:var(--serif);font-size:32px;color:var(--gold);font-weight:600}
+  .meta{color:var(--muted);font-size:12.5px}
+  svg{width:100%;height:auto;display:block}
+  .legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;color:var(--muted);font-size:11.5px}
+  .legend span::before{content:"";display:inline-block;width:14px;height:3px;margin-right:6px;vertical-align:middle;
+    background:var(--c)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;color:var(--faint);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+    padding:4px 6px;border-bottom:1px solid var(--border-v)}
+  td{padding:5px 6px;border-bottom:1px solid var(--border);vertical-align:top}
+  td.n{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+  .lnk{color:var(--ink);cursor:pointer;border-bottom:1px dotted var(--gold-dim)}
+  .lnk:hover{color:var(--gold)}
+  .person{border-top:1px solid var(--border-v);padding-top:12px;margin-top:12px}
+  .person:first-of-type{border-top:0;margin-top:4px;padding-top:4px}
+  .phead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .phead b{font-family:var(--serif);font-size:20px;color:var(--ink)}
+  .src{font-size:11px;border:1px solid var(--border-v);border-radius:6px;padding:1px 7px;color:var(--muted)}
+  .rel{padding:6px 0;border-bottom:1px solid var(--border)}
+  .rel:last-child{border-bottom:0}
+  .rel .what{font-size:14px}
+  .rel .words{color:var(--muted);font-size:12.5px;font-style:italic}
+  .badge{display:inline-block;font-size:11px;border-radius:10px;padding:0 8px;margin-left:6px;border:1px solid}
+  .v-together{color:var(--green);border-color:#3e5c35}
+  .v-near{color:var(--blue);border-color:#3b5470}
+  .v-never{color:var(--muted);border-color:var(--border-v)}
+  .v-none{color:var(--faint);border-color:var(--border)}
+  .r-agrees{color:var(--green);border-color:#3e5c35}
+  .r-reversed{color:var(--red);border-color:#6b3d2c}
+  .r-differs{color:var(--gold);border-color:var(--gold-dim)}
+  .line{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+  .gen{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .gen .g{color:var(--faint);font-family:var(--mono);font-size:11px;width:34px}
+  .chipn{background:var(--bg3);border:1px solid var(--border-v);border-radius:16px;padding:2px 10px;font-size:12.5px;
+    cursor:pointer;color:var(--ink)}
+  .chipn.me{border-color:var(--gold);color:var(--gold)}
+  .chipn.both{border-style:solid}
+  .chipn.one{border-style:dashed}
+  .note{color:var(--faint);font-size:12px;margin-top:10px}
+  .empty{color:var(--faint);font-size:13px;padding:6px 0}
+  .claim{padding:6px 0;border-bottom:1px solid var(--border);font-size:13.5px}
+  .claim .p{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-right:6px}
+  .status{color:var(--muted);font-size:13px;margin:12px 2px}
+  @media (max-width:1000px){.grid{grid-template-columns:minmax(0,1fr)}}
+  @media (max-width:600px){.wrap{padding:0 14px 48px}.title{font-size:23px}.who .name{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="title">Relations</div>
+      <div class="sub">Whom our texts name together, what the indexes state of each person, the lines of descent, and
+        Raychaudhuri's view: every statement with its source and how far our verses bear it out</div>
+    </div>
+    <nav class="nav" aria-label="Pages">
+      <a href="/">&larr; Dashboard</a>
+      <a href="/ask">Ask</a>
+      <a href="/library">Library</a>
+    </nav>
+  </header>
+
+  <section class="search" aria-label="Choose a name">
+    <label class="lbl" for="q">Name</label>
+    <input id="q" autocomplete="off" placeholder="e.g. Janamejaya, Janaka, Vi&#347;v&#257;mitra" aria-autocomplete="list"
+      aria-controls="sugg"/>
+    <div class="sugg" id="sugg" role="listbox" hidden></div>
+    <div class="filters" id="filters" aria-label="What to show">
+      <span class="fgroup"><span class="lbl">Index</span>
+        <button type="button" class="tog" data-f="src" data-v="pui" aria-pressed="true">Purana Index</button>
+        <button type="button" class="tog" data-f="src" data-v="vei" aria-pressed="true">Vedic Index</button>
+        <button type="button" class="tog" data-f="src" data-v="inm" aria-pressed="true">Soerensen</button></span>
+      <span class="fgroup"><span class="lbl">Relation</span>
+        <button type="button" class="tog" data-f="grp" data-v="family" aria-pressed="true"><span class="dot" style="background:var(--violet)"></span>family</button>
+        <button type="button" class="tog" data-f="grp" data-v="marriage" aria-pressed="true"><span class="dot" style="background:var(--rose)"></span>marriage</button>
+        <button type="button" class="tog" data-f="grp" data-v="siblings" aria-pressed="true"><span class="dot" style="background:var(--blue)"></span>siblings</button>
+        <button type="button" class="tog" data-f="grp" data-v="learning" aria-pressed="true"><span class="dot" style="background:var(--teal)"></span>teacher, pupil, priest</button>
+        <button type="button" class="tog" data-f="grp" data-v="rule" aria-pressed="true"><span class="dot" style="background:var(--red)"></span>rule</button>
+        <button type="button" class="tog" data-f="grp" data-v="time" aria-pressed="true"><span class="dot" style="background:var(--muted)"></span>contemporaries</button></span>
+      <span class="fgroup"><span class="lbl">Our verses</span>
+        <button type="button" class="tog" data-f="only" data-v="together" aria-pressed="false" title="Only the relations whose two persons our texts name in one passage">named together only</button>
+        <button type="button" class="tog" data-f="ring" data-v="on" aria-pressed="true" title="Draw whom our texts name with this name">show named together</button></span>
+    </div>
+  </section>
+
+  <div class="status" id="status" role="status">Choose a name. The list offers our names as you type.</div>
+
+  <div id="main" hidden>
+    <div class="grid">
+      <div>
+        <section class="card" aria-label="The name">
+          <div class="who"><span class="name" id="nm"></span><span class="meta" id="nmMeta"></span></div>
+          <svg id="graph" viewBox="0 0 760 560" role="img" aria-label="The name, whom our texts name it with, and the persons the indexes relate to it"></svg>
+          <div class="legend">
+            <span style="--c:var(--gold)">named together in our texts (the thicker, the more passages)</span>
+            <span style="--c:var(--violet)">family</span><span style="--c:var(--rose)">marriage</span>
+            <span style="--c:var(--blue)">siblings</span><span style="--c:var(--teal)">teacher, pupil, priest</span>
+            <span style="--c:var(--red)">rule</span><span style="--c:var(--muted)">contemporaries</span>
+          </div>
+          <div class="note">The outer ring is what the indexes state; the inner ring is what our own texts show. A dashed
+            line: the indexes state it, our texts never name the two together. Click a name to go to it.</div>
+        </section>
+        <section class="card" style="margin-top:16px" aria-label="Named together in our texts">
+          <h2>Named together in our texts</h2>
+          <div class="meta">Two names in one passage of a live text (a passage naming more than 12 names is a list and left
+            out), from the table entity_links</div>
+          <div id="together"></div>
+        </section>
+      </div>
+      <div>
+        <section class="card" aria-label="In the indexes">
+          <h2>In the indexes</h2>
+          <div class="meta">Each person of this name as one index enters him or her (the number tells homonyms apart).
+            Only the relations kept after the checks: their words stand in the entry and agree in direction.</div>
+          <div id="persons"></div>
+        </section>
+        <section class="card" style="margin-top:16px" aria-label="Raychaudhuri">
+          <h2>Raychaudhuri</h2>
+          <div class="meta">Claims read from the Political History of Ancient India (1923), page by page</div>
+          <div id="claims"></div>
+        </section>
+      </div>
+    </div>
+    <div class="note" id="credit"></div>
+  </div>
+</div>
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var COLORS = {family:"#c3a6e8", marriage:"#e39ab0", siblings:"#8fb4de", learning:"#7cc4b8", rule:"#d98b6a",
+                time:"#a3967f", other:"#756a58"};
+  var F = {src:{pui:true, vei:true, inm:true},
+           grp:{family:true, marriage:true, siblings:true, learning:true, rule:true, time:true, other:true},
+           only:false, ring:true};
+  var DATA = null, sugg = [], sel = -1, timer = null;
+
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
+  function vcls(v){ return v === "named together" ? "v-together" : v === "named near" ? "v-near" :
+    v === "both named, never near" ? "v-never" : "v-none"; }
+  function vtext(v){ return v === "both named, never near" ? "our texts: both, never near" :
+    v === "one not in our texts" ? "our texts: one not named" : v === "not tied" ? "not tied to our names" :
+    v === "unchecked" ? "unchecked" : "our texts: " + v; }
+  function keep(it, src){ return F.src[src] && F.grp[it.group || "other"] !== false &&
+    (!F.only || it.verdict === "named together"); }
+
+  function api(params){
+    var u = "/api/relations?" + Object.keys(params).map(function(k){
+      return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]); }).join("&");
+    return fetch(u).then(function(r){ return r.json(); });
+  }
+
+  // ---- the choice of a name ---------------------------------------------------------------------------
+  function showSugg(list){
+    sugg = list || []; sel = -1;
+    var box = $("sugg");
+    if (!sugg.length){ box.hidden = true; box.innerHTML = ""; return; }
+    box.innerHTML = sugg.map(function(s, i){
+      return "<button type=\"button\" role=\"option\" data-i=\"" + i + "\"><span>" + esc(s.name) + "</span><span class=\"k\">" +
+        esc(s.kind || "") + " &middot; named in " + s.mentions + " passage(s)" +
+        (s.via === "variant" ? " &middot; found by one of its forms in our texts" : "") + "</span></button>"; }).join("");
+    box.hidden = false;
+  }
+  $("q").addEventListener("input", function(){
+    clearTimeout(timer);
+    var q = this.value;
+    timer = setTimeout(function(){ api({find: q}).then(function(d){ showSugg(d.names); }).catch(function(){}); }, 160);
+  });
+  $("q").addEventListener("keydown", function(e){
+    var bs = $("sugg").querySelectorAll("button");
+    if (e.key === "ArrowDown" && bs.length){ sel = Math.min(bs.length - 1, sel + 1); e.preventDefault(); }
+    else if (e.key === "ArrowUp" && bs.length){ sel = Math.max(0, sel - 1); e.preventDefault(); }
+    else if (e.key === "Enter"){ e.preventDefault(); var s = sugg[sel >= 0 ? sel : 0]; if (s) go(s.id, s.name); return; }
+    else if (e.key === "Escape"){ showSugg([]); return; }
+    bs.forEach(function(b, i){ b.classList.toggle("on", i === sel); });
+  });
+  $("sugg").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    var s = sugg[+b.getAttribute("data-i")]; if (s) go(s.id, s.name);
+  });
+  document.addEventListener("click", function(e){ if (!e.target.closest(".search")) showSugg([]); });
+
+  function go(id, name){
+    showSugg([]); $("q").value = name || "";
+    history.replaceState(null, "", "/relations?id=" + id + "&name=" + encodeURIComponent(name || ""));
+    load(id);
+  }
+  function goName(name){
+    api({find: name}).then(function(d){
+      var s = (d.names || []).filter(function(x){ return x.exact; })[0] || (d.names || [])[0];
+      if (s) go(s.id, s.name); else { $("status").textContent = "None of our names is \u201c" + name + "\u201d: the index names a person our texts do not."; }
+    });
+  }
+  function load(id){
+    $("status").textContent = "Reading\u2026";
+    api({id: id}).then(function(d){
+      if (d.error){ $("status").textContent = d.error; return; }
+      DATA = d; $("status").textContent = ""; $("main").hidden = false; render();
+    }).catch(function(e){ $("status").textContent = "The dashboard did not answer: " + e; });
+  }
+
+  // ---- the filters ------------------------------------------------------------------------------------
+  $("filters").addEventListener("click", function(e){
+    var b = e.target.closest(".tog"); if (!b) return;
+    var on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    var f = b.getAttribute("data-f"), v = b.getAttribute("data-v");
+    if (f === "src") F.src[v] = on; else if (f === "grp") F.grp[v] = on;
+    else if (f === "only") F.only = on; else if (f === "ring") F.ring = on;
+    if (DATA) render();
+  });
+
+  // ---- the drawing ------------------------------------------------------------------------------------
+  function draw(){
+    var svg = $("graph"), small = svg.clientWidth > 0 && svg.clientWidth < 600;
+    var W = small ? 460 : 760, H = small ? 460 : 560, cx = W / 2, cy = H / 2, parts = [];
+    var RIN = small ? 112 : 150, ROUT = small ? 180 : 248;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var inner = F.ring ? DATA.together.slice(0, 12) : [];
+    var byId = {};
+    inner.forEach(function(t){ byId[t.id] = t; });
+    var outer = [], seen = {};
+    DATA.persons.forEach(function(p){
+      if (!F.src[p.source]) return;
+      p.own.forEach(function(it){
+        if (!keep(it, p.source)) return;
+        var key = it.other_entity ? "e" + it.other_entity : "n" + it.other;
+        if (seen[key]) { seen[key].groups[it.group] = true; return; }
+        var o = {key: key, name: it.other_head || it.other, id: it.other_entity, group: it.group, groups: {},
+                 together: it.verdict === "named together"};
+        o.groups[it.group] = true; seen[key] = o;
+        if (!(it.other_entity && byId[it.other_entity])) outer.push(o);
+        else byId[it.other_entity].rel = o;
+      });
+    });
+    outer = outer.slice(0, 22);
+    var maxp = Math.max.apply(null, [1].concat(inner.map(function(t){ return t.passages; })));
+    function node(x, y, label, color, id, r){
+      return "<g class=\"nd\" data-id=\"" + (id || "") + "\" data-name=\"" + esc(label) + "\" style=\"cursor:pointer\">" +
+        "<circle cx=\"" + x.toFixed(1) + "\" cy=\"" + y.toFixed(1) + "\" r=\"" + r + "\" fill=\"#1e1a14\" stroke=\"" + color +
+        "\" stroke-width=\"1.6\"/><text x=\"" + x.toFixed(1) + "\" y=\"" + (y + r + 13).toFixed(1) +
+        "\" text-anchor=\"middle\" fill=\"#ece4d4\" font-size=\"12\" font-family=\"Inter,system-ui,sans-serif\">" +
+        esc(label.length > 22 ? label.slice(0, 21) + "\u2026" : label) + "</text></g>";
+    }
+    inner.forEach(function(t, i){
+      var a = -Math.PI / 2 + i * 2 * Math.PI / Math.max(1, inner.length), R = RIN;
+      t.x = cx + R * Math.cos(a); t.y = cy + R * Math.sin(a) * 0.86;
+      var w = 1 + 5 * Math.log(1 + t.passages) / Math.log(1 + maxp);
+      parts.push("<line x1=\"" + cx + "\" y1=\"" + cy + "\" x2=\"" + t.x.toFixed(1) + "\" y2=\"" + t.y.toFixed(1) +
+        "\" stroke=\"#e0b062\" stroke-opacity=\"0.75\" stroke-width=\"" + w.toFixed(1) + "\"><title>" + esc(t.name) + ": " +
+        t.passages + " passage(s), " + t.texts + " text(s)</title></line>");
+      if (t.rel){
+        parts.push("<path d=\"M" + cx + "," + cy + " Q" + ((cx + t.x) / 2 + 18).toFixed(1) + "," + ((cy + t.y) / 2 - 18).toFixed(1) +
+          " " + t.x.toFixed(1) + "," + t.y.toFixed(1) + "\" fill=\"none\" stroke=\"" + COLORS[t.rel.group] +
+          "\" stroke-width=\"1.6\"/>");
+      }
+    });
+    outer.forEach(function(o, i){
+      var a = -Math.PI / 2 + (i + 0.5) * 2 * Math.PI / Math.max(1, outer.length), R = ROUT;
+      o.x = cx + R * Math.cos(a); o.y = cy + R * Math.sin(a) * 0.86;
+      parts.push("<line x1=\"" + cx + "\" y1=\"" + cy + "\" x2=\"" + o.x.toFixed(1) + "\" y2=\"" + o.y.toFixed(1) +
+        "\" stroke=\"" + COLORS[o.group] + "\" stroke-width=\"1.4\"" + (o.together ? "" : " stroke-dasharray=\"5 4\"") +
+        "/>");
+    });
+    inner.forEach(function(t){ parts.push(node(t.x, t.y, t.name, t.rel ? COLORS[t.rel.group] : "#e0b062", t.id, 7)); });
+    outer.forEach(function(o){ parts.push(node(o.x, o.y, o.name, COLORS[o.group], o.id, 6)); });
+    parts.push("<circle cx=\"" + cx + "\" cy=\"" + cy + "\" r=\"15\" fill=\"#26211a\" stroke=\"#e0b062\" stroke-width=\"2.4\"/>" +
+      "<text x=\"" + cx + "\" y=\"" + (cy + 34) + "\" text-anchor=\"middle\" fill=\"#e0b062\" font-size=\"16\" " +
+      "font-family=\"Cormorant Garamond,Georgia,serif\" font-weight=\"600\">" + esc(DATA.entity.name) + "</text>");
+    if (!inner.length && !outer.length){
+      parts.push("<text x=\"" + cx + "\" y=\"" + (cy + 70) + "\" text-anchor=\"middle\" fill=\"#756a58\" font-size=\"13\">" +
+        "Nothing to draw with these choices</text>");
+    }
+    svg.innerHTML = parts.join("");
+  }
+  $("graph").addEventListener("click", function(e){
+    var g = e.target.closest(".nd"); if (!g) return;
+    var id = g.getAttribute("data-id"), name = g.getAttribute("data-name");
+    if (id) go(+id, name); else goName(name);
+  });
+
+  function places(pl){
+    return (pl || []).map(function(p){ return typeof p === "string" ? esc(p) :
+      "<a href=\"/reader/" + encodeURIComponent(p.doc) + "\" title=\"" + esc(p.doc + " " + p.ref) + "\">" + esc(p.doc) +
+      " " + esc(p.ref) + "</a>"; }).join("; ");
+  }
+  function nameLink(name, id){
+    return "<span class=\"lnk\" data-id=\"" + (id || "") + "\" data-name=\"" + esc(name) + "\">" + esc(name) + "</span>";
+  }
+  document.addEventListener("click", function(e){
+    var l = e.target.closest(".lnk,.chipn"); if (!l || l.classList.contains("me")) return;
+    var id = l.getAttribute("data-id"), name = l.getAttribute("data-name");
+    if (id) go(+id, name); else goName(name);
+  });
+
+  function render(){
+    var e = DATA.entity;
+    $("nm").textContent = e.name;
+    $("nmMeta").textContent = (e.kind || "name") + " \u00b7 named in " + e.mentions + " passage(s) of " + (e.texts || 0) +
+      " text(s)";
+    document.title = e.name + " \u2014 Relations \u2014 Srangam";
+    draw();
+    var rows = DATA.together.map(function(t){
+      return "<tr><td>" + nameLink(t.name, t.id) + " <span class=\"meta\">" + esc(t.kind || "") + "</span></td><td class=\"n\">" +
+        t.passages + "</td><td class=\"n\">" + t.texts + "</td><td>" + places(t.places) + "</td></tr>"; }).join("");
+    var near = DATA.near.slice(0, 10).map(function(t){ return nameLink(t.name, t.id) + " (" + t.passages + ")"; }).join(", ");
+    $("together").innerHTML = (rows ? "<table><thead><tr><th>Name</th><th>Passages</th><th>Texts</th><th>First met in</th></tr>" +
+      "</thead><tbody>" + rows + "</tbody></table>" : "<div class=\"empty\">Our texts name no one with this name in one passage.</div>") +
+      (near ? "<h3>Named near (within a few passages)</h3><div style=\"font-size:13.5px\">" + near + "</div>" : "");
+    var ps = DATA.persons.filter(function(p){ return F.src[p.source]; }).map(person).join("");
+    $("persons").innerHTML = ps || "<div class=\"empty\">No index relation of this name, with these choices.</div>";
+    $("claims").innerHTML = DATA.claims.length ? DATA.claims.map(function(c){
+      return "<div class=\"claim\"><span class=\"p\">p. " + esc(c.page) + "</span>" + esc(c.claim) +
+        (c.relation ? " <span class=\"meta\">(" + esc(c.relation.replace(/_/g, " ")) + ")</span>" : "") + "</div>"; }).join("") :
+      "<div class=\"empty\">No claim of Raychaudhuri's names this name" + (DATA.read.claims ? "." : " (claims.db not read).") + "</div>";
+    $("credit").innerHTML = "Sources: " + Object.keys(DATA.titles).map(function(k){ return esc(DATA.titles[k]); }).join("; ") +
+      "; " + esc("H. C. Raychaudhuri, Political History of Ancient India (1923)") + ". The indexes' relations are read by a model " +
+      "from the entries and kept only where their words stand in the entry; they are the indexes' statements, not facts settled. " +
+      "For private study on this computer.";
+  }
+
+  function person(p){
+    var own = p.own.filter(function(it){ return keep(it, p.source); });
+    var named = p.named_in.filter(function(it){ return keep(it, p.source); });
+    if (!own.length && !named.length && !p.up.length && !p.down.length) return "";
+    var h = "<div class=\"person\"><div class=\"phead\"><b>" + esc(p.head) + "</b><span class=\"src\" title=\"" + esc(p.title) +
+      "\">" + esc(p.index) + "</span><span class=\"meta\">" + own.length + " relation(s) in its entry" +
+      (named.length ? ", named in " + named.length + " other(s)" : "") + "</span></div>";
+    h += own.map(function(it){ return rel(it, ""); }).join("");
+    if (named.length){
+      h += "<h3>Named in other entries</h3>" + named.slice(0, 12).map(function(it){
+        return rel(it, "s.v. " + it.stated_in); }).join("");
+    }
+    if (p.up.length || p.down.length) h += lineOf(p);
+    return h + "</div>";
+  }
+  function rel(it, where){
+    var who = it.as === "subject" ? "<b>" + esc(it.label) + "</b> " + nameLink(it.other_head || it.other, it.other_entity) :
+      nameLink(it.subject, it.other_entity) + " <b>" + esc(it.label) + "</b> " + esc(it.object);
+    var r = it.raychaudhuri ? "<span class=\"badge r-" + esc(it.raychaudhuri) + "\" title=\"" + esc(it.raychaudhuri_note) +
+      "\">Raychaudhuri " + esc(it.raychaudhuri) + "</span>" : "";
+    return "<div class=\"rel\"><div class=\"what\"><span class=\"dot\" style=\"display:inline-block;width:8px;height:8px;" +
+      "border-radius:50%;margin-right:7px;background:" + COLORS[it.group || "other"] + "\"></span>" + who +
+      "<span class=\"badge " + vcls(it.verdict) + "\">" + esc(vtext(it.verdict)) + "</span>" + r + "</div>" +
+      "<div class=\"words\">\u201c" + esc(it.words) + "\u201d" + (it.refs && it.refs.length ? " (" + esc(it.refs.join("; ")) + ")" : "") +
+      (where ? " \u00b7 " + esc(where) : "") + (it.places && it.places.length ? " \u00b7 ours: " + places(it.places) : "") +
+      "</div></div>";
+  }
+  function lineOf(p){
+    var h = "<h3>Line of descent in the " + esc(p.index) + "</h3><div class=\"line\">";
+    var up = p.up.slice().reverse();
+    up.forEach(function(gen, i){
+      h += "<div class=\"gen\"><span class=\"g\">\u2212" + (up.length - i) + "</span>" + gen.map(chip).join("") + "</div>";
+    });
+    h += "<div class=\"gen\"><span class=\"g\">0</span><span class=\"chipn me\">" + esc(p.head) + "</span></div>";
+    p.down.forEach(function(gen, i){
+      h += "<div class=\"gen\"><span class=\"g\">+" + (i + 1) + "</span>" + gen.map(chip).join("") + "</div>";
+    });
+    return h + "</div><div class=\"note\">A solid outline: both entries state the step; dashed: one entry states it. " +
+      "Joined only through this index's own entries, never through another person of the same name.</div>";
+  }
+  function chip(n){
+    return "<span class=\"chipn " + (n.both ? "both" : "one") + "\" data-name=\"" + esc(n.head.replace(/\s*(\([^)]*\)|\[\d+\])\s*$/, "")) +
+      "\" title=\"" + esc(n.head) + (n.both ? ": both entries state it" : ": one entry states it") + "\">" + esc(n.head) + "</span>";
+  }
+
+  var sp = new URLSearchParams(location.search);
+  if (sp.get("id")) { $("q").value = sp.get("name") || ""; load(+sp.get("id")); }
+  else if (sp.get("name")) { $("q").value = sp.get("name"); goName(sp.get("name")); }
+  else { api({find: ""}).then(function(d){ if (d.names) $("status").textContent = "Choose a name. Most named in our texts: " +
+    d.names.slice(0, 8).map(function(x){ return x.name; }).join(", ") + "."; }).catch(function(){}); }
+  document.addEventListener("keydown", function(e){ if (e.key === "/" && document.activeElement !== $("q")){ e.preventDefault(); $("q").focus(); } });
+})();
+</script>
+</body>
+</html>

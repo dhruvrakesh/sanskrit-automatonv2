@@ -5686,6 +5686,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
   <a class="back" href="/desk" title="TRANSLATION_DESK_2026_10_17: every text by its stage, and the scholarly English begun from its page" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128221; The desk</a>
   <a class="back" href="/methodology" title="How source and translation quality are measured" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
   <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
+  <a class="back" href="/relations" title="RELATIONS_UI_2026_10_24: whom our texts name together, what the indexes state of each person, the lines of descent" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128279; Relations</a>
 </header>
 <main>{body}</main>
 <!-- BOOKSMITH_WIRING_2026_09_12 -->
@@ -6939,6 +6940,31 @@ def api_ask():
 @app.get("/ask")
 def ask_page():
     return send_from_directory(str(SCRIPTS), "ask.html")
+
+
+# RELATIONS_UI_2026_10_24: the names and their relations, seen and chosen (scripts/relations.html), read-only.
+@app.get("/relations")
+def relations_page():
+    return send_from_directory(str(SCRIPTS), "relations.html")
+
+
+@app.get("/api/relations")
+def api_relations():
+    """RELATIONS_UI_2026_10_24: ?find=<text> -> {"names": [our names that match]}; ?id=<entity id> -> whom our texts
+    name it with, what the indexes state of each person of that name, the lines of descent, Raychaudhuri's claims
+    (scripts/relations_view.py). Read-only: context.db, data/shelf/kin.db and claims.db opened mode=ro."""
+    if str(SCRIPTS) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS))
+    import relations_view as rv
+    db = str(ROOT / "data" / "context.db")
+    try:
+        if "id" in request.args:
+            eid = int(request.args.get("id") or 0)
+            k = max(1, min(60, int(request.args.get("k") or 24)))
+            return jsonify(rv.view(db, eid, ROOT / "data" / "shelf", k=k))
+        return jsonify({"names": rv.find(db, request.args.get("find", ""), limit=12), "mark": rv.MARK})
+    except (ValueError, sqlite3.Error) as e:
+        return jsonify({"error": "%s: %s" % (type(e).__name__, str(e)[:200])}), 400
 
 
 # ── Launch Datasette (SQL explorer) on a consistent snapshot, from the UI ──────

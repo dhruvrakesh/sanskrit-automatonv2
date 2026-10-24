@@ -166,6 +166,7 @@
     <nav class="nav" aria-label="Pages">
       <a href="/">&larr; Dashboard</a>
       <a href="/library">Library</a>
+      <a href="/relations" title="RELATIONS_UI_2026_10_24: the names and their relations">Relations</a>
     </nav>
   </header>
 
@@ -456,7 +457,8 @@
     }).join("") : '<div class="schitem nt">No statement of the scholars or the indexes for these names here.</div>';
     $("schNames").innerHTML = (sc.names || []).map(function(n){
       var t = (n.together || []).map(function(x){ return esc(x.name) + " " + x.passages; }).join(", ");
-      return "<div><b>" + esc(n.name) + "</b>" + (t ? " with " + t : "") + "</div>";
+      return "<div><a href=\"/relations?name=" + encodeURIComponent(n.name) + "\" title=\"This name on the Relations page\"><b>" +
+        esc(n.name) + "</b></a>" + (t ? " with " + t : "") + "</div>";   // RELATIONS_UI_2026_10_24
     }).join("") || "<div>(none)</div>";
     box.hidden = false;
   }

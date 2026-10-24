@@ -34,6 +34,13 @@ function Test-Writer($after) {
     return $true
 }
 
+# MAINT_GUARD_2026_10_24: an error that nothing else catches is logged as a FAIL line (health_watch.py reads it)
+# instead of ending the tick in silence: on 24 Oct the 15:00 tick wrote "dashboard idle" and nothing more.
+trap {
+    Log ("FAIL: the runner stopped on an error no step caught: " + $_.Exception.Message)
+    exit 1
+}
+
 # Always record that the runner fired, before any guard, so a silent task is
 # never a mystery again.
 Log "TICK - maintenance runner started (user=$env:USERNAME)"
@@ -54,7 +61,11 @@ try {
 }
 
 # Guard 2: Gemini API must be reachable (embeddings/entities need it).
-$net = Test-NetConnection generativelanguage.googleapis.com -Port 443 -InformationLevel Quiet -WarningAction SilentlyContinue
+try {   # MAINT_GUARD_2026_10_24: the check itself may raise (no network, no DNS); that is a skip, logged
+    $net = Test-NetConnection generativelanguage.googleapis.com -Port 443 -InformationLevel Quiet -WarningAction SilentlyContinue
+} catch {
+    Log ("SKIP: the API check failed: " + $_.Exception.Message); exit 0
+}
 if (-not $net) { Log "SKIP: no API connectivity"; exit 0 }
 
 $py = (Get-Command python -ErrorAction SilentlyContinue).Source

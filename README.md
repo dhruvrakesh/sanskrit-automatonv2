@@ -51,6 +51,11 @@ translation, Ask, embeddings, and entity extraction.
   search finds the most relevant verses; the chosen Gemini model answers *using only
   those verses* and cites each `[doc verse_ref]`. Falls back to keyword search when
   the embedding index isn't built.
+- **/relations** - **Relations** (RELATIONS_UI_2026_10_24, DOCS94_2026_10_24): one of our names; whom our
+  texts name it with; what the Purana Index, the Vedic Index and Soerensen state of each person of that
+  name (homonyms apart); the line of descent through each; Raychaudhuri's claims. A drawing and
+  selections (index, kind of relation, named together only). Read-only. The Ask page's Professor mode
+  reads the same relations (ASK_PROF_2026_10_23).
 - **💾 Database** — snapshots the DB and opens it in **Datasette** for read-only SQL.
 
 ---

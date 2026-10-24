@@ -979,7 +979,10 @@ def run(argv=None, caller=None) -> int:
         "read exports\\kin_cards.md and kin_agreement.csv; then the full run: python scripts\\kin_index.py --yes "
         "--per-source 0 --max-usd 4.50 (the plan prices it first: about $4)" if a.per_source and unread != 0 else
         "read exports\\kin_lineages.md and kin_cards.md; one name: python scripts\\kin_index.py --show Janamejaya",
-        ["%d entries of the trial are not read yet: python scripts\\kin_index.py --yes" % left] if left else [])
+        ["%d entries %s are not read yet: python scripts\\kin_index.py --yes%s" % (   # KIN_ALSO_2026_10_24
+            left, "of the trial" if a.per_source else "in all",
+            "" if a.per_source == 100 else " --per-source %d --max-usd %.2f (twice the plan: long entries cost more)" % (
+                a.per_source, max(a.max_usd, round(planned * 2 + 0.005, 2))))] if left else [])
     return 0
 
 

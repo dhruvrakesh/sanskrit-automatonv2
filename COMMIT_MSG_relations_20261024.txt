@@ -1,0 +1,23 @@
+A Relations page on the dashboard; the maintenance task never stops in silence; kin_index's ALSO line; the night of 24 Oct recorded (RELATIONS_UI, MAINT_GUARD, KIN_ALSO, DOCS94)
+
+- RELATIONS_UI_2026_10_24 (scripts/relations.html, scripts/relations_view.py, new; scripts/patch_relations_ui_2026_10_24.py):
+  /relations and /api/relations on the PC's dashboard, read-only. For one of our names: a drawing (whom our texts
+  name it with, the line's width by passages; whom the indexes relate to it, coloured by the kind of relation, dashed
+  where our texts never name the two together), "Named together in our texts" with the first passages, "In the
+  indexes" (each person of the name as one index enters him or her, homonyms apart; each relation's words, reference,
+  verdict against our verses and Raychaudhuri's view), the line of descent through each by the index's own entries,
+  Raychaudhuri's claims. Selections by index, kind of relation, named together only. A variant of a name (often an
+  epithet) finds it but never ties an index's person. Links from the dashboard, the Library, the Ask page and the
+  Professor's names.
+- MAINT_GUARD_2026_10_24 (scripts/patch_maint_guard_2026_10_24.py): maintenance_runner.ps1 logs a SKIP when its API
+  check raises and a FAIL (exit 1) on any error no step catches; on 24 Oct the 15:00 tick stopped without a word.
+- KIN_ALSO_2026_10_24 (scripts/patch_kin_also_2026_10_24.py): after the full run's plan, the ALSO line gives the
+  command that reads what is left (--per-source, --max-usd).
+- DOCS94_2026_10_24: DEBT section 15, STATE 29, RUNBOOK, PLATFORM 97, ENTERPRISE_PATH 84, ASKS 11, RELATIONS_AND_ASK
+  9, README's web UI: named together live on the site (45,183 pairs filled in 3.1 s), 9a840934, the Soerensen run,
+  the Relations page, the silent tick, a correction (the maintenance task fires every 3 hours, not hourly), U3 next.
+
+Tests: test_relations_ui_2026_10_24, test_maint_guard_2026_10_24, test_kin_also_2026_10_24, test_docs94_2026_10_24.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

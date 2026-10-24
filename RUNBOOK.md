@@ -2544,3 +2544,16 @@ From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automat
    entries); `python scripts\judge_sample.py --doc nirukta__w_gretil --sample-pct 10` (the dry run), then with
    `--yes --max-usd 0.30`.
 5. The Shukla Yajurveda (about $12.2) waits for your decision on the cap: `python scripts\set_budget.py` shows it.
+## 24 Oct, night: the Relations page, the guard, the ALSO line (DOCS94_2026_10_24)
+
+From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automatonv2"`), not in the minutes :00 to
+:03 of a tick (00:00, 03:00 ... 21:00), and after the Soerensen run has ended (kin_index.py is one of the files):
+
+1. `python scripts\patch_relations_ui_2026_10_24.py --check`, then without --check; the same for
+   `patch_maint_guard_2026_10_24.py`, `patch_kin_also_2026_10_24.py` and `patch_docs94_2026_10_24.py`. Then
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`, and the dashboard restarted when it is idle.
+2. Open http://127.0.0.1:5057/relations (or the Relations button on the dashboard's top bar, the Library, the Ask
+   page; a name under a Professor's answer leads there too).
+3. On the site: Publish Srangam in Lovable; after 04:40 UTC, V6 of docs\cloud\C20_checks_2026-10-24.sql (the
+   nightly job's runs).
+4. What Soerensen's run leaves: `python scripts\kin_index.py --per-source 0` (the plan) names the command.

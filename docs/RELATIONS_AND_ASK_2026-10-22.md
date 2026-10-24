@@ -122,3 +122,10 @@ is not yet, and each of those is a decision of yours before it is built.
   them. These are the indexes' lines, not yet checked against our verses.
 - **The coverage:** 90% of the untied persons are not named in our English; the next step for the relations is the
   corpus (the genealogical chapters), then our names for the indexes' persons.
+## 9. 24 Oct, night: U2 live, the local view, U3 next (DOCS94_2026_10_24)
+
+- **U2** (names-ui): live on the site's database (45,183 pairs, 3.1 s to fill); seen once Srangam is published.
+- **The local view** (RELATIONS_UI): the drawing and the cards read the same tables the Professor reads, so what the
+  page shows and what the Professor may cite agree.
+- **U3** (relations-ui-site): needs H2's mirror of the kept relations (decided: with credit and the licence's notice
+  while the site stays non-commercial).
