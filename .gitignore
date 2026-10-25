@@ -164,3 +164,9 @@ data/source_fidelity/
 # GRETIL_LIBRARY_2026_10_22 (DOCS87_2026_10_22): GRETIL's catalog and the match are made again by
 # scripts/gretil_library.py (free, read-only); the zips are under sources/, ignored above
 data/gretil/
+# AUTO_REPAIR_2026_10_25: the repair rounds' allowance, log, state and lock are the desk's own (scripts/repair_auto.py)
+data/auto_repair.json
+data/auto_repair_log.jsonl
+data/auto_repair_state.json
+data/auto_repair.lock
+data/auto_repair*.tmp

@@ -129,3 +129,10 @@ is not yet, and each of those is a decision of yours before it is built.
   page shows and what the Professor may cite agree.
 - **U3** (relations-ui-site): needs H2's mirror of the kept relations (decided: with credit and the licence's notice
   while the site stays non-commercial).
+## 10. 25 Oct: the lines read against the Sanskrit (DOCS95_2026_10_25)
+
+- **The Purana Index's citations, read:** 4,910 of its 12,211 relations have both names in the cited verse (of the
+  7,098 citations of a text GRETIL holds).
+- **The lines, longer:** a shared verse joins a name the rule left open (891 sides), the honorific aside (586 sides);
+  the Iksvaku line through Dasaratha (II) runs 38 generations, 29 of its 37 steps with both names in the verse.
+- **The page:** /vamsa; the Relations page links each line of descent to it.

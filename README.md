@@ -56,6 +56,10 @@ translation, Ask, embeddings, and entity extraction.
   name (homonyms apart); the line of descent through each; Raychaudhuri's claims. A drawing and
   selections (index, kind of relation, named together only). Read-only. The Ask page's Professor mode
   reads the same relations (ASK_PROF_2026_10_23).
+- **/vamsa** - **Vamsa** (VAMSA_UI_2026_10_25, DOCS95_2026_10_25): the lines of descent of the three
+  indexes, generation by generation; each step with the index's words, the Sanskrit verse where both
+  names stand (GRETIL's editions, read by scripts/vamsa_check.py), the epics' verses that name both, our
+  passages and Raychaudhuri's view. Read-only; no model is called.
 - **💾 Database** — snapshots the DB and opens it in **Datasette** for read-only SQL.
 
 ---

@@ -1253,3 +1253,15 @@ Gate for calling a text CURRENT: source debris ≤ 5%, English and Hindi lacunae
 | maint-guard | The maintenance task never stops in silence | Built (MAINT_GUARD) |
 | kin-also | kin_index's ALSO line names the right command | Built (KIN_ALSO) |
 | relations-index | Soerensen's last entries | Under way; what is left after the $2.00, about $0.60 |
+## Addendum 2026-10-25 (85): genealogies and consolidation (DOCS95_2026_10_25)
+
+| Phase | Key | Item | State | Cost |
+|---|---|---|---|---|
+| G1 | vamsa-check | The Purana Index's citations read in GRETIL's Sanskrit; the epics' verses that name both | Built (VAMSA_CHECK): 4,910 with both names | free |
+| G1 | vamsa-ui | The Vamsa page on the PC: lines, steps, verses, joins shown | Built (VAMSA_UI) | free |
+| C1 | auto-repair | The scans' repair kept going: one step a round, the next step repair_text.py names | Built (AUTO_REPAIR) | $0.25 a day unless set |
+| G2 | vamsa-comment | The Professor's commentary on a whole line, citing the index, the verses, the epics, our passages, Raychaudhuri; marked as a reading; cached | Next | per line, priced first |
+| G3 | h2, vamsa-site | C21 (corpus.index_relations with the checks, a reader function behind the gate, the credit and the notice); corpus_sync; Srangam's genealogy | Next | free |
+| G4 | vamsa-corpus | The genealogical chapters as texts of their own and translated: the first slice the Visnu's book IV (1,341) and the Bhagavata's book IX and XII.1 (1,005) | Next: the importer (as import_mbh_gretil.py), then the plan's price | about $24 at $0.01 a verse; needs the cap |
+| - | relations-index | What is left of the three indexes | Yours | about $4 by the plan |
+| - | yajur-shukla | The Shukla Yajurveda translated, then --release | Yours | about $12.2; needs the cap |

@@ -167,6 +167,7 @@
       <a href="/">&larr; Dashboard</a>
       <a href="/library">Library</a>
       <a href="/relations" title="RELATIONS_UI_2026_10_24: the names and their relations">Relations</a>
+      <a href="/vamsa" title="VAMSA_UI_2026_10_25: the lines of descent, each step with its verse">Vamsa</a>
     </nav>
   </header>
 
@@ -274,6 +275,13 @@
   }
   document.querySelectorAll("[data-mode]").forEach(function(b){ b.addEventListener("click", function(){ setMode(b.dataset.mode); }); });
   setMode(store("askMode") || "verses");
+  /* VAMSA_UI_2026_10_25: a question brought from another page (/ask?q=...&mode=professor) is put in the box, not asked:
+     each answer is metered, so the reader asks it */
+  (function(){
+    var P = new URLSearchParams(location.search);
+    if (P.get("mode")) setMode(P.get("mode"));
+    if (P.get("q")) setQ(P.get("q").slice(0, 600));
+  })();
 
   $("k").addEventListener("input", function(){ $("kv").textContent = this.value; });
   $("q").addEventListener("keydown", function(ev){

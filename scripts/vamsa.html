@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Va&#7747;&#347;a &mdash; Srangam</title>
+<!-- VAMSA_UI_2026_10_25: the lines of descent, generation by generation. For a person of the Purana Index, Soerensen's
+     index to the Mahabharata or the Vedic Index: the line up and down as the index's own entries join it, each step
+     with the index's words and reference, the Sanskrit verse where both names stand (GRETIL's editions, read by
+     scripts/vamsa_check.py), the verses of the Mahabharata, the Harivamsa and the Ramayana that name both, our own
+     passages and Raychaudhuri's view. It reads /api/vamsa (scripts/vamsa_view.py), read-only. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#100e0b; --bg2:#17140f; --bg3:#1e1a14; --bg4:#26211a;
+    --ink:#ece4d4; --muted:#a3967f; --faint:#756a58;
+    --gold:#e0b062; --gold-dim:#7a5f2e; --border:#2a241b; --border-v:#3a3226;
+    --green:#7bbf6a; --green-dim:#3e5c35; --amber:#d9b45a; --red:#d98b6a; --blue:#8fb4de; --blue-dim:#3b5470;
+    --serif:"Cormorant Garamond",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:15px;
+    line-height:1.55}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 20px 64px}
+  header.top{display:flex;align-items:center;gap:14px;padding:18px 0 12px;flex-wrap:wrap}
+  .title{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--gold);line-height:1.1}
+  .sub{color:var(--muted);font-size:12.5px;max-width:760px}
+  .nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .nav a{font-size:12.5px;color:var(--muted);border:1px solid var(--border-v);padding:5px 11px;border-radius:7px}
+  .nav a:hover{color:var(--gold);border-color:var(--gold-dim);text-decoration:none}
+  .search{position:relative;background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;padding:12px;
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .search input{flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border-v);color:var(--ink);
+    border-radius:10px;padding:10px 13px;font-size:15.5px;font-family:inherit}
+  .search input:focus{outline:none;border-color:var(--gold-dim)}
+  .sugg{position:absolute;left:12px;right:12px;top:58px;background:var(--bg3);border:1px solid var(--border-v);
+    border-radius:10px;z-index:5;max-height:340px;overflow:auto}
+  .sugg button{display:flex;width:100%;gap:10px;align-items:baseline;background:none;border:0;color:var(--ink);
+    padding:8px 12px;text-align:left;cursor:pointer;font-size:14px}
+  .sugg button:hover,.sugg button.on{background:var(--bg4)}
+  .sugg .k{color:var(--faint);font-size:11.5px}
+  .fg{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+  .lbl{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .tog{background:var(--bg3);border:1px solid var(--border-v);color:var(--muted);border-radius:20px;padding:3px 11px;
+    font-size:12px;cursor:pointer}
+  .tog[aria-pressed="true"]{color:var(--ink);border-color:var(--gold-dim);background:var(--bg4)}
+  .grid{display:grid;grid-template-columns:300px minmax(0,1fr) minmax(0,.95fr);gap:16px;margin-top:16px;align-items:start}
+  .card{background:var(--bg2);border:1px solid var(--border-v);border-radius:14px;padding:14px 16px}
+  .card h2{font-family:var(--serif);font-size:21px;color:var(--gold);margin:0 0 4px;font-weight:600}
+  .card h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+  .meta{color:var(--muted);font-size:12.5px}
+  .note{color:var(--faint);font-size:12px;margin-top:10px}
+  .empty{color:var(--faint);font-size:13px;padding:6px 0}
+  .status{color:var(--muted);font-size:13px;margin:12px 2px}
+  .lines button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--border);
+    color:var(--ink);padding:8px 2px;cursor:pointer;font-size:13.5px}
+  .lines button:hover,.lines button.on{background:var(--bg3)}
+  .lines .n{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .ladder{position:relative}
+  .rung{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;align-items:start}
+  .rung .g{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:8px;text-align:right}
+  .pbox{background:var(--bg3);border:1px solid var(--border-v);border-radius:12px;padding:7px 12px}
+  .pbox.me{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-dim) inset}
+  .pname{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink)}
+  .pbox.me .pname{color:var(--gold)}
+  .pname button{background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0}
+  .pname button:hover{color:var(--gold)}
+  .side{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .side .x{color:var(--ink);cursor:pointer;border-bottom:1px dotted var(--gold-dim)}
+  .side .x:hover{color:var(--gold)}
+  .step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px}
+  .step .bar{display:flex;justify-content:center}
+  .step .bar i{display:block;width:0;border-left:2px solid var(--gold-dim);min-height:34px}
+  .step.one .bar i{border-left-style:dashed}
+  .step button.ev{display:flex;flex-wrap:wrap;gap:4px;align-items:center;background:none;border:1px solid transparent;
+    border-radius:9px;padding:4px 6px;margin:2px 0;cursor:pointer;color:var(--muted);font-size:11.5px;text-align:left}
+  .step button.ev:hover,.step button.ev.on{border-color:var(--border-v);background:var(--bg2)}
+  .b{display:inline-block;font-size:11px;border-radius:10px;padding:0 8px;border:1px solid var(--border-v);color:var(--muted)}
+  .b.ok{color:var(--green);border-color:var(--green-dim)}
+  .b.half{color:var(--amber);border-color:var(--gold-dim)}
+  .b.no{color:var(--faint);border-color:var(--border)}
+  .b.ep{color:var(--blue);border-color:var(--blue-dim)}
+  .b.r{color:var(--gold);border-color:var(--gold-dim)}
+  .b.bad{color:var(--red);border-color:#6b3d2c}
+  .stmt{border-top:1px solid var(--border);padding:8px 0}
+  .stmt:first-of-type{border-top:0}
+  .words{color:var(--muted);font-size:13px;font-style:italic}
+  .verse{background:var(--bg3);border-left:3px solid var(--gold-dim);border-radius:6px;padding:7px 10px;margin:6px 0;
+    font-size:14px;line-height:1.6}
+  .verse .ref{font-family:var(--mono);font-size:11px;color:var(--faint);display:block;margin-bottom:2px}
+  .verse mark{background:rgba(224,176,98,.18);color:var(--gold);border-radius:3px;padding:0 2px}
+  .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+  .chip{background:var(--bg3);border:1px solid var(--border-v);border-radius:16px;padding:2px 10px;font-size:12.5px;
+    cursor:pointer;color:var(--ink)}
+  .chip.line{border-color:var(--gold-dim);color:var(--gold)}
+  .chip:hover{border-color:var(--gold)}
+  .legend{display:flex;flex-wrap:wrap;gap:5px 12px;margin-top:8px;color:var(--muted);font-size:11.5px}
+  .ask{display:inline-block;margin-top:8px;font-size:12.5px;border:1px solid var(--border-v);border-radius:8px;
+    padding:4px 10px;color:var(--gold)}
+  @media (max-width:1180px){.grid{grid-template-columns:260px minmax(0,1fr)} #evcard{grid-column:1 / -1}}
+  @media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)} .wrap{padding:0 14px 48px}
+    .title{font-size:24px} #linescard{order:3}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="title">Va&#7747;&#347;a &middot; the lines of descent</div>
+      <div class="sub">The kings and sages of the Pur&#257;&#7751;as, the Mah&#257;bh&#257;rata and the R&#257;m&#257;ya&#7751;a,
+        generation by generation: each step as the index states it, the Sanskrit verse where both names stand, the
+        epics' verses that name both, and our own passages</div>
+    </div>
+    <nav class="nav" aria-label="Pages">
+      <a href="/">&larr; Dashboard</a>
+      <a href="/relations">Relations</a>
+      <a href="/ask">Ask</a>
+      <a href="/library">Library</a>
+    </nav>
+  </header>
+
+  <section class="search" aria-label="Choose a person">
+    <label class="lbl" for="q">Person</label>
+    <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. Janamejaya, Ik&#7779;v&#257;ku, Yay&#257;ti, Pur&#363;ravas"
+      role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list"/>
+    <div class="fg" role="group" aria-label="Index" id="srcs">
+      <button type="button" class="tog" data-src="" aria-pressed="true">all</button>
+      <button type="button" class="tog" data-src="pui" aria-pressed="false" title="V. R. Ramachandra Dikshitar, The Purana Index (1951-55)">Purana Index</button>
+      <button type="button" class="tog" data-src="inm" aria-pressed="false" title="S. Soerensen, An Index to the Names in the Mahabharata (1904)">Soerensen</button>
+      <button type="button" class="tog" data-src="vei" aria-pressed="false" title="Macdonell and Keith, Vedic Index of Names and Subjects (1912)">Vedic Index</button>
+    </div>
+    <div id="sugg" class="sugg" role="listbox" hidden></div>
+  </section>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+
+  <div class="grid">
+    <section class="card" id="linescard" aria-label="The longest lines">
+      <h2>The longest lines</h2>
+      <div class="meta">Each from a person without a parent in the index, down the child whose own line runs longest</div>
+      <div id="lines" class="lines"></div>
+    </section>
+
+    <section class="card" aria-label="The line">
+      <div id="who"><h2>Choose a person or a line</h2>
+        <div class="empty">Search by the index's own head word; the indexes number the persons who share a name, and each
+          is shown apart.</div></div>
+      <div id="ladder" class="ladder"></div>
+      <div id="down"></div>
+      <div class="legend" aria-label="Legend">
+        <span><span class="b ok">verse &#10003;</span> both names in the cited verse</span>
+        <span><span class="b half">one name</span> one of them there</span>
+        <span><span class="b no">not held</span> a text we lack (the V&#257;yu)</span>
+        <span><span class="b ep">MBh 4</span> verses of an epic that name both</span>
+        <span><span class="b r">R agrees</span> Raychaudhuri</span>
+        <span>solid line: both entries state the step; dashed: one</span>
+      </div>
+    </section>
+
+    <section class="card" id="evcard" aria-label="What the step rests on">
+      <h2>What the step rests on</h2>
+      <div id="ev"><div class="empty">Choose a step of the line.</div></div>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:16px" aria-label="Sources">
+    <h3 style="margin-top:0">Sources and how far they go</h3>
+    <div id="credits" class="meta"></div>
+  </section>
+</div>
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var SRC = "", DATA = null, STEP = -1, PATH = null, SUG = [], SI = -1, TEXTS = {};
+  var SHOWN = {vi: "Vi\u1e63\u1e47u (1910)", vic: "Vi\u1e63\u1e47u (crit.)", bh: "Bh\u0101gavata", br: "Brahm\u0101\u1e47\u1e0da",
+               m: "Matsya", hv: "Hariva\u1e43\u015ba", ram: "R\u0101m\u0101ya\u1e47a", mbh: "Mah\u0101bh\u0101rata"};
+  var EP = {mbh: "MBh", hv: "HV", ram: "R\u0101m"};
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+    return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]; }); }
+  function say(t){ $("status").textContent = t || ""; }
+  async function get(params){
+    var u = "/api/vamsa?" + Object.keys(params).map(function(k){
+      return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]); }).join("&");
+    var r = await fetch(u); var d = {};
+    try { d = await r.json(); } catch(_){ d = {error: "HTTP " + r.status}; }
+    if (!r.ok || d.error) throw new Error(d.error || ("HTTP " + r.status));
+    return d;
+  }
+
+  /* the indexes */
+  document.querySelectorAll("#srcs .tog").forEach(function(b){
+    b.addEventListener("click", function(){
+      SRC = b.dataset.src;
+      document.querySelectorAll("#srcs .tog").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      loadLines(); if ($("q").value.trim()) suggest();
+    });
+  });
+
+  /* the longest lines */
+  async function loadLines(){
+    $("lines").innerHTML = '<div class="empty">Reading the lines&hellip;</div>';
+    try {
+      var d = await get(SRC ? {lines: 1, src: SRC} : {lines: 1});
+      var html = "";
+      Object.keys(d.lines).forEach(function(s){
+        var ls = d.lines[s] || [];
+        if (!ls.length) return;
+        html += '<div class="lbl" style="margin-top:10px">' + esc(({pui: "Purana Index", inm: "Soerensen", vei: "Vedic Index"})[s] || s) + "</div>";
+        ls.forEach(function(l, i){
+          html += '<button type="button" data-s="' + esc(s) + '" data-i="' + i + '">' + esc(l.heads[0]) + " &rarr; " +
+            esc(l.heads[l.heads.length - 1]) + ' <span class="n">' + l.length + " generations &middot; " + l.both_steps +
+            " of " + (l.length - 1) + " steps in both entries</span></button>";
+        });
+      });
+      $("lines").innerHTML = html || '<div class="empty">No line of six generations or more.</div>';
+      $("lines").querySelectorAll("button").forEach(function(b){
+        b.addEventListener("click", function(){
+          var l = d.lines[b.dataset.s][+b.dataset.i];
+          $("lines").querySelectorAll("button").forEach(function(x){ x.classList.toggle("on", x === b); });
+          openP(b.dataset.s, l.entries[0], l.entries);
+        });
+      });
+    } catch (e) { $("lines").innerHTML = '<div class="empty">' + esc(e.message) + "</div>"; }
+  }
+
+  /* the search */
+  var tmr = null;
+  $("q").addEventListener("input", function(){ clearTimeout(tmr); tmr = setTimeout(suggest, 180); });
+  $("q").addEventListener("keydown", function(ev){
+    if ($("sugg").hidden) { if (ev.key === "Enter") { ev.preventDefault(); suggest(true); } return; }
+    if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+      ev.preventDefault(); SI = Math.max(0, Math.min(SUG.length - 1, SI + (ev.key === "ArrowDown" ? 1 : -1))); mark();
+    } else if (ev.key === "Enter") {
+      ev.preventDefault(); var s = SUG[SI >= 0 ? SI : 0]; if (s) pick(s);
+    } else if (ev.key === "Escape") { hide(); }
+  });
+  document.addEventListener("click", function(ev){ if (!ev.target.closest(".search")) hide(); });
+  function hide(){ $("sugg").hidden = true; $("q").setAttribute("aria-expanded", "false"); }
+  function mark(){ $("sugg").querySelectorAll("button").forEach(function(b, i){ b.classList.toggle("on", i === SI); }); }
+  async function suggest(go){
+    var q = $("q").value.trim();
+    if (!q) { hide(); return; }
+    try {
+      var p = {find: q}; if (SRC) p.src = SRC;
+      var d = await get(p);
+      SUG = d.persons || []; SI = -1;
+      if (go && SUG.length) { pick(SUG[0]); return; }
+      $("sugg").innerHTML = SUG.length ? SUG.map(function(s, i){
+        return '<button type="button" role="option" data-i="' + i + '"><b>' + esc(s.head) + '</b><span class="k">' +
+          esc(s.index) + " &middot; " + (s.up - 1) + " generations above, " + (s.down - 1) + " below" +
+          (s.entity ? " &middot; in our texts" : "") + "</span></button>";
+      }).join("") : '<div class="empty" style="padding:8px 12px">No person of that name has a parent or a child in the index.</div>';
+      $("sugg").hidden = false; $("q").setAttribute("aria-expanded", "true");
+      $("sugg").querySelectorAll("button").forEach(function(b){ b.addEventListener("click", function(){ pick(SUG[+b.dataset.i]); }); });
+    } catch (e) { say(e.message); }
+  }
+  function pick(s){ hide(); $("q").value = s.head; openP(s.source, s.entry, null); }
+
+  /* one person */
+  async function openP(src, entry, path, via){
+    say("Reading the line\u2026"); PATH = path;
+    try {
+      var p = {src: src, entry: entry}; if (path) p.path = path.join(","); if (via) p.via = via;
+      DATA = await get(p);
+      TEXTS = DATA.texts || {};
+      var u = "/vamsa?src=" + encodeURIComponent(src) + "&entry=" + entry + (path ? "&path=" + path.join(",") : "") +
+        (via ? "&via=" + via : "");
+      history.replaceState(null, "", u);
+      draw(); say("");
+    } catch (e) { say(e.message); }
+  }
+  function verdict(st){
+    var h = "";
+    if (st.cited === "both") h += '<span class="b ok">verse &#10003;</span>';
+    else if (st.cited === "one") h += '<span class="b half">one name</span>';
+    else if (st.cited === "neither") h += '<span class="b no">neither name</span>';
+    else if (st.cited === "not held") h += '<span class="b no">not held</span>';
+    else if (st.cited === "no verse") h += '<span class="b no">no such verse</span>';
+    ["mbh", "hv", "ram"].forEach(function(c){
+      var e = (st.epic || {})[c]; if (e && e[0]) h += '<span class="b ep">' + EP[c] + " " + e[0] + "</span>";
+    });
+    if (st.ours === "named together") h += '<span class="b ok">ours: together</span>';
+    else if (st.ours === "named near") h += '<span class="b ep">ours: near</span>';
+    if (st.scholar) h += '<span class="b ' + (st.scholar === "agrees" ? "r" : "bad") + '">R ' + esc(st.scholar) + "</span>";
+    if (st.joined === "verse") h += '<span class="b half" title="The name has several entries; the one whose entry cites the same verse was taken">by a shared verse</span>';
+    else if (st.joined === "named") h += '<span class="b no" title="The index names this person, but its entries of that name cannot be told apart">a name only</span>';
+    return h || '<span class="b no">the index alone</span>';
+  }
+  function person(r){
+    var h = '<div class="pname"><button type="button" data-entry="' + r.entry + '">' + esc(r.head) + "</button>" +
+      (r.entity ? ' <a href="/relations?id=' + r.entity + "&name=" + encodeURIComponent(r.head) +
+        '" style="font-family:Inter,sans-serif;font-size:11.5px" title="This person in our texts, on the Relations page">in our texts &rarr;</a>' : "") + "</div>";
+    var side = [];
+    if (r.spouses && r.spouses.length) side.push("&#9901; " + r.spouses.map(function(s){
+      return '<span class="x" data-entry="' + s.entry + '">' + esc(s.head) + "</span>"; }).join(", "));
+    if (r.other_parents && r.other_parents.length) side.push("also the child of " + r.other_parents.map(function(o){
+      return '<span class="x" data-entry="' + o.entry + '">' + esc(o.head) + "</span>" + (o.entry > 0 ?
+        ' <button type="button" class="tog" data-via="' + o.entry + '" data-for="' + r.entry +
+        '" title="Draw the line up through this parent">line through</button>' : ""); }).join(", "));
+    if (r.siblings_n) side.push(r.siblings_n + (r.siblings_n === 1 ? " sibling: " : " siblings: ") + r.siblings.map(function(s){
+      return '<span class="x" data-entry="' + s.entry + '">' + esc(s.head) + "</span>"; }).join(", ") + (r.siblings_n > r.siblings.length ? " &hellip;" : ""));
+    if (r.named_only) side.unshift("named in the index; its entries of this name cannot be told apart");
+    return h + (side.length ? '<div class="side">' + side.join(" &middot; ") + "</div>" : "");
+  }
+  function draw(){
+    var d = DATA, line = d.line, html = "";
+    $("who").innerHTML = "<h2>" + esc(line[d.me].head) + '</h2><div class="meta">' + esc(d.title) + " &middot; " +
+      line.length + " generations shown &middot; " + d.steps.filter(function(s){ return s.cited === "both"; }).length +
+      " steps with both names in the cited verse</div>";
+    line.forEach(function(r, i){
+      html += '<div class="rung"><div class="g">' + (r.generation > 0 ? "+" : "") + r.generation + '</div><div class="pbox' +
+        (i === d.me ? " me" : "") + '">' + person(r) + "</div></div>";
+      if (i < d.steps.length) {
+        var st = d.steps[i];
+        html += '<div class="step' + (st.both_entries ? "" : " one") + '"><div class="bar"><i></i></div><div><button type="button" class="ev" data-step="' +
+          i + '" aria-label="What the step from ' + esc(r.head) + " to " + esc(line[i + 1].head) + ' rests on">' + verdict(st) + "</button></div></div>";
+      }
+    });
+    $("ladder").innerHTML = html;
+    var dn = "";
+    (d.down || []).forEach(function(gen, gi){
+      dn += '<h3>' + (gi === 0 ? "Children of " + esc(line[d.me].head) : "Generation +" + (gi + 1)) + '</h3><div class="chips">' +
+        gen.map(function(n){ return '<button type="button" class="chip' + (n.on_line ? " line" : "") + '" data-entry="' + n.entry +
+          '" title="' + esc(n.evidence.cited === "both" ? "both names in the cited verse" : "") + '">' + esc(n.head) + "</button>"; }).join("") + "</div>";
+    });
+    $("down").innerHTML = dn;
+    document.querySelectorAll("#ladder [data-entry], #down [data-entry]").forEach(function(b){
+      b.addEventListener("click", function(){ openP(d.source, +b.dataset.entry, null); });
+    });
+    document.querySelectorAll("#ladder [data-via]").forEach(function(b){
+      b.addEventListener("click", function(){ openP(d.source, +b.dataset.for, null, +b.dataset.via); });
+    });
+    document.querySelectorAll("#ladder button.ev").forEach(function(b){
+      b.addEventListener("click", function(){
+        showStep(+b.dataset.step);
+        if (window.innerWidth < 760) $("evcard").scrollIntoView({behavior: "smooth", block: "start"});
+      });
+    });
+    var first = d.steps.findIndex(function(s){ return s.cited === "both"; });
+    showStep(d.me > 0 ? d.me - 1 : (first >= 0 ? first : 0));
+    credits();
+  }
+  function hl(words, forms){
+    var h = esc(words);
+    (forms || []).forEach(function(f){
+      if (!f) return; var e = esc(f), k = h.indexOf(e);
+      if (k >= 0) h = h.slice(0, k) + "<mark>" + e + "</mark>" + h.slice(k + e.length);
+    });
+    return h;
+  }
+  function verse(code, ref, forms){
+    var w = (DATA.verses || {})[code + "|" + ref];
+    if (!w) return "";
+    return '<div class="verse"><span class="ref">' + esc(SHOWN[code] || code) + " " + esc(ref) + "</span>" + hl(w, forms) + "</div>";
+  }
+  function showStep(i){
+    var d = DATA; if (!d || !d.steps.length) { $("ev").innerHTML = '<div class="empty">This person has no parent or child in the index.</div>'; return; }
+    i = Math.max(0, Math.min(d.steps.length - 1, i)); STEP = i;
+    document.querySelectorAll("#ladder button.ev").forEach(function(b){ b.classList.toggle("on", +b.dataset.step === i); });
+    var st = d.steps[i], p = d.line[i], c = d.line[i + 1];
+    var h = '<div class="meta"><b style="color:var(--ink)">' + esc(p.head) + "</b> &rarr; <b style=\"color:var(--ink)\">" + esc(c.head) +
+      "</b> &middot; " + (st.both_entries ? "both entries state it" : "one entry states it") + "</div>";
+    st.items.forEach(function(it){
+      h += '<div class="stmt"><div>' + esc(it.subject) + " <i>" + esc(it.label) + "</i> " + esc(it.object) +
+        ' <span class="meta">in the entry ' + esc(it.stated_in) + "</span></div>";
+      if (it.words) h += '<div class="words">&ldquo;' + esc(it.words) + "&rdquo;" + (it.refs && it.refs.length ? " (" + esc(it.refs.join("; ")) + ")" : "") + "</div>";
+      if ((it.join || []).indexOf("verse") >= 0) h += '<div class="meta">The name has several entries in the index; the one whose entry cites the same verse was taken.</div>';
+      var shown = 0;
+      (it.cites || []).forEach(function(cv){
+        if (shown >= 2 || (cv.verdict !== "both" && cv.verdict !== "one")) return;
+        var at = (cv.at && cv.at.length) ? cv.at : [cv.ref];
+        at.slice(0, 2).forEach(function(ref){ var v = verse(cv.text, ref, [cv.subject_form, cv.object_form]); if (v) { h += v; shown++; } });
+        h += '<div class="meta">' + (cv.verdict === "both" ? "Both names" : "One name") + " in " + esc(SHOWN[cv.text] || cv.text) + " " +
+          esc(cv.ref) + (cv.printed ? " (the index prints " + esc(cv.printed) + ")" : "") + "</div>";
+      });
+      if (!shown && it.cited === "not held") h += '<div class="meta">The index cites a text we do not hold in Sanskrit (the V&#257;yu; the Matsya after chapter 176).</div>';
+      if (!shown && it.cited === "no citation") h += '<div class="meta">The index gives no verse for this statement.</div>';
+      if (!shown && it.cited === "neither") h += '<div class="meta">Neither name stands in the cited verse or the two on each side of it: the edition may differ, or the index.</div>';
+      var ep = [];
+      ["mbh", "hv", "ram"].forEach(function(code){
+        var e = (it.together || {})[code];
+        if (e && e[0]) ep.push(EP[code] + " " + esc(e[1]) + (e[0] > 1 ? " and " + (e[0] - 1) + " more" : ""));
+      });
+      if (ep.length) h += '<div class="meta">Both names in one verse of ' + ep.join("; ") + "</div>";
+      ["hv", "ram"].forEach(function(code){
+        var e = (it.together || {})[code]; if (e && e[0] && e[1]) h += verse(code, e[1], []);
+      });
+      if (it.ours && it.ours !== "not tied") h += '<div class="meta">Our own passages: ' + esc(it.ours) + (it.passages ? " (" + it.passages + " passages)" : "") + "</div>";
+      if (it.raychaudhuri) h += '<div class="meta">Raychaudhuri ' + esc(it.raychaudhuri) + (it.raychaudhuri_note ? ": " + esc(it.raychaudhuri_note) : "") + "</div>";
+      h += "</div>";
+    });
+    var q = "What do the Puranas and the epics say of " + c.head.replace(/\s*[\(\[].*?[\)\]]/g, "") + " as the child of " +
+      p.head.replace(/\s*[\(\[].*?[\)\]]/g, "") + "? Do the texts agree on this step of the line?";
+    h += '<a class="ask" href="/ask?mode=professor&q=' + encodeURIComponent(q) + '" title="The Professor reads the verses, the names, the indexes and Raychaudhuri; each question is metered under the cap">Ask the Professor about this step &rarr;</a>';
+    $("ev").innerHTML = h;
+  }
+  function credits(){
+    var t = TEXTS, h = "The relations: V. R. Ramachandra Dikshitar, <i>The Purana Index</i> (1951-55); S. Soerensen, <i>An Index to the Names in the Mahabharata</i> (1904); " +
+      "A. A. Macdonell and A. B. Keith, <i>Vedic Index of Names and Subjects</i> (1912): read from the Cologne Digital Sanskrit Dictionaries' e-texts (CC BY-NC-SA 3.0), " +
+      "each statement checked against the entry's words. The Sanskrit: GRETIL (G\u00f6ttingen Register of Electronic Texts in Indian Languages): ";
+    var parts = [];
+    Object.keys(t).forEach(function(k){ parts.push("<b>" + esc(t[k].title) + "</b>, " + esc(t[k].edition) + " (" + esc(t[k].rights) + ")"); });
+    h += parts.join("; ") + ". A verse where both names stand says where to read; it does not by itself prove the relation." +
+      (DATA && DATA.checked ? " Checked " + esc(DATA.checked) + "." : "");
+    $("credits").innerHTML = h;
+  }
+
+  /* the address */
+  var P = new URLSearchParams(location.search);
+  loadLines();
+  if (P.get("src") && P.get("entry")) {
+    var path = (P.get("path") || "").split(",").filter(Boolean).map(Number);
+    openP(P.get("src"), +P.get("entry"), path.length ? path : null, P.get("via") ? +P.get("via") : null);
+  } else if (P.get("name")) { $("q").value = P.get("name"); suggest(true); }
+})();
+</script>
+</body>
+</html>

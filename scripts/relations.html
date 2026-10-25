@@ -116,6 +116,7 @@
     <nav class="nav" aria-label="Pages">
       <a href="/">&larr; Dashboard</a>
       <a href="/ask">Ask</a>
+      <a href="/vamsa" title="VAMSA_UI_2026_10_25: the lines of descent, each step with its verse">Vamsa</a>
       <a href="/library">Library</a>
     </nav>
   </header>
@@ -408,7 +409,8 @@
       "</div></div>";
   }
   function lineOf(p){
-    var h = "<h3>Line of descent in the " + esc(p.index) + "</h3><div class=\"line\">";
+    var h = "<h3>Line of descent in the " + esc(p.index) + " <a href=\"/vamsa?src=" + encodeURIComponent(p.source) + "&entry=" + p.entry +
+      "\" style=\"text-transform:none;letter-spacing:0;font-weight:500\" title=\"VAMSA_UI_2026_10_25: the whole line, each step with its verse\">the whole line &rarr;</a></h3><div class=\"line\">";
     var up = p.up.slice().reverse();
     up.forEach(function(gen, i){
       h += "<div class=\"gen\"><span class=\"g\">\u2212" + (up.length - i) + "</span>" + gen.map(chip).join("") + "</div>";

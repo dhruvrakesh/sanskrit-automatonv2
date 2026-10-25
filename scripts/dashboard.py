@@ -5687,6 +5687,7 @@ main{{max-width:1180px;margin:0 auto;padding:24px 20px 60px}}
   <a class="back" href="/methodology" title="How source and translation quality are measured" style="color:var(--muted);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#9878;&#65039; Quality methodology</a>
   <a class="back" href="/ask" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128172; Ask the Corpus</a>
   <a class="back" href="/relations" title="RELATIONS_UI_2026_10_24: whom our texts name together, what the indexes state of each person, the lines of descent" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#128279; Relations</a>
+  <a class="back" href="/vamsa" title="VAMSA_UI_2026_10_25: the lines of descent, generation by generation, each step with the Sanskrit verse where both names stand" style="color:var(--gold);border:1px solid var(--border);padding:5px 12px;border-radius:7px">&#127795; Vamsa</a>
 </header>
 <main>{body}</main>
 <!-- BOOKSMITH_WIRING_2026_09_12 -->
@@ -6963,6 +6964,39 @@ def api_relations():
             k = max(1, min(60, int(request.args.get("k") or 24)))
             return jsonify(rv.view(db, eid, ROOT / "data" / "shelf", k=k))
         return jsonify({"names": rv.find(db, request.args.get("find", ""), limit=12), "mark": rv.MARK})
+    except (ValueError, sqlite3.Error) as e:
+        return jsonify({"error": "%s: %s" % (type(e).__name__, str(e)[:200])}), 400
+
+
+# VAMSA_UI_2026_10_25: the lines of descent, generation by generation, each step with its verse (scripts/vamsa.html).
+@app.get("/vamsa")
+def vamsa_page():
+    return send_from_directory(str(SCRIPTS), "vamsa.html")
+
+
+@app.get("/api/vamsa")
+def api_vamsa():
+    """VAMSA_UI_2026_10_25: ?lines=1[&src=] -> the longest lines of each index; ?find=<text>[&src=] -> the index's
+    persons of that name; ?src=<pui|inm|vei>&entry=<id>[&path=<ids>|&via=<a parent>] -> the line up and down, each
+    step with the index's words, the verse where both names stand, the epics' verses and our passages
+    (scripts/vamsa_view.py).
+    Read-only: context.db, data/shelf/kin.db and vamsa.db opened mode=ro; no model is called."""
+    if str(SCRIPTS) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS))
+    import vamsa_view as vv
+    db = str(ROOT / "data" / "context.db")
+    shelf = ROOT / "data" / "shelf"
+    src = (request.args.get("src") or "").strip()
+    try:
+        if request.args.get("lines"):
+            return jsonify(vv.lines(db, str(shelf / "kin.db"), src=src))
+        if "find" in request.args:
+            return jsonify({"persons": vv.find(db, str(shelf / "kin.db"), request.args.get("find", ""), src=src),
+                            "mark": vv.MARK})
+        entry = int(request.args.get("entry") or 0)
+        path = [int(x) for x in (request.args.get("path") or "").split(",") if x.strip()][:400] or None
+        via = int(request.args["via"]) if (request.args.get("via") or "").lstrip("-").isdigit() else None
+        return jsonify(vv.tree(db, str(shelf / "kin.db"), str(shelf / "vamsa.db"), src, entry, path=path, via=via))
     except (ValueError, sqlite3.Error) as e:
         return jsonify({"error": "%s: %s" % (type(e).__name__, str(e)[:200])}), 400
 

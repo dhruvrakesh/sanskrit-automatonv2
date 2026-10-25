@@ -2557,3 +2557,18 @@ From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automat
 3. On the site: Publish Srangam in Lovable; after 04:40 UTC, V6 of docs\cloud\C20_checks_2026-10-24.sql (the
    nightly job's runs).
 4. What Soerensen's run leaves: `python scripts\kin_index.py --per-source 0` (the plan) names the command.
+## 25 Oct: the verses read, the Vamsa page, the repair rounds (DOCS95_2026_10_25)
+
+From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automatonv2"`), not in the minutes :00 to
+:03 of a tick (00:00, 03:00 ... 21:00):
+
+1. `python scripts\patch_vamsa_ui_2026_10_25.py --check`, then without --check; the same for
+   `patch_auto_repair_2026_10_25.py` and `patch_docs95_2026_10_25.py`. Then
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. `python scripts\vamsa_check.py` (the plan: every check counted, nothing written), then
+   `python scripts\vamsa_check.py --yes` (free; writes data\shelf\vamsa.db and two exports, about half a minute).
+3. Restart the dashboard when it is idle; open http://127.0.0.1:5057/vamsa (or the Vamsa button on the dashboard's
+   top bar, the Library's header, the Relations page beside each line of descent).
+4. The repair rounds: `python scripts\repair_auto.py` (the queue), `python scripts\repair_auto.py --round --dry-run`
+   (what the next round would run); the allowance: `python scripts\repair_auto.py --allow 0.25` (0 stops the paid
+   steps). The maintenance task runs a round at each tick; `python scripts\repair_auto.py --log` shows them.

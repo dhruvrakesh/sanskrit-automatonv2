@@ -125,9 +125,25 @@ try {
     try {
         & $py scripts\entity_links.py --scheduled --claims data\shelf\claims.db 2>&1 | Add-Content $log
         if (Test-Path "data\shelf\kin.db") { & $py scripts\kin_index.py --check 2>&1 | Add-Content $log }
+        # VAMSA_CHECK_2026_10_25: the Purana Index's kinships read in GRETIL's verses (FREE); only when kin.db changed
+        if ((Test-Path "data\shelf\kin.db") -and (Test-Path "scripts\vamsa_check.py")) {
+            & $py scripts\vamsa_check.py --scheduled 2>&1 | Add-Content $log
+        }
         Log ("STEP d links        {0:n0}s" -f ((Get-Date) - $td).TotalSeconds)
     } catch {
         Log ("STEP d links SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $td).TotalSeconds, $_)
+    }
+
+    # e) AUTO_REPAIR_2026_10_25: one round of the scans' repair (repair_auto.py): one step of one text, the step
+    #    repair_text.py names; the paid one (vision) within the allowance (repair_auto.py --allow) and above the cap's
+    #    reserve. A failure here is logged and skipped; it never stops the DONE line.
+    if (Test-Writer "d") { exit 0 }
+    $te = Get-Date
+    try {
+        if (Test-Path "scripts\repair_auto.py") { & $py scripts\repair_auto.py --round 2>&1 | Add-Content $log }
+        Log ("STEP e repair       {0:n0}s" -f ((Get-Date) - $te).TotalSeconds)
+    } catch {
+        Log ("STEP e repair SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $te).TotalSeconds, $_)
     }
 
     Log ("DONE maintenance - total {0:n0}s" -f ((Get-Date) - $t0).TotalSeconds)

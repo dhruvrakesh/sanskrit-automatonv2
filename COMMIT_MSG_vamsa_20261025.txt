@@ -1,0 +1,30 @@
+The indexes' kinships read in the Sanskrit; the lines of descent, each step with its verse; the scans repaired by themselves within an allowance; the project's evolution traced (VAMSA_CHECK, VAMSA_UI, AUTO_REPAIR, DOCS95)
+
+- VAMSA_CHECK_2026_10_25 (scripts/vamsa_check.py, new): the Purana Index's citations (Vi., Bha., Br., M.) found and
+  read in GRETIL's TEI texts (the Visnu in the Venkatesvara print and Pathak's critical edition, the Bhagavata, the
+  Brahmanda with the index's padas mapped to GRETIL's parts by their colophons, the Matsya 1-176); every relation's
+  names looked for in the critical editions of the Mahabharata (counts and references only: BORI's e-text), the
+  Harivamsa and the Ramayana. Names compared by their letters (vowels by quality, the anusvara as one sign), short
+  names by their case forms; tuned on the real data for precision. Free; --yes writes data/shelf/vamsa.db and two
+  exports; --scheduled only when kin.db or the zip changed. On 25 Oct: of 7,098 citations of a text we hold, both
+  names stand in the cited verse for 4,910.
+- VAMSA_UI_2026_10_25 (scripts/vamsa_view.py, scripts/vamsa.html, new; scripts/patch_vamsa_ui_2026_10_25.py): /vamsa
+  and /api/vamsa on the PC's dashboard, read-only: the longest lines of each index; a person's line up and down as a
+  ladder of generations with spouses, siblings and other parents; each step's evidence (the index's words and
+  reference, the Sanskrit verse with both names marked and its edition, the epics' verses, our passages,
+  Raychaudhuri); two more joins, each shown on its step (the honorific aside; a verse both entries cite); "line
+  through" another parent; a question for the Professor put in the Ask page's box (never asked by itself). Links from
+  the dashboard, the Library, the Relations page and the Ask page.
+- AUTO_REPAIR_2026_10_25 (scripts/repair_auto.py, new; scripts/patch_auto_repair_2026_10_25.py): the maintenance
+  task's step e: the first round of each day judges every text; each other round does one step of one text, the step
+  repair_text.py names: vision within $0.25 a day unless set and above a $1.00 reserve of the cap, a repaired text into
+  the database only when it replaces nothing and the dashboard is idle; decisions written down, never taken. Step d
+  runs vamsa_check.py --scheduled. health_watch.py warns when the rounds are blocked (the cap, or only decisions
+  left), so the site mails. The rounds' own files stay out of the repository (.gitignore).
+- DOCS95_2026_10_25: docs/VAMSA_2026-10-25.md, docs/CONSOLIDATION_2026-10-25.md, docs/EVOLUTION_2026-10-25.md (new);
+  DEBT section 16, STATE 30, RUNBOOK, PLATFORM 98, ENTERPRISE_PATH 85, ASKS 12, RELATIONS_AND_ASK 10, README's web UI.
+
+Tests: test_vamsa_2026_10_25, test_auto_repair_2026_10_25, test_docs95_2026_10_25.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

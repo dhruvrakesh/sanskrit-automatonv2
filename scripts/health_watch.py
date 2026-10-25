@@ -15,6 +15,9 @@ ends, the database is opened read-only, nothing is written but the optional log 
   disk         the drive that holds the backups: under 50 GB free warn, under 15 GB fail
   spend        the cap (budget_state): paused, or under $2 left, warn
   links        entity_link_runs: the links last rebuilt more than 26 hours ago while the names changed since, warn
+  repair       data\auto_repair_state.json (repair_auto.py's rounds, AUTO_REPAIR_2026_10_25), when there is one: blocked
+               (the cap, or only decisions left) warn, with what it asks; no round for 30 hours while it has an
+               allowance, warn
 
   python scripts\\health_watch.py               one line a check, then the verdict
   python scripts\\health_watch.py --json        the same as JSON
@@ -181,6 +184,28 @@ def check_db(db: Path, now) -> list:
     return out
 
 
+REPAIR_H = 30
+
+
+def check_repair(path: Path, now):
+    """AUTO_REPAIR_2026_10_25: the state the last round left; None when the rounds have never run."""
+    if not path.exists():
+        return None
+    try:
+        st = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"state": "warn", "say": "repair: the rounds' state does not read"}
+    t = parse_ts(st.get("at"))
+    asks = [a.get("say", "") for a in (st.get("asks") or []) if isinstance(a, dict)]
+    if st.get("status") == "blocked":
+        return {"state": "warn", "say": "repair: " + (asks[0] if asks else "blocked")}
+    if t is not None and hours(t, now) > REPAIR_H and float(st.get("allowance") or 0) > 0:
+        return {"state": "warn", "say": "repair: no round since %s" % t.strftime("%d %b %H:%M")}
+    d = st.get("did") or {}
+    return {"state": "ok", "say": "repair: %s%s" % (st.get("status", "?"), (", %s %s" % (d.get("step"), d.get("doc")))
+                                                      if d.get("doc") else "")}
+
+
 def health(root: Path = ROOT, backup_dir: str = "", now=None) -> dict:
     now = now or datetime.datetime.now()
     bdir = Path(backup_dir or os.environ.get("SA_BACKUP_DIR") or r"D:\backups")
@@ -190,6 +215,9 @@ def health(root: Path = ROOT, backup_dir: str = "", now=None) -> dict:
               "disk": check_disk(bdir if bdir.exists() else root)}
     for c in check_db(root / "data" / "context.db", now):
         checks[c["say"].split(":", 1)[0]] = c
+    rep = check_repair(root / "data" / "auto_repair_state.json", now)   # AUTO_REPAIR_2026_10_25
+    if rep:
+        checks["repair"] = rep
     status = max((c["state"] for c in checks.values()), key=lambda s: RANK[s])
     return {"mark": MARK, "status": status, "at": now.strftime("%Y-%m-%dT%H:%M:%S"), "checks": checks,
             "problems": [c["say"] for c in checks.values() if c["state"] != "ok"]}
