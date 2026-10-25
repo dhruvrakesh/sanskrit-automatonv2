@@ -60,6 +60,9 @@ translation, Ask, embeddings, and entity extraction.
   indexes, generation by generation; each step with the index's words, the Sanskrit verse where both
   names stand (GRETIL's editions, read by scripts/vamsa_check.py), the epics' verses that name both, our
   passages and Raychaudhuri's view. Read-only; no model is called.
+  On the site (INDEX_SITE_2026_10_25, DOCS97_2026_10_25): **/corpus/genealogies**, the same lines for signed-in
+  readers, from the mirror (scripts/index_sync.py, docs/cloud/C21), with "In the indexes" on a name's page; the
+  Mahabharata e-text counted, never quoted; Raychaudhuri's view not yet (B2).
 - **💾 Database** — snapshots the DB and opens it in **Datasette** for read-only SQL.
 
 ---

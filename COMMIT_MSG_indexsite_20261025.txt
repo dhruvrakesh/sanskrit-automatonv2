@@ -1,0 +1,26 @@
+The genealogies of the indexes on Srangam (25 Oct, night)
+
+Asked: "i thought ill see the geneaologies of kings on a react front end and our carefully
+built db mirrored from local to supabase!" The desk's /vamsa (the three indexes' lines of
+descent, each step with the index's words, the GRETIL verse where both names stand, the
+epics' verses, our passages) was the desk's alone.
+
+- INDEX_SITE_2026_10_25: scripts/index_sync.py builds the rows from context.db, kin.db and
+  vamsa.db (read-only, the same functions as /vamsa, no model) and sends what differs
+  through corpus-index (HMAC); --if-configured for the tick. Places only in texts the
+  mirror carries; verse forms only for shown texts; the MBh e-text counted, never quoted.
+- C21_INDEX_SITE_2026_10_25: docs/cloud/C21 (seven tables in corpus, four service functions
+  for service_role, five readers behind the gate; checks); docs/cloud/C21_corpus-index
+  (the edge function, deno tests).
+- The Srangam kit docs/srangam/INDEX_SITE_2026-10-25 and
+  scripts/patch_srangam_index_site_2026_10_25.py: /corpus/genealogies, a person's line,
+  "In the indexes" on a name's page, the tab and the menu, corpus-index; Phase AQ.
+- scripts/patch_index_task_2026_10_25.py: the mirror task sends them last in each tick.
+- DOCS97_2026_10_25: docs/INDEX_SITE_2026-10-25.md; STATE section 32; RUNBOOK; README.
+
+Tests: test_index_site_pg (PostgreSQL 16, 24), test_srangam_index_site (9), test_docs97 (3);
+deno 8 + 7; Srangam's vitest index-site (17), all 48 files passing; the suite on a copy:
+207 modules, none failed.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -9,6 +9,8 @@ $ErrorActionPreference = "Continue"
 # docs/MEDIA_AND_CORNER_2026-10-09.md), at most 40 MB per tick; it exits 0 quietly until C8 is
 # applied and corpus-media is deployed. The PC is kept awake while the tick runs (the tick of
 # 2026-10-08 night took 7.5 h because the PC slept in the middle); it may sleep again after.
+# INDEX_SITE_2026_10_25: last, the indexes' genealogies (scripts\index_sync.py, docs/INDEX_SITE_2026-10-25.md):
+# what differs only; it exits 0 quietly until C21 is pasted and corpus-index is deployed.
 $root = "D:\Sanksrit Automatons\sanskrit-automatonv2"
 $log  = "D:\backups\corpus_mirror_log.txt"
 New-Item -ItemType Directory -Force -Path "D:\backups" | Out-Null
@@ -34,6 +36,11 @@ $t1 = Get-Date
 & $py scripts\corpus_media.py --apply --if-configured --max-mb 40 2>&1 | ForEach-Object { "$_" } | Add-Content $log
 $rcm = $LASTEXITCODE
 Log ("DONE - corpus media rc={0} {1:n0}s" -f $rcm, ((Get-Date) - $t1).TotalSeconds)
+$t2 = Get-Date
+& $py scripts\index_sync.py --apply --if-configured 2>&1 | ForEach-Object { "$_" } | Add-Content $log
+$rci = $LASTEXITCODE
+Log ("DONE - index genealogies rc={0} {1:n0}s" -f $rci, ((Get-Date) - $t2).TotalSeconds)
 if ($awake) { [void][SanskritAutomaton.Power]::SetThreadExecutionState([uint32]2147483648) }
 if ($rc -ne 0) { exit $rc }
-exit $rcm
+if ($rcm -ne 0) { exit $rcm }
+exit $rci

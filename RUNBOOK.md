@@ -2572,3 +2572,18 @@ From the repository root (`Set-Location "D:\Sanksrit Automatons\sanskrit-automat
 4. The repair rounds: `python scripts\repair_auto.py` (the queue), `python scripts\repair_auto.py --round --dry-run`
    (what the next round would run); the allowance: `python scripts\repair_auto.py --allow 0.25` (0 stops the paid
    steps). The maintenance task runs a round at each tick; `python scripts\repair_auto.py --log` shows them.
+## 25 Oct, night: the genealogies on the site (DOCS97_2026_10_25)
+
+docs\INDEX_SITE_2026-10-25.md. From the repository root:
+
+1. `python scripts\patch_index_task_2026_10_25.py --check`, then without --check; the same for
+   `patch_docs97_2026_10_25.py`. Then `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. In the Lovable Cloud SQL editor: P1 of docs\cloud\C21_checks_2026-10-25.sql; the whole of
+   docs\cloud\C21_index_site_2026-10-25.sql in one paste; V1 and V2.
+3. In D:\srangam-42267: `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_srangam_index_site_2026_10_25.py"`
+   (--check first), the typecheck, the tests and the build, commit and push; ask Lovable to deploy
+   supabase/functions/corpus-index as it is.
+4. `python scripts\index_sync.py` (the plan), then `python scripts\index_sync.py --apply` (about 25 MB of JSON, gzip;
+   what differs only, so a second run sends nothing); `--status` shows the counts here and there. E1 to E3 of the
+   checks; open /corpus/genealogies signed in.
+5. The mirror task sends what changes after that, last in each tick; it is quiet until steps 2 and 3 are done.
