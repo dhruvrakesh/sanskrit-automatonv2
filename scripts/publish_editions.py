@@ -14,6 +14,10 @@ Refused: a text the register (data/source_verdicts.jsonl) holds in repair or has
 <doc>__w_<site>) whose entry gives no source and licence; an edition with no scholarly English. An edition whose
 content has not changed is left as it is (its date too).
 
+PROSE_EDITION_2026_10_25: each edition is also written read as prose (export_html.py --scholar --prose), as
+public/scholarly/<slug>-prose.html, its bar linking the verses and the verses' bar linking it; the index gives its
+file ("prose"), size and digest, and the site's /editions page links it. "prose": false in an entry keeps it out.
+
   python scripts\\publish_editions.py                      (the plan: what would be written; free, nothing written)
   python scripts\\publish_editions.py --apply              (writes into the Srangam repo; never runs git)
   python scripts\\publish_editions.py --only devimahatmya --apply
@@ -26,6 +30,7 @@ import argparse, datetime, hashlib, html, json, os, re, subprocess, sys, tempfil
 from pathlib import Path
 
 MARK = "EDITIONS_SITE_2026_10_18"
+MARK_PROSE = "PROSE_EDITION_2026_10_25"
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 CONFIG = ROOT / "configs" / "editions.json"
@@ -106,12 +111,12 @@ def check_entry(e: dict, reg: dict) -> str:
     return ""
 
 
-def export(db: Path, e: dict, out: Path, py: str = sys.executable) -> Path:
-    cmd = [py, str(SCRIPTS / "export_html.py"), "--db", str(db), "--doc", e["doc"], "--scholar", "--sanskrit",
-           "--side-by-side", "--from", str(e["pages"][0]), "--to", str(e["pages"][1]), "--title", e["title"],
-           "--out", str(out)]
+def export(db: Path, e: dict, out: Path, py: str = sys.executable, prose: bool = False) -> Path:
+    cmd = [py, str(SCRIPTS / "export_html.py"), "--db", str(db), "--doc", e["doc"], "--scholar"]
+    cmd += ["--prose"] if prose else ["--sanskrit", "--side-by-side"]   # PROSE_EDITION_2026_10_25
+    cmd += ["--from", str(e["pages"][0]), "--to", str(e["pages"][1]), "--title", e["title"], "--out", str(out)]
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
-    files = sorted(out.glob("*_scholar.html"))
+    files = sorted(out.glob("*_scholar_prose.html" if prose else "*_scholar.html"))
     if r.returncode != 0 or len(files) != 1:
         raise RuntimeError("export_html.py: rc %s, %d file(s): %s" % (r.returncode, len(files), (r.stderr or r.stdout)[-400:]))
     return files[0]
@@ -172,18 +177,31 @@ def credits_html(e: dict, st: dict) -> str:
     return "<div class='credits'>" + "<br/>".join(lines) + "</div>"
 
 
-def dress(page: str, e: dict, st: dict) -> str:
-    """The exported edition, given its place on the site: a bar back to /editions, its credits, its canonical address."""
+def wants_prose(e: dict) -> bool:
+    """PROSE_EDITION_2026_10_25: an edition is also read as prose unless its entry says "prose": false."""
+    return e.get("prose", True) is not False
+
+
+def dress(page: str, e: dict, st: dict, prose: bool = False) -> str:
+    """The exported edition, given its place on the site: a bar back to /editions, its credits, its canonical address.
+    PROSE_EDITION_2026_10_25: the prose's bar links the verses, the verses' bar the prose."""
     slug = e["slug"]
-    url = "%s/scholarly/%s.html" % (SITE_URL, slug)
+    url = "%s/scholarly/%s%s.html" % (SITE_URL, slug, "-prose" if prose else "")
     desc = "%s: %s" % (e["title"], e.get("subtitle") or "the Sanskrit with a scholarly English and notes")
+    if prose:
+        desc = "%s, read as prose: the scholarly English with its notes" % e["title"]
     head = ("<link rel='canonical' href='%s'/><meta name='description' content='%s'/>"
             "<meta name='robots' content='index,follow'/><!-- %s -->"
             % (html.escape(url, quote=True), html.escape(desc, quote=True), MARK))
     page = page.replace("</head>", head + "</head>", 1)
     page = page.replace("</style>", BAR_CSS + "</style>", 1)
-    bar = ("<div class='site-bar'><a href='/editions'>&larr; Srangam: the scholarly editions</a>"
-           "<span>%s</span></div>" % html.escape(e.get("subtitle") or ""))
+    other = ""
+    if prose:   # PROSE_EDITION_2026_10_25
+        other = "<a href='/scholarly/%s.html'>The verses, beside the Sanskrit</a>" % html.escape(slug, quote=True)
+    elif wants_prose(e):
+        other = "<a href='/scholarly/%s-prose.html'>Read it as prose</a>" % html.escape(slug, quote=True)
+    bar = ("<div class='site-bar'><a href='/editions'>&larr; Srangam: the scholarly editions</a>%s"
+           "<span>%s</span></div>" % (other, html.escape(e.get("subtitle") or "")))
     m = re.search(r"<body[^>]*>", page)
     if not m:
         raise RuntimeError("the export has no <body>")
@@ -247,6 +265,23 @@ def plan(a, cfg: dict, reg: dict, site: Path, now: str) -> tuple:
                  rec["flagged"], len(body) / 1e6, "" if same else " -> %s" % (SUBDIR / ("%s.html" % slug)).as_posix()))
         if not same:
             writes.append((out_dir / ("%s.html" % slug), body))
+        if wants_prose(e):   # PROSE_EDITION_2026_10_25: the edition read as prose, beside it
+            with tempfile.TemporaryDirectory() as td:
+                try:
+                    pp = dress(export(Path(a.db), e, Path(td), prose=True).read_text(encoding="utf-8"), e, st, prose=True)
+                except RuntimeError as x:
+                    problems.append("%s (as prose): %s" % (slug, x)); pp = None
+            if pp is not None:
+                pb = pp.replace("\r\n", "\n").encode("utf-8")
+                ph = sha(pb)
+                psame = prev.get("prose_sha256") == ph and (out_dir / ("%s-prose.html" % slug)).exists()
+                rec.update({"prose": "/scholarly/%s-prose.html" % slug, "prose_bytes": len(pb), "prose_sha256": ph,
+                            "mark_prose": MARK_PROSE})
+                print("  %-22s %s  as prose, %.2f MB%s" % ("", "unchanged" if psame else ("new" if not prev.get("prose")
+                                                                                        else "changed"), len(pb) / 1e6,
+                                                         "" if psame else " -> %s" % (SUBDIR / ("%s-prose.html" % slug)).as_posix()))
+                if not psame:
+                    writes.append((out_dir / ("%s-prose.html" % slug), pb))
     gone = [s for s in old if s not in {r.get("slug") for r in rows} and not (a.only and s not in a.only)]
     for s in gone:
         print("  %-22s no longer in the config (or off): dropped from the index; its file stays until removed by hand" % s)

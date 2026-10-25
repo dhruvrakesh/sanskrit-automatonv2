@@ -58,7 +58,7 @@ class ThePublisher(unittest.TestCase):
         rc, out = self.run_tool()
         self.assertEqual(rc, 0, out)
         self.assertIn("devi", out); self.assertIn("new", out)
-        self.assertIn("VERDICT: 2 file(s) to write", out)
+        self.assertIn("VERDICT: 3 file(s) to write", out)   # PROSE_EDITION_2026_10_25: the edition, its prose, the index
         self.assertIn("NEXT: python scripts\\publish_editions.py --apply", out)
         self.assertFalse((self.site / "public").exists())
 

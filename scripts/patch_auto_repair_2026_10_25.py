@@ -3,28 +3,30 @@
 """
 patch_auto_repair_2026_10_25.py  (2026-10-25)  AUTO_REPAIR_2026_10_25
 
-The scheduled maintenance task (scripts\maintenance_runner.ps1, every 3 hours) gains two steps, and health_watch.py a
+The scheduled maintenance task (scripts\\maintenance_runner.ps1, every 3 hours) gains two steps, and health_watch.py a
 check:
 
-  step d    VAMSA_CHECK_2026_10_25: after kin_index.py --check, python scripts\vamsa_check.py --scheduled: the Purana
+  step d    VAMSA_CHECK_2026_10_25: after kin_index.py --check, python scripts\\vamsa_check.py --scheduled: the Purana
             Index's kinships read in GRETIL's verses, and the epics' verses that name both (FREE: no model); it writes
             only when kin.db or GRETIL's zip changed since its last run
-  step e    python scripts\repair_auto.py --round: one round of the scans' repair: the first round of each day judges
+  step e    python scripts\\repair_auto.py --round: one round of the scans' repair: the first round of each day judges
             every text (repair_text.py --judge-all, free); each other round does one step of one text, the step
             repair_text.py names: vision OCR within the allowance (repair_auto.py --allow, $0.25 a day unless set) and
             above the cap's reserve ($1.00), or a repaired text into the database when it replaces nothing (a backup
             first; only while the dashboard answers and runs no job). A failure is logged and skipped
-  health    health_watch.py reads data\auto_repair_state.json when there is one: "blocked" (the cap, or only
+  health    health_watch.py reads data\\auto_repair_state.json when there is one: "blocked" (the cap, or only
             decisions left) is a warn, so the site mails the super admin; no round for 30 hours, a warn
 
-  .gitignore  the rounds' own files (data\auto_repair.json, _log.jsonl, _state.json, .lock) stay out of the repository
+  .gitignore  the rounds' own files (data\\auto_repair.json, _log.jsonl, _state.json, .lock) stay out of the repository
 
 Needs MAINT_GUARD_2026_10_24 in the runner, HEALTH_2026_10_23 in health_watch.py and GRETIL_LIBRARY_2026_10_22 in
-.gitignore, and scripts\repair_auto.py and scripts\vamsa_check.py in place. Anchored, all-or-nothing, marker-idempotent; line endings kept; a .bak_autorepair_<date>
+.gitignore, and scripts\\repair_auto.py and scripts\\vamsa_check.py in place. Anchored, all-or-nothing, marker-idempotent; line endings kept; a .bak_autorepair_<date>
 copy of each file; health_watch.py compiled before anything is written.
 
-  python scripts\patch_auto_repair_2026_10_25.py --check
-  python scripts\patch_auto_repair_2026_10_25.py
+  python scripts\\patch_auto_repair_2026_10_25.py --check
+  python scripts\\patch_auto_repair_2026_10_25.py
+
+ESCAPES_2026_10_25: this docstring's backslashes are written as two (Python 3.12 and later warned).
 """
 from __future__ import annotations
 import argparse, datetime, os, py_compile, shutil, sys, tempfile

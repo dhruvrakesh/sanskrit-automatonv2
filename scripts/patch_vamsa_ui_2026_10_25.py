@@ -4,7 +4,7 @@
 patch_vamsa_ui_2026_10_25.py  (2026-10-25)  VAMSA_UI_2026_10_25
 
 The Vamsa page on the dashboard: the lines of descent of the three indexes, generation by generation, each step with
-the index's words, the Sanskrit verse where both names stand (GRETIL's editions, read by scripts\vamsa_check.py), the
+the index's words, the Sanskrit verse where both names stand (GRETIL's editions, read by scripts\\vamsa_check.py), the
 verses of the Mahabharata, the Harivamsa and the Ramayana that name both, our own passages and Raychaudhuri's view.
 
   scripts/dashboard.py          /vamsa (scripts/vamsa.html) and /api/vamsa (scripts/vamsa_view.py: ?lines=1,
@@ -16,11 +16,13 @@ verses of the Mahabharata, the Harivamsa and the Ramayana that name both, our ow
 
 Needs RELATIONS_UI_2026_10_24 in each file, and scripts/vamsa_view.py, scripts/vamsa.html and scripts/vamsa_check.py
 in place. Anchored, all-or-nothing, marker-idempotent; line endings kept; a .bak_vamsaui_<date> copy of each file;
-dashboard.py compiled before anything is written. Restart the dashboard (scripts\restart_dashboard.ps1) when it is
-idle; the page reads data\shelf\vamsa.db (python scripts\vamsa_check.py --yes, free).
+dashboard.py compiled before anything is written. Restart the dashboard (scripts\\restart_dashboard.ps1) when it is
+idle; the page reads data\\shelf\\vamsa.db (python scripts\\vamsa_check.py --yes, free).
 
-  python scripts\patch_vamsa_ui_2026_10_25.py --check
-  python scripts\patch_vamsa_ui_2026_10_25.py
+  python scripts\\patch_vamsa_ui_2026_10_25.py --check
+  python scripts\\patch_vamsa_ui_2026_10_25.py
+
+ESCAPES_2026_10_25: this docstring's backslashes are written as two (Python 3.12 and later warned).
 """
 from __future__ import annotations
 import argparse, datetime, os, py_compile, shutil, sys, tempfile

@@ -198,12 +198,21 @@ def check_repair(path: Path, now):
     t = parse_ts(st.get("at"))
     asks = [a.get("say", "") for a in (st.get("asks") or []) if isinstance(a, dict)]
     if st.get("status") == "blocked":
-        return {"state": "warn", "say": "repair: " + (asks[0] if asks else "blocked")}
+        hard = [a.get("say", "") for a in (st.get("asks") or []) if isinstance(a, dict)
+                and a.get("kind") in ("cap", "decision", "allowance")]   # AUTO_TRANSLATE_2026_10_25: not "ready"
+        return {"state": "warn", "say": "repair: " + ((hard or asks)[0] if (hard or asks) else "blocked")}
     if t is not None and hours(t, now) > REPAIR_H and float(st.get("allowance") or 0) > 0:
         return {"state": "warn", "say": "repair: no round since %s" % t.strftime("%d %b %H:%M")}
+    al = [a for a in (st.get("asks") or []) if isinstance(a, dict) and a.get("kind") == "allowance"]
+    if al:   # AUTO_TRANSLATE_2026_10_25: a text's translation allowance is spent: yours to raise
+        return {"state": "warn", "say": "repair: " + al[0].get("say", "an allowance is spent")}
     d = st.get("did") or {}
-    return {"state": "ok", "say": "repair: %s%s" % (st.get("status", "?"), (", %s %s" % (d.get("step"), d.get("doc")))
-                                                      if d.get("doc") else "")}
+    ready = [a for a in (st.get("asks") or []) if isinstance(a, dict) and a.get("kind") == "translate"]
+    return {"state": "ok", "say": "repair: %s%s%s" % (st.get("status", "?"), (", %s %s" % (d.get("step"), d.get("doc")))
+                                                        if d.get("doc") else "",
+                                                        ("; ready to translate: %s" % ", ".join(
+                                                            "%s (about $%.2f)" % (a.get("doc"), max(0.01, float(a.get("usd") or 0)))
+                                                            for a in ready[:3])) if ready else "")}
 
 
 def health(root: Path = ROOT, backup_dir: str = "", now=None) -> dict:

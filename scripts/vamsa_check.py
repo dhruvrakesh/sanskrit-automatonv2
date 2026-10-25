@@ -705,17 +705,24 @@ def show_name(store: Path, kin: Path, who: str) -> int:
                                             "mbh_first, hv, hv_first, ram, ram_first FROM vamsa_rel")}
     finally:
         con.close()
-    print("%s: %d relation(s) name %s" % (MARK, len(rows), who))
-    for r in rows[:200]:
+    # VAMSA_NAMES_2026_10_25: a statement an index makes more than once (the same subject, relation and object in one
+    # source: an entry that lists it twice, or two entries of the name) is shown once, "x n", with its best check
+    groups = collections.OrderedDict()
+    for r in rows:
         g = got.get(r["kin_id"])
-        if not g:
-            continue
+        if g:
+            groups.setdefault((r["source"], nfc(r["subject"]), r["relation"], nfc(r["object"])), []).append((r, g))
+    print("%s: %d relation(s) name %s, %d distinct statement(s)" % (MARK, len(rows), who, len(groups)))
+    for items in list(groups.values())[:200]:
+        r, g = min(items, key=lambda x: (ORDER.index(x[1][1]) if x[1][1] in ORDER else len(ORDER), -(x[1][6] or 0),
+                                         x[0]["kin_id"]))
         where = ref_text(g[2], tuple(int(x) for x in g[3].split("."))) if g[3] else ""
-        print("  [%s] %s %s %s | cited: %s%s%s | together: MBh %s%s, HV %s, Ram %s" % (
-            SHORT[r["source"]], r["subject"], r["relation"], r["object"], g[1] or "-",
-            (" at " + where) if where else "", (" (%s / %s)" % (g[4], g[5])) if (g[4] or g[5]) else "",
+        print("  [%s] %s %s %s%s | cited: %s%s%s | together: MBh %s%s, HV %s, Ram %s" % (
+            SHORT[r["source"]], r["subject"], r["relation"], r["object"], (" x%d" % len(items)) if len(items) > 1 else "",
+            g[1] or "-", (" at " + where) if where else "", (" (%s / %s)" % (g[4], g[5])) if (g[4] or g[5]) else "",
             g[6] or 0, (" first " + g[7]) if g[7] else "", g[8] or 0, g[10] or 0))
-    print("VERDICT: %d relation(s) of %s shown" % (len(rows), who)); print("NEXT: open /vamsa on the dashboard")
+    print("VERDICT: %d relation(s) of %s shown as %d distinct statement(s)" % (len(rows), who, len(groups)))
+    print("NEXT: open /vamsa on the dashboard")
     return 0
 
 

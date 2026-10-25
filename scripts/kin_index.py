@@ -32,6 +32,13 @@ checked, and set beside our verses and beside Raychaudhuri's claims.
   python scripts\\kin_index.py --yes --per-source 0    every candidate entry (priced by the plan first)
   python scripts\\kin_index.py --check                 free: the checks and the exports again
   python scripts\\kin_index.py --show Janamejaya       one name's relations with their evidence
+  python scripts\\kin_index.py --salvage              free: the relations whole in a stored reply that was cut short
+
+KIN_SALVAGE_2026_10_25: a reply cut short (Soerensen's longest entries ask for more relations than one answer holds:
+entries 12641 and 7692, 25 Oct) keeps the relations it gives whole, and is not asked again (asked again it was cut
+again: three calls of one entry, about $0.13 a run); in a call of one entry every relation is that entry's, whatever
+number the model gave it ("entry": 150); an entry whose reading failed twice is not asked again unless --retry-failed
+(the plan says how many); --salvage reads again, free, the failed replies already stored.
 
 Stored in data/shelf/kin.db (beside claims.db; data/shelf/ is not committed; the Cologne shelf's terms, CC BY-NC-SA
 3.0, go with it). data/context.db is only read (the shelf, our entities, entity_links) and gets the meter's row of
@@ -56,6 +63,7 @@ ENTRY_MAX = 12000       # a longer entry is cut (Soerensen's longest runs to 147
 EST_CALL = 0.0009       # $ a call: the instructions (700 tokens), the thinking (256) ...
 EST_CHAR = 0.0000001    # ... plus about 0.3/3.5 of a millionth of a dollar a character of the entries
 EST_ENTRY = 0.0002      # ... plus the relations written back
+GIVE_UP = 2             # KIN_SALVAGE_2026_10_25: an entry whose reading failed this often is not asked again by itself
 KIN_RX = re.compile(r"\b(sons?|daughters?|father|mother|wife|wives|husband|brothers?|sisters?|grand(?:son|daughter|father)"
                     r"|pupil|disciple|teacher|preceptor|king|queen|contemporar\w*|patronymic|descendant|married"
                     r"|succeeded|successor)\b", re.I)
@@ -244,6 +252,32 @@ def parse_reply(text: str):
     return None
 
 
+def salvage(text: str):
+    """KIN_SALVAGE_2026_10_25: the relations given whole in a reply cut short ({"relations": [{...}, {...}, {"entr),
+    or None when there are none."""
+    t = text or ""
+    i = t.find('"relations"')
+    if i < 0:
+        return None
+    j = t.find("[", i)
+    if j < 0:
+        return None
+    dec = json.JSONDecoder(strict=False)
+    out, pos = [], j + 1
+    while True:
+        k = t.find("{", pos)
+        if k < 0:
+            break
+        try:
+            obj, end = dec.raw_decode(t, k)
+        except ValueError:
+            break
+        if isinstance(obj, dict):
+            out.append(obj)
+        pos = end
+    return out or None
+
+
 def _s(x, n: int) -> str:
     return re.sub(r"\s+", " ", str(x or "")).strip()[:n]
 
@@ -254,6 +288,10 @@ def clean_relation(d, n_entries: int):
     try:
         k = int(d.get("entry"))
     except (TypeError, ValueError):
+        k = None
+    if n_entries == 1:   # KIN_SALVAGE_2026_10_25: one entry to the call: every relation is that entry's
+        k = 1
+    if k is None:
         return None
     rel = _s(d.get("relation"), 40).lower().replace(" ", "_")
     subj, obj, words = _s(d.get("subject"), 120), _s(d.get("object"), 120), _s(d.get("words"), 400)
@@ -294,6 +332,71 @@ def open_store(path: str):
     return con
 
 
+def failures(con, engine: str) -> dict:
+    """KIN_SALVAGE_2026_10_25: {entry_id: failed reads} of the entries not read since, for this prompt and engine."""
+    out = collections.Counter()
+    done = {e for (e,) in con.execute("SELECT entry_id FROM kin_done WHERE prompt_version = ? AND engine = ?",
+                                      (PROMPT_VERSION, engine))}
+    for (ids,) in con.execute("SELECT entries FROM kin_reads WHERE status = 'failed' AND prompt_version = ? AND "
+                              "engine = ?", (PROMPT_VERSION, engine)):
+        try:
+            for e in json.loads(ids or "[]"):
+                if e not in done:
+                    out[e] += 1
+        except (TypeError, ValueError):
+            continue
+    return dict(out)
+
+
+def keep(store, rid: int, src: str, batch: list, rels: list, engine: str) -> int:
+    """KIN_SALVAGE_2026_10_25 (from read): a read's relations checked and stored, its entries marked done."""
+    kept = 0
+    for d in rels:
+        c = clean_relation(d, len(batch))
+        if not c:
+            continue
+        eid, head, body = batch[c["entry"] - 1]
+        text = entry_text(head, body)
+        store.execute("INSERT INTO kin (read_id, source, entry_id, head, subject, relation, object, words, "
+                      "refs, words_check, direction, at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                      (rid, src, eid, head, c["subject"], c["relation"], c["object"], c["words"],
+                       json.dumps(c["refs"], ensure_ascii=False), words_check(c["words"], text),
+                       direction_check(c["relation"], c["words"]), now()))
+        kept += 1
+    for eid, head, body in batch:
+        store.execute("INSERT OR REPLACE INTO kin_done (entry_id, source, entry_sha, read_id, prompt_version, "
+                      "engine) VALUES (?,?,?,?,?,?)", (eid, src, entry_sha(head, body), rid, PROMPT_VERSION, engine))
+    store.execute("UPDATE kin_reads SET relations = ? WHERE id = ?", (kept, rid))
+    return kept
+
+
+def salvage_stored(store, engine: str, cands: dict) -> dict:
+    """KIN_SALVAGE_2026_10_25 (--salvage, free): each failed read whose stored reply gives relations whole, kept as
+    a read would keep them; its entries marked done. A read whose entries changed since (or left the candidates) stays
+    as it is."""
+    by_id = {r[0]: (src, r) for src, rows in cands.items() for r in rows}
+    got = {"reads": 0, "salvaged": 0, "relations": 0, "entries": 0}
+    for rid, src, ids, raw in store.execute("SELECT id, source, entries, raw FROM kin_reads WHERE status = 'failed' AND "
+                                            "prompt_version = ? AND engine = ? ORDER BY id",
+                                            (PROMPT_VERSION, engine)).fetchall():
+        got["reads"] += 1
+        try:
+            batch = [by_id[e][1] for e in json.loads(ids or "[]")]
+        except (KeyError, TypeError, ValueError):
+            continue
+        rels = parse_reply(raw or "") or salvage(raw or "")
+        if not batch or not rels:
+            continue
+        kept = keep(store, rid, src, batch, rels, engine)
+        store.execute("UPDATE kin_reads SET status = 'salvaged', note = trim(coalesce(note, '') || ' salvaged by "
+                      "--salvage: ' || ? || ' relation objects') WHERE id = ?", (str(len(rels)), rid))
+        store.commit()
+        got["salvaged"] += 1
+        got["relations"] += kept
+        got["entries"] += len(batch)
+    return got
+
+
 def done_entries(con, engine: str) -> dict:
     return {e: s for e, s in con.execute("SELECT entry_id, entry_sha FROM kin_done WHERE prompt_version = ? AND "
                                          "engine = ?", (PROMPT_VERSION, engine))}
@@ -320,6 +423,7 @@ def read(a, store, todo: dict, titles: dict, caller=None) -> dict:
                 return got
             prompt, cut = batch_prompt(titles.get(src, src), batch)
             reply, resp, err, spent, rels = "", None, "", 0.0, None
+            salvaged = 0   # KIN_SALVAGE_2026_10_25
             for attempt in range(3):
                 t0 = time.time()
                 try:
@@ -334,17 +438,25 @@ def read(a, store, todo: dict, titles: dict, caller=None) -> dict:
                 rels = parse_reply(reply) if not err else None
                 if rels is not None:
                     break
+                if not err and reply.strip():   # KIN_SALVAGE_2026_10_25: a reply cut short keeps its whole relations,
+                    sal = salvage(reply)        # and is not asked again (it would be cut again)
+                    if sal:
+                        rels, salvaged = sal, len(sal)
+                        break
                 if attempt < 2 and caller is None:
                     time.sleep(2 ** (attempt + 1))
             got["calls"] += 1
             got["cost"] += spent
             ids = [r[0] for r in batch]
-            status = "ok" if rels is not None else "failed"
+            status = ("salvaged" if salvaged else "ok") if rels is not None else "failed"
+            note = " ".join(x for x in (("cut: %s" % ",".join(map(str, cut))) if cut else "",
+                                        ("salvaged: %d relation objects of a reply cut short" % salvaged)
+                                        if salvaged else "") if x)
             cur = store.execute("INSERT INTO kin_reads (source, entries, prompt_version, engine, status, relations, "
                                 "cost_usd, raw, error, note, at, mark) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                                 (src, json.dumps(ids), PROMPT_VERSION, engine, status, 0, spent, reply[:200000],
                                  err or ("" if rels is not None else "the reply is not the JSON asked for"),
-                                 ("cut: %s" % ",".join(map(str, cut))) if cut else "", now(), MARK))
+                                 note, now(), MARK))
             rid = cur.lastrowid
             if rels is None:
                 got["failed"] += 1
@@ -354,24 +466,7 @@ def read(a, store, todo: dict, titles: dict, caller=None) -> dict:
                     got["stopped"] = "five calls failed"
                     return got
                 continue
-            kept = 0
-            for d in rels:
-                c = clean_relation(d, len(batch))
-                if not c:
-                    continue
-                eid, head, body = batch[c["entry"] - 1]
-                text = entry_text(head, body)
-                store.execute("INSERT INTO kin (read_id, source, entry_id, head, subject, relation, object, words, "
-                              "refs, words_check, direction, at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-                              (rid, src, eid, head, c["subject"], c["relation"], c["object"], c["words"],
-                               json.dumps(c["refs"], ensure_ascii=False), words_check(c["words"], text),
-                               direction_check(c["relation"], c["words"]), now()))
-                kept += 1
-            for eid, head, body in batch:
-                store.execute("INSERT OR REPLACE INTO kin_done (entry_id, source, entry_sha, read_id, prompt_version, "
-                              "engine) VALUES (?,?,?,?,?,?)", (eid, src, entry_sha(head, body), rid, PROMPT_VERSION,
-                                                              engine))
-            store.execute("UPDATE kin_reads SET relations = ? WHERE id = ?", (kept, rid))
+            kept = keep(store, rid, src, batch, rels, engine)   # KIN_SALVAGE_2026_10_25: as --salvage keeps them
             store.commit()
             got["entries"] += len(batch)
             got["relations"] += kept
@@ -887,6 +982,10 @@ def run(argv=None, caller=None) -> int:
     ap.add_argument("--check", action="store_true", help="free: the checks and the exports")
     ap.add_argument("--show", default="")
     ap.add_argument("--no-write", action="store_true")
+    ap.add_argument("--salvage", action="store_true",   # KIN_SALVAGE_2026_10_25
+                    help="free: the relations given whole in the stored replies that failed (a reply cut short)")
+    ap.add_argument("--retry-failed", action="store_true",
+                    help="ask again the entries whose reading failed %d times (KIN_SALVAGE_2026_10_25)" % GIVE_UP)
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         try:
@@ -929,17 +1028,30 @@ def run(argv=None, caller=None) -> int:
             return 0
         return show(a, open_store(a.kin_db), a.show)
     engine = "gemini:%s" % a.model
-    store = open_store(a.kin_db) if (a.yes or a.check or Path(a.kin_db).exists()) else None
+    store = open_store(a.kin_db) if (a.yes or a.check or a.salvage or Path(a.kin_db).exists()) else None
+    if store is not None and a.salvage:   # KIN_SALVAGE_2026_10_25: free, before the plan
+        sv = salvage_stored(store, engine, cands)
+        print("salvage: %d failed read(s) stored; %d salvaged: %d entries, %d relations kept (free)" % (
+            sv["reads"], sv["salvaged"], sv["entries"], sv["relations"]))
     done = done_entries(store, engine) if store else {}
-    todo, planned = {}, 0.0
+    fails = failures(store, engine) if store else {}   # KIN_SALVAGE_2026_10_25
+    todo, planned, given_up = {}, 0.0, 0
     for src in sources:
         rows = cands[src]
         pick = rows if a.per_source <= 0 else rows[:a.per_source]
         left = [r for r in pick if done.get(r[0]) != entry_sha(r[1], r[2])]
+        gave = [r for r in left if fails.get(r[0], 0) >= GIVE_UP and not a.retry_failed]
+        if gave:   # KIN_SALVAGE_2026_10_25: not asked again by themselves
+            left = [r for r in left if r not in gave]
+            given_up += len(gave)
         todo[src] = left
         planned += estimate(left)
-        print("  %-44s %6d candidate entries; this run %d (%d read already); about $%.2f" % (
-            SHORT.get(src, src)[:44], len(rows), len(left), len(pick) - len(left), estimate(left)))
+        print("  %-44s %6d candidate entries; this run %d (%d read already); about $%.2f%s" % (
+            SHORT.get(src, src)[:44], len(rows), len(left), len(pick) - len(left) - len(gave), estimate(left),
+            ("; %d given up after %d failed reads" % (len(gave), GIVE_UP)) if gave else ""))
+    if given_up:
+        print("  %d entr%s given up: python scripts\\kin_index.py --salvage (free) keeps what their replies give; "
+              "--retry-failed asks again" % (given_up, "y" if given_up == 1 else "ies"))
     print("%s: %d entries to read, about $%.2f in all; %s" % (MARK, sum(len(v) for v in todo.values()), planned,
                                                                budget_left(a.db, a.immutable)))
     if a.yes:

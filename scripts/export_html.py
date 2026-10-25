@@ -377,7 +377,7 @@ def _section_key(rec):
 
 def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
             side_by_side, number_pages, drop_junk_en, want_toc=True, want_footnotes=True,
-            title=None, figures=None):   # EXPORT_IMAGES_2026_10_04: figures
+            title=None, figures=None, prose=False):   # EXPORT_IMAGES_2026_10_04: figures; PROSE_EDITION_2026_10_25: prose
     # Group into ordered sections.
     sections = OrderedDict()
     for r in recs:
@@ -394,6 +394,8 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
     if prov.get("scholar") is not None:   # SCHOLAR_EDITION_2026_10_17
         subtitle = "The scholarly English" + (", with the Sanskrit" if include_san else "") + (
             " and the working " + hi_label if include_hi else "")
+        if prose:   # PROSE_EDITION_2026_10_25
+            subtitle = "The scholarly English, read as prose"
     out.append("<div class='titlepage'>")
     out.append(f"<h1>{html.escape(disp_title)}</h1>")
     if subtitle.strip(): out.append(f"<div class='subtitle'>{html.escape(subtitle)}</div>")
@@ -462,6 +464,7 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
         out.append(f"<section class='chapter' id='{sid}'>")
         out.append(f"<h2>{html.escape(label)}</h2>")
         fn_counter = [0]; fn_notes: List[Tuple[int,str]] = []
+        paras, cur_p = [], []   # PROSE_EDITION_2026_10_25
         for r in rows:
             san = (r["san"] or "").strip()
             iast = (r["iast"] or "").strip()
@@ -482,6 +485,22 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                 # Hindi bracket-notes get footnoted too (36 such rows in MBh01);
                 # they share the section's footnote numbering with English.
                 return _extract_footnotes(base, fn_counter, fn_notes) if want_footnotes else base
+            if prose:   # PROSE_EDITION_2026_10_25: the verses run on as a book's paragraphs, a speaker opening one
+                sch_ = r.get("sch")
+                if not (include_en and en) or (sch_ or {}).get("with"):
+                    continue
+                num = str(vref).split(".")[-1] if vlabel else ""   # a line without a reference has no number
+                if sch_ is not None and sch_.get("range"):
+                    num = str(sch_["range"]).split(".")[-1]
+                    sch_ = dict(sch_, range="")
+                body_ = (_sch_en_html(en, sch_, fn_counter, fn_notes, want_footnotes) if sch_ is not None
+                         else _inline_format(html.escape(en)))
+                if cur_p and (_PROSE_SPEECH.match(en) or len(cur_p) >= 8):
+                    paras.append(cur_p)
+                    cur_p = []
+                cur_p.append(("<span class='vr'>%s</span>" % html.escape(num) if num else "") + body_)
+                kept += 1
+                continue
             if side_by_side:
                 cols = []
                 if include_san and san: cols.append(("Sanskrit",
@@ -517,6 +536,10 @@ def _render(doc, recs, prov, *, include_san, include_en, include_hi, hi_label,
                 for _fg in figures.pop(_k):
                     _fg["_late"] = True
                     out.append(_figure_html(_fg, include_en, include_hi))
+        if prose:   # PROSE_EDITION_2026_10_25
+            if cur_p:
+                paras.append(cur_p)
+            out.extend("<p class='prose'>%s</p>" % " ".join(p_) for p_ in paras)
         # footnotes for this section
         if want_footnotes and fn_notes:
             out.append("<div class='footnotes'><ol>")
@@ -762,6 +785,16 @@ _SCH_CSS = (".sch-flag { color: #a0522d; font-size: .8em; margin-left: .15em; cu
             ".sch-with { color: var(--muted); font-style: italic; font-size: .85rem; }")
 
 
+# PROSE_EDITION_2026_10_25: the scholarly edition read as prose (--scholar --prose), as the desk's /scholar/<doc>/prose
+# reads it: no Sanskrit, the verse numbers small, a sentence over verses whole, a paragraph where a speaker begins (or
+# after eight verses), the chapter's notes at its end; the chapters, the notes, the daggers and the title page are the
+# edition's own.
+_PROSE_CSS = ("p.prose { text-align: justify; line-height: 1.9; margin: 0 0 1.1rem; }"
+              "p.prose .vr { font-size: .62rem; color: var(--muted); vertical-align: super; margin: 0 .2em 0 .15em; "
+              "font-family: 'JetBrains Mono',ui-monospace,monospace; }")
+_PROSE_SPEECH = re.compile(r"^[A-Z][^.:;]{0,60} said:")   # scholar_translate.py _SPEECH
+
+
 def _sch_meth(stats: dict) -> str:
     """The title page's methodology, for the scholarly edition."""
     return ("<div class='methodology'>The scholarly English of the Sanskrit Automaton (scholar_translate.py): each "
@@ -942,7 +975,8 @@ def _sch_en_html(en, sch, counter, notes_out, want_footnotes=True):
 def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                 side_by_side, number_pages, drop_junk_en, force_san, force_en,
                 hi_lang=None, hi_label="Hindi", want_toc=True, want_footnotes=True, debug=False,
-                keep_frontmatter=False, images="none", scholar=False):   # SCHOLAR_EDITION_2026_10_17: scholar
+                keep_frontmatter=False, images="none", scholar=False,
+                prose=False):   # SCHOLAR_EDITION_2026_10_17: scholar; PROSE_EDITION_2026_10_25: prose
     title = _display_title(title, doc)   # EXPORT_EMPTY_2026_10_07
     san_col, en_col = _detect_cols(con, doc, force_san, force_en, debug=debug)
     figs = _load_figures(con, doc) if images == "approved" else {}   # EXPORT_IMAGES_2026_10_04
@@ -959,17 +993,19 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
                          include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                          number_pages=number_pages, drop_junk_en=drop_junk_en,
                          want_toc=want_toc, want_footnotes=want_footnotes, title=title,
-                         figures=_fig_copy(figs) if figs else None)
+                         figures=_fig_copy(figs) if figs else None, prose=prose)
     if kept == 0 and include_en and not include_san and drop_junk_en:
         body, kept = _render(doc, recs, prov, include_san=include_san, include_en=include_en,
                           include_hi=include_hi, hi_label=hi_label, side_by_side=side_by_side,
                           number_pages=number_pages, drop_junk_en=False,
                           want_toc=want_toc, want_footnotes=want_footnotes, title=title,
-                         figures=_fig_copy(figs) if figs else None)
+                         figures=_fig_copy(figs) if figs else None, prose=prose)
     os.makedirs(dest, exist_ok=True)
     suffix = f"_{hi_lang}" if (include_hi and not include_en) else ("_tri" if include_hi else "")
     if scholar:   # SCHOLAR_EDITION_2026_10_17: never overwrite the working edition
         suffix += "_scholar"
+    if prose:   # PROSE_EDITION_2026_10_25: never overwrite the verse edition
+        suffix += "_prose"
     if images == "approved":   # EXPORT_IMAGES_2026_10_04: never overwrite the plain edition
         suffix += "_img"
     out_path = os.path.join(dest, f"{_safe_filename(doc or 'export')}_{lo}-{hi}{suffix}.html")
@@ -980,6 +1016,8 @@ def _export_one(con, *, doc, lo, hi, title, dest, include_san, include_en,
         _doc_html = _with_fig_css(_html(title or (doc or "Export"), body, lang_attr=lang_attr), bool(figs) or bool(cover))
         if scholar:   # SCHOLAR_EDITION_2026_10_17
             _doc_html = _doc_html.replace("</style>", _SCH_CSS + "</style>", 1)
+        if prose:   # PROSE_EDITION_2026_10_25
+            _doc_html = _doc_html.replace("</style>", _PROSE_CSS + "</style>", 1)
         f.write(_doc_html)
     if images == "approved":   # EXPORT_IMAGES_2026_10_04
         _n_in = body.count("<figure class='plate'")
@@ -1037,14 +1075,19 @@ def main():
                     help="SCHOLAR_EDITION_2026_10_17: the scholarly English (scholar_translate.py) with its notes in "
                          "place of the working English, which stands, marked, where there is none (file name "
                          "gains _scholar)")
+    ap.add_argument("--prose", action="store_true",
+                    help="PROSE_EDITION_2026_10_25: with --scholar, the scholarly English read as prose: no Sanskrit, "
+                         "the verse numbers small, the notes at each chapter's end (file name gains _prose)")
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
+    if args.prose and not args.scholar:   # PROSE_EDITION_2026_10_25
+        raise SystemExit("--prose reads the scholarly English: give --scholar too")
 
     hi_lang = None; hi_label = "Hindi"
     if args.hindi or args.hindi_only:
         hi_lang = (args.lang or "hi").strip()
         hi_label = "हिन्दी" if hi_lang == "hi" else hi_lang
-    include_san = bool(args.sanskrit and not args.no_sanskrit)
+    include_san = bool(args.sanskrit and not args.no_sanskrit) and not args.prose   # PROSE_EDITION_2026_10_25
     include_en  = not args.hindi_only
     side_by_side = bool(args.side_by_side and (include_san or (hi_lang and include_en)))
     number_pages = not args.no_pagenum
@@ -1067,7 +1110,7 @@ def main():
                             force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
                             hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
                             keep_frontmatter=args.keep_frontmatter, images=args.images,
-                            scholar=args.scholar)   # SCHOLAR_EDITION_2026_10_17
+                            scholar=args.scholar, prose=args.prose)   # SCHOLAR_EDITION_2026_10_17; PROSE_EDITION_2026_10_25
         else:
             if args.doc:
                 lo,hi = (_page_span(con, args.doc) if (args.pg_from is None or args.pg_to is None) else (args.pg_from, args.pg_to))
@@ -1081,7 +1124,7 @@ def main():
                         force_san=args.san_col, force_en=args.en_col, hi_lang=hi_lang,
                         hi_label=hi_label, want_toc=want_toc, want_footnotes=want_footnotes, debug=args.debug,
                         keep_frontmatter=args.keep_frontmatter, images=args.images,
-                        scholar=args.scholar)   # SCHOLAR_EDITION_2026_10_17
+                        scholar=args.scholar, prose=args.prose)   # SCHOLAR_EDITION_2026_10_17; PROSE_EDITION_2026_10_25
 
 if __name__ == "__main__":
     main()

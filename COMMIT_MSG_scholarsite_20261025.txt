@@ -1,0 +1,28 @@
+The scholarly English and its prose on Srangam; the rounds and the kinships mended (25 Oct)
+
+Asked: "why isnt scholary and prose available on srangam?" The site had the scholarly
+English only verse by verse in the reader (C18) and in two static editions; nothing listed
+the texts that have it, and nothing read it as prose, as the desk's /scholar does.
+
+- SCHOLAR_SITE_2026_10_25: docs/cloud/C22 (a partial index; corpus_reader_scholar_docs and
+  corpus_reader_scholar_prose behind the readers' gate; checks); the Srangam kit
+  docs/srangam/SCHOLAR_SITE_2026-10-25 and scripts/patch_srangam_scholar_site_2026_10_25.py:
+  /corpus/scholarly and /corpus/:docCode/prose, the menus, the reader's link, an edition's
+  prose link, and the typecheck error at Editions.tsx mended; RELIABILITY_AUDIT Phase AP.
+- PROSE_EDITION_2026_10_25: export_html.py --scholar --prose; publish_editions.py writes
+  public/scholarly/<slug>-prose.html beside each edition.
+- KIN_SALVAGE_2026_10_25: kin_index.py keeps a cut reply's whole relations and does not ask
+  again; one entry to a call takes every relation; two failures give an entry up;
+  --salvage reads the stored failed replies again, free.
+- VAMSA_NAMES_2026_10_25: vamsa_check.py --name shows a statement once, x n.
+- AUTO_TRANSLATE_2026_10_25: repair_auto.py: decisions are not tries; the day remembers
+  them; a text ready to translate is priced, not a block; --allow-translate X --usd N;
+  swaps_per_day; the backups counted. health_watch.py: a spent allowance warns.
+- ESCAPES_2026_10_25: the morning's two patchers' docstrings.
+- DOCS96_2026_10_25: docs/SCHOLAR_SITE_2026-10-25.md; STATE section 31.
+
+Tests: test_scholar_site_pg (PostgreSQL 16, 8), test_prose_edition, test_kin_salvage,
+test_vamsa_names, test_auto_translate; the suite on a copy: 204 modules, none failed.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

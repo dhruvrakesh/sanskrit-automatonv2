@@ -38,6 +38,24 @@ is ready to translate.
 
 Every round appends to data/auto_repair_log.jsonl: the text, the step, the command, its VERDICT, what it spent
 (budget_state's spent_usd before and after). The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's.
+
+AUTO_TRANSLATE_2026_10_25 (the dry run of 25 Oct said "blocked": five texts whose fresh step was "translate it"
+filled the round's five tries, and the vision work below them waited):
+  - a decision, and a text ready to translate, is not a try: the round looks further (twenty texts at most), and a
+    text it found waiting on a decision today (its judgement unchanged) is not asked again today;
+  - a text ready to translate is listed with its price (its passages without English, and with English but without
+    Hindi, at the measured price of a flash passage: redeem.py), and is not a block;
+  - translating is opt-in, text by text: python scripts\\repair_auto.py --allow-translate X --usd 2.00. Each round
+    after its repair step then translates one of them, English first, then Hindi (translate_passages.py --engine
+    gemini:gemini-2.5-flash --limit N: at most $0.25 a round, within what is left of the text's allowance and above
+    the cap's reserve; 15 minutes at most). A text the register holds in repair (re-translated after its repair) may
+    be one of them; its release stays a decision. The debris guard (exit 3) or the register (exit 4) refusing is
+    written down as an ask. Translation is not paid from the repair's allowance a day;
+  - the rounds say how many pre-repair backups the drive holds, and how large; swaps_per_day (1) in
+    data/auto_repair.json.
+
+  python scripts\\repair_auto.py --allow-translate yajur_veda_shukla_yajur_veda --usd 2.00
+  python scripts\\repair_auto.py --allow-translate yajur_veda_shukla_yajur_veda --usd 0      (no more)
 """
 from __future__ import annotations
 
@@ -50,7 +68,11 @@ SCRIPTS = Path(os.environ.get("SA_REPAIR_SCRIPTS") or (ROOT / "scripts"))   # th
 PY = sys.executable
 DASHBOARD = os.environ.get("SA_DASHBOARD_URL") or "http://127.0.0.1:5057"
 DEFAULTS = {"usd_per_day": 0.25, "round_usd": 0.10, "reserve_usd": 1.00, "swap": True, "max_tries": 5,
-            "step_minutes": 25}
+            "step_minutes": 25,
+            # AUTO_TRANSLATE_2026_10_25
+            "max_looks": 20, "swaps_per_day": 1, "translate_round_usd": 0.25, "translate_minutes": 15}
+ENGINE_TR = "gemini:gemini-2.5-flash"   # AUTO_TRANSLATE_2026_10_25: the working English and Hindi (never a Claude engine)
+FLASH_PASSAGE = 0.00048                 # $ a passage when usage_log cannot say (redeem.FLASH_DEFAULT)
 SKIP_STATES = {"withdrawn", "set_aside", "complete", "translate_as_is", "in_repair", "witness"}
 NEVER = {"Daivat-Sanhita"}           # withdrawn until 1 January 2029: its 2017 scan is local and private only
 LEVEL = {"material": 0, "moderate": 1, "cosmetic": 2}
@@ -94,6 +116,8 @@ def config(p: Path) -> dict:
             if k in got:
                 c[k] = got[k]
         c["set_at"] = got.get("set_at", "")
+    tr = got.get("translate") if isinstance(got, dict) else None   # AUTO_TRANSLATE_2026_10_25: the texts opted in
+    c["translate"] = {k: v for k, v in tr.items() if isinstance(v, dict)} if isinstance(tr, dict) else {}
     c["from_file"] = p.exists()
     return c
 
@@ -111,8 +135,23 @@ def rounds(log: Path) -> list:
     return out
 
 
-def spent_today(log: Path, day: str) -> float:
-    return round(sum(float(r.get("spent") or 0) for r in rounds(log) if str(r.get("at", "")).startswith(day)), 6)
+def spent_today(log: Path, day: str, translate: bool = False) -> float:
+    """$ the rounds spent today: the repair's (the allowance a day), or with translate=True the translations'
+    (AUTO_TRANSLATE_2026_10_25: each text's own allowance pays those)."""
+    return round(sum(float(r.get("spent") or 0) for r in rounds(log) if str(r.get("at", "")).startswith(day)
+                     and (r.get("step") == "translate") == translate), 6)
+
+
+def swaps_today(log: Path, day: str) -> int:
+    """AUTO_TRANSLATE_2026_10_25: the swaps done today (swaps_per_day)."""
+    return sum(1 for r in rounds(log) if r.get("step") == "swap" and str(r.get("at", "")).startswith(day)
+               and r.get("rc") == 0)
+
+
+def spent_on(log: Path, doc: str) -> float:
+    """AUTO_TRANSLATE_2026_10_25: $ the rounds spent translating this text, every day."""
+    return round(sum(float(r.get("spent") or 0) for r in rounds(log) if r.get("step") == "translate"
+                     and r.get("doc") == doc), 6)
 
 
 def did_today(log: Path, day: str, step: str) -> bool:
@@ -247,9 +286,78 @@ def classify(nxt: str) -> tuple:
         return "vision", float(m.group(1)) if m else 1.0
     if "repair_text.py" in n and "--use-repaired" in n:
         return ("decision", n) if "--replace" in n else ("swap", None)
-    if "reingest_pages.py" in n or "translate it" in n or "Finish EN" in n or "--release" in n:
+    if "reingest_pages.py" in n or "--release" in n:
         return "decision", n
+    if "translate it" in n or "Finish EN" in n:   # AUTO_TRANSLATE_2026_10_25: ready to translate, not a decision
+        return "translate", n
     return "other", n
+
+
+# ---- AUTO_TRANSLATE_2026_10_25: what a text needs translated, and its price ------------------------------------
+def to_translate(db: Path, doc: str):
+    """(passages without English, passages with English but without Hindi) of a text, its scaffolding (noise,
+    frontmatter) aside; read-only; None when the database cannot say."""
+    try:
+        con = sqlite3.connect(db.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+    except sqlite3.Error:
+        return None
+    try:
+        pc = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
+        tt = "AND COALESCE(p.text_type, 'mula') NOT IN ('noise', 'frontmatter')" if "text_type" in pc else ""
+        has_hi = bool(con.execute("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'translations_l10n'")
+                      .fetchone())
+        hi_sql = ("SUM(CASE WHEN TRIM(COALESCE(p.translation, '')) <> '' AND NOT EXISTS (SELECT 1 FROM translations_l10n "
+                  "l WHERE l.passage_id = p.id AND l.lang = 'hi' AND TRIM(COALESCE(l.translation, '')) <> '') THEN 1 "
+                  "ELSE 0 END)") if has_hi else "0"
+        r = con.execute("SELECT SUM(CASE WHEN TRIM(COALESCE(p.translation, '')) = '' THEN 1 ELSE 0 END), %s FROM passages "
+                        "p JOIN docs d ON d.id = p.doc_id WHERE d.code = ? %s" % (hi_sql, tt), (doc,)).fetchone()
+        return (int(r[0] or 0), int(r[1] or 0)) if r else (0, 0)
+    except sqlite3.Error:
+        return None
+    finally:
+        con.close()
+
+
+def doc_known(db: Path, doc: str) -> bool:
+    try:
+        con = sqlite3.connect(db.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+        try:
+            return con.execute("SELECT 1 FROM docs WHERE code = ?", (doc,)).fetchone() is not None
+        finally:
+            con.close()
+    except sqlite3.Error:
+        return False
+
+
+def passage_price(db: Path) -> float:
+    """$ a flash passage, as redeem.py measures it on usage_log; FLASH_PASSAGE when it cannot."""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import redeem
+        con = sqlite3.connect(db.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+        try:
+            return float(redeem.spend_by_doc(con)[1]) or FLASH_PASSAGE
+        finally:
+            con.close()
+    except Exception:
+        return FLASH_PASSAGE
+
+
+def money(x: float) -> str:
+    """$1.25, $0.125, $0.0024: as redeem.py writes a price."""
+    return "$%.2f" % x if x >= 0.995 else ("$%.3f" % x if x >= 0.0095 else "$%.4f" % x)
+
+
+def backups(backup_dir: Path) -> dict:
+    """The pre-repair backups repair_text.py leaves (context_pre_repair_*.db): how many, how large."""
+    fs = sorted(glob.glob(str(backup_dir / "context_pre_repair_*.db")))
+    gb = 0.0
+    for f in fs:
+        try:
+            gb += os.path.getsize(f) / 1e9
+        except OSError:
+            pass
+    return {"n": len(fs), "gb": round(gb, 1), "dir": str(backup_dir)}
 
 
 # ---- the round ---------------------------------------------------------------------------------------------------
@@ -297,6 +405,8 @@ def plan(a, p: Paths, cfg: dict) -> dict:
     q = queue(p.judged, p.verdicts)
     st["queue"] = [{k: x[k] for k in ("doc", "level", "tier", "pages_left", "english", "judged_at")} for x in q[:10]]
     st["queue_n"] = len(q)
+    st["backups"] = backups(p.backup)   # AUTO_TRANSLATE_2026_10_25
+    st["spent_translating_today"] = spent_today(p.log, day, translate=True)
     return st
 
 
@@ -340,15 +450,29 @@ def _round(a, p: Paths, cfg: dict, st: dict, day: str) -> int:
         st["asks"].append({"kind": "cap", "say": "the cap was not read (budget_state): the paid steps wait"})
     tried, decided = 0, 0
     jobs = None
+    # AUTO_TRANSLATE_2026_10_25: what today's rounds found waiting on a decision (its judgement unchanged) is not
+    # asked again today; a decision is not a try; twenty texts looked at, at most
+    seen = (read_json(p.state, {}) or {}).get("seen") or {}
+    if seen.get("day") != day or not isinstance(seen.get("docs"), dict):
+        seen = {"day": day, "docs": {}}
+    looked = 0
+    price = None
     for item in queue(p.judged, p.verdicts):
-        if tried >= int(cfg["max_tries"]):
+        if tried >= int(cfg["max_tries"]) or looked >= int(cfg["max_looks"]):
             break
-        tried += 1
+        looked += 1
         doc = item["doc"]
-        keep = []
-        rc = run([PY, SCRIPTS / "repair_text.py", "--doc", doc], 10 * 60, keep)
-        nxt = said(keep, "NEXT")
-        kind, detail = classify(nxt)
+        mem = seen["docs"].get(doc) or {}
+        if mem.get("kind") in ("decision", "translate") and mem.get("judged_at") == item["judged_at"]:
+            kind, detail, nxt = mem["kind"], mem.get("next", ""), mem.get("next", "")
+        else:
+            keep = []
+            rc = run([PY, SCRIPTS / "repair_text.py", "--doc", doc], 10 * 60, keep)
+            nxt = said(keep, "NEXT")
+            kind, detail = classify(nxt)
+            seen["docs"][doc] = {"kind": kind, "next": nxt[:400], "judged_at": item["judged_at"]}
+        if kind not in ("decision", "translate"):
+            tried += 1
         print("%s: %s -> %s" % (MARK, doc, kind if kind != "other" else "nothing for the round (%s)" % (nxt or "no step")))
         if kind == "vision":
             if not paid_ok:
@@ -372,7 +496,7 @@ def _round(a, p: Paths, cfg: dict, st: dict, day: str) -> int:
         if kind == "swap":
             if not cfg.get("swap", True):
                 continue
-            if did_today(p.log, day, "swap"):
+            if swaps_today(p.log, day) >= int(cfg["swaps_per_day"]):   # AUTO_TRANSLATE_2026_10_25
                 continue
             jobs = dashboard_jobs() if jobs is None else jobs
             enough, free = room(p.backup, p.db)
@@ -394,6 +518,23 @@ def _round(a, p: Paths, cfg: dict, st: dict, day: str) -> int:
         if kind == "decision":
             decided += 1
             st["asks"].append({"kind": "decision", "doc": doc, "say": "%s: %s" % (doc, detail[:220])})
+        if kind == "translate" and doc not in cfg["translate"]:   # AUTO_TRANSLATE_2026_10_25: listed, priced
+            n = to_translate(p.db, doc)
+            price = passage_price(p.db) if price is None else price
+            if n is not None:
+                usd_ = (2 * n[0] + n[1]) * price   # a passage without English needs its Hindi too
+                st["asks"].append({"kind": "translate", "doc": doc, "english": n[0], "hindi": n[0] + n[1],
+                                   "usd": round(usd_, 4),
+                                   "say": "%s is ready to translate: %d passage(s) into English and %d into Hindi, "
+                                          "about %s; to let the rounds do it: python scripts\\repair_auto.py "
+                                          "--allow-translate %s --usd %.2f" % (doc, n[0], n[0] + n[1], money(usd_), doc,
+                                                                              max(0.10, round(usd_ * 1.25 + 0.005, 2)))})
+    st["seen"] = seen
+    tr = translate_round(a, p, cfg, st, c, left_cap, log_rec)   # AUTO_TRANSLATE_2026_10_25: after the repair's step
+    if st["did"] is None and tr is not None:
+        st["did"] = tr
+    if st["did"] is not None and st["status"] == "idle":
+        st["status"] = "working"
     if st["did"] is None:
         cap_ask = any(x["kind"] == "cap" for x in st["asks"])
         if cap_ask:
@@ -402,8 +543,8 @@ def _round(a, p: Paths, cfg: dict, st: dict, day: str) -> int:
             st["status"] = "waiting"     # today's allowance spent: tomorrow, not an ask
         elif float(cfg["usd_per_day"]) <= 0:
             st["status"] = "off"
-        elif st["asks"]:
-            st["status"] = "blocked"     # only decisions are left
+        elif any(x["kind"] in ("decision", "allowance") for x in st["asks"]):
+            st["status"] = "blocked"     # only decisions are left (AUTO_TRANSLATE_2026_10_25: or a spent allowance)
         else:
             st["status"] = "idle"
     st["tried"] = tried
@@ -413,6 +554,83 @@ def _round(a, p: Paths, cfg: dict, st: dict, day: str) -> int:
     return 0
 
 
+def translate_round(a, p: Paths, cfg: dict, st: dict, c, left_cap: float, log_rec):
+    """AUTO_TRANSLATE_2026_10_25: one translation step, of the first text opted in that still needs one: its English,
+    else its Hindi; None when none ran. A text done (English and Hindi) is marked so; its release, when the register
+    holds it in repair, is written down as a decision."""
+    if not cfg["translate"]:
+        return None
+    reg = register(p.verdicts)
+    price = passage_price(p.db)
+    jobs = None
+    for doc, t in sorted(cfg["translate"].items(), key=lambda kv: str(kv[1].get("set_at", ""))):
+        if t.get("done"):
+            continue
+        if isinstance(t.get("held"), dict):   # refused once (exit 3 or 4): asked again only when you allow it again
+            st["asks"].append({"kind": "decision", "doc": doc, "say": "translating %s waits: %s; when it is mended: "
+                               "python scripts\\repair_auto.py --allow-translate %s --usd %.2f"
+                               % (doc, t["held"].get("why", "refused")[:160], doc, float(t.get("usd") or 0))})
+            continue
+        budget = float(t.get("usd") or 0)
+        left_doc = round(budget - spent_on(p.log, doc), 4)
+        if left_doc < 0.02:
+            st["asks"].append({"kind": "allowance", "doc": doc, "say": "translating %s waits: its allowance is spent "
+                               "($%.2f of $%.2f); more: python scripts\\repair_auto.py --allow-translate %s --usd %.2f"
+                               % (doc, budget - left_doc, budget, doc, budget * 2)})
+            continue
+        if not c or c["paused"] or left_cap <= 0.01:
+            return None                  # the cap's ask is written already
+        n = to_translate(p.db, doc)
+        if n is None:
+            continue
+        if n == (0, 0):
+            if not a.dry_run:
+                got = read_json(p.cfg, {})
+                if isinstance(got, dict) and isinstance(got.get("translate"), dict) and doc in got["translate"]:
+                    got["translate"][doc]["done"] = stamp()
+                    write_json(p.cfg, got)
+            if (reg.get(doc) or {}).get("status") == "in_repair":
+                st["asks"].append({"kind": "decision", "doc": doc, "say": "%s is translated (English and Hindi): its "
+                                   "release to the site is yours: python scripts\\repair_text.py --doc %s --release"
+                                   % (doc, doc)})
+            continue
+        jobs = dashboard_jobs() if jobs is None else jobs
+        if jobs:   # the dashboard runs a job (perhaps this text's translation): not now
+            print("%s: translating %s waits: the dashboard runs %d job(s)" % (MARK, doc, len(jobs)))
+            return None
+        lang, need = ("en", n[0]) if n[0] else ("hi", n[1])
+        spend = min(float(cfg["translate_round_usd"]), left_doc, left_cap)
+        limit = max(1, min(need, int(spend / max(price, 1e-6))))
+        argv = [PY, SCRIPTS / "translate_passages.py", "--db", p.db, "--doc", doc, "--engine", ENGINE_TR,
+                "--limit", str(limit)]
+        if lang == "hi":
+            argv += ["--lang", "hi"]
+        if a.dry_run:
+            d = {"doc": doc, "step": "translate", "lang": lang, "would_run": " ".join(str(x) for x in argv[1:])}
+            st["did_translate"] = d
+            return d
+        before = cap(p.db)
+        keep = []
+        rc = run(argv, int(cfg["translate_minutes"]) * 60, keep)
+        after = cap(p.db)
+        spent = round(max(0.0, (after[1] if after else 0) - (before[1] if before else 0)), 6)
+        last = next((x for x in reversed(keep) if x.strip()), "")
+        rec = {"doc": doc, "step": "translate", "lang": lang, "limit": limit, "rc": rc, "spent": spent,
+               "verdict": last[:300], "left": [need, n[1] if lang == "en" else 0]}
+        log_rec(rec)
+        st["did_translate"] = rec
+        if rc in (3, 4):   # the debris guard, or the register: written down, and not asked again by itself
+            why = ("the debris guard refused it (its scan's repair first): " if rc == 3 else
+                   "the register holds it: ") + last[:140]
+            st["asks"].append({"kind": "decision", "doc": doc, "say": "translating %s: %s" % (doc, why)})
+            got = read_json(p.cfg, {})
+            if isinstance(got, dict) and isinstance(got.get("translate"), dict) and doc in got["translate"]:
+                got["translate"][doc]["held"] = {"rc": rc, "at": stamp(), "why": why}
+                write_json(p.cfg, got)
+        return rec
+    return None
+
+
 def say(st: dict, dry: bool) -> None:
     c = st.get("cap") or {}
     print("%s: the allowance $%.2f a day, $%.2f spent today; the cap $%.2f of $%.2f spent%s" % (
@@ -420,13 +638,25 @@ def say(st: dict, dry: bool) -> None:
         ", paused" if c.get("paused") else ""))
     for x in st["asks"]:
         print("  ASK (%s): %s" % (x["kind"], x["say"]))
+    b = st.get("backups") or {}
+    if b.get("n"):   # AUTO_TRANSLATE_2026_10_25
+        print("  the drive holds %d pre-repair backup(s), %.1f GB, in %s (repair_text.py's; yours to clear)"
+              % (b["n"], b["gb"], b.get("dir", "")))
+    dt = st.get("did_translate")
+    if dt and dt is not st.get("did"):
+        if dt.get("would_run"):
+            print("  and would translate: %s" % dt["would_run"])
+        else:
+            print("  and translated %s (%s): rc %s, $%.4f spent" % (dt["doc"], dt.get("lang"), dt.get("rc"),
+                                                                  dt.get("spent", 0)))
     d = st.get("did")
     if d and d.get("would_run"):
         print("VERDICT: the round would run: %s" % d["would_run"])
         print("NEXT: python scripts\\repair_auto.py --round"); return
     if d:
-        print("VERDICT: %s %s: rc %s, $%.4f spent; %s" % (d["step"], d["doc"], d.get("rc"), d.get("spent", 0),
-                                                         d.get("verdict", "")[:160]))
+        print("VERDICT: %s %s%s: rc %s, $%.4f spent; %s" % (d["step"], d["doc"], (" (%s)" % d["lang"]) if d.get("lang")
+                                                           else "", d.get("rc"), d.get("spent", 0),
+                                                           d.get("verdict", "")[:160]))
         print("NEXT: the next round (the maintenance task, every 3 hours)")
         return
     print("VERDICT: %s: nothing run%s" % (st["status"], "" if not st["asks"] else "; %d ask(s)" % len(st["asks"])))
@@ -448,6 +678,14 @@ def show_plan(a, p: Paths, cfg: dict) -> int:
     for i, x in enumerate(queue(p.judged, p.verdicts)[:25], 1):
         print("  %2d. %-52s %-9s %-36s pages left %4d, English %5d  (judged %s)" % (
             i, x["doc"][:52], x["level"], names[x["tier"]], x["pages_left"], x["english"], x["judged_at"][:10]))
+    for doc, t in sorted(cfg["translate"].items()):   # AUTO_TRANSLATE_2026_10_25: the texts opted in
+        n = to_translate(p.db, doc)
+        print("  translating %-48s $%.2f of $%.2f spent%s" % (doc[:48], spent_on(p.log, doc), float(t.get("usd") or 0),
+              (", done %s" % t["done"][:16]) if t.get("done") else
+              (", %d passage(s) to English and %d to Hindi left" % n) if n else ""))
+    b = st.get("backups") or {}
+    if b.get("n"):
+        print("  pre-repair backups: %d, %.1f GB in %s" % (b["n"], b["gb"], b.get("dir", "")))
     old = read_json(p.state, {})
     if old:
         print("  the last round: %s, %s%s" % (old.get("at", "?"), old.get("status", "?"),
@@ -468,6 +706,9 @@ def main(argv=None) -> int:
     ap.add_argument("--db", default="")
     ap.add_argument("--data", default="", help=argparse.SUPPRESS)   # the data folder (the tests)
     ap.add_argument("--backup-dir", default=os.environ.get("SA_BACKUP_DIR") or r"D:\backups")
+    ap.add_argument("--allow-translate", default="", metavar="DOC",   # AUTO_TRANSLATE_2026_10_25
+                    help="let the rounds translate this text (English, then Hindi), up to --usd in all")
+    ap.add_argument("--usd", type=float, default=None, help="with --allow-translate: $ in all for that text (0 stops it)")
     a = ap.parse_args(argv)
     try:
         sys.stdout.reconfigure(errors="backslashreplace")
@@ -486,6 +727,34 @@ def main(argv=None) -> int:
                        "mark": MARK})
         print("VERDICT: the allowance is $%.2f a day (it was $%.2f)%s" % (a.allow, old,
                                                                         "; the paid steps stop" if a.allow == 0 else ""))
+        print("NEXT: python scripts\\repair_auto.py"); return 0
+    if a.allow_translate:   # AUTO_TRANSLATE_2026_10_25
+        doc = a.allow_translate.strip()
+        if a.usd is None or a.usd < 0 or a.usd > 20:
+            print("REFUSE: --allow-translate takes --usd 0 to 20 (US dollars in all for the text)."); return 2
+        if doc in NEVER:
+            print("REFUSE: %s is withdrawn (its rights); it is never translated by the rounds." % doc); return 2
+        st_ = (register(p.verdicts).get(doc) or {}).get("status")
+        if a.usd > 0 and st_ in ("withdrawn", "set_aside"):
+            print("REFUSE: the register holds %s (%s); translate_passages.py would refuse it too." % (doc, st_)); return 2
+        if a.usd > 0 and not doc_known(p.db, doc):
+            print("REFUSE: no text %s in %s." % (doc, p.db)); return 2
+        got = read_json(p.cfg, {})
+        got = got if isinstance(got, dict) else {}
+        tr = got.get("translate") if isinstance(got.get("translate"), dict) else {}
+        old = float((tr.get(doc) or {}).get("usd") or 0)
+        if a.usd == 0:
+            tr.pop(doc, None)
+        else:
+            tr[doc] = {"usd": round(a.usd, 2), "set_at": stamp()}
+        got.update({"translate": tr, "mark": got.get("mark") or MARK})
+        write_json(p.cfg, got)
+        append(p.log, {"at": stamp(), "step": "allow_translate", "rc": 0, "spent": 0, "doc": doc, "from": old,
+                       "to": round(a.usd, 2), "mark": MARK})
+        n = to_translate(p.db, doc)
+        print("VERDICT: %s" % ("the rounds no longer translate %s" % doc if a.usd == 0 else
+                               "the rounds translate %s, up to $%.2f in all (it was $%.2f)%s" % (
+                                   doc, a.usd, old, ("; %d passage(s) to English and %d to Hindi now" % n) if n else "")))
         print("NEXT: python scripts\\repair_auto.py"); return 0
     cfg = config(p.cfg)
     if a.log:
