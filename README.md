@@ -64,6 +64,11 @@ translation, Ask, embeddings, and entity extraction.
   readers, from the mirror (scripts/index_sync.py, docs/cloud/C21), with "In the indexes" on a name's page; the
   Mahabharata e-text counted, never quoted. Raychaudhuri's view beside each step and on a name's page (B2,
   docs/cloud/C23), and a search over the scholarly English (X1c, C24): DOCS98_2026_10_28.
+- **Texts and their sources** (DOCS99_2026_10_28): a scan is repaired by its rounds page by page within the day's
+  allowance (scripts/repair_auto.py; REPAIR_PARTIAL lets a round read part of a text); an open e-text (GRETIL, CC
+  BY-NC-SA 4.0) is a witness of a scan or a text of its own (scripts/gretil_library.py, scripts/etext_witness.py);
+  an edition's note numbers are taken out of its Sanskrit (scripts/mend_marks.py); a modern edition's own matter is
+  never sent to the site (configs/edition_rights.json). docs/REPAIR_AND_SOURCES_2026-10-28.md.
 - **💾 Database** — snapshots the DB and opens it in **Datasette** for read-only SQL.
 
 ---

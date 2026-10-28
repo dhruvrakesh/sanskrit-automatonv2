@@ -2606,3 +2606,20 @@ docs\B2_AND_X1C_2026-10-28.md. From the repository root:
    ("What the historians say"), /corpus/scholarly (its search).
 5. Until C23 is pasted and corpus-index deployed again, the mirror task's tick sends everything but the claims and
    says that they wait.
+## 28 Oct, afternoon: the corpus read again, the open texts weighed (DOCS99_2026_10_28)
+
+docs\REPAIR_AND_SOURCES_2026-10-28.md. From the repository root, with the dashboard idle:
+
+1. `python scripts\patch_repair_partial_2026_10_28.py --check`, then without --check; the same for
+   `patch_rights_frontmatter_2026_10_28.py`, `patch_vedic_lla_2026_10_28.py` and `patch_docs99_2026_10_28.py`. Then
+   `python scripts\docs_map.py --write` and `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. `python scripts\mend_marks.py --doc HAYASHIRSHA_PANCARATRA --show 8` (the dry run: 854 numbers in 597 passages,
+   667 scholarly rows carried), then the same with `--apply` (it backs the database up to D:\backups first). Its ALSO
+   line is the undo.
+3. `python scripts\mend_witness.py --doc nirukta__w_gretil` (the plan: 41 respelled, "the Vedic l"), then `--yes`.
+4. `python scripts\repair_auto.py --round --dry-run`: the Padma Patala's round now reads the pages that fit
+   ("PARTIAL"), not none.
+5. The next mirror tick sends the six editions' own matter as a notice (RIGHTS_FRONTMATTER); the Hayasirsa stays
+   held until it is released.
+6. The Karanagama (section 4 of the account): mark_passages.py on the 33 passages, a dry run first; the two mixed
+   ones read by a person; then the decision on its rights before `repair_text.py --restore`.

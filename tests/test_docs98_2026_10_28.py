@@ -43,8 +43,12 @@ class ThePatch(unittest.TestCase):
             for rel in FILES:
                 got = (t / rel).read_bytes()
                 self.assertIn(MARK.encode(), got, rel)
-                if MARK.encode() in (REPO / rel).read_bytes():
-                    self.assertEqual(got, (REPO / rel).read_bytes(), rel)
+                now = (REPO / rel).read_bytes()
+                later = sorted((REPO / rel).parent.glob(Path(rel).name + ".bak_docs99_*"))   # DOCS99_2026_10_28 came after
+                if later:
+                    now = later[0].read_bytes()
+                if MARK.encode() in now and b"DOCS99_2026_10_28" not in now:
+                    self.assertEqual(got, now, rel)
             self.assertIn("Nothing to do", run().stdout)
 
 

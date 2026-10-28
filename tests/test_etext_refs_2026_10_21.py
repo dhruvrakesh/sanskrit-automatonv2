@@ -177,7 +177,8 @@ class TheFiles(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:   # ETEXT_PROSE_2026_10_21 came after: its backup of etext_witness.py is this patch's
-                later = sorted((REPO / f).parent.glob(Path(f).name + ".bak_etextprose_*"))
+                later = (sorted((REPO / f).parent.glob(Path(f).name + ".bak_etextprose_*")) or
+                         sorted((REPO / f).parent.glob(Path(f).name + ".bak_vedlla_*")))   # VEDIC_LLA_2026_10_28: mend_witness.py
                 self.assertEqual((t / f).read_bytes(), (later[0] if later else REPO / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:

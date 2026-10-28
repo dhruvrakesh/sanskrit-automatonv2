@@ -1,0 +1,42 @@
+{
+  "mark": "RIGHTS_FRONTMATTER_2026_10_28",
+  "about": "The texts whose scan is a modern edition: its own matter (preface, introduction, notes, its editor's translation, typed 'frontmatter') stays on the desk; scripts/corpus_sync.py sends such a passage with its place and type only. The Sanskrit is sent as before: whether an edition's Sanskrit may be shown is decided apart. Set withhold_frontmatter to false to send a text's own matter again. Facts below are read from each scan's own title pages (docs/REPAIR_AND_SOURCES_2026-10-28.md).",
+  "texts": {
+    "HAYASHIRSHA_PANCARATRA": {
+      "edition": "Hayasirsapancaratra (Adi-kanda), ed. Kali Kumar Dutta Sastri, iconographical notes by Kalyan Kumar Dasgupta, Bibliotheca Indica Work 306, The Asiatic Society, Calcutta, 1976",
+      "notice": "(c) The Asiatic Society, 1976",
+      "evidence": "the scan's page 4: 'Work Number-306, (c) The Asiatic Society, First Published in 1976'",
+      "withhold_frontmatter": true
+    },
+    "Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi": {
+      "edition": "Karanagama (Kriyapada), with Hindi translation and notes, ed. Prof. Ramachandra Pandey, Shaiva Bharati Shodha Pratishthanam, Jangamawadi Math, Varanasi, 1994 (Research Publications Series 4)",
+      "notice": "(c) Shaiva Bharati Shodha Pratishthanam, 1994",
+      "evidence": "the scan's page 4: '(c) Shaiva Bharati Shodha Pratishthanam, first edition 1994'",
+      "withhold_frontmatter": true
+    },
+    "Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V": {
+      "edition": "Ganitayuktibhasa of Jyesthadeva, the Sanskrit version, ed. Vachaspati K. V. Sarma, vol. III, Indian Institute of Advanced Study, Shimla, 2004",
+      "notice": "(c) Indian Institute of Advanced Study, Shimla, 2004, all rights reserved",
+      "evidence": "the scan's pages 3 and 6: 'First published 2004, (c) Indian Institute of Advanced Study, Shimla, All rights reserved'",
+      "withhold_frontmatter": true
+    },
+    "Mallapurana": {
+      "edition": "Mallapurana, ed. B. J. Sandesara and R. N. Mehta, Gaekwad's Oriental Series 144, M. S. University of Baroda, 1964",
+      "notice": "a modern edition (Baroda, 1964), in copyright",
+      "evidence": "the scan's pages 1 to 3: GOS No. 144, first edition, 500 copies; no notice read",
+      "withhold_frontmatter": true
+    },
+    "AkashBhairavaKalpam": {
+      "edition": "Akasa-bhairava-kalpa with a short Hindi commentary by Kaviraj Pt. Nanakachandra Sharma",
+      "notice": "a modern Hindi commentary, in copyright",
+      "evidence": "the scan's page 3: 'samksipta-hindi-vyakhyopetam, vyakhyakara Kaviraj Pt. Nanakachandra Sharma'",
+      "withhold_frontmatter": true
+    },
+    "Astadhyayi": {
+      "edition": "Astadhyayisutrapatha with anuvrtti, vartika and paribhasa, ed. Brahmacarini Medha Michika, Arsha Vidya Gurukulam, Anaikatti; Arsha Avinash Foundation, Coimbatore, Vikrama Samvat 2070 (2013)",
+      "notice": "a modern edition (2013), in copyright",
+      "evidence": "the scan's pages 1 and 2; no notice read",
+      "withhold_frontmatter": true
+    }
+  }
+}

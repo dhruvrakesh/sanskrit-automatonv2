@@ -792,6 +792,8 @@ def main(argv=None) -> int:
                    "a state in the register; cache each for the Library and the Sources page")
     ap.add_argument("--replace", type=int, default=None, help="with --use-repaired: the English translations it replaces")
     ap.add_argument("--max-usd", type=float, default=1.00)
+    ap.add_argument("--partial", action="store_true",   # REPAIR_PARTIAL_2026_10_28
+                    help="with --repair: read the pages that fit under --max-usd when all of them do not")
     ap.add_argument("--ai", action="store_true", help="with --find-source: let the AI judge the editions (about $0.002)")
     ap.add_argument("--force", action="store_true", help="with --release: publish even before the translation is back")
     ap.add_argument("--judged-dir", default="data/source_judged")
@@ -864,7 +866,8 @@ def main(argv=None) -> int:
         # REPAIR_HEAL_2026_10_11: ocr_consensus.py refuses while the dashboard runs a job for this text;
         # this repair is such a job (kind "repair"), so it is told to look past it
         rc = run([PY, SCRIPTS / "ocr_consensus.py", "--doc", a.doc, "--threshold", thr, "--include-unassessed",
-                  "--yes", "--max-usd", "%.2f" % a.max_usd], keep=out, env_extra={"SA_CONSENSUS_SELF_KIND": "repair"})
+                  "--yes", "--max-usd", "%.2f" % a.max_usd] + (["--partial"] if a.partial else []),   # REPAIR_PARTIAL_2026_10_28
+                 keep=out, env_extra={"SA_CONSENSUS_SELF_KIND": "repair"})
         text = "".join(out)
         m = re.search(r"REFUSING: estimate \$([0-9.]+) exceeds --max-usd", text)
         if rc not in (0, 3) and m:
@@ -873,6 +876,8 @@ def main(argv=None) -> int:
                   "spent (it prices a new text from the corpus's recent pages; Karan Aagama cost a tenth of its "
                   "estimate)" % (est, a.max_usd))
             print("NEXT: python scripts\\repair_text.py --doc %s --repair --max-usd %.2f" % (a.doc, math.ceil(est * 110) / 100.0))
+            print("ALSO: or a part now, within $%.2f: python scripts\\repair_text.py --doc %s --repair --max-usd %.2f "
+                  "--partial (REPAIR_PARTIAL_2026_10_28)" % (a.max_usd, a.doc, a.max_usd))
             return 1
         if rc not in (0, 3) and "stop them first" in text:
             print("VERDICT: ocr_consensus.py saw this repair as a job in its way: it is older than REPAIR_HEAL_2026_10_11 "

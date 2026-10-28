@@ -17,7 +17,9 @@ is ready to translate.
   a round      the first of the day judges (repair_text.py --judge-all) and does nothing else; each other round does at
                most one step, of one text, after repair_text.py --doc X has said what the step is:
                  vision  NEXT: ... --repair --max-usd N: run with --max-usd the least of N, the round's limit ($0.10),
-                         what is left of today's allowance and what the cap leaves above its reserve ($1.00). Vision
+                         what is left of today's allowance and what the cap leaves above its reserve ($1.00), and
+                         --partial (REPAIR_PARTIAL_2026_10_28: the pages that fit under it go now, the rest in later
+                         rounds; before, a text whose pages left cost more than the round was refused each round). Vision
                          OCR of the pages not read, the audit and the merge: page files only, the database untouched;
                          repair_text.py and ocr_consensus.py stop before spending more
                  swap    NEXT: ... --use-repaired (nothing replaced): run only when the dashboard answers and runs no job,
@@ -480,7 +482,8 @@ def _round(a, p: Paths, cfg: dict, st: dict, day: str) -> int:
             spend = round(min(float(detail), float(cfg["round_usd"]), left_day, left_cap), 2)
             if spend < 0.02:
                 continue
-            argv = [PY, SCRIPTS / "repair_text.py", "--doc", doc, "--repair", "--max-usd", "%.2f" % spend]
+            argv = [PY, SCRIPTS / "repair_text.py", "--doc", doc, "--repair", "--max-usd", "%.2f" % spend,
+                    "--partial"]   # REPAIR_PARTIAL_2026_10_28
             if a.dry_run:
                 st["did"] = {"doc": doc, "step": "vision", "would_run": " ".join(str(x) for x in argv[1:])}
                 break

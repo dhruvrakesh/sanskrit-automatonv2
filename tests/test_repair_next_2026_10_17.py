@@ -77,7 +77,9 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-            self.assertEqual((t / "scripts" / "repair_text.py").read_bytes(), (SCRIPTS / "repair_text.py").read_bytes())
+            later = sorted(SCRIPTS.glob("repair_text.py.bak_repairpartial_*"))   # REPAIR_PARTIAL_2026_10_28 came after
+            self.assertEqual((t / "scripts" / "repair_text.py").read_bytes(),
+                             (later[0] if later else SCRIPTS / "repair_text.py").read_bytes())
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             shutil.copy2(baks[0], t / "scripts" / "repair_text.py")
             p = t / "scripts" / "repair_text.py"

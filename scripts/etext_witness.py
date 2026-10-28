@@ -42,6 +42,10 @@ text's category when it is no scan's witness.
 
   python scripts\\etext_witness.py --doc satapatha_madhyandina --file sources\\satapatha_gretil --category brahmana --per-page 10
 
+VEDIC_LLA_2026_10_28: the Vedic l (l with a dot below between vowels) is read as the consonant U+0933, not the vowel
+l that indic_transliteration writes (the Nirukta's witness had it in 41 passages; GRETIL's Rgveda padapatha has it
+598 times); mend_witness.py reads a witness already in the database again with it.
+
 The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's, for the dashboard.
 """
 from __future__ import annotations
@@ -327,7 +331,27 @@ def gretil_header(lines: list) -> set:
     return set()
 
 
-def to_deva(s: str, scheme: str, ortho: bool = True) -> str:
+# VEDIC_LLA_2026_10_28: the Vedic l (IAST l with a dot below between vowels: the Rgveda's "\u012b\u1e37e", the
+# Nirukta's "parivr\u0325\u1e37ham") is the consonant U+0933 there; indic_transliteration writes the vowel l
+# (U+090C) as a letter of its own ("\u0908\u090c\u090f"). A vowel l stands after a consonant as its sign (U+0962:
+# "k\u1e37pta") or at a word's start, so a letter U+090C after a Devanagari letter or sign is that misreading: it
+# becomes U+0933 with the vowel after it as its sign (an a as none), or with a virama before a consonant.
+LLA_BAD = re.compile("(?<=[\u0900-\u0963\u0970-\u097f])\u090c([\u0905-\u0914\u0960]?)")
+VOWEL_SIGN = {"\u0905": "", "\u0906": "\u093e", "\u0907": "\u093f", "\u0908": "\u0940", "\u0909": "\u0941",
+              "\u090a": "\u0942", "\u090b": "\u0943", "\u0960": "\u0944", "\u090f": "\u0947", "\u0910": "\u0948",
+              "\u0913": "\u094b", "\u0914": "\u094c"}
+
+
+def vedic_lla(out: str) -> str:
+    """VEDIC_LLA_2026_10_28: a Devanagari reading with each misread Vedic l made U+0933."""
+    def put(m):
+        v = m.group(1)
+        return "\u0933" + VOWEL_SIGN[v] if v in VOWEL_SIGN else "\u0933\u094d" + v
+    return LLA_BAD.sub(put, out)
+
+
+def to_deva(s: str, scheme: str, ortho: bool = True, lla: bool = True) -> str:
+    """lla=False (with ortho) reads as before VEDIC_LLA_2026_10_28 (mend_witness.py compares the two)."""
     if scheme == "devanagari":
         return s.replace(DANDA + DANDA, DDANDA).replace("||", DDANDA).replace("|", DANDA)
     s = unicodedata.normalize("NFC", s)
@@ -347,6 +371,8 @@ def to_deva(s: str, scheme: str, ortho: bool = True) -> str:
     sch = {"iast": sanscript.IAST, "hk": sanscript.HK, "velthuis": sanscript.VELTHUIS, "itrans": sanscript.ITRANS}[scheme]
     out = sanscript.transliterate(s, sch, sanscript.DEVANAGARI)
     out = out.replace("\x01", DDANDA).replace("\x02", DANDA)
+    if ortho and lla:   # VEDIC_LLA_2026_10_28
+        out = vedic_lla(out)
     for k, v in enumerate(kept):   # ETEXT_ORTHO_2026_10_21: the labels and sigla, as the e-text writes them
         out = out.replace(chr(KEEP0 + k), v)
     return out

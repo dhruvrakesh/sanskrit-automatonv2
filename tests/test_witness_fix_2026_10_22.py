@@ -142,7 +142,8 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:   # ETEXT_ANALYSIS_2026_10_22: etext_witness.py's later backup may be .bak_etextanalysis_
-                later = sorted((REPO / f).parent.glob(Path(f).name + ".bak_etextanalysis_*"))
+                later = (sorted((REPO / f).parent.glob(Path(f).name + ".bak_etextanalysis_*")) or
+                         sorted((REPO / f).parent.glob(Path(f).name + ".bak_vedlla_*")))   # VEDIC_LLA_2026_10_28
                 self.assertEqual((t / f).read_bytes(), (later[0] if later else REPO / f).read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
 

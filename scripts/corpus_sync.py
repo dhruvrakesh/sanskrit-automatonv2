@@ -338,6 +338,50 @@ PASSAGE_COLS = ("text", "iast", "translation", "verse_ref", "chapter", "text_typ
                 "quality_score", "translation_score", "translation_qa", "engine", "mt_prompt_version",
                 "translated_at", "ocr_engine", "sandhi", "morph", "source")
 L10N_COLS = ("translation", "engine", "mt_prompt_version", "translation_score", "translation_qa", "translated_at")
+
+# --- RIGHTS_FRONTMATTER_2026_10_28: an edition in copyright keeps its own matter off the site ----------------------
+# configs/edition_rights.json names the texts whose scan is a modern edition with a copyright notice of its own (the
+# publisher's or the editor's, as its title page prints it). Of such a text, a passage typed 'frontmatter' (its
+# preface, introduction and notes, its editor's translation: the edition's own words, not the Sanskrit) goes to the
+# mirror with its place and its type only: its words, IAST, English, Hindi, names and vector stay on the desk. The
+# Sanskrit goes as before (whether an edition's Sanskrit may be shown is decided apart, as for the BORI text).
+# A text not listed, or listed with "withhold_frontmatter": false, is sent as before.
+RIGHTS_PATH = ROOT / "configs" / "edition_rights.json"
+WITHHELD_TEXT = "[The edition's own matter, not shown on the site: %s.]"
+_RIGHTS = {}
+
+
+def edition_rights(path=None) -> dict:
+    """RIGHTS_FRONTMATTER_2026_10_28: {doc_code: entry} of configs/edition_rights.json (SA_EDITION_RIGHTS overrides
+    the path); {} when it is missing or unreadable."""
+    p = Path(path or os.environ.get("SA_EDITION_RIGHTS") or RIGHTS_PATH)
+    key = str(p)
+    if key not in _RIGHTS:
+        try:
+            j = json.loads(p.read_text(encoding="utf-8"))
+            texts = j.get("texts") if isinstance(j, dict) else None
+            _RIGHTS[key] = {k: v for k, v in (texts or {}).items() if isinstance(v, dict)}
+        except (OSError, ValueError):
+            _RIGHTS[key] = {}
+    return _RIGHTS[key]
+
+
+def withheld_notice(code) -> str:
+    """RIGHTS_FRONTMATTER_2026_10_28: the notice of a text whose own matter is withheld, else ''."""
+    r = edition_rights().get(code) or {}
+    if not r.get("withhold_frontmatter"):
+        return ""
+    return str(r.get("notice") or "its edition is in copyright").strip()
+
+
+def _withheld(vals: list, notice: str) -> list:
+    """A passage row (doc_code, page_no, idx, local_id, PASSAGE_COLS...) with the edition's words taken out."""
+    out = list(vals)
+    for c, v in (("text", WITHHELD_TEXT % notice), ("iast", None), ("translation", None), ("sandhi", None),
+                 ("morph", None), ("padas", None), ("chandas", None), ("translation_score", None),
+                 ("translation_qa", None), ("engine", None), ("mt_prompt_version", None), ("translated_at", None)):
+        out[4 + PASSAGE_COLS.index(c)] = v
+    return out
 STORY_COLS = ("image_id", "status", "title", "title_hi", "why", "from_page", "from_idx", "to_page", "to_idx",
               "story_en", "story_hi", "quote_sa", "quote_ref", "notes", "cites", "verify", "model", "provenance",
               "created_at", "updated_at", "approved_at")
@@ -474,12 +518,17 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
             "SELECT p.id, p.page_no, p.idx, %s FROM passages p WHERE p.doc_id=? ORDER BY p.page_no, p.idx"
             % _sel(pcols, PASSAGE_COLS, "p"), (did,)).fetchall()
         g = Group("passages", code)
+        notice = withheld_notice(code)   # RIGHTS_FRONTMATTER_2026_10_28
+        held = set()
         for r in rows:
             pid, page, idx = r[0], r[1], r[2]
             key = "%d|%d" % (page, idx)
             passages[pid] = (page, idx)
             pinfo[pid] = (r[3 + PASSAGE_COLS.index("text")], r[3 + PASSAGE_COLS.index("verse_ref")])
             vals = [code, page, idx, pid] + [_clean(x) for x in r[3:]]
+            if notice and r[3 + PASSAGE_COLS.index("text_type")] == "frontmatter":
+                held.add(pid)
+                vals = _withheld(vals, notice)
             row = dict(zip(("doc_code", "page_no", "idx", "local_id") + PASSAGE_COLS, vals))
             g.add(key, vals, row)
         out["passages"] = g
@@ -492,15 +541,16 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
                         "SELECT l.passage_id, l.lang, %s FROM translations_l10n l JOIN passages p ON p.id = l.passage_id "
                         "WHERE p.doc_id=?" % _sel(lcols, L10N_COLS, "l"), (did,)):
                     pos = passages.get(r[0])
-                    if pos is None or not r[1]:
+                    if pos is None or not r[1] or r[0] in held:   # RIGHTS_FRONTMATTER_2026_10_28
                         g.skipped += 1
                         continue
                     key = "%d|%d|%s" % (pos[0], pos[1], r[1])
                     vals = [code, pos[0], pos[1], r[1]] + [_clean(x) for x in r[2:]]
                     row = dict(zip(("doc_code", "page_no", "idx", "lang") + L10N_COLS, vals))
                     g.add(key, vals, row)
+            held_at = {passages[x] for x in held}   # RIGHTS_FRONTMATTER_2026_10_28
             for key, vals, row in scholar_rows(con, code, passages, pinfo):   # SCHOLAR_MIRROR_2026_10_18
-                if key in g.rows:
+                if key in g.rows or (vals[1], vals[2]) in held_at:
                     g.skipped += 1
                     continue
                 g.add(key, vals, row)
@@ -515,7 +565,7 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
                         "WHERE p.doc_id=?", (did,)):
                     pos = passages.get(pid)
                     canonical = _clean(canonical)
-                    if pos is None or canonical not in ent_ok:
+                    if pos is None or canonical not in ent_ok or pid in held:   # RIGHTS_FRONTMATTER_2026_10_28
                         g.skipped += 1
                         continue
                     key = "%d|%d|%s" % (pos[0], pos[1], canonical)
@@ -558,7 +608,8 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
                         "SELECT e.passage_id, e.model, e.dim, e.vec FROM passage_embeddings e "
                         "JOIN passages p ON p.id = e.passage_id WHERE p.doc_id=?", (did,)):
                     pos = passages.get(pid)
-                    if pos is None or blob is None or not dim or int(dim) < VEC_DIMS or len(blob) != 4 * int(dim):
+                    if (pos is None or blob is None or not dim or int(dim) < VEC_DIMS or len(blob) != 4 * int(dim)
+                            or pid in held):   # RIGHTS_FRONTMATTER_2026_10_28
                         g.skipped += 1
                         continue
                     h = hashlib.md5(("%s|vectors|%s|%d|%d|" % (SCHEMA_VERSION, model, int(dim), VEC_DIMS)).encode("utf-8")

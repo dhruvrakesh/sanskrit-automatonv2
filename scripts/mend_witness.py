@@ -38,6 +38,12 @@ in brackets" put back; the scholarly English re-based, as below). A reference th
   python scripts\\mend_witness.py --doc jyotish_surya_siddhanta__w_etext --yes
   python scripts\\mend_witness.py --doc markandeya_purana__w_gretil
 
+VEDIC_LLA_2026_10_28 (28 Oct): the Vedic l (l with a dot below between vowels) had been read as the vowel l
+(U+090C) in 41 of the Nirukta witness's passages ("parivr\u0325\u1e37ham" as a vowel l and an h); read again,
+it is U+0933 ("respelled", "the Vedic l"), its scholarly English re-based as above.
+
+  python scripts\\mend_witness.py --doc nirukta__w_gretil
+
 The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's.
 """
 from __future__ import annotations
@@ -85,9 +91,11 @@ def read_records(path: Path) -> list:
     return [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]
 
 
-def convert(roman: str, scheme: str, ortho: bool) -> str:
-    """A record's Devanagari from its romanized lines, as etext_witness.parse() joins them."""
-    return "\n".join(x for x in (EW.to_deva(y, scheme, ortho=ortho).strip() for y in roman.split("\n")) if x).strip()
+def convert(roman: str, scheme: str, ortho: bool, lla: bool = True) -> str:
+    """A record's Devanagari from its romanized lines, as etext_witness.parse() joins them (lla=False: as before
+    VEDIC_LLA_2026_10_28)."""
+    return "\n".join(x for x in (EW.to_deva(y, scheme, ortho=ortho, lla=lla).strip() for y in roman.split("\n"))
+                     if x).strip()
 
 
 def what_changed(roman: str) -> list:
@@ -243,7 +251,8 @@ def plan(a) -> dict:
             target_type = "noise" if head else it["type_old"]
             if not roman or (old.strip() == target and it["type_old"] == target_type and not rw):
                 it.update(kind="same", new=old, type_new=it["type_old"])   # as the e-text means it (mended already)
-            elif old.strip() not in (convert(roman, scheme, False), convert(roman, scheme, True)):
+            elif old.strip() not in (convert(roman, scheme, False), convert(roman, scheme, True, lla=False),
+                                     convert(roman, scheme, True)):   # VEDIC_LLA_2026_10_28: the reading of 21-27 Oct
                 it.update(kind="unreproducible", new=old, type_new=it["type_old"])
             elif head:
                 it.update(kind="header", new=target, type_new="noise", what=["GRETIL's English header"])
@@ -251,6 +260,8 @@ def plan(a) -> dict:
                 it.update(kind="refs", new=old, type_new=it["type_old"], what=rw)
             else:
                 what = what_changed(roman) if convert(roman, scheme, True) != old.strip() else []
+                if convert(roman, scheme, True, lla=False) != convert(roman, scheme, True):   # VEDIC_LLA_2026_10_28
+                    what.append("the Vedic l")
                 if roman_now != roman:
                     what.append("the value in brackets")
                 it.update(kind="respelled", new=target, type_new=it["type_old"], what=what + rw)

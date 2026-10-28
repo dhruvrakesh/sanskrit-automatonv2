@@ -2,7 +2,7 @@
 
 Made by `python scripts\docs_map.py --write` from the files' own first lines (their titles, the dates in
 their names, the markers they name); not written by hand. `--check` says when it is stale.
-90 documents; the newest is of 2026-10-28.
+91 documents; the newest is of 2026-10-28.
 
 ## Start here
 
@@ -116,6 +116,7 @@ their names, the markers they name); not written by hand. `--check` says when it
 
 | Date | File | What it is | Markers |
 |---|---|---|---|
+| 2026-10-28 | [REPAIR_AND_SOURCES_2026-10-28.md](REPAIR_AND_SOURCES_2026-10-28.md) | Repair and sources: the corpus read again, the open texts weighed (28 Oct 2026) | REPAIR_PARTIAL_2026_10_28, RIGHTS_FRONTMATTER_2026_10_28, INLINE_MARKS_2026_10_28, VEDIC_LLA_2026_10_28 |
 | 2026-10-25 | [CONSOLIDATION_2026-10-25.md](CONSOLIDATION_2026-10-25.md) | Consolidation: the scans repaired by themselves (25 Oct 2026) | AUTO_REPAIR_2026_10_25 |
 | 2026-10-17 | [NEXT_BOOKS_2026-10-17.md](NEXT_BOOKS_2026-10-17.md) | The next books: the Devimahatmya before Ashtami, the Ganita Yukti Bhasa, the Surya Siddhanta (17 Oct 2026, night) | TIER_R_2026_10_17 |
 | 2026-10-17 | [EDITIONS_2026-10-17.md](EDITIONS_2026-10-17.md) | Scholarly books from the corpus: what is ready, what is not, and the edition's format (17 Oct 2026) | SCHOLAR_EDITION_2026_10_17 |
@@ -198,6 +199,7 @@ Each file once, whole, in the Lovable Cloud SQL editor; its checks one query per
 | [CHECKS_fidelity_2026-10-22.sql](cloud/CHECKS_fidelity_2026-10-22.sql) | checks | CHECKS_fidelity_2026-10-22.sql  (DOCS84_2026_10_22, FIDELITY_2026_10_22) | - |
 | [CHECKS_followup_2026-10-22.sql](cloud/CHECKS_followup_2026-10-22.sql) | checks | CHECKS_followup_2026-10-22.sql  (DOCS86_2026_10_22, docs/DEBT_2026-10-22.md section 7) | - |
 | [CHECKS_held_2026-10-21.sql](cloud/CHECKS_held_2026-10-21.sql) | checks | CHECKS_held_2026-10-21.sql  (DOCS82_2026_10_21) | - |
+| [CHECKS_rights_2026-10-28.sql](cloud/CHECKS_rights_2026-10-28.sql) | checks | CHECKS_rights_2026-10-28.sql  (RIGHTS_FRONTMATTER_2026_10_28, DOCS99_2026_10_28, docs/REPAIR_AND_SOURCES_2026-10-28.md) | - |
 | [CHECKS_surya_mend_2026-10-21.sql](cloud/CHECKS_surya_mend_2026-10-21.sql) | checks | CHECKS for the Surya Siddhanta's mend (WITNESS_MEND_2026_10_21, docs/SHELF_AND_SURYA_2026-10-21.md). Read-only: | - |
 | [CHECKS_surya_refs_2026-10-21.sql](cloud/CHECKS_surya_refs_2026-10-21.sql) | checks | CHECKS for the Surya Siddhanta's references (ETEXT_REFS_2026_10_21, docs/CLAIMS_AND_REFS_2026-10-21.md). Read-only: | - |
 | [OPS_health_2026-10-08.sql](cloud/OPS_health_2026-10-08.sql) | checks | OPS health (OPS_HEALTH_2026_10_08). Read-only. ONE QUERY PER PASTE in the Lovable Cloud SQL | - |

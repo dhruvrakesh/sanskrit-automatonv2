@@ -496,6 +496,20 @@ def reingest_commands(doc: str) -> str:
 
 
 # ---------------------------------------------------------------------- main
+def fit_pages(todo: list, cpp: float, max_usd: float, partial: bool) -> tuple:
+    """REPAIR_PARTIAL_2026_10_28: (the pages to read now, their estimate, what to print) when the estimate of all of
+    them is above max_usd. Without partial: none (the refusal, as before). With it: the first pages of the order that
+    fit under max_usd at cpp a page; none when not even one fits. The repair rounds give $0.10 a round; a text whose
+    pages left cost more was refused every round, and nothing behind it ran (the Padma's Patala-khanda, 22 to 28 Oct)."""
+    est = len(todo) * cpp
+    fit = int((max_usd + 1e-9) // cpp) if (partial and cpp > 0) else 0
+    if fit < 1:
+        return [], 0.0, "  REFUSING: estimate $%.4f exceeds --max-usd %.4f" % (est, max_usd)
+    part = list(todo[:fit])
+    return part, len(part) * cpp, ("  PARTIAL: estimate $%.4f exceeds --max-usd %.4f: %d of %d page(s) this run, the "
+                                   "rest later" % (est, max_usd, len(part), len(todo)))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Idempotent OCR consensus for one doc (no DB writes)")
     ap.add_argument("--doc", required=True)
@@ -511,6 +525,9 @@ def main() -> int:
                     help="also vision pages whose Tesseract output carries no confidence")
     ap.add_argument("--max-usd", type=float, default=1.00, help="refuse the vision step above this estimate")
     ap.add_argument("--max-pages", type=int, default=0, help="cap vision pages this run (0 = no cap)")
+    ap.add_argument("--partial", action="store_true",   # REPAIR_PARTIAL_2026_10_28
+                    help="when the estimate is above --max-usd, read the pages that fit under it (the first in the "
+                         "order below), not none")
     ap.add_argument("--model", default=None, help="passed to ocr_vision.py --model")
     ap.add_argument("--yes", action="store_true", help="spend (vision) and write (repair, merge)")
     ap.add_argument("--drift-only", action="store_true")
@@ -597,8 +614,11 @@ def main() -> int:
               % (len(queue), len(done), len(todo), est, cpp))
         if todo and args.yes:
             if est > args.max_usd:
-                print("  REFUSING: estimate $%.4f exceeds --max-usd %.4f" % (est, args.max_usd))
-                return 1
+                # REPAIR_PARTIAL_2026_10_28: with --partial, the pages that fit under the cap go now, the rest later
+                todo, est, said_ = fit_pages(todo, cpp, args.max_usd, args.partial)
+                print(said_)
+                if not todo:
+                    return 1
             vdir.mkdir(parents=True, exist_ok=True)
             try:   # PATH_2026_10_12: the cap is asked before each page
                 import usage_meter as _um

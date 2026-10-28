@@ -1,0 +1,17 @@
+The corpus read again, the open texts weighed: four mends (DOCS99_2026_10_28)
+
+- REPAIR_PARTIAL_2026_10_28: ocr_consensus.py --partial reads the pages that fit under --max-usd, the rest
+  later; repair_text.py --partial; the rounds pass it (they had refused 9 times on the Padma Patala's $1.2727).
+- RIGHTS_FRONTMATTER_2026_10_28: configs/edition_rights.json names six modern editions; corpus_sync.py sends
+  their own matter as a notice, and none of its Hindi, scholarly rows, names or vectors.
+- INLINE_MARKS_2026_10_28: scripts/mend_marks.py takes an edition's footnote numbers out of the Sanskrit read by
+  vision (the Hayasirsa: 854 in 597 passages), the IAST and the search row made again, the scholarly English
+  carried; the raw OCR kept; a backup and a manifest first, an exact undo; Tesseract readings and svara
+  notations refused.
+- VEDIC_LLA_2026_10_28: etext_witness.to_deva() reads the Vedic l as the consonant; mend_witness.py mends a
+  witness in place (the Nirukta: 41 passages); the six replays before it look for its backup.
+- docs/REPAIR_AND_SOURCES_2026-10-28.md, docs/cloud/CHECKS_rights_2026-10-28.sql; STATE section 34, RUNBOOK,
+  README (DOCS99_2026_10_28); DOCS_MAP. The replay tests of the patches before each mend look for its backup.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
