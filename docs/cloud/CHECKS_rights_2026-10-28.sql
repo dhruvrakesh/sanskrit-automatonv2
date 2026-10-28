@@ -27,3 +27,20 @@ WHERE p.text_type = 'frontmatter'
   AND p.doc_code IN ('Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V', 'Mallapurana', 'AkashBhairavaKalpam', 'Astadhyayi')
 GROUP BY t.doc_code, t.lang
 ORDER BY t.doc_code, t.lang;
+
+-- R3 (RIGHTS_NOISE_2026_10_28, DOCS100_2026_10_28): after the first mirror tick that follows
+-- patch_rights_noise_2026_10_28.py, a listed edition's noise (its apparatus of variant readings, or a page's debris)
+-- is withheld as its frontmatter is. Expected: withheld = noise_live and with_words = 0 for the Ganita Yukti Bhasa (9),
+-- the Mallapurana (44) and the Akasabhairava (38). The Hayasirsa (held) keeps its last version until it is released.
+SELECT p.doc_code,
+       count(*) FILTER (WHERE p.retired_at IS NULL) AS noise_live,
+       count(*) FILTER (WHERE p.retired_at IS NULL
+                          AND p.text LIKE '[The edition''s own matter, not shown on the site:%') AS withheld,
+       count(*) FILTER (WHERE p.retired_at IS NULL
+                          AND (p.translation IS NOT NULL OR p.iast IS NOT NULL)) AS with_words
+FROM corpus.passages p
+WHERE p.text_type = 'noise'
+  AND p.doc_code IN ('Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V', 'Mallapurana', 'AkashBhairavaKalpam', 'Astadhyayi',
+                     'HAYASHIRSHA_PANCARATRA')
+GROUP BY p.doc_code
+ORDER BY p.doc_code;

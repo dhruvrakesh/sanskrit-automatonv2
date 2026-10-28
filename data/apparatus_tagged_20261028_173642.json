@@ -1,0 +1,517 @@
+{
+ "marker": "APPARATUS_TAG_2026_10_03",
+ "at": "2026-10-28T17:36:42",
+ "rows": [
+  {
+   "id": 273802,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 26,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 273871,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 32,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 273884,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 33,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274041,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 46,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274104,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 51,
+   "idx": 14,
+   "prev": "prose"
+  },
+  {
+   "id": 274229,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 61,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274241,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 62,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274370,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 73,
+   "idx": 10,
+   "prev": "prose"
+  },
+  {
+   "id": 274382,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 74,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274394,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 75,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274405,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 76,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274417,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 77,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274429,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 78,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274442,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 79,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274466,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 81,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274477,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 82,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274488,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 83,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274500,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 84,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274511,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 85,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274537,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 87,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274549,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 88,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274562,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 89,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274573,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 90,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274585,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 91,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274607,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 93,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274618,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 94,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274629,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 95,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274639,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 96,
+   "idx": 10,
+   "prev": "mula"
+  },
+  {
+   "id": 274650,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 97,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274661,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 98,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274672,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 99,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274694,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 101,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274706,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 102,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274718,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 103,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274731,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 104,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274736,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 105,
+   "idx": 5,
+   "prev": "mula"
+  },
+  {
+   "id": 274742,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 106,
+   "idx": 6,
+   "prev": "mula"
+  },
+  {
+   "id": 274752,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 107,
+   "idx": 10,
+   "prev": "mula"
+  },
+  {
+   "id": 274788,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 110,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274800,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 111,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274811,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 112,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274824,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 113,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274858,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 116,
+   "idx": 10,
+   "prev": "prose"
+  },
+  {
+   "id": 274881,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 118,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 274894,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 119,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274933,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 122,
+   "idx": 15,
+   "prev": "mula"
+  },
+  {
+   "id": 274945,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 123,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 274958,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 124,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274969,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 125,
+   "idx": 11,
+   "prev": "mula"
+  },
+  {
+   "id": 274982,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 126,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 274992,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 127,
+   "idx": 10,
+   "prev": "prose"
+  },
+  {
+   "id": 275004,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 128,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275016,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 129,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275028,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 130,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275040,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 131,
+   "idx": 12,
+   "prev": "mula"
+  },
+  {
+   "id": 275052,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 132,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275063,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 133,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 275088,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 135,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 275100,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 136,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275113,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 137,
+   "idx": 13,
+   "prev": "prose"
+  },
+  {
+   "id": 275125,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 138,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275162,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 141,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275184,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 143,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275196,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 144,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275227,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 147,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 275248,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 149,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275257,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 150,
+   "idx": 9,
+   "prev": "prose"
+  },
+  {
+   "id": 275268,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 151,
+   "idx": 11,
+   "prev": "prose"
+  },
+  {
+   "id": 275291,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 153,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275303,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 154,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275314,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 155,
+   "idx": 11,
+   "prev": "mula"
+  },
+  {
+   "id": 275315,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 155,
+   "idx": 12,
+   "prev": "prose"
+  },
+  {
+   "id": 275325,
+   "doc": "HAYASHIRSHA_PANCARATRA",
+   "page": 156,
+   "idx": 10,
+   "prev": "prose"
+  }
+ ]
+}

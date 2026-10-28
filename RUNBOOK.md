@@ -2623,3 +2623,25 @@ docs\REPAIR_AND_SOURCES_2026-10-28.md. From the repository root, with the dashbo
    held until it is released.
 6. The Karanagama (section 4 of the account): mark_passages.py on the 33 passages, a dry run first; the two mixed
    ones read by a person; then the decision on its rights before `repair_text.py --restore`.
+## 28 Oct, evening: the week's asks verified; the editions' own matter (DOCS100_2026_10_28)
+
+docs\ASKS_2026-10-22.md, section 13. From the repository root:
+
+1. `python scripts\patch_rights_noise_2026_10_28.py --check`, then without --check; the same for
+   `patch_docs100_2026_10_28.py`. Then `python scripts\docs_map.py --write` and
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. With the dashboard idle: `python scripts\db_backup.py data\context.db D:\backups\context_pre_tags_20261028.db`;
+   `powershell -ExecutionPolicy Bypass -File scripts\tags_2026_10_28.ps1` (the dry run: 73 by classify_apparatus.py,
+   68 listed and 20 of the Hayasirsa; 143, 1 and 5 of the Karanagama); read it; then the same with `-Apply`.
+   Page 19, passage 12 of the Hayasirsa is a person's (half a verse, then the notes).
+3. The Hayasirsa's English and Hindi through the rounds: `python scripts\repair_auto.py --allow-translate
+   HAYASHIRSHA_PANCARATRA --usd 15.00` (1,453 passages, about $7 a language); when both are done the round asks for
+   its release (`python scripts\repair_text.py --doc HAYASHIRSHA_PANCARATRA --release`), which also takes its old
+   own matter off the site.
+4. The Gandharva Veda Natyasastra: `python scripts\text_path.py` (every text's path charted again, free; it writes
+   data\text_path.json, which the desk reads: its chart of 22 Oct said nothing was in the database); GRETIL's
+   Natyasastra as its witness: `python scripts\gretil_library.py --extract
+   1_sanskr/tei/transformations/html/sa_bharata-nATyazAstra-1-1618-303335-37.htm --doc gandharva_veda_natya_shastra`,
+   then `etext_witness.py` with `--file` (the preview), `--write` and `--ingest`, as for the Astadhyayi.
+5. After the next mirror tick: R3 of docs\cloud\CHECKS_rights_2026-10-28.sql (RIGHTS_NOISE: the listed editions'
+   noise withheld too: the Ganita's 9, the Mallapurana's 44, the Akasabhairava's 38), and R1 again.

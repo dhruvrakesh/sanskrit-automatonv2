@@ -346,6 +346,10 @@ L10N_COLS = ("translation", "engine", "mt_prompt_version", "translation_score", 
 # mirror with its place and its type only: its words, IAST, English, Hindi, names and vector stay on the desk. The
 # Sanskrit goes as before (whether an edition's Sanskrit may be shown is decided apart, as for the BORI text).
 # A text not listed, or listed with "withhold_frontmatter": false, is sent as before.
+# RIGHTS_NOISE_2026_10_28: a passage of such a text typed 'noise' goes the same way: there it is the edition's
+# apparatus of variant readings (the Mallapurana's, tagged on 3 Oct by classify_apparatus.py; the Hayasirsa's, read
+# clearly since its vision repair) or a page's debris, never its Sanskrit.
+WITHHELD_TYPES = ("frontmatter", "noise")
 RIGHTS_PATH = ROOT / "configs" / "edition_rights.json"
 WITHHELD_TEXT = "[The edition's own matter, not shown on the site: %s.]"
 _RIGHTS = {}
@@ -526,7 +530,7 @@ def build_doc_groups(con, doc, tables, ent_ok: set) -> dict:
             passages[pid] = (page, idx)
             pinfo[pid] = (r[3 + PASSAGE_COLS.index("text")], r[3 + PASSAGE_COLS.index("verse_ref")])
             vals = [code, page, idx, pid] + [_clean(x) for x in r[3:]]
-            if notice and r[3 + PASSAGE_COLS.index("text_type")] == "frontmatter":
+            if notice and r[3 + PASSAGE_COLS.index("text_type")] in WITHHELD_TYPES:   # RIGHTS_NOISE_2026_10_28
                 held.add(pid)
                 vals = _withheld(vals, notice)
             row = dict(zip(("doc_code", "page_no", "idx", "local_id") + PASSAGE_COLS, vals))

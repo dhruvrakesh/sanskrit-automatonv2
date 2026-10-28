@@ -1,0 +1,13 @@
+The week's asks verified; the editions' own matter found (DOCS100_2026_10_28)
+
+- docs/ASKS_2026-10-22.md section 13: every ask of 25 to 28 Oct, done or not, with its evidence and what is left;
+  the standing asks and the open keys read again; new keys. The register had stopped at 25 Oct.
+- RIGHTS_NOISE_2026_10_28: corpus_sync.py withholds a listed edition's noise (its apparatus of variant readings,
+  or a page's debris) as it withholds its frontmatter.
+- scripts/tags_2026_10_28.ps1 (TAGS_2026_10_28): the Hayasirsa's apparatus (141 passages) as noise and its title
+  pages and contents as frontmatter; the Karanagama's title pages, contents, verse index and bibliography as
+  frontmatter and its debris as noise; through classify_apparatus.py and mark_passages.py, a dry run first.
+- STATE section 35, RUNBOOK (28 Oct, evening).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
