@@ -1,0 +1,31 @@
+B2, X1c and HEAL: the historian's view beside the genealogies, a search in the scholarly English, two mends (28 Oct)
+
+HEAL_2026_10_28 (scripts/patch_heal_2026_10_28.py)
+- scripts/vamsa_view.py: a tie between two parents (or children) of one name is broken by the entry, never by a
+  set's order, so the same stores draw the same line in every run; each tick of the mirror had sent 80 to 150
+  persons again. Two hash seeds now give 0 different rows in all seven tables.
+- tests/test_edition_refs_2026_10_18.py: replays against the file as its patch left it (the one module that failed
+  on 25 Oct).
+
+B2_SITE_2026_10_28, C23_INDEX_CLAIMS_2026_10_28 (scripts/patch_b2_site_2026_10_28.py)
+- scripts/index_sync.py, scheme i2: Raychaudhuri's claims (public domain; the quotation found on the page, exact or
+  close; a name tied only where one name of ours was found), each statement's view and each step's best verdict;
+  before C23 or the deploy the claims wait and the rest is sent and verified as before.
+- docs/cloud/C23_index_claims_2026-10-28.sql, docs/cloud/C23_checks_2026-10-28.sql, docs/cloud/C23_corpus-index (i2).
+- docs/srangam/B2_SITE_2026-10-28 and scripts/patch_srangam_b2_site_2026_10_28.py: the historian's chip and words,
+  a strip over the line, "In our corpus", "What the historians say", the credits apart.
+- On the 28 Oct desk: 1,904 claims, 253 statements with a view, 62 steps with a verdict.
+
+X1C_SITE_2026_10_28, C24_SCHOLAR_SEARCH_2026_10_28
+- docs/cloud/C24_scholar_search_2026-10-28.sql: corpus_reader_scholar_search behind the readers' gate; the Srangam
+  kit's search on /corpus (a third way) and /corpus/scholarly.
+
+DOCS98_2026_10_28 (scripts/patch_docs98_2026_10_28.py)
+- docs/B2_AND_X1C_2026-10-28.md; docs/STATE_2026-10-18.md section 33; RUNBOOK.md; README.md.
+- scripts/docs_map.py and docs/DOCS_MAP.md: the map of the documentation from the files' own first lines.
+
+Tests: test_heal_2026_10_28, test_b2_site_pg_2026_10_28, test_scholar_search_pg_2026_10_28,
+test_srangam_b2_site_2026_10_28, test_docs_map_2026_10_28, test_docs98_2026_10_28.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

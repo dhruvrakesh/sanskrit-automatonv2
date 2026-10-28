@@ -2587,3 +2587,22 @@ docs\INDEX_SITE_2026-10-25.md. From the repository root:
    what differs only, so a second run sends nothing); `--status` shows the counts here and there. E1 to E3 of the
    checks; open /corpus/genealogies signed in.
 5. The mirror task sends what changes after that, last in each tick; it is quiet until steps 2 and 3 are done.
+## 28 Oct: the historian's view and the scholarly search on the site (DOCS98_2026_10_28)
+
+docs\B2_AND_X1C_2026-10-28.md. From the repository root:
+
+1. `python scripts\patch_heal_2026_10_28.py --check`, then without --check; the same for
+   `patch_b2_site_2026_10_28.py` and `patch_docs98_2026_10_28.py`. Then `python scripts\docs_map.py --write` and
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. In the Lovable Cloud SQL editor: P1 of docs\cloud\C23_checks_2026-10-28.sql; the whole of
+   docs\cloud\C23_index_claims_2026-10-28.sql in one paste; the whole of docs\cloud\C24_scholar_search_2026-10-28.sql
+   in one paste; V1, V2, V3 and S1. Never paste C21 again after C23 (it would take the claims out of the readers).
+3. In D:\srangam-42267: `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_srangam_b2_site_2026_10_28.py"`
+   (--check first), the typecheck, the tests and the build, commit and push; ask Lovable to deploy
+   supabase/functions/corpus-index as it is, then Publish.
+4. `python scripts\index_sync.py` (the plan: the claims, the work, the statements and steps that now carry a verdict,
+   and once the persons whose tie HEAL settles), then `python scripts\index_sync.py --apply`; E1 to E3 of the checks.
+   Signed in: /corpus/genealogies (the historians' view), a line (its strip, its chips, "In our corpus"), a name's page
+   ("What the historians say"), /corpus/scholarly (its search).
+5. Until C23 is pasted and corpus-index deployed again, the mirror task's tick sends everything but the claims and
+   says that they wait.

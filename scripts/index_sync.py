@@ -8,13 +8,19 @@ lines of descent of the Purana Index, the Vedic Index and Soerensen's Index, eac
 computed here from the same stores, read-only, and sent to the site's private mirror (docs/cloud/C21): the persons,
 their lines up and down, the steps, every kept relation the indexes state (all kinds), the longest lines, and the
 GRETIL verses where both names stand. The site's /corpus/genealogies reads them (Srangam INDEX_SITE_2026_10_25).
+B2_SITE_2026_10_28 (scheme i2, docs/cloud/C23): and the scholars' claims beside them: each relation's verdict in
+Raychaudhuri's Political History of Ancient India (1923; public domain) as the desk weighs it (kin_index.py: agrees,
+reversed, differs), with the claims it rests on, and those claims themselves (data/shelf/claims.db: scholar_claims.py),
+only the public-domain works', only the claims whose quotation was found on the page (exact or close), their names tied
+to ours only where one name of ours is the candidate. Until C23 is pasted the claims are left out, the rest is sent.
 
   read     data/context.db (the shelf's entries, our names and their ties, our passages), data/shelf/kin.db (the
-           kinships read: kin_index.py), data/shelf/vamsa.db (their citations read in GRETIL: vamsa_check.py); all
-           read-only (--immutable for a backup copy). No model is called.
+           kinships read: kin_index.py), data/shelf/vamsa.db (their citations read in GRETIL: vamsa_check.py),
+           data/shelf/claims.db (the scholars' claims: scholar_claims.py); all read-only (--immutable for a backup
+           copy). No model is called.
   send     what differs only: the server's digest of each table first, then its keys and hashes; a row the desk no
            longer has is deleted there (these tables are derived, recomputed every run).
-  not sent Raychaudhuri's claims (their mirror is B2); the Mahabharata e-text's words (BORI asks that the text not be
+  not sent a work not in the public domain; a claim whose quotation was not found on its page; the Mahabharata e-text's words (BORI asks that the text not be
            given to others: its references and counts only); the shelf's entries themselves (the Cologne files: only
            the relations derived from them, with the words they rest on, as H2 decided, with the credit and the
            licence's notice, CC BY-NC-SA 3.0, while the site is non-commercial).
@@ -39,11 +45,12 @@ import argparse, collections, gzip, hashlib, json, os, sqlite3, sys, time, urlli
 from pathlib import Path
 
 MARK = "INDEX_SITE_2026_10_25"
-SCHEME = "i1"
+SCHEME = "i2"   # B2_SITE_2026_10_28: i2 adds the claims
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
-TABLES = ("texts", "persons", "steps", "statements", "lines", "verses", "meta")
+TABLES = ("texts", "persons", "steps", "statements", "claims", "lines", "verses", "meta")
+OPTIONAL = ("claims",)   # sent only when the site has the table (C23) and corpus-index takes it
 MAX_ROWS, MAX_BYTES, MAX_KEYS = 1000, 3 * 1024 * 1024, 5000
 INDEX_RIGHTS = ("the relations derived from the index, with the entry's own words: Cologne Digital Sanskrit "
                 "Dictionaries, CC BY-NC-SA 3.0 (https://creativecommons.org/licenses/by-nc-sa/3.0/)")
@@ -53,6 +60,9 @@ INDEX_EDITIONS = {"pui": "Madras: University of Madras, 1951-55; digitized by th
 STATEMENT_FIELDS = ("source", "entry_id", "head", "subject", "relation", "object", "words")
 # a citation's check: the forms (the two names as the verse writes them, to mark them) only for a text shown
 CITE_FIELDS = ("text", "ref", "verdict", "printed", "at", "subject_form", "object_form")
+CLAIM_QUOTES = ("exact", "close")          # a claim goes to the site only when its quotation was found on its page
+CERTAIN_TIES = ("exact", "numbered exact")  # the others are probable; the site says how each was made
+SCHOLAR_ORDER = ["agrees", "differs", "reversed"]   # vamsa_view's order of the scholars' verdicts
 
 
 def say(verdict: str, nxt: str = "", also=()):
@@ -118,7 +128,113 @@ def _places(con, pairs: dict, live=None) -> dict:
     return out
 
 
-def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False) -> dict:
+def _claims(claims_db: str, live, immutable: bool = False):
+    """(works rows, claim rows, (key_ix, pair_ix)) from data/shelf/claims.db, read-only. Only the public-domain works,
+    only the claims whose quotation was found on the page. The indexes match the claims to the kinships as kin_index.py
+    does (claims_index, norm: by our entities on both sides, every tie counted), so a verdict the site shows always has
+    a claim on the site beside it."""
+    if not claims_db or not Path(claims_db).exists():
+        return [], [], ({}, {})
+    import kin_index as ki
+    con = (ro_immutable(claims_db) if immutable else
+           sqlite3.connect(Path(claims_db).resolve().as_uri() + "?mode=ro", uri=True, timeout=10))
+    try:
+        have = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+        if not {"claims", "claim_works", "claim_links"} <= have:
+            return [], [], ({}, {})
+        works = {}
+        for code, author, title, pub, year, source, handle, licence in con.execute(
+                "SELECT code, author, title, publisher, year, source, handle, licence FROM claim_works"):
+            if (licence or "").lower().startswith("public domain"):
+                works[code] = {"key": "work:" + code, "kind": "work", "code": code,
+                               "title": "%s, %s" % (author, title), "show": True, "rights": licence or "",
+                               "edition": "; ".join(x for x in ("%s, %s" % (pub, year) if pub else str(year or ""),
+                                                               "the scan: %s" % source if source else "",
+                                                               "handle %s" % handle if handle else "") if x)}
+        sides = collections.defaultdict(lambda: {"subject": set(), "object": set()})
+        tie_rows = collections.defaultdict(list)
+        for cid, role, eid, canonical, how, cands in con.execute(
+                "SELECT claim_id, role, entity_id, canonical, how, cands FROM claim_links"):
+            if role in ("subject", "object"):
+                sides[cid][role].add(eid)
+                tie_rows[(cid, role)].append((canonical, how, cands))
+        cites = collections.defaultdict(list)
+        if "claim_cites" in have:
+            for cid, printed, work, locus, ours, note in con.execute(
+                    "SELECT claim_id, printed, work, locus, ours, note FROM claim_cites ORDER BY claim_id, n"):
+                held = ours if ours and ours in live else None
+                cites[cid].append({"printed": printed or "", "work": work or "", "locus": locus or "",
+                                   "ours": held, "note": (note or "") if held else ""})
+        rows, key_of = [], {}
+        for (cid, work, page, printed, n, subj, rel, obj, claim, quote, qc, stance, hedge) in con.execute(
+                "SELECT id, work, pdf_page, printed, n, subject, relation, object, claim, quote, quote_check, stance, "
+                "hedge FROM claims ORDER BY work, pdf_page, n"):
+            if work not in works or qc not in CLAIM_QUOTES:
+                continue
+            key = "%s:%d:%d" % (work, page, n)
+            key_of[cid] = (key, rel)
+
+            def tie(role):
+                tr = tie_rows.get((cid, role), [])
+                if len(tr) == 1 and int(tr[0][2] or 0) == 1 and tr[0][0]:
+                    return tr[0][0], tr[0][1] or ""
+                return None, ""
+            sc, sh = tie("subject")
+            oc, oh = tie("object")
+            rows.append(finish({"key": key, "work": work, "pdf_page": page, "printed": printed or "", "n": n,
+                                "subject": subj or "", "relation": rel or "", "object": obj or "",
+                                "claim": claim or "", "quote": quote or "", "quote_check": qc, "stance": stance or "",
+                                "hedge": hedge or "", "subject_canonical": sc, "subject_how": sh,
+                                "object_canonical": oc, "object_how": oh, "cites": cites.get(cid, [])[:8]}))
+    finally:
+        con.close()
+    key_ix, pair_ix = collections.defaultdict(list), collections.defaultdict(list)
+    for cid, sd in sorted(sides.items()):
+        if cid not in key_of:
+            continue
+        ck, rel = key_of[cid]
+        for s in sorted(sd["subject"]):
+            for o in sorted(sd["object"]):
+                if s == o:
+                    continue
+                if ck not in pair_ix[(min(s, o), max(s, o))]:
+                    pair_ix[(min(s, o), max(s, o))].append(ck)
+                if rel in ki.CLASS and ck not in key_ix[ki.norm(rel, s, o)]:
+                    key_ix[ki.norm(rel, s, o)].append(ck)
+    return [finish(w) for _c, w in sorted(works.items())], rows, (key_ix, pair_ix)
+
+
+def scholar_view(r: dict, ix) -> list:
+    """[{work, verdict, note, claims}]: the desk's verdict on a relation (kin_index.py, stored in kin_ties), with the
+    claims on the site it rests on; nothing when none of them is on the site."""
+    import kin_index as ki
+    verdict = r.get("raychaudhuri") or ""
+    s, o, rel = r.get("subject_entity"), r.get("object_entity"), r.get("relation")
+    if verdict not in SCHOLAR_ORDER or not s or not o or s == o:
+        return []
+    key_ix, pair_ix = ix
+    if verdict == "differs" or rel not in ki.CLASS:
+        keys = pair_ix.get((min(s, o), max(s, o)), [])
+    else:
+        k = ki.norm(rel, s, o)
+        keys = key_ix.get(k if verdict == "agrees" else (k[0], k[2], k[1]), [])
+    if not keys:
+        return []
+    by = collections.OrderedDict()
+    for ck in keys:
+        by.setdefault(ck.split(":")[0], []).append(ck)
+    return [{"work": w, "verdict": verdict, "note": r.get("raychaudhuri_note") or "", "claims": ks[:3]}
+            for w, ks in by.items()]
+
+
+def _best_scholar(stmts: dict, keys: list) -> str:
+    """A step's scholar: the best verdict of its statements' (agrees before differs before reversed), as /vamsa."""
+    vs = [sv["verdict"] for k in keys for sv in (stmts.get(k) or {}).get("scholars", [])]
+    vs = [x for x in vs if x in SCHOLAR_ORDER]
+    return min(vs, key=SCHOLAR_ORDER.index) if vs else ""
+
+
+def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_db: str = "") -> dict:
     """{table: [row]}: the site's rows, from the stores the dashboard's Vamsa page reads; read-only."""
     import relations_view as rv
     if immutable:
@@ -157,15 +273,21 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False) -> dict:
     try:
         pairs = {(r["subject_entity"], r["object_entity"]) for r in rows_all
                  if r.get("subject_entity") and r.get("object_entity") and r["subject_entity"] != r["object_entity"]}
-        places = _places(con, pairs, {r[1] for r in cs.live_docs(con)})
+        live = {r[1] for r in cs.live_docs(con)}
+        places = _places(con, pairs, live)
     finally:
         con.close()
+    works, claims, cix = _claims(claims_db, live, immutable)   # B2_SITE_2026_10_28
+    out["texts"].extend(works)
+    out["claims"] = claims
     key_of, stmts = {}, collections.OrderedDict()
     for r in rows_all:
         k = statement_key(r)
         key_of[r["kin_id"]] = k
         if k in stmts:
             stmts[k]["n"] += 1
+            if not stmts[k]["scholars"]:
+                stmts[k]["scholars"] = scholar_view(r, cix)
             continue
         x = v["rel"].get(r["kin_id"], {})
         s_entry, o_entry = joins.get(r["kin_id"], (r.get("subject_entry"), r.get("object_entry")))
@@ -181,7 +303,10 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False) -> dict:
                     "cites": [{k2: c.get(k2) for k2 in (CITE_FIELDS if c.get("text") in shown_text else CITE_FIELDS[:5])
                                if k2 in c} for c in (x.get("cites") or [])[:6]],
                     "best_text": x.get("best_text", ""), "best_ref": x.get("best_ref", ""),
-                    "together": x.get("together", {})}
+                    "together": x.get("together", {}), "scholars": scholar_view(r, cix)}
+    for s in stmts.values():
+        if not s["scholars"]:
+            del s["scholars"]   # a relation without a scholar's view keeps the row (and the hash) it had in i1
     out["statements"] = [finish(s) for s in stmts.values()]
 
     # the steps, as the desk weighs them
@@ -207,7 +332,8 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False) -> dict:
         out["steps"].append(finish({"key": "%s:%d:%d" % (src, p, c), "source": src, "parent": p, "child": c,
                                     "joined": ev["joined"], "both_entries": bool(ev["both_entries"]),
                                     "cited": ev["cited"], "ours": ev["ours"], "epic": ev["epic"],
-                                    "statements": keys, "verse_keys": vk}))
+                                    "statements": keys, "verse_keys": vk,
+                                    **({"scholar": sb} if (sb := _best_scholar(stmts, keys)) else {})}))
 
     # the persons: every one with a parent, a child or a spouse in the index
     nodes = set(g["par"]) | set(g["chi"])
@@ -387,19 +513,42 @@ def chunks(rows: list):
         yield cur
 
 
+def without_claims(rows: dict) -> dict:
+    """The rows as a site without C23 stores them: no scholars' verdicts on the statements and the steps (C21's ingest
+    has no column for them). Their hashes are then the ones such a site keeps, so once C23 is pasted they differ and
+    the rows go again with the verdicts (else a site that took them before C23 would never get the verdicts)."""
+    out = dict(rows)
+    for t, field in (("statements", "scholars"), ("steps", "scholar")):
+        out[t] = [finish({k: v for k, v in r.items() if k not in (field, "row_hash")}) for r in rows.get(t, [])]
+    return out
+
+
 def sync(rows: dict, sink, apply: bool, log=print) -> dict:
     """Send what differs: a table whose digest the server has is left alone; else only the rows whose hash differs,
     and the keys the desk no longer has are deleted. The run's row (meta) goes last."""
     man = sink.manifest() or {}
-    got = {"tables": {}, "sent": 0, "deleted": 0, "changed": 0}
+    got = {"tables": {}, "sent": 0, "deleted": 0, "changed": 0, "waiting": []}
+    if not all(t in man for t in OPTIONAL):
+        rows = without_claims(rows)   # B2_SITE_2026_10_28: C23 not pasted yet
     for t in TABLES:
+        if t in OPTIONAL and t not in man:
+            got["waiting"].append(t)   # B2_SITE_2026_10_28: the site has no such table yet (C23 not pasted)
+            log("  %-10s here %6d, the site has no table for them yet (C23): left for later" % (t, len(rows.get(t, []))))
+            continue
         mine = {r["key"]: r for r in rows.get(t, [])}
         d = digest((k, r["row_hash"]) for k, r in mine.items())
         there = man.get(t) or {}
         if there.get("digest") == d and int(there.get("n") or 0) == len(mine):
             got["tables"][t] = {"here": len(mine), "there": len(mine), "send": 0, "delete": 0}
             continue
-        keys = sink.keys(t) or {}
+        try:
+            keys = sink.keys(t) or {}
+        except SinkError as e:
+            if t in OPTIONAL and "unknown table" in str(e):
+                got["waiting"].append(t)   # corpus-index not yet deployed again with the table
+                log("  %-10s corpus-index does not take them yet (deploy it again): left for later" % t)
+                continue
+            raise
         send = [r for k, r in mine.items() if keys.get(k) != r["row_hash"]]
         gone = sorted(k for k in keys if k not in mine)
         got["tables"][t] = {"here": len(mine), "there": len(keys), "send": len(send), "delete": len(gone)}
@@ -415,9 +564,10 @@ def sync(rows: dict, sink, apply: bool, log=print) -> dict:
             got["deleted"] += int(res.get("deleted") or 0)
     if apply:
         after = sink.manifest() or {}
-        bad = [t for t in TABLES if (after.get(t) or {}).get("digest") !=
+        tabs = [t for t in TABLES if t not in got["waiting"]]
+        bad = [t for t in tabs if (after.get(t) or {}).get("digest") !=
                digest((r["key"], r["row_hash"]) for r in rows.get(t, []))]
-        got["verified"] = {"tables_equal": len(TABLES) - len(bad), "tables_different": bad}
+        got["verified"] = {"tables_equal": len(tabs) - len(bad), "tables_different": bad}
     return got
 
 
@@ -426,6 +576,7 @@ def main(argv=None) -> int:
     ap.add_argument("--db", default="")
     ap.add_argument("--kin-db", default="")
     ap.add_argument("--vamsa-db", default="")
+    ap.add_argument("--claims-db", default="", help="the scholars' claims (default data\\shelf\\claims.db; none there: none sent)")
     ap.add_argument("--immutable", action="store_true", help="the database is a backup copy: read it as immutable")
     ap.add_argument("--sink", default="auto", choices=("auto", "edge", "pg", "none"))
     ap.add_argument("--dsn", default="")
@@ -444,6 +595,7 @@ def main(argv=None) -> int:
     db = a.db or str(ROOT / "data" / "context.db")
     kin = a.kin_db or str(ROOT / "data" / "shelf" / "kin.db")
     vam = a.vamsa_db or str(ROOT / "data" / "shelf" / "vamsa.db")
+    clm = a.claims_db or str(ROOT / "data" / "shelf" / "claims.db")
     print("index_sync.py  %s  %s" % (MARK, "APPLY" if a.apply else "PLAN (nothing sent)"))
     if a.if_configured and not a.dump and a.sink in ("auto", "edge"):
         import corpus_sync as cs
@@ -456,7 +608,7 @@ def main(argv=None) -> int:
             say("refused: %s not found (%s)" % (what, p), how)
             return 0 if a.if_configured else 1
     t0 = time.time()
-    rows = build(db, kin, vam, immutable=a.immutable)
+    rows = build(db, kin, vam, immutable=a.immutable, claims_db=clm)
     sizes = {t: sum(len(json.dumps(r, ensure_ascii=False)) for r in rows[t]) for t in TABLES}
     print("built in %.1f s: %s" % (time.time() - t0, ", ".join("%s %d (%.1f MB)" % (t, len(rows[t]), sizes[t] / 1e6)
                                                                for t in TABLES)))
@@ -476,11 +628,13 @@ def main(argv=None) -> int:
             return 0
         say("stopped: %s" % e, "python scripts\\index_sync.py   (the plan, again)")
         return 1
+    wait = (["the claims wait (%s): paste docs\\cloud\\C23_index_claims_2026-10-28.sql, then ask Lovable to deploy "
+             "supabase/functions/corpus-index again" % ", ".join(got["waiting"])] if got.get("waiting") else [])
     if a.status or not a.apply:
         todo = sum(x["send"] + x["delete"] for x in got["tables"].values())
         say("%s: %d row(s) to send or delete%s" % ("the site is current" if not todo else "the plan", todo,
                                                      " (no network: --sink none)" if sink.name == "none" else ""),
-            "python scripts\\index_sync.py --apply" if todo else "")
+            "python scripts\\index_sync.py --apply" if todo else "", wait)
         return 0
     v = got.get("verified") or {}
     if v.get("tables_different"):
@@ -490,7 +644,7 @@ def main(argv=None) -> int:
         return 1
     say("sent %d row(s) (%d changed), deleted %d; the site's genealogies equal the desk's (%d tables)" % (
         got["sent"], got["changed"], got["deleted"], v.get("tables_equal", 0)),
-        "open /corpus/genealogies on the site (signed in)")
+        "open /corpus/genealogies on the site (signed in)", wait)
     return 0
 
 

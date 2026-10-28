@@ -62,7 +62,8 @@ translation, Ask, embeddings, and entity extraction.
   passages and Raychaudhuri's view. Read-only; no model is called.
   On the site (INDEX_SITE_2026_10_25, DOCS97_2026_10_25): **/corpus/genealogies**, the same lines for signed-in
   readers, from the mirror (scripts/index_sync.py, docs/cloud/C21), with "In the indexes" on a name's page; the
-  Mahabharata e-text counted, never quoted; Raychaudhuri's view not yet (B2).
+  Mahabharata e-text counted, never quoted. Raychaudhuri's view beside each step and on a name's page (B2,
+  docs/cloud/C23), and a search over the scholarly English (X1c, C24): DOCS98_2026_10_28.
 - **💾 Database** — snapshots the DB and opens it in **Datasette** for read-only SQL.
 
 ---

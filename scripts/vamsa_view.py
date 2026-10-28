@@ -239,8 +239,9 @@ def _main_up(g: dict, src: str, e, limit: int = 160) -> list:
         ps = [p for p in g["par"].get(node, ()) if p[1] not in seen]
         if not ps:
             break
+        # HEAL_2026_10_28: the entry last, so a tie (two name-only parents of one name) is the same in every run
         ps.sort(key=lambda p: (p[1] < 0, g["sex"].get(p) != "m", g["sex"].get(p) == "f", -_strength(g, src, p[1], node[1]),
-                               -g["up"].get(p, 1), _head(g, src, p[1])))
+                               -g["up"].get(p, 1), _head(g, src, p[1]), p[1]))
         node = ps[0]
         seen.add(node[1]); out.append(node[1])
     return list(reversed(out))
@@ -258,7 +259,7 @@ def _main_down(g: dict, src: str, e, limit: int = 160) -> list:
         cs = [c for c in g["chi"].get(node, ()) if c[1] not in seen]
         if not cs:
             break
-        cs.sort(key=lambda c: (c[1] < 0, -g["down"].get(c, 1), g["sex"].get(c) == "f", _head(g, src, c[1])))
+        cs.sort(key=lambda c: (c[1] < 0, -g["down"].get(c, 1), g["sex"].get(c) == "f", _head(g, src, c[1]), c[1]))
         node = cs[0]
         seen.add(node[1]); out.append(node[1])
     return out
@@ -305,7 +306,7 @@ def _person(g: dict, src: str, e) -> dict:
             "up": g["up"].get(node, 1), "down": g["down"].get(node, 1),
             "entity": g["entity_of"].get(node),
             "spouses": [{"entry": s, "head": _head(g, src, s)} for s in sorted(g["spouses"].get(node, ()),
-                                                                              key=lambda z: _head(g, src, z))][:6]}
+                                                                              key=lambda z: (_head(g, src, z), z))][:6]}
 
 
 def lines(db: str, kin_db: str, src: str = "", top: int = 30, min_len: int = 6) -> dict:
@@ -317,7 +318,7 @@ def lines(db: str, kin_db: str, src: str = "", top: int = 30, min_len: int = 6) 
         if src and s != src:
             continue
         roots = [n for n in g["chi"] if n[0] == s and not g["par"].get(n)]
-        roots.sort(key=lambda n: (-g["down"].get(n, 1), _head(g, s, n[1])))
+        roots.sort(key=lambda n: (-g["down"].get(n, 1), _head(g, s, n[1]), n[1]))
         kept = []
         for n in roots:
             if g["down"].get(n, 1) < min_len or len(kept) >= top:
@@ -382,9 +383,9 @@ def tree(db: str, kin_db: str, store: str, src: str, entry: int, path=None, down
     for i, e in enumerate(line):
         node = (src, e)
         par = line[i - 1] if i else None
-        sibs = sorted((c[1] for c in g["chi"].get((src, par), ()) if c[1] != e), key=lambda z: _head(g, src, z)) \
+        sibs = sorted((c[1] for c in g["chi"].get((src, par), ()) if c[1] != e), key=lambda z: (_head(g, src, z), z)) \
             if par is not None else []
-        others = sorted((p[1] for p in g["par"].get(node, ()) if p[1] != par), key=lambda z: _head(g, src, z))
+        others = sorted((p[1] for p in g["par"].get(node, ()) if p[1] != par), key=lambda z: (_head(g, src, z), z))
         rungs.append(dict(_person(g, src, e), generation=i - me,
                           siblings=[{"entry": s, "head": _head(g, src, s)} for s in sibs[:16]],
                           siblings_n=len(sibs),
@@ -395,7 +396,7 @@ def tree(db: str, kin_db: str, store: str, src: str, entry: int, path=None, down
     for _ in range(max(0, min(int(down), 6))):
         nxt = []
         for p in level:
-            for c in sorted((c[1] for c in g["chi"].get((src, p), ())), key=lambda z: _head(g, src, z)):
+            for c in sorted((c[1] for c in g["chi"].get((src, p), ())), key=lambda z: (_head(g, src, z), z)):
                 if c in seen:
                     continue
                 seen.add(c)

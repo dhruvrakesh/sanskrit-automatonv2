@@ -127,6 +127,16 @@ class TheNotes(unittest.TestCase):
         self.assertIn("<li id='fn-3'><em>Manu</em>: The progenitor of an age.", h, "the note's term in italics")
 
 
+def as_left(rel: str) -> bytes:
+    """The file as this patch left it. HEAL_2026_10_28: a later patch of the same file (PROSE_EDITION_2026_10_25 changed
+    export_html.py) keeps that state in its own backup, the oldest one that already carries MARK; without one, the file
+    as it is now."""
+    p = REPO / rel
+    later = [b for b in p.parent.glob(p.name + ".bak_*")
+             if ".bak_editionrefs_" not in b.name and MARK in b.read_bytes()]
+    return min(later, key=lambda b: b.stat().st_mtime).read_bytes() if later else p.read_bytes()
+
+
 class ThePatcher(unittest.TestCase):
     FILES = ("scripts/export_html.py", "tests/test_scholar_edition_2026_10_17.py")
 
@@ -147,7 +157,7 @@ class ThePatcher(unittest.TestCase):
             r = subprocess.run(pat, cwd=td, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in self.FILES:
-                self.assertEqual((t / f).read_bytes(), (REPO / f).read_bytes(), f)
+                self.assertEqual((t / f).read_bytes(), as_left(f), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)
             for f in self.FILES:
                 shutil.copy2(baks[f][0], t / f)

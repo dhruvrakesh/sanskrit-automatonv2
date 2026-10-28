@@ -121,7 +121,9 @@ class TestBuild(Fixture):
     def test_tables_and_run(self):
         self.assertEqual(sorted(self.rows), sorted(self.ix.TABLES))
         run = self.rows["meta"][0]
-        self.assertEqual((run["key"], run["value"]["mark"], run["value"]["scheme"]), ("run", MARK, "i1"))
+        # B2_SITE_2026_10_28: the scheme is index_sync's own (i2 adds the scholars' claims)
+        self.assertEqual((run["key"], run["value"]["mark"], run["value"]["scheme"]), ("run", MARK, self.ix.SCHEME))
+        self.assertIn(self.ix.SCHEME, ("i1", "i2"))
         self.assertEqual(run["value"]["counts"], {t: len(self.rows[t]) for t in self.ix.TABLES if t != "meta"})
         for t in self.ix.TABLES:
             keys = [r["key"] for r in self.rows[t]]
