@@ -15,7 +15,10 @@ Gadgil Library, Gokhale Institute of Politics and Economics, Pune (GIPE-004595, 
 md5 75e8d7bd429f9396997cc9e1c2e9f4bd). Published 1923, its author died in 1957: in the public domain in India (60
 years after the author's death) and in the United States (published before 1929). The page numbers: pdf pages
 14-18 are Part I's Foreword (i-v), pdf page 19 is page 1 and so on (pdf - 18); Part I (From the Accession of
-Parikshit to the Coronation of Bimbisara) is pdf 14-112 (pp. i-v, 1-94).
+Parikshit to the Coronation of Bimbisara) is pdf 14-112 (pp. i-v, 1-94). CLAIMS_PART2_2026_10_28: Part II (From the
+Coronation of Bimbisara to the Extinction of the Gupta Dynasty) is pdf 113-328 (pp. 95-310), --part 2; the Appendix,
+notes to pages of both parts, pdf 329-332 (pp. 311-314), --part app; the Bibliographical and General Indexes (pdf
+333-368) and the author's other books and their reviews (pdf 369-372) are not read.
 
 Each page's text is the scan's own text layer (Adobe Paper Capture, 2014: it misreads, Brahma1;1a for Brahmana),
 read with pypdf (free). A page is read by gemini-2.5-flash (Google's cap, metered as kind "claims"; the cap is asked
@@ -58,7 +61,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 PROMPT_VERSION = "claims-v1"
 API = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent"
-PER_PAGE = 0.007   # the estimate of a page: about 1.5k tokens in, 2.2k out (the thinking capped at 1024)
+PER_PAGE = 0.009   # CLAIMS_PART2_2026_10_28: as measured on Part I, $0.8893 for 99 pages read whole (21 Oct; 0.007 before)
 
 ROMAN = {"i": 1, "ii": 2, "iii": 3, "iv": 4, "v": 5, "vi": 6, "vii": 7, "viii": 8, "ix": 9, "x": 10}
 WORKS = {
@@ -72,7 +75,11 @@ WORKS = {
         "pdf": "data/shelf/phai1923/GIPE-004595.pdf",
         "licence": "public domain: published 1923; the author died in 1957 (India: 60 years after; USA: before 1929)",
         "front": (14, 18), "offset": 18,
-        "parts": {"1": (14, 112, "Part I: From the Accession of Parikshit to the Coronation of Bimbisara")},
+        "parts": {"1": (14, 112, "Part I: From the Accession of Parikshit to the Coronation of Bimbisara"),
+                  # CLAIMS_PART2_2026_10_28: as the scan's pages show them (claim_pages, 28 Oct): Part II's title on
+                  # pdf 113 (p. 95), its last page pdf 328 (p. 310); the Appendix pdf 329-332; the indexes from pdf 333
+                  "2": (113, 328, "Part II: From the Coronation of Bimbisara to the Extinction of the Gupta Dynasty"),
+                  "app": (329, 332, "Appendix: notes to pages of both parts")},
     },
 }
 
@@ -1255,7 +1262,7 @@ def main(argv=None, caller=None) -> int:
     ap.add_argument("--claims-db", default="data/shelf/claims.db")
     ap.add_argument("--db", default="data/context.db", help="the shelf and our entities (read); the meter's rows")
     ap.add_argument("--extract", action="store_true", help="free: the pages' text from the scan into the claims database")
-    ap.add_argument("--part", default="", help="a part of the book: 1 (Part I)")
+    ap.add_argument("--part", default="", help="a part of the book: 1 (Part I), 2 (Part II), app (the Appendix)")
     ap.add_argument("--pages", default="", help="printed pages: 1-3, i-v, 12, 40-44")
     ap.add_argument("--redo", action="store_true", help="read again pages read already (a new read; the old one kept)")
     ap.add_argument("--model", default="gemini-2.5-flash")

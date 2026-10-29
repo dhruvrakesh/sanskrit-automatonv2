@@ -1,0 +1,23 @@
+The peoples of the Puranas' lists, the Professor's room, Raychaudhuri's Part II made ready (DOCS101_2026_10_28)
+
+- PEOPLES_2026_10_28: scripts/peoples_index.py (free, read-only).
+  - The peoples of the Puranas' lists of the lands (Matsya 114, Brahmanda II.16, Visnu II.3, Vayu 45), as
+    Dikshitar's Purana Index cites them: 289.
+  - Each is read in GRETIL's verses, with the region its text words (the two Puranas agree on 47 of 50), tied to our
+    names and set beside Raychaudhuri's claims (39 peoples, 371 claims).
+  - B. C. Law's Tribes in Ancient India is not read (in copyright in India to the end of 2029).
+  - docs/PEOPLES_2026-10-28.md.
+- ASK_ROOM_2026_10_28: the Professor's answers were cut by gemini-2.5-flash's own thinking (3,068 of 3,072 tokens).
+  - The room is now 16,384 for the Professor and 6,144 for the verses.
+  - A cut answer says so; a reply with no part is "no text", not an error.
+  - Each claim is cited by its own work, and a work in copyright is marked private.
+- CLAIMS_PART2_2026_10_28: scholar_claims.py --part 2 (pdf 113-328, pp. 95-310) and --part app.
+  - The page's estimate is now the one measured on Part I ($0.009).
+- DOCS101_2026_10_28:
+  - docs/ASKS_2026-10-22.md section 14: the ask missing from the register, begun, not done; the Nirukta's release
+    corrected; the cap's order.
+  - STATE section 36; the RUNBOOK; docs/cloud/CHECKS_night_2026-10-28.sql (N1 to N4).
+  - test_docs100 reads section 13 up to section 14.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -2645,3 +2645,25 @@ docs\ASKS_2026-10-22.md, section 13. From the repository root:
    then `etext_witness.py` with `--file` (the preview), `--write` and `--ingest`, as for the Astadhyayi.
 5. After the next mirror tick: R3 of docs\cloud\CHECKS_rights_2026-10-28.sql (RIGHTS_NOISE: the listed editions'
    noise withheld too: the Ganita's 9, the Mallapurana's 44, the Akasabhairava's 38), and R1 again.
+## 28 Oct, night: the Professor's room, Raychaudhuri's Part II, the peoples of the lists (DOCS101_2026_10_28)
+
+docs\ASKS_2026-10-22.md, section 14, and docs\PEOPLES_2026-10-28.md. From the repository root:
+
+1. `python scripts\patch_ask_room_2026_10_28.py --check`, then without --check; the same for
+   `patch_claims_part2_2026_10_28.py` and `patch_docs101_2026_10_28.py`. Then `python scripts\docs_map.py --write` and
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`.
+2. Restart the dashboard when it is idle (ASK_ROOM loads). Ask the Professor again on http://127.0.0.1:5057/ask:
+   "give me a brief story about the genealogy of Janamejaya and Parasurama". usage_log's last ask_prof row shows its
+   tokens; an answer cut at the limit now says so.
+3. The peoples (free): `python scripts\peoples_index.py`, then `python scripts\peoples_index.py --yes` (writes
+   data\shelf\peoples_index.json and .csv), and `python scripts\peoples_index.py --name Kekaya`.
+4. Raychaudhuri's Part II (Money, Google's cap): `python scripts\scholar_claims.py --part 2` (the plan, free; 216 pages,
+   about $1.94); then `python scripts\scholar_claims.py --part 2 --yes --max-usd 3.50`; `python scripts\scholar_claims.py
+   --reparse` if a page failed; `python scripts\scholar_claims.py --link`; `python scripts\peoples_index.py --yes`. The
+   next index tick sends the new claims to the site.
+5. After the 18:33 tick: N1 to N4 of docs\cloud\CHECKS_night_2026-10-28.sql, one query per paste.
+6. Within the cap ($22.56 left): the Hayasirsa's English and Hindi
+   (`python scripts\repair_auto.py --allow-translate HAYASHIRSHA_PANCARATRA --usd 15.00`); the Nirukta's Hindi (Add
+   Hindi in the Library), then `python scripts\repair_text.py --doc nirukta__w_gretil --release`. The Padma Patala:
+   `python scripts\reingest_pages.py --doc SP_4214_Pataal_Khanda_from_Padma_Puran_1895_-_Sri_Venkateshwar_Press`, then
+   the same with `--apply`.

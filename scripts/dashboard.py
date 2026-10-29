@@ -6706,6 +6706,38 @@ _PROF_SHELF = {"pui": "Purana Index (Dikshitar)", "vei": "Vedic Index (Macdonell
 _PROF_CLAIM_RELS = ("contemporary_of", "son_of", "father_of", "pupil_of", "teacher_of", "priest_of", "king_of",
                     "successor_of", "predecessor_of", "brother_of", "descendant_of", "ancestor_of", "married",
                     "capital_of", "fought", "defeated", "dated_to")
+# ASK_ROOM_2026_10_28: the room the model is given, its thinking included. gemini-2.5-flash counts its thinking inside
+# max_output_tokens: at 3,072 the Professor's thinking took about 2,900 tokens and its answer was cut after about 130
+# (28 Oct: two answers of 545 and 423 characters, 3,068 tokens each in usage_log). The room is a ceiling, not a cost:
+# an answer is billed for the tokens it uses (at most about $0.04 at 16,384).
+_ASK_ROOM = {"professor": 16384, "verses": 6144}
+
+
+def _ask_text(resp) -> str:
+    """ASK_ROOM_2026_10_28: the answer's text; "" when the reply holds no part (the SDK's .text raises then, as when
+    the limit is reached inside the thinking), instead of an error for the whole question."""
+    try:
+        return (resp.text or "").strip()
+    except Exception:
+        try:
+            return "".join(getattr(p, "text", "") or "" for p in resp.candidates[0].content.parts).strip()
+        except Exception:
+            return ""
+
+
+def _ask_cut(resp) -> bool:
+    """ASK_ROOM_2026_10_28: whether the model stopped at the length limit (finish reason MAX_TOKENS, 2)."""
+    try:
+        fr = resp.candidates[0].finish_reason
+    except Exception:
+        return False
+    name = getattr(fr, "name", None)
+    if isinstance(name, str):
+        return name == "MAX_TOKENS"
+    try:
+        return int(fr) == 2
+    except (TypeError, ValueError):
+        return str(fr).upper().endswith("MAX_TOKENS")
 
 
 def _ask_scholarly(db, sources, max_names=8, per_name=3, max_items=24):
@@ -6756,19 +6788,34 @@ def _ask_scholarly(db, sources, max_names=8, per_name=3, max_items=24):
             c2 = sqlite3.connect(cp.resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
             try:
                 rels = ",".join("'%s'" % r for r in _PROF_CLAIM_RELS)
+                works = {}   # ASK_ROOM_2026_10_28: each claim cited by its own work
+                if c2.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='claim_works'").fetchone():
+                    _wc = {r[1] for r in c2.execute("PRAGMA table_info(claim_works)")}
+                    if {"code", "author", "title", "year", "licence"} <= _wc:
+                        for _c, _a, _t, _y, _l in c2.execute("SELECT code, author, title, year, licence FROM claim_works"):
+                            works[_c] = {"author": _a, "title": _t, "year": _y, "licence": _l}
                 for eid, canon in ids:
-                    for cid, printed, rel, claim, stance, hedge in c2.execute(
-                            "SELECT DISTINCT c.id, c.printed, c.relation, c.claim, c.stance, c.hedge FROM claim_links l "
+                    for cid, printed, rel, claim, stance, hedge, work in c2.execute(
+                            "SELECT DISTINCT c.id, c.printed, c.relation, c.claim, c.stance, c.hedge, c.work FROM claim_links l "
                             "JOIN claims c ON c.id = l.claim_id WHERE l.entity_id = ? AND c.read_id IN (SELECT MAX(id) "
                             "FROM claim_reads WHERE status = 'ok' GROUP BY work, pdf_page) ORDER BY CASE WHEN "
                             "c.relation IN (%s) THEN 0 ELSE 1 END, c.id LIMIT ?" % rels, (eid, per_name)):
                         if ("c", cid) in seen:
                             continue
                         seen.add(("c", cid))
+                        # ASK_ROOM_2026_10_28: the claim's own work (claims.db's claim_works); a work not in the
+                        # public domain is marked as private reading (the Professor runs on this PC only, and
+                        # index_sync.py sends only the public-domain works to the site)
+                        _w = works.get(work) or {}
+                        _wn = ("Raychaudhuri, Political History of Ancient India (1923)" if work == "phai1923" else
+                               "%s, %s (%s)" % (_w.get("author") or "?", _w.get("title") or work, _w.get("year") or "?")
+                               if _w else str(work or "a scholar's work"))
+                        _wp = ("" if str(_w.get("licence") or "public domain").lower().startswith("public domain") else
+                               "in copyright: private reading on this PC, never on the site")
                         items.append({"kind": "claim", "about": canon,
-                                      "source": "Raychaudhuri, Political History of Ancient India (1923)",
+                                      "source": _wn,
                                       "where": "p. %s" % (printed or "?"), "text": claim or "",
-                                      "note": ", ".join(x for x in (stance, hedge) if x)})
+                                      "note": ", ".join(x for x in (stance, hedge, _wp) if x)})
                 out["read"]["claims"] = True
             finally:
                 c2.close()
@@ -6902,6 +6949,7 @@ def api_ask():
     except Exception:
         pass
     # 2. LLM answer — self-contained Gemini config so the translation engine is untouched
+    _cut = False   # ASK_ROOM_2026_10_28
     try:
         import google.generativeai as genai
         key = os.environ.get("GEMINI_API_KEY")
@@ -6911,8 +6959,7 @@ def api_ask():
         _sys = _ASK_SYSTEM_PROF if ask_mode == "professor" else _ASK_SYSTEM   # ASK_PROF_2026_10_23
         kwargs = dict(model_name=model,
                       generation_config=genai.GenerationConfig(temperature=0.2,
-                                                               max_output_tokens=(3072 if ask_mode == "professor"
-                                                                                  else 2048)),
+                                                               max_output_tokens=_ASK_ROOM[ask_mode]),   # ASK_ROOM_2026_10_28
                       system_instruction=_sys)
         if _ASK_SAFETY is not None:
             kwargs["safety_settings"] = _ASK_SAFETY
@@ -6921,7 +6968,7 @@ def api_ask():
         try:   # METER_GATES_2026_10_04
             from usage_meter import meter as _meter
             try:
-                _out = len(getattr(resp, "text", "") or "")
+                _out = len(_ask_text(resp))   # ASK_ROOM_2026_10_28
             except Exception:
                 _out = 0
             _meter(kind=("ask_prof" if ask_mode == "professor" else "ask"), doc="", engine=engine, resp=resp,
@@ -6929,11 +6976,15 @@ def api_ask():
                    out_chars=_out, units=1, duration_s=time.time() - _t0, db=db)
         except Exception:
             pass
-        answer = (getattr(resp, "text", "") or "").strip() or \
-                 "(The model returned no text — try rephrasing or a smaller k.)"
+        answer = _ask_text(resp) or \
+                 "(The model returned no text — try rephrasing or a smaller k.)"   # ASK_ROOM_2026_10_28
+        _cut = _ask_cut(resp)
+        if _cut:
+            answer += ("\n\n[The answer was cut at the length limit (%d tokens, the model's thinking included). "
+                       "Ask a narrower question, or with fewer passages (k).]" % _ASK_ROOM[ask_mode])
     except Exception as e:
         return jsonify({"error": f"LLM error: {e}", "sources": sources}), 500
-    return jsonify({"answer": answer, "sources": sources, "engine": engine,
+    return jsonify({"answer": answer, "sources": sources, "engine": engine, "cut": _cut,   # ASK_ROOM_2026_10_28
                     "k": k, "mode": mode, "editorial": len(extra),   # BRAIN_ITEMS_2026_10_07
                     "ask_mode": ask_mode, "scholarly": scholarly})   # ASK_PROF_2026_10_23
 

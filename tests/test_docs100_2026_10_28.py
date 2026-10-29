@@ -62,6 +62,7 @@ class TheRegister(unittest.TestCase):
     def test_says_done_or_not(self):
         s = REG.read_text(encoding="utf-8")
         sec = s[s.index("## 13. 25 to 28 Oct"):]
+        sec = sec.split("\n## 14. ", 1)[0]   # DOCS101_2026_10_28: section 13 only (section 14 has its own asks)
         flat = " ".join(sec.split())
         for k in ("Done in full? No.", "9 are done and 6 are partly done", "load-ux", "hayasirsa-apparatus",
                   "karanagama-matter", "thinking-ab", "proxy-limit", "1,904 claims", "141 passages",

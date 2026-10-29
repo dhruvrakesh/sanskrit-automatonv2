@@ -2,7 +2,7 @@
 
 Made by `python scripts\docs_map.py --write` from the files' own first lines (their titles, the dates in
 their names, the markers they name); not written by hand. `--check` says when it is stale.
-91 documents; the newest is of 2026-10-28.
+92 documents; the newest is of 2026-10-28.
 
 ## Start here
 
@@ -133,6 +133,7 @@ their names, the markers they name); not written by hand. `--check` says when it
 
 | Date | File | What it is | Markers |
 |---|---|---|---|
+| 2026-10-28 | [PEOPLES_2026-10-28.md](PEOPLES_2026-10-28.md) | The peoples of the Puranas' lists, read against Raychaudhuri (28 Oct 2026) | PEOPLES_2026_10_28 |
 | - | [readme_sanskrit_automaton_v_2_windows.md](../readme_sanskrit_automaton_v_2_windows.md) | Sanskrit Automaton v2 — Windows README | - |
 
 ## The cloud SQL, in the order it is pasted
@@ -199,6 +200,7 @@ Each file once, whole, in the Lovable Cloud SQL editor; its checks one query per
 | [CHECKS_fidelity_2026-10-22.sql](cloud/CHECKS_fidelity_2026-10-22.sql) | checks | CHECKS_fidelity_2026-10-22.sql  (DOCS84_2026_10_22, FIDELITY_2026_10_22) | - |
 | [CHECKS_followup_2026-10-22.sql](cloud/CHECKS_followup_2026-10-22.sql) | checks | CHECKS_followup_2026-10-22.sql  (DOCS86_2026_10_22, docs/DEBT_2026-10-22.md section 7) | - |
 | [CHECKS_held_2026-10-21.sql](cloud/CHECKS_held_2026-10-21.sql) | checks | CHECKS_held_2026-10-21.sql  (DOCS82_2026_10_21) | - |
+| [CHECKS_night_2026-10-28.sql](cloud/CHECKS_night_2026-10-28.sql) | checks | CHECKS_night_2026-10-28.sql  (DOCS101_2026_10_28: after the mirror's tick of 18:33 IST, 28 Oct) | - |
 | [CHECKS_rights_2026-10-28.sql](cloud/CHECKS_rights_2026-10-28.sql) | checks | CHECKS_rights_2026-10-28.sql  (RIGHTS_FRONTMATTER_2026_10_28, DOCS99_2026_10_28, docs/REPAIR_AND_SOURCES_2026-10-28.md) | - |
 | [CHECKS_surya_mend_2026-10-21.sql](cloud/CHECKS_surya_mend_2026-10-21.sql) | checks | CHECKS for the Surya Siddhanta's mend (WITNESS_MEND_2026_10_21, docs/SHELF_AND_SURYA_2026-10-21.md). Read-only: | - |
 | [CHECKS_surya_refs_2026-10-21.sql](cloud/CHECKS_surya_refs_2026-10-21.sql) | checks | CHECKS for the Surya Siddhanta's references (ETEXT_REFS_2026_10_21, docs/CLAIMS_AND_REFS_2026-10-21.md). Read-only: | - |
