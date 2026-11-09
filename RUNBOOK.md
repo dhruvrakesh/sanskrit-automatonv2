@@ -2687,3 +2687,19 @@ docs\LOAD_AND_STORIES_2026-11-09.md; docs\ASKS_2026-10-22.md, section 15. From t
 5. Raychaudhuri: `python scripts\scholar_claims.py --pages 252` (the plan), then with `--yes`;
    `python scripts\scholar_claims.py --part app` then with `--yes`; `python scripts\scholar_claims.py --link`;
    `python scripts\peoples_index.py --yes`.
+## 9 Nov, later: the cards live; the credit's first runs (DOCS103_2026_11_09)
+
+docs\ASKS_2026-10-22.md, section 16. From the automaton's root:
+
+1. `git push`: the commit 7cb611a2 (DOCS102) is made but not pushed. Then `python scripts\patch_docs103_2026_11_09.py --check`,
+   without --check, `python scripts\docs_map.py --write`, `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`,
+   and release.ps1 with COMMIT_MSG_measured_20261109.txt.
+2. The stories: `python scripts\stories.py list --doc MBh01 --status draft` (the 11 written by Claude, and #66);
+   `python scripts\stories.py verify --id 66` (free: the new check); `python scripts\stories.py show --id 66`; approve in
+   the Stories page, or `python scripts\stories.py approve --id 66`. A story marked CHECK is read before it is approved.
+3. The Hayasirsa (the Claude credit): `python scripts\translate_passages.py --doc HAYASHIRSHA_PANCARATRA --engine
+   anthropic:claude-sonnet-5-5`, then the same with `--lang hi`. Then `python scripts\repair_text.py --doc
+   HAYASHIRSHA_PANCARATRA --release`.
+4. The Karanagama: the same two commands with `--doc Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi`.
+5. The Nirukta: `python scripts\translate_passages.py --doc nirukta__w_gretil --engine anthropic:claude-sonnet-5-5 --lang hi`;
+   then `python scripts\repair_text.py --doc nirukta__w_gretil --release`.

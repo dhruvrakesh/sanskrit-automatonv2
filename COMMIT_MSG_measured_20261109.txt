@@ -1,0 +1,14 @@
+The cards live and measured again; the Claude credit's first runs (DOCS103_2026_11_09)
+
+- docs/LOAD_AND_STORIES_2026-11-09.md section 7, after Publish:
+  - the home page cold: 3,091 KB to 778 KB, LCP 2,504 ms to 1,072 ms;
+  - /articles: 3,166 KB to 853 KB;
+  - the articles' read: 2,329 KB to 16 KB;
+  - what is heavy now (2.0 MB of JavaScript on /articles).
+- The Claude credit's first runs, measured: $0.024 a story, $0.0055 a translated passage. The plan priced again
+  (about $142).
+- docs/ASKS_2026-10-22.md section 16; STATE section 38; the RUNBOOK (git push, the stories, the Hayasirsa, the
+  Karanagama, the Nirukta).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

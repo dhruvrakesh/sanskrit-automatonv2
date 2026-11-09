@@ -207,3 +207,29 @@ On the PC, Chrome's DevTools give the same figure without installing anything:
 2. Load https://srangam.nartiang.org/.
 3. Read "transferred" at the bottom.
 4. Filter on "rest/v1": the articles read should be a few KB (srangam_article_cards), not 2.3 MB (srangam_articles).
+
+## 7. After Publish (9 Nov, 09:55 IST): measured again (DOCS103_2026_11_09)
+
+The same script and pages. Srangam `9a22055` was published, and C25 was live.
+
+| Page, cold | Before | After |
+|---|---|---|
+| / transferred | 3,091 KB | 778 KB |
+| / LCP | 2,504 ms | 1,072 ms |
+| / to idle | 5,920 ms | 2,737 ms |
+| /articles transferred | 3,166 KB | 853 KB |
+| The articles' read | 2,329 KB (srangam_articles, select=*) | 16 KB (srangam_article_cards) |
+
+The lists are as before: 60 articles on /articles (50 from the database, the rest from the site's own files).
+
+**What is heavy now.** /articles loads 2.0 MB of JavaScript uncompressed, in 49 requests, and the home page 1.0 MB.
+On /articles, the glossary chunk (cultural-terms) alone is 330 KB, 130 KB transferred. The build reports chunks over
+500 kB (MapboxBujangNetwork 1,617 kB, MapsData 989 kB, mermaid.core 538 kB) for the pages that use them. The next
+round, load-js, measures which chunks each page loads before it cuts anything.
+
+**The Claude credit's first runs:**
+
+| Run | Measured | The estimate |
+|---|---|---|
+| Stories (claude-sonnet-5-5) | $0.024 a story (11 for $0.2634) | $0.06 |
+| Translation, English and Hindi | $0.0055 a passage (40 for $0.221) | $0.0064 |
