@@ -2667,3 +2667,23 @@ docs\ASKS_2026-10-22.md, section 14, and docs\PEOPLES_2026-10-28.md. From the re
    Hindi in the Library), then `python scripts\repair_text.py --doc nirukta__w_gretil --release`. The Padma Patala:
    `python scripts\reingest_pages.py --doc SP_4214_Pataal_Khanda_from_Padma_Puran_1895_-_Sri_Venkateshwar_Press`, then
    the same with `--apply`.
+## 9 Nov: the stories, the Claude credit, the load times (DOCS102_2026_11_09)
+
+docs\LOAD_AND_STORIES_2026-11-09.md; docs\ASKS_2026-10-22.md, section 15. From the automaton's root unless said:
+
+1. `python scripts\patch_story_quality_2026_11_09.py --check`, then without --check; the same for
+   `patch_docs102_2026_11_09.py`. Then `python scripts\docs_map.py --write` and
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`. Restart the dashboard when it is idle.
+2. The Claude credit (the new grant, to 11 Dec): three lines appended to .env (section 3 of the page gives them;
+   the RUNBOOK's commands check first that .env does not hold them already, printing names only). Then
+   `python scripts\claude_engine.py --credit` (free): "$0.00 spent of $200.00 since 2026-11-09".
+3. The stories with Claude: `SA_STORY_WRITER=anthropic:claude-sonnet-5-5@medium` in .env, the dashboard restarted;
+   `python scripts\stories.py write --doc MBh01 --candidates --max 12` (the dry run), then with `--yes`. Read each in the
+   Stories page; approve what stands. The next tick sends them.
+4. Srangam's load: C25 in the Lovable Cloud SQL editor (B1, B2, V, A1, A2, one block a paste). Then, in D:\srangam-42267:
+   `git pull --rebase --autostash`; `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\patch_srangam_load_cards_2026_11_09.py" --check`,
+   then without --check; `npm run typecheck`; `npx vitest run`; `npm run build`; `git add -- src/hooks/useArticles.ts`;
+   `git commit -m "LOAD_CARDS_2026_11_09: the article cards without their bodies"`; `git push`; Publish in Lovable.
+5. Raychaudhuri: `python scripts\scholar_claims.py --pages 252` (the plan), then with `--yes`;
+   `python scripts\scholar_claims.py --part app` then with `--yes`; `python scripts\scholar_claims.py --link`;
+   `python scripts\peoples_index.py --yes`.

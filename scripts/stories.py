@@ -44,6 +44,20 @@ COMMANDS (dry run unless --yes; every paid call is metered and asks the budget)
          -> exports\\anthology_<date>.html  (then: python scripts\\export_pdf.py <that file>)
 An approved story linked to an approved image also appears under that image in
 export_html --images approved (patch_vignettes_2026_10_05.py).
+
+STORY_QUALITY_2026_11_09
+------------------------
+- The English given to the model is the best the passage has: its scholarly English where the latest scholarly
+  row passed (or a person accepted it) and its Sanskrit is unchanged since; else the working English. A witness
+  with scholarly English and no working English can now be mined and written too (its stories stay on this PC
+  until the witness is adopted, as the witness does). SA_STORY_SCHOLARLY=0 turns this off.
+- The writer may be Claude: SA_STORY_WRITER=anthropic:claude-sonnet-5-5@medium (in .env) writes the stories and
+  the versions for younger readers through claude_engine.py, paid from the Claude credit and stopped by its meter;
+  unset, gemini (SA_STORY_MODEL) writes them as before. Mining and the image ideas stay with Gemini.
+- The miner returns no episode for a treatise (a calculation, a rule, a definition is not a story).
+- The check: a lowercase word in IAST (ksatriya, rsi, yuga) is a common noun, not a name; a name is also found
+  when the passages spell it otherwise (Krishna and krsna, Kshatriya and ksatriya, an English plural on an IAST
+  stem). A name the passages do not give still fails.
 """
 from __future__ import annotations
 
@@ -65,6 +79,8 @@ import images as im  # noqa: E402  (REST client, metering, connection helpers)
 
 MARK = "VIGNETTES_2026_10_05"
 MODEL = os.environ.get("SA_STORY_MODEL", im.BRIEF_MODEL)
+QUALITY = "STORY_QUALITY_2026_11_09"
+WRITER = os.environ.get("SA_STORY_WRITER", "").strip()   # STORY_QUALITY_2026_11_09: "" = MODEL (gemini), as before
 ROOT = Path(__file__).resolve().parents[1]
 STATUSES = ("candidate", "draft", "approved", "retired")
 
@@ -85,7 +101,9 @@ MINE_SYSTEM = (
     "You read an English translation of part of a Sanskrit text, passage by passage, each tagged [page.idx]. "
     "Find the EPISODES a general reader would enjoy as a short story: a narrated event with people, a place "
     "and a turn (a meeting, a curse, a rescue, a contest, a vow, a journey, a dialogue that changes something). "
-    "Skip lists, rules, praise and doctrine. Use only what these passages say. Respond with JSON only: "
+    "Skip lists, rules, praise and doctrine. If the passages tell no such episode (a treatise: a calculation, a "
+    "rule, a definition, a commentary), return {\"episodes\": []}: an explanation is not a story. "   # STORY_QUALITY_2026_11_09
+    "Use only what these passages say. Respond with JSON only: "
     "{\"episodes\": [{\"title\": str (6-10 words), \"title_hi\": str, \"from\": \"page.idx\", "
     "\"to\": \"page.idx\", \"why\": str (one sentence: what happens)}]}. 'from' and 'to' must be tags that "
     "appear below, with from before to, spanning the whole episode (usually 4-40 passages). At most %d episodes.")
@@ -106,6 +124,10 @@ STORY_SYSTEM = (
     "(6) If a translated detail makes no sense in the story (an animal, object or act that does not belong, "
     "which usually means the translation or the OCR is wrong there), leave it out of story_en and story_hi "
     "and describe it in 'notes' with its tag. "   # STORIES_UI_2026_10_05
+    "(7) Tell it as a storyteller would, within rules 1-6: begin in the scene, keep the order of events, let the "
+    "speakers' own words (as the passages give them) carry the turns, and keep the passages' concrete details; no "
+    "summing-up or moral that the passages do not state. Where an ENGLISH line is marked (scholarly), prefer it to "
+    "the others for the meaning. "   # STORY_QUALITY_2026_11_09
     "Respond with JSON only: {\"title\": str, \"title_hi\": str, \"story_en\": str, \"story_hi\": str, "
     "\"quote_sa\": str, \"quote_ref\": \"page.idx\", \"notes\": str, \"cites\": [\"page.idx\", ...]}")
 
@@ -139,16 +161,51 @@ def parse_ref(s) -> tuple | None:
     return (int(m.group(1)), int(m.group(2))) if m else None
 
 
+def _src_hash(text) -> str:
+    """scholar_translate.src_hash: the Sanskrit a scholarly row was made from, its spaces aside."""
+    return hashlib.sha256(" ".join(str(text or "").split()).encode("utf-8")).hexdigest()[:16]
+
+
+def scholarly(con, code: str) -> dict:
+    """STORY_QUALITY_2026_11_09: {(page, idx): scholarly English} of a text's verses whose latest scholarly row passed
+    (or a person accepted it, and none rejected it) and whose Sanskrit is unchanged since. {} without the table, or
+    with SA_STORY_SCHOLARLY=0."""
+    if os.environ.get("SA_STORY_SCHOLARLY", "1").strip() == "0":
+        return {}
+    try:
+        if not con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='scholar_translations'").fetchone():
+            return {}
+        out = {}
+        for pg, ix, text, tr, status, verdict, h in con.execute(
+                """SELECT p.page_no, p.idx, p.text, s.translation, s.status, s.review_verdict, s.src_hash
+                   FROM scholar_translations s JOIN passages p ON p.id = s.passage_id JOIN docs d ON d.id = p.doc_id
+                   WHERE d.code = ? AND s.id IN (SELECT MAX(id) FROM scholar_translations WHERE doc_code = ?
+                                                 GROUP BY passage_id)""", (code, code)):
+            if (tr or "").strip() and verdict != "reject" and (status == "passed" or verdict == "accept") \
+                    and h == _src_hash(text):
+                out[(pg, ix)] = tr.strip()
+        return out
+    except sqlite3.Error:
+        return {}
+
+
 def passages(con, code: str) -> list:
-    """[(page, idx, sanskrit, iast, english)] translated, non-noise, in reading order."""
+    """[(page, idx, sanskrit, iast, english)] translated, non-noise, in reading order. STORY_QUALITY_2026_11_09: the
+    English is the verse's scholarly English where it has one that stands (scholarly()), else its working English."""
     cols = {r[1] for r in con.execute("PRAGMA table_info(passages)")}
     iast = "COALESCE(p.iast,'')" if "iast" in cols else "''"
-    return con.execute(
+    rows = con.execute(
         """SELECT p.page_no, p.idx, COALESCE(p.text,''), %s, p.translation FROM passages p
            JOIN docs d ON d.id = p.doc_id
-           WHERE d.code = ? AND TRIM(COALESCE(p.translation,'')) <> ''
-             AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')
+           WHERE d.code = ? AND COALESCE(p.text_type,'mula') NOT IN ('noise','frontmatter')
            ORDER BY p.page_no, p.idx""" % iast, (code,)).fetchall()
+    sch = scholarly(con, code)
+    out = []
+    for pg, ix, sa, ia, en in rows:
+        best = sch.get((pg, ix)) or en
+        if (best or "").strip():
+            out.append((pg, ix, sa, ia, best))
+    return out
 
 
 def window(rows: list, lo: tuple, hi: tuple, pad: int = 2, cap: int = 40) -> list:
@@ -220,6 +277,24 @@ def _name_in(t: str, src: str) -> bool:
     return False
 
 
+def _loose(s: str) -> str:
+    """STORY_QUALITY_2026_11_09: a word as an English spelling and the IAST are compared: diacritics off, sh and ch
+    as s and c, ri as r (Kshatriya and ksatriya; Krishna and krsna)."""
+    return _fold(s).replace("sh", "s").replace("ch", "c").replace("ri", "r")
+
+
+def _name_loose(t: str, lsrc: str) -> bool:
+    """A name found in the passages when both are spelt loosely (_loose), or its stem at the start of a word there
+    when the story adds an English plural to an IAST stem (ksatriyas: ksatriyan)."""
+    lt = _loose(t)
+    if len(lt) < 4:
+        return False
+    if re.search(r"(?<![a-z])" + re.escape(lt), lsrc):
+        return True
+    stem = lt[:-1] if lt.endswith("s") else lt
+    return len(stem) >= 5 and re.search(r"(?<![a-z])" + re.escape(stem), lsrc) is not None
+
+
 # ------------------------------------------------------------------ verify (no API)
 def verify(story: dict, given: list) -> dict:
     """Deterministic checks of a written story against the passages it was given."""
@@ -245,6 +320,7 @@ def verify(story: dict, given: list) -> dict:
     elif qr not in refs or _norm_sa(q) not in _norm_sa(refs[qr][2]):
         problems.append("the Sanskrit quotation is not found verbatim in passage %s" % (qr or "?"))
     src = _fold(" ".join("%s %s" % (refs[c][3], refs[c][4]) for c in cited if c in refs))
+    lsrc = _loose(src)   # STORY_QUALITY_2026_11_09
     unknown = []
     for s in SENT_RE.split(en):
         for k, mt in enumerate(WORD_RE.finditer(s)):   # STORIES_UI_2026_10_05
@@ -252,8 +328,10 @@ def verify(story: dict, given: list) -> dict:
             t2 = t.strip("'\u2019").removesuffix("'s").removesuffix("\u2019s")
             lead = s[:mt.start()].rstrip()[-1:]
             opens = k == 0 or (lead != "" and lead in OPENERS)
-            is_name = any(c in IAST for c in t2) or (not opens and t2[:1].isupper())
-            if is_name and len(t2) > 2 and t2.lower() not in NAME_STOP and not _name_in(t2, src):   # VERIFY_NAMES_2026_10_07
+            # STORY_QUALITY_2026_11_09: a lowercase IAST word (ksatriya, rsi, yuga) is a common noun, not a name
+            is_name = (any(c in IAST for c in t2) and t2[:1].isupper()) or (not opens and t2[:1].isupper())
+            if is_name and len(t2) > 2 and t2.lower() not in NAME_STOP and not _name_in(t2, src) \
+                    and not _name_loose(t2, lsrc):   # VERIFY_NAMES_2026_10_07, STORY_QUALITY_2026_11_09
                 unknown.append(t2)
     if unknown:
         problems.append("names not found in the cited passages: " + ", ".join(sorted(set(unknown))[:12]))
@@ -262,15 +340,52 @@ def verify(story: dict, given: list) -> dict:
 
 
 # ------------------------------------------------------------------ paid steps
-def _prompt_block(rows: list, with_sa: bool) -> str:
+def _prompt_block(rows: list, with_sa: bool, sch=None) -> str:
     out = []
     for p, i, sa, ia, en in rows:
         line = "[%s]" % ref(p, i)
         if with_sa:
             line += "\nSA: " + sa.strip().replace("\n", " ")
-        line += "\nEN: " + (en or "").strip().replace("\n", " ")
+        mark = " (scholarly)" if sch and (p, i) in sch else ""   # STORY_QUALITY_2026_11_09
+        line += "\nEN%s: " % mark + (en or "").strip().replace("\n", " ")
         out.append(line)
     return "\n\n".join(out)
+
+
+def writer_name() -> str:
+    return WRITER if WRITER.startswith("anthropic:") else MODEL
+
+
+def writer_cost() -> str:
+    """The estimate a dry run prints: gemini as measured since 5 Oct; Claude Sonnet 5.5 from its prices (about 8k
+    tokens in, 4k out with the Hindi and its thinking at medium effort)."""
+    return ("about $0.06 each, from the Claude credit" if WRITER.startswith("anthropic:") else "about $0.01 each")
+
+
+def write_json(system: str, user: str, code: str, db: str, http=None, kind: str = "story") -> tuple:
+    """STORY_QUALITY_2026_11_09: (the JSON answer, the engine that wrote it). WRITER (SA_STORY_WRITER) names a Claude
+    engine: the call goes through claude_engine.py, paid from the Claude credit, refused when its meter says the
+    credit is spent or expired, recorded in usage_log. Unset: gemini (MODEL), as before, through images.py. An http
+    client given (the tests' stubs) always means the gemini path: a test never reaches a paid API."""
+    if WRITER.startswith("anthropic:") and http is None:
+        import claude_engine as ce
+        model, effort = ce.parse_engine(WRITER)
+        con = sqlite3.connect(db, timeout=30)
+        try:
+            if not ce.budget_ok(con):
+                raise SystemExit("FAIL: the Claude credit allows no more calls: python scripts\\claude_engine.py "
+                                 "--credit (SA_CLAUDE_CREDIT_USD, _SINCE, _EXPIRES in .env).")
+            t0 = time.time()
+            msg = ce.Client(model, effort).create(system + " Respond with one JSON object only, nothing before or "
+                                                  "after it.", user, 8000)
+            ce.meter(con, kind, code, model, ce._get(msg, "usage"), time.time() - t0, units=1)
+        finally:
+            con.close()
+        return im.parse_json_text(ce.text_of(msg)), ce.engine_name(model, effort)
+    t0 = time.time()
+    data, resp = im.call_text_json(MODEL, system, user, http=http)
+    im.meter(kind, code, "gemini:" + MODEL, resp, db, time.time() - t0, units=1)
+    return data, MODEL
 
 
 def mine(con, code: str, did: int, db: str, max_n: int = 12, chunk: int = 150, yes: bool = False,
@@ -322,21 +437,22 @@ def write_story(con, sid: int, code: str, db: str, pad: int = 2, http=None, cap:
     rows = window(passages(con, code), (s["from_page"], s["from_idx"]), (s["to_page"], s["to_idx"]), pad=pad, cap=cap)
     if not rows:
         raise SystemExit("FAIL: story #%d: no translated passages in its range." % sid)
-    user = "Episode: %s\n%s\n\nPASSAGES\n\n%s" % (s.get("title") or "", s.get("why") or "", _prompt_block(rows, True))
-    t0 = time.time()
-    data, resp = im.call_text_json(MODEL, STORY_SYSTEM, user, http=http)
-    im.meter("story", code, "gemini:" + MODEL, resp, db, time.time() - t0, units=1)
+    sch = scholarly(con, code)   # STORY_QUALITY_2026_11_09
+    user = "Episode: %s\n%s\n\nPASSAGES\n\n%s" % (s.get("title") or "", s.get("why") or "",
+                                                  _prompt_block(rows, True, sch))
+    data, engine = write_json(STORY_SYSTEM, user, code, db, http=http)
     data = data if isinstance(data, dict) else {}
     v = verify(data, rows)
-    ph = hashlib.sha256((MODEL + STORY_SYSTEM + user).encode("utf-8")).hexdigest()[:16]
+    ph = hashlib.sha256((engine + STORY_SYSTEM + user).encode("utf-8")).hexdigest()[:16]
     con.execute(
         """UPDATE doc_stories SET status='draft', title=COALESCE(NULLIF(?,''), title), title_hi=COALESCE(NULLIF(?,''), title_hi),
              story_en=?, story_hi=?, quote_sa=?, quote_ref=?, notes=?, cites=?, verify=?, model=?, prompt_hash=?,
              provenance=?, updated_at=? WHERE id=?""",
         (data.get("title") or "", data.get("title_hi") or "", data.get("story_en") or "", data.get("story_hi") or "",
          data.get("quote_sa") or "", data.get("quote_ref") or "", data.get("notes") or "",
-         json.dumps(v["cited"]), json.dumps(v), MODEL, ph,
+         json.dumps(v["cited"]), json.dumps(v), engine, ph,
          json.dumps({"given": [ref(*rows[0][:2]), ref(*rows[-1][:2])], "n_given": len(rows),
+                     "scholarly": sum(1 for r in rows if (r[0], r[1]) in sch), "writer": engine,
                      "written_at": now()}), now(), sid))
     con.commit()
     return v
@@ -725,13 +841,12 @@ def retell(con, sid: int, audience: str, db: str, http=None, cap: int = 60, forc
     who, how = AUDIENCE_SPEC[audience]
     system = RETELL_SYSTEM % (who, how)
     user = ("Episode: %s\n\nAPPROVED RETELLING (for adults):\n%s\n\nEDITORIAL NOTES:\n%s\n\nPASSAGES\n\n%s"
-            % (s.get("title") or "", s.get("story_en") or "", s.get("notes") or "(none)", _prompt_block(rows, True)))
-    t0 = time.time()
-    data, resp = im.call_text_json(MODEL, system, user, http=http)
-    im.meter("story", code, "gemini:" + MODEL, resp, db, time.time() - t0, units=1)
+            % (s.get("title") or "", s.get("story_en") or "", s.get("notes") or "(none)",
+               _prompt_block(rows, True, scholarly(con, code))))
+    data, engine = write_json(system, user, code, db, http=http)   # STORY_QUALITY_2026_11_09
     data = data if isinstance(data, dict) else {}
     v = variant_verify(con, s, data)
-    ph = hashlib.sha256((MODEL + system + user).encode("utf-8")).hexdigest()[:16]
+    ph = hashlib.sha256((engine + system + user).encode("utf-8")).hexdigest()[:16]
     con.execute(
         """INSERT INTO doc_story_variants(story_id, audience, status, title, title_hi, story_en, story_hi, notes, cites,
                                           verify, model, prompt_hash, provenance, created_at, updated_at)
@@ -742,7 +857,7 @@ def retell(con, sid: int, audience: str, db: str, http=None, cap: int = 60, forc
              provenance=excluded.provenance, updated_at=excluded.updated_at, approved_at=NULL""",
         (sid, audience, data.get("title") or s.get("title") or "", data.get("title_hi") or s.get("title_hi") or "",
          data.get("story_en") or "", data.get("story_hi") or "", data.get("notes") or "", json.dumps(v["cited"]),
-         json.dumps(v), MODEL, ph, json.dumps({"from_story": sid, "story_status": s["status"], "written_at": now()}),
+         json.dumps(v), engine, ph, json.dumps({"from_story": sid, "story_status": s["status"], "written_at": now()}),
          now(), now()))
     con.commit()
     return v
@@ -869,7 +984,7 @@ def main() -> int:
             else:
                 print("give --id, --image, or --doc with --images or --candidates"); return 2
             ids = [i for i in ids if _row(con, i)["status"] in ("candidate", "draft")][:args.max]
-            print("write: %d story(ies) with %s, about $0.01 each" % (len(ids), MODEL))
+            print("write: %d story(ies) with %s, %s" % (len(ids), writer_name(), writer_cost()))   # STORY_QUALITY_2026_11_09
             for i in ids:
                 s = _row(con, i)
                 print("  #%d  %s-%s  %s" % (i, ref(s["from_page"], s["from_idx"]), ref(s["to_page"], s["to_idx"]),
@@ -888,8 +1003,8 @@ def main() -> int:
             return 0
         if args.cmd == "retell":   # STORY_VARIANTS_2026_10_07
             s = _row(con, args.id)
-            print("retell #%d %s for %s with %s, about $0.01" % (args.id, s.get("title") or "",
-                                                                 AUDIENCE_SPEC[args.audience][0], MODEL))
+            print("retell #%d %s for %s with %s, %s" % (args.id, s.get("title") or "", AUDIENCE_SPEC[args.audience][0],
+                                                        writer_name(), writer_cost()))   # STORY_QUALITY_2026_11_09
             if not args.yes:
                 print("Dry run. Add --yes."); return 0
             if not budget_ok(args.db):

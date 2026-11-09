@@ -213,18 +213,29 @@ def _key() -> str:
     return k
 
 
+def retry_wait(code: int, body: str, attempt: int) -> float:
+    """STORY_QUALITY_2026_11_09: seconds to wait before the next try. A 429 (the requests a minute used up) waits as
+    long as Google's RetryInfo asks ("retryDelay": "37s"), at most 60 s, else 15, 30, 45 s; a server error 4, 8, 12 s
+    as before. On 28 Oct "Write found episodes" failed twice on a 429 that the 4 and 8 s waits could not outlast."""
+    if code == 429:
+        m = re.search(r'"retryDelay"\s*:\s*"(\d+(?:\.\d+)?)s"', body or "")
+        return min(60.0, float(m.group(1)) + 1.0) if m else 15.0 * (attempt + 1)
+    return 4.0 * (attempt + 1)
+
+
 def http_json(url: str, body: dict | None = None, timeout: int = 180) -> dict:
     data = None if body is None else json.dumps(body).encode("utf-8")
     req = urllib.request.Request(url, data=data, method="POST" if body is not None else "GET",
                                  headers={"Content-Type": "application/json", "x-goog-api-key": _key()})
-    for attempt in range(3):
+    for attempt in range(4):   # STORY_QUALITY_2026_11_09: a fourth try, and Google's own wait after a 429
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return json.loads(r.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
-            msg = e.read().decode("utf-8", "replace")[:400]
-            if e.code in (429, 500, 503, 504) and attempt < 2:
-                time.sleep(4 * (attempt + 1)); continue
+            body = e.read().decode("utf-8", "replace")
+            msg = body[:400]
+            if e.code in (429, 500, 503, 504) and attempt < 3:
+                time.sleep(retry_wait(e.code, body, attempt)); continue
             raise SystemExit("FAIL: HTTP %d from the API: %s" % (e.code, msg))
         except (urllib.error.URLError, TimeoutError) as e:
             if attempt < 2:
@@ -276,8 +287,25 @@ def call_text_json(model: str, system: str, user: str, http=None) -> tuple[objec
                  "generationConfig": {"responseMimeType": "application/json", "temperature": 0.4}})
     text = "".join(p.get("text", "") for c in resp.get("candidates") or []
                    for p in (c.get("content") or {}).get("parts") or [])
-    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
-    return json.loads(text), resp
+    return parse_json_text(text), resp
+
+
+def parse_json_text(text: str):
+    """STORY_QUALITY_2026_11_09: the JSON a model returned. Fences are taken off; a reply with something after its
+    JSON (an extra brace, a second object: "Proposing an image" failed so on 28 Oct) gives its first value; a reply
+    with no JSON at all stops with what it said, not a traceback."""
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", (text or "").strip())
+    try:
+        return json.loads(text)
+    except ValueError:
+        pass
+    starts = [i for i in (text.find("{"), text.find("[")) if i >= 0]
+    if starts:
+        try:
+            return json.JSONDecoder().raw_decode(text[min(starts):])[0]
+        except ValueError:
+            pass
+    raise SystemExit("FAIL: the model's reply is not the JSON asked for: %r" % text[:200])
 
 
 # --------------------------------------------------------------- the briefs

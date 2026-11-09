@@ -2,7 +2,7 @@
 
 Made by `python scripts\docs_map.py --write` from the files' own first lines (their titles, the dates in
 their names, the markers they name); not written by hand. `--check` says when it is stale.
-92 documents; the newest is of 2026-10-28.
+93 documents; the newest is of 2026-11-09.
 
 ## Start here
 
@@ -52,6 +52,7 @@ their names, the markers they name); not written by hand. `--check` says when it
 
 | Date | File | What it is | Markers |
 |---|---|---|---|
+| 2026-11-09 | [LOAD_AND_STORIES_2026-11-09.md](LOAD_AND_STORIES_2026-11-09.md) | Load times measured, the stories mended, the Claude credit planned (9 Nov 2026) | DOCS102_2026_11_09, LOAD_CARDS_2026_11_09, STORY_QUALITY_2026_11_09 |
 | 2026-10-25 | [SCHOLAR_SITE_2026-10-25.md](SCHOLAR_SITE_2026-10-25.md) | The scholarly English on Srangam as the desk has it; the rounds and the kinships mended (25 Oct 2026, evening) | SCHOLAR_SITE_2026_10_25, C22_SCHOLAR_SITE_2026_10_25, PROSE_EDITION_2026_10_25, KIN_SALVAGE_2026_10_25 |
 | 2026-10-18 | [SCHOLAR_READER_2026-10-18.md](SCHOLAR_READER_2026-10-18.md) | The scholarly English in the mirror and in Srangam's reader (18 Oct 2026, night) | SCHOLAR_MIRROR_2026_10_18, C18_READER_SCHOLAR_2026_10_18, SCHOLAR_READER_2026_10_18, DOCS76_2026_10_18 |
 | 2026-10-18 | [EDITIONS_SITE_2026-10-18.md](EDITIONS_SITE_2026-10-18.md) | The scholarly editions on Srangam, the chapters of an e-text, and the dashboard's menus (18 Oct 2026) | EDITIONS_SITE_2026_10_18, EDITION_REFS_2026_10_18, NAV_MENUS_2026_10_18, DOCS75_2026_10_18 |
@@ -195,6 +196,7 @@ Each file once, whole, in the Lovable Cloud SQL editor; its checks one query per
 | [C23_index_claims_2026-10-28.sql](cloud/C23_index_claims_2026-10-28.sql) | change | C23 - the scholars' claims beside the genealogies (C23_INDEX_CLAIMS_2026_10_28, Srangam B2_SITE_2026_10_28) | Needs C21 (and so C4, C5) |
 | [C23_checks_2026-10-28.sql](cloud/C23_checks_2026-10-28.sql) | checks | C23 and C24 checks (C23_INDEX_CLAIMS_2026_10_28, C24_SCHOLAR_SEARCH_2026_10_28): read-only, ONE query per paste | - |
 | [C24_scholar_search_2026-10-28.sql](cloud/C24_scholar_search_2026-10-28.sql) | change | C24 - a search over the scholarly English (C24_SCHOLAR_SEARCH_2026_10_28, Srangam X1C_SITE_2026_10_28) | Needs C22 (and so C4, C5, C18) |
+| [C25_article_cards_2026-11-09.sql](cloud/C25_article_cards_2026-11-09.sql) | change | C25_article_cards_2026-11-09.sql  (LOAD_CARDS_2026_11_09; docs\LOAD_AND_STORIES_2026-11-09.md) | - |
 | [CHECKS_brain_counts_2026-10-21.sql](cloud/CHECKS_brain_counts_2026-10-21.sql) | checks | CHECKS_brain_counts_2026-10-21.sql  (DOCS81_2026_10_21) | - |
 | [CHECKS_debt_2026-10-22.sql](cloud/CHECKS_debt_2026-10-22.sql) | checks | CHECKS_debt_2026-10-22.sql  (DOCS85_2026_10_22, docs/DEBT_2026-10-22.md) | - |
 | [CHECKS_fidelity_2026-10-22.sql](cloud/CHECKS_fidelity_2026-10-22.sql) | checks | CHECKS_fidelity_2026-10-22.sql  (DOCS84_2026_10_22, FIDELITY_2026_10_22) | - |

@@ -1,0 +1,20 @@
+The stories mended, the article cards without their bodies, the Claude credit planned (DOCS102_2026_11_09)
+
+- STORY_QUALITY_2026_11_09 (scripts/stories.py, scripts/images.py):
+  - the writer, the miner and the check read a passage's scholarly English where it stands (marked), else its
+    working English;
+  - SA_STORY_WRITER names Claude as the writer, through claude_engine.py and its credit;
+  - a storyteller's rule (7); no episodes from a treatise;
+  - the check no longer fails on a lowercase IAST noun (#66), and finds a name spelt otherwise;
+  - a JSON reply with a trailing brace is read (#81);
+  - a 429 waits as Google asks.
+- LOAD_CARDS_2026_11_09: scripts/patch_srangam_load_cards_2026_11_09.py and docs/cloud/C25_article_cards_2026-11-09.sql.
+  - The home page transferred 3,091 KB, 2,329 KB of it the articles' bodies (measured on 9 Nov).
+  - The cards now come from a view, and the old read stays as the fallback.
+- DOCS102_2026_11_09:
+  - docs/LOAD_AND_STORIES_2026-11-09.md (the load measured; the stories; what reaches Srangam; the Claude credit's
+    plan; Raychaudhuri's Part II);
+  - docs/ASKS_2026-10-22.md section 15; STATE section 37; the RUNBOOK.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
