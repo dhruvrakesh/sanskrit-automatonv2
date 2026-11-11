@@ -27,7 +27,7 @@ SCRIPTS = ROOT / "scripts"
 # Load .env early so CORPUS_ROOT etc. are available
 def _load_env():
     env_path = ROOT / ".env"
-    if not env_path.exists():
+    if not env_path.exists() or os.environ.get("SA_NO_DOTENV") == "1":   # TESTS_HERMETIC_2026_11_11: not under the tests
         return
     for line in env_path.read_text(encoding="utf-8", errors="replace").splitlines():
         s = line.strip()
@@ -50,6 +50,8 @@ _CREDIT_ENV_SEEN = {"key": None}
 def _credit_env_fresh() -> None:
     """DESK_FRESH_2026_11_11: the credit's settings as .env has them now (claude_engine.dotenv_credit: those three keys
     only), when .env changed since last read; never raises."""
+    if os.environ.get("SA_NO_DOTENV") == "1":   # TESTS_HERMETIC_2026_11_11: the tests never read this PC's .env
+        return
     try:
         p = ROOT / ".env"
         st = p.stat()

@@ -249,9 +249,10 @@ class TheDashboard(unittest.TestCase):
 
     def test_the_credit_as_env_has_it_now(self):
         d = self.d
-        saved_env = {k: os.environ.get(k) for k in KEYS}
+        saved_env = {k: os.environ.get(k) for k in KEYS + ("SA_NO_DOTENV",)}   # TESTS_HERMETIC_2026_11_11
         saved = (d.ROOT, set(d._CREDIT_SHELL), dict(d._CREDIT_ENV_SEEN))
         try:
+            os.environ.pop("SA_NO_DOTENV", None)   # this test reads its own .env (in a temp folder)
             root = self.td / "root"
             root.mkdir()
             env = root / ".env"

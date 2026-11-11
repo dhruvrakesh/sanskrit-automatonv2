@@ -2741,3 +2741,21 @@ docs\ASKS_2026-10-22.md, section 18. From the automaton's root:
    vision's of the edition or the GRETIL e-text, is the better text; then translate that one only.
 5. C27 in the Lovable Cloud SQL editor (docs\cloud\C27_spatial_ref_sys_2026-11-11.sql): S1 (read-only), S2 (the
    writes revoked, one paste), S1 again.
+
+## 11 Nov, later: the tests apart from this PC; G5a; spatial_ref_sys (DOCS106_2026_11_11)
+
+docs\ASKS_2026-10-22.md, section 19; docs\PEOPLES_FINDINGS_2026-11-11.md. From the automaton's root:
+
+1. The patches: `python scripts\patch_tests_hermetic_2026_11_11.py --check`, then without; the same for
+   `patch_docs106_2026_11_11.py`; `python -m unittest tests.test_tests_hermetic_2026_11_11 tests.test_vamsa_read_2026_11_11
+   tests.test_claude_engine_2026_10_15`; `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1
+   with COMMIT_MSG_g5a_20261111.txt.
+2. The key: the new key on the line `ANTHROPIC_API_KEY=` of .env (ANTHROPIC_API_KEY2 is read by nothing). Restart the
+   dashboard when no job runs; then `python scripts\claude_engine.py --credit` (free) and
+   `python scripts\claude_engine.py --probe` (about $0.001; the Console's key list then shows which key it used).
+3. G5a: `python scripts\vamsa_read.py` (the plan, free); `python scripts\vamsa_read.py --work vip4 --chapters 1-2 --yes`
+   (the trial); `python scripts\vamsa_read.py --report`; then `python scripts\vamsa_read.py --work all --yes --max-usd 8`
+   and `--report` again.
+4. C27's S3 (read-only) in the Lovable Cloud SQL editor; mark the finding on spatial_ref_sys accepted in Lovable's
+   security view with C27's reason; ask Lovable's support to move PostGIS into the schema "extensions".
+5. The Gandharva Veda: `python scripts\benchmark_sources.py --doc gandharva_veda_natya_shastra` (free).

@@ -25,8 +25,9 @@ STATIC = APP_DIR / "webui" / "static"
 
 # load .env after APP_DIR is defined
 try:
-    from dotenv import load_dotenv
-    load_dotenv(str(APP_DIR / ".env"))
+    if os.environ.get("SA_NO_DOTENV") != "1":   # TESTS_HERMETIC_2026_11_11: the tests never read this PC's .env
+        from dotenv import load_dotenv
+        load_dotenv(str(APP_DIR / ".env"))
 except Exception:
     pass
 

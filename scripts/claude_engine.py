@@ -178,6 +178,16 @@ def settings() -> dict:
 CREDIT_KEYS = ("SA_CLAUDE_CREDIT_USD", "SA_CLAUDE_CREDIT_SINCE", "SA_CLAUDE_CREDIT_EXPIRES")
 
 
+def test_today():
+    """TESTS_HERMETIC_2026_11_11: the tests' own day (SA_TEST_TODAY, set by tests/__init__.py only), so that a test
+    written in the credit's month still runs after it; None otherwise (the clock). Never put it in .env."""
+    v = (os.environ.get("SA_TEST_TODAY") or "").strip()
+    try:
+        return datetime.date.fromisoformat(v) if v else None
+    except ValueError:
+        return None
+
+
 def dotenv_credit(path) -> dict:
     """DESK_FRESH_2026_11_11: the credit's three settings as the .env file at path has them now ({} when it has none);
     only those keys are read, nothing else of the file. A process started before .env changed (the dashboard, on 11 Nov
@@ -210,7 +220,7 @@ def credit(con, today=None) -> dict:
                                        "AND ts >= ?", (PREFIX + "%", s["since"])).fetchone()
     except sqlite3.Error as e:
         raise RuntimeError("the credit cannot be read (%s)" % e)
-    day = (today or datetime.date.today()).isoformat()
+    day = (today or test_today() or datetime.date.today()).isoformat()
     return dict(s, spent=float(spent or 0.0), calls=int(calls or 0), left=s["cap"] - float(spent or 0.0),
                 expired=day >= s["expires"])
 

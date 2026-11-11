@@ -12,12 +12,25 @@
 -- it; any geometry or geography column of ours (does the site use PostGIS at all); the public tables without RLS (so
 -- the other findings of the same kind show here too).
 --
--- S2 takes the writes away from anon and authenticated (they keep SELECT: the catalogue is public knowledge). Nothing
--- is dropped and no row is touched. Undo (one paste):
---   GRANT INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON public.spatial_ref_sys TO anon, authenticated;
--- If S1 after S2 still says anon_insert true, the table's owner (not the editor's role) made those grants and only it
--- can take them back: then the finding is to be marked accepted in Lovable's security view, with this file's reason.
--- Do NOT run DROP EXTENSION postgis CASCADE: it would drop every column of ours that S1 lists as a geometry.
+-- S2 was meant to take the writes away from anon and authenticated. It cannot (S1's export of 11 Nov, 17:24, says
+-- anon_insert true): supabase_admin owns the table and made those grants, and a role can revoke only its own grants.
+-- Postgres then prints "no privileges could be revoked", which the SQL editor does not show. Supabase's own pages say
+-- so: "Security Advisor flags spatial_ref_sys and other PostGIS objects in the public schema" and "Revoking privileges
+-- on Storage, pg_cron, Vault, and extension objects has no effect" (supabase.com/kb/troubleshooting, 4 Nov 2026). S2
+-- did nothing and needs no undo.
+--
+-- What S1 said (11 Nov): postgis 3.3.7 in public (pg_net and vector in public too); spatial_ref_sys owned by
+-- supabase_admin, RLS off, anon and authenticated may insert and update; geo_columns 2 (two columns of ours are
+-- PostGIS types); spatial_ref_sys the only public table without RLS.
+--
+-- Supabase's way out is to move PostGIS into the schema "extensions" (never exposed to the API). With columns of ours
+-- of PostGIS types, only Supabase Support can move it without dropping them (here: through Lovable's support, as we
+-- reach the database only through Lovable Cloud). Dropping and re-creating it ourselves deletes those columns and their
+-- data. Until then: mark the finding accepted in Lovable's security view, with this reason, and run S3 now and then:
+-- it says which two columns use PostGIS and whether anyone has written spatial_ref_sys through the API ("inserted"
+-- counts PostGIS's own several thousand rows when the statistics were never reset; "updated" or "deleted" above 0
+-- is someone's write, and so is srs_4326_and_3857 below 2).
+-- Do NOT run DROP EXTENSION postgis CASCADE: it would drop every column of ours that S3 lists.
 -- ============================================================
 
 -- ---------- S1 (read-only; before and after S2) ----------
@@ -46,3 +59,16 @@ SELECT
 
 -- ---------- S2 (the change: one paste) ----------
 REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON public.spatial_ref_sys FROM anon, authenticated;
+
+-- ---------- S3 (read-only: which columns use PostGIS; was spatial_ref_sys written through the API) ----------
+SELECT
+  (SELECT string_agg(table_schema || '.' || table_name || '.' || column_name || ' ' || udt_name, '; '
+                     ORDER BY table_schema, table_name, column_name)
+     FROM information_schema.columns
+     WHERE udt_name IN ('geometry', 'geography', 'raster')
+       AND table_schema NOT IN ('pg_catalog', 'information_schema'))                            AS geo_columns,
+  (SELECT n_tup_ins || ' inserted, ' || n_tup_upd || ' updated, ' || n_tup_del || ' deleted'
+     FROM pg_stat_all_tables WHERE relid = to_regclass('public.spatial_ref_sys'))               AS srs_writes_since_stats_reset,
+  (SELECT count(*) FROM public.spatial_ref_sys)                                                  AS srs_rows,
+  (SELECT count(*) FROM public.spatial_ref_sys WHERE srid IN (4326, 3857))                       AS srs_4326_and_3857,
+  (SELECT extversion FROM pg_extension WHERE extname = 'postgis')                                AS postgis_version;

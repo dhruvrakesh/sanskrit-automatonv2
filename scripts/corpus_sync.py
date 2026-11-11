@@ -836,9 +836,11 @@ def load_config(env_path=None, site_env_path=None) -> dict:
         env_loader.load_env()
     except Exception:
         pass
-    local = _read_env_file(env_path or (ROOT / ".env"))
+    quiet = os.environ.get("SA_NO_DOTENV") == "1"   # TESTS_HERMETIC_2026_11_11: the tests read only the files they name
+    local = _read_env_file(env_path or (ROOT / ".env")) if (env_path or not quiet) else {}
     get = lambda k: os.environ.get(k) or local.get(k) or ""
-    site = _read_env_file(site_env_path or get("CORPUS_SITE_ENV") or DEFAULT_SITE_ENV)
+    site_path = site_env_path or get("CORPUS_SITE_ENV") or ("" if quiet else DEFAULT_SITE_ENV)
+    site = _read_env_file(site_path) if site_path else {}
     return {
         "secret": get("CORPUS_SYNC_SECRET"),
         "url": get("CORPUS_SYNC_URL") or site.get("VITE_SUPABASE_URL", ""),

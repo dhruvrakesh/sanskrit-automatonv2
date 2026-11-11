@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OCR = ROOT / "scripts" / "ocr_pdf.py"
 
 def _load_dotenv_from_repo_root():
-    if os.environ.get("OPENAI_API_KEY"):
+    if os.environ.get("OPENAI_API_KEY") or os.environ.get("SA_NO_DOTENV") == "1":   # TESTS_HERMETIC_2026_11_11
         return
     env_path = Path(__file__).resolve().parents[1] / ".env"
     if env_path.exists():

@@ -42,8 +42,9 @@ try:
     load_env()
 except Exception:
     try:
-        from dotenv import load_dotenv
-        load_dotenv()
+        if os.environ.get("SA_NO_DOTENV") != "1":   # TESTS_HERMETIC_2026_11_11: the tests never read this PC's .env
+            from dotenv import load_dotenv
+            load_dotenv()
     except Exception:
         pass
 

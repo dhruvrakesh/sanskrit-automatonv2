@@ -2,7 +2,7 @@
 
 Made by `python scripts\docs_map.py --write` from the files' own first lines (their titles, the dates in
 their names, the markers they name); not written by hand. `--check` says when it is stale.
-94 documents; the newest is of 2026-11-10.
+95 documents; the newest is of 2026-11-11.
 
 ## Start here
 
@@ -41,6 +41,7 @@ their names, the markers they name); not written by hand. `--check` says when it
 
 | Date | File | What it is | Markers |
 |---|---|---|---|
+| 2026-11-11 | [PEOPLES_FINDINGS_2026-11-11.md](PEOPLES_FINDINGS_2026-11-11.md) | Our findings: what of the scholars' reading the site may carry (11 Nov 2026) | DOCS106_2026_11_11 |
 | 2026-11-10 | [GENEALOGY_2026-11-10.md](GENEALOGY_2026-11-10.md) | The genealogies mended, explained, and the path to the dynasties; B. C. Law read into claims (10 Nov 2026) | GENEALOGY_HEAL_2026_11_10, C26_INDEX_ALIASES_2026_11_10, CLAIMS_EPUB_2026_11_10, DOCS104_2026_11_10 |
 | 2026-10-28 | [PEOPLES_2026-10-28.md](PEOPLES_2026-10-28.md) | The peoples of the Puranas' lists, read against Raychaudhuri (28 Oct 2026) | PEOPLES_2026_10_28 |
 | 2026-10-28 | [B2_AND_X1C_2026-10-28.md](B2_AND_X1C_2026-10-28.md) | B2 and X1c: the historian's view beside the genealogies, and a search in the scholarly English (28 Oct 2026) | B2_SITE_2026_10_28, X1C_SITE_2026_10_28, DOCS98_2026_10_28, HEAL_2026_10_28 |
@@ -199,6 +200,7 @@ Each file once, whole, in the Lovable Cloud SQL editor; its checks one query per
 | [C24_scholar_search_2026-10-28.sql](cloud/C24_scholar_search_2026-10-28.sql) | change | C24 - a search over the scholarly English (C24_SCHOLAR_SEARCH_2026_10_28, Srangam X1C_SITE_2026_10_28) | Needs C22 (and so C4, C5, C18) |
 | [C25_article_cards_2026-11-09.sql](cloud/C25_article_cards_2026-11-09.sql) | change | C25_article_cards_2026-11-09.sql  (LOAD_CARDS_2026_11_09; docs\LOAD_AND_STORIES_2026-11-09.md) | - |
 | [C26_index_aliases_2026-11-10.sql](cloud/C26_index_aliases_2026-11-10.sql) | change | C26 - the epithets of the genealogies (C26_INDEX_ALIASES_2026_11_10, Srangam GENEALOGY_HEAL_2026_11_10) | Needs C21 and C23 |
+| [C27_spatial_ref_sys_2026-11-11.sql](cloud/C27_spatial_ref_sys_2026-11-11.sql) | change | C27 - Lovable's security finding on public.spatial_ref_sys (C27_SPATIAL_REF_SYS_2026_11_11) | - |
 | [CHECKS_brain_counts_2026-10-21.sql](cloud/CHECKS_brain_counts_2026-10-21.sql) | checks | CHECKS_brain_counts_2026-10-21.sql  (DOCS81_2026_10_21) | - |
 | [CHECKS_debt_2026-10-22.sql](cloud/CHECKS_debt_2026-10-22.sql) | checks | CHECKS_debt_2026-10-22.sql  (DOCS85_2026_10_22, docs/DEBT_2026-10-22.md) | - |
 | [CHECKS_fidelity_2026-10-22.sql](cloud/CHECKS_fidelity_2026-10-22.sql) | checks | CHECKS_fidelity_2026-10-22.sql  (DOCS84_2026_10_22, FIDELITY_2026_10_22) | - |

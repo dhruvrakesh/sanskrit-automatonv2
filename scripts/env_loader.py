@@ -4,6 +4,10 @@ import os
 from pathlib import Path
 
 def _load_dotenv():
+    # TESTS_HERMETIC_2026_11_11: the tests (tests/__init__.py) set SA_NO_DOTENV=1: they never read this PC's .env (its
+    # keys, its credit), so they run alike on every machine and never call a paid API with a real key
+    if os.environ.get("SA_NO_DOTENV") == "1":
+        return
     # Import lazily to avoid new hard deps if you don't want them
     try:
         from dotenv import load_dotenv

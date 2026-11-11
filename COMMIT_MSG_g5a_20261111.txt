@@ -1,0 +1,22 @@
+The tests apart from this PC; the dynasties read verse by verse (G5a); our findings may be published (DOCS106_2026_11_11)
+
+Asked on 11 Nov: run_tests failed on the PC; a fresh Anthropic key; the dynasties as "an API call thing"; our own
+analysis of Law and Raychaudhuri published with citations. docs/PEOPLES_FINDINGS_2026-11-11.md.
+
+- TESTS_HERMETIC_2026_11_11 (tests/__init__.py; env_loader, dashboard, ingest_pdf, run_inbox, corpus_sync,
+  publish_api, publish_srangam; claude_engine.test_today): the tests never read this PC's .env (its keys, its credit)
+  and take their own day for the Claude credit, so they run alike on every machine and never call a paid API with a
+  real key. 235 modules, 1,752 tests pass with a copy of this PC's settings (fake keys) and python-dotenv.
+- VAMSA_READ_2026_11_11 (scripts/vamsa_read.py, G5a): GRETIL's Visnupurana book 4 and Bhagavatapurana book 9 and
+  12.1 read by Claude chapter by chapter into kinship statements, each checked against its verse by machine; the plan,
+  the run (the credit, a cap), --reparse, --report (the CSV, the longest father-to-son lines). Private until decided.
+- C27 (docs/cloud/C27_spatial_ref_sys_2026-11-11.sql): the REVOKE cannot work (supabase_admin's grants, as Supabase's
+  pages say); S3, read-only: which columns use PostGIS, any write through the API.
+- DOCS106_2026_11_11: the register's section 19, STATE 41, the RUNBOOK's commands; the findings' rule.
+- If DESK_FRESH_2026_11_11 and DOCS105 were not released before, they go with this (COMMIT_MSG_deskfresh_20261111.txt).
+
+Tests: test_tests_hermetic_2026_11_11 (7), test_vamsa_read_2026_11_11 (9), test_docs106_2026_11_11; the full suite on
+a copy.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

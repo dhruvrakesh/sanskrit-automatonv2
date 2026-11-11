@@ -41,6 +41,8 @@ PAGE_RE = re.compile(r"^(?P<doc>[a-z0-9_]+)_(?P<page>\d{1,6})$", re.I)
 def _load_dotenv_from_repo_root():
     if os.environ.get("OPENAI_API_KEY"):  # already set (e.g., CI or shell)
         return
+    if os.environ.get("SA_NO_DOTENV") == "1":   # TESTS_HERMETIC_2026_11_11: the tests never read this PC's .env
+        return
     env_path = Path(__file__).resolve().parents[1] / ".env"
     if env_path.exists():
         for line in env_path.read_text(encoding="utf-8").splitlines():
