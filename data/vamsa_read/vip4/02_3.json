@@ -1,0 +1,52 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 2,
+ "part": 3,
+ "refs": [
+  "ViP 4,2.117",
+  "ViP 4,2.118",
+  "ViP 4,2.119",
+  "ViP 4,2.120",
+  "ViP 4,2.121",
+  "ViP 4,2.122",
+  "ViP 4,2.123",
+  "ViP 4,2.124",
+  "ViP 4,2.125",
+  "ViP 4,2.126",
+  "ViP 4,2.127",
+  "ViP 4,2.128",
+  "ViP 4,2.129",
+  "ViP 4,2.103",
+  "ViP 4,2.131",
+  "ViP 4,2.132",
+  "ViP 4,2.133"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:53:45",
+ "reply": "{\"statements\": [{\"ref\": \"ViP 4,2.132\", \"a\": \"Saubhari\", \"rel\": \"other\", \"b\": \"Māndhātṛ\", \"words\": \"māndhātṛduhitṛsaṃbandhādākhyātam\", \"doubt\": true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00559,
+ "tokens": {
+  "input": 2334,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 92,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,2.132",
+   "a": "Saubhari",
+   "rel": "other",
+   "b": "Māndhātṛ",
+   "words": "māndhātṛduhitṛsaṃbandhādākhyātam",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

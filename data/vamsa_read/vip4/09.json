@@ -1,0 +1,180 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 9,
+ "part": 0,
+ "refs": [
+  "ViP 4,9.1",
+  "ViP 4,9.2",
+  "ViP 4,9.3",
+  "ViP 4,9.4",
+  "ViP 4,9.5",
+  "ViP 4,9.6",
+  "ViP 4,9.7",
+  "ViP 4,9.8",
+  "ViP 4,9.9",
+  "ViP 4,9.10",
+  "ViP 4,9.11",
+  "ViP 4,9.12",
+  "ViP 4,9.13",
+  "ViP 4,9.14",
+  "ViP 4,9.15",
+  "ViP 4,9.16",
+  "ViP 4,9.17",
+  "ViP 4,9.18",
+  "ViP 4,9.19",
+  "ViP 4,9.20",
+  "ViP 4,9.21",
+  "ViP 4,9.22",
+  "ViP 4,9.23",
+  "ViP 4,9.24",
+  "ViP 4,9.25",
+  "ViP 4,9.26",
+  "ViP 4,9.27",
+  "ViP 4,9.28"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:55:33",
+ "reply": "{\"statements\":[{\"ref\":\"ViP 4,9.11\",\"a\":\"Indra\",\"rel\":\"son_of\",\"b\":\"Raji\",\"words\":\"yasyāhaṃ putrastrilokendraḥ\",\"doubt\":true},{\"ref\":\"ViP 4,9.15\",\"a\":\"Raji\",\"rel\":\"other\",\"b\":\"Raji\",\"words\":\"rajiputrāḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.15\",\"a\":\"Śatakratu\",\"rel\":\"other\",\"b\":\"Raji\",\"words\":\"śatakratumātmapitṛputraṃ\",\"doubt\":true},{\"ref\":\"ViP 4,9.25\",\"a\":\"Pratikṣatra\",\"rel\":\"son_of\",\"b\":\"Kṣatravṛddha\",\"words\":\"kṣatravṛddhasutaḥ pratikṣatro 'bhavat\",\"doubt\":false},{\"ref\":\"ViP 4,9.26\",\"a\":\"Saṃjaya\",\"rel\":\"son_of\",\"b\":\"Pratikṣatra\",\"words\":\"tatputraḥ saṃjayaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.26\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Saṃjaya\",\"words\":\"tasyāpi jayaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.26\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"tasyāpi vijayaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.26\",\"a\":\"Kṛta\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"tasmācca jajñe kṛtaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.27\",\"a\":\"Haryadhana\",\"rel\":\"son_of\",\"b\":\"Kṛta\",\"words\":\"tasya ca haryadhanaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.27\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Haryadhana\",\"words\":\"haryadhanasutaḥsahadevaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.27\",\"a\":\"Adīna\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"tasmādadīnaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.27\",\"a\":\"Jayatsena\",\"rel\":\"son_of\",\"b\":\"Adīna\",\"words\":\"tasya jayatseya jayatsenaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.27\",\"a\":\"Saṃkṛti\",\"rel\":\"son_of\",\"b\":\"Jayatsena\",\"words\":\"tataś ca saṃkṛtiḥ\",\"doubt\":false},{\"ref\":\"ViP 4,9.27\",\"a\":\"Kṣatradharman\",\"rel\":\"son_of\",\"b\":\"Saṃkṛti\",\"words\":\"tatputraḥ kṣatradharmā\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01456,
+ "tokens": {
+  "input": 2417,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 973,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,9.11",
+   "a": "Indra",
+   "rel": "son_of",
+   "b": "Raji",
+   "words": "yasyāhaṃ putrastrilokendraḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,9.15",
+   "a": "Raji",
+   "rel": "other",
+   "b": "Raji",
+   "words": "rajiputrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.15",
+   "a": "Śatakratu",
+   "rel": "other",
+   "b": "Raji",
+   "words": "śatakratumātmapitṛputraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.25",
+   "a": "Pratikṣatra",
+   "rel": "son_of",
+   "b": "Kṣatravṛddha",
+   "words": "kṣatravṛddhasutaḥ pratikṣatro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.26",
+   "a": "Saṃjaya",
+   "rel": "son_of",
+   "b": "Pratikṣatra",
+   "words": "tatputraḥ saṃjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.26",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Saṃjaya",
+   "words": "tasyāpi jayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.26",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "tasyāpi vijayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.26",
+   "a": "Kṛta",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "tasmācca jajñe kṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.27",
+   "a": "Haryadhana",
+   "rel": "son_of",
+   "b": "Kṛta",
+   "words": "tasya ca haryadhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.27",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Haryadhana",
+   "words": "haryadhanasutaḥsahadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.27",
+   "a": "Adīna",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "tasmādadīnaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,9.27",
+   "a": "Jayatsena",
+   "rel": "son_of",
+   "b": "Adīna",
+   "words": "tasya jayatseya jayatsenaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.27",
+   "a": "Saṃkṛti",
+   "rel": "son_of",
+   "b": "Jayatsena",
+   "words": "tataś ca saṃkṛtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,9.27",
+   "a": "Kṣatradharman",
+   "rel": "son_of",
+   "b": "Saṃkṛti",
+   "words": "tatputraḥ kṣatradharmā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

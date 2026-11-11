@@ -1,0 +1,34 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 24,
+ "part": 2,
+ "refs": [
+  "BhP 9.24.59",
+  "BhP 9.24.60",
+  "BhP 9.24.61",
+  "BhP 9.24.62",
+  "BhP 9.24.63",
+  "BhP 9.24.64",
+  "BhP 9.24.65",
+  "BhP 9.24.66",
+  "BhP 9.24.67"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:08:24",
+ "reply": "These verses name no kinship or succession relations. They narrate and praise Kṛṣṇa (Madhusūdana), his deeds, and the peoples he pleased. Two things I did not count:\n\n- Verse 63 names clans in a list (Bhoja, Vṛṣṇi, Andhaka, Madhu, Śūrasena, Daśārha, Kuru, Sṛñjaya, Pāṇḍu). It only says they praised him, and it does not say any line is named after a person.\n- Verse 67 mentions Uddhava as the one Kṛṣṇa addressed, which is not a kinship statement.\n\n```json\n{\"statements\": []}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.00513,
+ "tokens": {
+  "input": 1474,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 218,
+  "thinking": 0
+ },
+ "statements": []
+}

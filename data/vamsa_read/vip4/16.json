@@ -1,0 +1,95 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 16,
+ "part": 0,
+ "refs": [
+  "ViP 4,16.1",
+  "ViP 4,16.2",
+  "ViP 4,16.3",
+  "ViP 4,16.4",
+  "ViP 4,16.5",
+  "ViP 4,16.6"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:57:37",
+ "reply": "{\"statements\":[{\"ref\":\"ViP 4,16.3\",\"a\":\"Vahni\",\"rel\":\"son_of\",\"b\":\"Durvasu\",\"words\":\"durvasorvahnirātmajaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,16.3\",\"a\":\"Bhārga\",\"rel\":\"son_of\",\"b\":\"Vahni\",\"words\":\"bahnerbhārgaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,16.3\",\"a\":\"Bhānu\",\"rel\":\"son_of\",\"b\":\"Bhārga\",\"words\":\"bhārgādbhānuḥ\",\"doubt\":false},{\"ref\":\"ViP 4,16.3\",\"a\":\"Trayīsānu\",\"rel\":\"son_of\",\"b\":\"Bhānu\",\"words\":\"tataś ca trayīsānuḥ\",\"doubt\":false},{\"ref\":\"ViP 4,16.3\",\"a\":\"Karandama\",\"rel\":\"son_of\",\"b\":\"Trayīsānu\",\"words\":\"tasmācca karandamaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,16.3\",\"a\":\"Marutta\",\"rel\":\"son_of\",\"b\":\"Karandama\",\"words\":\"tasyāpi maruttaḥ\",\"doubt\":false},{\"ref\":\"ViP 4,16.5\",\"a\":\"Duṣyanta\",\"rel\":\"son_of\",\"b\":\"Marutta\",\"words\":\"pauravaṃ duṣyantaṃ putramakalpayat\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00662,
+ "tokens": {
+  "input": 934,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 475,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,16.3",
+   "a": "Vahni",
+   "rel": "son_of",
+   "b": "Durvasu",
+   "words": "durvasorvahnirātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,16.3",
+   "a": "Bhārga",
+   "rel": "son_of",
+   "b": "Vahni",
+   "words": "bahnerbhārgaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,16.3",
+   "a": "Bhānu",
+   "rel": "son_of",
+   "b": "Bhārga",
+   "words": "bhārgādbhānuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,16.3",
+   "a": "Trayīsānu",
+   "rel": "son_of",
+   "b": "Bhānu",
+   "words": "tataś ca trayīsānuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,16.3",
+   "a": "Karandama",
+   "rel": "son_of",
+   "b": "Trayīsānu",
+   "words": "tasmācca karandamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,16.3",
+   "a": "Marutta",
+   "rel": "son_of",
+   "b": "Karandama",
+   "words": "tasyāpi maruttaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,16.5",
+   "a": "Duṣyanta",
+   "rel": "son_of",
+   "b": "Marutta",
+   "words": "pauravaṃ duṣyantaṃ putramakalpayat",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

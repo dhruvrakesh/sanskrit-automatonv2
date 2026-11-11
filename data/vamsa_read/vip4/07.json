@@ -1,0 +1,344 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 7,
+ "part": 0,
+ "refs": [
+  "ViP 4,7.1",
+  "ViP 4,7.2",
+  "ViP 4,7.3",
+  "ViP 4,7.4",
+  "ViP 4,7.5",
+  "ViP 4,7.6",
+  "ViP 4,7.7",
+  "ViP 4,7.8",
+  "ViP 4,7.9",
+  "ViP 4,7.10",
+  "ViP 4,7.11",
+  "ViP 4,7.12",
+  "ViP 4,7.13",
+  "ViP 4,7.14",
+  "ViP 4,7.15",
+  "ViP 4,7.16",
+  "ViP 4,7.17",
+  "ViP 4,7.18",
+  "ViP 4,7.19",
+  "ViP 4,7.20",
+  "ViP 4,7.21",
+  "ViP 4,7.22",
+  "ViP 4,7.23",
+  "ViP 4,7.24",
+  "ViP 4,7.25",
+  "ViP 4,7.26",
+  "ViP 4,7.27",
+  "ViP 4,7.28",
+  "ViP 4,7.29",
+  "ViP 4,7.30",
+  "ViP 4,7.31",
+  "ViP 4,7.32",
+  "ViP 4,7.33",
+  "ViP 4,7.34",
+  "ViP 4,7.35",
+  "ViP 4,7.36",
+  "ViP 4,7.37",
+  "ViP 4,7.38",
+  "ViP 4,7.39"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:55:06",
+ "reply": "{\"statements\":[\n{\"ref\":\"ViP 4,7.1\",\"a\":\"Amāvasu\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"tasyāpyāyurdhīmānamāvasurvaniśvāvasuḥśrutāyuḥ śayurayutāyuritisaṃjñāḥ ṣaṭ putrā abhavan\",\"doubt\":true},\n{\"ref\":\"ViP 4,7.2\",\"a\":\"Bhīma\",\"rel\":\"son_of\",\"b\":\"Amāvasu\",\"words\":\"amāvasorbhīmanāmā putro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.3\",\"a\":\"Kāñcana\",\"rel\":\"son_of\",\"b\":\"Bhīma\",\"words\":\"bhīmasya kāñcanaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.3\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Kāñcana\",\"words\":\"kāñcanātsuhotraḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.3\",\"a\":\"Jahnu\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"tasyāpi jahnuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.6\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Jahnu\",\"words\":\"duhitṛtve cāsya gaṅgāmanayan\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.7\",\"a\":\"Sumandu\",\"rel\":\"son_of\",\"b\":\"Jahnu\",\"words\":\"jahnoś ca sumandurnāma putro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Ajaka\",\"rel\":\"son_of\",\"b\":\"Sumandu\",\"words\":\"tasyāpyajakaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Balākāśva\",\"rel\":\"son_of\",\"b\":\"Ajaka\",\"words\":\"tato balākāśvaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Balākāśva\",\"words\":\"tasmātkuśaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Kuśāmba\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Kuśanābha\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Dhūrtarajas\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.8\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.10\",\"a\":\"Indra\",\"rel\":\"son_of\",\"b\":\"Kuśāmba\",\"words\":\"ātmanaivāsyendraḥ putratvamagacchat\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.11\",\"a\":\"Gādhi\",\"rel\":\"son_of\",\"b\":\"Kuśāmba\",\"words\":\"sa gādhirnāma putraḥ kauśiko 'bhavat\",\"doubt\":true},\n{\"ref\":\"ViP 4,7.12\",\"a\":\"Satyavatī\",\"rel\":\"daughter_of\",\"b\":\"Gādhi\",\"words\":\"gādhiś ca satyavatīṃ kanyāmajanayat\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.16\",\"a\":\"Satyavatī\",\"rel\":\"wife_of\",\"b\":\"Ṛcīka\",\"words\":\"tatastāmṛcīkaḥ kanyāmupayeme\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.32\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Satyavatī\",\"words\":\"sā jamadagnimajījanat\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.33\",\"a\":\"Viśvāmitra\",\"rel\":\"son_of\",\"b\":\"Gādhi\",\"words\":\"tanmātā ca viśvāmitraṃ janayāmāsa\",\"doubt\":true},\n{\"ref\":\"ViP 4,7.35\",\"a\":\"Reṇukā\",\"rel\":\"daughter_of\",\"b\":\"Reṇu\",\"words\":\"reṇostanayāṃ reṇukām\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.35\",\"a\":\"Reṇukā\",\"rel\":\"wife_of\",\"b\":\"Jamadagni\",\"words\":\"jamadagnirikṣvākuvaṃśodbhavasya reṇostanayāṃ reṇukāmupayeme\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.35\",\"a\":\"Reṇu\",\"rel\":\"descendant_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākuvaṃśodbhavasya reṇoḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.36\",\"a\":\"Paraśurāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"paraśurāmasaṃjñaṃ ... jamadagnirajījanat\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.37\",\"a\":\"Śunaḥśepa\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmītraputrastu bhārgava eva śunaḥśepo\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.38\",\"a\":\"Madhuśchandas\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.38\",\"a\":\"Dhanañjaya\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.38\",\"a\":\"Kṛtadeva\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.38\",\"a\":\"Aṣṭaka\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.38\",\"a\":\"Kacchapa\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,7.38\",\"a\":\"Hari\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03328,
+ "tokens": {
+  "input": 2943,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2739,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,7.1",
+   "a": "Amāvasu",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "tasyāpyāyurdhīmānamāvasurvaniśvāvasuḥśrutāyuḥ śayurayutāyuritisaṃjñāḥ ṣaṭ putrā abhavan",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.2",
+   "a": "Bhīma",
+   "rel": "son_of",
+   "b": "Amāvasu",
+   "words": "amāvasorbhīmanāmā putro 'bhavat",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.3",
+   "a": "Kāñcana",
+   "rel": "son_of",
+   "b": "Bhīma",
+   "words": "bhīmasya kāñcanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.3",
+   "a": "Suhotra",
+   "rel": "son_of",
+   "b": "Kāñcana",
+   "words": "kāñcanātsuhotraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.3",
+   "a": "Jahnu",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "tasyāpi jahnuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.6",
+   "a": "Gaṅgā",
+   "rel": "daughter_of",
+   "b": "Jahnu",
+   "words": "duhitṛtve cāsya gaṅgāmanayan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.7",
+   "a": "Sumandu",
+   "rel": "son_of",
+   "b": "Jahnu",
+   "words": "jahnoś ca sumandurnāma putro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Ajaka",
+   "rel": "son_of",
+   "b": "Sumandu",
+   "words": "tasyāpyajakaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Balākāśva",
+   "rel": "son_of",
+   "b": "Ajaka",
+   "words": "tato balākāśvaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Balākāśva",
+   "words": "tasmātkuśaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Kuśāmba",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Kuśanābha",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Dhūrtarajas",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.8",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "tasyāpi kuśāṃbakuśanābhādhūrtarajaso vasuśceti catvāraḥ putrā babhūvuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.10",
+   "a": "Indra",
+   "rel": "son_of",
+   "b": "Kuśāmba",
+   "words": "ātmanaivāsyendraḥ putratvamagacchat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,7.11",
+   "a": "Gādhi",
+   "rel": "son_of",
+   "b": "Kuśāmba",
+   "words": "sa gādhirnāma putraḥ kauśiko 'bhavat",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,7.12",
+   "a": "Satyavatī",
+   "rel": "daughter_of",
+   "b": "Gādhi",
+   "words": "gādhiś ca satyavatīṃ kanyāmajanayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.16",
+   "a": "Satyavatī",
+   "rel": "wife_of",
+   "b": "Ṛcīka",
+   "words": "tatastāmṛcīkaḥ kanyāmupayeme",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,7.32",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Satyavatī",
+   "words": "sā jamadagnimajījanat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,7.33",
+   "a": "Viśvāmitra",
+   "rel": "son_of",
+   "b": "Gādhi",
+   "words": "tanmātā ca viśvāmitraṃ janayāmāsa",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,7.35",
+   "a": "Reṇukā",
+   "rel": "daughter_of",
+   "b": "Reṇu",
+   "words": "reṇostanayāṃ reṇukām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.35",
+   "a": "Reṇukā",
+   "rel": "wife_of",
+   "b": "Jamadagni",
+   "words": "jamadagnirikṣvākuvaṃśodbhavasya reṇostanayāṃ reṇukāmupayeme",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.35",
+   "a": "Reṇu",
+   "rel": "descendant_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākuvaṃśodbhavasya reṇoḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.36",
+   "a": "Paraśurāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "paraśurāmasaṃjñaṃ ... jamadagnirajījanat",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,7.37",
+   "a": "Śunaḥśepa",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmītraputrastu bhārgava eva śunaḥśepo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.38",
+   "a": "Madhuśchandas",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.38",
+   "a": "Dhanañjaya",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.38",
+   "a": "Kṛtadeva",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.38",
+   "a": "Aṣṭaka",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.38",
+   "a": "Kacchapa",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,7.38",
+   "a": "Hari",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "madhuśchandodhanañjayakṛtadevāṣṭakakacchapaharirākhyā viśvāmitraputrā babhūvuḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

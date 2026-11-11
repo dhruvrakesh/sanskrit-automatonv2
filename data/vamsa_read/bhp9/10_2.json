@@ -1,0 +1,94 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 10,
+ "part": 2,
+ "refs": [
+  "BhP 9.10.34",
+  "BhP 9.10.35",
+  "BhP 9.10.36",
+  "BhP 9.10.37",
+  "BhP 9.10.38",
+  "BhP 9.10.39",
+  "BhP 9.10.40",
+  "BhP 9.10.41",
+  "BhP 9.10.42",
+  "BhP 9.10.43",
+  "BhP 9.10.44",
+  "BhP 9.10.45",
+  "BhP 9.10.46",
+  "BhP 9.10.47",
+  "BhP 9.10.48",
+  "BhP 9.10.49",
+  "BhP 9.10.50",
+  "BhP 9.10.51",
+  "BhP 9.10.52",
+  "BhP 9.10.53",
+  "BhP 9.10.54",
+  "BhP 9.10.55",
+  "BhP 9.10.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:02:27",
+ "reply": "{\"statements\": [\n{\"ref\": \"BhP 9.10.35\", \"a\": \"Bharata\", \"rel\": \"brother_of\", \"b\": \"Rāma\", \"words\": \"bhrātaraṃ valkalāmbaram\", \"doubt\": true},\n{\"ref\": \"BhP 9.10.36\", \"a\": \"Rāma\", \"rel\": \"brother_of\", \"b\": \"Bharata\", \"words\": \"rāmaṃ pratyudyato 'grajam\", \"doubt\": false},\n{\"ref\": \"BhP 9.10.46\", \"a\": \"Rāma\", \"rel\": \"brother_of\", \"b\": \"Bharata\", \"words\": \"bhrātrābhinanditaḥ\", \"doubt\": true},\n{\"ref\": \"BhP 9.10.47\", \"a\": \"Sītā\", \"rel\": \"other\", \"b\": \"Rāma\", \"words\": \"vaidehī lakṣmaṇaścaiva\", \"doubt\": true},\n{\"ref\": \"BhP 9.10.56\", \"a\": \"Sītā\", \"rel\": \"wife_of\", \"b\": \"Rāma\", \"words\": \"bhartuḥ sītāharan manaḥ\", \"doubt\": true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00881,
+ "tokens": {
+  "input": 2521,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 377,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.10.35",
+   "a": "Bharata",
+   "rel": "brother_of",
+   "b": "Rāma",
+   "words": "bhrātaraṃ valkalāmbaram",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.10.36",
+   "a": "Rāma",
+   "rel": "brother_of",
+   "b": "Bharata",
+   "words": "rāmaṃ pratyudyato 'grajam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.46",
+   "a": "Rāma",
+   "rel": "brother_of",
+   "b": "Bharata",
+   "words": "bhrātrābhinanditaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.10.47",
+   "a": "Sītā",
+   "rel": "other",
+   "b": "Rāma",
+   "words": "vaidehī lakṣmaṇaścaiva",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.10.56",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "bhartuḥ sītāharan manaḥ",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

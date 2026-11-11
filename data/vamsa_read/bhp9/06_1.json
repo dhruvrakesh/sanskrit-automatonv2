@@ -1,0 +1,431 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 6,
+ "part": 1,
+ "refs": [
+  "BhP 9.6.1",
+  "BhP 9.6.2",
+  "BhP 9.6.3",
+  "BhP 9.6.4",
+  "BhP 9.6.5",
+  "BhP 9.6.6",
+  "BhP 9.6.7",
+  "BhP 9.6.8",
+  "BhP 9.6.9",
+  "BhP 9.6.10",
+  "BhP 9.6.11",
+  "BhP 9.6.12",
+  "BhP 9.6.13",
+  "BhP 9.6.14",
+  "BhP 9.6.15",
+  "BhP 9.6.16",
+  "BhP 9.6.17",
+  "BhP 9.6.18",
+  "BhP 9.6.19",
+  "BhP 9.6.20",
+  "BhP 9.6.21",
+  "BhP 9.6.22",
+  "BhP 9.6.23",
+  "BhP 9.6.24",
+  "BhP 9.6.25",
+  "BhP 9.6.26",
+  "BhP 9.6.27",
+  "BhP 9.6.28",
+  "BhP 9.6.29",
+  "BhP 9.6.30",
+  "BhP 9.6.31",
+  "BhP 9.6.32",
+  "BhP 9.6.33",
+  "BhP 9.6.34",
+  "BhP 9.6.35",
+  "BhP 9.6.36",
+  "BhP 9.6.37",
+  "BhP 9.6.38",
+  "BhP 9.6.39",
+  "BhP 9.6.40",
+  "BhP 9.6.41",
+  "BhP 9.6.42",
+  "BhP 9.6.43",
+  "BhP 9.6.44",
+  "BhP 9.6.45",
+  "BhP 9.6.46",
+  "BhP 9.6.47",
+  "BhP 9.6.48",
+  "BhP 9.6.49",
+  "BhP 9.6.50",
+  "BhP 9.6.51",
+  "BhP 9.6.52",
+  "BhP 9.6.53",
+  "BhP 9.6.54"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:01:43",
+ "reply": "{\"statements\":[\n{\"ref\":\"BhP 9.6.1\",\"a\":\"Virūpa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"virūpaḥ ketumān chambhurambarīṣasutāstrayaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.1\",\"a\":\"Ketumān\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"virūpaḥ ketumān chambhurambarīṣasutāstrayaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.1\",\"a\":\"Śambhu\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"virūpaḥ ketumān chambhurambarīṣasutāstrayaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.1\",\"a\":\"Pṛṣadaśva\",\"rel\":\"son_of\",\"b\":\"Virūpa\",\"words\":\"virūpāt pṛṣadaśvo 'bhūt\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.1\",\"a\":\"Rathītara\",\"rel\":\"son_of\",\"b\":\"Pṛṣadaśva\",\"words\":\"tatputrastu rathītaraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.2\",\"a\":\"Rathītara\",\"rel\":\"wife_of\",\"b\":\"Rathītara\",\"words\":\"rathītarasyāprajasya bhāryāyāṃ\",\"doubt\":true},\n{\"ref\":\"BhP 9.6.4\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu\",\"words\":\"manorjajñe ikṣvākurghrāṇataḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.4\",\"a\":\"Vikukṣi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.4\",\"a\":\"Nimi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.4\",\"a\":\"Daṇḍaka\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.11\",\"a\":\"Vikukṣi\",\"rel\":\"succeeded\",\"b\":\"Ikṣvāku\",\"words\":\"pitaryuparate 'bhyetya vikukṣiḥ pṛthivīmimām śāsad\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.12\",\"a\":\"Purañjaya\",\"rel\":\"son_of\",\"b\":\"Vikukṣi\",\"words\":\"purañjayastasya suta\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.20\",\"a\":\"Anenas\",\"rel\":\"son_of\",\"b\":\"Purañjaya\",\"words\":\"purañjayasya putro 'bhūdanenāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.20\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Anenas\",\"words\":\"anenāstatsutaḥ pṛthuḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.20\",\"a\":\"Viśvagandhi\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"viśvagandhistataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.20\",\"a\":\"Candra\",\"rel\":\"son_of\",\"b\":\"Viśvagandhi\",\"words\":\"tataścandro\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.20\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Candra\",\"words\":\"yuvanāśvastu tatsutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.21\",\"a\":\"Śrāvasta\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"śrāvastastatsuto\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.21\",\"a\":\"Bṛhadaśva\",\"rel\":\"son_of\",\"b\":\"Śrāvasta\",\"words\":\"bṛhadaśvastu śrāvastiḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.21\",\"a\":\"Kuvalayāśvaka\",\"rel\":\"son_of\",\"b\":\"Bṛhadaśva\",\"words\":\"tataḥ kuvalayāśvakaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.23\",\"a\":\"Dṛḍhāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalayāśvaka\",\"words\":\"tatsutāste\",\"doubt\":true},\n{\"ref\":\"BhP 9.6.23\",\"a\":\"Kapilāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalayāśvaka\",\"words\":\"tatsutāste\",\"doubt\":true},\n{\"ref\":\"BhP 9.6.23\",\"a\":\"Bhadrāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalayāśvaka\",\"words\":\"tatsutāste\",\"doubt\":true},\n{\"ref\":\"BhP 9.6.24\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dṛḍhāśva\",\"words\":\"dṛḍhāśvaputro haryaśvo\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.24\",\"a\":\"Nikumbha\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"nikumbhastatsutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.25\",\"a\":\"Bahulāśva\",\"rel\":\"son_of\",\"b\":\"Nikumbha\",\"words\":\"bahulāśvo nikumbhasya\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.25\",\"a\":\"Kṛśāśva\",\"rel\":\"son_of\",\"b\":\"Bahulāśva\",\"words\":\"kṛśāśvo 'thāsya\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.25\",\"a\":\"Senajit\",\"rel\":\"son_of\",\"b\":\"Kṛśāśva\",\"words\":\"athāsya senajit\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.25\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"yuvanāśvo 'bhavat tasya\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.30\",\"a\":\"Māndhātā\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"yuvanāśvasya tanayaścakravartī\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Bindumatī\",\"rel\":\"daughter_of\",\"b\":\"Śaśabindu\",\"words\":\"śaśabindorduhitari bindumatyām\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Purukutsa\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"adhān nṛpaḥ purukutsam\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"adhān nṛpaḥ ambarīṣam\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Mucukunda\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"adhān nṛpaḥ mucukundaṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Purukutsa\",\"rel\":\"son_of\",\"b\":\"Bindumatī\",\"words\":\"bindumatyāmadhān nṛpaḥ purukutsam\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Bindumatī\",\"words\":\"bindumatyāmadhān nṛpaḥ ambarīṣam\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Mucukunda\",\"rel\":\"son_of\",\"b\":\"Bindumatī\",\"words\":\"bindumatyāmadhān nṛpaḥ mucukundaṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Māndhātṛ's fifty daughters\",\"rel\":\"sister_of\",\"b\":\"Purukutsa\",\"words\":\"teṣāṃ svasāraḥ pañcāśat\",\"doubt\":false},\n{\"ref\":\"BhP 9.6.38\",\"a\":\"Māndhātṛ's fifty daughters\",\"rel\":\"wife_of\",\"b\":\"Saubhari\",\"words\":\"saubhariṃ vavrire patim\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03988,
+ "tokens": {
+  "input": 5043,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2979,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.6.1",
+   "a": "Virūpa",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "virūpaḥ ketumān chambhurambarīṣasutāstrayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.1",
+   "a": "Ketumān",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "virūpaḥ ketumān chambhurambarīṣasutāstrayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.1",
+   "a": "Śambhu",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "virūpaḥ ketumān chambhurambarīṣasutāstrayaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.6.1",
+   "a": "Pṛṣadaśva",
+   "rel": "son_of",
+   "b": "Virūpa",
+   "words": "virūpāt pṛṣadaśvo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.1",
+   "a": "Rathītara",
+   "rel": "son_of",
+   "b": "Pṛṣadaśva",
+   "words": "tatputrastu rathītaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.2",
+   "a": "Rathītara",
+   "rel": "wife_of",
+   "b": "Rathītara",
+   "words": "rathītarasyāprajasya bhāryāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.4",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu",
+   "words": "manorjajñe ikṣvākurghrāṇataḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.4",
+   "a": "Vikukṣi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.4",
+   "a": "Nimi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.4",
+   "a": "Daṇḍaka",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.11",
+   "a": "Vikukṣi",
+   "rel": "succeeded",
+   "b": "Ikṣvāku",
+   "words": "pitaryuparate 'bhyetya vikukṣiḥ pṛthivīmimām śāsad",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.6.12",
+   "a": "Purañjaya",
+   "rel": "son_of",
+   "b": "Vikukṣi",
+   "words": "purañjayastasya suta",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.20",
+   "a": "Anenas",
+   "rel": "son_of",
+   "b": "Purañjaya",
+   "words": "purañjayasya putro 'bhūdanenāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.20",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Anenas",
+   "words": "anenāstatsutaḥ pṛthuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.20",
+   "a": "Viśvagandhi",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "viśvagandhistataḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.20",
+   "a": "Candra",
+   "rel": "son_of",
+   "b": "Viśvagandhi",
+   "words": "tataścandro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.20",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Candra",
+   "words": "yuvanāśvastu tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.21",
+   "a": "Śrāvasta",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "śrāvastastatsuto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.21",
+   "a": "Bṛhadaśva",
+   "rel": "son_of",
+   "b": "Śrāvasta",
+   "words": "bṛhadaśvastu śrāvastiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.21",
+   "a": "Kuvalayāśvaka",
+   "rel": "son_of",
+   "b": "Bṛhadaśva",
+   "words": "tataḥ kuvalayāśvakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.23",
+   "a": "Dṛḍhāśva",
+   "rel": "son_of",
+   "b": "Kuvalayāśvaka",
+   "words": "tatsutāste",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.6.23",
+   "a": "Kapilāśva",
+   "rel": "son_of",
+   "b": "Kuvalayāśvaka",
+   "words": "tatsutāste",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.6.23",
+   "a": "Bhadrāśva",
+   "rel": "son_of",
+   "b": "Kuvalayāśvaka",
+   "words": "tatsutāste",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.6.24",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dṛḍhāśva",
+   "words": "dṛḍhāśvaputro haryaśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.24",
+   "a": "Nikumbha",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "nikumbhastatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.25",
+   "a": "Bahulāśva",
+   "rel": "son_of",
+   "b": "Nikumbha",
+   "words": "bahulāśvo nikumbhasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.25",
+   "a": "Kṛśāśva",
+   "rel": "son_of",
+   "b": "Bahulāśva",
+   "words": "kṛśāśvo 'thāsya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.25",
+   "a": "Senajit",
+   "rel": "son_of",
+   "b": "Kṛśāśva",
+   "words": "athāsya senajit",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.25",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "yuvanāśvo 'bhavat tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.30",
+   "a": "Māndhātā",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "yuvanāśvasya tanayaścakravartī",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Bindumatī",
+   "rel": "daughter_of",
+   "b": "Śaśabindu",
+   "words": "śaśabindorduhitari bindumatyām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Purukutsa",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "adhān nṛpaḥ purukutsam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "adhān nṛpaḥ ambarīṣam",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Mucukunda",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "adhān nṛpaḥ mucukundaṃ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Purukutsa",
+   "rel": "son_of",
+   "b": "Bindumatī",
+   "words": "bindumatyāmadhān nṛpaḥ purukutsam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Bindumatī",
+   "words": "bindumatyāmadhān nṛpaḥ ambarīṣam",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Mucukunda",
+   "rel": "son_of",
+   "b": "Bindumatī",
+   "words": "bindumatyāmadhān nṛpaḥ mucukundaṃ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Māndhātṛ's fifty daughters",
+   "rel": "sister_of",
+   "b": "Purukutsa",
+   "words": "teṣāṃ svasāraḥ pañcāśat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.6.38",
+   "a": "Māndhātṛ's fifty daughters",
+   "rel": "wife_of",
+   "b": "Saubhari",
+   "words": "saubhariṃ vavrire patim",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

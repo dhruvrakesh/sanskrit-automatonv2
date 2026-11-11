@@ -146,6 +146,24 @@ try {
         Log ("STEP e repair SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $te).TotalSeconds, $_)
     }
 
+    # f) PATH_SCHED_2026_11_11: the path of every text charted again (scripts\text_path.py: FREE, the database read
+    #    only) when the chart is 20 hours old or more, after the repair's round (step e) has changed a text. The desk
+    #    (/desk/<doc>) reads it: on 11 Nov the Gandharva Veda's desk still said "vision has read 0 of its 507 pages",
+    #    from a chart of 28 Oct, two days after vision had read them. A failure here is logged and skipped.
+    $tf = Get-Date
+    try {
+        $chart = "data\text_path.json"
+        $stale = (-not (Test-Path $chart)) -or (((Get-Date) - (Get-Item $chart).LastWriteTime).TotalHours -ge 20)
+        if ($stale -and (Test-Path "scripts\text_path.py")) {
+            & $py scripts\text_path.py 2>&1 | Select-Object -Last 3 | Add-Content $log
+            Log ("STEP f path         {0:n0}s" -f ((Get-Date) - $tf).TotalSeconds)
+        } else {
+            Log "STEP f path         the chart is less than 20 hours old"
+        }
+    } catch {
+        Log ("STEP f path SKIPPED after {0:n0}s: {1}" -f ((Get-Date) - $tf).TotalSeconds, $_)
+    }
+
     Log ("DONE maintenance - total {0:n0}s" -f ((Get-Date) - $t0).TotalSeconds)
     exit 0
 } catch {

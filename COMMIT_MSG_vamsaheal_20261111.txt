@@ -1,0 +1,19 @@
+The dynasties mended: corrected replies, references from the words, sandhi, homonyms apart; the path on a schedule (DOCS107_2026_11_11)
+
+G5a's first run (11 Nov, 18:52 to 19:10: 56 parts, 1,975 statements, 1,449 verified, $2.00) showed replies that
+corrected themselves, a part without references, dictionary forms against the verses' sandhi, and lines drawn through
+homonyms of different dynasties.
+
+- VAMSA_HEAL_2026_11_11 (scripts/vamsa_read.py): the last object of statements read; a statement without its verse
+  takes the verse its words are in; the words found with sandhi's endings and "..."; a person is a name with the father
+  the text gives, joined only within a chapter and the one before; a mother is not a father; --report writes the lines
+  with their verses. On a copy of the stored replies, free: 64 parts, 2,098 statements, 1,767 verified (84%).
+- PATH_SCHED_2026_11_11 (scripts/maintenance_runner.ps1, step f): the path of every text charted again when the chart
+  is 20 hours old (free; the database read only), so the desk follows the repair's rounds.
+- DOCS107_2026_11_11: the register's section 20 (done in full? no; the schedule; the select audience), STATE 42, the
+  RUNBOOK's commands.
+
+Tests: test_vamsa_read_2026_11_11 (13), test_path_sched_2026_11_11, test_docs107_2026_11_11; the full suite on a copy.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

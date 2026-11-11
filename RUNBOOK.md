@@ -2759,3 +2759,19 @@ docs\ASKS_2026-10-22.md, section 19; docs\PEOPLES_FINDINGS_2026-11-11.md. From t
 4. C27's S3 (read-only) in the Lovable Cloud SQL editor; mark the finding on spatial_ref_sys accepted in Lovable's
    security view with C27's reason; ask Lovable's support to move PostGIS into the schema "extensions".
 5. The Gandharva Veda: `python scripts\benchmark_sources.py --doc gandharva_veda_natya_shastra` (free).
+
+## 11 Nov, evening: the dynasties mended; the path on a schedule (DOCS107_2026_11_11)
+
+docs\ASKS_2026-10-22.md, section 20. From the automaton's root:
+
+1. The patches: `python scripts\patch_vamsa_heal_2026_11_11.py --check`, then without; the same for
+   `patch_path_sched_2026_11_11.py` and `patch_docs107_2026_11_11.py`; `python -m unittest tests.test_vamsa_read_2026_11_11
+   tests.test_path_sched_2026_11_11 tests.test_docs107_2026_11_11 tests.test_auto_repair_2026_10_25`;
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1 with COMMIT_MSG_vamsaheal_20261111.txt.
+2. The dynasties again, free: `python scripts\vamsa_read.py --reparse`, then `python scripts\vamsa_read.py --report`.
+3. The dashboard: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1` (it refuses while
+   a job runs; `-Status` shows them).
+4. The schedule: `Get-ScheduledTask -TaskName SanskritCorpusMirror, SanskritMaintenance, SanskritDBBackup,
+   SanskritCornerWorker | Get-ScheduledTaskInfo`; on the site, H1 of docs\cloud\OPS_health_2026-10-08.sql.
+5. The Gandharva Veda: a trial of 40 passages with Sonnet through the dashboard (`/api/translate`, engine
+   anthropic:claude-sonnet-5-5, limit 40), then the rest from its desk page.

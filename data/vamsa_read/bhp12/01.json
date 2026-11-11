@@ -1,0 +1,535 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp12",
+ "title": "Bhagavatapurana 12.1",
+ "chapter": 1,
+ "part": 0,
+ "refs": [
+  "BhP 12.1.1",
+  "BhP 12.1.2",
+  "BhP 12.1.3",
+  "BhP 12.1.4",
+  "BhP 12.1.5",
+  "BhP 12.1.6",
+  "BhP 12.1.7",
+  "BhP 12.1.8",
+  "BhP 12.1.9",
+  "BhP 12.1.10",
+  "BhP 12.1.11",
+  "BhP 12.1.12",
+  "BhP 12.1.13",
+  "BhP 12.1.14",
+  "BhP 12.1.15",
+  "BhP 12.1.16",
+  "BhP 12.1.17",
+  "BhP 12.1.18",
+  "BhP 12.1.19",
+  "BhP 12.1.20",
+  "BhP 12.1.21",
+  "BhP 12.1.22",
+  "BhP 12.1.23",
+  "BhP 12.1.24",
+  "BhP 12.1.25",
+  "BhP 12.1.26",
+  "BhP 12.1.27",
+  "BhP 12.1.28",
+  "BhP 12.1.29",
+  "BhP 12.1.30",
+  "BhP 12.1.31",
+  "BhP 12.1.32",
+  "BhP 12.1.33",
+  "BhP 12.1.34",
+  "BhP 12.1.35",
+  "BhP 12.1.36",
+  "BhP 12.1.37",
+  "BhP 12.1.38",
+  "BhP 12.1.39",
+  "BhP 12.1.40",
+  "BhP 12.1.41"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:08:29",
+ "reply": "{\"statements\":[\n{\"ref\":\"BhP 12.1.1\",\"a\":\"Śunaka\",\"rel\":\"other\",\"b\":\"Purañjaya\",\"words\":\"tasyāmātyas tu śunako hatvā svāminam\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.2\",\"a\":\"Pālaka\",\"rel\":\"son_of\",\"b\":\"Pradyota\",\"words\":\"yat-pālakaḥ sutaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.2\",\"a\":\"Viśākhayūpa\",\"rel\":\"son_of\",\"b\":\"Pālaka\",\"words\":\"viśākhayūpas tat-putro\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.2\",\"a\":\"Rājaka\",\"rel\":\"succeeded\",\"b\":\"Viśākhayūpa\",\"words\":\"bhavitā rājakas tataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.3\",\"a\":\"Nandivardhana\",\"rel\":\"son_of\",\"b\":\"Rājaka\",\"words\":\"nandivardhanas tat-putraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.4\",\"a\":\"Śiśunāga\",\"rel\":\"succeeded\",\"b\":\"Nandivardhana\",\"words\":\"śiśunāgas tato bhāvyaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.4\",\"a\":\"Kākavarṇa\",\"rel\":\"son_of\",\"b\":\"Śiśunāga\",\"words\":\"kākavarṇas tu tat-sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.4\",\"a\":\"Kṣemadharmā\",\"rel\":\"son_of\",\"b\":\"Kākavarṇa\",\"words\":\"kṣemadharmā tasya sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.4\",\"a\":\"Kṣetrajña\",\"rel\":\"son_of\",\"b\":\"Kṣemadharmā\",\"words\":\"kṣetrajñaḥ kṣemadharma-jaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.5\",\"a\":\"Vidhisāra\",\"rel\":\"son_of\",\"b\":\"Kṣetrajña\",\"words\":\"vidhisāraḥ sutas tasya\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.5\",\"a\":\"Ajātaśatru\",\"rel\":\"succeeded\",\"b\":\"Vidhisāra\",\"words\":\"jātaśatrur bhaviṣyati\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.5\",\"a\":\"Darbhaka\",\"rel\":\"son_of\",\"b\":\"Ajātaśatru\",\"words\":\"darbhakas tat-suto\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.5\",\"a\":\"Ajaya\",\"rel\":\"succeeded\",\"b\":\"Darbhaka\",\"words\":\"darbhakasyājayaḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.6\",\"a\":\"Mahānandi\",\"rel\":\"son_of\",\"b\":\"Nandivardhana\",\"words\":\"mahānandiḥ sutas tataḥ\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.7\",\"a\":\"Nanda\",\"rel\":\"son_of\",\"b\":\"Mahānandi\",\"words\":\"mahānandi-suto\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.10\",\"a\":\"Sumālya\",\"rel\":\"son_of\",\"b\":\"Mahāpadma\",\"words\":\"tasya cāṣṭau bhaviṣyanti sumālya-pramukhāḥ sutāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.12\",\"a\":\"Candragupta\",\"rel\":\"other\",\"b\":\"Mauryas\",\"words\":\"candraguptaṃ vai dvijo rājye 'bhiṣekṣyati\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.12\",\"a\":\"Vārisāra\",\"rel\":\"son_of\",\"b\":\"Candragupta\",\"words\":\"tat-suto vārisāraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.12\",\"a\":\"Aśokavardhana\",\"rel\":\"succeeded\",\"b\":\"Vārisāra\",\"words\":\"tataś cāśokavardhanaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.13\",\"a\":\"Suyaśā\",\"rel\":\"succeeded\",\"b\":\"Aśokavardhana\",\"words\":\"suyaśā bhavitā tasya\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.13\",\"a\":\"Saṅgata\",\"rel\":\"son_of\",\"b\":\"Suyaśā\",\"words\":\"saṅgataḥ suyaśaḥ-sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.13\",\"a\":\"Śāliśūka\",\"rel\":\"succeeded\",\"b\":\"Saṅgata\",\"words\":\"śāliśūkas tatas tasya\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.13\",\"a\":\"Somaśarmā\",\"rel\":\"succeeded\",\"b\":\"Śāliśūka\",\"words\":\"somaśarmā bhaviṣyati\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.13\",\"a\":\"Śatadhanvā\",\"rel\":\"succeeded\",\"b\":\"Somaśarmā\",\"words\":\"śatadhanvā tatas tasya\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.13\",\"a\":\"Bṛhadratha\",\"rel\":\"succeeded\",\"b\":\"Śatadhanvā\",\"words\":\"bhavitā tad-bṛhadrathaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.15\",\"a\":\"Agnimitra\",\"rel\":\"succeeded\",\"b\":\"Bṛhadratha\",\"words\":\"agnimitras tatas tasmāt\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.15\",\"a\":\"Sujyeṣṭha\",\"rel\":\"succeeded\",\"b\":\"Agnimitra\",\"words\":\"sujyeṣṭho bhavitā tataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.15\",\"a\":\"Vasumitra\",\"rel\":\"succeeded\",\"b\":\"Sujyeṣṭha\",\"words\":\"vasumitro bhadrakaś ca\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.15\",\"a\":\"Pulinda\",\"rel\":\"son_of\",\"b\":\"Bhadraka\",\"words\":\"pulindo bhavitā sutaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.16\",\"a\":\"Ghoṣa\",\"rel\":\"son_of\",\"b\":\"Pulinda\",\"words\":\"tato ghoṣaḥ sutas tasmād\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.16\",\"a\":\"Vajramitra\",\"rel\":\"succeeded\",\"b\":\"Ghoṣa\",\"words\":\"vajramitro bhaviṣyati\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.16\",\"a\":\"Bhāgavata\",\"rel\":\"succeeded\",\"b\":\"Vajramitra\",\"words\":\"tato bhāgavatas tasmād\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.16\",\"a\":\"Devabhūti\",\"rel\":\"succeeded\",\"b\":\"Bhāgavata\",\"words\":\"devabhūtiḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.18\",\"a\":\"Vasudeva\",\"rel\":\"other\",\"b\":\"Devabhūti\",\"words\":\"śuṅgaṃ hatvā devabhūtiṃ kāṇvo 'mātyas\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.19\",\"a\":\"Bhūmitra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"tasya putras tu bhūmitras\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.19\",\"a\":\"Nārāyaṇa\",\"rel\":\"son_of\",\"b\":\"Bhūmitra\",\"words\":\"tasya nārāyaṇaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.21\",\"a\":\"Kṛṣṇa\",\"rel\":\"brother_of\",\"b\":\"Vṛṣala\",\"words\":\"kṛṣṇa-nāmātha tad-bhrātā\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.21\",\"a\":\"Śāntakarṇa\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"śrī-śāntakarṇas tat-putraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.21\",\"a\":\"Paurṇamāsa\",\"rel\":\"son_of\",\"b\":\"Śāntakarṇa\",\"words\":\"paurṇamāsas tu tat-sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.22\",\"a\":\"Lambodara\",\"rel\":\"son_of\",\"b\":\"Paurṇamāsa\",\"words\":\"lambodaras tu tat-putras\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.22\",\"a\":\"Cibilaka\",\"rel\":\"son_of\",\"b\":\"Lambodara\",\"words\":\"tasmāc cibilako nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.22\",\"a\":\"Meghasvāti\",\"rel\":\"son_of\",\"b\":\"Cibilaka\",\"words\":\"meghasvātiś cibilakād\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.22\",\"a\":\"Aṭamāna\",\"rel\":\"son_of\",\"b\":\"Meghasvāti\",\"words\":\"aṭamānas tu tasya ca\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.23\",\"a\":\"Aniṣṭakarmā\",\"rel\":\"son_of\",\"b\":\"Aṭamāna\",\"words\":\"aniṣṭakarmā hāleyas\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.23\",\"a\":\"Talaka\",\"rel\":\"son_of\",\"b\":\"Aniṣṭakarmā\",\"words\":\"talakas tasya cātma-jaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.23\",\"a\":\"Purīṣabhīru\",\"rel\":\"son_of\",\"b\":\"Talaka\",\"words\":\"purīṣabhīrus tat-putras\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.23\",\"a\":\"Sunandana\",\"rel\":\"succeeded\",\"b\":\"Purīṣabhīru\",\"words\":\"tato rājā sunandanaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.24\",\"a\":\"Gomatī\",\"rel\":\"son_of\",\"b\":\"Śivasvāti\",\"words\":\"tasyāpi gomatī putraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.24\",\"a\":\"Purīmān\",\"rel\":\"succeeded\",\"b\":\"Gomatī\",\"words\":\"purīmān bhavitā tataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.25\",\"a\":\"Yajñaśrī\",\"rel\":\"son_of\",\"b\":\"Śivaskanda\",\"words\":\"yajñaśrīs tat-sutas\",\"doubt\":true},\n{\"ref\":\"BhP 12.1.25\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Yajñaśrī\",\"words\":\"vijayas tat-suto\",\"doubt\":false},\n{\"ref\":\"BhP 12.1.31\",\"a\":\"Śiśunandi\",\"rel\":\"brother_of\",\"b\":\"Bhūtananda\",\"words\":\"śiśunandiś ca tad-bhrātā\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04641,
+ "tokens": {
+  "input": 4089,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3823,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 12.1.1",
+   "a": "Śunaka",
+   "rel": "other",
+   "b": "Purañjaya",
+   "words": "tasyāmātyas tu śunako hatvā svāminam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.2",
+   "a": "Pālaka",
+   "rel": "son_of",
+   "b": "Pradyota",
+   "words": "yat-pālakaḥ sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.2",
+   "a": "Viśākhayūpa",
+   "rel": "son_of",
+   "b": "Pālaka",
+   "words": "viśākhayūpas tat-putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.2",
+   "a": "Rājaka",
+   "rel": "succeeded",
+   "b": "Viśākhayūpa",
+   "words": "bhavitā rājakas tataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.3",
+   "a": "Nandivardhana",
+   "rel": "son_of",
+   "b": "Rājaka",
+   "words": "nandivardhanas tat-putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.4",
+   "a": "Śiśunāga",
+   "rel": "succeeded",
+   "b": "Nandivardhana",
+   "words": "śiśunāgas tato bhāvyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.4",
+   "a": "Kākavarṇa",
+   "rel": "son_of",
+   "b": "Śiśunāga",
+   "words": "kākavarṇas tu tat-sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.4",
+   "a": "Kṣemadharmā",
+   "rel": "son_of",
+   "b": "Kākavarṇa",
+   "words": "kṣemadharmā tasya sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.4",
+   "a": "Kṣetrajña",
+   "rel": "son_of",
+   "b": "Kṣemadharmā",
+   "words": "kṣetrajñaḥ kṣemadharma-jaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.5",
+   "a": "Vidhisāra",
+   "rel": "son_of",
+   "b": "Kṣetrajña",
+   "words": "vidhisāraḥ sutas tasya",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 12.1.5",
+   "a": "Ajātaśatru",
+   "rel": "succeeded",
+   "b": "Vidhisāra",
+   "words": "jātaśatrur bhaviṣyati",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.5",
+   "a": "Darbhaka",
+   "rel": "son_of",
+   "b": "Ajātaśatru",
+   "words": "darbhakas tat-suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.5",
+   "a": "Ajaya",
+   "rel": "succeeded",
+   "b": "Darbhaka",
+   "words": "darbhakasyājayaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.6",
+   "a": "Mahānandi",
+   "rel": "son_of",
+   "b": "Nandivardhana",
+   "words": "mahānandiḥ sutas tataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.7",
+   "a": "Nanda",
+   "rel": "son_of",
+   "b": "Mahānandi",
+   "words": "mahānandi-suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.10",
+   "a": "Sumālya",
+   "rel": "son_of",
+   "b": "Mahāpadma",
+   "words": "tasya cāṣṭau bhaviṣyanti sumālya-pramukhāḥ sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.12",
+   "a": "Candragupta",
+   "rel": "other",
+   "b": "Mauryas",
+   "words": "candraguptaṃ vai dvijo rājye 'bhiṣekṣyati",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.12",
+   "a": "Vārisāra",
+   "rel": "son_of",
+   "b": "Candragupta",
+   "words": "tat-suto vārisāraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 12.1.12",
+   "a": "Aśokavardhana",
+   "rel": "succeeded",
+   "b": "Vārisāra",
+   "words": "tataś cāśokavardhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.13",
+   "a": "Suyaśā",
+   "rel": "succeeded",
+   "b": "Aśokavardhana",
+   "words": "suyaśā bhavitā tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.13",
+   "a": "Saṅgata",
+   "rel": "son_of",
+   "b": "Suyaśā",
+   "words": "saṅgataḥ suyaśaḥ-sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.13",
+   "a": "Śāliśūka",
+   "rel": "succeeded",
+   "b": "Saṅgata",
+   "words": "śāliśūkas tatas tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.13",
+   "a": "Somaśarmā",
+   "rel": "succeeded",
+   "b": "Śāliśūka",
+   "words": "somaśarmā bhaviṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.13",
+   "a": "Śatadhanvā",
+   "rel": "succeeded",
+   "b": "Somaśarmā",
+   "words": "śatadhanvā tatas tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.13",
+   "a": "Bṛhadratha",
+   "rel": "succeeded",
+   "b": "Śatadhanvā",
+   "words": "bhavitā tad-bṛhadrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.15",
+   "a": "Agnimitra",
+   "rel": "succeeded",
+   "b": "Bṛhadratha",
+   "words": "agnimitras tatas tasmāt",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 12.1.15",
+   "a": "Sujyeṣṭha",
+   "rel": "succeeded",
+   "b": "Agnimitra",
+   "words": "sujyeṣṭho bhavitā tataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.15",
+   "a": "Vasumitra",
+   "rel": "succeeded",
+   "b": "Sujyeṣṭha",
+   "words": "vasumitro bhadrakaś ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.15",
+   "a": "Pulinda",
+   "rel": "son_of",
+   "b": "Bhadraka",
+   "words": "pulindo bhavitā sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.16",
+   "a": "Ghoṣa",
+   "rel": "son_of",
+   "b": "Pulinda",
+   "words": "tato ghoṣaḥ sutas tasmād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.16",
+   "a": "Vajramitra",
+   "rel": "succeeded",
+   "b": "Ghoṣa",
+   "words": "vajramitro bhaviṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.16",
+   "a": "Bhāgavata",
+   "rel": "succeeded",
+   "b": "Vajramitra",
+   "words": "tato bhāgavatas tasmād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.16",
+   "a": "Devabhūti",
+   "rel": "succeeded",
+   "b": "Bhāgavata",
+   "words": "devabhūtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.18",
+   "a": "Vasudeva",
+   "rel": "other",
+   "b": "Devabhūti",
+   "words": "śuṅgaṃ hatvā devabhūtiṃ kāṇvo 'mātyas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.19",
+   "a": "Bhūmitra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "tasya putras tu bhūmitras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.19",
+   "a": "Nārāyaṇa",
+   "rel": "son_of",
+   "b": "Bhūmitra",
+   "words": "tasya nārāyaṇaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.21",
+   "a": "Kṛṣṇa",
+   "rel": "brother_of",
+   "b": "Vṛṣala",
+   "words": "kṛṣṇa-nāmātha tad-bhrātā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.21",
+   "a": "Śāntakarṇa",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "śrī-śāntakarṇas tat-putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.21",
+   "a": "Paurṇamāsa",
+   "rel": "son_of",
+   "b": "Śāntakarṇa",
+   "words": "paurṇamāsas tu tat-sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.22",
+   "a": "Lambodara",
+   "rel": "son_of",
+   "b": "Paurṇamāsa",
+   "words": "lambodaras tu tat-putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.22",
+   "a": "Cibilaka",
+   "rel": "son_of",
+   "b": "Lambodara",
+   "words": "tasmāc cibilako nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.22",
+   "a": "Meghasvāti",
+   "rel": "son_of",
+   "b": "Cibilaka",
+   "words": "meghasvātiś cibilakād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.22",
+   "a": "Aṭamāna",
+   "rel": "son_of",
+   "b": "Meghasvāti",
+   "words": "aṭamānas tu tasya ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.23",
+   "a": "Aniṣṭakarmā",
+   "rel": "son_of",
+   "b": "Aṭamāna",
+   "words": "aniṣṭakarmā hāleyas",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.23",
+   "a": "Talaka",
+   "rel": "son_of",
+   "b": "Aniṣṭakarmā",
+   "words": "talakas tasya cātma-jaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.23",
+   "a": "Purīṣabhīru",
+   "rel": "son_of",
+   "b": "Talaka",
+   "words": "purīṣabhīrus tat-putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.23",
+   "a": "Sunandana",
+   "rel": "succeeded",
+   "b": "Purīṣabhīru",
+   "words": "tato rājā sunandanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.24",
+   "a": "Gomatī",
+   "rel": "son_of",
+   "b": "Śivasvāti",
+   "words": "tasyāpi gomatī putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.24",
+   "a": "Purīmān",
+   "rel": "succeeded",
+   "b": "Gomatī",
+   "words": "purīmān bhavitā tataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.25",
+   "a": "Yajñaśrī",
+   "rel": "son_of",
+   "b": "Śivaskanda",
+   "words": "yajñaśrīs tat-sutas",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.25",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Yajñaśrī",
+   "words": "vijayas tat-suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 12.1.31",
+   "a": "Śiśunandi",
+   "rel": "brother_of",
+   "b": "Bhūtananda",
+   "words": "śiśunandiś ca tad-bhrātā",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

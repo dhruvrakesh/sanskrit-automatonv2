@@ -1,0 +1,66 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 1,
+ "part": 2,
+ "refs": [
+  "ViP 4,1.84",
+  "ViP 4,1.85",
+  "ViP 4,1.86",
+  "ViP 4,1.87",
+  "ViP 4,1.88",
+  "ViP 4,1.89",
+  "ViP 4,1.90",
+  "ViP 4,1.91",
+  "ViP 4,1.92",
+  "ViP 4,1.93",
+  "ViP 4,1.94",
+  "ViP 4,1.95",
+  "ViP 4,1.96"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:53:27",
+ "reply": "{\"statements\": [\n{\"ref\": \"ViP 4,1.92\", \"a\": \"Revatī\", \"rel\": \"daughter_of\", \"b\": \"Raivata\", \"words\": \"tanayā taveyaṃ\", \"doubt\": true},\n{\"ref\": \"ViP 4,1.96\", \"a\": \"Revatī\", \"rel\": \"wife_of\", \"b\": \"Baladeva\", \"words\": \"tāṃ revatīṃraivatabhūpakanyāṃ sīrāyudho 'sau vidhinopayeme\", \"doubt\": true},\n{\"ref\": \"ViP 4,1.96\", \"a\": \"Revatī\", \"rel\": \"daughter_of\", \"b\": \"Raivata\", \"words\": \"revatīṃraivatabhūpakanyāṃ\", \"doubt\": false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00636,
+ "tokens": {
+  "input": 1892,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 258,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,1.92",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Raivata",
+   "words": "tanayā taveyaṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,1.96",
+   "a": "Revatī",
+   "rel": "wife_of",
+   "b": "Baladeva",
+   "words": "tāṃ revatīṃraivatabhūpakanyāṃ sīrāyudho 'sau vidhinopayeme",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,1.96",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Raivata",
+   "words": "revatīṃraivatabhūpakanyāṃ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

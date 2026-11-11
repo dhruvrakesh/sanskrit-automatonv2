@@ -1,0 +1,391 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 15,
+ "part": 0,
+ "refs": [
+  "BhP 9.15.1",
+  "BhP 9.15.2",
+  "BhP 9.15.3",
+  "BhP 9.15.4",
+  "BhP 9.15.5",
+  "BhP 9.15.6",
+  "BhP 9.15.7",
+  "BhP 9.15.8",
+  "BhP 9.15.9",
+  "BhP 9.15.10",
+  "BhP 9.15.11",
+  "BhP 9.15.12",
+  "BhP 9.15.13",
+  "BhP 9.15.14",
+  "BhP 9.15.15",
+  "BhP 9.15.16",
+  "BhP 9.15.17",
+  "BhP 9.15.18",
+  "BhP 9.15.19",
+  "BhP 9.15.20",
+  "BhP 9.15.21",
+  "BhP 9.15.22",
+  "BhP 9.15.23",
+  "BhP 9.15.24",
+  "BhP 9.15.25",
+  "BhP 9.15.26",
+  "BhP 9.15.27",
+  "BhP 9.15.28",
+  "BhP 9.15.29",
+  "BhP 9.15.30",
+  "BhP 9.15.31",
+  "BhP 9.15.32",
+  "BhP 9.15.33",
+  "BhP 9.15.34",
+  "BhP 9.15.35",
+  "BhP 9.15.36",
+  "BhP 9.15.37",
+  "BhP 9.15.38",
+  "BhP 9.15.39",
+  "BhP 9.15.40",
+  "BhP 9.15.41"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:03:29",
+ "reply": "{\"statements\":[{\"ref\":\"BhP 9.15.1\",\"a\":\"Āyu\",\"rel\":\"son_of\",\"b\":\"Aila\",\"words\":\"ailasya corvaśīgarbhāt ṣaḍ āsannātmajā\",\"doubt\":true},{\"ref\":\"BhP 9.15.1\",\"a\":\"Śrutāyu\",\"rel\":\"son_of\",\"b\":\"Aila\",\"words\":\"ailasya corvaśīgarbhāt ṣaḍ āsannātmajā\",\"doubt\":true},{\"ref\":\"BhP 9.15.1\",\"a\":\"Satyāyu\",\"rel\":\"son_of\",\"b\":\"Aila\",\"words\":\"ailasya corvaśīgarbhāt ṣaḍ āsannātmajā\",\"doubt\":true},{\"ref\":\"BhP 9.15.1\",\"a\":\"Raya\",\"rel\":\"son_of\",\"b\":\"Aila\",\"words\":\"ailasya corvaśīgarbhāt ṣaḍ āsannātmajā\",\"doubt\":true},{\"ref\":\"BhP 9.15.1\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Aila\",\"words\":\"ailasya corvaśīgarbhāt ṣaḍ āsannātmajā\",\"doubt\":true},{\"ref\":\"BhP 9.15.1\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Aila\",\"words\":\"ailasya corvaśīgarbhāt ṣaḍ āsannātmajā\",\"doubt\":true},{\"ref\":\"BhP 9.15.2\",\"a\":\"Vasumān\",\"rel\":\"son_of\",\"b\":\"Śrutāyu\",\"words\":\"śrutāyorvasumān putraḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.2\",\"a\":\"Śrutañjaya\",\"rel\":\"son_of\",\"b\":\"Satyāyu\",\"words\":\"satyāyośca śrutañjayaḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.2\",\"a\":\"Eka\",\"rel\":\"son_of\",\"b\":\"Raya\",\"words\":\"rayasya suta ekaśca\",\"doubt\":false},{\"ref\":\"BhP 9.15.2\",\"a\":\"Amita\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"jayasya tanayo 'mitaḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.3\",\"a\":\"Bhīma\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"bhīmastu vijayasyātha\",\"doubt\":false},{\"ref\":\"BhP 9.15.3\",\"a\":\"Kāñcana\",\"rel\":\"son_of\",\"b\":\"Bhīma\",\"words\":\"kāñcano hotrakastataḥ\",\"doubt\":true},{\"ref\":\"BhP 9.15.3\",\"a\":\"Hotraka\",\"rel\":\"son_of\",\"b\":\"Kāñcana\",\"words\":\"kāñcano hotrakastataḥ\",\"doubt\":true},{\"ref\":\"BhP 9.15.3\",\"a\":\"Jahnu\",\"rel\":\"son_of\",\"b\":\"Hotraka\",\"words\":\"tasya jahnuḥ suto\",\"doubt\":false},{\"ref\":\"BhP 9.15.3\",\"a\":\"Pura\",\"rel\":\"son_of\",\"b\":\"Jahnu\",\"words\":\"jahnostu purustasyātha\",\"doubt\":false},{\"ref\":\"BhP 9.15.3\",\"a\":\"Balāka\",\"rel\":\"son_of\",\"b\":\"Pura\",\"words\":\"balākaścātmajo\",\"doubt\":false},{\"ref\":\"BhP 9.15.3\",\"a\":\"Ajaka\",\"rel\":\"son_of\",\"b\":\"Balāka\",\"words\":\"balākaścātmajo 'jakaḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.4\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Ajaka\",\"words\":\"tataḥ kuśaḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.4\",\"a\":\"Kuśāmbu\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśasyāpi kuśāmbustanayo\",\"doubt\":false},{\"ref\":\"BhP 9.15.4\",\"a\":\"Tanaya\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśasyāpi kuśāmbustanayo vasuḥ\",\"doubt\":true},{\"ref\":\"BhP 9.15.4\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśasyāpi kuśāmbustanayo vasuḥ\",\"doubt\":true},{\"ref\":\"BhP 9.15.4\",\"a\":\"Kuśanābha\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśanābhaśca catvāro\",\"doubt\":true},{\"ref\":\"BhP 9.15.4\",\"a\":\"Gādhi\",\"rel\":\"son_of\",\"b\":\"Kuśāmbu\",\"words\":\"gādhirāsīt kuśāmbujaḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.5\",\"a\":\"Satyavatī\",\"rel\":\"daughter_of\",\"b\":\"Gādhi\",\"words\":\"tasya satyavatīṃ kanyām\",\"doubt\":false},{\"ref\":\"BhP 9.15.7\",\"a\":\"Satyavatī\",\"rel\":\"wife_of\",\"b\":\"Ṛcīka\",\"words\":\"upayeme varānanām\",\"doubt\":false},{\"ref\":\"BhP 9.15.10\",\"a\":\"Satyavatī\",\"rel\":\"wife_of\",\"b\":\"Ṛcīka\",\"words\":\"prāha patnīṃ\",\"doubt\":false},{\"ref\":\"BhP 9.15.11\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Satyavatī\",\"words\":\"bhavet pautrojamadagnistato 'bhavat\",\"doubt\":true},{\"ref\":\"BhP 9.15.12\",\"a\":\"Satyavatī\",\"rel\":\"other\",\"b\":\"Kauśikī\",\"words\":\"sā cābhūt sumahatpuṇyā kauśikī\",\"doubt\":true},{\"ref\":\"BhP 9.15.12\",\"a\":\"Reṇukā\",\"rel\":\"daughter_of\",\"b\":\"Reṇu\",\"words\":\"reṇoḥ sutāṃ reṇukāṃ\",\"doubt\":false},{\"ref\":\"BhP 9.15.12\",\"a\":\"Reṇukā\",\"rel\":\"wife_of\",\"b\":\"Jamadagni\",\"words\":\"jamadagniruvāha yām\",\"doubt\":false},{\"ref\":\"BhP 9.15.13\",\"a\":\"Vasumat\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"bhārgavaṛṣeḥ sutā vasumadādayaḥ\",\"doubt\":false},{\"ref\":\"BhP 9.15.13\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"yavīyān jajña eteṣāṃ rāma\",\"doubt\":false},{\"ref\":\"BhP 9.15.13\",\"a\":\"Rāma\",\"rel\":\"brother_of\",\"b\":\"Vasumat\",\"words\":\"yavīyān jajña eteṣāṃ rāma\",\"doubt\":false},{\"ref\":\"BhP 9.15.35\",\"a\":\"Arjuna\",\"rel\":\"son_of\",\"b\":\"Arjuna\",\"words\":\"hate pitari tatputrā\",\"doubt\":true},{\"ref\":\"BhP 9.15.37\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"pitre bhrātṛbhya eva ca\",\"doubt\":false},{\"ref\":\"BhP 9.15.17\",\"a\":\"Haihaya\",\"rel\":\"line_of\",\"b\":\"Arjuna\",\"words\":\"haihayānāmadhipatirarjunaḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03347,
+ "tokens": {
+  "input": 4057,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2536,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.15.1",
+   "a": "Āyu",
+   "rel": "son_of",
+   "b": "Aila",
+   "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.1",
+   "a": "Śrutāyu",
+   "rel": "son_of",
+   "b": "Aila",
+   "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.1",
+   "a": "Satyāyu",
+   "rel": "son_of",
+   "b": "Aila",
+   "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.1",
+   "a": "Raya",
+   "rel": "son_of",
+   "b": "Aila",
+   "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.1",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Aila",
+   "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.1",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Aila",
+   "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.2",
+   "a": "Vasumān",
+   "rel": "son_of",
+   "b": "Śrutāyu",
+   "words": "śrutāyorvasumān putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.2",
+   "a": "Śrutañjaya",
+   "rel": "son_of",
+   "b": "Satyāyu",
+   "words": "satyāyośca śrutañjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.2",
+   "a": "Eka",
+   "rel": "son_of",
+   "b": "Raya",
+   "words": "rayasya suta ekaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.2",
+   "a": "Amita",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "jayasya tanayo 'mitaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Bhīma",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "bhīmastu vijayasyātha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Kāñcana",
+   "rel": "son_of",
+   "b": "Bhīma",
+   "words": "kāñcano hotrakastataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Hotraka",
+   "rel": "son_of",
+   "b": "Kāñcana",
+   "words": "kāñcano hotrakastataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Jahnu",
+   "rel": "son_of",
+   "b": "Hotraka",
+   "words": "tasya jahnuḥ suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Pura",
+   "rel": "son_of",
+   "b": "Jahnu",
+   "words": "jahnostu purustasyātha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Balāka",
+   "rel": "son_of",
+   "b": "Pura",
+   "words": "balākaścātmajo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.3",
+   "a": "Ajaka",
+   "rel": "son_of",
+   "b": "Balāka",
+   "words": "balākaścātmajo 'jakaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.15.4",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Ajaka",
+   "words": "tataḥ kuśaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.15.4",
+   "a": "Kuśāmbu",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśasyāpi kuśāmbustanayo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.4",
+   "a": "Tanaya",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśasyāpi kuśāmbustanayo vasuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.4",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśasyāpi kuśāmbustanayo vasuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.4",
+   "a": "Kuśanābha",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśanābhaśca catvāro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.4",
+   "a": "Gādhi",
+   "rel": "son_of",
+   "b": "Kuśāmbu",
+   "words": "gādhirāsīt kuśāmbujaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.5",
+   "a": "Satyavatī",
+   "rel": "daughter_of",
+   "b": "Gādhi",
+   "words": "tasya satyavatīṃ kanyām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.7",
+   "a": "Satyavatī",
+   "rel": "wife_of",
+   "b": "Ṛcīka",
+   "words": "upayeme varānanām",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.15.10",
+   "a": "Satyavatī",
+   "rel": "wife_of",
+   "b": "Ṛcīka",
+   "words": "prāha patnīṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.15.11",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Satyavatī",
+   "words": "bhavet pautrojamadagnistato 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.12",
+   "a": "Satyavatī",
+   "rel": "other",
+   "b": "Kauśikī",
+   "words": "sā cābhūt sumahatpuṇyā kauśikī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.12",
+   "a": "Reṇukā",
+   "rel": "daughter_of",
+   "b": "Reṇu",
+   "words": "reṇoḥ sutāṃ reṇukāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.12",
+   "a": "Reṇukā",
+   "rel": "wife_of",
+   "b": "Jamadagni",
+   "words": "jamadagniruvāha yām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.13",
+   "a": "Vasumat",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "bhārgavaṛṣeḥ sutā vasumadādayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.13",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "yavīyān jajña eteṣāṃ rāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.13",
+   "a": "Rāma",
+   "rel": "brother_of",
+   "b": "Vasumat",
+   "words": "yavīyān jajña eteṣāṃ rāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.35",
+   "a": "Arjuna",
+   "rel": "son_of",
+   "b": "Arjuna",
+   "words": "hate pitari tatputrā",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.15.37",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "pitre bhrātṛbhya eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.15.17",
+   "a": "Haihaya",
+   "rel": "line_of",
+   "b": "Arjuna",
+   "words": "haihayānāmadhipatirarjunaḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 24,
+ "part": 3,
+ "refs": [
+  "ViP 4,24.144",
+  "ViP 4,24.145",
+  "ViP 4,24.146",
+  "ViP 4,24.147",
+  "ViP 4,24.148",
+  "ViP 4,24.149",
+  "ViP 4,24.150",
+  "ViP 4,24.151"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T19:00:42",
+ "reply": "These verses are moral reflection on transience and name rulers only in passing. They state no kinship or succession relation: no son, wife, brother, succession, descent, or clan eponym is asserted.\n\nVerse 149 lists names (Bhagīratha, Sagara, Kakutstha, Daśānana, Rāghava, Lakṣmaṇa, Yudhiṣṭhira) but gives no relations among them. Verse 151 mentions \"tanayātmajāyāḥ\" (sons, offspring and wives) only generically, with no named persons.\n\n```json\n{\"statements\": []}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.00481,
+ "tokens": {
+  "input": 1434,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 194,
+  "thinking": 0
+ },
+ "statements": []
+}

@@ -1,0 +1,112 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 17,
+ "part": 0,
+ "refs": [
+  "ViP 4,17.1",
+  "ViP 4,17.2",
+  "ViP 4,17.3",
+  "ViP 4,17.4",
+  "ViP 4,17.5"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:57:44",
+ "reply": "{\"statements\": [\n{\"ref\": \"ViP 4,17.1\", \"a\": \"Babhru\", \"rel\": \"son_of\", \"b\": \"Druhyu\", \"words\": \"druhyostu tanayo babhruḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.2\", \"a\": \"Setu\", \"rel\": \"son_of\", \"b\": \"Babhru\", \"words\": \"babhroḥsetuḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.3\", \"a\": \"Ārabdhanāman\", \"rel\": \"son_of\", \"b\": \"Setu\", \"words\": \"setuputra ārabdhanāmā\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.4\", \"a\": \"Gāndhāra\", \"rel\": \"son_of\", \"b\": \"Ārabdha\", \"words\": \"ārabdhasyātmajo gāndhāraḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.4\", \"a\": \"Dharma\", \"rel\": \"son_of\", \"b\": \"Gāndhāra\", \"words\": \"gāndhārasya dharmaḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.4\", \"a\": \"Ghṛta\", \"rel\": \"son_of\", \"b\": \"Dharma\", \"words\": \"dharmāt ghṛtaḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.4\", \"a\": \"Durdama\", \"rel\": \"son_of\", \"b\": \"Ghṛta\", \"words\": \"ghṛtāt durdamaḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.4\", \"a\": \"Pracetas\", \"rel\": \"son_of\", \"b\": \"Durdama\", \"words\": \"tataḥ pracetāḥ\", \"doubt\": false},\n{\"ref\": \"ViP 4,17.5\", \"a\": \"Śatadharma\", \"rel\": \"son_of\", \"b\": \"Pracetas\", \"words\": \"pracetasaḥ putraḥ śatadharmaḥ\", \"doubt\": false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00846,
+ "tokens": {
+  "input": 882,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 670,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,17.1",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Druhyu",
+   "words": "druhyostu tanayo babhruḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.2",
+   "a": "Setu",
+   "rel": "son_of",
+   "b": "Babhru",
+   "words": "babhroḥsetuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.3",
+   "a": "Ārabdhanāman",
+   "rel": "son_of",
+   "b": "Setu",
+   "words": "setuputra ārabdhanāmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.4",
+   "a": "Gāndhāra",
+   "rel": "son_of",
+   "b": "Ārabdha",
+   "words": "ārabdhasyātmajo gāndhāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.4",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Gāndhāra",
+   "words": "gāndhārasya dharmaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.4",
+   "a": "Ghṛta",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "dharmāt ghṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.4",
+   "a": "Durdama",
+   "rel": "son_of",
+   "b": "Ghṛta",
+   "words": "ghṛtāt durdamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.4",
+   "a": "Pracetas",
+   "rel": "son_of",
+   "b": "Durdama",
+   "words": "tataḥ pracetāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,17.5",
+   "a": "Śatadharma",
+   "rel": "son_of",
+   "b": "Pracetas",
+   "words": "pracetasaḥ putraḥ śatadharmaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

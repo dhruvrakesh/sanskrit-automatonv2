@@ -1,0 +1,179 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 3,
+ "part": 0,
+ "refs": [
+  "BhP 9.3.1",
+  "BhP 9.3.2",
+  "BhP 9.3.3",
+  "BhP 9.3.4",
+  "BhP 9.3.5",
+  "BhP 9.3.6",
+  "BhP 9.3.7",
+  "BhP 9.3.8",
+  "BhP 9.3.9",
+  "BhP 9.3.10",
+  "BhP 9.3.11",
+  "BhP 9.3.12",
+  "BhP 9.3.13",
+  "BhP 9.3.14",
+  "BhP 9.3.15",
+  "BhP 9.3.16",
+  "BhP 9.3.17",
+  "BhP 9.3.18",
+  "BhP 9.3.19",
+  "BhP 9.3.20",
+  "BhP 9.3.21",
+  "BhP 9.3.22",
+  "BhP 9.3.23",
+  "BhP 9.3.24",
+  "BhP 9.3.25",
+  "BhP 9.3.26",
+  "BhP 9.3.27",
+  "BhP 9.3.28",
+  "BhP 9.3.29",
+  "BhP 9.3.30",
+  "BhP 9.3.31",
+  "BhP 9.3.32",
+  "BhP 9.3.33",
+  "BhP 9.3.34",
+  "BhP 9.3.35",
+  "BhP 9.3.36"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:01:24",
+ "reply": "{\"statements\":[\n{\"ref\":\"BhP 9.3.2\",\"a\":\"Sukanyā\",\"rel\":\"daughter_of\",\"b\":\"Śaryāti\",\"words\":\"sukanyā nāma tasyāsīt kanyā\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.7\",\"a\":\"Sukanyā\",\"rel\":\"daughter_of\",\"b\":\"Śaryāti\",\"words\":\"sukanyā prāha pitaraṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.9\",\"a\":\"Sukanyā\",\"rel\":\"wife_of\",\"b\":\"Cyavana\",\"words\":\"prādādduhitaraṃ muneḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.10\",\"a\":\"Sukanyā\",\"rel\":\"wife_of\",\"b\":\"Cyavana\",\"words\":\"cyavanaṃ prāpya patiṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.22\",\"a\":\"Cyavana\",\"rel\":\"other\",\"b\":\"Śaryāti\",\"words\":\"tāta jāmātā tavaiṣa bhṛgunandanaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.22\",\"a\":\"Cyavana\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgunandanaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.27\",\"a\":\"Uttānabarhi\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāterabhavan putrā\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.27\",\"a\":\"Ānarta\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāterabhavan putrā\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.27\",\"a\":\"Bhūriṣeṇa\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāterabhavan putrā\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.27\",\"a\":\"Revata\",\"rel\":\"son_of\",\"b\":\"Ānarta\",\"words\":\"ānartādrevato 'bhavat\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.29\",\"a\":\"Kakudmī\",\"rel\":\"son_of\",\"b\":\"Revata\",\"words\":\"tasya putraśataṃ jajñe kakudmijyeṣṭham\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.29\",\"a\":\"Revatī\",\"rel\":\"daughter_of\",\"b\":\"Kakudmī\",\"words\":\"kakudmī revatīṃ kanyāṃ svām\",\"doubt\":false},\n{\"ref\":\"BhP 9.3.36\",\"a\":\"Revatī\",\"rel\":\"wife_of\",\"b\":\"Balarāma\",\"words\":\"sutāṃ dattvānavadyāṅgīṃ balāya\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01633,
+ "tokens": {
+  "input": 3419,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 949,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.3.2",
+   "a": "Sukanyā",
+   "rel": "daughter_of",
+   "b": "Śaryāti",
+   "words": "sukanyā nāma tasyāsīt kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.7",
+   "a": "Sukanyā",
+   "rel": "daughter_of",
+   "b": "Śaryāti",
+   "words": "sukanyā prāha pitaraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.9",
+   "a": "Sukanyā",
+   "rel": "wife_of",
+   "b": "Cyavana",
+   "words": "prādādduhitaraṃ muneḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.10",
+   "a": "Sukanyā",
+   "rel": "wife_of",
+   "b": "Cyavana",
+   "words": "cyavanaṃ prāpya patiṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.22",
+   "a": "Cyavana",
+   "rel": "other",
+   "b": "Śaryāti",
+   "words": "tāta jāmātā tavaiṣa bhṛgunandanaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.3.22",
+   "a": "Cyavana",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgunandanaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.3.27",
+   "a": "Uttānabarhi",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "śaryāterabhavan putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.27",
+   "a": "Ānarta",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "śaryāterabhavan putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.27",
+   "a": "Bhūriṣeṇa",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "śaryāterabhavan putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.27",
+   "a": "Revata",
+   "rel": "son_of",
+   "b": "Ānarta",
+   "words": "ānartādrevato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.29",
+   "a": "Kakudmī",
+   "rel": "son_of",
+   "b": "Revata",
+   "words": "tasya putraśataṃ jajñe kakudmijyeṣṭham",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.29",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Kakudmī",
+   "words": "kakudmī revatīṃ kanyāṃ svām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.3.36",
+   "a": "Revatī",
+   "rel": "wife_of",
+   "b": "Balarāma",
+   "words": "sutāṃ dattvānavadyāṅgīṃ balāya",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

@@ -1,0 +1,237 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 23,
+ "part": 0,
+ "refs": [
+  "ViP 4,23.1",
+  "ViP 4,23.2",
+  "ViP 4,23.3",
+  "ViP 4,23.4",
+  "ViP 4,23.5",
+  "ViP 4,23.6",
+  "ViP 4,23.7",
+  "ViP 4,23.8",
+  "ViP 4,23.9",
+  "ViP 4,23.10",
+  "ViP 4,23.11",
+  "ViP 4,23.12",
+  "ViP 4,23.13"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T19:00:18",
+ "reply": "```json\n{\"statements\":[\n{\"ref\":\"ViP 4,23.2\",\"a\":\"Jarāsaṃdha\",\"rel\":\"other\",\"b\":\"Bārhadratha\",\"words\":\"bārhadrathānāṃ\",\"doubt\":true},\n{\"ref\":\"ViP 4,23.3\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Jarāsaṃdha\",\"words\":\"jarāsaṃdhasya putraḥ sahadevaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.4\",\"a\":\"Somāpi\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"sahadevātsomāpiḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.4\",\"a\":\"Anuśrutaśravas\",\"rel\":\"son_of\",\"b\":\"Somāpi\",\"words\":\"tasyānuśrutaśravāḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.4\",\"a\":\"Ayutāyus\",\"rel\":\"son_of\",\"b\":\"Anuśrutaśravas\",\"words\":\"tasyāpyayutāyuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.4\",\"a\":\"Niramitra\",\"rel\":\"son_of\",\"b\":\"Ayutāyus\",\"words\":\"tataś ca niramitraḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.4\",\"a\":\"Sunetra\",\"rel\":\"son_of\",\"b\":\"Niramitra\",\"words\":\"tattanayaḥsunetraḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.4\",\"a\":\"Bṛhatkarman\",\"rel\":\"son_of\",\"b\":\"Sunetra\",\"words\":\"tasmādapi bṛhatkarmā\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.5\",\"a\":\"Senajit\",\"rel\":\"son_of\",\"b\":\"Bṛhatkarman\",\"words\":\"tataś ca senajit\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.5\",\"a\":\"Śrutañjaya\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"tataś ca śrutañjayaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.5\",\"a\":\"Vipra\",\"rel\":\"son_of\",\"b\":\"Śrutañjaya\",\"words\":\"tato viprastasya\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.5\",\"a\":\"Śucināman\",\"rel\":\"son_of\",\"b\":\"Vipra\",\"words\":\"tasya ca putraḥ śucināmā\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.6\",\"a\":\"Kṣemya\",\"rel\":\"son_of\",\"b\":\"Śucināman\",\"words\":\"tasyāpi kṣemyaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.6\",\"a\":\"Suvrata\",\"rel\":\"son_of\",\"b\":\"Kṣemya\",\"words\":\"tataś ca suvrataḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.6\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Suvrata\",\"words\":\"suvratāddharmaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.6\",\"a\":\"Suśravas\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"tataḥsuśravā\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.7\",\"a\":\"Dṛḍhasena\",\"rel\":\"son_of\",\"b\":\"Suśravas\",\"words\":\"tato dṛḍhasenaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.8\",\"a\":\"Subala\",\"rel\":\"son_of\",\"b\":\"Dṛḍhasena\",\"words\":\"tasmātsubalaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.9\",\"a\":\"Sunīta\",\"rel\":\"son_of\",\"b\":\"Subala\",\"words\":\"subalātsunīto bhavitā\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.10\",\"a\":\"Satyajit\",\"rel\":\"son_of\",\"b\":\"Sunīta\",\"words\":\"tataḥsatyajit\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.11\",\"a\":\"Viśvajit\",\"rel\":\"son_of\",\"b\":\"Satyajit\",\"words\":\"tasmādviśvajit\",\"doubt\":false},\n{\"ref\":\"ViP 4,23.12\",\"a\":\"Ripuñjaya\",\"rel\":\"son_of\",\"b\":\"Viśvajit\",\"words\":\"tasyāpi ripuñjayaḥ\",\"doubt\":false}\n]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.01744,
+ "tokens": {
+  "input": 1182,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1508,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,23.2",
+   "a": "Jarāsaṃdha",
+   "rel": "other",
+   "b": "Bārhadratha",
+   "words": "bārhadrathānāṃ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.3",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Jarāsaṃdha",
+   "words": "jarāsaṃdhasya putraḥ sahadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.4",
+   "a": "Somāpi",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "sahadevātsomāpiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.4",
+   "a": "Anuśrutaśravas",
+   "rel": "son_of",
+   "b": "Somāpi",
+   "words": "tasyānuśrutaśravāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.4",
+   "a": "Ayutāyus",
+   "rel": "son_of",
+   "b": "Anuśrutaśravas",
+   "words": "tasyāpyayutāyuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.4",
+   "a": "Niramitra",
+   "rel": "son_of",
+   "b": "Ayutāyus",
+   "words": "tataś ca niramitraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.4",
+   "a": "Sunetra",
+   "rel": "son_of",
+   "b": "Niramitra",
+   "words": "tattanayaḥsunetraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.4",
+   "a": "Bṛhatkarman",
+   "rel": "son_of",
+   "b": "Sunetra",
+   "words": "tasmādapi bṛhatkarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.5",
+   "a": "Senajit",
+   "rel": "son_of",
+   "b": "Bṛhatkarman",
+   "words": "tataś ca senajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.5",
+   "a": "Śrutañjaya",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "tataś ca śrutañjayaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.5",
+   "a": "Vipra",
+   "rel": "son_of",
+   "b": "Śrutañjaya",
+   "words": "tato viprastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.5",
+   "a": "Śucināman",
+   "rel": "son_of",
+   "b": "Vipra",
+   "words": "tasya ca putraḥ śucināmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.6",
+   "a": "Kṣemya",
+   "rel": "son_of",
+   "b": "Śucināman",
+   "words": "tasyāpi kṣemyaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.6",
+   "a": "Suvrata",
+   "rel": "son_of",
+   "b": "Kṣemya",
+   "words": "tataś ca suvrataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.6",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Suvrata",
+   "words": "suvratāddharmaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,23.6",
+   "a": "Suśravas",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "tataḥsuśravā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.7",
+   "a": "Dṛḍhasena",
+   "rel": "son_of",
+   "b": "Suśravas",
+   "words": "tato dṛḍhasenaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.8",
+   "a": "Subala",
+   "rel": "son_of",
+   "b": "Dṛḍhasena",
+   "words": "tasmātsubalaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.9",
+   "a": "Sunīta",
+   "rel": "son_of",
+   "b": "Subala",
+   "words": "subalātsunīto bhavitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.10",
+   "a": "Satyajit",
+   "rel": "son_of",
+   "b": "Sunīta",
+   "words": "tataḥsatyajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.11",
+   "a": "Viśvajit",
+   "rel": "son_of",
+   "b": "Satyajit",
+   "words": "tasmādviśvajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,23.12",
+   "a": "Ripuñjaya",
+   "rel": "son_of",
+   "b": "Viśvajit",
+   "words": "tasyāpi ripuñjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,51 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 11,
+ "part": 2,
+ "refs": [
+  "BhP 9.11.21",
+  "BhP 9.11.22",
+  "BhP 9.11.23",
+  "BhP 9.11.24",
+  "BhP 9.11.25",
+  "BhP 9.11.26",
+  "BhP 9.11.27",
+  "BhP 9.11.28",
+  "BhP 9.11.29",
+  "BhP 9.11.30",
+  "BhP 9.11.31",
+  "BhP 9.11.32",
+  "BhP 9.11.33",
+  "BhP 9.11.34",
+  "BhP 9.11.35",
+  "BhP 9.11.36"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:02:38",
+ "reply": "Only two verses give a kinship relation, and both are marked uncertain.\n\n- 9.11.25 says Rāma ordered his brothers (\"bhrātṝn\") to go on a conquest of the quarters. The text does not name the brothers, so no statement can be made from it.\n- 9.11.35 says Rāma delighted with Sītā, his dear and beloved (\"priyayā iṣṭayā\"). \"Rāma\" and \"Sītā\" are both named, and the verse calls her his beloved, which implies she is his wife. The word \"wife\" does not occur, so I record it with doubt set to true.\n- 9.11.21 names Raghupati, meaning Rāma as lord of the Raghus, which suggests a line named after Raghu. The verse does not name Raghu on its own, so this is not recorded.\n- 9.11.31 mentions \"pūrvarājabhiḥ\" (earlier kings) without naming them, so it yields no statement.\n\n{\"statements\": [{\"ref\": \"BhP 9.11.35\", \"a\": \"Sītā\", \"rel\": \"wife_of\", \"b\": \"Rāma\", \"words\": \"snigdhayā priyayeṣṭayā reme\", \"doubt\": true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00817,
+ "tokens": {
+  "input": 2125,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 392,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.11.35",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "snigdhayā priyayeṣṭayā reme",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

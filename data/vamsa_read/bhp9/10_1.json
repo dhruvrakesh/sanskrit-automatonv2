@@ -1,0 +1,194 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 10,
+ "part": 1,
+ "refs": [
+  "BhP 9.10.1",
+  "BhP 9.10.2",
+  "BhP 9.10.3",
+  "BhP 9.10.4",
+  "BhP 9.10.5",
+  "BhP 9.10.6",
+  "BhP 9.10.7",
+  "BhP 9.10.8",
+  "BhP 9.10.9",
+  "BhP 9.10.10",
+  "BhP 9.10.11",
+  "BhP 9.10.12",
+  "BhP 9.10.13",
+  "BhP 9.10.14",
+  "BhP 9.10.15",
+  "BhP 9.10.16",
+  "BhP 9.10.17",
+  "BhP 9.10.18",
+  "BhP 9.10.19",
+  "BhP 9.10.20",
+  "BhP 9.10.21",
+  "BhP 9.10.22",
+  "BhP 9.10.23",
+  "BhP 9.10.24",
+  "BhP 9.10.25",
+  "BhP 9.10.26",
+  "BhP 9.10.27",
+  "BhP 9.10.28",
+  "BhP 9.10.29",
+  "BhP 9.10.30",
+  "BhP 9.10.31",
+  "BhP 9.10.32",
+  "BhP 9.10.33"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:02:20",
+ "reply": "{\"statements\":[{\"ref\":\"BhP 9.10.1\",\"a\":\"Dīrghabāhu\",\"rel\":\"son_of\",\"b\":\"Khaṭvāṅga\",\"words\":\"khaṭvāṅgāddīrghabāhuśca\",\"doubt\":false},{\"ref\":\"BhP 9.10.1\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Dīrghabāhu\",\"words\":\"raghustasmāt\",\"doubt\":false},{\"ref\":\"BhP 9.10.1\",\"a\":\"Pṛthuśravas\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"tasmāt pṛthuśravāḥ\",\"doubt\":false},{\"ref\":\"BhP 9.10.1\",\"a\":\"Aja\",\"rel\":\"son_of\",\"b\":\"Pṛthuśravas\",\"words\":\"ajastato\",\"doubt\":false},{\"ref\":\"BhP 9.10.1\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Aja\",\"words\":\"tasmāddaśaratho 'bhavat\",\"doubt\":false},{\"ref\":\"BhP 9.10.2\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tasyāpi bhagavān eṣa putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā\",\"doubt\":false},{\"ref\":\"BhP 9.10.2\",\"a\":\"Lakṣmaṇa\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā\",\"doubt\":false},{\"ref\":\"BhP 9.10.2\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā\",\"doubt\":false},{\"ref\":\"BhP 9.10.2\",\"a\":\"Śatrughna\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā\",\"doubt\":false},{\"ref\":\"BhP 9.10.3\",\"a\":\"Sītā\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"sītāpatermuhuḥ\",\"doubt\":false},{\"ref\":\"BhP 9.10.11\",\"a\":\"Sītā\",\"rel\":\"daughter_of\",\"b\":\"Videha\",\"words\":\"vaideharājaduhitar\",\"doubt\":true},{\"ref\":\"BhP 9.10.9\",\"a\":\"Śūrpaṇakhā\",\"rel\":\"sister_of\",\"b\":\"Khara\",\"words\":\"rakṣaḥsvasurvyakṛta rūpamaśuddhabuddhes tasyāḥ kharatriśiradūṣaṇamukhyabandhūn\",\"doubt\":true},{\"ref\":\"BhP 9.10.18\",\"a\":\"Prahasta\",\"rel\":\"son_of\",\"b\":\"Rāvaṇa\",\"words\":\"putraṃ prahastam\",\"doubt\":true},{\"ref\":\"BhP 9.10.24\",\"a\":\"Mandodarī\",\"rel\":\"wife_of\",\"b\":\"Rāvaṇa\",\"words\":\"mandodaryā samaṃ\",\"doubt\":true},{\"ref\":\"BhP 9.10.31\",\"a\":\"Sītā\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"rāmaḥ priyatamāṃ bhāryāṃ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02191,
+ "tokens": {
+  "input": 5000,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1191,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.10.1",
+   "a": "Dīrghabāhu",
+   "rel": "son_of",
+   "b": "Khaṭvāṅga",
+   "words": "khaṭvāṅgāddīrghabāhuśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.1",
+   "a": "Raghu",
+   "rel": "son_of",
+   "b": "Dīrghabāhu",
+   "words": "raghustasmāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.1",
+   "a": "Pṛthuśravas",
+   "rel": "son_of",
+   "b": "Raghu",
+   "words": "tasmāt pṛthuśravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.1",
+   "a": "Aja",
+   "rel": "son_of",
+   "b": "Pṛthuśravas",
+   "words": "ajastato",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.1",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Aja",
+   "words": "tasmāddaśaratho 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.2",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tasyāpi bhagavān eṣa putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.10.2",
+   "a": "Lakṣmaṇa",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.2",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.2",
+   "a": "Śatrughna",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "putratvaṃ prārthitaḥ suraiḥ rāmalakṣmaṇabharata śatrughnā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.3",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "sītāpatermuhuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.11",
+   "a": "Sītā",
+   "rel": "daughter_of",
+   "b": "Videha",
+   "words": "vaideharājaduhitar",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.10.9",
+   "a": "Śūrpaṇakhā",
+   "rel": "sister_of",
+   "b": "Khara",
+   "words": "rakṣaḥsvasurvyakṛta rūpamaśuddhabuddhes tasyāḥ kharatriśiradūṣaṇamukhyabandhūn",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.10.18",
+   "a": "Prahasta",
+   "rel": "son_of",
+   "b": "Rāvaṇa",
+   "words": "putraṃ prahastam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.10.24",
+   "a": "Mandodarī",
+   "rel": "wife_of",
+   "b": "Rāvaṇa",
+   "words": "mandodaryā samaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.10.31",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "rāmaḥ priyatamāṃ bhāryāṃ",
+   "doubt": false,
+   "check": "words"
+  }
+ ]
+}

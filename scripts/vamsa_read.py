@@ -32,6 +32,19 @@ prints the longest father-to-son lines it found (verified statements only). Noth
   python scripts\\vamsa_read.py --work all --yes --max-usd 8      every chapter not read yet, at most $8
   python scripts\\vamsa_read.py --reparse                         the stored replies parsed and checked again (free)
   python scripts\\vamsa_read.py --report                          the counts, the CSVs, the longest lines (free)
+
+VAMSA_HEAL_2026_11_11 (after the first run, 11 Nov: 56 parts, 1,975 statements, 1,449 verified, $2.00):
+  - a reply that corrects itself ("Correction: ... a corrected reply follows", "Final answer:") is read by its last
+    JSON object of statements (four parts were not read: "Extra data");
+  - a statement without its verse's reference (a whole part, 35 statements, "bad") takes the verse its words are in;
+  - the words are looked for as Sanskrit is written: the end of each word may change by sandhi (putrah, putras,
+    putro), and "..." stands for words left out (281 of 309 "unsupported" were such);
+  - the lines: a person is a name and the father the text gives; a father's name is joined to a person of that name
+    only in the same chapter or the one before (never across the book: the first report drew one "line of 42" through
+    Srnjaya, Candra and Nara of different dynasties, homonyms); a mother is not a father. --report writes each line
+    with its verses (data\\vamsa_read\\<work>_lines.json, exports\\vamsa_lines_<work>.csv). The persons of the
+    indexes (G5b) are what joins a line across chapters and books.
+  python scripts\\vamsa_read.py --reparse   then   python scripts\\vamsa_read.py --report      (free)
 """
 from __future__ import annotations
 
@@ -48,6 +61,7 @@ import zipfile
 from pathlib import Path
 
 MARK = "VAMSA_READ_2026_11_11"
+HEAL = "VAMSA_HEAL_2026_11_11"
 PROMPT_VERSION = "vamsa-read-v1"
 ROOT = Path(__file__).resolve().parents[1]
 ZIP = "sources/gretil/1_sanskr.zip"
@@ -171,21 +185,33 @@ def estimate(chars: int, model: str = MODEL) -> float:
 
 
 # --------------------------------------------------------------------------------------------- the reply
+def json_objects(s: str) -> list:
+    """Every JSON object at the top level of s, in order (the text between them left out)."""
+    dec, out, i = json.JSONDecoder(strict=False), [], 0
+    while True:
+        i = s.find("{", i)
+        if i < 0:
+            return out
+        try:
+            obj, end = dec.raw_decode(s, i)
+        except ValueError:
+            i += 1
+            continue
+        out.append(obj)
+        i = end
+
+
 def parse_reply(text: str) -> list:
-    """The statements of a reply; raises ValueError when it is not the JSON asked for."""
+    """The statements of a reply; raises ValueError when it is not the JSON asked for. VAMSA_HEAL_2026_11_11: a reply
+    that corrects itself is read by its last object of statements."""
     s = (text or "").strip()
     s = re.sub(r"^```(?:json)?\s*|\s*```$", "", s)
-    i, j = s.find("{"), s.rfind("}")
-    if i < 0 or j <= i:
+    if s.find("{") < 0:
         raise ValueError("no JSON object in the reply")
-    try:
-        d = json.loads(s[i:j + 1])
-    except ValueError:
-        d = json.loads(s[i:j + 1], strict=False)
-    st = d.get("statements") if isinstance(d, dict) else None
-    if not isinstance(st, list):
+    objs = [o for o in json_objects(s) if isinstance(o, dict) and isinstance(o.get("statements"), list)]
+    if not objs:
         raise ValueError("the reply has no list of statements")
-    return [x for x in st if isinstance(x, dict)]
+    return [x for x in objs[-1]["statements"] if isinstance(x, dict)]
 
 
 def letters(s: str) -> str:
@@ -206,6 +232,37 @@ def stem_key(name: str) -> str:
     return k[:5] if len(k) > 5 else (k[:-1] if len(k) > 3 else k)
 
 
+def words_in(words: str, span: str, fold: bool = False) -> bool:
+    """VAMSA_HEAL_2026_11_11: the words are in span (letters only) as Sanskrit is written: the last letter of each word
+    of four letters or more may differ (sandhi: putrah, putras, putro), at most three letters may come between two
+    words, and "..." stands for words left out (each part found in order)."""
+    f = folded if fold else letters
+    pos = 0
+    for frag in re.split(r"\.{2,}|\u2026", str(words or "")):
+        toks = [f(x) for x in frag.split() if f(x)]
+        if not toks:
+            continue
+        cores = [x[:-1] if len(x) > 3 else x for x in toks]
+        if sum(len(c) for c in cores) < 4:
+            return False
+        m = re.compile(".{0,3}".join(re.escape(c) for c in cores)).search(span, pos)
+        if not m:
+            return False
+        pos = m.end()
+    return pos > 0
+
+
+def ref_of(words: str, refs: dict, order: list):
+    """VAMSA_HEAL_2026_11_11: the verse of the part whose words these are (the first, alone or with the next), or None."""
+    for r in order:
+        if words_in(words, letters(refs[r])):
+            return r
+    for k, r in enumerate(order):
+        if words_in(words, letters(refs[r]) + "".join(letters(refs[x]) for x in order[k + 1:k + 2])):
+            return r
+    return None
+
+
 def check(st: dict, refs: dict, order: list) -> str:
     """verified, words, unsupported or bad (see the docstring). refs: {ref: text}; order: the refs in order."""
     a, b, rel, ref, words = (str(st.get(k) or "").strip() for k in ("a", "b", "rel", "ref", "words"))
@@ -214,8 +271,7 @@ def check(st: dict, refs: dict, order: list) -> str:
     k = order.index(ref)
     here = letters(refs[ref])
     near = here + "".join(letters(refs[r]) for r in order[k + 1:k + 2])
-    w = letters(words)
-    if not w or w not in near:
+    if not (words_in(words, near) or words_in(words, folded(near), fold=True)):
         return "unsupported"
     span = "".join(letters(refs[r]) for r in order[max(0, k - 1):k]) + near   # a pronoun's person: the verse before
     if stem_key(a) in span and stem_key(b) in span:
@@ -232,8 +288,14 @@ def checked(statements: list, u: dict) -> list:
     out = []
     for st in statements:
         x = {k: st.get(k) for k in ("ref", "a", "rel", "b", "words", "doubt")}
+        if not x.get("ref"):   # VAMSA_HEAL_2026_11_11: the reference under another name, or none
+            x["ref"] = st.get("reference") or st.get("verse") or st.get("verse_ref")
+        if x.get("ref") not in refs and x.get("words"):
+            got = ref_of(str(x["words"]), refs, order)
+            if got:
+                x["ref"], x["ref_from"] = got, "words"
         x["doubt"] = bool(x.get("doubt"))
-        x["check"] = check(st, refs, order)
+        x["check"] = check(x, refs, order)
         out.append(x)
     return out
 
@@ -272,8 +334,80 @@ def records(out_dir, work: str) -> list:
 
 
 # --------------------------------------------------------------------------------------------- the lines
+def persons(statements: list) -> dict:
+    """VAMSA_HEAL_2026_11_11: the persons of the verified son_of statements, homonyms kept apart. A person is a name and
+    the father the text gives; his father is the person of that name who is a son in the same chapter or the one
+    before (the nearest before him, else the nearest after); when there is none, the father is a person of his own
+    (a root). A mother (a wife_of, daughter_of or sister_of in these statements) is not a father.
+    {key: {"name", "father", "up": key or None, "chapter", "ref", "words", "pos"}}"""
+    ver = [s for s in statements if s.get("check") == "verified"]
+    female = {letters(s.get("a")) for s in ver if s.get("rel") in ("wife_of", "daughter_of", "sister_of")}
+    sons = [s for s in ver if s.get("rel") == "son_of" and letters(s.get("b")) not in female
+            and letters(s.get("a")) and letters(s.get("b")) and letters(s.get("a")) != letters(s.get("b"))]
+    out = {}
+    for pos, s in enumerate(sons):
+        key = "%s|%s" % (letters(s["a"]), letters(s["b"]))
+        if key not in out:
+            out[key] = {"name": s["a"], "father": s["b"], "up": None, "chapter": s.get("chapter"), "ref": s.get("ref"),
+                        "words": s.get("words"), "pos": pos}
+    by_name = {}
+    for key, p in out.items():
+        by_name.setdefault(key.split("|")[0], []).append(key)
+    for key, p in out.items():
+        fk = letters(p["father"])
+        near = [k for k in by_name.get(fk, ()) if k != key and p["chapter"] is not None
+                and out[k]["chapter"] is not None and 0 <= p["chapter"] - out[k]["chapter"] <= 1]
+        if not near:
+            continue
+        before = [k for k in near if out[k]["pos"] < p["pos"]]
+        pick = max(before, key=lambda k: out[k]["pos"]) if before else min(near, key=lambda k: out[k]["pos"])
+        if pick != key:
+            p["up"] = pick
+    for key, p in out.items():   # no person his own ancestor
+        seen, k = {key}, p["up"]
+        while k:
+            if k in seen:
+                p["up"] = None
+                break
+            seen.add(k)
+            k = out[k]["up"]
+    return out
+
+
+def lines_of(statements: list) -> list:
+    """VAMSA_HEAL_2026_11_11: the father-to-son lines of persons(), longest first: [[(name, ref, words), ...]], each
+    from a root (a father who is not a son here: his name and no verse) down to a person with no son here."""
+    ps = persons(statements)
+    kids = {}
+    for key, p in ps.items():
+        kids.setdefault(p["up"] or "root:" + letters(p["father"]), []).append(key)
+    memo = {}
+
+    def down(k):
+        if k not in memo:
+            best = []
+            for c in kids.get(k, ()):
+                got = down(c)
+                if len(got) > len(best):
+                    best = got
+            memo[k] = [k] + best
+        return memo[k]
+    roots = [k for k in kids if k.startswith("root:")]
+    out = []
+    for r in roots:
+        chain = down(r)
+        first = ps[chain[1]]["father"] if len(chain) > 1 else r[5:]
+        out.append([(first, None, None)] + [(ps[k]["name"], ps[k]["ref"], ps[k]["words"]) for k in chain[1:]])
+    return sorted(out, key=lambda x: (-len(x), letters(x[0][0])))
+
+
 def longest_lines(statements: list, top: int = 5) -> list:
-    """The longest father-to-son lines of the verified son_of statements: [[ancestor, ..., descendant]]."""
+    """The longest father-to-son lines (lines_of: homonyms kept apart): [[ancestor, ..., descendant]]."""
+    return [[n for n, _r, _w in ln] for ln in lines_of(statements)[:top] if len(ln) > 2]
+
+
+def longest_lines_by_name(statements: list, top: int = 5) -> list:
+    """The first report's lines (before VAMSA_HEAL_2026_11_11): persons joined by their names alone, homonyms merged."""
     kids = {}
     for s in statements:
         if s.get("check") == "verified" and s.get("rel") == "son_of":
@@ -481,8 +615,23 @@ def do_report(a) -> int:
         errs = sum(1 for r in recs if r.get("error"))
         print("  %-6s %d part(s) read (%d not), %d statements: %s; $%.2f" % (
             wk, len(recs) - errs, errs, len(st), ", ".join("%s %d" % kv for kv in sorted(by.items())), cost))
-        for ln in longest_lines(st):
-            print("         a line of %d: %s" % (len(ln), " > ".join(ln)))
+        lines = lines_of(st)   # VAMSA_HEAL_2026_11_11: homonyms kept apart
+        for ln in lines[:5]:
+            if len(ln) > 2:
+                print("         a line of %d: %s" % (len(ln), " > ".join(n for n, _r, _w in ln)))
+        lp = Path(a.out) / ("%s_lines.json" % wk)
+        lp.parent.mkdir(parents=True, exist_ok=True)
+        lp.write_text(json.dumps({"mark": HEAL, "work": wk, "title": WORKS[wk]["title"], "lines": [
+            [{"name": n, "ref": r, "words": w} for n, r, w in ln] for ln in lines if len(ln) > 1]},
+            ensure_ascii=False, indent=1), encoding="utf-8")
+        lc = ex / ("vamsa_lines_%s.csv" % wk)
+        with open(lc, "w", encoding="utf-8-sig", newline="") as f:
+            wr = csv.writer(f)
+            wr.writerow(["line", "step", "name", "father", "ref", "words"])
+            for i, ln in enumerate(l for l in lines if len(l) > 1):
+                for j, (n, r, w) in enumerate(ln):
+                    wr.writerow([i + 1, j, n, ln[j - 1][0] if j else "", r or "", w or ""])
+        print("         wrote %s, %s (%d lines of 3 or more)" % (lp, lc, sum(1 for l in lines if len(l) > 2)))
         p = ex / ("vamsa_read_%s.csv" % wk)
         with open(p, "w", encoding="utf-8-sig", newline="") as f:
             wr = csv.writer(f)

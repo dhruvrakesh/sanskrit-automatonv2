@@ -1,0 +1,152 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 7,
+ "part": 0,
+ "refs": [
+  "BhP 9.7.1",
+  "BhP 9.7.2",
+  "BhP 9.7.3",
+  "BhP 9.7.4",
+  "BhP 9.7.5",
+  "BhP 9.7.6",
+  "BhP 9.7.7",
+  "BhP 9.7.8",
+  "BhP 9.7.9",
+  "BhP 9.7.10",
+  "BhP 9.7.11",
+  "BhP 9.7.12",
+  "BhP 9.7.13",
+  "BhP 9.7.14",
+  "BhP 9.7.15",
+  "BhP 9.7.16",
+  "BhP 9.7.17",
+  "BhP 9.7.18",
+  "BhP 9.7.19",
+  "BhP 9.7.20",
+  "BhP 9.7.21",
+  "BhP 9.7.22",
+  "BhP 9.7.23",
+  "BhP 9.7.24",
+  "BhP 9.7.25",
+  "BhP 9.7.26",
+  "BhP 9.7.27"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:02:01",
+ "reply": "{\"statements\":[\n{\"ref\":\"BhP 9.7.1\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Māndhātṛ\",\"words\":\"māndhātuḥ putrapravaro yo 'mbarīṣaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.1\",\"a\":\"Yauvanāśva\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"yauvanāśvastu tatsutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.1\",\"a\":\"Hārīta\",\"rel\":\"son_of\",\"b\":\"Yauvanāśva\",\"words\":\"hārītastasya putro 'bhūt\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.4\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"haryaśvastatsutaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.7.4\",\"a\":\"Aruṇa\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"tasmāt prāruṇo\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.4\",\"a\":\"Tribandhana\",\"rel\":\"son_of\",\"b\":\"Aruṇa\",\"words\":\"prāruṇo 'tha tribandhanaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.5\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Tribandhana\",\"words\":\"tasya satyavrataḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.5\",\"a\":\"Triśaṅku\",\"rel\":\"other\",\"b\":\"Satyavrata\",\"words\":\"satyavrataḥ putrastriśaṅkuriti viśrutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.7\",\"a\":\"Hariścandra\",\"rel\":\"son_of\",\"b\":\"Triśaṅku\",\"words\":\"traiśaṅkavo hariścandro\",\"doubt\":false},\n{\"ref\":\"BhP 9.7.9\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Hariścandra\",\"words\":\"putro jātastu rohitaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.7.20\",\"a\":\"Śunaḥśepha\",\"rel\":\"son_of\",\"b\":\"Ajīgarta\",\"words\":\"ajīgartādakrīṇān madhyamaṃ sutam\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01368,
+ "tokens": {
+  "input": 2719,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 824,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.7.1",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Māndhātṛ",
+   "words": "māndhātuḥ putrapravaro yo 'mbarīṣaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.7.1",
+   "a": "Yauvanāśva",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "yauvanāśvastu tatsutaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.7.1",
+   "a": "Hārīta",
+   "rel": "son_of",
+   "b": "Yauvanāśva",
+   "words": "hārītastasya putro 'bhūt",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.7.4",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Anaraṇya",
+   "words": "haryaśvastatsutaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.7.4",
+   "a": "Aruṇa",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "tasmāt prāruṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.7.4",
+   "a": "Tribandhana",
+   "rel": "son_of",
+   "b": "Aruṇa",
+   "words": "prāruṇo 'tha tribandhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.7.5",
+   "a": "Satyavrata",
+   "rel": "son_of",
+   "b": "Tribandhana",
+   "words": "tasya satyavrataḥ putraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.7.5",
+   "a": "Triśaṅku",
+   "rel": "other",
+   "b": "Satyavrata",
+   "words": "satyavrataḥ putrastriśaṅkuriti viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.7.7",
+   "a": "Hariścandra",
+   "rel": "son_of",
+   "b": "Triśaṅku",
+   "words": "traiśaṅkavo hariścandro",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.7.9",
+   "a": "Rohita",
+   "rel": "son_of",
+   "b": "Hariścandra",
+   "words": "putro jātastu rohitaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.7.20",
+   "a": "Śunaḥśepha",
+   "rel": "son_of",
+   "b": "Ajīgarta",
+   "words": "ajīgartādakrīṇān madhyamaṃ sutam",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

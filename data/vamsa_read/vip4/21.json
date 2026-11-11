@@ -1,0 +1,314 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 21,
+ "part": 0,
+ "refs": [
+  "ViP 4,21.1",
+  "ViP 4,21.2",
+  "ViP 4,21.3",
+  "ViP 4,21.4",
+  "ViP 4,21.5",
+  "ViP 4,21.6",
+  "ViP 4,21.7",
+  "ViP 4,21.8",
+  "ViP 4,21.9",
+  "ViP 4,21.10",
+  "ViP 4,21.11",
+  "ViP 4,21.12",
+  "ViP 4,21.13",
+  "ViP 4,21.14",
+  "ViP 4,21.15",
+  "ViP 4,21.16",
+  "ViP 4,21.17",
+  "ViP 4,21.18"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:59:56",
+ "reply": "{\"statements\":[\n{\"ref\":\"ViP 4,21.2\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Parīkṣit\",\"words\":\"parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.2\",\"a\":\"Śrutasena\",\"rel\":\"son_of\",\"b\":\"Parīkṣit\",\"words\":\"parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.2\",\"a\":\"Ugrasena\",\"rel\":\"son_of\",\"b\":\"Parīkṣit\",\"words\":\"parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.2\",\"a\":\"Bhīmasena\",\"rel\":\"son_of\",\"b\":\"Parīkṣit\",\"words\":\"parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.3\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayasyāpi śatānīko bhaviṣyati\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.5\",\"a\":\"Aśvamedhadatta\",\"rel\":\"son_of\",\"b\":\"Śatānīka\",\"words\":\"śatānīkādaśvamedhadatto bhavitā\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.6\",\"a\":\"Adhisīmakṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Aśvamedhadatta\",\"words\":\"tasmādapyacadhisīmakṛṣṇaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.7\",\"a\":\"Nicaknu\",\"rel\":\"son_of\",\"b\":\"Adhisīmakṛṣṇa\",\"words\":\"adhisīmakṛṣṇānnicaknuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.9\",\"a\":\"Uṣma\",\"rel\":\"son_of\",\"b\":\"Nicaknu\",\"words\":\"tasyā pyuṣmaḥ putro bhavitā\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.10\",\"a\":\"Vicitraratha\",\"rel\":\"son_of\",\"b\":\"Uṣma\",\"words\":\"uṣṇādvicitrarathaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.11\",\"a\":\"Śuciratha\",\"rel\":\"son_of\",\"b\":\"Vicitraratha\",\"words\":\"tataḥ śucirathaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Vṛṣṇimat\",\"rel\":\"son_of\",\"b\":\"Śuciratha\",\"words\":\"tasmādvṛṣṇimāṃs\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Suṣeṇa\",\"rel\":\"son_of\",\"b\":\"Vṛṣṇimat\",\"words\":\"tataḥsuṣeṇaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Sunītha\",\"rel\":\"son_of\",\"b\":\"Suṣeṇa\",\"words\":\"tasyāpi sunīthaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Nṛpacakṣu\",\"rel\":\"son_of\",\"b\":\"Sunītha\",\"words\":\"sunīthānnṛpacakṣuḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Sukhibala\",\"rel\":\"son_of\",\"b\":\"Nṛpacakṣu\",\"words\":\"tasmādapi sukhibalaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Pāriplava\",\"rel\":\"son_of\",\"b\":\"Sukhibala\",\"words\":\"tasya ca pāriplavaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Sunaya\",\"rel\":\"son_of\",\"b\":\"Pāriplava\",\"words\":\"tataś ca sunayaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.12\",\"a\":\"Medhāvin\",\"rel\":\"son_of\",\"b\":\"Sunaya\",\"words\":\"tasyāpi medhāvī\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.13\",\"a\":\"Ripuñjaya\",\"rel\":\"son_of\",\"b\":\"Medhāvin\",\"words\":\"medhāvino ripuñjayaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.13\",\"a\":\"Urva\",\"rel\":\"son_of\",\"b\":\"Ripuñjaya\",\"words\":\"tatorvaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.13\",\"a\":\"Tigma\",\"rel\":\"son_of\",\"b\":\"Urva\",\"words\":\"tasmācca tigmaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.13\",\"a\":\"Bṛhadratha\",\"rel\":\"son_of\",\"b\":\"Tigma\",\"words\":\"tasmādbṛhadrathaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.13\",\"a\":\"Vasudāsa\",\"rel\":\"son_of\",\"b\":\"Bṛhadratha\",\"words\":\"bṛhadrathādvasudāsaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.14\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Vasudāsa\",\"words\":\"tato 'paraḥ śatanīkaḥ\",\"doubt\":true},\n{\"ref\":\"ViP 4,21.15\",\"a\":\"Udayana\",\"rel\":\"son_of\",\"b\":\"Śatānīka\",\"words\":\"tasmāccodayanaḥ\",\"doubt\":true},\n{\"ref\":\"ViP 4,21.15\",\"a\":\"Vihīnara\",\"rel\":\"son_of\",\"b\":\"Udayana\",\"words\":\"udayanādvihīnaraḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.15\",\"a\":\"Daṇḍapāṇi\",\"rel\":\"son_of\",\"b\":\"Vihīnara\",\"words\":\"tataścadaṇḍapāṇiḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.15\",\"a\":\"Nimitta\",\"rel\":\"son_of\",\"b\":\"Daṇḍapāṇi\",\"words\":\"tato nimittaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,21.16\",\"a\":\"Kṣemaka\",\"rel\":\"son_of\",\"b\":\"Nimitta\",\"words\":\"tasmācca kṣemakaḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02615,
+ "tokens": {
+  "input": 1618,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2291,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,21.2",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Parīkṣit",
+   "words": "parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.2",
+   "a": "Śrutasena",
+   "rel": "son_of",
+   "b": "Parīkṣit",
+   "words": "parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.2",
+   "a": "Ugrasena",
+   "rel": "son_of",
+   "b": "Parīkṣit",
+   "words": "parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.2",
+   "a": "Bhīmasena",
+   "rel": "son_of",
+   "b": "Parīkṣit",
+   "words": "parīkṣittasyāpi janamejayaśrutasenograsenabhīmasenāścatvāraḥ putrāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.3",
+   "a": "Śatānīka",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayasyāpi śatānīko bhaviṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.5",
+   "a": "Aśvamedhadatta",
+   "rel": "son_of",
+   "b": "Śatānīka",
+   "words": "śatānīkādaśvamedhadatto bhavitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.6",
+   "a": "Adhisīmakṛṣṇa",
+   "rel": "son_of",
+   "b": "Aśvamedhadatta",
+   "words": "tasmādapyacadhisīmakṛṣṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.7",
+   "a": "Nicaknu",
+   "rel": "son_of",
+   "b": "Adhisīmakṛṣṇa",
+   "words": "adhisīmakṛṣṇānnicaknuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.9",
+   "a": "Uṣma",
+   "rel": "son_of",
+   "b": "Nicaknu",
+   "words": "tasyā pyuṣmaḥ putro bhavitā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,21.10",
+   "a": "Vicitraratha",
+   "rel": "son_of",
+   "b": "Uṣma",
+   "words": "uṣṇādvicitrarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.11",
+   "a": "Śuciratha",
+   "rel": "son_of",
+   "b": "Vicitraratha",
+   "words": "tataḥ śucirathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Vṛṣṇimat",
+   "rel": "son_of",
+   "b": "Śuciratha",
+   "words": "tasmādvṛṣṇimāṃs",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Suṣeṇa",
+   "rel": "son_of",
+   "b": "Vṛṣṇimat",
+   "words": "tataḥsuṣeṇaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Sunītha",
+   "rel": "son_of",
+   "b": "Suṣeṇa",
+   "words": "tasyāpi sunīthaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Nṛpacakṣu",
+   "rel": "son_of",
+   "b": "Sunītha",
+   "words": "sunīthānnṛpacakṣuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Sukhibala",
+   "rel": "son_of",
+   "b": "Nṛpacakṣu",
+   "words": "tasmādapi sukhibalaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Pāriplava",
+   "rel": "son_of",
+   "b": "Sukhibala",
+   "words": "tasya ca pāriplavaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Sunaya",
+   "rel": "son_of",
+   "b": "Pāriplava",
+   "words": "tataś ca sunayaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.12",
+   "a": "Medhāvin",
+   "rel": "son_of",
+   "b": "Sunaya",
+   "words": "tasyāpi medhāvī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.13",
+   "a": "Ripuñjaya",
+   "rel": "son_of",
+   "b": "Medhāvin",
+   "words": "medhāvino ripuñjayaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.13",
+   "a": "Urva",
+   "rel": "son_of",
+   "b": "Ripuñjaya",
+   "words": "tatorvaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.13",
+   "a": "Tigma",
+   "rel": "son_of",
+   "b": "Urva",
+   "words": "tasmācca tigmaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.13",
+   "a": "Bṛhadratha",
+   "rel": "son_of",
+   "b": "Tigma",
+   "words": "tasmādbṛhadrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.13",
+   "a": "Vasudāsa",
+   "rel": "son_of",
+   "b": "Bṛhadratha",
+   "words": "bṛhadrathādvasudāsaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.14",
+   "a": "Śatānīka",
+   "rel": "son_of",
+   "b": "Vasudāsa",
+   "words": "tato 'paraḥ śatanīkaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.15",
+   "a": "Udayana",
+   "rel": "son_of",
+   "b": "Śatānīka",
+   "words": "tasmāccodayanaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.15",
+   "a": "Vihīnara",
+   "rel": "son_of",
+   "b": "Udayana",
+   "words": "udayanādvihīnaraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.15",
+   "a": "Daṇḍapāṇi",
+   "rel": "son_of",
+   "b": "Vihīnara",
+   "words": "tataścadaṇḍapāṇiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,21.15",
+   "a": "Nimitta",
+   "rel": "son_of",
+   "b": "Daṇḍapāṇi",
+   "words": "tato nimittaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,21.16",
+   "a": "Kṣemaka",
+   "rel": "son_of",
+   "b": "Nimitta",
+   "words": "tasmācca kṣemakaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

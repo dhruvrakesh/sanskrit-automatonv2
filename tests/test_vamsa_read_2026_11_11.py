@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import vamsa_read as VR      # noqa: E402
 import claude_engine as CE   # noqa: E402
 
-MARK = "VAMSA_READ_2026_11_11"
+MARK = "VAMSA_READ_2026_11_11"   # and VAMSA_HEAL_2026_11_11
 S, M = "\u1e63", "\u0101"    # s with dot below, a with macron
 IK, VI = "ik%sv%sku" % (S, M), "vikuk%si" % S
 TEXT = "\n".join([
@@ -231,6 +231,54 @@ class TheRun(Base):
         self.assertEqual(VR.check(dict(ok, words="ramasya putra"), refs, order), "unsupported")
         self.assertEqual(VR.check(dict(ok, ref="R1", words="putra ik%sv%sku\u1e25 tasya" % (S, M)), refs, order),
                          "verified", "words running into the next verse")
+
+
+class TheHeal(unittest.TestCase):
+    """VAMSA_HEAL_2026_11_11: what the first run of 11 Nov showed."""
+
+    def test_a_reply_that_corrects_itself(self):
+        r = ('{"statements": [{"ref": "R1", "a": "X", "rel": "son_of", "b": "Y", "words": "x"}]}\n\nCorrection: the '
+             'last is not valid. A corrected reply follows.\n\n{"statements": [{"ref": "R1", "a": "Z"}]}')
+        self.assertEqual([s["a"] for s in VR.parse_reply(r)], ["Z"])
+        self.assertEqual(VR.parse_reply(r + '\n\nFinal answer:\n\n{"statements": []}'), [])
+        self.assertRaises(ValueError, VR.parse_reply, "no JSON here")
+        self.assertRaises(ValueError, VR.parse_reply, '{"other": 1}')
+
+    def test_a_statement_without_its_reference(self):
+        u = {"verses": [("R1", "mano\u1e25 putra ik%sv%sku\u1e25" % (S, M)), ("R2", "tasya putro vikuk%si\u1e25" % S)]}
+        got = VR.checked([{"a": VI, "rel": "son_of", "b": IK, "words": "tasya putro vikuk%si\u1e25" % S}], u)
+        self.assertEqual((got[0]["ref"], got[0].get("ref_from"), got[0]["check"]), ("R2", "words", "verified"))
+        got = VR.checked([{"verse": "R1", "a": IK, "rel": "son_of", "b": "Manu", "words": "putra ik%sv%sku" % (S, M)}], u)
+        self.assertEqual((got[0]["ref"], got[0]["check"]), ("R1", "verified"))
+
+    def test_sandhi_and_words_left_out(self):
+        L = VR.letters
+        v = "tato da\u015b\u0101rho n\u0101mn\u0101bh\u016bt tasya vyoma\u1e25 sutastata\u1e25"
+        self.assertTrue(VR.words_in("tasya vyoma\u1e25 suta\u1e25", L(v)))
+        v2 = ("paurav\u012b rohi\u1e47\u012b bhadr\u0101 madir\u0101 rocan\u0101 il\u0101 / devak\u012bpramukh"
+              "\u0101\u015bc\u0101san patnya \u0101nakadundubhe\u1e25")
+        self.assertTrue(VR.words_in("madir\u0101 rocan\u0101 ... patnya \u0101nakadundubhe\u1e25", L(v2)))
+        self.assertFalse(VR.words_in("patnya \u0101nakadundubhe\u1e25 ... madir\u0101 rocan\u0101", L(v2)), "in order")
+        self.assertFalse(VR.words_in("r\u0101masya putra\u1e25", L(v)))
+        self.assertFalse(VR.words_in("x", L(v)), "too short to tell")
+
+    def test_homonyms_kept_apart_and_a_mother_is_no_father(self):
+        sr = "S\u1e5b\u00f1jaya"
+        st = [dict(ref="R1", a="Dh\u016bmr\u0101k\u1e63a", rel="son_of", b="Candra", check="verified", chapter=1),
+              dict(ref="R2", a=sr, rel="son_of", b="Dh\u016bmr\u0101k\u1e63a", check="verified", chapter=1),
+              dict(ref="R3", a="Sahadeva", rel="son_of", b=sr, check="verified", chapter=1),
+              dict(ref="R9", a="Pura\u00f1jaya", rel="son_of", b=sr, check="verified", chapter=19),
+              dict(ref="R10", a="\u1e5ak\u1e63a", rel="son_of", b="Pura\u00f1jaya", check="verified", chapter=19),
+              dict(ref="R11", a="Pur\u016bravas", rel="son_of", b="Il\u0101", check="verified", chapter=1),
+              dict(ref="R12", a="Il\u0101", rel="wife_of", b="Budha", check="verified", chapter=1),
+              dict(ref="R13", a="X", rel="son_of", b="Y", check="unsupported", chapter=1)]
+        lines = [[n for n, _r, _w in ln] for ln in VR.lines_of(st)]
+        self.assertEqual(lines[0], ["Candra", "Dh\u016bmr\u0101k\u1e63a", sr, "Sahadeva"])
+        self.assertIn([sr, "Pura\u00f1jaya", "\u1e5ak\u1e63a"], lines, "the Srnjaya of chapter 19 is another")
+        self.assertFalse(any("Il\u0101" in ln for ln in lines), "a mother is not a father")
+        self.assertFalse(any("X" in ln for ln in lines), "only verified statements")
+        by_name = VR.longest_lines_by_name(st)
+        self.assertEqual(len(by_name[0]), 5, "the first report merged them: Candra > ... > Srnjaya > Puranjaya > Rksa")
 
 
 class TheFile(unittest.TestCase):

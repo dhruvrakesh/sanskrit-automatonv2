@@ -1,0 +1,329 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 1,
+ "part": 0,
+ "refs": [
+  "BhP 9.1.1",
+  "BhP 9.1.2",
+  "BhP 9.1.3",
+  "BhP 9.1.4",
+  "BhP 9.1.5",
+  "BhP 9.1.6",
+  "BhP 9.1.7",
+  "BhP 9.1.8",
+  "BhP 9.1.9",
+  "BhP 9.1.10",
+  "BhP 9.1.11",
+  "BhP 9.1.12",
+  "BhP 9.1.13",
+  "BhP 9.1.14",
+  "BhP 9.1.15",
+  "BhP 9.1.16",
+  "BhP 9.1.17",
+  "BhP 9.1.18",
+  "BhP 9.1.19",
+  "BhP 9.1.20",
+  "BhP 9.1.21",
+  "BhP 9.1.22",
+  "BhP 9.1.23",
+  "BhP 9.1.24",
+  "BhP 9.1.25",
+  "BhP 9.1.26",
+  "BhP 9.1.27",
+  "BhP 9.1.28",
+  "BhP 9.1.29",
+  "BhP 9.1.30",
+  "BhP 9.1.31",
+  "BhP 9.1.32",
+  "BhP 9.1.33",
+  "BhP 9.1.34",
+  "BhP 9.1.35",
+  "BhP 9.1.36",
+  "BhP 9.1.37",
+  "BhP 9.1.38",
+  "BhP 9.1.39",
+  "BhP 9.1.40",
+  "BhP 9.1.41",
+  "BhP 9.1.42"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:00:45",
+ "reply": "{\"statements\":[\n{\"ref\":\"BhP 9.1.3\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Vivasvat\",\"words\":\"sa vai vivasvataḥ putro manurāsīt\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.9\",\"a\":\"Brahmā\",\"rel\":\"son_of\",\"b\":\"Puruṣa\",\"words\":\"tasya nābheḥ samabhavat padmakoṣo hiraṇmayaḥ tasmin jajñe mahārāja svayambhūścaturānanaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.1.10\",\"a\":\"Marīci\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"marīcirmanasastasya jajñe\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.10\",\"a\":\"Kaśyapa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"tasyāpi kaśyapaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.10\",\"a\":\"Vivasvat\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"dākṣāyaṇyāṃ tato 'dityāṃ vivasvān abhavat sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.10\",\"a\":\"Vivasvat\",\"rel\":\"son_of\",\"b\":\"Aditi\",\"words\":\"dākṣāyaṇyāṃ tato 'dityāṃ vivasvān abhavat sutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.11\",\"a\":\"Śrāddhadeva\",\"rel\":\"son_of\",\"b\":\"Vivasvat\",\"words\":\"tato manuḥ śrāddhadevaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.11\",\"a\":\"Śrāddhadeva\",\"rel\":\"other\",\"b\":\"Saṃjñā\",\"words\":\"saṃjñāyāmāsa\",\"doubt\":true},\n{\"ref\":\"BhP 9.1.11\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"śraddhāyāṃ janayāmāsa daśa putrān\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Nṛga\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"ikṣvākunṛgaśaryāti\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Śaryāti\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"ikṣvākunṛgaśaryāti\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Diṣṭa\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"diṣṭadhṛṣṭakarūṣakān\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Dhṛṣṭa\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"diṣṭadhṛṣṭakarūṣakān\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Karūṣaka\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"diṣṭadhṛṣṭakarūṣakān\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Nariṣyanta\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"nariṣyantaṃ pṛṣadhraṃ ca\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Pṛṣadhra\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"nariṣyantaṃ pṛṣadhraṃ ca\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Nabhaga\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"nabhagaṃ ca kaviṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.12\",\"a\":\"Kavi\",\"rel\":\"son_of\",\"b\":\"Śrāddhadeva\",\"words\":\"nabhagaṃ ca kaviṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.14\",\"a\":\"Śraddhā\",\"rel\":\"wife_of\",\"b\":\"Manu\",\"words\":\"śraddhā manoḥ patnī\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.16\",\"a\":\"Ilā\",\"rel\":\"daughter_of\",\"b\":\"Manu\",\"words\":\"kanyelā nāma sābhavat\",\"doubt\":true},\n{\"ref\":\"BhP 9.1.22\",\"a\":\"Sudyumna\",\"rel\":\"other\",\"b\":\"Ilā\",\"words\":\"ilābhavat tena sudyumnaḥ puruṣarṣabhaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.1.35\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"sa tasyāṃ janayāmāsa purūravasamātmajam\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.35\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Ilā\",\"words\":\"sa tasyāṃ janayāmāsa purūravasamātmajam\",\"doubt\":true},\n{\"ref\":\"BhP 9.1.35\",\"a\":\"Ilā\",\"rel\":\"wife_of\",\"b\":\"Budha\",\"words\":\"somarājasutaṃ patim\",\"doubt\":true},\n{\"ref\":\"BhP 9.1.35\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somarājasutaṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.41\",\"a\":\"Utkala\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.41\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.41\",\"a\":\"Vimala\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.1.42\",\"a\":\"Purūravas\",\"rel\":\"succeeded\",\"b\":\"Sudyumna\",\"words\":\"pratiṣṭhānapatiḥ prabhuḥ purūravasa utsṛjya gāṃ putrāya\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03067,
+ "tokens": {
+  "input": 3922,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2283,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.1.3",
+   "a": "Satyavrata",
+   "rel": "son_of",
+   "b": "Vivasvat",
+   "words": "sa vai vivasvataḥ putro manurāsīt",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.1.9",
+   "a": "Brahmā",
+   "rel": "son_of",
+   "b": "Puruṣa",
+   "words": "tasya nābheḥ samabhavat padmakoṣo hiraṇmayaḥ tasmin jajñe mahārāja svayambhūścaturānanaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.10",
+   "a": "Marīci",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "marīcirmanasastasya jajñe",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.10",
+   "a": "Kaśyapa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "tasyāpi kaśyapaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.10",
+   "a": "Vivasvat",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "dākṣāyaṇyāṃ tato 'dityāṃ vivasvān abhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.10",
+   "a": "Vivasvat",
+   "rel": "son_of",
+   "b": "Aditi",
+   "words": "dākṣāyaṇyāṃ tato 'dityāṃ vivasvān abhavat sutaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.11",
+   "a": "Śrāddhadeva",
+   "rel": "son_of",
+   "b": "Vivasvat",
+   "words": "tato manuḥ śrāddhadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.11",
+   "a": "Śrāddhadeva",
+   "rel": "other",
+   "b": "Saṃjñā",
+   "words": "saṃjñāyāmāsa",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.11",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "śraddhāyāṃ janayāmāsa daśa putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Nṛga",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "ikṣvākunṛgaśaryāti",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Śaryāti",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "ikṣvākunṛgaśaryāti",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Diṣṭa",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "diṣṭadhṛṣṭakarūṣakān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Dhṛṣṭa",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "diṣṭadhṛṣṭakarūṣakān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Karūṣaka",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "diṣṭadhṛṣṭakarūṣakān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Nariṣyanta",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "nariṣyantaṃ pṛṣadhraṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Pṛṣadhra",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "nariṣyantaṃ pṛṣadhraṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Nabhaga",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "nabhagaṃ ca kaviṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.12",
+   "a": "Kavi",
+   "rel": "son_of",
+   "b": "Śrāddhadeva",
+   "words": "nabhagaṃ ca kaviṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.14",
+   "a": "Śraddhā",
+   "rel": "wife_of",
+   "b": "Manu",
+   "words": "śraddhā manoḥ patnī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.16",
+   "a": "Ilā",
+   "rel": "daughter_of",
+   "b": "Manu",
+   "words": "kanyelā nāma sābhavat",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.22",
+   "a": "Sudyumna",
+   "rel": "other",
+   "b": "Ilā",
+   "words": "ilābhavat tena sudyumnaḥ puruṣarṣabhaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.35",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "sa tasyāṃ janayāmāsa purūravasamātmajam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.35",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Ilā",
+   "words": "sa tasyāṃ janayāmāsa purūravasamātmajam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.35",
+   "a": "Ilā",
+   "rel": "wife_of",
+   "b": "Budha",
+   "words": "somarājasutaṃ patim",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.35",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somarājasutaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.1.41",
+   "a": "Utkala",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.41",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.41",
+   "a": "Vimala",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.1.42",
+   "a": "Purūravas",
+   "rel": "succeeded",
+   "b": "Sudyumna",
+   "words": "pratiṣṭhānapatiḥ prabhuḥ purūravasa utsṛjya gāṃ putrāya",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

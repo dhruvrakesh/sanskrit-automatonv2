@@ -1,0 +1,633 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "chapter": 4,
+ "part": 2,
+ "refs": [
+  "ViP 4,4.65",
+  "ViP 4,4.66",
+  "ViP 4,4.67",
+  "ViP 4,4.68",
+  "ViP 4,4.69",
+  "ViP 4,4.70",
+  "ViP 4,4.71",
+  "ViP 4,4.72",
+  "ViP 4,4.73",
+  "ViP 4,4.74",
+  "ViP 4,4.75",
+  "ViP 4,4.76",
+  "ViP 4,4.77",
+  "ViP 4,4.78",
+  "ViP 4,4.79",
+  "ViP 4,4.80",
+  "ViP 4,4.81",
+  "ViP 4,4.82",
+  "ViP 4,4.83",
+  "ViP 4,4.84",
+  "ViP 4,4.85",
+  "ViP 4,4.86",
+  "ViP 4,4.87",
+  "ViP 4,4.88",
+  "ViP 4,4.89",
+  "ViP 4,4.90",
+  "ViP 4,4.91",
+  "ViP 4,4.92",
+  "ViP 4,4.93",
+  "ViP 4,4.94",
+  "ViP 4,4.95",
+  "ViP 4,4.96",
+  "ViP 4,4.97",
+  "ViP 4,4.98",
+  "ViP 4,4.99",
+  "ViP 4,4.100",
+  "ViP 4,4.101",
+  "ViP 4,4.102",
+  "ViP 4,4.103",
+  "ViP 4,4.104",
+  "ViP 4,4.105",
+  "ViP 4,4.106",
+  "ViP 4,4.107",
+  "ViP 4,4.108",
+  "ViP 4,4.109",
+  "ViP 4,4.110",
+  "ViP 4,4.111",
+  "ViP 4,4.112",
+  "ViP 4,4.113"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-11T18:54:14",
+ "reply": "{\"statements\":[\n{\"ref\":\"ViP 4,4.69\",\"a\":\"Madayantī\",\"rel\":\"wife_of\",\"b\":\"Vasiṣṭha\",\"words\":\"madayantyāṃ garbhādhānaṃ cakāra\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.72\",\"a\":\"Aśmaka\",\"rel\":\"son_of\",\"b\":\"Madayantī\",\"words\":\"putraścājāyata tasya cāśmaka ityeva nāmābhavat\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.73\",\"a\":\"Mūlaka\",\"rel\":\"son_of\",\"b\":\"Aśmaka\",\"words\":\"aśmasya mūlako nāma putro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.75\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Mūlaka\",\"words\":\"mūlakāddaśarathaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.75\",\"a\":\"Ilivila\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tasmādilivilaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.75\",\"a\":\"Viśvasaha\",\"rel\":\"son_of\",\"b\":\"Ilivila\",\"words\":\"tataś ca viśvasahaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.76\",\"a\":\"Khaṭvāṅga\",\"rel\":\"son_of\",\"b\":\"Viśvasaha\",\"words\":\"tasmācca khaṭvāṅgaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.83\",\"a\":\"Dīrghabāhu\",\"rel\":\"son_of\",\"b\":\"Khaṭvāṅga\",\"words\":\"khaṭvāṅgāddīrghabāhuḥ putro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.84\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Dīrghabāhu\",\"words\":\"tato raghurabhavat\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.85\",\"a\":\"Aja\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"tasmādapyajaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.86\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Aja\",\"words\":\"ajāddaśarathaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.87\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tasyāpi bhagavānabjanābho rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.87\",\"a\":\"Lakṣmaṇa\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.87\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.87\",\"a\":\"Śatrughna\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.93\",\"a\":\"Sītā\",\"rel\":\"daughter_of\",\"b\":\"Janaka\",\"words\":\"janakarājatanayāṃ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.93\",\"a\":\"Sītā\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"sītāmayonijāṃ janakarājatanayāṃ vīryaśulkāṃ lebhe\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.95\",\"a\":\"Lakṣmaṇa\",\"rel\":\"brother_of\",\"b\":\"Rāma\",\"words\":\"bhrātṛbhāryāsameto\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.97\",\"a\":\"Sītā\",\"rel\":\"daughter_of\",\"b\":\"Janaka\",\"words\":\"janakarājakanyām\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.99\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"daśarathiḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.99\",\"a\":\"Rāma\",\"rel\":\"descendant_of\",\"b\":\"Raghu\",\"words\":\"raghukulatilako\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.99\",\"a\":\"Rāma\",\"rel\":\"wife_of\",\"b\":\"Sītā\",\"words\":\"jānakīpriyo\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.101\",\"a\":\"Lavaṇa\",\"rel\":\"son_of\",\"b\":\"Madhu\",\"words\":\"madhuputro lavaṇo nāma\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"rāmasya kuśalavo dvau putrau\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Lava\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"rāmasya kuśalavo dvau putrau\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Aṅgada\",\"rel\":\"son_of\",\"b\":\"Lakṣmaṇa\",\"words\":\"lakṣmaṇasyāṅgadacandraketū\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Candraketu\",\"rel\":\"son_of\",\"b\":\"Lakṣmaṇa\",\"words\":\"lakṣmaṇasyāṅgadacandraketū\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Takṣa\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"takṣapuṣkalau bharatasya\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Puṣkala\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"takṣapuṣkalau bharatasya\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Subāhu\",\"rel\":\"son_of\",\"b\":\"Śatrughna\",\"words\":\"subāhuśurasenau śatrughnasya\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.104\",\"a\":\"Śūrasena\",\"rel\":\"son_of\",\"b\":\"Śatrughna\",\"words\":\"subāhuśurasenau śatrughnasya\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.105\",\"a\":\"Atithi\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśasyātithiḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.105\",\"a\":\"Niṣadha\",\"rel\":\"son_of\",\"b\":\"Atithi\",\"words\":\"atitherapi niṣadhaḥ putro 'bhūt\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Anala\",\"rel\":\"son_of\",\"b\":\"Niṣadha\",\"words\":\"niṣadhasyāpyanalaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Nabhas\",\"rel\":\"son_of\",\"b\":\"Anala\",\"words\":\"tasmādapi nabhaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Puṇḍarīka\",\"rel\":\"son_of\",\"b\":\"Nabhas\",\"words\":\"nabhasaḥ puṇḍarīkastattanayaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Kṣemadhanvan\",\"rel\":\"son_of\",\"b\":\"Puṇḍarīka\",\"words\":\"puṇḍarīkastattanayaḥ kṣemadhanvā\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Devānīka\",\"rel\":\"son_of\",\"b\":\"Kṣemadhanvan\",\"words\":\"tasya ca devānīkaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Ahīnaka\",\"rel\":\"son_of\",\"b\":\"Devānīka\",\"words\":\"tasyāpyahīnako\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Ruru\",\"rel\":\"son_of\",\"b\":\"Ahīnaka\",\"words\":\"ahīnakasyāpi rurus\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Pāriyātraka\",\"rel\":\"son_of\",\"b\":\"Ruru\",\"words\":\"tasya ca pāriyātrakaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pāriyātraka\",\"words\":\"pāriyātrāddevalo\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Vaccala\",\"rel\":\"son_of\",\"b\":\"Devala\",\"words\":\"devalādvaccalaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Utka\",\"rel\":\"son_of\",\"b\":\"Vaccala\",\"words\":\"tasyāpyutkaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Vajranābha\",\"rel\":\"son_of\",\"b\":\"Utka\",\"words\":\"utkācca vajranābhaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Śaṅkhaṇa\",\"rel\":\"son_of\",\"b\":\"Vajranābha\",\"words\":\"vajranābhastasmācchaṅkhaṇaḥ\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Yuṣitāśva\",\"rel\":\"son_of\",\"b\":\"Śaṅkhaṇa\",\"words\":\"tasmādyuṣitāśvaḥ\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.106\",\"a\":\"Viśvasaha\",\"rel\":\"son_of\",\"b\":\"Yuṣitāśva\",\"words\":\"tataś ca viśvasaho jajñe\",\"doubt\":true},\n{\"ref\":\"ViP 4,4.107\",\"a\":\"Hiraṇyanābha\",\"rel\":\"son_of\",\"b\":\"Viśvasaha\",\"words\":\"tasmāddhiraṇyanābhaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.108\",\"a\":\"Puṣya\",\"rel\":\"son_of\",\"b\":\"Hiraṇyanābha\",\"words\":\"hiraṇyanābhasya putraḥ puṣyaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.108\",\"a\":\"Dhruvasaṃdhi\",\"rel\":\"son_of\",\"b\":\"Puṣya\",\"words\":\"tasmād dhruvasaṃdhiḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.108\",\"a\":\"Sudarśana\",\"rel\":\"son_of\",\"b\":\"Dhruvasaṃdhi\",\"words\":\"tataḥ sudarśanaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.108\",\"a\":\"Agnivarṇa\",\"rel\":\"son_of\",\"b\":\"Sudarśana\",\"words\":\"tasmādagnivarmaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.108\",\"a\":\"Śīghraga\",\"rel\":\"son_of\",\"b\":\"Agnivarṇa\",\"words\":\"tataḥ śīghragaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.108\",\"a\":\"Maru\",\"rel\":\"son_of\",\"b\":\"Śīghraga\",\"words\":\"tasmādapi maruḥ putro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.111\",\"a\":\"Praśuśruka\",\"rel\":\"son_of\",\"b\":\"Maru\",\"words\":\"tasyātmajaḥ praśuśrukaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.111\",\"a\":\"Susaṃdhi\",\"rel\":\"son_of\",\"b\":\"Praśuśruka\",\"words\":\"tasyapi susaṃdhiḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.111\",\"a\":\"Amarṣa\",\"rel\":\"son_of\",\"b\":\"Susaṃdhi\",\"words\":\"tataścāpyamarṣaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.111\",\"a\":\"Sahasvān\",\"rel\":\"son_of\",\"b\":\"Amarṣa\",\"words\":\"tasya ca sahasvān\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.111\",\"a\":\"Viśvabhava\",\"rel\":\"son_of\",\"b\":\"Sahasvān\",\"words\":\"tataś ca viśvabhavaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.112\",\"a\":\"Bṛhadbala\",\"rel\":\"son_of\",\"b\":\"Viśvabhava\",\"words\":\"tasya bṛhadbalaḥ\",\"doubt\":false},\n{\"ref\":\"ViP 4,4.112\",\"a\":\"Abhimanyu\",\"rel\":\"son_of\",\"b\":\"Arjuna\",\"words\":\"arjunatanayenābhimanyunā\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05404,
+ "tokens": {
+  "input": 4354,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4533,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViP 4,4.69",
+   "a": "Madayantī",
+   "rel": "wife_of",
+   "b": "Vasiṣṭha",
+   "words": "madayantyāṃ garbhādhānaṃ cakāra",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.72",
+   "a": "Aśmaka",
+   "rel": "son_of",
+   "b": "Madayantī",
+   "words": "putraścājāyata tasya cāśmaka ityeva nāmābhavat",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.73",
+   "a": "Mūlaka",
+   "rel": "son_of",
+   "b": "Aśmaka",
+   "words": "aśmasya mūlako nāma putro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.75",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Mūlaka",
+   "words": "mūlakāddaśarathaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.75",
+   "a": "Ilivila",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tasmādilivilaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.75",
+   "a": "Viśvasaha",
+   "rel": "son_of",
+   "b": "Ilivila",
+   "words": "tataś ca viśvasahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.76",
+   "a": "Khaṭvāṅga",
+   "rel": "son_of",
+   "b": "Viśvasaha",
+   "words": "tasmācca khaṭvāṅgaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.83",
+   "a": "Dīrghabāhu",
+   "rel": "son_of",
+   "b": "Khaṭvāṅga",
+   "words": "khaṭvāṅgāddīrghabāhuḥ putro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.84",
+   "a": "Raghu",
+   "rel": "son_of",
+   "b": "Dīrghabāhu",
+   "words": "tato raghurabhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.85",
+   "a": "Aja",
+   "rel": "son_of",
+   "b": "Raghu",
+   "words": "tasmādapyajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.86",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Aja",
+   "words": "ajāddaśarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.87",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tasyāpi bhagavānabjanābho rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.87",
+   "a": "Lakṣmaṇa",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.87",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.87",
+   "a": "Śatrughna",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.93",
+   "a": "Sītā",
+   "rel": "daughter_of",
+   "b": "Janaka",
+   "words": "janakarājatanayāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.93",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "sītāmayonijāṃ janakarājatanayāṃ vīryaśulkāṃ lebhe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.95",
+   "a": "Lakṣmaṇa",
+   "rel": "brother_of",
+   "b": "Rāma",
+   "words": "bhrātṛbhāryāsameto",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,4.97",
+   "a": "Sītā",
+   "rel": "daughter_of",
+   "b": "Janaka",
+   "words": "janakarājakanyām",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,4.99",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "daśarathiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.99",
+   "a": "Rāma",
+   "rel": "descendant_of",
+   "b": "Raghu",
+   "words": "raghukulatilako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.99",
+   "a": "Rāma",
+   "rel": "wife_of",
+   "b": "Sītā",
+   "words": "jānakīpriyo",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,4.101",
+   "a": "Lavaṇa",
+   "rel": "son_of",
+   "b": "Madhu",
+   "words": "madhuputro lavaṇo nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "rāmasya kuśalavo dvau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Lava",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "rāmasya kuśalavo dvau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Aṅgada",
+   "rel": "son_of",
+   "b": "Lakṣmaṇa",
+   "words": "lakṣmaṇasyāṅgadacandraketū",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Candraketu",
+   "rel": "son_of",
+   "b": "Lakṣmaṇa",
+   "words": "lakṣmaṇasyāṅgadacandraketū",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Takṣa",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "takṣapuṣkalau bharatasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Puṣkala",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "takṣapuṣkalau bharatasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Subāhu",
+   "rel": "son_of",
+   "b": "Śatrughna",
+   "words": "subāhuśurasenau śatrughnasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.104",
+   "a": "Śūrasena",
+   "rel": "son_of",
+   "b": "Śatrughna",
+   "words": "subāhuśurasenau śatrughnasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.105",
+   "a": "Atithi",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśasyātithiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.105",
+   "a": "Niṣadha",
+   "rel": "son_of",
+   "b": "Atithi",
+   "words": "atitherapi niṣadhaḥ putro 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Anala",
+   "rel": "son_of",
+   "b": "Niṣadha",
+   "words": "niṣadhasyāpyanalaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Nabhas",
+   "rel": "son_of",
+   "b": "Anala",
+   "words": "tasmādapi nabhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Puṇḍarīka",
+   "rel": "son_of",
+   "b": "Nabhas",
+   "words": "nabhasaḥ puṇḍarīkastattanayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Kṣemadhanvan",
+   "rel": "son_of",
+   "b": "Puṇḍarīka",
+   "words": "puṇḍarīkastattanayaḥ kṣemadhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Devānīka",
+   "rel": "son_of",
+   "b": "Kṣemadhanvan",
+   "words": "tasya ca devānīkaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Ahīnaka",
+   "rel": "son_of",
+   "b": "Devānīka",
+   "words": "tasyāpyahīnako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Ruru",
+   "rel": "son_of",
+   "b": "Ahīnaka",
+   "words": "ahīnakasyāpi rurus",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Pāriyātraka",
+   "rel": "son_of",
+   "b": "Ruru",
+   "words": "tasya ca pāriyātrakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pāriyātraka",
+   "words": "pāriyātrāddevalo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Vaccala",
+   "rel": "son_of",
+   "b": "Devala",
+   "words": "devalādvaccalaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Utka",
+   "rel": "son_of",
+   "b": "Vaccala",
+   "words": "tasyāpyutkaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Vajranābha",
+   "rel": "son_of",
+   "b": "Utka",
+   "words": "utkācca vajranābhaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Śaṅkhaṇa",
+   "rel": "son_of",
+   "b": "Vajranābha",
+   "words": "vajranābhastasmācchaṅkhaṇaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Yuṣitāśva",
+   "rel": "son_of",
+   "b": "Śaṅkhaṇa",
+   "words": "tasmādyuṣitāśvaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.106",
+   "a": "Viśvasaha",
+   "rel": "son_of",
+   "b": "Yuṣitāśva",
+   "words": "tataś ca viśvasaho jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.107",
+   "a": "Hiraṇyanābha",
+   "rel": "son_of",
+   "b": "Viśvasaha",
+   "words": "tasmāddhiraṇyanābhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.108",
+   "a": "Puṣya",
+   "rel": "son_of",
+   "b": "Hiraṇyanābha",
+   "words": "hiraṇyanābhasya putraḥ puṣyaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.108",
+   "a": "Dhruvasaṃdhi",
+   "rel": "son_of",
+   "b": "Puṣya",
+   "words": "tasmād dhruvasaṃdhiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.108",
+   "a": "Sudarśana",
+   "rel": "son_of",
+   "b": "Dhruvasaṃdhi",
+   "words": "tataḥ sudarśanaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.108",
+   "a": "Agnivarṇa",
+   "rel": "son_of",
+   "b": "Sudarśana",
+   "words": "tasmādagnivarmaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.108",
+   "a": "Śīghraga",
+   "rel": "son_of",
+   "b": "Agnivarṇa",
+   "words": "tataḥ śīghragaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.108",
+   "a": "Maru",
+   "rel": "son_of",
+   "b": "Śīghraga",
+   "words": "tasmādapi maruḥ putro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.111",
+   "a": "Praśuśruka",
+   "rel": "son_of",
+   "b": "Maru",
+   "words": "tasyātmajaḥ praśuśrukaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.111",
+   "a": "Susaṃdhi",
+   "rel": "son_of",
+   "b": "Praśuśruka",
+   "words": "tasyapi susaṃdhiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.111",
+   "a": "Amarṣa",
+   "rel": "son_of",
+   "b": "Susaṃdhi",
+   "words": "tataścāpyamarṣaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.111",
+   "a": "Sahasvān",
+   "rel": "son_of",
+   "b": "Amarṣa",
+   "words": "tasya ca sahasvān",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViP 4,4.111",
+   "a": "Viśvabhava",
+   "rel": "son_of",
+   "b": "Sahasvān",
+   "words": "tataś ca viśvabhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.112",
+   "a": "Bṛhadbala",
+   "rel": "son_of",
+   "b": "Viśvabhava",
+   "words": "tasya bṛhadbalaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,4.112",
+   "a": "Abhimanyu",
+   "rel": "son_of",
+   "b": "Arjuna",
+   "words": "arjunatanayenābhimanyunā",
+   "doubt": false,
+   "check": "unsupported"
+  }
+ ]
+}

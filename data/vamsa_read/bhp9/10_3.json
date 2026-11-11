@@ -1,0 +1,26 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 10,
+ "part": 3,
+ "refs": [
+  "BhP 9.10.20"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:02:36",
+ "reply": "{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00163,
+ "tokens": {
+  "input": 769,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 9,
+  "thinking": 0
+ },
+ "statements": []
+}

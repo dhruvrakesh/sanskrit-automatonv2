@@ -1,0 +1,43 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 4,
+ "part": 2,
+ "refs": [
+  "BhP 9.4.54",
+  "BhP 9.4.55",
+  "BhP 9.4.56",
+  "BhP 9.4.57",
+  "BhP 9.4.58",
+  "BhP 9.4.59",
+  "BhP 9.4.60",
+  "BhP 9.4.61",
+  "BhP 9.4.62",
+  "BhP 9.4.63",
+  "BhP 9.4.64",
+  "BhP 9.4.65",
+  "BhP 9.4.66",
+  "BhP 9.4.67",
+  "BhP 9.4.68",
+  "BhP 9.4.69",
+  "BhP 9.4.70",
+  "BhP 9.4.71"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:01:37",
+ "reply": "The only kinship statement in these verses is in 9.4.71, where Nābhāga's son (the king) is named by the phrase \"nābhāgatanayaṃ nṛpam\". The verse does not name the king himself; the other verses name no relations. The king's name is not given in these verses, so the statement cannot be written with a named \"a\". Per the rules (\"no persons the verses do not name\"), I do not record it.\n\nOther verses contain no genealogical relations: \"dārāgāraputrāpta\" in 9.4.65 is generic, and \"satstriyaḥ satpatiṃ\" in 9.4.66 is a simile.\n\n{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00654,
+ "tokens": {
+  "input": 2216,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 211,
+  "thinking": 0
+ },
+ "statements": []
+}

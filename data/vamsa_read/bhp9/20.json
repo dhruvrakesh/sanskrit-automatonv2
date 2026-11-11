@@ -1,0 +1,425 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 20,
+ "part": 0,
+ "refs": [
+  "BhP 9.20.1",
+  "BhP 9.20.2",
+  "BhP 9.20.3",
+  "BhP 9.20.4",
+  "BhP 9.20.5",
+  "BhP 9.20.6",
+  "BhP 9.20.7",
+  "BhP 9.20.8",
+  "BhP 9.20.9",
+  "BhP 9.20.10",
+  "BhP 9.20.11",
+  "BhP 9.20.12",
+  "BhP 9.20.13",
+  "BhP 9.20.14",
+  "BhP 9.20.15",
+  "BhP 9.20.16",
+  "BhP 9.20.17",
+  "BhP 9.20.18",
+  "BhP 9.20.19",
+  "BhP 9.20.20",
+  "BhP 9.20.21",
+  "BhP 9.20.22",
+  "BhP 9.20.23",
+  "BhP 9.20.24",
+  "BhP 9.20.25",
+  "BhP 9.20.26",
+  "BhP 9.20.27",
+  "BhP 9.20.28",
+  "BhP 9.20.29",
+  "BhP 9.20.30",
+  "BhP 9.20.31",
+  "BhP 9.20.32",
+  "BhP 9.20.33",
+  "BhP 9.20.34",
+  "BhP 9.20.35",
+  "BhP 9.20.36",
+  "BhP 9.20.37",
+  "BhP 9.20.38",
+  "BhP 9.20.39"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:04:15",
+ "reply": "{\"statements\":[\n{\"ref\":\"BhP 9.20.2\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Pūru\",\"words\":\"janamejayo hyabhūt pūroḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.2\",\"a\":\"Pracinvān\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"pracinvāṃstatsutastataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.2\",\"a\":\"Pravīra\",\"rel\":\"son_of\",\"b\":\"Pracinvān\",\"words\":\"pravīro 'tha\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.2\",\"a\":\"Manusyu\",\"rel\":\"son_of\",\"b\":\"Pravīra\",\"words\":\"manusyurvai tasmāc\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.2\",\"a\":\"Cārupada\",\"rel\":\"son_of\",\"b\":\"Manusyu\",\"words\":\"tasmāc cārupado 'bhavat\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.3\",\"a\":\"Sudyu\",\"rel\":\"son_of\",\"b\":\"Cārupada\",\"words\":\"tasya sudyurabhūt putraḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.3\",\"a\":\"Bahugava\",\"rel\":\"son_of\",\"b\":\"Sudyu\",\"words\":\"tasmādbahugavastataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.3\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Bahugava\",\"words\":\"saṃyātistasya\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.3\",\"a\":\"Ahaṃyāti\",\"rel\":\"son_of\",\"b\":\"Saṃyāti\",\"words\":\"saṃyātistasyāhaṃyātī\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.3\",\"a\":\"Raudrāśva\",\"rel\":\"son_of\",\"b\":\"Ahaṃyāti\",\"words\":\"raudrāśvastatsutaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Ṛteyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"ṛteyustasya\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Kakṣeyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"kakṣeyuḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Sthaṇḍileyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"sthaṇḍileyuḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Kṛteyuka\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"kṛteyukaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Jaleyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"jaleyuḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Sannateyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"sannateyuśca\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Dharmeyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"dharmasatyavrateyavaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Satyeyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"dharmasatyavrateyavaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.4\",\"a\":\"Vrateyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"dharmasatyavrateyavaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.5\",\"a\":\"Vaneyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"vaneyuścāvamaḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.5\",\"a\":\"Ṛteyu\",\"rel\":\"son_of\",\"b\":\"Ghṛtācī\",\"words\":\"daśaite 'psarasaḥ putrā ghṛtācyām\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.6\",\"a\":\"Rantināva\",\"rel\":\"son_of\",\"b\":\"Ṛteyu\",\"words\":\"ṛteyo rantināvo 'bhūt\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.6\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Rantināva\",\"words\":\"trayastasyātmajā sumatirdhruvo 'pratirathaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.6\",\"a\":\"Dhruva\",\"rel\":\"son_of\",\"b\":\"Rantināva\",\"words\":\"trayastasyātmajā sumatirdhruvo 'pratirathaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.6\",\"a\":\"Apratiratha\",\"rel\":\"son_of\",\"b\":\"Rantināva\",\"words\":\"trayastasyātmajā sumatirdhruvo 'pratirathaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.6\",\"a\":\"Kaṇva\",\"rel\":\"son_of\",\"b\":\"Apratiratha\",\"words\":\"kaṇvo 'pratirathātmajaḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.7\",\"a\":\"Medhātithi\",\"rel\":\"son_of\",\"b\":\"Kaṇva\",\"words\":\"tasya medhātithiḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.7\",\"a\":\"Rebhi\",\"rel\":\"son_of\",\"b\":\"Sumati\",\"words\":\"putro 'bhūt sumate rebhiḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.7\",\"a\":\"Duṣmanta\",\"rel\":\"son_of\",\"b\":\"Rebhi\",\"words\":\"duṣmantastatsuto mataḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.13\",\"a\":\"Śakuntalā\",\"rel\":\"daughter_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrātmajaivāhaṃ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.13\",\"a\":\"Śakuntalā\",\"rel\":\"daughter_of\",\"b\":\"Menakā\",\"words\":\"tyaktā menakayā vane\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.16\",\"a\":\"Śakuntalā\",\"rel\":\"wife_of\",\"b\":\"Duṣmanta\",\"words\":\"upayeme śakuntalām\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.17\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Duṣmanta\",\"words\":\"kālenāsūta sā sutam\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.17\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Śakuntalā\",\"words\":\"kālenāsūta sā sutam\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.26\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Duṣmanta\",\"words\":\"bharatasya hi dauṣmanteḥ\",\"doubt\":false},\n{\"ref\":\"BhP 9.20.34\",\"a\":\"Vaidarbhī\",\"rel\":\"wife_of\",\"b\":\"Bharata\",\"words\":\"tasyāsan nṛpa vaidarbhyaḥ patnyaḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.35\",\"a\":\"Bharadvāja\",\"rel\":\"other\",\"b\":\"Bharata\",\"words\":\"bharadvājamupādaduḥ\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.36\",\"a\":\"Mamatā\",\"rel\":\"wife_of\",\"b\":\"Utathya\",\"words\":\"bhrātṛpatnyām\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.38\",\"a\":\"Bharadvāja\",\"rel\":\"son_of\",\"b\":\"Bṛhaspati\",\"words\":\"bhara dvājaṃ bṛhaspate\",\"doubt\":true},\n{\"ref\":\"BhP 9.20.38\",\"a\":\"Bharadvāja\",\"rel\":\"son_of\",\"b\":\"Mamatā\",\"words\":\"mūḍhe bhara dvājamimaṃ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03579,
+ "tokens": {
+  "input": 3693,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2840,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.20.2",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Pūru",
+   "words": "janamejayo hyabhūt pūroḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.2",
+   "a": "Pracinvān",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "pracinvāṃstatsutastataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.2",
+   "a": "Pravīra",
+   "rel": "son_of",
+   "b": "Pracinvān",
+   "words": "pravīro 'tha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.2",
+   "a": "Manusyu",
+   "rel": "son_of",
+   "b": "Pravīra",
+   "words": "manusyurvai tasmāc",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.2",
+   "a": "Cārupada",
+   "rel": "son_of",
+   "b": "Manusyu",
+   "words": "tasmāc cārupado 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.3",
+   "a": "Sudyu",
+   "rel": "son_of",
+   "b": "Cārupada",
+   "words": "tasya sudyurabhūt putraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.3",
+   "a": "Bahugava",
+   "rel": "son_of",
+   "b": "Sudyu",
+   "words": "tasmādbahugavastataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.3",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Bahugava",
+   "words": "saṃyātistasya",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.3",
+   "a": "Ahaṃyāti",
+   "rel": "son_of",
+   "b": "Saṃyāti",
+   "words": "saṃyātistasyāhaṃyātī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.3",
+   "a": "Raudrāśva",
+   "rel": "son_of",
+   "b": "Ahaṃyāti",
+   "words": "raudrāśvastatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Ṛteyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "ṛteyustasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Kakṣeyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "kakṣeyuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Sthaṇḍileyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "sthaṇḍileyuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Kṛteyuka",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "kṛteyukaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Jaleyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "jaleyuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Sannateyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "sannateyuśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Dharmeyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "dharmasatyavrateyavaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Satyeyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "dharmasatyavrateyavaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.20.4",
+   "a": "Vrateyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "dharmasatyavrateyavaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.5",
+   "a": "Vaneyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "vaneyuścāvamaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.20.5",
+   "a": "Ṛteyu",
+   "rel": "son_of",
+   "b": "Ghṛtācī",
+   "words": "daśaite 'psarasaḥ putrā ghṛtācyām",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.6",
+   "a": "Rantināva",
+   "rel": "son_of",
+   "b": "Ṛteyu",
+   "words": "ṛteyo rantināvo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.6",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Rantināva",
+   "words": "trayastasyātmajā sumatirdhruvo 'pratirathaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.6",
+   "a": "Dhruva",
+   "rel": "son_of",
+   "b": "Rantināva",
+   "words": "trayastasyātmajā sumatirdhruvo 'pratirathaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.6",
+   "a": "Apratiratha",
+   "rel": "son_of",
+   "b": "Rantināva",
+   "words": "trayastasyātmajā sumatirdhruvo 'pratirathaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.6",
+   "a": "Kaṇva",
+   "rel": "son_of",
+   "b": "Apratiratha",
+   "words": "kaṇvo 'pratirathātmajaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.20.7",
+   "a": "Medhātithi",
+   "rel": "son_of",
+   "b": "Kaṇva",
+   "words": "tasya medhātithiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.7",
+   "a": "Rebhi",
+   "rel": "son_of",
+   "b": "Sumati",
+   "words": "putro 'bhūt sumate rebhiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.7",
+   "a": "Duṣmanta",
+   "rel": "son_of",
+   "b": "Rebhi",
+   "words": "duṣmantastatsuto mataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.13",
+   "a": "Śakuntalā",
+   "rel": "daughter_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrātmajaivāhaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.13",
+   "a": "Śakuntalā",
+   "rel": "daughter_of",
+   "b": "Menakā",
+   "words": "tyaktā menakayā vane",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.16",
+   "a": "Śakuntalā",
+   "rel": "wife_of",
+   "b": "Duṣmanta",
+   "words": "upayeme śakuntalām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.17",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Duṣmanta",
+   "words": "kālenāsūta sā sutam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.20.17",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Śakuntalā",
+   "words": "kālenāsūta sā sutam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.20.26",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Duṣmanta",
+   "words": "bharatasya hi dauṣmanteḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.34",
+   "a": "Vaidarbhī",
+   "rel": "wife_of",
+   "b": "Bharata",
+   "words": "tasyāsan nṛpa vaidarbhyaḥ patnyaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.35",
+   "a": "Bharadvāja",
+   "rel": "other",
+   "b": "Bharata",
+   "words": "bharadvājamupādaduḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.36",
+   "a": "Mamatā",
+   "rel": "wife_of",
+   "b": "Utathya",
+   "words": "bhrātṛpatnyām",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.20.38",
+   "a": "Bharadvāja",
+   "rel": "son_of",
+   "b": "Bṛhaspati",
+   "words": "bhara dvājaṃ bṛhaspate",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.20.38",
+   "a": "Bharadvāja",
+   "rel": "son_of",
+   "b": "Mamatā",
+   "words": "mūḍhe bhara dvājamimaṃ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

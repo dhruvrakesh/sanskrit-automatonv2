@@ -1,0 +1,153 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bhp9",
+ "title": "Bhagavatapurana, book 9",
+ "chapter": 11,
+ "part": 1,
+ "refs": [
+  "BhP 9.11.1",
+  "BhP 9.11.2",
+  "BhP 9.11.3",
+  "BhP 9.11.4",
+  "BhP 9.11.5",
+  "BhP 9.11.6",
+  "BhP 9.11.7",
+  "BhP 9.11.8",
+  "BhP 9.11.9",
+  "BhP 9.11.10",
+  "BhP 9.11.11",
+  "BhP 9.11.12",
+  "BhP 9.11.13",
+  "BhP 9.11.14",
+  "BhP 9.11.15",
+  "BhP 9.11.16",
+  "BhP 9.11.17",
+  "BhP 9.11.18",
+  "BhP 9.11.19"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
+ "at": "2026-11-11T19:02:29",
+ "reply": "{\"statements\":[{\"ref\":\"BhP 9.11.11\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Sītā\",\"words\":\"yamau sā suṣuve sutau kuśo lava iti khyātau\",\"doubt\":false},{\"ref\":\"BhP 9.11.11\",\"a\":\"Lava\",\"rel\":\"son_of\",\"b\":\"Sītā\",\"words\":\"yamau sā suṣuve sutau kuśo lava iti khyātau\",\"doubt\":false},{\"ref\":\"BhP 9.11.11\",\"a\":\"Kuśa\",\"rel\":\"brother_of\",\"b\":\"Lava\",\"words\":\"yamau sā suṣuve sutau kuśo lava\",\"doubt\":false},{\"ref\":\"BhP 9.11.12\",\"a\":\"Aṅgada\",\"rel\":\"son_of\",\"b\":\"Lakṣmaṇa\",\"words\":\"aṅgadaścitraketuśca lakṣmaṇasyātmajau smṛtau\",\"doubt\":false},{\"ref\":\"BhP 9.11.12\",\"a\":\"Citraketu\",\"rel\":\"son_of\",\"b\":\"Lakṣmaṇa\",\"words\":\"aṅgadaścitraketuśca lakṣmaṇasyātmajau smṛtau\",\"doubt\":false},{\"ref\":\"BhP 9.11.12\",\"a\":\"Takṣa\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"takṣaḥ puṣkala ityāstāṃ bharatasya\",\"doubt\":false},{\"ref\":\"BhP 9.11.12\",\"a\":\"Puṣkala\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"takṣaḥ puṣkala ityāstāṃ bharatasya\",\"doubt\":false},{\"ref\":\"BhP 9.11.13\",\"a\":\"Subāhu\",\"rel\":\"son_of\",\"b\":\"Śatrughna\",\"words\":\"subāhuḥ śrutasenaśca śatrughnasya babhūvatuḥ\",\"doubt\":false},{\"ref\":\"BhP 9.11.13\",\"a\":\"Śrutasena\",\"rel\":\"son_of\",\"b\":\"Śatrughna\",\"words\":\"subāhuḥ śrutasenaśca śatrughnasya babhūvatuḥ\",\"doubt\":false},{\"ref\":\"BhP 9.11.14\",\"a\":\"Lavaṇa\",\"rel\":\"son_of\",\"b\":\"Madhu\",\"words\":\"madhoḥ putraṃ lavaṇaṃ nāma rākṣasam\",\"doubt\":false},{\"ref\":\"BhP 9.11.9\",\"a\":\"Sītā\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"bhāryāmuddiśya kasyacit\",\"doubt\":true},{\"ref\":\"BhP 9.11.15\",\"a\":\"Sītā\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"sītā bhartrā vivāsitā\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0138,
+ "tokens": {
+  "input": 2177,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 945,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BhP 9.11.11",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Sītā",
+   "words": "yamau sā suṣuve sutau kuśo lava iti khyātau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.11.11",
+   "a": "Lava",
+   "rel": "son_of",
+   "b": "Sītā",
+   "words": "yamau sā suṣuve sutau kuśo lava iti khyātau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BhP 9.11.11",
+   "a": "Kuśa",
+   "rel": "brother_of",
+   "b": "Lava",
+   "words": "yamau sā suṣuve sutau kuśo lava",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.12",
+   "a": "Aṅgada",
+   "rel": "son_of",
+   "b": "Lakṣmaṇa",
+   "words": "aṅgadaścitraketuśca lakṣmaṇasyātmajau smṛtau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.12",
+   "a": "Citraketu",
+   "rel": "son_of",
+   "b": "Lakṣmaṇa",
+   "words": "aṅgadaścitraketuśca lakṣmaṇasyātmajau smṛtau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.12",
+   "a": "Takṣa",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "takṣaḥ puṣkala ityāstāṃ bharatasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.12",
+   "a": "Puṣkala",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "takṣaḥ puṣkala ityāstāṃ bharatasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.13",
+   "a": "Subāhu",
+   "rel": "son_of",
+   "b": "Śatrughna",
+   "words": "subāhuḥ śrutasenaśca śatrughnasya babhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.13",
+   "a": "Śrutasena",
+   "rel": "son_of",
+   "b": "Śatrughna",
+   "words": "subāhuḥ śrutasenaśca śatrughnasya babhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.14",
+   "a": "Lavaṇa",
+   "rel": "son_of",
+   "b": "Madhu",
+   "words": "madhoḥ putraṃ lavaṇaṃ nāma rākṣasam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BhP 9.11.9",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "bhāryāmuddiśya kasyacit",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BhP 9.11.15",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "sītā bhartrā vivāsitā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}
