@@ -529,7 +529,15 @@ def claims_index(path: str) -> dict:
         for cid, role, eid in cl.execute("SELECT claim_id, role, entity_id FROM claim_links"):
             if role in sides[cid]:
                 sides[cid][role].add(eid)
-        claims = {r[0]: r for r in cl.execute("SELECT id, printed, relation, claim FROM claims")}
+        # CLAIMS_EPUB_2026_11_10: only the public-domain works (Raychaudhuri's): these verdicts are shown on the site
+        # as his, and a work in copyright (B. C. Law, to the end of 2029) is private reading on this PC
+        private = set()
+        if has(cl, "claim_works"):
+            private = {c for c, lic in cl.execute("SELECT code, licence FROM claim_works")
+                       if not str(lic or "").lower().startswith("public domain")}
+        wcol = "work" if "work" in {r[1] for r in cl.execute("PRAGMA table_info(claims)")} else "''"
+        claims = {r[0]: r for r in cl.execute("SELECT id, printed, relation, claim, %s FROM claims" % wcol)
+                  if r[4] not in private}
     finally:
         cl.close()
     for cid, sd in sides.items():

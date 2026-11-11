@@ -45,7 +45,7 @@ import argparse, collections, gzip, hashlib, json, os, sqlite3, sys, time, urlli
 from pathlib import Path
 
 MARK = "INDEX_SITE_2026_10_25"
-SCHEME = "i2"   # B2_SITE_2026_10_28: i2 adds the claims
+SCHEME = "i2"   # B2_SITE_2026_10_28: i2 adds the claims (GENEALOGY_HEAL_2026_11_10's epithets are fields of i2's persons)
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
@@ -340,17 +340,29 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_d
     for n in list(nodes):
         for s in g["spouses"].get(n, ()):
             nodes.add((n[0], s))
+    # GENEALOGY_HEAL_2026_11_10: the epithets ("Kaunteya = Arjuna"): on the person's row when it has a line, else a row
+    # of its own (no line, no spouse) so that a search for the epithet finds the person; only when the entry names one
+    try:
+        als = vv.aliases(db, kin_db)
+    except sqlite3.Error:
+        als = {}
+    for (src, e), a in als.items():
+        if a.get("same_as") and src in rv.SHELF_TITLES:
+            nodes.add((src, e))
     for (src, e) in sorted(nodes):
         pr = vv._person(g, src, e)
         has_line = (src, e) in g["par"] or (src, e) in g["chi"]
         up = vv._main_up(g, src, e) if has_line else [e]
         down = vv._main_down(g, src, e) if has_line else []
+        al = als.get((src, e)) or {}
         out["persons"].append(finish({
             "key": "%s:%d" % (src, e), "source": src, "entry": e, "head": pr["head"],
             "fold": rv.split_mark(vv._hon(pr["head"]))[0], "sex": pr["sex"], "named_only": bool(pr["named_only"]),
             "has_line": has_line, "up": pr["up"], "down": pr["down"], "parents_n": pr["parents"],
             "children_n": pr["children"], "canonical": canon(pr["entity"]) if pr["entity"] else None,
-            "spouses": pr["spouses"], "main_up": up[:-1], "main_down": down}))
+            "spouses": pr["spouses"], "main_up": up[:-1], "main_down": down,
+            **({"same_as": al["same_as"]} if al.get("same_as") else {}),
+            **({"gloss": al["gloss"]} if al.get("gloss") else {})}))
 
     # the longest lines, and the verses
     for src, ls in vv.lines(db, kin_db)["lines"].items():
@@ -523,13 +535,31 @@ def without_claims(rows: dict) -> dict:
     return out
 
 
+def without_aliases(rows: dict) -> dict:
+    """GENEALOGY_HEAL_2026_11_10: the rows as a site without C26 stores them: no epithets on the persons, and no row of
+    an epithet's own (no line, no spouse). Their hashes are then the ones such a site keeps, so once C26 is pasted they
+    differ and go again with the epithets."""
+    out = dict(rows)
+    keep = []
+    for r in rows.get("persons", []):
+        if "same_as" not in r and "gloss" not in r:
+            keep.append(r)
+        elif r.get("has_line") or r.get("spouses"):
+            keep.append(finish({k: v for k, v in r.items() if k not in ("same_as", "gloss", "row_hash")}))
+    out["persons"] = keep
+    return out
+
+
 def sync(rows: dict, sink, apply: bool, log=print) -> dict:
     """Send what differs: a table whose digest the server has is left alone; else only the rows whose hash differs,
     and the keys the desk no longer has are deleted. The run's row (meta) goes last."""
     man = sink.manifest() or {}
-    got = {"tables": {}, "sent": 0, "deleted": 0, "changed": 0, "waiting": []}
+    got = {"tables": {}, "sent": 0, "deleted": 0, "changed": 0, "waiting": [], "features_waiting": []}
     if not all(t in man for t in OPTIONAL):
         rows = without_claims(rows)   # B2_SITE_2026_10_28: C23 not pasted yet
+    if not (man.get("features") or {}).get("aliases"):
+        rows = without_aliases(rows)   # GENEALOGY_HEAL_2026_11_10: C26 not pasted yet
+        got["features_waiting"].append("aliases")
     for t in TABLES:
         if t in OPTIONAL and t not in man:
             got["waiting"].append(t)   # B2_SITE_2026_10_28: the site has no such table yet (C23 not pasted)
@@ -630,6 +660,9 @@ def main(argv=None) -> int:
         return 1
     wait = (["the claims wait (%s): paste docs\\cloud\\C23_index_claims_2026-10-28.sql, then ask Lovable to deploy "
              "supabase/functions/corpus-index again" % ", ".join(got["waiting"])] if got.get("waiting") else [])
+    if "aliases" in got.get("features_waiting", []):   # GENEALOGY_HEAL_2026_11_10
+        wait.append("the epithets wait (Kaunteya = Arjuna): paste docs\\cloud\\C26_index_aliases_2026-11-10.sql in one "
+                    "paste, then python scripts\\index_sync.py --apply")
     if a.status or not a.apply:
         todo = sum(x["send"] + x["delete"] for x in got["tables"].values())
         say("%s: %d row(s) to send or delete%s" % ("the site is current" if not todo else "the plan", todo,

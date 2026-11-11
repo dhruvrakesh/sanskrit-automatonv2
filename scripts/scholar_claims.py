@@ -49,10 +49,28 @@ it was made and how many of our entities it could be; --show, --report and --csv
 
   python scripts\\scholar_claims.py --link                           (free: the names tied to our entities)
 
+CLAIMS_EPUB_2026_11_10: the second work, B. C. Law, Ancient Indian Tribes (Lahore: Motilal Banarsidass, 1926; The
+Punjab Oriental (Sanskrit) Series, No. XII): the Kasis, the Kosalas, the Asmakas, the Magadhas and the Bhojas. The copy:
+the Internet Archive's EPUB of the Digital Library of India's scan 2015.78161 (Osmania University Library; 226 pages in
+its spine, each a scan and its OCR; md5 20edab5f62d1d54bf6772339d99d41f6), under data/shelf/law1926/. --work law1926. Its author
+died in 1969: in copyright in India to the end of 2029, so it is private reading on this PC only. Its licence does not
+begin "public domain", and so index_sync.py never sends its claims to the site, the Professor marks each one "in
+copyright: private reading", and kin_index.py's verdicts (shown on the site as the historian's) stay Raychaudhuri's.
+An EPUB page's text is its OCR (the Internet Archive's note "The text on this page is estimated to be only N%
+accurate" set aside); because that OCR is poor (Ka^i for Kasi, Bimbisara for Bhimasena), each page's scan goes with its
+text to the model ("image": true), which reads the words from the scan and copies its quotation from the OCR text, so
+that the quotation is still checked against the page mechanically. The book's printed pages are mapped from the EPUB's
+by the running heads (work["segments"]): the scan lacks printed pages 113-116 and carries five unnumbered plates.
+
+  python scripts\\scholar_claims.py --work law1926 --extract                 (free: the 226 pages' text into claims.db)
+  python scripts\\scholar_claims.py --work law1926 --pages 1-3 --yes         (a trial: about $0.04)
+  python scripts\\scholar_claims.py --work law1926 --part 1 --yes            (Chapter I, the Kasis; parts 1-5 and pre)
+
 The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's.
 """
 from __future__ import annotations
-import argparse, csv, datetime, difflib, hashlib, json, os, re, sqlite3, sys, time, types, unicodedata
+import argparse, base64, csv, datetime, difflib, hashlib, html, json, os, re, sqlite3, sys, time, types, unicodedata
+import zipfile   # CLAIMS_EPUB_2026_11_10
 from pathlib import Path
 
 MARK = "CLAIMS_2026_10_21"
@@ -81,7 +99,56 @@ WORKS = {
                   "2": (113, 328, "Part II: From the Coronation of Bimbisara to the Extinction of the Gupta Dynasty"),
                   "app": (329, 332, "Appendix: notes to pages of both parts")},
     },
+    # CLAIMS_EPUB_2026_11_10: "pdf" pages are the EPUB's pages in its spine (page_N.html is page N + 1; 226 of them, no
+    # page_39 and no page 40 so; a plate, as page_40.html is blank). The
+    # printed pages, from the running heads (ANCIENT INDIAN TRIBES 5; 44 THE KOSALAS): printed = page - offset within each
+    # segment; the scan has no printed pages 113-116, and the pages between the segments are plates or blank.
+    "law1926": {
+        "author": "Bimala Churn Law",
+        "title": "Ancient Indian Tribes (the Kasis, the Kosalas, the Asmakas, the Magadhas, the Bhojas)",
+        "short": "B. C. Law, Ancient Indian Tribes (1926)",
+        "publisher": "Lahore: Motilal Banarsidass (The Punjab Oriental (Sanskrit) Series, No. XII)", "year": "1926",
+        "edition": "first",
+        "source": "Digital Library of India 2015.78161 (Osmania University Library), as the Internet Archive's EPUB",
+        "handle": "in.ernet.dli.2015.78161", "md5": "20edab5f62d1d54bf6772339d99d41f6", "pdf_pages": 226,
+        "pdf": "data/shelf/law1926/2015.78161.Ancient-Indian-Tribes.epub",
+        "format": "epub", "image": True, "prompt_version": "claims-v1-img", "per_page": 0.012,
+        "licence": "in copyright in India to the end of 2029 (the author died in 1969): private reading on this PC, "
+                   "never on the site",
+        "running_head": "ANCIENT INDIAN TRIBES; THE KASIS, THE KOSALAS and the other chapters' titles",
+        "front": (0, -1), "offset": 0,
+        "segments": [(16, 39, 15), (42, 71, 17), (74, 131, 19), (132, 143, 15), (146, 153, 17), (156, 210, 19)],
+        "named": {12: "preface"},
+        "parts": {"pre": (12, 12, "Preface"),
+                  "1": (16, 50, "Chapter I: The Kasis (pp. 1-33)"),
+                  "2": (51, 104, "Chapter II: The Kosalas (pp. 34-85)"),
+                  "3": (105, 111, "Chapter III: The Asmakas or Assakas (pp. 86-92)"),
+                  "4": (112, 194, "Chapter IV: The Magadhas (pp. 93-175; the scan lacks pp. 113-116)"),
+                  "5": (195, 210, "Chapter V: The Bhojas (pp. 176-191)")},
+    },
 }
+
+
+def work_cmd(code: str) -> str:
+    """CLAIMS_EPUB_2026_11_10: the --work a NEXT line names (none for the first work, as before)."""
+    return "" if code == "phai1923" else " --work %s" % code
+
+
+def system_for(work: dict) -> str:
+    """CLAIMS_EPUB_2026_11_10: SYSTEM for a work: its year and running head; for Raychaudhuri the very text it was."""
+    s = SYSTEM.replace("a print of 1923", "a print of " + work.get("year", "1923"))
+    s = s.replace("(POLITICAL HISTORY OF INDIA)", "(%s)" % work.get("running_head", "POLITICAL HISTORY OF INDIA"))
+    if work.get("image"):
+        s += IMAGE_NOTE
+    return s
+
+
+IMAGE_NOTE = """
+
+The page's scan comes with its OCR text. Read the page from the scan where the OCR is garbled (a name, a number, a \
+diacritic), and give the subject and the object as the scan prints them. Copy the quotation from the OCR text as it \
+is given here, its misreadings too, so that it can be found in that text; where the OCR has lost the passage, copy \
+the nearest words it keeps."""
 
 RELATIONS = ("son_of", "father_of", "grandson_of", "descendant_of", "ancestor_of", "brother_of", "wife_of", "married",
              "successor_of", "predecessor_of", "contemporary_of", "priest_of", "teacher_of", "pupil_of", "king_of",
@@ -185,6 +252,11 @@ def say(verdict: str, nxt: str = "", also=()):
 # ---- pages ------------------------------------------------------------------------------------------
 def printed_of(work: dict, pdf_page: int) -> str:
     """The page number the book prints: the Foreword's i-v, then pdf - offset; "" for the front matter before."""
+    if "segments" in work:   # CLAIMS_EPUB_2026_11_10: the printed pages by segments; a plate or a blank page: ""
+        for a_, b_, off in work["segments"]:
+            if a_ <= pdf_page <= b_:
+                return str(pdf_page - off)
+        return work.get("named", {}).get(pdf_page, "")
     f0, f1 = work["front"]
     if f0 <= pdf_page <= f1:
         return [k for k, v in ROMAN.items() if v == pdf_page - f0 + 1][0]
@@ -195,6 +267,15 @@ def printed_of(work: dict, pdf_page: int) -> str:
 
 def pdf_of(work: dict, printed: str):
     p = str(printed).strip().lower()
+    if "segments" in work:   # CLAIMS_EPUB_2026_11_10
+        for n, name in work.get("named", {}).items():
+            if p == name:
+                return n
+        if p.isdigit():
+            for a_, b_, off in work["segments"]:
+                if a_ <= int(p) + off <= b_:
+                    return int(p) + off
+        return None
     if p in ROMAN:
         n = work["front"][0] + ROMAN[p] - 1
         return n if n <= work["front"][1] else None
@@ -594,6 +675,62 @@ def extract(pdf: Path) -> list:
     return [(i, (pg.extract_text() or "")) for i, pg in enumerate(r.pages, 1)]
 
 
+IA_NOTE = re.compile(r"^\s*The text on this page is estimated to be only [\d.]+% accurate\s*")
+
+
+def epub_pages(path: Path) -> list:
+    """CLAIMS_EPUB_2026_11_10: the EPUB's pages in its spine, [(page, html name, image name or "")]: page N + 1 for
+    page_N.html, its scan image_000N_00.jpeg (the Internet Archive's naming)."""
+    z = zipfile.ZipFile(str(path))
+    names = set(z.namelist())
+    opf = next((n for n in names if n.endswith(".opf")), "")
+    if not opf:
+        return []
+    root = opf.rsplit("/", 1)[0] + "/" if "/" in opf else ""
+    o = z.read(opf).decode("utf-8", "replace")
+    href = {}
+    for tag in re.findall(r"<item\b[^>]*>", o):
+        i, h = re.search(r'\bid="([^"]+)"', tag), re.search(r'\bhref="([^"]+)"', tag)
+        if i and h:
+            href[i.group(1)] = h.group(1)
+    out = []
+    for idref in re.findall(r'<itemref\b[^>]*\bidref="([^"]+)"', o):
+        h = href.get(idref, "")
+        m = re.match(r"page_(\d+)\.x?html?$", h)
+        if not m:
+            continue
+        k = int(m.group(1))
+        img = "%simage_%04d_00.jpeg" % (root, k)
+        out.append((k + 1, root + h, img if img in names else ""))
+    return out
+
+
+def epub_text(raw: str) -> str:
+    """A page's text: its paragraphs, the tags and the Internet Archive's note on its accuracy set aside."""
+    b = re.split(r"(?i)<body\b[^>]*>", raw, maxsplit=1)[-1]
+    b = re.sub(r"(?i)</p\s*>|<br\s*/?>", "\n", b)
+    b = html.unescape(re.sub(r"<[^>]+>", " ", b))
+    lines = [re.sub(r"[ \t\u00a0]+", " ", x).strip() for x in b.split("\n")]
+    text = "\n".join(x for x in lines if x)
+    return IA_NOTE.sub("", text)
+
+
+def extract_epub(path: Path) -> list:
+    """[(page, text)] of every page of the EPUB, in its spine."""
+    z = zipfile.ZipFile(str(path))
+    return [(n, epub_text(z.read(h).decode("utf-8", "replace"))) for n, h, _img in epub_pages(path)]
+
+
+def page_image(work: dict, path: Path, page: int) -> bytes:
+    """The scan of a page (EPUB), or b"" when the work sends no scans or the page has none."""
+    if not work.get("image") or work.get("format") != "epub" or not path.exists():
+        return b""
+    for n, _h, img in epub_pages(path):
+        if n == page and img:
+            return zipfile.ZipFile(str(path)).read(img)
+    return b""
+
+
 def md5_of(p: Path) -> str:
     h = hashlib.md5()
     with open(p, "rb") as f:
@@ -602,20 +739,25 @@ def md5_of(p: Path) -> str:
     return h.hexdigest()
 
 
-def done_pages(con, code: str, engine: str) -> dict:
+def done_pages(con, code: str, engine: str, pv: str = PROMPT_VERSION) -> dict:
     """{pdf_page: read id} of the pages read with this prompt and engine from the text they hold now."""
     rows = con.execute("SELECT r.pdf_page, MAX(r.id) FROM claim_reads r JOIN claim_pages p ON p.work = r.work AND "
                        "p.pdf_page = r.pdf_page AND p.sha256 = r.page_sha256 WHERE r.work = ? AND r.status = 'ok' AND "
-                       "r.prompt_version = ? AND r.engine = ? GROUP BY r.pdf_page", (code, PROMPT_VERSION, engine)).fetchall()
+                       "r.prompt_version = ? AND r.engine = ? GROUP BY r.pdf_page", (code, pv, engine)).fetchall()
     return {p: i for p, i in rows}
 
 
 # ---- the model --------------------------------------------------------------------------------------
-def rest_call(model: str, system: str, prompt: str, key: str, think: int, timeout: float = 180.0, opener=None):
-    """One generateContent call (JSON out; the thinking capped); a response shaped as the SDK's, for usage_meter."""
+def rest_call(model: str, system: str, prompt: str, key: str, think: int, timeout: float = 180.0, opener=None,
+              image: bytes = b""):
+    """One generateContent call (JSON out; the thinking capped); a response shaped as the SDK's, for usage_meter.
+    CLAIMS_EPUB_2026_11_10: image, a page's scan (JPEG), goes before the prompt."""
     import urllib.request
+    parts = [{"text": prompt}]
+    if image:
+        parts.insert(0, {"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(image).decode("ascii")}})
     body = {"systemInstruction": {"parts": [{"text": system}]},
-            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+            "contents": [{"role": "user", "parts": parts}],
             "generationConfig": {"temperature": 0.0, "maxOutputTokens": 8192, "responseMimeType": "application/json",
                                  "thinkingConfig": {"thinkingBudget": int(think)}}}
     req = urllib.request.Request(API % model, data=json.dumps(body).encode("utf-8"), method="POST",
@@ -650,10 +792,27 @@ def json_repair(t: str) -> str:
                           else "\\\\" + m.group(1), t)
 
 
+KV_LINE = re.compile(r'^(\s*"[A-Za-z_]+"\s*:\s*")(.*)("\s*,?\s*)$')
+ITEM_LINE = re.compile(r'^(\s*")(.*)("\s*,?\s*)$')
+
+
+def quote_repair(t: str) -> str:
+    """CLAIMS_EPUB_2026_11_10: a double quote the scan's OCR put inside a value, copied as it is ("Kanishka and his
+    "'uccessors", Raychaudhuri p. 252, refused six times), escaped. The replies give one key or one list item a line,
+    so a value is what stands between the line's first quote after the key and its last quote."""
+    out = []
+    for line in t.split("\n"):
+        m = KV_LINE.match(line) or ITEM_LINE.match(line)
+        if m and '"' in m.group(2):
+            line = m.group(1) + re.sub(r'(?<!\\)"', '\\"', m.group(2)) + m.group(3)
+        out.append(line)
+    return "\n".join(out)
+
+
 def parse_reply(text: str):
     t = (text or "").strip()
     d = None
-    for s in (t, json_repair(t)):   # CLAIMS_FIX_2026_10_21: then with the scan's backslashes read as backslashes
+    for s in (t, json_repair(t), json_repair(quote_repair(t))):   # CLAIMS_FIX_2026_10_21: then with the scan's backslashes read as backslashes
         a_, b_ = s.find("{"), s.rfind("}")
         for x in (s, s[a_:b_ + 1] if 0 <= a_ < b_ else None):
             if x is None:
@@ -711,7 +870,7 @@ def save_read(con, code: str, work: dict, pg: tuple, engine: str, status: str, c
     with con:
         cur = con.execute("INSERT INTO claim_reads(work, pdf_page, page_sha256, prompt_version, engine, status, claims, "
                           "cost_usd, in_tokens, out_tokens, raw, error, at, note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                          (code, n_page, sha, PROMPT_VERSION, engine, status, len(claims), cost, pin, pout,
+                          (code, n_page, sha, work.get("prompt_version", PROMPT_VERSION), engine, status, len(claims), cost, pin, pout,
                            (raw or "")[:200000], error[:2000] if error else None, at, note or None))
         rid = cur.lastrowid
         prev = ""   # CLAIMS_FIX_2026_10_21: the cite before, for an Ibid
@@ -746,22 +905,26 @@ def read_pages(a, con, code: str, work: dict, todo: list, caller=None) -> dict:
     key = os.environ.get("GEMINI_API_KEY", "") if caller is None else "stub"
     if not key:
         return {"refuse": "GEMINI_API_KEY is not set (.env)"}
-    call = caller or (lambda system, prompt: rest_call(a.model, system, prompt, key, a.think))
+    call = caller or (lambda system, prompt, image=b"": rest_call(a.model, system, prompt, key, a.think, image=image))
     got = {"read": 0, "claims": 0, "failed": 0, "cost": 0.0, "stopped": ""}
+    per = work.get("per_page", PER_PAGE)   # CLAIMS_EPUB_2026_11_10: the work's own estimate (a scan costs more)
+    system = system_for(work)
+    scan = Path(a.pdf or work["pdf"])
     for pg in todo:
-        if got["cost"] + PER_PAGE > a.max_usd:
+        if got["cost"] + per > a.max_usd:
             got["stopped"] = "--max-usd %.2f reached (spent %.4f in this run)" % (a.max_usd, got["cost"])
             break
-        if not usage_meter.budget_ok(a.db, PER_PAGE):
+        if not usage_meter.budget_ok(a.db, per):
             got["stopped"] = "the spend cap (python scripts\\set_budget.py shows it)"
             break
         prompt = page_prompt(work, pg[1], pg[2])
+        img = page_image(work, scan, pg[0])
         reply, resp, err = "", None, ""
         spent = 0.0   # CLAIMS_FIX_2026_10_21: every attempt's cost, on the page's read
         for attempt in range(4):
             t0 = time.time()
             try:
-                resp = call(SYSTEM, prompt)
+                resp = call(system, prompt, img) if img else call(system, prompt)
                 reply = getattr(resp, "text", "") or ""
                 err = ""
             except Exception as e:   # a network error, a quota, a timeout: waited for, then tried again
@@ -769,7 +932,7 @@ def read_pages(a, con, code: str, work: dict, todo: list, caller=None) -> dict:
                 resp = None
             cost = 0.0
             if resp is not None:   # a call that failed (a network error, a quota) is not billed
-                cost = usage_meter.meter(kind="claims", doc=code, engine=engine, resp=resp, in_chars=len(SYSTEM) + len(prompt),
+                cost = usage_meter.meter(kind="claims", doc=code, engine=engine, resp=resp, in_chars=len(system) + len(prompt),
                                          out_chars=len(reply), units=1, duration_s=time.time() - t0, ok=not err,
                                          db=a.db) or 0.0
             got["cost"] += cost
@@ -1298,7 +1461,8 @@ def main(argv=None, caller=None) -> int:
         pdf = Path(a.pdf or work["pdf"])
         print("  the scan: %s (%s); the claims database %s: not made yet" % (pdf, "here" if pdf.exists() else "NOT HERE",
                                                                              a.claims_db))
-        say("nothing read from %s yet" % work["short"], "python scripts\\scholar_claims.py --extract   (free)")
+        say("nothing read from %s yet" % work["short"], "python scripts\\scholar_claims.py%s --extract   (free)"
+            % work_cmd(code))
         return 0
     con = open_store(a.claims_db)
     try:
@@ -1326,7 +1490,7 @@ def main(argv=None, caller=None) -> int:
             if m5 != work["md5"]:
                 say("the scan at %s is not the copy registered (md5 %s, not %s): nothing read" % (pdf, m5, work["md5"]), "")
                 return 1
-            pages = extract(pdf)
+            pages = extract_epub(pdf) if work.get("format") == "epub" else extract(pdf)   # CLAIMS_EPUB_2026_11_10
             if len(pages) != work["pdf_pages"]:
                 say("the scan has %d pages, not %d: nothing read" % (len(pages), work["pdf_pages"]), "")
                 return 1
@@ -1336,10 +1500,12 @@ def main(argv=None, caller=None) -> int:
             print("  extracted: %d pages (%d with almost no text) into %s" % (have, empty, a.claims_db))
             if a.extract and not a.yes:
                 say("the text of %d pages of %s is in %s (free)" % (have, work["short"], a.claims_db),
-                    "python scripts\\scholar_claims.py --pages 1-3 --yes   (a trial: about $%.2f)" % (3 * PER_PAGE))
+                    "python scripts\\scholar_claims.py%s --pages 1-3 --yes   (a trial: about $%.2f)"
+                    % (work_cmd(code), 3 * work.get("per_page", PER_PAGE)))
                 return 0
         if not have:
-            say("the pages are not read from the scan yet", "python scripts\\scholar_claims.py --extract   (free)")
+            say("the pages are not read from the scan yet", "python scripts\\scholar_claims.py%s --extract   (free)"
+                % work_cmd(code))
             return 1
         try:
             if a.pages:
@@ -1355,20 +1521,21 @@ def main(argv=None, caller=None) -> int:
             say(str(e), "")
             return 2
         engine = "gemini:%s" % a.model
-        done = done_pages(con, code, engine)
+        done = done_pages(con, code, engine, work.get("prompt_version", PROMPT_VERSION))   # CLAIMS_EPUB_2026_11_10
+        per = work.get("per_page", PER_PAGE)
         pages = {r[0]: r for r in con.execute("SELECT pdf_page, printed, text, sha256 FROM claim_pages WHERE work = ?", (code,))}
         todo = [pages[n] for n in want if n in pages and (a.redo or n not in done)]
         print("  pages asked: %d (printed %s to %s); read already %d; to read %d; about $%.2f (%s)"
               % (len(want), printed_of(work, want[0]) if want else "-", printed_of(work, want[-1]) if want else "-",
-                 len([n for n in want if n in done]), len(todo), len(todo) * PER_PAGE, engine))
+                 len([n for n in want if n in done]), len(todo), len(todo) * per, engine))
         print("  " + budget_line(a.db, a.immutable))
         if not a.yes:
             if not todo:
                 say("every page asked is read already (--redo reads again)", "python scripts\\scholar_claims.py --report")
                 return 0
-            say("%d page(s) of %s to read, about $%.2f; nothing sent" % (len(todo), work["short"], len(todo) * PER_PAGE),
-                "python scripts\\scholar_claims.py %s --yes" % (("--pages %s" % a.pages) if a.pages else
-                                                               ("--part %s" % (a.part or "1"))))
+            say("%d page(s) of %s to read, about $%.2f; nothing sent" % (len(todo), work["short"], len(todo) * per),
+                "python scripts\\scholar_claims.py%s %s --yes" % (work_cmd(code), ("--pages %s" % a.pages) if a.pages else
+                                                                   ("--part %s" % (a.part or "1"))))
             return 0
         if not todo:
             say("every page asked is read already", "python scripts\\scholar_claims.py --report")
@@ -1385,8 +1552,9 @@ def main(argv=None, caller=None) -> int:
                                                                            got["failed"], got["cost"]))
         if got["stopped"]:
             verdict += "; stopped: %s (%d left)" % (got["stopped"], left)
-        say(verdict, "python scripts\\scholar_claims.py --report",
-            ["python scripts\\scholar_claims.py --show Janamejaya",
+        say(verdict, "python scripts\\scholar_claims.py%s --report" % work_cmd(code),
+            ["python scripts\\scholar_claims.py%s --link" % work_cmd(code),
+             "python scripts\\scholar_claims.py --show Janamejaya",
              "python scripts\\scholar_claims.py --csv data\\shelf\\%s_claims.csv" % code])
         return 0 if not got["failed"] and not got["stopped"] else 1
     finally:

@@ -98,6 +98,10 @@ CODES = ("m", "br", "vi", "vic")   # the GRETIL texts read (vic: the Visnu's cri
 LAW = ("B. C. Law, Tribes in Ancient India (Poona: Bhandarkar Oriental Research Institute, 1943): in copyright in "
        "India to the end of 2029 (the author died in 1969); not read here. Private reading only, from a copy held "
        "lawfully; from 1 Jan 2030 as Raychaudhuri is read.")
+# CLAIMS_EPUB_2026_11_10: his Ancient Indian Tribes (1926; the Kasis, the Kosalas, the Asmakas, the Magadhas, the Bhojas)
+# is read into claims.db as private reading (scholar_claims.py --work law1926): its claims stand beside the peoples here,
+# under his name ("scholars"), never as Raychaudhuri's, and this file is written on the PC only.
+LAW_READ = "law1926"
 RAYCHAUDHURI = "phai1923"
 
 
@@ -419,7 +423,7 @@ def build(db: str, claims_db: str, zp: Path, immutable: bool = False) -> dict:
                "entries": [{"id": e, "head": cited[e]["head"], "words": cited[e]["words"],
                             "cites": {c: sorted(v) for c, v in cited[e]["cites"].items()}} for e in eids],
                "lists": {}, "regions": {}, "entities": [], "ours": {"passages": 0, "texts": 0, "top": []},
-               "raychaudhuri": []}
+               "raychaudhuri": [], "scholars": []}
         for code, spec in LISTS.items():
             vs = sorted({v for e in eids for v in cited[e]["cites"].get(code, [])})
             if not vs:
@@ -450,8 +454,9 @@ def build(db: str, claims_db: str, zp: Path, immutable: bool = False) -> dict:
                 for d, n in (ment.get(ent) or {}).get("docs", {}).items():
                     docs[d] += n
                 for c in cl.get(ent, []):
-                    if all(c["id"] != x["id"] for x in row["raychaudhuri"]):
-                        row["raychaudhuri"].append(c)
+                    into = row["raychaudhuri"] if c["work"] == RAYCHAUDHURI else row["scholars"]   # CLAIMS_EPUB_2026_11_10
+                    if all(c["id"] != x["id"] for x in into):
+                        into.append(c)
         row["ours"] = {"passages": sum(docs.values()), "texts": len(docs), "top": [[d, n] for d, n in docs.most_common(3)]}
         rows.append(row)
     return {"mark": MARK, "at": now(), "db": db, "claims_db": claims_db, "zip": str(zp), "texts": facts,
@@ -477,6 +482,8 @@ def summarize(rows: list) -> dict:
             "tied": sum(1 for r in rows if r["entities"]), "in_our_texts": sum(1 for r in rows if r["ours"]["passages"]),
             "raychaudhuri": sum(1 for r in rows if r["raychaudhuri"]),
             "raychaudhuri_claims": sum(len(r["raychaudhuri"]) for r in rows),
+            "scholars": sum(1 for r in rows if r.get("scholars")),   # CLAIMS_EPUB_2026_11_10
+            "scholars_claims": sum(len(r.get("scholars") or []) for r in rows),
             "regions": {"%s %s" % k: v for k, v in sorted(region.items())}}
 
 
@@ -511,6 +518,9 @@ def show_row(r: dict, out=print):
         out("    ours: not tied to our names")
     for c in r["raychaudhuri"][:6]:
         out("    Raychaudhuri p. %s (%s): %s" % (c["page"], c["relation"], c["claim"]))
+    for c in (r.get("scholars") or [])[:6]:   # CLAIMS_EPUB_2026_11_10: B. C. Law (private reading)
+        out("    %s p. %s (%s): %s" % ("B. C. Law (1926)" if c["work"] == LAW_READ else c["work"], c["page"], c["relation"],
+                                     c["claim"]))
 
 
 def report(res: dict, limit: int = 30, out=print):
@@ -529,6 +539,9 @@ def report(res: dict, limit: int = 30, out=print):
         % (s["m_br_both"], s["m_br_agree"], s["m_br_differ"]))
     out("  tied to our names %d; named in our texts %d; Raychaudhuri speaks of %d (%d claims)"
         % (s["tied"], s["in_our_texts"], s["raychaudhuri"], s["raychaudhuri_claims"]))
+    if s.get("scholars"):   # CLAIMS_EPUB_2026_11_10
+        out("  B. C. Law (Ancient Indian Tribes, 1926; private reading) speaks of %d (%d claims)"
+            % (s["scholars"], s["scholars_claims"]))
     rows = res["rows"]
     diff = [r for r in rows if r["agree"] == "differ"]
     out("")
@@ -540,6 +553,12 @@ def report(res: dict, limit: int = 30, out=print):
     out("The lists and Raychaudhuri, side by side (%d):" % len(ray))
     for r in ray[:limit]:
         show_row(r, out)
+    law = sorted([r for r in rows if r.get("scholars")], key=lambda r: (-len(r["scholars"]), r["key"]))
+    if law:   # CLAIMS_EPUB_2026_11_10
+        out("")
+        out("The lists and B. C. Law, side by side (%d; private reading, never on the site):" % len(law))
+        for r in law[:limit]:
+            show_row(r, out)
     out("")
     out("Not read: " + res["law"])
 
@@ -550,7 +569,8 @@ def write(res: dict, jpath: Path, cpath: Path):
     with open(cpath, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
         w.writerow(["key", "name", "entries", "matsya", "matsya_region", "brahmanda", "brahmanda_region", "visnu",
-                    "vayu", "m_br", "ours", "our_passages", "our_texts", "raychaudhuri_claims", "raychaudhuri_pages"])
+                    "vayu", "m_br", "ours", "our_passages", "our_texts", "raychaudhuri_claims", "raychaudhuri_pages",
+                    "law_claims", "law_pages"])   # CLAIMS_EPUB_2026_11_10
         for r in res["rows"]:
             def vs(c):
                 return " ".join("%s%s" % (x["cited"], "" if x["verdict"] == "named" else "?" if x["verdict"] ==
@@ -559,7 +579,9 @@ def write(res: dict, jpath: Path, cpath: Path):
                         "/".join(r["regions"].get("m", [])), vs("br"), "/".join(r["regions"].get("br", [])), vs("vi"),
                         vs("va"), r["agree"], "; ".join(e["canonical"] for e in r["entities"]), r["ours"]["passages"],
                         r["ours"]["texts"], len(r["raychaudhuri"]),
-                        " ".join(sorted({c["page"] for c in r["raychaudhuri"]}, key=lambda p: (len(p), p)))])
+                        " ".join(sorted({c["page"] for c in r["raychaudhuri"]}, key=lambda p: (len(p), p))),
+                        len(r.get("scholars") or []),
+                        " ".join(sorted({c["page"] for c in r.get("scholars") or []}, key=lambda p: (len(p), p)))])
 
 
 def main(argv=None) -> int:

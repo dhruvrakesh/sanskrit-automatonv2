@@ -2703,3 +2703,25 @@ docs\ASKS_2026-10-22.md, section 16. From the automaton's root:
 4. The Karanagama: the same two commands with `--doc Karan_Aagama_by_Prof_Rama_Chandra_Pandey_4_-_Shaiva_Bharati_Varanasi`.
 5. The Nirukta: `python scripts\translate_passages.py --doc nirukta__w_gretil --engine anthropic:claude-sonnet-5-5 --lang hi`;
    then `python scripts\repair_text.py --doc nirukta__w_gretil --release`.
+
+## 10 Nov: the genealogies, C26 and B. C. Law (DOCS104_2026_11_10)
+
+docs\GENEALOGY_2026-11-10.md; docs\ASKS_2026-10-22.md, section 17. From the automaton's root unless said:
+
+1. The patches: `python scripts\patch_claims_epub_2026_11_10.py --check`, then without; the same for
+   `patch_genealogy_heal_2026_11_10.py` and `patch_docs104_2026_11_10.py`; `python scripts\docs_map.py --write`;
+   `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1` (231 modules); release.ps1 with
+   COMMIT_MSG_genealogy_20261110.txt.
+2. C26 in the Lovable Cloud SQL editor (docs\cloud\C26_index_aliases_2026-11-10.sql): B1, B2, the change (one paste,
+   BEGIN to COMMIT), A1, A3. Expected A1: true, true, true; A3: false, true, false.
+3. Srangam (D:\srangam-42267): `git pull --rebase --autostash`; the kit's patcher (`--check`, then without);
+   `npm run typecheck`; `npx vitest run`; `npm run build`; `git add` the five files by name; commit; push; Publish.
+4. `python scripts\index_sync.py` (the plan: about 6,800 persons, 87 statements and 76 steps to send, about 200 rows
+   to delete), then
+   `python scripts\index_sync.py --apply`; then A2 of C26. Open /corpus/genealogies/inm/9364 (Kaunteya[1]) and
+   /corpus/genealogies/inm/4635 (Arjuna) signed in.
+5. B. C. Law: `New-Item -ItemType Directory -Force data\shelf\law1926`; `Move-Item
+   inbox\2015.78161.Ancient-Indian-Tribes.epub data\shelf\law1926\`; then `python scripts\scholar_claims.py --work
+   law1926` with `--extract` (free); `--pages 1-3 --yes` (a trial, about $0.04); `--part pre --yes`, then `--part 1 --yes`
+   to `--part 5 --yes` (about $2.30 in all); `--link`; `--report`. Then `python scripts\peoples_index.py --yes`.
+6. Raychaudhuri's page 252: `python scripts\scholar_claims.py --reparse` (free), `python scripts\scholar_claims.py --link`.

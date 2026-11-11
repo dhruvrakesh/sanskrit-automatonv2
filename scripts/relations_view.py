@@ -342,12 +342,20 @@ def view(db: str, entity_id: int, shelf_dir, k: int = 24, depth: int = 6) -> dic
         c2 = ro(cp)
         try:
             if has(c2, "claims") and has(c2, "claim_links") and has(c2, "claim_reads"):
-                for cid, printed, rel, claim in c2.execute(
-                        "SELECT DISTINCT c.id, c.printed, c.relation, c.claim FROM claim_links l JOIN claims c ON "
+                works = {}   # CLAIMS_EPUB_2026_11_10: each claim under its own work; a work in copyright so marked
+                if has(c2, "claim_works"):
+                    for code, author, title, year, lic in c2.execute(
+                            "SELECT code, author, title, year, licence FROM claim_works"):
+                        works[code] = ("%s, %s (%s)" % (author, title, year) if code != "phai1923" else CLAIMS_SOURCE) + (
+                            "" if str(lic or "").lower().startswith("public domain") else
+                            "; in copyright: private reading on this PC, never on the site")
+                wcol = "c.work" if "work" in {r[1] for r in c2.execute("PRAGMA table_info(claims)")} else "''"
+                for cid, printed, rel, claim, work in c2.execute(
+                        "SELECT DISTINCT c.id, c.printed, c.relation, c.claim, " + wcol + " FROM claim_links l JOIN claims c ON "
                         "c.id = l.claim_id WHERE l.entity_id = ? AND c.read_id IN (SELECT MAX(id) FROM claim_reads "
                         "WHERE status = 'ok' GROUP BY work, pdf_page) ORDER BY c.id LIMIT 60", (entity_id,)):
                     out["claims"].append({"page": printed or "", "relation": rel or "", "claim": claim or "",
-                                          "source": CLAIMS_SOURCE})
+                                          "source": works.get(work, CLAIMS_SOURCE)})
                 out["read"]["claims"] = True
         finally:
             c2.close()

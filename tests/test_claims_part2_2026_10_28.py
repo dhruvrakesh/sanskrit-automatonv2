@@ -89,7 +89,9 @@ class TheFiles(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in files:
                 self.assertIn(MARK.encode(), (t / f).read_bytes(), f)
-                self.assertEqual((t / f).read_bytes(), (REPO / f).read_bytes(), f)
+                # CLAIMS_EPUB_2026_11_10 came after on scholar_claims.py: its backup is what this patch made
+                later = sorted((REPO / f).parent.glob(Path(f).name + ".bak_claimsepub_*"))
+                self.assertEqual((t / f).read_bytes(), (later[0] if later else REPO / f).read_bytes(), f)
             r = subprocess.run([sys.executable, str(PAT)], cwd=str(t), capture_output=True, text=True)
             self.assertIn("Nothing to do", r.stdout)
 

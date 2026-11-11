@@ -1,0 +1,21 @@
+The genealogies mended and explained, the epithets on the site, B. C. Law made ready as private reading (DOCS104_2026_11_10)
+
+Asked on 10 Nov: the genealogy pages made no sense, Kaunteya (Arjuna) was wrong, the dynasties were not there, and
+B. C. Law's EPUB was to be read as Raychaudhuri was. docs/GENEALOGY_2026-11-10.md.
+
+- GENEALOGY_HEAL_2026_11_10 (vamsa_view.py, index_sync.py): Soerensen's 5,525 epithet entries ("Kaunteya = Arjuna")
+  and the Purana Index's "a name of" tied to their persons; a son with two fathers drawn through his mother's husband
+  (Arjuna through Pandu, not Indra); names of several entries joined by the names both entries give; no line turns
+  back on itself; the longest lines are fathers' lines. The Srangam kit (docs/srangam/GENEALOGY_HEAL_2026-11-10/):
+  "How to read this page", an epithet sent to its person, Soerensen's citations explained.
+- C26_INDEX_ALIASES_2026_11_10 (docs/cloud/C26_index_aliases_2026-11-10.sql): same_as and gloss on the site's persons;
+  index_sync.py sends them only once the manifest says so.
+- CLAIMS_EPUB_2026_11_10 (scholar_claims.py --work law1926; kin_index.py, relations_view.py, peoples_index.py): the
+  EPUB's pages and scans read into claims, private (in copyright to the end of 2029); the historian's verdicts from
+  public-domain works only; a quote inside an OCR value escaped (Raychaudhuri p. 252).
+- DOCS104_2026_11_10: the register's section 17, STATE 39, the RUNBOOK's commands, the docs map's theme.
+
+Tests: test_genealogy_heal_2026_11_10 (28, PostgreSQL 16 for C26), test_docs104_2026_11_10; the full suite on a copy.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
