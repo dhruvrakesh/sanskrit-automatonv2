@@ -34,6 +34,11 @@ The stages, in the desk's order:
             path whose first step is not the translation, such as a re-ingest of changed pages; or the register
             holds it withdrawn or set aside)
   uncharted the path has not charted it (chart the path again: python scripts\\text_path.py, free)
+
+DESK_FRESH_2026_11_11: a text's own chart time (text_path.py --doc X --write puts one row in with its "at"), and what
+changed since it (changed_since: the OCR consensus, the merged pages, the register), so that the desk says when the
+path it shows is older than the text: on 11 Nov the Gandharva Veda's desk still said "vision has read 0 of its 507
+pages" a day after vision had read 506.
 """
 from __future__ import annotations
 
@@ -88,6 +93,62 @@ def load_path(p) -> dict:
         return res
     except (OSError, ValueError, TypeError, KeyError, AttributeError):
         return {"at": "", "texts": {}}
+
+
+def _ts(at: str):
+    try:
+        return time.mktime(time.strptime(str(at)[:19], "%Y-%m-%dT%H:%M:%S"))
+    except (ValueError, TypeError):
+        return None
+
+
+def row_at(prow, chart_at: str = "") -> str:
+    """DESK_FRESH_2026_11_11: when this text was charted: its own row's time, else the chart's."""
+    return str((prow or {}).get("at") or chart_at or "")
+
+
+def changed_since(doc: str, at: str, data) -> list:
+    """DESK_FRESH_2026_11_11: [(what, when)] that changed the text after its chart (at), in the data folder (beside the
+    database): the OCR consensus written (ocr_consensus/<doc>.json), pages merged (raw_merged/<doc>_NNNN.jsonl), the
+    register (source_verdicts.jsonl). Read-only; [] when the chart's time cannot be read."""
+    t0 = _ts(at)
+    if t0 is None or not doc:
+        return []
+    data = Path(data)
+    out = []
+
+    def when(ts):
+        return time.strftime("%Y-%m-%d %H:%M", time.localtime(ts))
+    try:
+        m = (data / "ocr_consensus" / ("%s.json" % doc)).stat().st_mtime
+        if m > t0 + 60:
+            out.append(("the OCR consensus (vision) written", when(m)))
+    except OSError:
+        pass
+    try:
+        newest = 0.0
+        for p in (data / "raw_merged").glob("%s_*.jsonl" % doc):
+            if re.match(r"^%s_\d{4}\.jsonl$" % re.escape(doc), p.name):
+                newest = max(newest, p.stat().st_mtime)
+        if newest > t0 + 60:
+            out.append(("its merged pages written", when(newest)))
+    except OSError:
+        pass
+    try:
+        last = None
+        for line in (data / "source_verdicts.jsonl").read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if isinstance(r, dict) and r.get("doc") == doc:
+                last = r
+        lt = _ts((last or {}).get("at") or "")
+        if last and lt is not None and lt > t0 + 60:
+            out.append(("the register: %s" % (last.get("status") or "?"), str(last.get("at"))[:16].replace("T", " ")))
+    except OSError:
+        pass
+    return out
 
 
 def chart_age_days(at: str, now: float = None):

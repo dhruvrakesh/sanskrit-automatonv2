@@ -1,0 +1,22 @@
+The desk says what is so now: one text charted again, its own date, what changed since; the credit read again (DOCS105_2026_11_11)
+
+Asked on 11 Nov: why the Natyasastra's desk did not move. The desk read data/text_path.json of 28 Oct, before vision
+read the Gandharva Veda's pages (10 and 11 Nov), and the dashboard showed the credit's defaults (started before .env
+had them), which its jobs inherited: expired on 11 Nov.
+
+- DESK_FRESH_2026_11_11 (text_path.py, translation_desk.py, claude_engine.py, dashboard.py): text_path.py --doc X
+  --write charts one text again (its e-text witness with it) and puts its row into the chart with its own time; the
+  desk dates a text by its row, says what changed since (the OCR consensus, the merged pages, the register) and offers
+  "Chart this text again (free)" (/api/repair step path_doc); the dashboard reads the credit's three settings from
+  .env again when it changes (the desk, the Usage tab, BM1's caps, every job it starts), the shell's own winning.
+  Tests that ran on the default's last day (test_claude_engine_2026_10_15) set a later one; test_tier_r and
+  test_redeem compare with the .bak_deskfresh_ copies.
+- C27_SPATIAL_REF_SYS_2026_11_11 (docs/cloud/C27_spatial_ref_sys_2026-11-11.sql): Lovable's finding on PostGIS's
+  table: a read-only check, the writes revoked from anon and authenticated, the check again; nothing dropped.
+- DOCS105_2026_11_11: the register's section 18, STATE 40, the RUNBOOK's commands.
+
+Tests: test_desk_fresh_2026_11_11 (14), test_docs105_2026_11_11; the full suite on a copy (232 modules, 1,731 tests;
+ten modules need .env's credit, as on the PC).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

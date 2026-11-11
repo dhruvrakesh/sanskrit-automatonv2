@@ -48,6 +48,13 @@ data/text_path.json (for the dashboard's /path page) and, with --html, a page to
   python scripts\\text_path.py                       every text
   python scripts\\text_path.py --doc nirukta         one text, with every fact
   python scripts\\text_path.py --html exports\\text_path.html
+
+DESK_FRESH_2026_11_11: --doc X --write charts one text again and puts its row into data/text_path.json (the others as
+they were), with the row's own time ("at"): the desk (/desk/<doc>) reads a text's path from that chart, and after a
+repair or a new reading the chart of a fortnight before kept saying "vision has read 0 of its 507 pages". A text whose
+path was "retire" (a duplicate: that needs every text) is charted again only by the whole chart.
+
+  python scripts\\text_path.py --doc gandharva_veda_natya_shastra --write
 """
 from __future__ import annotations
 
@@ -514,7 +521,7 @@ def chart(a) -> dict:
     reg = rt.verdicts(Path(a.verdicts))
     live = [c for c in dbf["codes"] if not c.endswith("-RETIRED")]
     retired = [c for c in dbf["codes"] if c.endswith("-RETIRED")]
-    only = [a.only] if a.only else live
+    only = ([a.only] + [c for c in live if c.startswith(a.only + "__w_")]) if a.only else live   # DESK_FRESH_2026_11_11: its witnesses too
     facts = {}
     for i, code in enumerate(only, 1):
         last = reg.get(code) or {}
@@ -589,14 +596,7 @@ def chart(a) -> dict:
                 "; superseded by %s" % dbf["retired"][base] if dbf["retired"].get(base) else ""),
                           "next": [], "also": [], "cost": 0.0, "then": 0.0, "facts": {"doc": c}, "retired": True})
     texts.sort(key=lambda t: (ORDER.get(t["path"], 99), -(t.get("cost") or 0), t["doc"]))
-    totals = {}
-    for t in texts:
-        if t.get("retired"):
-            continue
-        x = totals.setdefault(t["path"], {"texts": 0, "cost": 0.0, "cost_hi": 0.0, "cost_lo": 0.0, "then": 0.0})
-        x["texts"] += 1; x["cost"] += t.get("cost") or 0.0; x["then"] += t.get("then") or 0.0
-        x["cost_hi"] += t.get("cost_hi") or t.get("cost") or 0.0
-        x["cost_lo"] += t["cost_lo"] if t.get("cost_lo") is not None else (t.get("cost") or 0.0)
+    totals = totals_of(texts)
     return {"mark": MARK, "at": datetime.datetime.now().isoformat(timespec="seconds"), "prices": pr, "texts": texts,
             "totals": totals, "paths": [list(p) for p in PATHS]}
 
@@ -667,6 +667,48 @@ def page(res: dict) -> str:
                per_page(res["prices"].get("vision_dear") or 0), "$%.5f" % res["prices"]["passage"], body))
 
 
+def totals_of(texts: list) -> dict:
+    """{path: {"texts", "cost", "cost_hi", "cost_lo", "then"}} of the texts not retired."""
+    totals = {}
+    for t in texts:
+        if t.get("retired"):
+            continue
+        x = totals.setdefault(t["path"], {"texts": 0, "cost": 0.0, "cost_hi": 0.0, "cost_lo": 0.0, "then": 0.0})
+        x["texts"] += 1; x["cost"] += t.get("cost") or 0.0; x["then"] += t.get("then") or 0.0
+        x["cost_hi"] += t.get("cost_hi") or t.get("cost") or 0.0
+        x["cost_lo"] += t["cost_lo"] if t.get("cost_lo") is not None else (t.get("cost") or 0.0)
+    return totals
+
+
+def merge_row(path: Path, row) -> dict:
+    """DESK_FRESH_2026_11_11: the chart at path with one text's row put in (its place kept, or added; the others and the
+    chart's own time as they were); written atomically. row None: only read. Returns {"at", "rows": {doc: row}}."""
+    try:
+        d = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        d = {}
+    if not isinstance(d, dict):
+        d = {}
+    texts = [t for t in (d.get("texts") or []) if isinstance(t, dict)]
+    if row is not None:
+        for i, t in enumerate(texts):
+            if t.get("doc") == row.get("doc"):
+                texts[i] = row
+                break
+        else:
+            texts.append(row)
+        texts.sort(key=lambda t: (ORDER.get(t.get("path"), 99), -(t.get("cost") or 0), str(t.get("doc") or "")))
+        d["texts"] = texts
+        d["totals"] = totals_of([t for t in texts if t.get("path")])
+        d.setdefault("at", row.get("at"))
+        d.setdefault("mark", MARK)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+        os.replace(tmp, path)
+    return {"at": str(d.get("at") or ""), "rows": {t.get("doc"): t for t in texts if t.get("doc")}}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--db", default="data/context.db")
@@ -682,13 +724,35 @@ def main(argv=None) -> int:
     ap.add_argument("--html", default=None)
     ap.add_argument("--progress", action="store_true")
     ap.add_argument("--from-dashboard", action="store_true", help=argparse.SUPPRESS)
+    ap.add_argument("--write", action="store_true",   # DESK_FRESH_2026_11_11
+                    help="with --doc: put this text's row into the chart (data/text_path.json), the others as they were")
     a = ap.parse_args(argv)
     if not Path(a.db).exists():
         print("REFUSE: %s not found" % a.db); print("VERDICT: no database"); print("NEXT: "); return 1
     if a.from_dashboard:
         a.progress = True
+    if a.only and a.write:   # DESK_FRESH_2026_11_11: refused before the work when the text's path needs every text
+        old = merge_row(Path(a.out), None)
+        prev = (old.get("rows") or {}).get(a.only) or {}
+        if prev.get("path") == "retire":
+            print("VERDICT: %s's path is retire (a duplicate of another text): only the whole chart decides it; nothing "
+                  "written" % a.only)
+            print("NEXT: python scripts\\text_path.py   (every text, free)")
+            return 1
     res = chart(a)
     show(res, bool(a.only))
+    if a.only and a.write:
+        row = next((t for t in res["texts"] if t.get("doc") == a.only), None)
+        if row is None:
+            print("VERDICT: %s was not charted (not in the database?): nothing written" % a.only)
+            print("NEXT: python scripts\\text_path.py --doc %s" % a.only)
+            return 1
+        got = merge_row(Path(a.out), dict(row, at=res["at"]))
+        print("  wrote %s (%s charted again at %s; the chart of the others is of %s)" % (a.out, a.only, res["at"],
+                                                                                   got.get("at") or "-"))
+        print("VERDICT: %s: %s (%s)" % (a.only, row.get("path"), str(row.get("why") or "")[:200]))
+        print("NEXT: " + ((row.get("next") or [""])[0] or "-"))
+        return 0
     if not a.only:
         p = Path(a.out)
         p.parent.mkdir(parents=True, exist_ok=True)

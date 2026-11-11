@@ -226,6 +226,7 @@ class TheClient(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             con = usage_db(Path(d)); con.close()
             env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
+            env["SA_CLAUDE_CREDIT_EXPIRES"] = "2099-12-31"   # DESK_FRESH_2026_11_11: the default's last day (2026-11-11) is past
             r = subprocess.run([sys.executable, str(SCRIPTS / "claude_engine.py"), "--db", str(Path(d) / "u.db"), "--credit"],
                                capture_output=True, text=True, env=env, cwd=d)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
@@ -591,6 +592,8 @@ class TheDuel(unittest.TestCase):
             keep = DUEL.make_judge
             DUEL.make_judge = lambda eng, a, meta: judges.setdefault(eng, StubJudge())
             os.environ.setdefault("ANTHROPIC_API_KEY", "test-not-a-key")
+            exp = os.environ.get("SA_CLAUDE_CREDIT_EXPIRES")   # DESK_FRESH_2026_11_11: the default's last day is past
+            os.environ["SA_CLAUDE_CREDIT_EXPIRES"] = "2099-12-31"
             try:
                 cwd = os.getcwd(); os.chdir(d)
                 try:
@@ -632,6 +635,10 @@ class TheDuel(unittest.TestCase):
                     os.chdir(cwd)
             finally:
                 DUEL.make_judge = keep
+                if exp is None:
+                    os.environ.pop("SA_CLAUDE_CREDIT_EXPIRES", None)
+                else:
+                    os.environ["SA_CLAUDE_CREDIT_EXPIRES"] = exp
 
 
 class ThePatcher(unittest.TestCase):

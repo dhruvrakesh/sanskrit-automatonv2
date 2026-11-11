@@ -2725,3 +2725,19 @@ docs\GENEALOGY_2026-11-10.md; docs\ASKS_2026-10-22.md, section 17. From the auto
    law1926` with `--extract` (free); `--pages 1-3 --yes` (a trial, about $0.04); `--part pre --yes`, then `--part 1 --yes`
    to `--part 5 --yes` (about $2.30 in all); `--link`; `--report`. Then `python scripts\peoples_index.py --yes`.
 6. Raychaudhuri's page 252: `python scripts\scholar_claims.py --reparse` (free), `python scripts\scholar_claims.py --link`.
+
+## 11 Nov: the desk, the credit's line, spatial_ref_sys (DOCS105_2026_11_11)
+
+docs\ASKS_2026-10-22.md, section 18. From the automaton's root:
+
+1. Now, without any patch (free, read-only on the database): `python scripts\text_path.py` (every text, a few
+   minutes). The desk and /path read the new chart at once.
+2. The patches: `python scripts\patch_desk_fresh_2026_11_11.py --check`, then without; the same for
+   `patch_docs105_2026_11_11.py`; `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1 with
+   COMMIT_MSG_deskfresh_20261111.txt.
+3. Restart the dashboard when no job runs (the History says). After it: one text charted again from its desk page
+   ("Chart this text again (free)"), or `python scripts\text_path.py --doc gandharva_veda_natya_shastra --write`.
+4. The Gandharva Veda: `python scripts\benchmark_sources.py --doc gandharva_veda_natya_shastra` (free): which reading,
+   vision's of the edition or the GRETIL e-text, is the better text; then translate that one only.
+5. C27 in the Lovable Cloud SQL editor (docs\cloud\C27_spatial_ref_sys_2026-11-11.sql): S1 (read-only), S2 (the
+   writes revoked, one paste), S1 again.

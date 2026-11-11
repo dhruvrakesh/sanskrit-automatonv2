@@ -37,7 +37,38 @@ def _load_env():
         if sep:
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
+# DESK_FRESH_2026_11_11: the Claude credit's three settings the dashboard was started with from its shell win, as at
+# start; the others are read from .env again whenever it changes (_credit_env_fresh), for the desk, the Usage tab and
+# every job it starts (they inherit its environment): on 11 Nov the dashboard, started before .env had them (9 Nov),
+# showed "$0.00 left (it expires 2026-11-11)", the defaults, beside the CLI's $163.39 until 2026-12-11.
+_CREDIT_SHELL = {k for k in ("SA_CLAUDE_CREDIT_USD", "SA_CLAUDE_CREDIT_SINCE", "SA_CLAUDE_CREDIT_EXPIRES")
+                 if k in os.environ}
 _load_env()
+_CREDIT_ENV_SEEN = {"key": None}
+
+
+def _credit_env_fresh() -> None:
+    """DESK_FRESH_2026_11_11: the credit's settings as .env has them now (claude_engine.dotenv_credit: those three keys
+    only), when .env changed since last read; never raises."""
+    try:
+        p = ROOT / ".env"
+        st = p.stat()
+        key = (st.st_mtime_ns, st.st_size)
+        if _CREDIT_ENV_SEEN["key"] == key:
+            return
+        import claude_engine as _ce
+        got = _ce.dotenv_credit(p)
+        for k in _ce.CREDIT_KEYS:
+            if k in _CREDIT_SHELL:
+                continue
+            if k in got:
+                os.environ[k] = got[k]
+            else:
+                os.environ.pop(k, None)
+        _CREDIT_ENV_SEEN["key"] = key
+    except Exception:
+        pass
+
 
 CORPUS_ROOT = pathlib.Path(os.environ.get("CORPUS_ROOT", r"D:\hindu.holy.scriptures.all.sanskrit.pdf.entIDity"))
 
@@ -144,6 +175,7 @@ def _child_env() -> dict:
     Without this, a child printing Devanagari/IAST to its captured pipe on
     Windows encodes as cp1252 and raises UnicodeEncodeError('charmap'), which
     shows up as spurious per-verse errors (the infamous err:NNN counter)."""
+    _credit_env_fresh()   # DESK_FRESH_2026_11_11: a job bills the credit as .env has it now
     env = dict(os.environ)
     env["PYTHONUTF8"] = "1"                 # interpreter-wide UTF-8 mode
     env["PYTHONIOENCODING"] = "utf-8:replace"
@@ -1270,7 +1302,8 @@ _REPAIR_STEPS = ("assess", "repair", "use", "set_aside", "restore", "as_is", "ac
                  "benchmark", "benchmark_all",              # BENCHMARK_2026_10_11
                  "reingest_plan", "reingest",               # REINGEST_2026_10_12: only the pages that changed
                  "withdraw", "path_all",                    # PATH_2026_10_12: off the site; the path of every text
-                 "redeem_all")                              # REDEEM_2026_10_14: what of the translation is kept
+                 "redeem_all",                              # REDEEM_2026_10_14: what of the translation is kept
+                 "path_doc")                                # DESK_FRESH_2026_11_11: one text charted again (free)
 _REPAIR_MAX_USD = 5.0      # the most one press spends on vision OCR; above it, run repair_text.py by hand
 _REPAIR_STATES = ("set_aside", "translate_as_is", "complete", "in_repair", "witness",   # ETEXT_WITNESS_2026_10_11: witness
                   "withdrawn")                                                          # PATH_2026_10_12
@@ -1859,6 +1892,8 @@ def api_repair():
         argv += ["--withdraw", reason or "its text is damaged: a better source is wanted"]
     elif step == "path_all":   # PATH_2026_10_12: free and read-only
         argv = [script("text_path.py"), "--from-dashboard"]
+    elif step == "path_doc":   # DESK_FRESH_2026_11_11: free; the database read-only, its row put into the chart
+        argv = [script("text_path.py"), "--doc", doc, "--write", "--from-dashboard"]
     elif step == "redeem_all":   # REDEEM_2026_10_14: free and read-only
         argv = [script("redeem.py"), "--from-dashboard"]
     elif step in ("reingest_plan", "reingest"):   # REINGEST_2026_10_12: the plan is read-only; the re-ingest a writer
@@ -1993,6 +2028,7 @@ def _bm1_state(fresh: bool = False, db: str = None) -> dict:
                 mcon = bm.open_ro(db)
                 try:
                     p = bm.prices(mcon, BM1_DIR)
+                    _credit_env_fresh()   # DESK_FRESH_2026_11_11
                     caps = bm.caps(mcon)
                 finally:
                     mcon.close()
@@ -2930,6 +2966,7 @@ def _desk_state(fresh: bool = False) -> dict:
                 counts = _desk_counts(con)
                 try:
                     import claude_engine as _ce
+                    _credit_env_fresh()   # DESK_FRESH_2026_11_11
                     c = _ce.credit(con)
                     res["caps"]["credit_left"] = max(0.0, float(c["left"]))
                     res["caps"]["credit_expires"] = c.get("expires")
@@ -2963,7 +3000,8 @@ def _desk_state(fresh: bool = False) -> dict:
                                                       "rejected", "stale")},
                 "engines": dict(cv.get("engines") or {}), "spent": float(cv.get("spent") or 0.0),
                 "next": td.next_step(st, prow, cv, int(n.get("mula") or 0)),
-                "guard": td.guard(prow, rg, chart["at"])})
+                "at": td.row_at(prow, chart["at"]),   # DESK_FRESH_2026_11_11: the row's own chart time
+                "guard": td.guard(prow, rg, td.row_at(prow, chart["at"]))})
     except Exception as ex:   # the dashboard is never stopped by the desk
         res["error"] = "%s: %s" % (type(ex).__name__, str(ex)[:300])
     _DESK_CACHE.update(at=now_, res=res)
@@ -2976,7 +3014,8 @@ def _desk_guard(doc: str):
     try:
         import translation_desk as td
         chart = td.load_path(PATH_FILE)
-        return td.guard(chart["texts"].get(doc), _source_verdicts(pathlib.Path(DESK_DB).parent).get(doc), chart["at"])
+        return td.guard(chart["texts"].get(doc), _source_verdicts(pathlib.Path(DESK_DB).parent).get(doc),
+                        td.row_at(chart["texts"].get(doc), chart["at"]))   # DESK_FRESH_2026_11_11
     except Exception:
         return None
 
@@ -3058,6 +3097,19 @@ async function deskChart(btn){
     var d = await r.json();
     if (!d.job){ o.textContent = 'Could not start: ' + (d.error || 'unknown'); btn.disabled = false; return; }
     _dkWatch(d.job, function(j){ o.textContent = j.ok ? 'charted: the page reads it again' : 'it did not finish (the History has why)'; if (j.ok) setTimeout(function(){ location.reload(); }, 1500); }, null);
+  }catch(e){ o.textContent = 'Request failed: ' + e; btn.disabled = false; }
+}
+async function deskChartOne(doc, btn){   /* DESK_FRESH_2026_11_11: this text's path charted again, free */
+  btn.disabled = true; var o = document.getElementById('chartone'); o.textContent = 'charting this text...';
+  try{
+    var r = await fetch('/api/repair', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({step: 'path_doc', doc: doc})});
+    var d = await r.json();
+    if (!d.job){ o.textContent = 'Could not start: ' + (d.error || 'unknown'); btn.disabled = false; return; }
+    _dkWatch(d.job, function(j){
+      var out = String(j.out || '') + _DK_NL + String(j.err || ''), v = _dkLine(out, 'VERDICT: ');
+      o.textContent = j.ok ? ('charted: ' + (v || 'the page reads it again')) : ('it did not finish: ' + (v || 'the History has why'));
+      if (j.ok) setTimeout(function(){ location.reload(); }, 2500); else btn.disabled = false;
+    }, null);
   }catch(e){ o.textContent = 'Request failed: ' + e; btn.disabled = false; }
 }
 async function _dkWatch(id, done, pre){
@@ -3204,8 +3256,19 @@ def desk_text(doc):
                  e(r["stage"]), e(dict(td.STAGES).get(r["stage"], r["stage"])),
                  ('<span class="chip c-source">%s: %s</span>' % (e(held.replace("_", " ")), e(r.get("held_reason") or "")))
                  if held in td.HOLDS or held == "in_repair" else "", e(r["doc"]),
-                 (" (charted %s)" % e(str(s.get("chart_at") or "")[:10])) if s.get("chart_at") else "",
+                 (" (charted %s)" % e(str(r.get("at") or "")[:16].replace("T", " "))) if r.get("at") else "",   # DESK_FRESH_2026_11_11
                  e(td.PATH_LABEL.get(r["path"] or "", r["path"] or "not charted")), e(r["why"]), e(r["next"])))
+    try:   # DESK_FRESH_2026_11_11: what changed the text since its path was charted, and its own chart again
+        _chg = td.changed_since(r["doc"], r.get("at") or "", pathlib.Path(DESK_DB).parent)
+    except Exception:
+        _chg = []
+    h.append('<p class="%s" id="dkfresh">%s <button class="btn dkbtn" onclick="deskChartOne(\'%s\', this)">Chart this text '
+             'again (free)</button> <span class="small" id="chartone"></span></p>' % (
+                 "warn" if _chg else "small",
+                 e("Changed since its path was charted (%s): %s. The path above is of before: chart this text again "
+                   "(free, a minute; the database is read, not changed), and the page reads it again." % (
+                       str(r.get("at") or "")[:16].replace("T", " "), "; ".join("%s %s" % (w, t) for w, t in _chg)))
+                 if _chg else e("Nothing has changed this text since its path was charted."), e(r["doc"], quote=True)))
     if r["path"] and r["next_path"]:
         h.append('<p class="small">The path\'s steps: %s. <a href="/repair/%s">The repair page</a> &middot; '
                  '<a href="/path">The path</a></p>' % (e(" | ".join(r["next_path"])), e(r["doc"], quote=True)))
@@ -3336,8 +3399,8 @@ def api_desk_scholar():
             cover = {}
         if td.stage_of(prow, cover, reg) == "source":
             return jsonify({"error": "its path says the reading comes first (%s): %s" % (
-                td.PATH_LABEL.get((prow or {}).get("path") or "", ""), td.guard(prow, reg, chart["at"])["say"]
-                if td.guard(prow, reg, chart["at"]) else "")}), 409
+                td.PATH_LABEL.get((prow or {}).get("path") or "", ""), td.guard(prow, reg, td.row_at(prow, chart["at"]))["say"]
+                if td.guard(prow, reg, td.row_at(prow, chart["at"])) else "")}), 409   # DESK_FRESH_2026_11_11
     argv, why = td.scholar_argv(doc, step, data.get("pages") or "", data.get("limit") or td.STEP_VERSES,
                                 data.get("max_usd") or 0, reg.get("status") == "in_repair",
                                 from_ref=str(data.get("from_ref") or ""))   # TIER_R_2026_10_17
@@ -3379,8 +3442,9 @@ def _status_decorate(rows: list, dbp) -> list:
         _p = _chart["texts"].get(r.get("doc"))
         if _p and _td is not None:   # TRANSLATION_DESK_2026_10_17
             x["path"] = {"path": _p.get("path"), "label": _td.PATH_LABEL.get(_p.get("path"), _p.get("path")),
-                         "next": str((list(_p.get("next") or []) or [""])[0])[:300], "at": _chart["at"][:10],
-                         "held": bool(_td.guard(_p, reg.get(r.get("doc")), _chart["at"]))}
+                         "next": str((list(_p.get("next") or []) or [""])[0])[:300],
+                         "at": _td.row_at(_p, _chart["at"])[:10],   # DESK_FRESH_2026_11_11
+                         "held": bool(_td.guard(_p, reg.get(r.get("doc")), _td.row_at(_p, _chart["at"])))}
         g = reg.get(r.get("doc"))
         if g:
             x["held"] = {"status": g.get("status"), "at": str(g.get("at") or "")[:10], "reason": str(g.get("reason") or "")[:200]}
@@ -3397,6 +3461,7 @@ def _usage_more(con, d: dict) -> dict:
     kind and bill (BM1's kinds bench_* apart), and BM1's line. What was there is left as it was."""
     try:
         import claude_engine as _ce
+        _credit_env_fresh()   # DESK_FRESH_2026_11_11
         c = _ce.credit(con)
         d["credit"] = {"cap": c["cap"], "spent": round(c["spent"], 4), "left": round(max(0.0, c["left"]), 4),
                        "since": c["since"], "expires": c["expires"], "expired": c["expired"], "calls": c["calls"]}

@@ -175,6 +175,30 @@ def settings() -> dict:
             "expires": (os.environ.get("SA_CLAUDE_CREDIT_EXPIRES") or CREDIT_EXPIRES).strip()}
 
 
+CREDIT_KEYS = ("SA_CLAUDE_CREDIT_USD", "SA_CLAUDE_CREDIT_SINCE", "SA_CLAUDE_CREDIT_EXPIRES")
+
+
+def dotenv_credit(path) -> dict:
+    """DESK_FRESH_2026_11_11: the credit's three settings as the .env file at path has them now ({} when it has none);
+    only those keys are read, nothing else of the file. A process started before .env changed (the dashboard, on 11 Nov
+    showing "$0.00 left, it expires 2026-11-11", the defaults) puts them in its environment with this."""
+    out = {}
+    try:
+        for line in Path(path).read_text(encoding="utf-8", errors="replace").splitlines():
+            s = line.strip()
+            if s.startswith("export "):
+                s = s[7:].lstrip()
+            k, sep, v = s.partition("=")
+            k = k.strip()
+            if sep and k in CREDIT_KEYS:
+                v = v.split(" #", 1)[0].strip().strip('"').strip("'")
+                if v:
+                    out[k] = v
+    except OSError:
+        pass
+    return out
+
+
 def credit(con, today=None) -> dict:
     """{cap, spent, left, since, expires, expired, calls}: the usage_log rows of engine anthropic:% from since."""
     s = settings()
