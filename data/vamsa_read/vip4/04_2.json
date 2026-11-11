@@ -105,7 +105,7 @@
    "b": "Mūlaka",
    "words": "mūlakāddaśarathaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.75",
@@ -114,7 +114,7 @@
    "b": "Daśaratha",
    "words": "tasmādilivilaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.75",
@@ -249,7 +249,7 @@
    "b": "Daśaratha",
    "words": "daśarathiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.99",
@@ -357,7 +357,7 @@
    "b": "Kuśa",
    "words": "kuśasyātithiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.105",
@@ -375,7 +375,7 @@
    "b": "Niṣadha",
    "words": "niṣadhasyāpyanalaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.106",
@@ -411,7 +411,7 @@
    "b": "Kṣemadhanvan",
    "words": "tasya ca devānīkaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.106",
@@ -474,7 +474,7 @@
    "b": "Utka",
    "words": "utkācca vajranābhaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.106",
@@ -483,7 +483,7 @@
    "b": "Vajranābha",
    "words": "vajranābhastasmācchaṅkhaṇaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "ViP 4,4.106",
@@ -519,7 +519,7 @@
    "b": "Hiraṇyanābha",
    "words": "hiraṇyanābhasya putraḥ puṣyaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.108",
@@ -528,7 +528,7 @@
    "b": "Puṣya",
    "words": "tasmād dhruvasaṃdhiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.108",
@@ -537,7 +537,7 @@
    "b": "Dhruvasaṃdhi",
    "words": "tataḥ sudarśanaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.108",
@@ -546,7 +546,7 @@
    "b": "Sudarśana",
    "words": "tasmādagnivarmaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.108",
@@ -555,7 +555,7 @@
    "b": "Agnivarṇa",
    "words": "tataḥ śīghragaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.108",
@@ -573,7 +573,7 @@
    "b": "Maru",
    "words": "tasyātmajaḥ praśuśrukaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.111",
@@ -582,7 +582,7 @@
    "b": "Praśuśruka",
    "words": "tasyapi susaṃdhiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.111",
@@ -591,7 +591,7 @@
    "b": "Susaṃdhi",
    "words": "tataścāpyamarṣaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.111",
@@ -600,7 +600,7 @@
    "b": "Amarṣa",
    "words": "tasya ca sahasvān",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.111",

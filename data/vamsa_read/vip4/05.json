@@ -90,7 +90,7 @@
    "b": "Udāvasu",
    "words": "udāvasornadivardhanaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "ViP 4,5.25",
@@ -108,7 +108,7 @@
    "b": "Suketu",
    "words": "tasmāddevarātaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,5.25",
@@ -126,7 +126,7 @@
    "b": "Bṛhaduktha",
    "words": "tasya ce mahāvīryaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,5.25",
@@ -153,7 +153,7 @@
    "b": "Dhṛṣṭaketu",
    "words": "dhṛṣṭaketorharyaśvaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,5.27",
@@ -180,7 +180,7 @@
    "b": "Patika",
    "words": "tasmātkṛtarathaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,5.27",
@@ -207,7 +207,7 @@
    "b": "Vibudha",
    "words": "vibudhasya mahādhṛtiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,5.27",
@@ -441,7 +441,7 @@
    "b": "Upagupta",
    "words": "tatputraḥ svāgataḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,5.31",

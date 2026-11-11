@@ -356,7 +356,7 @@
    "b": "Romapāda",
    "words": "romapāda iti khyātaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.8",
@@ -365,7 +365,7 @@
    "b": "Romapāda",
    "words": "śāntāṃ svakanyāṃ prāyacchat",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.8",
@@ -428,7 +428,7 @@
    "b": "Bṛhadratha",
    "words": "ādyādbṛhanmanāstasmāt",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.11",
@@ -437,7 +437,7 @@
    "b": "Bṛhanmanas",
    "words": "bṛhanmanāstasmāj jayadrathaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.12",
@@ -491,7 +491,7 @@
    "b": "Satkarman",
    "words": "adhirathastataḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.13",
@@ -563,7 +563,7 @@
    "b": "Gāndhāra",
    "words": "tasya dharmaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.15",
@@ -581,7 +581,7 @@
    "b": "Dhṛta",
    "words": "dhṛtasya durmadaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.15",
@@ -608,7 +608,7 @@
    "b": "Turvasu",
    "words": "turvasośca suto vahniḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.16",
@@ -644,7 +644,7 @@
    "b": "Tribhānu",
    "words": "tatsuto 'syāpi karandhamaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.17",
@@ -671,7 +671,7 @@
    "b": "Yayāti",
    "words": "yayāterjyeṣṭhaputrasya yadoḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.20",
@@ -779,7 +779,7 @@
    "b": "Kunti",
    "words": "sohañjirabhavat kunteḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.22",
@@ -914,7 +914,7 @@
    "b": "Jayadhvaja",
    "words": "jayadhvajāt tālajaṅghaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.29",
@@ -1049,7 +1049,7 @@
    "b": "Uśanas",
    "words": "tatsuto rucakaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "BhP 9.23.35",

@@ -2775,3 +2775,20 @@ docs\ASKS_2026-10-22.md, section 20. From the automaton's root:
    SanskritCornerWorker | Get-ScheduledTaskInfo`; on the site, H1 of docs\cloud\OPS_health_2026-10-08.sql.
 5. The Gandharva Veda: a trial of 40 passages with Sonnet through the dashboard (`/api/translate`, engine
    anthropic:claude-sonnet-5-5, limit 40), then the rest from its desk page.
+
+## 11 Nov, night: the dynasties to the site (DOCS108_2026_11_11)
+
+docs\ASKS_2026-10-22.md, section 21. From the automaton's root unless said:
+
+1. The patches: `python scripts\patch_vamsa_join_2026_11_11.py --check`, then without; the same for
+   `patch_docs108_2026_11_11.py`; `python -m unittest tests.test_vamsa_join_2026_11_11 tests.test_b2_site_pg_2026_10_28
+   tests.test_docs108_2026_11_11`; `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1 with
+   COMMIT_MSG_dynasties_20261111.txt.
+2. `python scripts\vamsa_join.py` (free): the counts, data\vamsa_read\dynasties.json, exports\vamsa_dynasties.csv.
+3. C28 in the Lovable Cloud SQL editor (docs\cloud\C28_index_dynasties_2026-11-11.sql): B1, the change (one paste),
+   A1, A3.
+4. Srangam (D:\srangam-42267): `git pull --rebase --autostash`; the kit's patcher (`--check`, then without);
+   `npm run typecheck`; `npx vitest run`; `npm run build`; `git add` the six files by name; commit; push; Publish (it
+   deploys corpus-index again).
+5. `python scripts\index_sync.py` (the plan: the dynasties to send), then `python scripts\index_sync.py --apply`; A2.
+   Open /corpus/genealogies/dynasties signed in.

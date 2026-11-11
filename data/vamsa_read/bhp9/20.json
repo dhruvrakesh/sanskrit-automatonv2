@@ -113,7 +113,7 @@
    "b": "Cārupada",
    "words": "tasya sudyurabhūt putraḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.20.3",
@@ -131,7 +131,7 @@
    "b": "Bahugava",
    "words": "saṃyātistasya",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.20.3",
@@ -302,7 +302,7 @@
    "b": "Kaṇva",
    "words": "tasya medhātithiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.20.7",
@@ -311,7 +311,7 @@
    "b": "Sumati",
    "words": "putro 'bhūt sumate rebhiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.20.7",
@@ -374,7 +374,7 @@
    "b": "Duṣmanta",
    "words": "bharatasya hi dauṣmanteḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "BhP 9.20.34",
@@ -383,7 +383,7 @@
    "b": "Bharata",
    "words": "tasyāsan nṛpa vaidarbhyaḥ patnyaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.20.35",
@@ -401,7 +401,7 @@
    "b": "Utathya",
    "words": "bhrātṛpatnyām",
    "doubt": true,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "BhP 9.20.38",

@@ -83,7 +83,7 @@
    "b": "Yadu",
    "words": "kroṣṭostu yaduputrasya",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.2",
@@ -209,7 +209,7 @@
    "b": "Śita",
    "words": "tasyāpi rukmakavacaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.10",
@@ -326,7 +326,7 @@
    "b": "Vidarbha",
    "words": "tṛtīyaṃ romapādasaṃjñaṃ putramajījanat",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "ViP 4,12.39",
@@ -407,7 +407,7 @@
    "b": "Nidhṛti",
    "words": "nidhṛterdaśārhaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.41",
@@ -542,7 +542,7 @@
    "b": "Purumitra",
    "words": "tataścāṃśuḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.43",

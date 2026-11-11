@@ -1,0 +1,3025 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "vip4",
+ "title": "Visnupurana, book 4",
+ "lines": [
+  [
+   {
+    "name": "Kratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kunti",
+    "ref": "ViP 4,12.40",
+    "words": "krathasya snaṣāputrasyakuntirabhavat"
+   },
+   {
+    "name": "Dhṛṣṭi",
+    "ref": "ViP 4,12.41",
+    "words": "kunterdhṛṣṭiḥ"
+   },
+   {
+    "name": "Nidhṛti",
+    "ref": "ViP 4,12.41",
+    "words": "dhṛṣṭernidhṛtiḥ"
+   },
+   {
+    "name": "Daśārha",
+    "ref": "ViP 4,12.41",
+    "words": "nidhṛterdaśārhaḥ"
+   },
+   {
+    "name": "Vyoman",
+    "ref": "ViP 4,12.41",
+    "words": "tataś ca vyomaḥ"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "ViP 4,12.41",
+    "words": "tasyāpi jīmūtaḥ"
+   },
+   {
+    "name": "Vikṛti",
+    "ref": "ViP 4,12.41",
+    "words": "tataś ca vikṛtiḥ"
+   },
+   {
+    "name": "Bhībharatha",
+    "ref": "ViP 4,12.41",
+    "words": "tataś ca bhībharathaḥ"
+   },
+   {
+    "name": "Navaratha",
+    "ref": "ViP 4,12.41",
+    "words": "tasmānnavarathaḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "ViP 4,12.41",
+    "words": "tasyāpi daśarathaḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "ViP 4,12.41",
+    "words": "tataś ca śakuniḥ"
+   },
+   {
+    "name": "Karambhi",
+    "ref": "ViP 4,12.41",
+    "words": "tattanayaḥ karaṃbhiḥ"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "ViP 4,12.41",
+    "words": "karaṃbherdevarāto 'bhavat"
+   },
+   {
+    "name": "Devakṣatra",
+    "ref": "ViP 4,12.42",
+    "words": "tasmāddevakṣatraḥ"
+   },
+   {
+    "name": "Madhu",
+    "ref": "ViP 4,12.42",
+    "words": "tasyāpi madhuḥ"
+   },
+   {
+    "name": "Kumāravaṃśa",
+    "ref": "ViP 4,12.42",
+    "words": "madhoḥ kumāravaṃśaḥ"
+   },
+   {
+    "name": "Anu",
+    "ref": "ViP 4,12.42",
+    "words": "kumāravaṃśādanuḥ"
+   },
+   {
+    "name": "Purumitra",
+    "ref": "ViP 4,12.42",
+    "words": "anoḥ purumitraḥ"
+   },
+   {
+    "name": "Aṃśu",
+    "ref": "ViP 4,12.43",
+    "words": "tataścāṃśuḥ"
+   },
+   {
+    "name": "Satvata",
+    "ref": "ViP 4,12.43",
+    "words": "tasmācca satvataḥ"
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "ViP 4,13.1",
+    "words": "satvatasya putrā babhūvuḥ"
+   },
+   {
+    "name": "Anamitra",
+    "ref": "ViP 4,13.9",
+    "words": "tataścānamitraḥ"
+   },
+   {
+    "name": "Śini",
+    "ref": "ViP 4,14.1",
+    "words": "anamitrasya putraḥ śinirnāmābhavat"
+   },
+   {
+    "name": "Satyaka",
+    "ref": "ViP 4,14.2",
+    "words": "tasyāpi satyakaḥ"
+   },
+   {
+    "name": "Sātyaki",
+    "ref": "ViP 4,14.2",
+    "words": "satyakātsātyakiḥ"
+   },
+   {
+    "name": "Saṃjaya",
+    "ref": "ViP 4,14.3",
+    "words": "tasmādapi saṃjayaḥ"
+   },
+   {
+    "name": "Kuṇi",
+    "ref": "ViP 4,14.3",
+    "words": "tatputraś ca kuṇiḥ"
+   },
+   {
+    "name": "Yugandhara",
+    "ref": "ViP 4,14.3",
+    "words": "kuṇeryugandharaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bṛhadbala",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bṛhatkṣaṇa",
+    "ref": "ViP 4,22.2",
+    "words": "bṛhadbalasya putro bṛhatkṣaṇaḥ"
+   },
+   {
+    "name": "Urukṣaya",
+    "ref": "ViP 4,22.3",
+    "words": "tasmādurukṣayaḥ"
+   },
+   {
+    "name": "Vatsavyūha",
+    "ref": "ViP 4,22.3",
+    "words": "tasmācca vatsavyūhaḥ"
+   },
+   {
+    "name": "Prativyoma",
+    "ref": "ViP 4,22.3",
+    "words": "tataś ca prativyomaḥ"
+   },
+   {
+    "name": "Divāraka",
+    "ref": "ViP 4,22.3",
+    "words": "tasmādapi divārakaḥ"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "ViP 4,22.4",
+    "words": "tasmātsahadevaḥ"
+   },
+   {
+    "name": "Somāpi",
+    "ref": "ViP 4,23.4",
+    "words": "sahadevātsomāpiḥ"
+   },
+   {
+    "name": "Anuśrutaśravas",
+    "ref": "ViP 4,23.4",
+    "words": "tasyānuśrutaśravāḥ"
+   },
+   {
+    "name": "Ayutāyus",
+    "ref": "ViP 4,23.4",
+    "words": "tasyāpyayutāyuḥ"
+   },
+   {
+    "name": "Niramitra",
+    "ref": "ViP 4,23.4",
+    "words": "tataś ca niramitraḥ"
+   },
+   {
+    "name": "Sunetra",
+    "ref": "ViP 4,23.4",
+    "words": "tattanayaḥsunetraḥ"
+   },
+   {
+    "name": "Bṛhatkarman",
+    "ref": "ViP 4,23.4",
+    "words": "tasmādapi bṛhatkarmā"
+   },
+   {
+    "name": "Senajit",
+    "ref": "ViP 4,23.5",
+    "words": "tataś ca senajit"
+   },
+   {
+    "name": "Śrutañjaya",
+    "ref": "ViP 4,23.5",
+    "words": "tataś ca śrutañjayaḥ"
+   },
+   {
+    "name": "Vipra",
+    "ref": "ViP 4,23.5",
+    "words": "tato viprastasya"
+   },
+   {
+    "name": "Śucināman",
+    "ref": "ViP 4,23.5",
+    "words": "tasya ca putraḥ śucināmā"
+   },
+   {
+    "name": "Kṣemya",
+    "ref": "ViP 4,23.6",
+    "words": "tasyāpi kṣemyaḥ"
+   },
+   {
+    "name": "Suvrata",
+    "ref": "ViP 4,23.6",
+    "words": "tataś ca suvrataḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "ViP 4,23.6",
+    "words": "suvratāddharmaḥ"
+   },
+   {
+    "name": "Suśravas",
+    "ref": "ViP 4,23.6",
+    "words": "tataḥsuśravā"
+   },
+   {
+    "name": "Dṛḍhasena",
+    "ref": "ViP 4,23.7",
+    "words": "tato dṛḍhasenaḥ"
+   },
+   {
+    "name": "Subala",
+    "ref": "ViP 4,23.8",
+    "words": "tasmātsubalaḥ"
+   },
+   {
+    "name": "Sunīta",
+    "ref": "ViP 4,23.9",
+    "words": "subalātsunīto bhavitā"
+   },
+   {
+    "name": "Satyajit",
+    "ref": "ViP 4,23.10",
+    "words": "tataḥsatyajit"
+   },
+   {
+    "name": "Viśvajit",
+    "ref": "ViP 4,23.11",
+    "words": "tasmādviśvajit"
+   },
+   {
+    "name": "Ripuñjaya",
+    "ref": "ViP 4,23.12",
+    "words": "tasyāpi ripuñjayaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vitatha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Manyu",
+    "ref": "ViP 4,19.20",
+    "words": "vitathasyāpi manyuḥ putro 'bhavat"
+   },
+   {
+    "name": "Bṛhatkṣatra",
+    "ref": "ViP 4,19.21",
+    "words": "bṛhatkṣatramahāvīryanagaragargā abhavanmanyuputrāḥ"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "ViP 4,19.27",
+    "words": "suhotraḥ"
+   },
+   {
+    "name": "Hastin",
+    "ref": "ViP 4,19.28",
+    "words": "suhotraddhastī"
+   },
+   {
+    "name": "Ajamīḍha",
+    "ref": "ViP 4,19.29",
+    "words": "ajamīḍhadvijamīḍhāstrayo"
+   },
+   {
+    "name": "Nīla",
+    "ref": "ViP 4,19.56",
+    "words": "ajamīḍhasya nalinī nāma patnī tasyāṃ nīlasaṃjñaḥ putro"
+   },
+   {
+    "name": "Śānti",
+    "ref": "ViP 4,19.57",
+    "words": "tasmādapi śāntiḥ"
+   },
+   {
+    "name": "Suśānti",
+    "ref": "ViP 4,19.57",
+    "words": "śānteḥsuśāntiḥ"
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "ViP 4,19.57",
+    "words": "suśānteḥ purañjayaḥ"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "ViP 4,19.57",
+    "words": "tasmācca ṛkṣaḥ"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "ViP 4,19.58",
+    "words": "tataś ca haryaśvaḥ"
+   },
+   {
+    "name": "Mudgala",
+    "ref": "ViP 4,19.59",
+    "words": "tasmānmudgalasṛṃjayabṛhadiṣuyavīnarakāṃpilyasaṃjñāḥ"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "ViP 4,19.61",
+    "words": "mudgalāddharyaśvaḥ"
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "ViP 4,19.62",
+    "words": "haryaśvāddivodāso 'halyā ca mithunamabhūt"
+   },
+   {
+    "name": "Mitrāyu",
+    "ref": "ViP 4,19.69",
+    "words": "divodāsasya putro mitrāyuḥ"
+   },
+   {
+    "name": "Cyavana",
+    "ref": "ViP 4,19.70",
+    "words": "mitrāyoścayavano nāma rājā"
+   },
+   {
+    "name": "Kṛtaka",
+    "ref": "ViP 4,19.79",
+    "words": "cyavanāt kṛtakaḥ"
+   },
+   {
+    "name": "Vasu",
+    "ref": "ViP 4,19.80",
+    "words": "tataścoparicaro vasuḥ"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "ViP 4,19.81",
+    "words": "bṛhadrathapratyagrakuśāṃbakucelamātsyapramukhāḥ vasoḥ putrāḥsaptājāyanta"
+   },
+   {
+    "name": "Kuśāgra",
+    "ref": "ViP 4,19.82",
+    "words": "vṛhadrathātkuśāgraḥ"
+   },
+   {
+    "name": "Vṛṣabha",
+    "ref": "ViP 4,19.82",
+    "words": "kuśāgrādvṛṣabhaḥ"
+   },
+   {
+    "name": "Puṣpavān",
+    "ref": "ViP 4,19.82",
+    "words": "vṛṣabhāt puṣpavān"
+   },
+   {
+    "name": "Satyahita",
+    "ref": "ViP 4,19.82",
+    "words": "tasmātsatyahitaḥ"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "ViP 4,19.82",
+    "words": "tasmātsudhanvā"
+   },
+   {
+    "name": "Jatu",
+    "ref": "ViP 4,19.82",
+    "words": "tasya ca jatuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vivasvān",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Manu",
+    "ref": "ViP 4,1.6",
+    "words": "vivasvato manuḥ"
+   },
+   {
+    "name": "Diṣṭa",
+    "ref": "ViP 4,1.7",
+    "words": "diṣṭa"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "ViP 4,1.19",
+    "words": "diṣṭaputrastu nābhāgo"
+   },
+   {
+    "name": "Balandhana",
+    "ref": "ViP 4,1.19",
+    "words": "tasmādbalandhanaḥ putrobhavat"
+   },
+   {
+    "name": "Vatsaprīti",
+    "ref": "ViP 4,1.20",
+    "words": "balandhanādvatsaprītiḥ"
+   },
+   {
+    "name": "Prāṃśu",
+    "ref": "ViP 4,1.21",
+    "words": "vatsaprīteḥ prāṃśurabhavat"
+   },
+   {
+    "name": "Prajāpati",
+    "ref": "ViP 4,1.22",
+    "words": "prajāpatiś ca prāṃśoreko 'bhavat"
+   },
+   {
+    "name": "Khanitra",
+    "ref": "ViP 4,1.23",
+    "words": "tataś ca khanitraḥ"
+   },
+   {
+    "name": "Cakṣus",
+    "ref": "ViP 4,1.24",
+    "words": "tasmāccakṣuṣaḥ"
+   },
+   {
+    "name": "Viṃśu",
+    "ref": "ViP 4,1.25",
+    "words": "cakṣuṣāccatibalaparākramoviṃśurabhavat"
+   },
+   {
+    "name": "Viviṃśaka",
+    "ref": "ViP 4,1.26",
+    "words": "tato viviṃśakaḥ"
+   },
+   {
+    "name": "Khaninetra",
+    "ref": "ViP 4,1.27",
+    "words": "tasmācca khaninetraḥ"
+   },
+   {
+    "name": "Ativibhūti",
+    "ref": "ViP 4,1.28",
+    "words": "tataścātivibhūtiḥ"
+   },
+   {
+    "name": "Karandhama",
+    "ref": "ViP 4,1.29",
+    "words": "ativibhūteratibalaparākramaḥ karandhamaḥ putrobhavat"
+   },
+   {
+    "name": "Avikṣit",
+    "ref": "ViP 4,1.30",
+    "words": "tasmādapyavikṣit"
+   },
+   {
+    "name": "Marutta",
+    "ref": "ViP 4,1.31",
+    "words": "avikṣitopyatibalaparākramaḥ putro marutto nāmābhavat"
+   },
+   {
+    "name": "Nariṣyanta",
+    "ref": "ViP 4,1.34",
+    "words": "maruttaścakravarti nariṣyantanāmānaṃ putramavāpa"
+   },
+   {
+    "name": "Dama",
+    "ref": "ViP 4,1.35",
+    "words": "tasmācca damaḥ"
+   },
+   {
+    "name": "Rājavardhana",
+    "ref": "ViP 4,1.36",
+    "words": "damasya putro rājavardhano jajñe"
+   },
+   {
+    "name": "Suvṛddhi",
+    "ref": "ViP 4,1.37",
+    "words": "rājavardhanātsuvṛddhiḥ"
+   },
+   {
+    "name": "Kevala",
+    "ref": "ViP 4,1.38",
+    "words": "suvṛddheḥ kevalaḥ"
+   },
+   {
+    "name": "Sudhṛti",
+    "ref": "ViP 4,1.39",
+    "words": "kevalātsudhṛtirabhūt"
+   },
+   {
+    "name": "Nara",
+    "ref": "ViP 4,1.40",
+    "words": "tataś ca naraḥ"
+   },
+   {
+    "name": "Candra",
+    "ref": "ViP 4,1.41",
+    "words": "tasmāccandraḥ"
+   },
+   {
+    "name": "Kevala",
+    "ref": "ViP 4,1.42",
+    "words": "tataḥ kevalobhūt"
+   }
+  ],
+  [
+   {
+    "name": "Suketu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devarāta",
+    "ref": "ViP 4,5.25",
+    "words": "tasmāddevarātaḥ"
+   },
+   {
+    "name": "Bṛhaduktha",
+    "ref": "ViP 4,5.25",
+    "words": "tataś ca bṛhadukthaḥ"
+   },
+   {
+    "name": "Mahāvīrya",
+    "ref": "ViP 4,5.25",
+    "words": "tasya ce mahāvīryaḥ"
+   },
+   {
+    "name": "Sudhṛti",
+    "ref": "ViP 4,5.25",
+    "words": "tasyāpi sudhṛti"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "ViP 4,5.26",
+    "words": "tataścadhṛṣṭaketurajāyata"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "ViP 4,5.27",
+    "words": "dhṛṣṭaketorharyaśvaḥ"
+   },
+   {
+    "name": "Manu",
+    "ref": "ViP 4,5.27",
+    "words": "tasya ca manuḥ"
+   },
+   {
+    "name": "Patika",
+    "ref": "ViP 4,5.27",
+    "words": "manoḥ patikaḥ"
+   },
+   {
+    "name": "Kṛtaratha",
+    "ref": "ViP 4,5.27",
+    "words": "tasmātkṛtarathaḥ"
+   },
+   {
+    "name": "Devamīḍha",
+    "ref": "ViP 4,5.27",
+    "words": "tasya devamīḍhaḥ"
+   },
+   {
+    "name": "Vibudha",
+    "ref": "ViP 4,5.27",
+    "words": "tasya ca vibudhaḥ"
+   },
+   {
+    "name": "Mahādhṛti",
+    "ref": "ViP 4,5.27",
+    "words": "vibudhasya mahādhṛtiḥ"
+   },
+   {
+    "name": "Kṛtarāta",
+    "ref": "ViP 4,5.27",
+    "words": "tataś ca kṛtarātaḥ"
+   },
+   {
+    "name": "Mahāromā",
+    "ref": "ViP 4,5.27",
+    "words": "tato mahāromā"
+   },
+   {
+    "name": "Svarṇaromā",
+    "ref": "ViP 4,5.27",
+    "words": "tasya svarṇaromā"
+   },
+   {
+    "name": "Hrasvaromā",
+    "ref": "ViP 4,5.27",
+    "words": "tatputro hrasvaroṇā"
+   },
+   {
+    "name": "Sīradhvaja",
+    "ref": "ViP 4,5.27",
+    "words": "hrasvaromṇaḥ sīradhvajo 'bhavat"
+   },
+   {
+    "name": "Bhānumān",
+    "ref": "ViP 4,5.30",
+    "words": "sīradhvajasyāpatyaṃ bhānumān"
+   },
+   {
+    "name": "Śatadyumna",
+    "ref": "ViP 4,5.30",
+    "words": "bhānumataḥ śatadyumnaḥ"
+   },
+   {
+    "name": "Śuci",
+    "ref": "ViP 4,5.30",
+    "words": "tasya tu śuciḥ"
+   }
+  ],
+  [
+   {
+    "name": "Aśmaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mūlaka",
+    "ref": "ViP 4,4.73",
+    "words": "aśmasya mūlako nāma putro 'bhavat"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "ViP 4,4.75",
+    "words": "mūlakāddaśarathaḥ"
+   },
+   {
+    "name": "Ilivila",
+    "ref": "ViP 4,4.75",
+    "words": "tasmādilivilaḥ"
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "ViP 4,4.75",
+    "words": "tataś ca viśvasahaḥ"
+   },
+   {
+    "name": "Khaṭvāṅga",
+    "ref": "ViP 4,4.76",
+    "words": "tasmācca khaṭvāṅgaḥ"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "ViP 4,4.83",
+    "words": "khaṭvāṅgāddīrghabāhuḥ putro 'bhavat"
+   },
+   {
+    "name": "Raghu",
+    "ref": "ViP 4,4.84",
+    "words": "tato raghurabhavat"
+   },
+   {
+    "name": "Aja",
+    "ref": "ViP 4,4.85",
+    "words": "tasmādapyajaḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "ViP 4,4.86",
+    "words": "ajāddaśarathaḥ"
+   },
+   {
+    "name": "Rāma",
+    "ref": "ViP 4,4.99",
+    "words": "daśarathiḥ"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "ViP 4,4.104",
+    "words": "rāmasya kuśalavo dvau putrau"
+   },
+   {
+    "name": "Atithi",
+    "ref": "ViP 4,4.105",
+    "words": "kuśasyātithiḥ"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "ViP 4,4.105",
+    "words": "atitherapi niṣadhaḥ putro 'bhūt"
+   },
+   {
+    "name": "Anala",
+    "ref": "ViP 4,4.106",
+    "words": "niṣadhasyāpyanalaḥ"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "ViP 4,4.106",
+    "words": "tasmādapi nabhaḥ"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "ViP 4,4.106",
+    "words": "nabhasaḥ puṇḍarīkastattanayaḥ"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "ViP 4,4.106",
+    "words": "puṇḍarīkastattanayaḥ kṣemadhanvā"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "ViP 4,4.106",
+    "words": "tasya ca devānīkaḥ"
+   },
+   {
+    "name": "Ahīnaka",
+    "ref": "ViP 4,4.106",
+    "words": "tasyāpyahīnako"
+   }
+  ],
+  [
+   {
+    "name": "Bhaumaratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Satyaratha",
+    "ref": "ViP 4,5.31",
+    "words": "tasya satyarathaḥ"
+   },
+   {
+    "name": "Upagu",
+    "ref": "ViP 4,5.31",
+    "words": "tasmādupaguḥ"
+   },
+   {
+    "name": "Upagupta",
+    "ref": "ViP 4,5.31",
+    "words": "upagor upaguptaḥ"
+   },
+   {
+    "name": "Svāgata",
+    "ref": "ViP 4,5.31",
+    "words": "tatputraḥ svāgataḥ"
+   },
+   {
+    "name": "Svānanda",
+    "ref": "ViP 4,5.31",
+    "words": "tasya ca svānandaḥ"
+   },
+   {
+    "name": "Suvarcas",
+    "ref": "ViP 4,5.31",
+    "words": "tasmācca suvarcāḥ"
+   },
+   {
+    "name": "Supārśva",
+    "ref": "ViP 4,5.31",
+    "words": "tasya supārśvaḥ"
+   },
+   {
+    "name": "Subhāṣa",
+    "ref": "ViP 4,5.31",
+    "words": "tasyāpisubhāṣaḥ"
+   },
+   {
+    "name": "Suśruta",
+    "ref": "ViP 4,5.31",
+    "words": "suśrutaḥ"
+   },
+   {
+    "name": "Jaya",
+    "ref": "ViP 4,5.31",
+    "words": "tasmāsuśrutājjayaḥ"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "ViP 4,5.31",
+    "words": "tasya putro vijayaḥ"
+   },
+   {
+    "name": "Ṛta",
+    "ref": "ViP 4,5.31",
+    "words": "vijayasya ṛtaḥ"
+   },
+   {
+    "name": "Sunaya",
+    "ref": "ViP 4,5.31",
+    "words": "ṛtātsunayaḥ"
+   },
+   {
+    "name": "Vītahavya",
+    "ref": "ViP 4,5.31",
+    "words": "sunayādvītahavyaḥ"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "ViP 4,5.31",
+    "words": "tasmāddhūtiḥ"
+   },
+   {
+    "name": "Bahulāśva",
+    "ref": "ViP 4,5.31",
+    "words": "dhṛtervabahulāsvaḥ"
+   },
+   {
+    "name": "Kṛti",
+    "ref": "ViP 4,5.31",
+    "words": "tasya putraḥ kṛtiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kuru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jahnu",
+    "ref": "ViP 4,19.78",
+    "words": "jahnu"
+   },
+   {
+    "name": "Suratha",
+    "ref": "ViP 4,20.2",
+    "words": "jahnostu surathonāmātmajo babhūva"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "ViP 4,20.3",
+    "words": "tasyāpi vidūrathaḥ"
+   },
+   {
+    "name": "Sārvabhauma",
+    "ref": "ViP 4,20.4",
+    "words": "tasmātsārvabhomaḥ"
+   },
+   {
+    "name": "Jayatsena",
+    "ref": "ViP 4,20.4",
+    "words": "sārvabhaumājjayatsenaḥ"
+   },
+   {
+    "name": "Ārādhita",
+    "ref": "ViP 4,20.4",
+    "words": "tasmādārādhitaḥ"
+   },
+   {
+    "name": "Ayutāyu",
+    "ref": "ViP 4,20.4",
+    "words": "tataścāyutāyuḥ"
+   },
+   {
+    "name": "Akrodhana",
+    "ref": "ViP 4,20.4",
+    "words": "ayutāyorakrodhanaḥ"
+   },
+   {
+    "name": "Devātithi",
+    "ref": "ViP 4,20.5",
+    "words": "tasmāddevātithiḥ"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "ViP 4,20.6",
+    "words": "tataś ca ṛkṣo 'nyobhavat"
+   },
+   {
+    "name": "Bhīmasena",
+    "ref": "ViP 4,20.7",
+    "words": "ṛkṣādbhīmasenaḥ"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "ViP 4,20.7",
+    "words": "tataś ca dilīpaḥ"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "ViP 4,20.8",
+    "words": "dilīpāt pratīpaḥ"
+   },
+   {
+    "name": "Śantanu",
+    "ref": "ViP 4,20.9",
+    "words": "tasyāpi devāpiśantanubāhlīkasaṃjñāstrayaḥ putrā babhūvuḥ"
+   },
+   {
+    "name": "Vicitravīrya",
+    "ref": "ViP 4,20.34",
+    "words": "citrāṅgadavicitravīryau dvau putrāvutpādayāmāsa śantanuḥ"
+   },
+   {
+    "name": "Dhṛtarāṣṭra",
+    "ref": "ViP 4,20.38",
+    "words": "vicitravīryakṣetre dhṛtarāṣṭrapāṇḍu"
+   },
+   {
+    "name": "Duryodhana",
+    "ref": "ViP 4,20.39",
+    "words": "gāndhāryāṃ duryodhanaduḥ śāsanapradhānaṃ putraśatamutpādayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Romapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Caturaṅga",
+    "ref": "ViP 4,18.19",
+    "words": "romapādāccaturaṅgaḥ"
+   },
+   {
+    "name": "Pṛthulākṣa",
+    "ref": "ViP 4,18.19",
+    "words": "tasmātpṛthulākṣaḥ"
+   },
+   {
+    "name": "Campa",
+    "ref": "ViP 4,18.20",
+    "words": "tataścaṃpaḥ"
+   },
+   {
+    "name": "Haryaṅga",
+    "ref": "ViP 4,18.21",
+    "words": "caṃpasya haryaṅgo nāmātmajo 'bhūt"
+   },
+   {
+    "name": "Bhadraratha",
+    "ref": "ViP 4,18.22",
+    "words": "haryaṅgādbhadrarathaḥ"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "ViP 4,18.22",
+    "words": "bhadrarathādbṛhadrathaḥ"
+   },
+   {
+    "name": "Bṛhatkarman",
+    "ref": "ViP 4,18.22",
+    "words": "bṛhadrathādbṛhatkarmā"
+   },
+   {
+    "name": "Bṛhadbhānu",
+    "ref": "ViP 4,18.22",
+    "words": "bṛhatkarmaṇaś ca vṛhadbhānuḥ"
+   },
+   {
+    "name": "Bṛhanmanas",
+    "ref": "ViP 4,18.22",
+    "words": "tasmācca bṛhanmanāḥ"
+   },
+   {
+    "name": "Jayadratha",
+    "ref": "ViP 4,18.22",
+    "words": "bṛhanmanaso jayadrathaḥ"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "ViP 4,18.23",
+    "words": "vijayaṃ nāma putramajījanat"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "ViP 4,18.24",
+    "words": "vijayaś ca dhṛtiṃ putramavāpa"
+   },
+   {
+    "name": "Dhṛtavrata",
+    "ref": "ViP 4,18.25",
+    "words": "tasyāpi dhṛtavrataḥ putro 'bhūt"
+   },
+   {
+    "name": "Satyakarman",
+    "ref": "ViP 4,18.26",
+    "words": "dhṛtavratātsatyakarmā"
+   },
+   {
+    "name": "Atiratha",
+    "ref": "ViP 4,18.27",
+    "words": "satyakarmaṇastvatirathaḥ"
+   },
+   {
+    "name": "Karṇa",
+    "ref": "ViP 4,18.28",
+    "words": "karṇaṃ putramavāpa"
+   },
+   {
+    "name": "Vṛṣasena",
+    "ref": "ViP 4,18.29",
+    "words": "karṇādvṛṣasenaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pūru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "ViP 4,19.1",
+    "words": "pūrorjanamejayaḥ"
+   },
+   {
+    "name": "Pracinvān",
+    "ref": "ViP 4,19.1",
+    "words": "tasyāpi pracinvān"
+   },
+   {
+    "name": "Pravīra",
+    "ref": "ViP 4,19.1",
+    "words": "pracinvataḥ pravīraḥ"
+   },
+   {
+    "name": "Manasyu",
+    "ref": "ViP 4,19.1",
+    "words": "pravīrānmanasyuḥ"
+   },
+   {
+    "name": "Abhayada",
+    "ref": "ViP 4,19.1",
+    "words": "manasyoścābhayadaḥ"
+   },
+   {
+    "name": "Sudyu",
+    "ref": "ViP 4,19.1",
+    "words": "tasyāpi sudyuḥ"
+   },
+   {
+    "name": "Bahugata",
+    "ref": "ViP 4,19.1",
+    "words": "sudyor bahugataḥ"
+   },
+   {
+    "name": "Saṃyāti",
+    "ref": "ViP 4,19.1",
+    "words": "tasyāpi saṃyātiḥ"
+   },
+   {
+    "name": "Ahaṃyāti",
+    "ref": "ViP 4,19.1",
+    "words": "saṃyāterahaṃyātiḥ"
+   },
+   {
+    "name": "Raudrāśva",
+    "ref": "ViP 4,19.1",
+    "words": "tato raudrāśvaḥ"
+   },
+   {
+    "name": "Ṛteṣu",
+    "ref": "ViP 4,19.2",
+    "words": "ṛteṣukakṣeṣu"
+   },
+   {
+    "name": "Antināra",
+    "ref": "ViP 4,19.3",
+    "words": "ṛteṣorantināraḥ putro 'bhūt"
+   },
+   {
+    "name": "Apratiratha",
+    "ref": "ViP 4,19.4",
+    "words": "apratirathaṃ"
+   },
+   {
+    "name": "Elīna",
+    "ref": "ViP 4,19.8",
+    "words": "apratirathasyāparaḥ putro 'bhūdailīnaḥ"
+   },
+   {
+    "name": "Duṣyanta",
+    "ref": "ViP 4,19.9",
+    "words": "elīnasya duṣyantādyāścatvāraḥ putrā"
+   },
+   {
+    "name": "Bharata",
+    "ref": "ViP 4,19.10",
+    "words": "duṣyantāccakravartī bharato 'bhūt"
+   }
+  ],
+  [
+   {
+    "name": "Nahuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yayāti",
+    "ref": "ViP 4,10.1",
+    "words": "nahuṣasya ṣaṭ putrā"
+   },
+   {
+    "name": "Yadu",
+    "ref": "ViP 4,10.8",
+    "words": "jyeṣṭhaṃ putraṃ yadumuvāca"
+   },
+   {
+    "name": "Sahasrajit",
+    "ref": "ViP 4,11.5",
+    "words": "yaduputrā vabhuvuḥ"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "ViP 4,11.6",
+    "words": "sahasrajitpuḥ śatajit"
+   },
+   {
+    "name": "Haihaya",
+    "ref": "ViP 4,11.7",
+    "words": "tasya haihayahehayaveṇuhayāstrayaḥ putrā babhūvuḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "ViP 4,11.8",
+    "words": "haihayaputro dharmaḥ"
+   },
+   {
+    "name": "Dharmanetra",
+    "ref": "ViP 4,11.8",
+    "words": "tasyāpi dharmanetraḥ"
+   },
+   {
+    "name": "Kunti",
+    "ref": "ViP 4,11.8",
+    "words": "tataḥ kuntiḥ"
+   },
+   {
+    "name": "Sahajit",
+    "ref": "ViP 4,11.8",
+    "words": "kunteḥ sahajit"
+   },
+   {
+    "name": "Mahiṣmān",
+    "ref": "ViP 4,11.9",
+    "words": "tattanayo mahiṣmān"
+   },
+   {
+    "name": "Bhadraśreṇya",
+    "ref": "ViP 4,11.10",
+    "words": "tasmādbhadraśreṇyaḥ"
+   },
+   {
+    "name": "Durdama",
+    "ref": "ViP 4,11.10",
+    "words": "tato durdamaḥ"
+   },
+   {
+    "name": "Dhanaka",
+    "ref": "ViP 4,11.10",
+    "words": "tasmāddhanakaḥ"
+   },
+   {
+    "name": "Kṛtavīrya",
+    "ref": "ViP 4,11.10",
+    "words": "dhanakasya kṛtavīryakṛtāgnikṛtadharmakṛtaujasaścatvāraḥ putrā babhūvuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Yuṣitāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "ViP 4,4.106",
+    "words": "tataś ca viśvasaho jajñe"
+   },
+   {
+    "name": "Hiraṇyanābha",
+    "ref": "ViP 4,4.107",
+    "words": "tasmāddhiraṇyanābhaḥ"
+   },
+   {
+    "name": "Puṣya",
+    "ref": "ViP 4,4.108",
+    "words": "hiraṇyanābhasya putraḥ puṣyaḥ"
+   },
+   {
+    "name": "Dhruvasaṃdhi",
+    "ref": "ViP 4,4.108",
+    "words": "tasmād dhruvasaṃdhiḥ"
+   },
+   {
+    "name": "Sudarśana",
+    "ref": "ViP 4,4.108",
+    "words": "tataḥ sudarśanaḥ"
+   },
+   {
+    "name": "Agnivarṇa",
+    "ref": "ViP 4,4.108",
+    "words": "tasmādagnivarmaḥ"
+   },
+   {
+    "name": "Śīghraga",
+    "ref": "ViP 4,4.108",
+    "words": "tataḥ śīghragaḥ"
+   },
+   {
+    "name": "Maru",
+    "ref": "ViP 4,4.108",
+    "words": "tasmādapi maruḥ putro 'bhavat"
+   },
+   {
+    "name": "Praśuśruka",
+    "ref": "ViP 4,4.111",
+    "words": "tasyātmajaḥ praśuśrukaḥ"
+   },
+   {
+    "name": "Susaṃdhi",
+    "ref": "ViP 4,4.111",
+    "words": "tasyapi susaṃdhiḥ"
+   },
+   {
+    "name": "Amarṣa",
+    "ref": "ViP 4,4.111",
+    "words": "tataścāpyamarṣaḥ"
+   },
+   {
+    "name": "Sahasvān",
+    "ref": "ViP 4,4.111",
+    "words": "tasya ca sahasvān"
+   },
+   {
+    "name": "Viśvabhava",
+    "ref": "ViP 4,4.111",
+    "words": "tataś ca viśvabhavaḥ"
+   },
+   {
+    "name": "Bṛhadbala",
+    "ref": "ViP 4,4.112",
+    "words": "tasya bṛhadbalaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vatsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Alarka",
+    "ref": "ViP 4,8.16",
+    "words": "vatsasya putro 'larkanāmābhavat"
+   },
+   {
+    "name": "Sannati",
+    "ref": "ViP 4,8.18",
+    "words": "tasyāpyalarkasya sannatināmābhavadātmaja"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "ViP 4,8.19",
+    "words": "sannateḥ sunīthaḥ"
+   },
+   {
+    "name": "Suketu",
+    "ref": "ViP 4,8.19",
+    "words": "tasyāpi suketuḥ"
+   },
+   {
+    "name": "Dharmaketu",
+    "ref": "ViP 4,8.19",
+    "words": "tasmācca dharmaketurjajñe"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "ViP 4,8.20",
+    "words": "tataś ca satyaketuḥ"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "ViP 4,8.20",
+    "words": "tasmādvibhuḥ"
+   },
+   {
+    "name": "Suvibhu",
+    "ref": "ViP 4,8.20",
+    "words": "tattayaḥsuvibhuḥ"
+   },
+   {
+    "name": "Sukumāra",
+    "ref": "ViP 4,8.20",
+    "words": "tataś ca sukumāraḥ"
+   },
+   {
+    "name": "Dṛṣṭaketu",
+    "ref": "ViP 4,8.20",
+    "words": "tasyāpi dṛṣṭaketuḥ"
+   },
+   {
+    "name": "Vītihotra",
+    "ref": "ViP 4,8.20",
+    "words": "tataś ca vītihotraḥ"
+   },
+   {
+    "name": "Bhārga",
+    "ref": "ViP 4,8.20",
+    "words": "tasmādbhārgaḥ"
+   },
+   {
+    "name": "Bhārgabhūmi",
+    "ref": "ViP 4,8.20",
+    "words": "bhārgasya bhārgabhūmiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sabhānala",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālānala",
+    "ref": "ViP 4,18.3",
+    "words": "sabhānalaputraḥ kālānalaḥ"
+   },
+   {
+    "name": "Sṛṃjaya",
+    "ref": "ViP 4,18.3",
+    "words": "kālānalātsṛṃjayaḥ"
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "ViP 4,18.4",
+    "words": "sṛṃjayāt purañjayaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "ViP 4,18.5",
+    "words": "purañjayājjanamejayaḥ"
+   },
+   {
+    "name": "Mahāśāla",
+    "ref": "ViP 4,18.6",
+    "words": "tasmānmahāśālaḥ"
+   },
+   {
+    "name": "Mahāmanas",
+    "ref": "ViP 4,18.7",
+    "words": "tasmācca mahāmanāḥ"
+   },
+   {
+    "name": "Titīkṣu",
+    "ref": "ViP 4,18.8",
+    "words": "tasmāduśīnaratitīkṣū dvau putrāvutpannau"
+   },
+   {
+    "name": "Ruśadratha",
+    "ref": "ViP 4,18.11",
+    "words": "titīkṣorapi ruśadrathaḥ putro 'bhūt"
+   },
+   {
+    "name": "Hema",
+    "ref": "ViP 4,18.12",
+    "words": "tasyāpi hemaḥ"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "ViP 4,18.12",
+    "words": "hemasyāpi sutapāḥ"
+   },
+   {
+    "name": "Bali",
+    "ref": "ViP 4,18.12",
+    "words": "sutapasaś ca baliḥ"
+   }
+  ],
+  [
+   {
+    "name": "Uṣma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vicitraratha",
+    "ref": "ViP 4,21.10",
+    "words": "uṣṇādvicitrarathaḥ"
+   },
+   {
+    "name": "Śuciratha",
+    "ref": "ViP 4,21.11",
+    "words": "tataḥ śucirathaḥ"
+   },
+   {
+    "name": "Vṛṣṇimat",
+    "ref": "ViP 4,21.12",
+    "words": "tasmādvṛṣṇimāṃs"
+   },
+   {
+    "name": "Suṣeṇa",
+    "ref": "ViP 4,21.12",
+    "words": "tataḥsuṣeṇaḥ"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "ViP 4,21.12",
+    "words": "tasyāpi sunīthaḥ"
+   },
+   {
+    "name": "Nṛpacakṣu",
+    "ref": "ViP 4,21.12",
+    "words": "sunīthānnṛpacakṣuḥ"
+   },
+   {
+    "name": "Sukhibala",
+    "ref": "ViP 4,21.12",
+    "words": "tasmādapi sukhibalaḥ"
+   },
+   {
+    "name": "Pāriplava",
+    "ref": "ViP 4,21.12",
+    "words": "tasya ca pāriplavaḥ"
+   },
+   {
+    "name": "Sunaya",
+    "ref": "ViP 4,21.12",
+    "words": "tataś ca sunayaḥ"
+   },
+   {
+    "name": "Medhāvin",
+    "ref": "ViP 4,21.12",
+    "words": "tasyāpi medhāvī"
+   },
+   {
+    "name": "Ripuñjaya",
+    "ref": "ViP 4,21.13",
+    "words": "medhāvino ripuñjayaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṣatravṛddha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suhotra",
+    "ref": "ViP 4,8.4",
+    "words": "kṣatravṛddhātsuhotraḥ putro 'bhavat"
+   },
+   {
+    "name": "Kāśya",
+    "ref": "ViP 4,8.5",
+    "words": "kāśyapakāśagṛtsamadāstrayastasya putrā babhūvuḥ"
+   },
+   {
+    "name": "Kāśeya",
+    "ref": "ViP 4,8.7",
+    "words": "kāśyasya kāśeyaḥ"
+   },
+   {
+    "name": "Rāṣṭra",
+    "ref": "ViP 4,8.7",
+    "words": "tasmādrāṣṭraḥ"
+   },
+   {
+    "name": "Dīrghatapas",
+    "ref": "ViP 4,8.7",
+    "words": "rāṣṭrasya dīrghatapāḥ putro 'bhavat"
+   },
+   {
+    "name": "Dhanvantari",
+    "ref": "ViP 4,8.8",
+    "words": "dhanvantaristu dīrghatapasaḥ putro 'bhavat"
+   },
+   {
+    "name": "Ketumat",
+    "ref": "ViP 4,8.11",
+    "words": "tasya ca dhanvantareḥ patraḥ ketumān"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "ViP 4,8.11",
+    "words": "ketumato bhīmarathaḥ"
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "ViP 4,8.11",
+    "words": "tasyāpi divodāsaḥ"
+   },
+   {
+    "name": "Pratardana",
+    "ref": "ViP 4,8.11",
+    "words": "tasyāpi pratardanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Māndhātṛ",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "ViP 4,2.67",
+    "words": "purukutsamaṃbarīṣaṃ mucukundaṃ ca tasyāṃ putratrayamutpādayāmāsa"
+   },
+   {
+    "name": "Trasaddasyu",
+    "ref": "ViP 4,3.16",
+    "words": "purukutso narmadāyāṃ trasaddasyumajījanat"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "ViP 4,3.17",
+    "words": "trasaddasyutaḥsaṃbhūto 'naraṇyaḥ"
+   },
+   {
+    "name": "Pṛṣadaśva",
+    "ref": "ViP 4,3.18",
+    "words": "anaraṇyasya pṛṣaṭaśvaḥ"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "ViP 4,3.18",
+    "words": "pṛṣadaśvasya haryaśvaḥ putro 'bhavat"
+   },
+   {
+    "name": "Hasta",
+    "ref": "ViP 4,3.19",
+    "words": "tasya ca hastaḥ putro 'bhavat"
+   },
+   {
+    "name": "Sumanas",
+    "ref": "ViP 4,3.20",
+    "words": "tataś ca sumanāḥ"
+   },
+   {
+    "name": "Tridhanvan",
+    "ref": "ViP 4,3.20",
+    "words": "tasyāpi tridhanvā"
+   },
+   {
+    "name": "Trayyāruṇi",
+    "ref": "ViP 4,3.20",
+    "words": "tridhanvanastrayyāruṇiḥ"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "ViP 4,3.21",
+    "words": "trayyāruṇeḥsatyavrataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Viśāla",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hemacandra",
+    "ref": "ViP 4,1.50",
+    "words": "hemacandraś ca viśālasya putrobhavat"
+   },
+   {
+    "name": "Candra",
+    "ref": "ViP 4,1.51",
+    "words": "tataścandraḥ"
+   },
+   {
+    "name": "Dhūmrākṣa",
+    "ref": "ViP 4,1.52",
+    "words": "tattanayo dhūmrākṣaḥ"
+   },
+   {
+    "name": "Sṛṃjaya",
+    "ref": "ViP 4,1.53",
+    "words": "tasyāpi sṛṃjayo 'bhūt"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "ViP 4,1.54",
+    "words": "sṛṃjayātsahadevaḥ"
+   },
+   {
+    "name": "Kṛśāśva",
+    "ref": "ViP 4,1.55",
+    "words": "tataś ca kṛśāśvo nāma putrobhavat"
+   },
+   {
+    "name": "Somadatta",
+    "ref": "ViP 4,1.56",
+    "words": "somadattaḥ kṛśāśvājjajñe"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "ViP 4,1.57",
+    "words": "tatputro janamejayaḥ"
+   },
+   {
+    "name": "Sumati",
+    "ref": "ViP 4,1.58",
+    "words": "janamejayātsumatiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Amāvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhīma",
+    "ref": "ViP 4,7.2",
+    "words": "amāvasorbhīmanāmā putro 'bhavat"
+   },
+   {
+    "name": "Kāñcana",
+    "ref": "ViP 4,7.3",
+    "words": "bhīmasya kāñcanaḥ"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "ViP 4,7.3",
+    "words": "kāñcanātsuhotraḥ"
+   },
+   {
+    "name": "Jahnu",
+    "ref": "ViP 4,7.3",
+    "words": "tasyāpi jahnuḥ"
+   },
+   {
+    "name": "Sumandu",
+    "ref": "ViP 4,7.7",
+    "words": "jahnoś ca sumandurnāma putro 'bhavat"
+   },
+   {
+    "name": "Ajaka",
+    "ref": "ViP 4,7.8",
+    "words": "tasyāpyajakaḥ"
+   },
+   {
+    "name": "Balākāśva",
+    "ref": "ViP 4,7.8",
+    "words": "tato balākāśvaḥ"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "ViP 4,7.8",
+    "words": "tasmātkuśaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Tigma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "ViP 4,21.13",
+    "words": "tasmādbṛhadrathaḥ"
+   },
+   {
+    "name": "Vasudāsa",
+    "ref": "ViP 4,21.13",
+    "words": "bṛhadrathādvasudāsaḥ"
+   },
+   {
+    "name": "Śatānīka",
+    "ref": "ViP 4,21.14",
+    "words": "tato 'paraḥ śatanīkaḥ"
+   },
+   {
+    "name": "Udayana",
+    "ref": "ViP 4,21.15",
+    "words": "tasmāccodayanaḥ"
+   },
+   {
+    "name": "Vihīnara",
+    "ref": "ViP 4,21.15",
+    "words": "udayanādvihīnaraḥ"
+   },
+   {
+    "name": "Daṇḍapāṇi",
+    "ref": "ViP 4,21.15",
+    "words": "tataścadaṇḍapāṇiḥ"
+   },
+   {
+    "name": "Nimitta",
+    "ref": "ViP 4,21.15",
+    "words": "tato nimittaḥ"
+   },
+   {
+    "name": "Kṣemaka",
+    "ref": "ViP 4,21.16",
+    "words": "tasmācca kṣemakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śamin",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "ViP 4,14.23",
+    "words": "śaminaḥ pratikṣatraḥ"
+   },
+   {
+    "name": "Svayaṃbhoja",
+    "ref": "ViP 4,14.23",
+    "words": "tasmātsvayaṃbhojaḥ"
+   },
+   {
+    "name": "Hṛdika",
+    "ref": "ViP 4,14.23",
+    "words": "tataś ca hṛdikaḥ"
+   },
+   {
+    "name": "Devagarbha",
+    "ref": "ViP 4,14.24",
+    "words": "tasyāpi kṛtavarmaśatadhanurdavārhadevagarbhādyāḥ putrā"
+   },
+   {
+    "name": "Śūra",
+    "ref": "ViP 4,14.25",
+    "words": "devagarbhasyāpi śuraḥ"
+   },
+   {
+    "name": "Vasudeva",
+    "ref": "ViP 4,14.27",
+    "words": "tasyāṃ cāsau daśaputrānajanayadvasudevarūrvān"
+   },
+   {
+    "name": "Sāraṇa",
+    "ref": "ViP 4,15.19",
+    "words": "balabhadraśaṭhasāraṇadurmadādīnputrārtnohiṇyānakadundubhir utpādayāmāsa"
+   },
+   {
+    "name": "Sārṣṭi",
+    "ref": "ViP 4,15.21",
+    "words": "sārṣṭimārṣṭiśiśusatyasatyadhṛtipramukhāḥ sāraṇātmajāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vijaya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṛta",
+    "ref": "ViP 4,9.26",
+    "words": "tasmācca jajñe kṛtaḥ"
+   },
+   {
+    "name": "Haryadhana",
+    "ref": "ViP 4,9.27",
+    "words": "tasya ca haryadhanaḥ"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "ViP 4,9.27",
+    "words": "haryadhanasutaḥsahadevaḥ"
+   },
+   {
+    "name": "Adīna",
+    "ref": "ViP 4,9.27",
+    "words": "tasmādadīnaḥ"
+   },
+   {
+    "name": "Jayatsena",
+    "ref": "ViP 4,9.27",
+    "words": "tasya jayatseya jayatsenaḥ"
+   },
+   {
+    "name": "Saṃkṛti",
+    "ref": "ViP 4,9.27",
+    "words": "tataś ca saṃkṛtiḥ"
+   },
+   {
+    "name": "Kṣatradharman",
+    "ref": "ViP 4,9.27",
+    "words": "tatputraḥ kṣatradharmā"
+   }
+  ],
+  [
+   {
+    "name": "Durvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vahni",
+    "ref": "ViP 4,16.3",
+    "words": "durvasorvahnirātmajaḥ"
+   },
+   {
+    "name": "Bhārga",
+    "ref": "ViP 4,16.3",
+    "words": "bahnerbhārgaḥ"
+   },
+   {
+    "name": "Bhānu",
+    "ref": "ViP 4,16.3",
+    "words": "bhārgādbhānuḥ"
+   },
+   {
+    "name": "Trayīsānu",
+    "ref": "ViP 4,16.3",
+    "words": "tataś ca trayīsānuḥ"
+   },
+   {
+    "name": "Karandama",
+    "ref": "ViP 4,16.3",
+    "words": "tasmācca karandamaḥ"
+   },
+   {
+    "name": "Marutta",
+    "ref": "ViP 4,16.3",
+    "words": "tasyāpi maruttaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dṛḍhāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "ViP 4,2.43",
+    "words": "vṛḍhāśvāddharyaśvaḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "ViP 4,2.44",
+    "words": "tasmācca nikuṃbhaḥ"
+   },
+   {
+    "name": "Amitāśva",
+    "ref": "ViP 4,2.45",
+    "words": "nikuṃbhasyāmitāśvaḥ"
+   },
+   {
+    "name": "Kṛśāśva",
+    "ref": "ViP 4,2.46",
+    "words": "tataś ca kṛśāśvaḥ"
+   },
+   {
+    "name": "Prasenajit",
+    "ref": "ViP 4,2.47",
+    "words": "tasmācca prasenajit"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "ViP 4,2.48",
+    "words": "prasenajito yuvanāśvobhavat"
+   }
+  ],
+  [
+   {
+    "name": "Pṛthuśravas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pṛthutama",
+    "ref": "ViP 4,12.7",
+    "words": "pṛthuśravasaś ca putraḥ pṛthutamaḥ"
+   },
+   {
+    "name": "Uśanas",
+    "ref": "ViP 4,12.8",
+    "words": "tasmāduśanā"
+   },
+   {
+    "name": "Śita",
+    "ref": "ViP 4,12.9",
+    "words": "tasya ca śitapurnāma putro 'bhavat"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "ViP 4,12.10",
+    "words": "tasyāpi rukmakavacaḥ"
+   },
+   {
+    "name": "Parāvṛt",
+    "ref": "ViP 4,12.10",
+    "words": "tataḥ paravṛt"
+   },
+   {
+    "name": "Rukmeṣu",
+    "ref": "ViP 4,12.11",
+    "words": "tasya pañcātmajā babhūvuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Saudāsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "ViP 4,19.71",
+    "words": "saudāsātsahadevaḥ"
+   },
+   {
+    "name": "Somaka",
+    "ref": "ViP 4,19.71",
+    "words": "tasyāpi somakaḥ"
+   },
+   {
+    "name": "Pṛṣata",
+    "ref": "ViP 4,19.73",
+    "words": "teṣāṃ yavīyān pṛṣataḥ"
+   },
+   {
+    "name": "Drupada",
+    "ref": "ViP 4,19.73",
+    "words": "pṛṣatād drupadas"
+   },
+   {
+    "name": "Dhṛṣṭadyumna",
+    "ref": "ViP 4,19.73",
+    "words": "tasmācca dhṛṣṭadyumnaḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "ViP 4,19.73",
+    "words": "tatodhṛṣṭaketuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Triśaṅku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "ViP 4,3.25",
+    "words": "triśaṅkorhariścandraḥ"
+   },
+   {
+    "name": "Rohitāśva",
+    "ref": "ViP 4,3.25",
+    "words": "tasmācca rohitāśvaḥ"
+   },
+   {
+    "name": "Harita",
+    "ref": "ViP 4,3.25",
+    "words": "tataś ca harito"
+   },
+   {
+    "name": "Cañcu",
+    "ref": "ViP 4,3.25",
+    "words": "haritasya cañcuḥ"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "ViP 4,3.25",
+    "words": "cañcorvijayavasudevau"
+   },
+   {
+    "name": "Ruruka",
+    "ref": "ViP 4,3.25",
+    "words": "ruruko vijayāt"
+   }
+  ],
+  [
+   {
+    "name": "Yadu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kroṣṭu",
+    "ref": "ViP 4,12.1",
+    "words": "kroṣṭostu yaduputrasya"
+   },
+   {
+    "name": "Dhvajinīvān",
+    "ref": "ViP 4,12.1",
+    "words": "kroṣṭostu yaduputrasyātmajo dhvajinīvān"
+   },
+   {
+    "name": "Svāti",
+    "ref": "ViP 4,12.2",
+    "words": "tataś ca svātiḥ"
+   },
+   {
+    "name": "Ruśaṅku",
+    "ref": "ViP 4,12.2",
+    "words": "tato ruśaṅkuḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "ViP 4,12.2",
+    "words": "ruśaṅkościtrarathaḥ"
+   },
+   {
+    "name": "Śaśibindu",
+    "ref": "ViP 4,12.3",
+    "words": "tattanayaḥ śaśibinduḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ārabdha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Gāndhāra",
+    "ref": "ViP 4,17.4",
+    "words": "ārabdhasyātmajo gāndhāraḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "ViP 4,17.4",
+    "words": "gāndhārasya dharmaḥ"
+   },
+   {
+    "name": "Ghṛta",
+    "ref": "ViP 4,17.4",
+    "words": "dharmāt ghṛtaḥ"
+   },
+   {
+    "name": "Durdama",
+    "ref": "ViP 4,17.4",
+    "words": "ghṛtāt durdamaḥ"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "ViP 4,17.4",
+    "words": "tataḥ pracetāḥ"
+   },
+   {
+    "name": "Śatadharma",
+    "ref": "ViP 4,17.5",
+    "words": "pracetasaḥ putraḥ śatadharmaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Jayadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "ViP 4,11.23",
+    "words": "jayadhvajāttālajaṅghaḥ putrobhavat"
+   },
+   {
+    "name": "Bharata",
+    "ref": "ViP 4,11.24",
+    "words": "eṣāṃ jyeṣṭhe vītihotrastathānyo bharataḥ"
+   },
+   {
+    "name": "Vṛṣa",
+    "ref": "ViP 4,11.25",
+    "words": "bharatādvṛṣaḥ"
+   },
+   {
+    "name": "Madhu",
+    "ref": "ViP 4,11.26",
+    "words": "vaṣasya putro madhurabhavat"
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "ViP 4,11.27",
+    "words": "tasyāpi vṛṣṇipramukhaṃputraśatamāsīt"
+   }
+  ],
+  [
+   {
+    "name": "Ruru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pāriyātraka",
+    "ref": "ViP 4,4.106",
+    "words": "tasya ca pāriyātrakaḥ"
+   },
+   {
+    "name": "Devala",
+    "ref": "ViP 4,4.106",
+    "words": "pāriyātrāddevalo"
+   },
+   {
+    "name": "Vaccala",
+    "ref": "ViP 4,4.106",
+    "words": "devalādvaccalaḥ"
+   },
+   {
+    "name": "Utka",
+    "ref": "ViP 4,4.106",
+    "words": "tasyāpyutkaḥ"
+   },
+   {
+    "name": "Vajranābha",
+    "ref": "ViP 4,4.106",
+    "words": "utkācca vajranābhaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Rāhula",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Prasenajit",
+    "ref": "ViP 4,22.8",
+    "words": "tataḥ prasenajit"
+   },
+   {
+    "name": "Kṣudraka",
+    "ref": "ViP 4,22.9",
+    "words": "tataś ca kṣudrakaḥ"
+   },
+   {
+    "name": "Kuṇḍaka",
+    "ref": "ViP 4,22.9",
+    "words": "tataścaja kuṇḍakaḥ"
+   },
+   {
+    "name": "Suratha",
+    "ref": "ViP 4,22.9",
+    "words": "tasmādapi surathaḥ"
+   },
+   {
+    "name": "Sumitra",
+    "ref": "ViP 4,22.10",
+    "words": "tatputraś ca sumitraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Samara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Supāra",
+    "ref": "ViP 4,19.41",
+    "words": "pārasupāra"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "ViP 4,19.42",
+    "words": "supārātpṛthuḥ"
+   },
+   {
+    "name": "Sukṛti",
+    "ref": "ViP 4,19.42",
+    "words": "pṛthoḥsukṛteḥ"
+   },
+   {
+    "name": "Vibhrāja",
+    "ref": "ViP 4,19.42",
+    "words": "sukṛtervibhrājaḥ"
+   },
+   {
+    "name": "Aṇuha",
+    "ref": "ViP 4,19.43",
+    "words": "tasmāccāṇuhaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Siṃdhudvīpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ayutāyu",
+    "ref": "ViP 4,4.36",
+    "words": "siṃdhudvīpādayutāyuḥ"
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "ViP 4,4.37",
+    "words": "tatputraś ca ṛtuparṇaḥ"
+   },
+   {
+    "name": "Sarvakāma",
+    "ref": "ViP 4,4.38",
+    "words": "ṛtuparṇaputraḥsarvakāmaḥ"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "ViP 4,4.39",
+    "words": "tattanayaḥsudāsaḥ"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "ViP 4,4.40",
+    "words": "sudāsātsaudāso"
+   }
+  ],
+  [
+   {
+    "name": "Ānakadundubhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Abhijit",
+    "ref": "ViP 4,14.14",
+    "words": "tataścā bhijit"
+   },
+   {
+    "name": "Punarvasu",
+    "ref": "ViP 4,14.14",
+    "words": "abhijitaḥ punarvasuḥ"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "ViP 4,14.15",
+    "words": "tasyāpyāhukaḥ"
+   },
+   {
+    "name": "Devaka",
+    "ref": "ViP 4,14.16",
+    "words": "āhukasya devakograsenau dvau putrau"
+   },
+   {
+    "name": "Devavān",
+    "ref": "ViP 4,14.17",
+    "words": "devakasya catvāraḥ putrāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Asamañjasa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṃśumān",
+    "ref": "ViP 4,4.7",
+    "words": "tasmādasamañjasādaṃśumānnāma kumāro jajñe"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "ViP 4,4.34",
+    "words": "tasyāṃśumato dilīpaḥ putrobhavat"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "ViP 4,4.35",
+    "words": "dilīpasya bhagīrathaḥ"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "ViP 4,4.36",
+    "words": "bhagīrathātsuhotraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Aṅga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anapāna",
+    "ref": "ViP 4,18.15",
+    "words": "aṅgādanapānaḥ"
+   },
+   {
+    "name": "Diviratha",
+    "ref": "ViP 4,18.15",
+    "words": "tato divirathaḥ"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "ViP 4,18.15",
+    "words": "tasmāddharmarathaḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "ViP 4,18.16",
+    "words": "tataścitrarathaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pradyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aniruddha",
+    "ref": "ViP 4,15.39",
+    "words": "tasyāmaniruddho jajñe"
+   },
+   {
+    "name": "Vajra",
+    "ref": "ViP 4,15.41",
+    "words": "tasyāmasya vajro jajñe"
+   },
+   {
+    "name": "Pratibāhu",
+    "ref": "ViP 4,15.42",
+    "words": "vajrasya pratibāhuḥ"
+   },
+   {
+    "name": "Sucāru",
+    "ref": "ViP 4,15.42",
+    "words": "tasyāpi sucāruḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ugrāyudha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṣemya",
+    "ref": "ViP 4,19.55",
+    "words": "ugrāyughātkṣemyaḥ"
+   },
+   {
+    "name": "Sudhīra",
+    "ref": "ViP 4,19.55",
+    "words": "kṣemyātsudhīraḥ"
+   },
+   {
+    "name": "Ripuñjaya",
+    "ref": "ViP 4,19.55",
+    "words": "tasmādripuñjayaḥ"
+   },
+   {
+    "name": "Bahuratha",
+    "ref": "ViP 4,19.55",
+    "words": "tasmācca bahuratha"
+   }
+  ],
+  [
+   {
+    "name": "Bandhumat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vegavān",
+    "ref": "ViP 4,1.44",
+    "words": "bandhumato gṛvegavān"
+   },
+   {
+    "name": "Budha",
+    "ref": "ViP 4,1.45",
+    "words": "vegavato budhaḥ"
+   },
+   {
+    "name": "Tṛṇabindu",
+    "ref": "ViP 4,1.46",
+    "words": "tataś ca tṛṇabinduḥ"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Babhru",
+    "ref": "ViP 4,17.1",
+    "words": "druhyostu tanayo babhruḥ"
+   },
+   {
+    "name": "Setu",
+    "ref": "ViP 4,17.2",
+    "words": "babhroḥsetuḥ"
+   },
+   {
+    "name": "Ārabdhanāman",
+    "ref": "ViP 4,17.3",
+    "words": "setuputra ārabdhanāmā"
+   }
+  ],
+  [
+   {
+    "name": "Jarāsaṃdha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "ViP 4,19.84",
+    "words": "tasmātsahadevaḥ"
+   },
+   {
+    "name": "Somapa",
+    "ref": "ViP 4,19.84",
+    "words": "sahadevātsomapaḥ"
+   },
+   {
+    "name": "Śrutiśravas",
+    "ref": "ViP 4,19.84",
+    "words": "tataś ca śrutiśravāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhūmitra",
+    "ref": "ViP 4,24.40",
+    "words": "tasya putro bhūmitraḥ"
+   },
+   {
+    "name": "Nārāyaṇa",
+    "ref": "ViP 4,24.40",
+    "words": "tasyāpi nārāyaṇaḥ"
+   },
+   {
+    "name": "Suśarman",
+    "ref": "ViP 4,24.41",
+    "words": "nārāyaṇātmajaḥsuśarmā"
+   }
+  ],
+  [
+   {
+    "name": "Śrutāyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Supārśva",
+    "ref": "ViP 4,5.31",
+    "words": "śrutāyuṣaḥ supārśvāḥ"
+   },
+   {
+    "name": "Sṛṃjaya",
+    "ref": "ViP 4,5.31",
+    "words": "tasmātsṛṃjayaḥ"
+   },
+   {
+    "name": "Kṣemāvin",
+    "ref": "ViP 4,5.31",
+    "words": "tataḥ kṣemāvī"
+   }
+  ],
+  [
+   {
+    "name": "Brahmā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Atri",
+    "ref": "ViP 4,6.5",
+    "words": "brahmaṇaḥ putro 'triḥ"
+   },
+   {
+    "name": "Soma",
+    "ref": "ViP 4,6.6",
+    "words": "atreḥsomaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Gāndinī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Akrūra",
+    "ref": "ViP 4,13.126",
+    "words": "tasyāmayamakrūraḥ"
+   },
+   {
+    "name": "Devavān",
+    "ref": "ViP 4,14.10",
+    "words": "devavānupadevaścākrūraputrau"
+   }
+  ],
+  [
+   {
+    "name": "Kuntī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yudhiṣṭhira",
+    "ref": "ViP 4,20.40",
+    "words": "yudhiṣṭhirabhīmasenārjunāḥ kuntyāṃ"
+   },
+   {
+    "name": "Prativindhya",
+    "ref": "ViP 4,20.42",
+    "words": "yudhiṣṭhirātprativindhyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Muṇika",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pradyota",
+    "ref": "ViP 4,24.2",
+    "words": "svuputraṃ pradyotanāmānamabhiṣekṣyati"
+   },
+   {
+    "name": "Balāka",
+    "ref": "ViP 4,24.3",
+    "words": "tasyāpi balākanāmā putro bhavitā"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Budha",
+    "ref": "ViP 4,1.11",
+    "words": "somamūnorbudhasya"
+   },
+   {
+    "name": "Purūravas",
+    "ref": "ViP 4,1.12",
+    "words": "budhaḥ purūravasamātmajamutpādayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Viśākhayūpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Janaka",
+    "ref": "ViP 4,24.5",
+    "words": "tatputro janakaḥ"
+   },
+   {
+    "name": "Nandivardhana",
+    "ref": "ViP 4,24.6",
+    "words": "tasya ca nandivardhanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Viṣvaksena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Udaksena",
+    "ref": "ViP 4,19.46",
+    "words": "tasmādudaksenaḥ"
+   },
+   {
+    "name": "Bhallāba",
+    "ref": "ViP 4,19.47",
+    "words": "bhallābhastasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Viṣṭarāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "ViP 4,2.36",
+    "words": "tasyāpi cāndro yuvanāśvaḥ"
+   },
+   {
+    "name": "Śāvasta",
+    "ref": "ViP 4,2.37",
+    "words": "cāndrasya tasya yuvanāśvasya śāvastaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaradvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śatānanda",
+    "ref": "ViP 4,19.63",
+    "words": "śaradvataścāhalyāyāṃ śatānando 'bhavat"
+   },
+   {
+    "name": "Satyadhṛti",
+    "ref": "ViP 4,19.64",
+    "words": "śatānandātsatyadhṛtirdhanurvedāntago jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Śiśunābha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kākavarṇa",
+    "ref": "ViP 4,24.10",
+    "words": "tatputraḥ kākavarṇo bhavitā"
+   },
+   {
+    "name": "Kṣemadharman",
+    "ref": "ViP 4,24.11",
+    "words": "tasya ca putraḥ kṣemadharmā"
+   }
+  ],
+  [
+   {
+    "name": "Baladeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśaṭha",
+    "ref": "ViP 4,15.20",
+    "words": "baladevopi revatyāṃ viśaṭholmukau putrāvajanayat"
+   }
+  ],
+  [
+   {
+    "name": "Candragupta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bindusāra",
+    "ref": "ViP 4,24.29",
+    "words": "tasyāpi putro bindusāro bhaviṣyati"
+   }
+  ],
+  [
+   {
+    "name": "Citraka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "ViP 4,14.11",
+    "words": "pṛthuvivṛthupramukhāścitrakasya putrā"
+   }
+  ],
+  [
+   {
+    "name": "Damaghoṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śiśupāla",
+    "ref": "ViP 4,14.45",
+    "words": "tasyāṃ ca śiśupālamutpādayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Gāndhārī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Duryodhana",
+    "ref": "ViP 4,20.39",
+    "words": "gāndhāryāṃ duryodhanaduḥ śāsanapradhānaṃ putraśatam"
+   }
+  ],
+  [
+   {
+    "name": "Hiḍimbā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ghaṭotkaca",
+    "ref": "ViP 4,20.45",
+    "words": "hiḍiṃbā ghaṭotkacaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Ilā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purūravas",
+    "ref": "ViP 4,1.12",
+    "words": "sānurāgācca tasyāṃ budhaḥ purūravasamātmajamutpādayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Jamadagni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Paraśurāma",
+    "ref": "ViP 4,7.36",
+    "words": "paraśurāmasaṃjñaṃ ... jamadagnirajījanat"
+   }
+  ],
+  [
+   {
+    "name": "Jāhnavī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhīṣma",
+    "ref": "ViP 4,20.33",
+    "words": "jāhnavyāmudārakīrtiraśeṣaśāstrarthavidbhīṣmaḥ putro 'bhūt"
+   }
+  ],
+  [
+   {
+    "name": "Kakutstha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anenas",
+    "ref": "ViP 4,2.33",
+    "words": "kakutsthasyāpyanenāḥ putro 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Kāśī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sarvaga",
+    "ref": "ViP 4,20.43",
+    "words": "kāśī ca bhīmasenādeva sarvagaṃ sutamavāpa"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śāntakarṇi",
+    "ref": "ViP 4,24.45",
+    "words": "tasyāpi putraḥ śāntakarṇiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇadvaipāyana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vidura",
+    "ref": "ViP 4,20.38",
+    "words": "viduraṃ cotpādayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Madhu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Lavaṇa",
+    "ref": "ViP 4,4.101",
+    "words": "madhuputro lavaṇo nāma"
+   }
+  ],
+  [
+   {
+    "name": "Mahāpadma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sumālya",
+    "ref": "ViP 4,24.23",
+    "words": "tasyāpyaṣṭau sutāḥsumālyādya bhavitāraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Mithi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Udāvasu",
+    "ref": "ViP 4,5.24",
+    "words": "tasyodāvasuḥ putro 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Nakula",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Niramitra",
+    "ref": "ViP 4,20.48",
+    "words": "reṇumatyāṃ ca nakulopi niramitramajījanat"
+   }
+  ],
+  [
+   {
+    "name": "Purūravas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Āyu",
+    "ref": "ViP 4,8.1",
+    "words": "purūravaso jyeṣṭhaḥ putro yastvāyurnāmā"
+   }
+  ],
+  [
+   {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nakula",
+    "ref": "ViP 4,14.38",
+    "words": "nakulasahadevau pāṇḍoḥ putrau"
+   }
+  ],
+  [
+   {
+    "name": "Reṇumatī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Niramitra",
+    "ref": "ViP 4,20.48",
+    "words": "reṇumatyāṃ ca nakulopi niramitramajījanat"
+   }
+  ],
+  [
+   {
+    "name": "Ugrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṃsa",
+    "ref": "ViP 4,14.20",
+    "words": "ugrasenasyāpi kaṃsa"
+   }
+  ],
+  [
+   {
+    "name": "Ulūpī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Irāvān",
+    "ref": "ViP 4,20.49",
+    "words": "ulūpyāṃ nāgakanyāyāmirāvānnāma putro"
+   }
+  ],
+  [
+   {
+    "name": "Vaiśālī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kauśika",
+    "ref": "ViP 4,15.25",
+    "words": "vaiśālyāṃ ca kauśikamekamevājanayat"
+   }
+  ],
+  [
+   {
+    "name": "Vijayā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuhotra",
+    "ref": "ViP 4,20.47",
+    "words": "vijayī kuhotraṃ putramavāpa"
+   }
+  ],
+  [
+   {
+    "name": "Viśvāmitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śunaḥśepa",
+    "ref": "ViP 4,7.37",
+    "words": "viśvāmītraputrastu bhārgava eva śunaḥśepo"
+   }
+  ],
+  [
+   {
+    "name": "Vṛka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bāhu",
+    "ref": "ViP 4,3.26",
+    "words": "tato vṛkasya bāhuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Yaudheyī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devaka",
+    "ref": "ViP 4,20.44",
+    "words": "yaudheyī yudhiṣchirāddevakaṃ putramavāpa"
+   }
+  ],
+  [
+   {
+    "name": "Śatadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṛti",
+    "ref": "ViP 4,5.31",
+    "words": "tataḥ kṛtiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaśāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "ViP 4,2.20",
+    "words": "śaśādasya tasya purañjayonāma putrobhavat"
+   }
+  ],
+  [
+   {
+    "name": "Śvaphalka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Akrūra",
+    "ref": "ViP 4,13.115",
+    "words": "asyākrūrasya pitṛśvaphalko"
+   }
+  ]
+ ]
+}

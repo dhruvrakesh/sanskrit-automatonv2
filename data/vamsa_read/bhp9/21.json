@@ -272,7 +272,7 @@
    "b": "Jayadratha",
    "words": "tatsuto viśadaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.21.23",
@@ -344,7 +344,7 @@
    "b": "Pāra",
    "words": "pārasya tanayo nīpaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.21.25",
@@ -389,7 +389,7 @@
    "b": "Viṣvaksena",
    "words": "udaksenastatastasmāt",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.21.26",

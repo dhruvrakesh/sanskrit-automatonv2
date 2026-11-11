@@ -81,5 +81,78 @@
   "output": 1416,
   "thinking": 0
  },
- "error": "the reply was not read: Extra data: line 13 column 1 (char 1141)"
+ "statements": [
+  {
+   "ref": "ViP 4,13.64",
+   "a": "Satyabhāmā",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "svasutāṃ satyabhāmāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,13.64",
+   "a": "Satyabhāmā",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "satyabhāmāṃ bhagavate bhāryārthaṃ dadau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,13.72",
+   "a": "Satyabhāmā",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "pitṛvadhāmarṣapūrṇā ca satyabhāmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,13.101",
+   "a": "Baladeva",
+   "rel": "brother_of",
+   "b": "Kṛṣṇa",
+   "words": "te bhrātṛtvānmayā kṣāntaṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,13.106",
+   "a": "Duryodhana",
+   "rel": "son_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "dhārtarāṣṭro duryodhanaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViP 4,13.111",
+   "a": "Śatrughna",
+   "rel": "descendant_of",
+   "b": "Sātvata",
+   "words": "śatrughne sātvatasya prapautre",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,13.115",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "asyākrūrasya pitṛśvaphalko",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,13.120",
+   "a": "Kāśīrāja's daughter",
+   "rel": "other",
+   "b": "Kāśīrāja",
+   "words": "tāmātmajāṃ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
 }

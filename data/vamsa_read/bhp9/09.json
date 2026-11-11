@@ -78,7 +78,7 @@
    "b": "Aṃśumān",
    "words": "dilīpastatsutaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.9.2",
@@ -87,7 +87,7 @@
    "b": "Dilīpa",
    "words": "bhagīrathastasya sutaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.9.16",
@@ -114,7 +114,7 @@
    "b": "Nābha",
    "words": "sindhudvīpastatastasmāt",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.9.16",
@@ -168,7 +168,7 @@
    "b": "Saudāsa",
    "words": "madayantyāḥ patiḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "BhP 9.9.40",
@@ -222,7 +222,7 @@
    "b": "Viśvasaha",
    "words": "yasya khaṭvāṅgaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   }
  ]
 }

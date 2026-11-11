@@ -204,7 +204,7 @@
    "b": "Sudhanu",
    "words": "suhotro 'bhūt sudhanuṣaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.5",
@@ -240,7 +240,7 @@
    "b": "Bṛhadratha",
    "words": "bṛhadrathāt kuśāgro 'bhūt",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.6",
@@ -303,7 +303,7 @@
    "b": "Sahadeva",
    "words": "sahadevo 'bhūt somāpiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.9",
@@ -330,7 +330,7 @@
    "b": "Suratha",
    "words": "tato vidūrathaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.10",
@@ -339,7 +339,7 @@
    "b": "Vidūratha",
    "words": "vidūrathastasmāt sārvabhaumaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.10",
@@ -375,7 +375,7 @@
    "b": "Ayutāyu",
    "words": "tataścākrodhanaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "BhP 9.22.11",
@@ -384,7 +384,7 @@
    "b": "Akrodhana",
    "words": "akrodhanastasmāddevātithiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.11",
@@ -447,7 +447,7 @@
    "b": "Bāhlīka",
    "words": "bāhlīkāt somadatto 'bhūt",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.18",
@@ -897,7 +897,7 @@
    "b": "Nemicakra",
    "words": "uktastataścitrarathaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.40",
@@ -1077,7 +1077,7 @@
    "b": "Sahadeva",
    "words": "bhavitā sahadevasya mārjāriḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.46",
@@ -1176,7 +1176,7 @@
    "b": "Kṣema",
    "words": "suvratastasmāt",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.48",

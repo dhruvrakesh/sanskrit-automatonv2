@@ -38,6 +38,13 @@ tests), --sink none (no network: the plan), --sink auto (edge when CORPUS_SYNC_S
            deployed
 
 The last lines are VERDICT:, NEXT: and ALSO:, as repair_text.py's.
+
+VAMSA_JOIN_2026_11_11 (G5c): and the dynasties, the Puranas' own lines read verse by verse (vamsa_read.py, G5a) and
+joined to the Purana Index's persons (vamsa_join.py, G5b): the table dynasties (docs\\cloud\\C28_index_dynasties_
+2026-11-11.sql), one row a line of three persons or more, each step with its verse, its Sanskrit words (GRETIL's text,
+CC BY-NC-SA 4.0, as the verses the site shows already), its index person and what the index says of it; a row "<work>:0"
+a work's counts. Sent only when the site has the table (C28) and corpus-index takes it (the Srangam kit DYNASTIES),
+as the claims were; until then the rest goes as before and the plan says the dynasties wait.
 """
 from __future__ import annotations
 
@@ -49,8 +56,8 @@ SCHEME = "i2"   # B2_SITE_2026_10_28: i2 adds the claims (GENEALOGY_HEAL_2026_11
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
-TABLES = ("texts", "persons", "steps", "statements", "claims", "lines", "verses", "meta")
-OPTIONAL = ("claims",)   # sent only when the site has the table (C23) and corpus-index takes it
+TABLES = ("texts", "persons", "steps", "statements", "claims", "lines", "verses", "dynasties", "meta")   # VAMSA_JOIN_2026_11_11: dynasties
+OPTIONAL = ("claims", "dynasties")   # sent only when the site has the table (C23, C28) and corpus-index takes it
 MAX_ROWS, MAX_BYTES, MAX_KEYS = 1000, 3 * 1024 * 1024, 5000
 INDEX_RIGHTS = ("the relations derived from the index, with the entry's own words: Cologne Digital Sanskrit "
                 "Dictionaries, CC BY-NC-SA 3.0 (https://creativecommons.org/licenses/by-nc-sa/3.0/)")
@@ -234,8 +241,10 @@ def _best_scholar(stmts: dict, keys: list) -> str:
     return min(vs, key=SCHOLAR_ORDER.index) if vs else ""
 
 
-def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_db: str = "") -> dict:
-    """{table: [row]}: the site's rows, from the stores the dashboard's Vamsa page reads; read-only."""
+def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_db: str = "",
+          vamsa_read_dir: str = "") -> dict:
+    """{table: [row]}: the site's rows, from the stores the dashboard's Vamsa page reads; read-only. vamsa_read_dir:
+    G5a's readings (data\\vamsa_read), for the dynasties (VAMSA_JOIN_2026_11_11); none given, none sent."""
     import relations_view as rv
     if immutable:
         rv.ro = ro_immutable
@@ -374,11 +383,39 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_d
         if t in shown_text and w:
             out["verses"].append(finish({"key": "%s|%s" % (t, ref), "text": t, "ref": ref, "words": w}))
 
+    # VAMSA_JOIN_2026_11_11: the dynasties, the Puranas' own lines joined to the index's persons (vamsa_join.py)
+    if vamsa_read_dir and Path(vamsa_read_dir).exists():
+        out["dynasties"] = dynasty_rows(vamsa_read_dir, db, kin_db, g, {r["key"] for r in out["persons"]})
     counts = {t: len(out[t]) for t in TABLES if t != "meta"}
     out["meta"].append(finish({"key": "run", "value": {"mark": MARK, "scheme": SCHEME, "counts": counts,
                                                        "checked": v["meta"].get("at", ""),
                                                        "kin": v["meta"].get("kin", "")}}))
     return out
+
+
+STEP_FIELDS = ("name", "father", "ref", "words", "person", "index_head", "how", "index", "joined")
+
+
+def dynasty_rows(vamsa_read_dir: str, db: str, kin_db: str, g: dict, persons: set) -> list:
+    """VAMSA_JOIN_2026_11_11: one row a line ("<work>:<n>"), and one a work ("<work>:0", its counts); a step's person
+    is linked ("page") only when the site has a page for it (a person with a line)."""
+    import vamsa_join as vj
+    d = vj.dynasties(vamsa_read_dir, db, kin_db, graph=g)
+    rows = []
+    for wk, w in sorted(d.items()):
+        rows.append(finish({"key": "%s:0" % wk, "work": wk, "n": 0, "title": w["title"], "text_code": w["text"],
+                            "label": "", "length": 0, "steps": [], "counts": w["counts"], "source": w["source"]}))
+        for ln in w["lines"]:
+            steps = []
+            for s in ln["steps"]:
+                x = {k: s.get(k) for k in STEP_FIELDS if s.get(k) not in (None, "")}
+                if s.get("person") and s["person"] in persons:
+                    x["page"] = True
+                steps.append(x)
+            rows.append(finish({"key": "%s:%d" % (wk, ln["n"]), "work": wk, "n": ln["n"], "title": w["title"],
+                                "text_code": w["text"], "label": ln["label"], "length": ln["length"], "steps": steps,
+                                "counts": {}, "source": w["source"]}))
+    return rows
 
 
 # ---- the sinks -------------------------------------------------------------------------------------------------------
@@ -555,12 +592,15 @@ def sync(rows: dict, sink, apply: bool, log=print) -> dict:
     and the keys the desk no longer has are deleted. The run's row (meta) goes last."""
     man = sink.manifest() or {}
     got = {"tables": {}, "sent": 0, "deleted": 0, "changed": 0, "waiting": [], "features_waiting": []}
-    if not all(t in man for t in OPTIONAL):
+    if "claims" not in man:   # VAMSA_JOIN_2026_11_11: the claims' table only (C28's table says nothing of them)
         rows = without_claims(rows)   # B2_SITE_2026_10_28: C23 not pasted yet
     if not (man.get("features") or {}).get("aliases"):
         rows = without_aliases(rows)   # GENEALOGY_HEAL_2026_11_10: C26 not pasted yet
         got["features_waiting"].append("aliases")
     for t in TABLES:
+        if t in OPTIONAL and t not in man and not rows.get(t):
+            got.setdefault("absent", []).append(t)   # VAMSA_JOIN_2026_11_11: nothing to send, no table there: nothing
+            continue
         if t in OPTIONAL and t not in man:
             got["waiting"].append(t)   # B2_SITE_2026_10_28: the site has no such table yet (C23 not pasted)
             log("  %-10s here %6d, the site has no table for them yet (C23): left for later" % (t, len(rows.get(t, []))))
@@ -594,7 +634,7 @@ def sync(rows: dict, sink, apply: bool, log=print) -> dict:
             got["deleted"] += int(res.get("deleted") or 0)
     if apply:
         after = sink.manifest() or {}
-        tabs = [t for t in TABLES if t not in got["waiting"]]
+        tabs = [t for t in TABLES if t not in got["waiting"] and t not in got.get("absent", [])]
         bad = [t for t in tabs if (after.get(t) or {}).get("digest") !=
                digest((r["key"], r["row_hash"]) for r in rows.get(t, []))]
         got["verified"] = {"tables_equal": len(tabs) - len(bad), "tables_different": bad}
@@ -606,6 +646,7 @@ def main(argv=None) -> int:
     ap.add_argument("--db", default="")
     ap.add_argument("--kin-db", default="")
     ap.add_argument("--vamsa-db", default="")
+    ap.add_argument("--vamsa-read", default="", help="G5a's readings, for the dynasties (default data\\vamsa_read)")
     ap.add_argument("--claims-db", default="", help="the scholars' claims (default data\\shelf\\claims.db; none there: none sent)")
     ap.add_argument("--immutable", action="store_true", help="the database is a backup copy: read it as immutable")
     ap.add_argument("--sink", default="auto", choices=("auto", "edge", "pg", "none"))
@@ -625,6 +666,7 @@ def main(argv=None) -> int:
     db = a.db or str(ROOT / "data" / "context.db")
     kin = a.kin_db or str(ROOT / "data" / "shelf" / "kin.db")
     vam = a.vamsa_db or str(ROOT / "data" / "shelf" / "vamsa.db")
+    vrd = a.vamsa_read or str(ROOT / "data" / "vamsa_read")   # VAMSA_JOIN_2026_11_11
     clm = a.claims_db or str(ROOT / "data" / "shelf" / "claims.db")
     print("index_sync.py  %s  %s" % (MARK, "APPLY" if a.apply else "PLAN (nothing sent)"))
     if a.if_configured and not a.dump and a.sink in ("auto", "edge"):
@@ -638,7 +680,7 @@ def main(argv=None) -> int:
             say("refused: %s not found (%s)" % (what, p), how)
             return 0 if a.if_configured else 1
     t0 = time.time()
-    rows = build(db, kin, vam, immutable=a.immutable, claims_db=clm)
+    rows = build(db, kin, vam, immutable=a.immutable, claims_db=clm, vamsa_read_dir=vrd)
     sizes = {t: sum(len(json.dumps(r, ensure_ascii=False)) for r in rows[t]) for t in TABLES}
     print("built in %.1f s: %s" % (time.time() - t0, ", ".join("%s %d (%.1f MB)" % (t, len(rows[t]), sizes[t] / 1e6)
                                                                for t in TABLES)))
@@ -658,8 +700,12 @@ def main(argv=None) -> int:
             return 0
         say("stopped: %s" % e, "python scripts\\index_sync.py   (the plan, again)")
         return 1
-    wait = (["the claims wait (%s): paste docs\\cloud\\C23_index_claims_2026-10-28.sql, then ask Lovable to deploy "
-             "supabase/functions/corpus-index again" % ", ".join(got["waiting"])] if got.get("waiting") else [])
+    wait = (["the claims wait: paste docs\\cloud\\C23_index_claims_2026-10-28.sql, then ask Lovable to deploy "
+             "supabase/functions/corpus-index again"] if "claims" in got.get("waiting", []) else [])
+    if "dynasties" in got.get("waiting", []):   # VAMSA_JOIN_2026_11_11
+        wait.append("the dynasties wait (%d lines): paste docs\\cloud\\C28_index_dynasties_2026-11-11.sql (B1, the "
+                    "change, A1), then the Srangam kit DYNASTIES (corpus-index deployed again), then python "
+                    "scripts\\index_sync.py --apply" % sum(1 for r in rows.get("dynasties", []) if r.get("n")))
     if "aliases" in got.get("features_waiting", []):   # GENEALOGY_HEAL_2026_11_10
         wait.append("the epithets wait (Kaunteya = Arjuna): paste docs\\cloud\\C26_index_aliases_2026-11-10.sql in one "
                     "paste, then python scripts\\index_sync.py --apply")

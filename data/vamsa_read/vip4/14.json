@@ -100,7 +100,7 @@
    "b": "Satyaka",
    "words": "satyakātsātyakiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.3",
@@ -217,7 +217,7 @@
    "b": "Andhaka",
    "words": "andhakasya catvāraḥ putrāḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.12",
@@ -226,7 +226,7 @@
    "b": "Andhaka",
    "words": "andhakasya catvāraḥ putrāḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.12",
@@ -235,7 +235,7 @@
    "b": "Andhaka",
    "words": "andhakasya catvāraḥ putrāḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.12",
@@ -244,7 +244,7 @@
    "b": "Andhaka",
    "words": "andhakasya catvāraḥ putrāḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.13",
@@ -280,7 +280,7 @@
    "b": "Viloma",
    "words": "tasmādapi tuṃburasakho 'bhavat",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.14",
@@ -613,7 +613,7 @@
    "b": "Mārīṣā",
    "words": "tasyāṃ cāsau daśaputrānajanayat",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,14.30",
@@ -721,7 +721,7 @@
    "b": "Pṛthā",
    "words": "anūḍhāyāś ca bhagavatā bhāsvatā kānīnaḥ karṇo nāma putro 'janyata",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "ViP 4,14.37",

@@ -113,7 +113,7 @@
    "b": "Pūru",
    "words": "pūrorjanamejayaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.1",
@@ -140,7 +140,7 @@
    "b": "Pravīra",
    "words": "pravīrānmanasyuḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.1",
@@ -608,7 +608,7 @@
    "b": "Bṛhadiṣu",
    "words": "bṛhadiṣorbṛhaddhanuḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.34",
@@ -626,7 +626,7 @@
    "b": "Bṛhatkarman",
    "words": "tataś ca jayadrathaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.34",
@@ -752,7 +752,7 @@
    "b": "Pṛthu",
    "words": "pṛthoḥsukṛteḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.42",
@@ -806,7 +806,7 @@
    "b": "Brahmadatta",
    "words": "tataś ca viṣvaksenaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "ViP 4,19.46",
@@ -842,7 +842,7 @@
    "b": "Yavīnara",
    "words": "tasyāpi dhṛtimān",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.49",
@@ -851,7 +851,7 @@
    "b": "Dhṛtimān",
    "words": "tasmācca satyadhṛtiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.49",
@@ -860,7 +860,7 @@
    "b": "Satyadhṛti",
    "words": "tataś ca dṛḍhanemiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.49",
@@ -869,7 +869,7 @@
    "b": "Dṛḍhanemi",
    "words": "tasmācca supārśvaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.49",
@@ -878,7 +878,7 @@
    "b": "Supārśva",
    "words": "tataḥsumatiḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.49",
@@ -923,7 +923,7 @@
    "b": "Kṣemya",
    "words": "kṣemyātsudhīraḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.55",
@@ -1121,7 +1121,7 @@
    "b": "Ahalyā",
    "words": "ahalyāyāṃ śatānando 'bhavat",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.64",
@@ -1148,7 +1148,7 @@
    "b": "Aśvatthāman",
    "words": "aśvatthāmno jananī kṛpī",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.69",
@@ -1193,7 +1193,7 @@
    "b": "Saudāsa",
    "words": "saudāsātsahadevaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.71",
@@ -1238,7 +1238,7 @@
    "b": "Drupada",
    "words": "tasmācca dhṛṣṭadyumnaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.73",
@@ -1463,7 +1463,7 @@
    "b": "Sahadeva",
    "words": "sahadevātsomapaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.84",

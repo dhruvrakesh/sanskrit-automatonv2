@@ -74,7 +74,7 @@
    "b": "Yauvanāśva",
    "words": "hārītastasya putro 'bhūt",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.4",
@@ -83,7 +83,7 @@
    "b": "Anaraṇya",
    "words": "haryaśvastatsutaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "check": "words"
   },
   {
    "ref": "BhP 9.7.4",
@@ -110,7 +110,7 @@
    "b": "Tribandhana",
    "words": "tasya satyavrataḥ putraḥ",
    "doubt": false,
-   "check": "unsupported"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.5",

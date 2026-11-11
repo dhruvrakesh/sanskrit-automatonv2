@@ -237,7 +237,8 @@ class TestSite(Fixture):
     def test_on_c21_alone_the_claims_wait_and_the_rest_is_verified(self):
         self.assertEqual(self.before["waiting"], ["claims"])
         self.assertEqual(self.before["verified"]["tables_different"], [])
-        self.assertEqual(self.before["verified"]["tables_equal"], len(self.ix.TABLES) - 1)
+        self.assertEqual(self.before["verified"]["tables_equal"],   # VAMSA_JOIN_2026_11_11: a table with nothing to send
+                         len(self.ix.TABLES) - 1 - len(self.before.get("absent", [])))   # and none there is not counted
 
     def test_with_c23_the_claims_go_and_all_is_verified(self):
         self.assertEqual(self.after["waiting"], [])

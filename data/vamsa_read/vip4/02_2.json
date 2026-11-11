@@ -63,5 +63,24 @@
   "output": 552,
   "thinking": 0
  },
- "error": "the reply was not read: Extra data: line 6 column 1 (char 234)"
+ "statements": [
+  {
+   "ref": "ViP 4,2.77",
+   "a": "Māndhātṛ",
+   "rel": "descendant_of",
+   "b": "Kakutstha",
+   "words": "kakutsthavaṃśe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViP 4,2.107",
+   "a": "Saubhari",
+   "rel": "other",
+   "b": "Māndhātṛ",
+   "words": "maharṣirayaṃmadbhartā",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
 }

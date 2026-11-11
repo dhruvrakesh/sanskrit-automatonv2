@@ -1,0 +1,236 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "bhp12",
+ "title": "Bhagavatapurana 12.1",
+ "lines": [
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śāntakarṇa",
+    "ref": "BhP 12.1.21",
+    "words": "śrī-śāntakarṇas tat-putraḥ"
+   },
+   {
+    "name": "Paurṇamāsa",
+    "ref": "BhP 12.1.21",
+    "words": "paurṇamāsas tu tat-sutaḥ"
+   },
+   {
+    "name": "Lambodara",
+    "ref": "BhP 12.1.22",
+    "words": "lambodaras tu tat-putras"
+   },
+   {
+    "name": "Cibilaka",
+    "ref": "BhP 12.1.22",
+    "words": "tasmāc cibilako nṛpaḥ"
+   },
+   {
+    "name": "Meghasvāti",
+    "ref": "BhP 12.1.22",
+    "words": "meghasvātiś cibilakād"
+   },
+   {
+    "name": "Aṭamāna",
+    "ref": "BhP 12.1.22",
+    "words": "aṭamānas tu tasya ca"
+   },
+   {
+    "name": "Aniṣṭakarmā",
+    "ref": "BhP 12.1.23",
+    "words": "aniṣṭakarmā hāleyas"
+   },
+   {
+    "name": "Talaka",
+    "ref": "BhP 12.1.23",
+    "words": "talakas tasya cātma-jaḥ"
+   },
+   {
+    "name": "Purīṣabhīru",
+    "ref": "BhP 12.1.23",
+    "words": "purīṣabhīrus tat-putras"
+   }
+  ],
+  [
+   {
+    "name": "Śiśunāga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kākavarṇa",
+    "ref": "BhP 12.1.4",
+    "words": "kākavarṇas tu tat-sutaḥ"
+   },
+   {
+    "name": "Kṣemadharmā",
+    "ref": "BhP 12.1.4",
+    "words": "kṣemadharmā tasya sutaḥ"
+   },
+   {
+    "name": "Kṣetrajña",
+    "ref": "BhP 12.1.4",
+    "words": "kṣetrajñaḥ kṣemadharma-jaḥ"
+   },
+   {
+    "name": "Vidhisāra",
+    "ref": "BhP 12.1.5",
+    "words": "vidhisāraḥ sutas tasya"
+   }
+  ],
+  [
+   {
+    "name": "Rājaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nandivardhana",
+    "ref": "BhP 12.1.3",
+    "words": "nandivardhanas tat-putraḥ"
+   },
+   {
+    "name": "Mahānandi",
+    "ref": "BhP 12.1.6",
+    "words": "mahānandiḥ sutas tataḥ"
+   },
+   {
+    "name": "Nanda",
+    "ref": "BhP 12.1.7",
+    "words": "mahānandi-suto"
+   }
+  ],
+  [
+   {
+    "name": "Bhadraka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pulinda",
+    "ref": "BhP 12.1.15",
+    "words": "pulindo bhavitā sutaḥ"
+   },
+   {
+    "name": "Ghoṣa",
+    "ref": "BhP 12.1.16",
+    "words": "tato ghoṣaḥ sutas tasmād"
+   }
+  ],
+  [
+   {
+    "name": "Pradyota",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pālaka",
+    "ref": "BhP 12.1.2",
+    "words": "yat-pālakaḥ sutaḥ"
+   },
+   {
+    "name": "Viśākhayūpa",
+    "ref": "BhP 12.1.2",
+    "words": "viśākhayūpas tat-putro"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhūmitra",
+    "ref": "BhP 12.1.19",
+    "words": "tasya putras tu bhūmitras"
+   },
+   {
+    "name": "Nārāyaṇa",
+    "ref": "BhP 12.1.19",
+    "words": "tasya nārāyaṇaḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śivaskanda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yajñaśrī",
+    "ref": "BhP 12.1.25",
+    "words": "yajñaśrīs tat-sutas"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "BhP 12.1.25",
+    "words": "vijayas tat-suto"
+   }
+  ],
+  [
+   {
+    "name": "Ajātaśatru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Darbhaka",
+    "ref": "BhP 12.1.5",
+    "words": "darbhakas tat-suto"
+   }
+  ],
+  [
+   {
+    "name": "Candragupta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vārisāra",
+    "ref": "BhP 12.1.12",
+    "words": "tat-suto vārisāraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Mahāpadma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sumālya",
+    "ref": "BhP 12.1.10",
+    "words": "tasya cāṣṭau bhaviṣyanti sumālya-pramukhāḥ sutāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Suyaśā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Saṅgata",
+    "ref": "BhP 12.1.13",
+    "words": "saṅgataḥ suyaśaḥ-sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śivasvāti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Gomatī",
+    "ref": "BhP 12.1.24",
+    "words": "tasyāpi gomatī putraḥ"
+   }
+  ]
+ ]
+}

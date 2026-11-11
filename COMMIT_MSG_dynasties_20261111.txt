@@ -1,0 +1,21 @@
+The dynasties joined to the Purana Index, the table for the site (C28), the Dynasties page's kit (DOCS108_2026_11_11)
+
+Asked on 11 Nov: join the dynasties to the index's people, then the database change and the Dynasties page.
+
+- VAMSA_JOIN_2026_11_11 (scripts/vamsa_join.py, new): each person of G5a's lines found in the Purana Index, by the
+  father the index gives him, else by a name it has once; a root named in another chapter joined by the index; each
+  step's verdict (agrees, differs, new, absent). On 11 Nov: 1,460 persons, 1,052 found, 990 steps with the same father
+  in the index, 55 with another, 408 persons not in it; 111 lines of three or more.
+- index_sync.py: the table dynasties, optional as the claims were (sent when the site has it and corpus-index takes it;
+  nothing waits when there is nothing to send); the claims' verdicts stripped only when their own table is missing.
+- C28_INDEX_DYNASTIES_2026_11_11 (docs/cloud/C28_index_dynasties_2026-11-11.sql): corpus.index_dynasties, a door
+  before C26's ingest and manifest, the reader for signed-in readers; tested on PostgreSQL 16 over C21, C23, C26.
+- The Srangam kit DYNASTIES_2026_11_11 (docs/srangam/DYNASTIES_2026-11-11, scripts/patch_srangam_dynasties_2026_11_11.py):
+  /corpus/genealogies/dynasties; corpus-index takes the table.
+- DOCS108_2026_11_11: the register's section 21, STATE 43, the RUNBOOK's commands.
+
+Tests: test_vamsa_join_2026_11_11 (8, PostgreSQL 16 for C28), test_b2_site_pg_2026_10_28, test_docs108_2026_11_11; the
+Srangam kit: typecheck, vitest (dynasties 6, genealogy-heal 6, index-site 17).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

@@ -96,319 +96,354 @@
  },
  "statements": [
   {
-   "ref": null,
+   "ref": "ViP 4,2.1",
    "a": "Raivata",
    "rel": "other",
    "b": "Kakudmin",
    "words": "kakudmī raivato",
    "doubt": true,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.2",
    "a": "Kakudmin",
    "rel": "brother_of",
    "b": "Kakudmin",
    "words": "bhrātṛśataṃ",
    "doubt": true,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.5",
    "a": "Nābhāgasaṃtra",
    "rel": "son_of",
    "b": "Nābhāga",
    "words": "nābhāgasyātmajo nābhāgasaṃtrobhavat",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.6",
    "a": "Ambarīṣa",
    "rel": "son_of",
    "b": "Nābhāgasaṃtra",
    "words": "tasyāpyaṃbarīṣaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.7",
    "a": "Virūpa",
    "rel": "son_of",
    "b": "Ambarīṣa",
    "words": "aṃbarīṣasyāpi virūpobhavat",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.8",
    "a": "Pṛṣadaśva",
    "rel": "son_of",
    "b": "Virūpa",
    "words": "virūpātpṛṣadaśvo jajñe",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.9",
    "a": "Rathītara",
    "rel": "son_of",
    "b": "Pṛṣadaśva",
    "words": "tataś ca rathītaraḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.11",
    "a": "Ikṣvāku",
    "rel": "son_of",
    "b": "Manu",
    "words": "manorikṣvākuḥ putro jajñe",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.12",
    "a": "Vikukṣi",
    "rel": "son_of",
    "b": "Ikṣvāku",
    "words": "tasya putraśatapradhānā vikukṣinimidaṇḍākhyāstrayaḥ putrā babhūvuḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.12",
    "a": "Nimi",
    "rel": "son_of",
    "b": "Ikṣvāku",
    "words": "vikukṣinimidaṇḍākhyāstrayaḥ putrā",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.12",
    "a": "Daṇḍa",
    "rel": "son_of",
    "b": "Ikṣvāku",
    "words": "vikukṣinimidaṇḍākhyāstrayaḥ putrā",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.20",
    "a": "Purañjaya",
    "rel": "son_of",
    "b": "Śaśāda",
    "words": "śaśādasya tasya purañjayonāma putrobhavat",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.18",
    "a": "Vikukṣi",
    "rel": "other",
    "b": "Śaśāda",
    "words": "śaśādasaṃjñāmavāpa",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.33",
    "a": "Anenas",
    "rel": "son_of",
    "b": "Kakutstha",
    "words": "kakutsthasyāpyanenāḥ putro 'bhavat",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.34",
    "a": "Pṛthu",
    "rel": "son_of",
    "b": "Anenas",
    "words": "puthunenasaḥ",
    "doubt": true,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.35",
    "a": "Viṣṭarāśva",
    "rel": "son_of",
    "b": "Pṛthu",
    "words": "puthorviṣṭarāśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.36",
    "a": "Yuvanāśva",
    "rel": "son_of",
    "b": "Viṣṭarāśva",
    "words": "tasyāpi cāndro yuvanāśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.37",
    "a": "Śāvasta",
    "rel": "son_of",
    "b": "Yuvanāśva",
    "words": "cāndrasya tasya yuvanāśvasya śāvastaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.38",
    "a": "Bṛhadaśva",
    "rel": "son_of",
    "b": "Śāvasta",
    "words": "śāvastasya vṛhadaśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.39",
    "a": "Kuvalāyāśva",
    "rel": "son_of",
    "b": "Bṛhadaśva",
    "words": "tasyāpi kuvālāyāśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.41",
    "a": "Dṛḍhāśva",
    "rel": "son_of",
    "b": "Kuvalāyāśva",
    "words": "tasya ca tanayāsptamastā eva",
    "doubt": true,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.41",
    "a": "Candrāśva",
    "rel": "son_of",
    "b": "Kuvalāyāśva",
    "words": "tasya ca tanayāsptamastā eva",
    "doubt": true,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.41",
    "a": "Kapilāśva",
    "rel": "son_of",
    "b": "Kuvalāyāśva",
    "words": "tasya ca tanayāsptamastā eva",
    "doubt": true,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.43",
    "a": "Haryaśva",
    "rel": "son_of",
    "b": "Dṛḍhāśva",
    "words": "vṛḍhāśvāddharyaśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.44",
    "a": "Nikumbha",
    "rel": "son_of",
    "b": "Haryaśva",
    "words": "tasmācca nikuṃbhaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.45",
    "a": "Amitāśva",
    "rel": "son_of",
    "b": "Nikumbha",
    "words": "nikuṃbhasyāmitāśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.46",
    "a": "Kṛśāśva",
    "rel": "son_of",
    "b": "Amitāśva",
    "words": "tataś ca kṛśāśvaḥ",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.47",
    "a": "Prasenajit",
    "rel": "son_of",
    "b": "Kṛśāśva",
    "words": "tasmācca prasenajit",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.48",
    "a": "Yuvanāśva",
    "rel": "son_of",
    "b": "Prasenajit",
    "words": "prasenajito yuvanāśvobhavat",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.55",
    "a": "Māndhātṛ",
    "rel": "son_of",
    "b": "Yuvanāśva",
    "words": "rājño yuvanāsvasya patnī mahābalaparākramaṃ putraṃ janayiṣyati",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.66",
    "a": "Bindumatī",
    "rel": "daughter_of",
    "b": "Śatabindu",
    "words": "śatabindor duhitaraṃ bundumatīm",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.66",
    "a": "Bindumatī",
    "rel": "wife_of",
    "b": "Māndhātṛ",
    "words": "māndhātā śatabindor duhitaraṃ bundumatīmupayem",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "words"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.67",
    "a": "Purukutsa",
    "rel": "son_of",
    "b": "Māndhātṛ",
    "words": "purukutsamaṃbarīṣaṃ mucukundaṃ ca tasyāṃ putratrayamutpādayāmāsa",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.67",
    "a": "Ambarīṣa",
    "rel": "son_of",
    "b": "Māndhātṛ",
    "words": "purukutsamaṃbarīṣaṃ mucukundaṃ ca tasyāṃ putratrayamutpādayāmāsa",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   },
   {
-   "ref": null,
+   "ref": "ViP 4,2.67",
    "a": "Mucukunda",
    "rel": "son_of",
    "b": "Māndhātṛ",
    "words": "purukutsamaṃbarīṣaṃ mucukundaṃ ca tasyāṃ putratrayamutpādayāmāsa",
    "doubt": false,
-   "check": "bad"
+   "ref_from": "words",
+   "check": "verified"
   }
  ]
 }
