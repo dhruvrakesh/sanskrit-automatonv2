@@ -2811,3 +2811,24 @@ docs\ASKS_2026-10-22.md, section 22. From the automaton's root unless said:
    anthropic:claude-sonnet-5-5 and limit 0, as on 12 Nov.
 5. Mallapurana's scholarly English, when you choose (about $25 to $44): /desk/Mallapurana, "Plan them (free)" (250 verses),
    then "Run"; again until done; then "As prose".
+
+## 13 Nov, evening: the best reading for each text; the Surya and the Ganita (DOCS110_2026_11_13)
+
+docs\ASKS_2026-10-22.md, section 23. From the automaton's root:
+
+1. The patches: `python scripts\patch_source_pick_2026_11_13.py --check`, then without; the same for
+   `patch_docs110_2026_11_13.py`; `python -m unittest tests.test_source_pick_2026_11_13 tests.test_banner_head_2026_11_13
+   tests.test_bench_letters_2026_10_22 tests.test_docs110_2026_11_13`; `powershell -ExecutionPolicy Bypass -File
+   scripts\run_tests.ps1`; release.ps1 with COMMIT_MSG_sourcepick_20261113.txt. The dashboard restarted when no job runs.
+2. `python scripts\text_path.py` (every text charted again, free).
+3. The benchmarks (free): `python scripts\benchmark_sources.py --doc jyotish_surya_siddhanta` and
+   `python scripts\benchmark_sources.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V`; each ends with PICK:, and the
+   text's desk page shows it.
+4. The Surya: `python scripts\scholar_translate.py --doc jyotish_surya_siddhanta__w_etext --engine
+   anthropic:claude-sonnet-5-5 --triage` (free: exports\scholar_triage_jyotish_surya_siddhanta__w_etext.csv, the 95 not
+   passed); then, as on 16 Oct, `--engine anthropic:claude-opus-5-5 --only-flagged anthropic:claude-sonnet-5-5 --serious
+   --compare-engine anthropic:claude-sonnet-5-5 --audit-every 1` (a dry run first; then `--yes --max-usd 9`).
+5. The Ganita: `python scripts\repair_text.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` (free: the price), then
+   its `--repair --max-usd` as it says; when the repair is released, its edition from /desk/Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V
+   in presses of 250.
+6. Mallapurana: the next presses from /desk/Mallapurana; then "As prose".

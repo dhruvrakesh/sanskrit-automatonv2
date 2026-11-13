@@ -1,0 +1,14 @@
+The benchmark picks the reading for each text's scholarly edition, and the desk shows it (SOURCE_PICK_2026_11_13, DOCS110_2026_11_13)
+
+- benchmark_sources: pick_reading() names the reading to make the scholarly English and its prose from: an e-text
+  witness when it is the same text as the scan (F1 page by page at least 0.6) and misreads no more; else the scan,
+  ready when its misreading is cosmetic, else after its repair. Kept as "pick" in data/benchmarks/<doc>.json, printed
+  as PICK:.
+- translation_desk.pick_of() and /desk/<doc>: the pick in the box of the scholarly English, with a link to the text
+  picked, or the free command that measures it. A person confirms.
+- tests: test_source_pick_2026_11_13; the replays of test_banner_head_2026_11_13 and test_bench_letters_2026_10_22
+  compare with the copies from before this patch.
+- DOCS110: ASKS section 23, STATE section 45, RUNBOOK 13 Nov, evening (the Surya and the Ganita first).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

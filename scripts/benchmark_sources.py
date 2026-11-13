@@ -576,7 +576,57 @@ def opine(res: dict, doc: str, a) -> dict:
     res["verdict"] = "%d reading(s) of %s compared%s; ours (%s) misreads %.2f%% of the letters" % (
         len(res["readings"]), doc, (" with the critical e-text (%s)" % res["reference"]) if res["reference"] else "",
         best, (ours or res["readings"][0])["misread_letters_pct"])
+    res["pick"] = pick_reading(res, doc)   # SOURCE_PICK_2026_11_13
     return res
+
+
+# SOURCE_PICK_2026_11_13. Asked on 13 Nov: "are we able to choose the best available from etext and our own ocr+vision
+# text for translation and then get to the scholarly prose and edition for each? Ganita Yuktibhasa and Surya Siddhanta are
+# on the top of our list." Within the scan the choice is made already: the repair (repair_text.py) merges Tesseract and
+# vision page by page into the consensus. Between the scan and an e-text (a witness of etext_witness.py, kept as its own
+# text "<doc>__w_<site>") the benchmark measured both and said nothing of which to use. pick_reading() says it, for the
+# scholarly English and its prose: the e-text when it is the same text as ours (F1 page by page at least PICK_F1) and
+# misreads no more than ours; else ours, ready when its misreading is cosmetic, else after its repair. A person confirms:
+# the desk shows the pick (translation_desk.pick_of) and nothing is chosen for them.
+PICK_F1 = 0.6
+
+
+def pick_reading(res: dict, doc: str) -> dict:
+    """{doc, reading, why, then}: the reading to make the scholarly English and its prose from (SOURCE_PICK_2026_11_13)."""
+    rd = res.get("readings") or []
+    ours = next((x for x in rd if x.get("kind") == "ours"), None) or next((x for x in rd if x.get("kind") == "db"), None)
+    ets = [x for x in rd if x.get("kind") == "etext" and x.get("site")]
+    om = (ours or {}).get("misread_letters_pct")
+    if ets:
+        w = max(ets, key=lambda x: (x.get("f1_ours") or 0.0, x.get("letters") or 0))
+        f1 = w.get("f1_ours")
+        code = "%s__w_%s" % (doc, w["site"])
+        if f1 is not None and f1 >= PICK_F1 and (om is None or (w.get("misread_letters_pct") or 0.0) <= om):
+            return {"doc": code, "reading": w["label"],
+                    "why": "the e-text (%s) is the same text as ours (F1 %.2f page by page, %s pages) and misreads no letter; "
+                           "ours misreads %s of the letters: make the scholarly English and its prose from the e-text; "
+                           "ours stays the scan's witness" % (w["label"], f1, w.get("ours_pages") or "-",
+                                                             ("%.2f%%" % om) if om is not None else "-"),
+                    "then": "python scripts\\scholar_translate.py --doc %s --status   (free)" % code}
+        why = ("the e-text (%s) agrees with ours on F1 %.2f only, page by page: another recension, or numbered "
+               "otherwise; ours for the edition, the e-text to compare" % (w["label"], f1) if f1 is not None else
+               "the e-text (%s) could not be aligned with ours: ours for the edition, the e-text to compare" % w["label"])
+        if ours and ours.get("level") not in ("cosmetic", None, "-"):
+            why += "; ours misreads %.2f%% (%s): repair it first" % (om or 0.0, ours.get("level"))
+        return {"doc": doc, "reading": (ours or {}).get("label", ""), "why": why,
+                "then": "python scripts\\repair_text.py --doc %s   (free: what the repair would cost)" % doc
+                if ours and ours.get("level") not in ("cosmetic", None, "-") else ""}
+    if not ours:
+        return {"doc": doc, "reading": "", "why": "nothing of this text is read yet", "then": ""}
+    if ours.get("level") in ("cosmetic", None, "-"):
+        return {"doc": doc, "reading": ours["label"],
+                "why": "no e-text of it here; ours (%s) misreads %.2f%% of the letters (cosmetic): ready for its scholarly "
+                       "English and its prose" % (ours["label"], om or 0.0), "then": ""}
+    return {"doc": doc, "reading": ours["label"],
+            "why": "no e-text of it here; ours (%s) misreads %.2f%% of the letters (%s): repair it first (vision reads "
+                   "the pages Tesseract misread), then its scholarly English; an edition made now goes stale where the "
+                   "reading changes" % (ours["label"], om or 0.0, ours.get("level")),
+            "then": "python scripts\\repair_text.py --doc %s   (free: what the repair would cost)" % doc}
 
 
 def current_scan(doc: str, sd_dir: Path):
@@ -692,10 +742,15 @@ def main(argv=None) -> int:
         show(res)
     p = write(res, Path(a.bench_dir))
     print("  wrote %s" % p)
+    pk = res.get("pick") or {}   # SOURCE_PICK_2026_11_13
+    if pk.get("doc"):
+        print("PICK: for the scholarly English and its prose: %s (%s): %s" % (pk["doc"], pk.get("reading") or "-", pk["why"]))
     print("VERDICT: " + res.get("verdict", ""))
     print("NEXT: " + res.get("next", ""))
     for x in res.get("also") or []:
         print("ALSO: " + x)
+    if pk.get("then"):
+        print("ALSO: " + pk["then"])
     return 0
 
 

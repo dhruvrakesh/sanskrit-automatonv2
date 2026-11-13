@@ -127,7 +127,11 @@ class ThePatch(unittest.TestCase):
             r = run()
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for rel in FILES:
-                self.assertEqual((t / rel).read_bytes(), (REPO / rel).read_bytes(), rel)
+                want = (REPO / rel).read_bytes()
+                later = sorted((REPO / rel).parent.glob(Path(rel).name + ".bak_sourcepick_*"))   # SOURCE_PICK_2026_11_13 came after
+                if later and b"SOURCE_PICK_2026_11_13" in want:
+                    want = later[0].read_bytes()
+                self.assertEqual((t / rel).read_bytes(), want, rel)
             self.assertIn("Nothing to do", run().stdout)
 
 

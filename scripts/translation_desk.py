@@ -220,6 +220,21 @@ def stage_of(prow, cover=None, reg=None) -> str:
     return "uncharted"
 
 
+def pick_of(doc: str, bench_dir) -> dict:
+    """SOURCE_PICK_2026_11_13: the benchmark's pick for a text (benchmark_sources.pick_reading): which reading to make the
+    scholarly English and its prose from, with its date and the text it was measured for ("of"). A witness's page reads
+    its scan's pick. None when no benchmark has a pick."""
+    base = str(doc or "").split("__w_")[0]
+    try:
+        j = json.loads((Path(bench_dir) / ("%s.json" % base)).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    p = j.get("pick") if isinstance(j, dict) else None
+    if not isinstance(p, dict) or not p.get("doc"):
+        return None
+    return dict(p, at=str(j.get("at") or ""), of=base)
+
+
 def next_step(stage: str, prow=None, cover=None, mula: int = 0) -> str:
     """The desk's one next step for a text, in words."""
     prow = prow or {}

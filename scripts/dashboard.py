@@ -3313,6 +3313,16 @@ def desk_text(doc):
             td.PATH_LABEL.get(r["path"] or "", r["path"]))
     held_ok = held == "in_repair"
     ctl = ""
+    _pk = td.pick_of(r["doc"], BENCH_DIR) if hasattr(td, "pick_of") else None   # SOURCE_PICK_2026_11_13
+    if _pk:
+        ctl += ('<p class="%s">The reading to make the edition from (the benchmark of %s): %s. %s.%s</p>' % (
+            "small" if _pk["doc"] == r["doc"] else "warn", e(_pk.get("at", "")[:10]),
+            "<b>this text</b>" if _pk["doc"] == r["doc"] else '<a href="/desk/%s">%s</a>' % (e(_pk["doc"], quote=True),
+                                                                                             e(_pk["doc"])),
+            e(_pk.get("why", "")), (" Then: <code>%s</code>" % e(_pk["then"])) if _pk.get("then") else ""))
+    elif "__w_" not in r["doc"]:
+        ctl += ('<p class="small">Which reading to make the edition from, this scan\'s or an e-text\'s: not measured yet. '
+                'Free: <code>python scripts\\benchmark_sources.py --doc %s</code></p>' % e(r["doc"]))
     if r.get("guard") and r["stage"] == "edition":
         ctl += ('<p class="warn">Its path says the reading comes first (%s): the verses of the pages that change go '
                 'stale, not wrong; the path\'s step first is the safer way.</p>' % e(r["guard"]["label"]))
