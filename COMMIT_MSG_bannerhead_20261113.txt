@@ -1,0 +1,12 @@
+Each page's first verses translated; a Done text offers its scholarly edition (BANNER_HEAD_2026_11_13, DOCS109_2026_11_13)
+
+- text_filters: a publisher's running head (MAHARISHI UNIVERSITY OF MANAGEMENT / VEDIC LITERATURE COLLECTION) at the
+  front of a page's first passage no longer makes the whole passage front matter: 1,924 passages of 21 texts become
+  translatable (1,745 untranslated; the Gandharva Veda 501); none stops being so.
+- translation_desk, dashboard: a Done text without a scholarly English says so, with its verses and the measured price
+  ($0.026 to $0.045 a verse), and its page begins with a press of 250 (DESK_SCHOLAR_NEXT_2026_11_13).
+- tests/test_leak_guard_2026_10_19: its replay compares with the copy from before this patch.
+- DOCS109: ASKS section 22, STATE section 44, RUNBOOK 13 Nov (Publish does not deploy corpus-index: ask Lovable).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

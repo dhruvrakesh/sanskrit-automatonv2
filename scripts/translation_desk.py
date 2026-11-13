@@ -58,6 +58,13 @@ SCHOLAR_ENGINE = "anthropic:claude-sonnet-5-5"
 STEP_VERSES = 40          # a plan's verses by default
 MAX_VERSES = 400          # the most verses a press plans or runs
 MAX_USD = 12.0            # the most one press may spend (as the benchmarks' buttons)
+# DESK_SCHOLAR_NEXT_2026_11_13 (patch BANNER_HEAD_2026_11_13): the scholarly English's price a verse as the meter has it (usage_log, kind scholar,
+# claude-sonnet-5-5, 15 to 21 Oct): the Markandeya witness $36.65 for 1,408 verses ($0.026), the Karanagama $42.19 for
+# 1,018 ($0.041), the Hayasirsa $62.11 for 1,431 ($0.043), the Surya $22.22 for 492 ($0.045). A plan (free) prices a
+# text from the measured rows; this is the desk's word before any plan. A press of SCHOLAR_PRESS verses stays under
+# MAX_USD at the dearer rate.
+SCHOLAR_PER_VERSE = (0.026, 0.045)
+SCHOLAR_PRESS = 250
 TIER_R_ENGINE = "anthropic:claude-sonnet-5-5"   # TIER_R_2026_10_17: the working English, Sonnet in one pass
 TIER_R_PER_VERSE = 0.0052                        # $ a verse, BM1's measure (the Claude credit)
 REF_RE = re.compile(r"^\d{1,4}(\.\d{1,4}){0,3}$")   # TIER_R_2026_10_17: a verse to begin at (81.1)
@@ -228,6 +235,14 @@ def next_step(stage: str, prow=None, cover=None, mula: int = 0) -> str:
     if stage == "ready":
         return ("the working English and its Hindi (one pass), about $%.2f by the path; or begin its scholarly English"
                 % float(prow.get("cost") or 0))
+    if stage == "done" and not _first(prow) and int(mula or 0) > 0 and not int(cover.get("verses") or 0):
+        # DESK_SCHOLAR_NEXT_2026_11_13: asked on 13 Nov, "why dont we have prose type scholarly editions for mallapurana
+        # or a ui/ux locally to get to one?": a text whose working English is done was called "nothing to do", and the
+        # scholarly English (the edition, and the edition read as prose) was never offered from the list.
+        lo, hi = SCHOLAR_PER_VERSE
+        return ("the working English is done; its scholarly English (the edition, also read as prose) is not begun: "
+                "%d verses, about $%.0f to $%.0f; on its page, plan the first %d (free), then run them"
+                % (int(mula), int(mula) * lo, int(mula) * hi, min(SCHOLAR_PRESS, int(mula))))
     if stage in ("judged", "source", "done"):
         return _first(prow) or ("nothing to do" if stage == "done" else "-")
     return "chart the path again (free): python scripts\\text_path.py"

@@ -409,11 +409,74 @@ def strip_model_chatter(out: str):
     return t, " and ".join(what)
 
 
+# BANNER_HEAD_2026_11_13: a page's running head that names its publisher. The editions of the Maharishi University of
+# Management's Vedic Literature Collection (the Gandharva Veda, the Yajur and Sama Vedas, the smrtis, the dhanurvedas,
+# the siksas) print on every page a head such as "[Gandharva Veda] / (the name in Devanagari) / GANDHARVA VEDA /
+# MAHARISHI UNIVERSITY OF MANAGEMENT / VEDIC LITERATURE COLLECTION", and the segmenter puts it at the front of the
+# page's first passage, before that page's verses. looks_like_frontmatter() finds "vedic literature" anywhere in a
+# passage and calls all of it front matter, so should_translate() said no and the translators passed over each page's
+# first verses without a word. On the backup of 13 Nov: 1,924 passages of 21 texts, 1,745 of them untranslated: 501
+# the Gandharva Veda's (its English stopped at 379 of 884), 444 the Taittiriya's, 280 the Sukla Yajurveda's, 241 the Samaveda's; their
+# charts counted them as debris (the Gandharva 57%). strip_banner_head() takes such a head off the front of a passage:
+# whole leading lines only, and only when one of them is a publisher's banner; the rest is judged and translated as any
+# passage. A passage that is nothing but the banner, or has no Sanskrit after it, is left as it was (front matter).
+_BH_STOP = re.compile(r"[।॥०-९0-9]")
+_BH_HEADING = re.compile(r"(?:\u0927\u094d\u092f\u093e\u092f|\u0907\u0924\u093f|\u0938\u0930\u094d\u0917|\u092a\u091f\u0932|\u0915\u093e\u0923\u094d\u0921|\u092e\u0923\u094d\u0921\u0932|\u0905\u0928\u0941\u0935\u093e\u0915|\u0916\u0923\u094d\u0921|\u092a\u094d\u0930\u092a\u093e\u0920\u0915)")
+_BH_ATHA = re.compile(r"^अथ(?:\s|$)")
+
+
+def _bh_banner(t: str) -> bool:
+    """A line that names the publisher (_PUBLISHER_BANNERS) and is not Sanskrit."""
+    low = t.lower()
+    return len(t) <= 90 and frac_devanagari(t) < 0.05 and any(sig in low for sig in _PUBLISHER_BANNERS)
+
+
+def _bh_title(t: str, banner_seen: bool) -> bool:
+    """A line of a running head: a Latin title in brackets or in capitals ("[Gandharva Veda]", "GANDHARVA VEDA",
+    "MAHARISHI UNIVERSITY OF MANAGEMENT"), or the work's name in Devanagari: one word (two once the banner is seen), no
+    danda, no numeral, no word of a chapter's heading (dhyaya as in adhyaya, iti, sarga, patala, kanda, mandala, anuvaka, khanda,
+    prapathaka) and not beginning with atha."""
+    if len(t) > 40:
+        return False
+    if frac_devanagari(t) < 0.05:
+        letters = [c for c in t if c.isalpha()]
+        return bool(letters) and ((t.startswith("[") and t.endswith("]")) or not any(c.islower() for c in letters))
+    if frac_devanagari(t) < 0.5 or _BH_STOP.search(t) or _BH_HEADING.search(t) or _BH_ATHA.search(t):
+        return False
+    return len(t.split()) <= (2 if banner_seen else 1)
+
+
+def strip_banner_head(s: str, max_lines: int = 10) -> str:
+    """BANNER_HEAD_2026_11_13: the passage without a publisher's running head at its front, or the passage as it was.
+
+    Only whole leading lines go, at most max_lines, and never the last line; only when one of them names the publisher;
+    and only when Sanskrit is left after them."""
+    if not s:
+        return s
+    lines = s.split("\n")
+    n, banner = 0, False
+    while n < min(max_lines, len(lines) - 1):
+        t = lines[n].strip()
+        if t and _bh_banner(t):
+            banner = True
+        elif t and not _bh_title(t, banner):
+            break
+        n += 1
+    if not banner:
+        return s
+    t = lines[n].strip() if n < len(lines) else ""
+    if n >= max_lines and t and (_bh_banner(t) or _bh_title(t, banner)):
+        return s   # a head longer than max_lines: not taken apart
+    rest = "\n".join(lines[n:]).strip()
+    return rest if rest and has_any_devanagari(rest) else s
+
+
 def should_translate(s: str, *, min_dev: float = 0.05) -> bool:
     """Return True if this passage contains enough Sanskrit to warrant translation.
 
     Lowered default min_dev from 0.08 → 0.05 to catch mixed Sanskrit-English commentary.
     """
+    s = strip_banner_head(s)   # BANNER_HEAD_2026_11_13: a publisher's running head is not the passage
     if is_noise(s): return False
     if looks_like_heading(s): return False
     if looks_like_table_fragment(s): return False
@@ -488,6 +551,7 @@ def clean_for_mt(s: str) -> str:
     # Devanagari page furniture FIRST: every rule below this line is Latin-script
     # and cannot see a running head like "(८२) शतपथब्राह्मणम् । [ १४ का० ]".
     # (PAGE_FURNITURE_2026_09_06)
+    s = strip_banner_head(s)   # BANNER_HEAD_2026_11_13: the publisher's running head, before the page's furniture
     s = strip_page_furniture(s)
     # Remove leading bullet/list markers
     s = re.sub(r"^\s*[\-•*]\s+", "", s)

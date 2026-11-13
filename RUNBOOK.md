@@ -2792,3 +2792,22 @@ docs\ASKS_2026-10-22.md, section 21. From the automaton's root unless said:
    deploys corpus-index again).
 5. `python scripts\index_sync.py` (the plan: the dynasties to send), then `python scripts\index_sync.py --apply`; A2.
    Open /corpus/genealogies/dynasties signed in.
+
+## 13 Nov: the page's first verses; corpus-index; Mallapurana's edition (DOCS109_2026_11_13)
+
+docs\ASKS_2026-10-22.md, section 22. From the automaton's root unless said:
+
+1. The patches: `python scripts\patch_banner_head_2026_11_13.py --check`, then without; the same for
+   `patch_docs109_2026_11_13.py`; `python -m unittest tests.test_banner_head_2026_11_13 tests.test_leak_guard_2026_10_19
+   tests.test_docs109_2026_11_13`; `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1 with
+   COMMIT_MSG_bannerhead_20261113.txt.
+2. The dashboard restarted when no job runs; then `python scripts\text_path.py` (every text charted again, free: the
+   Maharishi University's texts lose the debris that was their pages' first verses).
+3. corpus-index (a correction to 11 Nov, night, step 4: Publish does not deploy an edge function). In Lovable's chat:
+   deploy supabase/functions/corpus-index as it is in the repository, without changing its code. Then
+   `python scripts\index_sync.py` (the plan: dynasties 114 to send), `python scripts\index_sync.py --apply`, and A2 of
+   docs\cloud\C28_index_dynasties_2026-11-11.sql.
+4. The Gandharva Veda's rest, 501 passages: its desk page, "Translate the rest", or `/api/translate` with the engine
+   anthropic:claude-sonnet-5-5 and limit 0, as on 12 Nov.
+5. Mallapurana's scholarly English, when you choose (about $25 to $44): /desk/Mallapurana, "Plan them (free)" (250 verses),
+   then "Run"; again until done; then "As prose".

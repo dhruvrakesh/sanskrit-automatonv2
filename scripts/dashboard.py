@@ -3328,7 +3328,8 @@ def desk_text(doc):
                 '<button class="btn go dkbtn" onclick="deskStep(\'%s\', \'plan\', this)">Plan them (free)</button> '
                 '<button class="btn go dkbtn" id="dkrun" style="display:none" data-cap="0" onclick="deskStep(\'%s\', \'run\', '
                 'this)">Run</button></div>%s' % (
-                    td.STEP_VERSES, td.MAX_VERSES, e(r["doc"], quote=True), e(r["doc"], quote=True),
+                    (td.STEP_VERSES if sc.get("verses") else getattr(td, "SCHOLAR_PRESS", td.STEP_VERSES)),   # DESK_SCHOLAR_NEXT_2026_11_13 (BANNER_HEAD_2026_11_13)
+                    td.MAX_VERSES, e(r["doc"], quote=True), e(r["doc"], quote=True),
                     '<p class="small">In repair: run with --held-ok, as on 15 Oct (nothing is written to the site or to '
                     'its passages; a row goes stale, not wrong, if the reading changes).</p>' if held_ok else ""))
     ctl += ('<div class="row"><button class="btn dkbtn" onclick="deskStep(\'%s\', \'status\', this)">Status (free)</button>'
