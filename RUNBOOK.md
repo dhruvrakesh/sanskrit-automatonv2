@@ -2832,3 +2832,24 @@ docs\ASKS_2026-10-22.md, section 23. From the automaton's root:
    its `--repair --max-usd` as it says; when the repair is released, its edition from /desk/Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V
    in presses of 250.
 6. Mallapurana: the next presses from /desk/Mallapurana; then "As prose".
+
+## 14 Nov: the home page healed; a start for readers (DOCS111_2026_11_14)
+
+docs\ASKS_2026-10-22.md, section 24.
+
+1. The automaton: `python scripts\patch_docs111_2026_11_14.py --check`, then without; `python -m unittest
+   tests.test_docs111_2026_11_14`; `powershell -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1 with
+   COMMIT_MSG_homeheal_20261114.txt.
+2. Srangam (D:\srangam-42267): `git pull --rebase --autostash`; the kit's patcher (`--check`, then without); `npm run
+   typecheck`; `npx vitest run`; `npm run build`; `git add` the five files by name (src/App.tsx, src/pages/Home.tsx,
+   src/components/home/GeomythologySection.tsx, src/components/home/CorpusStartSection.tsx,
+   src/__tests__/home-heal.test.tsx); commit; push; Publish. Then open the home page and /sacred-ecology.
+3. The Ganita: `python scripts\reingest_pages.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` (the plan, free), then
+   with `--apply`; `python scripts\repair_text.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V --repair --max-usd 1.00`;
+   reingest_pages again (plan, then --apply); its English and Hindi for the changed passages (the Library, or
+   translate_passages.py with gemini:gemini-2.5-flash); `python scripts\benchmark_sources.py --doc
+   Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` again; then its edition from its desk page, in presses of 250.
+4. The Surya: `python scripts\scholar_translate.py --doc jyotish_surya_siddhanta__w_etext --status` (free).
+5. The Markandeya's 113: `python scripts\scholar_translate.py --doc markandeya_purana__w_gretil --engine
+   anthropic:claude-sonnet-5-5 --triage` (free), then the Opus reading of the serious as for the Surya on 13 Nov (a dry
+   run first). The Nirukta: its desk page (/desk/nirukta__w_gretil), Plan (free), Run, 250 verses a press.

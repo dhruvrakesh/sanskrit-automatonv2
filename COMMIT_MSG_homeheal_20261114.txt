@@ -1,0 +1,10 @@
+The home page's Sacred Ecology card mended and a start for readers, as a Srangam kit (HOME_HEAL_2026_11_14, DOCS111_2026_11_14)
+
+- docs/srangam/HOME_HEAL_2026-11-14 and scripts/patch_srangam_home_heal_2026_11_14.py: the Geomythology cards link
+  their articles directly; the fourth (/sacred-ecology, a 404) opens Part 1 of the Sacred Ecology series and the old
+  path redirects there; "Start here: the texts themselves" (CorpusStartSection) on the home page, lazy and static;
+  a test that every link written on the home page is a route.
+- DOCS111: ASKS section 24, STATE section 46, RUNBOOK 14 Nov.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH
