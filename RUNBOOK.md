@@ -2853,3 +2853,18 @@ docs\ASKS_2026-10-22.md, section 24.
 5. The Markandeya's 113: `python scripts\scholar_translate.py --doc markandeya_purana__w_gretil --engine
    anthropic:claude-sonnet-5-5 --triage` (free), then the Opus reading of the serious as for the Surya on 13 Nov (a dry
    run first). The Nirukta: its desk page (/desk/nirukta__w_gretil), Plan (free), Run, 250 verses a press.
+
+## 15 Nov: the repair's loop; the genealogies' plan (DOCS112_2026_11_15)
+
+docs\ASKS_2026-10-22.md, section 25.
+
+1. The patches: `python scripts\patch_repair_loop_2026_11_15.py --check`, then without; the same for
+   `patch_docs112_2026_11_15.py`; `python -m unittest tests.test_repair_loop_2026_11_15 tests.test_docs112_2026_11_15
+   tests.test_repair_next_2026_10_17 tests.test_repair_partial_2026_10_28`; `powershell -ExecutionPolicy Bypass -File
+   scripts\run_tests.ps1`; release.ps1 with COMMIT_MSG_repairloop_20261115.txt.
+2. The Ganita (repair_text.py runs afresh for each job: no restart is needed): `python scripts\repair_text.py --doc
+   Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V --repair --max-usd 1.00`. It says REPAIR_LOOP_2026_11_15 and "[2] vision
+   queued 339 | already done 112 | to run 227". Then `python scripts\reingest_pages.py --doc
+   Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` (the plan) and with `--apply`; its English and Hindi for the changed
+   passages; the benchmark again.
+3. The genealogies (G6): nothing to run yet; the plan is in section 25 of the register and in the brain document.

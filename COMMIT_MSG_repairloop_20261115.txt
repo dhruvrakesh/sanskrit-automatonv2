@@ -1,0 +1,10 @@
+The repair reads the pages the assessment counts; the genealogies' plan and the evolution traced (REPAIR_LOOP_2026_11_15, DOCS112_2026_11_15)
+
+- repair_text: when the assessment asks for the repair (debris moderate or material, vision under half of the scan),
+  --repair queues every page (threshold 101) and vision skips the pages it read. On 13 Nov the Ganita's repair read
+  nothing in 4.5 seconds and was offered again (the triage's threshold 72 let only the 112 pages already read through).
+- DOCS112: ASKS section 25 (the four lineage layers, GRETIL's genealogical chapters, the plan G6a to G6f, the evolution),
+  STATE section 47, RUNBOOK 15 Nov.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

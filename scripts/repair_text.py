@@ -412,6 +412,21 @@ def repair_first(r: dict, doc: str, q: str, tr: str):
     return None
 
 
+def repair_todo(r: dict) -> int:
+    """REPAIR_LOOP_2026_11_15: the pages repair_first counts when it says "repair first" (vision has not read them and
+    has not given up on them), else 0. --repair now reads exactly these. On 13 Nov the Ganita Yuktibhasa's repair ran
+    for 4.5 seconds and read nothing: the triage's threshold (72) let through only the 112 pages of low confidence,
+    which vision had read already, while the assessment counted the other 227 and asked for the same repair again, so
+    the desk's button led back to itself."""
+    j = r.get("judged") or {}
+    if j.get("level") not in ("moderate", "material") or float(r.get("vision_pct") or 0) >= 50.0:
+        return 0
+    pdfs, vp, raw = int(r.get("pdfs") or 0), int(r.get("vision_pages") or 0), int(r.get("raw_pages") or 0)
+    if not pdfs or pdfs < 0.9 * max(1, raw):
+        return 0
+    return max(0, pdfs - vp - int(r.get("vision_gave_up") or 0))
+
+
 def advise(r: dict, doc: str):
     """(verdict, next, also) for the assessment."""
     q = 'python scripts\\repair_text.py --doc %s' % doc
@@ -862,6 +877,11 @@ def main(argv=None) -> int:
         if r.get("error"):
             print("REFUSE: " + r["error"]); return 1
         thr = a.threshold if a.threshold is not None else (101 if r["guard"] else 72)
+        _todo = repair_todo(r) if a.threshold is None and thr < 101 else 0   # REPAIR_LOOP_2026_11_15
+        if _todo:
+            thr = 101
+            print("REPAIR_LOOP_2026_11_15: the %d page(s) vision has not read go to vision: every page is queued "
+                  "(threshold 101) and the pages vision read already are skipped" % _todo, flush=True)
         out = []
         # REPAIR_HEAL_2026_10_11: ocr_consensus.py refuses while the dashboard runs a job for this text;
         # this repair is such a job (kind "repair"), so it is told to look past it
