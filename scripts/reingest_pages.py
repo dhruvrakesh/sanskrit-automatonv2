@@ -24,6 +24,8 @@ stays held. The site gets the change at the next mirror run (corpus_sync.py), th
 
   python scripts\\reingest_pages.py --doc X                  the plan: free, read-only
   python scripts\\reingest_pages.py --doc X --apply          a backup, then the changed pages
+  python scripts\\reingest_pages.py --doc X --keep           REINGEST_KEEP_2026_11_15: the plan when a sentence whose
+                                                             letters were mended keeps its row, English and Hindi
   python scripts\\reingest_pages.py --doc X --pages 2,20-21  only these pages
 A translation, a picture or a story that would lose its passage must be said: --replace N (N = the English
 translations it removes), as with --use-repaired. Refused while the dashboard runs another database writer.
@@ -50,6 +52,50 @@ sys.path.insert(0, str(SCRIPTS))
 INSERT_COLS = ("text", "norm", "iast", "verse_ref", "chapter", "text_type", "chandas", "padas", "quality_score",
                "ocr_engine", "ocr_variants")
 KEEP_COLS = ("norm", "iast", "verse_ref", "chapter", "chandas", "padas", "quality_score", "ocr_engine", "ocr_variants")
+
+# REINGEST_KEEP_2026_11_15. Asked on 15 Nov: "i am tired of wasting our APIs on translating works that you then make me
+# drop". A repaired page changes most of its sentences by a few letters (vision restores the anusvaras and matras that
+# Tesseract lost), and a sentence whose text changed at all was deleted with its English, its Hindi, its vector and its
+# reviews: the Ganita Yuktibhasa's repair of 15 Nov would have removed 1,838 English translations, 925 of them of
+# sentences nine tenths the same. With --keep, a new passage and a passage that would go, on the same page, whose
+# Devanagari letters agree at KEEP (0.9) or more, are one passage: its row stays (its English, Hindi, vector, reviews,
+# pictures and stories with it) and takes the mended text and what the ingest derives from it. The translation was
+# made from the reading before: the log keeps that reading, and the scholarly English is made from the mended one.
+KEEP = 0.9
+KEEP_MIN = 12          # Devanagari letters: a shorter passage is not paired
+_DEV = re.compile(r"[^\u0900-\u0963\u0970-\u097f]")
+
+
+def _letters(t) -> str:
+    return _DEV.sub("", t or "")
+
+
+def mend_pairs(gone: list, insert: list, thr: float) -> list:
+    """REINGEST_KEEP_2026_11_15: [(old, new, ratio)], each new passage with the passage that goes whose letters it
+    shares most, at thr or more; the best pairs first, each passage once."""
+    from difflib import SequenceMatcher
+    cand = []
+    for i, n in enumerate(insert):
+        a = _letters(n.get("text"))
+        if len(a) < KEEP_MIN:
+            continue
+        for j, o in enumerate(gone):
+            b = _letters(o.get("text"))
+            if len(b) < KEEP_MIN or not 0.5 <= len(a) / float(len(b)) <= 2.0:
+                continue
+            m = SequenceMatcher(None, a, b, autojunk=False)
+            if m.real_quick_ratio() < thr or m.quick_ratio() < thr:
+                continue
+            r = m.ratio()
+            if r >= thr:
+                cand.append((r, i, j))
+    out, ui, uj = [], set(), set()
+    for r, i, j in sorted(cand, key=lambda x: (-x[0], x[1], x[2])):
+        if i in ui or j in uj:
+            continue
+        ui.add(i); uj.add(j)
+        out.append((gone[j], insert[i], round(r, 3)))
+    return out
 
 
 def page_files(merged: Path, doc: str) -> dict:
@@ -110,12 +156,13 @@ def live_rows(con, doc_id: int, pages) -> dict:
     return out
 
 
-def plan_page(old: list, new: list) -> dict:
-    """Match the page's passages by their text, in order: kept (perhaps moved), new, gone."""
+def plan_page(old: list, new: list, thr: float = 0.0) -> dict:
+    """Match the page's passages by their text, in order: kept (perhaps moved), new, gone; with thr (--keep), mended
+    too: a new passage and one that would go, the same but for its letters (REINGEST_KEEP_2026_11_15)."""
     if [o["text"] for o in old] == [n["text"] for n in new]:
         meta = [(o, n) for o, n in zip(old, new)
                 if (o["ocr_engine"], o["ocr_variants"]) != (n.get("ocr_engine"), n.get("ocr_variants"))]
-        return {"changed": False, "meta": meta, "keep": [], "insert": [], "gone": []}
+        return {"changed": False, "meta": meta, "keep": [], "insert": [], "gone": [], "mend": []}
     pool = {}
     for o in old:
         pool.setdefault(o["text"], []).append(o)
@@ -128,7 +175,12 @@ def plan_page(old: list, new: list) -> dict:
         else:
             insert.append(n)
     gone = [o for o in old if o["id"] not in used]
-    return {"changed": True, "meta": [], "keep": keep, "insert": insert, "gone": gone}
+    mend = mend_pairs(gone, insert, thr) if thr else []   # REINGEST_KEEP_2026_11_15
+    if mend:
+        mo, mn = {id(o) for o, _n, _r in mend}, {id(n) for _o, n, _r in mend}
+        gone = [o for o in gone if id(o) not in mo]
+        insert = [n for n in insert if id(n) not in mn]
+    return {"changed": True, "meta": [], "keep": keep, "insert": insert, "gone": gone, "mend": mend}
 
 
 def count_children(con, ids: list) -> dict:
@@ -173,7 +225,7 @@ def anchors(con, doc_id: int, pages) -> dict:
     return out
 
 
-def plan(con, doc: str, merged: Path, only: set, segment: bool = True):
+def plan(con, doc: str, merged: Path, only: set, segment: bool = True, keep: float = 0.0):
     row = con.execute("SELECT id FROM docs WHERE code=?", (doc,)).fetchone()
     if not row:
         return None, "%s is not in the database" % doc
@@ -188,7 +240,7 @@ def plan(con, doc: str, merged: Path, only: set, segment: bool = True):
     db_pages = {r[0] for r in con.execute("SELECT DISTINCT page_no FROM passages WHERE doc_id=?", (doc_id,))}
     new = cut(con, files, segment)
     old = live_rows(con, doc_id, files)
-    pages = {pg: plan_page(old[pg], new.get(pg, [])) for pg in sorted(files)}
+    pages = {pg: plan_page(old[pg], new.get(pg, []), keep) for pg in sorted(files)}
     changed = [pg for pg, p in pages.items() if p["changed"]]
     gone_ids = [o["id"] for pg in changed for o in pages[pg]["gone"]]
     kids = count_children(con, gone_ids)
@@ -196,6 +248,8 @@ def plan(con, doc: str, merged: Path, only: set, segment: bool = True):
     moved_map = {}
     for pg in changed:
         for o, n in pages[pg]["keep"]:
+            moved_map[(pg, o["idx"])] = n["idx"]
+        for o, n, _r in pages[pg]["mend"]:   # REINGEST_KEEP_2026_11_15: a mended passage keeps its pictures and stories
             moved_map[(pg, o["idx"])] = n["idx"]
     gone_keys = {(pg, o["idx"]) for pg in changed for o in pages[pg]["gone"]}
     for im in anc["images"]:
@@ -206,9 +260,14 @@ def plan(con, doc: str, merged: Path, only: set, segment: bool = True):
         ks = [st["from"], st["to"]]
         st["fate"] = "loses an end passage" if any(k in gone_keys for k in ks) else (
             "its range moves" if any(k in moved_map and moved_map[k] != k[1] for k in ks) else "stays")
+    could = 0   # REINGEST_KEEP_2026_11_15: what --keep would keep, said in the plan
+    if not keep:
+        for pg in changed:
+            could += sum(1 for o, _n, _r in mend_pairs(pages[pg]["gone"], pages[pg]["insert"], KEEP)
+                         if (o["translation"] or "").strip())
     return {"doc": doc, "doc_id": doc_id, "files": files, "pages": pages, "changed": changed, "kids": kids,
             "anchors": anc, "db_pages": db_pages, "only_db": sorted(db_pages - set(page_files(merged, doc))),
-            "gone_ids": gone_ids}, ""
+            "gone_ids": gone_ids, "could_keep": could, "keep": keep}, ""
 
 
 def report(p: dict, q: str, apply: bool) -> tuple:
@@ -218,6 +277,7 @@ def report(p: dict, q: str, apply: bool) -> tuple:
     moved = sum(1 for pg in changed for o, n in pages[pg]["keep"] if o["idx"] != n["idx"])
     new = sum(len(pages[pg]["insert"]) for pg in changed)
     gone = len(p["gone_ids"])
+    mended = sum(len(pages[pg]["mend"]) for pg in changed)   # REINGEST_KEEP_2026_11_15
     meta = sum(len(v["meta"]) for v in pages.values())
     print("reingest_pages.py  %s  %s   %s" % (MARK, p["doc"], "APPLY" if apply else "PLAN (nothing written)"))
     print("  repaired pages %d | in the database %d | unchanged %d | changed %d | only in the database %d (not touched)"
@@ -225,12 +285,16 @@ def report(p: dict, q: str, apply: bool) -> tuple:
     for pg in changed[:60]:
         v = pages[pg]
         en = sum(1 for o in v["gone"] if (o["translation"] or "").strip())
-        print("  page %04d  kept %d (moved %d)  new %d  gone %d%s" % (
+        print("  page %04d  kept %d (moved %d)  new %d  gone %d%s%s" % (
             pg, len(v["keep"]), sum(1 for o, n in v["keep"] if o["idx"] != n["idx"]), len(v["insert"]), len(v["gone"]),
-            ("  English lost %d" % en) if en else ""))
+            ("  mended %d" % len(v["mend"])) if v["mend"] else "", ("  English lost %d" % en) if en else ""))
     if len(changed) > 60:
         print("  ... and %d more pages" % (len(changed) - 60))
     print("  passages on the changed pages: kept %d (moved %d), new %d (untranslated), gone %d" % (kept, moved, new, gone))
+    if mended:
+        print("  mended in place (--keep %.2f): %d passage(s) keep their row, their English and their Hindi; the text "
+              "is the repair's, the translation was made from the reading before (the log keeps that reading)"
+              % (p.get("keep") or KEEP, mended))
     print("  what goes with them: English %d, Hindi %d, reviews %d, vectors %d" % (
         k["english"], k["hindi"], k["reviews"], k["vectors"]))
     if meta:
@@ -244,7 +308,7 @@ def report(p: dict, q: str, apply: bool) -> tuple:
     needs_say = bool(k["english"] or k["hindi"] or lost_anchor)
     nxt = q + " --apply" + ((" --replace %d" % k["english"]) if needs_say else "")
     return needs_say, nxt, {"kept": kept, "moved": moved, "new": new, "gone": gone, "meta": meta,
-                            "lost_anchor": lost_anchor}
+                            "lost_anchor": lost_anchor, "mended": mended}
 
 
 def run(argv, env_extra=None) -> int:
@@ -268,7 +332,10 @@ def apply(con, p: dict, log_path: Path) -> dict:
                 f.write(json.dumps({"gone": o["id"], "page": pg, "idx": o["idx"], "text": o["text"],
                                     "translation": o["translation"], "l10n": hindi.get(o["id"], [])},
                                    ensure_ascii=False) + "\n")
-    done = {"deleted": 0, "inserted": 0, "moved": 0, "meta": 0, "images": 0, "stories": 0}
+            for o, n, r in pages[pg]["mend"]:   # REINGEST_KEEP_2026_11_15: the reading its translation was made from
+                f.write(json.dumps({"mended": o["id"], "page": pg, "idx": o["idx"], "text": o["text"], "ratio": r,
+                                    "translation": o["translation"]}, ensure_ascii=False) + "\n")
+    done = {"deleted": 0, "inserted": 0, "moved": 0, "meta": 0, "images": 0, "stories": 0, "mended": 0}
     cur = con.cursor()
     cur.execute("BEGIN IMMEDIATE")
     try:
@@ -276,7 +343,8 @@ def apply(con, p: dict, log_path: Path) -> dict:
         now = live_rows(con, doc_id, p["changed"])
         for pg in p["changed"]:
             v = pages[pg]
-            was = sorted((o["id"], o["idx"], o["text"]) for o in [o for o, _ in v["keep"]] + v["gone"])
+            was = sorted((o["id"], o["idx"], o["text"]) for o in [o for o, _ in v["keep"]] + v["gone"]
+                         + [o for o, _n, _r in v["mend"]])
             if sorted((o["id"], o["idx"], o["text"]) for o in now[pg]) != was:
                 raise RuntimeError("page %d changed in the database since the plan; run it again" % pg)
         if count_children(con, p["gone_ids"])["english"] != p["kids"]["english"]:
@@ -289,6 +357,7 @@ def apply(con, p: dict, log_path: Path) -> dict:
         for pg in p["changed"]:
             v = pages[pg]
             remap = {o["idx"]: n["idx"] for o, n in v["keep"]}
+            remap.update({o["idx"]: n["idx"] for o, n, _r in v["mend"]})   # REINGEST_KEEP_2026_11_15
             # anchors first, by id, from the old places (no chain of updates)
             if "doc_images" in have:
                 for iid, ix in cur.execute("SELECT id, anchor_idx FROM doc_images WHERE doc_id=? AND anchor_page=?",
@@ -304,7 +373,7 @@ def apply(con, p: dict, log_path: Path) -> dict:
                     if (nf, nt) != (fi, ti):
                         cur.execute("UPDATE doc_stories SET from_idx=?, to_idx=? WHERE id=?", (nf, nt, sid)); done["stories"] += 1
             # free the page's places, then delete, move and insert
-            for o in [o for o, _ in v["keep"]] + v["gone"]:
+            for o in [o for o, _ in v["keep"]] + v["gone"] + [o for o, _n, _r in v["mend"]]:
                 cur.execute("UPDATE passages SET idx=? WHERE id=?", (-o["id"], o["id"]))
             for o in v["gone"]:
                 if fts:
@@ -318,6 +387,14 @@ def apply(con, p: dict, log_path: Path) -> dict:
                 cur.execute("UPDATE passages SET idx=?, %s WHERE id=?" % ", ".join("%s=?" % c for c in KEEP_COLS),
                             [n["idx"]] + [n.get(c) for c in KEEP_COLS] + [o["id"]])
                 done["moved"] += int(o["idx"] != n["idx"])
+            for o, n, _r in v["mend"]:   # REINGEST_KEEP_2026_11_15: the row stays, with its translations; the text is the repair's
+                cur.execute("UPDATE passages SET idx=?, %s WHERE id=?" % ", ".join("%s=?" % c for c in INSERT_COLS),
+                            [n["idx"]] + [n.get(c) for c in INSERT_COLS] + [o["id"]])
+                if fts:
+                    cur.execute("DELETE FROM passages_fts WHERE rowid=?", (o["id"],))
+                    cur.execute("INSERT INTO passages_fts(rowid, text, iast, translation) VALUES(?,?,?,?)",
+                                (o["id"], n.get("text") or "", n.get("iast") or "", o["translation"] or ""))
+                done["mended"] += 1
             for n in v["insert"]:
                 cur.execute("INSERT INTO passages(doc_id, page_no, idx, %s, translation) VALUES(?,?,?,%s,'')"
                             % (", ".join(INSERT_COLS), ",".join("?" * len(INSERT_COLS))),
@@ -349,6 +426,9 @@ def main() -> int:
     ap.add_argument("--pages", default="", help="only these pages: 2,20-21")
     ap.add_argument("--apply", action="store_true", help="a backup, then the changed pages")
     ap.add_argument("--replace", type=int, default=None, help="the English translations it may remove")
+    ap.add_argument("--keep", type=float, nargs="?", const=KEEP, default=0.0,
+                    help="REINGEST_KEEP_2026_11_15: a passage whose Devanagari letters agree with one that would go, at "
+                         "this share or more (0.9 when no number is given), keeps its row, English and Hindi")
     ap.add_argument("--backup-dir", default=os.environ.get("SA_BACKUP_DIR") or r"D:\backups")
     ap.add_argument("--log-dir", default="data/reingest")
     ap.add_argument("--from-dashboard", action="store_true")
@@ -362,6 +442,11 @@ def main() -> int:
         q += " --merged-dir %s" % a.merged_dir
     if a.no_segment:
         q += " --no-segment"
+    if a.keep and not 0.5 <= a.keep <= 1.0:
+        print("REFUSE: --keep takes a share between 0.5 and 1 (0.9 when no number is given)"); return 2
+    q0 = q
+    if a.keep:   # REINGEST_KEEP_2026_11_15
+        q += " --keep" + ("" if a.keep == KEEP else " %.2f" % a.keep)
     if not Path(a.db).exists():
         print("REFUSE: %s not found" % a.db); print("VERDICT: no database"); return 1
     try:
@@ -371,7 +456,7 @@ def main() -> int:
     uri = Path(a.db).resolve().as_uri() + "?mode=ro"
     ro = sqlite3.connect(uri, uri=True, timeout=30)
     try:
-        p, err = plan(ro, doc, Path(a.merged_dir), only, not a.no_segment)
+        p, err = plan(ro, doc, Path(a.merged_dir), only, not a.no_segment, a.keep)
     finally:
         ro.close()
     if not p:
@@ -386,9 +471,14 @@ def main() -> int:
             "untranslated, %d stay (%d moved on their page)" % (len(p["changed"]), len(p["pages"]), sums["gone"],
                                                                 k["english"], k["hindi"], sums["new"], sums["kept"],
                                                                 sums["moved"]))
+    if sums["mended"]:
+        what += "; %d mended in place keep their English and Hindi" % sums["mended"]
     if not a.apply:
         print("VERDICT: " + what)
         print("NEXT: " + nxt)
+        if not a.keep and p.get("could_keep"):   # REINGEST_KEEP_2026_11_15
+            print("ALSO: %s --keep   (%d of the %d English translations stay with their sentences: the same sentence, "
+                  "its letters mended; the plan is free)" % (q0, p["could_keep"], k["english"]))
         if len(p["changed"]) > 0.5 * len(p["pages"]):
             print("ALSO: python scripts\\repair_text.py --doc %s --use-repaired   (most pages changed: the whole text "
                   "again does the same)" % doc)
@@ -399,6 +489,9 @@ def main() -> int:
             k["english"]))
         print("VERDICT: a decision is needed")
         print("NEXT: " + nxt)
+        if not a.keep and p.get("could_keep"):   # REINGEST_KEEP_2026_11_15
+            print("ALSO: %s --keep   (%d of the %d English translations stay with their sentences; the plan is free)"
+                  % (q0, p["could_keep"], k["english"]))
         return 1
     import repair_text as rt
     w = rt.writers_running(a.from_dashboard, doc)
@@ -427,6 +520,8 @@ def main() -> int:
         con.close()
     print("  done: %(deleted)d deleted, %(inserted)d inserted, %(moved)d moved, %(meta)d engine updates; anchors moved: "
           "%(images)d pictures, %(stories)d stories" % done)
+    if done.get("mended"):
+        print("  mended in place: %d passage(s) kept their English and Hindi (REINGEST_KEEP_2026_11_15)" % done["mended"])
     run([PY, STEPS / "classify_doc.py", "--doc", doc, "--db", a.db, "--apply"])
     rc = run([PY, STEPS / "ocr_consensus.py", "--doc", doc, "--db", a.db, "--merged-dir", a.merged_dir, "--drift-only"],
              env_extra={"SA_CONSENSUS_SELF_KIND": "repair,repair_use"})

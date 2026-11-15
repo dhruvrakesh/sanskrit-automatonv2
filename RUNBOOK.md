@@ -2868,3 +2868,20 @@ docs\ASKS_2026-10-22.md, section 25.
    Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` (the plan) and with `--apply`; its English and Hindi for the changed
    passages; the benchmark again.
 3. The genealogies (G6): nothing to run yet; the plan is in section 25 of the register and in the brain document.
+
+## 15 Nov, afternoon: a repaired reading keeps its translations (DOCS113_2026_11_15)
+
+docs\ASKS_2026-10-22.md, section 26. From the automaton's root:
+
+1. The patches: `python scripts\patch_reingest_keep_2026_11_15.py --check`, then without; the same for
+   `patch_docs113_2026_11_15.py`; `python -m unittest tests.test_reingest_keep_2026_11_15 tests.test_reingest_2026_10_12
+   tests.test_source_pick_2026_11_13 tests.test_mbh_prose_2026_10_14 tests.test_docs113_2026_11_15`; `powershell
+   -ExecutionPolicy Bypass -File scripts\run_tests.ps1`; release.ps1 with COMMIT_MSG_reingestkeep_20261115.txt.
+2. The Ganita: `python scripts\reingest_pages.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V --keep` (the plan,
+   free: about 971 mended in place, English lost about 914); then its NEXT line (`--keep --apply --replace` and the
+   number it prints). A backup is made first; what goes is written to data\reingest.
+3. `python scripts\text_path.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V --write` and
+   `python scripts\benchmark_sources.py --doc Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V` (free: the pick says ready).
+4. Its new passages' English (about 813) by Sonnet through the dashboard (`/api/translate`, engine
+   anthropic:claude-sonnet-5-5, limit 0); its Hindi by flash when Google's cap allows.
+5. Its edition: 40 verses first from its desk page (Plan, Run), then presses of 250.

@@ -1,0 +1,97 @@
+HANDOVER, 15 Nov 2026 (afternoon). For a new chat that takes this project over. Read this first.
+
+1. WHAT AND WHERE
+- Automaton (the translation desk; Python; local dashboard at http://127.0.0.1:5057): D:\Sanksrit Automatons\sanskrit-automatonv2
+- Srangam (the public site, React + Supabase through Lovable Cloud; srangam.nartiang.org): D:\srangam-42267
+- Nightly database copies: D:\backups\context_YYYYMMDD.db (04:00). The live database is data\context.db.
+- The record of every ask, done or not, with evidence: docs\ASKS_2026-10-22.md (the last sections are the newest).
+  The state: docs\STATE_2026-10-18.md (last section). The commands of each round: RUNBOOK.md (last sections).
+- The brain document (plain words, for the owner): https://claude.ai/artifact/AozYeE4XhjcBdAjT7cfzTf
+- The one page for the owner's team (11 to 15 Nov): https://claude.ai/artifact/LYZ6zVLyVVQL9FTJ7qwYAn
+
+2. RULES (the owner's, still in force)
+- Supabase is reached only through Lovable Cloud: privileged SQL goes in the Lovable Cloud SQL editor, one block per
+  paste, read-only checks before and after. Never hand-insert into supabase_migrations.schema_migrations.
+- Never run git through the device bridge (read .git files with Python). The owner releases with scripts\release.ps1
+  (a dry run, then -MessageFile <file> -Apply) and pushes the web repo himself.
+- Never open data\context.db from the VM. Read backups only as file:<path>?mode=ro&immutable=1. Never VACUUM. Never run
+  purge_empty_cache.py --yes. Never hand-edit translations_l10n. Back up first (db_backup.py src dst). One dashboard
+  only; restart it only when no job runs. Deleting on the device is off.
+- Never ask for, read or print key values (.env; Lovable Secrets). Never publish beneficiary PII. Do not read
+  G:\My Drive\Nartiang_Trust_Deed.
+- Commands for the owner: PowerShell or SQL, complete, NEVER with placeholders. Never pipe a patcher into | head.
+- .py and .ps1 files are ASCII. Tests that would call a paid API are stubbed. PYTHONDONTWRITEBYTECODE=1.
+- Never set MT_ENGINE to anthropic:. The Professor and kin_index use Gemini only. Say that you are Claude when you
+  recommend Claude models.
+- 15 Nov: "stop worrying about license etc. this is first a local only study project": on this PC every text is read
+  and used whole (the Harivamsa, the Mahabharata's genealogies). What the site shows is decided when its pages are built.
+- 15 Nov: "i am tired of wasting our APIs on translating works that you then make me drop": settle a text's reading
+  before any translation is bought; bring a repaired reading in with reingest_pages.py --keep; never tell the owner to
+  run a step that deletes translations without saying how many and why.
+- Surgical changes only: this is a running project. Measure before changing; say what was not verified.
+
+3. HOW A ROUND IS BUILT (the house style)
+- Stage the files to change from the PC, keep a base copy and a new copy, edit the new copy.
+- Build the patcher with handover\mkpatcher.py (it needs mkpatch.py beside it):
+    build(out_path, MARK, tag, docstring, [files], {file: marker it must already carry}, base=<base dir>, new=<new dir>)
+  Anchored edits, all or nothing, idempotent by MARK (MARK must be new in every file), .bak_<tag>_<date> copies.
+- A test module per patch in tests\ (test_<name>_<date>.py) with a replay of the patcher on the .bak copies. An older
+  test that replays an older patcher on a file you changed needs a "came after" fallback to your .bak_<tag>_* copy.
+- A docs patch each round (patch_docsNNN_<date>.py): a new section of ASKS (a table: Date | Ask | Done (evidence) |
+  Left), a section of STATE, the commands in RUNBOOK; and its test (rows counted, key phrases, no placeholder such as
+  an angle-bracketed word). A commit message file COMMIT_MSG_<tag>_<date>.txt ending with the attribution lines the
+  session gives.
+- Srangam changes travel as a kit in the automaton repo: docs\srangam\<KIT>\ (the files) and
+  scripts\patch_srangam_<kit>_<date>.py (md5-guarded replace of the exact version main has; new files). Then
+  npm run typecheck, npx vitest run, npm run build; git add the files by name; commit; push; Publish in Lovable.
+  Publish does not deploy an edge function: ask Lovable in its chat to deploy it as it is in the repository.
+- Testing without touching the PC's database: copy the repo's scripts, tests and docs to the VM's own disk
+  (handover\refresh_o.py), apply the patchers there, run the suite in pieces (handover\runner.py <copy> <out.jsonl>
+  <seconds>, repeated until "left 0": a shell call ends at 180 s and kills background jobs). Srangam the same
+  (handover\sync_srx.py), vitest in shards (--shard=1/6 ...) with VITE_SUPABASE_URL=http://localhost:54321 and
+  VITE_SUPABASE_PUBLISHABLE_KEY=test-not-a-real-key. Site SQL is tested on a PostgreSQL 16 set up in the cloud workspace.
+- Traps met: a heredoc turns \uXXXX escapes into letters (run handover\asciify.py on a .py after writing it); on
+  Windows a test must close its sqlite connections before tearDown (WinError 32); the VM has no .env, the PC has.
+
+4. STATE ON 15 NOV, AFTERNOON
+- Released: the automaton to DOCS112 (REPAIR_LOOP); Srangam to HOME_HEAL (6d8aad4 and the commit of 14 Nov).
+- Applied on the PC, not yet released when this was written: REINGEST_KEEP_2026_11_15 and DOCS113 (ASKS section 26).
+- The Ganita Yuktibhasa: its repair is read (vision 290 of 339 pages); the owner started
+  reingest_pages.py --keep --apply --replace 914 at 13:18 (971 passages mended in place, 813 new). Check data\reingest
+  for today's log ending "applied". Then: text_path.py --doc ... --write, the benchmark (PICK should say ready), the
+  813 new passages' English by Sonnet (optional), then its scholarly edition (40 verses first, then presses of 250).
+- The Claude credit: $132.03 left on 15 Nov morning (the meter: claude_engine.py --credit), ends 2026-12-11.
+  Google's monthly cap was near its end on 13 Nov ($9.09 of $140 left).
+- Measured prices: working English by Sonnet $0.005 to $0.009 a passage; scholarly English $0.026 to $0.096 a verse
+  (Markandeya 0.026, Mallapurana 0.046, Satapatha 0.096); vamsa_read $2.00 for 2,346 verses.
+- Open runs of the owner's: Mallapurana's edition (about 790 verses left), the Nirukta's (631), the Markandeya's 18
+  Opus verses, the Surya's status; before more of the Satapatha's edition, its benchmark (a GRETIL e-text is here).
+
+5. NEXT, IN ORDER (none of it begun)
+- G6a (free): teach scripts\vamsa_read.py the works below (sources\gretil\1_sanskr.zip, all IAST). Its verses_of()
+  expects three numbers (book, chapter, verse) and a closing //. The marks found on 15 Nov:
+    Harivamsa   sa_harivaMza.txt              HV_9.1            (two numbers)   chapters 2-3, 9-10, 15, 23-28, 98-99
+    Ramayana    sa_rAmAyaNa.txt               R_2,102.001       (no // at all)  1,069  1,070  2,102 (and 1,037-1,046)
+    Matsya      sa_matsyapurANa1-176.txt      MatsP_12.1        (two numbers)   5-6, 12, 24, 34, 43-51
+    Brahmanda   sa_brahmANDapurANa.txt        // bndp_2,63.1 // (fits)          1,9-14; 2,1-6; 2,61-74
+    Brahma      sa_brahmapurANa-1-246.txt     BrP_13.1          (two numbers)   3, 7-16
+    Linga       sa_liGgapurANa1-108.txt       LiP_1,66.1        (no closing //) 1,63-69
+    Kurma       sa_kUrmapurANa.txt            kUrmp_1,20.1 //   (the prefix has a long u) 1,8; 1,12-13; 1,17-23; 1,38
+    Garuda      sa_garuDapurANa.txt           garp_1,138.1 //   (fits)          1,5-6; 1,54; 1,138-145
+    Agni        sa_agnipurANa.txt             ap_272.001ab/     (half-verses)   18-20, 272-277
+    Markandeya  sa_mArkaNDeyapurANa1-93.txt   markp_52.1 //     (two numbers)   52-53, 76
+    Mahabharata 1_sanskr/2_epic/mbh/mbh_01_u.htm  01,089.001a (TAB, text; drop * and @ lines)  1.59-61, 1.70, 1.80,
+                1.89-92, 1.100, 1.107, 1.111
+    The Visnu again in Pathak's critical edition (vamsa.db's vamsa_texts names both editions).
+    Chapters dense in kinship words (3 in 100 or more): about 9,290 verses in 197 chapters; not in the zip: the Vayu,
+    Padma, Bhavisya, Varaha, Brahmavaivarta.
+- G6b (about $5 to $8 of the Claude credit): the reading, a trial of two chapters first.
+- G6c (free): the same dynasty aligned across the works, generation by generation.
+- G6d: one person register (index entries, our entities, the dynasties' persons, the claims; homonyms apart).
+- G6e: one page model here and on the site (a dynasty, a person, the evidence); a Dynasties page on the desk.
+- G6f / R1: our findings on a line, approved by a person (docs\PEOPLES_FINDINGS_2026-11-11.md).
+- Then: kin-long (Sorensen's 52 entries read only to 12,000 characters), U2 (the desk's "make a scholarly edition"
+  in plain words), U3 (three amateurs, five tasks, timed), a free prose view of the working English, prompt caching
+  and the Batch API measured before use, a join of the old sentences on pages the repair cuts as one block
+  (19 pages of the Ganita, 222 English), load-js.
+- What the genealogies hold today and where they do not cohere: ASKS section 25.

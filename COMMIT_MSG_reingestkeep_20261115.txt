@@ -1,0 +1,13 @@
+A repaired reading keeps the translations of its mended sentences; the pick when the repair is made (REINGEST_KEEP_2026_11_15, DOCS113_2026_11_15)
+
+- reingest_pages --keep: a new passage and one that would go, on the same page, whose Devanagari letters agree at 0.9
+  or more, are one passage: the row stays with its English, Hindi, vector, reviews, pictures and stories, and takes
+  the mended text. On the Ganita Yuktibhasa: English lost 914 in place of 1,838; 971 passages mended in place. The
+  plan says what --keep would keep; without it nothing changes; the log keeps the reading before.
+- benchmark_sources: the pick says to bring the repair in (or that the text is ready) when vision has read the scan,
+  not "repair it first".
+- tests: test_reingest_keep_2026_11_15; the replays of test_source_pick_2026_11_13 and test_mbh_prose_2026_10_14.
+- DOCS113: ASKS section 26, STATE section 48, RUNBOOK 15 Nov, afternoon (local first; the brain's five layers).
+
+Co-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01GJEenTgSGTwu9WqKSUFAgH

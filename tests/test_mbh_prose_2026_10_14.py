@@ -141,6 +141,7 @@ class ThePatcher(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             for f in baks:
                 later = sorted(SCRIPTS.glob(f + ".bak_scholarv2_*"))   # SCHOLAR_V2_2026_10_14 came after (the importer)
+                later = later or sorted(SCRIPTS.glob(f + ".bak_reingestkeep_*"))   # REINGEST_KEEP_2026_11_15 came after (reingest_pages.py)
                 want = later[0] if later else (SCRIPTS / f)
                 self.assertEqual((t / "scripts" / f).read_bytes(), want.read_bytes(), f)
             self.assertIn("Nothing to do", subprocess.run(pat, cwd=td, capture_output=True, text=True).stdout)

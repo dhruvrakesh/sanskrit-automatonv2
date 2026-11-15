@@ -591,6 +591,28 @@ def opine(res: dict, doc: str, a) -> dict:
 PICK_F1 = 0.6
 
 
+def repair_state(rd: list, ours: dict, doc: str):
+    """PICK_REPAIRED (patch REINGEST_KEEP_2026_11_15): when ours is not cosmetic, is there a repair still to make?
+    (why, then) or None (repair first, as before). On 15 Nov the Ganita Yuktibhasa's pick still said "repair it first"
+    after vision had read 290 of its 339 pages: the repair was made, and was not yet in the database; and what the
+    count of Latin letters calls misread was partly the edition's own English (its introduction, its glossary)."""
+    v = next((x for x in rd if x.get("label") == "vision"), None)
+    pages = int((ours or {}).get("pages") or 0)
+    if not v or not pages or int(v.get("pages") or 0) < 0.8 * pages:
+        return None
+    db = next((x for x in rd if x.get("kind") == "db"), None)
+    read = "vision has read %d of its %d pages: the repair is made" % (int(v.get("pages") or 0), pages)
+    if db and db.get("f1_ours") is not None and db["f1_ours"] < 0.98:
+        return ("%s, but the database still holds the reading before (it agrees with the repair on F1 %.2f): bring "
+                "the repair in, keeping the translations of the sentences that are the same but for their letters, "
+                "then its scholarly English" % (read, db["f1_ours"]),
+                "python scripts\\reingest_pages.py --doc %s --keep   (free: the plan)" % doc)
+    return ("%s and the database holds it; what is still counted as misread (%.2f%% of the letters) is Latin inside "
+            "the Devanagari, which in an edition with English pages (an introduction, a glossary) is partly the "
+            "edition's own English: ready for its scholarly English and its prose"
+            % (read, (ours or {}).get("misread_letters_pct") or 0.0), "")
+
+
 def pick_reading(res: dict, doc: str) -> dict:
     """{doc, reading, why, then}: the reading to make the scholarly English and its prose from (SOURCE_PICK_2026_11_13)."""
     rd = res.get("readings") or []
@@ -611,17 +633,25 @@ def pick_reading(res: dict, doc: str) -> dict:
         why = ("the e-text (%s) agrees with ours on F1 %.2f only, page by page: another recension, or numbered "
                "otherwise; ours for the edition, the e-text to compare" % (w["label"], f1) if f1 is not None else
                "the e-text (%s) could not be aligned with ours: ours for the edition, the e-text to compare" % w["label"])
+        then = ""
         if ours and ours.get("level") not in ("cosmetic", None, "-"):
-            why += "; ours misreads %.2f%% (%s): repair it first" % (om or 0.0, ours.get("level"))
-        return {"doc": doc, "reading": (ours or {}).get("label", ""), "why": why,
-                "then": "python scripts\\repair_text.py --doc %s   (free: what the repair would cost)" % doc
-                if ours and ours.get("level") not in ("cosmetic", None, "-") else ""}
+            st = repair_state(rd, ours, doc)   # PICK_REPAIRED (REINGEST_KEEP_2026_11_15)
+            if st:
+                why += "; " + st[0]
+                then = st[1]
+            else:
+                why += "; ours misreads %.2f%% (%s): repair it first" % (om or 0.0, ours.get("level"))
+                then = "python scripts\\repair_text.py --doc %s   (free: what the repair would cost)" % doc
+        return {"doc": doc, "reading": (ours or {}).get("label", ""), "why": why, "then": then}
     if not ours:
         return {"doc": doc, "reading": "", "why": "nothing of this text is read yet", "then": ""}
     if ours.get("level") in ("cosmetic", None, "-"):
         return {"doc": doc, "reading": ours["label"],
                 "why": "no e-text of it here; ours (%s) misreads %.2f%% of the letters (cosmetic): ready for its scholarly "
                        "English and its prose" % (ours["label"], om or 0.0), "then": ""}
+    st = repair_state(rd, ours, doc)   # PICK_REPAIRED (REINGEST_KEEP_2026_11_15)
+    if st:
+        return {"doc": doc, "reading": ours["label"], "why": "no e-text of it here; " + st[0], "then": st[1]}
     return {"doc": doc, "reading": ours["label"],
             "why": "no e-text of it here; ours (%s) misreads %.2f%% of the letters (%s): repair it first (vision reads "
                    "the pages Tesseract misread), then its scholarly English; an edition made now goes stale where the "
