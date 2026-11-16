@@ -1,0 +1,14 @@
+The genealogical chapters of the Harivamsa, the Ramayana, the Adiparvan and ten Puranas taught to vamsa_read (VAMSA_G6A_2026_11_15, DOCS114_2026_11_15)
+
+- vamsa_read: fourteen works of GRETIL's archive beside G5a's three (G6_WORKS: hv, ram1, ram2, matsya, bndp1, bndp2,
+  brahma, linga1, kurma1, garuda1, agni, markp, mbh1, vipc4), each with its verse mark and its chapters. verses_g6 cuts
+  marks of two numbers, marks without a closing //, half-verses, prose marks and the Mahabharata's lines; star passages,
+  colophons, headings, page marks and the Agni's footnotes are left out; a chapter's number misprinted in a mark is
+  mended; a number given twice keeps both verses. 9,029 verses in 154 chapters on the files here.
+- --work g6 (the new works), --show n and --verses (free looks at the cut); the plan's NEXT names chapters the work has.
+- --work all is still G5a's three works, cut as before; vamsa_join and the site read WORKS, which is unchanged.
+- tests: test_vamsa_g6a_2026_11_15 (small texts in the files' shapes, a stubbed reading, the patch's replay).
+- DOCS114: ASKS section 27, STATE section 49, RUNBOOK 15 Nov, evening (the trial reading's commands).
+
+Co-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

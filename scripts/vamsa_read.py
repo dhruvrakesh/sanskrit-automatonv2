@@ -45,6 +45,27 @@ VAMSA_HEAL_2026_11_11 (after the first run, 11 Nov: 56 parts, 1,975 statements, 
     with its verses (data\\vamsa_read\\<work>_lines.json, exports\\vamsa_lines_<work>.csv). The persons of the
     indexes (G5b) are what joins a line across chapters and books.
   python scripts\\vamsa_read.py --reparse   then   python scripts\\vamsa_read.py --report      (free)
+
+VAMSA_G6A_2026_11_15 (G6a, free: asked on 15 Nov, "authoritative genealogies of these kings ... the sanskrit texts
+(primary and critical editions, wherever possible)"): the genealogical chapters of the works GRETIL's archive holds
+here, beside the three above. Their verse marks differ (two numbers, no closing //, half-verses, the Mahabharata's
+lines), so each work says how its marks are written (G6_WORKS) and verses_g6() cuts it:
+  hv       the Harivamsa (Vaidya's constituted text, BORI 1969): 2-3, 9-10, 15, 23-28, 98-99
+  ram1     the Ramayana, book 1: 37-46 (Sagara's line), 69-70 (the Iksvakus, Janaka's line)     ram2   book 2: 102
+  matsya   the Matsyapurana: 5-6, 12, 24, 34, 43-51            brahma   the Brahmapurana: 3, 7-16
+  bndp1    the Brahmandapurana, book 1: 9-14                   bndp2    book 2: 1-6, 61-74
+  linga1   the Lingapurana, book 1: 63-69                      kurma1   the Kurmapurana, book 1: 8, 12-13, 17-23, 38
+  garuda1  the Garudapurana, book 1: 5-6, 54, 138-145          agni     the Agnipurana: 18-20, 272-277
+  markp    the Markandeyapurana: 52-53, 76
+  mbh1     the Mahabharata, Adiparvan (BORI's electronic text): 1.59-61, 70, 80, 89-92, 100, 107, 111
+  vipc4    the Visnupurana, book 4, in Pathak's critical edition (vip4 is the 1910 Venkatesvara print)
+A star passage or an appendix (a mark with * or @) is not the constituted text and is left out; half-verses (ab, cd)
+and the Mahabharata's padas are joined into their verse; the Agni's footnotes, the colophons and the page marks are
+taken out. --work all is still the three works of G5a (what the site's Dynasties page is built from: nothing of G6
+goes to the site until its pages are decided); --work g6 is these. A work is read with the same prompt and checks.
+  python scripts\\vamsa_read.py --work g6                          the plan of these works (free)
+  python scripts\\vamsa_read.py --work hv --chapters 9 --show 12   the first 12 verses as they would be sent (free)
+  python scripts\\vamsa_read.py --work g6 --verses                 every chapter: its verses, the gaps in their numbers (free)
 """
 from __future__ import annotations
 
@@ -62,6 +83,7 @@ from pathlib import Path
 
 MARK = "VAMSA_READ_2026_11_11"
 HEAL = "VAMSA_HEAL_2026_11_11"
+G6A = "VAMSA_G6A_2026_11_15"
 PROMPT_VERSION = "vamsa-read-v1"
 ROOT = Path(__file__).resolve().parents[1]
 ZIP = "sources/gretil/1_sanskr.zip"
@@ -74,6 +96,77 @@ WORKS = {
     "bhp12": {"member": "sa_bhAgavatapurANa.txt", "marker": r"//\s*bhp_(\d+)\.(\d+)\.(\d+)\*?\s*//", "book": 12,
               "chapters": [1], "title": "Bhagavatapurana 12.1", "entry": "Ulrich Stiehl", "ref": "BhP %d.%d.%d"},
 }
+# VAMSA_G6A_2026_11_15: the works of G6 (see the docstring). "marker": the verse's mark, with the groups b (book, when
+# the work has books), c (chapter), v (verse), h (a half-verse's letters), x or cx (a star passage, an appendix: left
+# out). "form": "mbh" for the Mahabharata's lines. "notes": True when footnotes stand between the verses (the Agni).
+BORI = "GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only"
+G6_WORKS = {
+    "hv": {"member": "sa_harivaMza.txt", "marker": r"(?://[ \t]*)?\*?HV_(?P<c>\d+)[.,](?P<v>\d+)(?P<x>\*\S*)?",
+           "book": None, "chapters": [2, 3, 9, 10, 15, 23, 24, 25, 26, 27, 28, 98, 99],
+           "title": "Harivamsa (Vaidya's constituted text)", "entry": "Atul Agarwala, J. Wayne Bass and others",
+           "ref": "HV %d.%d"},
+    "ram1": {"member": "sa_rAmAyaNa.txt", "marker": r"R_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d+)", "book": 1,
+             "chapters": [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 69, 70], "title": "Ramayana, book 1 (Balakanda)",
+             "entry": "Muneo Tokunaga, John Smith", "ref": "R %d,%d.%d"},
+    "ram2": {"member": "sa_rAmAyaNa.txt", "marker": r"R_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d+)", "book": 2,
+             "chapters": [102], "title": "Ramayana, book 2 (Ayodhyakanda)", "entry": "Muneo Tokunaga, John Smith",
+             "ref": "R %d,%d.%d"},
+    "matsya": {"member": "sa_matsyapurANa1-176.txt",
+               "marker": r"(?://[ \t]*)?MatsP_(?P<c>\d+)\.(?P<v>\d+)[*:]*", "book": None,
+               "chapters": [5, 6, 12, 24, 34, 43, 44, 45, 46, 47, 48, 49, 50, 51], "title": "Matsyapurana",
+               "entry": "Oliver Hellwig", "ref": "MatsP %d.%d"},
+    "bndp1": {"member": "sa_brahmANDapurANa.txt",
+              "marker": r"//[ \t]*bndp_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d*)[ \t]*(?://|/)?", "book": 1,
+              "chapters": [9, 10, 11, 12, 13, 14], "title": "Brahmandapurana, book 1",
+              "entry": "members of the Sansknet Project", "ref": "BndP %d,%d.%d"},
+    "bndp2": {"member": "sa_brahmANDapurANa.txt",
+              "marker": r"//[ \t]*bndp_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d*)[ \t]*(?://|/)?", "book": 2,
+              "chapters": [1, 2, 3, 4, 5, 6, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74],
+              "title": "Brahmandapurana, book 2", "entry": "members of the Sansknet Project", "ref": "BndP %d,%d.%d"},
+    "brahma": {"member": "sa_brahmapurANa-1-246.txt",
+               "marker": r"(?://[ \t]*|\|\|[ \t]*\()?BrP_(?P<c>\d+)(?P<cx>\*)?\.(?P<v>\d+)\)?", "book": None,
+               "chapters": [3, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "title": "Brahmapurana",
+               "entry": "Peter Schreiner and Renate Soehnen-Thieme", "ref": "BrP %d.%d"},
+    "linga1": {"member": "sa_liGgapurANa1-108.txt", "marker": r"(?://[ \t]*)?LiP_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d+)",
+               "book": 1, "chapters": [63, 64, 65, 66, 67, 68, 69], "title": "Lingapurana, book 1",
+               "entry": "members of the Sansknet Project", "ref": "LiP %d,%d.%d"},
+    "kurma1": {"member": "sa_kUrmapurANa.txt",
+               "marker": r"//[ \t]*k\u016brmp_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d+)[ \t]*(?://)?", "book": 1,
+               "chapters": [8, 12, 13, 17, 18, 19, 20, 21, 22, 23, 38], "title": "Kurmapurana, book 1",
+               "entry": "members of the Sansknet Project", "ref": "KurmP %d,%d.%d"},
+    "garuda1": {"member": "sa_garuDapurANa.txt",
+                "marker": r"//[ \t]*garp_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d*)(?P<x>\*\d+)?[ \t]*(?://|/)?", "book": 1,
+                "chapters": [5, 6, 54, 138, 139, 140, 141, 142, 143, 144, 145], "title": "Garudapurana, book 1",
+                "entry": "members of the Sansknet Project", "ref": "GarP %d,%d.%d"},
+    "agni": {"member": "sa_agnipurANa.txt",
+             "marker": r"/+ap_(?P<x>\*)?(?P<c>\d+)(?P<cx>[^\d.\s/]*)\.(?P<v>\d+)(?P<h>[^\d\s/]*)/", "book": None,
+             "chapters": [18, 19, 20, 272, 273, 274, 275, 276, 277], "title": "Agnipurana", "entry": "Jun Takashima",
+             "ref": "AgP %d.%d", "notes": True},
+    "markp": {"member": "sa_mArkaNDeyapurANa1-93.txt", "marker": r"//[ \t]*markp_(?P<c>\d+)\.(?P<v>\d*)[ \t]*(?://)?",
+              "book": None, "chapters": [52, 53, 76], "title": "Markandeyapurana",
+              "entry": "members of the Sansknet Project", "ref": "MarkP %d.%d"},
+    "mbh1": {"member": "mbh_01_u.htm", "form": "mbh", "book": 1,
+             "chapters": [59, 60, 61, 70, 80, 89, 90, 91, 92, 100, 107, 111], "title": "Mahabharata, Adiparvan",
+             "entry": "Muneo Tokunaga, John Smith", "ref": "MBh %d,%d.%d", "source": BORI},
+    "vipc4": {"member": "sa_viSNupurANa-crit.txt",
+              "marker": r"(?://[ \t]*|\|\|[ \t]*\()?ViP_(?P<b>\d+),(?P<c>\d+)\.(?P<v>\d+)(?P<h>ab|cd|ef)?"
+                        r"(?P<x>[*@][^\s|)]*)?\|?\)?",
+              "book": 4, "chapters": None, "title": "Visnupurana, book 4 (Pathak's critical edition)",
+              "entry": "Peter Schreiner", "ref": "ViPc %d,%d.%d"},
+}
+GROUPS = {"all": list(WORKS), "g6": list(G6_WORKS)}
+
+
+def work_of(work: str) -> dict:
+    """The work's entry: one of G5a's three (WORKS) or one of G6's (G6_WORKS)."""
+    return WORKS[work] if work in WORKS else G6_WORKS[work]
+
+
+def source_of(work: str) -> str:
+    w = work_of(work)
+    return "%s; %s (data entry: %s)" % (w["member"], w.get("source") or GRETIL, w["entry"])
+
+
 RELS = ("son_of", "daughter_of", "wife_of", "brother_of", "sister_of", "succeeded", "descendant_of", "line_of", "other")
 MODEL = "claude-sonnet-5-5"
 EFFORT = "medium"
@@ -127,6 +220,8 @@ def clean(seg: str) -> str:
 
 def verses_of(work: str, text: str) -> list:
     """[(chapter, verse, ref, text)] of the work's book (and chapters), in order: the text before each marker."""
+    if work in G6_WORKS:   # VAMSA_G6A_2026_11_15
+        return verses_g6(work, text)
     w = WORKS[work]
     out, last = [], 0
     for m in re.finditer(w["marker"], text):
@@ -137,6 +232,121 @@ def verses_of(work: str, text: str) -> list:
         t = clean(seg)
         if t:
             out.append((c, v, w["ref"] % (b, c, v), t))
+    return out
+
+
+G6_DROP = re.compile(r"(?m)^[ \t]*(?:(?::\S+[ \t]+)?\[*[ \t]*(?:it[iy]|eti).*dhy\u0101y.*|.*pur\u0101\u1e47e.*dhy\u0101ya\u1e25.*"
+                     r"|[%:].*|\(.*\)[ \t]*/?|\[.*\]|.*-[ \t]*\d+|\S*-pur\u0101\u1e47a[ \t]+\d+)[ \t\r]*$")
+G6_CALL = re.compile(r"\((?:\d+|[?!])\)|(?<![^\s(])\d+(?:[.,]\d+)*(?=[ \t]*/)")
+MBH_LINE = re.compile(r"(?m)^(\d\d),(\d\d\d)\.(\d\d\d)([A-Za-z])\t(.*?)[ \t\r]*$")
+PAGE_END = re.compile(r":p[ \t]*\d+[ \t\r]*$")
+
+
+def clean_g6(seg: str) -> str:
+    """VAMSA_G6A_2026_11_15: a verse's text without the colophon, the chapter's heading, the page marks and the
+    footnotes' calls that stand before it in GRETIL's files."""
+    return clean(G6_CALL.sub("", G6_DROP.sub(" ", seg.replace("<BR>", " "))))
+
+
+def no_notes(text: str, marker: str) -> str:
+    """VAMSA_G6A_2026_11_15: the Agni's footnotes out: from a line ":n" to the line that ends with the page's mark
+    (":p 8"), or to the next line that carries a verse's mark."""
+    out, skip, rx = [], False, re.compile(marker)
+    for ln in text.split("\n"):
+        if ln.strip() == ":n":
+            skip = True
+            continue
+        if skip:
+            if rx.search(ln):
+                skip = False
+            else:
+                if PAGE_END.search(ln):
+                    skip = False
+                continue
+        out.append(ln)
+    return "\n".join(out)
+
+
+def verses_mbh(work: str, text: str) -> list:
+    """VAMSA_G6A_2026_11_15: the Mahabharata's file: a line is "01,089.001a", a TAB and a pada (or a prose sentence,
+    A, B, ...); the padas of one number are one verse. A line of a star passage or an appendix (* or @ in its
+    reference) and a speaker's line (no letter) are left out."""
+    w = G6_WORKS[work]
+    out = []
+    for m in MBH_LINE.finditer(text):
+        b, c, v = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if b != w["book"] or (w["chapters"] and c not in w["chapters"]):
+            continue
+        t = clean_g6(re.sub(r"<[^>]*>", " ", m.group(5)))
+        if not t:
+            continue
+        ref = w["ref"] % (b, c, v)
+        if out and out[-1][2] == ref:
+            out[-1] = (c, v, ref, out[-1][3] + " " + t)
+        else:
+            out.append((c, v, ref, t))
+    return out
+
+
+def verses_g6(work: str, text: str) -> list:
+    """VAMSA_G6A_2026_11_15: [(chapter, verse, ref, text)] of a work of G6_WORKS: the text before each mark; the
+    halves of a verse joined; a star passage or an appendix left out; a mark that lost its verse's number gives its
+    text to the verse after it; a number given twice in a chapter keeps both verses (20, 20b)."""
+    w = G6_WORKS[work]
+    if w.get("form") == "mbh":
+        return verses_mbh(work, text)
+    if w.get("notes"):
+        text = no_notes(text, w["marker"])
+    out, last, carry, seen = [], 0, "", set()
+    ms = list(re.finditer(w["marker"], text))
+    at = [(m.groupdict().get("b"), m.group("c")) for m in ms]
+    for i in range(1, len(ms)):   # a chapter's number misprinted in one mark (ap_273.001cd in 274): the chapter around it
+        nxt = at[i + 1:i + 4]   # and it is not the chapter that goes on after (the first mark of 274 is right)
+        if at[i] != at[i - 1] and at[i - 1] in nxt and nxt[-1] != at[i]:
+            at[i] = at[i - 1]
+    for i, m in enumerate(ms):
+        seg, last = text[last:m.start()], m.end()
+        d = dict(m.groupdict(), b=at[i][0], c=at[i][1])
+        if d.get("x") or d.get("cx"):
+            carry = ""
+            continue
+        if not d.get("v"):
+            carry += seg + "\n"
+            continue
+        seg, carry = carry + seg, ""
+        b = int(d["b"]) if d.get("b") else None
+        c, v = int(d["c"]), int(d["v"])
+        if b != w["book"] or (w["chapters"] and c not in w["chapters"]):
+            continue
+        t = clean_g6(seg)
+        if not t:
+            continue
+        ref = w["ref"] % ((b, c, v) if b is not None else (c, v))
+        if out and out[-1][2] == ref:
+            out[-1] = (c, v, ref, out[-1][3] + " " + t)
+            continue
+        k = 0
+        while ref in seen:   # a number given to two verses of a chapter (the print's): the second is 20b
+            k += 1
+            ref = w["ref"] % ((b, c, v) if b is not None else (c, v)) + "bcdefgh"[min(k, 7) - 1] * (1 + max(0, k - 7))
+        seen.add(ref)
+        out.append((c, v, ref, t))
+    return out
+
+
+def gaps(verses: list) -> dict:
+    """VAMSA_G6A_2026_11_15: {chapter: {"verses", "first", "last", "missing": [numbers not there], "again": [numbers
+    there twice]}}: what a look at a work's cut shows before any reading is bought."""
+    out = {}
+    for c, v, _r, _t in verses:
+        d = out.setdefault(c, {"verses": 0, "first": v, "last": v, "seen": []})
+        d["verses"] += 1
+        d["first"], d["last"] = min(d["first"], v), max(d["last"], v)
+        d["seen"].append(v)
+    for d in out.values():
+        seen = d.pop("seen")
+        d["missing"] = [n for n in range(1, d["last"] + 1) if n not in set(seen)]
+        d["again"] = sorted({n for n in seen if seen.count(n) > 1})
     return out
 
 
@@ -168,7 +378,7 @@ def unit_name(u: dict) -> str:
 
 
 def user_message(work: str, u: dict) -> str:
-    w = WORKS[work]
+    w = work_of(work)
     lines = ["%s, chapter %d%s (GRETIL's text). The verses:" % (w["title"], u["chapter"],
                                                                  ", part %d" % u["part"] if u["part"] else ""), ""]
     lines += ["[%s] %s" % (r, t) for r, t in u["verses"]]
@@ -456,11 +666,11 @@ def parse_chapters(spec: str):
 
 
 def plan_units(a) -> dict:
-    works = list(WORKS) if a.work == "all" else [a.work]
+    works = GROUPS.get(a.work) or [a.work]
     texts, out = {}, {}
     want = parse_chapters(a.chapters)
     for wk in works:
-        m = WORKS[wk]["member"]
+        m = work_of(wk)["member"]
         if m not in texts:
             texts[m] = read_member(a.zip, m)
         us = chunks(verses_of(wk, texts[m]))
@@ -483,6 +693,45 @@ def credit_line(db) -> str:
         return "the credit could not be read (%s)" % e
 
 
+def trial_of(a, units: dict) -> str:
+    """VAMSA_G6A_2026_11_15: "--work w --chapters a-b": the first two chapters not read yet of the first work that has
+    any (a work of G6 does not begin at chapter 1)."""
+    for wk, us in units.items():
+        left = sorted({u["chapter"] for u in us if not done(a.out, wk, u)})[:2]
+        if left:
+            spec = "%d" % left[0] if len(left) == 1 else ("%d-%d" if left[1] == left[0] + 1 else "%d,%d") % tuple(left)
+            return "--work %s --chapters %s" % (wk, spec)
+    return "--work %s --chapters 1-2" % next(iter(units))
+
+
+def do_show(a, units: dict) -> int:
+    """VAMSA_G6A_2026_11_15: the verses as they would be sent (--show n: the first n of what was asked), or each
+    chapter's count and the gaps in its numbers (--verses). Free: nothing is sent, nothing is written."""
+    n_all, odd = 0, 0
+    for wk, us in units.items():
+        vs = [(u["chapter"], int(re.findall(r"\d+", r)[-1]), r, t) for u in us for r, t in u["verses"]]
+        n_all += len(vs)
+        if a.show:
+            print("  %s: %s, %s" % (wk, work_of(wk)["title"], source_of(wk)))
+            for _c, _v, r, t in vs[:a.show]:
+                print("    [%s] %s" % (r, t))
+            continue
+        for c, d in sorted(gaps(vs).items()):
+            bad = bool(d["missing"] or d["again"])
+            odd += 1 if bad else 0
+            print("  %-8s chapter %3d: %4d verses, %d to %d%s%s" % (
+                wk, c, d["verses"], d["first"], d["last"],
+                ("; not there: %s" % ", ".join(str(n) for n in d["missing"][:12])) if d["missing"] else "",
+                ("; twice: %s" % ", ".join(str(n) for n in d["again"][:12])) if d["again"] else ""))
+    if a.show:
+        print("VERDICT: the first %d verse(s) of each work asked for, as they would be sent (free; nothing sent)" % a.show)
+    else:
+        print("VERDICT: %d verses in %d work(s); %d chapter(s) with a gap or a number twice (free; nothing sent)"
+              % (n_all, len(units), odd))
+    print("NEXT: python scripts\\vamsa_read.py %s --yes   (a trial)" % trial_of(a, units))
+    return 0
+
+
 def do_plan(a, units: dict) -> int:
     total, todo_n, todo_usd = 0.0, 0, 0.0
     for wk, us in units.items():
@@ -492,12 +741,11 @@ def do_plan(a, units: dict) -> int:
         usd = sum(estimate(u["chars"], a.model) for u in left)
         todo_n += len(left); todo_usd += usd; total += sum(estimate(u["chars"], a.model) for u in us)
         print("  %-6s %-28s %3d chapter part(s), %5d verses, %7d characters; %d to read, about $%.2f"
-              % (wk, WORKS[wk]["title"], len(us), n_v, chars, len(left), usd))
+              % (wk, work_of(wk)["title"], len(us), n_v, chars, len(left), usd))
     print("  %s" % credit_line(a.db))
     print("VERDICT: %d part(s) to read, about $%.2f (the whole: about $%.2f; the estimate is a guess until the trial "
           "measures it), %s with %s" % (todo_n, todo_usd, total, "the Claude credit", a.model))
-    first = next(iter(units))
-    print("NEXT: python scripts\\vamsa_read.py --work %s --chapters 1-2 --yes   (a trial)" % first
+    print("NEXT: python scripts\\vamsa_read.py %s --yes   (a trial)" % trial_of(a, units)
           if todo_n else "NEXT: python scripts\\vamsa_read.py --report")
     return 0
 
@@ -512,8 +760,7 @@ def do_run(a, units: dict, client=None, con=None) -> int:
     if need > a.max_usd * 1.5:
         print("REFUSE: the estimate is $%.2f, above --max-usd %.2f by half again: read fewer chapters (--chapters), or "
               "raise --max-usd" % (need, a.max_usd))
-        print("VERDICT: nothing sent"); print("NEXT: python scripts\\vamsa_read.py --work %s --chapters 1-2 --yes"
-                                               % todo[0][0])
+        print("VERDICT: nothing sent"); print("NEXT: python scripts\\vamsa_read.py %s --yes" % trial_of(a, units))
         return 1
     own = None
     if con is None:
@@ -536,10 +783,9 @@ def do_run(a, units: dict, client=None, con=None) -> int:
                 print("  stopped: the Claude credit (python scripts\\claude_engine.py --credit)")
                 break
             t0 = time.time()
-            rec = {"mark": MARK, "work": wk, "title": WORKS[wk]["title"], "chapter": u["chapter"], "part": u["part"],
+            rec = {"mark": MARK, "work": wk, "title": work_of(wk)["title"], "chapter": u["chapter"], "part": u["part"],
                    "refs": [r for r, _t in u["verses"]], "model": a.model, "effort": a.effort,
-                   "prompt_version": PROMPT_VERSION, "source": "%s; %s (data entry: %s)" % (
-                       WORKS[wk]["member"], GRETIL, WORKS[wk]["entry"]),
+                   "prompt_version": PROMPT_VERSION, "source": source_of(wk),
                    "at": datetime.datetime.now().isoformat(timespec="seconds")}
             try:
                 msg = client.create(SYSTEM, user_message(wk, u), MAX_TOKENS)
@@ -597,7 +843,7 @@ def do_reparse(a, units: dict) -> int:
 
 
 def do_report(a) -> int:
-    works = list(WORKS) if a.work == "all" else [a.work]
+    works = GROUPS.get(a.work) or [a.work]
     ex = Path(a.exports)
     ex.mkdir(parents=True, exist_ok=True)
     total = 0
@@ -621,7 +867,7 @@ def do_report(a) -> int:
                 print("         a line of %d: %s" % (len(ln), " > ".join(n for n, _r, _w in ln)))
         lp = Path(a.out) / ("%s_lines.json" % wk)
         lp.parent.mkdir(parents=True, exist_ok=True)
-        lp.write_text(json.dumps({"mark": HEAL, "work": wk, "title": WORKS[wk]["title"], "lines": [
+        lp.write_text(json.dumps({"mark": HEAL, "work": wk, "title": work_of(wk)["title"], "lines": [
             [{"name": n, "ref": r, "words": w} for n, r, w in ln] for ln in lines if len(ln) > 1]},
             ensure_ascii=False, indent=1), encoding="utf-8")
         lc = ex / ("vamsa_lines_%s.csv" % wk)
@@ -647,7 +893,8 @@ def do_report(a) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--work", default="all", choices=["all"] + list(WORKS))
+    ap.add_argument("--work", default="all", choices=list(GROUPS) + list(WORKS) + list(G6_WORKS),
+                    help="all: G5a's three works; g6: the works of VAMSA_G6A_2026_11_15; or one work")
     ap.add_argument("--chapters", default="", help="numbers and ranges: 1-3,7")
     ap.add_argument("--yes", action="store_true", help="read (the Claude credit); without it, the plan")
     ap.add_argument("--max-usd", type=float, default=CAP_USD)
@@ -655,6 +902,8 @@ def main(argv=None) -> int:
     ap.add_argument("--effort", default=EFFORT)
     ap.add_argument("--reparse", action="store_true", help="the stored replies parsed and checked again (free)")
     ap.add_argument("--report", action="store_true", help="the counts, the CSVs, the longest lines (free)")
+    ap.add_argument("--show", type=int, default=0, help="print the first n verses as they would be sent (free)")
+    ap.add_argument("--verses", action="store_true", help="each chapter's verses and the gaps in their numbers (free)")
     ap.add_argument("--db", default="data/context.db")
     ap.add_argument("--zip", default=ZIP)
     ap.add_argument("--out", default="data/vamsa_read")
@@ -683,6 +932,8 @@ def main(argv=None) -> int:
         units = plan_units(a)
     except (ValueError, FileNotFoundError) as e:
         print("REFUSE: %s" % e); print("VERDICT: nothing read"); print("NEXT: "); return 1
+    if getattr(a, "show", 0) or getattr(a, "verses", False):   # VAMSA_G6A_2026_11_15
+        return do_show(a, units)
     if a.reparse:
         return do_reparse(a, units)
     if a.yes:

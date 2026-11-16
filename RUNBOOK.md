@@ -2885,3 +2885,25 @@ docs\ASKS_2026-10-22.md, section 26. From the automaton's root:
 4. Its new passages' English (about 813) by Sonnet through the dashboard (`/api/translate`, engine
    anthropic:claude-sonnet-5-5, limit 0); its Hindi by flash when Google's cap allows.
 5. Its edition: 40 verses first from its desk page (Plan, Run), then presses of 250.
+
+## 15 Nov, evening: the genealogies' texts taught to the reader (DOCS114_2026_11_15)
+
+docs\ASKS_2026-10-22.md, section 27. From the automaton's root:
+
+1. The patches: `python scripts\patch_vamsa_g6a_2026_11_15.py --check`, then without; the same for
+   `patch_docs114_2026_11_15.py`; `python -m unittest tests.test_vamsa_g6a_2026_11_15 tests.test_vamsa_read_2026_11_11
+   tests.test_vamsa_join_2026_11_11 tests.test_docs114_2026_11_15`; `powershell -ExecutionPolicy Bypass -File
+   scripts\run_tests.ps1`; release.ps1 with COMMIT_MSG_vamsag6a_20261115.txt.
+2. Free, nothing sent: `python scripts\vamsa_read.py --work g6` (the plan: fourteen works, 248 parts, about $8.26);
+   `python scripts\vamsa_read.py --work g6 --verses` (each chapter's verses and the gaps in their numbers);
+   `python scripts\vamsa_read.py --work hv --chapters 9 --show 12` and
+   `python scripts\vamsa_read.py --work mbh1 --chapters 90 --show 12` (the verses as they would be sent).
+3. The trial (the Claude credit, about $0.30 in all): `python scripts\vamsa_read.py --work hv --chapters 9-10 --yes
+   --max-usd 0.50`, then `python scripts\vamsa_read.py --work mbh1 --chapters 90 --yes --max-usd 0.50`.
+4. What it found (free): `python scripts\vamsa_read.py --work hv --report` and
+   `python scripts\vamsa_read.py --work mbh1 --report` (the counts by check, the longest father-to-son lines;
+   exports\vamsa_read_hv.csv, exports\vamsa_lines_hv.csv and the same for mbh1). A good trial: three statements in
+   four or more "verified" (G5a's first run: 1,449 of 1,975).
+5. The rest, when the trial reads well (G6b): `python scripts\vamsa_read.py --work g6 --yes --max-usd 9`; it reads only
+   what is not read yet and stops at the cap. `--work all` is still G5a's three works, and nothing of G6 goes to the
+   site.

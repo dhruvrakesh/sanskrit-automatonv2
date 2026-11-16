@@ -1,0 +1,356 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 9,
+ "part": 1,
+ "refs": [
+  "HV 9.1",
+  "HV 9.2",
+  "HV 9.3",
+  "HV 9.4",
+  "HV 9.5",
+  "HV 9.6",
+  "HV 9.7",
+  "HV 9.8",
+  "HV 9.9",
+  "HV 9.10",
+  "HV 9.11",
+  "HV 9.12",
+  "HV 9.13",
+  "HV 9.14",
+  "HV 9.15",
+  "HV 9.16",
+  "HV 9.17",
+  "HV 9.18",
+  "HV 9.19",
+  "HV 9.20",
+  "HV 9.21",
+  "HV 9.22",
+  "HV 9.23",
+  "HV 9.24",
+  "HV 9.25",
+  "HV 9.26",
+  "HV 9.27",
+  "HV 9.28",
+  "HV 9.29",
+  "HV 9.30",
+  "HV 9.31",
+  "HV 9.32",
+  "HV 9.33",
+  "HV 9.34",
+  "HV 9.35",
+  "HV 9.36",
+  "HV 9.37",
+  "HV 9.38",
+  "HV 9.39",
+  "HV 9.40",
+  "HV 9.41",
+  "HV 9.42"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-16T18:12:32",
+ "reply": "{\"statements\":[{\"ref\":\"HV 9.1\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},{\"ref\":\"HV 9.1\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},{\"ref\":\"HV 9.1\",\"a\":\"Dhṛṣṇu\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},{\"ref\":\"HV 9.1\",\"a\":\"Śaryāti\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},{\"ref\":\"HV 9.2\",\"a\":\"Nariṣyanta\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"navaite puruṣarṣabha\",\"doubt\":false},{\"ref\":\"HV 9.2\",\"a\":\"Prāṃśu\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"navaite puruṣarṣabha\",\"doubt\":false},{\"ref\":\"HV 9.2\",\"a\":\"Nābhānediṣṭha\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"navaite puruṣarṣabha\",\"doubt\":false},{\"ref\":\"HV 9.2\",\"a\":\"Karūṣa\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"navaite puruṣarṣabha\",\"doubt\":false},{\"ref\":\"HV 9.2\",\"a\":\"Pṛṣadhra\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"navaite puruṣarṣabha\",\"doubt\":false},{\"ref\":\"HV 9.14\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"somaputrād budhād rājaṃs tasyāṃ jajñe purūravāḥ\",\"doubt\":false},{\"ref\":\"HV 9.14\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somaputrād budhād\",\"doubt\":false},{\"ref\":\"HV 9.14\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Iḍā\",\"words\":\"tasyāṃ jajñe purūravāḥ\",\"doubt\":false},{\"ref\":\"HV 9.15\",\"a\":\"Utkala\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnasya tu dāyādās trayaḥ\",\"doubt\":false},{\"ref\":\"HV 9.15\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnasya tu dāyādās trayaḥ\",\"doubt\":false},{\"ref\":\"HV 9.15\",\"a\":\"Vinatāśva\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnasya tu dāyādās trayaḥ\",\"doubt\":false},{\"ref\":\"HV 9.20\",\"a\":\"Eḍa\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnaś ca divaṃ yāta eḍam utpādya\",\"doubt\":true},{\"ref\":\"HV 9.21\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasya tu bhārata ambarīṣo 'bhavat putraḥ\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Dhārṣṇika\",\"rel\":\"line_of\",\"b\":\"Dhṛṣṇu\",\"words\":\"dhṛṣṇos tu dhārṣṇikaṃ kṣatraṃ\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Kārūṣa\",\"rel\":\"line_of\",\"b\":\"Karūṣa\",\"words\":\"karūṣasya tu kārūṣāḥ kṣatriyā\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Prajāpati\",\"rel\":\"son_of\",\"b\":\"Prāṃśu\",\"words\":\"prāṃśor eko 'bhavat putraḥ prajāpatir iti śrutaḥ\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Dama\",\"rel\":\"son_of\",\"b\":\"Nariṣyanta\",\"words\":\"nariṣyantasya dāyādo rājā daṇḍadharo damaḥ\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Ānarta\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāter mithunaṃ cāsīd ānarto nāma viśrutaḥ putraḥ\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Sukanyā\",\"rel\":\"daughter_of\",\"b\":\"Śaryāti\",\"words\":\"kanyā sukanyā ca\",\"doubt\":false},{\"ref\":\"HV 9.22\",\"a\":\"Sukanyā\",\"rel\":\"wife_of\",\"b\":\"Cyavana\",\"words\":\"yā patnī cyavanasya\",\"doubt\":false},{\"ref\":\"HV 9.23\",\"a\":\"Reva\",\"rel\":\"son_of\",\"b\":\"Ānarta\",\"words\":\"ānartasya tu dāyādo revo\",\"doubt\":false},{\"ref\":\"HV 9.24\",\"a\":\"Raivata Kakudmin\",\"rel\":\"son_of\",\"b\":\"Reva\",\"words\":\"revasya raivataḥ putraḥ kakudmī\",\"doubt\":false},{\"ref\":\"HV 9.25\",\"a\":\"Raivata Kakudmin\",\"rel\":\"father_of\",\"b\":\"Revatī\",\"words\":\"sa kanyāsahitaḥ\",\"doubt\":true},{\"ref\":\"HV 9.27\",\"a\":\"Revatī\",\"rel\":\"daughter_of\",\"b\":\"Raivata Kakudmin\",\"words\":\"raivato kanyāṃ tāṃ baladevāya suvratāṃ nāma revatīm dattvā\",\"doubt\":false},{\"ref\":\"HV 9.28\",\"a\":\"Revatī\",\"rel\":\"wife_of\",\"b\":\"Baladeva\",\"words\":\"rāmo 'pi dharmātmā revatyā sahitaḥ\",\"doubt\":false},{\"ref\":\"HV 9.38\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"kṣuvatas tu manos tāta ikṣvākur abhavat sutaḥ\",\"doubt\":false},{\"ref\":\"HV 9.39\",\"a\":\"Vikukṣi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"tasya putraśataṃ tv āsīd ikṣvākor teṣāṃ vikukṣir jyeṣṭhas\",\"doubt\":false},{\"ref\":\"HV 9.40\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Vikukṣi\",\"words\":\"śakunipramukhās tasya putrāḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03353,
+ "tokens": {
+  "input": 4800,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2393,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 9.1",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.1",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.1",
+   "a": "Dhṛṣṇu",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.1",
+   "a": "Śaryāti",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.2",
+   "a": "Nariṣyanta",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "navaite puruṣarṣabha",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.2",
+   "a": "Prāṃśu",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "navaite puruṣarṣabha",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.2",
+   "a": "Nābhānediṣṭha",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "navaite puruṣarṣabha",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.2",
+   "a": "Karūṣa",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "navaite puruṣarṣabha",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.2",
+   "a": "Pṛṣadhra",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "navaite puruṣarṣabha",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.14",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "somaputrād budhād rājaṃs tasyāṃ jajñe purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.14",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somaputrād budhād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.14",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Iḍā",
+   "words": "tasyāṃ jajñe purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.15",
+   "a": "Utkala",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnasya tu dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.15",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnasya tu dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.15",
+   "a": "Vinatāśva",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnasya tu dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.20",
+   "a": "Eḍa",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnaś ca divaṃ yāta eḍam utpādya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.21",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasya tu bhārata ambarīṣo 'bhavat putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Dhārṣṇika",
+   "rel": "line_of",
+   "b": "Dhṛṣṇu",
+   "words": "dhṛṣṇos tu dhārṣṇikaṃ kṣatraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Kārūṣa",
+   "rel": "line_of",
+   "b": "Karūṣa",
+   "words": "karūṣasya tu kārūṣāḥ kṣatriyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Prajāpati",
+   "rel": "son_of",
+   "b": "Prāṃśu",
+   "words": "prāṃśor eko 'bhavat putraḥ prajāpatir iti śrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Dama",
+   "rel": "son_of",
+   "b": "Nariṣyanta",
+   "words": "nariṣyantasya dāyādo rājā daṇḍadharo damaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Ānarta",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "śaryāter mithunaṃ cāsīd ānarto nāma viśrutaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Sukanyā",
+   "rel": "daughter_of",
+   "b": "Śaryāti",
+   "words": "kanyā sukanyā ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.22",
+   "a": "Sukanyā",
+   "rel": "wife_of",
+   "b": "Cyavana",
+   "words": "yā patnī cyavanasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.23",
+   "a": "Reva",
+   "rel": "son_of",
+   "b": "Ānarta",
+   "words": "ānartasya tu dāyādo revo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.24",
+   "a": "Raivata Kakudmin",
+   "rel": "son_of",
+   "b": "Reva",
+   "words": "revasya raivataḥ putraḥ kakudmī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.25",
+   "a": "Raivata Kakudmin",
+   "rel": "father_of",
+   "b": "Revatī",
+   "words": "sa kanyāsahitaḥ",
+   "doubt": true,
+   "check": "bad"
+  },
+  {
+   "ref": "HV 9.27",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Raivata Kakudmin",
+   "words": "raivato kanyāṃ tāṃ baladevāya suvratāṃ nāma revatīm dattvā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 9.28",
+   "a": "Revatī",
+   "rel": "wife_of",
+   "b": "Baladeva",
+   "words": "rāmo 'pi dharmātmā revatyā sahitaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 9.38",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "kṣuvatas tu manos tāta ikṣvākur abhavat sutaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 9.39",
+   "a": "Vikukṣi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "tasya putraśataṃ tv āsīd ikṣvākor teṣāṃ vikukṣir jyeṣṭhas",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 9.40",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Vikukṣi",
+   "words": "śakunipramukhās tasya putrāḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

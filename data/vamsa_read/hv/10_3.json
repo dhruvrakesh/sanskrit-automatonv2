@@ -1,0 +1,209 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 10,
+ "part": 3,
+ "refs": [
+  "HV 10.78",
+  "HV 10.79",
+  "HV 10.80"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v1",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-16T18:13:37",
+ "reply": "{\"statements\":[{\"ref\":\"HV 10.78\",\"a\":\"Nala\",\"rel\":\"son_of\",\"b\":\"Sudhanvan\",\"words\":\"sudhanvanaḥ sutaś caiva tatojajñe nalo\",\"doubt\":true},{\"ref\":\"HV 10.78\",\"a\":\"Uktha\",\"rel\":\"son_of\",\"b\":\"Nala\",\"words\":\"uktho nāma sa dharmātmā nalaputro babhūva\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Vajranābha\",\"rel\":\"son_of\",\"b\":\"Uktha\",\"words\":\"vajranābhaḥ sutas tasya ukthasya\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Śaṅkha\",\"rel\":\"son_of\",\"b\":\"Vajranābha\",\"words\":\"śaṅkhas tasya suto vidvān\",\"doubt\":true},{\"ref\":\"HV 10.78\",\"a\":\"Dhyuṣitāśva\",\"rel\":\"son_of\",\"b\":\"Śaṅkha\",\"words\":\"śaṅkhas tasya suto vidvān dhyuṣitāśva iti śrutaḥ\",\"doubt\":true},{\"ref\":\"HV 10.78\",\"a\":\"Viśvasaha\",\"rel\":\"son_of\",\"b\":\"Dhyuṣitāśva\",\"words\":\"dhyuṣitāśvasuto vidvān rājā viśvasahaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Hiraṇyanābha\",\"rel\":\"son_of\",\"b\":\"Viśvasaha\",\"words\":\"hiraṇyanābhaḥ kauśalyo\",\"doubt\":true},{\"ref\":\"HV 10.78\",\"a\":\"Brahmiṣṭha\",\"rel\":\"son_of\",\"b\":\"Hiraṇyanābha\",\"words\":\"brahmiṣṭhas tasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Puṣpa\",\"rel\":\"son_of\",\"b\":\"Brahmiṣṭha\",\"words\":\"puṣpas tasya suto vidvān\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Arthasiddhi\",\"rel\":\"son_of\",\"b\":\"Puṣpa\",\"words\":\"arthasiddhis tu tatsutaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Sudarśana\",\"rel\":\"son_of\",\"b\":\"Arthasiddhi\",\"words\":\"sudarśanaḥ sutas tasya\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Agnivarṇa\",\"rel\":\"son_of\",\"b\":\"Sudarśana\",\"words\":\"agnivarṇaḥ sudarśanāt\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Śīghra\",\"rel\":\"son_of\",\"b\":\"Agnivarṇa\",\"words\":\"agnivarṇasya śīghras\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Maru\",\"rel\":\"son_of\",\"b\":\"Śīghra\",\"words\":\"śīghrasya tu maruḥ sutaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Bṛhadbala\",\"rel\":\"son_of\",\"b\":\"Maru\",\"words\":\"tasyāsīd viśrutavataḥ putro rājā bṛhadbalaḥ\",\"doubt\":true},{\"ref\":\"HV 10.78\",\"a\":\"Prasusruta\",\"rel\":\"son_of\",\"b\":\"Maru\",\"words\":\"prasusruto marusutaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Susaṃdhi\",\"rel\":\"son_of\",\"b\":\"Prasusruta\",\"words\":\"susaṃdhis tasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Marṣa\",\"rel\":\"son_of\",\"b\":\"Susaṃdhi\",\"words\":\"susaṃdhes tu suto marṣaḥ\",\"doubt\":false},{\"ref\":\"HV 10.78\",\"a\":\"Sahasrat\",\"rel\":\"son_of\",\"b\":\"Marṣa\",\"words\":\"sahasrān nāma nāmataḥ\",\"doubt\":true},{\"ref\":\"HV 10.78\",\"a\":\"Viśrutavat\",\"rel\":\"son_of\",\"b\":\"Sahasrat\",\"words\":\"āsīt sahasrataḥ putro rājā viśrutavān\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0173,
+ "tokens": {
+  "input": 1379,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1454,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 10.78",
+   "a": "Nala",
+   "rel": "son_of",
+   "b": "Sudhanvan",
+   "words": "sudhanvanaḥ sutaś caiva tatojajñe nalo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Uktha",
+   "rel": "son_of",
+   "b": "Nala",
+   "words": "uktho nāma sa dharmātmā nalaputro babhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Vajranābha",
+   "rel": "son_of",
+   "b": "Uktha",
+   "words": "vajranābhaḥ sutas tasya ukthasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Śaṅkha",
+   "rel": "son_of",
+   "b": "Vajranābha",
+   "words": "śaṅkhas tasya suto vidvān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Dhyuṣitāśva",
+   "rel": "son_of",
+   "b": "Śaṅkha",
+   "words": "śaṅkhas tasya suto vidvān dhyuṣitāśva iti śrutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Viśvasaha",
+   "rel": "son_of",
+   "b": "Dhyuṣitāśva",
+   "words": "dhyuṣitāśvasuto vidvān rājā viśvasahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Hiraṇyanābha",
+   "rel": "son_of",
+   "b": "Viśvasaha",
+   "words": "hiraṇyanābhaḥ kauśalyo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Brahmiṣṭha",
+   "rel": "son_of",
+   "b": "Hiraṇyanābha",
+   "words": "brahmiṣṭhas tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Puṣpa",
+   "rel": "son_of",
+   "b": "Brahmiṣṭha",
+   "words": "puṣpas tasya suto vidvān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Arthasiddhi",
+   "rel": "son_of",
+   "b": "Puṣpa",
+   "words": "arthasiddhis tu tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Sudarśana",
+   "rel": "son_of",
+   "b": "Arthasiddhi",
+   "words": "sudarśanaḥ sutas tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Agnivarṇa",
+   "rel": "son_of",
+   "b": "Sudarśana",
+   "words": "agnivarṇaḥ sudarśanāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Śīghra",
+   "rel": "son_of",
+   "b": "Agnivarṇa",
+   "words": "agnivarṇasya śīghras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Maru",
+   "rel": "son_of",
+   "b": "Śīghra",
+   "words": "śīghrasya tu maruḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Bṛhadbala",
+   "rel": "son_of",
+   "b": "Maru",
+   "words": "tasyāsīd viśrutavataḥ putro rājā bṛhadbalaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Prasusruta",
+   "rel": "son_of",
+   "b": "Maru",
+   "words": "prasusruto marusutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Susaṃdhi",
+   "rel": "son_of",
+   "b": "Prasusruta",
+   "words": "susaṃdhis tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Marṣa",
+   "rel": "son_of",
+   "b": "Susaṃdhi",
+   "words": "susaṃdhes tu suto marṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Sahasrat",
+   "rel": "son_of",
+   "b": "Marṣa",
+   "words": "sahasrān nāma nāmataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.78",
+   "a": "Viśrutavat",
+   "rel": "son_of",
+   "b": "Sahasrat",
+   "words": "āsīt sahasrataḥ putro rājā viśrutavān",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}
