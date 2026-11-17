@@ -29,6 +29,13 @@ The requests (platform.claude.com/docs/en/build-with-claude/effort; the Sonnet 5
     for Opus 5.5 and Haiku 5.5). An engine names it after an "@": anthropic:claude-sonnet-5-5@medium;
   - max_tokens counts the thinking too; the answer is streamed (no time limit on a long one).
 The key: ANTHROPIC_API_KEY in .env, read by the SDK from the environment; it is never printed.
+CLAUDE_KEY_FRESH_2026_11_16: and read from .env again by each Client, which uses it when it differs from the
+environment's. A run started by the dashboard carries the dashboard's environment, and python-dotenv does not replace
+a key already there (override=False): from 14 to 16 Nov the dashboard, started on 13 Nov, gave its jobs the key that
+was refused ("401 invalid x-api-key"), while a run from PowerShell had the new one. The 18 Sonnet jobs of 15 Nov
+(16 small texts, the Siddhanta Siromani's 640 passages, 40 of the Akasa Bhairava Kalpa: 952 passages) translated
+nothing for that reason; nothing was billed.
+A refused key is said once in the run's output ("[claude] the key was refused (401)"), with the probe to run.
 
   python scripts\\claude_engine.py --credit                         the credit: spent, left (free, read-only)
   python scripts\\claude_engine.py --probe                          one short call (claude-haiku-5-5, about $0.001)
@@ -250,11 +257,32 @@ def budget_ok(con, next_cost: float = 0.0, today=None) -> bool:
 
 
 # --------------------------------------------------------------------------------------------- the calls
+def env_key(path=None):
+    """CLAUDE_KEY_FRESH_2026_11_16: ANTHROPIC_API_KEY as .env holds it now, or None (no .env, no python-dotenv, no
+    key there, or the tests: SA_NO_DOTENV=1). Never printed."""
+    if os.environ.get("SA_NO_DOTENV") == "1" and path is None:
+        return None
+    try:
+        from dotenv import dotenv_values
+    except Exception:
+        return None
+    try:
+        v = dotenv_values(str(path or Path(__file__).resolve().parents[1] / ".env")).get("ANTHROPIC_API_KEY")
+    except Exception:
+        return None
+    return (v or "").strip() or None
+
+
+_SAID_KEY = []
+_SAID_REFUSED = []
+
+
 class Client:
     """One model, one effort. Built first: without the key or the SDK it raises, and nothing is called."""
 
     def __init__(self, model: str, effort=None, timeout: float = TIMEOUT_S, sdk=None):
-        if not os.environ.get("ANTHROPIC_API_KEY"):
+        key = env_key()   # CLAUDE_KEY_FRESH_2026_11_16
+        if not (key or os.environ.get("ANTHROPIC_API_KEY")):
             raise RuntimeError("ANTHROPIC_API_KEY is not set (.env)")
         if sdk is None:
             try:
@@ -264,7 +292,14 @@ class Client:
         if effort is not None and effort not in EFFORTS:
             raise RuntimeError("effort %r is not one of %s" % (effort, ", ".join(EFFORTS)))
         self.sdk, self.model, self.effort = sdk, model, effort
-        self.client = sdk.Anthropic(max_retries=MAX_RETRIES, timeout=timeout)   # the key from the environment
+        kw = {"max_retries": MAX_RETRIES, "timeout": timeout}   # the key from the environment
+        if key and key != os.environ.get("ANTHROPIC_API_KEY"):   # CLAUDE_KEY_FRESH_2026_11_16: .env's, as it is now
+            kw["api_key"] = key
+            if not _SAID_KEY:
+                _SAID_KEY.append(1)
+                print("[claude] the key in .env is not the one this process was started with (the dashboard keeps the "
+                      "key it started with): .env's is used", flush=True)
+        self.client = sdk.Anthropic(**kw)
 
     def request(self, system: str, user: str, max_tokens: int) -> dict:
         kw = {"model": self.model, "max_tokens": int(max_tokens), "system": system,
@@ -275,8 +310,21 @@ class Client:
 
     def create(self, system: str, user: str, max_tokens: int):
         """The final message, streamed. Raises what the SDK raises once its own retries are spent."""
-        with self.client.messages.stream(**self.request(system, user, max_tokens)) as s:
-            return s.get_final_message()
+        try:
+            with self.client.messages.stream(**self.request(system, user, max_tokens)) as s:
+                return s.get_final_message()
+        except Exception as e:   # CLAUDE_KEY_FRESH_2026_11_16: a refused key said once, plainly
+            if refused(e) and not _SAID_REFUSED:
+                _SAID_REFUSED.append(1)
+                print("[claude] the key was refused (401 invalid x-api-key): nothing is billed for it; put the key in "
+                      ".env and check it with: python scripts\\claude_engine.py --probe", flush=True)
+            raise
+
+
+def refused(e) -> bool:
+    """CLAUDE_KEY_FRESH_2026_11_16: the API refused the key (401, authentication_error, invalid x-api-key)."""
+    low = str(e).lower()
+    return any(k in low for k in ("invalid x-api-key", "authentication_error", "error code: 401"))
 
 
 def text_of(msg) -> str:

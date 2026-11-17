@@ -1,0 +1,18 @@
+The Claude key read fresh from .env; the genealogies' reader made ready for the whole reading (CLAUDE_KEY_FRESH_2026_11_16, VAMSA_G6B_READY_2026_11_16, DOCS115_2026_11_16)
+
+- claude_engine: each Client reads ANTHROPIC_API_KEY from .env again and uses it when it differs from the process's
+  environment (the dashboard keeps the key it started with: the 18 Sonnet jobs of 15 Nov, 952 passages, were refused
+  with 401 and translated nothing; nothing was billed); a refused key is said once, with the probe to run.
+- vamsa_read: the works of G6 read with a second prompt (son_of the father, born_of the mother, begotten_by a begetter
+  counted as another man's child: niyoga, a god, a son before marriage); G5a's three keep the first and are not read
+  again; a part read again keeps its first reading beside it. The checks: a name by each of its words, an avagraha, a
+  pronoun's person two verses back, a statement's words found in another verse take that verse (108 more verified on
+  the stored readings, none fewer). A mother is never a father in a line. --chapters that name nothing here is refused;
+  every NEXT carries --work.
+- tests: test_claude_key_fresh_2026_11_16, test_vamsa_g6b_ready_2026_11_16; test_vamsa_g6a_2026_11_15 expects the
+  second prompt and knows this came after; test_docs115_2026_11_16.
+- DOCS115: ASKS section 28 (the trial, the failed jobs of 15 Nov, Sonnet's next work priced, the desk and the site
+  rationalised, the path P0 to P4), STATE section 50, RUNBOOK 16 Nov.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgtk

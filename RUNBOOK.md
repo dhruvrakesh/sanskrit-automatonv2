@@ -2907,3 +2907,30 @@ docs\ASKS_2026-10-22.md, section 27. From the automaton's root:
 5. The rest, when the trial reads well (G6b): `python scripts\vamsa_read.py --work g6 --yes --max-usd 9`; it reads only
    what is not read yet and stops at the cap. `--work all` is still G5a's three works, and nothing of G6 goes to the
    site.
+
+## 16 Nov: the Claude key read fresh; the reader ready for G6b (DOCS115_2026_11_16)
+
+docs\ASKS_2026-10-22.md, section 28. From the automaton's root, in PowerShell:
+
+1. The patches and the tests: `python scripts\patch_claude_key_fresh_2026_11_16.py --check`, then without; the same
+   for `patch_vamsa_g6b_ready_2026_11_16.py` and `patch_docs115_2026_11_16.py`; `python -m unittest
+   tests.test_claude_key_fresh_2026_11_16 tests.test_vamsa_g6b_ready_2026_11_16 tests.test_vamsa_g6a_2026_11_15
+   tests.test_vamsa_read_2026_11_11 tests.test_vamsa_join_2026_11_11 tests.test_desk_fresh_2026_11_11
+   tests.test_claude_engine_2026_10_15 tests.test_docs115_2026_11_16`; `powershell -ExecutionPolicy Bypass -File
+   scripts\run_tests.ps1`; release.ps1 with COMMIT_MSG_g6bready_20261116.txt (the dry run, then -Apply).
+2. The dashboard, when no job runs: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1
+   -Status`, then `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\restart_dashboard.ps1`; then
+   `python scripts\claude_engine.py --probe` and `python scripts\claude_engine.py --credit`.
+3. Free: `python scripts\vamsa_read.py --reparse` (G5a's three), `python scripts\vamsa_read.py --work g6 --reparse`,
+   `python scripts\vamsa_read.py --report`, `python scripts\vamsa_join.py`, `python scripts\index_sync.py` (the plan:
+   the dynasties' rows that would change; the scheduled mirror sends them).
+4. The trial again (about $0.34): `python scripts\vamsa_read.py --work hv --chapters 9-10 --yes --max-usd 0.50`;
+   `python scripts\vamsa_read.py --work mbh1 --chapters 90 --yes --max-usd 0.50`; `python scripts\vamsa_read.py --work
+   mbh1 --report`. Good: Pandu son_of Vicitravirya and begotten_by Dvaipayana; three in four verified.
+5. G6b: `python scripts\vamsa_read.py --work g6` (the plan), then `python scripts\vamsa_read.py --work g6 --yes
+   --max-usd 15`.
+6. The 18 jobs of 15 Nov again, through the dashboard (/api/translate, engine anthropic:claude-sonnet-5-5): the loop is
+   in the chat of 16 Nov.
+7. The corner lock: `Get-Content data\corner_worker.lock`; `Get-Process -Id 40108 -ErrorAction SilentlyContinue`. No
+   such process: the lock frees itself at 00:28, or rename it (`Rename-Item data\corner_worker.lock
+   corner_worker.lock.stale_20261116`).

@@ -66,6 +66,28 @@ goes to the site until its pages are decided); --work g6 is these. A work is rea
   python scripts\\vamsa_read.py --work g6                          the plan of these works (free)
   python scripts\\vamsa_read.py --work hv --chapters 9 --show 12   the first 12 verses as they would be sent (free)
   python scripts\\vamsa_read.py --work g6 --verses                 every chapter: its verses, the gaps in their numbers (free)
+
+VAMSA_G6B_READY_2026_11_16 (after the trial of 15 and 16 Nov: the Harivamsa 9-10, 175 statements, 151 verified, $0.18;
+the Mahabharata 1.90, 181 statements, 173 verified, $0.16), before the whole reading (G6b) is bought:
+  - the works of G6 are read with a second prompt (vamsa-read-v2, SYSTEM_G6): son_of and daughter_of name the father,
+    born_of the mother, begotten_by a begetter whose child the text counts as another man's (niyoga, a god, a son born
+    before the marriage). The trial gave "Pandu son_of Dvaipayana" and "Arjuna son_of Kunti" only, so Arjuna's line
+    broke at Vyasa: what the verse says of the begetter and of the father it counts are now two statements. G5a's
+    three works keep vamsa-read-v1 and are not read again; the two trial chapters are read again (about $0.34), and
+    the first reading is kept beside the new one (09_1.json.vamsa-read-v1);
+  - a name is found in its verses by each of its words too (Manu Vaivasvata), an avagraha is read as the a it stands
+    for ('mrtam: Amrta), and a pronoun's person in the two verses before (tasya ... in a later verse); a statement
+    whose words are in another verse of its part than the one it cites takes that verse (ref_cited keeps the other):
+    on the stored readings 108 statements become "verified" with --reparse (G5a 88, the trial 20) and 2 "unsupported"
+    become "words"; none goes the other way;
+  - a mother (a wife_of, daughter_of or sister_of whose words are in the verse, or a born_of) is never a father in a
+    line, even when her own statement is only "words"; nor is the parent of a son given two parents in one verse who
+    is not a son himself (the trial drew "Rathamtari > Duhsanta": now Puru's line runs 24 steps to Ajamidha);
+  - --chapters that name none of a work's chapters is refused with its chapters (it said "nothing to read: every
+    part asked for is read"); every NEXT carries --work; when all that was asked is read, NEXT is the work's plan, not
+    "--chapters 1-2" of a work that has no chapter 1.
+  python scripts\\vamsa_read.py --work all --reparse; python scripts\\vamsa_read.py --work g6 --reparse   (free)
+  python scripts\\vamsa_read.py --work mbh1 --chapters 90 --yes --max-usd 0.50                     (the trial again)
 """
 from __future__ import annotations
 
@@ -75,6 +97,7 @@ import datetime
 import json
 import os
 import re
+import shutil
 import sys
 import time
 import unicodedata
@@ -84,6 +107,7 @@ from pathlib import Path
 MARK = "VAMSA_READ_2026_11_11"
 HEAL = "VAMSA_HEAL_2026_11_11"
 G6A = "VAMSA_G6A_2026_11_15"
+G6B = "VAMSA_G6B_READY_2026_11_16"
 PROMPT_VERSION = "vamsa-read-v1"
 ROOT = Path(__file__).resolve().parents[1]
 ZIP = "sources/gretil/1_sanskr.zip"
@@ -167,7 +191,10 @@ def source_of(work: str) -> str:
     return "%s; %s (data entry: %s)" % (w["member"], w.get("source") or GRETIL, w["entry"])
 
 
-RELS = ("son_of", "daughter_of", "wife_of", "brother_of", "sister_of", "succeeded", "descendant_of", "line_of", "other")
+RELS = ("son_of", "daughter_of", "wife_of", "brother_of", "sister_of", "succeeded", "descendant_of", "line_of", "other",
+        "born_of", "begotten_by")   # VAMSA_G6B_READY_2026_11_16: the last two from vamsa-read-v2
+PROMPT_VERSION_G6 = "vamsa-read-v2"   # VAMSA_G6B_READY_2026_11_16: the works of G6
+REACH = 2   # VAMSA_G6B_READY_2026_11_16: a pronoun's person is looked for in this many verses before
 MODEL = "claude-sonnet-5-5"
 EFFORT = "medium"
 CHUNK_CHARS = 6000          # one call reads at most this much of a chapter's text
@@ -196,6 +223,60 @@ Rules:
 
 Reply with JSON only, no prose: {"statements": [{"ref": "...", "a": "...", "rel": "...", "b": "...", "words": "...",
 "doubt": false}]}. If the verses give nothing, reply {"statements": []}."""
+
+
+SYSTEM_G6 = """You read Sanskrit genealogical passages (vamsanucarita) of a Purana, an epic (the Mahabharata, the Ramayana) or
+the Harivamsa, given in IAST with each verse's reference.
+List every statement of kinship or succession that the text itself makes: who is whose son or daughter, of which
+mother a child was born, whose wife, whose brother or sister, who reigned after whom, who descends from whom, which
+line or clan is named after whom, and who begot a child that the text counts as another man's.
+
+Rules:
+- Only what these verses say. No knowledge from other texts, no inference beyond the words, no persons the verses do
+  not name. A verse that only praises or narrates gives nothing.
+- One statement per relation. "a" is the rel of "b": {"a": "Vikuk\u1e63i", "rel": "son_of", "b": "Ik\u1e63v\u0101ku"}.
+- rel is one of: son_of, daughter_of, born_of, begotten_by, wife_of, brother_of, sister_of, succeeded, descendant_of,
+  line_of, other.
+  son_of, daughter_of: b is the father, the man whose son or daughter the text counts a as. Never a mother.
+  born_of: b is the mother.
+  begotten_by: b begot a, but the text counts a as another man's child (niyoga on a widow or on the wife of a man
+  without sons, a god or a sage on a king's wife, a son born before his mother's marriage). Give both then: son_of (or
+  daughter_of) the man whose child the text counts a as, when these verses name him, and begotten_by the begetter.
+  succeeded: a reigned after b. line_of: a is a dynasty or clan (Y\u0101davas, Haihayas) named after b.
+- Names in IAST, as the stem (Ik\u1e63v\u0101ku, not Ik\u1e63v\u0101ku\u1e25 or Ik\u1e63v\u0101ko\u1e25), with every diacritic as
+  in the text. Where the verse adds a name that tells two persons apart (Manu Vaivasvata), keep it.
+- "ref": the reference of the verse that says it, exactly as given in square brackets.
+- "words": the Sanskrit words of that verse that say it, copied exactly from the verse (a few words, not the verse).
+- "doubt": true when the text is ambiguous (two persons of one name, a pronoun whose person is unclear), else false.
+- Keep the order of the text. When a verse names several sons, give one statement for each.
+
+Reply with JSON only, no prose: {"statements": [{"ref": "...", "a": "...", "rel": "...", "b": "...", "words": "...",
+"doubt": false}]}. If the verses give nothing, reply {"statements": []}."""
+
+
+def prompt_of(work: str) -> tuple:
+    """VAMSA_G6B_READY_2026_11_16: (the prompt's version, its system prompt) for a work: G5a's three keep the first."""
+    return (PROMPT_VERSION, SYSTEM) if work in WORKS else (PROMPT_VERSION_G6, SYSTEM_G6)
+
+
+def spans(nums) -> str:
+    """VAMSA_G6B_READY_2026_11_16: [2, 3, 9, 10, 15] -> "2-3, 9-10, 15"."""
+    out, run = [], []
+    for n in sorted(set(nums)):
+        if run and n == run[-1] + 1:
+            run.append(n)
+            continue
+        if run:
+            out.append("%d-%d" % (run[0], run[-1]) if len(run) > 1 else "%d" % run[0])
+        run = [n]
+    if run:
+        out.append("%d-%d" % (run[0], run[-1]) if len(run) > 1 else "%d" % run[0])
+    return ", ".join(out)
+
+
+def work_arg(a) -> str:
+    """VAMSA_G6B_READY_2026_11_16: " --work hv" for a NEXT line (nothing for all, G5a's three)."""
+    return "" if getattr(a, "work", "all") == "all" else " --work %s" % a.work
 
 
 # --------------------------------------------------------------------------------------------- the text
@@ -377,6 +458,22 @@ def unit_name(u: dict) -> str:
     return "%02d" % u["chapter"] + ("_%d" % u["part"] if u["part"] else "")
 
 
+def keep_before(out_dir, work: str, u: dict, version: str):
+    """VAMSA_G6B_READY_2026_11_16: a reading made with another prompt is kept beside the new one (09_1.json.vamsa-read-v1,
+    which records() does not read), so the two can be compared."""
+    p = out_path(out_dir, work, u)
+    try:
+        old = json.loads(p.read_text(encoding="utf-8")).get("prompt_version")
+    except (OSError, ValueError):
+        return None
+    if not old or old == version:
+        return None
+    keep = p.with_name(p.name + "." + str(old))
+    if not keep.exists():
+        shutil.copy2(p, keep)
+    return keep
+
+
 def user_message(work: str, u: dict) -> str:
     w = work_of(work)
     lines = ["%s, chapter %d%s (GRETIL's text). The verses:" % (w["title"], u["chapter"],
@@ -473,6 +570,30 @@ def ref_of(words: str, refs: dict, order: list):
     return None
 
 
+def name_keys(name: str, fold: bool = False) -> list:
+    """VAMSA_G6B_READY_2026_11_16: the keys a name is looked for by: the whole name's, and each of its words' that
+    begins with a capital (Manu Vaivasvata: manuv, man, vaiva), so a name given with the word that tells two persons
+    apart is still found."""
+    f = folded if fold else (lambda x: x)
+    ks = [stem_key(f(name))] + [stem_key(f(t)) for t in str(name or "").split() if t[:1].isupper() and len(letters(t)) >= 3]
+    return [k for k in dict.fromkeys(ks) if k]
+
+
+def name_span(text: str) -> str:
+    """VAMSA_G6B_READY_2026_11_16: the letters of the verses with an avagraha read as the a it stands for
+    ('mrtam: amrtam), where a name is looked for."""
+    return letters(str(text or "").replace("'", "a").replace(chr(0x2019), "a"))
+
+
+def words_at(words: str, refs: dict, order: list, ref: str) -> bool:
+    """VAMSA_G6B_READY_2026_11_16: the words are in the verse ref, or in it and the next (as check() looks for them)."""
+    if ref not in refs:
+        return False
+    k = order.index(ref)
+    near = letters(refs[ref]) + "".join(letters(refs[r]) for r in order[k + 1:k + 2])
+    return words_in(words, near) or words_in(words, folded(near), fold=True)
+
+
 def check(st: dict, refs: dict, order: list) -> str:
     """verified, words, unsupported or bad (see the docstring). refs: {ref: text}; order: the refs in order."""
     a, b, rel, ref, words = (str(st.get(k) or "").strip() for k in ("a", "b", "rel", "ref", "words"))
@@ -483,11 +604,12 @@ def check(st: dict, refs: dict, order: list) -> str:
     near = here + "".join(letters(refs[r]) for r in order[k + 1:k + 2])
     if not (words_in(words, near) or words_in(words, folded(near), fold=True)):
         return "unsupported"
-    span = "".join(letters(refs[r]) for r in order[max(0, k - 1):k]) + near   # a pronoun's person: the verse before
-    if stem_key(a) in span and stem_key(b) in span:
+    # a pronoun's person: the verses before (VAMSA_G6B_READY_2026_11_16: two, by its words and with the avagraha)
+    span = name_span(" ".join(refs[r] for r in order[max(0, k - REACH):k + 2]))
+    if all(any(x in span for x in name_keys(n)) for n in (a, b)):
         return "verified"
     fspan = folded(span)
-    if stem_key(folded(a)) in fspan and stem_key(folded(b)) in fspan:
+    if all(any(x in fspan for x in name_keys(n, fold=True)) for n in (a, b)):
         return "verified"
     return "words"
 
@@ -504,6 +626,12 @@ def checked(statements: list, u: dict) -> list:
             got = ref_of(str(x["words"]), refs, order)
             if got:
                 x["ref"], x["ref_from"] = got, "words"
+        elif x.get("words") and not words_at(str(x["words"]), refs, order, x["ref"]):
+            # VAMSA_G6B_READY_2026_11_16: the words are in another verse of the part (the trial: "Parikshit son_of
+            # Abhimanyu" cited 1.90.92, its words are in 1.90.90): the verse they are in, the one cited kept
+            got = ref_of(str(x["words"]), refs, order)
+            if got and got != x["ref"]:
+                x["ref_cited"], x["ref"], x["ref_from"] = x["ref"], got, "words"
         x["doubt"] = bool(x.get("doubt"))
         x["check"] = check(x, refs, order)
         out.append(x)
@@ -521,7 +649,7 @@ def done(out_dir, work: str, u: dict) -> bool:
         d = json.loads(p.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    return d.get("prompt_version") == PROMPT_VERSION and not d.get("error")
+    return d.get("prompt_version") == prompt_of(work)[0] and not d.get("error")   # VAMSA_G6B_READY_2026_11_16
 
 
 def store(out_dir, work: str, u: dict, rec: dict) -> Path:
@@ -551,7 +679,21 @@ def persons(statements: list) -> dict:
     (a root). A mother (a wife_of, daughter_of or sister_of in these statements) is not a father.
     {key: {"name", "father", "up": key or None, "chapter", "ref", "words", "pos"}}"""
     ver = [s for s in statements if s.get("check") == "verified"]
-    female = {letters(s.get("a")) for s in ver if s.get("rel") in ("wife_of", "daughter_of", "sister_of")}
+    # VAMSA_G6B_READY_2026_11_16: a woman is known by any statement whose words are in its verse, and a born_of's b
+    said = [s for s in statements if s.get("check") in ("verified", "words")]
+    female = {letters(s.get("a")) for s in said if s.get("rel") in ("wife_of", "daughter_of", "sister_of")}
+    female |= {letters(s.get("b")) for s in said if s.get("rel") == "born_of"}
+    # VAMSA_G6B_READY_2026_11_16: a son given two parents in one verse (Duhsanta son_of Ilina, son_of Rathamtari): the
+    # one who is a son himself in these statements is the father, the other the mother (v1 asked for no born_of)
+    two = {}
+    for s in ver:
+        if s.get("rel") == "son_of" and letters(s.get("a")) and letters(s.get("b")):
+            two.setdefault((letters(s.get("a")), s.get("ref")), set()).add(letters(s.get("b")))
+    is_son = {letters(s.get("a")) for s in ver if s.get("rel") == "son_of"}
+    for bs in two.values():
+        dads = {b for b in bs if b in is_son}
+        if len(bs) > 1 and dads and dads != bs:
+            female |= bs - dads
     sons = [s for s in ver if s.get("rel") == "son_of" and letters(s.get("b")) not in female
             and letters(s.get("a")) and letters(s.get("b")) and letters(s.get("a")) != letters(s.get("b"))]
     out = {}
@@ -667,7 +809,7 @@ def parse_chapters(spec: str):
 
 def plan_units(a) -> dict:
     works = GROUPS.get(a.work) or [a.work]
-    texts, out = {}, {}
+    texts, out, have = {}, {}, {}
     want = parse_chapters(a.chapters)
     for wk in works:
         m = work_of(wk)["member"]
@@ -675,6 +817,10 @@ def plan_units(a) -> dict:
             texts[m] = read_member(a.zip, m)
         us = chunks(verses_of(wk, texts[m]))
         out[wk] = [u for u in us if not want or u["chapter"] in want]
+        have[wk] = sorted({u["chapter"] for u in us})
+    if want and not any(out.values()):   # VAMSA_G6B_READY_2026_11_16: it said "nothing to read: every part ... is read"
+        raise ValueError("chapters %s: none of them is here; the chapters: %s" % (
+            a.chapters, "; ".join("%s %s" % (wk, spans(c) or "none") for wk, c in have.items())))
     return out
 
 
@@ -701,7 +847,7 @@ def trial_of(a, units: dict) -> str:
         if left:
             spec = "%d" % left[0] if len(left) == 1 else ("%d-%d" if left[1] == left[0] + 1 else "%d,%d") % tuple(left)
             return "--work %s --chapters %s" % (wk, spec)
-    return "--work %s --chapters 1-2" % next(iter(units))
+    return None   # VAMSA_G6B_READY_2026_11_16: all that was asked is read (it named "--chapters 1-2", not there)
 
 
 def do_show(a, units: dict) -> int:
@@ -728,7 +874,9 @@ def do_show(a, units: dict) -> int:
     else:
         print("VERDICT: %d verses in %d work(s); %d chapter(s) with a gap or a number twice (free; nothing sent)"
               % (n_all, len(units), odd))
-    print("NEXT: python scripts\\vamsa_read.py %s --yes   (a trial)" % trial_of(a, units))
+    t = trial_of(a, units)
+    print("NEXT: python scripts\\vamsa_read.py %s --yes   (a trial)" % t if t else
+          "NEXT: python scripts\\vamsa_read.py%s   (all that was asked is read: the plan of the whole)" % work_arg(a))
     return 0
 
 
@@ -746,7 +894,7 @@ def do_plan(a, units: dict) -> int:
     print("VERDICT: %d part(s) to read, about $%.2f (the whole: about $%.2f; the estimate is a guess until the trial "
           "measures it), %s with %s" % (todo_n, todo_usd, total, "the Claude credit", a.model))
     print("NEXT: python scripts\\vamsa_read.py %s --yes   (a trial)" % trial_of(a, units)
-          if todo_n else "NEXT: python scripts\\vamsa_read.py --report")
+          if todo_n else "NEXT: python scripts\\vamsa_read.py%s --report" % work_arg(a))
     return 0
 
 
@@ -755,7 +903,8 @@ def do_run(a, units: dict, client=None, con=None) -> int:
     todo = [(wk, u) for wk, us in units.items() for u in us if not done(a.out, wk, u)]
     need = sum(estimate(u["chars"], a.model) for _w, u in todo)
     if not todo:
-        print("VERDICT: nothing to read: every part asked for is read"); print("NEXT: python scripts\\vamsa_read.py --report")
+        print("VERDICT: nothing to read: every part asked for is read")
+        print("NEXT: python scripts\\vamsa_read.py%s --report" % work_arg(a))
         return 0
     if need > a.max_usd * 1.5:
         print("REFUSE: the estimate is $%.2f, above --max-usd %.2f by half again: read fewer chapters (--chapters), or "
@@ -783,12 +932,13 @@ def do_run(a, units: dict, client=None, con=None) -> int:
                 print("  stopped: the Claude credit (python scripts\\claude_engine.py --credit)")
                 break
             t0 = time.time()
+            version, system = prompt_of(wk)   # VAMSA_G6B_READY_2026_11_16
             rec = {"mark": MARK, "work": wk, "title": work_of(wk)["title"], "chapter": u["chapter"], "part": u["part"],
                    "refs": [r for r, _t in u["verses"]], "model": a.model, "effort": a.effort,
-                   "prompt_version": PROMPT_VERSION, "source": source_of(wk),
+                   "prompt_version": version, "source": source_of(wk),
                    "at": datetime.datetime.now().isoformat(timespec="seconds")}
             try:
-                msg = client.create(SYSTEM, user_message(wk, u), MAX_TOKENS)
+                msg = client.create(system, user_message(wk, u), MAX_TOKENS)
             except Exception as e:
                 rec["error"] = "%s: %s" % (type(e).__name__, str(e)[:300])
                 store(a.out, wk, u, rec)
@@ -802,6 +952,7 @@ def do_run(a, units: dict, client=None, con=None) -> int:
             except ValueError as e:
                 rec["error"] = "the reply was not read: %s%s" % (e, "; it was cut (max_tokens)" if rec["stop"] == "max_tokens"
                                                                  else "")
+            keep_before(a.out, wk, u, version)   # VAMSA_G6B_READY_2026_11_16
             store(a.out, wk, u, rec)
             st = rec.get("statements") or []
             v = sum(1 for s in st if s["check"] == "verified")
@@ -811,7 +962,7 @@ def do_run(a, units: dict, client=None, con=None) -> int:
                      ("  (%s)" % rec["error"][:100]) if rec.get("error") else ""), flush=True)
         print("VERDICT: %d part(s) read, %d statements, %d verified (%s); $%.2f spent of the Claude credit"
               % (n_ok, n_st, n_ver, "%d%%" % (100 * n_ver // n_st) if n_st else "-", spent))
-        print("NEXT: python scripts\\vamsa_read.py --report")
+        print("NEXT: python scripts\\vamsa_read.py%s --report" % work_arg(a))
         return 0
     finally:
         if own is not None:
@@ -838,7 +989,7 @@ def do_reparse(a, units: dict) -> int:
             store(a.out, wk, u, rec)
             n += 1
     print("VERDICT: %d stored repl(ies) parsed and checked again, %d not read (free)" % (n, bad))
-    print("NEXT: python scripts\\vamsa_read.py --report")
+    print("NEXT: python scripts\\vamsa_read.py%s --report" % work_arg(a))
     return 0
 
 
@@ -887,7 +1038,7 @@ def do_report(a) -> int:
                              s.get("doubt"), s.get("check")])
         print("         wrote %s" % p)
     print("VERDICT: %d statements in all; the verified ones are what G5b joins to the index's persons" % total)
-    print("NEXT: python scripts\\vamsa_read.py   (the plan: what is left to read)")
+    print("NEXT: python scripts\\vamsa_read.py%s   (the plan: what is left to read)" % work_arg(a))
     return 0
 
 

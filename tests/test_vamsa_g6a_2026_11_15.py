@@ -329,7 +329,8 @@ class TheDesk(unittest.TestCase):
         sent = sdk.requests[0]["messages"][0]["content"]
         self.assertIn("Harivamsa (Vaidya's constituted text), chapter 9", sent)
         self.assertIn("[HV 9.2] nari\u1e63yantas", sent); self.assertNotIn("HV 10.1", sent)
-        self.assertEqual(sdk.requests[0]["system"], VR.SYSTEM, "the same prompt as G5a")
+        self.assertEqual(sdk.requests[0]["system"], getattr(VR, "SYSTEM_G6", VR.SYSTEM),
+                         "G5a's prompt; VAMSA_G6B_READY_2026_11_16: its second, for the works of G6")
         d = json.loads((Path(self.out) / "hv" / "09.json").read_text(encoding="utf-8"))
         self.assertEqual([s["check"] for s in d["statements"]], ["verified", "words", "bad"])
         self.assertEqual(d["title"], "Harivamsa (Vaidya's constituted text)")
@@ -367,7 +368,11 @@ class ThePatch(unittest.TestCase):
             self.assertIn("CHECK OK: %d file(s)" % len(FILES), r.stdout, r.stdout + r.stderr)
             self.assertEqual(run().returncode, 0)
             for rel in FILES:
-                self.assertEqual((t / rel).read_bytes(), (REPO / rel).read_bytes(), rel)
+                want = (REPO / rel).read_bytes()
+                later = sorted((REPO / rel).parent.glob(Path(rel).name + ".bak_vamsag6b_*"))   # VAMSA_G6B_READY came after
+                if later and b"VAMSA_G6B_READY_2026_11_16" in want:
+                    want = later[0].read_bytes()
+                self.assertEqual((t / rel).read_bytes(), want, rel)
             self.assertIn("Nothing to do", run().stdout)
 
 
