@@ -1,0 +1,219 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 10,
+ "part": 0,
+ "refs": [
+  "ViPc 4,10.1",
+  "ViPc 4,10.2",
+  "ViPc 4,10.3",
+  "ViPc 4,10.4",
+  "ViPc 4,10.5",
+  "ViPc 4,10.6",
+  "ViPc 4,10.7",
+  "ViPc 4,10.8",
+  "ViPc 4,10.9",
+  "ViPc 4,10.10",
+  "ViPc 4,10.11",
+  "ViPc 4,10.12",
+  "ViPc 4,10.13",
+  "ViPc 4,10.14",
+  "ViPc 4,10.15",
+  "ViPc 4,10.16",
+  "ViPc 4,10.17",
+  "ViPc 4,10.18",
+  "ViPc 4,10.19",
+  "ViPc 4,10.20",
+  "ViPc 4,10.21",
+  "ViPc 4,10.22"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:49:56",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,10.1\",\"a\":\"Yati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ṣaṭ putrā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.1\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ṣaṭ putrā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.1\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ṣaṭ putrā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.1\",\"a\":\"Āyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ṣaṭ putrā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.1\",\"a\":\"Viyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ṣaṭ putrā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.1\",\"a\":\"Kṛti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ṣaṭ putrā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.3\",\"a\":\"Devayānī\",\"rel\":\"daughter_of\",\"b\":\"Uśanas\",\"words\":\"uśanasaś ca duhitaraṃ devayānīṃ\",\"doubt\":false},{\"ref\":\"ViPc 4,10.3\",\"a\":\"Devayānī\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"devayānīṃ śarmiṣṭhāṃ ca vārṣaparvaṇīm upayeme\",\"doubt\":false},{\"ref\":\"ViPc 4,10.3\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"śarmiṣṭhāṃ ca vārṣaparvaṇīm\",\"doubt\":false},{\"ref\":\"ViPc 4,10.3\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"śarmiṣṭhāṃ ca vārṣaparvaṇīm upayeme\",\"doubt\":false},{\"ref\":\"ViPc 4,10.4\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayānī vyajāyata\",\"doubt\":false},{\"ref\":\"ViPc 4,10.4\",\"a\":\"Turvasu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayānī vyajāyata\",\"doubt\":false},{\"ref\":\"ViPc 4,10.4\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.4\",\"a\":\"Anu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.4\",\"a\":\"Pūru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā\",\"doubt\":false},{\"ref\":\"ViPc 4,10.6\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"jyeṣṭhaputraṃ yadum uvāca\",\"doubt\":false},{\"ref\":\"ViPc 4,10.9\",\"a\":\"Pūru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"śarmiṣṭhātanayam aśeṣakanīyāṃsaṃ pūruṃ\",\"doubt\":false},{\"ref\":\"ViPc 4,10.9\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"praṇamya pitaraṃ\",\"doubt\":true},{\"ref\":\"ViPc 4,10.20\",\"a\":\"Pūru\",\"rel\":\"succeeded\",\"b\":\"Yayāti\",\"words\":\"rājye 'bhiṣicya pūruṃ ca\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02111,
+ "tokens": {
+  "input": 2883,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1534,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,10.1",
+   "a": "Yati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ṣaṭ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.1",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ṣaṭ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.1",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ṣaṭ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.1",
+   "a": "Āyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ṣaṭ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.1",
+   "a": "Viyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ṣaṭ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.1",
+   "a": "Kṛti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ṣaṭ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.3",
+   "a": "Devayānī",
+   "rel": "daughter_of",
+   "b": "Uśanas",
+   "words": "uśanasaś ca duhitaraṃ devayānīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.3",
+   "a": "Devayānī",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "devayānīṃ śarmiṣṭhāṃ ca vārṣaparvaṇīm upayeme",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.3",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "śarmiṣṭhāṃ ca vārṣaparvaṇīm",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,10.3",
+   "a": "Śarmiṣṭhā",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "śarmiṣṭhāṃ ca vārṣaparvaṇīm upayeme",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.4",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.4",
+   "a": "Turvasu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.4",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.4",
+   "a": "Anu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.4",
+   "a": "Pūru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.6",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "jyeṣṭhaputraṃ yadum uvāca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.9",
+   "a": "Pūru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "śarmiṣṭhātanayam aśeṣakanīyāṃsaṃ pūruṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,10.9",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "praṇamya pitaraṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,10.20",
+   "a": "Pūru",
+   "rel": "succeeded",
+   "b": "Yayāti",
+   "words": "rājye 'bhiṣicya pūruṃ ca",
+   "doubt": false,
+   "check": "words"
+  }
+ ]
+}

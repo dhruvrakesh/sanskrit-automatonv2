@@ -1,0 +1,176 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "chapter": 20,
+ "part": 2,
+ "refs": [
+  "KurmP 1,20.56",
+  "KurmP 1,20.57",
+  "KurmP 1,20.58",
+  "KurmP 1,20.59",
+  "KurmP 1,20.60",
+  "KurmP 1,20.61"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_kUrmapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:32:15",
+ "reply": "{\"statements\":[{\"ref\":\"KurmP 1,20.56\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"rāmasya tanayo jajñe kuśa\",\"doubt\":false},{\"ref\":\"KurmP 1,20.56\",\"a\":\"Lava\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"lavaśca sumahābhāgaḥ\",\"doubt\":true},{\"ref\":\"KurmP 1,20.57\",\"a\":\"Atithi\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"atithistu kuśājjajñe\",\"doubt\":false},{\"ref\":\"KurmP 1,20.57\",\"a\":\"Niṣadha\",\"rel\":\"son_of\",\"b\":\"Atithi\",\"words\":\"niṣadhastatsuto 'bhavat\",\"doubt\":false},{\"ref\":\"KurmP 1,20.57\",\"a\":\"Nala\",\"rel\":\"son_of\",\"b\":\"Niṣadha\",\"words\":\"nalastu niṣadhasyābhūt\",\"doubt\":false},{\"ref\":\"KurmP 1,20.57\",\"a\":\"Nabhas\",\"rel\":\"son_of\",\"b\":\"Nala\",\"words\":\"nabhastamādajāyata\",\"doubt\":false},{\"ref\":\"KurmP 1,20.58\",\"a\":\"Puṇḍarīka\",\"rel\":\"son_of\",\"b\":\"Nabhas\",\"words\":\"nabhasaḥ puṇḍarīkākhyaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,20.58\",\"a\":\"Kṣemadhanvan\",\"rel\":\"son_of\",\"b\":\"Puṇḍarīka\",\"words\":\"kṣemadhanvā ca tatsutaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,20.58\",\"a\":\"Devānīka\",\"rel\":\"son_of\",\"b\":\"Kṣemadhanvan\",\"words\":\"tasya putro 'bhavad vīro devānīkaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,20.59\",\"a\":\"Ahīnagu\",\"rel\":\"son_of\",\"b\":\"Devānīka\",\"words\":\"ahīnagustasya suto\",\"doubt\":false},{\"ref\":\"KurmP 1,20.59\",\"a\":\"Sahasvat\",\"rel\":\"son_of\",\"b\":\"Ahīnagu\",\"words\":\"sahasvāṃstatsuto 'bhavat\",\"doubt\":false},{\"ref\":\"KurmP 1,20.59\",\"a\":\"Candrāvaloka\",\"rel\":\"son_of\",\"b\":\"Sahasvat\",\"words\":\"tasmāccandrāvalokastu\",\"doubt\":false},{\"ref\":\"KurmP 1,20.59\",\"a\":\"Tārāpīḍa\",\"rel\":\"son_of\",\"b\":\"Candrāvaloka\",\"words\":\"tārāpīḍastu tatsutaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,20.60\",\"a\":\"Candragiri\",\"rel\":\"son_of\",\"b\":\"Tārāpīḍa\",\"words\":\"tārāpīḍāccandragiri\",\"doubt\":false},{\"ref\":\"KurmP 1,20.60\",\"a\":\"Bhānuvitta\",\"rel\":\"son_of\",\"b\":\"Candragiri\",\"words\":\"bhānuvittastato 'bhavat\",\"doubt\":false},{\"ref\":\"KurmP 1,20.60\",\"a\":\"Śrutāyu\",\"rel\":\"son_of\",\"b\":\"Bhānuvitta\",\"words\":\"śrutāyurabhavat tasmāt\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01425,
+ "tokens": {
+  "input": 1397,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1146,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "KurmP 1,20.56",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "rāmasya tanayo jajñe kuśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.56",
+   "a": "Lava",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "lavaśca sumahābhāgaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.57",
+   "a": "Atithi",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "atithistu kuśājjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.57",
+   "a": "Niṣadha",
+   "rel": "son_of",
+   "b": "Atithi",
+   "words": "niṣadhastatsuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.57",
+   "a": "Nala",
+   "rel": "son_of",
+   "b": "Niṣadha",
+   "words": "nalastu niṣadhasyābhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.57",
+   "a": "Nabhas",
+   "rel": "son_of",
+   "b": "Nala",
+   "words": "nabhastamādajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.58",
+   "a": "Puṇḍarīka",
+   "rel": "son_of",
+   "b": "Nabhas",
+   "words": "nabhasaḥ puṇḍarīkākhyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.58",
+   "a": "Kṣemadhanvan",
+   "rel": "son_of",
+   "b": "Puṇḍarīka",
+   "words": "kṣemadhanvā ca tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.58",
+   "a": "Devānīka",
+   "rel": "son_of",
+   "b": "Kṣemadhanvan",
+   "words": "tasya putro 'bhavad vīro devānīkaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.59",
+   "a": "Ahīnagu",
+   "rel": "son_of",
+   "b": "Devānīka",
+   "words": "ahīnagustasya suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.59",
+   "a": "Sahasvat",
+   "rel": "son_of",
+   "b": "Ahīnagu",
+   "words": "sahasvāṃstatsuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.59",
+   "a": "Candrāvaloka",
+   "rel": "son_of",
+   "b": "Sahasvat",
+   "words": "tasmāccandrāvalokastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.59",
+   "a": "Tārāpīḍa",
+   "rel": "son_of",
+   "b": "Candrāvaloka",
+   "words": "tārāpīḍastu tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.60",
+   "a": "Candragiri",
+   "rel": "son_of",
+   "b": "Tārāpīḍa",
+   "words": "tārāpīḍāccandragiri",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.60",
+   "a": "Bhānuvitta",
+   "rel": "son_of",
+   "b": "Candragiri",
+   "words": "bhānuvittastato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,20.60",
+   "a": "Śrutāyu",
+   "rel": "son_of",
+   "b": "Bhānuvitta",
+   "words": "śrutāyurabhavat tasmāt",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,361 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 59,
+ "part": 0,
+ "refs": [
+  "MBh 1,59.1",
+  "MBh 1,59.2",
+  "MBh 1,59.3",
+  "MBh 1,59.4",
+  "MBh 1,59.5",
+  "MBh 1,59.6",
+  "MBh 1,59.7",
+  "MBh 1,59.8",
+  "MBh 1,59.9",
+  "MBh 1,59.10",
+  "MBh 1,59.11",
+  "MBh 1,59.12",
+  "MBh 1,59.13",
+  "MBh 1,59.14",
+  "MBh 1,59.15",
+  "MBh 1,59.16",
+  "MBh 1,59.17",
+  "MBh 1,59.18",
+  "MBh 1,59.19",
+  "MBh 1,59.20",
+  "MBh 1,59.21",
+  "MBh 1,59.22",
+  "MBh 1,59.23",
+  "MBh 1,59.24",
+  "MBh 1,59.25",
+  "MBh 1,59.26",
+  "MBh 1,59.27",
+  "MBh 1,59.28",
+  "MBh 1,59.29",
+  "MBh 1,59.30",
+  "MBh 1,59.31",
+  "MBh 1,59.32",
+  "MBh 1,59.33",
+  "MBh 1,59.34",
+  "MBh 1,59.35",
+  "MBh 1,59.36",
+  "MBh 1,59.37",
+  "MBh 1,59.38",
+  "MBh 1,59.39",
+  "MBh 1,59.40",
+  "MBh 1,59.41",
+  "MBh 1,59.42",
+  "MBh 1,59.43",
+  "MBh 1,59.44",
+  "MBh 1,59.45",
+  "MBh 1,59.46",
+  "MBh 1,59.47",
+  "MBh 1,59.48",
+  "MBh 1,59.49",
+  "MBh 1,59.50",
+  "MBh 1,59.51",
+  "MBh 1,59.52",
+  "MBh 1,59.53",
+  "MBh 1,59.54"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:45:00",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Kaśyapa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"marīceḥ kaśyapaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Aditi\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Diti\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Danu\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Kālā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Anāyu\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Siṃhikā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Muni\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Krodhā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Prāvā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Ariṣṭā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Vinatā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.11\",\"a\":\"Kapilā\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣakanyās trayodaśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.13\",\"a\":\"Kadrū\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"kadrūś ca manujavyāghra dakṣakanyaiva\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.17\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"eka eva diteḥ putro hiraṇyakaśipuḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,59.17\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"eka eva diteḥ putro hiraṇyakaśipuḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.18\",\"a\":\"Prahrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"tasyeme putrāḥ pañca mahātmanaḥ prahrādaḥ pūrvajas teṣām\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.18\",\"a\":\"Saṃhrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"saṃhrādas tadanantaram\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.18\",\"a\":\"Anuhrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"anuhrādas tṛtīyo 'bhūt\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.18\",\"a\":\"Śibi\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"tasmāc ca śibibāṣkalau\",\"doubt\":true},\n{\"ref\":\"MBh 1,59.18\",\"a\":\"Bāṣkala\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"tasmāc ca śibibāṣkalau\",\"doubt\":true},\n{\"ref\":\"MBh 1,59.19\",\"a\":\"Virocana\",\"rel\":\"son_of\",\"b\":\"Prahrāda\",\"words\":\"prahrādasya trayaḥ putrāḥ virocanaś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.19\",\"a\":\"Kumbha\",\"rel\":\"son_of\",\"b\":\"Prahrāda\",\"words\":\"prahrādasya trayaḥ putrāḥ kumbhaś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.19\",\"a\":\"Nikumbha\",\"rel\":\"son_of\",\"b\":\"Prahrāda\",\"words\":\"nikumbhaś ceti viśrutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.20\",\"a\":\"Bali\",\"rel\":\"son_of\",\"b\":\"Virocana\",\"words\":\"virocanasya putro 'bhūd balir\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.20\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"baleś ca prathitaḥ putro bāṇo nāma\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.21\",\"a\":\"Vipracitti\",\"rel\":\"born_of\",\"b\":\"Danu\",\"words\":\"catvāriṃśad danoḥ putrāḥ teṣāṃ prathamajo rājā vipracittir\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.30\",\"a\":\"Rāhu\",\"rel\":\"born_of\",\"b\":\"Siṃhikā\",\"words\":\"siṃhikā suṣuve putraṃ rāhuṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.30\",\"a\":\"Sucandra\",\"rel\":\"born_of\",\"b\":\"Siṃhikā\",\"words\":\"siṃhikā suṣuve putraṃ rāhuṃ candrārkamardanam sucandraṃ\",\"doubt\":true},\n{\"ref\":\"MBh 1,59.32\",\"a\":\"Vṛtra\",\"rel\":\"born_of\",\"b\":\"Anāyu\",\"words\":\"anāyuṣaḥ punaḥ putrāś catvāro vṛtraś caiva\",\"doubt\":false},\n{\"ref\":\"MBh 1,59.35\",\"a\":\"Śukra\",\"rel\":\"son_of\",\"b\":\"Kavi\",\"words\":\"śukras tv ṛṣisuto 'bhavat\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03408,
+ "tokens": {
+  "input": 5179,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2372,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Kaśyapa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "marīceḥ kaśyapaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Aditi",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Diti",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Danu",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Kālā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Anāyu",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Siṃhikā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Muni",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Krodhā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Prāvā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Ariṣṭā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Vinatā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.11",
+   "a": "Kapilā",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "dakṣakanyās trayodaśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.13",
+   "a": "Kadrū",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "kadrūś ca manujavyāghra dakṣakanyaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.17",
+   "a": "Hiraṇyakaśipu",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "eka eva diteḥ putro hiraṇyakaśipuḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,59.17",
+   "a": "Hiraṇyakaśipu",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "eka eva diteḥ putro hiraṇyakaśipuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.17",
+   "a": "Prahrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "tasyeme putrāḥ pañca mahātmanaḥ prahrādaḥ pūrvajas teṣām",
+   "doubt": false,
+   "ref_cited": "MBh 1,59.18",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.18",
+   "a": "Saṃhrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "saṃhrādas tadanantaram",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.18",
+   "a": "Anuhrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "anuhrādas tṛtīyo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.18",
+   "a": "Śibi",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "tasmāc ca śibibāṣkalau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.18",
+   "a": "Bāṣkala",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "tasmāc ca śibibāṣkalau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.19",
+   "a": "Virocana",
+   "rel": "son_of",
+   "b": "Prahrāda",
+   "words": "prahrādasya trayaḥ putrāḥ virocanaś ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,59.19",
+   "a": "Kumbha",
+   "rel": "son_of",
+   "b": "Prahrāda",
+   "words": "prahrādasya trayaḥ putrāḥ kumbhaś ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,59.19",
+   "a": "Nikumbha",
+   "rel": "son_of",
+   "b": "Prahrāda",
+   "words": "nikumbhaś ceti viśrutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.20",
+   "a": "Bali",
+   "rel": "son_of",
+   "b": "Virocana",
+   "words": "virocanasya putro 'bhūd balir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.20",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "baleś ca prathitaḥ putro bāṇo nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.21",
+   "a": "Vipracitti",
+   "rel": "born_of",
+   "b": "Danu",
+   "words": "catvāriṃśad danoḥ putrāḥ teṣāṃ prathamajo rājā vipracittir",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,59.30",
+   "a": "Rāhu",
+   "rel": "born_of",
+   "b": "Siṃhikā",
+   "words": "siṃhikā suṣuve putraṃ rāhuṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.30",
+   "a": "Sucandra",
+   "rel": "born_of",
+   "b": "Siṃhikā",
+   "words": "siṃhikā suṣuve putraṃ rāhuṃ candrārkamardanam sucandraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,59.32",
+   "a": "Vṛtra",
+   "rel": "born_of",
+   "b": "Anāyu",
+   "words": "anāyuṣaḥ punaḥ putrāś catvāro vṛtraś caiva",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,59.35",
+   "a": "Śukra",
+   "rel": "son_of",
+   "b": "Kavi",
+   "words": "śukras tv ṛṣisuto 'bhavat",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

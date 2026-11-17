@@ -1,0 +1,556 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "agni",
+ "title": "Agnipurana",
+ "chapter": 18,
+ "part": 0,
+ "refs": [
+  "AgP 18.1",
+  "AgP 18.2",
+  "AgP 18.3",
+  "AgP 18.4",
+  "AgP 18.5",
+  "AgP 18.6",
+  "AgP 18.7",
+  "AgP 18.8",
+  "AgP 18.9",
+  "AgP 18.10",
+  "AgP 18.11",
+  "AgP 18.12",
+  "AgP 18.13",
+  "AgP 18.14",
+  "AgP 18.15",
+  "AgP 18.16",
+  "AgP 18.17",
+  "AgP 18.18",
+  "AgP 18.19",
+  "AgP 18.20",
+  "AgP 18.21",
+  "AgP 18.22",
+  "AgP 18.23",
+  "AgP 18.24",
+  "AgP 18.25",
+  "AgP 18.26",
+  "AgP 18.27",
+  "AgP 18.28",
+  "AgP 18.29",
+  "AgP 18.30",
+  "AgP 18.31",
+  "AgP 18.32",
+  "AgP 18.33",
+  "AgP 18.34",
+  "AgP 18.35",
+  "AgP 18.36",
+  "AgP 18.37",
+  "AgP 18.38",
+  "AgP 18.39",
+  "AgP 18.40",
+  "AgP 18.41",
+  "AgP 18.42",
+  "AgP 18.43",
+  "AgP 18.44"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_agnipurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Jun Takashima)",
+ "at": "2026-11-17T22:40:51",
+ "reply": "{\"statements\":[{\"ref\":\"AgP 18.1\",\"a\":\"Priyavrata\",\"rel\":\"son_of\",\"b\":\"Manu Svāyambhuva\",\"words\":\"manoḥ svāyambhuvāt sutau\",\"doubt\":false},{\"ref\":\"AgP 18.1\",\"a\":\"Uttānapāda\",\"rel\":\"son_of\",\"b\":\"Manu Svāyambhuva\",\"words\":\"manoḥ svāyambhuvāt sutau\",\"doubt\":false},{\"ref\":\"AgP 18.2\",\"a\":\"Uttama\",\"rel\":\"son_of\",\"b\":\"Uttānapāda\",\"words\":\"putra uttānapādataḥ\",\"doubt\":false},{\"ref\":\"AgP 18.2\",\"a\":\"Uttama\",\"rel\":\"born_of\",\"b\":\"Surucī\",\"words\":\"surucyāmuttamo jajñe\",\"doubt\":false},{\"ref\":\"AgP 18.3\",\"a\":\"Dhruva\",\"rel\":\"born_of\",\"b\":\"Sunīti\",\"words\":\"sunītyāntu dhruvaḥ putraḥ\",\"doubt\":false},{\"ref\":\"AgP 18.6\",\"a\":\"Śiṣṭi\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvācchambhurvyajāyata\",\"doubt\":true},{\"ref\":\"AgP 18.6\",\"a\":\"Bhavya\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"śiṣṭiñca bhavyañca dhruvāt\",\"doubt\":true},{\"ref\":\"AgP 18.6\",\"a\":\"Ripu\",\"rel\":\"born_of\",\"b\":\"Suchāyā\",\"words\":\"śiṣṭerādhatta suchāyā pañca putrān\",\"doubt\":true},{\"ref\":\"AgP 18.6\",\"a\":\"Ripu\",\"rel\":\"son_of\",\"b\":\"Śiṣṭi\",\"words\":\"śiṣṭerādhatta suchāyā pañca putrān\",\"doubt\":true},{\"ref\":\"AgP 18.7\",\"a\":\"Cākṣuṣa\",\"rel\":\"son_of\",\"b\":\"Ripu\",\"words\":\"riporādhatta bṛhatī cākṣuṣam\",\"doubt\":false},{\"ref\":\"AgP 18.7\",\"a\":\"Cākṣuṣa\",\"rel\":\"born_of\",\"b\":\"Bṛhatī\",\"words\":\"riporādhatta bṛhatī cākṣuṣam\",\"doubt\":false},{\"ref\":\"AgP 18.8\",\"a\":\"Manu\",\"rel\":\"son_of\",\"b\":\"Cākṣuṣa\",\"words\":\"cākṣuṣo manum\",\"doubt\":false},{\"ref\":\"AgP 18.8\",\"a\":\"Manu\",\"rel\":\"born_of\",\"b\":\"Puṣkariṇī\",\"words\":\"puṣkariṇyāṃ vīriṇyāṃ cākṣuṣo manum\",\"doubt\":true},{\"ref\":\"AgP 18.8\",\"a\":\"Ūru\",\"rel\":\"son_of\",\"b\":\"Manu\",\"words\":\"manorajāyanta daśa naḍvalāyāṃ sutottamāḥ\",\"doubt\":false},{\"ref\":\"AgP 18.8\",\"a\":\"Ūru\",\"rel\":\"born_of\",\"b\":\"Naḍvalā\",\"words\":\"naḍvalāyāṃ sutottamāḥ\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Aṅga\",\"rel\":\"son_of\",\"b\":\"Ūru\",\"words\":\"ūrorajanayat putrān\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Aṅga\",\"rel\":\"born_of\",\"b\":\"Āgneyī\",\"words\":\"ṣaḍagneyī\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Sumanas\",\"rel\":\"son_of\",\"b\":\"Ūru\",\"words\":\"ūrorajanayat putrān\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Svāti\",\"rel\":\"son_of\",\"b\":\"Ūru\",\"words\":\"ūrorajanayat putrān\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Kratu\",\"rel\":\"son_of\",\"b\":\"Ūru\",\"words\":\"ūrorajanayat putrān\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Aṅgiras\",\"rel\":\"son_of\",\"b\":\"Ūru\",\"words\":\"ūrorajanayat putrān\",\"doubt\":false},{\"ref\":\"AgP 18.10\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Ūru\",\"words\":\"ūrorajanayat putrān\",\"doubt\":false},{\"ref\":\"AgP 18.11\",\"a\":\"Veṇa\",\"rel\":\"son_of\",\"b\":\"Aṅga\",\"words\":\"aṅgāt sunīthāpatyaṃ vai veṇam\",\"doubt\":false},{\"ref\":\"AgP 18.11\",\"a\":\"Veṇa\",\"rel\":\"born_of\",\"b\":\"Sunīthā\",\"words\":\"sunīthāpatyaṃ vai veṇam\",\"doubt\":false},{\"ref\":\"AgP 18.12\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Veṇa\",\"words\":\"veṇasya mathito pāṇau sambabhūva pṛthur nṛpaḥ\",\"doubt\":false},{\"ref\":\"AgP 18.14\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Veṇa\",\"words\":\"pṛthurvaiṇyaḥ\",\"doubt\":false},{\"ref\":\"AgP 18.19\",\"a\":\"Śikhaṇḍin\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"pṛthoḥ putrau\",\"doubt\":false},{\"ref\":\"AgP 18.19\",\"a\":\"Havirdhāna\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"pṛthoḥ putrau\",\"doubt\":false},{\"ref\":\"AgP 18.19\",\"a\":\"Havirdhāna\",\"rel\":\"son_of\",\"b\":\"Antardhāna\",\"words\":\"havirdhānamantardhānāt vyajāyata\",\"doubt\":true},{\"ref\":\"AgP 18.20\",\"a\":\"Prācīnavarhis\",\"rel\":\"son_of\",\"b\":\"Havirdhāna\",\"words\":\"havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān prācīnavarhiṣaṃ\",\"doubt\":false},{\"ref\":\"AgP 18.20\",\"a\":\"Prācīnavarhis\",\"rel\":\"born_of\",\"b\":\"Dhīṣaṇā\",\"words\":\"dhīṣaṇājanayat sutān prācīnavarhiṣaṃ\",\"doubt\":false},{\"ref\":\"AgP 18.20\",\"a\":\"Śukra\",\"rel\":\"son_of\",\"b\":\"Havirdhāna\",\"words\":\"havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān\",\"doubt\":false},{\"ref\":\"AgP 18.20\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Havirdhāna\",\"words\":\"havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān\",\"doubt\":false},{\"ref\":\"AgP 18.20\",\"a\":\"Kṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Havirdhāna\",\"words\":\"havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān\",\"doubt\":false},{\"ref\":\"AgP 18.20\",\"a\":\"Vraja\",\"rel\":\"son_of\",\"b\":\"Havirdhāna\",\"words\":\"havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān\",\"doubt\":false},{\"ref\":\"AgP 18.20\",\"a\":\"Ajina\",\"rel\":\"son_of\",\"b\":\"Havirdhāna\",\"words\":\"havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān\",\"doubt\":false},{\"ref\":\"AgP 18.22\",\"a\":\"Pracetas\",\"rel\":\"son_of\",\"b\":\"Prācīnavarhis\",\"words\":\"daśa prācīnavarhiṣaḥ sarve pracetaso\",\"doubt\":false},{\"ref\":\"AgP 18.22\",\"a\":\"Pracetas\",\"rel\":\"born_of\",\"b\":\"Savarṇā\",\"words\":\"savarṇādhatta sāmudrī daśa\",\"doubt\":false},{\"ref\":\"AgP 18.26\",\"a\":\"Māriṣā\",\"rel\":\"daughter_of\",\"b\":\"Kaṇḍu\",\"words\":\"kanyāṃ vo māriṣāṃ varām tapasvino muneḥ kaṇḍoḥ\",\"doubt\":false},{\"ref\":\"AgP 18.26\",\"a\":\"Māriṣā\",\"rel\":\"born_of\",\"b\":\"Pramlocā\",\"words\":\"kaṇḍoḥ pramlocāyāṃ\",\"doubt\":false},{\"ref\":\"AgP 18.28\",\"a\":\"Māriṣā\",\"rel\":\"wife_of\",\"b\":\"Pracetas\",\"words\":\"pracetasastāṃ jagṛhuḥ\",\"doubt\":false},{\"ref\":\"AgP 18.28\",\"a\":\"Dakṣa\",\"rel\":\"born_of\",\"b\":\"Māriṣā\",\"words\":\"dakṣosyāñca tato 'bhavat\",\"doubt\":false},{\"ref\":\"AgP 18.35\",\"a\":\"Dhruva\",\"rel\":\"brother_of\",\"b\":\"Āpa\",\"words\":\"āpo dhruvañca somañca\",\"doubt\":true},{\"ref\":\"AgP 18.36\",\"a\":\"Vaitaṇḍya\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putro vaitaṇḍyaḥ\",\"doubt\":false},{\"ref\":\"AgP 18.36\",\"a\":\"Kāla\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvasya kālo\",\"doubt\":false},{\"ref\":\"AgP 18.36\",\"a\":\"Varcas\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somasya vai sutaḥ\",\"doubt\":false},{\"ref\":\"AgP 18.37\",\"a\":\"Draviṇa\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"dharasya putro draviṇo\",\"doubt\":false},{\"ref\":\"AgP 18.37\",\"a\":\"Śiśira\",\"rel\":\"born_of\",\"b\":\"Manoharā\",\"words\":\"manoharāyāḥ śiśiraḥ\",\"doubt\":false},{\"ref\":\"AgP 18.38\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Anala\",\"words\":\"agniputraḥ kumāraś ca\",\"doubt\":false},{\"ref\":\"AgP 18.40\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pratyūṣa\",\"words\":\"pratyūṣāddevalo jajñe\",\"doubt\":false},{\"ref\":\"AgP 18.40\",\"a\":\"Viśvakarman\",\"rel\":\"son_of\",\"b\":\"Prabhāva\",\"words\":\"viśvakarmā prabhāvataḥ\",\"doubt\":false},{\"ref\":\"AgP 18.41\",\"a\":\"Rudra\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"surabhī kaśyapādrudrānekādaśa vijajñuṣī\",\"doubt\":false},{\"ref\":\"AgP 18.41\",\"a\":\"Rudra\",\"rel\":\"born_of\",\"b\":\"Surabhī\",\"words\":\"surabhī kaśyapādrudrānekādaśa vijajñuṣī\",\"doubt\":false},{\"ref\":\"AgP 18.43\",\"a\":\"Viśvarūpa\",\"rel\":\"son_of\",\"b\":\"Tvaṣṭṛ\",\"words\":\"tvaṣṭuś caivātmajaḥ śrīmānviśvarūpo\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04726,
+ "tokens": {
+  "input": 4231,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3880,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "AgP 18.1",
+   "a": "Priyavrata",
+   "rel": "son_of",
+   "b": "Manu Svāyambhuva",
+   "words": "manoḥ svāyambhuvāt sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.1",
+   "a": "Uttānapāda",
+   "rel": "son_of",
+   "b": "Manu Svāyambhuva",
+   "words": "manoḥ svāyambhuvāt sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.2",
+   "a": "Uttama",
+   "rel": "son_of",
+   "b": "Uttānapāda",
+   "words": "putra uttānapādataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.2",
+   "a": "Uttama",
+   "rel": "born_of",
+   "b": "Surucī",
+   "words": "surucyāmuttamo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.3",
+   "a": "Dhruva",
+   "rel": "born_of",
+   "b": "Sunīti",
+   "words": "sunītyāntu dhruvaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.6",
+   "a": "Śiṣṭi",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvācchambhurvyajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.6",
+   "a": "Bhavya",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "śiṣṭiñca bhavyañca dhruvāt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.6",
+   "a": "Ripu",
+   "rel": "born_of",
+   "b": "Suchāyā",
+   "words": "śiṣṭerādhatta suchāyā pañca putrān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.6",
+   "a": "Ripu",
+   "rel": "son_of",
+   "b": "Śiṣṭi",
+   "words": "śiṣṭerādhatta suchāyā pañca putrān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.7",
+   "a": "Cākṣuṣa",
+   "rel": "son_of",
+   "b": "Ripu",
+   "words": "riporādhatta bṛhatī cākṣuṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.7",
+   "a": "Cākṣuṣa",
+   "rel": "born_of",
+   "b": "Bṛhatī",
+   "words": "riporādhatta bṛhatī cākṣuṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.8",
+   "a": "Manu",
+   "rel": "son_of",
+   "b": "Cākṣuṣa",
+   "words": "cākṣuṣo manum",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.8",
+   "a": "Manu",
+   "rel": "born_of",
+   "b": "Puṣkariṇī",
+   "words": "puṣkariṇyāṃ vīriṇyāṃ cākṣuṣo manum",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.8",
+   "a": "Ūru",
+   "rel": "son_of",
+   "b": "Manu",
+   "words": "manorajāyanta daśa naḍvalāyāṃ sutottamāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.8",
+   "a": "Ūru",
+   "rel": "born_of",
+   "b": "Naḍvalā",
+   "words": "naḍvalāyāṃ sutottamāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Aṅga",
+   "rel": "son_of",
+   "b": "Ūru",
+   "words": "ūrorajanayat putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Aṅga",
+   "rel": "born_of",
+   "b": "Āgneyī",
+   "words": "ṣaḍagneyī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Sumanas",
+   "rel": "son_of",
+   "b": "Ūru",
+   "words": "ūrorajanayat putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Svāti",
+   "rel": "son_of",
+   "b": "Ūru",
+   "words": "ūrorajanayat putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Kratu",
+   "rel": "son_of",
+   "b": "Ūru",
+   "words": "ūrorajanayat putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Aṅgiras",
+   "rel": "son_of",
+   "b": "Ūru",
+   "words": "ūrorajanayat putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.10",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Ūru",
+   "words": "ūrorajanayat putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.11",
+   "a": "Veṇa",
+   "rel": "son_of",
+   "b": "Aṅga",
+   "words": "aṅgāt sunīthāpatyaṃ vai veṇam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.11",
+   "a": "Veṇa",
+   "rel": "born_of",
+   "b": "Sunīthā",
+   "words": "sunīthāpatyaṃ vai veṇam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.12",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Veṇa",
+   "words": "veṇasya mathito pāṇau sambabhūva pṛthur nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.14",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Veṇa",
+   "words": "pṛthurvaiṇyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.19",
+   "a": "Śikhaṇḍin",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "pṛthoḥ putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.19",
+   "a": "Havirdhāna",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "pṛthoḥ putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.19",
+   "a": "Havirdhāna",
+   "rel": "son_of",
+   "b": "Antardhāna",
+   "words": "havirdhānamantardhānāt vyajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Prācīnavarhis",
+   "rel": "son_of",
+   "b": "Havirdhāna",
+   "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān prācīnavarhiṣaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Prācīnavarhis",
+   "rel": "born_of",
+   "b": "Dhīṣaṇā",
+   "words": "dhīṣaṇājanayat sutān prācīnavarhiṣaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Śukra",
+   "rel": "son_of",
+   "b": "Havirdhāna",
+   "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Havirdhāna",
+   "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Kṛṣṇa",
+   "rel": "son_of",
+   "b": "Havirdhāna",
+   "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Vraja",
+   "rel": "son_of",
+   "b": "Havirdhāna",
+   "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.20",
+   "a": "Ajina",
+   "rel": "son_of",
+   "b": "Havirdhāna",
+   "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.22",
+   "a": "Pracetas",
+   "rel": "son_of",
+   "b": "Prācīnavarhis",
+   "words": "daśa prācīnavarhiṣaḥ sarve pracetaso",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.22",
+   "a": "Pracetas",
+   "rel": "born_of",
+   "b": "Savarṇā",
+   "words": "savarṇādhatta sāmudrī daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.26",
+   "a": "Māriṣā",
+   "rel": "daughter_of",
+   "b": "Kaṇḍu",
+   "words": "kanyāṃ vo māriṣāṃ varām tapasvino muneḥ kaṇḍoḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.26",
+   "a": "Māriṣā",
+   "rel": "born_of",
+   "b": "Pramlocā",
+   "words": "kaṇḍoḥ pramlocāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.28",
+   "a": "Māriṣā",
+   "rel": "wife_of",
+   "b": "Pracetas",
+   "words": "pracetasastāṃ jagṛhuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.28",
+   "a": "Dakṣa",
+   "rel": "born_of",
+   "b": "Māriṣā",
+   "words": "dakṣosyāñca tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.35",
+   "a": "Dhruva",
+   "rel": "brother_of",
+   "b": "Āpa",
+   "words": "āpo dhruvañca somañca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.36",
+   "a": "Vaitaṇḍya",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putro vaitaṇḍyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.36",
+   "a": "Kāla",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvasya kālo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.36",
+   "a": "Varcas",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somasya vai sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.37",
+   "a": "Draviṇa",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "dharasya putro draviṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.37",
+   "a": "Śiśira",
+   "rel": "born_of",
+   "b": "Manoharā",
+   "words": "manoharāyāḥ śiśiraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.38",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Anala",
+   "words": "agniputraḥ kumāraś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.40",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pratyūṣa",
+   "words": "pratyūṣāddevalo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.40",
+   "a": "Viśvakarman",
+   "rel": "son_of",
+   "b": "Prabhāva",
+   "words": "viśvakarmā prabhāvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.41",
+   "a": "Rudra",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "surabhī kaśyapādrudrānekādaśa vijajñuṣī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.41",
+   "a": "Rudra",
+   "rel": "born_of",
+   "b": "Surabhī",
+   "words": "surabhī kaśyapādrudrānekādaśa vijajñuṣī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 18.43",
+   "a": "Viśvarūpa",
+   "rel": "son_of",
+   "b": "Tvaṣṭṛ",
+   "words": "tvaṣṭuś caivātmajaḥ śrīmānviśvarūpo",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

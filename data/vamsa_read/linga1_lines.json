@@ -5,6 +5,766 @@
  "lines": [
   [
    {
+    "name": "Yadu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kroṣṭu",
+    "ref": "LiP 1,68.2",
+    "words": "yadoḥ putrā babhūvur hi pañca ... kroṣṭur"
+   },
+   {
+    "name": "Vṛjinīvat",
+    "ref": "LiP 1,68.22",
+    "words": "kroṣṭoreko 'bhavatputro vṛjinīvān"
+   },
+   {
+    "name": "Svāti",
+    "ref": "LiP 1,68.22",
+    "words": "tasya putro 'bhavat svātī"
+   },
+   {
+    "name": "Kuśaṅku",
+    "ref": "LiP 1,68.22",
+    "words": "kuśaṅkus tatsuto 'bhavat"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "LiP 1,68.24",
+    "words": "jajñe citrarathastasya putraḥ"
+   },
+   {
+    "name": "Śaśabindu",
+    "ref": "LiP 1,68.24",
+    "words": "atha caitraratho vīro ... śaśabindus"
+   },
+   {
+    "name": "Anantaka",
+    "ref": "LiP 1,68.26",
+    "words": "śaśabindostu putrāṇām ... tasya putrāṇām anantakam"
+   },
+   {
+    "name": "Yajña",
+    "ref": "LiP 1,68.27",
+    "words": "anantakāt suto yajño"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "LiP 1,68.27",
+    "words": "yajñasya tanayo dhṛtiḥ"
+   },
+   {
+    "name": "Uśanas",
+    "ref": "LiP 1,68.27",
+    "words": "uśanāstasya tanayaḥ"
+   },
+   {
+    "name": "Siteṣu",
+    "ref": "LiP 1,68.28",
+    "words": "smṛtaścośanasaḥ putraḥ siteṣur"
+   },
+   {
+    "name": "Maruta",
+    "ref": "LiP 1,68.29",
+    "words": "marutastasya tanayo"
+   },
+   {
+    "name": "Kambalabarhis",
+    "ref": "LiP 1,68.29",
+    "words": "kambalabarhistu marustasyātmajaḥ"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "LiP 1,68.30",
+    "words": "putrastu rukmakavaco ... kambalabarhiṣaḥ"
+   },
+   {
+    "name": "Parāvṛt",
+    "ref": "LiP 1,68.32",
+    "words": "jajñe tu rukmakavacāt parāvṛt"
+   },
+   {
+    "name": "Jyāmagha",
+    "ref": "LiP 1,68.33",
+    "words": "jyāmaghaḥ"
+   },
+   {
+    "name": "Vidarbha",
+    "ref": "LiP 1,68.38",
+    "words": "sutaṃ vidarbhaṃ"
+   },
+   {
+    "name": "Kratha",
+    "ref": "LiP 1,68.38",
+    "words": "putrau vidarbharājasya śūrau"
+   },
+   {
+    "name": "Kunti",
+    "ref": "LiP 1,68.41",
+    "words": "kuntistasyātmajo 'bhavat"
+   },
+   {
+    "name": "Vṛta",
+    "ref": "LiP 1,68.41",
+    "words": "kunter vṛtastato jajñe"
+   },
+   {
+    "name": "Raṇadhṛṣṭa",
+    "ref": "LiP 1,68.41",
+    "words": "vṛtastato jajñe raṇadhṛṣṭaḥ"
+   },
+   {
+    "name": "Nidhṛti",
+    "ref": "LiP 1,68.42",
+    "words": "raṇadhṛṣṭasya ca suto nidhṛtiḥ"
+   },
+   {
+    "name": "Daśārha",
+    "ref": "LiP 1,68.42",
+    "words": "daśārho naidhṛto nāmnā"
+   },
+   {
+    "name": "Vyāpta",
+    "ref": "LiP 1,68.43",
+    "words": "daśārhasya suto vyāpto"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "LiP 1,68.43",
+    "words": "jīmūta iti tatsutaḥ"
+   },
+   {
+    "name": "Vikṛti",
+    "ref": "LiP 1,68.43",
+    "words": "jīmūtaputro vikṛtis"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "LiP 1,68.43",
+    "words": "tasya bhīmarathaḥ sutaḥ"
+   },
+   {
+    "name": "Navaratha",
+    "ref": "LiP 1,68.44",
+    "words": "bhīmarathasyāsīt putro navarathaḥ"
+   },
+   {
+    "name": "Dṛḍharatha",
+    "ref": "LiP 1,68.45",
+    "words": "tasya cāsīddṛḍharathaḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "LiP 1,68.45",
+    "words": "śakunistasya cātmajaḥ"
+   },
+   {
+    "name": "Karambha",
+    "ref": "LiP 1,68.45",
+    "words": "tasmāt karambhaḥ sambhūto"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "LiP 1,68.45",
+    "words": "devarāto 'bhavattataḥ"
+   },
+   {
+    "name": "Devarāti",
+    "ref": "LiP 1,68.46",
+    "words": "devarātādabhūdrājā devarātir"
+   },
+   {
+    "name": "Devakṣatra",
+    "ref": "LiP 1,68.46",
+    "words": "devarātir ... jajñe yo devakṣatranāmakaḥ"
+   },
+   {
+    "name": "Madhu",
+    "ref": "LiP 1,68.47",
+    "words": "devakṣatrasutaḥ śrīmān madhurnāma"
+   }
+  ],
+  [
+   {
+    "name": "Kalmāṣapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aśmaka",
+    "ref": "LiP 1,66.27",
+    "words": "kṣetre kalmāṣapādake aśmakaṃ janayāmāsa"
+   },
+   {
+    "name": "Mūlaka",
+    "ref": "LiP 1,66.28",
+    "words": "aśmakasyottarāyāṃ tu mūlakastu suto 'bhavat"
+   },
+   {
+    "name": "Śataratha",
+    "ref": "LiP 1,66.30",
+    "words": "mūlakasyāpi dharmātmā rājā śatarathaḥ sutaḥ"
+   },
+   {
+    "name": "Ilavila",
+    "ref": "LiP 1,66.30",
+    "words": "tasmācchatarathājjajñe rājā tvilavilo"
+   },
+   {
+    "name": "Vṛddhaśarman",
+    "ref": "LiP 1,66.31",
+    "words": "āsīt tvailaviliḥ śrīmān vṛddhaśarmā"
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "LiP 1,66.31",
+    "words": "putro viśvasahastasya"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "LiP 1,66.32",
+    "words": "dilīpastasya putro 'bhūt khaṭvāṅga"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "LiP 1,66.33",
+    "words": "dīrghabāhuḥ sutastasya"
+   },
+   {
+    "name": "Raghu",
+    "ref": "LiP 1,66.33",
+    "words": "raghustasmādajāyata"
+   },
+   {
+    "name": "Aja",
+    "ref": "LiP 1,66.34",
+    "words": "ajaḥ putro raghoścāpi"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "LiP 1,66.34",
+    "words": "tasmājjajñe ca vīryavān rājā daśarathas"
+   },
+   {
+    "name": "Rāma",
+    "ref": "LiP 1,66.35",
+    "words": "rāmo daśarathādvīro"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "LiP 1,66.37",
+    "words": "rāmasya tanayo jajñe kuśa"
+   },
+   {
+    "name": "Atithi",
+    "ref": "LiP 1,66.38",
+    "words": "atithistu kuśājjajñe"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "LiP 1,66.38",
+    "words": "niṣadhastasya cātmajaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "LiP 1,66.39",
+    "words": "nalastu niṣadhājjāto"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "LiP 1,66.39",
+    "words": "nabhastasmādajāyata"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "LiP 1,66.39",
+    "words": "nabhasaḥ puṇḍarīkākhyaḥ"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "LiP 1,66.39",
+    "words": "kṣemadhanvā tataḥ smṛtaḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "LiP 1,66.40",
+    "words": "tasya putro 'bhavad vīro devānīkaḥ"
+   },
+   {
+    "name": "Ahīnara",
+    "ref": "LiP 1,66.40",
+    "words": "ahīnaraḥ sutas tasya"
+   },
+   {
+    "name": "Sahasrāśva",
+    "ref": "LiP 1,66.40",
+    "words": "sahasrāśvastataḥ paraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Hariścandra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Rohita",
+    "ref": "LiP 1,66.11",
+    "words": "hariścandrasya ca suto rohito nāma"
+   },
+   {
+    "name": "Harita",
+    "ref": "LiP 1,66.12",
+    "words": "harito rohitasyātha"
+   },
+   {
+    "name": "Dhundhu",
+    "ref": "LiP 1,66.12",
+    "words": "dhundhurhārita ucyate"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "LiP 1,66.12",
+    "words": "dhundhuputrau babhūvatuḥ"
+   },
+   {
+    "name": "Rucaka",
+    "ref": "LiP 1,66.13",
+    "words": "rucakastasya tanayo"
+   },
+   {
+    "name": "Vṛka",
+    "ref": "LiP 1,66.14",
+    "words": "rucakasya vṛkaḥ putras"
+   },
+   {
+    "name": "Bāhu",
+    "ref": "LiP 1,66.14",
+    "words": "tasmādbāhuś ca jajñivān"
+   },
+   {
+    "name": "Sagara",
+    "ref": "LiP 1,66.14",
+    "words": "sagarastasya putro 'bhūd"
+   },
+   {
+    "name": "Asamañjasa",
+    "ref": "LiP 1,66.17",
+    "words": "ekaṃ bhānumatiḥ putram agṛhṇād asamañjasam"
+   },
+   {
+    "name": "Aṃśumān",
+    "ref": "LiP 1,66.19",
+    "words": "asamañjasya tanayaḥ so 'ṃśumānnāma"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "LiP 1,66.19",
+    "words": "tasya putro dilīpastu"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "LiP 1,66.19",
+    "words": "dilīpāttu bhagīrathaḥ"
+   },
+   {
+    "name": "Śruta",
+    "ref": "LiP 1,66.20",
+    "words": "bhagīrathasutaścāpi śruto nāma"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "LiP 1,66.21",
+    "words": "nābhāgastasya dāyādo"
+   },
+   {
+    "name": "Aṃbarīṣa",
+    "ref": "LiP 1,66.21",
+    "words": "aṃbarīṣaḥ sutastasya"
+   },
+   {
+    "name": "Sindhudvīpa",
+    "ref": "LiP 1,66.21",
+    "words": "sindhudvīpas tato 'bhavat"
+   },
+   {
+    "name": "Ayutāyus",
+    "ref": "LiP 1,66.23",
+    "words": "ayutāyuḥ sutastasya sindhudvīpasya"
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "LiP 1,66.23",
+    "words": "putro 'yutāyuṣo dhīmān ṛtuparṇo"
+   },
+   {
+    "name": "Sārvabhauma",
+    "ref": "LiP 1,66.25",
+    "words": "ṛtuparṇasya putro 'bhūt sārvabhaumaḥ"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "LiP 1,66.26",
+    "words": "sudāsastasya tanayo"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "LiP 1,66.26",
+    "words": "sudāsasya sutaḥ proktaḥ saudāso"
+   }
+  ],
+  [
+   {
+    "name": "Dhundhumāra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dṛḍhāśva",
+    "ref": "LiP 1,65.36",
+    "words": "dhundhumārasya tanayās trayas"
+   },
+   {
+    "name": "Pramoda",
+    "ref": "LiP 1,65.37",
+    "words": "dṛḍhāśvasya pramodastu"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "LiP 1,65.37",
+    "words": "haryaśvastasya vai sutaḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "LiP 1,65.37",
+    "words": "haryaśvasya nikumbhastu"
+   },
+   {
+    "name": "Saṃhatāśva",
+    "ref": "LiP 1,65.37",
+    "words": "saṃhatāśvastu tatsutaḥ"
+   },
+   {
+    "name": "Raṇāśva",
+    "ref": "LiP 1,65.38",
+    "words": "saṃhatāśvātmajāvubhau"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "LiP 1,65.38",
+    "words": "yuvanāśvo raṇāśvasya"
+   },
+   {
+    "name": "Māndhātṛ",
+    "ref": "LiP 1,65.38",
+    "words": "māndhātā tasya vai sutaḥ"
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "LiP 1,65.39",
+    "words": "māndhātuḥ purukutso 'bhūd"
+   },
+   {
+    "name": "Trasaddasyu",
+    "ref": "LiP 1,65.41",
+    "words": "purukutsasya dāyādas trasaddasyur"
+   },
+   {
+    "name": "Sambhūti",
+    "ref": "LiP 1,65.42",
+    "words": "sambhūtistasya cātmajaḥ"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "LiP 1,65.43",
+    "words": "sambhūtiraparaṃ putram anaraṇyamajījanat"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "LiP 1,65.44",
+    "words": "bṛhadaśvo 'naraṇyasya"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "LiP 1,65.44",
+    "words": "haryaśvastasya cātmajaḥ"
+   },
+   {
+    "name": "Vasumanas",
+    "ref": "LiP 1,65.45",
+    "words": "haryaśvāttu dṛṣadvatyāṃ jajñe vasumanā"
+   },
+   {
+    "name": "Tridhanvan",
+    "ref": "LiP 1,65.45",
+    "words": "tasya putro 'bhavadrājā tridhanvā"
+   },
+   {
+    "name": "Trayyāruṇa",
+    "ref": "LiP 1,66.2",
+    "words": "āsīttridhanvanaścāpi vidvāṃstrayyāruṇo nṛpaḥ"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "LiP 1,66.3",
+    "words": "tasya satyavrato nāma kumāro 'bhūn"
+   }
+  ],
+  [
+   {
+    "name": "Kuruvaṃśa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anu",
+    "ref": "LiP 1,68.48",
+    "words": "kuruvaṃśād anus"
+   },
+   {
+    "name": "Purutvat",
+    "ref": "LiP 1,68.48",
+    "words": "tasmāt purutvān puruṣottamaḥ"
+   },
+   {
+    "name": "Aṃśu",
+    "ref": "LiP 1,68.48",
+    "words": "aṃśurjajñe ca vaidarbhyāṃ bhadravatyāṃ purutvataḥ"
+   },
+   {
+    "name": "Sattva",
+    "ref": "LiP 1,68.49",
+    "words": "sattvastasmādajāyata"
+   },
+   {
+    "name": "Sātvata",
+    "ref": "LiP 1,68.49",
+    "words": "sattvāt sarvaguṇopetaḥ sātvataḥ"
+   },
+   {
+    "name": "Andhaka",
+    "ref": "LiP 1,69.2",
+    "words": "andhakaṃ ca mahābhāgaṃ"
+   },
+   {
+    "name": "Kukura",
+    "ref": "LiP 1,69.32",
+    "words": "andhakātkāśyaduhitā lebhe ca caturaḥ sutān kukuraṃ"
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "LiP 1,69.33",
+    "words": "kukurasya suto vṛṣṇir"
+   },
+   {
+    "name": "Śūra",
+    "ref": "LiP 1,69.33",
+    "words": "vṛṣṇeḥ śūrastato 'bhavat"
+   },
+   {
+    "name": "Kapotaroman",
+    "ref": "LiP 1,69.33",
+    "words": "kapotaromātibalas"
+   },
+   {
+    "name": "Viloma",
+    "ref": "LiP 1,69.33",
+    "words": "tasya putro vilomakaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "LiP 1,69.34",
+    "words": "tasyāsīt tumburusakho vidvānputro nalaḥ"
+   },
+   {
+    "name": "Abhijit",
+    "ref": "LiP 1,69.35",
+    "words": "tasmādapyabhijitputra utpanno"
+   },
+   {
+    "name": "Punarvasu",
+    "ref": "LiP 1,69.35",
+    "words": "abhijitputra utpanno 'sya punarvasuḥ"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "LiP 1,69.37",
+    "words": "tasyāpi putramithunaṃ babhūvābhijitaḥ"
+   },
+   {
+    "name": "Devaka",
+    "ref": "LiP 1,69.38",
+    "words": "āhukāt kāśyaduhitur dvau putrau saṃbabhūvatuḥ devakaś"
+   },
+   {
+    "name": "Upadeva",
+    "ref": "LiP 1,69.39",
+    "words": "upadevaś ca"
+   }
+  ],
+  [
+   {
+    "name": "Sūrya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Manu",
+    "ref": "LiP 1,65.3",
+    "words": "suṣuve sūryānmanumanuttamam"
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "LiP 1,65.17",
+    "words": "manostu prathamasyāsan nava putrāstu"
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "LiP 1,65.31",
+    "words": "ikṣvākorabhavadvīro vikukṣir"
+   },
+   {
+    "name": "Kakutstha",
+    "ref": "LiP 1,65.32",
+    "words": "jyeṣṭhaḥ putraśatasyāsīd"
+   },
+   {
+    "name": "Suyodhana",
+    "ref": "LiP 1,65.32",
+    "words": "kakutsthāttu suyodhanaḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "LiP 1,65.33",
+    "words": "tataḥ pṛthurmuniśreṣṭhā"
+   },
+   {
+    "name": "Viśvaka",
+    "ref": "LiP 1,65.33",
+    "words": "viśvakaḥ pārthivas tathā"
+   },
+   {
+    "name": "Ārdraka",
+    "ref": "LiP 1,65.33",
+    "words": "viśvakasyārdrako dhīmān"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "LiP 1,65.33",
+    "words": "yuvanāśvastu tatsutaḥ"
+   },
+   {
+    "name": "Śābasti",
+    "ref": "LiP 1,65.34",
+    "words": "śābastiś ca mahātejā"
+   },
+   {
+    "name": "Vaṃśaka",
+    "ref": "LiP 1,65.34",
+    "words": "vaṃśakastu tato 'bhavat"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "LiP 1,65.35",
+    "words": "vaṃśācca bṛhadaśvo 'bhūt"
+   },
+   {
+    "name": "Kuvalāśva",
+    "ref": "LiP 1,65.35",
+    "words": "kuvalāśvastu tatsutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Jayadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "LiP 1,68.12",
+    "words": "jayadhvajasya putro 'bhūt tālajaṅgho"
+   },
+   {
+    "name": "Vṛṣa",
+    "ref": "LiP 1,68.14",
+    "words": "vṛṣaprabhṛtayaścānye tatsutāḥ"
+   },
+   {
+    "name": "Madhu",
+    "ref": "LiP 1,68.14",
+    "words": "tasya putro 'bhavanmadhuḥ"
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "LiP 1,68.15",
+    "words": "madhoḥ putraśataṃ cāsīd vṛṣṇistasya"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Budha",
+    "ref": "LiP 1,65.24",
+    "words": "somaputrādbudhāccāpi"
+   },
+   {
+    "name": "Purūravas",
+    "ref": "LiP 1,65.24",
+    "words": "somaputrādbudhāccāpi ailo jajñe purūravāḥ"
+   },
+   {
+    "name": "Āyus",
+    "ref": "LiP 1,66.57",
+    "words": "tasya putrāḥ sapta bhavan"
+   }
+  ],
+  [
+   {
+    "name": "Yudhājit",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śvaphalka",
+    "ref": "LiP 1,69.18",
+    "words": "suto vārṣṇiryudhājitaḥ śvaphalka"
+   },
+   {
+    "name": "Akrūra",
+    "ref": "LiP 1,69.25",
+    "words": "putraḥ smṛto 'krūraḥ śvaphalkāt"
+   },
+   {
+    "name": "Māṅgu",
+    "ref": "LiP 1,69.26",
+    "words": "tathā māṅgur"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nighna",
+    "ref": "LiP 1,69.12",
+    "words": "anamitrasuto nighno"
+   },
+   {
+    "name": "Prasena",
+    "ref": "LiP 1,69.12",
+    "words": "nighnasya dvau babhūvatuḥ prasenaś ca"
+   }
+  ],
+  [
+   {
     "name": "Kaśyapa",
     "ref": null,
     "words": null
@@ -18,6 +778,23 @@
     "name": "Naidhruva",
     "ref": "LiP 1,63.51",
     "words": "vatsarānnaidhruvo jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Nahuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yayāti",
+    "ref": "LiP 1,66.60",
+    "words": "nahuṣasya tu dāyādāḥ ṣaḍ"
+   },
+   {
+    "name": "Pūru",
+    "ref": "LiP 1,66.80",
+    "words": "abhyaṣiñcatpuruṃ putraṃ yayātirnāhuṣaḥ"
    }
   ],
   [
@@ -39,6 +816,40 @@
   ],
   [
    {
+    "name": "Sumitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Citraka",
+    "ref": "LiP 1,69.29",
+    "words": "sumitrasya suto jajñe citrakaś"
+   },
+   {
+    "name": "Vipṛthu",
+    "ref": "LiP 1,69.30",
+    "words": "citrakasyābhavanputrā vipṛthuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Yuyudhāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuṇi",
+    "ref": "LiP 1,69.17",
+    "words": "kuṇistasya suto 'bhavat"
+   },
+   {
+    "name": "Yugaṃdhara",
+    "ref": "LiP 1,69.17",
+    "words": "kuṇer yugaṃdharaḥ putraḥ"
+   }
+  ],
+  [
+   {
     "name": "Śakti",
     "ref": null,
     "words": null
@@ -56,6 +867,23 @@
   ],
   [
    {
+    "name": "Śini",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Satyaka",
+    "ref": "LiP 1,69.15",
+    "words": "putraḥ śinerjajñe"
+   },
+   {
+    "name": "Sātyaki Yuyudhāna",
+    "ref": "LiP 1,69.16",
+    "words": "satyakastasya cātmajaḥ sātyakiryuyudhānaḥ"
+   }
+  ],
+  [
+   {
     "name": "Atri",
     "ref": null,
     "words": null
@@ -64,6 +892,18 @@
     "name": "Soma",
     "ref": "LiP 1,63.73",
     "words": "prabhuratrirmaharṣibhiḥ bhadrāyāṃ janayāmāsa somaṃ putraṃ"
+   }
+  ],
+  [
+   {
+    "name": "Bhāskara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sāvarṇi",
+    "ref": "LiP 1,65.5",
+    "words": "suṣuve sāvarṇiṃ bhāskarāddvijāḥ"
    }
   ],
   [
@@ -92,6 +932,18 @@
   ],
   [
    {
+    "name": "Divākara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aśvin",
+    "ref": "LiP 1,65.14",
+    "words": "saṃjñā tasmāddivākarāt suṣuve cāśvinau"
+   }
+  ],
+  [
+   {
     "name": "Dvaipāyana",
     "ref": null,
     "words": null
@@ -112,6 +964,78 @@
     "name": "Upamanyu",
     "ref": "LiP 1,63.91",
     "words": "upamanyuḥ sutastasya"
+   }
+  ],
+  [
+   {
+    "name": "Kṛta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pṛṣita",
+    "ref": "LiP 1,66.51",
+    "words": "kṛtastasya sudharmābhūt pṛṣito"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pradyumna",
+    "ref": "LiP 1,69.64",
+    "words": "tasya kṛṣṇasya tanayāḥ pradyumnapramukhāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Nṛga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhṛṣṭa",
+    "ref": "LiP 1,66.46",
+    "words": "te putrās trayaḥ paramadhārmikāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sudyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Utkala",
+    "ref": "LiP 1,65.26",
+    "words": "putratrayamabhūttasya sudyumnasya"
+   }
+  ],
+  [
+   {
+    "name": "Ugrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṃsa",
+    "ref": "LiP 1,69.56",
+    "words": "ugrasenātmajāyātha kaṃsāya"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hari",
+    "ref": "LiP 1,69.46",
+    "words": "vasudevo hariṃ dhīmān devakyāmudapādayat"
    }
   ],
   [

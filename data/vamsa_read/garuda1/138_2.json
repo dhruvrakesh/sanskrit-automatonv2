@@ -1,0 +1,166 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "garuda1",
+ "title": "Garudapurana, book 1",
+ "chapter": 138,
+ "part": 2,
+ "refs": [
+  "GarP 1,138.56",
+  "GarP 1,138.57",
+  "GarP 1,138.58",
+  "GarP 1,138.59",
+  "GarP 1,138.60"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_garuDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:37:13",
+ "reply": "{\"statements\":[{\"ref\":\"GarP 1,138.56\",\"a\":\"Upaguru\",\"rel\":\"son_of\",\"b\":\"Rāmaratha\",\"words\":\"satyaratho rāmarathāttasmādupaguruḥ smṛtaḥ\",\"doubt\":true},{\"ref\":\"GarP 1,138.56\",\"a\":\"Upagupta\",\"rel\":\"son_of\",\"b\":\"Upaguru\",\"words\":\"upagurorupaguptaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.56\",\"a\":\"Svāgata\",\"rel\":\"son_of\",\"b\":\"Upagupta\",\"words\":\"svāgataścopaguptataḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.57\",\"a\":\"Svanara\",\"rel\":\"son_of\",\"b\":\"Svāgata\",\"words\":\"svanaraḥ svāgatājjajñe\",\"doubt\":false},{\"ref\":\"GarP 1,138.57\",\"a\":\"Suvarcas\",\"rel\":\"son_of\",\"b\":\"Svanara\",\"words\":\"suvarcāstasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.57\",\"a\":\"Supārśva\",\"rel\":\"son_of\",\"b\":\"Suvarcas\",\"words\":\"suvarcasaḥ supārśvastu\",\"doubt\":false},{\"ref\":\"GarP 1,138.57\",\"a\":\"Suśruta\",\"rel\":\"son_of\",\"b\":\"Supārśva\",\"words\":\"suśrutaśca supārśvataḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.58\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Suśruta\",\"words\":\"jayastu suśrutājjajñe\",\"doubt\":false},{\"ref\":\"GarP 1,138.58\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"jayāttu vijayo 'bhavat\",\"doubt\":false},{\"ref\":\"GarP 1,138.58\",\"a\":\"Ṛta\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"vijayasya ṛtaḥ putraḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.58\",\"a\":\"Sunaya\",\"rel\":\"son_of\",\"b\":\"Ṛta\",\"words\":\"ṛtasya sunayaḥ sutaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.59\",\"a\":\"Vītahavya\",\"rel\":\"son_of\",\"b\":\"Sunaya\",\"words\":\"sunayādvītahavyastu\",\"doubt\":false},{\"ref\":\"GarP 1,138.59\",\"a\":\"Dhṛti\",\"rel\":\"son_of\",\"b\":\"Vītahavya\",\"words\":\"vītahavyāddhatiḥ smṛtaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,138.59\",\"a\":\"Bahulāśva\",\"rel\":\"son_of\",\"b\":\"Dhṛti\",\"words\":\"bahulāśvo dhṛteḥ putro\",\"doubt\":false},{\"ref\":\"GarP 1,138.59\",\"a\":\"Kṛti\",\"rel\":\"son_of\",\"b\":\"Bahulāśva\",\"words\":\"bahulāśvātkṛtiḥ smṛtaḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01306,
+ "tokens": {
+  "input": 1268,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1052,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "GarP 1,138.56",
+   "a": "Upaguru",
+   "rel": "son_of",
+   "b": "Rāmaratha",
+   "words": "satyaratho rāmarathāttasmādupaguruḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.56",
+   "a": "Upagupta",
+   "rel": "son_of",
+   "b": "Upaguru",
+   "words": "upagurorupaguptaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.56",
+   "a": "Svāgata",
+   "rel": "son_of",
+   "b": "Upagupta",
+   "words": "svāgataścopaguptataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.57",
+   "a": "Svanara",
+   "rel": "son_of",
+   "b": "Svāgata",
+   "words": "svanaraḥ svāgatājjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.57",
+   "a": "Suvarcas",
+   "rel": "son_of",
+   "b": "Svanara",
+   "words": "suvarcāstasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.57",
+   "a": "Supārśva",
+   "rel": "son_of",
+   "b": "Suvarcas",
+   "words": "suvarcasaḥ supārśvastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.57",
+   "a": "Suśruta",
+   "rel": "son_of",
+   "b": "Supārśva",
+   "words": "suśrutaśca supārśvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.58",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Suśruta",
+   "words": "jayastu suśrutājjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.58",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "jayāttu vijayo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.58",
+   "a": "Ṛta",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "vijayasya ṛtaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.58",
+   "a": "Sunaya",
+   "rel": "son_of",
+   "b": "Ṛta",
+   "words": "ṛtasya sunayaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.59",
+   "a": "Vītahavya",
+   "rel": "son_of",
+   "b": "Sunaya",
+   "words": "sunayādvītahavyastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.59",
+   "a": "Dhṛti",
+   "rel": "son_of",
+   "b": "Vītahavya",
+   "words": "vītahavyāddhatiḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.59",
+   "a": "Bahulāśva",
+   "rel": "son_of",
+   "b": "Dhṛti",
+   "words": "bahulāśvo dhṛteḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,138.59",
+   "a": "Kṛti",
+   "rel": "son_of",
+   "b": "Bahulāśva",
+   "words": "bahulāśvātkṛtiḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

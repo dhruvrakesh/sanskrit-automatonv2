@@ -1,0 +1,32 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 6,
+ "part": 2,
+ "refs": [
+  "ViPc 4,6.44",
+  "ViPc 4,6.45",
+  "ViPc 4,6.46",
+  "ViPc 4,6.47",
+  "ViPc 4,6.48",
+  "ViPc 4,6.49",
+  "ViPc 4,6.50"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:49:15",
+ "reply": "Only verse 4,6.50 comes near a kinship claim, and it does not state one. \"Ailena\" means \"by Aila\", the king in the passage, but the verse only says the fire was made threefold by him. Verses 44–49 mention Urvaśī, but they do not call her anyone's wife. Aila is a patronymic, and I am not inferring a son_of relation from it, since no father is named. The other verses give no kinship or succession statements.\n\n{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00529,
+ "tokens": {
+  "input": 1885,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 152,
+  "thinking": 0
+ },
+ "statements": []
+}

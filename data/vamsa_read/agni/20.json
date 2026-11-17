@@ -1,0 +1,409 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "agni",
+ "title": "Agnipurana",
+ "chapter": 20,
+ "part": 0,
+ "refs": [
+  "AgP 20.1",
+  "AgP 20.2",
+  "AgP 20.3",
+  "AgP 20.4",
+  "AgP 20.5",
+  "AgP 20.6",
+  "AgP 20.7",
+  "AgP 20.8",
+  "AgP 20.9",
+  "AgP 20.10",
+  "AgP 20.11",
+  "AgP 20.12",
+  "AgP 20.13",
+  "AgP 20.14",
+  "AgP 20.15",
+  "AgP 20.16",
+  "AgP 20.17",
+  "AgP 20.18",
+  "AgP 20.19",
+  "AgP 20.20",
+  "AgP 20.21",
+  "AgP 20.22",
+  "AgP 20.23"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_agnipurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Jun Takashima)",
+ "at": "2026-11-17T22:41:25",
+ "reply": "{\"statements\":[{\"ref\":\"AgP 20.9\",\"a\":\"Dhātṛ\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"devau dhātāvidhātārau bhṛgoḥ khyātirasūyata\",\"doubt\":false},{\"ref\":\"AgP 20.9\",\"a\":\"Vidhātṛ\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"devau dhātāvidhātārau bhṛgoḥ khyātirasūyata\",\"doubt\":false},{\"ref\":\"AgP 20.9\",\"a\":\"Dhātṛ\",\"rel\":\"born_of\",\"b\":\"Khyāti\",\"words\":\"bhṛgoḥ khyātirasūyata\",\"doubt\":false},{\"ref\":\"AgP 20.9\",\"a\":\"Vidhātṛ\",\"rel\":\"born_of\",\"b\":\"Khyāti\",\"words\":\"bhṛgoḥ khyātirasūyata\",\"doubt\":false},{\"ref\":\"AgP 20.9\",\"a\":\"Śrī\",\"rel\":\"wife_of\",\"b\":\"Viṣṇu\",\"words\":\"śriyañca patnī viṣṇoryā\",\"doubt\":false},{\"ref\":\"AgP 20.10\",\"a\":\"Prāṇa\",\"rel\":\"son_of\",\"b\":\"Dhātṛ\",\"words\":\"dhāturvidhārturdvau putrau kramāt prāṇo mṛkaṇḍukaḥ\",\"doubt\":true},{\"ref\":\"AgP 20.10\",\"a\":\"Mṛkaṇḍu\",\"rel\":\"son_of\",\"b\":\"Vidhātṛ\",\"words\":\"dhāturvidhārturdvau putrau kramāt prāṇo mṛkaṇḍukaḥ\",\"doubt\":true},{\"ref\":\"AgP 20.10\",\"a\":\"Mārkaṇḍeya\",\"rel\":\"son_of\",\"b\":\"Mṛkaṇḍu\",\"words\":\"mārkaṇḍeyo mṛkaṇḍoś ca jajñe\",\"doubt\":false},{\"ref\":\"AgP 20.10\",\"a\":\"Vedaśiras\",\"rel\":\"son_of\",\"b\":\"Mārkaṇḍeya\",\"words\":\"jajñe vedaśirāstataḥ\",\"doubt\":true},{\"ref\":\"AgP 20.11\",\"a\":\"Paurṇamāsa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"paurṇamāsaś ca sambhūtyāṃ marīcerabhavat sutaḥ\",\"doubt\":false},{\"ref\":\"AgP 20.11\",\"a\":\"Paurṇamāsa\",\"rel\":\"born_of\",\"b\":\"Sambhūti\",\"words\":\"paurṇamāsaś ca sambhūtyāṃ\",\"doubt\":false},{\"ref\":\"AgP 20.11\",\"a\":\"Sinīvālī\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"smṛtyāmaṅgirasaḥ putrāḥ sinīvālī kuhūs tathā\",\"doubt\":false},{\"ref\":\"AgP 20.11\",\"a\":\"Kuhū\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"smṛtyāmaṅgirasaḥ putrāḥ sinīvālī kuhūs tathā\",\"doubt\":false},{\"ref\":\"AgP 20.11\",\"a\":\"Sinīvālī\",\"rel\":\"born_of\",\"b\":\"Smṛti\",\"words\":\"smṛtyāmaṅgirasaḥ putrāḥ sinīvālī\",\"doubt\":false},{\"ref\":\"AgP 20.11\",\"a\":\"Kuhū\",\"rel\":\"born_of\",\"b\":\"Smṛti\",\"words\":\"smṛtyāmaṅgirasaḥ putrāḥ sinīvālī kuhūs tathā\",\"doubt\":false},{\"ref\":\"AgP 20.12\",\"a\":\"Rākā\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"rākāścānumatiścātreranasūyāpyajījanat\",\"doubt\":true},{\"ref\":\"AgP 20.12\",\"a\":\"Anumati\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"rākāścānumatiścātreranasūyāpyajījanat\",\"doubt\":true},{\"ref\":\"AgP 20.12\",\"a\":\"Soma\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"atreranasūyāpyajījanat somaṃ\",\"doubt\":false},{\"ref\":\"AgP 20.12\",\"a\":\"Durvāsas\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"atreranasūyāpyajījanat somaṃ durvāsasaṃ putraṃ\",\"doubt\":false},{\"ref\":\"AgP 20.12\",\"a\":\"Dattātreya\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"dattātreyañca yoginam\",\"doubt\":false},{\"ref\":\"AgP 20.12\",\"a\":\"Soma\",\"rel\":\"born_of\",\"b\":\"Anasūyā\",\"words\":\"anasūyāpyajījanat somaṃ\",\"doubt\":false},{\"ref\":\"AgP 20.12\",\"a\":\"Durvāsas\",\"rel\":\"born_of\",\"b\":\"Anasūyā\",\"words\":\"anasūyāpyajījanat somaṃ durvāsasaṃ putraṃ\",\"doubt\":false},{\"ref\":\"AgP 20.12\",\"a\":\"Dattātreya\",\"rel\":\"born_of\",\"b\":\"Anasūyā\",\"words\":\"dattātreyañca yoginam\",\"doubt\":false},{\"ref\":\"AgP 20.13\",\"a\":\"Prīti\",\"rel\":\"wife_of\",\"b\":\"Pulastya\",\"words\":\"prītyāṃ pulastyabhāryāyāṃ\",\"doubt\":false},{\"ref\":\"AgP 20.13\",\"a\":\"Datta\",\"rel\":\"son_of\",\"b\":\"Pulastya\",\"words\":\"dattolistatsutobhavat\",\"doubt\":true},{\"ref\":\"AgP 20.13\",\"a\":\"Datta\",\"rel\":\"born_of\",\"b\":\"Prīti\",\"words\":\"prītyāṃ pulastyabhāryāyāṃ dattolistatsutobhavat\",\"doubt\":false},{\"ref\":\"AgP 20.13\",\"a\":\"Sahiṣṇu\",\"rel\":\"son_of\",\"b\":\"Pulaha\",\"words\":\"kṣamāyāṃ pulahājjātāḥ sahiṣṇuḥ\",\"doubt\":false},{\"ref\":\"AgP 20.13\",\"a\":\"Sahiṣṇu\",\"rel\":\"born_of\",\"b\":\"Kṣamā\",\"words\":\"kṣamāyāṃ pulahājjātāḥ\",\"doubt\":false},{\"ref\":\"AgP 20.14\",\"a\":\"Bālakhilyas\",\"rel\":\"son_of\",\"b\":\"Kratu\",\"words\":\"sannatyāñca kratorāsan bālikhilyā\",\"doubt\":false},{\"ref\":\"AgP 20.14\",\"a\":\"Bālakhilyas\",\"rel\":\"born_of\",\"b\":\"Sannati\",\"words\":\"sannatyāñca kratorāsan bālikhilyā\",\"doubt\":false},{\"ref\":\"AgP 20.16\",\"a\":\"Pavamāna\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"pāvakaḥ pavamānobhūcchuciḥ svāhāgnijobhavat\",\"doubt\":true},{\"ref\":\"AgP 20.17\",\"a\":\"Menā\",\"rel\":\"daughter_of\",\"b\":\"Pitṛ\",\"words\":\"pitṛbhyaś ca svadhāyāñca menā vaidhāriṇī sute\",\"doubt\":true},{\"ref\":\"AgP 20.17\",\"a\":\"Hiṃsā\",\"rel\":\"wife_of\",\"b\":\"Adharma\",\"words\":\"hiṃsābhāryā tvadharmasya\",\"doubt\":false},{\"ref\":\"AgP 20.17\",\"a\":\"Anṛta\",\"rel\":\"born_of\",\"b\":\"Hiṃsā\",\"words\":\"tayorjajñe tathānṛtam\",\"doubt\":false},{\"ref\":\"AgP 20.17\",\"a\":\"Anṛta\",\"rel\":\"son_of\",\"b\":\"Adharma\",\"words\":\"tayorjajñe tathānṛtam\",\"doubt\":false},{\"ref\":\"AgP 20.18\",\"a\":\"Nikṛti\",\"rel\":\"daughter_of\",\"b\":\"Adharma\",\"words\":\"kanyā ca nikṛtistābhyāṃ\",\"doubt\":true},{\"ref\":\"AgP 20.18\",\"a\":\"Nikṛti\",\"rel\":\"daughter_of\",\"b\":\"Hiṃsā\",\"words\":\"kanyā ca nikṛtistābhyāṃ\",\"doubt\":true},{\"ref\":\"AgP 20.20\",\"a\":\"Rudra\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"brahmaṇaś ca rudan jāto rodanādrudranāmakaḥ\",\"doubt\":false},{\"ref\":\"AgP 20.22\",\"a\":\"Satī\",\"rel\":\"wife_of\",\"b\":\"Śambhu\",\"words\":\"patnī śambhorabhūt punaḥ\",\"doubt\":false},{\"ref\":\"AgP 20.22\",\"a\":\"Satī\",\"rel\":\"daughter_of\",\"b\":\"Himavat\",\"words\":\"himavadduhitā bhūtvā\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03582,
+ "tokens": {
+  "input": 2694,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3043,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "AgP 20.9",
+   "a": "Dhātṛ",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "devau dhātāvidhātārau bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.9",
+   "a": "Vidhātṛ",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "devau dhātāvidhātārau bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.9",
+   "a": "Dhātṛ",
+   "rel": "born_of",
+   "b": "Khyāti",
+   "words": "bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.9",
+   "a": "Vidhātṛ",
+   "rel": "born_of",
+   "b": "Khyāti",
+   "words": "bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.9",
+   "a": "Śrī",
+   "rel": "wife_of",
+   "b": "Viṣṇu",
+   "words": "śriyañca patnī viṣṇoryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.10",
+   "a": "Prāṇa",
+   "rel": "son_of",
+   "b": "Dhātṛ",
+   "words": "dhāturvidhārturdvau putrau kramāt prāṇo mṛkaṇḍukaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.10",
+   "a": "Mṛkaṇḍu",
+   "rel": "son_of",
+   "b": "Vidhātṛ",
+   "words": "dhāturvidhārturdvau putrau kramāt prāṇo mṛkaṇḍukaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.10",
+   "a": "Mārkaṇḍeya",
+   "rel": "son_of",
+   "b": "Mṛkaṇḍu",
+   "words": "mārkaṇḍeyo mṛkaṇḍoś ca jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.10",
+   "a": "Vedaśiras",
+   "rel": "son_of",
+   "b": "Mārkaṇḍeya",
+   "words": "jajñe vedaśirāstataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.11",
+   "a": "Paurṇamāsa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "paurṇamāsaś ca sambhūtyāṃ marīcerabhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.11",
+   "a": "Paurṇamāsa",
+   "rel": "born_of",
+   "b": "Sambhūti",
+   "words": "paurṇamāsaś ca sambhūtyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.11",
+   "a": "Sinīvālī",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "smṛtyāmaṅgirasaḥ putrāḥ sinīvālī kuhūs tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.11",
+   "a": "Kuhū",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "smṛtyāmaṅgirasaḥ putrāḥ sinīvālī kuhūs tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.11",
+   "a": "Sinīvālī",
+   "rel": "born_of",
+   "b": "Smṛti",
+   "words": "smṛtyāmaṅgirasaḥ putrāḥ sinīvālī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.11",
+   "a": "Kuhū",
+   "rel": "born_of",
+   "b": "Smṛti",
+   "words": "smṛtyāmaṅgirasaḥ putrāḥ sinīvālī kuhūs tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Rākā",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "rākāścānumatiścātreranasūyāpyajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Anumati",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "rākāścānumatiścātreranasūyāpyajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Soma",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "atreranasūyāpyajījanat somaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Durvāsas",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "atreranasūyāpyajījanat somaṃ durvāsasaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Dattātreya",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "dattātreyañca yoginam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Soma",
+   "rel": "born_of",
+   "b": "Anasūyā",
+   "words": "anasūyāpyajījanat somaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Durvāsas",
+   "rel": "born_of",
+   "b": "Anasūyā",
+   "words": "anasūyāpyajījanat somaṃ durvāsasaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.12",
+   "a": "Dattātreya",
+   "rel": "born_of",
+   "b": "Anasūyā",
+   "words": "dattātreyañca yoginam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.13",
+   "a": "Prīti",
+   "rel": "wife_of",
+   "b": "Pulastya",
+   "words": "prītyāṃ pulastyabhāryāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.13",
+   "a": "Datta",
+   "rel": "son_of",
+   "b": "Pulastya",
+   "words": "dattolistatsutobhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.13",
+   "a": "Datta",
+   "rel": "born_of",
+   "b": "Prīti",
+   "words": "prītyāṃ pulastyabhāryāyāṃ dattolistatsutobhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.13",
+   "a": "Sahiṣṇu",
+   "rel": "son_of",
+   "b": "Pulaha",
+   "words": "kṣamāyāṃ pulahājjātāḥ sahiṣṇuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.13",
+   "a": "Sahiṣṇu",
+   "rel": "born_of",
+   "b": "Kṣamā",
+   "words": "kṣamāyāṃ pulahājjātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.14",
+   "a": "Bālakhilyas",
+   "rel": "son_of",
+   "b": "Kratu",
+   "words": "sannatyāñca kratorāsan bālikhilyā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "AgP 20.14",
+   "a": "Bālakhilyas",
+   "rel": "born_of",
+   "b": "Sannati",
+   "words": "sannatyāñca kratorāsan bālikhilyā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "AgP 20.16",
+   "a": "Pavamāna",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "pāvakaḥ pavamānobhūcchuciḥ svāhāgnijobhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.17",
+   "a": "Menā",
+   "rel": "daughter_of",
+   "b": "Pitṛ",
+   "words": "pitṛbhyaś ca svadhāyāñca menā vaidhāriṇī sute",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.17",
+   "a": "Hiṃsā",
+   "rel": "wife_of",
+   "b": "Adharma",
+   "words": "hiṃsābhāryā tvadharmasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.17",
+   "a": "Anṛta",
+   "rel": "born_of",
+   "b": "Hiṃsā",
+   "words": "tayorjajñe tathānṛtam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.17",
+   "a": "Anṛta",
+   "rel": "son_of",
+   "b": "Adharma",
+   "words": "tayorjajñe tathānṛtam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.18",
+   "a": "Nikṛti",
+   "rel": "daughter_of",
+   "b": "Adharma",
+   "words": "kanyā ca nikṛtistābhyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.18",
+   "a": "Nikṛti",
+   "rel": "daughter_of",
+   "b": "Hiṃsā",
+   "words": "kanyā ca nikṛtistābhyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.20",
+   "a": "Rudra",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "brahmaṇaś ca rudan jāto rodanādrudranāmakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.22",
+   "a": "Satī",
+   "rel": "wife_of",
+   "b": "Śambhu",
+   "words": "patnī śambhorabhūt punaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 20.22",
+   "a": "Satī",
+   "rel": "daughter_of",
+   "b": "Himavat",
+   "words": "himavadduhitā bhūtvā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

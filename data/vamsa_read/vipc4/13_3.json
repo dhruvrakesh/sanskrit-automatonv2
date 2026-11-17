@@ -1,0 +1,68 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 13,
+ "part": 3,
+ "refs": [
+  "ViPc 4,13.43",
+  "ViPc 4,13.44",
+  "ViPc 4,13.45",
+  "ViPc 4,13.46",
+  "ViPc 4,13.47",
+  "ViPc 4,13.48",
+  "ViPc 4,13.49",
+  "ViPc 4,13.50",
+  "ViPc 4,13.51",
+  "ViPc 4,13.52",
+  "ViPc 4,13.53",
+  "ViPc 4,13.54",
+  "ViPc 4,13.55",
+  "ViPc 4,13.56",
+  "ViPc 4,13.57"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:51:04",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,13.44\",\"a\":\"Akrūra\",\"rel\":\"son_of\",\"b\":\"Śvaphalka\",\"words\":\"gāndinyāṃ śvaphalkenākrūro jātaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,13.44\",\"a\":\"Akrūra\",\"rel\":\"born_of\",\"b\":\"Gāndinī\",\"words\":\"gāndinyāṃ śvaphalkenākrūro jātaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,13.44\",\"a\":\"Akrūra\",\"rel\":\"other\",\"b\":\"Śvāphalki\",\"words\":\"śvāphalkiḥ svapuram ānītaḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00938,
+ "tokens": {
+  "input": 3467,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 245,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,13.44",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "gāndinyāṃ śvaphalkenākrūro jātaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.44",
+   "a": "Akrūra",
+   "rel": "born_of",
+   "b": "Gāndinī",
+   "words": "gāndinyāṃ śvaphalkenākrūro jātaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.44",
+   "a": "Akrūra",
+   "rel": "other",
+   "b": "Śvāphalki",
+   "words": "śvāphalkiḥ svapuram ānītaḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

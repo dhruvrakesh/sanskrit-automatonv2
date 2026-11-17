@@ -1,0 +1,197 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 80,
+ "part": 0,
+ "refs": [
+  "MBh 1,80.1",
+  "MBh 1,80.2",
+  "MBh 1,80.3",
+  "MBh 1,80.4",
+  "MBh 1,80.5",
+  "MBh 1,80.6",
+  "MBh 1,80.7",
+  "MBh 1,80.8",
+  "MBh 1,80.9",
+  "MBh 1,80.10",
+  "MBh 1,80.11",
+  "MBh 1,80.12",
+  "MBh 1,80.13",
+  "MBh 1,80.14",
+  "MBh 1,80.15",
+  "MBh 1,80.16",
+  "MBh 1,80.17",
+  "MBh 1,80.18",
+  "MBh 1,80.19",
+  "MBh 1,80.20",
+  "MBh 1,80.21",
+  "MBh 1,80.22",
+  "MBh 1,80.23",
+  "MBh 1,80.24",
+  "MBh 1,80.25",
+  "MBh 1,80.26",
+  "MBh 1,80.27"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:46:22",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,80.1\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātir nahuṣātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.8\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pūruṃ putram uvāca\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.11\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātir nāhuṣas\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.13\",\"a\":\"Yayāti\",\"rel\":\"descendant_of\",\"b\":\"Śukra\",\"words\":\"śukrasya naptāraṃ\",\"doubt\":true},\n{\"ref\":\"MBh 1,80.13\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"devayānyāḥ sutaṃ prabho jyeṣṭhaṃ yadum\",\"doubt\":true},\n{\"ref\":\"MBh 1,80.13\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"devayānyāḥ sutaṃ prabho jyeṣṭhaṃ yadum\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.14\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yadur jyeṣṭhas tava suto jātas\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.14\",\"a\":\"Turvasu\",\"rel\":\"brother_of\",\"b\":\"Yadu\",\"words\":\"tam anu turvasuḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,80.14\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"śarmiṣṭhāyāḥ suto druhyus\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.24\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pūruṃ rājye sve sutam ātmajam\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.24\",\"a\":\"Pūru\",\"rel\":\"succeeded\",\"b\":\"Yayāti\",\"words\":\"abhyaṣiñcat tataḥ pūruṃ rājye sve\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.26\",\"a\":\"Yādavas\",\"rel\":\"line_of\",\"b\":\"Yadu\",\"words\":\"yados tu yādavā jātāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.26\",\"a\":\"Yavanas\",\"rel\":\"descendant_of\",\"b\":\"Turvasu\",\"words\":\"turvasor yavanāḥ sutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.26\",\"a\":\"Bhojas\",\"rel\":\"descendant_of\",\"b\":\"Druhyu\",\"words\":\"druhyor api sutā bhojā\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.26\",\"a\":\"Mlecchas\",\"rel\":\"descendant_of\",\"b\":\"Anu\",\"words\":\"anos tu mlecchajātayaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,80.27\",\"a\":\"Paurava\",\"rel\":\"line_of\",\"b\":\"Pūru\",\"words\":\"pūros tu pauravo vaṃśo\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01759,
+ "tokens": {
+  "input": 3042,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1151,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,80.1",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātir nahuṣātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.8",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pūruṃ putram uvāca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,80.11",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātir nāhuṣas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.13",
+   "a": "Yayāti",
+   "rel": "descendant_of",
+   "b": "Śukra",
+   "words": "śukrasya naptāraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.13",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "devayānyāḥ sutaṃ prabho jyeṣṭhaṃ yadum",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.13",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "devayānyāḥ sutaṃ prabho jyeṣṭhaṃ yadum",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.14",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yadur jyeṣṭhas tava suto jātas",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,80.14",
+   "a": "Turvasu",
+   "rel": "brother_of",
+   "b": "Yadu",
+   "words": "tam anu turvasuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.14",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "śarmiṣṭhāyāḥ suto druhyus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.24",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pūruṃ rājye sve sutam ātmajam",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,80.24",
+   "a": "Pūru",
+   "rel": "succeeded",
+   "b": "Yayāti",
+   "words": "abhyaṣiñcat tataḥ pūruṃ rājye sve",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,80.26",
+   "a": "Yādavas",
+   "rel": "line_of",
+   "b": "Yadu",
+   "words": "yados tu yādavā jātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.26",
+   "a": "Yavanas",
+   "rel": "descendant_of",
+   "b": "Turvasu",
+   "words": "turvasor yavanāḥ sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.26",
+   "a": "Bhojas",
+   "rel": "descendant_of",
+   "b": "Druhyu",
+   "words": "druhyor api sutā bhojā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,80.26",
+   "a": "Mlecchas",
+   "rel": "descendant_of",
+   "b": "Anu",
+   "words": "anos tu mlecchajātayaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,80.27",
+   "a": "Paurava",
+   "rel": "line_of",
+   "b": "Pūru",
+   "words": "pūros tu pauravo vaṃśo",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

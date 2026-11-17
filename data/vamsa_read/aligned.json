@@ -1,0 +1,6258 @@
+{
+ "mark": "VAMSA_ALIGN_2026_11_17",
+ "at": "2026-11-17T22:55:35",
+ "same": 0.82,
+ "dynasties": [
+  {
+   "slug": "solar",
+   "anchor": "Ikṣvāku",
+   "father": "Manu",
+   "title": "the solar line (Aikṣvākas) from Ikṣvāku",
+   "order": [
+    "ram2",
+    "ram1",
+    "bhp9",
+    "linga1",
+    "kurma1",
+    "vip4",
+    "vipc4"
+   ],
+   "counts": {
+    "agree": 4,
+    "most": 2,
+    "differ": 7,
+    "one": 1,
+    "share_agree": 0.308
+   },
+   "pairs": {
+    "ram2 & ram1": [
+     13,
+     13
+    ],
+    "ram2 & bhp9": [
+     4,
+     12
+    ],
+    "ram2 & linga1": [
+     4,
+     12
+    ],
+    "ram2 & kurma1": [
+     4,
+     11
+    ],
+    "ram2 & vip4": [
+     2,
+     3
+    ],
+    "ram2 & vipc4": [
+     2,
+     3
+    ],
+    "ram1 & bhp9": [
+     4,
+     12
+    ],
+    "ram1 & linga1": [
+     4,
+     12
+    ],
+    "ram1 & kurma1": [
+     4,
+     11
+    ],
+    "ram1 & vip4": [
+     2,
+     3
+    ],
+    "ram1 & vipc4": [
+     2,
+     3
+    ],
+    "bhp9 & linga1": [
+     5,
+     11
+    ],
+    "bhp9 & kurma1": [
+     7,
+     11
+    ],
+    "bhp9 & vip4": [
+     3,
+     3
+    ],
+    "bhp9 & vipc4": [
+     3,
+     3
+    ],
+    "linga1 & kurma1": [
+     9,
+     10
+    ],
+    "linga1 & vip4": [
+     2,
+     3
+    ],
+    "linga1 & vipc4": [
+     2,
+     3
+    ],
+    "kurma1 & vip4": [
+     2,
+     3
+    ],
+    "kurma1 & vipc4": [
+     2,
+     3
+    ],
+    "vip4 & vipc4": [
+     3,
+     3
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Ikṣvāku",
+     "n": 7,
+     "cells": {
+      "ram2": {
+       "name": "Ikṣvāku",
+       "ref": "R 2,102.5",
+       "words": "ikṣvākus tu manoḥ sutaḥ"
+      },
+      "ram1": {
+       "name": "Ikṣvāku",
+       "ref": "R 1,69.18",
+       "words": "ikṣvākus tu manoḥ sutaḥ"
+      },
+      "bhp9": {
+       "name": "Ikṣvāku",
+       "ref": "BhP 9.6.4",
+       "words": "manorjajñe ikṣvākurghrāṇataḥ sutaḥ"
+      },
+      "linga1": {
+       "name": "Ikṣvāku",
+       "ref": "LiP 1,65.17",
+       "words": "manostu prathamasyāsan nava putrāstu"
+      },
+      "kurma1": {
+       "name": "Ikṣvāku",
+       "ref": "KurmP 1,19.4",
+       "words": "manostu prathamasyāsan nava putrāstu saṃyamāḥ ikṣvākuḥ"
+      },
+      "vip4": {
+       "name": "Ikṣvāku",
+       "ref": "ViP 4,1.7",
+       "words": "manorikṣvāku"
+      },
+      "vipc4": {
+       "name": "Ikṣvāku",
+       "ref": "ViPc 4,1.8",
+       "words": "manor ikṣvāku"
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "one",
+     "name": "Kukṣi",
+     "n": 1,
+     "cells": {
+      "ram2": {
+       "name": "Kukṣi",
+       "ref": "R 2,102.7",
+       "words": "ikṣvākos tu sutaḥ śrīmān kukṣir"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Vikukṣi",
+     "n": 7,
+     "cells": {
+      "ram2": {
+       "name": "Vikukṣi",
+       "ref": "R 2,102.7",
+       "words": "kukṣer athātmajo vīro vikukṣir udapadyata"
+      },
+      "ram1": {
+       "name": "Vikukṣi",
+       "ref": "R 1,69.19",
+       "words": "ikṣvākos tu sutaḥ śrīmān vikukṣir udapadyata"
+      },
+      "bhp9": {
+       "name": "Vikukṣi",
+       "ref": "BhP 9.6.4",
+       "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ"
+      },
+      "linga1": {
+       "name": "Vikukṣi",
+       "ref": "LiP 1,65.31",
+       "words": "ikṣvākorabhavadvīro vikukṣir"
+      },
+      "kurma1": {
+       "name": "Vikukṣi",
+       "ref": "KurmP 1,19.10",
+       "words": "ikṣvākoścābhavad vīro vikukṣirnāma"
+      },
+      "vip4": {
+       "name": "Vikukṣi",
+       "ref": "ViP 4,2.12",
+       "words": "tasya putraśatapradhānā vikukṣinimidaṇḍākhyāstrayaḥ putrā babhūvuḥ"
+      },
+      "vipc4": {
+       "name": "Vikukṣi",
+       "ref": "ViPc 4,2.9",
+       "words": "tasya putraśatapravarā vikukṣinimidaṇḍākhyās trayaḥ putrā"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "differ",
+     "name": "Purañjaya",
+     "n": 3,
+     "cells": {
+      "ram2": {
+       "name": "Bāṇa",
+       "ref": "R 2,102.8",
+       "words": "vikukṣes tu mahātejā bāṇaḥ putraḥ"
+      },
+      "ram1": {
+       "name": "Bāṇa",
+       "ref": "R 1,69.20",
+       "words": "vikukṣes tu mahātejā bāṇaḥ putraḥ"
+      },
+      "bhp9": {
+       "name": "Purañjaya",
+       "ref": "BhP 9.6.12",
+       "words": "purañjayastasya suta"
+      },
+      "linga1": {
+       "name": "Kakutstha",
+       "ref": "LiP 1,65.32",
+       "words": "jyeṣṭhaḥ putraśatasyāsīd"
+      },
+      "kurma1": {
+       "name": "Kakutstha",
+       "ref": "KurmP 1,19.11",
+       "words": "teṣāñjyeṣṭhaḥ kakutstho 'bhūt"
+      },
+      "vip4": {
+       "name": "Purañjaya",
+       "ref": "ViP 4,2.20",
+       "words": "śaśādasya tasya purañjayonāma putrobhavat"
+      },
+      "vipc4": {
+       "name": "Puraṃjaya",
+       "ref": "ViPc 4,2.14",
+       "words": "śaśādasya puraṃjayo nāma putro 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "differ",
+     "name": "Anaraṇya",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Anaraṇya",
+       "ref": "R 2,102.8",
+       "words": "bāṇasya tu mahābāhur anaraṇyo"
+      },
+      "ram1": {
+       "name": "Anaraṇya",
+       "ref": "R 1,69.20",
+       "words": "bāṇasya tu mahātejā anaraṇyaḥ"
+      },
+      "bhp9": {
+       "name": "Anenas",
+       "ref": "BhP 9.6.20",
+       "words": "purañjayasya putro 'bhūdanenāḥ"
+      },
+      "linga1": {
+       "name": "Suyodhana",
+       "ref": "LiP 1,65.32",
+       "words": "kakutsthāttu suyodhanaḥ"
+      },
+      "kurma1": {
+       "name": "Suyodhana",
+       "ref": "KurmP 1,19.11",
+       "words": "kākutstho hi suyodhanaḥ"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Pṛthu",
+     "n": 5,
+     "cells": {
+      "ram2": {
+       "name": "Pṛthu",
+       "ref": "R 2,102.10",
+       "words": "anaraṇyān mahābāhuḥ pṛthū rājā babhūva"
+      },
+      "ram1": {
+       "name": "Pṛthu",
+       "ref": "R 1,69.21",
+       "words": "anaraṇyāt pṛthur jajñe"
+      },
+      "bhp9": {
+       "name": "Pṛthu",
+       "ref": "BhP 9.6.20",
+       "words": "anenāstatsutaḥ pṛthuḥ"
+      },
+      "linga1": {
+       "name": "Pṛthu",
+       "ref": "LiP 1,65.33",
+       "words": "tataḥ pṛthurmuniśreṣṭhā"
+      },
+      "kurma1": {
+       "name": "Pṛthu",
+       "ref": "KurmP 1,19.11",
+       "words": "suyodhanāt pṛthuḥ"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "differ",
+     "name": "Triśaṅku",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Triśaṅku",
+       "ref": "R 2,102.10",
+       "words": "tasmāt pṛthor mahārājas triśaṅkur udapadyata"
+      },
+      "ram1": {
+       "name": "Triśaṅku",
+       "ref": "R 1,69.21",
+       "words": "triśaṅkus tu pṛthoḥ sutaḥ"
+      },
+      "bhp9": {
+       "name": "Viśvagandhi",
+       "ref": "BhP 9.6.20",
+       "words": "viśvagandhistataḥ"
+      },
+      "linga1": {
+       "name": "Viśvaka",
+       "ref": "LiP 1,65.33",
+       "words": "viśvakaḥ pārthivas tathā"
+      },
+      "kurma1": {
+       "name": "Viśvaka",
+       "ref": "KurmP 1,19.11",
+       "words": "viśvakaśca pṛthoḥ sutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "differ",
+     "name": "Dhundhumāra",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Dhundhumāra",
+       "ref": "R 2,102.11",
+       "words": "triśaṅkor abhavat sūnur dhundhumāro"
+      },
+      "ram1": {
+       "name": "Dhundhumāra",
+       "ref": "R 1,69.21",
+       "words": "triśaṅkor abhavat putro dhundhumāro"
+      },
+      "bhp9": {
+       "name": "Candra",
+       "ref": "BhP 9.6.20",
+       "words": "tataścandro"
+      },
+      "linga1": {
+       "name": "Ārdraka",
+       "ref": "LiP 1,65.33",
+       "words": "viśvakasyārdrako dhīmān"
+      },
+      "kurma1": {
+       "name": "Ārdraka",
+       "ref": "KurmP 1,19.12",
+       "words": "viśvakādārdrako"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "agree",
+     "name": "Yuvanāśva",
+     "n": 5,
+     "cells": {
+      "ram2": {
+       "name": "Yuvanāśva",
+       "ref": "R 2,102.11",
+       "words": "dhundhumārān mahātejā yuvanāśvo vyajāyata"
+      },
+      "ram1": {
+       "name": "Yuvanāśva",
+       "ref": "R 1,69.22",
+       "words": "dhundhumārān mahātejā yuvanāśvo"
+      },
+      "bhp9": {
+       "name": "Yuvanāśva",
+       "ref": "BhP 9.6.20",
+       "words": "yuvanāśvastu tatsutaḥ"
+      },
+      "linga1": {
+       "name": "Yuvanāśva",
+       "ref": "LiP 1,65.33",
+       "words": "yuvanāśvastu tatsutaḥ"
+      },
+      "kurma1": {
+       "name": "Yuvanāśva",
+       "ref": "KurmP 1,19.12",
+       "words": "yuvanāśvastu tatsutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "most",
+     "name": "Māndhātā",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Māndhātā",
+       "ref": "R 2,102.12",
+       "words": "yuvanāśva sutaḥ śrīmān māndhātā samapadyata"
+      },
+      "ram1": {
+       "name": "Māndhātā",
+       "ref": "R 1,69.22",
+       "words": "yuvanāśvasutaḥ śrīmān māndhātā"
+      },
+      "linga1": {
+       "name": "Śābasti",
+       "ref": "LiP 1,65.34",
+       "words": "śābastiś ca mahātejā"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "differ",
+     "name": "Susaṃdhi",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Susaṃdhi",
+       "ref": "R 2,102.12",
+       "words": "māndhātus tu mahātejāḥ susaṃdhir udapadyata"
+      },
+      "ram1": {
+       "name": "Susaṃdhi",
+       "ref": "R 1,69.23",
+       "words": "māndhātus tu sutaḥ śrīmān susaṃdhir"
+      },
+      "bhp9": {
+       "name": "Śrāvasta",
+       "ref": "BhP 9.6.21",
+       "words": "śrāvastastatsuto"
+      },
+      "linga1": {
+       "name": "Vaṃśaka",
+       "ref": "LiP 1,65.34",
+       "words": "vaṃśakastu tato 'bhavat"
+      },
+      "kurma1": {
+       "name": "Śrāvasti",
+       "ref": "KurmP 1,19.18",
+       "words": "tasya putro 'bhavad vīraḥ śrāvastiriti"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "most",
+     "name": "Bṛhadaśva",
+     "n": 3,
+     "cells": {
+      "ram2": {
+       "name": "Dhruvasaṃdhi",
+       "ref": "R 2,102.13",
+       "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit"
+      },
+      "ram1": {
+       "name": "Dhruvasaṃdhi",
+       "ref": "R 1,69.23",
+       "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ"
+      },
+      "bhp9": {
+       "name": "Bṛhadaśva",
+       "ref": "BhP 9.6.21",
+       "words": "bṛhadaśvastu śrāvastiḥ"
+      },
+      "linga1": {
+       "name": "Bṛhadaśva",
+       "ref": "LiP 1,65.35",
+       "words": "vaṃśācca bṛhadaśvo 'bhūt"
+      },
+      "kurma1": {
+       "name": "Bṛhadaśva",
+       "ref": "KurmP 1,19.19",
+       "words": "tasmācca bṛhadaśvo 'bhūt"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "differ",
+     "name": "Bharata",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Bharata",
+       "ref": "R 2,102.13",
+       "words": "yaśasvī dhruvasaṃdhes tu bharato"
+      },
+      "ram1": {
+       "name": "Bharata",
+       "ref": "R 1,69.24",
+       "words": "dhruvasaṃdhes tu bharato nāma"
+      },
+      "bhp9": {
+       "name": "Kuvalayāśvaka",
+       "ref": "BhP 9.6.21",
+       "words": "tataḥ kuvalayāśvakaḥ"
+      },
+      "kurma1": {
+       "name": "Kuvalayāśvaka",
+       "ref": "KurmP 1,19.19",
+       "words": "tasmāt kuvalayāśvakaḥ"
+      }
+     }
+    },
+    {
+     "gen": 13,
+     "status": "differ",
+     "name": "Asita",
+     "n": 2,
+     "cells": {
+      "ram2": {
+       "name": "Asita",
+       "ref": "R 2,102.14",
+       "words": "bharatāt tu mahābāhor asito nāma jāyata"
+      },
+      "ram1": {
+       "name": "Asita",
+       "ref": "R 1,69.24",
+       "words": "bharatāt tu mahātejā asito nāma jāyata"
+      },
+      "bhp9": {
+       "name": "Bhadrāśva",
+       "ref": "BhP 9.6.23",
+       "words": "tatsutāste"
+      },
+      "linga1": {
+       "name": "Kuvalāśva",
+       "ref": "LiP 1,65.35",
+       "words": "kuvalāśvastu tatsutaḥ"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "lunar",
+   "anchor": "Purūravas",
+   "father": "Budha",
+   "title": "the lunar line from Purūravas",
+   "order": [
+    "garuda1",
+    "bhp9",
+    "matsya",
+    "kurma1"
+   ],
+   "counts": {
+    "agree": 4,
+    "most": 1,
+    "differ": 0,
+    "one": 8,
+    "share_agree": 0.8
+   },
+   "pairs": {
+    "garuda1 & bhp9": [
+     5,
+     5
+    ],
+    "garuda1 & matsya": [
+     4,
+     5
+    ],
+    "garuda1 & kurma1": [
+     4,
+     4
+    ],
+    "bhp9 & matsya": [
+     4,
+     5
+    ],
+    "bhp9 & kurma1": [
+     4,
+     4
+    ],
+    "matsya & kurma1": [
+     3,
+     4
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Purūravas",
+     "n": 4,
+     "cells": {
+      "garuda1": {
+       "name": "Purūravas",
+       "ref": "GarP 1,138.4",
+       "words": "budhājjāto rājā rudra purūravāḥ"
+      },
+      "bhp9": {
+       "name": "Purūravas",
+       "ref": null,
+       "words": null
+      },
+      "matsya": {
+       "name": "Purūravas",
+       "ref": "MatsP 24.9",
+       "words": "budhaḥ putramajījanat"
+      },
+      "kurma1": {
+       "name": "Purūravas",
+       "ref": null,
+       "words": null
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "most",
+     "name": "Āyu",
+     "n": 3,
+     "cells": {
+      "garuda1": {
+       "name": "Āyu",
+       "ref": "GarP 1,139.3",
+       "words": "budhaputrādathorvaśyāṃ ṣaṭ putrāḥ"
+      },
+      "bhp9": {
+       "name": "Āyu",
+       "ref": "BhP 9.17.1",
+       "words": "yaḥ purūravasaḥ putra āyus"
+      },
+      "matsya": {
+       "name": "Āyus",
+       "ref": "MatsP 24.32",
+       "words": "urvaśī budhasūnutaḥ ajījanatsutānaṣṭau"
+      },
+      "kurma1": {
+       "name": "Āyu",
+       "ref": "KurmP 1,21.1",
+       "words": "tasya putrā babhūvurhi ṣaḍindrasamatejasaḥ āyurmāyuramāvāyuḥ"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Nahuṣa",
+     "n": 4,
+     "cells": {
+      "garuda1": {
+       "name": "Nahuṣa",
+       "ref": "GarP 1,139.8",
+       "words": "āyuṣo nahuṣaḥ"
+      },
+      "bhp9": {
+       "name": "Nahuṣa",
+       "ref": "BhP 9.17.1",
+       "words": "āyustasyābhavan sutāḥ nahuṣaḥ"
+      },
+      "matsya": {
+       "name": "Nahuṣa",
+       "ref": "MatsP 24.34",
+       "words": "āyuṣo nahuṣaḥ putrau"
+      },
+      "kurma1": {
+       "name": "Nahuṣa",
+       "ref": "KurmP 1,21.3",
+       "words": "āyuṣastanayā vīrāḥ pañcaivāsan"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "agree",
+     "name": "Yayāti",
+     "n": 4,
+     "cells": {
+      "garuda1": {
+       "name": "Yayāti",
+       "ref": "GarP 1,139.19",
+       "words": "nahuṣasya sutāḥ khyātā"
+      },
+      "bhp9": {
+       "name": "Yayāti",
+       "ref": "BhP 9.18.1",
+       "words": "ṣaḍ ime nahuṣasyāsan"
+      },
+      "matsya": {
+       "name": "Yayāti",
+       "ref": "MatsP 24.55",
+       "words": "yayātirnāhuṣaścāsīd"
+      },
+      "kurma1": {
+       "name": "Āyāti",
+       "ref": "KurmP 1,21.4",
+       "words": "nahuṣasya tu dāyādāḥ"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Yadu",
+     "n": 3,
+     "cells": {
+      "garuda1": {
+       "name": "Yadu",
+       "ref": "GarP 1,139.19",
+       "words": "yayāternṛpatestathā yaduṃ ca"
+      },
+      "bhp9": {
+       "name": "Yadu",
+       "ref": "BhP 9.18.38",
+       "words": "putraṃ jyeṣṭham avocata yado tāta"
+      },
+      "matsya": {
+       "name": "Yadu",
+       "ref": "MatsP 24.53",
+       "words": "yayāteḥ pañca dāyādās"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "one",
+     "name": "Sahasrajit",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Sahasrajit",
+       "ref": "GarP 1,139.20",
+       "words": "sahasrajītkroṣṭumanā raghuścaiva yadoḥ sutāḥ"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "one",
+     "name": "Śatajit",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Śatajit",
+       "ref": "GarP 1,139.21",
+       "words": "sahasrajitaḥ śatajit"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "one",
+     "name": "Haihaya",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Haihaya",
+       "ref": "GarP 1,139.21",
+       "words": "śatajittasmādvai hayahaihayau"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "one",
+     "name": "Dharma",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Dharma",
+       "ref": "GarP 1,139.21",
+       "words": "dharmo haihayato 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "one",
+     "name": "Dharmanetra",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Dharmanetra",
+       "ref": "GarP 1,139.22",
+       "words": "dharmasya dharmanetro 'būt"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "one",
+     "name": "Kunti",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Kunti",
+       "ref": "GarP 1,139.22",
+       "words": "kuntirvai dharmanetrataḥ"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "one",
+     "name": "Sāhañji",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Sāhañji",
+       "ref": "GarP 1,139.22",
+       "words": "kunterbabhūta sāhañjiḥ"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "one",
+     "name": "Mahiṣmān",
+     "n": 1,
+     "cells": {
+      "garuda1": {
+       "name": "Mahiṣmān",
+       "ref": "GarP 1,139.22",
+       "words": "mahiṣmāṃśca tadātmajaḥ"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "yadu",
+   "anchor": "Yadu",
+   "father": "Yayāti",
+   "title": "the Yādavas from Yadu",
+   "order": [
+    "linga1",
+    "vipc4",
+    "matsya",
+    "vip4",
+    "agni",
+    "garuda1",
+    "bndp2",
+    "kurma1",
+    "brahma",
+    "bhp9",
+    "hv"
+   ],
+   "counts": {
+    "agree": 8,
+    "most": 4,
+    "differ": 2,
+    "one": 0,
+    "share_agree": 0.571
+   },
+   "pairs": {
+    "linga1 & vipc4": [
+     11,
+     14
+    ],
+    "linga1 & matsya": [
+     8,
+     13
+    ],
+    "linga1 & vip4": [
+     11,
+     13
+    ],
+    "linga1 & agni": [
+     8,
+     11
+    ],
+    "linga1 & garuda1": [
+     7,
+     9
+    ],
+    "linga1 & bndp2": [
+     5,
+     7
+    ],
+    "linga1 & kurma1": [
+     7,
+     7
+    ],
+    "linga1 & brahma": [
+     3,
+     6
+    ],
+    "linga1 & bhp9": [
+     4,
+     4
+    ],
+    "linga1 & hv": [
+     1,
+     4
+    ],
+    "vipc4 & matsya": [
+     10,
+     13
+    ],
+    "vipc4 & vip4": [
+     13,
+     13
+    ],
+    "vipc4 & agni": [
+     9,
+     11
+    ],
+    "vipc4 & garuda1": [
+     9,
+     9
+    ],
+    "vipc4 & bndp2": [
+     6,
+     7
+    ],
+    "vipc4 & kurma1": [
+     6,
+     7
+    ],
+    "vipc4 & brahma": [
+     3,
+     6
+    ],
+    "vipc4 & bhp9": [
+     4,
+     4
+    ],
+    "vipc4 & hv": [
+     1,
+     4
+    ],
+    "matsya & vip4": [
+     9,
+     12
+    ],
+    "matsya & agni": [
+     10,
+     11
+    ],
+    "matsya & garuda1": [
+     7,
+     8
+    ],
+    "matsya & bndp2": [
+     6,
+     7
+    ],
+    "matsya & kurma1": [
+     5,
+     6
+    ],
+    "matsya & brahma": [
+     3,
+     6
+    ],
+    "matsya & bhp9": [
+     4,
+     4
+    ],
+    "matsya & hv": [
+     1,
+     4
+    ],
+    "vip4 & agni": [
+     8,
+     10
+    ],
+    "vip4 & garuda1": [
+     9,
+     9
+    ],
+    "vip4 & bndp2": [
+     6,
+     6
+    ],
+    "vip4 & kurma1": [
+     6,
+     7
+    ],
+    "vip4 & brahma": [
+     3,
+     6
+    ],
+    "vip4 & bhp9": [
+     4,
+     4
+    ],
+    "vip4 & hv": [
+     2,
+     3
+    ],
+    "agni & garuda1": [
+     5,
+     6
+    ],
+    "agni & bndp2": [
+     4,
+     5
+    ],
+    "agni & kurma1": [
+     4,
+     4
+    ],
+    "agni & brahma": [
+     4,
+     5
+    ],
+    "agni & bhp9": [
+     3,
+     3
+    ],
+    "agni & hv": [
+     1,
+     4
+    ],
+    "garuda1 & bndp2": [
+     6,
+     6
+    ],
+    "garuda1 & kurma1": [
+     6,
+     7
+    ],
+    "garuda1 & brahma": [
+     4,
+     6
+    ],
+    "garuda1 & bhp9": [
+     4,
+     4
+    ],
+    "garuda1 & hv": [
+     1,
+     3
+    ],
+    "bndp2 & kurma1": [
+     5,
+     6
+    ],
+    "bndp2 & brahma": [
+     3,
+     5
+    ],
+    "bndp2 & bhp9": [
+     4,
+     4
+    ],
+    "bndp2 & hv": [
+     1,
+     3
+    ],
+    "kurma1 & brahma": [
+     3,
+     5
+    ],
+    "kurma1 & bhp9": [
+     4,
+     4
+    ],
+    "kurma1 & hv": [
+     1,
+     2
+    ],
+    "brahma & bhp9": [
+     2,
+     3
+    ],
+    "brahma & hv": [
+     2,
+     3
+    ],
+    "bhp9 & hv": [
+     1,
+     2
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Yadu",
+     "n": 11,
+     "cells": {
+      "linga1": {
+       "name": "Yadu",
+       "ref": null,
+       "words": null
+      },
+      "vipc4": {
+       "name": "Yadu",
+       "ref": "ViPc 4,10.6",
+       "words": "jyeṣṭhaputraṃ yadum uvāca"
+      },
+      "matsya": {
+       "name": "Yadu",
+       "ref": null,
+       "words": null
+      },
+      "vip4": {
+       "name": "Yadu",
+       "ref": "ViP 4,10.8",
+       "words": "jyeṣṭhaṃ putraṃ yadumuvāca"
+      },
+      "agni": {
+       "name": "Yadu",
+       "ref": "AgP 273.22",
+       "words": "yayāteḥ pañca tatsutāḥ"
+      },
+      "garuda1": {
+       "name": "Yadu",
+       "ref": "GarP 1,139.19",
+       "words": "yayāternṛpatestathā yaduṃ ca"
+      },
+      "bndp2": {
+       "name": "Yadu",
+       "ref": null,
+       "words": null
+      },
+      "kurma1": {
+       "name": "Yadu",
+       "ref": null,
+       "words": null
+      },
+      "brahma": {
+       "name": "Yadu",
+       "ref": "BrP 12.24",
+       "words": "yadum abravīt jarāṃ me pratigṛhṇīṣva putra"
+      },
+      "bhp9": {
+       "name": "Yadu",
+       "ref": null,
+       "words": null
+      },
+      "hv": {
+       "name": "Yadu",
+       "ref": null,
+       "words": null
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "agree",
+     "name": "Sahasrajit",
+     "n": 8,
+     "cells": {
+      "linga1": {
+       "name": "Sahasrajit",
+       "ref": "LiP 1,68.2",
+       "words": "yadoḥ putrā babhūvur hi pañca ... sahasrajitsuto jyeṣṭhaḥ"
+      },
+      "vipc4": {
+       "name": "Sahasrajit",
+       "ref": "ViPc 4,11.3",
+       "words": "sahasrajitkroṣṭunalaraghusaṃjñāś catvāro yaduputrā babhūvuḥ"
+      },
+      "matsya": {
+       "name": "Sahasrajit",
+       "ref": "MatsP 43.6",
+       "words": "yadoḥ putrā babhūvurhi pañca"
+      },
+      "vip4": {
+       "name": "Sahasrajit",
+       "ref": "ViP 4,11.5",
+       "words": "yaduputrā vabhuvuḥ"
+      },
+      "garuda1": {
+       "name": "Sahasrajit",
+       "ref": "GarP 1,139.20",
+       "words": "sahasrajītkroṣṭumanā raghuścaiva yadoḥ sutāḥ"
+      },
+      "bndp2": {
+       "name": "Sahasrajit",
+       "ref": "BndP 2,69.2",
+       "words": "yadoḥ putrā babhūvurhi pañca"
+      },
+      "kurma1": {
+       "name": "Sahastrajit",
+       "ref": "KurmP 1,21.11",
+       "words": "yadorapyabhavan putrāḥ pañca"
+      },
+      "bhp9": {
+       "name": "Sahasrajit",
+       "ref": "BhP 9.23.20",
+       "words": "yadoḥ sahasrajit kroṣṭā nalo ripuriti"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "most",
+     "name": "Śatajit",
+     "n": 9,
+     "cells": {
+      "linga1": {
+       "name": "Śatajit",
+       "ref": "LiP 1,68.3",
+       "words": "sahasrajitsutastadvac chatajinnāma pārthivaḥ"
+      },
+      "vipc4": {
+       "name": "Śatajit",
+       "ref": "ViPc 4,11.3",
+       "words": "sahasrajitputraḥ śatajit"
+      },
+      "matsya": {
+       "name": "Śatajit",
+       "ref": "MatsP 43.7",
+       "words": "sahasrajestu dāyādaḥ śatajirnāma pārthivaḥ"
+      },
+      "vip4": {
+       "name": "Śatajit",
+       "ref": "ViP 4,11.6",
+       "words": "sahasrajitpuḥ śatajit"
+      },
+      "agni": {
+       "name": "Śatajit",
+       "ref": "AgP 274.1",
+       "words": "yadorāsanpañca putrā"
+      },
+      "garuda1": {
+       "name": "Śatajit",
+       "ref": "GarP 1,139.21",
+       "words": "sahasrajitaḥ śatajit"
+      },
+      "bndp2": {
+       "name": "Śatajit",
+       "ref": "BndP 2,69.3",
+       "words": "sahasrajitsutaḥ śrīmāñchatajinnāma"
+      },
+      "kurma1": {
+       "name": "Śatajit",
+       "ref": "KurmP 1,21.12",
+       "words": "sahastrajitsutastadvacchatajinnāma"
+      },
+      "brahma": {
+       "name": "Sahasrāda",
+       "ref": "BrP 13.153",
+       "words": "babhūvus tu yadoḥ putrāḥ pañca"
+      },
+      "bhp9": {
+       "name": "Śatajit",
+       "ref": "BhP 9.23.21",
+       "words": "śatajit prathamātmajaḥ"
+      },
+      "hv": {
+       "name": "Sahasrada",
+       "ref": "HV 23.134",
+       "words": "babhūvus tu yadoḥ putrāḥ pañca"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "agree",
+     "name": "Haihaya",
+     "n": 10,
+     "cells": {
+      "linga1": {
+       "name": "Haihaya",
+       "ref": "LiP 1,68.3",
+       "words": "sutāḥ śatajitaḥ khyātās trayaḥ"
+      },
+      "vipc4": {
+       "name": "Haihaya",
+       "ref": "ViPc 4,11.3",
+       "words": "tasya haihayahehayaveṇuhayās trayaḥ putrā babhūvuḥ"
+      },
+      "matsya": {
+       "name": "Haihaya",
+       "ref": "MatsP 43.8",
+       "words": "śatajerapi dāyādās trayaḥ"
+      },
+      "vip4": {
+       "name": "Haihaya",
+       "ref": "ViP 4,11.7",
+       "words": "tasya haihayahehayaveṇuhayāstrayaḥ putrā babhūvuḥ"
+      },
+      "agni": {
+       "name": "Haihaya",
+       "ref": "AgP 274.2",
+       "words": "śatajiddhaihayo reṇuhayo haya iti trayaḥ"
+      },
+      "garuda1": {
+       "name": "Haihaya",
+       "ref": "GarP 1,139.21",
+       "words": "śatajittasmādvai hayahaihayau"
+      },
+      "bndp2": {
+       "name": "Haihaya",
+       "ref": "BndP 2,69.3",
+       "words": "śatajittanayāḥ khyātastrayaḥ"
+      },
+      "kurma1": {
+       "name": "Haihaya",
+       "ref": "KurmP 1,21.12",
+       "words": "sutāḥ śatajito 'pyāsaṃstrayaḥ"
+      },
+      "brahma": {
+       "name": "Haihaya",
+       "ref": "BrP 13.154",
+       "words": "sahasrādasya dāyādās trayaḥ"
+      },
+      "bhp9": {
+       "name": "Haihaya",
+       "ref": "BhP 9.23.21",
+       "words": "mahāhayo reṇuhayo haihayaśceti tatsutāḥ"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Dharma",
+     "n": 5,
+     "cells": {
+      "linga1": {
+       "name": "Dharma",
+       "ref": "LiP 1,68.4",
+       "words": "haihayasya tu dāyādo dharma"
+      },
+      "vipc4": {
+       "name": "Dharma",
+       "ref": "ViPc 4,11.3",
+       "words": "haihayaputro dharmas"
+      },
+      "vip4": {
+       "name": "Dharma",
+       "ref": "ViP 4,11.8",
+       "words": "haihayaputro dharmaḥ"
+      },
+      "garuda1": {
+       "name": "Dharma",
+       "ref": "GarP 1,139.21",
+       "words": "dharmo haihayato 'bhavat"
+      },
+      "kurma1": {
+       "name": "Dharma",
+       "ref": "KurmP 1,21.13",
+       "words": "haihayasyābhavat putro dharma"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Dharmanetra",
+     "n": 9,
+     "cells": {
+      "linga1": {
+       "name": "Dharmanetra",
+       "ref": "LiP 1,68.5",
+       "words": "tasya putro 'bhavadviprā dharmanetra"
+      },
+      "vipc4": {
+       "name": "Dharmanetra",
+       "ref": "ViPc 4,11.3",
+       "words": "tasyāpi dharmanetras"
+      },
+      "matsya": {
+       "name": "Dharmanetra",
+       "ref": "MatsP 43.9",
+       "words": "haihayasya tu dāyādo dharmanetraḥ"
+      },
+      "vip4": {
+       "name": "Dharmanetra",
+       "ref": "ViP 4,11.8",
+       "words": "tasyāpi dharmanetraḥ"
+      },
+      "agni": {
+       "name": "Dharmanetra",
+       "ref": "AgP 274.2",
+       "words": "dharmanetro haihayasya"
+      },
+      "garuda1": {
+       "name": "Dharmanetra",
+       "ref": "GarP 1,139.22",
+       "words": "dharmasya dharmanetro 'būt"
+      },
+      "bndp2": {
+       "name": "Dharmanetra",
+       "ref": "BndP 2,69.4",
+       "words": "haihayasya tu dāyādo dharmanetra"
+      },
+      "kurma1": {
+       "name": "Dharmanetra",
+       "ref": "KurmP 1,21.14",
+       "words": "tasya putro 'bhavad viprā dharmanetraḥ"
+      },
+      "brahma": {
+       "name": "Dharmanetra",
+       "ref": "BrP 13.155",
+       "words": "haihayasyābhavat putro dharmanetra"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "most",
+     "name": "Kunti",
+     "n": 5,
+     "cells": {
+      "linga1": {
+       "name": "Kīrti",
+       "ref": "LiP 1,68.5",
+       "words": "dharmanetrasya kīrtis"
+      },
+      "vipc4": {
+       "name": "Kunti",
+       "ref": "ViPc 4,11.3",
+       "words": "dharmanetras tataḥ kuntiḥ"
+      },
+      "matsya": {
+       "name": "Kunti",
+       "ref": "MatsP 43.9",
+       "words": "dharmanetrasya kuntistu"
+      },
+      "vip4": {
+       "name": "Kunti",
+       "ref": "ViP 4,11.8",
+       "words": "tataḥ kuntiḥ"
+      },
+      "garuda1": {
+       "name": "Kunti",
+       "ref": "GarP 1,139.22",
+       "words": "kuntirvai dharmanetrataḥ"
+      },
+      "bndp2": {
+       "name": "Kunti",
+       "ref": "BndP 2,69.5",
+       "words": "dharmanetrasya kuntistu"
+      },
+      "kurma1": {
+       "name": "Kīrti",
+       "ref": "KurmP 1,21.14",
+       "words": "dharmanetrasya kīrtistu"
+      },
+      "brahma": {
+       "name": "Kārta",
+       "ref": "BrP 13.156",
+       "words": "dharmanetrasya kārtas"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "differ",
+     "name": "Sāhaṃjit",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Saṃjaya",
+       "ref": "LiP 1,68.5",
+       "words": "saṃjayas tasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Sāhaṃjit",
+       "ref": "ViPc 4,11.3",
+       "words": "kunteḥ sāhaṃjit"
+      },
+      "matsya": {
+       "name": "Saṃhata",
+       "ref": "MatsP 43.9",
+       "words": "saṃhatastasya cātmajaḥ"
+      },
+      "vip4": {
+       "name": "Sahajit",
+       "ref": "ViP 4,11.8",
+       "words": "kunteḥ sahajit"
+      },
+      "agni": {
+       "name": "Saṃhana",
+       "ref": "AgP 274.2",
+       "words": "dharmanetrasya saṃhanaḥ"
+      },
+      "garuda1": {
+       "name": "Sāhañji",
+       "ref": "GarP 1,139.22",
+       "words": "kunterbabhūta sāhañjiḥ"
+      },
+      "brahma": {
+       "name": "Sāhañja",
+       "ref": "BrP 13.156",
+       "words": "sāhañjas tasya cātmajaḥ"
+      },
+      "hv": {
+       "name": "Śatajit",
+       "ref": "HV 23.135",
+       "words": "sahasradasya dāyādās traya"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "agree",
+     "name": "Mahiṣmat",
+     "n": 6,
+     "cells": {
+      "linga1": {
+       "name": "Mahiṣmat",
+       "ref": "LiP 1,68.6",
+       "words": "saṃjayasya tu dāyādo mahiṣmān"
+      },
+      "vipc4": {
+       "name": "Mahiṣmān",
+       "ref": "ViPc 4,11.3",
+       "words": "tattanayo mahiṣmān"
+      },
+      "matsya": {
+       "name": "Mahiṣmat",
+       "ref": "MatsP 43.10",
+       "words": "saṃhatasya tu dāyādo mahiṣmān"
+      },
+      "vip4": {
+       "name": "Mahiṣmān",
+       "ref": "ViP 4,11.9",
+       "words": "tattanayo mahiṣmān"
+      },
+      "agni": {
+       "name": "Mahimā",
+       "ref": "AgP 274.3",
+       "words": "mahimā saṃhanasyāsīt"
+      },
+      "garuda1": {
+       "name": "Mahiṣmān",
+       "ref": "GarP 1,139.22",
+       "words": "mahiṣmāṃśca tadātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "most",
+     "name": "Bhadraśreṇya",
+     "n": 4,
+     "cells": {
+      "linga1": {
+       "name": "Bhadraśreṇya",
+       "ref": "LiP 1,68.6",
+       "words": "mahiṣmataḥ putro bhadraśreṇyaḥ"
+      },
+      "vipc4": {
+       "name": "Bhadraśreṇya",
+       "ref": "ViPc 4,11.4",
+       "words": "tasmād bhadraśreṇyas"
+      },
+      "matsya": {
+       "name": "Rudraśreṇya",
+       "ref": "MatsP 43.10",
+       "words": "mahiṣmataḥ putro rudraśreṇyaḥ"
+      },
+      "vip4": {
+       "name": "Bhadraśreṇya",
+       "ref": "ViP 4,11.10",
+       "words": "tasmādbhadraśreṇyaḥ"
+      },
+      "agni": {
+       "name": "Bhadrasenaka",
+       "ref": "AgP 274.3",
+       "words": "mahimnao bhadrasenakaḥ"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "agree",
+     "name": "Durdama",
+     "n": 5,
+     "cells": {
+      "linga1": {
+       "name": "Durdama",
+       "ref": "LiP 1,68.7",
+       "words": "bhadraśreṇyasya dāyādo durdamo"
+      },
+      "vipc4": {
+       "name": "Durdama",
+       "ref": "ViPc 4,11.4",
+       "words": "tato durdamas"
+      },
+      "matsya": {
+       "name": "Durdama",
+       "ref": "MatsP 43.11",
+       "words": "rudraśreṇyasya putro 'bhūd durdamo"
+      },
+      "vip4": {
+       "name": "Durdama",
+       "ref": "ViP 4,11.10",
+       "words": "tato durdamaḥ"
+      },
+      "agni": {
+       "name": "Durgama",
+       "ref": "AgP 274.3",
+       "words": "bhadrasenād durgamo 'bhūt"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "most",
+     "name": "Dhanaka",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Dhanaka",
+       "ref": "LiP 1,68.7",
+       "words": "durdamasya suto ... dhanako"
+      },
+      "vipc4": {
+       "name": "Dhanaka",
+       "ref": "ViPc 4,11.4",
+       "words": "tasmād dhanakaḥ"
+      },
+      "matsya": {
+       "name": "Kanaka",
+       "ref": "MatsP 43.12",
+       "words": "durdamasya suto dhīmān kanako"
+      },
+      "vip4": {
+       "name": "Dhanaka",
+       "ref": "ViP 4,11.10",
+       "words": "tasmāddhanakaḥ"
+      },
+      "agni": {
+       "name": "Kanaka",
+       "ref": "AgP 274.3",
+       "words": "durgamātkanako 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "agree",
+     "name": "Kṛtavīrya",
+     "n": 5,
+     "cells": {
+      "linga1": {
+       "name": "Kṛtavīrya",
+       "ref": "LiP 1,68.8",
+       "words": "dhanakasya tu dāyādāś catvāro ... kṛtavīryaḥ"
+      },
+      "vipc4": {
+       "name": "Kṛtavīrya",
+       "ref": "ViPc 4,11.4",
+       "words": "dhanakasya kṛtavīryakṛtāgnikṛtadharmakṛtaujasaś catvāraḥ putrāḥ"
+      },
+      "matsya": {
+       "name": "Kṛtavīrya",
+       "ref": "MatsP 43.12",
+       "words": "kanakasya tu dāyādāś catvāro"
+      },
+      "vip4": {
+       "name": "Kṛtavīrya",
+       "ref": "ViP 4,11.10",
+       "words": "dhanakasya kṛtavīryakṛtāgnikṛtadharmakṛtaujasaścatvāraḥ putrā babhūvuḥ"
+      },
+      "agni": {
+       "name": "Kṛtavīrya",
+       "ref": "AgP 274.4",
+       "words": "kanakāt kṛtavīryastu"
+      }
+     }
+    },
+    {
+     "gen": 13,
+     "status": "differ",
+     "name": "Arjuna",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Kārtavīrya Arjuna",
+       "ref": "LiP 1,68.9",
+       "words": "kārtavīryastato 'rjunaḥ jajñe"
+      },
+      "vipc4": {
+       "name": "Arjuna",
+       "ref": "ViPc 4,11.4",
+       "words": "kṛtavīryād arjunaḥ saptadvīpapatir bāhusahasrī jajñe"
+      },
+      "matsya": {
+       "name": "Arjuna",
+       "ref": "MatsP 43.13",
+       "words": "kṛtavīryāttato 'rjunaḥ"
+      },
+      "agni": {
+       "name": "Arjuna",
+       "ref": "AgP 274.4",
+       "words": "kṛtavīryāttu so 'rjunaḥ"
+      },
+      "bndp2": {
+       "name": "Saṃkṣeya",
+       "ref": "BndP 2,69.5",
+       "words": "saṃkṣeyastasya cātmajaḥ"
+      },
+      "hv": {
+       "name": "Haya",
+       "ref": "HV 23.135",
+       "words": "śatajitaḥ sutāḥ khyātāḥ hayaś"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "haihaya",
+   "anchor": "Sahasrajit",
+   "father": "Yadu",
+   "title": "the Haihayas from Sahasrajit",
+   "order": [
+    "linga1",
+    "vipc4",
+    "matsya",
+    "vip4",
+    "garuda1",
+    "bndp2",
+    "bhp9"
+   ],
+   "counts": {
+    "agree": 8,
+    "most": 4,
+    "differ": 1,
+    "one": 0,
+    "share_agree": 0.615
+   },
+   "pairs": {
+    "linga1 & vipc4": [
+     10,
+     13
+    ],
+    "linga1 & matsya": [
+     7,
+     12
+    ],
+    "linga1 & vip4": [
+     10,
+     12
+    ],
+    "linga1 & garuda1": [
+     6,
+     8
+    ],
+    "linga1 & bndp2": [
+     4,
+     6
+    ],
+    "linga1 & bhp9": [
+     3,
+     3
+    ],
+    "vipc4 & matsya": [
+     9,
+     12
+    ],
+    "vipc4 & vip4": [
+     12,
+     12
+    ],
+    "vipc4 & garuda1": [
+     8,
+     8
+    ],
+    "vipc4 & bndp2": [
+     5,
+     6
+    ],
+    "vipc4 & bhp9": [
+     3,
+     3
+    ],
+    "matsya & vip4": [
+     8,
+     11
+    ],
+    "matsya & garuda1": [
+     6,
+     7
+    ],
+    "matsya & bndp2": [
+     5,
+     6
+    ],
+    "matsya & bhp9": [
+     3,
+     3
+    ],
+    "vip4 & garuda1": [
+     8,
+     8
+    ],
+    "vip4 & bndp2": [
+     5,
+     5
+    ],
+    "vip4 & bhp9": [
+     3,
+     3
+    ],
+    "garuda1 & bndp2": [
+     5,
+     5
+    ],
+    "garuda1 & bhp9": [
+     3,
+     3
+    ],
+    "bndp2 & bhp9": [
+     3,
+     3
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Sahasrajit",
+     "n": 7,
+     "cells": {
+      "linga1": {
+       "name": "Sahasrajit",
+       "ref": "LiP 1,68.2",
+       "words": "yadoḥ putrā babhūvur hi pañca ... sahasrajitsuto jyeṣṭhaḥ"
+      },
+      "vipc4": {
+       "name": "Sahasrajit",
+       "ref": "ViPc 4,11.3",
+       "words": "sahasrajitkroṣṭunalaraghusaṃjñāś catvāro yaduputrā babhūvuḥ"
+      },
+      "matsya": {
+       "name": "Sahasrajit",
+       "ref": "MatsP 43.6",
+       "words": "yadoḥ putrā babhūvurhi pañca"
+      },
+      "vip4": {
+       "name": "Sahasrajit",
+       "ref": "ViP 4,11.5",
+       "words": "yaduputrā vabhuvuḥ"
+      },
+      "garuda1": {
+       "name": "Sahasrajit",
+       "ref": "GarP 1,139.20",
+       "words": "sahasrajītkroṣṭumanā raghuścaiva yadoḥ sutāḥ"
+      },
+      "bndp2": {
+       "name": "Sahasrajit",
+       "ref": "BndP 2,69.2",
+       "words": "yadoḥ putrā babhūvurhi pañca"
+      },
+      "bhp9": {
+       "name": "Sahasrajit",
+       "ref": "BhP 9.23.20",
+       "words": "yadoḥ sahasrajit kroṣṭā nalo ripuriti"
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "agree",
+     "name": "Śatajit",
+     "n": 7,
+     "cells": {
+      "linga1": {
+       "name": "Śatajit",
+       "ref": "LiP 1,68.3",
+       "words": "sahasrajitsutastadvac chatajinnāma pārthivaḥ"
+      },
+      "vipc4": {
+       "name": "Śatajit",
+       "ref": "ViPc 4,11.3",
+       "words": "sahasrajitputraḥ śatajit"
+      },
+      "matsya": {
+       "name": "Śatajit",
+       "ref": "MatsP 43.7",
+       "words": "sahasrajestu dāyādaḥ śatajirnāma pārthivaḥ"
+      },
+      "vip4": {
+       "name": "Śatajit",
+       "ref": "ViP 4,11.6",
+       "words": "sahasrajitpuḥ śatajit"
+      },
+      "garuda1": {
+       "name": "Śatajit",
+       "ref": "GarP 1,139.21",
+       "words": "sahasrajitaḥ śatajit"
+      },
+      "bndp2": {
+       "name": "Śatajit",
+       "ref": "BndP 2,69.3",
+       "words": "sahasrajitsutaḥ śrīmāñchatajinnāma"
+      },
+      "bhp9": {
+       "name": "Śatajit",
+       "ref": "BhP 9.23.21",
+       "words": "śatajit prathamātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Haihaya",
+     "n": 7,
+     "cells": {
+      "linga1": {
+       "name": "Haihaya",
+       "ref": "LiP 1,68.3",
+       "words": "sutāḥ śatajitaḥ khyātās trayaḥ"
+      },
+      "vipc4": {
+       "name": "Haihaya",
+       "ref": "ViPc 4,11.3",
+       "words": "tasya haihayahehayaveṇuhayās trayaḥ putrā babhūvuḥ"
+      },
+      "matsya": {
+       "name": "Haihaya",
+       "ref": "MatsP 43.8",
+       "words": "śatajerapi dāyādās trayaḥ"
+      },
+      "vip4": {
+       "name": "Haihaya",
+       "ref": "ViP 4,11.7",
+       "words": "tasya haihayahehayaveṇuhayāstrayaḥ putrā babhūvuḥ"
+      },
+      "garuda1": {
+       "name": "Haihaya",
+       "ref": "GarP 1,139.21",
+       "words": "śatajittasmādvai hayahaihayau"
+      },
+      "bndp2": {
+       "name": "Haihaya",
+       "ref": "BndP 2,69.3",
+       "words": "śatajittanayāḥ khyātastrayaḥ"
+      },
+      "bhp9": {
+       "name": "Haihaya",
+       "ref": "BhP 9.23.21",
+       "words": "mahāhayo reṇuhayo haihayaśceti tatsutāḥ"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "agree",
+     "name": "Dharma",
+     "n": 4,
+     "cells": {
+      "linga1": {
+       "name": "Dharma",
+       "ref": "LiP 1,68.4",
+       "words": "haihayasya tu dāyādo dharma"
+      },
+      "vipc4": {
+       "name": "Dharma",
+       "ref": "ViPc 4,11.3",
+       "words": "haihayaputro dharmas"
+      },
+      "vip4": {
+       "name": "Dharma",
+       "ref": "ViP 4,11.8",
+       "words": "haihayaputro dharmaḥ"
+      },
+      "garuda1": {
+       "name": "Dharma",
+       "ref": "GarP 1,139.21",
+       "words": "dharmo haihayato 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Dharmanetra",
+     "n": 6,
+     "cells": {
+      "linga1": {
+       "name": "Dharmanetra",
+       "ref": "LiP 1,68.5",
+       "words": "tasya putro 'bhavadviprā dharmanetra"
+      },
+      "vipc4": {
+       "name": "Dharmanetra",
+       "ref": "ViPc 4,11.3",
+       "words": "tasyāpi dharmanetras"
+      },
+      "matsya": {
+       "name": "Dharmanetra",
+       "ref": "MatsP 43.9",
+       "words": "haihayasya tu dāyādo dharmanetraḥ"
+      },
+      "vip4": {
+       "name": "Dharmanetra",
+       "ref": "ViP 4,11.8",
+       "words": "tasyāpi dharmanetraḥ"
+      },
+      "garuda1": {
+       "name": "Dharmanetra",
+       "ref": "GarP 1,139.22",
+       "words": "dharmasya dharmanetro 'būt"
+      },
+      "bndp2": {
+       "name": "Dharmanetra",
+       "ref": "BndP 2,69.4",
+       "words": "haihayasya tu dāyādo dharmanetra"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "most",
+     "name": "Kunti",
+     "n": 5,
+     "cells": {
+      "linga1": {
+       "name": "Kīrti",
+       "ref": "LiP 1,68.5",
+       "words": "dharmanetrasya kīrtis"
+      },
+      "vipc4": {
+       "name": "Kunti",
+       "ref": "ViPc 4,11.3",
+       "words": "dharmanetras tataḥ kuntiḥ"
+      },
+      "matsya": {
+       "name": "Kunti",
+       "ref": "MatsP 43.9",
+       "words": "dharmanetrasya kuntistu"
+      },
+      "vip4": {
+       "name": "Kunti",
+       "ref": "ViP 4,11.8",
+       "words": "tataḥ kuntiḥ"
+      },
+      "garuda1": {
+       "name": "Kunti",
+       "ref": "GarP 1,139.22",
+       "words": "kuntirvai dharmanetrataḥ"
+      },
+      "bndp2": {
+       "name": "Kunti",
+       "ref": "BndP 2,69.5",
+       "words": "dharmanetrasya kuntistu"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "most",
+     "name": "Sāhaṃjit",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Saṃjaya",
+       "ref": "LiP 1,68.5",
+       "words": "saṃjayas tasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Sāhaṃjit",
+       "ref": "ViPc 4,11.3",
+       "words": "kunteḥ sāhaṃjit"
+      },
+      "matsya": {
+       "name": "Saṃhata",
+       "ref": "MatsP 43.9",
+       "words": "saṃhatastasya cātmajaḥ"
+      },
+      "vip4": {
+       "name": "Sahajit",
+       "ref": "ViP 4,11.8",
+       "words": "kunteḥ sahajit"
+      },
+      "garuda1": {
+       "name": "Sāhañji",
+       "ref": "GarP 1,139.22",
+       "words": "kunterbabhūta sāhañjiḥ"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "agree",
+     "name": "Mahiṣmat",
+     "n": 5,
+     "cells": {
+      "linga1": {
+       "name": "Mahiṣmat",
+       "ref": "LiP 1,68.6",
+       "words": "saṃjayasya tu dāyādo mahiṣmān"
+      },
+      "vipc4": {
+       "name": "Mahiṣmān",
+       "ref": "ViPc 4,11.3",
+       "words": "tattanayo mahiṣmān"
+      },
+      "matsya": {
+       "name": "Mahiṣmat",
+       "ref": "MatsP 43.10",
+       "words": "saṃhatasya tu dāyādo mahiṣmān"
+      },
+      "vip4": {
+       "name": "Mahiṣmān",
+       "ref": "ViP 4,11.9",
+       "words": "tattanayo mahiṣmān"
+      },
+      "garuda1": {
+       "name": "Mahiṣmān",
+       "ref": "GarP 1,139.22",
+       "words": "mahiṣmāṃśca tadātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "most",
+     "name": "Bhadraśreṇya",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Bhadraśreṇya",
+       "ref": "LiP 1,68.6",
+       "words": "mahiṣmataḥ putro bhadraśreṇyaḥ"
+      },
+      "vipc4": {
+       "name": "Bhadraśreṇya",
+       "ref": "ViPc 4,11.4",
+       "words": "tasmād bhadraśreṇyas"
+      },
+      "matsya": {
+       "name": "Rudraśreṇya",
+       "ref": "MatsP 43.10",
+       "words": "mahiṣmataḥ putro rudraśreṇyaḥ"
+      },
+      "vip4": {
+       "name": "Bhadraśreṇya",
+       "ref": "ViP 4,11.10",
+       "words": "tasmādbhadraśreṇyaḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "agree",
+     "name": "Durdama",
+     "n": 4,
+     "cells": {
+      "linga1": {
+       "name": "Durdama",
+       "ref": "LiP 1,68.7",
+       "words": "bhadraśreṇyasya dāyādo durdamo"
+      },
+      "vipc4": {
+       "name": "Durdama",
+       "ref": "ViPc 4,11.4",
+       "words": "tato durdamas"
+      },
+      "matsya": {
+       "name": "Durdama",
+       "ref": "MatsP 43.11",
+       "words": "rudraśreṇyasya putro 'bhūd durdamo"
+      },
+      "vip4": {
+       "name": "Durdama",
+       "ref": "ViP 4,11.10",
+       "words": "tato durdamaḥ"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "most",
+     "name": "Dhanaka",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Dhanaka",
+       "ref": "LiP 1,68.7",
+       "words": "durdamasya suto ... dhanako"
+      },
+      "vipc4": {
+       "name": "Dhanaka",
+       "ref": "ViPc 4,11.4",
+       "words": "tasmād dhanakaḥ"
+      },
+      "matsya": {
+       "name": "Kanaka",
+       "ref": "MatsP 43.12",
+       "words": "durdamasya suto dhīmān kanako"
+      },
+      "vip4": {
+       "name": "Dhanaka",
+       "ref": "ViP 4,11.10",
+       "words": "tasmāddhanakaḥ"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "agree",
+     "name": "Kṛtavīrya",
+     "n": 4,
+     "cells": {
+      "linga1": {
+       "name": "Kṛtavīrya",
+       "ref": "LiP 1,68.8",
+       "words": "dhanakasya tu dāyādāś catvāro ... kṛtavīryaḥ"
+      },
+      "vipc4": {
+       "name": "Kṛtavīrya",
+       "ref": "ViPc 4,11.4",
+       "words": "dhanakasya kṛtavīryakṛtāgnikṛtadharmakṛtaujasaś catvāraḥ putrāḥ"
+      },
+      "matsya": {
+       "name": "Kṛtavīrya",
+       "ref": "MatsP 43.12",
+       "words": "kanakasya tu dāyādāś catvāro"
+      },
+      "vip4": {
+       "name": "Kṛtavīrya",
+       "ref": "ViP 4,11.10",
+       "words": "dhanakasya kṛtavīryakṛtāgnikṛtadharmakṛtaujasaścatvāraḥ putrā babhūvuḥ"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "differ",
+     "name": "Arjuna",
+     "n": 2,
+     "cells": {
+      "linga1": {
+       "name": "Kārtavīrya Arjuna",
+       "ref": "LiP 1,68.9",
+       "words": "kārtavīryastato 'rjunaḥ jajñe"
+      },
+      "vipc4": {
+       "name": "Arjuna",
+       "ref": "ViPc 4,11.4",
+       "words": "kṛtavīryād arjunaḥ saptadvīpapatir bāhusahasrī jajñe"
+      },
+      "matsya": {
+       "name": "Arjuna",
+       "ref": "MatsP 43.13",
+       "words": "kṛtavīryāttato 'rjunaḥ"
+      },
+      "bndp2": {
+       "name": "Saṃkṣeya",
+       "ref": "BndP 2,69.5",
+       "words": "saṃkṣeyastasya cātmajaḥ"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "kroshtu",
+   "anchor": "Kroṣṭu",
+   "father": "Yadu",
+   "title": "the Vṛṣṇis and Andhakas from Kroṣṭu",
+   "order": [
+    "linga1",
+    "kurma1",
+    "garuda1",
+    "agni",
+    "matsya",
+    "vip4"
+   ],
+   "counts": {
+    "agree": 9,
+    "most": 2,
+    "differ": 5,
+    "one": 23,
+    "share_agree": 0.562
+   },
+   "pairs": {
+    "linga1 & kurma1": [
+     8,
+     12
+    ],
+    "linga1 & garuda1": [
+     9,
+     13
+    ],
+    "linga1 & agni": [
+     4,
+     6
+    ],
+    "linga1 & matsya": [
+     4,
+     6
+    ],
+    "linga1 & vip4": [
+     5,
+     6
+    ],
+    "kurma1 & garuda1": [
+     6,
+     9
+    ],
+    "kurma1 & agni": [
+     5,
+     6
+    ],
+    "kurma1 & matsya": [
+     4,
+     6
+    ],
+    "kurma1 & vip4": [
+     4,
+     6
+    ],
+    "garuda1 & agni": [
+     3,
+     5
+    ],
+    "garuda1 & matsya": [
+     3,
+     5
+    ],
+    "garuda1 & vip4": [
+     4,
+     5
+    ],
+    "agni & matsya": [
+     6,
+     6
+    ],
+    "agni & vip4": [
+     2,
+     6
+    ],
+    "matsya & vip4": [
+     4,
+     6
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Kroṣṭu",
+     "n": 6,
+     "cells": {
+      "linga1": {
+       "name": "Kroṣṭu",
+       "ref": "LiP 1,68.2",
+       "words": "yadoḥ putrā babhūvur hi pañca ... kroṣṭur"
+      },
+      "kurma1": {
+       "name": "Kroṣṭu",
+       "ref": null,
+       "words": null
+      },
+      "garuda1": {
+       "name": "Kroṣṭu",
+       "ref": null,
+       "words": null
+      },
+      "agni": {
+       "name": "Kroṣṭu",
+       "ref": "AgP 274.1",
+       "words": "yadorāsanpañca putrā"
+      },
+      "matsya": {
+       "name": "Kroṣṭu",
+       "ref": "MatsP 43.6",
+       "words": "yadoḥ putrā babhūvurhi pañca"
+      },
+      "vip4": {
+       "name": "Kroṣṭu",
+       "ref": "ViP 4,12.1",
+       "words": "kroṣṭostu yaduputrasya"
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "most",
+     "name": "Vṛjinīvat",
+     "n": 4,
+     "cells": {
+      "linga1": {
+       "name": "Vṛjinīvat",
+       "ref": "LiP 1,68.22",
+       "words": "kroṣṭoreko 'bhavatputro vṛjinīvān"
+      },
+      "kurma1": {
+       "name": "Vṛjinīvān",
+       "ref": "KurmP 1,23.1",
+       "words": "kroṣṭoreko 'bhavat putro vṛjinīvān"
+      },
+      "agni": {
+       "name": "Vṛjinīvat",
+       "ref": "AgP 274.12",
+       "words": "kroṣṭostu vṛjinīvāṃś ca"
+      },
+      "matsya": {
+       "name": "Vṛjinīvat",
+       "ref": "MatsP 44.15",
+       "words": "kroṣṭorevābhavatputro vṛjinīvānmahārathaḥ"
+      },
+      "vip4": {
+       "name": "Dhvajinīvān",
+       "ref": "ViP 4,12.1",
+       "words": "kroṣṭostu yaduputrasyātmajo dhvajinīvān"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "differ",
+     "name": "Svāti",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Svāti",
+       "ref": "LiP 1,68.22",
+       "words": "tasya putro 'bhavat svātī"
+      },
+      "kurma1": {
+       "name": "Svāti",
+       "ref": "KurmP 1,23.1",
+       "words": "tasya putro mahān svātiḥ"
+      },
+      "garuda1": {
+       "name": "Āhi",
+       "ref": "GarP 1,139.26",
+       "words": "kroṣṭorvijajñivānputtra āhistasya"
+      },
+      "agni": {
+       "name": "Svāhā",
+       "ref": "AgP 274.12",
+       "words": "svāhābhūdvṛjinīvataḥ"
+      },
+      "matsya": {
+       "name": "Svāha",
+       "ref": "MatsP 44.16",
+       "words": "vṛjinīvataśca putro 'bhūt svāho nāma"
+      },
+      "vip4": {
+       "name": "Svāti",
+       "ref": "ViP 4,12.2",
+       "words": "tataś ca svātiḥ"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "differ",
+     "name": "Kuśaṅku",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Kuśaṅku",
+       "ref": "LiP 1,68.22",
+       "words": "kuśaṅkus tatsuto 'bhavat"
+      },
+      "kurma1": {
+       "name": "Uśadgu",
+       "ref": "KurmP 1,23.1",
+       "words": "uśadgustatsuto 'bhavat"
+      },
+      "garuda1": {
+       "name": "Uśaṅku",
+       "ref": "GarP 1,139.27",
+       "words": "āheruśaṅkuḥ saṃjajñe"
+      },
+      "agni": {
+       "name": "Ruṣadgu",
+       "ref": "AgP 274.13",
+       "words": "svāhāputrao ruṣadguś ca"
+      },
+      "matsya": {
+       "name": "Ruṣaṅgu",
+       "ref": "MatsP 44.16",
+       "words": "svāhaputro 'bhavad rājan ruṣaṅguḥ"
+      },
+      "vip4": {
+       "name": "Ruśaṅku",
+       "ref": "ViP 4,12.2",
+       "words": "tato ruśaṅkuḥ"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Citraratha",
+     "n": 6,
+     "cells": {
+      "linga1": {
+       "name": "Citraratha",
+       "ref": "LiP 1,68.24",
+       "words": "jajñe citrarathastasya putraḥ"
+      },
+      "kurma1": {
+       "name": "Citraratha",
+       "ref": "KurmP 1,23.2",
+       "words": "uśadgorabhavat putro nāmnā citraratho"
+      },
+      "garuda1": {
+       "name": "Citraratha",
+       "ref": "GarP 1,139.27",
+       "words": "tasya citrarathaḥ sataḥ"
+      },
+      "agni": {
+       "name": "Citraratha",
+       "ref": "AgP 274.13",
+       "words": "tasya citrarathaḥ sutaḥ"
+      },
+      "matsya": {
+       "name": "Citraratha",
+       "ref": "MatsP 44.17",
+       "words": "citraścitrarathaścāsya putraḥ"
+      },
+      "vip4": {
+       "name": "Citraratha",
+       "ref": "ViP 4,12.2",
+       "words": "ruśaṅkościtrarathaḥ"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Śaśabindu",
+     "n": 6,
+     "cells": {
+      "linga1": {
+       "name": "Śaśabindu",
+       "ref": "LiP 1,68.24",
+       "words": "atha caitraratho vīro ... śaśabindus"
+      },
+      "kurma1": {
+       "name": "Śaśabindu",
+       "ref": "KurmP 1,23.2",
+       "words": "caitrarathirloke śaśabinduriti smṛtaḥ"
+      },
+      "garuda1": {
+       "name": "Śaśabindu",
+       "ref": "GarP 1,139.27",
+       "words": "śaśabinduścitrarathāt"
+      },
+      "agni": {
+       "name": "Śaśavindu",
+       "ref": "AgP 274.13",
+       "words": "śaśavinduścitrarathāt"
+      },
+      "matsya": {
+       "name": "Śaśabindu",
+       "ref": "MatsP 44.18",
+       "words": "atha caitrarathivīro jajñe vipuladakṣiṇaḥ śaśabinduriti khyātaḥ"
+      },
+      "vip4": {
+       "name": "Śaśibindu",
+       "ref": "ViP 4,12.3",
+       "words": "tattanayaḥ śaśibinduḥ"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "one",
+     "name": "Pṛthuyaśas",
+     "n": 1,
+     "cells": {
+      "kurma1": {
+       "name": "Pṛthuyaśas",
+       "ref": "KurmP 1,23.3",
+       "words": "tasya putraḥ pṛthuyaśā"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "one",
+     "name": "Pṛthukarman",
+     "n": 1,
+     "cells": {
+      "kurma1": {
+       "name": "Pṛthukarman",
+       "ref": "KurmP 1,23.3",
+       "words": "pṛthukarmā ca tatputraḥ"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "one",
+     "name": "Pṛthujaya",
+     "n": 1,
+     "cells": {
+      "kurma1": {
+       "name": "Pṛthujaya",
+       "ref": "KurmP 1,23.3",
+       "words": "tasmāt pṛthujayo 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "one",
+     "name": "Pṛthukīrti",
+     "n": 1,
+     "cells": {
+      "kurma1": {
+       "name": "Pṛthukīrti",
+       "ref": "KurmP 1,23.4",
+       "words": "pṛthukīrtirabhūt tasmāt"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "differ",
+     "name": "Anantaka",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Anantaka",
+       "ref": "LiP 1,68.26",
+       "words": "śaśabindostu putrāṇām ... tasya putrāṇām anantakam"
+      },
+      "kurma1": {
+       "name": "Pṛthudāna",
+       "ref": "KurmP 1,23.4",
+       "words": "pṛthudānastato 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "most",
+     "name": "Pṛthuśravas",
+     "n": 2,
+     "cells": {
+      "linga1": {
+       "name": "Yajña",
+       "ref": "LiP 1,68.27",
+       "words": "anantakāt suto yajño"
+      },
+      "kurma1": {
+       "name": "Pṛthuśravas",
+       "ref": "KurmP 1,23.4",
+       "words": "pṛthuśravāstasya putraḥ"
+      },
+      "garuda1": {
+       "name": "Pṛthuśravas",
+       "ref": "GarP 1,139.28",
+       "words": "pṛthuśravāḥ"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "differ",
+     "name": "Dhṛti",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Dhṛti",
+       "ref": "LiP 1,68.27",
+       "words": "yajñasya tanayo dhṛtiḥ"
+      },
+      "kurma1": {
+       "name": "Pṛthusattama",
+       "ref": "KurmP 1,23.4",
+       "words": "tasyāsīt pṛthusattamaḥ"
+      },
+      "garuda1": {
+       "name": "Tamas",
+       "ref": "GarP 1,139.29",
+       "words": "pṛthuśravaso 'bhūttama"
+      }
+     }
+    },
+    {
+     "gen": 13,
+     "status": "agree",
+     "name": "Uśanas",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Uśanas",
+       "ref": "LiP 1,68.27",
+       "words": "uśanāstasya tanayaḥ"
+      },
+      "kurma1": {
+       "name": "Uśanas",
+       "ref": "KurmP 1,23.5",
+       "words": "uśanā tasya putro 'būt"
+      },
+      "garuda1": {
+       "name": "Uśanas",
+       "ref": "GarP 1,139.29",
+       "words": "uśanāstamaso 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 14,
+     "status": "agree",
+     "name": "Siteṣu",
+     "n": 2,
+     "cells": {
+      "linga1": {
+       "name": "Siteṣu",
+       "ref": "LiP 1,68.28",
+       "words": "smṛtaścośanasaḥ putraḥ siteṣur"
+      },
+      "kurma1": {
+       "name": "Siteṣu",
+       "ref": "KurmP 1,23.5",
+       "words": "siteṣustatsuto 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 15,
+     "status": "one",
+     "name": "Maruta",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Maruta",
+       "ref": "LiP 1,68.29",
+       "words": "marutastasya tanayo"
+      }
+     }
+    },
+    {
+     "gen": 16,
+     "status": "differ",
+     "name": "Kambalabarhis",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Kambalabarhis",
+       "ref": "LiP 1,68.29",
+       "words": "kambalabarhistu marustasyātmajaḥ"
+      },
+      "garuda1": {
+       "name": "Śitagu",
+       "ref": "GarP 1,139.29",
+       "words": "tatputraḥ śitagurnāma"
+      }
+     }
+    },
+    {
+     "gen": 17,
+     "status": "agree",
+     "name": "Rukmakavaca",
+     "n": 3,
+     "cells": {
+      "linga1": {
+       "name": "Rukmakavaca",
+       "ref": "LiP 1,68.30",
+       "words": "putrastu rukmakavaco ... kambalabarhiṣaḥ"
+      },
+      "kurma1": {
+       "name": "Rukmakavaca",
+       "ref": "KurmP 1,23.5",
+       "words": "tasyābhūd rukmakavacaḥ"
+      },
+      "garuda1": {
+       "name": "Rukmakavaca",
+       "ref": "GarP 1,139.29",
+       "words": "śrīrukmakavacastataḥ"
+      }
+     }
+    },
+    {
+     "gen": 18,
+     "status": "one",
+     "name": "Parāvṛt",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Parāvṛt",
+       "ref": "LiP 1,68.32",
+       "words": "jajñe tu rukmakavacāt parāvṛt"
+      }
+     }
+    },
+    {
+     "gen": 19,
+     "status": "agree",
+     "name": "Jyāmagha",
+     "n": 2,
+     "cells": {
+      "linga1": {
+       "name": "Jyāmagha",
+       "ref": "LiP 1,68.33",
+       "words": "jyāmaghaḥ"
+      },
+      "garuda1": {
+       "name": "Jyāmagha",
+       "ref": "GarP 1,139.30",
+       "words": "jyāmaghaḥ pālito hariḥ śrīrukmakavacasyaite"
+      }
+     }
+    },
+    {
+     "gen": 20,
+     "status": "agree",
+     "name": "Vidarbha",
+     "n": 2,
+     "cells": {
+      "linga1": {
+       "name": "Vidarbha",
+       "ref": "LiP 1,68.38",
+       "words": "sutaṃ vidarbhaṃ"
+      },
+      "garuda1": {
+       "name": "Vidarbha",
+       "ref": "GarP 1,139.30",
+       "words": "vidarbho jyāmaghāttathā"
+      }
+     }
+    },
+    {
+     "gen": 21,
+     "status": "agree",
+     "name": "Kratha",
+     "n": 2,
+     "cells": {
+      "linga1": {
+       "name": "Kratha",
+       "ref": "LiP 1,68.38",
+       "words": "putrau vidarbharājasya śūrau"
+      },
+      "garuda1": {
+       "name": "Kratha",
+       "ref": "GarP 1,139.31",
+       "words": "vidarbhātkrathakauśikau"
+      }
+     }
+    },
+    {
+     "gen": 22,
+     "status": "one",
+     "name": "Kunti",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Kunti",
+       "ref": "LiP 1,68.41",
+       "words": "kuntistasyātmajo 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 23,
+     "status": "one",
+     "name": "Vṛta",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Vṛta",
+       "ref": "LiP 1,68.41",
+       "words": "kunter vṛtastato jajñe"
+      }
+     }
+    },
+    {
+     "gen": 24,
+     "status": "one",
+     "name": "Raṇadhṛṣṭa",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Raṇadhṛṣṭa",
+       "ref": "LiP 1,68.41",
+       "words": "vṛtastato jajñe raṇadhṛṣṭaḥ"
+      }
+     }
+    },
+    {
+     "gen": 25,
+     "status": "one",
+     "name": "Nidhṛti",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Nidhṛti",
+       "ref": "LiP 1,68.42",
+       "words": "raṇadhṛṣṭasya ca suto nidhṛtiḥ"
+      }
+     }
+    },
+    {
+     "gen": 26,
+     "status": "one",
+     "name": "Daśārha",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Daśārha",
+       "ref": "LiP 1,68.42",
+       "words": "daśārho naidhṛto nāmnā"
+      }
+     }
+    },
+    {
+     "gen": 27,
+     "status": "one",
+     "name": "Vyāpta",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Vyāpta",
+       "ref": "LiP 1,68.43",
+       "words": "daśārhasya suto vyāpto"
+      }
+     }
+    },
+    {
+     "gen": 28,
+     "status": "one",
+     "name": "Jīmūta",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Jīmūta",
+       "ref": "LiP 1,68.43",
+       "words": "jīmūta iti tatsutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 29,
+     "status": "one",
+     "name": "Vikṛti",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Vikṛti",
+       "ref": "LiP 1,68.43",
+       "words": "jīmūtaputro vikṛtis"
+      }
+     }
+    },
+    {
+     "gen": 30,
+     "status": "one",
+     "name": "Bhīmaratha",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Bhīmaratha",
+       "ref": "LiP 1,68.43",
+       "words": "tasya bhīmarathaḥ sutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 31,
+     "status": "one",
+     "name": "Navaratha",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Navaratha",
+       "ref": "LiP 1,68.44",
+       "words": "bhīmarathasyāsīt putro navarathaḥ"
+      }
+     }
+    },
+    {
+     "gen": 32,
+     "status": "one",
+     "name": "Dṛḍharatha",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Dṛḍharatha",
+       "ref": "LiP 1,68.45",
+       "words": "tasya cāsīddṛḍharathaḥ"
+      }
+     }
+    },
+    {
+     "gen": 33,
+     "status": "one",
+     "name": "Śakuni",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Śakuni",
+       "ref": "LiP 1,68.45",
+       "words": "śakunistasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 34,
+     "status": "one",
+     "name": "Karambha",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Karambha",
+       "ref": "LiP 1,68.45",
+       "words": "tasmāt karambhaḥ sambhūto"
+      }
+     }
+    },
+    {
+     "gen": 35,
+     "status": "one",
+     "name": "Devarāta",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Devarāta",
+       "ref": "LiP 1,68.45",
+       "words": "devarāto 'bhavattataḥ"
+      }
+     }
+    },
+    {
+     "gen": 36,
+     "status": "one",
+     "name": "Devarāti",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Devarāti",
+       "ref": "LiP 1,68.46",
+       "words": "devarātādabhūdrājā devarātir"
+      }
+     }
+    },
+    {
+     "gen": 37,
+     "status": "one",
+     "name": "Devakṣatra",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Devakṣatra",
+       "ref": "LiP 1,68.46",
+       "words": "devarātir ... jajñe yo devakṣatranāmakaḥ"
+      }
+     }
+    },
+    {
+     "gen": 38,
+     "status": "one",
+     "name": "Madhu",
+     "n": 1,
+     "cells": {
+      "linga1": {
+       "name": "Madhu",
+       "ref": "LiP 1,68.47",
+       "words": "devakṣatrasutaḥ śrīmān madhurnāma"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "turvasu",
+   "anchor": "Turvasu",
+   "father": "Yayāti",
+   "title": "the line of Turvasu",
+   "order": [
+    "agni",
+    "bndp2",
+    "vipc4",
+    "brahma",
+    "hv",
+    "matsya"
+   ],
+   "counts": {
+    "agree": 6,
+    "most": 1,
+    "differ": 3,
+    "one": 4,
+    "share_agree": 0.6
+   },
+   "pairs": {
+    "agni & bndp2": [
+     6,
+     10
+    ],
+    "agni & vipc4": [
+     6,
+     7
+    ],
+    "agni & brahma": [
+     4,
+     6
+    ],
+    "agni & hv": [
+     4,
+     6
+    ],
+    "agni & matsya": [
+     3,
+     5
+    ],
+    "bndp2 & vipc4": [
+     7,
+     7
+    ],
+    "bndp2 & brahma": [
+     5,
+     6
+    ],
+    "bndp2 & hv": [
+     6,
+     6
+    ],
+    "bndp2 & matsya": [
+     3,
+     5
+    ],
+    "vipc4 & brahma": [
+     6,
+     6
+    ],
+    "vipc4 & hv": [
+     6,
+     6
+    ],
+    "vipc4 & matsya": [
+     3,
+     4
+    ],
+    "brahma & hv": [
+     5,
+     6
+    ],
+    "brahma & matsya": [
+     3,
+     4
+    ],
+    "hv & matsya": [
+     3,
+     4
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Turvasu",
+     "n": 6,
+     "cells": {
+      "agni": {
+       "name": "Turvasu",
+       "ref": null,
+       "words": null
+      },
+      "bndp2": {
+       "name": "Turvasu",
+       "ref": null,
+       "words": null
+      },
+      "vipc4": {
+       "name": "Turvasu",
+       "ref": null,
+       "words": null
+      },
+      "brahma": {
+       "name": "Turvasu",
+       "ref": null,
+       "words": null
+      },
+      "hv": {
+       "name": "Turvasu",
+       "ref": null,
+       "words": null
+      },
+      "matsya": {
+       "name": "Turvasu",
+       "ref": null,
+       "words": null
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "most",
+     "name": "Vahni",
+     "n": 4,
+     "cells": {
+      "agni": {
+       "name": "Varga",
+       "ref": "AgP 276.1",
+       "words": "turvasoś ca suto vargo"
+      },
+      "bndp2": {
+       "name": "Vahni",
+       "ref": "BndP 2,74.1",
+       "words": "turvasostu suto vahniḥ"
+      },
+      "vipc4": {
+       "name": "Vahni",
+       "ref": "ViPc 4,16.2",
+       "words": "turvasor vahnir ātmajo"
+      },
+      "brahma": {
+       "name": "Vahni",
+       "ref": "BrP 13.142",
+       "words": "turvasos tu suto vahnir"
+      },
+      "hv": {
+       "name": "Vahni",
+       "ref": "HV 23.123",
+       "words": "turvasos tu suto vahnir"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Gobhānu",
+     "n": 6,
+     "cells": {
+      "agni": {
+       "name": "Gobhānu",
+       "ref": "AgP 276.1",
+       "words": "gobhānustasya cātmajaḥ"
+      },
+      "bndp2": {
+       "name": "Gobhānu",
+       "ref": "BndP 2,74.1",
+       "words": "vahnergobhānurātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Gobhānu",
+       "ref": "ViPc 4,16.2",
+       "words": "vahner gobhānus"
+      },
+      "brahma": {
+       "name": "Gobhānu",
+       "ref": "BrP 13.142",
+       "words": "gobhānus tasya cātmajaḥ"
+      },
+      "hv": {
+       "name": "Gobhānu",
+       "ref": "HV 23.123",
+       "words": "vahner gobhānur ātmajaḥ"
+      },
+      "matsya": {
+       "name": "Gobhānu",
+       "ref": "MatsP 48.1",
+       "words": "turvasostu suto garbho gobhānustasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "differ",
+     "name": "Traiśāni",
+     "n": 2,
+     "cells": {
+      "agni": {
+       "name": "Traiśāni",
+       "ref": "AgP 276.1",
+       "words": "gobhānorāsīt traiśāniḥ"
+      },
+      "bndp2": {
+       "name": "Strisānu",
+       "ref": "BndP 2,74.1",
+       "words": "gobhānostu suto vīra strisānurapājitaḥ"
+      },
+      "vipc4": {
+       "name": "Traiśānu",
+       "ref": "ViPc 4,16.2",
+       "words": "gobhānus tataś ca traiśānus"
+      },
+      "brahma": {
+       "name": "Aiśānu",
+       "ref": "BrP 13.142",
+       "words": "gobhānos tu suto rājā aiśānur"
+      },
+      "hv": {
+       "name": "Triśānu",
+       "ref": "HV 23.123",
+       "words": "gobhānos tu suto rājā triśānur"
+      },
+      "matsya": {
+       "name": "Trisāri",
+       "ref": "MatsP 48.1",
+       "words": "gobhānostu suto vīras trisāriraparājitaḥ"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Karandhama",
+     "n": 6,
+     "cells": {
+      "agni": {
+       "name": "Karandhama",
+       "ref": "AgP 276.1",
+       "words": "traiśānestu karandhamaḥ"
+      },
+      "bndp2": {
+       "name": "Karandhama",
+       "ref": "BndP 2,74.2",
+       "words": "karandhamastu traisāno"
+      },
+      "vipc4": {
+       "name": "Karaṃdhama",
+       "ref": "ViPc 4,16.2",
+       "words": "traiśānus tasmāc ca karaṃdhamaḥ"
+      },
+      "brahma": {
+       "name": "Karaṃdhama",
+       "ref": "BrP 13.143",
+       "words": "karaṃdhamas tu aiśānor"
+      },
+      "hv": {
+       "name": "Karaṃdhama",
+       "ref": "HV 23.124",
+       "words": "karaṃdhamas tu triśānor"
+      },
+      "matsya": {
+       "name": "Karaṃdhama",
+       "ref": "MatsP 48.2",
+       "words": "karaṃdhamastu traisārir"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Marutta",
+     "n": 5,
+     "cells": {
+      "agni": {
+       "name": "Marutta",
+       "ref": "AgP 276.2",
+       "words": "karandhamānmaruttobhūt"
+      },
+      "bndp2": {
+       "name": "Marutta",
+       "ref": "BndP 2,74.2",
+       "words": "maruttastasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Marutta",
+       "ref": "ViPc 4,16.2",
+       "words": "tasyāpi maruttaḥ"
+      },
+      "brahma": {
+       "name": "Marutta",
+       "ref": "BrP 13.143",
+       "words": "maruttas tasya cātmajaḥ"
+      },
+      "hv": {
+       "name": "Marutta",
+       "ref": "HV 23.124",
+       "words": "maruttas tasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "agree",
+     "name": "Duṣmanta",
+     "n": 3,
+     "cells": {
+      "agni": {
+       "name": "Duṣmanta",
+       "ref": "AgP 276.2",
+       "words": "duṣmantastasya cātmajaḥ"
+      },
+      "bndp2": {
+       "name": "Duṣkanta",
+       "ref": "BndP 2,74.3",
+       "words": "duṣkantaṃ pauravaṃ cāpi sa vai putramakalpayat"
+      },
+      "vipc4": {
+       "name": "Duṣyanta",
+       "ref": "ViPc 4,16.2",
+       "words": "pauravaṃ duṣyantaṃ putram akalpayat"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "differ",
+     "name": "Varūtha",
+     "n": 1,
+     "cells": {
+      "agni": {
+       "name": "Varūtha",
+       "ref": "AgP 276.2",
+       "words": "duṣmantasya varūtho 'bhūt"
+      },
+      "bndp2": {
+       "name": "Sarūpya",
+       "ref": "BndP 2,74.5",
+       "words": "duṣkantasya tu dāyādaḥ sarūpyo nāma pārthivaḥ"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "agree",
+     "name": "Gāṇḍīra",
+     "n": 2,
+     "cells": {
+      "agni": {
+       "name": "Gāṇḍīra",
+       "ref": "AgP 276.2",
+       "words": "gāṇḍīrastu varūthataḥ"
+      },
+      "bndp2": {
+       "name": "Āṇḍīra",
+       "ref": "BndP 2,74.5",
+       "words": "sarūpyāttu tathāṇḍīraścatvārastasya cātmajāḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "one",
+     "name": "Gāndhāra",
+     "n": 1,
+     "cells": {
+      "agni": {
+       "name": "Gāndhāra",
+       "ref": "AgP 276.3",
+       "words": "gāṇḍīrāccaiva gāndhāraḥ"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "one",
+     "name": "Dharma",
+     "n": 1,
+     "cells": {
+      "agni": {
+       "name": "Dharma",
+       "ref": "AgP 276.4",
+       "words": "gāndhārair dharmo"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "one",
+     "name": "Ghṛta",
+     "n": 1,
+     "cells": {
+      "agni": {
+       "name": "Ghṛta",
+       "ref": "AgP 276.4",
+       "words": "dharmād ghṛto 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "one",
+     "name": "Vidus",
+     "n": 1,
+     "cells": {
+      "agni": {
+       "name": "Vidus",
+       "ref": "AgP 276.5",
+       "words": "ghṛtāttu viduṣaḥ"
+      }
+     }
+    },
+    {
+     "gen": 13,
+     "status": "differ",
+     "name": "Pracetas",
+     "n": 1,
+     "cells": {
+      "agni": {
+       "name": "Pracetas",
+       "ref": "AgP 276.5",
+       "words": "viduṣastasmāt pracetāḥ"
+      },
+      "bndp2": {
+       "name": "Pāṇḍya",
+       "ref": "BndP 2,74.6",
+       "words": "pāṇḍyaśca keralaścaiva colaḥ kulyastathaiva ca"
+      },
+      "matsya": {
+       "name": "Bharata",
+       "ref": "MatsP 48.2",
+       "words": "bharatastasya cātmajaḥ"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "druhyu",
+   "anchor": "Druhyu",
+   "father": "Yayāti",
+   "title": "the line of Druhyu",
+   "order": [
+    "bhp9",
+    "bndp2",
+    "garuda1",
+    "matsya",
+    "vipc4",
+    "brahma",
+    "hv",
+    "vip4",
+    "agni"
+   ],
+   "counts": {
+    "agree": 5,
+    "most": 3,
+    "differ": 2,
+    "one": 0,
+    "share_agree": 0.5
+   },
+   "pairs": {
+    "bhp9 & bndp2": [
+     6,
+     8
+    ],
+    "bhp9 & garuda1": [
+     6,
+     8
+    ],
+    "bhp9 & matsya": [
+     5,
+     8
+    ],
+    "bhp9 & vipc4": [
+     5,
+     6
+    ],
+    "bhp9 & brahma": [
+     2,
+     4
+    ],
+    "bhp9 & hv": [
+     2,
+     4
+    ],
+    "bhp9 & vip4": [
+     3,
+     4
+    ],
+    "bhp9 & agni": [
+     1,
+     3
+    ],
+    "bndp2 & garuda1": [
+     7,
+     7
+    ],
+    "bndp2 & matsya": [
+     5,
+     7
+    ],
+    "bndp2 & vipc4": [
+     4,
+     5
+    ],
+    "bndp2 & brahma": [
+     2,
+     4
+    ],
+    "bndp2 & hv": [
+     2,
+     4
+    ],
+    "bndp2 & vip4": [
+     2,
+     3
+    ],
+    "bndp2 & agni": [
+     1,
+     3
+    ],
+    "garuda1 & matsya": [
+     6,
+     8
+    ],
+    "garuda1 & vipc4": [
+     4,
+     5
+    ],
+    "garuda1 & brahma": [
+     2,
+     4
+    ],
+    "garuda1 & hv": [
+     2,
+     4
+    ],
+    "garuda1 & vip4": [
+     2,
+     3
+    ],
+    "garuda1 & agni": [
+     1,
+     3
+    ],
+    "matsya & vipc4": [
+     5,
+     5
+    ],
+    "matsya & brahma": [
+     2,
+     4
+    ],
+    "matsya & hv": [
+     2,
+     4
+    ],
+    "matsya & vip4": [
+     2,
+     3
+    ],
+    "matsya & agni": [
+     1,
+     3
+    ],
+    "vipc4 & brahma": [
+     2,
+     4
+    ],
+    "vipc4 & hv": [
+     2,
+     4
+    ],
+    "vipc4 & vip4": [
+     3,
+     3
+    ],
+    "vipc4 & agni": [
+     1,
+     2
+    ],
+    "brahma & hv": [
+     3,
+     4
+    ],
+    "brahma & vip4": [
+     1,
+     2
+    ],
+    "brahma & agni": [
+     2,
+     2
+    ],
+    "hv & vip4": [
+     1,
+     2
+    ],
+    "hv & agni": [
+     1,
+     2
+    ],
+    "vip4 & agni": [
+     1,
+     3
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Druhyu",
+     "n": 9,
+     "cells": {
+      "bhp9": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "bndp2": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "garuda1": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "matsya": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "vipc4": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "brahma": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "hv": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "vip4": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      },
+      "agni": {
+       "name": "Druhyu",
+       "ref": null,
+       "words": null
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "agree",
+     "name": "Babhru",
+     "n": 3,
+     "cells": {
+      "bhp9": {
+       "name": "Babhru",
+       "ref": "BhP 9.23.14",
+       "words": "druhyośca tanayo babhruḥ"
+      },
+      "vipc4": {
+       "name": "Babhru",
+       "ref": "ViPc 4,17.1",
+       "words": "druhyos tu tanayo babhruḥ"
+      },
+      "vip4": {
+       "name": "Babhru",
+       "ref": "ViP 4,17.1",
+       "words": "druhyostu tanayo babhruḥ"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "most",
+     "name": "Setu",
+     "n": 6,
+     "cells": {
+      "bhp9": {
+       "name": "Setu",
+       "ref": "BhP 9.23.14",
+       "words": "setustasyātmajastataḥ"
+      },
+      "bndp2": {
+       "name": "Setu",
+       "ref": "BndP 2,74.7",
+       "words": "druhyośca tanayau vīrau babhruḥ setuśca"
+      },
+      "garuda1": {
+       "name": "Setu",
+       "ref": "GarP 1,139.66",
+       "words": "drahyostu tanayaḥ setur"
+      },
+      "matsya": {
+       "name": "Setu",
+       "ref": "MatsP 48.6",
+       "words": "druhyostu tanayau śūrau setuḥ"
+      },
+      "vipc4": {
+       "name": "Setu",
+       "ref": "ViPc 4,17.2",
+       "words": "tataḥ setuḥ"
+      },
+      "brahma": {
+       "name": "Babhrusetu",
+       "ref": "BrP 13.148",
+       "words": "druhyoś ca tanayo rājan babhrusetuś"
+      },
+      "hv": {
+       "name": "Babhrusena",
+       "ref": "HV 23.130",
+       "words": "druhyos tu tanayo rājan babhrusenaś"
+      },
+      "vip4": {
+       "name": "Setu",
+       "ref": "ViP 4,17.2",
+       "words": "babhroḥsetuḥ"
+      },
+      "agni": {
+       "name": "Babhrusetu",
+       "ref": "AgP 276.4",
+       "words": "druhyastu vabhrusetuś ca"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "differ",
+     "name": "Ārabdha",
+     "n": 2,
+     "cells": {
+      "bhp9": {
+       "name": "Ārabdha",
+       "ref": "BhP 9.23.15",
+       "words": "ārabdhastasya"
+      },
+      "bndp2": {
+       "name": "Aruddha",
+       "ref": "BndP 2,74.7",
+       "words": "aruddhaḥ setuputraḥ"
+      },
+      "garuda1": {
+       "name": "Āraddha",
+       "ref": "GarP 1,139.66",
+       "words": "āraddhaśca tadātmajaḥ"
+      },
+      "matsya": {
+       "name": "Śaradvān",
+       "ref": "MatsP 48.6",
+       "words": "setuputraḥ śaradvāṃstu"
+      },
+      "vipc4": {
+       "name": "Āradvān",
+       "ref": "ViPc 4,17.2",
+       "words": "setuputra āradvānnāmā"
+      },
+      "brahma": {
+       "name": "Aṅgārasetu",
+       "ref": "BrP 13.149",
+       "words": "aṅgārasetus tatputro"
+      },
+      "hv": {
+       "name": "Aṅgārasetu",
+       "ref": "HV 23.130",
+       "words": "aṅgārasetus tatputro"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Gāndhāra",
+     "n": 7,
+     "cells": {
+      "bhp9": {
+       "name": "Gāndhāra",
+       "ref": "BhP 9.23.15",
+       "words": "gāndhārastasya"
+      },
+      "bndp2": {
+       "name": "Gāndhāra",
+       "ref": "BndP 2,74.9",
+       "words": "aruddhasya tu dāyādo gāndhāro nāma pārthivaḥ"
+      },
+      "garuda1": {
+       "name": "Gāndhāra",
+       "ref": "GarP 1,139.67",
+       "words": "āraddhasyaiva gāndha ro"
+      },
+      "matsya": {
+       "name": "Gandhāra",
+       "ref": "MatsP 48.6",
+       "words": "gandhārastasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Gāndhāra",
+       "ref": "ViPc 4,17.2",
+       "words": "tadātmajo gāndhāraḥ"
+      },
+      "brahma": {
+       "name": "Gāndhāra",
+       "ref": "BrP 13.150",
+       "words": "aṅgārasetor dāyādo gāndhāro nāma"
+      },
+      "hv": {
+       "name": "Gāndhāra",
+       "ref": "HV 23.132",
+       "words": "aṅgārasya tu dāyādo gāndhāro"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Dharma",
+     "n": 5,
+     "cells": {
+      "bhp9": {
+       "name": "Dharma",
+       "ref": "BhP 9.23.15",
+       "words": "tasya dharmaḥ"
+      },
+      "bndp2": {
+       "name": "Dharma",
+       "ref": "BndP 2,74.10",
+       "words": "gāndhāraputro dharmastu"
+      },
+      "garuda1": {
+       "name": "Gharma",
+       "ref": "GarP 1,139.67",
+       "words": "gharmo gāndhārato 'bhavat"
+      },
+      "matsya": {
+       "name": "Dharma",
+       "ref": "MatsP 48.8",
+       "words": "gandhāraputro dharmastu"
+      },
+      "vipc4": {
+       "name": "Dharma",
+       "ref": "ViPc 4,17.2",
+       "words": "tato dharmo"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "agree",
+     "name": "Dhṛta",
+     "n": 2,
+     "cells": {
+      "bhp9": {
+       "name": "Dhṛta",
+       "ref": "BhP 9.23.15",
+       "words": "tato dhṛtaḥ"
+      },
+      "bndp2": {
+       "name": "Dhṛta",
+       "ref": "BndP 2,74.10",
+       "words": "dhṛtastasya suto 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "most",
+     "name": "Ghṛta",
+     "n": 2,
+     "cells": {
+      "bhp9": {
+       "name": "Durmada",
+       "ref": "BhP 9.23.15",
+       "words": "dhṛtasya durmadaḥ"
+      },
+      "garuda1": {
+       "name": "Ghṛta",
+       "ref": "GarP 1,139.67",
+       "words": "ghṛtastu gharmaputro"
+      },
+      "matsya": {
+       "name": "Ghṛta",
+       "ref": "MatsP 48.8",
+       "words": "ghṛtastasyātmajo 'bhavat"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "differ",
+     "name": "Durdama",
+     "n": 2,
+     "cells": {
+      "bhp9": {
+       "name": "Pracetas",
+       "ref": "BhP 9.23.15",
+       "words": "tasmāt pracetāḥ"
+      },
+      "bndp2": {
+       "name": "Durdama",
+       "ref": "BndP 2,74.11",
+       "words": "dhṛtasya durdamo jajñe"
+      },
+      "garuda1": {
+       "name": "Durgama",
+       "ref": "GarP 1,139.67",
+       "words": "durgamaśca ghṛsya tu"
+      },
+      "matsya": {
+       "name": "Viduṣa",
+       "ref": "MatsP 48.8",
+       "words": "ghṛtācca viduṣo jajñe"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "most",
+     "name": "Prācetasa",
+     "n": 4,
+     "cells": {
+      "bhp9": {
+       "name": "Prācetasa",
+       "ref": "BhP 9.23.15",
+       "words": "prācetasaḥ śatam"
+      },
+      "bndp2": {
+       "name": "Pracetas",
+       "ref": "BndP 2,74.11",
+       "words": "pracetāstasya cātmajaḥ"
+      },
+      "garuda1": {
+       "name": "Pracetā",
+       "ref": "GarP 1,139.68",
+       "words": "pracetā durgamasyaiva"
+      },
+      "matsya": {
+       "name": "Pracetas",
+       "ref": "MatsP 48.8",
+       "words": "pracetāstasya cātmajaḥ"
+      },
+      "vip4": {
+       "name": "Ārabdhanāman",
+       "ref": "ViP 4,17.3",
+       "words": "setuputra ārabdhanāmā"
+      },
+      "agni": {
+       "name": "Purovasu",
+       "ref": "AgP 276.4",
+       "words": "babhrusetoḥ purovasuḥ"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "puru",
+   "anchor": "Pūru",
+   "father": "Yayāti",
+   "title": "the Pauravas from Pūru",
+   "order": [
+    "hv",
+    "vipc4",
+    "vip4",
+    "mbh1",
+    "brahma",
+    "bhp9",
+    "matsya",
+    "agni"
+   ],
+   "counts": {
+    "agree": 6,
+    "most": 4,
+    "differ": 15,
+    "one": 0,
+    "share_agree": 0.24
+   },
+   "pairs": {
+    "hv & vipc4": [
+     4,
+     16
+    ],
+    "hv & vip4": [
+     4,
+     15
+    ],
+    "hv & mbh1": [
+     2,
+     13
+    ],
+    "hv & brahma": [
+     5,
+     14
+    ],
+    "hv & bhp9": [
+     3,
+     11
+    ],
+    "hv & matsya": [
+     2,
+     12
+    ],
+    "hv & agni": [
+     2,
+     4
+    ],
+    "vipc4 & vip4": [
+     15,
+     17
+    ],
+    "vipc4 & mbh1": [
+     4,
+     9
+    ],
+    "vipc4 & brahma": [
+     3,
+     8
+    ],
+    "vipc4 & bhp9": [
+     12,
+     12
+    ],
+    "vipc4 & matsya": [
+     4,
+     12
+    ],
+    "vipc4 & agni": [
+     4,
+     6
+    ],
+    "vip4 & mbh1": [
+     4,
+     9
+    ],
+    "vip4 & brahma": [
+     3,
+     7
+    ],
+    "vip4 & bhp9": [
+     11,
+     12
+    ],
+    "vip4 & matsya": [
+     4,
+     11
+    ],
+    "vip4 & agni": [
+     4,
+     5
+    ],
+    "mbh1 & brahma": [
+     1,
+     8
+    ],
+    "mbh1 & bhp9": [
+     3,
+     10
+    ],
+    "mbh1 & matsya": [
+     3,
+     9
+    ],
+    "mbh1 & agni": [
+     3,
+     3
+    ],
+    "brahma & bhp9": [
+     2,
+     6
+    ],
+    "brahma & matsya": [
+     2,
+     7
+    ],
+    "brahma & agni": [
+     2,
+     4
+    ],
+    "bhp9 & matsya": [
+     4,
+     12
+    ],
+    "bhp9 & agni": [
+     3,
+     4
+    ],
+    "matsya & agni": [
+     3,
+     4
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Pūru",
+     "n": 8,
+     "cells": {
+      "hv": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      },
+      "vipc4": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      },
+      "vip4": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      },
+      "mbh1": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      },
+      "brahma": {
+       "name": "Puru",
+       "ref": "BrP 12.36",
+       "words": "pituḥ puruḥ"
+      },
+      "bhp9": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      },
+      "matsya": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      },
+      "agni": {
+       "name": "Pūru",
+       "ref": null,
+       "words": null
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "agree",
+     "name": "Janamejaya",
+     "n": 6,
+     "cells": {
+      "vipc4": {
+       "name": "Janamejaya",
+       "ref": "ViPc 4,19.1",
+       "words": "pūror janamejayaḥ putras"
+      },
+      "vip4": {
+       "name": "Janamejaya",
+       "ref": "ViP 4,19.1",
+       "words": "pūrorjanamejayaḥ"
+      },
+      "mbh1": {
+       "name": "Janamejaya",
+       "ref": "MBh 1,90.11",
+       "words": "pūror bhāryā kausalyā nāma tasyām asya jajñe janamejayo"
+      },
+      "bhp9": {
+       "name": "Janamejaya",
+       "ref": "BhP 9.20.2",
+       "words": "janamejayo hyabhūt pūroḥ"
+      },
+      "matsya": {
+       "name": "Janamejaya",
+       "ref": "MatsP 49.1",
+       "words": "pūroḥ putro mahātejā rājā sa janamejayaḥ"
+      },
+      "agni": {
+       "name": "Janamejaya",
+       "ref": "AgP 277.1",
+       "words": "purorjanamejayo 'bhūt"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Pracinvān",
+     "n": 5,
+     "cells": {
+      "vipc4": {
+       "name": "Pracinvān",
+       "ref": "ViPc 4,19.1",
+       "words": "tasyāpi pracinvān"
+      },
+      "vip4": {
+       "name": "Pracinvān",
+       "ref": "ViP 4,19.1",
+       "words": "tasyāpi pracinvān"
+      },
+      "mbh1": {
+       "name": "Prācinvān",
+       "ref": "MBh 1,90.12",
+       "words": "janamejayaḥ khalv anantāṃ nāmopayeme mādhavīm tasyām asya jajñe prācinvān"
+      },
+      "bhp9": {
+       "name": "Pracinvān",
+       "ref": "BhP 9.20.2",
+       "words": "pracinvāṃstatsutastataḥ"
+      },
+      "agni": {
+       "name": "Prācīnnant",
+       "ref": "AgP 277.1",
+       "words": "prācīnnantastu tatsutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "most",
+     "name": "Pravīra",
+     "n": 4,
+     "cells": {
+      "hv": {
+       "name": "Pravīra",
+       "ref": "HV 23.4",
+       "words": "pūroḥ pravīraḥ putro 'bhūt"
+      },
+      "vipc4": {
+       "name": "Pravīra",
+       "ref": "ViPc 4,19.1",
+       "words": "pracinvataḥ pravīraḥ"
+      },
+      "vip4": {
+       "name": "Pravīra",
+       "ref": "ViP 4,19.1",
+       "words": "pracinvataḥ pravīraḥ"
+      },
+      "brahma": {
+       "name": "Suvīra",
+       "ref": "BrP 13.3",
+       "words": "puroḥ putraḥ suvīro 'bhūt"
+      },
+      "bhp9": {
+       "name": "Pravīra",
+       "ref": "BhP 9.20.2",
+       "words": "pravīro 'tha"
+      },
+      "matsya": {
+       "name": "Prācītvat",
+       "ref": "MatsP 49.1",
+       "words": "prācītvataḥ sutastasya"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Manasyu",
+     "n": 7,
+     "cells": {
+      "hv": {
+       "name": "Manasyu",
+       "ref": "HV 23.4",
+       "words": "manasyus tasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Manasyu",
+       "ref": "ViPc 4,19.1",
+       "words": "tasmān manasyur"
+      },
+      "vip4": {
+       "name": "Manasyu",
+       "ref": "ViP 4,19.1",
+       "words": "pravīrānmanasyuḥ"
+      },
+      "brahma": {
+       "name": "Manasyu",
+       "ref": "BrP 13.3",
+       "words": "manasyus tasya cātmajaḥ"
+      },
+      "bhp9": {
+       "name": "Manusyu",
+       "ref": "BhP 9.20.2",
+       "words": "manusyurvai tasmāc"
+      },
+      "matsya": {
+       "name": "Manasyu",
+       "ref": "MatsP 49.2",
+       "words": "prācītvatasya tanayo manasyuśca"
+      },
+      "agni": {
+       "name": "Manastyu",
+       "ref": "AgP 277.1",
+       "words": "prācīnnantānmanastyustu"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Abhayada",
+     "n": 4,
+     "cells": {
+      "hv": {
+       "name": "Abhayada",
+       "ref": "HV 23.4",
+       "words": "manasyor abhavat sutaḥ"
+      },
+      "vipc4": {
+       "name": "Abhayada",
+       "ref": "ViPc 4,19.1",
+       "words": "manasyoś cābhayadas"
+      },
+      "vip4": {
+       "name": "Abhayada",
+       "ref": "ViP 4,19.1",
+       "words": "manasyoścābhayadaḥ"
+      },
+      "brahma": {
+       "name": "Abhayada",
+       "ref": "BrP 13.3",
+       "words": "abhayado nāma manasyor abhavat sutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "agree",
+     "name": "Sudhanvan",
+     "n": 2,
+     "cells": {
+      "hv": {
+       "name": "Sudhanvan",
+       "ref": "HV 23.5",
+       "words": "abhayadasyāsīt sudhanvā"
+      },
+      "brahma": {
+       "name": "Sudhanvan",
+       "ref": "BrP 13.4",
+       "words": "abhayadasyāsīt sudhanvā nāma pārthivaḥ"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "differ",
+     "name": "Suhotra",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Suhotra",
+       "ref": "HV 23.110",
+       "words": "sudhanvanas tu dāyādaḥ suhotro"
+      },
+      "mbh1": {
+       "name": "Saṃyāti",
+       "ref": "MBh 1,90.13",
+       "words": "prācinvān khalv aśmakīm upayeme tasyām asya jajñe saṃyātiḥ"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "differ",
+     "name": "Bṛhat",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Bṛhat",
+       "ref": "HV 23.73",
+       "words": "suhotrasya bṛhat putro"
+      },
+      "mbh1": {
+       "name": "Ahaṃpāti",
+       "ref": "MBh 1,90.14",
+       "words": "saṃyātiḥ khalu dṛṣadvato duhitaraṃ varāṅgīṃ nāmopayeme tasyām asya jajñe ahaṃpātiḥ"
+      },
+      "brahma": {
+       "name": "Raudrāśva",
+       "ref": "BrP 13.4",
+       "words": "raudrāśvas tasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "differ",
+     "name": "Ajamīḍha",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Ajamīḍha",
+       "ref": "HV 23.73",
+       "words": "bṛhatas tanayās trayaḥ ajamīḍho"
+      },
+      "mbh1": {
+       "name": "Sārvabhauma",
+       "ref": "MBh 1,90.15",
+       "words": "ahaṃpātis tu khalu kṛtavīryaduhitaram upayeme bhānumatīṃ nāma tasyām asya jajñe sārvabhaumaḥ"
+      },
+      "brahma": {
+       "name": "Kakṣeyu",
+       "ref": "BrP 13.5",
+       "words": "kakṣeyusthaṇḍileyuś ca"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "differ",
+     "name": "Ṛkṣa",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Ṛkṣa",
+       "ref": "HV 23.106",
+       "words": "ajamīḍhaḥ sameyivān ṛkṣaṃ sā janayām āsa"
+      },
+      "mbh1": {
+       "name": "Jayatsena",
+       "ref": "MBh 1,90.16",
+       "words": "sārvabhaumaḥ khalu jitvājahāra kaikeyīṃ sunandāṃ nāma tasyām asya jajñe jayatsenaḥ"
+      },
+      "brahma": {
+       "name": "Sabhānara",
+       "ref": "BrP 13.14",
+       "words": "kakṣeyos tanayās tv āsaṃs traya eva mahārathāḥ sabhānaraś"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "differ",
+     "name": "Saṃvaraṇa",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Saṃvaraṇa",
+       "ref": "HV 23.107",
+       "words": "ṛkṣāt saṃvaraṇo jajñe"
+      },
+      "mbh1": {
+       "name": "Arācīna",
+       "ref": "MBh 1,90.17",
+       "words": "jayatsenaḥ khalu vaidarbhīm upayeme suṣuvāṃ nāma tasyām asya jajñe arācīnaḥ"
+      },
+      "brahma": {
+       "name": "Kālānala",
+       "ref": "BrP 13.15",
+       "words": "sabhānarasya putras tu vidvān kālānalo nṛpaḥ"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "differ",
+     "name": "Kuru",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Kuru",
+       "ref": "HV 23.107",
+       "words": "kuruḥ saṃvaraṇāt"
+      },
+      "mbh1": {
+       "name": "Mahābhauma",
+       "ref": "MBh 1,90.18",
+       "words": "arācīno 'pi vaidarbhīm evāparām upayeme maryādāṃ nāma tasyām asya jajñe mahābhaumaḥ"
+      },
+      "brahma": {
+       "name": "Sṛñjaya",
+       "ref": "BrP 13.16",
+       "words": "kālānalasya dharmajñaḥ sṛñjayo nāma vai sutaḥ"
+      },
+      "bhp9": {
+       "name": "Cārupada",
+       "ref": "BhP 9.20.2",
+       "words": "tasmāc cārupado 'bhavat"
+      },
+      "matsya": {
+       "name": "Pītāyudha",
+       "ref": "MatsP 49.2",
+       "words": "manasyorabhavatsutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 13,
+     "status": "differ",
+     "name": "Sudyu",
+     "n": 3,
+     "cells": {
+      "hv": {
+       "name": "Parīkṣit",
+       "ref": "HV 23.109",
+       "words": "parīkṣic ca mahābāhuḥ"
+      },
+      "vipc4": {
+       "name": "Sudyu",
+       "ref": "ViPc 4,19.1",
+       "words": "tasyāpi sudyuḥ"
+      },
+      "vip4": {
+       "name": "Sudyu",
+       "ref": "ViP 4,19.1",
+       "words": "tasyāpi sudyuḥ"
+      },
+      "mbh1": {
+       "name": "Ayutanāyin",
+       "ref": "MBh 1,90.19",
+       "words": "mahābhaumaḥ khalu prāsenajitīm upayeme suyajñāṃ nāma tasyām asya jajñe ayutanāyī"
+      },
+      "brahma": {
+       "name": "Puraṃjaya",
+       "ref": "BrP 13.16",
+       "words": "sṛñjayasyābhavat putro vīro rājā puraṃjayaḥ"
+      },
+      "bhp9": {
+       "name": "Sudyu",
+       "ref": "BhP 9.20.3",
+       "words": "tasya sudyurabhūt putraḥ"
+      },
+      "matsya": {
+       "name": "Dhundhu",
+       "ref": "MatsP 49.3",
+       "words": "dāyādastasya cāpyāsīd dhundhurnāma"
+      }
+     }
+    },
+    {
+     "gen": 14,
+     "status": "differ",
+     "name": "Bahugava",
+     "n": 3,
+     "cells": {
+      "hv": {
+       "name": "Janamejaya",
+       "ref": "HV 23.110",
+       "words": "parīkṣitas tu tanayo dhārmiko janamejayaḥ"
+      },
+      "vipc4": {
+       "name": "Bahugava",
+       "ref": "ViPc 4,19.1",
+       "words": "sudyor bahugavaḥ"
+      },
+      "vip4": {
+       "name": "Bahugata",
+       "ref": "ViP 4,19.1",
+       "words": "sudyor bahugataḥ"
+      },
+      "mbh1": {
+       "name": "Akrodhana",
+       "ref": "MBh 1,90.20",
+       "words": "ayutanāyī khalu pṛthuśravaso duhitaram upayeme bhāsāṃ nāma tasyām asya jajñe akrodhanaḥ"
+      },
+      "brahma": {
+       "name": "Janamejaya",
+       "ref": "BrP 13.17",
+       "words": "puraṃjayasuto 'bhavat"
+      },
+      "bhp9": {
+       "name": "Bahugava",
+       "ref": "BhP 9.20.3",
+       "words": "tasmādbahugavastataḥ"
+      },
+      "matsya": {
+       "name": "Bahuvidha",
+       "ref": "MatsP 49.3",
+       "words": "dhundhorbahuvidhaḥ putraḥ"
+      }
+     }
+    },
+    {
+     "gen": 15,
+     "status": "differ",
+     "name": "Saṃyāti",
+     "n": 3,
+     "cells": {
+      "hv": {
+       "name": "Suratha",
+       "ref": "HV 23.111",
+       "words": "janamejayasya putrau tu suratho"
+      },
+      "vipc4": {
+       "name": "Saṃyāti",
+       "ref": "ViPc 4,19.1",
+       "words": "tasyāpi saṃyātiḥ"
+      },
+      "vip4": {
+       "name": "Saṃyāti",
+       "ref": "ViP 4,19.1",
+       "words": "tasyāpi saṃyātiḥ"
+      },
+      "mbh1": {
+       "name": "Devātithi",
+       "ref": "MBh 1,90.21",
+       "words": "akrodhanaḥ khalu kāliṅgīṃ karaṇḍuṃ nāmopayeme tasyām asya jajñe devātithiḥ"
+      },
+      "bhp9": {
+       "name": "Saṃyāti",
+       "ref": "BhP 9.20.3",
+       "words": "saṃyātistasya"
+      },
+      "matsya": {
+       "name": "Sampāti",
+       "ref": "MatsP 49.3",
+       "words": "sampātistasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 16,
+     "status": "differ",
+     "name": "Ahaṃyāti",
+     "n": 3,
+     "cells": {
+      "hv": {
+       "name": "Vidūratha",
+       "ref": "HV 23.111",
+       "words": "surathasya tu vikrāntaḥ putro jajñe vidūrathaḥ"
+      },
+      "vipc4": {
+       "name": "Ahaṃyāti",
+       "ref": "ViPc 4,19.1",
+       "words": "saṃyāter ahaṃyātiḥ"
+      },
+      "vip4": {
+       "name": "Ahaṃyāti",
+       "ref": "ViP 4,19.1",
+       "words": "saṃyāterahaṃyātiḥ"
+      },
+      "mbh1": {
+       "name": "Ṛca",
+       "ref": "MBh 1,90.22",
+       "words": "devātithiḥ khalu vaidehīm upayeme maryādāṃ nāma tasyām asya jajñe ṛcaḥ"
+      },
+      "bhp9": {
+       "name": "Ahaṃyāti",
+       "ref": "BhP 9.20.3",
+       "words": "saṃyātistasyāhaṃyātī"
+      },
+      "matsya": {
+       "name": "Raṃhavarcā",
+       "ref": "MatsP 49.4",
+       "words": "sampātestu raṃhavarcā"
+      }
+     }
+    },
+    {
+     "gen": 17,
+     "status": "differ",
+     "name": "Raudrāśva",
+     "n": 3,
+     "cells": {
+      "hv": {
+       "name": "Ṛkṣa",
+       "ref": "HV 23.112",
+       "words": "vidūrathasya dāyāda ṛkṣa"
+      },
+      "vipc4": {
+       "name": "Raudrāśva",
+       "ref": "ViPc 4,19.1",
+       "words": "tato raudrāśvaḥ"
+      },
+      "vip4": {
+       "name": "Raudrāśva",
+       "ref": "ViP 4,19.1",
+       "words": "tato raudrāśvaḥ"
+      },
+      "mbh1": {
+       "name": "Ṛkṣa",
+       "ref": "MBh 1,90.23",
+       "words": "ṛcaḥ khalv āṅgeyīm upayeme sudevāṃ nāma tasyāṃ putram ajanayad ṛkṣam"
+      },
+      "bhp9": {
+       "name": "Raudrāśva",
+       "ref": "BhP 9.20.3",
+       "words": "raudrāśvastatsutaḥ"
+      },
+      "matsya": {
+       "name": "Bhadrāśva",
+       "ref": "MatsP 49.4",
+       "words": "bhadrāśvastasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 18,
+     "status": "differ",
+     "name": "Ṛteyu",
+     "n": 2,
+     "cells": {
+      "hv": {
+       "name": "Bhīmasena",
+       "ref": "HV 23.114",
+       "words": "ṛkṣasya tu dvitīyasya bhīmaseno 'bhavat sutaḥ"
+      },
+      "vipc4": {
+       "name": "Ṛteyu",
+       "ref": "ViPc 4,19.1",
+       "words": "raudrāśvasya daśātmajā"
+      },
+      "vip4": {
+       "name": "Ṛteṣu",
+       "ref": "ViP 4,19.2",
+       "words": "ṛteṣukakṣeṣu"
+      },
+      "bhp9": {
+       "name": "Ṛteyu",
+       "ref": "BhP 9.20.4",
+       "words": "ṛteyustasya"
+      },
+      "matsya": {
+       "name": "Auceyu",
+       "ref": "MatsP 49.4",
+       "words": "bhadrāśvasya dhṛtāyāṃ tu daśāpsarasi sūnavaḥ"
+      }
+     }
+    },
+    {
+     "gen": 19,
+     "status": "most",
+     "name": "Rantināra",
+     "n": 5,
+     "cells": {
+      "hv": {
+       "name": "Pratīpa",
+       "ref": "HV 23.114",
+       "words": "pratīpo bhīmasenasya"
+      },
+      "vipc4": {
+       "name": "Rantināra",
+       "ref": "ViPc 4,19.1",
+       "words": "ṛteyo rantināraḥ putro 'bhūt"
+      },
+      "vip4": {
+       "name": "Antināra",
+       "ref": "ViP 4,19.3",
+       "words": "ṛteṣorantināraḥ putro 'bhūt"
+      },
+      "mbh1": {
+       "name": "Matināra",
+       "ref": "MBh 1,90.24",
+       "words": "ṛkṣaḥ khalu takṣakaduhitaram upayeme jvālāṃ nāma tasyāṃ putraṃ matināraṃ nāmotpādayām āsa"
+      },
+      "bhp9": {
+       "name": "Rantināva",
+       "ref": "BhP 9.20.6",
+       "words": "ṛteyo rantināvo 'bhūt"
+      },
+      "matsya": {
+       "name": "Antināra",
+       "ref": "MatsP 49.7",
+       "words": "tasyāṃ sa janayāmāsa antināraṃ"
+      }
+     }
+    },
+    {
+     "gen": 20,
+     "status": "most",
+     "name": "Apratiratha",
+     "n": 2,
+     "cells": {
+      "hv": {
+       "name": "Śāṃtanu",
+       "ref": "HV 23.114",
+       "words": "pratīpasya tu śāṃtanuḥ"
+      },
+      "vipc4": {
+       "name": "Apratiratha",
+       "ref": "ViPc 4,19.1",
+       "words": "sumatim apratirathaṃ dhruvaṃ ca rantināraḥ putrān avāpa"
+      },
+      "vip4": {
+       "name": "Apratiratha",
+       "ref": "ViP 4,19.4",
+       "words": "apratirathaṃ"
+      }
+     }
+    },
+    {
+     "gen": 21,
+     "status": "differ",
+     "name": "Vicitravīrya",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Vicitravīrya",
+       "ref": "HV 23.119",
+       "words": "śāṃtanor dayitaṃ putraṃ"
+      },
+      "vipc4": {
+       "name": "Ailīna",
+       "ref": "ViPc 4,19.1",
+       "words": "apratirathasyāparaḥ putro 'bhūd ailīnaḥ"
+      },
+      "vip4": {
+       "name": "Elīna",
+       "ref": "ViP 4,19.8",
+       "words": "apratirathasyāparaḥ putro 'bhūdailīnaḥ"
+      }
+     }
+    },
+    {
+     "gen": 22,
+     "status": "most",
+     "name": "Duṣyanta",
+     "n": 2,
+     "cells": {
+      "hv": {
+       "name": "Pāṇḍu",
+       "ref": "HV 23.120",
+       "words": "kṣetre vaicitravīryake dhṛtarāṣṭraṃ ca pāṇḍuṃ"
+      },
+      "vipc4": {
+       "name": "Duṣyanta",
+       "ref": "ViPc 4,19.1",
+       "words": "tato duṣyantādyāś catvāraḥ putrā babhūvuḥ"
+      },
+      "vip4": {
+       "name": "Duṣyanta",
+       "ref": "ViP 4,19.9",
+       "words": "elīnasya duṣyantādyāścatvāraḥ putrā"
+      }
+     }
+    },
+    {
+     "gen": 23,
+     "status": "differ",
+     "name": "Bharata",
+     "n": 2,
+     "cells": {
+      "hv": {
+       "name": "Dhanaṃjaya",
+       "ref": "HV 23.121",
+       "words": "pāṇḍor dhanaṃjayaḥ putraḥ"
+      },
+      "vipc4": {
+       "name": "Bharata",
+       "ref": "ViPc 4,19.1",
+       "words": "duṣyantāc cakravartī bharato 'bhavat"
+      },
+      "vip4": {
+       "name": "Bharata",
+       "ref": "ViP 4,19.10",
+       "words": "duṣyantāccakravartī bharato 'bhūt"
+      },
+      "brahma": {
+       "name": "Mahāśāla",
+       "ref": "BrP 13.17",
+       "words": "janamejayasya rājarṣer mahāśālo 'bhavat sutaḥ"
+      },
+      "agni": {
+       "name": "Vītamaya",
+       "ref": "AgP 277.1",
+       "words": "tasmādvītamayo nṛpaḥ"
+      }
+     }
+    },
+    {
+     "gen": 24,
+     "status": "differ",
+     "name": "Saubhadra",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Saubhadra",
+       "ref": "HV 23.121",
+       "words": "saubhadras tasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Bharadvāja",
+       "ref": "ViPc 4,19.3",
+       "words": "putro marudbhir dattaḥ"
+      },
+      "brahma": {
+       "name": "Mahāmanas",
+       "ref": "BrP 13.18",
+       "words": "mahāmanā nāma suto mahāśālasya"
+      },
+      "matsya": {
+       "name": "Trivana",
+       "ref": "MatsP 49.8",
+       "words": "trivanaṃ caiva dhārmikam"
+      },
+      "agni": {
+       "name": "Śundhu",
+       "ref": "AgP 277.2",
+       "words": "śundhurvītamayāccābhūt"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "kuru",
+   "anchor": "Kuru",
+   "father": "Saṃvaraṇa",
+   "title": "the Kurus from Kuru",
+   "order": [
+    "matsya",
+    "vipc4",
+    "vip4",
+    "bhp9",
+    "garuda1",
+    "hv",
+    "agni",
+    "mbh1",
+    "brahma"
+   ],
+   "counts": {
+    "agree": 12,
+    "most": 6,
+    "differ": 2,
+    "one": 1,
+    "share_agree": 0.6
+   },
+   "pairs": {
+    "matsya & vipc4": [
+     13,
+     18
+    ],
+    "matsya & vip4": [
+     15,
+     18
+    ],
+    "matsya & bhp9": [
+     10,
+     15
+    ],
+    "matsya & garuda1": [
+     10,
+     15
+    ],
+    "matsya & hv": [
+     7,
+     10
+    ],
+    "matsya & agni": [
+     8,
+     10
+    ],
+    "matsya & mbh1": [
+     5,
+     10
+    ],
+    "matsya & brahma": [
+     1,
+     3
+    ],
+    "vipc4 & vip4": [
+     16,
+     18
+    ],
+    "vipc4 & bhp9": [
+     12,
+     15
+    ],
+    "vipc4 & garuda1": [
+     13,
+     15
+    ],
+    "vipc4 & hv": [
+     9,
+     11
+    ],
+    "vipc4 & agni": [
+     8,
+     10
+    ],
+    "vipc4 & mbh1": [
+     6,
+     11
+    ],
+    "vipc4 & brahma": [
+     2,
+     3
+    ],
+    "vip4 & bhp9": [
+     12,
+     15
+    ],
+    "vip4 & garuda1": [
+     13,
+     15
+    ],
+    "vip4 & hv": [
+     8,
+     10
+    ],
+    "vip4 & agni": [
+     9,
+     10
+    ],
+    "vip4 & mbh1": [
+     5,
+     10
+    ],
+    "vip4 & brahma": [
+     1,
+     3
+    ],
+    "bhp9 & garuda1": [
+     10,
+     14
+    ],
+    "bhp9 & hv": [
+     7,
+     8
+    ],
+    "bhp9 & agni": [
+     7,
+     7
+    ],
+    "bhp9 & mbh1": [
+     3,
+     7
+    ],
+    "bhp9 & brahma": [
+     1,
+     2
+    ],
+    "garuda1 & hv": [
+     6,
+     8
+    ],
+    "garuda1 & agni": [
+     6,
+     7
+    ],
+    "garuda1 & mbh1": [
+     3,
+     7
+    ],
+    "garuda1 & brahma": [
+     1,
+     2
+    ],
+    "hv & agni": [
+     10,
+     10
+    ],
+    "hv & mbh1": [
+     6,
+     9
+    ],
+    "hv & brahma": [
+     1,
+     2
+    ],
+    "agni & mbh1": [
+     5,
+     8
+    ],
+    "agni & brahma": [
+     1,
+     3
+    ],
+    "mbh1 & brahma": [
+     2,
+     3
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Kuru",
+     "n": 9,
+     "cells": {
+      "matsya": {
+       "name": "Kuru",
+       "ref": "MatsP 50.20",
+       "words": "kuruḥ saṃvaraṇāt"
+      },
+      "vipc4": {
+       "name": "Kuru",
+       "ref": "ViPc 4,19.16",
+       "words": "saṃvaraṇāc ca kuruḥ"
+      },
+      "vip4": {
+       "name": "Kuru",
+       "ref": null,
+       "words": null
+      },
+      "bhp9": {
+       "name": "Kuru",
+       "ref": "BhP 9.22.4",
+       "words": "tapatyāṃ sūryakanyāyāṃ kurukṣetrapatiḥ kuruḥ"
+      },
+      "garuda1": {
+       "name": "Kuru",
+       "ref": "GarP 1,140.25",
+       "words": "kuruḥ saṃvaraṇādabhūt"
+      },
+      "hv": {
+       "name": "Kuru",
+       "ref": "HV 23.107",
+       "words": "kuruḥ saṃvaraṇāt"
+      },
+      "agni": {
+       "name": "Kuru",
+       "ref": "AgP 277.26",
+       "words": "kuruḥ samvaraṇāt"
+      },
+      "mbh1": {
+       "name": "Kuru",
+       "ref": "MBh 1,89.42",
+       "words": "saṃvaraṇāt saurī suṣuve tapatī kurum"
+      },
+      "brahma": {
+       "name": "Kuru",
+       "ref": "BrP 13.106",
+       "words": "kuruḥ saṃvaraṇāt"
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "most",
+     "name": "Jahnu",
+     "n": 4,
+     "cells": {
+      "matsya": {
+       "name": "Jahnu",
+       "ref": "MatsP 50.23",
+       "words": "kurostu dayitāḥ putrāḥ sudhanvā jahnureva ca"
+      },
+      "vipc4": {
+       "name": "Jahnu",
+       "ref": "ViPc 4,19.17",
+       "words": "sudhanurjahnuparīkṣitpramukhāḥ kuroḥ putrāḥ"
+      },
+      "vip4": {
+       "name": "Jahnu",
+       "ref": "ViP 4,19.78",
+       "words": "jahnu"
+      },
+      "bhp9": {
+       "name": "Parīkṣi",
+       "ref": "BhP 9.22.4",
+       "words": "parīkṣiḥ sudhanurjahnurniṣadhaśca kuroḥ sutāḥ"
+      },
+      "garuda1": {
+       "name": "Jahnu",
+       "ref": "GarP 1,140.25",
+       "words": "kuroḥ sutāḥ"
+      },
+      "hv": {
+       "name": "Parīkṣit",
+       "ref": "HV 23.109",
+       "words": "parīkṣic ca mahābāhuḥ"
+      },
+      "agni": {
+       "name": "Parikṣit",
+       "ref": "AgP 277.27",
+       "words": "parikṣiccārimejayaḥ"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Janamejaya",
+     "n": 2,
+     "cells": {
+      "hv": {
+       "name": "Janamejaya",
+       "ref": "HV 23.110",
+       "words": "parīkṣitas tu tanayo dhārmiko janamejayaḥ"
+      },
+      "agni": {
+       "name": "Janamejaya",
+       "ref": "AgP 277.31",
+       "words": "parikṣitasya dāyādo dhārmiko janamejayaḥ"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "agree",
+     "name": "Suratha",
+     "n": 7,
+     "cells": {
+      "matsya": {
+       "name": "Suratha",
+       "ref": "MatsP 50.34",
+       "words": "jahnustvajanayatputraṃ surathaṃ"
+      },
+      "vipc4": {
+       "name": "Suratha",
+       "ref": "ViPc 4,20.2",
+       "words": "jahnos tu suratho nāmātmajo babhūva"
+      },
+      "vip4": {
+       "name": "Suratha",
+       "ref": "ViP 4,20.2",
+       "words": "jahnostu surathonāmātmajo babhūva"
+      },
+      "bhp9": {
+       "name": "Suratha",
+       "ref": "BhP 9.22.9",
+       "words": "parīkṣiranapatyo 'bhūt suratho nāma jāhnavaḥ"
+      },
+      "garuda1": {
+       "name": "Suratha",
+       "ref": "GarP 1,140.30",
+       "words": "jahnostu suratho 'bhavat"
+      },
+      "hv": {
+       "name": "Suratha",
+       "ref": "HV 23.111",
+       "words": "janamejayasya putrau tu suratho"
+      },
+      "agni": {
+       "name": "Suratha",
+       "ref": "AgP 277.33",
+       "words": "janamejayasya putrau tu suratho"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Vidūratha",
+     "n": 8,
+     "cells": {
+      "matsya": {
+       "name": "Vidūratha",
+       "ref": "MatsP 50.35",
+       "words": "surathasya tu dāyādo vīro rājā vidūrathaḥ"
+      },
+      "vipc4": {
+       "name": "Vidūratha",
+       "ref": "ViPc 4,20.3",
+       "words": "tasya ca vidūrathaḥ"
+      },
+      "vip4": {
+       "name": "Vidūratha",
+       "ref": "ViP 4,20.3",
+       "words": "tasyāpi vidūrathaḥ"
+      },
+      "bhp9": {
+       "name": "Vidūratha",
+       "ref": "BhP 9.22.10",
+       "words": "tato vidūrathaḥ"
+      },
+      "garuda1": {
+       "name": "Vidūratha",
+       "ref": "GarP 1,140.31",
+       "words": "surathātsārvabhaumo vidūrathāt"
+      },
+      "hv": {
+       "name": "Vidūratha",
+       "ref": "HV 23.111",
+       "words": "surathasya tu vikrāntaḥ putro jajñe vidūrathaḥ"
+      },
+      "agni": {
+       "name": "Vidūratha",
+       "ref": "AgP 277.33",
+       "words": "surathādvidūratho"
+      },
+      "mbh1": {
+       "name": "Viḍūratha",
+       "ref": "MBh 1,90.41",
+       "words": "kuruḥ khalu dāśārhīm upayeme śubhāṅgīṃ nāma tasyām asya jajñe viḍūrathaḥ"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "agree",
+     "name": "Sārvabhauma",
+     "n": 5,
+     "cells": {
+      "matsya": {
+       "name": "Sārvabhauma",
+       "ref": "MatsP 50.35",
+       "words": "vidūrathasutaścāpi sārvabhauma"
+      },
+      "vipc4": {
+       "name": "Sārvabhauma",
+       "ref": "ViPc 4,20.3",
+       "words": "vidūrathasya sārvabhaumaḥ"
+      },
+      "vip4": {
+       "name": "Sārvabhauma",
+       "ref": "ViP 4,20.4",
+       "words": "tasmātsārvabhomaḥ"
+      },
+      "bhp9": {
+       "name": "Sārvabhauma",
+       "ref": "BhP 9.22.10",
+       "words": "vidūrathastasmāt sārvabhaumaḥ"
+      },
+      "garuda1": {
+       "name": "Sārvabhauma",
+       "ref": "GarP 1,140.31",
+       "words": "sārvabhaumo vidūrathāt"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "agree",
+     "name": "Jayatsena",
+     "n": 5,
+     "cells": {
+      "matsya": {
+       "name": "Jayatsena",
+       "ref": "MatsP 50.36",
+       "words": "sārvabhaumājjayatseno"
+      },
+      "vipc4": {
+       "name": "Jayatsena",
+       "ref": "ViPc 4,20.3",
+       "words": "sārvabhaumāj jayatsenas"
+      },
+      "vip4": {
+       "name": "Jayatsena",
+       "ref": "ViP 4,20.4",
+       "words": "sārvabhaumājjayatsenaḥ"
+      },
+      "bhp9": {
+       "name": "Jayasena",
+       "ref": "BhP 9.22.10",
+       "words": "jayasenastattanayo"
+      },
+      "garuda1": {
+       "name": "Jayasena",
+       "ref": "GarP 1,140.31",
+       "words": "jayasenaḥ sārvabhaumāt"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "one",
+     "name": "Rucira",
+     "n": 1,
+     "cells": {
+      "matsya": {
+       "name": "Rucira",
+       "ref": "MatsP 50.36",
+       "words": "rucirastasya cātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "most",
+     "name": "Ārādhita",
+     "n": 3,
+     "cells": {
+      "matsya": {
+       "name": "Bhauma",
+       "ref": "MatsP 50.36",
+       "words": "rucirāttu tato bhaumas"
+      },
+      "vipc4": {
+       "name": "Ārādhita",
+       "ref": "ViPc 4,20.3",
+       "words": "tasmād ārādhitas"
+      },
+      "vip4": {
+       "name": "Ārādhita",
+       "ref": "ViP 4,20.4",
+       "words": "tasmādārādhitaḥ"
+      },
+      "bhp9": {
+       "name": "Rādhika",
+       "ref": "BhP 9.22.10",
+       "words": "rādhiko 'to"
+      },
+      "garuda1": {
+       "name": "Avadhīta",
+       "ref": "GarP 1,140.31",
+       "words": "āvadhītastadātmajaḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "most",
+     "name": "Ayutāyu",
+     "n": 4,
+     "cells": {
+      "matsya": {
+       "name": "Tvaritāyu",
+       "ref": "MatsP 50.36",
+       "words": "tvaritāyustato 'bhavat"
+      },
+      "vipc4": {
+       "name": "Ayutāyu",
+       "ref": "ViPc 4,20.3",
+       "words": "tataś cāyutāyur"
+      },
+      "vip4": {
+       "name": "Ayutāyu",
+       "ref": "ViP 4,20.4",
+       "words": "tataścāyutāyuḥ"
+      },
+      "bhp9": {
+       "name": "Ayutāyu",
+       "ref": "BhP 9.22.10",
+       "words": "rādhiko 'to 'yutāyv abhūt"
+      },
+      "garuda1": {
+       "name": "Ayutāyu",
+       "ref": "GarP 1,140.32",
+       "words": "ayutāyustasya putraḥ"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "agree",
+     "name": "Akrodhana",
+     "n": 5,
+     "cells": {
+      "matsya": {
+       "name": "Akrodhana",
+       "ref": "MatsP 50.37",
+       "words": "akrodhanas tv āyusutas"
+      },
+      "vipc4": {
+       "name": "Akrodhana",
+       "ref": "ViPc 4,20.3",
+       "words": "ayutāyor akrodhanaḥ"
+      },
+      "vip4": {
+       "name": "Akrodhana",
+       "ref": "ViP 4,20.4",
+       "words": "ayutāyorakrodhanaḥ"
+      },
+      "bhp9": {
+       "name": "Akrodhana",
+       "ref": "BhP 9.22.11",
+       "words": "tataścākrodhanaḥ"
+      },
+      "garuda1": {
+       "name": "Akrodhana",
+       "ref": "GarP 1,140.32",
+       "words": "tasya cākrodhanaḥ sutaḥ"
+      }
+     }
+    },
+    {
+     "gen": 11,
+     "status": "most",
+     "name": "Devātithi",
+     "n": 4,
+     "cells": {
+      "matsya": {
+       "name": "Devātithi",
+       "ref": "MatsP 50.37",
+       "words": "tasmāddevātithiḥ smṛtaḥ"
+      },
+      "vipc4": {
+       "name": "Devātithi",
+       "ref": "ViPc 4,20.3",
+       "words": "tasmād devātithiḥ"
+      },
+      "vip4": {
+       "name": "Devātithi",
+       "ref": "ViP 4,20.5",
+       "words": "tasmāddevātithiḥ"
+      },
+      "bhp9": {
+       "name": "Devātithi",
+       "ref": "BhP 9.22.11",
+       "words": "akrodhanastasmāddevātithiḥ"
+      },
+      "garuda1": {
+       "name": "Atithi",
+       "ref": "GarP 1,140.32",
+       "words": "akrodhanasyātithiśca"
+      },
+      "mbh1": {
+       "name": "Arugvān",
+       "ref": "MBh 1,90.42",
+       "words": "viḍūrathas tu māgadhīm upayeme saṃpriyāṃ nāma tasyām asya jajñe 'rugvān"
+      }
+     }
+    },
+    {
+     "gen": 12,
+     "status": "most",
+     "name": "Ṛkṣa",
+     "n": 6,
+     "cells": {
+      "matsya": {
+       "name": "Dakṣa",
+       "ref": "MatsP 50.37",
+       "words": "devātithestu dāyādo dakṣa"
+      },
+      "vipc4": {
+       "name": "Ṛkṣa",
+       "ref": "ViPc 4,20.3",
+       "words": "tato ṛkṣaḥ"
+      },
+      "vip4": {
+       "name": "Ṛkṣa",
+       "ref": "ViP 4,20.6",
+       "words": "tataś ca ṛkṣo 'nyobhavat"
+      },
+      "bhp9": {
+       "name": "Ṛkṣa",
+       "ref": "BhP 9.22.11",
+       "words": "ṛkṣastasya"
+      },
+      "garuda1": {
+       "name": "Ṛkṣa",
+       "ref": "GarP 1,140.32",
+       "words": "ṛkṣo 'bhūdatitheḥ sutaḥ"
+      },
+      "hv": {
+       "name": "Ṛkṣa",
+       "ref": "HV 23.112",
+       "words": "vidūrathasya dāyāda ṛkṣa"
+      },
+      "agni": {
+       "name": "Ṛkṣa",
+       "ref": "AgP 277.33",
+       "words": "ṛkṣa āsīdvidūrathāt"
+      },
+      "mbh1": {
+       "name": "Parikṣit",
+       "ref": "MBh 1,90.43",
+       "words": "arugvān khalu māgadhīm upayeme 'mṛtāṃ nāma tasyām asya jajñe parikṣit"
+      },
+      "brahma": {
+       "name": "Parīkṣit",
+       "ref": "BrP 13.108",
+       "words": "parīkṣic ca mahābāhuḥ"
+      }
+     }
+    },
+    {
+     "gen": 13,
+     "status": "agree",
+     "name": "Bhīmasena",
+     "n": 7,
+     "cells": {
+      "matsya": {
+       "name": "Bhīmasena",
+       "ref": "MatsP 50.38",
+       "words": "bhīmasenastato dakṣād"
+      },
+      "vipc4": {
+       "name": "Bhīmasena",
+       "ref": "ViPc 4,20.4",
+       "words": "ṛkṣād bhīmasenas"
+      },
+      "vip4": {
+       "name": "Bhīmasena",
+       "ref": "ViP 4,20.7",
+       "words": "ṛkṣādbhīmasenaḥ"
+      },
+      "garuda1": {
+       "name": "Bhīmasena",
+       "ref": "GarP 1,140.33",
+       "words": "ṛkṣācca bhīmaseno 'bhūt"
+      },
+      "hv": {
+       "name": "Bhīmasena",
+       "ref": "HV 23.114",
+       "words": "ṛkṣasya tu dvitīyasya bhīmaseno 'bhavat sutaḥ"
+      },
+      "agni": {
+       "name": "Bhīmasena",
+       "ref": "AgP 277.34",
+       "words": "ṛkṣasya tu dvitīyasya bhīmaseno 'bhavatsutaḥ"
+      },
+      "mbh1": {
+       "name": "Bhīmasena",
+       "ref": "MBh 1,90.44",
+       "words": "parikṣit khalu bāhudām upayeme suyaśāṃ nāma tasyām asya jajñe bhīmasenaḥ"
+      }
+     }
+    },
+    {
+     "gen": 14,
+     "status": "agree",
+     "name": "Dilīpa",
+     "n": 5,
+     "cells": {
+      "matsya": {
+       "name": "Dilīpa",
+       "ref": "MatsP 50.38",
+       "words": "dilīpas tasya cātmajaḥ"
+      },
+      "vipc4": {
+       "name": "Dilīpa",
+       "ref": "ViPc 4,20.4",
+       "words": "tataś ca dilīpaḥ"
+      },
+      "vip4": {
+       "name": "Dilīpa",
+       "ref": "ViP 4,20.7",
+       "words": "tataś ca dilīpaḥ"
+      },
+      "bhp9": {
+       "name": "Dilīpa",
+       "ref": "BhP 9.22.11",
+       "words": "ṛkṣastasya dilīpo 'bhūt"
+      },
+      "garuda1": {
+       "name": "Dilīpa",
+       "ref": "GarP 1,140.33",
+       "words": "dilīpo bhīmasenataḥ"
+      }
+     }
+    },
+    {
+     "gen": 15,
+     "status": "most",
+     "name": "Pratīpa",
+     "n": 7,
+     "cells": {
+      "matsya": {
+       "name": "Pratīpa",
+       "ref": "MatsP 50.38",
+       "words": "dilīpasya pratīpastu"
+      },
+      "vipc4": {
+       "name": "Pratīpa",
+       "ref": "ViPc 4,20.4",
+       "words": "dilīpāt pratīpaḥ"
+      },
+      "vip4": {
+       "name": "Pratīpa",
+       "ref": "ViP 4,20.8",
+       "words": "dilīpāt pratīpaḥ"
+      },
+      "bhp9": {
+       "name": "Pratīpa",
+       "ref": "BhP 9.22.11",
+       "words": "pratīpastasya cātmajaḥ"
+      },
+      "garuda1": {
+       "name": "Pratīpa",
+       "ref": "GarP 1,140.33",
+       "words": "pratīpo 'bhūddilīpācca"
+      },
+      "hv": {
+       "name": "Pratīpa",
+       "ref": "HV 23.114",
+       "words": "pratīpo bhīmasenasya"
+      },
+      "agni": {
+       "name": "Pratīpa",
+       "ref": "AgP 277.34",
+       "words": "pratīpo bhīmasenāt"
+      },
+      "mbh1": {
+       "name": "Paryaśravas",
+       "ref": "MBh 1,90.45",
+       "words": "bhīmasenaḥ khalu kaikeyīm upayeme sukumārīṃ nāma tasyām asya jajñe paryaśravāḥ"
+      }
+     }
+    },
+    {
+     "gen": 16,
+     "status": "agree",
+     "name": "Śaṃtanu",
+     "n": 7,
+     "cells": {
+      "matsya": {
+       "name": "Śaṃtanu",
+       "ref": "MatsP 50.38",
+       "words": "tasya putrās trayaḥ smṛtāḥ"
+      },
+      "vipc4": {
+       "name": "Śāṃtanu",
+       "ref": "ViPc 4,20.4",
+       "words": "tasyāpi devāpiśāṃtanubāhlīkasaṃjñās trayaḥ putrā babhūvuḥ"
+      },
+      "vip4": {
+       "name": "Śantanu",
+       "ref": "ViP 4,20.9",
+       "words": "tasyāpi devāpiśantanubāhlīkasaṃjñāstrayaḥ putrā babhūvuḥ"
+      },
+      "bhp9": {
+       "name": "Śāntanu",
+       "ref": "BhP 9.22.12",
+       "words": "śāntanustasya bāhlīka iti cātmajāḥ"
+      },
+      "hv": {
+       "name": "Śāṃtanu",
+       "ref": "HV 23.114",
+       "words": "pratīpasya tu śāṃtanuḥ"
+      },
+      "agni": {
+       "name": "Śāntanu",
+       "ref": "AgP 277.34",
+       "words": "pratīpasya tu śāntanuḥ"
+      },
+      "mbh1": {
+       "name": "Śaṃtanu",
+       "ref": "MBh 1,90.46",
+       "words": "putrān utpādayām āsa devāpiṃ śaṃtanuṃ"
+      }
+     }
+    },
+    {
+     "gen": 17,
+     "status": "agree",
+     "name": "Vicitravīrya",
+     "n": 6,
+     "cells": {
+      "matsya": {
+       "name": "Vicitravīrya",
+       "ref": "MatsP 50.46",
+       "words": "śaṃtanordayitaṃ putraṃ"
+      },
+      "vipc4": {
+       "name": "Vicitravīrya",
+       "ref": "ViPc 4,20.10",
+       "words": "citrāṅgadavicitravīryau putrāv utpādayām āsa śāṃtanuḥ"
+      },
+      "vip4": {
+       "name": "Vicitravīrya",
+       "ref": "ViP 4,20.34",
+       "words": "citrāṅgadavicitravīryau dvau putrāvutpādayāmāsa śantanuḥ"
+      },
+      "hv": {
+       "name": "Vicitravīrya",
+       "ref": "HV 23.119",
+       "words": "śāṃtanor dayitaṃ putraṃ"
+      },
+      "agni": {
+       "name": "Vicitravīrya",
+       "ref": "AgP 277.36",
+       "words": "kālyāyāṃ vicitravīryakaḥ"
+      },
+      "mbh1": {
+       "name": "Vicitravīrya",
+       "ref": "MBh 1,90.52",
+       "words": "śaṃtanor dvau putrau babhūvatuḥ citrāṅgado vicitravīryaś ca"
+      }
+     }
+    },
+    {
+     "gen": 18,
+     "status": "agree",
+     "name": "Pāṇḍu",
+     "n": 3,
+     "cells": {
+      "vipc4": {
+       "name": "Pāṇḍu",
+       "ref": "ViPc 4,20.10",
+       "words": "vicitravīryakṣetre dhṛtarāṣṭrapāṇḍū"
+      },
+      "hv": {
+       "name": "Pāṇḍu",
+       "ref": "HV 23.120",
+       "words": "kṣetre vaicitravīryake dhṛtarāṣṭraṃ ca pāṇḍuṃ"
+      },
+      "mbh1": {
+       "name": "Pāṇḍu",
+       "ref": "MBh 1,90.59",
+       "words": "sādhv apatyaṃ tasyotpādayeti sa param ity uktvā trīn putrān utpādayām āsa dhṛtarāṣṭraṃ pāṇḍuṃ"
+      }
+     }
+    },
+    {
+     "gen": 19,
+     "status": "differ",
+     "name": "Dhṛtarāṣṭra",
+     "n": 3,
+     "cells": {
+      "matsya": {
+       "name": "Dhṛtarāṣṭra",
+       "ref": "MatsP 50.46",
+       "words": "kṣetre vaicitraviryake dhṛtarāṣṭraṃ ca"
+      },
+      "vipc4": {
+       "name": "Bhīmasena",
+       "ref": "ViPc 4,20.11",
+       "words": "pāṇḍor apy araṇye ... yudhiṣṭhirabhīmārjunāḥ kuntyāṃ"
+      },
+      "vip4": {
+       "name": "Dhṛtarāṣṭra",
+       "ref": "ViP 4,20.38",
+       "words": "vicitravīryakṣetre dhṛtarāṣṭrapāṇḍu"
+      },
+      "agni": {
+       "name": "Dhṛtarāṣṭra",
+       "ref": "AgP 277.36",
+       "words": "kṣetre vaicitravīryake dhṛtaraṣṭrañca"
+      },
+      "mbh1": {
+       "name": "Nakula",
+       "ref": "MBh 1,90.72",
+       "words": "mādryām aśvibhyāṃ nakulasahadevāv utpāditau"
+      },
+      "brahma": {
+       "name": "Bhīmasena",
+       "ref": "BrP 13.109",
+       "words": "bhīmasenaś ca nāmataḥ"
+      }
+     }
+    },
+    {
+     "gen": 20,
+     "status": "differ",
+     "name": "Duryodhana",
+     "n": 2,
+     "cells": {
+      "matsya": {
+       "name": "Duryodhana",
+       "ref": "MatsP 50.47",
+       "words": "dhṛtarāṣṭrastu gāndhāryāṃ putrānajanayacchatam"
+      },
+      "vipc4": {
+       "name": "Śrutasoma",
+       "ref": "ViPc 4,20.11",
+       "words": "bhīmasenāc chrutasomaḥ"
+      },
+      "vip4": {
+       "name": "Duryodhana",
+       "ref": "ViP 4,20.39",
+       "words": "gāndhāryāṃ duryodhanaduḥ śāsanapradhānaṃ putraśatamutpādayāmāsa"
+      },
+      "bhp9": {
+       "name": "Citrāṅgada",
+       "ref": "BhP 9.22.20",
+       "words": "śāntanordāsakanyāyāṃ jajñe citrāṅgadaḥ sutaḥ"
+      },
+      "garuda1": {
+       "name": "Devāpi",
+       "ref": "GarP 1,140.33",
+       "words": "devāpistu pratīpataḥ"
+      },
+      "hv": {
+       "name": "Yudhiṣṭhira",
+       "ref": "HV 24.22",
+       "words": "kauntyas tāṃ pāṇḍur āvahat yasyāṃ sa dharmavid rājā dharmād jajñe yudhiṣṭhiraḥ"
+      },
+      "mbh1": {
+       "name": "Śatānīka",
+       "ref": "MBh 1,90.82",
+       "words": "śatānīkaṃ nakulaḥ"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "slug": "magadha",
+   "anchor": "Bṛhadratha",
+   "father": "Vasu",
+   "title": "the Bārhadrathas of Magadha from Bṛhadratha son of Vasu",
+   "order": [
+    "hv",
+    "garuda1",
+    "vip4",
+    "vipc4",
+    "matsya"
+   ],
+   "counts": {
+    "agree": 5,
+    "most": 1,
+    "differ": 1,
+    "one": 4,
+    "share_agree": 0.714
+   },
+   "pairs": {
+    "hv & garuda1": [
+     4,
+     6
+    ],
+    "hv & vip4": [
+     4,
+     6
+    ],
+    "hv & vipc4": [
+     4,
+     6
+    ],
+    "hv & matsya": [
+     3,
+     3
+    ],
+    "garuda1 & vip4": [
+     6,
+     7
+    ],
+    "garuda1 & vipc4": [
+     6,
+     7
+    ],
+    "garuda1 & matsya": [
+     3,
+     3
+    ],
+    "vip4 & vipc4": [
+     6,
+     7
+    ],
+    "vip4 & matsya": [
+     3,
+     3
+    ],
+    "vipc4 & matsya": [
+     3,
+     3
+    ]
+   },
+   "rows": [
+    {
+     "gen": 0,
+     "status": "agree",
+     "name": "Bṛhadratha",
+     "n": 5,
+     "cells": {
+      "hv": {
+       "name": "Bṛhadratha",
+       "ref": "HV 23.110",
+       "words": "caidyoparicarāj jajñe girikā sapta mānavān"
+      },
+      "garuda1": {
+       "name": "Bṛhadratha",
+       "ref": "GarP 1,140.27",
+       "words": "vasoḥ sutāḥ"
+      },
+      "vip4": {
+       "name": "Bṛhadratha",
+       "ref": "ViP 4,19.81",
+       "words": "bṛhadrathapratyagrakuśāṃbakucelamātsyapramukhāḥ vasoḥ putrāḥsaptājāyanta"
+      },
+      "vipc4": {
+       "name": "Bṛhadratha",
+       "ref": "ViPc 4,19.17",
+       "words": "bṛhadrathapratyagrakuśāmbamāvellamatsyapramukhāḥ vasoḥ putrāḥ"
+      },
+      "matsya": {
+       "name": "Bṛhadratha",
+       "ref": "MatsP 50.26",
+       "words": "caidyoparicarājjajñe girikā sapta vai sutān"
+      }
+     }
+    },
+    {
+     "gen": 1,
+     "status": "agree",
+     "name": "Kuśāgra",
+     "n": 5,
+     "cells": {
+      "hv": {
+       "name": "Kuśāgra",
+       "ref": "HV 23.110",
+       "words": "bṛhadrathasya dāyādaḥ kuśāgro"
+      },
+      "garuda1": {
+       "name": "Kuśāgra",
+       "ref": "GarP 1,140.27",
+       "words": "bṛhadrathātkuśāgraśca"
+      },
+      "vip4": {
+       "name": "Kuśāgra",
+       "ref": "ViP 4,19.82",
+       "words": "vṛhadrathātkuśāgraḥ"
+      },
+      "vipc4": {
+       "name": "Kuśāgra",
+       "ref": "ViPc 4,19.17",
+       "words": "bṛhadrathāt kuśāgras"
+      },
+      "matsya": {
+       "name": "Kuśāgra",
+       "ref": "MatsP 50.28",
+       "words": "bṛhadrathasya dāyādaḥ kuśāgro"
+      }
+     }
+    },
+    {
+     "gen": 2,
+     "status": "agree",
+     "name": "Ṛṣabha",
+     "n": 5,
+     "cells": {
+      "hv": {
+       "name": "Ṛṣabha",
+       "ref": "HV 23.110",
+       "words": "kuśāgrasyātmajo vidvān ṛṣabho"
+      },
+      "garuda1": {
+       "name": "Ṛṣabha",
+       "ref": "GarP 1,140.27",
+       "words": "kuśāgrādṛṣabho 'bhavat"
+      },
+      "vip4": {
+       "name": "Vṛṣabha",
+       "ref": "ViP 4,19.82",
+       "words": "kuśāgrādvṛṣabhaḥ"
+      },
+      "vipc4": {
+       "name": "Ṛṣabha",
+       "ref": "ViPc 4,19.17",
+       "words": "tasmād ṛṣabhas"
+      },
+      "matsya": {
+       "name": "Vṛṣabha",
+       "ref": "MatsP 50.29",
+       "words": "kuśāgrasyātmajaścaiva vṛṣabho"
+      }
+     }
+    },
+    {
+     "gen": 3,
+     "status": "agree",
+     "name": "Puṣpavat",
+     "n": 3,
+     "cells": {
+      "garuda1": {
+       "name": "Puṣpavat",
+       "ref": "GarP 1,140.28",
+       "words": "ṛṣabhātpuṣpavān"
+      },
+      "vip4": {
+       "name": "Puṣpavān",
+       "ref": "ViP 4,19.82",
+       "words": "vṛṣabhāt puṣpavān"
+      },
+      "vipc4": {
+       "name": "Puṣpavān",
+       "ref": "ViPc 4,19.17",
+       "words": "tataḥ puṣpavān"
+      }
+     }
+    },
+    {
+     "gen": 4,
+     "status": "agree",
+     "name": "Satyahita",
+     "n": 4,
+     "cells": {
+      "hv": {
+       "name": "Satyahita",
+       "ref": "HV 23.110",
+       "words": "dāyādas tasya vikrānto rājā satyahitaḥ"
+      },
+      "garuda1": {
+       "name": "Satyahita",
+       "ref": "GarP 1,140.28",
+       "words": "tasmājjajñe satyahito"
+      },
+      "vip4": {
+       "name": "Satyahita",
+       "ref": "ViP 4,19.82",
+       "words": "tasmātsatyahitaḥ"
+      },
+      "vipc4": {
+       "name": "Satyahita",
+       "ref": "ViPc 4,19.17",
+       "words": "tasmāt satyahitas"
+      }
+     }
+    },
+    {
+     "gen": 5,
+     "status": "one",
+     "name": "Ūrja",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Ūrja",
+       "ref": "HV 23.110",
+       "words": "tasya putraḥ sa dharmātmā nāmnā ūrjas"
+      }
+     }
+    },
+    {
+     "gen": 6,
+     "status": "one",
+     "name": "Saṃbhava",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Saṃbhava",
+       "ref": "HV 23.110",
+       "words": "ūrjasya saṃbhavaḥ putro"
+      }
+     }
+    },
+    {
+     "gen": 7,
+     "status": "one",
+     "name": "Jarāsaṃdha",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Jarāsaṃdha",
+       "ref": "HV 23.110",
+       "words": "yasya jajñe sa vīryavān"
+      }
+     }
+    },
+    {
+     "gen": 8,
+     "status": "one",
+     "name": "Sahadeva",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Sahadeva",
+       "ref": "HV 23.110",
+       "words": "jarāsaṃdhasya putro vai sahadevaḥ"
+      }
+     }
+    },
+    {
+     "gen": 9,
+     "status": "most",
+     "name": "Sudhanvan",
+     "n": 3,
+     "cells": {
+      "hv": {
+       "name": "Udāyi",
+       "ref": "HV 23.110",
+       "words": "sahadevātmajaḥ śrīmān udāyiḥ"
+      },
+      "garuda1": {
+       "name": "Sudhanvan",
+       "ref": "GarP 1,140.28",
+       "words": "satyahitātsudhanvābhūt"
+      },
+      "vip4": {
+       "name": "Sudhanvan",
+       "ref": "ViP 4,19.82",
+       "words": "tasmātsudhanvā"
+      },
+      "vipc4": {
+       "name": "Sudhanvan",
+       "ref": "ViPc 4,19.17",
+       "words": "tasmāt sudhanvā"
+      }
+     }
+    },
+    {
+     "gen": 10,
+     "status": "differ",
+     "name": "Śrutadharma",
+     "n": 1,
+     "cells": {
+      "hv": {
+       "name": "Śrutadharma",
+       "ref": "HV 23.110",
+       "words": "udāyir janayām āsa putraṃ"
+      },
+      "garuda1": {
+       "name": "Jahru",
+       "ref": "GarP 1,140.28",
+       "words": "jahruścava sudhanvanaḥ"
+      },
+      "vip4": {
+       "name": "Jatu",
+       "ref": "ViP 4,19.82",
+       "words": "tasya ca jatuḥ"
+      },
+      "vipc4": {
+       "name": "Jantu",
+       "ref": "ViPc 4,19.17",
+       "words": "tasya ca jantuḥ"
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

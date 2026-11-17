@@ -1,0 +1,390 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "garuda1",
+ "title": "Garudapurana, book 1",
+ "chapter": 145,
+ "part": 0,
+ "refs": [
+  "GarP 1,145.1",
+  "GarP 1,145.2",
+  "GarP 1,145.3",
+  "GarP 1,145.4",
+  "GarP 1,145.5",
+  "GarP 1,145.6",
+  "GarP 1,145.7",
+  "GarP 1,145.8",
+  "GarP 1,145.9",
+  "GarP 1,145.10",
+  "GarP 1,145.11",
+  "GarP 1,145.12",
+  "GarP 1,145.13",
+  "GarP 1,145.14",
+  "GarP 1,145.15",
+  "GarP 1,145.16",
+  "GarP 1,145.17",
+  "GarP 1,145.18",
+  "GarP 1,145.19",
+  "GarP 1,145.20",
+  "GarP 1,145.21",
+  "GarP 1,145.22",
+  "GarP 1,145.23",
+  "GarP 1,145.24",
+  "GarP 1,145.25",
+  "GarP 1,145.26",
+  "GarP 1,145.27",
+  "GarP 1,145.28",
+  "GarP 1,145.29",
+  "GarP 1,145.30",
+  "GarP 1,145.31",
+  "GarP 1,145.32",
+  "GarP 1,145.33",
+  "GarP 1,145.34",
+  "GarP 1,145.35",
+  "GarP 1,145.36",
+  "GarP 1,145.37",
+  "GarP 1,145.38",
+  "GarP 1,145.39",
+  "GarP 1,145.40",
+  "GarP 1,145.41",
+  "GarP 1,145.42",
+  "GarP 1,145.43"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_garuDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:40:37",
+ "reply": "{\"statements\":[{\"ref\":\"GarP 1,145.2\",\"a\":\"Brahmā\",\"rel\":\"born_of\",\"b\":\"Viṣṇu\",\"words\":\"viṣṇunābhyabjato brahmā\",\"doubt\":true},{\"ref\":\"GarP 1,145.2\",\"a\":\"Atri\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"brahmaputro 'triratritaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.2\",\"a\":\"Soma\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"triratritaḥ somastato\",\"doubt\":false},{\"ref\":\"GarP 1,145.2\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somastato budhastasmād\",\"doubt\":false},{\"ref\":\"GarP 1,145.2\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"budhastasmādilāyāṃ ca purūravāḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.2\",\"a\":\"Purūravas\",\"rel\":\"born_of\",\"b\":\"Ilā\",\"words\":\"ilāyāṃ ca purūravāḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.3\",\"a\":\"Āyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"tasyāyustatra vaṃśe\",\"doubt\":false},{\"ref\":\"GarP 1,145.3\",\"a\":\"Bhīṣma\",\"rel\":\"son_of\",\"b\":\"Śantanu\",\"words\":\"gaṅgāyāṃ śantanoḥ sutaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.3\",\"a\":\"Bhīṣma\",\"rel\":\"born_of\",\"b\":\"Gaṅgā\",\"words\":\"gaṅgāyāṃ śantanoḥ sutaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.5\",\"a\":\"Citrāṅgada\",\"rel\":\"son_of\",\"b\":\"Śantanu\",\"words\":\"śantanoḥ satyavatyāṃ ca dvau putrau\",\"doubt\":false},{\"ref\":\"GarP 1,145.5\",\"a\":\"Citrāṅgada\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"śantanoḥ satyavatyāṃ ca dvau putrau\",\"doubt\":false},{\"ref\":\"GarP 1,145.5\",\"a\":\"Vicitravīrya\",\"rel\":\"son_of\",\"b\":\"Śantanu\",\"words\":\"śantanoḥ satyavatyāṃ ca dvau putrau\",\"doubt\":false},{\"ref\":\"GarP 1,145.5\",\"a\":\"Vicitravīrya\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"śantanoḥ satyavatyāṃ ca dvau putrau\",\"doubt\":false},{\"ref\":\"GarP 1,145.6\",\"a\":\"Vicitravīrya\",\"rel\":\"brother_of\",\"b\":\"Citrāṅgada\",\"words\":\"anyo vicitravīryo 'bhūt\",\"doubt\":false},{\"ref\":\"GarP 1,145.6\",\"a\":\"Vicitravīrya\",\"rel\":\"other\",\"b\":\"Kāśīrāja\",\"words\":\"kāśīrājasutāpatiḥ\",\"doubt\":true},{\"ref\":\"GarP 1,145.7\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"son_of\",\"b\":\"Vicitravīrya\",\"words\":\"vicitravīrye svaryāte vyāsāttatkṣetrato 'bhavat dhṛtarāṣṭo\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"begotten_by\",\"b\":\"Vyāsa\",\"words\":\"vyāsāttatkṣetrato 'bhavat\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"born_of\",\"b\":\"Ambikā\",\"words\":\"dhṛtarāṣṭo 'mbikāputraḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Pāṇḍu\",\"rel\":\"son_of\",\"b\":\"Vicitravīrya\",\"words\":\"vyāsāttatkṣetrato 'bhavat pāṇḍurāmbālikāsutaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Pāṇḍu\",\"rel\":\"begotten_by\",\"b\":\"Vyāsa\",\"words\":\"vyāsāttatkṣetrato 'bhavat\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Pāṇḍu\",\"rel\":\"born_of\",\"b\":\"Ambālikā\",\"words\":\"pāṇḍurāmbālikāsutaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Vidura\",\"rel\":\"born_of\",\"b\":\"Bhujiṣyā\",\"words\":\"bhujiṣyāyāntu viduro\",\"doubt\":false},{\"ref\":\"GarP 1,145.7\",\"a\":\"Duryodhana\",\"rel\":\"born_of\",\"b\":\"Gāndhārī\",\"words\":\"gāndhāryāṃ dhṛtarāṣṭrataḥ\",\"doubt\":true},{\"ref\":\"GarP 1,145.7\",\"a\":\"Duryodhana\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"gāndhāryāṃ dhṛtarāṣṭrataḥ\",\"doubt\":true},{\"ref\":\"GarP 1,145.8\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire\",\"doubt\":false},{\"ref\":\"GarP 1,145.8\",\"a\":\"Bhīmasena\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire\",\"doubt\":false},{\"ref\":\"GarP 1,145.8\",\"a\":\"Arjuna\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire\",\"doubt\":false},{\"ref\":\"GarP 1,145.8\",\"a\":\"Nakula\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire\",\"doubt\":false},{\"ref\":\"GarP 1,145.8\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire\",\"doubt\":false},{\"ref\":\"GarP 1,145.15\",\"a\":\"Subhadrā\",\"rel\":\"sister_of\",\"b\":\"Vāsudeva\",\"words\":\"vāsudevasya bhaginīm\",\"doubt\":false},{\"ref\":\"GarP 1,145.13\",\"a\":\"Draupadī\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍava\",\"words\":\"draupadyāste svayaṃvaram vijñāya vīryaśulkāntāṃ pāṇḍavā upayemire\",\"doubt\":true},{\"ref\":\"GarP 1,145.18\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"brother_of\",\"b\":\"Arjuna\",\"words\":\"yudhiṣṭhirāya mahate bhrātre\",\"doubt\":false},{\"ref\":\"GarP 1,145.33\",\"a\":\"Aśvatthāman\",\"rel\":\"son_of\",\"b\":\"Droṇa\",\"words\":\"aśvatthāmā gato drauṇiḥ\",\"doubt\":false},{\"ref\":\"GarP 1,145.38\",\"a\":\"Parīkṣit\",\"rel\":\"succeeded\",\"b\":\"Yudhiṣṭhira\",\"words\":\"rājye parīkṣitaṃ sthāpya\",\"doubt\":false},{\"ref\":\"GarP 1,145.43\",\"a\":\"Suśruta\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasutāyaiva śuśrutāya\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03667,
+ "tokens": {
+  "input": 4320,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2803,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "GarP 1,145.2",
+   "a": "Brahmā",
+   "rel": "born_of",
+   "b": "Viṣṇu",
+   "words": "viṣṇunābhyabjato brahmā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.2",
+   "a": "Atri",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "brahmaputro 'triratritaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.2",
+   "a": "Soma",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "triratritaḥ somastato",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.2",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somastato budhastasmād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.2",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "budhastasmādilāyāṃ ca purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.2",
+   "a": "Purūravas",
+   "rel": "born_of",
+   "b": "Ilā",
+   "words": "ilāyāṃ ca purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.3",
+   "a": "Āyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "tasyāyustatra vaṃśe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.3",
+   "a": "Bhīṣma",
+   "rel": "son_of",
+   "b": "Śantanu",
+   "words": "gaṅgāyāṃ śantanoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.3",
+   "a": "Bhīṣma",
+   "rel": "born_of",
+   "b": "Gaṅgā",
+   "words": "gaṅgāyāṃ śantanoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.5",
+   "a": "Citrāṅgada",
+   "rel": "son_of",
+   "b": "Śantanu",
+   "words": "śantanoḥ satyavatyāṃ ca dvau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.5",
+   "a": "Citrāṅgada",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "śantanoḥ satyavatyāṃ ca dvau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.5",
+   "a": "Vicitravīrya",
+   "rel": "son_of",
+   "b": "Śantanu",
+   "words": "śantanoḥ satyavatyāṃ ca dvau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.5",
+   "a": "Vicitravīrya",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "śantanoḥ satyavatyāṃ ca dvau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.6",
+   "a": "Vicitravīrya",
+   "rel": "brother_of",
+   "b": "Citrāṅgada",
+   "words": "anyo vicitravīryo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.6",
+   "a": "Vicitravīrya",
+   "rel": "other",
+   "b": "Kāśīrāja",
+   "words": "kāśīrājasutāpatiḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.6",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "son_of",
+   "b": "Vicitravīrya",
+   "words": "vicitravīrye svaryāte vyāsāttatkṣetrato 'bhavat dhṛtarāṣṭo",
+   "doubt": false,
+   "ref_cited": "GarP 1,145.7",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.6",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "begotten_by",
+   "b": "Vyāsa",
+   "words": "vyāsāttatkṣetrato 'bhavat",
+   "doubt": false,
+   "ref_cited": "GarP 1,145.7",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.7",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "born_of",
+   "b": "Ambikā",
+   "words": "dhṛtarāṣṭo 'mbikāputraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.7",
+   "a": "Pāṇḍu",
+   "rel": "son_of",
+   "b": "Vicitravīrya",
+   "words": "vyāsāttatkṣetrato 'bhavat pāṇḍurāmbālikāsutaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "GarP 1,145.6",
+   "a": "Pāṇḍu",
+   "rel": "begotten_by",
+   "b": "Vyāsa",
+   "words": "vyāsāttatkṣetrato 'bhavat",
+   "doubt": false,
+   "ref_cited": "GarP 1,145.7",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.7",
+   "a": "Pāṇḍu",
+   "rel": "born_of",
+   "b": "Ambālikā",
+   "words": "pāṇḍurāmbālikāsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.7",
+   "a": "Vidura",
+   "rel": "born_of",
+   "b": "Bhujiṣyā",
+   "words": "bhujiṣyāyāntu viduro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.7",
+   "a": "Duryodhana",
+   "rel": "born_of",
+   "b": "Gāndhārī",
+   "words": "gāndhāryāṃ dhṛtarāṣṭrataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.7",
+   "a": "Duryodhana",
+   "rel": "son_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "gāndhāryāṃ dhṛtarāṣṭrataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.8",
+   "a": "Yudhiṣṭhira",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.8",
+   "a": "Bhīmasena",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.8",
+   "a": "Arjuna",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.8",
+   "a": "Nakula",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.8",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍoḥ kuntyāñca mādyāṃ ca pañca putrāḥ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.15",
+   "a": "Subhadrā",
+   "rel": "sister_of",
+   "b": "Vāsudeva",
+   "words": "vāsudevasya bhaginīm",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.13",
+   "a": "Draupadī",
+   "rel": "wife_of",
+   "b": "Pāṇḍava",
+   "words": "draupadyāste svayaṃvaram vijñāya vīryaśulkāntāṃ pāṇḍavā upayemire",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.18",
+   "a": "Yudhiṣṭhira",
+   "rel": "brother_of",
+   "b": "Arjuna",
+   "words": "yudhiṣṭhirāya mahate bhrātre",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "GarP 1,145.33",
+   "a": "Aśvatthāman",
+   "rel": "son_of",
+   "b": "Droṇa",
+   "words": "aśvatthāmā gato drauṇiḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "GarP 1,145.38",
+   "a": "Parīkṣit",
+   "rel": "succeeded",
+   "b": "Yudhiṣṭhira",
+   "words": "rājye parīkṣitaṃ sthāpya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,145.43",
+   "a": "Suśruta",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasutāyaiva śuśrutāya",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

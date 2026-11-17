@@ -1,0 +1,315 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "agni",
+ "title": "Agnipurana",
+ "chapter": 19,
+ "part": 0,
+ "refs": [
+  "AgP 19.1",
+  "AgP 19.2",
+  "AgP 19.3",
+  "AgP 19.4",
+  "AgP 19.5",
+  "AgP 19.6",
+  "AgP 19.7",
+  "AgP 19.8",
+  "AgP 19.9",
+  "AgP 19.10",
+  "AgP 19.11",
+  "AgP 19.12",
+  "AgP 19.13",
+  "AgP 19.14",
+  "AgP 19.15",
+  "AgP 19.16",
+  "AgP 19.17",
+  "AgP 19.18",
+  "AgP 19.19",
+  "AgP 19.20",
+  "AgP 19.21",
+  "AgP 19.22",
+  "AgP 19.23",
+  "AgP 19.24",
+  "AgP 19.25",
+  "AgP 19.26",
+  "AgP 19.27",
+  "AgP 19.28"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_agnipurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Jun Takashima)",
+ "at": "2026-11-17T22:41:14",
+ "reply": "{\"statements\":[\n{\"ref\":\"AgP 19.5\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt\",\"doubt\":false},\n{\"ref\":\"AgP 19.5\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt\",\"doubt\":false},\n{\"ref\":\"AgP 19.5\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt\",\"doubt\":false},\n{\"ref\":\"AgP 19.5\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt\",\"doubt\":false},\n{\"ref\":\"AgP 19.6\",\"a\":\"Siṃhikā\",\"rel\":\"wife_of\",\"b\":\"Vipracitti\",\"words\":\"siṃhikā cābhavat kanyā vipracitteḥ parigrahaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 19.6\",\"a\":\"Rāhu\",\"rel\":\"born_of\",\"b\":\"Siṃhikā\",\"words\":\"rāhuprabhṛtayastasyāṃ saiṃhikeyā\",\"doubt\":false},\n{\"ref\":\"AgP 19.7\",\"a\":\"Anuhrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipoḥ putrāś catvāraḥ anuhrādaś ca\",\"doubt\":false},\n{\"ref\":\"AgP 19.7\",\"a\":\"Hrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipoḥ putrāś catvāraḥ hrādaś ca\",\"doubt\":false},\n{\"ref\":\"AgP 19.7\",\"a\":\"Prahrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipoḥ putrāś catvāraḥ prahrādaścātivaiṣṇavaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 19.8\",\"a\":\"Saṃhrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"saṃhrādaś ca caturthobhūt\",\"doubt\":false},\n{\"ref\":\"AgP 19.8\",\"a\":\"Hrada\",\"rel\":\"son_of\",\"b\":\"Hrāda\",\"words\":\"hrādaputro hradas tathā\",\"doubt\":false},\n{\"ref\":\"AgP 19.8\",\"a\":\"Āyuṣmān\",\"rel\":\"son_of\",\"b\":\"Hrada\",\"words\":\"hradasya putra āyuṣmān\",\"doubt\":false},\n{\"ref\":\"AgP 19.8\",\"a\":\"Śibi\",\"rel\":\"son_of\",\"b\":\"Hrada\",\"words\":\"hradasya putra āyuṣmān śibirvāskala eva ca\",\"doubt\":false},\n{\"ref\":\"AgP 19.8\",\"a\":\"Vāskala\",\"rel\":\"son_of\",\"b\":\"Hrada\",\"words\":\"hradasya putra āyuṣmān śibirvāskala eva ca\",\"doubt\":false},\n{\"ref\":\"AgP 19.9\",\"a\":\"Virocana\",\"rel\":\"son_of\",\"b\":\"Prahrāda\",\"words\":\"prāhrādirbalirjajñe virocanāt\",\"doubt\":true},\n{\"ref\":\"AgP 19.9\",\"a\":\"Bali\",\"rel\":\"son_of\",\"b\":\"Virocana\",\"words\":\"balirjajñe virocanāt\",\"doubt\":false},\n{\"ref\":\"AgP 19.9\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"baleḥ putraśataṃ tvāsīdvāṇaśreṣṭhaṃ\",\"doubt\":true},\n{\"ref\":\"AgP 19.11\",\"a\":\"Śambara\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasutāḥ pañca śambaraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 19.11\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasutāḥ pañca śambaraḥ śakunistviti\",\"doubt\":false},\n{\"ref\":\"AgP 19.11\",\"a\":\"Dvimūrdhan\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"dvimūrdhā\",\"doubt\":false},\n{\"ref\":\"AgP 19.11\",\"a\":\"Śaṅku\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"śaṅkurāryaś ca\",\"doubt\":false},\n{\"ref\":\"AgP 19.11\",\"a\":\"Ārya\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"śaṅkurāryaś ca\",\"doubt\":false},\n{\"ref\":\"AgP 19.12\",\"a\":\"Prabhā\",\"rel\":\"daughter_of\",\"b\":\"Svarbhānu\",\"words\":\"svarbhānostu prabhā kanyā\",\"doubt\":false},\n{\"ref\":\"AgP 19.12\",\"a\":\"Śacī\",\"rel\":\"daughter_of\",\"b\":\"Puloman\",\"words\":\"pulomnastu śacī smṛtā\",\"doubt\":false},\n{\"ref\":\"AgP 19.12\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"śarmiṣṭhā vārṣaparvaṇī\",\"doubt\":false},\n{\"ref\":\"AgP 19.13\",\"a\":\"Pulomā\",\"rel\":\"daughter_of\",\"b\":\"Vaiśvānara\",\"words\":\"vaiśvānarasute ubhe\",\"doubt\":false},\n{\"ref\":\"AgP 19.13\",\"a\":\"Kālakā\",\"rel\":\"daughter_of\",\"b\":\"Vaiśvānara\",\"words\":\"vaiśvānarasute ubhe\",\"doubt\":false},\n{\"ref\":\"AgP 19.13\",\"a\":\"Pulomā\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"kaśyapasya tu bhārye dve\",\"doubt\":false},\n{\"ref\":\"AgP 19.13\",\"a\":\"Kālakā\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"kaśyapasya tu bhārye dve\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02896,
+ "tokens": {
+  "input": 3086,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2279,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "AgP 19.5",
+   "a": "Hiraṇyakaśipu",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.5",
+   "a": "Hiraṇyākṣa",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.5",
+   "a": "Hiraṇyakaśipu",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.5",
+   "a": "Hiraṇyākṣa",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.6",
+   "a": "Siṃhikā",
+   "rel": "wife_of",
+   "b": "Vipracitti",
+   "words": "siṃhikā cābhavat kanyā vipracitteḥ parigrahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.6",
+   "a": "Rāhu",
+   "rel": "born_of",
+   "b": "Siṃhikā",
+   "words": "rāhuprabhṛtayastasyāṃ saiṃhikeyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.7",
+   "a": "Anuhrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipoḥ putrāś catvāraḥ anuhrādaś ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "AgP 19.7",
+   "a": "Hrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipoḥ putrāś catvāraḥ hrādaś ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "AgP 19.7",
+   "a": "Prahrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipoḥ putrāś catvāraḥ prahrādaścātivaiṣṇavaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "AgP 19.8",
+   "a": "Saṃhrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "saṃhrādaś ca caturthobhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.8",
+   "a": "Hrada",
+   "rel": "son_of",
+   "b": "Hrāda",
+   "words": "hrādaputro hradas tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.8",
+   "a": "Āyuṣmān",
+   "rel": "son_of",
+   "b": "Hrada",
+   "words": "hradasya putra āyuṣmān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.8",
+   "a": "Śibi",
+   "rel": "son_of",
+   "b": "Hrada",
+   "words": "hradasya putra āyuṣmān śibirvāskala eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.8",
+   "a": "Vāskala",
+   "rel": "son_of",
+   "b": "Hrada",
+   "words": "hradasya putra āyuṣmān śibirvāskala eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.9",
+   "a": "Virocana",
+   "rel": "son_of",
+   "b": "Prahrāda",
+   "words": "prāhrādirbalirjajñe virocanāt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.9",
+   "a": "Bali",
+   "rel": "son_of",
+   "b": "Virocana",
+   "words": "balirjajñe virocanāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.9",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "baleḥ putraśataṃ tvāsīdvāṇaśreṣṭhaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.11",
+   "a": "Śambara",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasutāḥ pañca śambaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.11",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasutāḥ pañca śambaraḥ śakunistviti",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.11",
+   "a": "Dvimūrdhan",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "dvimūrdhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.11",
+   "a": "Śaṅku",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "śaṅkurāryaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.11",
+   "a": "Ārya",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "śaṅkurāryaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.12",
+   "a": "Prabhā",
+   "rel": "daughter_of",
+   "b": "Svarbhānu",
+   "words": "svarbhānostu prabhā kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.12",
+   "a": "Śacī",
+   "rel": "daughter_of",
+   "b": "Puloman",
+   "words": "pulomnastu śacī smṛtā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.12",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "śarmiṣṭhā vārṣaparvaṇī",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "AgP 19.13",
+   "a": "Pulomā",
+   "rel": "daughter_of",
+   "b": "Vaiśvānara",
+   "words": "vaiśvānarasute ubhe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.13",
+   "a": "Kālakā",
+   "rel": "daughter_of",
+   "b": "Vaiśvānara",
+   "words": "vaiśvānarasute ubhe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.13",
+   "a": "Pulomā",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "kaśyapasya tu bhārye dve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 19.13",
+   "a": "Kālakā",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "kaśyapasya tu bhārye dve",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

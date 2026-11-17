@@ -1,0 +1,533 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "markp",
+ "title": "Markandeyapurana",
+ "chapter": 53,
+ "part": 0,
+ "refs": [
+  "MarkP 53.1",
+  "MarkP 53.2",
+  "MarkP 53.3",
+  "MarkP 53.4",
+  "MarkP 53.5",
+  "MarkP 53.6",
+  "MarkP 53.7",
+  "MarkP 53.8",
+  "MarkP 53.9",
+  "MarkP 53.10",
+  "MarkP 53.11",
+  "MarkP 53.12",
+  "MarkP 53.13",
+  "MarkP 53.14",
+  "MarkP 53.15",
+  "MarkP 53.16",
+  "MarkP 53.17",
+  "MarkP 53.18",
+  "MarkP 53.19",
+  "MarkP 53.20",
+  "MarkP 53.21",
+  "MarkP 53.22",
+  "MarkP 53.23",
+  "MarkP 53.24",
+  "MarkP 53.25",
+  "MarkP 53.26",
+  "MarkP 53.27",
+  "MarkP 53.28",
+  "MarkP 53.29",
+  "MarkP 53.30",
+  "MarkP 53.31",
+  "MarkP 53.32",
+  "MarkP 53.33",
+  "MarkP 53.34",
+  "MarkP 53.35",
+  "MarkP 53.36",
+  "MarkP 53.37",
+  "MarkP 53.38",
+  "MarkP 53.39",
+  "MarkP 53.40",
+  "MarkP 53.41",
+  "MarkP 53.42",
+  "MarkP 53.43",
+  "MarkP 53.44"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_mArkaNDeyapurANa1-93.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:44:34",
+ "reply": "{\"statements\":[\n{\"ref\":\"MarkP 53.10\",\"a\":\"Priyavrata\",\"rel\":\"son_of\",\"b\":\"Svāyambhuva Manu\",\"words\":\"manoḥ svāyambhuvasyāsan daśa putrāstu\",\"doubt\":true},\n{\"ref\":\"MarkP 53.13\",\"a\":\"Priyavrata\",\"rel\":\"begotten_by\",\"b\":\"Priyavrata\",\"words\":\"priyavratāt prajāvatyāṃ vīrāt kanyā vyajāyata\",\"doubt\":true},\n{\"ref\":\"MarkP 53.14\",\"a\":\"Samrāṭ\",\"rel\":\"daughter_of\",\"b\":\"Priyavrata\",\"words\":\"kanye dve daśa putrāṃśca samrāṭkukṣī ca te ubhe\",\"doubt\":true},\n{\"ref\":\"MarkP 53.14\",\"a\":\"Kukṣi\",\"rel\":\"daughter_of\",\"b\":\"Priyavrata\",\"words\":\"kanye dve daśa putrāṃśca samrāṭkukṣī ca te ubhe\",\"doubt\":true},\n{\"ref\":\"MarkP 53.15\",\"a\":\"Āgnīdhra\",\"rel\":\"brother_of\",\"b\":\"Samrāṭ\",\"words\":\"tayorvai bhrātaraḥ śūrāḥ prajāpatisamā daśa\",\"doubt\":true},\n{\"ref\":\"MarkP 53.17\",\"a\":\"Āgnīdhra\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"jambudvīpe tathāgnīdhraṃ rājānaṃ kṛtavān pitā\",\"doubt\":true},\n{\"ref\":\"MarkP 53.17\",\"a\":\"Medhātithi\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"plakṣadvīpeśvaraścāpi tena medhātithiḥ kṛtaḥ\",\"doubt\":true},\n{\"ref\":\"MarkP 53.18\",\"a\":\"Vapuṣmant\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"śālmalestu vapuṣmantaṃ\",\"doubt\":true},\n{\"ref\":\"MarkP 53.18\",\"a\":\"Jyotiṣmant\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"jyotiṣmantaṃ kuśāhvaye\",\"doubt\":true},\n{\"ref\":\"MarkP 53.18\",\"a\":\"Dyutimant\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"krauñcadvīpe dyutimantaṃ\",\"doubt\":true},\n{\"ref\":\"MarkP 53.18\",\"a\":\"Bhavya\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"bhavyaṃ śākāhvayeśvaram\",\"doubt\":true},\n{\"ref\":\"MarkP 53.19\",\"a\":\"Savana\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"savanaṃ kṛtavān sutam\",\"doubt\":true},\n{\"ref\":\"MarkP 53.19\",\"a\":\"Mahāvīta\",\"rel\":\"son_of\",\"b\":\"Savana\",\"words\":\"mahāvīto dhātakiśca puṣkarādhipateḥ sutau\",\"doubt\":false},\n{\"ref\":\"MarkP 53.19\",\"a\":\"Dhātaki\",\"rel\":\"son_of\",\"b\":\"Savana\",\"words\":\"mahāvīto dhātakiśca puṣkarādhipateḥ sutau\",\"doubt\":false},\n{\"ref\":\"MarkP 53.19\",\"a\":\"Mahāvīta\",\"rel\":\"brother_of\",\"b\":\"Dhātaki\",\"words\":\"mahāvīto dhātakiśca puṣkarādhipateḥ sutau\",\"doubt\":false},\n{\"ref\":\"MarkP 53.20\",\"a\":\"Jalada\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"bhavyasya putrāḥ sapta\",\"doubt\":false},\n{\"ref\":\"MarkP 53.21\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"jaladaśca kumāraśca\",\"doubt\":false},\n{\"ref\":\"MarkP 53.21\",\"a\":\"Sukumāra\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"sukumāro manīvakaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.21\",\"a\":\"Manīvaka\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"sukumāro manīvakaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.21\",\"a\":\"Kuśottara\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"kuśottaro 'tha\",\"doubt\":false},\n{\"ref\":\"MarkP 53.21\",\"a\":\"Medhāvin\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"medhāvī\",\"doubt\":false},\n{\"ref\":\"MarkP 53.21\",\"a\":\"Mahādruma\",\"rel\":\"son_of\",\"b\":\"Bhavya\",\"words\":\"saptamastu mahādrumaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.22\",\"a\":\"Kuśala\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"dyutimataḥ sapta putrāstāṃśca\",\"doubt\":false},\n{\"ref\":\"MarkP 53.23\",\"a\":\"Manuga\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"kuśalo manugaścoṣṇaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.23\",\"a\":\"Uṣṇa\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"manugaścoṣṇaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.23\",\"a\":\"Prākara\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"prākaraścārthakārakaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.23\",\"a\":\"Arthakāraka\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"prākaraścārthakārakaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.23\",\"a\":\"Muni\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"muniśca dundubhiścaiva\",\"doubt\":false},\n{\"ref\":\"MarkP 53.23\",\"a\":\"Dundubhi\",\"rel\":\"son_of\",\"b\":\"Dyutimant\",\"words\":\"dundubhiścaiva saptamaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.26\",\"a\":\"Vapuṣmant\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"vapuṣmataḥ sutāḥ sapta\",\"doubt\":true},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Śveta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"vapuṣmataḥ sutāḥ sapta śālmaleśasya cābhavan\",\"doubt\":false},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Harita\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"śvetaśca haritaścaiva\",\"doubt\":false},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Jīmūta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"jīmūto rohitastathā\",\"doubt\":false},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"jīmūto rohitastathā\",\"doubt\":false},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Vaidyuta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"vaidyuto mānasaścaiva\",\"doubt\":false},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Mānasa\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"mānasaścaiva ketumān\",\"doubt\":false},\n{\"ref\":\"MarkP 53.27\",\"a\":\"Ketumān\",\"rel\":\"son_of\",\"b\":\"Vapuṣmant\",\"words\":\"ketumān saptamastathā\",\"doubt\":false},\n{\"ref\":\"MarkP 53.28\",\"a\":\"Medhātithi\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"sapta medhātitheḥ putrāḥ\",\"doubt\":true},\n{\"ref\":\"MarkP 53.33\",\"a\":\"Nābhi\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"tasya putrā babhūvurhi prajāpatisamā nava jyeṣṭho nābiriti\",\"doubt\":false},\n{\"ref\":\"MarkP 53.33\",\"a\":\"Kiṃpuruṣa\",\"rel\":\"brother_of\",\"b\":\"Nābhi\",\"words\":\"tasya kiṃpuruṣo 'nujaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.34\",\"a\":\"Harivarṣa\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"harivarṣastṛtīyastu\",\"doubt\":false},\n{\"ref\":\"MarkP 53.34\",\"a\":\"Ilāvṛta\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"caturtho 'bhūdilāvṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.34\",\"a\":\"Vaśya\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"vaśyaśca pañcamaḥ putro\",\"doubt\":false},\n{\"ref\":\"MarkP 53.34\",\"a\":\"Hiraṇya\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"hiraṇyaḥ ṣaṣṭha ucyate\",\"doubt\":false},\n{\"ref\":\"MarkP 53.35\",\"a\":\"Kuru\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"kurustu saptamasteṣāṃ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.35\",\"a\":\"Bhadrāśva\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"bhadrāśvaścāṣṭamaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 53.35\",\"a\":\"Ketumāla\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"navamaḥ ketumālaśca\",\"doubt\":false},\n{\"ref\":\"MarkP 53.38\",\"a\":\"Ṛṣabha\",\"rel\":\"son_of\",\"b\":\"Nābhi\",\"words\":\"āgnīdhrasūnornābhestu ṛṣabho 'bhūt suto\",\"doubt\":false},\n{\"ref\":\"MarkP 53.39\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Ṛṣabha\",\"words\":\"ṛṣabhādbharato jajñe\",\"doubt\":false},\n{\"ref\":\"MarkP 53.41\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"bhatasyāpyabhūt putraḥ sumatirnāma\",\"doubt\":false},\n{\"ref\":\"MarkP 53.42\",\"a\":\"Sumati\",\"rel\":\"succeeded\",\"b\":\"Bharata\",\"words\":\"tasmin rājyaṃ samāveśya bharato 'pi vanaṃ yayau\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04637,
+ "tokens": {
+  "input": 4227,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3792,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MarkP 53.10",
+   "a": "Priyavrata",
+   "rel": "son_of",
+   "b": "Svāyambhuva Manu",
+   "words": "manoḥ svāyambhuvasyāsan daśa putrāstu",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.13",
+   "a": "Priyavrata",
+   "rel": "begotten_by",
+   "b": "Priyavrata",
+   "words": "priyavratāt prajāvatyāṃ vīrāt kanyā vyajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.14",
+   "a": "Samrāṭ",
+   "rel": "daughter_of",
+   "b": "Priyavrata",
+   "words": "kanye dve daśa putrāṃśca samrāṭkukṣī ca te ubhe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.14",
+   "a": "Kukṣi",
+   "rel": "daughter_of",
+   "b": "Priyavrata",
+   "words": "kanye dve daśa putrāṃśca samrāṭkukṣī ca te ubhe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.14",
+   "a": "Āgnīdhra",
+   "rel": "brother_of",
+   "b": "Samrāṭ",
+   "words": "tayorvai bhrātaraḥ śūrāḥ prajāpatisamā daśa",
+   "doubt": true,
+   "ref_cited": "MarkP 53.15",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.17",
+   "a": "Āgnīdhra",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "jambudvīpe tathāgnīdhraṃ rājānaṃ kṛtavān pitā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.17",
+   "a": "Medhātithi",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "plakṣadvīpeśvaraścāpi tena medhātithiḥ kṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.18",
+   "a": "Vapuṣmant",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "śālmalestu vapuṣmantaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.18",
+   "a": "Jyotiṣmant",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "jyotiṣmantaṃ kuśāhvaye",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.18",
+   "a": "Dyutimant",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "krauñcadvīpe dyutimantaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.18",
+   "a": "Bhavya",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "bhavyaṃ śākāhvayeśvaram",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.19",
+   "a": "Savana",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "savanaṃ kṛtavān sutam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.19",
+   "a": "Mahāvīta",
+   "rel": "son_of",
+   "b": "Savana",
+   "words": "mahāvīto dhātakiśca puṣkarādhipateḥ sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.19",
+   "a": "Dhātaki",
+   "rel": "son_of",
+   "b": "Savana",
+   "words": "mahāvīto dhātakiśca puṣkarādhipateḥ sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.19",
+   "a": "Mahāvīta",
+   "rel": "brother_of",
+   "b": "Dhātaki",
+   "words": "mahāvīto dhātakiśca puṣkarādhipateḥ sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.20",
+   "a": "Jalada",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "bhavyasya putrāḥ sapta",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.21",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "jaladaśca kumāraśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.21",
+   "a": "Sukumāra",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "sukumāro manīvakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.21",
+   "a": "Manīvaka",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "sukumāro manīvakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.21",
+   "a": "Kuśottara",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "kuśottaro 'tha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.21",
+   "a": "Medhāvin",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "medhāvī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.21",
+   "a": "Mahādruma",
+   "rel": "son_of",
+   "b": "Bhavya",
+   "words": "saptamastu mahādrumaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.22",
+   "a": "Kuśala",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "dyutimataḥ sapta putrāstāṃśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.23",
+   "a": "Manuga",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "kuśalo manugaścoṣṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.23",
+   "a": "Uṣṇa",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "manugaścoṣṇaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.23",
+   "a": "Prākara",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "prākaraścārthakārakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.23",
+   "a": "Arthakāraka",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "prākaraścārthakārakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.23",
+   "a": "Muni",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "muniśca dundubhiścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.23",
+   "a": "Dundubhi",
+   "rel": "son_of",
+   "b": "Dyutimant",
+   "words": "dundubhiścaiva saptamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.26",
+   "a": "Vapuṣmant",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "vapuṣmataḥ sutāḥ sapta",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.26",
+   "a": "Śveta",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "vapuṣmataḥ sutāḥ sapta śālmaleśasya cābhavan",
+   "doubt": false,
+   "ref_cited": "MarkP 53.27",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.27",
+   "a": "Harita",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "śvetaśca haritaścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.27",
+   "a": "Jīmūta",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "jīmūto rohitastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.27",
+   "a": "Rohita",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "jīmūto rohitastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.27",
+   "a": "Vaidyuta",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "vaidyuto mānasaścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.27",
+   "a": "Mānasa",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "mānasaścaiva ketumān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.27",
+   "a": "Ketumān",
+   "rel": "son_of",
+   "b": "Vapuṣmant",
+   "words": "ketumān saptamastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.28",
+   "a": "Medhātithi",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "sapta medhātitheḥ putrāḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.33",
+   "a": "Nābhi",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "tasya putrā babhūvurhi prajāpatisamā nava jyeṣṭho nābiriti",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.33",
+   "a": "Kiṃpuruṣa",
+   "rel": "brother_of",
+   "b": "Nābhi",
+   "words": "tasya kiṃpuruṣo 'nujaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.34",
+   "a": "Harivarṣa",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "harivarṣastṛtīyastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.34",
+   "a": "Ilāvṛta",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "caturtho 'bhūdilāvṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.34",
+   "a": "Vaśya",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "vaśyaśca pañcamaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.34",
+   "a": "Hiraṇya",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "hiraṇyaḥ ṣaṣṭha ucyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.35",
+   "a": "Kuru",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "kurustu saptamasteṣāṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.35",
+   "a": "Bhadrāśva",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "bhadrāśvaścāṣṭamaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.35",
+   "a": "Ketumāla",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "navamaḥ ketumālaśca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 53.38",
+   "a": "Ṛṣabha",
+   "rel": "son_of",
+   "b": "Nābhi",
+   "words": "āgnīdhrasūnornābhestu ṛṣabho 'bhūt suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.39",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Ṛṣabha",
+   "words": "ṛṣabhādbharato jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.41",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "bhatasyāpyabhūt putraḥ sumatirnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 53.42",
+   "a": "Sumati",
+   "rel": "succeeded",
+   "b": "Bharata",
+   "words": "tasmin rājyaṃ samāveśya bharato 'pi vanaṃ yayau",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,820 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 60,
+ "part": 1,
+ "refs": [
+  "MBh 1,60.1",
+  "MBh 1,60.2",
+  "MBh 1,60.3",
+  "MBh 1,60.4",
+  "MBh 1,60.5",
+  "MBh 1,60.6",
+  "MBh 1,60.7",
+  "MBh 1,60.8",
+  "MBh 1,60.9",
+  "MBh 1,60.10",
+  "MBh 1,60.11",
+  "MBh 1,60.12",
+  "MBh 1,60.13",
+  "MBh 1,60.14",
+  "MBh 1,60.15",
+  "MBh 1,60.16",
+  "MBh 1,60.17",
+  "MBh 1,60.18",
+  "MBh 1,60.19",
+  "MBh 1,60.20",
+  "MBh 1,60.21",
+  "MBh 1,60.22",
+  "MBh 1,60.23",
+  "MBh 1,60.24",
+  "MBh 1,60.25",
+  "MBh 1,60.26",
+  "MBh 1,60.27",
+  "MBh 1,60.28",
+  "MBh 1,60.29",
+  "MBh 1,60.30",
+  "MBh 1,60.31",
+  "MBh 1,60.32",
+  "MBh 1,60.33",
+  "MBh 1,60.34",
+  "MBh 1,60.35",
+  "MBh 1,60.36",
+  "MBh 1,60.37",
+  "MBh 1,60.38",
+  "MBh 1,60.39",
+  "MBh 1,60.40",
+  "MBh 1,60.41",
+  "MBh 1,60.42",
+  "MBh 1,60.43",
+  "MBh 1,60.44",
+  "MBh 1,60.45",
+  "MBh 1,60.46",
+  "MBh 1,60.47",
+  "MBh 1,60.48",
+  "MBh 1,60.49",
+  "MBh 1,60.50",
+  "MBh 1,60.51",
+  "MBh 1,60.52",
+  "MBh 1,60.53",
+  "MBh 1,60.54"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:45:12",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,60.1\",\"a\":\"Sthāṇu\",\"rel\":\"other\",\"b\":\"Sthāṇu\",\"words\":\"ekādaśa sutāḥ sthāṇoḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.4\",\"a\":\"Marīci\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"ete brahmaṇaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.4\",\"a\":\"Aṅgiras\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"ete brahmaṇaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.4\",\"a\":\"Atri\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"ete brahmaṇaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.4\",\"a\":\"Pulastya\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"ete brahmaṇaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.4\",\"a\":\"Pulaha\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"ete brahmaṇaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.4\",\"a\":\"Kratu\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"ete brahmaṇaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.5\",\"a\":\"Bṛhaspati\",\"rel\":\"son_of\",\"b\":\"Aṅgiras\",\"words\":\"trayas tv aṅgirasaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.5\",\"a\":\"Utathya\",\"rel\":\"son_of\",\"b\":\"Aṅgiras\",\"words\":\"trayas tv aṅgirasaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.5\",\"a\":\"Saṃvarta\",\"rel\":\"son_of\",\"b\":\"Aṅgiras\",\"words\":\"trayas tv aṅgirasaḥ putrā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.9\",\"a\":\"Dakṣa\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"brahmaṇaḥ pṛthivīpāla putraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.10\",\"a\":\"Dakṣa's wife\",\"rel\":\"wife_of\",\"b\":\"Dakṣa\",\"words\":\"bhāryā tasya mahātmanaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.12\",\"a\":\"Dakṣa's daughters\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"pañcāśataṃ kanyāḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Kīrti\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Lakṣmī\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Dhṛti\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Medhā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Puṣṭi\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Śraddhā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Kriyā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Buddhi\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Lajjā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.14\",\"a\":\"Mati\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"patnyo dharmasya tā daśa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.18\",\"a\":\"Dhara\",\"rel\":\"son_of\",\"b\":\"Dhūmrā\",\"words\":\"dhūmrāyāś ca dharaḥ putro\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.18\",\"a\":\"Dhruva\",\"rel\":\"born_of\",\"b\":\"Dhūmrā\",\"words\":\"dhruvas tathā\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.18\",\"a\":\"Candramas\",\"rel\":\"born_of\",\"b\":\"Manasvinī\",\"words\":\"candramās tu manasvinyāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.18\",\"a\":\"Śvasana\",\"rel\":\"born_of\",\"b\":\"Śvasā\",\"words\":\"śvasāyāḥ śvasanas\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.19\",\"a\":\"Ahar\",\"rel\":\"born_of\",\"b\":\"Ratā\",\"words\":\"ratāyāś cāpy ahaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.19\",\"a\":\"Hutāśana\",\"rel\":\"born_of\",\"b\":\"Śāṇḍilī\",\"words\":\"śāṇḍilyāś ca hutāśanaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.19\",\"a\":\"Pratyūṣa\",\"rel\":\"born_of\",\"b\":\"Prabhātā\",\"words\":\"prabhātāyāḥ sutau smṛtau\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.19\",\"a\":\"Prabhāsa\",\"rel\":\"born_of\",\"b\":\"Prabhātā\",\"words\":\"prabhātāyāḥ sutau smṛtau\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.20\",\"a\":\"Draviṇa\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"dharasya putro draviṇo\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.20\",\"a\":\"Hutahavyavaha\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"dharasya putro draviṇo hutahavyavahas\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.20\",\"a\":\"Kāla\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvasya putro bhagavān kālo\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.21\",\"a\":\"Varcas\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somasya tu suto varcā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.21\",\"a\":\"Śiśira\",\"rel\":\"born_of\",\"b\":\"Manohara\",\"words\":\"manoharāyāḥ śiśiraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.21\",\"a\":\"Prāṇa\",\"rel\":\"born_of\",\"b\":\"Manohara\",\"words\":\"prāṇo 'tha\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.21\",\"a\":\"Ramaṇa\",\"rel\":\"born_of\",\"b\":\"Manohara\",\"words\":\"ramaṇas tathā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.22\",\"a\":\"Jyotis\",\"rel\":\"son_of\",\"b\":\"Ahar\",\"words\":\"ahnaḥ sutaḥ smṛto jyotiḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.22\",\"a\":\"Śrama\",\"rel\":\"son_of\",\"b\":\"Ahar\",\"words\":\"ahnaḥ sutaḥ smṛto jyotiḥ śramaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.22\",\"a\":\"Śānta\",\"rel\":\"son_of\",\"b\":\"Ahar\",\"words\":\"śāntas tathā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.22\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"agneḥ putraḥ kumāras\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.23\",\"a\":\"Śākha\",\"rel\":\"brother_of\",\"b\":\"Kumāra\",\"words\":\"tasya śākho viśākhaś ca\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.24\",\"a\":\"Śivā\",\"rel\":\"wife_of\",\"b\":\"Anila\",\"words\":\"anilasya śivā bhāryā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.24\",\"a\":\"Purojava\",\"rel\":\"born_of\",\"b\":\"Śivā\",\"words\":\"tasyāḥ putraḥ purojavaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.24\",\"a\":\"Purojava\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāv anilasya\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.24\",\"a\":\"Avijñātagati\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāv anilasya\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.25\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pratyūṣa\",\"words\":\"pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.26\",\"a\":\"Bṛhaspati's sister\",\"rel\":\"sister_of\",\"b\":\"Bṛhaspati\",\"words\":\"bṛhaspates tu bhaginī\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.26\",\"a\":\"Bṛhaspati's sister\",\"rel\":\"wife_of\",\"b\":\"Prabhāsa\",\"words\":\"prabhāsasya tu bhāryā sā\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.33\",\"a\":\"Kaśyapa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"marīceḥ kaśyapaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.34\",\"a\":\"Tvāṣṭrī\",\"rel\":\"wife_of\",\"b\":\"Savitṛ\",\"words\":\"tvāṣṭrī tu savitur bhāryā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.35\",\"a\":\"Śakra\",\"rel\":\"son_of\",\"b\":\"Aditi\",\"words\":\"dvādaśaivāditeḥ putrāḥ śakramukhyā\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.35\",\"a\":\"Viṣṇu\",\"rel\":\"brother_of\",\"b\":\"Śakra\",\"words\":\"teṣām avarajo viṣṇuḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.38\",\"a\":\"Garuḍa\",\"rel\":\"descendant_of\",\"b\":\"Vinatā\",\"words\":\"vainateyas tu garuḍo\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.40\",\"a\":\"Bhṛgu\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"brahmaṇo hṛdayaṃ bhittvā niḥsṛto bhagavān bhṛguḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.40\",\"a\":\"Kavi\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgoḥ putraḥ kavir\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.40\",\"a\":\"Śukra\",\"rel\":\"son_of\",\"b\":\"Kavi\",\"words\":\"śukraḥ kavisuto\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.43\",\"a\":\"Cyavana\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"putraṃ bhṛgur aninditam\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.45\",\"a\":\"Āruṣī\",\"rel\":\"daughter_of\",\"b\":\"Manu\",\"words\":\"āruṣī tu manoḥ kanyā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.45\",\"a\":\"Āruṣī\",\"rel\":\"wife_of\",\"b\":\"Cyavana\",\"words\":\"tasya patnī manīṣiṇaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.45\",\"a\":\"Aurva\",\"rel\":\"born_of\",\"b\":\"Āruṣī\",\"words\":\"aurvas tasyāṃ samabhavad\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.46\",\"a\":\"Ṛcīka\",\"rel\":\"son_of\",\"b\":\"Aurva\",\"words\":\"ṛcīkas tasya putras\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.46\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Ṛcīka\",\"words\":\"jamadagnis tato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.47\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"jamadagnes tu catvāra āsan putrā rāmas teṣāṃ jaghanyo\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.48\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Aurva\",\"words\":\"aurvasyāsīt putraśataṃ jamadagnipurogamam\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.49\",\"a\":\"Dhātṛ\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"dvau putrau brahmaṇas\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.49\",\"a\":\"Vidhātṛ\",\"rel\":\"son_of\",\"b\":\"Brahman\",\"words\":\"dvau putrau brahmaṇas\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.50\",\"a\":\"Lakṣmī\",\"rel\":\"sister_of\",\"b\":\"Dhātṛ\",\"words\":\"tayor eva svasā devī lakṣmīḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.50\",\"a\":\"Lakṣmī\",\"rel\":\"sister_of\",\"b\":\"Vidhātṛ\",\"words\":\"tayor eva svasā devī lakṣmīḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.51\",\"a\":\"Jyeṣṭhā\",\"rel\":\"wife_of\",\"b\":\"Varuṇa\",\"words\":\"varuṇasya bhāryā jyeṣṭhā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.51\",\"a\":\"Bala\",\"rel\":\"born_of\",\"b\":\"Jyeṣṭhā\",\"words\":\"tasyāḥ putraṃ balaṃ viddhi\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.51\",\"a\":\"Surā\",\"rel\":\"born_of\",\"b\":\"Jyeṣṭhā\",\"words\":\"surāṃ ca suranandinīm\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.53\",\"a\":\"Nirṛti\",\"rel\":\"wife_of\",\"b\":\"Adharma\",\"words\":\"tasyāpi nirṛtir bhāryā\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.53\",\"a\":\"Bhaya\",\"rel\":\"born_of\",\"b\":\"Nirṛti\",\"words\":\"tasyās trayaḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.53\",\"a\":\"Mahābhaya\",\"rel\":\"born_of\",\"b\":\"Nirṛti\",\"words\":\"tasyās trayaḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.53\",\"a\":\"Mṛtyu\",\"rel\":\"born_of\",\"b\":\"Nirṛti\",\"words\":\"tasyās trayaḥ putrāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.54\",\"a\":\"Kākī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"tāmrā tu suṣuve\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.54\",\"a\":\"Śyenī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"tāmrā tu suṣuve\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.54\",\"a\":\"Bhāsī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"tāmrā tu suṣuve\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.54\",\"a\":\"Dhṛtarāṣṭrī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"tāmrā tu suṣuve\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.54\",\"a\":\"Śukī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"tāmrā tu suṣuve\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.06869,
+ "tokens": {
+  "input": 5286,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 5812,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,60.1",
+   "a": "Sthāṇu",
+   "rel": "other",
+   "b": "Sthāṇu",
+   "words": "ekādaśa sutāḥ sthāṇoḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.4",
+   "a": "Marīci",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "ete brahmaṇaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.4",
+   "a": "Aṅgiras",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "ete brahmaṇaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.4",
+   "a": "Atri",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "ete brahmaṇaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.4",
+   "a": "Pulastya",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "ete brahmaṇaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.4",
+   "a": "Pulaha",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "ete brahmaṇaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.4",
+   "a": "Kratu",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "ete brahmaṇaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.5",
+   "a": "Bṛhaspati",
+   "rel": "son_of",
+   "b": "Aṅgiras",
+   "words": "trayas tv aṅgirasaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.5",
+   "a": "Utathya",
+   "rel": "son_of",
+   "b": "Aṅgiras",
+   "words": "trayas tv aṅgirasaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.5",
+   "a": "Saṃvarta",
+   "rel": "son_of",
+   "b": "Aṅgiras",
+   "words": "trayas tv aṅgirasaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.9",
+   "a": "Dakṣa",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "brahmaṇaḥ pṛthivīpāla putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.10",
+   "a": "Dakṣa's wife",
+   "rel": "wife_of",
+   "b": "Dakṣa",
+   "words": "bhāryā tasya mahātmanaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.10",
+   "a": "Dakṣa's daughters",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "pañcāśataṃ kanyāḥ",
+   "doubt": true,
+   "ref_cited": "MBh 1,60.12",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Kīrti",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Lakṣmī",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Dhṛti",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Medhā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Puṣṭi",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Śraddhā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Kriyā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Buddhi",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Lajjā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.14",
+   "a": "Mati",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "patnyo dharmasya tā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.18",
+   "a": "Dhara",
+   "rel": "son_of",
+   "b": "Dhūmrā",
+   "words": "dhūmrāyāś ca dharaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.18",
+   "a": "Dhruva",
+   "rel": "born_of",
+   "b": "Dhūmrā",
+   "words": "dhruvas tathā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.18",
+   "a": "Candramas",
+   "rel": "born_of",
+   "b": "Manasvinī",
+   "words": "candramās tu manasvinyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.18",
+   "a": "Śvasana",
+   "rel": "born_of",
+   "b": "Śvasā",
+   "words": "śvasāyāḥ śvasanas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.19",
+   "a": "Ahar",
+   "rel": "born_of",
+   "b": "Ratā",
+   "words": "ratāyāś cāpy ahaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.19",
+   "a": "Hutāśana",
+   "rel": "born_of",
+   "b": "Śāṇḍilī",
+   "words": "śāṇḍilyāś ca hutāśanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.19",
+   "a": "Pratyūṣa",
+   "rel": "born_of",
+   "b": "Prabhātā",
+   "words": "prabhātāyāḥ sutau smṛtau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.19",
+   "a": "Prabhāsa",
+   "rel": "born_of",
+   "b": "Prabhātā",
+   "words": "prabhātāyāḥ sutau smṛtau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.20",
+   "a": "Draviṇa",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "dharasya putro draviṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.20",
+   "a": "Hutahavyavaha",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "dharasya putro draviṇo hutahavyavahas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.20",
+   "a": "Kāla",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvasya putro bhagavān kālo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.21",
+   "a": "Varcas",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somasya tu suto varcā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.21",
+   "a": "Śiśira",
+   "rel": "born_of",
+   "b": "Manohara",
+   "words": "manoharāyāḥ śiśiraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.21",
+   "a": "Prāṇa",
+   "rel": "born_of",
+   "b": "Manohara",
+   "words": "prāṇo 'tha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.21",
+   "a": "Ramaṇa",
+   "rel": "born_of",
+   "b": "Manohara",
+   "words": "ramaṇas tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.22",
+   "a": "Jyotis",
+   "rel": "son_of",
+   "b": "Ahar",
+   "words": "ahnaḥ sutaḥ smṛto jyotiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.22",
+   "a": "Śrama",
+   "rel": "son_of",
+   "b": "Ahar",
+   "words": "ahnaḥ sutaḥ smṛto jyotiḥ śramaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.22",
+   "a": "Śānta",
+   "rel": "son_of",
+   "b": "Ahar",
+   "words": "śāntas tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.22",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "agneḥ putraḥ kumāras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.23",
+   "a": "Śākha",
+   "rel": "brother_of",
+   "b": "Kumāra",
+   "words": "tasya śākho viśākhaś ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.24",
+   "a": "Śivā",
+   "rel": "wife_of",
+   "b": "Anila",
+   "words": "anilasya śivā bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.24",
+   "a": "Purojava",
+   "rel": "born_of",
+   "b": "Śivā",
+   "words": "tasyāḥ putraḥ purojavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.24",
+   "a": "Purojava",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāv anilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.24",
+   "a": "Avijñātagati",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāv anilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.25",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pratyūṣa",
+   "words": "pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.26",
+   "a": "Bṛhaspati's sister",
+   "rel": "sister_of",
+   "b": "Bṛhaspati",
+   "words": "bṛhaspates tu bhaginī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.26",
+   "a": "Bṛhaspati's sister",
+   "rel": "wife_of",
+   "b": "Prabhāsa",
+   "words": "prabhāsasya tu bhāryā sā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.33",
+   "a": "Kaśyapa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "marīceḥ kaśyapaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.34",
+   "a": "Tvāṣṭrī",
+   "rel": "wife_of",
+   "b": "Savitṛ",
+   "words": "tvāṣṭrī tu savitur bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.35",
+   "a": "Śakra",
+   "rel": "son_of",
+   "b": "Aditi",
+   "words": "dvādaśaivāditeḥ putrāḥ śakramukhyā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.35",
+   "a": "Viṣṇu",
+   "rel": "brother_of",
+   "b": "Śakra",
+   "words": "teṣām avarajo viṣṇuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.38",
+   "a": "Garuḍa",
+   "rel": "descendant_of",
+   "b": "Vinatā",
+   "words": "vainateyas tu garuḍo",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,60.40",
+   "a": "Bhṛgu",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "brahmaṇo hṛdayaṃ bhittvā niḥsṛto bhagavān bhṛguḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.40",
+   "a": "Kavi",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgoḥ putraḥ kavir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.40",
+   "a": "Śukra",
+   "rel": "son_of",
+   "b": "Kavi",
+   "words": "śukraḥ kavisuto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.43",
+   "a": "Cyavana",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "putraṃ bhṛgur aninditam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.45",
+   "a": "Āruṣī",
+   "rel": "daughter_of",
+   "b": "Manu",
+   "words": "āruṣī tu manoḥ kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.45",
+   "a": "Āruṣī",
+   "rel": "wife_of",
+   "b": "Cyavana",
+   "words": "tasya patnī manīṣiṇaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.45",
+   "a": "Aurva",
+   "rel": "born_of",
+   "b": "Āruṣī",
+   "words": "aurvas tasyāṃ samabhavad",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.46",
+   "a": "Ṛcīka",
+   "rel": "son_of",
+   "b": "Aurva",
+   "words": "ṛcīkas tasya putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.46",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Ṛcīka",
+   "words": "jamadagnis tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.47",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "jamadagnes tu catvāra āsan putrā rāmas teṣāṃ jaghanyo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,60.48",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Aurva",
+   "words": "aurvasyāsīt putraśataṃ jamadagnipurogamam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.49",
+   "a": "Dhātṛ",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "dvau putrau brahmaṇas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.49",
+   "a": "Vidhātṛ",
+   "rel": "son_of",
+   "b": "Brahman",
+   "words": "dvau putrau brahmaṇas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.50",
+   "a": "Lakṣmī",
+   "rel": "sister_of",
+   "b": "Dhātṛ",
+   "words": "tayor eva svasā devī lakṣmīḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.50",
+   "a": "Lakṣmī",
+   "rel": "sister_of",
+   "b": "Vidhātṛ",
+   "words": "tayor eva svasā devī lakṣmīḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.51",
+   "a": "Jyeṣṭhā",
+   "rel": "wife_of",
+   "b": "Varuṇa",
+   "words": "varuṇasya bhāryā jyeṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.51",
+   "a": "Bala",
+   "rel": "born_of",
+   "b": "Jyeṣṭhā",
+   "words": "tasyāḥ putraṃ balaṃ viddhi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.51",
+   "a": "Surā",
+   "rel": "born_of",
+   "b": "Jyeṣṭhā",
+   "words": "surāṃ ca suranandinīm",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.53",
+   "a": "Nirṛti",
+   "rel": "wife_of",
+   "b": "Adharma",
+   "words": "tasyāpi nirṛtir bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.53",
+   "a": "Bhaya",
+   "rel": "born_of",
+   "b": "Nirṛti",
+   "words": "tasyās trayaḥ putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.53",
+   "a": "Mahābhaya",
+   "rel": "born_of",
+   "b": "Nirṛti",
+   "words": "tasyās trayaḥ putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.53",
+   "a": "Mṛtyu",
+   "rel": "born_of",
+   "b": "Nirṛti",
+   "words": "tasyās trayaḥ putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.54",
+   "a": "Kākī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "tāmrā tu suṣuve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.54",
+   "a": "Śyenī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "tāmrā tu suṣuve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.54",
+   "a": "Bhāsī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "tāmrā tu suṣuve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.54",
+   "a": "Dhṛtarāṣṭrī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "tāmrā tu suṣuve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.54",
+   "a": "Śukī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "tāmrā tu suṣuve",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

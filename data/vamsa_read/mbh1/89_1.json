@@ -1,0 +1,609 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 89,
+ "part": 1,
+ "refs": [
+  "MBh 1,89.1",
+  "MBh 1,89.2",
+  "MBh 1,89.3",
+  "MBh 1,89.4",
+  "MBh 1,89.5",
+  "MBh 1,89.6",
+  "MBh 1,89.7",
+  "MBh 1,89.8",
+  "MBh 1,89.9",
+  "MBh 1,89.10",
+  "MBh 1,89.11",
+  "MBh 1,89.12",
+  "MBh 1,89.13",
+  "MBh 1,89.14",
+  "MBh 1,89.15",
+  "MBh 1,89.16",
+  "MBh 1,89.17",
+  "MBh 1,89.18",
+  "MBh 1,89.19",
+  "MBh 1,89.20",
+  "MBh 1,89.21",
+  "MBh 1,89.22",
+  "MBh 1,89.23",
+  "MBh 1,89.24",
+  "MBh 1,89.25",
+  "MBh 1,89.26",
+  "MBh 1,89.27",
+  "MBh 1,89.28",
+  "MBh 1,89.29",
+  "MBh 1,89.30",
+  "MBh 1,89.31",
+  "MBh 1,89.32",
+  "MBh 1,89.33",
+  "MBh 1,89.34",
+  "MBh 1,89.35",
+  "MBh 1,89.36",
+  "MBh 1,89.37",
+  "MBh 1,89.38",
+  "MBh 1,89.39",
+  "MBh 1,89.40",
+  "MBh 1,89.41",
+  "MBh 1,89.42",
+  "MBh 1,89.43",
+  "MBh 1,89.44",
+  "MBh 1,89.45",
+  "MBh 1,89.46",
+  "MBh 1,89.47",
+  "MBh 1,89.48",
+  "MBh 1,89.49",
+  "MBh 1,89.50",
+  "MBh 1,89.51",
+  "MBh 1,89.52"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:46:32",
+ "reply": "{\"statements\":[{\"ref\":\"MBh 1,89.5\",\"a\":\"Pravīra\",\"rel\":\"son_of\",\"b\":\"Pūru\",\"words\":\"trayaḥ putrā mahārathāḥ pūroḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.5\",\"a\":\"Īśvara\",\"rel\":\"son_of\",\"b\":\"Pūru\",\"words\":\"pravīreśvararaudrāśvās trayaḥ putrā mahārathāḥ pūroḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.5\",\"a\":\"Raudrāśva\",\"rel\":\"son_of\",\"b\":\"Pūru\",\"words\":\"pravīreśvararaudrāśvās trayaḥ putrā mahārathāḥ pūroḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.5\",\"a\":\"Pravīra\",\"rel\":\"born_of\",\"b\":\"Pauṣṭī\",\"words\":\"pūroḥ pauṣṭyām ajāyanta\",\"doubt\":false},{\"ref\":\"MBh 1,89.5\",\"a\":\"Īśvara\",\"rel\":\"born_of\",\"b\":\"Pauṣṭī\",\"words\":\"pūroḥ pauṣṭyām ajāyanta\",\"doubt\":false},{\"ref\":\"MBh 1,89.5\",\"a\":\"Raudrāśva\",\"rel\":\"born_of\",\"b\":\"Pauṣṭī\",\"words\":\"pūroḥ pauṣṭyām ajāyanta\",\"doubt\":false},{\"ref\":\"MBh 1,89.6\",\"a\":\"Manasyu\",\"rel\":\"son_of\",\"b\":\"Pravīra\",\"words\":\"manasyur abhavat tasmāc chūraḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.6\",\"a\":\"Manasyu\",\"rel\":\"born_of\",\"b\":\"Śyenī\",\"words\":\"śyenīsutaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.7\",\"a\":\"Subhrū\",\"rel\":\"son_of\",\"b\":\"Manasyu\",\"words\":\"manasyor abhavan putrāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.7\",\"a\":\"Saṃhanana\",\"rel\":\"son_of\",\"b\":\"Manasyu\",\"words\":\"manasyor abhavan putrāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.7\",\"a\":\"Vāgmin\",\"rel\":\"son_of\",\"b\":\"Manasyu\",\"words\":\"manasyor abhavan putrāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.7\",\"a\":\"Subhrū\",\"rel\":\"born_of\",\"b\":\"Sauvīrī\",\"words\":\"sauvīrītanayās trayaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.7\",\"a\":\"Saṃhanana\",\"rel\":\"born_of\",\"b\":\"Sauvīrī\",\"words\":\"sauvīrītanayās trayaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.7\",\"a\":\"Vāgmin\",\"rel\":\"born_of\",\"b\":\"Sauvīrī\",\"words\":\"sauvīrītanayās trayaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.8\",\"a\":\"Ṛceyu\",\"rel\":\"son_of\",\"b\":\"Raudrāśva\",\"words\":\"raudrāśvasya maheṣvāsā daśāpsarasi sūnavaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.11\",\"a\":\"Matināra\",\"rel\":\"son_of\",\"b\":\"Ṛceyu\",\"words\":\"matināras tato rājā vidvāṃś carceputo 'bhavat\",\"doubt\":true},{\"ref\":\"MBh 1,89.11\",\"a\":\"Taṃsu\",\"rel\":\"son_of\",\"b\":\"Matināra\",\"words\":\"matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur\",\"doubt\":false},{\"ref\":\"MBh 1,89.11\",\"a\":\"Atiratha\",\"rel\":\"son_of\",\"b\":\"Matināra\",\"words\":\"matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur mahān atiratho\",\"doubt\":false},{\"ref\":\"MBh 1,89.11\",\"a\":\"Druhyu\",\"rel\":\"son_of\",\"b\":\"Matināra\",\"words\":\"matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur mahān atiratho druhyuś\",\"doubt\":false},{\"ref\":\"MBh 1,89.13\",\"a\":\"Ilina\",\"rel\":\"son_of\",\"b\":\"Taṃsu\",\"words\":\"ilinaṃ tu sutaṃ taṃsur janayām āsa\",\"doubt\":false},{\"ref\":\"MBh 1,89.14\",\"a\":\"Duḥṣanta\",\"rel\":\"son_of\",\"b\":\"Ilina\",\"words\":\"ilino janayām āsa duḥṣantaprabhṛtīn\",\"doubt\":false},{\"ref\":\"MBh 1,89.14\",\"a\":\"Duḥṣanta\",\"rel\":\"born_of\",\"b\":\"Rathaṃtarī\",\"words\":\"rathaṃtaryāṃ sutān pañca\",\"doubt\":false},{\"ref\":\"MBh 1,89.15\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Ilina\",\"words\":\"duḥṣantaṃ śūrabhīmau ca\",\"doubt\":false},{\"ref\":\"MBh 1,89.15\",\"a\":\"Bhīma\",\"rel\":\"son_of\",\"b\":\"Ilina\",\"words\":\"duḥṣantaṃ śūrabhīmau ca\",\"doubt\":false},{\"ref\":\"MBh 1,89.15\",\"a\":\"Prapūrva\",\"rel\":\"son_of\",\"b\":\"Ilina\",\"words\":\"prapūrvaṃ vasum eva ca\",\"doubt\":false},{\"ref\":\"MBh 1,89.15\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Ilina\",\"words\":\"prapūrvaṃ vasum eva ca\",\"doubt\":false},{\"ref\":\"MBh 1,89.16\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Duḥṣanta\",\"words\":\"duḥṣantād bharato jajñe\",\"doubt\":false},{\"ref\":\"MBh 1,89.16\",\"a\":\"Bharata\",\"rel\":\"born_of\",\"b\":\"Śakuntalā\",\"words\":\"śākuntalo\",\"doubt\":false},{\"ref\":\"MBh 1,89.17\",\"a\":\"Bharata\",\"rel\":\"other\",\"b\":\"Bharata\",\"words\":\"bharatas tisṛṣu strīṣu nava putrān ajījanat\",\"doubt\":true},{\"ref\":\"MBh 1,89.18\",\"a\":\"Bhumanyu\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"lebhe putraṃ bharadvājād bhumanyuṃ nāma\",\"doubt\":false},{\"ref\":\"MBh 1,89.18\",\"a\":\"Bhumanyu\",\"rel\":\"begotten_by\",\"b\":\"Bharadvāja\",\"words\":\"lebhe putraṃ bharadvājād bhumanyuṃ\",\"doubt\":false},{\"ref\":\"MBh 1,89.20\",\"a\":\"Vitatha\",\"rel\":\"son_of\",\"b\":\"Bhumanyu\",\"words\":\"vitatho nāma bhumanyor abhavat sutaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.21\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Bhumanyu\",\"words\":\"bhumanyor abhavan sutāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.21\",\"a\":\"Suhotṛ\",\"rel\":\"son_of\",\"b\":\"Bhumanyu\",\"words\":\"bhumanyor abhavan sutāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.21\",\"a\":\"Suhavi\",\"rel\":\"son_of\",\"b\":\"Bhumanyu\",\"words\":\"bhumanyor abhavan sutāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.21\",\"a\":\"Suyajus\",\"rel\":\"son_of\",\"b\":\"Bhumanyu\",\"words\":\"bhumanyor abhavan sutāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.21\",\"a\":\"Suhotra\",\"rel\":\"born_of\",\"b\":\"Puṣkariṇī\",\"words\":\"puṣkariṇyām ṛcīkasya bhumanyor abhavan sutāḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.26\",\"a\":\"Ajamīḍha\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"suhotrāt pṛthivīpateḥ ajamīḍhaṃ\",\"doubt\":false},{\"ref\":\"MBh 1,89.26\",\"a\":\"Sumīḍha\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"suhotrāt pṛthivīpateḥ ajamīḍhaṃ sumīḍhaṃ\",\"doubt\":false},{\"ref\":\"MBh 1,89.26\",\"a\":\"Purumīḍha\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"sumīḍhaṃ ca purumīḍhaṃ ca\",\"doubt\":false},{\"ref\":\"MBh 1,89.26\",\"a\":\"Ajamīḍha\",\"rel\":\"born_of\",\"b\":\"Aikṣvākī\",\"words\":\"aikṣvākī janayām āsa\",\"doubt\":false},{\"ref\":\"MBh 1,89.28\",\"a\":\"Ṛkṣa\",\"rel\":\"son_of\",\"b\":\"Ajamīḍha\",\"words\":\"so 'py ajanayat tisṛṣu strīṣu ṛkṣaṃ\",\"doubt\":false},{\"ref\":\"MBh 1,89.28\",\"a\":\"Ṛkṣa\",\"rel\":\"born_of\",\"b\":\"Nīlī\",\"words\":\"ṛkṣaṃ dhūminy atho nīlī\",\"doubt\":true},{\"ref\":\"MBh 1,89.28\",\"a\":\"Jahnu\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"keśiny ajanayaj jahnum\",\"doubt\":false},{\"ref\":\"MBh 1,89.28\",\"a\":\"Jahnu\",\"rel\":\"son_of\",\"b\":\"Ajamīḍha\",\"words\":\"keśiny ajanayaj jahnum\",\"doubt\":false},{\"ref\":\"MBh 1,89.30\",\"a\":\"Saṃvaraṇa\",\"rel\":\"son_of\",\"b\":\"Ṛkṣa\",\"words\":\"ṛkṣāt saṃvaraṇo jajñe\",\"doubt\":false},{\"ref\":\"MBh 1,89.42\",\"a\":\"Kuru\",\"rel\":\"son_of\",\"b\":\"Saṃvaraṇa\",\"words\":\"saṃvaraṇāt saurī suṣuve tapatī kurum\",\"doubt\":false},{\"ref\":\"MBh 1,89.42\",\"a\":\"Kuru\",\"rel\":\"born_of\",\"b\":\"Tapatī\",\"words\":\"saurī suṣuve tapatī kurum\",\"doubt\":false},{\"ref\":\"MBh 1,89.43\",\"a\":\"Kurukṣetra\",\"rel\":\"other\",\"b\":\"Kuru\",\"words\":\"tasya nāmnābhivikhyātaṃ pṛthivyāṃ kurujāṅgalam\",\"doubt\":false},{\"ref\":\"MBh 1,89.44\",\"a\":\"Aśvavant\",\"rel\":\"son_of\",\"b\":\"Kuru\",\"words\":\"aśvavantam abhiṣvantaṃ tathā citrarathaṃ munim janamejayaṃ ca\",\"doubt\":true},{\"ref\":\"MBh 1,89.44\",\"a\":\"Aśvavant\",\"rel\":\"born_of\",\"b\":\"Vāhinī\",\"words\":\"pañcaitān vāhinī putrān vyajāyata\",\"doubt\":false},{\"ref\":\"MBh 1,89.45\",\"a\":\"Parikṣit\",\"rel\":\"son_of\",\"b\":\"Abhiṣvant\",\"words\":\"abhiṣvataḥ parikṣit\",\"doubt\":false},{\"ref\":\"MBh 1,89.47\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Parikṣit\",\"words\":\"janamejayādayaḥ sapta parikṣito 'bhavan putrāḥ\",\"doubt\":true},{\"ref\":\"MBh 1,89.49\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayasya tanayā dhṛtarāṣṭraḥ prathamajaḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.49\",\"a\":\"Pāṇḍu\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayasya tanayā pāṇḍur\",\"doubt\":false},{\"ref\":\"MBh 1,89.49\",\"a\":\"Bāhlīka\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayasya tanayā bāhlīka eva ca\",\"doubt\":false},{\"ref\":\"MBh 1,89.52\",\"a\":\"Devāpi\",\"rel\":\"son_of\",\"b\":\"Pratīpa\",\"words\":\"pratīpasya trayaḥ putrā jajñire devāpiḥ\",\"doubt\":false},{\"ref\":\"MBh 1,89.52\",\"a\":\"Śaṃtanu\",\"rel\":\"son_of\",\"b\":\"Pratīpa\",\"words\":\"pratīpasya trayaḥ putrā jajñire śaṃtanuś\",\"doubt\":false},{\"ref\":\"MBh 1,89.52\",\"a\":\"Bāhlīka\",\"rel\":\"son_of\",\"b\":\"Pratīpa\",\"words\":\"pratīpasya trayaḥ putrā bāhlīkaś\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05583,
+ "tokens": {
+  "input": 5258,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4531,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,89.5",
+   "a": "Pravīra",
+   "rel": "son_of",
+   "b": "Pūru",
+   "words": "trayaḥ putrā mahārathāḥ pūroḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.5",
+   "a": "Īśvara",
+   "rel": "son_of",
+   "b": "Pūru",
+   "words": "pravīreśvararaudrāśvās trayaḥ putrā mahārathāḥ pūroḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,89.5",
+   "a": "Raudrāśva",
+   "rel": "son_of",
+   "b": "Pūru",
+   "words": "pravīreśvararaudrāśvās trayaḥ putrā mahārathāḥ pūroḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.5",
+   "a": "Pravīra",
+   "rel": "born_of",
+   "b": "Pauṣṭī",
+   "words": "pūroḥ pauṣṭyām ajāyanta",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.5",
+   "a": "Īśvara",
+   "rel": "born_of",
+   "b": "Pauṣṭī",
+   "words": "pūroḥ pauṣṭyām ajāyanta",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,89.5",
+   "a": "Raudrāśva",
+   "rel": "born_of",
+   "b": "Pauṣṭī",
+   "words": "pūroḥ pauṣṭyām ajāyanta",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.6",
+   "a": "Manasyu",
+   "rel": "son_of",
+   "b": "Pravīra",
+   "words": "manasyur abhavat tasmāc chūraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.6",
+   "a": "Manasyu",
+   "rel": "born_of",
+   "b": "Śyenī",
+   "words": "śyenīsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.7",
+   "a": "Subhrū",
+   "rel": "son_of",
+   "b": "Manasyu",
+   "words": "manasyor abhavan putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.7",
+   "a": "Saṃhanana",
+   "rel": "son_of",
+   "b": "Manasyu",
+   "words": "manasyor abhavan putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.7",
+   "a": "Vāgmin",
+   "rel": "son_of",
+   "b": "Manasyu",
+   "words": "manasyor abhavan putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.7",
+   "a": "Subhrū",
+   "rel": "born_of",
+   "b": "Sauvīrī",
+   "words": "sauvīrītanayās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.7",
+   "a": "Saṃhanana",
+   "rel": "born_of",
+   "b": "Sauvīrī",
+   "words": "sauvīrītanayās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.7",
+   "a": "Vāgmin",
+   "rel": "born_of",
+   "b": "Sauvīrī",
+   "words": "sauvīrītanayās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.8",
+   "a": "Ṛceyu",
+   "rel": "son_of",
+   "b": "Raudrāśva",
+   "words": "raudrāśvasya maheṣvāsā daśāpsarasi sūnavaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,89.11",
+   "a": "Matināra",
+   "rel": "son_of",
+   "b": "Ṛceyu",
+   "words": "matināras tato rājā vidvāṃś carceputo 'bhavat",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,89.11",
+   "a": "Taṃsu",
+   "rel": "son_of",
+   "b": "Matināra",
+   "words": "matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.11",
+   "a": "Atiratha",
+   "rel": "son_of",
+   "b": "Matināra",
+   "words": "matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur mahān atiratho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.11",
+   "a": "Druhyu",
+   "rel": "son_of",
+   "b": "Matināra",
+   "words": "matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur mahān atiratho druhyuś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.13",
+   "a": "Ilina",
+   "rel": "son_of",
+   "b": "Taṃsu",
+   "words": "ilinaṃ tu sutaṃ taṃsur janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.14",
+   "a": "Duḥṣanta",
+   "rel": "son_of",
+   "b": "Ilina",
+   "words": "ilino janayām āsa duḥṣantaprabhṛtīn",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.14",
+   "a": "Duḥṣanta",
+   "rel": "born_of",
+   "b": "Rathaṃtarī",
+   "words": "rathaṃtaryāṃ sutān pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.15",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Ilina",
+   "words": "duḥṣantaṃ śūrabhīmau ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.15",
+   "a": "Bhīma",
+   "rel": "son_of",
+   "b": "Ilina",
+   "words": "duḥṣantaṃ śūrabhīmau ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.15",
+   "a": "Prapūrva",
+   "rel": "son_of",
+   "b": "Ilina",
+   "words": "prapūrvaṃ vasum eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.15",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Ilina",
+   "words": "prapūrvaṃ vasum eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.16",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Duḥṣanta",
+   "words": "duḥṣantād bharato jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.16",
+   "a": "Bharata",
+   "rel": "born_of",
+   "b": "Śakuntalā",
+   "words": "śākuntalo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.17",
+   "a": "Bharata",
+   "rel": "other",
+   "b": "Bharata",
+   "words": "bharatas tisṛṣu strīṣu nava putrān ajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.18",
+   "a": "Bhumanyu",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "lebhe putraṃ bharadvājād bhumanyuṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.18",
+   "a": "Bhumanyu",
+   "rel": "begotten_by",
+   "b": "Bharadvāja",
+   "words": "lebhe putraṃ bharadvājād bhumanyuṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.20",
+   "a": "Vitatha",
+   "rel": "son_of",
+   "b": "Bhumanyu",
+   "words": "vitatho nāma bhumanyor abhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.21",
+   "a": "Suhotra",
+   "rel": "son_of",
+   "b": "Bhumanyu",
+   "words": "bhumanyor abhavan sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.21",
+   "a": "Suhotṛ",
+   "rel": "son_of",
+   "b": "Bhumanyu",
+   "words": "bhumanyor abhavan sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.21",
+   "a": "Suhavi",
+   "rel": "son_of",
+   "b": "Bhumanyu",
+   "words": "bhumanyor abhavan sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.21",
+   "a": "Suyajus",
+   "rel": "son_of",
+   "b": "Bhumanyu",
+   "words": "bhumanyor abhavan sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.21",
+   "a": "Suhotra",
+   "rel": "born_of",
+   "b": "Puṣkariṇī",
+   "words": "puṣkariṇyām ṛcīkasya bhumanyor abhavan sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.26",
+   "a": "Ajamīḍha",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "suhotrāt pṛthivīpateḥ ajamīḍhaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.26",
+   "a": "Sumīḍha",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "suhotrāt pṛthivīpateḥ ajamīḍhaṃ sumīḍhaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.26",
+   "a": "Purumīḍha",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "sumīḍhaṃ ca purumīḍhaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.26",
+   "a": "Ajamīḍha",
+   "rel": "born_of",
+   "b": "Aikṣvākī",
+   "words": "aikṣvākī janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.28",
+   "a": "Ṛkṣa",
+   "rel": "son_of",
+   "b": "Ajamīḍha",
+   "words": "so 'py ajanayat tisṛṣu strīṣu ṛkṣaṃ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.28",
+   "a": "Ṛkṣa",
+   "rel": "born_of",
+   "b": "Nīlī",
+   "words": "ṛkṣaṃ dhūminy atho nīlī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.28",
+   "a": "Jahnu",
+   "rel": "born_of",
+   "b": "Keśinī",
+   "words": "keśiny ajanayaj jahnum",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.28",
+   "a": "Jahnu",
+   "rel": "son_of",
+   "b": "Ajamīḍha",
+   "words": "keśiny ajanayaj jahnum",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.30",
+   "a": "Saṃvaraṇa",
+   "rel": "son_of",
+   "b": "Ṛkṣa",
+   "words": "ṛkṣāt saṃvaraṇo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.42",
+   "a": "Kuru",
+   "rel": "son_of",
+   "b": "Saṃvaraṇa",
+   "words": "saṃvaraṇāt saurī suṣuve tapatī kurum",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.42",
+   "a": "Kuru",
+   "rel": "born_of",
+   "b": "Tapatī",
+   "words": "saurī suṣuve tapatī kurum",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.43",
+   "a": "Kurukṣetra",
+   "rel": "other",
+   "b": "Kuru",
+   "words": "tasya nāmnābhivikhyātaṃ pṛthivyāṃ kurujāṅgalam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.44",
+   "a": "Aśvavant",
+   "rel": "son_of",
+   "b": "Kuru",
+   "words": "aśvavantam abhiṣvantaṃ tathā citrarathaṃ munim janamejayaṃ ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.44",
+   "a": "Aśvavant",
+   "rel": "born_of",
+   "b": "Vāhinī",
+   "words": "pañcaitān vāhinī putrān vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.45",
+   "a": "Parikṣit",
+   "rel": "son_of",
+   "b": "Abhiṣvant",
+   "words": "abhiṣvataḥ parikṣit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,89.47",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Parikṣit",
+   "words": "janamejayādayaḥ sapta parikṣito 'bhavan putrāḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.49",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayasya tanayā dhṛtarāṣṭraḥ prathamajaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.49",
+   "a": "Pāṇḍu",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayasya tanayā pāṇḍur",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.49",
+   "a": "Bāhlīka",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayasya tanayā bāhlīka eva ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.52",
+   "a": "Devāpi",
+   "rel": "son_of",
+   "b": "Pratīpa",
+   "words": "pratīpasya trayaḥ putrā jajñire devāpiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.52",
+   "a": "Śaṃtanu",
+   "rel": "son_of",
+   "b": "Pratīpa",
+   "words": "pratīpasya trayaḥ putrā jajñire śaṃtanuś",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,89.52",
+   "a": "Bāhlīka",
+   "rel": "son_of",
+   "b": "Pratīpa",
+   "words": "pratīpasya trayaḥ putrā bāhlīkaś",
+   "doubt": false,
+   "check": "unsupported"
+  }
+ ]
+}

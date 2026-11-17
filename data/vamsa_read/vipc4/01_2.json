@@ -1,0 +1,72 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 1,
+ "part": 2,
+ "refs": [
+  "ViPc 4,1.64",
+  "ViPc 4,1.65",
+  "ViPc 4,1.66",
+  "ViPc 4,1.67",
+  "ViPc 4,1.68",
+  "ViPc 4,1.69",
+  "ViPc 4,1.70",
+  "ViPc 4,1.71",
+  "ViPc 4,1.72",
+  "ViPc 4,1.73"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:47:42",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,1.68\",\"a\":\"Baladeva\",\"rel\":\"other\",\"b\":\"Keśava\",\"words\":\"sa keśavāṃśo baladevanāmā\",\"doubt\":false},{\"ref\":\"ViPc 4,1.69\",\"a\":\"Revatī\",\"rel\":\"daughter_of\",\"b\":\"Raivata\",\"words\":\"tasmai tvam enāṃ tanayāṃ narendra prayaccha\",\"doubt\":true},{\"ref\":\"ViPc 4,1.73\",\"a\":\"Revatī\",\"rel\":\"daughter_of\",\"b\":\"Raivata\",\"words\":\"tāṃ revatīṃ raivatabhūpakanyāṃ\",\"doubt\":false},{\"ref\":\"ViPc 4,1.73\",\"a\":\"Revatī\",\"rel\":\"wife_of\",\"b\":\"Sīrāyudha\",\"words\":\"sīrāyudho 'sau vidhinopayeme\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0069,
+ "tokens": {
+  "input": 1899,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 310,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,1.68",
+   "a": "Baladeva",
+   "rel": "other",
+   "b": "Keśava",
+   "words": "sa keśavāṃśo baladevanāmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,1.69",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Raivata",
+   "words": "tasmai tvam enāṃ tanayāṃ narendra prayaccha",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,1.73",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Raivata",
+   "words": "tāṃ revatīṃ raivatabhūpakanyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,1.73",
+   "a": "Revatī",
+   "rel": "wife_of",
+   "b": "Sīrāyudha",
+   "words": "sīrāyudho 'sau vidhinopayeme",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

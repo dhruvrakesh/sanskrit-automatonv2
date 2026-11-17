@@ -1,0 +1,523 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 70,
+ "part": 0,
+ "refs": [
+  "MBh 1,70.1",
+  "MBh 1,70.2",
+  "MBh 1,70.3",
+  "MBh 1,70.4",
+  "MBh 1,70.5",
+  "MBh 1,70.6",
+  "MBh 1,70.7",
+  "MBh 1,70.8",
+  "MBh 1,70.9",
+  "MBh 1,70.10",
+  "MBh 1,70.11",
+  "MBh 1,70.12",
+  "MBh 1,70.13",
+  "MBh 1,70.14",
+  "MBh 1,70.15",
+  "MBh 1,70.16",
+  "MBh 1,70.17",
+  "MBh 1,70.18",
+  "MBh 1,70.19",
+  "MBh 1,70.20",
+  "MBh 1,70.21",
+  "MBh 1,70.22",
+  "MBh 1,70.23",
+  "MBh 1,70.24",
+  "MBh 1,70.25",
+  "MBh 1,70.26",
+  "MBh 1,70.27",
+  "MBh 1,70.28",
+  "MBh 1,70.29",
+  "MBh 1,70.30",
+  "MBh 1,70.31",
+  "MBh 1,70.32",
+  "MBh 1,70.33",
+  "MBh 1,70.34",
+  "MBh 1,70.35",
+  "MBh 1,70.36",
+  "MBh 1,70.37",
+  "MBh 1,70.38",
+  "MBh 1,70.39",
+  "MBh 1,70.40",
+  "MBh 1,70.41",
+  "MBh 1,70.42",
+  "MBh 1,70.43",
+  "MBh 1,70.44",
+  "MBh 1,70.45",
+  "MBh 1,70.46"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:46:03",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,70.3\",\"a\":\"Pracetas\",\"rel\":\"son_of\",\"b\":\"Pracetas\",\"words\":\"daśa pracetasaḥ putrāḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,70.4\",\"a\":\"Dakṣa\",\"rel\":\"son_of\",\"b\":\"Pracetas\",\"words\":\"tebhyaḥ prācetaso jajñe dakṣo\",\"doubt\":true},\n{\"ref\":\"MBh 1,70.5\",\"a\":\"Dakṣa\",\"rel\":\"wife_of\",\"b\":\"Vīriṇī\",\"words\":\"vīriṇyā saha saṃgamya dakṣaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,70.6\",\"a\":\"Nārada\",\"rel\":\"other\",\"b\":\"Dakṣa\",\"words\":\"sutān dakṣasya nāradaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,70.9\",\"a\":\"Ādityas\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"kaśyapas tasyām ādityān samajījanat\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.9\",\"a\":\"Ādityas\",\"rel\":\"born_of\",\"b\":\"Dākṣāyaṇī\",\"words\":\"dākṣāyaṇī varā mārīcaḥ kaśyapas tasyām ādityān samajījanat\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.9\",\"a\":\"Vivasvant\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"ādityān samajījanat indrādīn vīryasaṃpannān vivasvantam athāpi ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.10\",\"a\":\"Yama Vaivasvata\",\"rel\":\"son_of\",\"b\":\"Vivasvant\",\"words\":\"vivasvataḥ suto jajñe yamo vaivasvataḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.10\",\"a\":\"Mārtaṇḍa\",\"rel\":\"son_of\",\"b\":\"Yama\",\"words\":\"mārtaṇḍaś ca yamasyāpi putro\",\"doubt\":true},\n{\"ref\":\"MBh 1,70.11\",\"a\":\"Manu\",\"rel\":\"son_of\",\"b\":\"Mārtaṇḍa\",\"words\":\"mārtaṇḍasya manur dhīmān ajāyata sutaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.11\",\"a\":\"Mānavas\",\"rel\":\"line_of\",\"b\":\"Manu\",\"words\":\"manor vaṃśo mānavānāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.16\",\"a\":\"Purūravas\",\"rel\":\"born_of\",\"b\":\"Ilā\",\"words\":\"purūravās tato vidvān ilāyāṃ samapadyata\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Āyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ṣaṭ putrā jajñire 'thailād āyur\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Āyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Amāvasu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ṣaṭ putrā jajñire 'thailād āyur dhīmān amāvasuḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Amāvasu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Dṛḍhāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"dṛḍhāyuś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Dṛḍhāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Vanāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"vanāyuś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Vanāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Śrutāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"śrutāyuś\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.22\",\"a\":\"Śrutāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.23\",\"a\":\"Nahuṣa\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"nahuṣaṃ ... āyoḥ putrān pracakṣate\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.23\",\"a\":\"Vṛddhaśarman\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"vṛddhaśarmāṇaṃ ... āyoḥ putrān\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.23\",\"a\":\"Raji\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"rajiṃ ... āyoḥ putrān\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.23\",\"a\":\"Rambha\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"rambham ... āyoḥ putrān\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.23\",\"a\":\"Anenas\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"anenasam ... āyoḥ putrān\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.23\",\"a\":\"Nahuṣa\",\"rel\":\"born_of\",\"b\":\"Svarbhānavī\",\"words\":\"svarbhānavīsutān etān\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.24\",\"a\":\"Nahuṣa\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyuṣo nahuṣaḥ putro\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.28\",\"a\":\"Yati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣo janayām āsa ṣaṭ putrān\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.28\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātiṃ ... nahuṣo janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.28\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"saṃyātim ... nahuṣo janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.28\",\"a\":\"Āyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"āyātiṃ ... nahuṣo janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.28\",\"a\":\"Uddhava\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"uddhavam nahuṣo janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.29\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātir nāhuṣaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.31\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tasya putrā ... devayānyāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"devayānyām ajāyetāṃ yadus\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Turvasu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tasya putrā ... turvasur\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Turvasu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"devayānyām ajāyetāṃ yadus turvasur eva ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Druhyu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tasya putrā ... druhyuś\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"śarmiṣṭhāyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Anu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tasya putrā ... cānuś\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Anu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"śarmiṣṭhāyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tasya putrā ... pūruś\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.32\",\"a\":\"Pūru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"pūruś ca śarmiṣṭhāyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.36\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"putro devayāneyaḥ pūrvajo yadur\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.43\",\"a\":\"Pūru\",\"rel\":\"succeeded\",\"b\":\"Yayāti\",\"words\":\"yāyātenāpi vayasā rājyaṃ pūrur akārayat\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.45\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pūruṃ putram uvāca\",\"doubt\":false},\n{\"ref\":\"MBh 1,70.45\",\"a\":\"Pauravas\",\"rel\":\"line_of\",\"b\":\"Pūru\",\"words\":\"pauravo vaṃśa iti te khyātiṃ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0449,
+ "tokens": {
+  "input": 4477,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3595,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,70.3",
+   "a": "Pracetas",
+   "rel": "son_of",
+   "b": "Pracetas",
+   "words": "daśa pracetasaḥ putrāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.4",
+   "a": "Dakṣa",
+   "rel": "son_of",
+   "b": "Pracetas",
+   "words": "tebhyaḥ prācetaso jajñe dakṣo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.5",
+   "a": "Dakṣa",
+   "rel": "wife_of",
+   "b": "Vīriṇī",
+   "words": "vīriṇyā saha saṃgamya dakṣaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.6",
+   "a": "Nārada",
+   "rel": "other",
+   "b": "Dakṣa",
+   "words": "sutān dakṣasya nāradaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.9",
+   "a": "Ādityas",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "kaśyapas tasyām ādityān samajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.9",
+   "a": "Ādityas",
+   "rel": "born_of",
+   "b": "Dākṣāyaṇī",
+   "words": "dākṣāyaṇī varā mārīcaḥ kaśyapas tasyām ādityān samajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.9",
+   "a": "Vivasvant",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "ādityān samajījanat indrādīn vīryasaṃpannān vivasvantam athāpi ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.10",
+   "a": "Yama Vaivasvata",
+   "rel": "son_of",
+   "b": "Vivasvant",
+   "words": "vivasvataḥ suto jajñe yamo vaivasvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.10",
+   "a": "Mārtaṇḍa",
+   "rel": "son_of",
+   "b": "Yama",
+   "words": "mārtaṇḍaś ca yamasyāpi putro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.11",
+   "a": "Manu",
+   "rel": "son_of",
+   "b": "Mārtaṇḍa",
+   "words": "mārtaṇḍasya manur dhīmān ajāyata sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.11",
+   "a": "Mānavas",
+   "rel": "line_of",
+   "b": "Manu",
+   "words": "manor vaṃśo mānavānāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.16",
+   "a": "Purūravas",
+   "rel": "born_of",
+   "b": "Ilā",
+   "words": "purūravās tato vidvān ilāyāṃ samapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Āyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ṣaṭ putrā jajñire 'thailād āyur",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Āyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Amāvasu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ṣaṭ putrā jajñire 'thailād āyur dhīmān amāvasuḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Amāvasu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Dṛḍhāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "dṛḍhāyuś ca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Dṛḍhāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Vanāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "vanāyuś ca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Vanāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Śrutāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "śrutāyuś",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,70.22",
+   "a": "Śrutāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.23",
+   "a": "Nahuṣa",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "nahuṣaṃ ... āyoḥ putrān pracakṣate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.23",
+   "a": "Vṛddhaśarman",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "vṛddhaśarmāṇaṃ ... āyoḥ putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.23",
+   "a": "Raji",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "rajiṃ ... āyoḥ putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.23",
+   "a": "Rambha",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "rambham ... āyoḥ putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.23",
+   "a": "Anenas",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "anenasam ... āyoḥ putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.23",
+   "a": "Nahuṣa",
+   "rel": "born_of",
+   "b": "Svarbhānavī",
+   "words": "svarbhānavīsutān etān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.24",
+   "a": "Nahuṣa",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyuṣo nahuṣaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.28",
+   "a": "Yati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣo janayām āsa ṣaṭ putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.28",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātiṃ ... nahuṣo janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.28",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "saṃyātim ... nahuṣo janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.28",
+   "a": "Āyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "āyātiṃ ... nahuṣo janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.28",
+   "a": "Uddhava",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "uddhavam nahuṣo janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.29",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātir nāhuṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.31",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tasya putrā ... devayānyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.32",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "devayānyām ajāyetāṃ yadus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.31",
+   "a": "Turvasu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tasya putrā ... turvasur",
+   "doubt": false,
+   "ref_cited": "MBh 1,70.32",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.32",
+   "a": "Turvasu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "devayānyām ajāyetāṃ yadus turvasur eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.31",
+   "a": "Druhyu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tasya putrā ... druhyuś",
+   "doubt": false,
+   "ref_cited": "MBh 1,70.32",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.32",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "śarmiṣṭhāyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.31",
+   "a": "Anu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tasya putrā ... cānuś",
+   "doubt": false,
+   "ref_cited": "MBh 1,70.32",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.32",
+   "a": "Anu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "śarmiṣṭhāyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.31",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tasya putrā ... pūruś",
+   "doubt": false,
+   "ref_cited": "MBh 1,70.32",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.32",
+   "a": "Pūru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "pūruś ca śarmiṣṭhāyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.36",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "putro devayāneyaḥ pūrvajo yadur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.43",
+   "a": "Pūru",
+   "rel": "succeeded",
+   "b": "Yayāti",
+   "words": "yāyātenāpi vayasā rājyaṃ pūrur akārayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.44",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pūruṃ putram uvāca",
+   "doubt": false,
+   "ref_cited": "MBh 1,70.45",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,70.45",
+   "a": "Pauravas",
+   "rel": "line_of",
+   "b": "Pūru",
+   "words": "pauravo vaṃśa iti te khyātiṃ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

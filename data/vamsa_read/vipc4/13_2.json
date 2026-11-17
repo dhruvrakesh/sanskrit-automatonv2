@@ -1,0 +1,135 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 13,
+ "part": 2,
+ "refs": [
+  "ViPc 4,13.24",
+  "ViPc 4,13.25",
+  "ViPc 4,13.26",
+  "ViPc 4,13.27",
+  "ViPc 4,13.28",
+  "ViPc 4,13.29",
+  "ViPc 4,13.30",
+  "ViPc 4,13.31",
+  "ViPc 4,13.32",
+  "ViPc 4,13.33",
+  "ViPc 4,13.34",
+  "ViPc 4,13.35",
+  "ViPc 4,13.36",
+  "ViPc 4,13.37",
+  "ViPc 4,13.38",
+  "ViPc 4,13.39",
+  "ViPc 4,13.40",
+  "ViPc 4,13.41",
+  "ViPc 4,13.42"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:50:54",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,13.24\",\"a\":\"Satyabhāmā\",\"rel\":\"daughter_of\",\"b\":\"Satrājit\",\"words\":\"satrājito 'pi mayāsyābhūtamalinam āropitam iti jātasaṃtrāsaḥ svasutāṃ satyabhāmāṃ\",\"doubt\":false},{\"ref\":\"ViPc 4,13.24\",\"a\":\"Satyabhāmā\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"satyabhāmāṃ bhagavate bhāryāṃ dadau\",\"doubt\":false},{\"ref\":\"ViPc 4,13.27\",\"a\":\"Satyabhāmā\",\"rel\":\"daughter_of\",\"b\":\"Satrājit\",\"words\":\"pitṛvadhāmarṣapūrṇā ca satyabhāmā\",\"doubt\":false},{\"ref\":\"ViPc 4,13.34\",\"a\":\"Balabhadra\",\"rel\":\"brother_of\",\"b\":\"Kṛṣṇa\",\"words\":\"te bhrātṛtvān marṣaye\",\"doubt\":false},{\"ref\":\"ViPc 4,13.37\",\"a\":\"Śatrughna\",\"rel\":\"descendant_of\",\"b\":\"Sātvata\",\"words\":\"śatrughne sātvatasya prapautre vyāpādite\",\"doubt\":false},{\"ref\":\"ViPc 4,13.39\",\"a\":\"Akrūra\",\"rel\":\"son_of\",\"b\":\"Śvaphalka\",\"words\":\"asyākrūrasya pitā śvaphalko\",\"doubt\":false},{\"ref\":\"ViPc 4,13.41\",\"a\":\"Gāndinī\",\"rel\":\"daughter_of\",\"b\":\"Kāśīrāja\",\"words\":\"garbhasthāṃ tām ātmajām āha\",\"doubt\":false},{\"ref\":\"ViPc 4,13.41\",\"a\":\"Gāndinī\",\"rel\":\"wife_of\",\"b\":\"Śvaphalka\",\"words\":\"tāṃ ca gāndinīṃ kanyāṃ śvaphalkāya priyopakāriṇe gṛhāgatāyārghabhūtāṃ prādāt\",\"doubt\":false},{\"ref\":\"ViPc 4,13.42\",\"a\":\"Akrūra\",\"rel\":\"son_of\",\"b\":\"Śvaphalka\",\"words\":\"tasyām ayam akrūraḥ śvaphalkāj jajñe\",\"doubt\":false},{\"ref\":\"ViPc 4,13.42\",\"a\":\"Akrūra\",\"rel\":\"born_of\",\"b\":\"Gāndinī\",\"words\":\"tasyām ayam akrūraḥ śvaphalkāj jajñe\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01867,
+ "tokens": {
+  "input": 4946,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 878,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,13.24",
+   "a": "Satyabhāmā",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "satrājito 'pi mayāsyābhūtamalinam āropitam iti jātasaṃtrāsaḥ svasutāṃ satyabhāmāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.24",
+   "a": "Satyabhāmā",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "satyabhāmāṃ bhagavate bhāryāṃ dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.27",
+   "a": "Satyabhāmā",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "pitṛvadhāmarṣapūrṇā ca satyabhāmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.34",
+   "a": "Balabhadra",
+   "rel": "brother_of",
+   "b": "Kṛṣṇa",
+   "words": "te bhrātṛtvān marṣaye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.37",
+   "a": "Śatrughna",
+   "rel": "descendant_of",
+   "b": "Sātvata",
+   "words": "śatrughne sātvatasya prapautre vyāpādite",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.39",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "asyākrūrasya pitā śvaphalko",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.41",
+   "a": "Gāndinī",
+   "rel": "daughter_of",
+   "b": "Kāśīrāja",
+   "words": "garbhasthāṃ tām ātmajām āha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.41",
+   "a": "Gāndinī",
+   "rel": "wife_of",
+   "b": "Śvaphalka",
+   "words": "tāṃ ca gāndinīṃ kanyāṃ śvaphalkāya priyopakāriṇe gṛhāgatāyārghabhūtāṃ prādāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.42",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "tasyām ayam akrūraḥ śvaphalkāj jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,13.42",
+   "a": "Akrūra",
+   "rel": "born_of",
+   "b": "Gāndinī",
+   "words": "tasyām ayam akrūraḥ śvaphalkāj jajñe",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

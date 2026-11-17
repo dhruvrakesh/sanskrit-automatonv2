@@ -1,0 +1,158 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 9,
+ "part": 0,
+ "refs": [
+  "ViPc 4,9.1",
+  "ViPc 4,9.2",
+  "ViPc 4,9.3",
+  "ViPc 4,9.4",
+  "ViPc 4,9.5",
+  "ViPc 4,9.6",
+  "ViPc 4,9.7",
+  "ViPc 4,9.8",
+  "ViPc 4,9.9",
+  "ViPc 4,9.10",
+  "ViPc 4,9.11",
+  "ViPc 4,9.12",
+  "ViPc 4,9.13",
+  "ViPc 4,9.25",
+  "ViPc 4,9.14"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:49:50",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,9.1\",\"a\":\"Raji\",\"rel\":\"father_of_placeholder\",\"b\":\"\",\"words\":\"\",\"doubt\":false}]}\n\nCorrection: the output above is invalid. The corrected reply follows.\n\n{\"statements\":[{\"ref\":\"ViPc 4,9.6\",\"a\":\"Indra\",\"rel\":\"son_of\",\"b\":\"Raji\",\"words\":\"yasyāhaṃ putras trilokendraḥ\",\"doubt\":true},{\"ref\":\"ViPc 4,9.9\",\"a\":\"Raji\",\"rel\":\"other\",\"b\":\"Raji\",\"words\":\"rajisutāḥ\",\"doubt\":true},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Saṃjaya\",\"rel\":\"son_of\",\"b\":\"Kṣatravṛddha\",\"words\":\"tatputraḥ saṃjayas\",\"doubt\":true},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Saṃjaya\",\"words\":\"tasyāpi jayas\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"tataś ca vijayas\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Kṛta\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"tasmāc ca jajñe kṛtaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Harṣavardhana\",\"rel\":\"son_of\",\"b\":\"Kṛta\",\"words\":\"tasya harṣavardhano\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Harṣavardhana\",\"words\":\"harṣavardhanasutaḥ sahadevas\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Adīna\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"tasmād adīnas\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Jayatsena\",\"rel\":\"son_of\",\"b\":\"Adīna\",\"words\":\"tasya jayatsenaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Saṃkṛti\",\"rel\":\"son_of\",\"b\":\"Jayatsena\",\"words\":\"tataś ca saṃkṛtis\",\"doubt\":false},{\"ref\":\"ViPc 4,9.14\",\"a\":\"Kṣatradharman\",\"rel\":\"son_of\",\"b\":\"Saṃkṛti\",\"words\":\"tatputraḥ kṣatradharmā\",\"doubt\":false},{\"ref\":\"ViPc 4,9.25\",\"a\":\"Pratikṣatra\",\"rel\":\"son_of\",\"b\":\"Kṣatravṛddha\",\"words\":\"kṣatravṛddhasutaḥ pratikṣatras\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0148,
+ "tokens": {
+  "input": 2508,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 978,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,9.6",
+   "a": "Indra",
+   "rel": "son_of",
+   "b": "Raji",
+   "words": "yasyāhaṃ putras trilokendraḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.9",
+   "a": "Raji",
+   "rel": "other",
+   "b": "Raji",
+   "words": "rajisutāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Saṃjaya",
+   "rel": "son_of",
+   "b": "Kṣatravṛddha",
+   "words": "tatputraḥ saṃjayas",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Saṃjaya",
+   "words": "tasyāpi jayas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "tataś ca vijayas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Kṛta",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "tasmāc ca jajñe kṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Harṣavardhana",
+   "rel": "son_of",
+   "b": "Kṛta",
+   "words": "tasya harṣavardhano",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Harṣavardhana",
+   "words": "harṣavardhanasutaḥ sahadevas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Adīna",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "tasmād adīnas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Jayatsena",
+   "rel": "son_of",
+   "b": "Adīna",
+   "words": "tasya jayatsenaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Saṃkṛti",
+   "rel": "son_of",
+   "b": "Jayatsena",
+   "words": "tataś ca saṃkṛtis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.14",
+   "a": "Kṣatradharman",
+   "rel": "son_of",
+   "b": "Saṃkṛti",
+   "words": "tatputraḥ kṣatradharmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,9.25",
+   "a": "Pratikṣatra",
+   "rel": "son_of",
+   "b": "Kṣatravṛddha",
+   "words": "kṣatravṛddhasutaḥ pratikṣatras",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

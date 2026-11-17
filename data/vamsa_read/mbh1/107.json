@@ -1,0 +1,153 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 107,
+ "part": 0,
+ "refs": [
+  "MBh 1,107.1",
+  "MBh 1,107.2",
+  "MBh 1,107.3",
+  "MBh 1,107.4",
+  "MBh 1,107.5",
+  "MBh 1,107.6",
+  "MBh 1,107.7",
+  "MBh 1,107.8",
+  "MBh 1,107.9",
+  "MBh 1,107.10",
+  "MBh 1,107.11",
+  "MBh 1,107.12",
+  "MBh 1,107.13",
+  "MBh 1,107.14",
+  "MBh 1,107.15",
+  "MBh 1,107.16",
+  "MBh 1,107.17",
+  "MBh 1,107.18",
+  "MBh 1,107.19",
+  "MBh 1,107.20",
+  "MBh 1,107.21",
+  "MBh 1,107.22",
+  "MBh 1,107.23",
+  "MBh 1,107.24",
+  "MBh 1,107.25",
+  "MBh 1,107.26",
+  "MBh 1,107.27",
+  "MBh 1,107.28",
+  "MBh 1,107.29",
+  "MBh 1,107.30",
+  "MBh 1,107.31",
+  "MBh 1,107.32",
+  "MBh 1,107.33",
+  "MBh 1,107.34",
+  "MBh 1,107.35",
+  "MBh 1,107.36",
+  "MBh 1,107.37"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:47:11",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,107.1\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"other\",\"b\":\"Gāndhārī\",\"words\":\"putraśataṃ jajñe gāndhāryāṃ dhṛtarāṣṭrasya\",\"doubt\":false},\n{\"ref\":\"MBh 1,107.1\",\"a\":\"Yuyutsu\",\"rel\":\"born_of\",\"b\":\"Vaiśyā\",\"words\":\"dhṛtarāṣṭrasya vaiśyāyām ekaś cāpi śatāt paraḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,107.2\",\"a\":\"Pāṇḍu\",\"rel\":\"other\",\"b\":\"Kuntī\",\"words\":\"pāṇḍoḥ kuntyāṃ ca mādryāṃ ca pañca putrā\",\"doubt\":true},\n{\"ref\":\"MBh 1,107.8\",\"a\":\"Gāndhārī\",\"rel\":\"wife_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"garbhaṃ dhṛtarāṣṭrād athāgrahīt\",\"doubt\":false},\n{\"ref\":\"MBh 1,107.10\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"born_of\",\"b\":\"Kuntī\",\"words\":\"kuntīsutaṃ jātaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,107.24\",\"a\":\"Duryodhana\",\"rel\":\"other\",\"b\":\"Gāndhārī\",\"words\":\"jajñe krameṇa caitena teṣāṃ duryodhano nṛpaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,107.34\",\"a\":\"Duḥśalā\",\"rel\":\"daughter_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya ... kanyā caikā śatādhikā\",\"doubt\":false},\n{\"ref\":\"MBh 1,107.36\",\"a\":\"Yuyutsu\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrān mahāyaśāḥ jajñe\",\"doubt\":false},\n{\"ref\":\"MBh 1,107.36\",\"a\":\"Yuyutsu\",\"rel\":\"born_of\",\"b\":\"Vaiśyā\",\"words\":\"jajñe dhīmāṃs tatas tasyāṃ yuyutsuḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,107.37\",\"a\":\"Duḥśalā\",\"rel\":\"daughter_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya dhīmataḥ ... kanyā caikātha duḥśalā\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01686,
+ "tokens": {
+  "input": 3836,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 919,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,107.1",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "other",
+   "b": "Gāndhārī",
+   "words": "putraśataṃ jajñe gāndhāryāṃ dhṛtarāṣṭrasya",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MBh 1,107.1",
+   "a": "Yuyutsu",
+   "rel": "born_of",
+   "b": "Vaiśyā",
+   "words": "dhṛtarāṣṭrasya vaiśyāyām ekaś cāpi śatāt paraḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,107.2",
+   "a": "Pāṇḍu",
+   "rel": "other",
+   "b": "Kuntī",
+   "words": "pāṇḍoḥ kuntyāṃ ca mādryāṃ ca pañca putrā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,107.8",
+   "a": "Gāndhārī",
+   "rel": "wife_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "garbhaṃ dhṛtarāṣṭrād athāgrahīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,107.10",
+   "a": "Yudhiṣṭhira",
+   "rel": "born_of",
+   "b": "Kuntī",
+   "words": "kuntīsutaṃ jātaṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,107.24",
+   "a": "Duryodhana",
+   "rel": "other",
+   "b": "Gāndhārī",
+   "words": "jajñe krameṇa caitena teṣāṃ duryodhano nṛpaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,107.34",
+   "a": "Duḥśalā",
+   "rel": "daughter_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "dhṛtarāṣṭrasya ... kanyā caikā śatādhikā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,107.36",
+   "a": "Yuyutsu",
+   "rel": "son_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "dhṛtarāṣṭrān mahāyaśāḥ jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,107.36",
+   "a": "Yuyutsu",
+   "rel": "born_of",
+   "b": "Vaiśyā",
+   "words": "jajñe dhīmāṃs tatas tasyāṃ yuyutsuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,107.37",
+   "a": "Duḥśalā",
+   "rel": "daughter_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "dhṛtarāṣṭrasya dhīmataḥ ... kanyā caikātha duḥśalā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

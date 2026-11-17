@@ -1,0 +1,71 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "chapter": 13,
+ "part": 2,
+ "refs": [
+  "KurmP 1,13.56",
+  "KurmP 1,13.57",
+  "KurmP 1,13.58",
+  "KurmP 1,13.59",
+  "KurmP 1,13.60",
+  "KurmP 1,13.61",
+  "KurmP 1,13.62",
+  "KurmP 1,13.63",
+  "KurmP 1,13.64"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_kUrmapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:31:06",
+ "reply": "{\"statements\":[{\"ref\":\"KurmP 1,13.56\",\"a\":\"Dakṣa\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"so 'dikāṃ brahmaṇaḥ sutaḥ\",\"doubt\":true},{\"ref\":\"KurmP 1,13.58\",\"a\":\"Satī\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"tvamapyasatsutāsmākaṃ\",\"doubt\":true},{\"ref\":\"KurmP 1,13.57\",\"a\":\"Satī\",\"rel\":\"wife_of\",\"b\":\"Śiva\",\"words\":\"satīṃ dakṣaḥ sudurmanāḥ / bhartrā saha\",\"doubt\":true},{\"ref\":\"KurmP 1,13.60\",\"a\":\"Satī\",\"rel\":\"daughter_of\",\"b\":\"Himavat\",\"words\":\"himavadduhitā sābhūt\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00635,
+ "tokens": {
+  "input": 1648,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 305,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "KurmP 1,13.56",
+   "a": "Dakṣa",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "so 'dikāṃ brahmaṇaḥ sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,13.58",
+   "a": "Satī",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "tvamapyasatsutāsmākaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,13.57",
+   "a": "Satī",
+   "rel": "wife_of",
+   "b": "Śiva",
+   "words": "satīṃ dakṣaḥ sudurmanāḥ / bhartrā saha",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,13.60",
+   "a": "Satī",
+   "rel": "daughter_of",
+   "b": "Himavat",
+   "words": "himavadduhitā sābhūt",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

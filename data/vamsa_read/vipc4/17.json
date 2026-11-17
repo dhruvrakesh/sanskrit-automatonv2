@@ -1,0 +1,100 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 17,
+ "part": 0,
+ "refs": [
+  "ViPc 4,17.1",
+  "ViPc 4,17.2"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:52:07",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,17.1\",\"a\":\"Babhru\",\"rel\":\"son_of\",\"b\":\"Druhyu\",\"words\":\"druhyos tu tanayo babhruḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Setu\",\"rel\":\"son_of\",\"b\":\"Babhru\",\"words\":\"tataḥ setuḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Āradvān\",\"rel\":\"son_of\",\"b\":\"Setu\",\"words\":\"setuputra āradvānnāmā\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Gāndhāra\",\"rel\":\"son_of\",\"b\":\"Āradvān\",\"words\":\"tadātmajo gāndhāraḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Gāndhāra\",\"words\":\"tato dharmo\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Dhṛta\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"dharmād dhṛtaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Durdama\",\"rel\":\"son_of\",\"b\":\"Dhṛta\",\"words\":\"dhṛtād durdamaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,17.2\",\"a\":\"Pracetas\",\"rel\":\"son_of\",\"b\":\"Durdama\",\"words\":\"tataḥ pracetāḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00747,
+ "tokens": {
+  "input": 1098,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 527,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,17.1",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Druhyu",
+   "words": "druhyos tu tanayo babhruḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Setu",
+   "rel": "son_of",
+   "b": "Babhru",
+   "words": "tataḥ setuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Āradvān",
+   "rel": "son_of",
+   "b": "Setu",
+   "words": "setuputra āradvānnāmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Gāndhāra",
+   "rel": "son_of",
+   "b": "Āradvān",
+   "words": "tadātmajo gāndhāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Gāndhāra",
+   "words": "tato dharmo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Dhṛta",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "dharmād dhṛtaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Durdama",
+   "rel": "son_of",
+   "b": "Dhṛta",
+   "words": "dhṛtād durdamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,17.2",
+   "a": "Pracetas",
+   "rel": "son_of",
+   "b": "Durdama",
+   "words": "tataḥ pracetāḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+G6d: one register of the persons of every work read; I1 live (VAMSA_REGISTER_2026_11_17, DOCS118_2026_11_17)
+
+- scripts\vamsa_register.py (new, free, read-only of the readings): one person in two works is one entry when his
+  names, his father and (where both works give him) his grandfather meet, or on name and father where G6c sets them
+  in one generation or no grandfather is given; an entry never holds two grandfathers that differ, nor two persons of
+  one work whose fathers differ. A son named by "words" is taken as a father only when a verified statement names him
+  so (the two Parikshits of the Adiparvan kept two); two names said in a verse give one entry both; two names between
+  one father and one son are proposed, never joined. Writes data\vamsa_read\register.json, exports\vamsa_register.csv
+  and exports\vamsa_register.md. tests: test_vamsa_register_2026_11_17.
+- ASKS section 31 (I1 released and deployed, eae2901; the ledger; G6b running; G6d measured; G6e's design), STATE
+  section 53, RUNBOOK 17 Nov, late. tests: test_docs118_2026_11_17.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

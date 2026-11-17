@@ -1,0 +1,127 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "garuda1",
+ "title": "Garudapurana, book 1",
+ "chapter": 144,
+ "part": 0,
+ "refs": [
+  "GarP 1,144.1",
+  "GarP 1,144.2",
+  "GarP 1,144.3",
+  "GarP 1,144.4",
+  "GarP 1,144.5",
+  "GarP 1,144.6",
+  "GarP 1,144.7",
+  "GarP 1,144.8",
+  "GarP 1,144.9",
+  "GarP 1,144.10",
+  "GarP 1,144.11"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_garuDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:40:29",
+ "reply": "{\"statements\":[{\"ref\":\"GarP 1,144.1\",\"a\":\"Vāsudeva\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāttu devakyāṃ vāsudevo\",\"doubt\":false},{\"ref\":\"GarP 1,144.1\",\"a\":\"Vāsudeva\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"vasudevāttu devakyāṃ vāsudevo\",\"doubt\":false},{\"ref\":\"GarP 1,144.6\",\"a\":\"Rukmiṇī\",\"rel\":\"wife_of\",\"b\":\"Hari\",\"words\":\"rukmiṇīsatyabhāmādyāḥ hyaṣṭau patnyo hareḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.6\",\"a\":\"Satyabhāmā\",\"rel\":\"wife_of\",\"b\":\"Hari\",\"words\":\"rukmiṇīsatyabhāmādyāḥ hyaṣṭau patnyo hareḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Pradyumna\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"rukmiṇyāñcaiva pradyumno\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Aniruddha\",\"rel\":\"son_of\",\"b\":\"Pradyumna\",\"words\":\"tasya putro 'niruddho 'bhūt\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Aniruddha\",\"rel\":\"husband_placeholder\",\"b\":\"Uṣā\",\"words\":\"uṣābāṇasutāpatiḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.11\",\"a\":\"Vajra\",\"rel\":\"son_of\",\"b\":\"Aniruddha\",\"words\":\"aniruddhādabhūdvajraḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.11\",\"a\":\"Vajra\",\"rel\":\"succeeded\",\"b\":\"Hari\",\"words\":\"sa ca rājā gate harau\",\"doubt\":false}]}\n\nCorrection: the rel value \"husband_placeholder\" is not allowed. Corrected output:\n\n{\"statements\":[{\"ref\":\"GarP 1,144.1\",\"a\":\"Vāsudeva\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāttu devakyāṃ vāsudevo\",\"doubt\":false},{\"ref\":\"GarP 1,144.1\",\"a\":\"Vāsudeva\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"vasudevāttu devakyāṃ vāsudevo\",\"doubt\":false},{\"ref\":\"GarP 1,144.6\",\"a\":\"Rukmiṇī\",\"rel\":\"wife_of\",\"b\":\"Hari\",\"words\":\"rukmiṇīsatyabhāmādyāḥ hyaṣṭau patnyo hareḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.6\",\"a\":\"Satyabhāmā\",\"rel\":\"wife_of\",\"b\":\"Hari\",\"words\":\"rukmiṇīsatyabhāmādyāḥ hyaṣṭau patnyo hareḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Pradyumna\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"rukmiṇyāñcaiva pradyumno\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Aniruddha\",\"rel\":\"son_of\",\"b\":\"Pradyumna\",\"words\":\"tasya putro 'niruddho 'bhūt\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Uṣā\",\"rel\":\"wife_of\",\"b\":\"Aniruddha\",\"words\":\"uṣābāṇasutāpatiḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.8\",\"a\":\"Uṣā\",\"rel\":\"daughter_of\",\"b\":\"Bāṇa\",\"words\":\"uṣābāṇasutāpatiḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.11\",\"a\":\"Vajra\",\"rel\":\"son_of\",\"b\":\"Aniruddha\",\"words\":\"aniruddhādabhūdvajraḥ\",\"doubt\":false},{\"ref\":\"GarP 1,144.11\",\"a\":\"Vajra\",\"rel\":\"succeeded\",\"b\":\"Hari\",\"words\":\"sa ca rājā gate harau\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01835,
+ "tokens": {
+  "input": 1818,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1471,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "GarP 1,144.1",
+   "a": "Vāsudeva",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāttu devakyāṃ vāsudevo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.1",
+   "a": "Vāsudeva",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "vasudevāttu devakyāṃ vāsudevo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.6",
+   "a": "Rukmiṇī",
+   "rel": "wife_of",
+   "b": "Hari",
+   "words": "rukmiṇīsatyabhāmādyāḥ hyaṣṭau patnyo hareḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.6",
+   "a": "Satyabhāmā",
+   "rel": "wife_of",
+   "b": "Hari",
+   "words": "rukmiṇīsatyabhāmādyāḥ hyaṣṭau patnyo hareḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.8",
+   "a": "Pradyumna",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "rukmiṇyāñcaiva pradyumno",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.8",
+   "a": "Aniruddha",
+   "rel": "son_of",
+   "b": "Pradyumna",
+   "words": "tasya putro 'niruddho 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.8",
+   "a": "Uṣā",
+   "rel": "wife_of",
+   "b": "Aniruddha",
+   "words": "uṣābāṇasutāpatiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.8",
+   "a": "Uṣā",
+   "rel": "daughter_of",
+   "b": "Bāṇa",
+   "words": "uṣābāṇasutāpatiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.11",
+   "a": "Vajra",
+   "rel": "son_of",
+   "b": "Aniruddha",
+   "words": "aniruddhādabhūdvajraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,144.11",
+   "a": "Vajra",
+   "rel": "succeeded",
+   "b": "Hari",
+   "words": "sa ca rājā gate harau",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

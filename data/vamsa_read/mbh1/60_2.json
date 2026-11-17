@@ -1,0 +1,257 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 60,
+ "part": 2,
+ "refs": [
+  "MBh 1,60.55",
+  "MBh 1,60.56",
+  "MBh 1,60.57",
+  "MBh 1,60.58",
+  "MBh 1,60.59",
+  "MBh 1,60.60",
+  "MBh 1,60.61",
+  "MBh 1,60.62",
+  "MBh 1,60.63",
+  "MBh 1,60.64",
+  "MBh 1,60.65",
+  "MBh 1,60.66",
+  "MBh 1,60.67",
+  "MBh 1,60.68",
+  "MBh 1,60.69"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:45:41",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,60.55\",\"a\":\"ulūka\",\"rel\":\"born_of\",\"b\":\"Kākī\",\"words\":\"ulūkān suṣuve kākī\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.55\",\"a\":\"śyena\",\"rel\":\"born_of\",\"b\":\"Śyenī\",\"words\":\"śyenī śyenān vyajāyata\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.55\",\"a\":\"bhāsa\",\"rel\":\"born_of\",\"b\":\"Bhāsī\",\"words\":\"bhāsī bhāsān ajanayad\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.55\",\"a\":\"gṛdhra\",\"rel\":\"born_of\",\"b\":\"Bhāsī\",\"words\":\"bhāsī bhāsān ajanayad gṛdhrāṃś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.56\",\"a\":\"haṃsa\",\"rel\":\"born_of\",\"b\":\"Dhṛtarāṣṭrī\",\"words\":\"dhṛtarāṣṭrī tu haṃsāṃś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.56\",\"a\":\"kalahaṃsa\",\"rel\":\"born_of\",\"b\":\"Dhṛtarāṣṭrī\",\"words\":\"kalahaṃsāṃś ca sarvaśaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.56\",\"a\":\"cakravāka\",\"rel\":\"born_of\",\"b\":\"Dhṛtarāṣṭrī\",\"words\":\"cakravākāṃś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.57\",\"a\":\"śuka\",\"rel\":\"born_of\",\"b\":\"Śukī\",\"words\":\"śukī vijajñe dharmajña śukān eva\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.61\",\"a\":\"Airāvata\",\"rel\":\"born_of\",\"b\":\"Bhadramanā\",\"words\":\"airāvataṃ nāgaṃ jajñe bhadramanā sutam\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.64\",\"a\":\"Śveta\",\"rel\":\"born_of\",\"b\":\"Śvetā\",\"words\":\"diśāgajaṃ tu śvetākhyaṃ śvetājanayad āśugam\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.65\",\"a\":\"Rohiṇī\",\"rel\":\"daughter_of\",\"b\":\"Surabhi\",\"words\":\"duhitarau rājan surabhir vai vyajāyata rohiṇīṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.65\",\"a\":\"Rohiṇī\",\"rel\":\"born_of\",\"b\":\"Surabhi\",\"words\":\"surabhir vai vyajāyata rohiṇīṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.65\",\"a\":\"Gandharvī\",\"rel\":\"born_of\",\"b\":\"Surabhi\",\"words\":\"gandharvīṃ ca yaśasvinīm\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.65\",\"a\":\"gāvaḥ\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ jajñire gāvo\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.65\",\"a\":\"vājin\",\"rel\":\"born_of\",\"b\":\"Gandharvī\",\"words\":\"gandharvyāṃ vājinaḥ sutāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.66\",\"a\":\"nāga\",\"rel\":\"born_of\",\"b\":\"Surasā\",\"words\":\"surasājanayan nāgān\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.66\",\"a\":\"pannaga\",\"rel\":\"born_of\",\"b\":\"Kadrū\",\"words\":\"kadrūś ca pannagān\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.66\",\"a\":\"Śukī\",\"rel\":\"born_of\",\"b\":\"Analā\",\"words\":\"analāyāḥ śukī putrī\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.66\",\"a\":\"Surasā\",\"rel\":\"born_of\",\"b\":\"Kadrū\",\"words\":\"kadrvās tu surasā sutā\",\"doubt\":true},\n{\"ref\":\"MBh 1,60.67\",\"a\":\"Śyenī\",\"rel\":\"wife_of\",\"b\":\"Aruṇa\",\"words\":\"aruṇasya bhāryā śyenī\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.67\",\"a\":\"Sampāti\",\"rel\":\"born_of\",\"b\":\"Śyenī\",\"words\":\"saṃpātiṃ janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.67\",\"a\":\"Jaṭāyu\",\"rel\":\"born_of\",\"b\":\"Śyenī\",\"words\":\"tathaiva ca jaṭāyuṣam\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.67\",\"a\":\"Garuḍa\",\"rel\":\"born_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyās tu vikhyātau garuḍāruṇau\",\"doubt\":false},\n{\"ref\":\"MBh 1,60.67\",\"a\":\"Aruṇa\",\"rel\":\"born_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyās tu vikhyātau garuḍāruṇau\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02202,
+ "tokens": {
+  "input": 2162,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1770,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,60.55",
+   "a": "ulūka",
+   "rel": "born_of",
+   "b": "Kākī",
+   "words": "ulūkān suṣuve kākī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.55",
+   "a": "śyena",
+   "rel": "born_of",
+   "b": "Śyenī",
+   "words": "śyenī śyenān vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.55",
+   "a": "bhāsa",
+   "rel": "born_of",
+   "b": "Bhāsī",
+   "words": "bhāsī bhāsān ajanayad",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.55",
+   "a": "gṛdhra",
+   "rel": "born_of",
+   "b": "Bhāsī",
+   "words": "bhāsī bhāsān ajanayad gṛdhrāṃś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.56",
+   "a": "haṃsa",
+   "rel": "born_of",
+   "b": "Dhṛtarāṣṭrī",
+   "words": "dhṛtarāṣṭrī tu haṃsāṃś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.56",
+   "a": "kalahaṃsa",
+   "rel": "born_of",
+   "b": "Dhṛtarāṣṭrī",
+   "words": "kalahaṃsāṃś ca sarvaśaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.56",
+   "a": "cakravāka",
+   "rel": "born_of",
+   "b": "Dhṛtarāṣṭrī",
+   "words": "cakravākāṃś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.57",
+   "a": "śuka",
+   "rel": "born_of",
+   "b": "Śukī",
+   "words": "śukī vijajñe dharmajña śukān eva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.61",
+   "a": "Airāvata",
+   "rel": "born_of",
+   "b": "Bhadramanā",
+   "words": "airāvataṃ nāgaṃ jajñe bhadramanā sutam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.64",
+   "a": "Śveta",
+   "rel": "born_of",
+   "b": "Śvetā",
+   "words": "diśāgajaṃ tu śvetākhyaṃ śvetājanayad āśugam",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.65",
+   "a": "Rohiṇī",
+   "rel": "daughter_of",
+   "b": "Surabhi",
+   "words": "duhitarau rājan surabhir vai vyajāyata rohiṇīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.65",
+   "a": "Rohiṇī",
+   "rel": "born_of",
+   "b": "Surabhi",
+   "words": "surabhir vai vyajāyata rohiṇīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.65",
+   "a": "Gandharvī",
+   "rel": "born_of",
+   "b": "Surabhi",
+   "words": "gandharvīṃ ca yaśasvinīm",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.65",
+   "a": "gāvaḥ",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ jajñire gāvo",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,60.65",
+   "a": "vājin",
+   "rel": "born_of",
+   "b": "Gandharvī",
+   "words": "gandharvyāṃ vājinaḥ sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.66",
+   "a": "nāga",
+   "rel": "born_of",
+   "b": "Surasā",
+   "words": "surasājanayan nāgān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.66",
+   "a": "pannaga",
+   "rel": "born_of",
+   "b": "Kadrū",
+   "words": "kadrūś ca pannagān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.66",
+   "a": "Śukī",
+   "rel": "born_of",
+   "b": "Analā",
+   "words": "analāyāḥ śukī putrī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.66",
+   "a": "Surasā",
+   "rel": "born_of",
+   "b": "Kadrū",
+   "words": "kadrvās tu surasā sutā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.67",
+   "a": "Śyenī",
+   "rel": "wife_of",
+   "b": "Aruṇa",
+   "words": "aruṇasya bhāryā śyenī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.67",
+   "a": "Sampāti",
+   "rel": "born_of",
+   "b": "Śyenī",
+   "words": "saṃpātiṃ janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.67",
+   "a": "Jaṭāyu",
+   "rel": "born_of",
+   "b": "Śyenī",
+   "words": "tathaiva ca jaṭāyuṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.67",
+   "a": "Garuḍa",
+   "rel": "born_of",
+   "b": "Vinatā",
+   "words": "vinatāyās tu vikhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,60.67",
+   "a": "Aruṇa",
+   "rel": "born_of",
+   "b": "Vinatā",
+   "words": "vinatāyās tu vikhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

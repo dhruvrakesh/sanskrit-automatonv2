@@ -1,0 +1,57 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 91,
+ "part": 0,
+ "refs": [
+  "MBh 1,91.1",
+  "MBh 1,91.2",
+  "MBh 1,91.3",
+  "MBh 1,91.4",
+  "MBh 1,91.5",
+  "MBh 1,91.6",
+  "MBh 1,91.7",
+  "MBh 1,91.8",
+  "MBh 1,91.9",
+  "MBh 1,91.10",
+  "MBh 1,91.11",
+  "MBh 1,91.12",
+  "MBh 1,91.13",
+  "MBh 1,91.14",
+  "MBh 1,91.15",
+  "MBh 1,91.16",
+  "MBh 1,91.17",
+  "MBh 1,91.18",
+  "MBh 1,91.19",
+  "MBh 1,91.20",
+  "MBh 1,91.21",
+  "MBh 1,91.22"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:46:58",
+ "reply": "{\"statements\":[{\"ref\":\"MBh 1,91.16\",\"a\":\"Śaṃtanu\",\"rel\":\"son_of\",\"b\":\"Pratīpa\",\"words\":\"pratīpasya suto rājā śaṃtanur nāma\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00607,
+ "tokens": {
+  "input": 2600,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 87,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,91.16",
+   "a": "Śaṃtanu",
+   "rel": "son_of",
+   "b": "Pratīpa",
+   "words": "pratīpasya suto rājā śaṃtanur nāma",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 16,
+ "part": 0,
+ "refs": [
+  "ViPc 4,16.1",
+  "ViPc 4,16.2"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:52:04",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,16.2\",\"a\":\"Vahni\",\"rel\":\"son_of\",\"b\":\"Turvasu\",\"words\":\"turvasor vahnir ātmajo\",\"doubt\":false},{\"ref\":\"ViPc 4,16.2\",\"a\":\"Gobhānu\",\"rel\":\"son_of\",\"b\":\"Vahni\",\"words\":\"vahner gobhānus\",\"doubt\":false},{\"ref\":\"ViPc 4,16.2\",\"a\":\"Traiśānu\",\"rel\":\"son_of\",\"b\":\"Gobhānu\",\"words\":\"gobhānus tataś ca traiśānus\",\"doubt\":false},{\"ref\":\"ViPc 4,16.2\",\"a\":\"Karaṃdhama\",\"rel\":\"son_of\",\"b\":\"Traiśānu\",\"words\":\"traiśānus tasmāc ca karaṃdhamaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,16.2\",\"a\":\"Marutta\",\"rel\":\"son_of\",\"b\":\"Karaṃdhama\",\"words\":\"tasyāpi maruttaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,16.2\",\"a\":\"Duṣyanta\",\"rel\":\"son_of\",\"b\":\"Marutta\",\"words\":\"pauravaṃ duṣyantaṃ putram akalpayat\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00661,
+ "tokens": {
+  "input": 1148,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 431,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,16.2",
+   "a": "Vahni",
+   "rel": "son_of",
+   "b": "Turvasu",
+   "words": "turvasor vahnir ātmajo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,16.2",
+   "a": "Gobhānu",
+   "rel": "son_of",
+   "b": "Vahni",
+   "words": "vahner gobhānus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,16.2",
+   "a": "Traiśānu",
+   "rel": "son_of",
+   "b": "Gobhānu",
+   "words": "gobhānus tataś ca traiśānus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,16.2",
+   "a": "Karaṃdhama",
+   "rel": "son_of",
+   "b": "Traiśānu",
+   "words": "traiśānus tasmāc ca karaṃdhamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,16.2",
+   "a": "Marutta",
+   "rel": "son_of",
+   "b": "Karaṃdhama",
+   "words": "tasyāpi maruttaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,16.2",
+   "a": "Duṣyanta",
+   "rel": "son_of",
+   "b": "Marutta",
+   "words": "pauravaṃ duṣyantaṃ putram akalpayat",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

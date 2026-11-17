@@ -1,0 +1,117 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "chapter": 67,
+ "part": 0,
+ "refs": [
+  "LiP 1,67.1",
+  "LiP 1,67.2",
+  "LiP 1,67.3",
+  "LiP 1,67.4",
+  "LiP 1,67.5",
+  "LiP 1,67.6",
+  "LiP 1,67.7",
+  "LiP 1,67.8",
+  "LiP 1,67.9",
+  "LiP 1,67.10",
+  "LiP 1,67.11",
+  "LiP 1,67.12",
+  "LiP 1,67.13",
+  "LiP 1,67.14",
+  "LiP 1,67.15",
+  "LiP 1,67.16",
+  "LiP 1,67.17",
+  "LiP 1,67.18",
+  "LiP 1,67.19",
+  "LiP 1,67.20",
+  "LiP 1,67.21",
+  "LiP 1,67.22",
+  "LiP 1,67.23",
+  "LiP 1,67.24",
+  "LiP 1,67.25",
+  "LiP 1,67.26",
+  "LiP 1,67.27",
+  "LiP 1,67.28"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_liGgapurANa1-108.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:28:01",
+ "reply": "{\"statements\":[{\"ref\":\"LiP 1,67.2\",\"a\":\"Yadu\",\"rel\":\"other\",\"b\":\"Yayāti\",\"words\":\"mama jyeṣṭhena yadunā niyogo nānupālitaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,67.11\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pūruṃ sa sutam ātmanaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,67.11\",\"a\":\"Turvasu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"turvasuṃ putramādiśat\",\"doubt\":false},{\"ref\":\"LiP 1,67.12\",\"a\":\"Yadu\",\"rel\":\"brother_of\",\"b\":\"Pūru\",\"words\":\"yaduṃ jyeṣṭhaṃ\",\"doubt\":true},{\"ref\":\"LiP 1,67.13\",\"a\":\"Yayāti\",\"rel\":\"other\",\"b\":\"Yayāti\",\"words\":\"vyabhajacca tridhā rājyaṃ putrebhyo nāhuṣastadā\",\"doubt\":true},{\"ref\":\"LiP 1,67.10\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"ityukto nāhuṣastadā\",\"doubt\":false},{\"ref\":\"LiP 1,67.5\",\"a\":\"Pūru\",\"rel\":\"other\",\"b\":\"Yayāti\",\"words\":\"kanīyānmama dāyādo\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01095,
+ "tokens": {
+  "input": 2963,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 502,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "LiP 1,67.2",
+   "a": "Yadu",
+   "rel": "other",
+   "b": "Yayāti",
+   "words": "mama jyeṣṭhena yadunā niyogo nānupālitaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,67.11",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pūruṃ sa sutam ātmanaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,67.11",
+   "a": "Turvasu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "turvasuṃ putramādiśat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,67.12",
+   "a": "Yadu",
+   "rel": "brother_of",
+   "b": "Pūru",
+   "words": "yaduṃ jyeṣṭhaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,67.13",
+   "a": "Yayāti",
+   "rel": "other",
+   "b": "Yayāti",
+   "words": "vyabhajacca tridhā rājyaṃ putrebhyo nāhuṣastadā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,67.10",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "ityukto nāhuṣastadā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,67.5",
+   "a": "Pūru",
+   "rel": "other",
+   "b": "Yayāti",
+   "words": "kanīyānmama dāyādo",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

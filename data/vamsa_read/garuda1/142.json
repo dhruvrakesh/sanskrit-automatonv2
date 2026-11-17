@@ -1,0 +1,117 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "garuda1",
+ "title": "Garudapurana, book 1",
+ "chapter": 142,
+ "part": 0,
+ "refs": [
+  "GarP 1,142.1",
+  "GarP 1,142.2",
+  "GarP 1,142.3",
+  "GarP 1,142.4",
+  "GarP 1,142.5",
+  "GarP 1,142.6",
+  "GarP 1,142.7",
+  "GarP 1,142.8",
+  "GarP 1,142.9",
+  "GarP 1,142.10",
+  "GarP 1,142.11",
+  "GarP 1,142.12",
+  "GarP 1,142.13",
+  "GarP 1,142.14",
+  "GarP 1,142.15",
+  "GarP 1,142.16",
+  "GarP 1,142.17",
+  "GarP 1,142.18",
+  "GarP 1,142.19",
+  "GarP 1,142.20",
+  "GarP 1,142.21",
+  "GarP 1,142.22",
+  "GarP 1,142.23",
+  "GarP 1,142.24",
+  "GarP 1,142.25",
+  "GarP 1,142.26",
+  "GarP 1,142.27",
+  "GarP 1,142.28"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_garuDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:40:15",
+ "reply": "{\"statements\":[{\"ref\":\"GarP 1,142.8\",\"a\":\"Paraśurāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"paraśurāmo 'bhūjjamadagneḥ\",\"doubt\":false},{\"ref\":\"GarP 1,142.10\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"putro daśarathājjajñe rāmaśca\",\"doubt\":false},{\"ref\":\"GarP 1,142.10\",\"a\":\"Bharata\",\"rel\":\"brother_of\",\"b\":\"Rāma\",\"words\":\"rāmaśca bharato 'nujaḥ\",\"doubt\":false},{\"ref\":\"GarP 1,142.11\",\"a\":\"Lakṣmaṇa\",\"rel\":\"brother_of\",\"b\":\"Rāma\",\"words\":\"lakṣmaṇaścātha śatrughno rāmabhāryā ca jānakī\",\"doubt\":true},{\"ref\":\"GarP 1,142.11\",\"a\":\"Jānakī\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"rāmabhāryā ca jānakī\",\"doubt\":false},{\"ref\":\"GarP 1,142.13\",\"a\":\"Vibhīṣaṇa\",\"rel\":\"brother_of\",\"b\":\"Rāvaṇa\",\"words\":\"rāvaṇaṃ cānujaṃ tasya laṅkāpuryāṃ vibhīṣaṇam\",\"doubt\":false},{\"ref\":\"GarP 1,142.19\",\"a\":\"Kauśika\",\"rel\":\"wife_of\",\"b\":\"Kauśika\",\"words\":\"taṃ tathā vyādhitaṃ bhāryā patiṃ\",\"doubt\":true}]}\n\nCorrection: the last statement is malformed, as the wife is not named in the text, so it should be disregarded.",
+ "stop": "end_turn",
+ "cost_usd": 0.01211,
+ "tokens": {
+  "input": 3087,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 594,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "GarP 1,142.8",
+   "a": "Paraśurāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "paraśurāmo 'bhūjjamadagneḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,142.10",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "putro daśarathājjajñe rāmaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,142.10",
+   "a": "Bharata",
+   "rel": "brother_of",
+   "b": "Rāma",
+   "words": "rāmaśca bharato 'nujaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,142.11",
+   "a": "Lakṣmaṇa",
+   "rel": "brother_of",
+   "b": "Rāma",
+   "words": "lakṣmaṇaścātha śatrughno rāmabhāryā ca jānakī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,142.11",
+   "a": "Jānakī",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "rāmabhāryā ca jānakī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,142.13",
+   "a": "Vibhīṣaṇa",
+   "rel": "brother_of",
+   "b": "Rāvaṇa",
+   "words": "rāvaṇaṃ cānujaṃ tasya laṅkāpuryāṃ vibhīṣaṇam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,142.19",
+   "a": "Kauśika",
+   "rel": "wife_of",
+   "b": "Kauśika",
+   "words": "taṃ tathā vyādhitaṃ bhāryā patiṃ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

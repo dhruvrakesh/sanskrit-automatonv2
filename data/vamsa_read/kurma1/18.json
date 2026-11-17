@@ -1,0 +1,386 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "chapter": 18,
+ "part": 0,
+ "refs": [
+  "KurmP 1,18.1",
+  "KurmP 1,18.2",
+  "KurmP 1,18.3",
+  "KurmP 1,18.4",
+  "KurmP 1,18.5",
+  "KurmP 1,18.6",
+  "KurmP 1,18.7",
+  "KurmP 1,18.8",
+  "KurmP 1,18.9",
+  "KurmP 1,18.10",
+  "KurmP 1,18.11",
+  "KurmP 1,18.12",
+  "KurmP 1,18.13",
+  "KurmP 1,18.14",
+  "KurmP 1,18.15",
+  "KurmP 1,18.16",
+  "KurmP 1,18.17",
+  "KurmP 1,18.18",
+  "KurmP 1,18.19",
+  "KurmP 1,18.20",
+  "KurmP 1,18.21",
+  "KurmP 1,18.22",
+  "KurmP 1,18.23",
+  "KurmP 1,18.24",
+  "KurmP 1,18.25",
+  "KurmP 1,18.26",
+  "KurmP 1,18.27"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_kUrmapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:31:15",
+ "reply": "{\"statements\":[{\"ref\":\"KurmP 1,18.2\",\"a\":\"Vatsara\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"tasya vai tapato 'tyarthaṃ prādurbhūtau sutāvimau\",\"doubt\":false},{\"ref\":\"KurmP 1,18.2\",\"a\":\"Asita\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"tasya vai tapato 'tyarthaṃ prādurbhūtau sutāvimau\",\"doubt\":false},{\"ref\":\"KurmP 1,18.3\",\"a\":\"Naidhruva\",\"rel\":\"son_of\",\"b\":\"Vatsara\",\"words\":\"vatsarānnaidhruvo jajñe\",\"doubt\":false},{\"ref\":\"KurmP 1,18.3\",\"a\":\"Raibhya\",\"rel\":\"son_of\",\"b\":\"Vatsara\",\"words\":\"raibhyaśca sumahāyaśāḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.3\",\"a\":\"Raibhya\",\"rel\":\"son_of\",\"b\":\"Raibhya\",\"words\":\"raibhyasya jajñire raibhyāḥ putrā\",\"doubt\":true},{\"ref\":\"KurmP 1,18.4\",\"a\":\"Sumedhā\",\"rel\":\"daughter_of\",\"b\":\"Cyavana\",\"words\":\"cyavanasya sutā patnī naidhruvasya\",\"doubt\":false},{\"ref\":\"KurmP 1,18.4\",\"a\":\"Sumedhā\",\"rel\":\"wife_of\",\"b\":\"Naidhruva\",\"words\":\"cyavanasya sutā patnī naidhruvasya mahātmanaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.5\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Asita\",\"words\":\"asitasyaikaparṇāyāṃ brahmiṣṭhaḥ samapadyata nāmnā vai devalaḥ putro\",\"doubt\":false},{\"ref\":\"KurmP 1,18.5\",\"a\":\"Devala\",\"rel\":\"born_of\",\"b\":\"Ekaparṇā\",\"words\":\"asitasyaikaparṇāyāṃ brahmiṣṭhaḥ samapadyata\",\"doubt\":false},{\"ref\":\"KurmP 1,18.8\",\"a\":\"Ilavilā\",\"rel\":\"daughter_of\",\"b\":\"Tṛṇabindu\",\"words\":\"tṛṇabindoḥ sutā viprā nāmnā tvilavilā smṛtā\",\"doubt\":false},{\"ref\":\"KurmP 1,18.8\",\"a\":\"Ilavilā\",\"rel\":\"wife_of\",\"b\":\"Pulastya\",\"words\":\"pulastyāya sa rājarṣistāṃ kanyāṃ pratyapādayat\",\"doubt\":false},{\"ref\":\"KurmP 1,18.9\",\"a\":\"Viśravas\",\"rel\":\"son_of\",\"b\":\"Pulastya\",\"words\":\"ṛṣistvailavilistasyāṃ viśravāḥ samapadyata\",\"doubt\":true},{\"ref\":\"KurmP 1,18.9\",\"a\":\"Viśravas\",\"rel\":\"born_of\",\"b\":\"Ilavilā\",\"words\":\"ṛṣistvailavilistasyāṃ viśravāḥ samapadyata\",\"doubt\":false},{\"ref\":\"KurmP 1,18.9\",\"a\":\"Puṣpotkaṭā\",\"rel\":\"wife_of\",\"b\":\"Viśravas\",\"words\":\"tasya patnyaścatastraḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.10\",\"a\":\"Rākā\",\"rel\":\"wife_of\",\"b\":\"Viśravas\",\"words\":\"puṣpotkaṭā ca rākā ca kaikasī\",\"doubt\":false},{\"ref\":\"KurmP 1,18.10\",\"a\":\"Kaikasī\",\"rel\":\"wife_of\",\"b\":\"Viśravas\",\"words\":\"puṣpotkaṭā ca rākā ca kaikasī\",\"doubt\":false},{\"ref\":\"KurmP 1,18.11\",\"a\":\"Vaiśravaṇa\",\"rel\":\"son_of\",\"b\":\"Viśravas\",\"words\":\"jyeṣṭhaṃ vaiśravaṇaṃ tasya suṣuve\",\"doubt\":true},{\"ref\":\"KurmP 1,18.11\",\"a\":\"Rāvaṇa\",\"rel\":\"born_of\",\"b\":\"Kaikasī\",\"words\":\"kaikasī janayat putraṃ rāvaṇaṃ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.12\",\"a\":\"Kumbhakarṇa\",\"rel\":\"born_of\",\"b\":\"Kaikasī\",\"words\":\"kumbhakarṇaṃ śūrpaṇakhāṃ tathaiva ca vibhīṣaṇam\",\"doubt\":true},{\"ref\":\"KurmP 1,18.12\",\"a\":\"Puṣpotkaṭā\",\"rel\":\"other\",\"b\":\"Viśravas\",\"words\":\"puṣpotkaṭā vyajanayat putrān viśravasaḥ śubhān\",\"doubt\":true},{\"ref\":\"KurmP 1,18.13\",\"a\":\"Kumbhīnasī\",\"rel\":\"daughter_of\",\"b\":\"Viśravas\",\"words\":\"kumbhīnasīṃ tathā kanyāṃ rākāyāṃ\",\"doubt\":true},{\"ref\":\"KurmP 1,18.13\",\"a\":\"Kumbhīnasī\",\"rel\":\"born_of\",\"b\":\"Rākā\",\"words\":\"kumbhīnasīṃ tathā kanyāṃ rākāyāṃ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.15\",\"a\":\"Mṛga\",\"rel\":\"son_of\",\"b\":\"Pulaha\",\"words\":\"pulahasya mṛgāḥ putrāḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.16\",\"a\":\"Kaśyapa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"marīceḥ kaśyapaḥ putraḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.17\",\"a\":\"Śukra\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgorapyabhavacchukro\",\"doubt\":false},{\"ref\":\"KurmP 1,18.18\",\"a\":\"Ghṛtācī\",\"rel\":\"wife_of\",\"b\":\"Kṛśāśva\",\"words\":\"kṛśāśvasya tu viprendrā ghṛtācyām\",\"doubt\":true},{\"ref\":\"KurmP 1,18.20\",\"a\":\"Arundhatī\",\"rel\":\"wife_of\",\"b\":\"Vasiṣṭha\",\"words\":\"nāradastu vasiṣṭhāya dadau devīmarundhatīm\",\"doubt\":false},{\"ref\":\"KurmP 1,18.23\",\"a\":\"Śakti\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"vasiṣṭhastu śaktimutpādayat sutam\",\"doubt\":false},{\"ref\":\"KurmP 1,18.23\",\"a\":\"Śakti\",\"rel\":\"born_of\",\"b\":\"Arundhatī\",\"words\":\"arundhatyāṃ vasiṣṭhastu śaktimutpādayat\",\"doubt\":false},{\"ref\":\"KurmP 1,18.23\",\"a\":\"Parāśara\",\"rel\":\"son_of\",\"b\":\"Śakti\",\"words\":\"śakteḥ parāśaraḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.24\",\"a\":\"Kṛṣṇa Dvaipāyana\",\"rel\":\"son_of\",\"b\":\"Parāśara\",\"words\":\"lebhe tvapratimaṃ putraṃ kṛṣṇādvaipāyanaṃ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.25\",\"a\":\"Śuka\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa Dvaipāyana\",\"words\":\"dvaipāyanācchrako jajñe\",\"doubt\":false},{\"ref\":\"KurmP 1,18.26\",\"a\":\"Bhūriśravas\",\"rel\":\"son_of\",\"b\":\"Śuka\",\"words\":\"śukasyāpyabhavan putrāḥ pañca bhūriśravāḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.26\",\"a\":\"Śambhu\",\"rel\":\"son_of\",\"b\":\"Śuka\",\"words\":\"śukasyāpyabhavan putrāḥ pañca prabhuḥ śaṃbhuḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.26\",\"a\":\"Kṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Śuka\",\"words\":\"śukasyāpyabhavan putrāḥ kṛṣṇo\",\"doubt\":false},{\"ref\":\"KurmP 1,18.26\",\"a\":\"Gaura\",\"rel\":\"son_of\",\"b\":\"Śuka\",\"words\":\"kṛṣṇo gauraśca pañcamaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,18.26\",\"a\":\"Kīrtimatī\",\"rel\":\"daughter_of\",\"b\":\"Śuka\",\"words\":\"śukasyāpyabhavan kanyā kīrtimatī\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03672,
+ "tokens": {
+  "input": 3153,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3041,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "KurmP 1,18.2",
+   "a": "Vatsara",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "tasya vai tapato 'tyarthaṃ prādurbhūtau sutāvimau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.2",
+   "a": "Asita",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "tasya vai tapato 'tyarthaṃ prādurbhūtau sutāvimau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.3",
+   "a": "Naidhruva",
+   "rel": "son_of",
+   "b": "Vatsara",
+   "words": "vatsarānnaidhruvo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.3",
+   "a": "Raibhya",
+   "rel": "son_of",
+   "b": "Vatsara",
+   "words": "raibhyaśca sumahāyaśāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.3",
+   "a": "Raibhya",
+   "rel": "son_of",
+   "b": "Raibhya",
+   "words": "raibhyasya jajñire raibhyāḥ putrā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.4",
+   "a": "Sumedhā",
+   "rel": "daughter_of",
+   "b": "Cyavana",
+   "words": "cyavanasya sutā patnī naidhruvasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.4",
+   "a": "Sumedhā",
+   "rel": "wife_of",
+   "b": "Naidhruva",
+   "words": "cyavanasya sutā patnī naidhruvasya mahātmanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.5",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Asita",
+   "words": "asitasyaikaparṇāyāṃ brahmiṣṭhaḥ samapadyata nāmnā vai devalaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.5",
+   "a": "Devala",
+   "rel": "born_of",
+   "b": "Ekaparṇā",
+   "words": "asitasyaikaparṇāyāṃ brahmiṣṭhaḥ samapadyata",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,18.8",
+   "a": "Ilavilā",
+   "rel": "daughter_of",
+   "b": "Tṛṇabindu",
+   "words": "tṛṇabindoḥ sutā viprā nāmnā tvilavilā smṛtā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.8",
+   "a": "Ilavilā",
+   "rel": "wife_of",
+   "b": "Pulastya",
+   "words": "pulastyāya sa rājarṣistāṃ kanyāṃ pratyapādayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.9",
+   "a": "Viśravas",
+   "rel": "son_of",
+   "b": "Pulastya",
+   "words": "ṛṣistvailavilistasyāṃ viśravāḥ samapadyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.9",
+   "a": "Viśravas",
+   "rel": "born_of",
+   "b": "Ilavilā",
+   "words": "ṛṣistvailavilistasyāṃ viśravāḥ samapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.9",
+   "a": "Puṣpotkaṭā",
+   "rel": "wife_of",
+   "b": "Viśravas",
+   "words": "tasya patnyaścatastraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.10",
+   "a": "Rākā",
+   "rel": "wife_of",
+   "b": "Viśravas",
+   "words": "puṣpotkaṭā ca rākā ca kaikasī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.10",
+   "a": "Kaikasī",
+   "rel": "wife_of",
+   "b": "Viśravas",
+   "words": "puṣpotkaṭā ca rākā ca kaikasī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.11",
+   "a": "Vaiśravaṇa",
+   "rel": "son_of",
+   "b": "Viśravas",
+   "words": "jyeṣṭhaṃ vaiśravaṇaṃ tasya suṣuve",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.11",
+   "a": "Rāvaṇa",
+   "rel": "born_of",
+   "b": "Kaikasī",
+   "words": "kaikasī janayat putraṃ rāvaṇaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.12",
+   "a": "Kumbhakarṇa",
+   "rel": "born_of",
+   "b": "Kaikasī",
+   "words": "kumbhakarṇaṃ śūrpaṇakhāṃ tathaiva ca vibhīṣaṇam",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.12",
+   "a": "Puṣpotkaṭā",
+   "rel": "other",
+   "b": "Viśravas",
+   "words": "puṣpotkaṭā vyajanayat putrān viśravasaḥ śubhān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.13",
+   "a": "Kumbhīnasī",
+   "rel": "daughter_of",
+   "b": "Viśravas",
+   "words": "kumbhīnasīṃ tathā kanyāṃ rākāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.13",
+   "a": "Kumbhīnasī",
+   "rel": "born_of",
+   "b": "Rākā",
+   "words": "kumbhīnasīṃ tathā kanyāṃ rākāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.15",
+   "a": "Mṛga",
+   "rel": "son_of",
+   "b": "Pulaha",
+   "words": "pulahasya mṛgāḥ putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.16",
+   "a": "Kaśyapa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "marīceḥ kaśyapaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.17",
+   "a": "Śukra",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgorapyabhavacchukro",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,18.18",
+   "a": "Ghṛtācī",
+   "rel": "wife_of",
+   "b": "Kṛśāśva",
+   "words": "kṛśāśvasya tu viprendrā ghṛtācyām",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.20",
+   "a": "Arundhatī",
+   "rel": "wife_of",
+   "b": "Vasiṣṭha",
+   "words": "nāradastu vasiṣṭhāya dadau devīmarundhatīm",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.23",
+   "a": "Śakti",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "vasiṣṭhastu śaktimutpādayat sutam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.23",
+   "a": "Śakti",
+   "rel": "born_of",
+   "b": "Arundhatī",
+   "words": "arundhatyāṃ vasiṣṭhastu śaktimutpādayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.23",
+   "a": "Parāśara",
+   "rel": "son_of",
+   "b": "Śakti",
+   "words": "śakteḥ parāśaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.24",
+   "a": "Kṛṣṇa Dvaipāyana",
+   "rel": "son_of",
+   "b": "Parāśara",
+   "words": "lebhe tvapratimaṃ putraṃ kṛṣṇādvaipāyanaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.25",
+   "a": "Śuka",
+   "rel": "son_of",
+   "b": "Kṛṣṇa Dvaipāyana",
+   "words": "dvaipāyanācchrako jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.26",
+   "a": "Bhūriśravas",
+   "rel": "son_of",
+   "b": "Śuka",
+   "words": "śukasyāpyabhavan putrāḥ pañca bhūriśravāḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,18.26",
+   "a": "Śambhu",
+   "rel": "son_of",
+   "b": "Śuka",
+   "words": "śukasyāpyabhavan putrāḥ pañca prabhuḥ śaṃbhuḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,18.26",
+   "a": "Kṛṣṇa",
+   "rel": "son_of",
+   "b": "Śuka",
+   "words": "śukasyāpyabhavan putrāḥ kṛṣṇo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,18.26",
+   "a": "Gaura",
+   "rel": "son_of",
+   "b": "Śuka",
+   "words": "kṛṣṇo gauraśca pañcamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,18.26",
+   "a": "Kīrtimatī",
+   "rel": "daughter_of",
+   "b": "Śuka",
+   "words": "śukasyāpyabhavan kanyā kīrtimatī",
+   "doubt": false,
+   "check": "unsupported"
+  }
+ ]
+}

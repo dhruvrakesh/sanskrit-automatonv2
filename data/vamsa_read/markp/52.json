@@ -1,0 +1,622 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "markp",
+ "title": "Markandeyapurana",
+ "chapter": 52,
+ "part": 0,
+ "refs": [
+  "MarkP 52.1",
+  "MarkP 52.2",
+  "MarkP 52.3",
+  "MarkP 52.4",
+  "MarkP 52.5",
+  "MarkP 52.6",
+  "MarkP 52.7",
+  "MarkP 52.8",
+  "MarkP 52.9",
+  "MarkP 52.10",
+  "MarkP 52.11",
+  "MarkP 52.12",
+  "MarkP 52.13",
+  "MarkP 52.14",
+  "MarkP 52.15",
+  "MarkP 52.16",
+  "MarkP 52.17",
+  "MarkP 52.18",
+  "MarkP 52.19",
+  "MarkP 52.20",
+  "MarkP 52.21",
+  "MarkP 52.22",
+  "MarkP 52.23",
+  "MarkP 52.24",
+  "MarkP 52.25",
+  "MarkP 52.26",
+  "MarkP 52.27",
+  "MarkP 52.28",
+  "MarkP 52.29",
+  "MarkP 52.30",
+  "MarkP 52.31",
+  "MarkP 52.32"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_mArkaNDeyapurANa1-93.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:44:11",
+ "reply": "{\"statements\":[\n{\"ref\":\"MarkP 52.12\",\"a\":\"Satī\",\"rel\":\"wife_of\",\"b\":\"Rudra\",\"words\":\"satīṃ bhāryāmavindata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.13\",\"a\":\"Satī\",\"rel\":\"daughter_of\",\"b\":\"Himavat\",\"words\":\"himavadduhitā sābhūnmenāyāṃ\",\"doubt\":true},\n{\"ref\":\"MarkP 52.13\",\"a\":\"Satī\",\"rel\":\"born_of\",\"b\":\"Menā\",\"words\":\"himavadduhitā sābhūnmenāyāṃ\",\"doubt\":true},\n{\"ref\":\"MarkP 52.13\",\"a\":\"Mainā­ka\",\"rel\":\"brother_of\",\"b\":\"Satī\",\"words\":\"tasyā bhrātā tu mainākaḥ\",\"doubt\":true},\n{\"ref\":\"MarkP 52.14\",\"a\":\"Dhātṛ\",\"rel\":\"born_of\",\"b\":\"Khyāti\",\"words\":\"devau dhātāvidhātārau bhṛgoḥ khyātirasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.14\",\"a\":\"Vidhātṛ\",\"rel\":\"born_of\",\"b\":\"Khyāti\",\"words\":\"devau dhātāvidhātārau bhṛgoḥ khyātirasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.14\",\"a\":\"Dhātṛ\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgoḥ khyātirasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.14\",\"a\":\"Vidhātṛ\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgoḥ khyātirasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.14\",\"a\":\"Khyāti\",\"rel\":\"wife_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgoḥ khyātirasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.15\",\"a\":\"Śrī\",\"rel\":\"wife_of\",\"b\":\"Nārāyaṇa\",\"words\":\"śriyañca devadevasya patnī nārāyaṇāsya\",\"doubt\":false},\n{\"ref\":\"MarkP 52.15\",\"a\":\"Āyāti\",\"rel\":\"daughter_of\",\"b\":\"Meru\",\"words\":\"āyātirniyatiścaiva meroḥ kanye\",\"doubt\":false},\n{\"ref\":\"MarkP 52.15\",\"a\":\"Niyati\",\"rel\":\"daughter_of\",\"b\":\"Meru\",\"words\":\"āyātirniyatiścaiva meroḥ kanye\",\"doubt\":false},\n{\"ref\":\"MarkP 52.16\",\"a\":\"Āyāti\",\"rel\":\"wife_of\",\"b\":\"Dhātṛ\",\"words\":\"dhātāvidhātroste bhārye\",\"doubt\":true},\n{\"ref\":\"MarkP 52.16\",\"a\":\"Niyati\",\"rel\":\"wife_of\",\"b\":\"Vidhātṛ\",\"words\":\"dhātāvidhātroste bhārye\",\"doubt\":true},\n{\"ref\":\"MarkP 52.16\",\"a\":\"Prāṇa\",\"rel\":\"son_of\",\"b\":\"Dhātṛ\",\"words\":\"tayorjātau sutāvubhau prāṇaścaiva mṛkaṇḍuśca\",\"doubt\":true},\n{\"ref\":\"MarkP 52.16\",\"a\":\"Mṛkaṇḍu\",\"rel\":\"son_of\",\"b\":\"Vidhātṛ\",\"words\":\"tayorjātau sutāvubhau prāṇaścaiva mṛkaṇḍuśca\",\"doubt\":true},\n{\"ref\":\"MarkP 52.16\",\"a\":\"Mṛkaṇḍu\",\"rel\":\"other\",\"b\":\"Mārkaṇḍeya\",\"words\":\"pitā mama mahāyaśāḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 52.17\",\"a\":\"Vedaśiras\",\"rel\":\"son_of\",\"b\":\"Mṛkaṇḍu\",\"words\":\"tasmāt putro vedaśirā mama\",\"doubt\":true},\n{\"ref\":\"MarkP 52.17\",\"a\":\"Vedaśiras\",\"rel\":\"born_of\",\"b\":\"Manasvinī\",\"words\":\"manasvinyāmahaṃ tasmāt putro vedaśirā\",\"doubt\":true},\n{\"ref\":\"MarkP 52.17\",\"a\":\"Dhūmravatī\",\"rel\":\"wife_of\",\"b\":\"Prāṇa\",\"words\":\"dhūmravatyāṃ samabhavat prāṇasyāpi\",\"doubt\":false},\n{\"ref\":\"MarkP 52.18\",\"a\":\"Dyutimat\",\"rel\":\"son_of\",\"b\":\"Prāṇa\",\"words\":\"prāṇasya dyutimān putra\",\"doubt\":false},\n{\"ref\":\"MarkP 52.18\",\"a\":\"Ajara\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"tasya cātmajaḥ ajarāśca\",\"doubt\":true},\n{\"ref\":\"MarkP 52.19\",\"a\":\"Sambhūti\",\"rel\":\"wife_of\",\"b\":\"Marīci\",\"words\":\"patnī marīceḥ sambhūtiḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 52.19\",\"a\":\"Paurṇamāsa\",\"rel\":\"born_of\",\"b\":\"Sambhūti\",\"words\":\"sambhūtiḥ paurṇamāsamasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.19\",\"a\":\"Paurṇamāsa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"patnī marīceḥ sambhūtiḥ paurṇamāsamasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.19\",\"a\":\"Virajas\",\"rel\":\"son_of\",\"b\":\"Paurṇamāsa\",\"words\":\"virajāḥ parvataścaiva tasya putrau\",\"doubt\":true},\n{\"ref\":\"MarkP 52.19\",\"a\":\"Parvata\",\"rel\":\"son_of\",\"b\":\"Paurṇamāsa\",\"words\":\"virajāḥ parvataścaiva tasya putrau\",\"doubt\":true},\n{\"ref\":\"MarkP 52.20\",\"a\":\"Smṛti\",\"rel\":\"wife_of\",\"b\":\"Aṅgiras\",\"words\":\"smṛtiścāṅgirasaḥ patnī\",\"doubt\":false},\n{\"ref\":\"MarkP 52.21\",\"a\":\"Sinīvālī\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"smṛtiścāṅgirasaḥ patnī prasūtā kanyakāstathā sinīvālī\",\"doubt\":false},\n{\"ref\":\"MarkP 52.21\",\"a\":\"Kuhū\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"sinīvālī kuhūścaiva\",\"doubt\":false},\n{\"ref\":\"MarkP 52.21\",\"a\":\"Rākā\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"rākā bhānumatī\",\"doubt\":false},\n{\"ref\":\"MarkP 52.21\",\"a\":\"Bhānumatī\",\"rel\":\"daughter_of\",\"b\":\"Aṅgiras\",\"words\":\"rākā bhānumatī\",\"doubt\":false},\n{\"ref\":\"MarkP 52.21\",\"a\":\"Anasūyā\",\"rel\":\"wife_of\",\"b\":\"Atri\",\"words\":\"anasūyā tathaivātrerjajñe\",\"doubt\":false},\n{\"ref\":\"MarkP 52.22\",\"a\":\"Soma\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"anasūyā tathaivātrerjajñe putrānakalpaṣān somaṃ\",\"doubt\":false},\n{\"ref\":\"MarkP 52.22\",\"a\":\"Durvāsas\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"somaṃ durvāsasañcaiva\",\"doubt\":false},\n{\"ref\":\"MarkP 52.22\",\"a\":\"Dattātreya\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"dattātreyañca yoginam\",\"doubt\":false},\n{\"ref\":\"MarkP 52.22\",\"a\":\"Prīti\",\"rel\":\"wife_of\",\"b\":\"Pulastya\",\"words\":\"prītyāṃ pulastyabhāryāyāṃ\",\"doubt\":false},\n{\"ref\":\"MarkP 52.22\",\"a\":\"Datta\",\"rel\":\"son_of\",\"b\":\"Pulastya\",\"words\":\"prītyāṃ pulastyabhāryāyāṃ datto 'nyastatsuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"MarkP 52.22\",\"a\":\"Datta\",\"rel\":\"born_of\",\"b\":\"Prīti\",\"words\":\"prītyāṃ pulastyabhāryāyāṃ datto\",\"doubt\":false},\n{\"ref\":\"MarkP 52.24\",\"a\":\"Kṣamā\",\"rel\":\"wife_of\",\"b\":\"Pulaha\",\"words\":\"kṣamā tu suṣuve bhāryā pulahasya\",\"doubt\":false},\n{\"ref\":\"MarkP 52.23\",\"a\":\"Kardama\",\"rel\":\"born_of\",\"b\":\"Kṣamā\",\"words\":\"kardamaścārvavīraśca sahiṣṇuśca sutatrayam\",\"doubt\":false},\n{\"ref\":\"MarkP 52.23\",\"a\":\"Kardama\",\"rel\":\"son_of\",\"b\":\"Pulaha\",\"words\":\"kṣamā tu suṣuve bhāryā pulahasya\",\"doubt\":false},\n{\"ref\":\"MarkP 52.23\",\"a\":\"Arvavīra\",\"rel\":\"son_of\",\"b\":\"Pulaha\",\"words\":\"kṣamā tu suṣuve bhāryā pulahasya\",\"doubt\":false},\n{\"ref\":\"MarkP 52.23\",\"a\":\"Sahiṣṇu\",\"rel\":\"son_of\",\"b\":\"Pulaha\",\"words\":\"kṣamā tu suṣuve bhāryā pulahasya\",\"doubt\":false},\n{\"ref\":\"MarkP 52.24\",\"a\":\"Sannati\",\"rel\":\"wife_of\",\"b\":\"Kratu\",\"words\":\"kratostu sannatirbhāryā\",\"doubt\":false},\n{\"ref\":\"MarkP 52.24\",\"a\":\"Bālakhilyas\",\"rel\":\"born_of\",\"b\":\"Sannati\",\"words\":\"sannatirbhāryā bālakhilyānasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.24\",\"a\":\"Bālakhilyas\",\"rel\":\"son_of\",\"b\":\"Kratu\",\"words\":\"kratostu sannatirbhāryā bālakhilyānasūyata\",\"doubt\":false},\n{\"ref\":\"MarkP 52.25\",\"a\":\"Ūrjā\",\"rel\":\"wife_of\",\"b\":\"Vasiṣṭha\",\"words\":\"ūrjāyāntu vasiṣṭhasya\",\"doubt\":false},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Rajas\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"saptājāyanta vai sutāḥ rajogātrordhvabāhuśca\",\"doubt\":true},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Gātra\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"rajogātrordhvabāhuśca\",\"doubt\":true},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Ūrdhvabāhu\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"rajogātrordhvabāhuśca\",\"doubt\":true},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Sabala\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"sabalaścānaghastathā\",\"doubt\":true},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Anagha\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"sabalaścānaghastathā\",\"doubt\":true},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Sutapas\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"sutapāḥ śukla\",\"doubt\":true},\n{\"ref\":\"MarkP 52.26\",\"a\":\"Śukla\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"sutapāḥ śukla\",\"doubt\":true},\n{\"ref\":\"MarkP 52.27\",\"a\":\"Agni\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"brahmaṇastanayo 'grajaḥ\",\"doubt\":false},\n{\"ref\":\"MarkP 52.27\",\"a\":\"Svāhā\",\"rel\":\"wife_of\",\"b\":\"Agni\",\"words\":\"tasmāt svāhā sutān lebhe\",\"doubt\":true},\n{\"ref\":\"MarkP 52.28\",\"a\":\"Pāvaka\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"tasmāt svāhā sutān lebhe trīn pāvakaṃ\",\"doubt\":false},\n{\"ref\":\"MarkP 52.28\",\"a\":\"Pavamāna\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"pavamānañca\",\"doubt\":false},\n{\"ref\":\"MarkP 52.28\",\"a\":\"Śuci\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"śuciñcāpi jalāśinam\",\"doubt\":false},\n{\"ref\":\"MarkP 52.31\",\"a\":\"Menā\",\"rel\":\"daughter_of\",\"b\":\"Svadhā\",\"words\":\"tebhyaḥ svadhā sute jajñe menāṃ\",\"doubt\":true},\n{\"ref\":\"MarkP 52.31\",\"a\":\"Dhāriṇī\",\"rel\":\"daughter_of\",\"b\":\"Svadhā\",\"words\":\"menāṃ vai dhāriṇīṃ\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05241,
+ "tokens": {
+  "input": 3330,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4575,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MarkP 52.12",
+   "a": "Satī",
+   "rel": "wife_of",
+   "b": "Rudra",
+   "words": "satīṃ bhāryāmavindata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.13",
+   "a": "Satī",
+   "rel": "daughter_of",
+   "b": "Himavat",
+   "words": "himavadduhitā sābhūnmenāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.13",
+   "a": "Satī",
+   "rel": "born_of",
+   "b": "Menā",
+   "words": "himavadduhitā sābhūnmenāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.13",
+   "a": "Mainā­ka",
+   "rel": "brother_of",
+   "b": "Satī",
+   "words": "tasyā bhrātā tu mainākaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.14",
+   "a": "Dhātṛ",
+   "rel": "born_of",
+   "b": "Khyāti",
+   "words": "devau dhātāvidhātārau bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.14",
+   "a": "Vidhātṛ",
+   "rel": "born_of",
+   "b": "Khyāti",
+   "words": "devau dhātāvidhātārau bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.14",
+   "a": "Dhātṛ",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.14",
+   "a": "Vidhātṛ",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.14",
+   "a": "Khyāti",
+   "rel": "wife_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgoḥ khyātirasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.15",
+   "a": "Śrī",
+   "rel": "wife_of",
+   "b": "Nārāyaṇa",
+   "words": "śriyañca devadevasya patnī nārāyaṇāsya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.15",
+   "a": "Āyāti",
+   "rel": "daughter_of",
+   "b": "Meru",
+   "words": "āyātirniyatiścaiva meroḥ kanye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.15",
+   "a": "Niyati",
+   "rel": "daughter_of",
+   "b": "Meru",
+   "words": "āyātirniyatiścaiva meroḥ kanye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.16",
+   "a": "Āyāti",
+   "rel": "wife_of",
+   "b": "Dhātṛ",
+   "words": "dhātāvidhātroste bhārye",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.16",
+   "a": "Niyati",
+   "rel": "wife_of",
+   "b": "Vidhātṛ",
+   "words": "dhātāvidhātroste bhārye",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.16",
+   "a": "Prāṇa",
+   "rel": "son_of",
+   "b": "Dhātṛ",
+   "words": "tayorjātau sutāvubhau prāṇaścaiva mṛkaṇḍuśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.16",
+   "a": "Mṛkaṇḍu",
+   "rel": "son_of",
+   "b": "Vidhātṛ",
+   "words": "tayorjātau sutāvubhau prāṇaścaiva mṛkaṇḍuśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.16",
+   "a": "Mṛkaṇḍu",
+   "rel": "other",
+   "b": "Mārkaṇḍeya",
+   "words": "pitā mama mahāyaśāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MarkP 52.17",
+   "a": "Vedaśiras",
+   "rel": "son_of",
+   "b": "Mṛkaṇḍu",
+   "words": "tasmāt putro vedaśirā mama",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.17",
+   "a": "Vedaśiras",
+   "rel": "born_of",
+   "b": "Manasvinī",
+   "words": "manasvinyāmahaṃ tasmāt putro vedaśirā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.17",
+   "a": "Dhūmravatī",
+   "rel": "wife_of",
+   "b": "Prāṇa",
+   "words": "dhūmravatyāṃ samabhavat prāṇasyāpi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.18",
+   "a": "Dyutimat",
+   "rel": "son_of",
+   "b": "Prāṇa",
+   "words": "prāṇasya dyutimān putra",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.18",
+   "a": "Ajara",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "tasya cātmajaḥ ajarāśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.19",
+   "a": "Sambhūti",
+   "rel": "wife_of",
+   "b": "Marīci",
+   "words": "patnī marīceḥ sambhūtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.19",
+   "a": "Paurṇamāsa",
+   "rel": "born_of",
+   "b": "Sambhūti",
+   "words": "sambhūtiḥ paurṇamāsamasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.19",
+   "a": "Paurṇamāsa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "patnī marīceḥ sambhūtiḥ paurṇamāsamasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.19",
+   "a": "Virajas",
+   "rel": "son_of",
+   "b": "Paurṇamāsa",
+   "words": "virajāḥ parvataścaiva tasya putrau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.19",
+   "a": "Parvata",
+   "rel": "son_of",
+   "b": "Paurṇamāsa",
+   "words": "virajāḥ parvataścaiva tasya putrau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.20",
+   "a": "Smṛti",
+   "rel": "wife_of",
+   "b": "Aṅgiras",
+   "words": "smṛtiścāṅgirasaḥ patnī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.20",
+   "a": "Sinīvālī",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "smṛtiścāṅgirasaḥ patnī prasūtā kanyakāstathā sinīvālī",
+   "doubt": false,
+   "ref_cited": "MarkP 52.21",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.21",
+   "a": "Kuhū",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "sinīvālī kuhūścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.21",
+   "a": "Rākā",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "rākā bhānumatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.21",
+   "a": "Bhānumatī",
+   "rel": "daughter_of",
+   "b": "Aṅgiras",
+   "words": "rākā bhānumatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.21",
+   "a": "Anasūyā",
+   "rel": "wife_of",
+   "b": "Atri",
+   "words": "anasūyā tathaivātrerjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.21",
+   "a": "Soma",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "anasūyā tathaivātrerjajñe putrānakalpaṣān somaṃ",
+   "doubt": false,
+   "ref_cited": "MarkP 52.22",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.22",
+   "a": "Durvāsas",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "somaṃ durvāsasañcaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.22",
+   "a": "Dattātreya",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "dattātreyañca yoginam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.22",
+   "a": "Prīti",
+   "rel": "wife_of",
+   "b": "Pulastya",
+   "words": "prītyāṃ pulastyabhāryāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.22",
+   "a": "Datta",
+   "rel": "son_of",
+   "b": "Pulastya",
+   "words": "prītyāṃ pulastyabhāryāyāṃ datto 'nyastatsuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.22",
+   "a": "Datta",
+   "rel": "born_of",
+   "b": "Prīti",
+   "words": "prītyāṃ pulastyabhāryāyāṃ datto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.24",
+   "a": "Kṣamā",
+   "rel": "wife_of",
+   "b": "Pulaha",
+   "words": "kṣamā tu suṣuve bhāryā pulahasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.23",
+   "a": "Kardama",
+   "rel": "born_of",
+   "b": "Kṣamā",
+   "words": "kardamaścārvavīraśca sahiṣṇuśca sutatrayam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.23",
+   "a": "Kardama",
+   "rel": "son_of",
+   "b": "Pulaha",
+   "words": "kṣamā tu suṣuve bhāryā pulahasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.23",
+   "a": "Arvavīra",
+   "rel": "son_of",
+   "b": "Pulaha",
+   "words": "kṣamā tu suṣuve bhāryā pulahasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.23",
+   "a": "Sahiṣṇu",
+   "rel": "son_of",
+   "b": "Pulaha",
+   "words": "kṣamā tu suṣuve bhāryā pulahasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.24",
+   "a": "Sannati",
+   "rel": "wife_of",
+   "b": "Kratu",
+   "words": "kratostu sannatirbhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.24",
+   "a": "Bālakhilyas",
+   "rel": "born_of",
+   "b": "Sannati",
+   "words": "sannatirbhāryā bālakhilyānasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.24",
+   "a": "Bālakhilyas",
+   "rel": "son_of",
+   "b": "Kratu",
+   "words": "kratostu sannatirbhāryā bālakhilyānasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.25",
+   "a": "Ūrjā",
+   "rel": "wife_of",
+   "b": "Vasiṣṭha",
+   "words": "ūrjāyāntu vasiṣṭhasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.25",
+   "a": "Rajas",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "saptājāyanta vai sutāḥ rajogātrordhvabāhuśca",
+   "doubt": true,
+   "ref_cited": "MarkP 52.26",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.26",
+   "a": "Gātra",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "rajogātrordhvabāhuśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.26",
+   "a": "Ūrdhvabāhu",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "rajogātrordhvabāhuśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.26",
+   "a": "Sabala",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "sabalaścānaghastathā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.26",
+   "a": "Anagha",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "sabalaścānaghastathā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.26",
+   "a": "Sutapas",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "sutapāḥ śukla",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.26",
+   "a": "Śukla",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "sutapāḥ śukla",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.27",
+   "a": "Agni",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "brahmaṇastanayo 'grajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.27",
+   "a": "Svāhā",
+   "rel": "wife_of",
+   "b": "Agni",
+   "words": "tasmāt svāhā sutān lebhe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.28",
+   "a": "Pāvaka",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "tasmāt svāhā sutān lebhe trīn pāvakaṃ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MarkP 52.28",
+   "a": "Pavamāna",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "pavamānañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.28",
+   "a": "Śuci",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "śuciñcāpi jalāśinam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.31",
+   "a": "Menā",
+   "rel": "daughter_of",
+   "b": "Svadhā",
+   "words": "tebhyaḥ svadhā sute jajñe menāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MarkP 52.31",
+   "a": "Dhāriṇī",
+   "rel": "daughter_of",
+   "b": "Svadhā",
+   "words": "menāṃ vai dhāriṇīṃ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

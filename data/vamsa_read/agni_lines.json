@@ -1,0 +1,1681 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "agni",
+ "title": "Agnipurana",
+ "lines": [
+  [
+   {
+    "name": "Aṃśumat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "AgP 272.29",
+    "words": "dilīpo 'ṃśumato 'bhavat"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "AgP 272.30",
+    "words": "bhagīratho dilīpāttu"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "AgP 272.30",
+    "words": "bhagīrathāttu nābhāgo"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "AgP 272.10",
+    "words": "nābhāgasya ca vaiṣṇavaḥ ambarīṣaḥ"
+   },
+   {
+    "name": "Sindhudvīpa",
+    "ref": "AgP 272.31",
+    "words": "sindhudvīpo 'mbarīṣāttu"
+   },
+   {
+    "name": "Śrutāyus",
+    "ref": "AgP 272.31",
+    "words": "śrutāyustatsutaḥ"
+   },
+   {
+    "name": "Ṛtaparṇa",
+    "ref": "AgP 272.31",
+    "words": "śrutāyorṛtaparṇo 'bhūt"
+   },
+   {
+    "name": "Kalmāṣapāda",
+    "ref": "AgP 272.31",
+    "words": "tasya kalmāṣapādakaḥ"
+   },
+   {
+    "name": "Sarvakarman",
+    "ref": "AgP 272.32",
+    "words": "kalmāṣāṅghreḥ sarvakarmā"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "AgP 272.32",
+    "words": "anaraṇyastato 'bhavat"
+   },
+   {
+    "name": "Nighna",
+    "ref": "AgP 272.32",
+    "words": "anaraṇyāttu nighno"
+   },
+   {
+    "name": "Anamitra",
+    "ref": "AgP 272.32",
+    "words": "anamitrastato"
+   },
+   {
+    "name": "Raghu",
+    "ref": "AgP 272.32",
+    "words": "anamitrastato raghuḥ"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "AgP 272.33",
+    "words": "raghorabhuddilīpastu"
+   },
+   {
+    "name": "Aja",
+    "ref": "AgP 272.33",
+    "words": "dilīpāccāpyajo nṛpaḥ"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "AgP 272.33",
+    "words": "dīrghavāhurajāt"
+   },
+   {
+    "name": "Kāla",
+    "ref": "AgP 272.33",
+    "words": "kālastvajāpālaḥ"
+   },
+   {
+    "name": "Ajapāla",
+    "ref": "AgP 272.33",
+    "words": "ajāpālastato 'bhavat"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "AgP 272.34",
+    "words": "tatha daśaratho jātaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ajamīḍha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "AgP 277.25",
+    "words": "ṛkṣo 'bhūdajamīḍhataḥ"
+   },
+   {
+    "name": "Saṃvaraṇa",
+    "ref": "AgP 277.26",
+    "words": "ṛkṣātsamvaraṇo jajñe"
+   },
+   {
+    "name": "Kuru",
+    "ref": "AgP 277.26",
+    "words": "kuruḥ samvaraṇāt"
+   },
+   {
+    "name": "Parikṣit",
+    "ref": "AgP 277.27",
+    "words": "parikṣiccārimejayaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "AgP 277.31",
+    "words": "parikṣitasya dāyādo dhārmiko janamejayaḥ"
+   },
+   {
+    "name": "Suratha",
+    "ref": "AgP 277.33",
+    "words": "janamejayasya putrau tu suratho"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "AgP 277.33",
+    "words": "surathādvidūratho"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "AgP 277.33",
+    "words": "ṛkṣa āsīdvidūrathāt"
+   },
+   {
+    "name": "Bhīmasena",
+    "ref": "AgP 277.34",
+    "words": "ṛkṣasya tu dvitīyasya bhīmaseno 'bhavatsutaḥ"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "AgP 277.34",
+    "words": "pratīpo bhīmasenāt"
+   },
+   {
+    "name": "Śāntanu",
+    "ref": "AgP 277.34",
+    "words": "pratīpasya tu śāntanuḥ"
+   },
+   {
+    "name": "Vicitravīrya",
+    "ref": "AgP 277.36",
+    "words": "kālyāyāṃ vicitravīryakaḥ"
+   },
+   {
+    "name": "Dhṛtarāṣṭra",
+    "ref": "AgP 277.36",
+    "words": "kṣetre vaicitravīryake dhṛtaraṣṭrañca"
+   }
+  ],
+  [
+   {
+    "name": "Turvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Varga",
+    "ref": "AgP 276.1",
+    "words": "turvasoś ca suto vargo"
+   },
+   {
+    "name": "Gobhānu",
+    "ref": "AgP 276.1",
+    "words": "gobhānustasya cātmajaḥ"
+   },
+   {
+    "name": "Traiśāni",
+    "ref": "AgP 276.1",
+    "words": "gobhānorāsīt traiśāniḥ"
+   },
+   {
+    "name": "Karandhama",
+    "ref": "AgP 276.1",
+    "words": "traiśānestu karandhamaḥ"
+   },
+   {
+    "name": "Marutta",
+    "ref": "AgP 276.2",
+    "words": "karandhamānmaruttobhūt"
+   },
+   {
+    "name": "Duṣmanta",
+    "ref": "AgP 276.2",
+    "words": "duṣmantastasya cātmajaḥ"
+   },
+   {
+    "name": "Varūtha",
+    "ref": "AgP 276.2",
+    "words": "duṣmantasya varūtho 'bhūt"
+   },
+   {
+    "name": "Gāṇḍīra",
+    "ref": "AgP 276.2",
+    "words": "gāṇḍīrastu varūthataḥ"
+   },
+   {
+    "name": "Gāndhāra",
+    "ref": "AgP 276.3",
+    "words": "gāṇḍīrāccaiva gāndhāraḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "AgP 276.4",
+    "words": "gāndhārair dharmo"
+   },
+   {
+    "name": "Ghṛta",
+    "ref": "AgP 276.4",
+    "words": "dharmād ghṛto 'bhavat"
+   },
+   {
+    "name": "Vidus",
+    "ref": "AgP 276.5",
+    "words": "ghṛtāttu viduṣaḥ"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "AgP 276.5",
+    "words": "viduṣastasmāt pracetāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Āyus",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nahuṣa",
+    "ref": "AgP 273.16",
+    "words": "āyuṣo nahuṣaḥ putro"
+   },
+   {
+    "name": "Yayāti",
+    "ref": "AgP 273.20",
+    "words": "nahuṣasya sutāḥ sapta yatiryayātiruttamaḥ"
+   },
+   {
+    "name": "Yadu",
+    "ref": "AgP 273.22",
+    "words": "yayāteḥ pañca tatsutāḥ"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "AgP 274.1",
+    "words": "yadorāsanpañca putrā"
+   },
+   {
+    "name": "Haihaya",
+    "ref": "AgP 274.2",
+    "words": "śatajiddhaihayo reṇuhayo haya iti trayaḥ"
+   },
+   {
+    "name": "Dharmanetra",
+    "ref": "AgP 274.2",
+    "words": "dharmanetro haihayasya"
+   },
+   {
+    "name": "Saṃhana",
+    "ref": "AgP 274.2",
+    "words": "dharmanetrasya saṃhanaḥ"
+   },
+   {
+    "name": "Mahimā",
+    "ref": "AgP 274.3",
+    "words": "mahimā saṃhanasyāsīt"
+   },
+   {
+    "name": "Bhadrasenaka",
+    "ref": "AgP 274.3",
+    "words": "mahimnao bhadrasenakaḥ"
+   },
+   {
+    "name": "Durgama",
+    "ref": "AgP 274.3",
+    "words": "bhadrasenād durgamo 'bhūt"
+   },
+   {
+    "name": "Kanaka",
+    "ref": "AgP 274.3",
+    "words": "durgamātkanako 'bhavat"
+   },
+   {
+    "name": "Kṛtavīrya",
+    "ref": "AgP 274.4",
+    "words": "kanakāt kṛtavīryastu"
+   },
+   {
+    "name": "Arjuna",
+    "ref": "AgP 274.4",
+    "words": "kṛtavīryāttu so 'rjunaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dṛḍhāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "AgP 272.22",
+    "words": "dṛḍhāśvāttu haryaśvaś"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "AgP 272.23",
+    "words": "haryaśvācca nikumbho 'bhūt"
+   },
+   {
+    "name": "Saṃhatāśva",
+    "ref": "AgP 272.23",
+    "words": "saṃhatāśvo nikumbhataḥ"
+   },
+   {
+    "name": "Raṇāśva",
+    "ref": "AgP 272.23",
+    "words": "raṇāśvaś ca saṃhatāśvasutāvubhau"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "AgP 272.24",
+    "words": "yuvanāśvo raṇāśvasya"
+   },
+   {
+    "name": "Māndhātā",
+    "ref": "AgP 272.24",
+    "words": "māndhātā yuvanāśvataḥ"
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "AgP 272.24",
+    "words": "māndhātuḥ purukutso 'bhūn"
+   },
+   {
+    "name": "Sambhūta",
+    "ref": "AgP 272.25",
+    "words": "purukutsādasasyuś ca sambhūto"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "AgP 272.25",
+    "words": "sambhūtasya sudhanvābhūt"
+   },
+   {
+    "name": "Tridhanvan",
+    "ref": "AgP 272.25",
+    "words": "tridhanvātha sudhanvanaḥ"
+   },
+   {
+    "name": "Taruṇa",
+    "ref": "AgP 272.26",
+    "words": "tridhanvanastu taruṇaḥ"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "AgP 272.26",
+    "words": "tasya satyavrataḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Rāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuśa",
+    "ref": "AgP 272.36",
+    "words": "rāmaputrau kuśalavau"
+   },
+   {
+    "name": "Atithi",
+    "ref": "AgP 272.36",
+    "words": "atithiś ca kuśājjajñe"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "AgP 272.36",
+    "words": "niṣadhastasya cātmajaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "AgP 272.37",
+    "words": "niṣadhāttu nalo jajñe"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "AgP 272.37",
+    "words": "nabho 'jāyata vai nalāt"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "AgP 272.37",
+    "words": "nabhasaḥ puṇḍarīko 'bhūt"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "AgP 272.37",
+    "words": "sudhanvā ca tato 'bhavat"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "AgP 272.38",
+    "words": "sudhanvano devānīko"
+   },
+   {
+    "name": "Ahīnāśva",
+    "ref": "AgP 272.38",
+    "words": "ahīnāśvaś ca tatsutaḥ"
+   },
+   {
+    "name": "Sahasrāśva",
+    "ref": "AgP 272.38",
+    "words": "ahīnāśvāt sahasrāśvaś"
+   },
+   {
+    "name": "Candrāloka",
+    "ref": "AgP 272.38",
+    "words": "candrālokastato 'bhavat"
+   },
+   {
+    "name": "Tārāpīḍa",
+    "ref": "AgP 272.39",
+    "words": "candrāvalokatastārāpīḍo"
+   }
+  ],
+  [
+   {
+    "name": "Dhruva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śiṣṭi",
+    "ref": "AgP 18.6",
+    "words": "dhruvācchambhurvyajāyata"
+   },
+   {
+    "name": "Ripu",
+    "ref": "AgP 18.6",
+    "words": "śiṣṭerādhatta suchāyā pañca putrān"
+   },
+   {
+    "name": "Cākṣuṣa",
+    "ref": "AgP 18.7",
+    "words": "riporādhatta bṛhatī cākṣuṣam"
+   },
+   {
+    "name": "Manu",
+    "ref": "AgP 18.8",
+    "words": "cākṣuṣo manum"
+   },
+   {
+    "name": "Ūru",
+    "ref": "AgP 18.8",
+    "words": "manorajāyanta daśa naḍvalāyāṃ sutottamāḥ"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "AgP 18.10",
+    "words": "ūrorajanayat putrān"
+   },
+   {
+    "name": "Veṇa",
+    "ref": "AgP 18.11",
+    "words": "aṅgāt sunīthāpatyaṃ vai veṇam"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "AgP 18.12",
+    "words": "veṇasya mathito pāṇau sambabhūva pṛthur nṛpaḥ"
+   },
+   {
+    "name": "Havirdhāna",
+    "ref": "AgP 18.19",
+    "words": "pṛthoḥ putrau"
+   },
+   {
+    "name": "Prācīnavarhis",
+    "ref": "AgP 18.20",
+    "words": "havirdhānāt ṣaḍāgneyī dhīṣaṇājanayat sutān prācīnavarhiṣaṃ"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "AgP 18.22",
+    "words": "daśa prācīnavarhiṣaḥ sarve pracetaso"
+   }
+  ],
+  [
+   {
+    "name": "Sabhānara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālānala",
+    "ref": "AgP 276.6",
+    "words": "sabhānarāt kālānalaḥ"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "AgP 276.6",
+    "words": "kālānalajasrṛñjayaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "AgP 276.6",
+    "words": "tatputro janamejayaḥ"
+   },
+   {
+    "name": "Mahāśāla",
+    "ref": "AgP 276.7",
+    "words": "tatputrastu mahāśālaḥ"
+   },
+   {
+    "name": "Mahāmanas",
+    "ref": "AgP 276.7",
+    "words": "tatputro 'bhunmahāmanāḥ"
+   },
+   {
+    "name": "Uśīnara",
+    "ref": "AgP 276.7",
+    "words": "tasmāduśīnaro"
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "AgP 276.10",
+    "words": "titikṣuruśīnarajaḥ"
+   },
+   {
+    "name": "Ruṣadratha",
+    "ref": "AgP 276.10",
+    "words": "titikṣoś ca ruṣadrathaḥ"
+   },
+   {
+    "name": "Paila",
+    "ref": "AgP 276.10",
+    "words": "ruṣadrathādabhūtpailaḥ"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "AgP 276.10",
+    "words": "pailācca sutapāḥ sutaḥ"
+   },
+   {
+    "name": "Bali",
+    "ref": "AgP 276.11",
+    "words": "mahāyogi balistasmāt"
+   }
+  ],
+  [
+   {
+    "name": "Kuśāgra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vṛṣabha",
+    "ref": "AgP 277.29",
+    "words": "kuśāgrādvṛṣabho jajñe"
+   },
+   {
+    "name": "Satyahita",
+    "ref": "AgP 277.29",
+    "words": "tasya satyahitaḥ sutaḥ"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "AgP 277.30",
+    "words": "sudhanvā tatsutaḥ"
+   },
+   {
+    "name": "Ūrja",
+    "ref": "AgP 277.30",
+    "words": "tatsutaścorja"
+   },
+   {
+    "name": "Sambhava",
+    "ref": "AgP 277.30",
+    "words": "ūrjādāsīcca sambhavaḥ"
+   },
+   {
+    "name": "Jarāsandha",
+    "ref": "AgP 277.30",
+    "words": "sambhavācca jarāsandhaḥ"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "AgP 277.30",
+    "words": "sahadevaś ca tatsutaḥ"
+   },
+   {
+    "name": "Udāpi",
+    "ref": "AgP 277.31",
+    "words": "sahadevādudāpiś"
+   },
+   {
+    "name": "Śrutakarmaka",
+    "ref": "AgP 277.31",
+    "words": "udāpeḥ śrutakarmakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Hemaratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "AgP 277.12",
+    "words": "ketumato hemaratho divodāsa"
+   },
+   {
+    "name": "Pratardana",
+    "ref": "AgP 277.12",
+    "words": "pratardano divodāsāt"
+   },
+   {
+    "name": "Vatsa",
+    "ref": "AgP 277.12",
+    "words": "vatsau pratardanāt"
+   },
+   {
+    "name": "Anarka",
+    "ref": "AgP 277.13",
+    "words": "vatsādanarka āsīt"
+   },
+   {
+    "name": "Kṣemaka",
+    "ref": "AgP 277.13",
+    "words": "anarkāt kṣemako 'bhavat"
+   },
+   {
+    "name": "Varṣaketu",
+    "ref": "AgP 277.13",
+    "words": "kṣemakadvarṣaketuś"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "AgP 277.13",
+    "words": "varṣaketorvibhuḥ"
+   },
+   {
+    "name": "Ānarta",
+    "ref": "AgP 277.14",
+    "words": "vibhorānartaḥ putro"
+   }
+  ],
+  [
+   {
+    "name": "Vikukṣi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kakutstha",
+    "ref": "AgP 272.19",
+    "words": "vikukṣestu kakutstho 'bhūt"
+   },
+   {
+    "name": "Suyodhana",
+    "ref": "AgP 272.19",
+    "words": "tasya putraḥ suyodhanaḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "AgP 272.19",
+    "words": "tasya putraḥ pṛthur nāma"
+   },
+   {
+    "name": "Viśvagaśva",
+    "ref": "AgP 272.19",
+    "words": "viśvagaśvaḥ pṛthoḥ sutaḥ"
+   },
+   {
+    "name": "Āyu",
+    "ref": "AgP 272.20",
+    "words": "āyustasya ca putro 'bhūt"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "AgP 272.20",
+    "words": "yuvanāśvas tathā sutaḥ"
+   },
+   {
+    "name": "Śrāvanta",
+    "ref": "AgP 272.20",
+    "words": "yuvanāśvācca śrāvantaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satyaratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "AgP 272.26",
+    "words": "hariś candraś ca tatsutaḥ"
+   },
+   {
+    "name": "Rohitāśva",
+    "ref": "AgP 272.27",
+    "words": "hariś candrādrohitāśvo"
+   },
+   {
+    "name": "Vṛka",
+    "ref": "AgP 272.27",
+    "words": "rohitāśvādvṛko 'bhavat"
+   },
+   {
+    "name": "Vāhu",
+    "ref": "AgP 272.27",
+    "words": "vṛkādvāhuś ca"
+   },
+   {
+    "name": "Sagara",
+    "ref": "AgP 272.27",
+    "words": "vāhoś ca sagaraḥ"
+   },
+   {
+    "name": "Asamañjasa",
+    "ref": "AgP 272.28",
+    "words": "bhānumatyasamañjasam"
+   }
+  ],
+  [
+   {
+    "name": "Aṅga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dadhivāhana",
+    "ref": "AgP 276.12",
+    "words": "aṅgāddadhivāhano 'bhūt"
+   },
+   {
+    "name": "Diviratha",
+    "ref": "AgP 276.12",
+    "words": "tasmāddiviratho nṛpaḥ"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "AgP 276.12",
+    "words": "divirathāddharmarathaḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "AgP 276.12",
+    "words": "tasya citrarathaḥ sutaḥ"
+   },
+   {
+    "name": "Lomapada",
+    "ref": "AgP 276.13",
+    "words": "lomapadaś ca tatsutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Puru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "AgP 277.1",
+    "words": "purorjanamejayo 'bhūt"
+   },
+   {
+    "name": "Prācīnnant",
+    "ref": "AgP 277.1",
+    "words": "prācīnnantastu tatsutaḥ"
+   },
+   {
+    "name": "Manastyu",
+    "ref": "AgP 277.1",
+    "words": "prācīnnantānmanastyustu"
+   },
+   {
+    "name": "Vītamaya",
+    "ref": "AgP 277.1",
+    "words": "tasmādvītamayo nṛpaḥ"
+   },
+   {
+    "name": "Śundhu",
+    "ref": "AgP 277.2",
+    "words": "śundhurvītamayāccābhūt"
+   }
+  ],
+  [
+   {
+    "name": "Pṛthuśravas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suyajña",
+    "ref": "AgP 274.15",
+    "words": "tasya putraḥ suyajñakaḥ"
+   },
+   {
+    "name": "Uśanas",
+    "ref": "AgP 274.15",
+    "words": "suyajñasyośanāḥ putraḥ"
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "AgP 274.15",
+    "words": "titikṣuruśanaḥsutaḥ"
+   },
+   {
+    "name": "Marutta",
+    "ref": "AgP 274.16",
+    "words": "titikṣostu marutto 'bhūt"
+   },
+   {
+    "name": "Kambalavarhiṣa",
+    "ref": "AgP 274.16",
+    "words": "tasmātkambalavarhiṣaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bahuvidha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Saṃyāti",
+    "ref": "AgP 277.2",
+    "words": "bahuvidhācca saṃyātiḥ"
+   },
+   {
+    "name": "Rahovādī",
+    "ref": "AgP 277.2",
+    "words": "rahovādī ca tatsutaḥ"
+   },
+   {
+    "name": "Bhadrāśva",
+    "ref": "AgP 277.3",
+    "words": "tasya putro 'tha bhadrāśoa"
+   },
+   {
+    "name": "Ṛceyu",
+    "ref": "AgP 277.3",
+    "words": "bhadrāśvasya daśātmajāḥ ṛceyuś"
+   }
+  ],
+  [
+   {
+    "name": "Bhṛgu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vidhātṛ",
+    "ref": "AgP 20.9",
+    "words": "devau dhātāvidhātārau bhṛgoḥ khyātirasūyata"
+   },
+   {
+    "name": "Mṛkaṇḍu",
+    "ref": "AgP 20.10",
+    "words": "dhāturvidhārturdvau putrau kramāt prāṇo mṛkaṇḍukaḥ"
+   },
+   {
+    "name": "Mārkaṇḍeya",
+    "ref": "AgP 20.10",
+    "words": "mārkaṇḍeyo mṛkaṇḍoś ca jajñe"
+   },
+   {
+    "name": "Vedaśiras",
+    "ref": "AgP 20.10",
+    "words": "jajñe vedaśirāstataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Brahmā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Marīci",
+    "ref": "AgP 272.1",
+    "words": "marīcirbrahmaṇaḥ sutaḥ"
+   },
+   {
+    "name": "Kaśyapa",
+    "ref": "AgP 272.2",
+    "words": "marīceḥ kaśyapaḥ"
+   },
+   {
+    "name": "Vivasvān",
+    "ref": "AgP 272.2",
+    "words": "kaśyapastasmādvivasvāṃstasya"
+   },
+   {
+    "name": "Revanta",
+    "ref": "AgP 272.3",
+    "words": "revantaṃ suṣuve putraṃ prabhātañca prabhā raveḥ"
+   }
+  ],
+  [
+   {
+    "name": "Lomapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Caturaṅga",
+    "ref": "AgP 276.13",
+    "words": "lomapādāccaturaṅgaḥ"
+   },
+   {
+    "name": "Pṛthulākṣa",
+    "ref": "AgP 276.13",
+    "words": "pṛthulākṣaś ca tatsutaḥ"
+   },
+   {
+    "name": "Campa",
+    "ref": "AgP 276.14",
+    "words": "pṛthulākṣācca campo 'bhūt"
+   },
+   {
+    "name": "Haryaṅgaka",
+    "ref": "AgP 276.14",
+    "words": "campāddharyaṅgako 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Valākāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuśika",
+    "ref": "AgP 277.17",
+    "words": "valākāśvasya kuśikaḥ"
+   },
+   {
+    "name": "Gādhi",
+    "ref": "AgP 277.17",
+    "words": "kuśikāt gādhirindrakaḥ"
+   },
+   {
+    "name": "Viśvāmitra",
+    "ref": "AgP 277.17",
+    "words": "viśvāmitraḥ sūtottamaḥ"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "AgP 277.18",
+    "words": "viśvāmitrasya te sutāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṛṣṇa",
+    "ref": "AgP 275.1",
+    "words": "devakyāṃ vasudevāttu kṛṣṇo 'bhūt"
+   },
+   {
+    "name": "Pradyumna",
+    "ref": "AgP 275.5",
+    "words": "pradyumnādyāś ca rukmiṇyāṃ ... kṛṣṇasyāsaṃs"
+   },
+   {
+    "name": "Aniruddha",
+    "ref": "AgP 275.7",
+    "words": "pradyumnasya tu vaidarbhyāmaniruddho"
+   },
+   {
+    "name": "Vajra",
+    "ref": "AgP 275.8",
+    "words": "aniruddhasya vajrādyā"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śini",
+    "ref": "AgP 274.45",
+    "words": "anamitrācchinirjajñe"
+   },
+   {
+    "name": "Satyaka",
+    "ref": "AgP 274.45",
+    "words": "satyakastu śineḥ sutaḥ"
+   },
+   {
+    "name": "Sātyaki",
+    "ref": "AgP 274.45",
+    "words": "satyakātsātyakirjajñe"
+   }
+  ],
+  [
+   {
+    "name": "Prahrāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Virocana",
+    "ref": "AgP 19.9",
+    "words": "prāhrādirbalirjajñe virocanāt"
+   },
+   {
+    "name": "Bali",
+    "ref": "AgP 19.9",
+    "words": "balirjajñe virocanāt"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "AgP 19.9",
+    "words": "baleḥ putraśataṃ tvāsīdvāṇaśreṣṭhaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Viśvajit",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Karṇa",
+    "ref": "AgP 276.16",
+    "words": "karṇo viśvajito 'bhavat"
+   },
+   {
+    "name": "Vṛṣasena",
+    "ref": "AgP 276.16",
+    "words": "karṇasya vṛṣasenaḥ"
+   },
+   {
+    "name": "Pṛthusena",
+    "ref": "AgP 276.16",
+    "words": "pṛthusenastadātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Candraparvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhānuratha",
+    "ref": "AgP 272.39",
+    "words": "candragirerbhānurathaḥ"
+   },
+   {
+    "name": "Śrutāyus",
+    "ref": "AgP 272.39",
+    "words": "śrutāyustasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Babhrusetu",
+    "ref": "AgP 276.4",
+    "words": "druhyastu vabhrusetuś ca"
+   },
+   {
+    "name": "Purovasu",
+    "ref": "AgP 276.4",
+    "words": "babhrusetoḥ purovasuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Hrāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hrada",
+    "ref": "AgP 19.8",
+    "words": "hrādaputro hradas tathā"
+   },
+   {
+    "name": "Āyuṣmān",
+    "ref": "AgP 19.8",
+    "words": "hradasya putra āyuṣmān"
+   }
+  ],
+  [
+   {
+    "name": "Jantu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sāttvata",
+    "ref": "AgP 274.23",
+    "words": "jantuputrastu sāttvataḥ"
+   },
+   {
+    "name": "Bhajamāna",
+    "ref": "AgP 274.24",
+    "words": "sāttvatādbhajamānastu"
+   }
+  ],
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hiraṇyakaśipu",
+    "ref": "AgP 19.5",
+    "words": "hiraṇyakaśipurdityāṃ hiraṇyākṣaś ca kaśyapāt"
+   },
+   {
+    "name": "Saṃhrāda",
+    "ref": "AgP 19.8",
+    "words": "saṃhrādaś ca caturthobhūt"
+   }
+  ],
+  [
+   {
+    "name": "Manu Svāyambhuva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uttānapāda",
+    "ref": "AgP 18.1",
+    "words": "manoḥ svāyambhuvāt sutau"
+   },
+   {
+    "name": "Uttama",
+    "ref": "AgP 18.2",
+    "words": "putra uttānapādataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Manu Vaivasvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nariṣyanta",
+    "ref": "AgP 272.6",
+    "words": "nariṣyantas tathā prāṃśur"
+   },
+   {
+    "name": "Śaka",
+    "ref": "AgP 272.10",
+    "words": "nariṣyataḥ śakāḥ putrā"
+   }
+  ],
+  [
+   {
+    "name": "Pratiratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṇva",
+    "ref": "AgP 277.5",
+    "words": "patirathātkaṇvaḥ"
+   },
+   {
+    "name": "Medhātithi",
+    "ref": "AgP 277.5",
+    "words": "kaṇvānmedhātithistvabhūt"
+   }
+  ],
+  [
+   {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Arjuna",
+    "ref": "AgP 277.37",
+    "words": "bhīmaś caivārjunastrayaḥ"
+   },
+   {
+    "name": "Saubhadra",
+    "ref": "AgP 277.38",
+    "words": "arjunasya ca saubhadraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Budha",
+    "ref": "AgP 273.12",
+    "words": "somādbudhaḥ puttraḥ"
+   },
+   {
+    "name": "Purūravas",
+    "ref": "AgP 273.12",
+    "words": "puttrastasya purūravāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Suśānti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purujāti",
+    "ref": "AgP 277.19",
+    "words": "purujātiḥ suśāntitaḥ"
+   },
+   {
+    "name": "Vāhyāśva",
+    "ref": "AgP 277.19",
+    "words": "purujātestu vāhyāśvo"
+   }
+  ],
+  [
+   {
+    "name": "Taṃsu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Duṣmanta",
+    "ref": "AgP 277.6",
+    "words": "taṃsuroghācca catvāro duṣmanto"
+   },
+   {
+    "name": "Bharata",
+    "ref": "AgP 277.6",
+    "words": "duṣmantādbharato 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Vāhlika",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Somadatta",
+    "ref": "AgP 277.35",
+    "words": "vāhlikātsomadatto"
+   },
+   {
+    "name": "Bhūri",
+    "ref": "AgP 277.35",
+    "words": "somadatto 'bhudbhūrirbhūrisravāḥ śalaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vītihotra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ananta",
+    "ref": "AgP 274.11",
+    "words": "vītihotrādananto 'bhut"
+   },
+   {
+    "name": "Durjaya",
+    "ref": "AgP 274.11",
+    "words": "anantāddurjayo nṛpaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Āhuka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devaka",
+    "ref": "AgP 274.30",
+    "words": "āhukāddevako jajñe"
+   },
+   {
+    "name": "Devavat",
+    "ref": "AgP 274.30",
+    "words": "devavānupadevaś ca devakasya sutāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaradvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śatānanda",
+    "ref": "AgP 277.22",
+    "words": "ahalyāyāṃ śaradvatāt śatānandaḥ"
+   },
+   {
+    "name": "Satyadhṛt",
+    "ref": "AgP 277.22",
+    "words": "śatānandāt satyadhṛt"
+   }
+  ],
+  [
+   {
+    "name": "Abhimanyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parikṣit",
+    "ref": "AgP 277.38",
+    "words": "parikṣidabhimanyutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Adharma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anṛta",
+    "ref": "AgP 20.17",
+    "words": "tayorjajñe tathānṛtam"
+   }
+  ],
+  [
+   {
+    "name": "Agni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pavamāna",
+    "ref": "AgP 20.16",
+    "words": "pāvakaḥ pavamānobhūcchuciḥ svāhāgnijobhavat"
+   }
+  ],
+  [
+   {
+    "name": "Anala",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kumāra",
+    "ref": "AgP 18.38",
+    "words": "agniputraḥ kumāraś ca"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "AgP 20.12",
+    "words": "atreranasūyāpyajījanat somaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Bhadraratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bṛhatkarman",
+    "ref": "AgP 276.14",
+    "words": "bṛhatkarmā ca tatsutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bhoja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hṛdika",
+    "ref": "AgP 274.36",
+    "words": "bhojasya hṛdikaḥ putro"
+   }
+  ],
+  [
+   {
+    "name": "Dhara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Draviṇa",
+    "ref": "AgP 18.37",
+    "words": "dharasya putro draviṇo"
+   }
+  ],
+  [
+   {
+    "name": "Dhuni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yugandhara",
+    "ref": "AgP 274.46",
+    "words": "dhuneryugandharaḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Jayadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "AgP 274.10",
+    "words": "jayadhvajāttālajaṅghaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śāmba",
+    "ref": "AgP 274.51",
+    "words": "śāmbādyāḥ kṛṣṇājjāmbavatīsutāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Marīci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Paurṇamāsa",
+    "ref": "AgP 20.11",
+    "words": "paurṇamāsaś ca sambhūtyāṃ marīcerabhavat sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Mukula",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cañcāśva",
+    "ref": "AgP 277.21",
+    "words": "cañcāśvo mukulājjajñe"
+   }
+  ],
+  [
+   {
+    "name": "Nara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṛmi",
+    "ref": "AgP 276.8",
+    "words": "kṛmistu kṛmitaḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Prabhāva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvakarman",
+    "ref": "AgP 18.40",
+    "words": "viśvakarmā prabhāvataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pratyūṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devala",
+    "ref": "AgP 18.40",
+    "words": "pratyūṣāddevalo jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Pulaha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahiṣṇu",
+    "ref": "AgP 20.13",
+    "words": "kṣamāyāṃ pulahājjātāḥ sahiṣṇuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pulastya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Datta",
+    "ref": "AgP 20.13",
+    "words": "dattolistatsutobhavat"
+   }
+  ],
+  [
+   {
+    "name": "Reva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Raivata",
+    "ref": "AgP 272.12",
+    "words": "revasya raivataḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sudyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Utkala",
+    "ref": "AgP 272.8",
+    "words": "sudyumnādutkalagayau"
+   }
+  ],
+  [
+   {
+    "name": "Sukumāra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "AgP 277.14",
+    "words": "sukumārātsatyaketuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Svaphalka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Akrūra",
+    "ref": "AgP 274.47",
+    "words": "svaphalkaputro hy akrūro"
+   }
+  ],
+  [
+   {
+    "name": "Tvaṣṭṛ",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvarūpa",
+    "ref": "AgP 18.43",
+    "words": "tvaṣṭuś caivātmajaḥ śrīmānviśvarūpo"
+   }
+  ],
+  [
+   {
+    "name": "Vatsaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vatsabhūmi",
+    "ref": "AgP 277.14",
+    "words": "vatsabhūmistu vatsakāt"
+   }
+  ],
+  [
+   {
+    "name": "Yudhiṣṭhira",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Prativindhya",
+    "ref": "AgP 277.39",
+    "words": "tasyāṃ yudhiṣṭhirāt prativindhyo"
+   }
+  ],
+  [
+   {
+    "name": "Āpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vaitaṇḍya",
+    "ref": "AgP 18.36",
+    "words": "āpasya putro vaitaṇḍyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaryāti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sukalpa",
+    "ref": "AgP 272.11",
+    "words": "sukalpānartau śaryārteḥ"
+   }
+  ]
+ ]
+}

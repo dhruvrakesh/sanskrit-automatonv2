@@ -1,0 +1,226 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 23,
+ "part": 0,
+ "refs": [
+  "ViPc 4,23.1",
+  "ViPc 4,23.2"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:54:51",
+ "reply": "Reading the sequence as father-to-son chain: each \"tasmāt/tataḥ\" gives descent. The text says \"jarāsaṃdhasutāt sahadevāt\" (Sahadeva, son of Jarāsaṃdha). Later items use \"tasya putraḥ\", \"tasmāt\", \"tataḥ\", and I treat these as son_of where the text implies birth. I give son_of for the explicit \"putra\"/\"tanaya\"/\"suta\" statements and for the ablative-of-origin chain, and I do not add succeeded, since the text says nothing about reigning order beyond birth.\n\nFor the ablative chain (tasmāt, tataḥ), I take it as son_of, flagged doubt:false because this is the standard genealogical idiom.\n\nChain: Sahadeva > Somāpi > Śrutavān > Ayutāyus > Niramitra > Sukṣatra > Bṛhatkarmā > Senajit > Śrutaṃjaya > Vipra > Śucināman > Kṣemya > Suvrata > Dharma > Suśrama > Dṛḍhasena > Sumati > Subala > Sunīta > Satyajit > Viśvajit > Ripuṃjaya.\n\n```json\n{\"statements\":[\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Jarāsaṃdha\",\"words\":\"jarāsaṃdhasutāt sahadevāt\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Somāpi\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"sahadevāt somāpis\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Śrutavān\",\"rel\":\"son_of\",\"b\":\"Somāpi\",\"words\":\"tasmāc chṛtavāṃs\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Ayutāyus\",\"rel\":\"son_of\",\"b\":\"Śrutavān\",\"words\":\"tasyāpy ayutāyus\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Niramitra\",\"rel\":\"son_of\",\"b\":\"Ayutāyus\",\"words\":\"tataś ca niramitras\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Sukṣatra\",\"rel\":\"son_of\",\"b\":\"Niramitra\",\"words\":\"tattanayaḥ sukṣatras\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Bṛhatkarman\",\"rel\":\"son_of\",\"b\":\"Sukṣatra\",\"words\":\"tasmād api bṛhatkarmā\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Senajit\",\"rel\":\"son_of\",\"b\":\"Bṛhatkarman\",\"words\":\"tataś ca senajit\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Śrutaṃjaya\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"tasmāc ca śrutaṃjayas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Vipra\",\"rel\":\"son_of\",\"b\":\"Śrutaṃjaya\",\"words\":\"tato vipras\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Śucināman\",\"rel\":\"son_of\",\"b\":\"Vipra\",\"words\":\"tasya putraḥ śucināmā\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Kṣemya\",\"rel\":\"son_of\",\"b\":\"Śucināman\",\"words\":\"tasyāpi kṣemyas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Suvrata\",\"rel\":\"son_of\",\"b\":\"Kṣemya\",\"words\":\"tataś ca suvrataḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Suvrata\",\"words\":\"suvratād dharmas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Suśrama\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"tataḥ suśramaḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Dṛḍhasena\",\"rel\":\"son_of\",\"b\":\"Suśrama\",\"words\":\"tato dṛḍhasenas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Dṛḍhasena\",\"words\":\"tataḥ sumatis\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Subala\",\"rel\":\"son_of\",\"b\":\"Sumati\",\"words\":\"tasmāt subalas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Sunīta\",\"rel\":\"son_of\",\"b\":\"Subala\",\"words\":\"tasya sunīto bhavitā\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Satyajit\",\"rel\":\"son_of\",\"b\":\"Sunīta\",\"words\":\"tataḥ satyajit\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Viśvajit\",\"rel\":\"son_of\",\"b\":\"Satyajit\",\"words\":\"satyajito viśvajit\",\"doubt\":false},\n{\"ref\":\"ViPc 4,23.2\",\"a\":\"Ripuṃjaya\",\"rel\":\"son_of\",\"b\":\"Viśvajit\",\"words\":\"tasyāpi ripuṃjayaḥ putraḥ\",\"doubt\":false}\n]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.02173,
+ "tokens": {
+  "input": 1342,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1905,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Jarāsaṃdha",
+   "words": "jarāsaṃdhasutāt sahadevāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Somāpi",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "sahadevāt somāpis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Śrutavān",
+   "rel": "son_of",
+   "b": "Somāpi",
+   "words": "tasmāc chṛtavāṃs",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Ayutāyus",
+   "rel": "son_of",
+   "b": "Śrutavān",
+   "words": "tasyāpy ayutāyus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Niramitra",
+   "rel": "son_of",
+   "b": "Ayutāyus",
+   "words": "tataś ca niramitras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Sukṣatra",
+   "rel": "son_of",
+   "b": "Niramitra",
+   "words": "tattanayaḥ sukṣatras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Bṛhatkarman",
+   "rel": "son_of",
+   "b": "Sukṣatra",
+   "words": "tasmād api bṛhatkarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Senajit",
+   "rel": "son_of",
+   "b": "Bṛhatkarman",
+   "words": "tataś ca senajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Śrutaṃjaya",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "tasmāc ca śrutaṃjayas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Vipra",
+   "rel": "son_of",
+   "b": "Śrutaṃjaya",
+   "words": "tato vipras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Śucināman",
+   "rel": "son_of",
+   "b": "Vipra",
+   "words": "tasya putraḥ śucināmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Kṣemya",
+   "rel": "son_of",
+   "b": "Śucināman",
+   "words": "tasyāpi kṣemyas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Suvrata",
+   "rel": "son_of",
+   "b": "Kṣemya",
+   "words": "tataś ca suvrataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Suvrata",
+   "words": "suvratād dharmas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Suśrama",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "tataḥ suśramaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Dṛḍhasena",
+   "rel": "son_of",
+   "b": "Suśrama",
+   "words": "tato dṛḍhasenas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Dṛḍhasena",
+   "words": "tataḥ sumatis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Subala",
+   "rel": "son_of",
+   "b": "Sumati",
+   "words": "tasmāt subalas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Sunīta",
+   "rel": "son_of",
+   "b": "Subala",
+   "words": "tasya sunīto bhavitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Satyajit",
+   "rel": "son_of",
+   "b": "Sunīta",
+   "words": "tataḥ satyajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Viśvajit",
+   "rel": "son_of",
+   "b": "Satyajit",
+   "words": "satyajito viśvajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,23.2",
+   "a": "Ripuṃjaya",
+   "rel": "son_of",
+   "b": "Viśvajit",
+   "words": "tasyāpi ripuṃjayaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

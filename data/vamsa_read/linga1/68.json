@@ -1,0 +1,835 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "chapter": 68,
+ "part": 0,
+ "refs": [
+  "LiP 1,68.1",
+  "LiP 1,68.2",
+  "LiP 1,68.3",
+  "LiP 1,68.4",
+  "LiP 1,68.5",
+  "LiP 1,68.6",
+  "LiP 1,68.7",
+  "LiP 1,68.8",
+  "LiP 1,68.9",
+  "LiP 1,68.10",
+  "LiP 1,68.11",
+  "LiP 1,68.12",
+  "LiP 1,68.13",
+  "LiP 1,68.14",
+  "LiP 1,68.15",
+  "LiP 1,68.16",
+  "LiP 1,68.17",
+  "LiP 1,68.18",
+  "LiP 1,68.19",
+  "LiP 1,68.20",
+  "LiP 1,68.21",
+  "LiP 1,68.22",
+  "LiP 1,68.23",
+  "LiP 1,68.24",
+  "LiP 1,68.25",
+  "LiP 1,68.26",
+  "LiP 1,68.27",
+  "LiP 1,68.28",
+  "LiP 1,68.29",
+  "LiP 1,68.30",
+  "LiP 1,68.31",
+  "LiP 1,68.32",
+  "LiP 1,68.33",
+  "LiP 1,68.34",
+  "LiP 1,68.35",
+  "LiP 1,68.36",
+  "LiP 1,68.37",
+  "LiP 1,68.38",
+  "LiP 1,68.39",
+  "LiP 1,68.40",
+  "LiP 1,68.41",
+  "LiP 1,68.42",
+  "LiP 1,68.43",
+  "LiP 1,68.44",
+  "LiP 1,68.45",
+  "LiP 1,68.46",
+  "LiP 1,68.47",
+  "LiP 1,68.48",
+  "LiP 1,68.49",
+  "LiP 1,68.50",
+  "LiP 1,68.51"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_liGgapurANa1-108.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:28:05",
+ "reply": "{\"statements\":[{\"ref\":\"LiP 1,68.2\",\"a\":\"Sahasrajit\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadoḥ putrā babhūvur hi pañca ... sahasrajitsuto jyeṣṭhaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.2\",\"a\":\"Kroṣṭu\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadoḥ putrā babhūvur hi pañca ... kroṣṭur\",\"doubt\":false},{\"ref\":\"LiP 1,68.2\",\"a\":\"Nīla\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadoḥ putrā babhūvur hi pañca ... nīlo\",\"doubt\":false},{\"ref\":\"LiP 1,68.2\",\"a\":\"Ajaka\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadoḥ putrā babhūvur hi pañca ... 'jako\",\"doubt\":false},{\"ref\":\"LiP 1,68.2\",\"a\":\"Laghu\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadoḥ putrā babhūvur hi pañca ... laghuḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.3\",\"a\":\"Śatajit\",\"rel\":\"son_of\",\"b\":\"Sahasrajit\",\"words\":\"sahasrajitsutastadvac chatajinnāma pārthivaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.3\",\"a\":\"Haihaya\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"sutāḥ śatajitaḥ khyātās trayaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.4\",\"a\":\"Haya\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"haihayaś ca hayaścaiva rājā veṇuhayaś ca\",\"doubt\":false},{\"ref\":\"LiP 1,68.4\",\"a\":\"Veṇuhaya\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"rājā veṇuhayaś ca yaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.4\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Haihaya\",\"words\":\"haihayasya tu dāyādo dharma\",\"doubt\":false},{\"ref\":\"LiP 1,68.5\",\"a\":\"Dharmanetra\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"tasya putro 'bhavadviprā dharmanetra\",\"doubt\":false},{\"ref\":\"LiP 1,68.5\",\"a\":\"Kīrti\",\"rel\":\"son_of\",\"b\":\"Dharmanetra\",\"words\":\"dharmanetrasya kīrtis\",\"doubt\":false},{\"ref\":\"LiP 1,68.5\",\"a\":\"Saṃjaya\",\"rel\":\"son_of\",\"b\":\"Kīrti\",\"words\":\"saṃjayas tasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.6\",\"a\":\"Mahiṣmat\",\"rel\":\"son_of\",\"b\":\"Saṃjaya\",\"words\":\"saṃjayasya tu dāyādo mahiṣmān\",\"doubt\":false},{\"ref\":\"LiP 1,68.6\",\"a\":\"Bhadraśreṇya\",\"rel\":\"son_of\",\"b\":\"Mahiṣmat\",\"words\":\"mahiṣmataḥ putro bhadraśreṇyaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.7\",\"a\":\"Durdama\",\"rel\":\"son_of\",\"b\":\"Bhadraśreṇya\",\"words\":\"bhadraśreṇyasya dāyādo durdamo\",\"doubt\":false},{\"ref\":\"LiP 1,68.7\",\"a\":\"Dhanaka\",\"rel\":\"son_of\",\"b\":\"Durdama\",\"words\":\"durdamasya suto ... dhanako\",\"doubt\":false},{\"ref\":\"LiP 1,68.8\",\"a\":\"Kṛtavīrya\",\"rel\":\"son_of\",\"b\":\"Dhanaka\",\"words\":\"dhanakasya tu dāyādāś catvāro ... kṛtavīryaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.8\",\"a\":\"Kṛtāgni\",\"rel\":\"son_of\",\"b\":\"Dhanaka\",\"words\":\"dhanakasya tu dāyādāś catvāro ... kṛtāgniś\",\"doubt\":false},{\"ref\":\"LiP 1,68.8\",\"a\":\"Kṛtavarman\",\"rel\":\"son_of\",\"b\":\"Dhanaka\",\"words\":\"dhanakasya tu dāyādāś catvāro ... kṛtavarmā\",\"doubt\":false},{\"ref\":\"LiP 1,68.9\",\"a\":\"Kṛtaujas\",\"rel\":\"son_of\",\"b\":\"Dhanaka\",\"words\":\"kṛtaujāś ca caturtho 'bhūt\",\"doubt\":false},{\"ref\":\"LiP 1,68.9\",\"a\":\"Kārtavīrya Arjuna\",\"rel\":\"son_of\",\"b\":\"Kṛtavīrya\",\"words\":\"kārtavīryastato 'rjunaḥ jajñe\",\"doubt\":true},{\"ref\":\"LiP 1,68.12\",\"a\":\"Jayadhvaja\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya Arjuna\",\"words\":\"tasya putraśatānyāsan ... jayadhvajaś ca\",\"doubt\":true},{\"ref\":\"LiP 1,68.12\",\"a\":\"Tālajaṅgha\",\"rel\":\"son_of\",\"b\":\"Jayadhvaja\",\"words\":\"jayadhvajasya putro 'bhūt tālajaṅgho\",\"doubt\":false},{\"ref\":\"LiP 1,68.13\",\"a\":\"Vītihotra\",\"rel\":\"son_of\",\"b\":\"Tālajaṅgha\",\"words\":\"śataṃ putrāstu tasyeha tālajaṅghāḥ ... vītihotro\",\"doubt\":true},{\"ref\":\"LiP 1,68.14\",\"a\":\"Vṛṣa\",\"rel\":\"son_of\",\"b\":\"Tālajaṅgha\",\"words\":\"vṛṣaprabhṛtayaścānye tatsutāḥ\",\"doubt\":true},{\"ref\":\"LiP 1,68.14\",\"a\":\"Madhu\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"tasya putro 'bhavanmadhuḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.15\",\"a\":\"Vṛṣṇi\",\"rel\":\"son_of\",\"b\":\"Madhu\",\"words\":\"madhoḥ putraśataṃ cāsīd vṛṣṇistasya\",\"doubt\":false},{\"ref\":\"LiP 1,68.15\",\"a\":\"Vṛṣṇi\",\"rel\":\"line_of\",\"b\":\"Vṛṣṇi\",\"words\":\"vṛṣṇestu vṛṣṇayaḥ sarve\",\"doubt\":false},{\"ref\":\"LiP 1,68.15\",\"a\":\"Mādhava\",\"rel\":\"line_of\",\"b\":\"Madhu\",\"words\":\"madhorvai mādhavāḥ smṛtāḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.15\",\"a\":\"Yādava\",\"rel\":\"line_of\",\"b\":\"Yadu\",\"words\":\"yādavā yaduvaṃśena nirucyante\",\"doubt\":false},{\"ref\":\"LiP 1,68.22\",\"a\":\"Vṛjinīvat\",\"rel\":\"son_of\",\"b\":\"Kroṣṭu\",\"words\":\"kroṣṭoreko 'bhavatputro vṛjinīvān\",\"doubt\":false},{\"ref\":\"LiP 1,68.22\",\"a\":\"Svāti\",\"rel\":\"son_of\",\"b\":\"Vṛjinīvat\",\"words\":\"tasya putro 'bhavat svātī\",\"doubt\":false},{\"ref\":\"LiP 1,68.22\",\"a\":\"Kuśaṅku\",\"rel\":\"son_of\",\"b\":\"Svāti\",\"words\":\"kuśaṅkus tatsuto 'bhavat\",\"doubt\":false},{\"ref\":\"LiP 1,68.24\",\"a\":\"Citraratha\",\"rel\":\"son_of\",\"b\":\"Kuśaṅku\",\"words\":\"jajñe citrarathastasya putraḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.24\",\"a\":\"Śaśabindu\",\"rel\":\"son_of\",\"b\":\"Citraratha\",\"words\":\"atha caitraratho vīro ... śaśabindus\",\"doubt\":true},{\"ref\":\"LiP 1,68.26\",\"a\":\"Anantaka\",\"rel\":\"son_of\",\"b\":\"Śaśabindu\",\"words\":\"śaśabindostu putrāṇām ... tasya putrāṇām anantakam\",\"doubt\":true},{\"ref\":\"LiP 1,68.27\",\"a\":\"Yajña\",\"rel\":\"son_of\",\"b\":\"Anantaka\",\"words\":\"anantakāt suto yajño\",\"doubt\":false},{\"ref\":\"LiP 1,68.27\",\"a\":\"Dhṛti\",\"rel\":\"son_of\",\"b\":\"Yajña\",\"words\":\"yajñasya tanayo dhṛtiḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.27\",\"a\":\"Uśanas\",\"rel\":\"son_of\",\"b\":\"Dhṛti\",\"words\":\"uśanāstasya tanayaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.28\",\"a\":\"Siteṣu\",\"rel\":\"son_of\",\"b\":\"Uśanas\",\"words\":\"smṛtaścośanasaḥ putraḥ siteṣur\",\"doubt\":false},{\"ref\":\"LiP 1,68.29\",\"a\":\"Maruta\",\"rel\":\"son_of\",\"b\":\"Siteṣu\",\"words\":\"marutastasya tanayo\",\"doubt\":false},{\"ref\":\"LiP 1,68.29\",\"a\":\"Kambalabarhis\",\"rel\":\"son_of\",\"b\":\"Maruta\",\"words\":\"kambalabarhistu marustasyātmajaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.30\",\"a\":\"Rukmakavaca\",\"rel\":\"son_of\",\"b\":\"Kambalabarhis\",\"words\":\"putrastu rukmakavaco ... kambalabarhiṣaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.32\",\"a\":\"Parāvṛt\",\"rel\":\"son_of\",\"b\":\"Rukmakavaca\",\"words\":\"jajñe tu rukmakavacāt parāvṛt\",\"doubt\":false},{\"ref\":\"LiP 1,68.32\",\"a\":\"Rukmeṣu\",\"rel\":\"son_of\",\"b\":\"Parāvṛt\",\"words\":\"jajñire pañca putrāstu ... parāvṛtaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.33\",\"a\":\"Pṛthurukma\",\"rel\":\"son_of\",\"b\":\"Parāvṛt\",\"words\":\"rukmeṣuḥ pṛthurukmaś ca\",\"doubt\":false},{\"ref\":\"LiP 1,68.33\",\"a\":\"Jyāmagha\",\"rel\":\"son_of\",\"b\":\"Parāvṛt\",\"words\":\"jyāmaghaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.33\",\"a\":\"Parigha\",\"rel\":\"son_of\",\"b\":\"Parāvṛt\",\"words\":\"parighaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.33\",\"a\":\"Hari\",\"rel\":\"son_of\",\"b\":\"Parāvṛt\",\"words\":\"hariḥ parighaṃ ca hariṃ caiva ... pitā\",\"doubt\":false},{\"ref\":\"LiP 1,68.37\",\"a\":\"Śaibyā\",\"rel\":\"wife_of\",\"b\":\"Jyāmagha\",\"words\":\"jyāmaghasyābhavadbhāryā śaibyā\",\"doubt\":false},{\"ref\":\"LiP 1,68.38\",\"a\":\"Vidarbha\",\"rel\":\"born_of\",\"b\":\"Śaibyā\",\"words\":\"śaibyā vai samprasūyata sutaṃ vidarbhaṃ\",\"doubt\":false},{\"ref\":\"LiP 1,68.38\",\"a\":\"Vidarbha\",\"rel\":\"son_of\",\"b\":\"Jyāmagha\",\"words\":\"sutaṃ vidarbhaṃ\",\"doubt\":true},{\"ref\":\"LiP 1,68.38\",\"a\":\"Kratha\",\"rel\":\"son_of\",\"b\":\"Vidarbha\",\"words\":\"putrau vidarbharājasya śūrau\",\"doubt\":false},{\"ref\":\"LiP 1,68.39\",\"a\":\"Kaiśika\",\"rel\":\"son_of\",\"b\":\"Vidarbha\",\"words\":\"putrau vidarbharājasya\",\"doubt\":false},{\"ref\":\"LiP 1,68.39\",\"a\":\"Romapāda\",\"rel\":\"son_of\",\"b\":\"Vidarbha\",\"words\":\"romapādastṛtīyaś ca\",\"doubt\":true},{\"ref\":\"LiP 1,68.39\",\"a\":\"Babhru\",\"rel\":\"son_of\",\"b\":\"Romapāda\",\"words\":\"babhrustasyātmajaḥ smṛtaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,68.40\",\"a\":\"Sudhṛti\",\"rel\":\"son_of\",\"b\":\"Babhru\",\"words\":\"sudhṛtistanayastasya\",\"doubt\":false},{\"ref\":\"LiP 1,68.40\",\"a\":\"Kauśika\",\"rel\":\"son_of\",\"b\":\"Sudhṛti\",\"words\":\"kauśikastanayastasmāt\",\"doubt\":false},{\"ref\":\"LiP 1,68.41\",\"a\":\"Kratha\",\"rel\":\"son_of\",\"b\":\"Vidarbha\",\"words\":\"kratho vidarbhasya sutaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,68.41\",\"a\":\"Kunti\",\"rel\":\"son_of\",\"b\":\"Kratha\",\"words\":\"kuntistasyātmajo 'bhavat\",\"doubt\":false},{\"ref\":\"LiP 1,68.41\",\"a\":\"Vṛta\",\"rel\":\"son_of\",\"b\":\"Kunti\",\"words\":\"kunter vṛtastato jajñe\",\"doubt\":false},{\"ref\":\"LiP 1,68.41\",\"a\":\"Raṇadhṛṣṭa\",\"rel\":\"son_of\",\"b\":\"Vṛta\",\"words\":\"vṛtastato jajñe raṇadhṛṣṭaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.42\",\"a\":\"Nidhṛti\",\"rel\":\"son_of\",\"b\":\"Raṇadhṛṣṭa\",\"words\":\"raṇadhṛṣṭasya ca suto nidhṛtiḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.42\",\"a\":\"Daśārha\",\"rel\":\"son_of\",\"b\":\"Nidhṛti\",\"words\":\"daśārho naidhṛto nāmnā\",\"doubt\":false},{\"ref\":\"LiP 1,68.43\",\"a\":\"Vyāpta\",\"rel\":\"son_of\",\"b\":\"Daśārha\",\"words\":\"daśārhasya suto vyāpto\",\"doubt\":false},{\"ref\":\"LiP 1,68.43\",\"a\":\"Jīmūta\",\"rel\":\"son_of\",\"b\":\"Vyāpta\",\"words\":\"jīmūta iti tatsutaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.43\",\"a\":\"Vikṛti\",\"rel\":\"son_of\",\"b\":\"Jīmūta\",\"words\":\"jīmūtaputro vikṛtis\",\"doubt\":false},{\"ref\":\"LiP 1,68.43\",\"a\":\"Bhīmaratha\",\"rel\":\"son_of\",\"b\":\"Vikṛti\",\"words\":\"tasya bhīmarathaḥ sutaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.44\",\"a\":\"Navaratha\",\"rel\":\"son_of\",\"b\":\"Bhīmaratha\",\"words\":\"bhīmarathasyāsīt putro navarathaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.45\",\"a\":\"Dṛḍharatha\",\"rel\":\"son_of\",\"b\":\"Navaratha\",\"words\":\"tasya cāsīddṛḍharathaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.45\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Dṛḍharatha\",\"words\":\"śakunistasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.45\",\"a\":\"Karambha\",\"rel\":\"son_of\",\"b\":\"Śakuni\",\"words\":\"tasmāt karambhaḥ sambhūto\",\"doubt\":false},{\"ref\":\"LiP 1,68.45\",\"a\":\"Devarāta\",\"rel\":\"son_of\",\"b\":\"Karambha\",\"words\":\"devarāto 'bhavattataḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.46\",\"a\":\"Devarāti\",\"rel\":\"son_of\",\"b\":\"Devarāta\",\"words\":\"devarātādabhūdrājā devarātir\",\"doubt\":false},{\"ref\":\"LiP 1,68.46\",\"a\":\"Devakṣatra\",\"rel\":\"son_of\",\"b\":\"Devarāti\",\"words\":\"devarātir ... jajñe yo devakṣatranāmakaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,68.47\",\"a\":\"Madhu\",\"rel\":\"son_of\",\"b\":\"Devakṣatra\",\"words\":\"devakṣatrasutaḥ śrīmān madhurnāma\",\"doubt\":false},{\"ref\":\"LiP 1,68.47\",\"a\":\"Kuruvaṃśa\",\"rel\":\"line_of\",\"b\":\"Madhu\",\"words\":\"madhostu kuruvaṃśakaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,68.48\",\"a\":\"Anu\",\"rel\":\"son_of\",\"b\":\"Kuruvaṃśa\",\"words\":\"kuruvaṃśād anus\",\"doubt\":true},{\"ref\":\"LiP 1,68.48\",\"a\":\"Purutvat\",\"rel\":\"son_of\",\"b\":\"Anu\",\"words\":\"tasmāt purutvān puruṣottamaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,68.48\",\"a\":\"Aṃśu\",\"rel\":\"son_of\",\"b\":\"Purutvat\",\"words\":\"aṃśurjajñe ca vaidarbhyāṃ bhadravatyāṃ purutvataḥ\",\"doubt\":false},{\"ref\":\"LiP 1,68.48\",\"a\":\"Aṃśu\",\"rel\":\"born_of\",\"b\":\"Bhadravatī\",\"words\":\"aṃśurjajñe ca vaidarbhyāṃ bhadravatyāṃ\",\"doubt\":false},{\"ref\":\"LiP 1,68.49\",\"a\":\"Sattva\",\"rel\":\"son_of\",\"b\":\"Aṃśu\",\"words\":\"sattvastasmādajāyata\",\"doubt\":false},{\"ref\":\"LiP 1,68.49\",\"a\":\"Sātvata\",\"rel\":\"son_of\",\"b\":\"Sattva\",\"words\":\"sattvāt sarvaguṇopetaḥ sātvataḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.07223,
+ "tokens": {
+  "input": 4743,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 6274,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "LiP 1,68.2",
+   "a": "Sahasrajit",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadoḥ putrā babhūvur hi pañca ... sahasrajitsuto jyeṣṭhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.2",
+   "a": "Kroṣṭu",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadoḥ putrā babhūvur hi pañca ... kroṣṭur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.2",
+   "a": "Nīla",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadoḥ putrā babhūvur hi pañca ... nīlo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "LiP 1,68.2",
+   "a": "Ajaka",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadoḥ putrā babhūvur hi pañca ... 'jako",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "LiP 1,68.2",
+   "a": "Laghu",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadoḥ putrā babhūvur hi pañca ... laghuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.3",
+   "a": "Śatajit",
+   "rel": "son_of",
+   "b": "Sahasrajit",
+   "words": "sahasrajitsutastadvac chatajinnāma pārthivaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.3",
+   "a": "Haihaya",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "sutāḥ śatajitaḥ khyātās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.4",
+   "a": "Haya",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "haihayaś ca hayaścaiva rājā veṇuhayaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.4",
+   "a": "Veṇuhaya",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "rājā veṇuhayaś ca yaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.4",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Haihaya",
+   "words": "haihayasya tu dāyādo dharma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.5",
+   "a": "Dharmanetra",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "tasya putro 'bhavadviprā dharmanetra",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.5",
+   "a": "Kīrti",
+   "rel": "son_of",
+   "b": "Dharmanetra",
+   "words": "dharmanetrasya kīrtis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.5",
+   "a": "Saṃjaya",
+   "rel": "son_of",
+   "b": "Kīrti",
+   "words": "saṃjayas tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.6",
+   "a": "Mahiṣmat",
+   "rel": "son_of",
+   "b": "Saṃjaya",
+   "words": "saṃjayasya tu dāyādo mahiṣmān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.6",
+   "a": "Bhadraśreṇya",
+   "rel": "son_of",
+   "b": "Mahiṣmat",
+   "words": "mahiṣmataḥ putro bhadraśreṇyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.7",
+   "a": "Durdama",
+   "rel": "son_of",
+   "b": "Bhadraśreṇya",
+   "words": "bhadraśreṇyasya dāyādo durdamo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.7",
+   "a": "Dhanaka",
+   "rel": "son_of",
+   "b": "Durdama",
+   "words": "durdamasya suto ... dhanako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.8",
+   "a": "Kṛtavīrya",
+   "rel": "son_of",
+   "b": "Dhanaka",
+   "words": "dhanakasya tu dāyādāś catvāro ... kṛtavīryaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.8",
+   "a": "Kṛtāgni",
+   "rel": "son_of",
+   "b": "Dhanaka",
+   "words": "dhanakasya tu dāyādāś catvāro ... kṛtāgniś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.8",
+   "a": "Kṛtavarman",
+   "rel": "son_of",
+   "b": "Dhanaka",
+   "words": "dhanakasya tu dāyādāś catvāro ... kṛtavarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.9",
+   "a": "Kṛtaujas",
+   "rel": "son_of",
+   "b": "Dhanaka",
+   "words": "kṛtaujāś ca caturtho 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.9",
+   "a": "Kārtavīrya Arjuna",
+   "rel": "son_of",
+   "b": "Kṛtavīrya",
+   "words": "kārtavīryastato 'rjunaḥ jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.12",
+   "a": "Jayadhvaja",
+   "rel": "son_of",
+   "b": "Kārtavīrya Arjuna",
+   "words": "tasya putraśatānyāsan ... jayadhvajaś ca",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "LiP 1,68.12",
+   "a": "Tālajaṅgha",
+   "rel": "son_of",
+   "b": "Jayadhvaja",
+   "words": "jayadhvajasya putro 'bhūt tālajaṅgho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.13",
+   "a": "Vītihotra",
+   "rel": "son_of",
+   "b": "Tālajaṅgha",
+   "words": "śataṃ putrāstu tasyeha tālajaṅghāḥ ... vītihotro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.14",
+   "a": "Vṛṣa",
+   "rel": "son_of",
+   "b": "Tālajaṅgha",
+   "words": "vṛṣaprabhṛtayaścānye tatsutāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.14",
+   "a": "Madhu",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "tasya putro 'bhavanmadhuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.15",
+   "a": "Vṛṣṇi",
+   "rel": "son_of",
+   "b": "Madhu",
+   "words": "madhoḥ putraśataṃ cāsīd vṛṣṇistasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.15",
+   "a": "Vṛṣṇi",
+   "rel": "line_of",
+   "b": "Vṛṣṇi",
+   "words": "vṛṣṇestu vṛṣṇayaḥ sarve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.15",
+   "a": "Mādhava",
+   "rel": "line_of",
+   "b": "Madhu",
+   "words": "madhorvai mādhavāḥ smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.15",
+   "a": "Yādava",
+   "rel": "line_of",
+   "b": "Yadu",
+   "words": "yādavā yaduvaṃśena nirucyante",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.22",
+   "a": "Vṛjinīvat",
+   "rel": "son_of",
+   "b": "Kroṣṭu",
+   "words": "kroṣṭoreko 'bhavatputro vṛjinīvān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.22",
+   "a": "Svāti",
+   "rel": "son_of",
+   "b": "Vṛjinīvat",
+   "words": "tasya putro 'bhavat svātī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.22",
+   "a": "Kuśaṅku",
+   "rel": "son_of",
+   "b": "Svāti",
+   "words": "kuśaṅkus tatsuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.24",
+   "a": "Citraratha",
+   "rel": "son_of",
+   "b": "Kuśaṅku",
+   "words": "jajñe citrarathastasya putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.24",
+   "a": "Śaśabindu",
+   "rel": "son_of",
+   "b": "Citraratha",
+   "words": "atha caitraratho vīro ... śaśabindus",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.26",
+   "a": "Anantaka",
+   "rel": "son_of",
+   "b": "Śaśabindu",
+   "words": "śaśabindostu putrāṇām ... tasya putrāṇām anantakam",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.27",
+   "a": "Yajña",
+   "rel": "son_of",
+   "b": "Anantaka",
+   "words": "anantakāt suto yajño",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.27",
+   "a": "Dhṛti",
+   "rel": "son_of",
+   "b": "Yajña",
+   "words": "yajñasya tanayo dhṛtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.27",
+   "a": "Uśanas",
+   "rel": "son_of",
+   "b": "Dhṛti",
+   "words": "uśanāstasya tanayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.28",
+   "a": "Siteṣu",
+   "rel": "son_of",
+   "b": "Uśanas",
+   "words": "smṛtaścośanasaḥ putraḥ siteṣur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.29",
+   "a": "Maruta",
+   "rel": "son_of",
+   "b": "Siteṣu",
+   "words": "marutastasya tanayo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.29",
+   "a": "Kambalabarhis",
+   "rel": "son_of",
+   "b": "Maruta",
+   "words": "kambalabarhistu marustasyātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.30",
+   "a": "Rukmakavaca",
+   "rel": "son_of",
+   "b": "Kambalabarhis",
+   "words": "putrastu rukmakavaco ... kambalabarhiṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.32",
+   "a": "Parāvṛt",
+   "rel": "son_of",
+   "b": "Rukmakavaca",
+   "words": "jajñe tu rukmakavacāt parāvṛt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.32",
+   "a": "Rukmeṣu",
+   "rel": "son_of",
+   "b": "Parāvṛt",
+   "words": "jajñire pañca putrāstu ... parāvṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.33",
+   "a": "Pṛthurukma",
+   "rel": "son_of",
+   "b": "Parāvṛt",
+   "words": "rukmeṣuḥ pṛthurukmaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.33",
+   "a": "Jyāmagha",
+   "rel": "son_of",
+   "b": "Parāvṛt",
+   "words": "jyāmaghaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.33",
+   "a": "Parigha",
+   "rel": "son_of",
+   "b": "Parāvṛt",
+   "words": "parighaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.33",
+   "a": "Hari",
+   "rel": "son_of",
+   "b": "Parāvṛt",
+   "words": "hariḥ parighaṃ ca hariṃ caiva ... pitā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "LiP 1,68.37",
+   "a": "Śaibyā",
+   "rel": "wife_of",
+   "b": "Jyāmagha",
+   "words": "jyāmaghasyābhavadbhāryā śaibyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.37",
+   "a": "Vidarbha",
+   "rel": "born_of",
+   "b": "Śaibyā",
+   "words": "śaibyā vai samprasūyata sutaṃ vidarbhaṃ",
+   "doubt": false,
+   "ref_cited": "LiP 1,68.38",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.38",
+   "a": "Vidarbha",
+   "rel": "son_of",
+   "b": "Jyāmagha",
+   "words": "sutaṃ vidarbhaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.38",
+   "a": "Kratha",
+   "rel": "son_of",
+   "b": "Vidarbha",
+   "words": "putrau vidarbharājasya śūrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.39",
+   "a": "Kaiśika",
+   "rel": "son_of",
+   "b": "Vidarbha",
+   "words": "putrau vidarbharājasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.39",
+   "a": "Romapāda",
+   "rel": "son_of",
+   "b": "Vidarbha",
+   "words": "romapādastṛtīyaś ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.39",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Romapāda",
+   "words": "babhrustasyātmajaḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.40",
+   "a": "Sudhṛti",
+   "rel": "son_of",
+   "b": "Babhru",
+   "words": "sudhṛtistanayastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.40",
+   "a": "Kauśika",
+   "rel": "son_of",
+   "b": "Sudhṛti",
+   "words": "kauśikastanayastasmāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.41",
+   "a": "Kratha",
+   "rel": "son_of",
+   "b": "Vidarbha",
+   "words": "kratho vidarbhasya sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.41",
+   "a": "Kunti",
+   "rel": "son_of",
+   "b": "Kratha",
+   "words": "kuntistasyātmajo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.41",
+   "a": "Vṛta",
+   "rel": "son_of",
+   "b": "Kunti",
+   "words": "kunter vṛtastato jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.41",
+   "a": "Raṇadhṛṣṭa",
+   "rel": "son_of",
+   "b": "Vṛta",
+   "words": "vṛtastato jajñe raṇadhṛṣṭaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.42",
+   "a": "Nidhṛti",
+   "rel": "son_of",
+   "b": "Raṇadhṛṣṭa",
+   "words": "raṇadhṛṣṭasya ca suto nidhṛtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.42",
+   "a": "Daśārha",
+   "rel": "son_of",
+   "b": "Nidhṛti",
+   "words": "daśārho naidhṛto nāmnā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.43",
+   "a": "Vyāpta",
+   "rel": "son_of",
+   "b": "Daśārha",
+   "words": "daśārhasya suto vyāpto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.43",
+   "a": "Jīmūta",
+   "rel": "son_of",
+   "b": "Vyāpta",
+   "words": "jīmūta iti tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.43",
+   "a": "Vikṛti",
+   "rel": "son_of",
+   "b": "Jīmūta",
+   "words": "jīmūtaputro vikṛtis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.43",
+   "a": "Bhīmaratha",
+   "rel": "son_of",
+   "b": "Vikṛti",
+   "words": "tasya bhīmarathaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.44",
+   "a": "Navaratha",
+   "rel": "son_of",
+   "b": "Bhīmaratha",
+   "words": "bhīmarathasyāsīt putro navarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.45",
+   "a": "Dṛḍharatha",
+   "rel": "son_of",
+   "b": "Navaratha",
+   "words": "tasya cāsīddṛḍharathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.45",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Dṛḍharatha",
+   "words": "śakunistasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.45",
+   "a": "Karambha",
+   "rel": "son_of",
+   "b": "Śakuni",
+   "words": "tasmāt karambhaḥ sambhūto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.45",
+   "a": "Devarāta",
+   "rel": "son_of",
+   "b": "Karambha",
+   "words": "devarāto 'bhavattataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.46",
+   "a": "Devarāti",
+   "rel": "son_of",
+   "b": "Devarāta",
+   "words": "devarātādabhūdrājā devarātir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.46",
+   "a": "Devakṣatra",
+   "rel": "son_of",
+   "b": "Devarāti",
+   "words": "devarātir ... jajñe yo devakṣatranāmakaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.47",
+   "a": "Madhu",
+   "rel": "son_of",
+   "b": "Devakṣatra",
+   "words": "devakṣatrasutaḥ śrīmān madhurnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.47",
+   "a": "Kuruvaṃśa",
+   "rel": "line_of",
+   "b": "Madhu",
+   "words": "madhostu kuruvaṃśakaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.48",
+   "a": "Anu",
+   "rel": "son_of",
+   "b": "Kuruvaṃśa",
+   "words": "kuruvaṃśād anus",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.48",
+   "a": "Purutvat",
+   "rel": "son_of",
+   "b": "Anu",
+   "words": "tasmāt purutvān puruṣottamaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.48",
+   "a": "Aṃśu",
+   "rel": "son_of",
+   "b": "Purutvat",
+   "words": "aṃśurjajñe ca vaidarbhyāṃ bhadravatyāṃ purutvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.48",
+   "a": "Aṃśu",
+   "rel": "born_of",
+   "b": "Bhadravatī",
+   "words": "aṃśurjajñe ca vaidarbhyāṃ bhadravatyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.49",
+   "a": "Sattva",
+   "rel": "son_of",
+   "b": "Aṃśu",
+   "words": "sattvastasmādajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,68.49",
+   "a": "Sātvata",
+   "rel": "son_of",
+   "b": "Sattva",
+   "words": "sattvāt sarvaguṇopetaḥ sātvataḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

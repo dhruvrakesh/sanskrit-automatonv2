@@ -1,0 +1,644 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "agni",
+ "title": "Agnipurana",
+ "chapter": 274,
+ "part": 0,
+ "refs": [
+  "AgP 274.1",
+  "AgP 274.2",
+  "AgP 274.3",
+  "AgP 274.4",
+  "AgP 274.5",
+  "AgP 274.6",
+  "AgP 274.7",
+  "AgP 274.8",
+  "AgP 274.9",
+  "AgP 274.10",
+  "AgP 274.11",
+  "AgP 274.12",
+  "AgP 274.13",
+  "AgP 274.14",
+  "AgP 274.15",
+  "AgP 274.16",
+  "AgP 274.17",
+  "AgP 274.18",
+  "AgP 274.19",
+  "AgP 274.20",
+  "AgP 274.21",
+  "AgP 274.22",
+  "AgP 274.23",
+  "AgP 274.24",
+  "AgP 274.25",
+  "AgP 274.26",
+  "AgP 274.27",
+  "AgP 274.28",
+  "AgP 274.29",
+  "AgP 274.30",
+  "AgP 274.31",
+  "AgP 274.32",
+  "AgP 274.33",
+  "AgP 274.34",
+  "AgP 274.35",
+  "AgP 274.36",
+  "AgP 274.37",
+  "AgP 274.38",
+  "AgP 274.39",
+  "AgP 274.40",
+  "AgP 274.41",
+  "AgP 274.42",
+  "AgP 274.43",
+  "AgP 274.44",
+  "AgP 274.45",
+  "AgP 274.46",
+  "AgP 274.47",
+  "AgP 274.48",
+  "AgP 274.49",
+  "AgP 274.50",
+  "AgP 274.51"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_agnipurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Jun Takashima)",
+ "at": "2026-11-17T22:42:35",
+ "reply": "{\"statements\":[\n{\"ref\":\"AgP 274.1\",\"a\":\"Sahasrajit\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadorāsanpañca putrā jyeṣṭhasteṣu sahasrajit\",\"doubt\":false},\n{\"ref\":\"AgP 274.1\",\"a\":\"Nīlāñjaka\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadorāsanpañca putrā\",\"doubt\":false},\n{\"ref\":\"AgP 274.1\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadorāsanpañca putrā\",\"doubt\":true},\n{\"ref\":\"AgP 274.1\",\"a\":\"Kroṣṭu\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadorāsanpañca putrā\",\"doubt\":false},\n{\"ref\":\"AgP 274.1\",\"a\":\"Śatajit\",\"rel\":\"son_of\",\"b\":\"Yadu\",\"words\":\"yadorāsanpañca putrā\",\"doubt\":true},\n{\"ref\":\"AgP 274.2\",\"a\":\"Haihaya\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"śatajiddhaihayo reṇuhayo haya iti trayaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.2\",\"a\":\"Reṇuhaya\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"śatajiddhaihayo reṇuhayo haya iti trayaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.2\",\"a\":\"Haya\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"śatajiddhaihayo reṇuhayo haya iti trayaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.2\",\"a\":\"Dharmanetra\",\"rel\":\"son_of\",\"b\":\"Haihaya\",\"words\":\"dharmanetro haihayasya\",\"doubt\":false},\n{\"ref\":\"AgP 274.2\",\"a\":\"Saṃhana\",\"rel\":\"son_of\",\"b\":\"Dharmanetra\",\"words\":\"dharmanetrasya saṃhanaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.3\",\"a\":\"Mahimā\",\"rel\":\"son_of\",\"b\":\"Saṃhana\",\"words\":\"mahimā saṃhanasyāsīt\",\"doubt\":false},\n{\"ref\":\"AgP 274.3\",\"a\":\"Bhadrasenaka\",\"rel\":\"son_of\",\"b\":\"Mahimā\",\"words\":\"mahimnao bhadrasenakaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.3\",\"a\":\"Durgama\",\"rel\":\"son_of\",\"b\":\"Bhadrasenaka\",\"words\":\"bhadrasenād durgamo 'bhūt\",\"doubt\":false},\n{\"ref\":\"AgP 274.3\",\"a\":\"Kanaka\",\"rel\":\"son_of\",\"b\":\"Durgama\",\"words\":\"durgamātkanako 'bhavat\",\"doubt\":false},\n{\"ref\":\"AgP 274.4\",\"a\":\"Kṛtavīrya\",\"rel\":\"son_of\",\"b\":\"Kanaka\",\"words\":\"kanakāt kṛtavīryastu\",\"doubt\":false},\n{\"ref\":\"AgP 274.4\",\"a\":\"Kṛtāgni\",\"rel\":\"son_of\",\"b\":\"Kanaka\",\"words\":\"kanakāt kṛtavīryastu kṛtāgniḥ\",\"doubt\":true},\n{\"ref\":\"AgP 274.4\",\"a\":\"Karavīraka\",\"rel\":\"son_of\",\"b\":\"Kanaka\",\"words\":\"kṛtāgniḥ karavīrakaḥ\",\"doubt\":true},\n{\"ref\":\"AgP 274.4\",\"a\":\"Kṛtaujas\",\"rel\":\"son_of\",\"b\":\"Kanaka\",\"words\":\"kṛtaujāś ca caturtho 'bhūt\",\"doubt\":true},\n{\"ref\":\"AgP 274.4\",\"a\":\"Arjuna\",\"rel\":\"son_of\",\"b\":\"Kṛtavīrya\",\"words\":\"kṛtavīryāttu so 'rjunaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.10\",\"a\":\"Tālajaṅgha\",\"rel\":\"son_of\",\"b\":\"Jayadhvaja\",\"words\":\"jayadhvajāttālajaṅghaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.11\",\"a\":\"Ananta\",\"rel\":\"son_of\",\"b\":\"Vītihotra\",\"words\":\"vītihotrādananto 'bhut\",\"doubt\":false},\n{\"ref\":\"AgP 274.11\",\"a\":\"Durjaya\",\"rel\":\"son_of\",\"b\":\"Ananta\",\"words\":\"anantāddurjayo nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.12\",\"a\":\"Vṛjinīvat\",\"rel\":\"son_of\",\"b\":\"Kroṣṭu\",\"words\":\"kroṣṭostu vṛjinīvāṃś ca\",\"doubt\":false},\n{\"ref\":\"AgP 274.12\",\"a\":\"Svāhā\",\"rel\":\"son_of\",\"b\":\"Vṛjinīvat\",\"words\":\"svāhābhūdvṛjinīvataḥ\",\"doubt\":true},\n{\"ref\":\"AgP 274.13\",\"a\":\"Ruṣadgu\",\"rel\":\"son_of\",\"b\":\"Svāhā\",\"words\":\"svāhāputrao ruṣadguś ca\",\"doubt\":false},\n{\"ref\":\"AgP 274.13\",\"a\":\"Citraratha\",\"rel\":\"son_of\",\"b\":\"Ruṣadgu\",\"words\":\"tasya citrarathaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.13\",\"a\":\"Śaśavindu\",\"rel\":\"son_of\",\"b\":\"Citraratha\",\"words\":\"śaśavinduścitrarathāt\",\"doubt\":false},\n{\"ref\":\"AgP 274.15\",\"a\":\"Suyajña\",\"rel\":\"son_of\",\"b\":\"Pṛthuśravas\",\"words\":\"tasya putraḥ suyajñakaḥ\",\"doubt\":true},\n{\"ref\":\"AgP 274.15\",\"a\":\"Uśanas\",\"rel\":\"son_of\",\"b\":\"Suyajña\",\"words\":\"suyajñasyośanāḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.15\",\"a\":\"Titikṣu\",\"rel\":\"son_of\",\"b\":\"Uśanas\",\"words\":\"titikṣuruśanaḥsutaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.16\",\"a\":\"Marutta\",\"rel\":\"son_of\",\"b\":\"Titikṣu\",\"words\":\"titikṣostu marutto 'bhūt\",\"doubt\":false},\n{\"ref\":\"AgP 274.16\",\"a\":\"Kambalavarhiṣa\",\"rel\":\"son_of\",\"b\":\"Marutta\",\"words\":\"tasmātkambalavarhiṣaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.23\",\"a\":\"Sāttvata\",\"rel\":\"son_of\",\"b\":\"Jantu\",\"words\":\"jantuputrastu sāttvataḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.24\",\"a\":\"Bhajamāna\",\"rel\":\"son_of\",\"b\":\"Sāttvata\",\"words\":\"sāttvatādbhajamānastu\",\"doubt\":false},\n{\"ref\":\"AgP 274.24\",\"a\":\"Vṛṣṇi\",\"rel\":\"son_of\",\"b\":\"Sāttvata\",\"words\":\"vṛṣṇirandhaka eva ca\",\"doubt\":false},\n{\"ref\":\"AgP 274.24\",\"a\":\"Andhaka\",\"rel\":\"son_of\",\"b\":\"Sāttvata\",\"words\":\"vṛṣṇirandhaka eva ca\",\"doubt\":false},\n{\"ref\":\"AgP 274.24\",\"a\":\"Devāvṛdha\",\"rel\":\"son_of\",\"b\":\"Sāttvata\",\"words\":\"devāvṛdhaś ca catvāraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.25\",\"a\":\"Babhru\",\"rel\":\"son_of\",\"b\":\"Devāvṛdha\",\"words\":\"devāvṛdhādvabhrurāsīt\",\"doubt\":false},\n{\"ref\":\"AgP 274.30\",\"a\":\"Devaka\",\"rel\":\"son_of\",\"b\":\"Āhuka\",\"words\":\"āhukāddevako jajñe\",\"doubt\":false},\n{\"ref\":\"AgP 274.30\",\"a\":\"Ugrasena\",\"rel\":\"son_of\",\"b\":\"Āhuka\",\"words\":\"ugrasenastato 'bhavat\",\"doubt\":true},\n{\"ref\":\"AgP 274.30\",\"a\":\"Devavat\",\"rel\":\"son_of\",\"b\":\"Devaka\",\"words\":\"devavānupadevaś ca devakasya sutāḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.30\",\"a\":\"Upadeva\",\"rel\":\"son_of\",\"b\":\"Devaka\",\"words\":\"devavānupadevaś ca devakasya sutāḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.31\",\"a\":\"Devakī\",\"rel\":\"sister_of\",\"b\":\"Devavat\",\"words\":\"teṣāṃ svasāraḥ saptāsan\",\"doubt\":true},\n{\"ref\":\"AgP 274.31\",\"a\":\"Devakī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau devakī\",\"doubt\":false},\n{\"ref\":\"AgP 274.32\",\"a\":\"Kaṃsa\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutāḥ kaṃsasteṣāñca pūrvajaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.36\",\"a\":\"Hṛdika\",\"rel\":\"son_of\",\"b\":\"Bhoja\",\"words\":\"bhojasya hṛdikaḥ putro\",\"doubt\":false},\n{\"ref\":\"AgP 274.45\",\"a\":\"Śini\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrācchinirjajñe\",\"doubt\":false},\n{\"ref\":\"AgP 274.45\",\"a\":\"Satyaka\",\"rel\":\"son_of\",\"b\":\"Śini\",\"words\":\"satyakastu śineḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.45\",\"a\":\"Sātyaki\",\"rel\":\"son_of\",\"b\":\"Satyaka\",\"words\":\"satyakātsātyakirjajñe\",\"doubt\":false},\n{\"ref\":\"AgP 274.46\",\"a\":\"Yugandhara\",\"rel\":\"son_of\",\"b\":\"Dhuni\",\"words\":\"dhuneryugandharaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.47\",\"a\":\"Akrūra\",\"rel\":\"son_of\",\"b\":\"Svaphalka\",\"words\":\"svaphalkaputro hy akrūro\",\"doubt\":false},\n{\"ref\":\"AgP 274.47\",\"a\":\"Pṛthā\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍu\",\"words\":\"pṛthā pāṇḍoḥ priyābhavat\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"dharmādyudhiṣṭhiraḥ pāṇḍoḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"begotten_by\",\"b\":\"Dharma\",\"words\":\"dharmādyudhiṣṭhiraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Vṛkodara\",\"rel\":\"begotten_by\",\"b\":\"Vāyu\",\"words\":\"vāyoḥ kuntyāṃ vṛkodaraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Vṛkodara\",\"rel\":\"born_of\",\"b\":\"Kuntī\",\"words\":\"kuntyāṃ vṛkodaraḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Dhanañjaya\",\"rel\":\"begotten_by\",\"b\":\"Indra\",\"words\":\"indrāddhanañjayo\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Nakula\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādryāṃ nakulaḥ sahadevakaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.48\",\"a\":\"Sahadeva\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādryāṃ nakulaḥ sahadevakaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.49\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevācca rohiṇyāṃ rāmaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.49\",\"a\":\"Rāma\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ rāmaḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.51\",\"a\":\"Śāmba\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"śāmbādyāḥ kṛṣṇājjāmbavatīsutāḥ\",\"doubt\":false},\n{\"ref\":\"AgP 274.51\",\"a\":\"Śāmba\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"jāmbavatīsutāḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05435,
+ "tokens": {
+  "input": 4838,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4467,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "AgP 274.1",
+   "a": "Sahasrajit",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadorāsanpañca putrā jyeṣṭhasteṣu sahasrajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.1",
+   "a": "Nīlāñjaka",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadorāsanpañca putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.1",
+   "a": "Raghu",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadorāsanpañca putrā",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "AgP 274.1",
+   "a": "Kroṣṭu",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadorāsanpañca putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.1",
+   "a": "Śatajit",
+   "rel": "son_of",
+   "b": "Yadu",
+   "words": "yadorāsanpañca putrā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.2",
+   "a": "Haihaya",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "śatajiddhaihayo reṇuhayo haya iti trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.2",
+   "a": "Reṇuhaya",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "śatajiddhaihayo reṇuhayo haya iti trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.2",
+   "a": "Haya",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "śatajiddhaihayo reṇuhayo haya iti trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.2",
+   "a": "Dharmanetra",
+   "rel": "son_of",
+   "b": "Haihaya",
+   "words": "dharmanetro haihayasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.2",
+   "a": "Saṃhana",
+   "rel": "son_of",
+   "b": "Dharmanetra",
+   "words": "dharmanetrasya saṃhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.3",
+   "a": "Mahimā",
+   "rel": "son_of",
+   "b": "Saṃhana",
+   "words": "mahimā saṃhanasyāsīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.3",
+   "a": "Bhadrasenaka",
+   "rel": "son_of",
+   "b": "Mahimā",
+   "words": "mahimnao bhadrasenakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.3",
+   "a": "Durgama",
+   "rel": "son_of",
+   "b": "Bhadrasenaka",
+   "words": "bhadrasenād durgamo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.3",
+   "a": "Kanaka",
+   "rel": "son_of",
+   "b": "Durgama",
+   "words": "durgamātkanako 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.4",
+   "a": "Kṛtavīrya",
+   "rel": "son_of",
+   "b": "Kanaka",
+   "words": "kanakāt kṛtavīryastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.4",
+   "a": "Kṛtāgni",
+   "rel": "son_of",
+   "b": "Kanaka",
+   "words": "kanakāt kṛtavīryastu kṛtāgniḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.4",
+   "a": "Karavīraka",
+   "rel": "son_of",
+   "b": "Kanaka",
+   "words": "kṛtāgniḥ karavīrakaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.4",
+   "a": "Kṛtaujas",
+   "rel": "son_of",
+   "b": "Kanaka",
+   "words": "kṛtaujāś ca caturtho 'bhūt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.4",
+   "a": "Arjuna",
+   "rel": "son_of",
+   "b": "Kṛtavīrya",
+   "words": "kṛtavīryāttu so 'rjunaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.10",
+   "a": "Tālajaṅgha",
+   "rel": "son_of",
+   "b": "Jayadhvaja",
+   "words": "jayadhvajāttālajaṅghaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.11",
+   "a": "Ananta",
+   "rel": "son_of",
+   "b": "Vītihotra",
+   "words": "vītihotrādananto 'bhut",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.11",
+   "a": "Durjaya",
+   "rel": "son_of",
+   "b": "Ananta",
+   "words": "anantāddurjayo nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.12",
+   "a": "Vṛjinīvat",
+   "rel": "son_of",
+   "b": "Kroṣṭu",
+   "words": "kroṣṭostu vṛjinīvāṃś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.12",
+   "a": "Svāhā",
+   "rel": "son_of",
+   "b": "Vṛjinīvat",
+   "words": "svāhābhūdvṛjinīvataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.13",
+   "a": "Ruṣadgu",
+   "rel": "son_of",
+   "b": "Svāhā",
+   "words": "svāhāputrao ruṣadguś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.13",
+   "a": "Citraratha",
+   "rel": "son_of",
+   "b": "Ruṣadgu",
+   "words": "tasya citrarathaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.13",
+   "a": "Śaśavindu",
+   "rel": "son_of",
+   "b": "Citraratha",
+   "words": "śaśavinduścitrarathāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.15",
+   "a": "Suyajña",
+   "rel": "son_of",
+   "b": "Pṛthuśravas",
+   "words": "tasya putraḥ suyajñakaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.15",
+   "a": "Uśanas",
+   "rel": "son_of",
+   "b": "Suyajña",
+   "words": "suyajñasyośanāḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.15",
+   "a": "Titikṣu",
+   "rel": "son_of",
+   "b": "Uśanas",
+   "words": "titikṣuruśanaḥsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.16",
+   "a": "Marutta",
+   "rel": "son_of",
+   "b": "Titikṣu",
+   "words": "titikṣostu marutto 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.16",
+   "a": "Kambalavarhiṣa",
+   "rel": "son_of",
+   "b": "Marutta",
+   "words": "tasmātkambalavarhiṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.23",
+   "a": "Sāttvata",
+   "rel": "son_of",
+   "b": "Jantu",
+   "words": "jantuputrastu sāttvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.24",
+   "a": "Bhajamāna",
+   "rel": "son_of",
+   "b": "Sāttvata",
+   "words": "sāttvatādbhajamānastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.24",
+   "a": "Vṛṣṇi",
+   "rel": "son_of",
+   "b": "Sāttvata",
+   "words": "vṛṣṇirandhaka eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.24",
+   "a": "Andhaka",
+   "rel": "son_of",
+   "b": "Sāttvata",
+   "words": "vṛṣṇirandhaka eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.24",
+   "a": "Devāvṛdha",
+   "rel": "son_of",
+   "b": "Sāttvata",
+   "words": "devāvṛdhaś ca catvāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.25",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Devāvṛdha",
+   "words": "devāvṛdhādvabhrurāsīt",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "AgP 274.30",
+   "a": "Devaka",
+   "rel": "son_of",
+   "b": "Āhuka",
+   "words": "āhukāddevako jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.30",
+   "a": "Ugrasena",
+   "rel": "son_of",
+   "b": "Āhuka",
+   "words": "ugrasenastato 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.30",
+   "a": "Devavat",
+   "rel": "son_of",
+   "b": "Devaka",
+   "words": "devavānupadevaś ca devakasya sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.30",
+   "a": "Upadeva",
+   "rel": "son_of",
+   "b": "Devaka",
+   "words": "devavānupadevaś ca devakasya sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.31",
+   "a": "Devakī",
+   "rel": "sister_of",
+   "b": "Devavat",
+   "words": "teṣāṃ svasāraḥ saptāsan",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.31",
+   "a": "Devakī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau devakī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.32",
+   "a": "Kaṃsa",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutāḥ kaṃsasteṣāñca pūrvajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.36",
+   "a": "Hṛdika",
+   "rel": "son_of",
+   "b": "Bhoja",
+   "words": "bhojasya hṛdikaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.45",
+   "a": "Śini",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrācchinirjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.45",
+   "a": "Satyaka",
+   "rel": "son_of",
+   "b": "Śini",
+   "words": "satyakastu śineḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.45",
+   "a": "Sātyaki",
+   "rel": "son_of",
+   "b": "Satyaka",
+   "words": "satyakātsātyakirjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.46",
+   "a": "Yugandhara",
+   "rel": "son_of",
+   "b": "Dhuni",
+   "words": "dhuneryugandharaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.47",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Svaphalka",
+   "words": "svaphalkaputro hy akrūro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.47",
+   "a": "Pṛthā",
+   "rel": "wife_of",
+   "b": "Pāṇḍu",
+   "words": "pṛthā pāṇḍoḥ priyābhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Yudhiṣṭhira",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "dharmādyudhiṣṭhiraḥ pāṇḍoḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Yudhiṣṭhira",
+   "rel": "begotten_by",
+   "b": "Dharma",
+   "words": "dharmādyudhiṣṭhiraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Vṛkodara",
+   "rel": "begotten_by",
+   "b": "Vāyu",
+   "words": "vāyoḥ kuntyāṃ vṛkodaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Vṛkodara",
+   "rel": "born_of",
+   "b": "Kuntī",
+   "words": "kuntyāṃ vṛkodaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Dhanañjaya",
+   "rel": "begotten_by",
+   "b": "Indra",
+   "words": "indrāddhanañjayo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Nakula",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādryāṃ nakulaḥ sahadevakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.48",
+   "a": "Sahadeva",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādryāṃ nakulaḥ sahadevakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.49",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevācca rohiṇyāṃ rāmaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.49",
+   "a": "Rāma",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ rāmaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.51",
+   "a": "Śāmba",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "śāmbādyāḥ kṛṣṇājjāmbavatīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 274.51",
+   "a": "Śāmba",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "jāmbavatīsutāḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

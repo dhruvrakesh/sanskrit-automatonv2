@@ -1,0 +1,172 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "agni",
+ "title": "Agnipurana",
+ "chapter": 275,
+ "part": 0,
+ "refs": [
+  "AgP 275.1",
+  "AgP 275.2",
+  "AgP 275.3",
+  "AgP 275.4",
+  "AgP 275.5",
+  "AgP 275.6",
+  "AgP 275.7",
+  "AgP 275.8",
+  "AgP 275.9",
+  "AgP 275.10",
+  "AgP 275.11",
+  "AgP 275.12",
+  "AgP 275.13",
+  "AgP 275.14",
+  "AgP 275.15",
+  "AgP 275.16",
+  "AgP 275.17",
+  "AgP 275.18",
+  "AgP 275.19",
+  "AgP 275.20",
+  "AgP 275.21",
+  "AgP 275.22",
+  "AgP 275.23",
+  "AgP 275.24",
+  "AgP 275.25"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_agnipurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Jun Takashima)",
+ "at": "2026-11-17T22:42:57",
+ "reply": "{\"statements\": [\n{\"ref\":\"AgP 275.1\",\"a\":\"Vasudeva\",\"rel\":\"other\",\"b\":\"Kaśyapa\",\"words\":\"kaśyapo vasudevo 'bhūt\",\"doubt\":false},\n{\"ref\":\"AgP 275.1\",\"a\":\"Devakī\",\"rel\":\"other\",\"b\":\"Aditi\",\"words\":\"devakī cāditirvarā\",\"doubt\":false},\n{\"ref\":\"AgP 275.1\",\"a\":\"Kṛṣṇa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyāṃ vasudevāttu kṛṣṇo 'bhūt\",\"doubt\":false},\n{\"ref\":\"AgP 275.1\",\"a\":\"Kṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"devakyāṃ vasudevāttu kṛṣṇo 'bhūt\",\"doubt\":false},\n{\"ref\":\"AgP 275.5\",\"a\":\"Pradyumna\",\"rel\":\"born_of\",\"b\":\"Rukmaṇī\",\"words\":\"pradyumnādyāś ca rukmiṇyāṃ\",\"doubt\":false},\n{\"ref\":\"AgP 275.5\",\"a\":\"Bhīma\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"bhīmādyāḥ satyabhāmayā\",\"doubt\":false},\n{\"ref\":\"AgP 275.6\",\"a\":\"Śāmba\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"jāmbavatyāñca śāmbādyāḥ\",\"doubt\":false},\n{\"ref\":\"AgP 275.6\",\"a\":\"Pradyumna\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"pradyumnādyāś ca rukmiṇyāṃ ... kṛṣṇasyāsaṃs\",\"doubt\":false},\n{\"ref\":\"AgP 275.6\",\"a\":\"Bhīma\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"bhīmādyāḥ satyabhāmayā ... kṛṣṇasyāsaṃs\",\"doubt\":false},\n{\"ref\":\"AgP 275.6\",\"a\":\"Śāmba\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"śāmbādyāḥ kṛṣṇasyāsaṃs\",\"doubt\":false},\n{\"ref\":\"AgP 275.7\",\"a\":\"Aniruddha\",\"rel\":\"son_of\",\"b\":\"Pradyumna\",\"words\":\"pradyumnasya tu vaidarbhyāmaniruddho\",\"doubt\":false},\n{\"ref\":\"AgP 275.7\",\"a\":\"Aniruddha\",\"rel\":\"born_of\",\"b\":\"Vaidarbhī\",\"words\":\"vaidarbhyāmaniruddho\",\"doubt\":false},\n{\"ref\":\"AgP 275.8\",\"a\":\"Vajra\",\"rel\":\"son_of\",\"b\":\"Aniruddha\",\"words\":\"aniruddhasya vajrādyā\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0155,
+ "tokens": {
+  "input": 2750,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1000,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "AgP 275.1",
+   "a": "Vasudeva",
+   "rel": "other",
+   "b": "Kaśyapa",
+   "words": "kaśyapo vasudevo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.1",
+   "a": "Devakī",
+   "rel": "other",
+   "b": "Aditi",
+   "words": "devakī cāditirvarā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.1",
+   "a": "Kṛṣṇa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyāṃ vasudevāttu kṛṣṇo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.1",
+   "a": "Kṛṣṇa",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "devakyāṃ vasudevāttu kṛṣṇo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.5",
+   "a": "Pradyumna",
+   "rel": "born_of",
+   "b": "Rukmaṇī",
+   "words": "pradyumnādyāś ca rukmiṇyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.5",
+   "a": "Bhīma",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "bhīmādyāḥ satyabhāmayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.6",
+   "a": "Śāmba",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "jāmbavatyāñca śāmbādyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.5",
+   "a": "Pradyumna",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "pradyumnādyāś ca rukmiṇyāṃ ... kṛṣṇasyāsaṃs",
+   "doubt": false,
+   "ref_cited": "AgP 275.6",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.5",
+   "a": "Bhīma",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "bhīmādyāḥ satyabhāmayā ... kṛṣṇasyāsaṃs",
+   "doubt": false,
+   "ref_cited": "AgP 275.6",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.6",
+   "a": "Śāmba",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "śāmbādyāḥ kṛṣṇasyāsaṃs",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.7",
+   "a": "Aniruddha",
+   "rel": "son_of",
+   "b": "Pradyumna",
+   "words": "pradyumnasya tu vaidarbhyāmaniruddho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.7",
+   "a": "Aniruddha",
+   "rel": "born_of",
+   "b": "Vaidarbhī",
+   "words": "vaidarbhyāmaniruddho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "AgP 275.8",
+   "a": "Vajra",
+   "rel": "son_of",
+   "b": "Aniruddha",
+   "words": "aniruddhasya vajrādyā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

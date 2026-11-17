@@ -1,0 +1,164 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 100,
+ "part": 0,
+ "refs": [
+  "MBh 1,100.1",
+  "MBh 1,100.2",
+  "MBh 1,100.3",
+  "MBh 1,100.4",
+  "MBh 1,100.5",
+  "MBh 1,100.6",
+  "MBh 1,100.7",
+  "MBh 1,100.8",
+  "MBh 1,100.9",
+  "MBh 1,100.10",
+  "MBh 1,100.11",
+  "MBh 1,100.12",
+  "MBh 1,100.13",
+  "MBh 1,100.14",
+  "MBh 1,100.15",
+  "MBh 1,100.16",
+  "MBh 1,100.17",
+  "MBh 1,100.18",
+  "MBh 1,100.19",
+  "MBh 1,100.20",
+  "MBh 1,100.21",
+  "MBh 1,100.22",
+  "MBh 1,100.23",
+  "MBh 1,100.24",
+  "MBh 1,100.25",
+  "MBh 1,100.26",
+  "MBh 1,100.27",
+  "MBh 1,100.28",
+  "MBh 1,100.29",
+  "MBh 1,100.30"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:47:04",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,100.1\",\"a\":\"Kausalyā\",\"rel\":\"wife_of\",\"b\":\"Vicitravīrya\",\"words\":\"vadhūṃ snātām ṛtau\",\"doubt\":true},\n{\"ref\":\"MBh 1,100.6\",\"a\":\"Ambikā\",\"rel\":\"daughter_of\",\"b\":\"Kāśi\",\"words\":\"kāśisutā\",\"doubt\":true},\n{\"ref\":\"MBh 1,100.7\",\"a\":\"Vyāsa\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"mātā putram athābravīt\",\"doubt\":false},\n{\"ref\":\"MBh 1,100.13\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"born_of\",\"b\":\"Kausalyā\",\"words\":\"kausalyā suṣuve 'ndhaṃ tam ātmajam\",\"doubt\":true},\n{\"ref\":\"MBh 1,100.13\",\"a\":\"Dhṛtarāṣṭra\",\"rel\":\"begotten_by\",\"b\":\"Vyāsa\",\"words\":\"kausalyā suṣuve 'ndhaṃ tam ātmajam\",\"doubt\":true},\n{\"ref\":\"MBh 1,100.16\",\"a\":\"Vyāsa\",\"rel\":\"son_of\",\"b\":\"Satyavatī\",\"words\":\"vyāsaḥ satyavatīputra\",\"doubt\":false},\n{\"ref\":\"MBh 1,100.21\",\"a\":\"Pāṇḍu\",\"rel\":\"born_of\",\"b\":\"Ambālikā\",\"words\":\"kumāraṃ sā devī prāptakālam ajījanat pāṇḍuṃ\",\"doubt\":true},\n{\"ref\":\"MBh 1,100.21\",\"a\":\"Pāṇḍu\",\"rel\":\"begotten_by\",\"b\":\"Vyāsa\",\"words\":\"kumāraṃ sā devī prāptakālam ajījanat pāṇḍuṃ\",\"doubt\":true},\n{\"ref\":\"MBh 1,100.21\",\"a\":\"Pāṇḍavas\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"tasya putrā maheṣvāsā jajñire pañca pāṇḍavāḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,100.27\",\"a\":\"Vidura\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa Dvaipāyana\",\"words\":\"viduro nāma kṛṣṇadvaipāyanātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,100.27\",\"a\":\"Vidura\",\"rel\":\"brother_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya ca bhrātā\",\"doubt\":false},\n{\"ref\":\"MBh 1,100.27\",\"a\":\"Vidura\",\"rel\":\"brother_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍoś cāmitabuddhimān\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01636,
+ "tokens": {
+  "input": 3297,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 977,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MBh 1,100.1",
+   "a": "Kausalyā",
+   "rel": "wife_of",
+   "b": "Vicitravīrya",
+   "words": "vadhūṃ snātām ṛtau",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,100.6",
+   "a": "Ambikā",
+   "rel": "daughter_of",
+   "b": "Kāśi",
+   "words": "kāśisutā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,100.7",
+   "a": "Vyāsa",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "mātā putram athābravīt",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,100.13",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "born_of",
+   "b": "Kausalyā",
+   "words": "kausalyā suṣuve 'ndhaṃ tam ātmajam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,100.13",
+   "a": "Dhṛtarāṣṭra",
+   "rel": "begotten_by",
+   "b": "Vyāsa",
+   "words": "kausalyā suṣuve 'ndhaṃ tam ātmajam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,100.16",
+   "a": "Vyāsa",
+   "rel": "son_of",
+   "b": "Satyavatī",
+   "words": "vyāsaḥ satyavatīputra",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,100.21",
+   "a": "Pāṇḍu",
+   "rel": "born_of",
+   "b": "Ambālikā",
+   "words": "kumāraṃ sā devī prāptakālam ajījanat pāṇḍuṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,100.21",
+   "a": "Pāṇḍu",
+   "rel": "begotten_by",
+   "b": "Vyāsa",
+   "words": "kumāraṃ sā devī prāptakālam ajījanat pāṇḍuṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,100.21",
+   "a": "Pāṇḍavas",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "tasya putrā maheṣvāsā jajñire pañca pāṇḍavāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,100.27",
+   "a": "Vidura",
+   "rel": "son_of",
+   "b": "Kṛṣṇa Dvaipāyana",
+   "words": "viduro nāma kṛṣṇadvaipāyanātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,100.27",
+   "a": "Vidura",
+   "rel": "brother_of",
+   "b": "Dhṛtarāṣṭra",
+   "words": "dhṛtarāṣṭrasya ca bhrātā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,100.27",
+   "a": "Vidura",
+   "rel": "brother_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍoś cāmitabuddhimān",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

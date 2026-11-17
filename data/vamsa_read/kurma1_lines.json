@@ -1,0 +1,1423 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "lines": [
+  [
+   {
+    "name": "Parāvṛt",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jyāmagha",
+    "ref": "KurmP 1,23.6",
+    "words": "parāvṛtaḥ suto jajñe jyāmagho"
+   },
+   {
+    "name": "Vidarbha",
+    "ref": "KurmP 1,23.6",
+    "words": "tasmād vidarbhaḥ saṃjajñe"
+   },
+   {
+    "name": "Kratha",
+    "ref": "KurmP 1,23.6",
+    "words": "vidarbhāt krathakaiśikau"
+   },
+   {
+    "name": "Kunti",
+    "ref": "KurmP 1,23.11",
+    "words": "krathasyāpyabhavat kuntī"
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "KurmP 1,23.11",
+    "words": "vṛṣṇī tasyābhavat sutaḥ"
+   },
+   {
+    "name": "Nivṛtti",
+    "ref": "KurmP 1,23.11",
+    "words": "vṛṣṇernivṛttirutpanno"
+   },
+   {
+    "name": "Daśārha",
+    "ref": "KurmP 1,23.11",
+    "words": "daśārhastasya"
+   },
+   {
+    "name": "Āroha",
+    "ref": "KurmP 1,23.12",
+    "words": "daśārhaputropyāroho"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "KurmP 1,23.12",
+    "words": "jīmūtastatsuto 'bhavat"
+   },
+   {
+    "name": "Vikṛti",
+    "ref": "KurmP 1,23.12",
+    "words": "jaimūtirabhavad vīro vikṛtiḥ"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "KurmP 1,23.13",
+    "words": "tasya bhīmarathaḥ putraḥ"
+   },
+   {
+    "name": "Navaratha",
+    "ref": "KurmP 1,23.13",
+    "words": "tasmānnavaratho 'bhavat"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "KurmP 1,23.28",
+    "words": "tasya cāsīd daśarathaḥ putraḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "KurmP 1,23.28",
+    "words": "śakunistasya cātmajaḥ"
+   },
+   {
+    "name": "Karambha",
+    "ref": "KurmP 1,23.29",
+    "words": "tasmāt karambhaḥ saṃbhūto"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "KurmP 1,23.29",
+    "words": "devarāto 'bhavat tataḥ"
+   },
+   {
+    "name": "Devakṣatra",
+    "ref": "KurmP 1,23.29",
+    "words": "devakṣatraśca tatsutaḥ"
+   },
+   {
+    "name": "Madhu",
+    "ref": "KurmP 1,23.30",
+    "words": "madhustasya tu dāyādaḥ"
+   },
+   {
+    "name": "Kuruvaśa",
+    "ref": "KurmP 1,23.30",
+    "words": "tasmāt kuruvaśo 'bhavat"
+   },
+   {
+    "name": "Anu",
+    "ref": "KurmP 1,23.30",
+    "words": "sutrāmā cānureva ca"
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "KurmP 1,23.31",
+    "words": "anostu purukutso 'bhūt"
+   },
+   {
+    "name": "Aṃśu",
+    "ref": "KurmP 1,23.31",
+    "words": "aṃśustasya ca rikthabhāk"
+   },
+   {
+    "name": "Sattvata",
+    "ref": "KurmP 1,23.31",
+    "words": "athāṃśoḥ sattvato nāma"
+   },
+   {
+    "name": "Sāttvata",
+    "ref": "KurmP 1,23.34",
+    "words": "sāttvatastasya putro 'bhūt"
+   },
+   {
+    "name": "Andhaka",
+    "ref": "KurmP 1,23.35",
+    "words": "sāttvataḥ sattvasaṃpannaḥ kauśalyāṃ suṣuve sutān andhakaṃ"
+   },
+   {
+    "name": "Bhajamāna",
+    "ref": "KurmP 1,23.47",
+    "words": "kukuraṃ bhajamānaṃ ca"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "KurmP 1,23.67",
+    "words": "bhajamānādabūt putraḥ prakhyāto 'sau vidūrathaḥ"
+   },
+   {
+    "name": "Śūra",
+    "ref": "KurmP 1,23.67",
+    "words": "tasya śūraḥ"
+   },
+   {
+    "name": "Śami",
+    "ref": "KurmP 1,23.67",
+    "words": "śūraḥ śamistasmāt"
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "KurmP 1,23.67",
+    "words": "śamistasmāt pratikṣatrastato 'bhavat"
+   },
+   {
+    "name": "Svayaṃbhoja",
+    "ref": "KurmP 1,23.68",
+    "words": "svayaṃbhojastatastasmād"
+   },
+   {
+    "name": "Hṛdika",
+    "ref": "KurmP 1,23.68",
+    "words": "hṛdikaḥ śatrutāpanaḥ"
+   },
+   {
+    "name": "Kṛtavarman",
+    "ref": "KurmP 1,23.68",
+    "words": "kṛtavarmātha tatputro"
+   },
+   {
+    "name": "Devara",
+    "ref": "KurmP 1,23.68",
+    "words": "devarastatsutaḥ smṛtaḥ"
+   },
+   {
+    "name": "Śūra",
+    "ref": "KurmP 1,23.68",
+    "words": "sa śūrastatsuto"
+   },
+   {
+    "name": "Vasudeva",
+    "ref": "KurmP 1,23.68",
+    "words": "vasudevo 'tha tatsutaḥ"
+   },
+   {
+    "name": "Vāsudeva",
+    "ref": "KurmP 1,23.69",
+    "words": "vasudevāvanmahābāhurvāsudevo"
+   },
+   {
+    "name": "Pradyumna",
+    "ref": "KurmP 1,23.81",
+    "words": "vāsudevasyāṃ mahābalaparākramāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bilibili",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vṛddhaśarman",
+    "ref": "KurmP 1,20.15",
+    "words": "vṛddhaśarmācatatsutaḥ"
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "KurmP 1,20.16",
+    "words": "tasmād viśvasahastasmāt"
+   },
+   {
+    "name": "Khaṭvāṅga",
+    "ref": "KurmP 1,20.16",
+    "words": "khaṭvāṅga iti viśrutaḥ"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "KurmP 1,20.16",
+    "words": "dīrghabāhuḥ sutastasya"
+   },
+   {
+    "name": "Raghu",
+    "ref": "KurmP 1,20.16",
+    "words": "raghustasmādajāyata"
+   },
+   {
+    "name": "Aja",
+    "ref": "KurmP 1,20.17",
+    "words": "raghorajaḥ samutpanno"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "KurmP 1,20.17",
+    "words": "rājā daśarathastataḥ"
+   },
+   {
+    "name": "Rāma",
+    "ref": "KurmP 1,20.17",
+    "words": "rāmo dāśarathir"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "KurmP 1,20.56",
+    "words": "rāmasya tanayo jajñe kuśa"
+   },
+   {
+    "name": "Atithi",
+    "ref": "KurmP 1,20.57",
+    "words": "atithistu kuśājjajñe"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "KurmP 1,20.57",
+    "words": "niṣadhastatsuto 'bhavat"
+   },
+   {
+    "name": "Nala",
+    "ref": "KurmP 1,20.57",
+    "words": "nalastu niṣadhasyābhūt"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "KurmP 1,20.57",
+    "words": "nabhastamādajāyata"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "KurmP 1,20.58",
+    "words": "nabhasaḥ puṇḍarīkākhyaḥ"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "KurmP 1,20.58",
+    "words": "kṣemadhanvā ca tatsutaḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "KurmP 1,20.58",
+    "words": "tasya putro 'bhavad vīro devānīkaḥ"
+   },
+   {
+    "name": "Ahīnagu",
+    "ref": "KurmP 1,20.59",
+    "words": "ahīnagustasya suto"
+   },
+   {
+    "name": "Sahasvat",
+    "ref": "KurmP 1,20.59",
+    "words": "sahasvāṃstatsuto 'bhavat"
+   },
+   {
+    "name": "Candrāvaloka",
+    "ref": "KurmP 1,20.59",
+    "words": "tasmāccandrāvalokastu"
+   },
+   {
+    "name": "Tārāpīḍa",
+    "ref": "KurmP 1,20.59",
+    "words": "tārāpīḍastu tatsutaḥ"
+   },
+   {
+    "name": "Candragiri",
+    "ref": "KurmP 1,20.60",
+    "words": "tārāpīḍāccandragiri"
+   },
+   {
+    "name": "Bhānuvitta",
+    "ref": "KurmP 1,20.60",
+    "words": "bhānuvittastato 'bhavat"
+   },
+   {
+    "name": "Śrutāyu",
+    "ref": "KurmP 1,20.60",
+    "words": "śrutāyurabhavat tasmāt"
+   }
+  ],
+  [
+   {
+    "name": "Kroṣṭu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vṛjinīvān",
+    "ref": "KurmP 1,23.1",
+    "words": "kroṣṭoreko 'bhavat putro vṛjinīvān"
+   },
+   {
+    "name": "Svāti",
+    "ref": "KurmP 1,23.1",
+    "words": "tasya putro mahān svātiḥ"
+   },
+   {
+    "name": "Uśadgu",
+    "ref": "KurmP 1,23.1",
+    "words": "uśadgustatsuto 'bhavat"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "KurmP 1,23.2",
+    "words": "uśadgorabhavat putro nāmnā citraratho"
+   },
+   {
+    "name": "Śaśabindu",
+    "ref": "KurmP 1,23.2",
+    "words": "caitrarathirloke śaśabinduriti smṛtaḥ"
+   },
+   {
+    "name": "Pṛthuyaśas",
+    "ref": "KurmP 1,23.3",
+    "words": "tasya putraḥ pṛthuyaśā"
+   },
+   {
+    "name": "Pṛthukarman",
+    "ref": "KurmP 1,23.3",
+    "words": "pṛthukarmā ca tatputraḥ"
+   },
+   {
+    "name": "Pṛthujaya",
+    "ref": "KurmP 1,23.3",
+    "words": "tasmāt pṛthujayo 'bhavat"
+   },
+   {
+    "name": "Pṛthukīrti",
+    "ref": "KurmP 1,23.4",
+    "words": "pṛthukīrtirabhūt tasmāt"
+   },
+   {
+    "name": "Pṛthudāna",
+    "ref": "KurmP 1,23.4",
+    "words": "pṛthudānastato 'bhavat"
+   },
+   {
+    "name": "Pṛthuśravas",
+    "ref": "KurmP 1,23.4",
+    "words": "pṛthuśravāstasya putraḥ"
+   },
+   {
+    "name": "Pṛthusattama",
+    "ref": "KurmP 1,23.4",
+    "words": "tasyāsīt pṛthusattamaḥ"
+   },
+   {
+    "name": "Uśanas",
+    "ref": "KurmP 1,23.5",
+    "words": "uśanā tasya putro 'būt"
+   },
+   {
+    "name": "Siteṣu",
+    "ref": "KurmP 1,23.5",
+    "words": "siteṣustatsuto 'bhavat"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "KurmP 1,23.5",
+    "words": "tasyābhūd rukmakavacaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Asamañjasa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṃśumat",
+    "ref": "KurmP 1,20.8",
+    "words": "asamañsasya tanayo hyaṃśumān"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "KurmP 1,20.8",
+    "words": "tasya putro dilīpastu"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "KurmP 1,20.8",
+    "words": "dilīpāt tu bhagīrathaḥ"
+   },
+   {
+    "name": "Śruta",
+    "ref": "KurmP 1,20.11",
+    "words": "bhagīrathasutaścāpi śruto nāma"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "KurmP 1,20.11",
+    "words": "nābhāgastasya dāyādaḥ"
+   },
+   {
+    "name": "Sindhudvīpa",
+    "ref": "KurmP 1,20.11",
+    "words": "sindhudvīpastato 'bhavat"
+   },
+   {
+    "name": "Ayutāyus",
+    "ref": "KurmP 1,20.12",
+    "words": "ayutāyuḥ sutastasya"
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "KurmP 1,20.12",
+    "words": "ṛtuparṇastu tatsutaḥ"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "KurmP 1,20.12",
+    "words": "ṛtuparṇasya putro 'bhūt sudāso"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "KurmP 1,20.12",
+    "words": "saudāsastasya tanayaḥ"
+   },
+   {
+    "name": "Aśmaka",
+    "ref": "KurmP 1,20.13",
+    "words": "kṣetre kalmāṣapādake aśmakaṃ janayāmasā"
+   },
+   {
+    "name": "Nakula",
+    "ref": "KurmP 1,20.14",
+    "words": "aśmakasyotkalāyāṃ tu nakulo"
+   }
+  ],
+  [
+   {
+    "name": "Prastāva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "KurmP 1,38.39",
+    "words": "pṛthustatastato"
+   },
+   {
+    "name": "Rakta",
+    "ref": "KurmP 1,38.39",
+    "words": "tato rakto"
+   },
+   {
+    "name": "Gaya",
+    "ref": "KurmP 1,38.39",
+    "words": "raktasyāpi gayaḥ sutaḥ"
+   },
+   {
+    "name": "Nara",
+    "ref": "KurmP 1,38.40",
+    "words": "naro gayasya tanayaḥ"
+   },
+   {
+    "name": "Virāj",
+    "ref": "KurmP 1,38.40",
+    "words": "tasya putro virāḍabhūt"
+   },
+   {
+    "name": "Dhīmat",
+    "ref": "KurmP 1,38.40",
+    "words": "tasya putro mahāvīryo dhīmāṃstasmādajāyata"
+   },
+   {
+    "name": "Mahānta",
+    "ref": "KurmP 1,38.41",
+    "words": "mahānto 'pi tataścābhūd"
+   },
+   {
+    "name": "Bhauvana",
+    "ref": "KurmP 1,38.41",
+    "words": "bhauvanastatsuto 'bhavat"
+   },
+   {
+    "name": "Tvaṣṭṛ",
+    "ref": "KurmP 1,38.41",
+    "words": "tvaṣṭā"
+   },
+   {
+    "name": "Viraja",
+    "ref": "KurmP 1,38.41",
+    "words": "tvaṣṭuśca virajo"
+   },
+   {
+    "name": "Rajas",
+    "ref": "KurmP 1,38.41",
+    "words": "rajastasyāpyabhūt sutaḥ"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "KurmP 1,38.42",
+    "words": "śatajid rajasastasya jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Sūrya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Manu",
+    "ref": "KurmP 1,19.2",
+    "words": "suṣuve sūryānmanumanuttamam"
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "KurmP 1,19.4",
+    "words": "manostu prathamasyāsan nava putrāstu saṃyamāḥ ikṣvākuḥ"
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "KurmP 1,19.10",
+    "words": "ikṣvākoścābhavad vīro vikukṣirnāma"
+   },
+   {
+    "name": "Kakutstha",
+    "ref": "KurmP 1,19.11",
+    "words": "teṣāñjyeṣṭhaḥ kakutstho 'bhūt"
+   },
+   {
+    "name": "Suyodhana",
+    "ref": "KurmP 1,19.11",
+    "words": "kākutstho hi suyodhanaḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "KurmP 1,19.11",
+    "words": "suyodhanāt pṛthuḥ"
+   },
+   {
+    "name": "Viśvaka",
+    "ref": "KurmP 1,19.11",
+    "words": "viśvakaśca pṛthoḥ sutaḥ"
+   },
+   {
+    "name": "Ārdraka",
+    "ref": "KurmP 1,19.12",
+    "words": "viśvakādārdrako"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "KurmP 1,19.12",
+    "words": "yuvanāśvastu tatsutaḥ"
+   },
+   {
+    "name": "Śrāvasti",
+    "ref": "KurmP 1,19.18",
+    "words": "tasya putro 'bhavad vīraḥ śrāvastiriti"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "KurmP 1,19.19",
+    "words": "tasmācca bṛhadaśvo 'bhūt"
+   },
+   {
+    "name": "Kuvalayāśvaka",
+    "ref": "KurmP 1,19.19",
+    "words": "tasmāt kuvalayāśvakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Tridhanvan",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Trayyāruṇa",
+    "ref": "KurmP 1,20.1",
+    "words": "tasya putro 'bhavad vidvāṃstrayyāruṇa"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "KurmP 1,20.2",
+    "words": "tasya satyavrato nāma kumāro"
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "KurmP 1,20.2",
+    "words": "bhāryā satyadhanā nāma hariścandramajījanat"
+   },
+   {
+    "name": "Rohita",
+    "ref": "KurmP 1,20.3",
+    "words": "hariścandrasya putro 'bhūd rohito"
+   },
+   {
+    "name": "Harita",
+    "ref": "KurmP 1,20.3",
+    "words": "harito rohitasyātha"
+   },
+   {
+    "name": "Dhundhu",
+    "ref": "KurmP 1,20.3",
+    "words": "dhundhustasya suto 'bhavat"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "KurmP 1,20.4",
+    "words": "dhundhuputrau babhūvatuḥ"
+   },
+   {
+    "name": "Kāruka",
+    "ref": "KurmP 1,20.4",
+    "words": "vijayasyābhavat putraḥ kāruko"
+   },
+   {
+    "name": "Vṛka",
+    "ref": "KurmP 1,20.5",
+    "words": "kārukasya vṛkaḥ putraḥ"
+   },
+   {
+    "name": "Bāhu",
+    "ref": "KurmP 1,20.5",
+    "words": "tasmād bāhurajāyata"
+   },
+   {
+    "name": "Sagara",
+    "ref": "KurmP 1,20.5",
+    "words": "sagarastasya putrau'bhūd"
+   }
+  ],
+  [
+   {
+    "name": "Yadu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahastrajit",
+    "ref": "KurmP 1,21.11",
+    "words": "yadorapyabhavan putrāḥ pañca"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "KurmP 1,21.12",
+    "words": "sahastrajitsutastadvacchatajinnāma"
+   },
+   {
+    "name": "Haihaya",
+    "ref": "KurmP 1,21.12",
+    "words": "sutāḥ śatajito 'pyāsaṃstrayaḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "KurmP 1,21.13",
+    "words": "haihayasyābhavat putro dharma"
+   },
+   {
+    "name": "Dharmanetra",
+    "ref": "KurmP 1,21.14",
+    "words": "tasya putro 'bhavad viprā dharmanetraḥ"
+   },
+   {
+    "name": "Kīrti",
+    "ref": "KurmP 1,21.14",
+    "words": "dharmanetrasya kīrtistu"
+   }
+  ],
+  [
+   {
+    "name": "Vasiṣṭha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śakti",
+    "ref": "KurmP 1,18.23",
+    "words": "vasiṣṭhastu śaktimutpādayat sutam"
+   },
+   {
+    "name": "Parāśara",
+    "ref": "KurmP 1,18.23",
+    "words": "śakteḥ parāśaraḥ"
+   },
+   {
+    "name": "Kṛṣṇa Dvaipāyana",
+    "ref": "KurmP 1,18.24",
+    "words": "lebhe tvapratimaṃ putraṃ kṛṣṇādvaipāyanaṃ"
+   },
+   {
+    "name": "Śuka",
+    "ref": "KurmP 1,18.25",
+    "words": "dvaipāyanācchrako jajñe"
+   },
+   {
+    "name": "Gaura",
+    "ref": "KurmP 1,18.26",
+    "words": "kṛṣṇo gauraśca pañcamaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dṛḍhāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pramoda",
+    "ref": "KurmP 1,19.21",
+    "words": "dṛḍhāśvasya pramodastu"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "KurmP 1,19.21",
+    "words": "haryaśvastasya cātmajaḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "KurmP 1,19.21",
+    "words": "haryaśvasya nikumbhastu"
+   },
+   {
+    "name": "Saṃhatāśvaka",
+    "ref": "KurmP 1,19.21",
+    "words": "nikumbhāt saṃhatāśvakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Manu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ūru",
+    "ref": "KurmP 1,13.7",
+    "words": "manorajāyanta daśa"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "KurmP 1,13.9",
+    "words": "ūrorajanayat putrān"
+   },
+   {
+    "name": "Vena",
+    "ref": "KurmP 1,13.10",
+    "words": "aṅgād veno 'bhavat"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "KurmP 1,13.10",
+    "words": "bainyo venādajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Nābhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛṣabha",
+    "ref": "KurmP 1,38.34",
+    "words": "nābherāsīnmahātmanaḥ tasyarṣabho 'bhavat putro"
+   },
+   {
+    "name": "Bharata",
+    "ref": "KurmP 1,38.35",
+    "words": "ṛṣabhād bharato jajñe"
+   },
+   {
+    "name": "Sumati",
+    "ref": "KurmP 1,38.37",
+    "words": "sumatirbharatasyābhūt putraḥ"
+   },
+   {
+    "name": "Taijasa",
+    "ref": "KurmP 1,38.37",
+    "words": "sumatestaijasaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Saṃsta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "KurmP 1,23.8",
+    "words": "saṃstasya putro balavān nāmnā viśvasahastu"
+   },
+   {
+    "name": "Kauśika",
+    "ref": "KurmP 1,23.8",
+    "words": "tasya putro mahāvīryaḥ prajāvān kauśikastataḥ"
+   },
+   {
+    "name": "Sumantu",
+    "ref": "KurmP 1,23.8",
+    "words": "abhūt tasya suto dhīmān sumantu"
+   },
+   {
+    "name": "Anala",
+    "ref": "KurmP 1,23.8",
+    "words": "sumantustatsuto 'nalaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ambarīṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "KurmP 1,19.25",
+    "words": "ambarīṣasya dāyādo yuvanāśvo 'paraḥ"
+   },
+   {
+    "name": "Harita",
+    "ref": "KurmP 1,19.25",
+    "words": "harito yuvanāśvasya"
+   },
+   {
+    "name": "Hārita",
+    "ref": "KurmP 1,19.25",
+    "words": "hāritastatsuto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Anṛta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhaya",
+    "ref": "KurmP 1,8.25",
+    "words": "nikṛtyanṛtayorjajñe bhayaṃ naraka eva ca"
+   },
+   {
+    "name": "Mṛtyu",
+    "ref": "KurmP 1,8.26",
+    "words": "bhayājjajñe 'tha vai māyā mṛtyuṃ"
+   },
+   {
+    "name": "Vyādhi",
+    "ref": "KurmP 1,8.27",
+    "words": "mṛtyorvyādhijarāśokatṛṣṇākrodhāśca jajñire"
+   }
+  ],
+  [
+   {
+    "name": "Bhadraśreṇya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Durdama",
+    "ref": "KurmP 1,21.15",
+    "words": "bhadraśreṇyasya dāyādo durdamo"
+   },
+   {
+    "name": "Dhanaka",
+    "ref": "KurmP 1,21.16",
+    "words": "durdamasya suto dhīmān dhanako"
+   },
+   {
+    "name": "Kṛtavīrya",
+    "ref": "KurmP 1,21.16",
+    "words": "dhanakasya tu dāyādāścatvāro"
+   }
+  ],
+  [
+   {
+    "name": "Bhṛgu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhātṛ",
+    "ref": "KurmP 1,12.1",
+    "words": "devau dhātāvidhātārau"
+   },
+   {
+    "name": "Prāṇa",
+    "ref": "KurmP 1,12.2",
+    "words": "tayorjātau sutāvubhau prāṇaścaiva"
+   },
+   {
+    "name": "Vedaśiras",
+    "ref": "KurmP 1,12.3",
+    "words": "vedaśirā nāma prāṇasya dyutimān sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Havirdhāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Prācīnabarhis",
+    "ref": "KurmP 1,13.50",
+    "words": "havirdhānastathāgneyyāṃ janayāmāsa satsutam prācīnabarhiṣaṃ"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "KurmP 1,13.51",
+    "words": "prācīnabarhirbhāgavān ... daśa putrānajījanat"
+   },
+   {
+    "name": "Dakṣa",
+    "ref": "KurmP 1,13.53",
+    "words": "daśabhyastu pracetobhyo māriṣāyāṃ prajāpatiḥ dakṣo jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Jyotiṣmat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vapuṣmat",
+    "ref": "KurmP 1,23.9",
+    "words": "jyotiṣmān vapuṣmāṃstatsuto 'bhavat"
+   },
+   {
+    "name": "Śrīdeva",
+    "ref": "KurmP 1,23.10",
+    "words": "śrīdevastatsuto 'bhavat"
+   },
+   {
+    "name": "Vītaratha",
+    "ref": "KurmP 1,23.10",
+    "words": "tasya vītaratho"
+   }
+  ],
+  [
+   {
+    "name": "Manu Svāyaṃbhuva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uttānapāda",
+    "ref": "KurmP 1,13.1",
+    "words": "priyavratottānapādau manoḥ svāyaṃbhuvasya"
+   },
+   {
+    "name": "Dhruva",
+    "ref": "KurmP 1,13.2",
+    "words": "uttānapādasya dhruvo nāma suto 'bhavat"
+   },
+   {
+    "name": "Śliṣṭi",
+    "ref": "KurmP 1,13.3",
+    "words": "dhruvāt śliṣṭiñca bhavyaṃ ca"
+   }
+  ],
+  [
+   {
+    "name": "Marīci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaśyapa",
+    "ref": "KurmP 1,18.16",
+    "words": "marīceḥ kaśyapaḥ putraḥ"
+   },
+   {
+    "name": "Vatsara",
+    "ref": "KurmP 1,18.2",
+    "words": "tasya vai tapato 'tyarthaṃ prādurbhūtau sutāvimau"
+   },
+   {
+    "name": "Naidhruva",
+    "ref": "KurmP 1,18.3",
+    "words": "vatsarānnaidhruvo jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Māndhātṛ",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "KurmP 1,19.24",
+    "words": "māndhātuḥ purukutso 'bhūd"
+   },
+   {
+    "name": "Trasadasyu",
+    "ref": "KurmP 1,19.26",
+    "words": "purukutsasya dāyādastrasadasyur"
+   },
+   {
+    "name": "Saṃbhūti",
+    "ref": "KurmP 1,19.26",
+    "words": "saṃbhūtistatsuto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Parameṣṭhī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pratīhāra",
+    "ref": "KurmP 1,38.38",
+    "words": "pratīhārastadanvayaḥ"
+   },
+   {
+    "name": "Pratihartā",
+    "ref": "KurmP 1,38.38",
+    "words": "pratiharteti vikhyāta utpannastasya cātmajaḥ"
+   },
+   {
+    "name": "Bhava",
+    "ref": "KurmP 1,38.39",
+    "words": "bhavastasmād"
+   }
+  ],
+  [
+   {
+    "name": "Purūravas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Āyu",
+    "ref": "KurmP 1,21.1",
+    "words": "tasya putrā babhūvurhi ṣaḍindrasamatejasaḥ āyurmāyuramāvāyuḥ"
+   },
+   {
+    "name": "Nahuṣa",
+    "ref": "KurmP 1,21.3",
+    "words": "āyuṣastanayā vīrāḥ pañcaivāsan"
+   },
+   {
+    "name": "Yati",
+    "ref": "KurmP 1,21.4",
+    "words": "nahuṣasya tu dāyādāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vītihotra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ananta",
+    "ref": "KurmP 1,22.4",
+    "words": "vītihotrasutaścāpi viśruto 'nanta"
+   },
+   {
+    "name": "Durjaya",
+    "ref": "KurmP 1,22.4",
+    "words": "durjayastasya putro 'būt"
+   },
+   {
+    "name": "Supratīka",
+    "ref": "KurmP 1,22.45",
+    "words": "tasya putro 'tha matimān supratīka iti śrutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kārtavīrya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jayadhvaja",
+    "ref": "KurmP 1,21.65",
+    "words": "kārtavīryasutaṃ"
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "KurmP 1,22.1",
+    "words": "jayadhvajasya putro 'bhūt tālājaṅghā"
+   }
+  ],
+  [
+   {
+    "name": "Priyavrata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Agnīdhra",
+    "ref": "KurmP 1,38.6",
+    "words": "putrastasyābhavan putrāḥ prajāpatisamā daśa"
+   },
+   {
+    "name": "Kiṃpuruṣa",
+    "ref": "KurmP 1,38.27",
+    "words": "nābhiḥ kiṃpuruṣaścaiva"
+   }
+  ],
+  [
+   {
+    "name": "Pulastya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśravas",
+    "ref": "KurmP 1,18.9",
+    "words": "ṛṣistvailavilistasyāṃ viśravāḥ samapadyata"
+   },
+   {
+    "name": "Vaiśravaṇa",
+    "ref": "KurmP 1,18.11",
+    "words": "jyeṣṭhaṃ vaiśravaṇaṃ tasya suṣuve"
+   }
+  ],
+  [
+   {
+    "name": "Ruci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yajña",
+    "ref": "KurmP 1,8.12",
+    "words": "mānasasya ruceḥ śubham"
+   },
+   {
+    "name": "Yāmā",
+    "ref": "KurmP 1,8.13",
+    "words": "yajñasya dakṣiṇāyāṃ tu putrā dvādaśa jajñire"
+   }
+  ],
+  [
+   {
+    "name": "Saṃhatāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Raṇāśva",
+    "ref": "KurmP 1,19.22",
+    "words": "raṇāśvaśca saṃhatāśvasya vai sutau"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "KurmP 1,19.22",
+    "words": "yuvanāśvo raṇāśvasya"
+   }
+  ],
+  [
+   {
+    "name": "Viṣṇuvṛddha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "KurmP 1,19.27",
+    "words": "tvanaraṇyo 'bhavat paraḥ"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "KurmP 1,19.27",
+    "words": "bṛhadaśavo 'naraṇyasya"
+   }
+  ],
+  [
+   {
+    "name": "Vṛṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Madhu",
+    "ref": "KurmP 1,22.3",
+    "words": "tasya putro 'bhavanmadhuḥ"
+   },
+   {
+    "name": "Vṛṣaṇa",
+    "ref": "KurmP 1,22.3",
+    "words": "madhoḥ putraśataṃ tvāsīd vṛṣaṇastasya vaṃśabhāk"
+   }
+  ],
+  [
+   {
+    "name": "Agrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nyagrodha",
+    "ref": "KurmP 1,23.66",
+    "words": "agrasenasya putro 'bhūnnyagrodhaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Akrūra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devavān",
+    "ref": "KurmP 1,23.45",
+    "words": "akrūrasya smṛtaḥ putro devavāniti"
+   }
+  ],
+  [
+   {
+    "name": "Arjuna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṛṣṇa",
+    "ref": "KurmP 1,21.36",
+    "words": "yadarjuno 'smajjanakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "KurmP 1,12.7",
+    "words": "anasūyā tathaivātrerjajñe putrān"
+   }
+  ],
+  [
+   {
+    "name": "Cakṣus",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cākṣuṣa Manu",
+    "ref": "KurmP 1,13.6",
+    "words": "so 'jījanat puṣkariṇyāṃ vairaṇyāṃ cākṣuṣaṃ manum"
+   }
+  ],
+  [
+   {
+    "name": "Danu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tāra",
+    "ref": "KurmP 1,17.8",
+    "words": "danoḥ putrāstārādyā"
+   }
+  ],
+  [
+   {
+    "name": "Dharma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṣema",
+    "ref": "KurmP 1,8.23",
+    "words": "ityete dharmasūnavaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dhundhumāra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Daṇḍāśva",
+    "ref": "KurmP 1,19.20",
+    "words": "daṇḍāśvaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kratu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bālakhilyas",
+    "ref": "KurmP 1,12.11",
+    "words": "saṃtatiḥ suṣuve kratoḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Harṣa",
+    "ref": "KurmP 1,8.24",
+    "words": "kāmasya harṣaḥ putro 'bhūd"
+   }
+  ],
+  [
+   {
+    "name": "Mṛkaṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mārkaṇḍeya",
+    "ref": "KurmP 1,12.3",
+    "words": "mārkaṇḍeyo mṛkaṇḍutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pulaha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kardama",
+    "ref": "KurmP 1,12.6",
+    "words": "putrān pulahasya prajāpateḥ"
+   }
+  ],
+  [
+   {
+    "name": "Saṃjita",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahiṣmān",
+    "ref": "KurmP 1,21.15",
+    "words": "mahiṣmān saṃjitasyābhūt"
+   }
+  ],
+  [
+   {
+    "name": "Vahni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pāvaka",
+    "ref": "KurmP 1,12.14",
+    "words": "svāhā tasmāt sutān lebhe"
+   }
+  ],
+  [
+   {
+    "name": "Virāj",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Svāyaṃbhuva Manu",
+    "ref": "KurmP 1,8.8",
+    "words": "yo 'bhavat puruṣāt putro virāḍavyaktajanmanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vāyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hanumat",
+    "ref": "KurmP 1,20.35",
+    "words": "vāyuputrau"
+   }
+  ]
+ ]
+}

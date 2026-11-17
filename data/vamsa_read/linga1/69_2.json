@@ -1,0 +1,197 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "chapter": 69,
+ "part": 2,
+ "refs": [
+  "LiP 1,69.59",
+  "LiP 1,69.60",
+  "LiP 1,69.61",
+  "LiP 1,69.62",
+  "LiP 1,69.63",
+  "LiP 1,69.64",
+  "LiP 1,69.65",
+  "LiP 1,69.66",
+  "LiP 1,69.67",
+  "LiP 1,69.68",
+  "LiP 1,69.69",
+  "LiP 1,69.70",
+  "LiP 1,69.71",
+  "LiP 1,69.72",
+  "LiP 1,69.73",
+  "LiP 1,69.74",
+  "LiP 1,69.75",
+  "LiP 1,69.76",
+  "LiP 1,69.77",
+  "LiP 1,69.78",
+  "LiP 1,69.79",
+  "LiP 1,69.80",
+  "LiP 1,69.81",
+  "LiP 1,69.82",
+  "LiP 1,69.83",
+  "LiP 1,69.84",
+  "LiP 1,69.85",
+  "LiP 1,69.86",
+  "LiP 1,69.87",
+  "LiP 1,69.88",
+  "LiP 1,69.89",
+  "LiP 1,69.90",
+  "LiP 1,69.91",
+  "LiP 1,69.92",
+  "LiP 1,69.93",
+  "LiP 1,69.94"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_liGgapurANa1-108.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:29:58",
+ "reply": "{\"statements\":[{\"ref\":\"LiP 1,69.61\",\"a\":\"Aṣṭama\",\"rel\":\"son_of\",\"b\":\"Devakī\",\"words\":\"devakyās tanayo 'ṣṭamaḥ\",\"doubt\":true},{\"ref\":\"LiP 1,69.64\",\"a\":\"Pradyumna\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"tasya kṛṣṇasya tanayāḥ pradyumnapramukhāḥ\",\"doubt\":false},{\"ref\":\"LiP 1,69.65\",\"a\":\"Cārudeṣṇa\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"putreṣveteṣu sarveṣu cārudeṣṇādayo hareḥ\",\"doubt\":false},{\"ref\":\"LiP 1,69.67\",\"a\":\"Rukmiṇī\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"kṛṣṇasya tāsu sarvāsu priyā jyeṣṭhā ca rukmiṇī\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Cārudeṣṇa\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Sucāru\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Cāruveṣa\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Yaśodhara\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Cāruśravas\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Cāruyaśas\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Pradyumna\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.69\",\"a\":\"Sāmba\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"ete labdhāstu kṛṣṇena\",\"doubt\":false},{\"ref\":\"LiP 1,69.70\",\"a\":\"Jāmbavatī\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"jāmbavatyabravītkṛṣṇaṃ bhāryā kṛṣṇasya\",\"doubt\":false},{\"ref\":\"LiP 1,69.77\",\"a\":\"Sāmba\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"sāmbaṃ jāṃbavatīputraṃ\",\"doubt\":false},{\"ref\":\"LiP 1,69.78\",\"a\":\"Sāmba\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"sāṃbaṃ bhāryā hareḥ sutam\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01973,
+ "tokens": {
+  "input": 3841,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1205,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "LiP 1,69.61",
+   "a": "Aṣṭama",
+   "rel": "son_of",
+   "b": "Devakī",
+   "words": "devakyās tanayo 'ṣṭamaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.64",
+   "a": "Pradyumna",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "tasya kṛṣṇasya tanayāḥ pradyumnapramukhāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.65",
+   "a": "Cārudeṣṇa",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "putreṣveteṣu sarveṣu cārudeṣṇādayo hareḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.67",
+   "a": "Rukmiṇī",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "kṛṣṇasya tāsu sarvāsu priyā jyeṣṭhā ca rukmiṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Cārudeṣṇa",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Sucāru",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Cāruveṣa",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Yaśodhara",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Cāruśravas",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Cāruyaśas",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Pradyumna",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.69",
+   "a": "Sāmba",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "ete labdhāstu kṛṣṇena",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.70",
+   "a": "Jāmbavatī",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "jāmbavatyabravītkṛṣṇaṃ bhāryā kṛṣṇasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.77",
+   "a": "Sāmba",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "sāmbaṃ jāṃbavatīputraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,69.78",
+   "a": "Sāmba",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "sāṃbaṃ bhāryā hareḥ sutam",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

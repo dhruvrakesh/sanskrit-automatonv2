@@ -1,0 +1,521 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 15,
+ "part": 0,
+ "refs": [
+  "ViPc 4,15.1",
+  "ViPc 4,15.2",
+  "ViPc 4,15.3",
+  "ViPc 4,15.4",
+  "ViPc 4,15.5",
+  "ViPc 4,15.6",
+  "ViPc 4,15.7",
+  "ViPc 4,15.8",
+  "ViPc 4,15.9",
+  "ViPc 4,15.10",
+  "ViPc 4,15.11",
+  "ViPc 4,15.12",
+  "ViPc 4,15.13",
+  "ViPc 4,15.14",
+  "ViPc 4,15.15",
+  "ViPc 4,15.16",
+  "ViPc 4,15.17",
+  "ViPc 4,15.18",
+  "ViPc 4,15.19",
+  "ViPc 4,15.43",
+  "ViPc 4,15.20",
+  "ViPc 4,15.21",
+  "ViPc 4,15.22",
+  "ViPc 4,15.23",
+  "ViPc 4,15.24",
+  "ViPc 4,15.25",
+  "ViPc 4,15.26"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:51:40",
+ "reply": "{\"statements\":[\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Balabhadra\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Balabhadra\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Sāraṇa\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Sāraṇa\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Śaṭha\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Śaṭha\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Durmada\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Durmada\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"putrān rohiṇyām ānakadundubhir utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Niśaṭha\",\"rel\":\"son_of\",\"b\":\"Balabhadra\",\"words\":\"balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Niśaṭha\",\"rel\":\"born_of\",\"b\":\"Revatī\",\"words\":\"balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Ulmuka\",\"rel\":\"son_of\",\"b\":\"Balabhadra\",\"words\":\"balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Ulmuka\",\"rel\":\"born_of\",\"b\":\"Revatī\",\"words\":\"balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Mārṣṭi\",\"rel\":\"son_of\",\"b\":\"Sāraṇa\",\"words\":\"mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Mārṣima\",\"rel\":\"son_of\",\"b\":\"Sāraṇa\",\"words\":\"mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Śiśu\",\"rel\":\"son_of\",\"b\":\"Sāraṇa\",\"words\":\"mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.12\",\"a\":\"Satyadhṛti\",\"rel\":\"son_of\",\"b\":\"Sāraṇa\",\"words\":\"mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Nanda\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"nandopanandakṛtakādyā madirāyās tanayāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Upananda\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"nandopanandakṛtakādyā madirāyās tanayāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Kṛtaka\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"nandopanandakṛtakādyā madirāyās tanayāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Upanidhi\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāyāś copanidhigadādyāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Gada\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāyāś copanidhigadādyāḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Kauśika\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"vaiśālyāṃ ca kauśikam ekam ajanayat\",\"doubt\":true},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Kauśika\",\"rel\":\"born_of\",\"b\":\"Vaiśālī\",\"words\":\"vaiśālyāṃ ca kauśikam ekam ajanayat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Kīrtimat\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Kīrtimat\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyām api\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Suṣeṇa\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Suṣeṇa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyām api\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Udāyin\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Udāyin\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyām api\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Bhadrasena\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Bhadrasena\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyām api\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Ṛjudāsa\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Ṛjudāsa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyām api\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Bhadradeva\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.13\",\"a\":\"Bhadradeva\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyām api\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.11\",\"a\":\"Rohiṇī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.11\",\"a\":\"Madirā\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.11\",\"a\":\"Bhadrā\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.11\",\"a\":\"Devakī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.11\",\"a\":\"Pauravī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.17\",\"a\":\"Yaśodā\",\"rel\":\"wife_of\",\"b\":\"Nanda\",\"words\":\"nandagopapatnyā yaśodāyā\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Pradyumna\",\"rel\":\"son_of\",\"b\":\"Vāsudeva\",\"words\":\"teṣāṃ ca pradyumnacārudeṣṇasāmbādayas trayodaśa pradhānāḥ\",\"doubt\":true},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Kakudvatī\",\"rel\":\"daughter_of\",\"b\":\"Rukmin\",\"words\":\"rukmiṇas tanayāṃ kakudvatīṃ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Kakudvatī\",\"rel\":\"wife_of\",\"b\":\"Pradyumna\",\"words\":\"pradyumno 'pi rukmiṇas tanayāṃ kakudvatīṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Aniruddha\",\"rel\":\"son_of\",\"b\":\"Pradyumna\",\"words\":\"tasyām asyāniruddho jajñe\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Aniruddha\",\"rel\":\"born_of\",\"b\":\"Kakudvatī\",\"words\":\"tasyām asyāniruddho jajñe\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Subhadrā\",\"rel\":\"descendant_of\",\"b\":\"Rukmin\",\"words\":\"rukmiṇa eva pautrīṃ subhadrāṃ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Subhadrā\",\"rel\":\"wife_of\",\"b\":\"Aniruddha\",\"words\":\"aniruddho 'pi rukmiṇa eva pautrīṃ subhadrāṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Vajra\",\"rel\":\"son_of\",\"b\":\"Aniruddha\",\"words\":\"tasyām asya vajro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Vajra\",\"rel\":\"born_of\",\"b\":\"Subhadrā\",\"words\":\"tasyām asya vajro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Pratibāhu\",\"rel\":\"son_of\",\"b\":\"Vajra\",\"words\":\"vajrasya pratibāhus\",\"doubt\":false},\n{\"ref\":\"ViPc 4,15.43\",\"a\":\"Sucāru\",\"rel\":\"son_of\",\"b\":\"Pratibāhu\",\"words\":\"tasyāpi sucāruḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05581,
+ "tokens": {
+  "input": 4197,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4742,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Balabhadra",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Balabhadra",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Sāraṇa",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Sāraṇa",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Śaṭha",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Śaṭha",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Durmada",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "balabhadrasāraṇaśaṭhadurmadādīn putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Durmada",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "putrān rohiṇyām ānakadundubhir utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Niśaṭha",
+   "rel": "son_of",
+   "b": "Balabhadra",
+   "words": "balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Niśaṭha",
+   "rel": "born_of",
+   "b": "Revatī",
+   "words": "balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Ulmuka",
+   "rel": "son_of",
+   "b": "Balabhadra",
+   "words": "balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Ulmuka",
+   "rel": "born_of",
+   "b": "Revatī",
+   "words": "balabhadro 'pi revatyāṃ niśaṭholmukau putrāv ajanayat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Mārṣṭi",
+   "rel": "son_of",
+   "b": "Sāraṇa",
+   "words": "mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Mārṣima",
+   "rel": "son_of",
+   "b": "Sāraṇa",
+   "words": "mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Śiśu",
+   "rel": "son_of",
+   "b": "Sāraṇa",
+   "words": "mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.12",
+   "a": "Satyadhṛti",
+   "rel": "son_of",
+   "b": "Sāraṇa",
+   "words": "mārṣṭimārṣimacchiśiśiśusatyadhṛtipramukhāḥ sāraṇasyātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Nanda",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "nandopanandakṛtakādyā madirāyās tanayāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Upananda",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "nandopanandakṛtakādyā madirāyās tanayāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Kṛtaka",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "nandopanandakṛtakādyā madirāyās tanayāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Upanidhi",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāyāś copanidhigadādyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Gada",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāyāś copanidhigadādyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Kauśika",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "vaiśālyāṃ ca kauśikam ekam ajanayat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Kauśika",
+   "rel": "born_of",
+   "b": "Vaiśālī",
+   "words": "vaiśālyāṃ ca kauśikam ekam ajanayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Kīrtimat",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Kīrtimat",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyām api",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Suṣeṇa",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Suṣeṇa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyām api",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Udāyin",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Udāyin",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyām api",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Bhadrasena",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Bhadrasena",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyām api",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Ṛjudāsa",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Ṛjudāsa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyām api",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Bhadradeva",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "ānakadundubhir devakyām api kīrtimatsuṣeṇodāyibhadrasenarjudāsabhadradevākhyāḥ ṣaṭ putrā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.13",
+   "a": "Bhadradeva",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyām api",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.11",
+   "a": "Rohiṇī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.11",
+   "a": "Madirā",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.11",
+   "a": "Bhadrā",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.11",
+   "a": "Devakī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.11",
+   "a": "Pauravī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevasyānakadundubheḥ pauravīrohiṇīmadirābhadrādevakīpramukhā bahvyaḥ patnyo 'bhavan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.17",
+   "a": "Yaśodā",
+   "rel": "wife_of",
+   "b": "Nanda",
+   "words": "nandagopapatnyā yaśodāyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Pradyumna",
+   "rel": "son_of",
+   "b": "Vāsudeva",
+   "words": "teṣāṃ ca pradyumnacārudeṣṇasāmbādayas trayodaśa pradhānāḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Kakudvatī",
+   "rel": "daughter_of",
+   "b": "Rukmin",
+   "words": "rukmiṇas tanayāṃ kakudvatīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Kakudvatī",
+   "rel": "wife_of",
+   "b": "Pradyumna",
+   "words": "pradyumno 'pi rukmiṇas tanayāṃ kakudvatīṃ nāmopayeme",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Aniruddha",
+   "rel": "son_of",
+   "b": "Pradyumna",
+   "words": "tasyām asyāniruddho jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Aniruddha",
+   "rel": "born_of",
+   "b": "Kakudvatī",
+   "words": "tasyām asyāniruddho jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Subhadrā",
+   "rel": "descendant_of",
+   "b": "Rukmin",
+   "words": "rukmiṇa eva pautrīṃ subhadrāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Subhadrā",
+   "rel": "wife_of",
+   "b": "Aniruddha",
+   "words": "aniruddho 'pi rukmiṇa eva pautrīṃ subhadrāṃ nāmopayeme",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Vajra",
+   "rel": "son_of",
+   "b": "Aniruddha",
+   "words": "tasyām asya vajro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Vajra",
+   "rel": "born_of",
+   "b": "Subhadrā",
+   "words": "tasyām asya vajro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Pratibāhu",
+   "rel": "son_of",
+   "b": "Vajra",
+   "words": "vajrasya pratibāhus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,15.43",
+   "a": "Sucāru",
+   "rel": "son_of",
+   "b": "Pratibāhu",
+   "words": "tasyāpi sucāruḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

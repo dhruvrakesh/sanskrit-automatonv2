@@ -1,0 +1,702 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 24,
+ "part": 1,
+ "refs": [
+  "ViPc 4,24.1",
+  "ViPc 4,24.2",
+  "ViPc 4,24.3",
+  "ViPc 4,24.4",
+  "ViPc 4,24.5",
+  "ViPc 4,24.6",
+  "ViPc 4,24.7",
+  "ViPc 4,24.8",
+  "ViPc 4,24.9",
+  "ViPc 4,24.10",
+  "ViPc 4,24.11",
+  "ViPc 4,24.12",
+  "ViPc 4,24.13",
+  "ViPc 4,24.14",
+  "ViPc 4,24.15",
+  "ViPc 4,24.16",
+  "ViPc 4,24.17",
+  "ViPc 4,24.18",
+  "ViPc 4,24.19"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:55:02",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,24.1\",\"a\":\"Pradyota\",\"rel\":\"succeeded\",\"b\":\"Ripuṃjaya\",\"words\":\"svāminaṃ hatvā svaputraṃ pradyotanāmānam abhiṣekṣyati\",\"doubt\":false},{\"ref\":\"ViPc 4,24.1\",\"a\":\"Pradyota\",\"rel\":\"son_of\",\"b\":\"Muniko\",\"words\":\"svaputraṃ pradyotanāmānam\",\"doubt\":false},{\"ref\":\"ViPc 4,24.1\",\"a\":\"Pālaka\",\"rel\":\"son_of\",\"b\":\"Pradyota\",\"words\":\"tasyāpi pālako nāma putro bhavitā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.1\",\"a\":\"Janaka\",\"rel\":\"son_of\",\"b\":\"Viśākhayūpa\",\"words\":\"viśākhayūpas tatputro janakas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.1\",\"a\":\"Nandivardhana\",\"rel\":\"son_of\",\"b\":\"Janaka\",\"words\":\"janakas tasya ca nandivardhanaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Kākavarṇa\",\"rel\":\"son_of\",\"b\":\"Śiśunāga\",\"words\":\"śiśunāgas tatputraś ca kākavarṇo\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Kṣemadharmā\",\"rel\":\"son_of\",\"b\":\"Kākavarṇa\",\"words\":\"tatputraḥ kṣemadharmā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Kṣatraujas\",\"rel\":\"son_of\",\"b\":\"Kṣemadharmā\",\"words\":\"tasyāpi kṣatraujāḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Vidhisāra\",\"rel\":\"son_of\",\"b\":\"Kṣatraujas\",\"words\":\"tatputro vidhisāras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Ajātaśatru\",\"rel\":\"son_of\",\"b\":\"Vidhisāra\",\"words\":\"tataś cājātaśatruḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Darbhaka\",\"rel\":\"son_of\",\"b\":\"Ajātaśatru\",\"words\":\"tasmāc ca darbhako\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Udayana\",\"rel\":\"son_of\",\"b\":\"Darbhaka\",\"words\":\"darbhakāc codayanaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Nandivardhana\",\"rel\":\"son_of\",\"b\":\"Udayana\",\"words\":\"tasmād api nandivardhanaḥ\",\"doubt\":true},{\"ref\":\"ViPc 4,24.2\",\"a\":\"Mahānandī\",\"rel\":\"son_of\",\"b\":\"Nandivardhana\",\"words\":\"tato mahānandī\",\"doubt\":true},{\"ref\":\"ViPc 4,24.3\",\"a\":\"Mahāpadma Nanda\",\"rel\":\"son_of\",\"b\":\"Mahānandī\",\"words\":\"mahānandisutaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.3\",\"a\":\"Mahāpadma Nanda\",\"rel\":\"born_of\",\"b\":\"śūdrā\",\"words\":\"śūdrāgarbhodbhavo\",\"doubt\":false},{\"ref\":\"ViPc 4,24.5\",\"a\":\"Sumālya\",\"rel\":\"son_of\",\"b\":\"Mahāpadma\",\"words\":\"tasyāpy aṣṭau sutāḥ sumālyādyā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.6\",\"a\":\"Candragupta\",\"rel\":\"succeeded\",\"b\":\"Nanda\",\"words\":\"kauṭilya eva candraguptaṃ rājye 'bhiṣekṣyati\",\"doubt\":true},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Bindusāra\",\"rel\":\"son_of\",\"b\":\"Candragupta\",\"words\":\"tasyāpi putro bindusāro\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Aśokavardhana\",\"rel\":\"son_of\",\"b\":\"Bindusāra\",\"words\":\"tasyāpy aśokavardhanas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Suyaśas\",\"rel\":\"son_of\",\"b\":\"Aśokavardhana\",\"words\":\"tataḥ suyaśās\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Suyaśas\",\"words\":\"tato daśarathas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Saṃgata\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tataḥ saṃgatas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Śāliśūka\",\"rel\":\"son_of\",\"b\":\"Saṃgata\",\"words\":\"tataḥ śāliśūkas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Somaśarmā\",\"rel\":\"son_of\",\"b\":\"Śāliśūka\",\"words\":\"tasmāt somaśarmā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Śatadhanvā\",\"rel\":\"son_of\",\"b\":\"Somaśarmā\",\"words\":\"tasmāc chatadhanvā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.7\",\"a\":\"Bṛhadratha\",\"rel\":\"son_of\",\"b\":\"Śatadhanvā\",\"words\":\"tasyāpy'nu bṛhadrathanāmā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.8\",\"a\":\"Puṣyamitra\",\"rel\":\"succeeded\",\"b\":\"Bṛhadratha\",\"words\":\"svāminaṃ hatvā rājyaṃ kariṣyati\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Agnimitra\",\"rel\":\"son_of\",\"b\":\"Puṣyamitra\",\"words\":\"asyātmajo 'gnimitras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Sujyeṣṭha\",\"rel\":\"son_of\",\"b\":\"Agnimitra\",\"words\":\"tasmāt sujyeṣṭhas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Vasumitra\",\"rel\":\"son_of\",\"b\":\"Sujyeṣṭha\",\"words\":\"tato vasumitras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Ardraka\",\"rel\":\"son_of\",\"b\":\"Vasumitra\",\"words\":\"tasmād apy ardrakas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Pulindaka\",\"rel\":\"son_of\",\"b\":\"Ardraka\",\"words\":\"tataḥ pulindakas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Ghoṣavasu\",\"rel\":\"son_of\",\"b\":\"Pulindaka\",\"words\":\"tato ghoṣavasus\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Vajramitra\",\"rel\":\"son_of\",\"b\":\"Ghoṣavasu\",\"words\":\"tasmād api vajramitras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.9\",\"a\":\"Bhāgavata\",\"rel\":\"son_of\",\"b\":\"Vajramitra\",\"words\":\"tato bhāgavataḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.10\",\"a\":\"Devabhūti\",\"rel\":\"son_of\",\"b\":\"Bhāgavata\",\"words\":\"tasmād devabhūtiḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Vasudeva\",\"rel\":\"succeeded\",\"b\":\"Devabhūti\",\"words\":\"devabhūtiṃ tu śuṅgarājānaṃ vyasaninaṃ tasyaivāmātyaḥ kaṇvo vasudevanāmā nipātya svayam avanīṃ bhokṣyate\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Bhūmitra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"tasya putro bhūmitras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Nārāyaṇa\",\"rel\":\"son_of\",\"b\":\"Bhūmitra\",\"words\":\"tasyāpi nārāyaṇaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Suśarmā\",\"rel\":\"son_of\",\"b\":\"Nārāyaṇa\",\"words\":\"nārāyaṇasyātmajaḥ suśarmā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śipraka\",\"rel\":\"succeeded\",\"b\":\"Suśarmā\",\"words\":\"suśarmāṇaṃ tu kāṇvaṃ svabhṛtyo balāt śiprakanāmā hatvāndhrajātīyo vasudhāṃ bhokṣyati\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Kṛṣṇa\",\"rel\":\"brother_of\",\"b\":\"Śipraka\",\"words\":\"kṛṣṇanāmā tadbhrātā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Kṛṣṇa\",\"rel\":\"succeeded\",\"b\":\"Śipraka\",\"words\":\"tataś ca kṛṣṇanāmā tadbhrātā bhūpatir bhāvī\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śrīśātakarṇi\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"tasya putraḥ śrīśātakarṇis\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Pūrṇotsaṅga\",\"rel\":\"son_of\",\"b\":\"Śrīśātakarṇi\",\"words\":\"tasyāpi pūrṇotsaṅgas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śātakarṇi\",\"rel\":\"son_of\",\"b\":\"Pūrṇotsaṅga\",\"words\":\"tatputraś ca śātakarṇis\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Lambodara\",\"rel\":\"son_of\",\"b\":\"Śātakarṇi\",\"words\":\"tasmāc ca lambodaras\",\"doubt\":true},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Divīlaka\",\"rel\":\"son_of\",\"b\":\"Lambodara\",\"words\":\"tasmād divīlakas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Meghasvāti\",\"rel\":\"son_of\",\"b\":\"Divīlaka\",\"words\":\"tato meghasvātis\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Paṭumān\",\"rel\":\"son_of\",\"b\":\"Meghasvāti\",\"words\":\"tataḥ paṭumān\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Ariṣṭakarmā\",\"rel\":\"son_of\",\"b\":\"Paṭumān\",\"words\":\"tataś cāriṣṭakarmā\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Hāla\",\"rel\":\"son_of\",\"b\":\"Ariṣṭakarmā\",\"words\":\"tato hālo\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Pattalaka\",\"rel\":\"son_of\",\"b\":\"Hāla\",\"words\":\"hālāt pattalakas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Pravilla\",\"rel\":\"son_of\",\"b\":\"Pattalaka\",\"words\":\"tataḥ pravilla senas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Sundara Śātakarṇī\",\"rel\":\"son_of\",\"b\":\"Pravilla\",\"words\":\"tataḥ sundaraḥ śātakarṇī\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Cakora\",\"rel\":\"son_of\",\"b\":\"Sundara Śātakarṇī\",\"words\":\"tasmāc cakoraḥ śātakarṇī\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śivasvāti\",\"rel\":\"son_of\",\"b\":\"Cakora\",\"words\":\"tataḥ śivasvātis\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Gomatīputra\",\"rel\":\"son_of\",\"b\":\"Śivasvāti\",\"words\":\"tataś ca gomatīputras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Pulimān\",\"rel\":\"son_of\",\"b\":\"Gomatīputra\",\"words\":\"tatputraḥ pulimān\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śātakarṇī\",\"rel\":\"son_of\",\"b\":\"Pulimān\",\"words\":\"tasyāpi śātakarṇī\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śivaśrī\",\"rel\":\"son_of\",\"b\":\"Śātakarṇī\",\"words\":\"tataḥ śivaśrīs\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Śivaskandha\",\"rel\":\"son_of\",\"b\":\"Śivaśrī\",\"words\":\"tataḥ śivaskandhaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Yajñaśrī\",\"rel\":\"son_of\",\"b\":\"Śivaskandha\",\"words\":\"tasmād yajñaśrīs\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Yajñaśrī\",\"words\":\"tato vijayas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Candraśrī\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"tataś candraśrīs\",\"doubt\":false},{\"ref\":\"ViPc 4,24.11\",\"a\":\"Pulomāvi\",\"rel\":\"son_of\",\"b\":\"Candraśrī\",\"words\":\"tasyāpi pulomāviḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.13\",\"a\":\"Vindhyaśakti\",\"rel\":\"succeeded\",\"b\":\"Kailakilā\",\"words\":\"teṣāṃ vindhyaśaktiḥ\",\"doubt\":true},{\"ref\":\"ViPc 4,24.14\",\"a\":\"Puraṃjaya\",\"rel\":\"son_of\",\"b\":\"Vindhyaśakti\",\"words\":\"tataḥ puraṃjayas\",\"doubt\":false},{\"ref\":\"ViPc 4,24.14\",\"a\":\"Rāmacandra\",\"rel\":\"son_of\",\"b\":\"Puraṃjaya\",\"words\":\"tato rāmacandras\",\"doubt\":false},{\"ref\":\"ViPc 4,24.14\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Rāmacandra\",\"words\":\"tasmād dharmo\",\"doubt\":false},{\"ref\":\"ViPc 4,24.14\",\"a\":\"Vaṅgara\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"dharmād vaṅgaraḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,24.14\",\"a\":\"Nandiyaśas\",\"rel\":\"brother_of\",\"b\":\"Suṣinandi\",\"words\":\"suṣinandis tadbhrātā nandiyaśāḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.06309,
+ "tokens": {
+  "input": 4938,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 5321,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,24.1",
+   "a": "Pradyota",
+   "rel": "succeeded",
+   "b": "Ripuṃjaya",
+   "words": "svāminaṃ hatvā svaputraṃ pradyotanāmānam abhiṣekṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.1",
+   "a": "Pradyota",
+   "rel": "son_of",
+   "b": "Muniko",
+   "words": "svaputraṃ pradyotanāmānam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.1",
+   "a": "Pālaka",
+   "rel": "son_of",
+   "b": "Pradyota",
+   "words": "tasyāpi pālako nāma putro bhavitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.1",
+   "a": "Janaka",
+   "rel": "son_of",
+   "b": "Viśākhayūpa",
+   "words": "viśākhayūpas tatputro janakas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.1",
+   "a": "Nandivardhana",
+   "rel": "son_of",
+   "b": "Janaka",
+   "words": "janakas tasya ca nandivardhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Kākavarṇa",
+   "rel": "son_of",
+   "b": "Śiśunāga",
+   "words": "śiśunāgas tatputraś ca kākavarṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Kṣemadharmā",
+   "rel": "son_of",
+   "b": "Kākavarṇa",
+   "words": "tatputraḥ kṣemadharmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Kṣatraujas",
+   "rel": "son_of",
+   "b": "Kṣemadharmā",
+   "words": "tasyāpi kṣatraujāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Vidhisāra",
+   "rel": "son_of",
+   "b": "Kṣatraujas",
+   "words": "tatputro vidhisāras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Ajātaśatru",
+   "rel": "son_of",
+   "b": "Vidhisāra",
+   "words": "tataś cājātaśatruḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Darbhaka",
+   "rel": "son_of",
+   "b": "Ajātaśatru",
+   "words": "tasmāc ca darbhako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Udayana",
+   "rel": "son_of",
+   "b": "Darbhaka",
+   "words": "darbhakāc codayanaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Nandivardhana",
+   "rel": "son_of",
+   "b": "Udayana",
+   "words": "tasmād api nandivardhanaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,24.2",
+   "a": "Mahānandī",
+   "rel": "son_of",
+   "b": "Nandivardhana",
+   "words": "tato mahānandī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.3",
+   "a": "Mahāpadma Nanda",
+   "rel": "son_of",
+   "b": "Mahānandī",
+   "words": "mahānandisutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.3",
+   "a": "Mahāpadma Nanda",
+   "rel": "born_of",
+   "b": "śūdrā",
+   "words": "śūdrāgarbhodbhavo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.5",
+   "a": "Sumālya",
+   "rel": "son_of",
+   "b": "Mahāpadma",
+   "words": "tasyāpy aṣṭau sutāḥ sumālyādyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.6",
+   "a": "Candragupta",
+   "rel": "succeeded",
+   "b": "Nanda",
+   "words": "kauṭilya eva candraguptaṃ rājye 'bhiṣekṣyati",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Bindusāra",
+   "rel": "son_of",
+   "b": "Candragupta",
+   "words": "tasyāpi putro bindusāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Aśokavardhana",
+   "rel": "son_of",
+   "b": "Bindusāra",
+   "words": "tasyāpy aśokavardhanas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Suyaśas",
+   "rel": "son_of",
+   "b": "Aśokavardhana",
+   "words": "tataḥ suyaśās",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Suyaśas",
+   "words": "tato daśarathas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Saṃgata",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tataḥ saṃgatas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Śāliśūka",
+   "rel": "son_of",
+   "b": "Saṃgata",
+   "words": "tataḥ śāliśūkas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Somaśarmā",
+   "rel": "son_of",
+   "b": "Śāliśūka",
+   "words": "tasmāt somaśarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Śatadhanvā",
+   "rel": "son_of",
+   "b": "Somaśarmā",
+   "words": "tasmāc chatadhanvā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,24.7",
+   "a": "Bṛhadratha",
+   "rel": "son_of",
+   "b": "Śatadhanvā",
+   "words": "tasyāpy'nu bṛhadrathanāmā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,24.8",
+   "a": "Puṣyamitra",
+   "rel": "succeeded",
+   "b": "Bṛhadratha",
+   "words": "svāminaṃ hatvā rājyaṃ kariṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Agnimitra",
+   "rel": "son_of",
+   "b": "Puṣyamitra",
+   "words": "asyātmajo 'gnimitras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Sujyeṣṭha",
+   "rel": "son_of",
+   "b": "Agnimitra",
+   "words": "tasmāt sujyeṣṭhas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Vasumitra",
+   "rel": "son_of",
+   "b": "Sujyeṣṭha",
+   "words": "tato vasumitras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Ardraka",
+   "rel": "son_of",
+   "b": "Vasumitra",
+   "words": "tasmād apy ardrakas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Pulindaka",
+   "rel": "son_of",
+   "b": "Ardraka",
+   "words": "tataḥ pulindakas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Ghoṣavasu",
+   "rel": "son_of",
+   "b": "Pulindaka",
+   "words": "tato ghoṣavasus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Vajramitra",
+   "rel": "son_of",
+   "b": "Ghoṣavasu",
+   "words": "tasmād api vajramitras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.9",
+   "a": "Bhāgavata",
+   "rel": "son_of",
+   "b": "Vajramitra",
+   "words": "tato bhāgavataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.10",
+   "a": "Devabhūti",
+   "rel": "son_of",
+   "b": "Bhāgavata",
+   "words": "tasmād devabhūtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Vasudeva",
+   "rel": "succeeded",
+   "b": "Devabhūti",
+   "words": "devabhūtiṃ tu śuṅgarājānaṃ vyasaninaṃ tasyaivāmātyaḥ kaṇvo vasudevanāmā nipātya svayam avanīṃ bhokṣyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Bhūmitra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "tasya putro bhūmitras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Nārāyaṇa",
+   "rel": "son_of",
+   "b": "Bhūmitra",
+   "words": "tasyāpi nārāyaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Suśarmā",
+   "rel": "son_of",
+   "b": "Nārāyaṇa",
+   "words": "nārāyaṇasyātmajaḥ suśarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śipraka",
+   "rel": "succeeded",
+   "b": "Suśarmā",
+   "words": "suśarmāṇaṃ tu kāṇvaṃ svabhṛtyo balāt śiprakanāmā hatvāndhrajātīyo vasudhāṃ bhokṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Kṛṣṇa",
+   "rel": "brother_of",
+   "b": "Śipraka",
+   "words": "kṛṣṇanāmā tadbhrātā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Kṛṣṇa",
+   "rel": "succeeded",
+   "b": "Śipraka",
+   "words": "tataś ca kṛṣṇanāmā tadbhrātā bhūpatir bhāvī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śrīśātakarṇi",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "tasya putraḥ śrīśātakarṇis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Pūrṇotsaṅga",
+   "rel": "son_of",
+   "b": "Śrīśātakarṇi",
+   "words": "tasyāpi pūrṇotsaṅgas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śātakarṇi",
+   "rel": "son_of",
+   "b": "Pūrṇotsaṅga",
+   "words": "tatputraś ca śātakarṇis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Lambodara",
+   "rel": "son_of",
+   "b": "Śātakarṇi",
+   "words": "tasmāc ca lambodaras",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Divīlaka",
+   "rel": "son_of",
+   "b": "Lambodara",
+   "words": "tasmād divīlakas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Meghasvāti",
+   "rel": "son_of",
+   "b": "Divīlaka",
+   "words": "tato meghasvātis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Paṭumān",
+   "rel": "son_of",
+   "b": "Meghasvāti",
+   "words": "tataḥ paṭumān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Ariṣṭakarmā",
+   "rel": "son_of",
+   "b": "Paṭumān",
+   "words": "tataś cāriṣṭakarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Hāla",
+   "rel": "son_of",
+   "b": "Ariṣṭakarmā",
+   "words": "tato hālo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Pattalaka",
+   "rel": "son_of",
+   "b": "Hāla",
+   "words": "hālāt pattalakas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Pravilla",
+   "rel": "son_of",
+   "b": "Pattalaka",
+   "words": "tataḥ pravilla senas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Sundara Śātakarṇī",
+   "rel": "son_of",
+   "b": "Pravilla",
+   "words": "tataḥ sundaraḥ śātakarṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Cakora",
+   "rel": "son_of",
+   "b": "Sundara Śātakarṇī",
+   "words": "tasmāc cakoraḥ śātakarṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śivasvāti",
+   "rel": "son_of",
+   "b": "Cakora",
+   "words": "tataḥ śivasvātis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Gomatīputra",
+   "rel": "son_of",
+   "b": "Śivasvāti",
+   "words": "tataś ca gomatīputras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Pulimān",
+   "rel": "son_of",
+   "b": "Gomatīputra",
+   "words": "tatputraḥ pulimān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śātakarṇī",
+   "rel": "son_of",
+   "b": "Pulimān",
+   "words": "tasyāpi śātakarṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śivaśrī",
+   "rel": "son_of",
+   "b": "Śātakarṇī",
+   "words": "tataḥ śivaśrīs",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Śivaskandha",
+   "rel": "son_of",
+   "b": "Śivaśrī",
+   "words": "tataḥ śivaskandhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Yajñaśrī",
+   "rel": "son_of",
+   "b": "Śivaskandha",
+   "words": "tasmād yajñaśrīs",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Yajñaśrī",
+   "words": "tato vijayas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Candraśrī",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "tataś candraśrīs",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.11",
+   "a": "Pulomāvi",
+   "rel": "son_of",
+   "b": "Candraśrī",
+   "words": "tasyāpi pulomāviḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.13",
+   "a": "Vindhyaśakti",
+   "rel": "succeeded",
+   "b": "Kailakilā",
+   "words": "teṣāṃ vindhyaśaktiḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.14",
+   "a": "Puraṃjaya",
+   "rel": "son_of",
+   "b": "Vindhyaśakti",
+   "words": "tataḥ puraṃjayas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.14",
+   "a": "Rāmacandra",
+   "rel": "son_of",
+   "b": "Puraṃjaya",
+   "words": "tato rāmacandras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.14",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Rāmacandra",
+   "words": "tasmād dharmo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.14",
+   "a": "Vaṅgara",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "dharmād vaṅgaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,24.14",
+   "a": "Nandiyaśas",
+   "rel": "brother_of",
+   "b": "Suṣinandi",
+   "words": "suṣinandis tadbhrātā nandiyaśāḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

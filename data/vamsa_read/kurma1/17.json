@@ -1,0 +1,153 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "chapter": 17,
+ "part": 0,
+ "refs": [
+  "KurmP 1,17.1",
+  "KurmP 1,17.2",
+  "KurmP 1,17.3",
+  "KurmP 1,17.4",
+  "KurmP 1,17.5",
+  "KurmP 1,17.6",
+  "KurmP 1,17.7",
+  "KurmP 1,17.8",
+  "KurmP 1,17.9",
+  "KurmP 1,17.10",
+  "KurmP 1,17.11",
+  "KurmP 1,17.12",
+  "KurmP 1,17.13",
+  "KurmP 1,17.14",
+  "KurmP 1,17.15",
+  "KurmP 1,17.16",
+  "KurmP 1,17.17",
+  "KurmP 1,17.18",
+  "KurmP 1,17.19"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_kUrmapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:31:09",
+ "reply": "{\"statements\":[{\"ref\":\"KurmP 1,17.1\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"baleḥ putraśataṃ tvāsīt teṣāṃ pradhāno dyutimān bāṇo nāma\",\"doubt\":false},{\"ref\":\"KurmP 1,17.8\",\"a\":\"Tāra\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"danoḥ putrāstārādyā\",\"doubt\":false},{\"ref\":\"KurmP 1,17.8\",\"a\":\"Śambara\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"danoḥ putrāstārādyā tārastathā śambaraśca\",\"doubt\":false},{\"ref\":\"KurmP 1,17.8\",\"a\":\"Kapila\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"danoḥ putrāstārādyā kapilaḥ\",\"doubt\":false},{\"ref\":\"KurmP 1,17.8\",\"a\":\"Śaṅkara\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"danoḥ putrāstārādyā śaṅkarastathā\",\"doubt\":false},{\"ref\":\"KurmP 1,17.8\",\"a\":\"Svarbhānu\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"danoḥ putrāstārādyā svarbhānurvṛṣaparvā ca\",\"doubt\":false},{\"ref\":\"KurmP 1,17.8\",\"a\":\"Vṛṣaparvan\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"danoḥ putrāstārādyā svarbhānurvṛṣaparvā ca\",\"doubt\":false},{\"ref\":\"KurmP 1,17.14\",\"a\":\"Garuḍa\",\"rel\":\"born_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyāśca putrau dvau prakhyātau garuḍāruṇau\",\"doubt\":false},{\"ref\":\"KurmP 1,17.14\",\"a\":\"Aruṇa\",\"rel\":\"born_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyāśca putrau dvau prakhyātau garuḍāruṇau\",\"doubt\":false},{\"ref\":\"KurmP 1,17.14\",\"a\":\"Garuḍa\",\"rel\":\"brother_of\",\"b\":\"Aruṇa\",\"words\":\"putrau dvau prakhyātau garuḍāruṇau\",\"doubt\":false},{\"ref\":\"KurmP 1,17.10\",\"a\":\"Anantā\",\"rel\":\"born_of\",\"b\":\"Kadrū\",\"words\":\"anantādyā mahānāgāḥ kādraveyāḥ\",\"doubt\":true},{\"ref\":\"KurmP 1,17.16\",\"a\":\"Kaśyapa\",\"rel\":\"other\",\"b\":\"Kaśyapa\",\"words\":\"ete kaśyapadāyādāḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01446,
+ "tokens": {
+  "input": 2509,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 944,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "KurmP 1,17.1",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "baleḥ putraśataṃ tvāsīt teṣāṃ pradhāno dyutimān bāṇo nāma",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,17.8",
+   "a": "Tāra",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "danoḥ putrāstārādyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,17.8",
+   "a": "Śambara",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "danoḥ putrāstārādyā tārastathā śambaraśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,17.8",
+   "a": "Kapila",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "danoḥ putrāstārādyā kapilaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,17.8",
+   "a": "Śaṅkara",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "danoḥ putrāstārādyā śaṅkarastathā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,17.8",
+   "a": "Svarbhānu",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "danoḥ putrāstārādyā svarbhānurvṛṣaparvā ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,17.8",
+   "a": "Vṛṣaparvan",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "danoḥ putrāstārādyā svarbhānurvṛṣaparvā ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,17.14",
+   "a": "Garuḍa",
+   "rel": "born_of",
+   "b": "Vinatā",
+   "words": "vinatāyāśca putrau dvau prakhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,17.14",
+   "a": "Aruṇa",
+   "rel": "born_of",
+   "b": "Vinatā",
+   "words": "vinatāyāśca putrau dvau prakhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,17.14",
+   "a": "Garuḍa",
+   "rel": "brother_of",
+   "b": "Aruṇa",
+   "words": "putrau dvau prakhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,17.10",
+   "a": "Anantā",
+   "rel": "born_of",
+   "b": "Kadrū",
+   "words": "anantādyā mahānāgāḥ kādraveyāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,17.16",
+   "a": "Kaśyapa",
+   "rel": "other",
+   "b": "Kaśyapa",
+   "words": "ete kaśyapadāyādāḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

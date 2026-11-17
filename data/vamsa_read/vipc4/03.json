@@ -1,0 +1,294 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 3,
+ "part": 0,
+ "refs": [
+  "ViPc 4,3.1",
+  "ViPc 4,3.2",
+  "ViPc 4,3.3",
+  "ViPc 4,3.4",
+  "ViPc 4,3.5",
+  "ViPc 4,3.6",
+  "ViPc 4,3.7",
+  "ViPc 4,3.8",
+  "ViPc 4,3.9",
+  "ViPc 4,3.10",
+  "ViPc 4,3.11",
+  "ViPc 4,3.12",
+  "ViPc 4,3.13",
+  "ViPc 4,3.20",
+  "ViPc 4,3.14",
+  "ViPc 4,3.15",
+  "ViPc 4,3.16",
+  "ViPc 4,3.17",
+  "ViPc 4,3.18",
+  "ViPc 4,3.19",
+  "ViPc 4,3.20b",
+  "ViPc 4,3.21",
+  "ViPc 4,3.22",
+  "ViPc 4,3.23",
+  "ViPc 4,3.24",
+  "ViPc 4,3.25",
+  "ViPc 4,3.26",
+  "ViPc 4,3.27",
+  "ViPc 4,3.28",
+  "ViPc 4,3.29",
+  "ViPc 4,3.30",
+  "ViPc 4,3.31",
+  "ViPc 4,3.32",
+  "ViPc 4,3.33"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:48:12",
+ "reply": "{\"statements\":[{\"ref\":\"ViPc 4,3.2\",\"a\":\"Māṃdhātṛ\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"ambarīṣasya māṃdhātus tanayasya\",\"doubt\":true},{\"ref\":\"ViPc 4,3.2\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Māṃdhātṛ\",\"words\":\"māṃdhātus tanayasya yuvanāśvaḥ putro 'bhūt\",\"doubt\":false},{\"ref\":\"ViPc 4,3.3\",\"a\":\"Harīta\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"tasmād dharīto\",\"doubt\":false},{\"ref\":\"ViPc 4,3.3\",\"a\":\"Hārīta\",\"rel\":\"line_of\",\"b\":\"Harīta\",\"words\":\"yato 'ṅgiraso hārītāḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,3.5\",\"a\":\"Purukutsa\",\"rel\":\"son_of\",\"b\":\"Māṃdhātṛ\",\"words\":\"yauvanāśvasya māṃdhātuḥ purukutsanāmā putras\",\"doubt\":false},{\"ref\":\"ViPc 4,3.13\",\"a\":\"Trasadasyu\",\"rel\":\"son_of\",\"b\":\"Purukutsa\",\"words\":\"purukutso narmadāyāṃ trasadasyum ajījanat\",\"doubt\":false},{\"ref\":\"ViPc 4,3.13\",\"a\":\"Trasadasyu\",\"rel\":\"born_of\",\"b\":\"Narmadā\",\"words\":\"purukutso narmadāyāṃ trasadasyum ajījanat\",\"doubt\":false},{\"ref\":\"ViPc 4,3.13\",\"a\":\"Narmadā\",\"rel\":\"wife_of\",\"b\":\"Purukutsa\",\"words\":\"purukutso narmadāyāṃ trasadasyum ajījanat\",\"doubt\":true},{\"ref\":\"ViPc 4,3.20\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Trasadasyu\",\"words\":\"trasadasyutaḥ saṃbhūtas tato 'naraṇyas\",\"doubt\":false},{\"ref\":\"ViPc 4,3.20\",\"a\":\"Pṛṣadaśva\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"anaraṇyasya pṛṣadaśvaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,3.20\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Pṛṣadaśva\",\"words\":\"pṛṣadaśvasya haryaśvaḥ putro 'bhavat\",\"doubt\":false},{\"ref\":\"ViPc 4,3.20\",\"a\":\"Vasumanas\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"tataś ca vasumanās\",\"doubt\":false},{\"ref\":\"ViPc 4,3.20\",\"a\":\"Tridhanvan\",\"rel\":\"son_of\",\"b\":\"Vasumanas\",\"words\":\"tasyāpi tridhanvā\",\"doubt\":false},{\"ref\":\"ViPc 4,3.20\",\"a\":\"Trayyāruṇa\",\"rel\":\"son_of\",\"b\":\"Tridhanvan\",\"words\":\"tridhanvanas trayyāruṇaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,3.14\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Trayyāruṇa\",\"words\":\"tasmāt satyavrato\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Hariścandra\",\"rel\":\"son_of\",\"b\":\"Triśaṅku\",\"words\":\"triśaṅkor hariścandras\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Rohitāśva\",\"rel\":\"son_of\",\"b\":\"Hariścandra\",\"words\":\"tasmād rohitāśvas\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Harita\",\"rel\":\"son_of\",\"b\":\"Rohitāśva\",\"words\":\"tataś ca harito\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Cañcu\",\"rel\":\"son_of\",\"b\":\"Harita\",\"words\":\"haritāc cañcuś\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Cañcu\",\"words\":\"cañcor vijayasudevau\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Sudeva\",\"rel\":\"son_of\",\"b\":\"Cañcu\",\"words\":\"cañcor vijayasudevau\",\"doubt\":false},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Ruruka\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"vijayād rurukasya\",\"doubt\":true},{\"ref\":\"ViPc 4,3.17\",\"a\":\"Vṛka\",\"rel\":\"son_of\",\"b\":\"Ruruka\",\"words\":\"rurukasya vṛkaḥ\",\"doubt\":false},{\"ref\":\"ViPc 4,3.18\",\"a\":\"Bāhu\",\"rel\":\"son_of\",\"b\":\"Vṛka\",\"words\":\"tato bāhur\",\"doubt\":false},{\"ref\":\"ViPc 4,3.21\",\"a\":\"Bāhu's wife\",\"rel\":\"wife_of\",\"b\":\"Bāhu\",\"words\":\"sā tasya bhāryā\",\"doubt\":true},{\"ref\":\"ViPc 4,3.24\",\"a\":\"Sagara\",\"rel\":\"son_of\",\"b\":\"Bāhu\",\"words\":\"sagara iti nāma cakāra\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02629,
+ "tokens": {
+  "input": 3775,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1874,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,3.2",
+   "a": "Māṃdhātṛ",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "ambarīṣasya māṃdhātus tanayasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.2",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Māṃdhātṛ",
+   "words": "māṃdhātus tanayasya yuvanāśvaḥ putro 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.3",
+   "a": "Harīta",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "tasmād dharīto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.3",
+   "a": "Hārīta",
+   "rel": "line_of",
+   "b": "Harīta",
+   "words": "yato 'ṅgiraso hārītāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.5",
+   "a": "Purukutsa",
+   "rel": "son_of",
+   "b": "Māṃdhātṛ",
+   "words": "yauvanāśvasya māṃdhātuḥ purukutsanāmā putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.13",
+   "a": "Trasadasyu",
+   "rel": "son_of",
+   "b": "Purukutsa",
+   "words": "purukutso narmadāyāṃ trasadasyum ajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.13",
+   "a": "Trasadasyu",
+   "rel": "born_of",
+   "b": "Narmadā",
+   "words": "purukutso narmadāyāṃ trasadasyum ajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.13",
+   "a": "Narmadā",
+   "rel": "wife_of",
+   "b": "Purukutsa",
+   "words": "purukutso narmadāyāṃ trasadasyum ajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.20",
+   "a": "Anaraṇya",
+   "rel": "son_of",
+   "b": "Trasadasyu",
+   "words": "trasadasyutaḥ saṃbhūtas tato 'naraṇyas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.20",
+   "a": "Pṛṣadaśva",
+   "rel": "son_of",
+   "b": "Anaraṇya",
+   "words": "anaraṇyasya pṛṣadaśvaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.20",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Pṛṣadaśva",
+   "words": "pṛṣadaśvasya haryaśvaḥ putro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.20",
+   "a": "Vasumanas",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "tataś ca vasumanās",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.20",
+   "a": "Tridhanvan",
+   "rel": "son_of",
+   "b": "Vasumanas",
+   "words": "tasyāpi tridhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.20",
+   "a": "Trayyāruṇa",
+   "rel": "son_of",
+   "b": "Tridhanvan",
+   "words": "tridhanvanas trayyāruṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.14",
+   "a": "Satyavrata",
+   "rel": "son_of",
+   "b": "Trayyāruṇa",
+   "words": "tasmāt satyavrato",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Hariścandra",
+   "rel": "son_of",
+   "b": "Triśaṅku",
+   "words": "triśaṅkor hariścandras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Rohitāśva",
+   "rel": "son_of",
+   "b": "Hariścandra",
+   "words": "tasmād rohitāśvas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Harita",
+   "rel": "son_of",
+   "b": "Rohitāśva",
+   "words": "tataś ca harito",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Cañcu",
+   "rel": "son_of",
+   "b": "Harita",
+   "words": "haritāc cañcuś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Cañcu",
+   "words": "cañcor vijayasudevau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Sudeva",
+   "rel": "son_of",
+   "b": "Cañcu",
+   "words": "cañcor vijayasudevau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Ruruka",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "vijayād rurukasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.17",
+   "a": "Vṛka",
+   "rel": "son_of",
+   "b": "Ruruka",
+   "words": "rurukasya vṛkaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.18",
+   "a": "Bāhu",
+   "rel": "son_of",
+   "b": "Vṛka",
+   "words": "tato bāhur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.21",
+   "a": "Bāhu's wife",
+   "rel": "wife_of",
+   "b": "Bāhu",
+   "words": "sā tasya bhāryā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,3.24",
+   "a": "Sagara",
+   "rel": "son_of",
+   "b": "Bāhu",
+   "words": "sagara iti nāma cakāra",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

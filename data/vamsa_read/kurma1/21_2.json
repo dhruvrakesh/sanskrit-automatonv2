@@ -1,0 +1,68 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "chapter": 21,
+ "part": 2,
+ "refs": [
+  "KurmP 1,21.55",
+  "KurmP 1,21.56",
+  "KurmP 1,21.57",
+  "KurmP 1,21.58",
+  "KurmP 1,21.59",
+  "KurmP 1,21.60",
+  "KurmP 1,21.61",
+  "KurmP 1,21.62",
+  "KurmP 1,21.63",
+  "KurmP 1,21.64",
+  "KurmP 1,21.65",
+  "KurmP 1,21.66",
+  "KurmP 1,21.67",
+  "KurmP 1,21.68",
+  "KurmP 1,21.69",
+  "KurmP 1,21.70",
+  "KurmP 1,21.71",
+  "KurmP 1,21.72",
+  "KurmP 1,21.73",
+  "KurmP 1,21.74",
+  "KurmP 1,21.75",
+  "KurmP 1,21.76",
+  "KurmP 1,21.77",
+  "KurmP 1,21.78"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_kUrmapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:32:48",
+ "reply": "```json\n{\"statements\":[\n{\"ref\":\"KurmP 1,21.64\",\"a\":\"Śīra\",\"rel\":\"brother_of\",\"b\":\"Jayadhvaja\",\"words\":\"śīrādyā bhrātaro nṛpāḥ\",\"doubt\":true},\n{\"ref\":\"KurmP 1,21.65\",\"a\":\"Jayadhvaja\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasutaṃ\",\"doubt\":false}\n]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.00718,
+ "tokens": {
+  "input": 2766,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 165,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "KurmP 1,21.64",
+   "a": "Śīra",
+   "rel": "brother_of",
+   "b": "Jayadhvaja",
+   "words": "śīrādyā bhrātaro nṛpāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,21.65",
+   "a": "Jayadhvaja",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasutaṃ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

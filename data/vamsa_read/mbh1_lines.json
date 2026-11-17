@@ -78,36 +78,43 @@
     "name": "Matināra",
     "ref": "MBh 1,90.24",
     "words": "ṛkṣaḥ khalu takṣakaduhitaram upayeme jvālāṃ nāma tasyāṃ putraṃ matināraṃ nāmotpādayām āsa"
+   }
+  ],
+  [
+   {
+    "name": "Matināra",
+    "ref": null,
+    "words": null
    },
    {
     "name": "Taṃsu",
-    "ref": "MBh 1,90.26",
-    "words": "taṃ bhartāraṃ varayām āsa tasyāṃ putram ajanayat taṃsuṃ nāma"
+    "ref": "MBh 1,89.11",
+    "words": "matinārasutā rājaṃś catvāro 'mitavikramāḥ taṃsur"
    },
    {
     "name": "Ilina",
-    "ref": "MBh 1,90.28",
-    "words": "ilinaṃ janayām āsa kālindyāṃ taṃsur ātmajam"
+    "ref": "MBh 1,89.13",
+    "words": "ilinaṃ tu sutaṃ taṃsur janayām āsa"
    },
    {
     "name": "Duḥṣanta",
-    "ref": "MBh 1,90.29",
-    "words": "ilinas tu rathaṃtaryāṃ duḥṣantādyān pañca putrān ajanayat"
+    "ref": "MBh 1,89.14",
+    "words": "ilino janayām āsa duḥṣantaprabhṛtīn"
    },
    {
     "name": "Bharata",
-    "ref": "MBh 1,90.30",
-    "words": "duḥṣantaḥ khalu viśvāmitraduhitaraṃ śakuntalāṃ nāmopayeme tasyām asya jajñe bharataḥ"
+    "ref": "MBh 1,89.16",
+    "words": "duḥṣantād bharato jajñe"
    },
    {
     "name": "Bhumanyu",
-    "ref": "MBh 1,90.34",
-    "words": "bharataḥ khalu kāśeyīm upayeme sārvasenīṃ sunandāṃ nāma tasyām asya jajñe bhumanyuḥ"
+    "ref": "MBh 1,89.18",
+    "words": "lebhe putraṃ bharadvājād bhumanyuṃ nāma"
    },
    {
     "name": "Suhotra",
-    "ref": "MBh 1,90.35",
-    "words": "bhumanyuḥ khalu dāśārhīm upayeme jayāṃ nāma tasyām asya jajñe suhotraḥ"
+    "ref": "MBh 1,89.21",
+    "words": "bhumanyor abhavan sutāḥ"
    },
    {
     "name": "Hastin",
@@ -127,14 +134,19 @@
   ],
   [
    {
-    "name": "Saṃvaraṇa",
+    "name": "Ṛkṣa",
     "ref": null,
     "words": null
    },
    {
+    "name": "Saṃvaraṇa",
+    "ref": "MBh 1,89.30",
+    "words": "ṛkṣāt saṃvaraṇo jajñe"
+   },
+   {
     "name": "Kuru",
-    "ref": "MBh 1,90.40",
-    "words": "saṃvaraṇaḥ khalu vaivasvatīṃ tapatīṃ nāmopayeme tasyām asya jajñe kuruḥ"
+    "ref": "MBh 1,89.42",
+    "words": "saṃvaraṇāt saurī suṣuve tapatī kurum"
    },
    {
     "name": "Viḍūratha",
@@ -201,6 +213,291 @@
   ],
   [
    {
+    "name": "Brahman",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhṛgu",
+    "ref": "MBh 1,60.40",
+    "words": "brahmaṇo hṛdayaṃ bhittvā niḥsṛto bhagavān bhṛguḥ"
+   },
+   {
+    "name": "Kavi",
+    "ref": "MBh 1,60.40",
+    "words": "bhṛgoḥ putraḥ kavir"
+   },
+   {
+    "name": "Śukra",
+    "ref": "MBh 1,60.40",
+    "words": "śukraḥ kavisuto"
+   }
+  ],
+  [
+   {
+    "name": "Āyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nahuṣa",
+    "ref": "MBh 1,70.23",
+    "words": "nahuṣaṃ ... āyoḥ putrān pracakṣate"
+   },
+   {
+    "name": "Yayāti",
+    "ref": "MBh 1,70.28",
+    "words": "yayātiṃ ... nahuṣo janayām āsa"
+   },
+   {
+    "name": "Yadu",
+    "ref": "MBh 1,70.31",
+    "words": "tasya putrā ... devayānyāṃ"
+   }
+  ],
+  [
+   {
+    "name": "Aurva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛcīka",
+    "ref": "MBh 1,60.46",
+    "words": "ṛcīkas tasya putras"
+   },
+   {
+    "name": "Jamadagni",
+    "ref": "MBh 1,60.46",
+    "words": "jamadagnis tato 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Hiraṇyakaśipu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Prahrāda",
+    "ref": "MBh 1,59.17",
+    "words": "tasyeme putrāḥ pañca mahātmanaḥ prahrādaḥ pūrvajas teṣām"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "MBh 1,59.19",
+    "words": "nikumbhaś ceti viśrutāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vivasvant",
+    "ref": "MBh 1,70.9",
+    "words": "ādityān samajījanat indrādīn vīryasaṃpannān vivasvantam athāpi ca"
+   },
+   {
+    "name": "Yama Vaivasvata",
+    "ref": "MBh 1,70.10",
+    "words": "vivasvataḥ suto jajñe yamo vaivasvataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Virocana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bali",
+    "ref": "MBh 1,59.20",
+    "words": "virocanasya putro 'bhūd balir"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "MBh 1,59.20",
+    "words": "baleś ca prathitaḥ putro bāṇo nāma"
+   }
+  ],
+  [
+   {
+    "name": "Yama",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mārtaṇḍa",
+    "ref": "MBh 1,70.10",
+    "words": "mārtaṇḍaś ca yamasyāpi putro"
+   },
+   {
+    "name": "Manu",
+    "ref": "MBh 1,70.11",
+    "words": "mārtaṇḍasya manur dhīmān ajāyata sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Abhiṣvant",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parikṣit",
+    "ref": "MBh 1,89.45",
+    "words": "abhiṣvataḥ parikṣit"
+   }
+  ],
+  [
+   {
+    "name": "Agni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kumāra",
+    "ref": "MBh 1,60.22",
+    "words": "agneḥ putraḥ kumāras"
+   }
+  ],
+  [
+   {
+    "name": "Ahar",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jyotis",
+    "ref": "MBh 1,60.22",
+    "words": "ahnaḥ sutaḥ smṛto jyotiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Anila",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purojava",
+    "ref": "MBh 1,60.24",
+    "words": "dvau putrāv anilasya"
+   }
+  ],
+  [
+   {
+    "name": "Arjuna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Abhimanyu",
+    "ref": "MBh 1,61.86",
+    "words": "abhimanyur bṛhatkīrtir arjunasya suto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Bhāradvāja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Droṇa",
+    "ref": "MBh 1,61.63",
+    "words": "droṇaṃ samutpannaṃ bhāradvājam ayonijam"
+   }
+  ],
+  [
+   {
+    "name": "Dhara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Draviṇa",
+    "ref": "MBh 1,60.20",
+    "words": "dharasya putro draviṇo"
+   }
+  ],
+  [
+   {
+    "name": "Dhruva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kāla",
+    "ref": "MBh 1,60.20",
+    "words": "dhruvasya putro bhagavān kālo"
+   }
+  ],
+  [
+   {
+    "name": "Dhṛtarāṣṭra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yuyutsu",
+    "ref": "MBh 1,107.36",
+    "words": "dhṛtarāṣṭrān mahāyaśāḥ jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa Dvaipāyana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vidura",
+    "ref": "MBh 1,100.27",
+    "words": "viduro nāma kṛṣṇadvaipāyanātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Marīci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaśyapa",
+    "ref": "MBh 1,59.11",
+    "words": "marīceḥ kaśyapaḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pracetas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dakṣa",
+    "ref": "MBh 1,70.4",
+    "words": "tebhyaḥ prācetaso jajñe dakṣo"
+   }
+  ],
+  [
+   {
+    "name": "Pratyūṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devala",
+    "ref": "MBh 1,60.25",
+    "words": "pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam"
+   }
+  ],
+  [
+   {
     "name": "Purūravas",
     "ref": null,
     "words": null
@@ -209,33 +506,54 @@
     "name": "Āyu",
     "ref": "MBh 1,90.7",
     "words": "purūravasa āyuḥ"
-   },
-   {
-    "name": "Nahuṣa",
-    "ref": "MBh 1,90.7",
-    "words": "āyuṣo nahuṣaḥ"
-   },
-   {
-    "name": "Yayāti",
-    "ref": "MBh 1,90.7",
-    "words": "nahuṣasya yayātiḥ"
    }
   ],
   [
    {
-    "name": "Aditi",
+    "name": "Pāṇḍu",
     "ref": null,
     "words": null
    },
    {
+    "name": "Pāṇḍavas",
+    "ref": "MBh 1,100.21",
+    "words": "tasya putrā maheṣvāsā jajñire pañca pāṇḍavāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Varcas",
+    "ref": "MBh 1,60.21",
+    "words": "somasya tu suto varcā"
+   }
+  ],
+  [
+   {
     "name": "Vivasvān",
-    "ref": "MBh 1,90.7",
-    "words": "aditer vivasvān"
+    "ref": null,
+    "words": null
    },
    {
     "name": "Manu",
     "ref": "MBh 1,90.7",
     "words": "vivasvato manuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaṃtanu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vasu",
+    "ref": "MBh 1,61.68",
+    "words": "vasavas tv aṣṭau gaṅgāyāṃ śaṃtanoḥ sutāḥ"
    }
   ]
  ]

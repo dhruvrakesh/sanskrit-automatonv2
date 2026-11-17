@@ -1,0 +1,28 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 24,
+ "part": 3,
+ "refs": [
+  "ViPc 4,24.68",
+  "ViPc 4,24.69",
+  "ViPc 4,24.70"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:55:31",
+ "reply": "{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00255,
+ "tokens": {
+  "input": 1232,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 9,
+  "thinking": 0
+ },
+ "statements": []
+}

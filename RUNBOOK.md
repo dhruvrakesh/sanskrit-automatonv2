@@ -2968,3 +2968,19 @@ docs\ASKS_2026-10-22.md, section 30. From the automaton's root, in PowerShell:
    run build`; commit and push; Publish in Lovable; ask Lovable's chat to deploy detect-duplicate-articles and
    suggest-tag-categories. Then, in the Lovable Cloud SQL editor, srangam_ai_usage shows their calls by provider.
 5. The credit: `python scripts\claude_engine.py --credit`.
+
+## 17 Nov, late: G6d, the person register; I1 checked (DOCS118_2026_11_17)
+
+docs\ASKS_2026-10-22.md, section 31. From the automaton's root, in PowerShell:
+
+1. The patch: `python scripts\patch_docs118_2026_11_17.py --check`, then without; `python -m unittest
+   tests.test_vamsa_register_2026_11_17 tests.test_docs118_2026_11_17 tests.test_docs117_2026_11_17
+   tests.test_vamsa_align_2026_11_17`; release.ps1 with COMMIT_MSG_g6d_20261117.txt (the dry run, then -Apply once).
+2. G6b: let it end; if it stopped on a dropped connection, `python scripts\vamsa_read.py --work g6 --yes --max-usd 8`
+   again; then `python scripts\vamsa_read.py --work g6 --report`.
+3. G6c and G6d again, free: `python scripts\vamsa_align.py`, then `python scripts\vamsa_register.py`; on screen,
+   writing nothing: `python scripts\vamsa_register.py --name Pariksit`, `--name Janamejaya`, `--name Devavrata`,
+   `--stats`; then exports\vamsa_register.md.
+4. I1: on the site's admin tag page, "suggest categories" once; then in the Lovable Cloud SQL editor the query of
+   section 31's ledger row again: srangam_ai_usage by function_name, purpose, provider, model, ok.
+5. The credit: `python scripts\claude_engine.py --credit`.

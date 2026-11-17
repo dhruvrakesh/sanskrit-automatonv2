@@ -1,0 +1,817 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "kurma1",
+ "title": "Kurmapurana, book 1",
+ "chapter": 38,
+ "part": 0,
+ "refs": [
+  "KurmP 1,38.1",
+  "KurmP 1,38.2",
+  "KurmP 1,38.3",
+  "KurmP 1,38.4",
+  "KurmP 1,38.5",
+  "KurmP 1,38.6",
+  "KurmP 1,38.7",
+  "KurmP 1,38.8",
+  "KurmP 1,38.9",
+  "KurmP 1,38.10",
+  "KurmP 1,38.11",
+  "KurmP 1,38.12",
+  "KurmP 1,38.13",
+  "KurmP 1,38.14",
+  "KurmP 1,38.15",
+  "KurmP 1,38.16",
+  "KurmP 1,38.17",
+  "KurmP 1,38.18",
+  "KurmP 1,38.19",
+  "KurmP 1,38.20",
+  "KurmP 1,38.21",
+  "KurmP 1,38.22",
+  "KurmP 1,38.23",
+  "KurmP 1,38.24",
+  "KurmP 1,38.25",
+  "KurmP 1,38.26",
+  "KurmP 1,38.27",
+  "KurmP 1,38.28",
+  "KurmP 1,38.29",
+  "KurmP 1,38.30",
+  "KurmP 1,38.31",
+  "KurmP 1,38.32",
+  "KurmP 1,38.33",
+  "KurmP 1,38.34",
+  "KurmP 1,38.35",
+  "KurmP 1,38.36",
+  "KurmP 1,38.37",
+  "KurmP 1,38.38",
+  "KurmP 1,38.39",
+  "KurmP 1,38.40",
+  "KurmP 1,38.41",
+  "KurmP 1,38.42",
+  "KurmP 1,38.43",
+  "KurmP 1,38.44"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_kUrmapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:33:49",
+ "reply": "{\"statements\":[\n{\"ref\":\"KurmP 1,38.6\",\"a\":\"Priyavrata\",\"rel\":\"son_of\",\"b\":\"Manu Svāyaṃbhuva\",\"words\":\"svāyaṃbhuvasya tu manoḥ prāgukto yaḥ priyavrataḥ\",\"doubt\":true},\n{\"ref\":\"KurmP 1,38.6\",\"a\":\"Agnīdhra\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"putrastasyābhavan putrāḥ prajāpatisamā daśa\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Agnibāhu\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"agnīdhraścāgnibāhuśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Vapuṣmat\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"vapuṣmān dyutimāṃstathā\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Dyutimat\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"vapuṣmān dyutimāṃstathā\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Medhā\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"medhā medhātithirhavyaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Medhātithi\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"medhā medhātithirhavyaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Havya\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"medhātithirhavyaḥ savanaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.7\",\"a\":\"Savana\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"savanaḥ putra eva ca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.8\",\"a\":\"Jyotiṣmat\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"jyotiṣmān daśamasteṣāṃ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.14\",\"a\":\"Mahāvīta\",\"rel\":\"son_of\",\"b\":\"Savana\",\"words\":\"savanasyāpi mahāvītaḥ suto 'bhavat\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.14\",\"a\":\"Dhātaki\",\"rel\":\"son_of\",\"b\":\"Savana\",\"words\":\"dhātikiścaiva dvāvetau putrau\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.14\",\"a\":\"Dhātaki\",\"rel\":\"brother_of\",\"b\":\"Mahāvīta\",\"words\":\"dvāvetau putrau\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Jalada\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ jaladaśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ kumāraśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Sukumāra\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ sukumāro\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Maṇīcaka\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ maṇīcakaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Kusumottara\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ kusumottaro\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Modāki\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ modākiḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.16\",\"a\":\"Mahādruma\",\"rel\":\"son_of\",\"b\":\"Havya\",\"words\":\"havyasyāpyabhavan sutāḥ saptamaḥ syānmahādrumaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.19\",\"a\":\"Kuśala\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"sutā dyutimato 'bhavan kuśalaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.19\",\"a\":\"Manohara\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"sutā dyutimato 'bhavan dvitīyastu manoharaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.20\",\"a\":\"Uṣṇa\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"uṣṇastṛtīyaḥ saṃproktaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.20\",\"a\":\"Pravara\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"caturthaḥ pravaraḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.20\",\"a\":\"Andhakāra\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"andhakāro muniścaiva\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.20\",\"a\":\"Muni\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"andhakāro muniścaiva\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.20\",\"a\":\"Dundubhi\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"dundubhiścaiva saptamaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Udbheda\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ kuśadvīpe saptaivāsan udbhedo\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Veṇumat\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ saptaivāsan veṇumāṃś\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Aśvaratha\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ saptaivāsan aśvaratho\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Lambana\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ saptaivāsan lambano\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Dhṛti\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ saptaivāsan dhṛtiḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Prabhākara\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ saptaivāsan ṣaṣṭhaḥ prabhākaraścāpi\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.21\",\"a\":\"Kapila\",\"rel\":\"son_of\",\"b\":\"Jyotiṣmat\",\"words\":\"jyotiṣmataḥ saptaivāsan saptamaḥ kapilaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Śveta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ śvetaśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Harita\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ haritaścaiva\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Jīmūta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ jīmūto\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ rohitastathā\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Vaidyuta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ vaidyutau\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Mānasa\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ mānasaścaiva\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.23\",\"a\":\"Suprabha\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāścāsan vapuṣmataḥ saptamaḥ suprabho\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Śāntabhaya\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ jyeṣṭhaḥ śāntabhayaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Śiśira\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ śiśiraśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Sukhodaya\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ sukhodayaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Ānanda\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ ānandaśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Śiva\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ śivaśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Kṣemaka\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ kṣemakaśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.24\",\"a\":\"Dhruva\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātitheḥ sutāḥ dhruvastathā\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.26\",\"a\":\"Nābhi\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"agnīdhrasya tannāmāni nābhiḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Kiṃpuruṣa\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"nābhiḥ kiṃpuruṣaścaiva\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Hari\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"tathā haririlāvṛtaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Ilāvṛta\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"haririlāvṛtaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Ramya\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"ramyo hiraṇvāṃśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Hiraṇvat\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"hiraṇvāṃśca\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Kuru\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"kururbhadrāśvaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Bhadrāśva\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"kururbhadrāśvaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.27\",\"a\":\"Ketumāla\",\"rel\":\"son_of\",\"b\":\"Agnīdhra\",\"words\":\"ketumāhalakaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.34\",\"a\":\"Ṛṣabha\",\"rel\":\"son_of\",\"b\":\"Nābhi\",\"words\":\"nābherāsīnmahātmanaḥ tasyarṣabho 'bhavat putro\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.34\",\"a\":\"Ṛṣabha\",\"rel\":\"born_of\",\"b\":\"Marudevī\",\"words\":\"marudevyāṃ mahādyutiḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.35\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Ṛṣabha\",\"words\":\"ṛṣabhād bharato jajñe\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.35\",\"a\":\"Bharata\",\"rel\":\"succeeded\",\"b\":\"Ṛṣabha\",\"words\":\"so 'bhiṣicyarṣabhaḥ putraṃ bharataṃ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.37\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"sumatirbharatasyābhūt putraḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.37\",\"a\":\"Taijasa\",\"rel\":\"son_of\",\"b\":\"Sumati\",\"words\":\"sumatestaijasaḥ\",\"doubt\":true},\n{\"ref\":\"KurmP 1,38.37\",\"a\":\"Indradyumna\",\"rel\":\"son_of\",\"b\":\"Taijasa\",\"words\":\"tasmādindridyumno vyajāyata\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.38\",\"a\":\"Parameṣṭhī\",\"rel\":\"son_of\",\"b\":\"Indradyumna\",\"words\":\"parameṣṭhī sutastasmāt\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.38\",\"a\":\"Pratīhāra\",\"rel\":\"son_of\",\"b\":\"Parameṣṭhī\",\"words\":\"pratīhārastadanvayaḥ\",\"doubt\":true},\n{\"ref\":\"KurmP 1,38.38\",\"a\":\"Pratihartā\",\"rel\":\"son_of\",\"b\":\"Pratīhāra\",\"words\":\"pratiharteti vikhyāta utpannastasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.39\",\"a\":\"Bhava\",\"rel\":\"son_of\",\"b\":\"Pratihartā\",\"words\":\"bhavastasmād\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.39\",\"a\":\"Udgītha\",\"rel\":\"son_of\",\"b\":\"Bhava\",\"words\":\"athodgīthaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.39\",\"a\":\"Prastāva\",\"rel\":\"son_of\",\"b\":\"Udgītha\",\"words\":\"prastāvastatsuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.39\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Prastāva\",\"words\":\"pṛthustatastato\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.39\",\"a\":\"Rakta\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"tato rakto\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.39\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Rakta\",\"words\":\"raktasyāpi gayaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.40\",\"a\":\"Nara\",\"rel\":\"son_of\",\"b\":\"Gaya\",\"words\":\"naro gayasya tanayaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.40\",\"a\":\"Virāj\",\"rel\":\"son_of\",\"b\":\"Nara\",\"words\":\"tasya putro virāḍabhūt\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.40\",\"a\":\"Dhīmat\",\"rel\":\"son_of\",\"b\":\"Virāj\",\"words\":\"tasya putro mahāvīryo dhīmāṃstasmādajāyata\",\"doubt\":true},\n{\"ref\":\"KurmP 1,38.41\",\"a\":\"Mahānta\",\"rel\":\"son_of\",\"b\":\"Dhīmat\",\"words\":\"mahānto 'pi tataścābhūd\",\"doubt\":true},\n{\"ref\":\"KurmP 1,38.41\",\"a\":\"Bhauvana\",\"rel\":\"son_of\",\"b\":\"Mahānta\",\"words\":\"bhauvanastatsuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.41\",\"a\":\"Tvaṣṭṛ\",\"rel\":\"son_of\",\"b\":\"Bhauvana\",\"words\":\"tvaṣṭā\",\"doubt\":true},\n{\"ref\":\"KurmP 1,38.41\",\"a\":\"Viraja\",\"rel\":\"son_of\",\"b\":\"Tvaṣṭṛ\",\"words\":\"tvaṣṭuśca virajo\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.41\",\"a\":\"Rajas\",\"rel\":\"son_of\",\"b\":\"Viraja\",\"words\":\"rajastasyāpyabhūt sutaḥ\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.42\",\"a\":\"Śatajit\",\"rel\":\"son_of\",\"b\":\"Rajas\",\"words\":\"śatajid rajasastasya jajñe\",\"doubt\":false},\n{\"ref\":\"KurmP 1,38.42\",\"a\":\"Viśvajyoti\",\"rel\":\"son_of\",\"b\":\"Śatajit\",\"words\":\"putraśataṃ teṣāṃ pradhāno viśvajyotiriti\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0723,
+ "tokens": {
+  "input": 4638,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 6302,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "KurmP 1,38.6",
+   "a": "Priyavrata",
+   "rel": "son_of",
+   "b": "Manu Svāyaṃbhuva",
+   "words": "svāyaṃbhuvasya tu manoḥ prāgukto yaḥ priyavrataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.6",
+   "a": "Agnīdhra",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "putrastasyābhavan putrāḥ prajāpatisamā daśa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Agnibāhu",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "agnīdhraścāgnibāhuśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Vapuṣmat",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "vapuṣmān dyutimāṃstathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Dyutimat",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "vapuṣmān dyutimāṃstathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Medhā",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "medhā medhātithirhavyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Medhātithi",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "medhā medhātithirhavyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Havya",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "medhātithirhavyaḥ savanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.7",
+   "a": "Savana",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "savanaḥ putra eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.8",
+   "a": "Jyotiṣmat",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "jyotiṣmān daśamasteṣāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.14",
+   "a": "Mahāvīta",
+   "rel": "son_of",
+   "b": "Savana",
+   "words": "savanasyāpi mahāvītaḥ suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.14",
+   "a": "Dhātaki",
+   "rel": "son_of",
+   "b": "Savana",
+   "words": "dhātikiścaiva dvāvetau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.14",
+   "a": "Dhātaki",
+   "rel": "brother_of",
+   "b": "Mahāvīta",
+   "words": "dvāvetau putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Jalada",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ jaladaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ kumāraśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Sukumāra",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ sukumāro",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Maṇīcaka",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ maṇīcakaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Kusumottara",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ kusumottaro",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Modāki",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ modākiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.16",
+   "a": "Mahādruma",
+   "rel": "son_of",
+   "b": "Havya",
+   "words": "havyasyāpyabhavan sutāḥ saptamaḥ syānmahādrumaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.19",
+   "a": "Kuśala",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "sutā dyutimato 'bhavan kuśalaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.19",
+   "a": "Manohara",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "sutā dyutimato 'bhavan dvitīyastu manoharaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.20",
+   "a": "Uṣṇa",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "uṣṇastṛtīyaḥ saṃproktaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.20",
+   "a": "Pravara",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "caturthaḥ pravaraḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.20",
+   "a": "Andhakāra",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "andhakāro muniścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.20",
+   "a": "Muni",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "andhakāro muniścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.20",
+   "a": "Dundubhi",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "dundubhiścaiva saptamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Udbheda",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ kuśadvīpe saptaivāsan udbhedo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Veṇumat",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ saptaivāsan veṇumāṃś",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Aśvaratha",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ saptaivāsan aśvaratho",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Lambana",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ saptaivāsan lambano",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Dhṛti",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ saptaivāsan dhṛtiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Prabhākara",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ saptaivāsan ṣaṣṭhaḥ prabhākaraścāpi",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.21",
+   "a": "Kapila",
+   "rel": "son_of",
+   "b": "Jyotiṣmat",
+   "words": "jyotiṣmataḥ saptaivāsan saptamaḥ kapilaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Śveta",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ śvetaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Harita",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ haritaścaiva",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Jīmūta",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ jīmūto",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Rohita",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ rohitastathā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Vaidyuta",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ vaidyutau",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Mānasa",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ mānasaścaiva",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.23",
+   "a": "Suprabha",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāścāsan vapuṣmataḥ saptamaḥ suprabho",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Śāntabhaya",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ jyeṣṭhaḥ śāntabhayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Śiśira",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ śiśiraśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Sukhodaya",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ sukhodayaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Ānanda",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ ānandaśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Śiva",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ śivaśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Kṣemaka",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ kṣemakaśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.24",
+   "a": "Dhruva",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātitheḥ sutāḥ dhruvastathā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.26",
+   "a": "Nābhi",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "agnīdhrasya tannāmāni nābhiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Kiṃpuruṣa",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "nābhiḥ kiṃpuruṣaścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Hari",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "tathā haririlāvṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Ilāvṛta",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "haririlāvṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Ramya",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "ramyo hiraṇvāṃśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Hiraṇvat",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "hiraṇvāṃśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Kuru",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "kururbhadrāśvaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Bhadrāśva",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "kururbhadrāśvaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.27",
+   "a": "Ketumāla",
+   "rel": "son_of",
+   "b": "Agnīdhra",
+   "words": "ketumāhalakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.34",
+   "a": "Ṛṣabha",
+   "rel": "son_of",
+   "b": "Nābhi",
+   "words": "nābherāsīnmahātmanaḥ tasyarṣabho 'bhavat putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.34",
+   "a": "Ṛṣabha",
+   "rel": "born_of",
+   "b": "Marudevī",
+   "words": "marudevyāṃ mahādyutiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.35",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Ṛṣabha",
+   "words": "ṛṣabhād bharato jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.35",
+   "a": "Bharata",
+   "rel": "succeeded",
+   "b": "Ṛṣabha",
+   "words": "so 'bhiṣicyarṣabhaḥ putraṃ bharataṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.37",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "sumatirbharatasyābhūt putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.37",
+   "a": "Taijasa",
+   "rel": "son_of",
+   "b": "Sumati",
+   "words": "sumatestaijasaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.37",
+   "a": "Indradyumna",
+   "rel": "son_of",
+   "b": "Taijasa",
+   "words": "tasmādindridyumno vyajāyata",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,38.38",
+   "a": "Parameṣṭhī",
+   "rel": "son_of",
+   "b": "Indradyumna",
+   "words": "parameṣṭhī sutastasmāt",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,38.38",
+   "a": "Pratīhāra",
+   "rel": "son_of",
+   "b": "Parameṣṭhī",
+   "words": "pratīhārastadanvayaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.38",
+   "a": "Pratihartā",
+   "rel": "son_of",
+   "b": "Pratīhāra",
+   "words": "pratiharteti vikhyāta utpannastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.39",
+   "a": "Bhava",
+   "rel": "son_of",
+   "b": "Pratihartā",
+   "words": "bhavastasmād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.39",
+   "a": "Udgītha",
+   "rel": "son_of",
+   "b": "Bhava",
+   "words": "athodgīthaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,38.39",
+   "a": "Prastāva",
+   "rel": "son_of",
+   "b": "Udgītha",
+   "words": "prastāvastatsuto 'bhavat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "KurmP 1,38.39",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Prastāva",
+   "words": "pṛthustatastato",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.39",
+   "a": "Rakta",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "tato rakto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.39",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Rakta",
+   "words": "raktasyāpi gayaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.40",
+   "a": "Nara",
+   "rel": "son_of",
+   "b": "Gaya",
+   "words": "naro gayasya tanayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.40",
+   "a": "Virāj",
+   "rel": "son_of",
+   "b": "Nara",
+   "words": "tasya putro virāḍabhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.40",
+   "a": "Dhīmat",
+   "rel": "son_of",
+   "b": "Virāj",
+   "words": "tasya putro mahāvīryo dhīmāṃstasmādajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.41",
+   "a": "Mahānta",
+   "rel": "son_of",
+   "b": "Dhīmat",
+   "words": "mahānto 'pi tataścābhūd",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.41",
+   "a": "Bhauvana",
+   "rel": "son_of",
+   "b": "Mahānta",
+   "words": "bhauvanastatsuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.41",
+   "a": "Tvaṣṭṛ",
+   "rel": "son_of",
+   "b": "Bhauvana",
+   "words": "tvaṣṭā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.41",
+   "a": "Viraja",
+   "rel": "son_of",
+   "b": "Tvaṣṭṛ",
+   "words": "tvaṣṭuśca virajo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.41",
+   "a": "Rajas",
+   "rel": "son_of",
+   "b": "Viraja",
+   "words": "rajastasyāpyabhūt sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.42",
+   "a": "Śatajit",
+   "rel": "son_of",
+   "b": "Rajas",
+   "words": "śatajid rajasastasya jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "KurmP 1,38.42",
+   "a": "Viśvajyoti",
+   "rel": "son_of",
+   "b": "Śatajit",
+   "words": "putraśataṃ teṣāṃ pradhāno viśvajyotiriti",
+   "doubt": true,
+   "check": "unsupported"
+  }
+ ]
+}

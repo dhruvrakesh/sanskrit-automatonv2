@@ -1,0 +1,150 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "garuda1",
+ "title": "Garudapurana, book 1",
+ "chapter": 6,
+ "part": 2,
+ "refs": [
+  "GarP 1,6.57",
+  "GarP 1,6.59",
+  "GarP 1,6.60",
+  "GarP 1,6.61",
+  "GarP 1,6.62",
+  "GarP 1,6.63",
+  "GarP 1,6.64",
+  "GarP 1,6.65",
+  "GarP 1,6.66",
+  "GarP 1,6.67",
+  "GarP 1,6.68",
+  "GarP 1,6.69",
+  "GarP 1,6.70",
+  "GarP 1,6.71",
+  "GarP 1,6.72",
+  "GarP 1,6.73"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_garuDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:35:10",
+ "reply": "{\"statements\":[{\"ref\":\"GarP 1,6.57\",\"a\":\"śuka\",\"rel\":\"born_of\",\"b\":\"śukī\",\"words\":\"śukī śukānajanayat\",\"doubt\":false},{\"ref\":\"GarP 1,6.57\",\"a\":\"ulūka\",\"rel\":\"born_of\",\"b\":\"ulūkī\",\"words\":\"ulūkī pratyalūkakān\",\"doubt\":false},{\"ref\":\"GarP 1,6.57\",\"a\":\"śyena\",\"rel\":\"born_of\",\"b\":\"śyenī\",\"words\":\"śyenī śyenāṃstathā\",\"doubt\":false},{\"ref\":\"GarP 1,6.57\",\"a\":\"bhāsa\",\"rel\":\"born_of\",\"b\":\"bhāsī\",\"words\":\"bhāsī bhāsān\",\"doubt\":false},{\"ref\":\"GarP 1,6.57\",\"a\":\"gṛdhra\",\"rel\":\"born_of\",\"b\":\"gṛdhrī\",\"words\":\"gṛdhrāṃśca gṛdhryapi\",\"doubt\":false},{\"ref\":\"GarP 1,6.59\",\"a\":\"Garuḍa\",\"rel\":\"son_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyāstu putrau dvau vikhyātau garuḍāruṇau\",\"doubt\":true},{\"ref\":\"GarP 1,6.59\",\"a\":\"Garuḍa\",\"rel\":\"born_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyāstu putrau dvau vikhyātau garuḍāruṇau\",\"doubt\":false},{\"ref\":\"GarP 1,6.59\",\"a\":\"Aruṇa\",\"rel\":\"born_of\",\"b\":\"Vinatā\",\"words\":\"vinatāyāstu putrau dvau vikhyātau garuḍāruṇau\",\"doubt\":false},{\"ref\":\"GarP 1,6.62\",\"a\":\"piśāca\",\"rel\":\"born_of\",\"b\":\"Krodhā\",\"words\":\"krodhā tu janayāmāsa piśācāṃśca\",\"doubt\":false},{\"ref\":\"GarP 1,6.63\",\"a\":\"gō\",\"rel\":\"born_of\",\"b\":\"Surabhi\",\"words\":\"gāstu vai janayāmāsa surabhirmahiṣāṃstathā\",\"doubt\":false},{\"ref\":\"GarP 1,6.63\",\"a\":\"mahiṣa\",\"rel\":\"born_of\",\"b\":\"Surabhi\",\"words\":\"surabhirmahiṣāṃstathā\",\"doubt\":false},{\"ref\":\"GarP 1,6.64\",\"a\":\"gandharva\",\"rel\":\"born_of\",\"b\":\"Ariṣṭā\",\"words\":\"ariṣṭā tu mahāsattvān gandharvānsamajījanat\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01306,
+ "tokens": {
+  "input": 2161,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 874,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "GarP 1,6.57",
+   "a": "śuka",
+   "rel": "born_of",
+   "b": "śukī",
+   "words": "śukī śukānajanayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.57",
+   "a": "ulūka",
+   "rel": "born_of",
+   "b": "ulūkī",
+   "words": "ulūkī pratyalūkakān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.57",
+   "a": "śyena",
+   "rel": "born_of",
+   "b": "śyenī",
+   "words": "śyenī śyenāṃstathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.57",
+   "a": "bhāsa",
+   "rel": "born_of",
+   "b": "bhāsī",
+   "words": "bhāsī bhāsān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.57",
+   "a": "gṛdhra",
+   "rel": "born_of",
+   "b": "gṛdhrī",
+   "words": "gṛdhrāṃśca gṛdhryapi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.59",
+   "a": "Garuḍa",
+   "rel": "son_of",
+   "b": "Vinatā",
+   "words": "vinatāyāstu putrau dvau vikhyātau garuḍāruṇau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.59",
+   "a": "Garuḍa",
+   "rel": "born_of",
+   "b": "Vinatā",
+   "words": "vinatāyāstu putrau dvau vikhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.59",
+   "a": "Aruṇa",
+   "rel": "born_of",
+   "b": "Vinatā",
+   "words": "vinatāyāstu putrau dvau vikhyātau garuḍāruṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.62",
+   "a": "piśāca",
+   "rel": "born_of",
+   "b": "Krodhā",
+   "words": "krodhā tu janayāmāsa piśācāṃśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.63",
+   "a": "gō",
+   "rel": "born_of",
+   "b": "Surabhi",
+   "words": "gāstu vai janayāmāsa surabhirmahiṣāṃstathā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "GarP 1,6.63",
+   "a": "mahiṣa",
+   "rel": "born_of",
+   "b": "Surabhi",
+   "words": "surabhirmahiṣāṃstathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "GarP 1,6.64",
+   "a": "gandharva",
+   "rel": "born_of",
+   "b": "Ariṣṭā",
+   "words": "ariṣṭā tu mahāsattvān gandharvānsamajījanat",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,257 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "vipc4",
+ "title": "Visnupurana, book 4 (Pathak's critical edition)",
+ "chapter": 4,
+ "part": 1,
+ "refs": [
+  "ViPc 4,4.1",
+  "ViPc 4,4.2",
+  "ViPc 4,4.3",
+  "ViPc 4,4.4",
+  "ViPc 4,4.5",
+  "ViPc 4,4.6",
+  "ViPc 4,4.7",
+  "ViPc 4,4.8",
+  "ViPc 4,4.9",
+  "ViPc 4,4.10",
+  "ViPc 4,4.12",
+  "ViPc 4,4.13",
+  "ViPc 4,4.14",
+  "ViPc 4,4.15",
+  "ViPc 4,4.16",
+  "ViPc 4,4.17",
+  "ViPc 4,4.18",
+  "ViPc 4,4.19",
+  "ViPc 4,4.20",
+  "ViPc 4,4.21",
+  "ViPc 4,4.22",
+  "ViPc 4,4.23",
+  "ViPc 4,4.24",
+  "ViPc 4,4.25",
+  "ViPc 4,4.26",
+  "ViPc 4,4.27",
+  "ViPc 4,4.28",
+  "ViPc 4,4.29",
+  "ViPc 4,4.30",
+  "ViPc 4,4.31",
+  "ViPc 4,4.32",
+  "ViPc 4,4.33",
+  "ViPc 4,4.34",
+  "ViPc 4,4.35",
+  "ViPc 4,4.36",
+  "ViPc 4,4.37",
+  "ViPc 4,4.38",
+  "ViPc 4,4.39",
+  "ViPc 4,4.40",
+  "ViPc 4,4.41",
+  "ViPc 4,4.42",
+  "ViPc 4,4.43"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_viSNupurANa-crit.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner)",
+ "at": "2026-11-17T22:48:22",
+ "reply": "{\"statements\":[\n{\"ref\":\"ViPc 4,4.1\",\"a\":\"Sumati\",\"rel\":\"daughter_of\",\"b\":\"Kāśyapa\",\"words\":\"kāśyapaduhitā sumatir\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.1\",\"a\":\"Sumati\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dve bhārye sagarasyāstām\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.1\",\"a\":\"Keśinī\",\"rel\":\"daughter_of\",\"b\":\"Vidarbharāja\",\"words\":\"vidarbharājatanayā keśinī\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.1\",\"a\":\"Keśinī\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dve bhārye sagarasyāstām\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.4\",\"a\":\"Asamañjasa\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"keśinī putram ekam asamañjasaṃ nāma vaṃśadharam asūta\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.4\",\"a\":\"Asamañjasa\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"keśinī putram ekam asamañjasaṃ nāma vaṃśadharam asūta\",\"doubt\":true},\n{\"ref\":\"ViPc 4,4.4\",\"a\":\"Sagara's sixty thousand sons\",\"rel\":\"born_of\",\"b\":\"Sumati\",\"words\":\"sumatyāḥ ṣaṣṭiḥ putrasahasrāṇy abhavan\",\"doubt\":true},\n{\"ref\":\"ViPc 4,4.5\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañjasa\",\"words\":\"tasmād asamañjaso 'ṃśumān nāma kumāro jajñe\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.17\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañjasa\",\"words\":\"aṃśumantam asamañjasaḥ putram\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.24\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumān\",\"words\":\"tasyāṃśumato dilīpaḥ putro 'bhavat\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.25\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpasya bhagīrathaḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.26\",\"a\":\"Śruta\",\"rel\":\"son_of\",\"b\":\"Bhagīratha\",\"words\":\"bhagīrathāc chrutas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.26\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Śruta\",\"words\":\"tasyāpi nābhāgas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.26\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgas tato 'mbarīṣas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.26\",\"a\":\"Sindhudvīpa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"tasmāt sindhudvīpaḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.26\",\"a\":\"Ayutāyus\",\"rel\":\"son_of\",\"b\":\"Sindhudvīpa\",\"words\":\"sindhudvīpād ayutāyus\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.26\",\"a\":\"Ṛtuparṇa\",\"rel\":\"son_of\",\"b\":\"Ayutāyus\",\"words\":\"tatputraś ca ṛtuparṇo\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.27\",\"a\":\"Sarvakāma\",\"rel\":\"son_of\",\"b\":\"Ṛtuparṇa\",\"words\":\"ṛtuparṇaputraḥ sarvakāmas\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.27\",\"a\":\"Sudāsa\",\"rel\":\"son_of\",\"b\":\"Sarvakāma\",\"words\":\"tattanayaḥ sudāsaḥ\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.27\",\"a\":\"Saudāsa\",\"rel\":\"son_of\",\"b\":\"Sudāsa\",\"words\":\"sudāsāt saudāso\",\"doubt\":false},\n{\"ref\":\"ViPc 4,4.38\",\"a\":\"Madayantī\",\"rel\":\"wife_of\",\"b\":\"Saudāsa\",\"words\":\"madayantyā svapatnyā\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02633,
+ "tokens": {
+  "input": 5155,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1602,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "ViPc 4,4.1",
+   "a": "Sumati",
+   "rel": "daughter_of",
+   "b": "Kāśyapa",
+   "words": "kāśyapaduhitā sumatir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.1",
+   "a": "Sumati",
+   "rel": "wife_of",
+   "b": "Sagara",
+   "words": "dve bhārye sagarasyāstām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.1",
+   "a": "Keśinī",
+   "rel": "daughter_of",
+   "b": "Vidarbharāja",
+   "words": "vidarbharājatanayā keśinī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.1",
+   "a": "Keśinī",
+   "rel": "wife_of",
+   "b": "Sagara",
+   "words": "dve bhārye sagarasyāstām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.4",
+   "a": "Asamañjasa",
+   "rel": "born_of",
+   "b": "Keśinī",
+   "words": "keśinī putram ekam asamañjasaṃ nāma vaṃśadharam asūta",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.4",
+   "a": "Asamañjasa",
+   "rel": "son_of",
+   "b": "Sagara",
+   "words": "keśinī putram ekam asamañjasaṃ nāma vaṃśadharam asūta",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,4.4",
+   "a": "Sagara's sixty thousand sons",
+   "rel": "born_of",
+   "b": "Sumati",
+   "words": "sumatyāḥ ṣaṣṭiḥ putrasahasrāṇy abhavan",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,4.5",
+   "a": "Aṃśumān",
+   "rel": "son_of",
+   "b": "Asamañjasa",
+   "words": "tasmād asamañjaso 'ṃśumān nāma kumāro jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.17",
+   "a": "Aṃśumān",
+   "rel": "son_of",
+   "b": "Asamañjasa",
+   "words": "aṃśumantam asamañjasaḥ putram",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.24",
+   "a": "Dilīpa",
+   "rel": "son_of",
+   "b": "Aṃśumān",
+   "words": "tasyāṃśumato dilīpaḥ putro 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.25",
+   "a": "Bhagīratha",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "dilīpasya bhagīrathaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "ViPc 4,4.26",
+   "a": "Śruta",
+   "rel": "son_of",
+   "b": "Bhagīratha",
+   "words": "bhagīrathāc chrutas",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,4.26",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Śruta",
+   "words": "tasyāpi nābhāgas",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "ViPc 4,4.26",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgas tato 'mbarīṣas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.26",
+   "a": "Sindhudvīpa",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "tasmāt sindhudvīpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.26",
+   "a": "Ayutāyus",
+   "rel": "son_of",
+   "b": "Sindhudvīpa",
+   "words": "sindhudvīpād ayutāyus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.26",
+   "a": "Ṛtuparṇa",
+   "rel": "son_of",
+   "b": "Ayutāyus",
+   "words": "tatputraś ca ṛtuparṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.27",
+   "a": "Sarvakāma",
+   "rel": "son_of",
+   "b": "Ṛtuparṇa",
+   "words": "ṛtuparṇaputraḥ sarvakāmas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.27",
+   "a": "Sudāsa",
+   "rel": "son_of",
+   "b": "Sarvakāma",
+   "words": "tattanayaḥ sudāsaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.27",
+   "a": "Saudāsa",
+   "rel": "son_of",
+   "b": "Sudāsa",
+   "words": "sudāsāt saudāso",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "ViPc 4,4.38",
+   "a": "Madayantī",
+   "rel": "wife_of",
+   "b": "Saudāsa",
+   "words": "madayantyā svapatnyā",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

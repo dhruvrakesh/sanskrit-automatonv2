@@ -1,0 +1,28 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "markp",
+ "title": "Markandeyapurana",
+ "chapter": 76,
+ "part": 2,
+ "refs": [
+  "MarkP 76.56",
+  "MarkP 76.57",
+  "MarkP 76.58"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_mArkaNDeyapurANa1-93.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T22:44:58",
+ "reply": "```json\n{\"statements\": []}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.00243,
+ "tokens": {
+  "input": 1147,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 14,
+  "thinking": 0
+ },
+ "statements": []
+}

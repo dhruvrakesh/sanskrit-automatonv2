@@ -1,0 +1,2709 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "garuda1",
+ "title": "Garudapurana, book 1",
+ "lines": [
+  [
+   {
+    "name": "Daśaratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cailavila",
+    "ref": "GarP 1,138.36",
+    "words": "tasya cailavilaḥ sutaḥ"
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "GarP 1,138.37",
+    "words": "tasya viśvasahaḥ putraḥ"
+   },
+   {
+    "name": "Khaṭvāṅga",
+    "ref": "GarP 1,138.37",
+    "words": "khaṭvāṅgaśca tadātmajaḥ"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "GarP 1,138.37",
+    "words": "khaṭvāṅgaddīrghabāhuśca"
+   },
+   {
+    "name": "Aja",
+    "ref": "GarP 1,138.37",
+    "words": "dīrghabāhorhyajaḥ sutaḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "GarP 1,138.38",
+    "words": "tasya puttro daśarathaś"
+   },
+   {
+    "name": "Rāma",
+    "ref": "GarP 1,138.38",
+    "words": "catvārastatsutāḥ smṛtāḥ rāmalakṣmaṇaśatrughnabharatāśca"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "GarP 1,138.39",
+    "words": "rāmātkuśalavau jātau"
+   },
+   {
+    "name": "Atithi",
+    "ref": "GarP 1,138.40",
+    "words": "kuśasya cātithiḥ putro"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "GarP 1,138.40",
+    "words": "niṣadho hyatitheḥ sutaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "GarP 1,138.41",
+    "words": "niṣadhasya nalaḥ putro"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "GarP 1,138.41",
+    "words": "nalasya ca nabhāḥ smṛtaḥ"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "GarP 1,138.41",
+    "words": "nabhasaḥ puṇḍarīkaḥ"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "GarP 1,138.41",
+    "words": "kṣemadhanvā tadātmajaḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "GarP 1,138.42",
+    "words": "devānīkastasya putro"
+   },
+   {
+    "name": "Ahīnaka",
+    "ref": "GarP 1,138.42",
+    "words": "devānīkādahīnakaḥ"
+   },
+   {
+    "name": "Ruru",
+    "ref": "GarP 1,138.42",
+    "words": "ahīnakādrururyajñe"
+   },
+   {
+    "name": "Pāriyātra",
+    "ref": "GarP 1,138.42",
+    "words": "pāriyātro ruroḥ sutaḥ"
+   },
+   {
+    "name": "Dala",
+    "ref": "GarP 1,138.43",
+    "words": "pāriyātrāddalo yajñe"
+   },
+   {
+    "name": "Chala",
+    "ref": "GarP 1,138.43",
+    "words": "dala putraśchalaḥ smṛtaḥ"
+   },
+   {
+    "name": "Uktha",
+    "ref": "GarP 1,138.43",
+    "words": "chalādukthastato"
+   },
+   {
+    "name": "Vajranābha",
+    "ref": "GarP 1,138.43",
+    "words": "hyukthādvajranābhastato"
+   },
+   {
+    "name": "Gaṇa",
+    "ref": "GarP 1,138.43",
+    "words": "vajranābhastato gaṇaḥ"
+   },
+   {
+    "name": "Uṣitāśva",
+    "ref": "GarP 1,138.44",
+    "words": "uṣitāśvo gaṇājjajñe"
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "GarP 1,138.44",
+    "words": "tato viśvasaho 'bhavat"
+   },
+   {
+    "name": "Hiraṇyanābha",
+    "ref": "GarP 1,138.44",
+    "words": "hiraṇyanābhastatputra"
+   },
+   {
+    "name": "Puṣpaka",
+    "ref": "GarP 1,138.44",
+    "words": "tatputraḥ puṣpakaḥ smṛtaḥ"
+   },
+   {
+    "name": "Dhruvasandhi",
+    "ref": "GarP 1,138.45",
+    "words": "dhruvasandhirabhūtpuṣpāt"
+   },
+   {
+    "name": "Sudarśana",
+    "ref": "GarP 1,138.45",
+    "words": "dhruvasandheḥ sudarśanaḥ"
+   },
+   {
+    "name": "Agnivarṇa",
+    "ref": "GarP 1,138.45",
+    "words": "sudarśanādagnivarṇaḥ"
+   },
+   {
+    "name": "Padmavarṇa",
+    "ref": "GarP 1,138.45",
+    "words": "padmavaṇo 'gnivarṇataḥ"
+   },
+   {
+    "name": "Śīghra",
+    "ref": "GarP 1,138.46",
+    "words": "śīghrastu padmavarṇāttu"
+   },
+   {
+    "name": "Maru",
+    "ref": "GarP 1,138.46",
+    "words": "śīghrātputro marustvabhūt"
+   },
+   {
+    "name": "Prasuśruta",
+    "ref": "GarP 1,138.46",
+    "words": "maroḥ prasuśrutaḥ putras"
+   },
+   {
+    "name": "Udāvasu",
+    "ref": "GarP 1,138.46",
+    "words": "tasya codāvasuḥ sutaḥ"
+   },
+   {
+    "name": "Nandivardhana",
+    "ref": "GarP 1,138.47",
+    "words": "udāvasornandivardhanaḥ"
+   },
+   {
+    "name": "Suketu",
+    "ref": "GarP 1,138.47",
+    "words": "suketurnandivardhanāt"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "GarP 1,138.47",
+    "words": "suketordevarāto 'bhūt"
+   },
+   {
+    "name": "Bṛhaduktha",
+    "ref": "GarP 1,138.47",
+    "words": "vṛhadukthastataḥ sutaḥ"
+   },
+   {
+    "name": "Mahāvīrya",
+    "ref": "GarP 1,138.48",
+    "words": "bṛhadukthānmahāvīryaḥ"
+   },
+   {
+    "name": "Sudhṛti",
+    "ref": "GarP 1,138.48",
+    "words": "sudhṛtistasya cātmajaḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "GarP 1,138.48",
+    "words": "sudhṛterdhṛṣṭaketuśca"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "GarP 1,138.48",
+    "words": "haryaśvo dhṛṣṭaketutaḥ"
+   },
+   {
+    "name": "Maru",
+    "ref": "GarP 1,138.49",
+    "words": "haryaśvāttu marurjāto"
+   },
+   {
+    "name": "Pratīndhaka",
+    "ref": "GarP 1,138.49",
+    "words": "maroḥ pratīndhako 'bhavat"
+   },
+   {
+    "name": "Kṛtiratha",
+    "ref": "GarP 1,138.49",
+    "words": "pratīndhakātkṛtiratho"
+   },
+   {
+    "name": "Devamīḍha",
+    "ref": "GarP 1,138.49",
+    "words": "devamīḍhastadātmajaḥ"
+   },
+   {
+    "name": "Vibudha",
+    "ref": "GarP 1,138.50",
+    "words": "vibudho devamīḍhāttu"
+   },
+   {
+    "name": "Mahādhṛti",
+    "ref": "GarP 1,138.50",
+    "words": "vibudhāttu mahādhṛtiḥ"
+   },
+   {
+    "name": "Kīrtirāta",
+    "ref": "GarP 1,138.50",
+    "words": "mahādhṛteḥ kīrtirāto"
+   },
+   {
+    "name": "Mahāromā",
+    "ref": "GarP 1,138.50",
+    "words": "mahāromā tadātmajaḥ"
+   },
+   {
+    "name": "Svarṇaromā",
+    "ref": "GarP 1,138.51",
+    "words": "mahāromṇaḥ svarṇaromā"
+   },
+   {
+    "name": "Hrasvaromā",
+    "ref": "GarP 1,138.51",
+    "words": "hrasvaromā tadātmajaḥ"
+   },
+   {
+    "name": "Sīradhvaja",
+    "ref": "GarP 1,138.51",
+    "words": "sīradhvajo hrasvaromṇaḥ"
+   },
+   {
+    "name": "Bhānumat",
+    "ref": "GarP 1,138.52",
+    "words": "sīradhvajāttu bhānumān"
+   },
+   {
+    "name": "Śatadyumna",
+    "ref": "GarP 1,138.52",
+    "words": "śatadyumno bhānumataḥ"
+   },
+   {
+    "name": "Śuci",
+    "ref": "GarP 1,138.52",
+    "words": "śatadyumnācchuciḥ smṛtaḥ"
+   },
+   {
+    "name": "Ūrjanāman",
+    "ref": "GarP 1,138.53",
+    "words": "ūrjanāmā śuceḥ putraḥ"
+   },
+   {
+    "name": "Sanadvāja",
+    "ref": "GarP 1,138.53",
+    "words": "sanadvājastadātmajaḥ"
+   },
+   {
+    "name": "Kuli",
+    "ref": "GarP 1,138.53",
+    "words": "sanadvājātkulirjāto"
+   }
+  ],
+  [
+   {
+    "name": "Duṣyanta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bharata",
+    "ref": "GarP 1,140.5",
+    "words": "bharatastasya cātmajaḥ"
+   },
+   {
+    "name": "Vitatha",
+    "ref": "GarP 1,140.5",
+    "words": "vitatho bharatādabhūt"
+   },
+   {
+    "name": "Manyu",
+    "ref": "GarP 1,140.6",
+    "words": "vitathasya suto manyuḥ"
+   },
+   {
+    "name": "Vyūhakṣatra",
+    "ref": "GarP 1,140.8",
+    "words": "vyūhakṣatrācca manyujāt"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "GarP 1,140.8",
+    "words": "suhotrastasya"
+   },
+   {
+    "name": "Hastin",
+    "ref": "GarP 1,140.8",
+    "words": "hastī ca"
+   },
+   {
+    "name": "Ajamīḍha",
+    "ref": "GarP 1,140.8",
+    "words": "ajamīḍhadvimīḍhakau"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "GarP 1,140.24",
+    "words": "ṛkṣo 'bhūtajamīḍhataḥ"
+   },
+   {
+    "name": "Saṃvaraṇa",
+    "ref": "GarP 1,140.25",
+    "words": "ṛkṣātsaṃvaraṇo jajñe"
+   },
+   {
+    "name": "Kuru",
+    "ref": "GarP 1,140.25",
+    "words": "kuruḥ saṃvaraṇādabhūt"
+   },
+   {
+    "name": "Jahnu",
+    "ref": "GarP 1,140.25",
+    "words": "kuroḥ sutāḥ"
+   },
+   {
+    "name": "Suratha",
+    "ref": "GarP 1,140.30",
+    "words": "jahnostu suratho 'bhavat"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "GarP 1,140.31",
+    "words": "surathātsārvabhaumo vidūrathāt"
+   },
+   {
+    "name": "Sārvabhauma",
+    "ref": "GarP 1,140.31",
+    "words": "sārvabhaumo vidūrathāt"
+   },
+   {
+    "name": "Jayasena",
+    "ref": "GarP 1,140.31",
+    "words": "jayasenaḥ sārvabhaumāt"
+   },
+   {
+    "name": "Avadhīta",
+    "ref": "GarP 1,140.31",
+    "words": "āvadhītastadātmajaḥ"
+   },
+   {
+    "name": "Ayutāyu",
+    "ref": "GarP 1,140.32",
+    "words": "ayutāyustasya putraḥ"
+   },
+   {
+    "name": "Akrodhana",
+    "ref": "GarP 1,140.32",
+    "words": "tasya cākrodhanaḥ sutaḥ"
+   },
+   {
+    "name": "Atithi",
+    "ref": "GarP 1,140.32",
+    "words": "akrodhanasyātithiśca"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "GarP 1,140.32",
+    "words": "ṛkṣo 'bhūdatitheḥ sutaḥ"
+   },
+   {
+    "name": "Bhīmasena",
+    "ref": "GarP 1,140.33",
+    "words": "ṛkṣācca bhīmaseno 'bhūt"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "GarP 1,140.33",
+    "words": "dilīpo bhīmasenataḥ"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "GarP 1,140.33",
+    "words": "pratīpo 'bhūddilīpācca"
+   },
+   {
+    "name": "Devāpi",
+    "ref": "GarP 1,140.33",
+    "words": "devāpistu pratīpataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Rājavardhana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sudhṛti",
+    "ref": "GarP 1,138.10",
+    "words": "rājavardhātsudhṛtiśca"
+   },
+   {
+    "name": "Nara",
+    "ref": "GarP 1,138.10",
+    "words": "naro 'bhūtsudhṛteḥ sutaḥ"
+   },
+   {
+    "name": "Kevala",
+    "ref": "GarP 1,138.10",
+    "words": "narācca kevalaḥ putraḥ"
+   },
+   {
+    "name": "Dhundhumat",
+    "ref": "GarP 1,138.10",
+    "words": "kevalāddhundhumānapi"
+   },
+   {
+    "name": "Vegavat",
+    "ref": "GarP 1,138.11",
+    "words": "dhundhumato vegavāṃśca"
+   },
+   {
+    "name": "Budha",
+    "ref": "GarP 1,138.11",
+    "words": "budho vegavataḥ sutaḥ"
+   },
+   {
+    "name": "Tṛṇabindu",
+    "ref": "GarP 1,138.11",
+    "words": "tṛṇabindurbudhājjātaḥ"
+   },
+   {
+    "name": "Viśāla",
+    "ref": "GarP 1,138.12",
+    "words": "janayāmāsa tṛṇabindostvalambusā"
+   },
+   {
+    "name": "Hemacandra",
+    "ref": "GarP 1,138.12",
+    "words": "viśālāddhemacandro 'bhūd"
+   },
+   {
+    "name": "Candraka",
+    "ref": "GarP 1,138.12",
+    "words": "candrācca candrakaḥ"
+   },
+   {
+    "name": "Dhūmrāśva",
+    "ref": "GarP 1,138.13",
+    "words": "dhūmrāśvaścaiva candrāttu"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "GarP 1,138.13",
+    "words": "dhūmrāśvātsṛñjayastathā"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "GarP 1,138.13",
+    "words": "sañjayātsahadevo 'bhūt"
+   },
+   {
+    "name": "Kṛśāśva",
+    "ref": "GarP 1,138.13",
+    "words": "kṛśāśvastatsuto 'bhavat"
+   },
+   {
+    "name": "Somadatta",
+    "ref": "GarP 1,138.14",
+    "words": "kṛśāśvātsomadattastu"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "GarP 1,138.14",
+    "words": "tato 'bhūjjanamejayaḥ"
+   },
+   {
+    "name": "Mahāśāla",
+    "ref": "GarP 1,139.69",
+    "words": "mahāśālastadātmajaḥ"
+   },
+   {
+    "name": "Mahāmanā",
+    "ref": "GarP 1,139.70",
+    "words": "mahāmanā mahāśāla"
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "GarP 1,139.71",
+    "words": "mahāmanojāttitikṣoḥ"
+   },
+   {
+    "name": "Ruṣadratha",
+    "ref": "GarP 1,139.71",
+    "words": "mahāmanojāttitikṣoḥ putro 'bhūcca ruṣadrathaḥ"
+   },
+   {
+    "name": "Hema",
+    "ref": "GarP 1,139.71",
+    "words": "hemo ruṣadrathājjajñe"
+   },
+   {
+    "name": "Sutapā",
+    "ref": "GarP 1,139.71",
+    "words": "sutapā hemato 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Taijasa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Indradyumna",
+    "ref": "GarP 1,54.15",
+    "words": "indradyumnaśca tatputraḥ"
+   },
+   {
+    "name": "Parameṣṭhī",
+    "ref": "GarP 1,54.15",
+    "words": "parameṣṭhī tataḥ smṛtaḥ"
+   },
+   {
+    "name": "Pratīhāra",
+    "ref": "GarP 1,54.15",
+    "words": "pratīhāraścatatputraḥ"
+   },
+   {
+    "name": "Pratihartā",
+    "ref": "GarP 1,54.15",
+    "words": "pratihartā tadātmajaḥ"
+   },
+   {
+    "name": "Prastāra",
+    "ref": "GarP 1,54.16",
+    "words": "sutastasmādathai jātaḥ prastārastatsuto"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "GarP 1,54.16",
+    "words": "prastārastatsuto vibhuḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "GarP 1,54.16",
+    "words": "pṛthuśca tatsuto"
+   },
+   {
+    "name": "Nakta",
+    "ref": "GarP 1,54.16",
+    "words": "tatsuto nakto"
+   },
+   {
+    "name": "Gaya",
+    "ref": "GarP 1,54.16",
+    "words": "naktasyāpi gayaḥ smṛtaḥ"
+   },
+   {
+    "name": "Nara",
+    "ref": "GarP 1,54.17",
+    "words": "naro gayasya tanayaḥ"
+   },
+   {
+    "name": "Virāj",
+    "ref": "GarP 1,54.17",
+    "words": "tatputrobhudvirāḍagataḥ"
+   },
+   {
+    "name": "Bhauvana",
+    "ref": "GarP 1,54.17",
+    "words": "bhauvanastasya cātmajaḥ"
+   },
+   {
+    "name": "Tvaṣṭṛ",
+    "ref": "GarP 1,54.18",
+    "words": "tvaṣṭā"
+   },
+   {
+    "name": "Virajas",
+    "ref": "GarP 1,54.18",
+    "words": "tvaṣṭuśca virajā"
+   },
+   {
+    "name": "Rajas",
+    "ref": "GarP 1,54.18",
+    "words": "rajastasyāpyabhūtsutaḥ"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "GarP 1,54.18",
+    "words": "śatajidrajasastasya"
+   },
+   {
+    "name": "Viṣvagjyotis",
+    "ref": "GarP 1,54.18",
+    "words": "viṣvagjyotiḥ sutaḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṣemāri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anenas",
+    "ref": "GarP 1,138.55",
+    "words": "kṣemāri tastvanenāśca"
+   },
+   {
+    "name": "Rāmaratha",
+    "ref": "GarP 1,138.55",
+    "words": "tasya rāmarathaḥ smṛtaḥ"
+   },
+   {
+    "name": "Upaguru",
+    "ref": "GarP 1,138.56",
+    "words": "satyaratho rāmarathāttasmādupaguruḥ smṛtaḥ"
+   },
+   {
+    "name": "Upagupta",
+    "ref": "GarP 1,138.56",
+    "words": "upagurorupaguptaḥ"
+   },
+   {
+    "name": "Svāgata",
+    "ref": "GarP 1,138.56",
+    "words": "svāgataścopaguptataḥ"
+   },
+   {
+    "name": "Svanara",
+    "ref": "GarP 1,138.57",
+    "words": "svanaraḥ svāgatājjajñe"
+   },
+   {
+    "name": "Suvarcas",
+    "ref": "GarP 1,138.57",
+    "words": "suvarcāstasya cātmajaḥ"
+   },
+   {
+    "name": "Supārśva",
+    "ref": "GarP 1,138.57",
+    "words": "suvarcasaḥ supārśvastu"
+   },
+   {
+    "name": "Suśruta",
+    "ref": "GarP 1,138.57",
+    "words": "suśrutaśca supārśvataḥ"
+   },
+   {
+    "name": "Jaya",
+    "ref": "GarP 1,138.58",
+    "words": "jayastu suśrutājjajñe"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "GarP 1,138.58",
+    "words": "jayāttu vijayo 'bhavat"
+   },
+   {
+    "name": "Ṛta",
+    "ref": "GarP 1,138.58",
+    "words": "vijayasya ṛtaḥ putraḥ"
+   },
+   {
+    "name": "Sunaya",
+    "ref": "GarP 1,138.58",
+    "words": "ṛtasya sunayaḥ sutaḥ"
+   },
+   {
+    "name": "Vītahavya",
+    "ref": "GarP 1,138.59",
+    "words": "sunayādvītahavyastu"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "GarP 1,138.59",
+    "words": "vītahavyāddhatiḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Abhimanyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parīkṣit",
+    "ref": "GarP 1,140.40",
+    "words": "parīkṣidabhimanyujaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "GarP 1,140.41",
+    "words": "janamejayo 'sya tato"
+   },
+   {
+    "name": "Namasyu",
+    "ref": "GarP 1,140.1",
+    "words": "namasyurjanamejayāt"
+   },
+   {
+    "name": "Abhayada",
+    "ref": "GarP 1,140.1",
+    "words": "tasya putraścābhayadaḥ"
+   },
+   {
+    "name": "Sudyu",
+    "ref": "GarP 1,140.1",
+    "words": "sudyuścābhayadādabhūt"
+   },
+   {
+    "name": "Bahugati",
+    "ref": "GarP 1,140.2",
+    "words": "sudyorbahugatiḥ putraḥ"
+   },
+   {
+    "name": "Saṃjāti",
+    "ref": "GarP 1,140.2",
+    "words": "saṃjātistasya cātmajaḥ"
+   },
+   {
+    "name": "Vatsajāti",
+    "ref": "GarP 1,140.2",
+    "words": "vatsajātiśca sañjāteḥ"
+   },
+   {
+    "name": "Raudrāśva",
+    "ref": "GarP 1,140.2",
+    "words": "raudrāśvaśca tadātmajaḥ"
+   },
+   {
+    "name": "Ṛteyu",
+    "ref": "GarP 1,140.3",
+    "words": "rodrāśvasya sutā varāḥ"
+   },
+   {
+    "name": "Ratināra",
+    "ref": "GarP 1,140.4",
+    "words": "ratināra ṛteyośca"
+   },
+   {
+    "name": "Pratiratha",
+    "ref": "GarP 1,140.4",
+    "words": "tasya pratirathaḥ sutaḥ"
+   },
+   {
+    "name": "Medhātithi",
+    "ref": "GarP 1,140.4",
+    "words": "tasya medhātithiḥ putraḥ"
+   },
+   {
+    "name": "Ainila",
+    "ref": "GarP 1,140.4",
+    "words": "tatputraścainilaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kakutstha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anenas",
+    "ref": "GarP 1,138.20",
+    "words": "anenāstu kakutsathācca"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "GarP 1,138.20",
+    "words": "pṛthuḥ putrastvanenasaḥ"
+   },
+   {
+    "name": "Viśvarāta",
+    "ref": "GarP 1,138.20",
+    "words": "viśvarātaḥ pṛthoḥ putra"
+   },
+   {
+    "name": "Ārdra",
+    "ref": "GarP 1,138.20",
+    "words": "ārdre 'bhūdviśvarātataḥ"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "GarP 1,138.21",
+    "words": "yuvanāśvo 'bhavaccārdrāt"
+   },
+   {
+    "name": "Māndhātā",
+    "ref": "GarP 1,138.24",
+    "words": "yuvanāśvācca māndhātā"
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "GarP 1,138.24",
+    "words": "purukutsastrayaḥ sutāḥ"
+   },
+   {
+    "name": "Trasadasyu",
+    "ref": "GarP 1,138.26",
+    "words": "purukutsānnarmadāyāṃ trasadasyurabūtsutaḥ"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "GarP 1,138.26",
+    "words": "anaraṇyastato jāto"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "GarP 1,138.26",
+    "words": "haryaśvo 'pyanaraṇyataḥ"
+   },
+   {
+    "name": "Vasumanas",
+    "ref": "GarP 1,138.27",
+    "words": "tatputro 'bhūdvasumanāḥ"
+   },
+   {
+    "name": "Tridhanvan",
+    "ref": "GarP 1,138.27",
+    "words": "tridhanvā tasya cātmajaḥ"
+   },
+   {
+    "name": "Trayyāruṇa",
+    "ref": "GarP 1,138.27",
+    "words": "trayyāruṇastasya putraḥ"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "GarP 1,138.27",
+    "words": "satyarataḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sutapas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bali",
+    "ref": "GarP 1,139.72",
+    "words": "baliḥ sutapaso jajñe"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "GarP 1,139.72",
+    "words": "baliḥ sutapaso jajñe hyaṅgavaṅgakaliṅgakāḥ"
+   },
+   {
+    "name": "Anapāna",
+    "ref": "GarP 1,139.72",
+    "words": "anapānastathāṅgataḥ"
+   },
+   {
+    "name": "Diviratha",
+    "ref": "GarP 1,139.73",
+    "words": "anapānāddivirathaḥ"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "GarP 1,139.73",
+    "words": "tato dharmaratho 'bhavat"
+   },
+   {
+    "name": "Romapāda",
+    "ref": "GarP 1,139.73",
+    "words": "romapādo dharmarathāt"
+   },
+   {
+    "name": "Caturaṅga",
+    "ref": "GarP 1,139.73",
+    "words": "caturaṅgastadātmajaḥ"
+   },
+   {
+    "name": "Pṛthulākṣa",
+    "ref": "GarP 1,139.74",
+    "words": "pṛthulākṣastasya putraḥ"
+   },
+   {
+    "name": "Campa",
+    "ref": "GarP 1,139.74",
+    "words": "campo 'bhūtpṛthulākṣataḥ"
+   },
+   {
+    "name": "Haryaṅga",
+    "ref": "GarP 1,139.74",
+    "words": "campaputraśca haryaṅgaḥ"
+   },
+   {
+    "name": "Bhadraratha",
+    "ref": "GarP 1,139.74",
+    "words": "tasya bhadrarathaḥ sutaḥ"
+   },
+   {
+    "name": "Bṛhatkarmā",
+    "ref": "GarP 1,139.75",
+    "words": "bṛhatkarmā sutastasya"
+   },
+   {
+    "name": "Bṛhadbhānu",
+    "ref": "GarP 1,139.75",
+    "words": "bṛhadbhānustato 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Dhruva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śliṣṭi",
+    "ref": "GarP 1,6.2",
+    "words": "dhruvasya tanayaḥ śliṣṭiḥ"
+   },
+   {
+    "name": "Prācīnavarhi",
+    "ref": "GarP 1,6.3",
+    "words": "tasya prācīnavarhistu putraḥ"
+   },
+   {
+    "name": "Divañjaya",
+    "ref": "GarP 1,6.3",
+    "words": "tasyāpyudāradhīḥ divañjayastasya sutaḥ"
+   },
+   {
+    "name": "Ripu",
+    "ref": "GarP 1,6.3",
+    "words": "divañjayastasya sutastasya putro ripuḥ"
+   },
+   {
+    "name": "Cākṣuṣa Manu",
+    "ref": "GarP 1,6.4",
+    "words": "ripoḥ putrastathā śrīmāṃścākṣuṣaḥ"
+   },
+   {
+    "name": "Ruru",
+    "ref": "GarP 1,6.4",
+    "words": "rurustasya sutaḥ"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "GarP 1,6.4",
+    "words": "aṅgastasyāpi cātmajaḥ"
+   },
+   {
+    "name": "Veṇa",
+    "ref": "GarP 1,6.5",
+    "words": "aṅgasya veṇaḥ putraḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "GarP 1,6.8",
+    "words": "puthurityevanāmā sa veṇaputro"
+   },
+   {
+    "name": "Antardhāna",
+    "ref": "GarP 1,6.9",
+    "words": "antardhānaḥ pṛthoḥ putro"
+   },
+   {
+    "name": "Havirdhāna",
+    "ref": "GarP 1,6.9",
+    "words": "havirdhānastadātmajaḥ"
+   },
+   {
+    "name": "Prācīnabarhis",
+    "ref": "GarP 1,6.10",
+    "words": "prācīnavaharstetputraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dvimīḍha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yavīnara",
+    "ref": "GarP 1,140.14",
+    "words": "yavīnaro dvimīḍhasya"
+   },
+   {
+    "name": "Dhṛtimat",
+    "ref": "GarP 1,140.14",
+    "words": "dhṛtimāṃśca yavīnarāt"
+   },
+   {
+    "name": "Satyadhṛti",
+    "ref": "GarP 1,140.14",
+    "words": "dhatimataḥ satyadhṛtiḥ"
+   },
+   {
+    "name": "Dṛḍhanemi",
+    "ref": "GarP 1,140.14",
+    "words": "dṛḍhanemistadātmajaḥ"
+   },
+   {
+    "name": "Supārśva",
+    "ref": "GarP 1,140.15",
+    "words": "dṛḍhanemeḥ supārśvo 'bhūt"
+   },
+   {
+    "name": "Sannati",
+    "ref": "GarP 1,140.15",
+    "words": "supārśvātsannatistathā"
+   },
+   {
+    "name": "Kṛta",
+    "ref": "GarP 1,140.15",
+    "words": "kṛstu sannateḥ putraḥ"
+   },
+   {
+    "name": "Ugrāyudha",
+    "ref": "GarP 1,140.15",
+    "words": "kṛtādugrāyudho 'bhavat"
+   },
+   {
+    "name": "Kṣemya",
+    "ref": "GarP 1,140.16",
+    "words": "ugrāyudhācca kṣemyau'bhūt"
+   },
+   {
+    "name": "Sudhīra",
+    "ref": "GarP 1,140.16",
+    "words": "sudhīrastu tadātmajaḥ"
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "GarP 1,140.16",
+    "words": "purañjayaḥ sudhīrācca"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "GarP 1,140.16",
+    "words": "tasya putro vidūrathaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kroṣṭu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Āhi",
+    "ref": "GarP 1,139.26",
+    "words": "kroṣṭorvijajñivānputtra āhistasya"
+   },
+   {
+    "name": "Uśaṅku",
+    "ref": "GarP 1,139.27",
+    "words": "āheruśaṅkuḥ saṃjajñe"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "GarP 1,139.27",
+    "words": "tasya citrarathaḥ sataḥ"
+   },
+   {
+    "name": "Śaśabindu",
+    "ref": "GarP 1,139.27",
+    "words": "śaśabinduścitrarathāt"
+   },
+   {
+    "name": "Pṛthuśravas",
+    "ref": "GarP 1,139.28",
+    "words": "pṛthuśravāḥ"
+   },
+   {
+    "name": "Tamas",
+    "ref": "GarP 1,139.29",
+    "words": "pṛthuśravaso 'bhūttama"
+   },
+   {
+    "name": "Uśanas",
+    "ref": "GarP 1,139.29",
+    "words": "uśanāstamaso 'bhavat"
+   },
+   {
+    "name": "Śitagu",
+    "ref": "GarP 1,139.29",
+    "words": "tatputraḥ śitagurnāma"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "GarP 1,139.29",
+    "words": "śrīrukmakavacastataḥ"
+   },
+   {
+    "name": "Jyāmagha",
+    "ref": "GarP 1,139.30",
+    "words": "jyāmaghaḥ pālito hariḥ śrīrukmakavacasyaite"
+   },
+   {
+    "name": "Vidarbha",
+    "ref": "GarP 1,139.30",
+    "words": "vidarbho jyāmaghāttathā"
+   },
+   {
+    "name": "Kratha",
+    "ref": "GarP 1,139.31",
+    "words": "vidarbhātkrathakauśikau"
+   }
+  ],
+  [
+   {
+    "name": "Kṣattravṛddha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "GarP 1,139.16",
+    "words": "pratikṣattraḥ kṣattravṛddhāt"
+   },
+   {
+    "name": "Saṃjaya",
+    "ref": "GarP 1,139.16",
+    "words": "saṃjayaśca ta dātmajaḥ"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "GarP 1,139.16",
+    "words": "vijayaḥ saṃjayasyāpi"
+   },
+   {
+    "name": "Kṛta",
+    "ref": "GarP 1,139.16",
+    "words": "vijayasya kṛtaḥ sutaḥ"
+   },
+   {
+    "name": "Vṛṣadhana",
+    "ref": "GarP 1,139.17",
+    "words": "kṛtādvṛṣadhanaścābhūt"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "GarP 1,139.17",
+    "words": "sahadevastadātmajaḥ"
+   },
+   {
+    "name": "Adīna",
+    "ref": "GarP 1,139.17",
+    "words": "sahadevādadīno 'bhūt"
+   },
+   {
+    "name": "Jayatsena",
+    "ref": "GarP 1,139.17",
+    "words": "jayatseno 'pyadīnataḥ"
+   },
+   {
+    "name": "Saṃkṛti",
+    "ref": "GarP 1,139.18",
+    "words": "jayatsenātsaṃkṛtiḥ"
+   },
+   {
+    "name": "Garga",
+    "ref": "GarP 1,140.6",
+    "words": "gargo vai saṃkṛteḥ sutaḥ"
+   },
+   {
+    "name": "Amanyu",
+    "ref": "GarP 1,140.7",
+    "words": "gargādamanyuḥ putro"
+   }
+  ],
+  [
+   {
+    "name": "Nivṛti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Daśārha",
+    "ref": "GarP 1,139.33",
+    "words": "daśārhe nivṛtestathā"
+   },
+   {
+    "name": "Vyomā",
+    "ref": "GarP 1,139.33",
+    "words": "daśārhasya suto vyomā"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "GarP 1,139.33",
+    "words": "jīmūtaśca tadātmajaḥ"
+   },
+   {
+    "name": "Vikṛti",
+    "ref": "GarP 1,139.34",
+    "words": "jīmūtādvikṛtirjajñe"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "GarP 1,139.34",
+    "words": "tato bhīmaratho 'bhavat"
+   },
+   {
+    "name": "Madhuratha",
+    "ref": "GarP 1,139.34",
+    "words": "tato madhuratho jajñe"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "GarP 1,139.34",
+    "words": "śakunistasya cātmajaḥ"
+   },
+   {
+    "name": "Karambhi",
+    "ref": "GarP 1,139.35",
+    "words": "karambhiḥ śakuneḥ putraḥ"
+   },
+   {
+    "name": "Devavān",
+    "ref": "GarP 1,139.35",
+    "words": "tasya vai devavānsmṛtaḥ"
+   },
+   {
+    "name": "Devakṣattra",
+    "ref": "GarP 1,139.35",
+    "words": "devakṣattro devanato"
+   },
+   {
+    "name": "Madhu",
+    "ref": "GarP 1,139.35",
+    "words": "devakṣattrānmadhuḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ṛtadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Alarka",
+    "ref": "GarP 1,139.12",
+    "words": "alarkaśca ṛtadhvajāt"
+   },
+   {
+    "name": "Sannati",
+    "ref": "GarP 1,139.12",
+    "words": "alarkātsannatirjajñe"
+   },
+   {
+    "name": "Sunīta",
+    "ref": "GarP 1,139.12",
+    "words": "sunītaḥ sannateḥ sutaḥ"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "GarP 1,139.13",
+    "words": "satyaketuḥ sunītasya"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "GarP 1,139.13",
+    "words": "satyaketorvibhuḥ sutaḥ"
+   },
+   {
+    "name": "Suvibhu",
+    "ref": "GarP 1,139.13",
+    "words": "vibhostu suvibhuḥ putraḥ"
+   },
+   {
+    "name": "Sukumāraka",
+    "ref": "GarP 1,139.13",
+    "words": "suvibhoḥ sukumārakaḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "GarP 1,139.14",
+    "words": "sukumāraddhṛṣṭaketuḥ"
+   },
+   {
+    "name": "Vītihotra",
+    "ref": "GarP 1,139.14",
+    "words": "votihotrastadātmajaḥ"
+   },
+   {
+    "name": "Bharga",
+    "ref": "GarP 1,139.14",
+    "words": "vītihotrasya bhargo 'bhūt"
+   },
+   {
+    "name": "Bhargabhūmi",
+    "ref": "GarP 1,139.14",
+    "words": "bhargabhūmistadātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Balākāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuśa",
+    "ref": "GarP 1,139.5",
+    "words": "balākāśvāt kuśaḥ smṛtaḥ"
+   },
+   {
+    "name": "Vasu",
+    "ref": "GarP 1,139.6",
+    "words": "vasuḥ kuśāt"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "GarP 1,140.27",
+    "words": "vasoḥ sutāḥ"
+   },
+   {
+    "name": "Kuśāgra",
+    "ref": "GarP 1,140.27",
+    "words": "bṛhadrathātkuśāgraśca"
+   },
+   {
+    "name": "Ṛṣabha",
+    "ref": "GarP 1,140.27",
+    "words": "kuśāgrādṛṣabho 'bhavat"
+   },
+   {
+    "name": "Puṣpavat",
+    "ref": "GarP 1,140.28",
+    "words": "ṛṣabhātpuṣpavān"
+   },
+   {
+    "name": "Satyahita",
+    "ref": "GarP 1,140.28",
+    "words": "tasmājjajñe satyahito"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "GarP 1,140.28",
+    "words": "satyahitātsudhanvābhūt"
+   },
+   {
+    "name": "Jahru",
+    "ref": "GarP 1,140.28",
+    "words": "jahruścava sudhanvanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Triśaṅku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "GarP 1,138.28",
+    "words": "yastriśaṅkuḥ samākhyāto hariścandro 'bhavattataḥ"
+   },
+   {
+    "name": "Rohitāśva",
+    "ref": "GarP 1,138.28",
+    "words": "hariścandrādrohitāśvo"
+   },
+   {
+    "name": "Harita",
+    "ref": "GarP 1,138.28",
+    "words": "harito rohitāśvataḥ"
+   },
+   {
+    "name": "Cañcu",
+    "ref": "GarP 1,138.29",
+    "words": "haritasya sutaścañcuḥ"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "GarP 1,138.29",
+    "words": "cañcośca vijayaḥ sutaḥ"
+   },
+   {
+    "name": "Ruruka",
+    "ref": "GarP 1,138.29",
+    "words": "vijayādruruko jajñe"
+   },
+   {
+    "name": "Vṛka",
+    "ref": "GarP 1,138.29",
+    "words": "rurukāttu vṛkaḥ sutaḥ"
+   },
+   {
+    "name": "Bāhu",
+    "ref": "GarP 1,138.30",
+    "words": "vṛkādbāhurnṛpo 'bhūt"
+   },
+   {
+    "name": "Sagara",
+    "ref": "GarP 1,138.30",
+    "words": "bāhostu sagaraḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kukura",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhṛṣṭa",
+    "ref": "GarP 1,139.46",
+    "words": "dhṛṣṭastu kukurājjajñe"
+   },
+   {
+    "name": "Kāpotaromaka",
+    "ref": "GarP 1,139.46",
+    "words": "tasmātkāpotaromakaḥ"
+   },
+   {
+    "name": "Viloman",
+    "ref": "GarP 1,139.46",
+    "words": "tadātmajo vilomā"
+   },
+   {
+    "name": "Tumburu",
+    "ref": "GarP 1,139.46",
+    "words": "vilomnastumburuḥ sutaḥ"
+   },
+   {
+    "name": "Dundubhi",
+    "ref": "GarP 1,139.47",
+    "words": "tasmāccadundubhirjajñe"
+   },
+   {
+    "name": "Punarvasu",
+    "ref": "GarP 1,139.47",
+    "words": "punarvasurataḥ smṛtaḥ"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "GarP 1,139.47",
+    "words": "tasyāhukaścāhukī ca"
+   },
+   {
+    "name": "Devaka",
+    "ref": "GarP 1,139.47",
+    "words": "kanyā caivāhukasya tu devakaścograsenaśca"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Setu",
+    "ref": "GarP 1,139.66",
+    "words": "drahyostu tanayaḥ setur"
+   },
+   {
+    "name": "Āraddha",
+    "ref": "GarP 1,139.66",
+    "words": "āraddhaśca tadātmajaḥ"
+   },
+   {
+    "name": "Gāndhāra",
+    "ref": "GarP 1,139.67",
+    "words": "āraddhasyaiva gāndha ro"
+   },
+   {
+    "name": "Gharma",
+    "ref": "GarP 1,139.67",
+    "words": "gharmo gāndhārato 'bhavat"
+   },
+   {
+    "name": "Ghṛta",
+    "ref": "GarP 1,139.67",
+    "words": "ghṛtastu gharmaputro"
+   },
+   {
+    "name": "Durgama",
+    "ref": "GarP 1,139.67",
+    "words": "durgamaśca ghṛsya tu"
+   },
+   {
+    "name": "Pracetā",
+    "ref": "GarP 1,139.68",
+    "words": "pracetā durgamasyaiva"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śibi",
+    "ref": "GarP 1,139.41",
+    "words": "anamitrācchibistathā"
+   },
+   {
+    "name": "Satyaka",
+    "ref": "GarP 1,139.41",
+    "words": "śibestu satyakaḥ putraḥ"
+   },
+   {
+    "name": "Sātyaki",
+    "ref": "GarP 1,139.41",
+    "words": "satyakātsātyakistathā"
+   },
+   {
+    "name": "Sañjaya",
+    "ref": "GarP 1,139.42",
+    "words": "sātyakeḥ sañjayaḥ putraḥ"
+   },
+   {
+    "name": "Kuli",
+    "ref": "GarP 1,139.42",
+    "words": "kuliścaiva tadātmajaḥ"
+   },
+   {
+    "name": "Yugandhara",
+    "ref": "GarP 1,139.42",
+    "words": "kuleryugandharaḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Asamañjasa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṃśumat",
+    "ref": "GarP 1,138.32",
+    "words": "tasyāṃśumānsuto vidvān"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "GarP 1,138.32",
+    "words": "dilīpastatsuto 'bhavat"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "GarP 1,138.32",
+    "words": "bhagīratho dilīpācca"
+   },
+   {
+    "name": "Śruta",
+    "ref": "GarP 1,138.33",
+    "words": "śruto bhagīrathasuto"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "GarP 1,138.33",
+    "words": "nābhagaśca śrutātkila"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "GarP 1,138.33",
+    "words": "nābhāgādambarīṣo 'bhūt"
+   }
+  ],
+  [
+   {
+    "name": "Bṛhadaśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuvalāśva",
+    "ref": "GarP 1,138.21",
+    "words": "tatputraḥ kuvalāśvakaḥ"
+   },
+   {
+    "name": "Dṛḍhāśva",
+    "ref": "GarP 1,138.22",
+    "words": "dṛḍhaśvaścatato 'bhavat"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "GarP 1,138.22",
+    "words": "haryaśvaśca dṛḍhaśvataḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "GarP 1,138.23",
+    "words": "haryaśvācca nikumbo 'bhūt"
+   },
+   {
+    "name": "Hitāśva",
+    "ref": "GarP 1,138.23",
+    "words": "hitāśvaśca nikumbhataḥ"
+   },
+   {
+    "name": "Pūjāśva",
+    "ref": "GarP 1,138.23",
+    "words": "pūjāśvaśca hitāśvācca"
+   }
+  ],
+  [
+   {
+    "name": "Diṣṭa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "GarP 1,138.6",
+    "words": "diṣṭaputrastu nābhāgo"
+   },
+   {
+    "name": "Neṣṭha",
+    "ref": "GarP 1,138.17",
+    "words": "nābhāgaputro neṣṭho"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "GarP 1,138.17",
+    "words": "ambarīṣo 'pi tatsutaḥ"
+   },
+   {
+    "name": "Virūpa",
+    "ref": "GarP 1,138.17",
+    "words": "ambarīṣādvirūpo 'bhūt"
+   },
+   {
+    "name": "Pṛṣadaśva",
+    "ref": "GarP 1,138.17",
+    "words": "pṛṣadaśvo virūpataḥ"
+   },
+   {
+    "name": "Rathīnara",
+    "ref": "GarP 1,138.18",
+    "words": "rathīnaraśca tatputro"
+   }
+  ],
+  [
+   {
+    "name": "Saudāsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "GarP 1,140.23",
+    "words": "sahadevastasya putraḥ"
+   },
+   {
+    "name": "Somaka",
+    "ref": "GarP 1,140.23",
+    "words": "sahadevāttu somakaḥ"
+   },
+   {
+    "name": "Pṛṣata",
+    "ref": "GarP 1,140.23",
+    "words": "pṛṣataścāparo mahān"
+   },
+   {
+    "name": "Drupada",
+    "ref": "GarP 1,140.24",
+    "words": "pṛṣatāddrupado jajñe"
+   },
+   {
+    "name": "Dhṛṣṭadyumna",
+    "ref": "GarP 1,140.24",
+    "words": "dhṛṣṭadyumnastato 'bhavat"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "GarP 1,140.24",
+    "words": "dhṛṣṭadyumnāddhṛṣṭaketuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Viviṃśa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Khanīnetra",
+    "ref": "GarP 1,138.8",
+    "words": "viviṃśācca khanīnetro"
+   },
+   {
+    "name": "Vibhūti",
+    "ref": "GarP 1,138.8",
+    "words": "vibhūtistatsutaḥ smṛtaḥ"
+   },
+   {
+    "name": "Karandhama",
+    "ref": "GarP 1,138.8",
+    "words": "karandhamo vibhūtestu"
+   },
+   {
+    "name": "Avikṣita",
+    "ref": "GarP 1,138.8",
+    "words": "tato jāto 'pyavikṣitaḥ"
+   },
+   {
+    "name": "Marutta",
+    "ref": "GarP 1,138.9",
+    "words": "marutto 'vikṣitasyāpi"
+   },
+   {
+    "name": "Nariṣyanta",
+    "ref": "GarP 1,138.9",
+    "words": "nariṣyantastataḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ṛci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Caidya",
+    "ref": "GarP 1,139.32",
+    "words": "tataścaidyo nṛpaḥ"
+   },
+   {
+    "name": "Kunti",
+    "ref": "GarP 1,139.32",
+    "words": "kuntiḥ kilāsya putro 'bhūt"
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "GarP 1,139.32",
+    "words": "kuntervṛṣṇiḥ sutaḥ smṛtaḥ"
+   },
+   {
+    "name": "Śvaphalka",
+    "ref": "GarP 1,139.43",
+    "words": "vṛṣṇiḥ śvaphalkaścitrakaḥ sutaḥ"
+   },
+   {
+    "name": "Akrūra",
+    "ref": "GarP 1,139.43",
+    "words": "śvaphalkāccaivagāndinyāmakrūro"
+   },
+   {
+    "name": "Devavān",
+    "ref": "GarP 1,139.44",
+    "words": "devavānupadevaśca hyakrūrasya sutau smṛtau"
+   }
+  ],
+  [
+   {
+    "name": "Ayutāyus",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "GarP 1,138.34",
+    "words": "ṛtuparṇastadātmajaḥ"
+   },
+   {
+    "name": "Sarvakāma",
+    "ref": "GarP 1,138.34",
+    "words": "ṛtuṣarṇātsarvakāmaḥ"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "GarP 1,138.34",
+    "words": "sudāso 'bhūttadātmajaḥ"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "GarP 1,138.35",
+    "words": "sudāsasya ca saudāso"
+   },
+   {
+    "name": "Aśvaka",
+    "ref": "GarP 1,138.36",
+    "words": "aśvakākhyo 'bhavatputro"
+   }
+  ],
+  [
+   {
+    "name": "Bhadraśreṇya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Durdama",
+    "ref": "GarP 1,139.23",
+    "words": "bhadraśreṇayasya durdamaḥ"
+   },
+   {
+    "name": "Dhanaka",
+    "ref": "GarP 1,139.23",
+    "words": "dhanako durdamāccaiva"
+   },
+   {
+    "name": "Kṛtavīrya",
+    "ref": "GarP 1,139.23",
+    "words": "kṛtavīryaśca jānakiḥ"
+   },
+   {
+    "name": "Arjuna",
+    "ref": "GarP 1,139.24",
+    "words": "kṛtavīryādarjuno 'bhūt"
+   },
+   {
+    "name": "Pratibindhya",
+    "ref": "GarP 1,140.38",
+    "words": "pratibindhyaḥ śrutasomaḥ śrutakīrtistathārjunāt"
+   }
+  ],
+  [
+   {
+    "name": "Śūra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śamin",
+    "ref": "GarP 1,139.51",
+    "words": "sūrasyāpi śamī sutaḥ"
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "GarP 1,139.51",
+    "words": "pratikṣattraśca śaminaḥ"
+   },
+   {
+    "name": "Svayambhoja",
+    "ref": "GarP 1,139.51",
+    "words": "svayambhojastadātmajaḥ"
+   },
+   {
+    "name": "Hṛdika",
+    "ref": "GarP 1,139.52",
+    "words": "hṛdikaśca svayambhojāt"
+   },
+   {
+    "name": "Kṛtavarman",
+    "ref": "GarP 1,139.52",
+    "words": "kṛtavarmā tadātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Anañjana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kulajit",
+    "ref": "GarP 1,138.54",
+    "words": "anañjanācca kulajit"
+   },
+   {
+    "name": "Adhinemika",
+    "ref": "GarP 1,138.54",
+    "words": "tasyāpi cādhinemikaḥ"
+   },
+   {
+    "name": "Śrutāyus",
+    "ref": "GarP 1,138.54",
+    "words": "śrutāyustasya putro 'bhūt"
+   },
+   {
+    "name": "Supārśva",
+    "ref": "GarP 1,138.54",
+    "words": "supārśvaśca tadātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Marīci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaśyapa",
+    "ref": "GarP 1,143.2",
+    "words": "marīceḥ kaśyapastasmādravistasmānmanuḥ"
+   },
+   {
+    "name": "Ravi",
+    "ref": "GarP 1,143.2",
+    "words": "marīceḥ kaśyapastasmādravistasmānmanuḥ"
+   },
+   {
+    "name": "Manu",
+    "ref": "GarP 1,143.2",
+    "words": "marīceḥ kaśyapastasmādravistasmānmanuḥ"
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "GarP 1,143.2",
+    "words": "manorikṣvākurasyābhūdvaṃśe"
+   }
+  ],
+  [
+   {
+    "name": "Pradyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aniruddha",
+    "ref": "GarP 1,139.63",
+    "words": "pradyumnādaniruddho 'bhūt"
+   },
+   {
+    "name": "Vajra",
+    "ref": "GarP 1,139.64",
+    "words": "aniruddhātsubhadrāyāṃ vajro nāma nṛpo 'bhavat"
+   },
+   {
+    "name": "Pratibāhu",
+    "ref": "GarP 1,139.64",
+    "words": "pratibāhurvajrasutaḥ"
+   },
+   {
+    "name": "Cāru",
+    "ref": "GarP 1,139.64",
+    "words": "tasya suto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Puruhotra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṃśu",
+    "ref": "GarP 1,139.36",
+    "words": "hyaṃśuśca puruhotrataḥ"
+   },
+   {
+    "name": "Sattvaśruta",
+    "ref": "GarP 1,139.37",
+    "words": "sattvaśrutaḥ sutaścāṃśoḥ"
+   },
+   {
+    "name": "Sāttvata",
+    "ref": "GarP 1,139.37",
+    "words": "tato vai sāttvato nṛpaḥ"
+   },
+   {
+    "name": "Andhaka",
+    "ref": "GarP 1,139.37",
+    "words": "sātvatādandhakaḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vahni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bharga",
+    "ref": "GarP 1,139.65",
+    "words": "vahnerbhargo 'bhavatsutaḥ"
+   },
+   {
+    "name": "Bhānu",
+    "ref": "GarP 1,139.65",
+    "words": "bhargādbhānurabhūtputro"
+   },
+   {
+    "name": "Karandhama",
+    "ref": "GarP 1,139.65",
+    "words": "bhānoḥ putraḥ karandhamaḥ"
+   },
+   {
+    "name": "Maruta",
+    "ref": "GarP 1,139.66",
+    "words": "karandhamasya maruto"
+   }
+  ],
+  [
+   {
+    "name": "Bhṛgu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vidhātṛ",
+    "ref": "GarP 1,5.8",
+    "words": "bhṛgordhātāvidhātārau"
+   },
+   {
+    "name": "Mṛkaṇḍu",
+    "ref": "GarP 1,5.10",
+    "words": "tayorjātau sutāvubhau"
+   },
+   {
+    "name": "Mārkaṇḍeya",
+    "ref": "GarP 1,5.10",
+    "words": "mārkaṇḍeyo mṛkaṇḍutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dhṛtavrata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Satyadharmā",
+    "ref": "GarP 1,139.76",
+    "words": "satyadharmā dhṛtavratāt"
+   },
+   {
+    "name": "Adhiratha",
+    "ref": "GarP 1,139.77",
+    "words": "tasya putrastvadhirathaḥ"
+   },
+   {
+    "name": "Karṇa",
+    "ref": "GarP 1,139.77",
+    "words": "karṇastasya suto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Khanitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṣupa",
+    "ref": "GarP 1,138.7",
+    "words": "bhūpastasmāttataḥ kṣupaḥ"
+   },
+   {
+    "name": "Viṃśa",
+    "ref": "GarP 1,138.7",
+    "words": "kṣupādviṃśo 'bhavatputro"
+   },
+   {
+    "name": "Viviṃśaka",
+    "ref": "GarP 1,138.7",
+    "words": "viṃśājjāto viviṃśakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Nābhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛṣabha",
+    "ref": "GarP 1,54.13",
+    "words": "nābhestu merudevyāṃ tu putro 'bhūdṛṣabho"
+   },
+   {
+    "name": "Bharata",
+    "ref": "GarP 1,54.14",
+    "words": "tatputro bharato nāma"
+   },
+   {
+    "name": "Sumati",
+    "ref": "GarP 1,54.14",
+    "words": "sumatirbharatasyābhūt"
+   }
+  ],
+  [
+   {
+    "name": "Vibhrāja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aśvaha",
+    "ref": "GarP 1,140.13",
+    "words": "vibhrājādaśvaho 'bhavat"
+   },
+   {
+    "name": "Brahmadatta",
+    "ref": "GarP 1,140.13",
+    "words": "tasmādbrahmadatto"
+   },
+   {
+    "name": "Viṣvaksena",
+    "ref": "GarP 1,140.13",
+    "words": "viṣvaksenastadātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vivasvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Manu",
+    "ref": "GarP 1,138.2",
+    "words": "tataḥ sūnurvivasvataḥ manu"
+   },
+   {
+    "name": "Sudyumna",
+    "ref": "GarP 1,138.3",
+    "words": "sudyumno 'sya suto 'bhavat"
+   },
+   {
+    "name": "Utkala",
+    "ref": "GarP 1,138.4",
+    "words": "sutāstrayaśca sudyumnādutkalo"
+   }
+  ],
+  [
+   {
+    "name": "Śantanu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vicitravīrya",
+    "ref": "GarP 1,140.35",
+    "words": "citrāṅgadavicitrau tu satyavatyāntu śantanoḥ"
+   },
+   {
+    "name": "Dhṛtarāṣṭra",
+    "ref": "GarP 1,140.36",
+    "words": "tayoḥ dhṛrāṣṭraṃ ca pāṇḍuñca"
+   },
+   {
+    "name": "Duryodhana",
+    "ref": "GarP 1,140.37",
+    "words": "gāndhāgī dhṛtarāṣṭrataḥ śataputraṃ duryodhanādyaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Ananta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Revata",
+    "ref": "GarP 1,138.15",
+    "words": "ranantādrevato 'bhavat"
+   },
+   {
+    "name": "Raivata",
+    "ref": "GarP 1,138.16",
+    "words": "raivato revatasyāpi"
+   }
+  ],
+  [
+   {
+    "name": "Bāhlīka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Somadatta",
+    "ref": "GarP 1,140.34",
+    "words": "bāhlīkātsomadatto 'bhūt"
+   },
+   {
+    "name": "Bhūri",
+    "ref": "GarP 1,140.34",
+    "words": "bhūrirbhūriśravāstataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Jayadratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vijaya",
+    "ref": "GarP 1,139.76",
+    "words": "jayajrathasya vijayo"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "GarP 1,139.76",
+    "words": "vijayasya dhṛtiḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ruci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yajña",
+    "ref": "GarP 1,5.25",
+    "words": "ruceryajño"
+   },
+   {
+    "name": "Yāmas",
+    "ref": "GarP 1,5.25",
+    "words": "dakṣiṇāyāṃ ca yajñataḥ abhavandvādaśa sutā yāmā"
+   }
+  ],
+  [
+   {
+    "name": "Sabhānara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālañjaya",
+    "ref": "GarP 1,139.68",
+    "words": "tasmā kālañjayo 'bhavat"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "GarP 1,139.69",
+    "words": "kālañjayātsṛñjayo 'bhūt"
+   }
+  ],
+  [
+   {
+    "name": "Śaradvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śatānanda",
+    "ref": "GarP 1,140.20",
+    "words": "śatānando 'bhavatputraḥ"
+   },
+   {
+    "name": "Satyadhṛti",
+    "ref": "GarP 1,140.20",
+    "words": "tasya satyadhṛtiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ṛcīka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jamadagni",
+    "ref": "GarP 1,139.7",
+    "words": "ṛcīkājjamadāgniśca"
+   },
+   {
+    "name": "Rāma",
+    "ref": "GarP 1,139.7",
+    "words": "rāmastasyābhavatsutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "GarP 1,5.13",
+    "words": "anasūyā tathaivātrerjajñe putrān"
+   }
+  ],
+  [
+   {
+    "name": "Bahulāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṛti",
+    "ref": "GarP 1,138.59",
+    "words": "bahulāśvātkṛtiḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Balabhadra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śaṭha",
+    "ref": "GarP 1,139.59",
+    "words": "revatyāṃ balabhadrataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bhajamāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "GarP 1,139.50",
+    "words": "vidūratho bhajamānāt"
+   }
+  ],
+  [
+   {
+    "name": "Damaghoṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śiśupāla",
+    "ref": "GarP 1,139.57",
+    "words": "damaghoṣātprajajñe śiśupālakam"
+   }
+  ],
+  [
+   {
+    "name": "Devamīḍhuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vasudeva",
+    "ref": "GarP 1,139.52",
+    "words": "devamīḍhuṣaḥ daśa putrā"
+   }
+  ],
+  [
+   {
+    "name": "Dharma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sukha",
+    "ref": "GarP 1,5.34",
+    "words": "ityete dharmasūnavaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Haryaśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mukula",
+    "ref": "GarP 1,140.18",
+    "words": "haryaśvānmukulo 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Himācala",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Maināka",
+    "ref": "GarP 1,5.20",
+    "words": "himācalaḥ mainākaṃ janayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Ikṣvāku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "GarP 1,138.18",
+    "words": "ikṣvākostu trayaḥ putrāḥ vikukṣi"
+   }
+  ],
+  [
+   {
+    "name": "Jamadagni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Paraśurāma",
+    "ref": "GarP 1,142.8",
+    "words": "paraśurāmo 'bhūjjamadagneḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nārada",
+    "ref": "GarP 1,6.18",
+    "words": "nārado hyabhavatputraḥ kaśyapasya muneḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kuruvaṃśa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Anu",
+    "ref": "GarP 1,139.36",
+    "words": "hyanuśca kuruvaṃśataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Harṣa",
+    "ref": "GarP 1,5.34",
+    "words": "tatputro harṣa ucyate"
+   }
+  ],
+  [
+   {
+    "name": "Manu Svāyambhuva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Priyavrata",
+    "ref": "GarP 1,5.24",
+    "words": "priyavratottānapādau"
+   }
+  ],
+  [
+   {
+    "name": "Nārāyaṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Brahmā",
+    "ref": "GarP 1,139.1",
+    "words": "nārāyaṇasuto brahmā"
+   }
+  ],
+  [
+   {
+    "name": "Nṛpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sṛmara",
+    "ref": "GarP 1,140.12",
+    "words": "nṛpasya sṛmaraḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Priyavrata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Agnīdhra",
+    "ref": "GarP 1,54.1",
+    "words": "putrā hyete priyavratāt"
+   }
+  ],
+  [
+   {
+    "name": "Prācetasa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dakṣa",
+    "ref": "GarP 1,6.13",
+    "words": "tasyāṃ dakṣo 'bhavattataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pulastya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Datto­li",
+    "ref": "GarP 1,5.14",
+    "words": "dattolistatsuto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Puru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Arka",
+    "ref": "GarP 1,140.18",
+    "words": "hyarkastasya suto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yudhiṣṭhira",
+    "ref": "GarP 1,139.54",
+    "words": "pāṇḍostasyāṃ dharmānilendrakaiḥ yudhiṣṭhiro"
+   }
+  ],
+  [
+   {
+    "name": "Pṛthu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sukṛti",
+    "ref": "GarP 1,140.12",
+    "words": "sukṛtiśca pṛthoḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Raghu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aja",
+    "ref": "GarP 1,143.3",
+    "words": "raghorajastato jāto"
+   }
+  ],
+  [
+   {
+    "name": "Saṃhrāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Āyuṣmān",
+    "ref": "GarP 1,6.45",
+    "words": "saṃhrādaputra āyuṣmāñ"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Budha",
+    "ref": "GarP 1,139.2",
+    "words": "somāttarā budhaṃ jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Sūrya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "GarP 1,141.6",
+    "words": "sahadevastadātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Tālajaṅgha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bharata",
+    "ref": "GarP 1,139.25",
+    "words": "bharatastālajaṅgataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ugrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṃsa",
+    "ref": "GarP 1,139.50",
+    "words": "ugrasenasya kaṃso 'bhūt"
+   }
+  ],
+  [
+   {
+    "name": "Uttānapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uttama",
+    "ref": "GarP 1,6.1",
+    "words": "uttānapādādabhavatsurucyāmuttamaḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vāsudeva",
+    "ref": "GarP 1,144.1",
+    "words": "vasudevāttu devakyāṃ vāsudevo"
+   }
+  ],
+  [
+   {
+    "name": "Virocana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bali",
+    "ref": "GarP 1,6.45",
+    "words": "balirjajñe virocanāt"
+   }
+  ],
+  [
+   {
+    "name": "Viśvāmitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suśruta",
+    "ref": "GarP 1,145.43",
+    "words": "viśvāmitrasutāyaiva śuśrutāya"
+   }
+  ],
+  [
+   {
+    "name": "Śaśāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "GarP 1,138.19",
+    "words": "purañjayaḥ śaśādācca"
+   }
+  ]
+ ]
+}

@@ -1,0 +1,215 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "markp",
+ "title": "Markandeyapurana",
+ "lines": [
+  [
+   {
+    "name": "Bhṛgu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhātṛ",
+    "ref": "MarkP 52.14",
+    "words": "bhṛgoḥ khyātirasūyata"
+   },
+   {
+    "name": "Prāṇa",
+    "ref": "MarkP 52.16",
+    "words": "tayorjātau sutāvubhau prāṇaścaiva mṛkaṇḍuśca"
+   },
+   {
+    "name": "Dyutimat",
+    "ref": "MarkP 52.18",
+    "words": "prāṇasya dyutimān putra"
+   },
+   {
+    "name": "Ajara",
+    "ref": "MarkP 52.18",
+    "words": "tasya cātmajaḥ ajarāśca"
+   }
+  ],
+  [
+   {
+    "name": "Nābhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛṣabha",
+    "ref": "MarkP 53.38",
+    "words": "āgnīdhrasūnornābhestu ṛṣabho 'bhūt suto"
+   },
+   {
+    "name": "Bharata",
+    "ref": "MarkP 53.39",
+    "words": "ṛṣabhādbharato jajñe"
+   },
+   {
+    "name": "Sumati",
+    "ref": "MarkP 53.41",
+    "words": "bhatasyāpyabhūt putraḥ sumatirnāma"
+   }
+  ],
+  [
+   {
+    "name": "Brahmā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Agni",
+    "ref": "MarkP 52.27",
+    "words": "brahmaṇastanayo 'grajaḥ"
+   },
+   {
+    "name": "Pavamāna",
+    "ref": "MarkP 52.28",
+    "words": "pavamānañca"
+   }
+  ],
+  [
+   {
+    "name": "Marīci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Paurṇamāsa",
+    "ref": "MarkP 52.19",
+    "words": "patnī marīceḥ sambhūtiḥ paurṇamāsamasūyata"
+   },
+   {
+    "name": "Virajas",
+    "ref": "MarkP 52.19",
+    "words": "virajāḥ parvataścaiva tasya putrau"
+   }
+  ],
+  [
+   {
+    "name": "Priyavrata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Āgnīdhra",
+    "ref": "MarkP 53.17",
+    "words": "jambudvīpe tathāgnīdhraṃ rājānaṃ kṛtavān pitā"
+   },
+   {
+    "name": "Harivarṣa",
+    "ref": "MarkP 53.34",
+    "words": "harivarṣastṛtīyastu"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "MarkP 52.21",
+    "words": "anasūyā tathaivātrerjajñe putrānakalpaṣān somaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Bodha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Caitra",
+    "ref": "MarkP 76.25",
+    "words": "viprāgryabodhaputrasya"
+   }
+  ],
+  [
+   {
+    "name": "Cākṣuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ūru",
+    "ref": "MarkP 76.55",
+    "words": "cākṣuṣasya manoḥ putrāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kratu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bālakhilyas",
+    "ref": "MarkP 52.24",
+    "words": "kratostu sannatirbhāryā bālakhilyānasūyata"
+   }
+  ],
+  [
+   {
+    "name": "Pulaha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kardama",
+    "ref": "MarkP 52.23",
+    "words": "kṣamā tu suṣuve bhāryā pulahasya"
+   }
+  ],
+  [
+   {
+    "name": "Pulastya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Datta",
+    "ref": "MarkP 52.22",
+    "words": "prītyāṃ pulastyabhāryāyāṃ datto 'nyastatsuto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Savana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahāvīta",
+    "ref": "MarkP 53.19",
+    "words": "mahāvīto dhātakiśca puṣkarādhipateḥ sutau"
+   }
+  ],
+  [
+   {
+    "name": "Vasiṣṭha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Rajas",
+    "ref": "MarkP 52.25",
+    "words": "saptājāyanta vai sutāḥ rajogātrordhvabāhuśca"
+   }
+  ],
+  [
+   {
+    "name": "Vikrānta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ānanda",
+    "ref": "MarkP 76.21",
+    "words": "ānandeti ca nāmāsya pitā cakre vidhānataḥ"
+   }
+  ]
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "mbh1",
+ "title": "Mahabharata, Adiparvan",
+ "chapter": 89,
+ "part": 2,
+ "refs": [
+  "MBh 1,89.53",
+  "MBh 1,89.54",
+  "MBh 1,89.55"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T22:46:55",
+ "reply": "{\"statements\":[{\"ref\":\"MBh 1,89.53\",\"a\":\"Śaṃtanu\",\"rel\":\"succeeded\",\"b\":\"Devāpi\",\"words\":\"śaṃtanuś ca mahīṃ lebhe\",\"doubt\":true},{\"ref\":\"MBh 1,89.54\",\"a\":\"Bharata\",\"rel\":\"line_of\",\"b\":\"Bharata\",\"words\":\"bharatasyānvaye jātāḥ\",\"doubt\":true}]}\n\nReconsidering: the line_of statement is poorly grounded, since the verse says only that persons were born in Bharata's lineage, not that a clan is named after him. I will give the stricter reply.\n\n{\"statements\":[]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0045,
+ "tokens": {
+  "input": 1136,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 223,
+  "thinking": 0
+ },
+ "statements": []
+}
