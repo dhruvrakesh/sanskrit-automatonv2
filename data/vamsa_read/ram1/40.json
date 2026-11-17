@@ -1,0 +1,97 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 40,
+ "part": 0,
+ "refs": [
+  "R 1,40.1",
+  "R 1,40.2",
+  "R 1,40.3",
+  "R 1,40.4",
+  "R 1,40.5",
+  "R 1,40.6",
+  "R 1,40.7",
+  "R 1,40.8",
+  "R 1,40.9",
+  "R 1,40.10",
+  "R 1,40.11",
+  "R 1,40.12",
+  "R 1,40.13",
+  "R 1,40.14",
+  "R 1,40.15",
+  "R 1,40.16",
+  "R 1,40.17",
+  "R 1,40.18",
+  "R 1,40.19",
+  "R 1,40.20",
+  "R 1,40.21",
+  "R 1,40.22",
+  "R 1,40.23",
+  "R 1,40.24",
+  "R 1,40.25",
+  "R 1,40.26"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:28",
+ "reply": "{\"statements\":[{\"ref\":\"R 1,40.1\",\"a\":\"Aṃśumān\",\"rel\":\"descendant_of\",\"b\":\"Sagara\",\"words\":\"sagaro raghunandana naptāram abravīd\",\"doubt\":false},{\"ref\":\"R 1,40.13\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"asamañjasutas\",\"doubt\":false},{\"ref\":\"R 1,40.12\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Aṃśumān\",\"words\":\"pitaras tasya sāgarāḥ\",\"doubt\":true},{\"ref\":\"R 1,40.16\",\"a\":\"Suparṇa\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"pitṝṇāṃ mātulaṃ rāma suparṇam\",\"doubt\":true},{\"ref\":\"R 1,40.19\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Himavat\",\"words\":\"gaṅgā himavato jyeṣṭhā duhitā\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00914,
+ "tokens": {
+  "input": 2814,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 351,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,40.1",
+   "a": "Aṃśumān",
+   "rel": "descendant_of",
+   "b": "Sagara",
+   "words": "sagaro raghunandana naptāram abravīd",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,40.13",
+   "a": "Aṃśumān",
+   "rel": "son_of",
+   "b": "Asamañja",
+   "words": "asamañjasutas",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,40.12",
+   "a": "Sagara",
+   "rel": "other",
+   "b": "Aṃśumān",
+   "words": "pitaras tasya sāgarāḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,40.16",
+   "a": "Suparṇa",
+   "rel": "other",
+   "b": "Sagara",
+   "words": "pitṝṇāṃ mātulaṃ rāma suparṇam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,40.19",
+   "a": "Gaṅgā",
+   "rel": "daughter_of",
+   "b": "Himavat",
+   "words": "gaṅgā himavato jyeṣṭhā duhitā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

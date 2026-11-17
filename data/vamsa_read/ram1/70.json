@@ -1,0 +1,284 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 70,
+ "part": 0,
+ "refs": [
+  "R 1,70.1",
+  "R 1,70.2",
+  "R 1,70.3",
+  "R 1,70.4",
+  "R 1,70.5",
+  "R 1,70.6",
+  "R 1,70.7",
+  "R 1,70.8",
+  "R 1,70.9",
+  "R 1,70.10",
+  "R 1,70.11",
+  "R 1,70.12",
+  "R 1,70.13",
+  "R 1,70.14",
+  "R 1,70.15",
+  "R 1,70.16",
+  "R 1,70.17",
+  "R 1,70.18",
+  "R 1,70.19",
+  "R 1,70.20",
+  "R 1,70.21",
+  "R 1,70.22",
+  "R 1,70.23",
+  "R 1,70.24"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:12:19",
+ "reply": "{\"statements\":[\n{\"ref\":\"R 1,70.4\",\"a\":\"Mithi\",\"rel\":\"son_of\",\"b\":\"Nimi\",\"words\":\"tasya putro mithir nāma\",\"doubt\":false},\n{\"ref\":\"R 1,70.4\",\"a\":\"Udāvasu\",\"rel\":\"succeeded\",\"b\":\"Janaka\",\"words\":\"janakād apy udāvasuḥ\",\"doubt\":true},\n{\"ref\":\"R 1,70.5\",\"a\":\"Nandivardhana\",\"rel\":\"son_of\",\"b\":\"Udāvasu\",\"words\":\"udāvasos tu dharmātmā jāto vai nandivardhanaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.5\",\"a\":\"Suketu\",\"rel\":\"son_of\",\"b\":\"Nandivardhana\",\"words\":\"nandivardhana putras tu suketur nāma\",\"doubt\":false},\n{\"ref\":\"R 1,70.6\",\"a\":\"Devarāta\",\"rel\":\"son_of\",\"b\":\"Suketu\",\"words\":\"suketor api dharmātmā devarāto\",\"doubt\":false},\n{\"ref\":\"R 1,70.6\",\"a\":\"Bṛhadratha\",\"rel\":\"son_of\",\"b\":\"Devarāta\",\"words\":\"devarātasya rājarṣer bṛhadratha iti śrutaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.7\",\"a\":\"Mahāvīra\",\"rel\":\"son_of\",\"b\":\"Bṛhadratha\",\"words\":\"bṛhadrathasya śūro 'bhūn mahāvīraḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.7\",\"a\":\"Sudhṛti\",\"rel\":\"son_of\",\"b\":\"Mahāvīra\",\"words\":\"mahāvīrasya dhṛtimān sudhṛtiḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.8\",\"a\":\"Dhṛṣṭaketu\",\"rel\":\"son_of\",\"b\":\"Sudhṛti\",\"words\":\"sudhṛter api dharmātmā dhṛṣṭaketuḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.8\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṭaketu\",\"words\":\"dhṛṣṭaketos tu rājarṣer haryaśva iti viśrutaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.9\",\"a\":\"Maru\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"haryaśvasya maruḥ putro\",\"doubt\":false},\n{\"ref\":\"R 1,70.9\",\"a\":\"Pratīndhaka\",\"rel\":\"son_of\",\"b\":\"Maru\",\"words\":\"maroḥ putraḥ pratīndhakaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.9\",\"a\":\"Kīrtiratha\",\"rel\":\"son_of\",\"b\":\"Pratīndhaka\",\"words\":\"pratīndhakasya dharmātmā rājā kīrtirathaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.10\",\"a\":\"Devamīḍha\",\"rel\":\"son_of\",\"b\":\"Kīrtiratha\",\"words\":\"putraḥ kīrtirathasyāpi devamīḍha\",\"doubt\":false},\n{\"ref\":\"R 1,70.10\",\"a\":\"Vibudha\",\"rel\":\"son_of\",\"b\":\"Devamīḍha\",\"words\":\"devamīḍhasya vibudho\",\"doubt\":false},\n{\"ref\":\"R 1,70.10\",\"a\":\"Mahīdhraka\",\"rel\":\"son_of\",\"b\":\"Vibudha\",\"words\":\"vibudhasya mahīdhrakaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.11\",\"a\":\"Kīrtirāta\",\"rel\":\"son_of\",\"b\":\"Mahīdhraka\",\"words\":\"mahīdhrakasuto rājā kīrtirāto\",\"doubt\":false},\n{\"ref\":\"R 1,70.11\",\"a\":\"Mahāroma\",\"rel\":\"son_of\",\"b\":\"Kīrtirāta\",\"words\":\"kīrtirātasya rājarṣer mahāromā vyajāyata\",\"doubt\":false},\n{\"ref\":\"R 1,70.12\",\"a\":\"Svarṇaroma\",\"rel\":\"son_of\",\"b\":\"Mahāroma\",\"words\":\"mahāroṃṇas tu dharmātmā svarṇaromā vyajāyata\",\"doubt\":false},\n{\"ref\":\"R 1,70.12\",\"a\":\"Hrasvaroma\",\"rel\":\"son_of\",\"b\":\"Svarṇaroma\",\"words\":\"svarṇaroṃṇas tu rājarṣer hrasvaromā vyajāyata\",\"doubt\":false},\n{\"ref\":\"R 1,70.13\",\"a\":\"Janaka\",\"rel\":\"son_of\",\"b\":\"Hrasvaroma\",\"words\":\"tasya putradvayaṃ jajñe jyeṣṭho 'ham\",\"doubt\":true},\n{\"ref\":\"R 1,70.13\",\"a\":\"Kuśadhvaja\",\"rel\":\"son_of\",\"b\":\"Hrasvaroma\",\"words\":\"tasya putradvayaṃ jajñe anujo bhrātā mama vīraḥ kuśadhvajaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,70.13\",\"a\":\"Kuśadhvaja\",\"rel\":\"brother_of\",\"b\":\"Janaka\",\"words\":\"anujo bhrātā mama vīraḥ kuśadhvajaḥ\",\"doubt\":true},\n{\"ref\":\"R 1,70.21\",\"a\":\"Sītā\",\"rel\":\"daughter_of\",\"b\":\"Janaka\",\"words\":\"mama sutāṃ sītāṃ\",\"doubt\":true},\n{\"ref\":\"R 1,70.21\",\"a\":\"Sītā\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"sītāṃ rāmāya\",\"doubt\":false},\n{\"ref\":\"R 1,70.21\",\"a\":\"Ūrmilā\",\"rel\":\"wife_of\",\"b\":\"Lakṣmaṇa\",\"words\":\"ūrmilāṃ lakṣmaṇāya ca\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0255,
+ "tokens": {
+  "input": 2686,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2013,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,70.4",
+   "a": "Mithi",
+   "rel": "son_of",
+   "b": "Nimi",
+   "words": "tasya putro mithir nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.4",
+   "a": "Udāvasu",
+   "rel": "succeeded",
+   "b": "Janaka",
+   "words": "janakād apy udāvasuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.5",
+   "a": "Nandivardhana",
+   "rel": "son_of",
+   "b": "Udāvasu",
+   "words": "udāvasos tu dharmātmā jāto vai nandivardhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.5",
+   "a": "Suketu",
+   "rel": "son_of",
+   "b": "Nandivardhana",
+   "words": "nandivardhana putras tu suketur nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.6",
+   "a": "Devarāta",
+   "rel": "son_of",
+   "b": "Suketu",
+   "words": "suketor api dharmātmā devarāto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.6",
+   "a": "Bṛhadratha",
+   "rel": "son_of",
+   "b": "Devarāta",
+   "words": "devarātasya rājarṣer bṛhadratha iti śrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.7",
+   "a": "Mahāvīra",
+   "rel": "son_of",
+   "b": "Bṛhadratha",
+   "words": "bṛhadrathasya śūro 'bhūn mahāvīraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.7",
+   "a": "Sudhṛti",
+   "rel": "son_of",
+   "b": "Mahāvīra",
+   "words": "mahāvīrasya dhṛtimān sudhṛtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.8",
+   "a": "Dhṛṣṭaketu",
+   "rel": "son_of",
+   "b": "Sudhṛti",
+   "words": "sudhṛter api dharmātmā dhṛṣṭaketuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.8",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dhṛṣṭaketu",
+   "words": "dhṛṣṭaketos tu rājarṣer haryaśva iti viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.9",
+   "a": "Maru",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "haryaśvasya maruḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.9",
+   "a": "Pratīndhaka",
+   "rel": "son_of",
+   "b": "Maru",
+   "words": "maroḥ putraḥ pratīndhakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.9",
+   "a": "Kīrtiratha",
+   "rel": "son_of",
+   "b": "Pratīndhaka",
+   "words": "pratīndhakasya dharmātmā rājā kīrtirathaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.10",
+   "a": "Devamīḍha",
+   "rel": "son_of",
+   "b": "Kīrtiratha",
+   "words": "putraḥ kīrtirathasyāpi devamīḍha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.10",
+   "a": "Vibudha",
+   "rel": "son_of",
+   "b": "Devamīḍha",
+   "words": "devamīḍhasya vibudho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.10",
+   "a": "Mahīdhraka",
+   "rel": "son_of",
+   "b": "Vibudha",
+   "words": "vibudhasya mahīdhrakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.11",
+   "a": "Kīrtirāta",
+   "rel": "son_of",
+   "b": "Mahīdhraka",
+   "words": "mahīdhrakasuto rājā kīrtirāto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.11",
+   "a": "Mahāroma",
+   "rel": "son_of",
+   "b": "Kīrtirāta",
+   "words": "kīrtirātasya rājarṣer mahāromā vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.12",
+   "a": "Svarṇaroma",
+   "rel": "son_of",
+   "b": "Mahāroma",
+   "words": "mahāroṃṇas tu dharmātmā svarṇaromā vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.12",
+   "a": "Hrasvaroma",
+   "rel": "son_of",
+   "b": "Svarṇaroma",
+   "words": "svarṇaroṃṇas tu rājarṣer hrasvaromā vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.13",
+   "a": "Janaka",
+   "rel": "son_of",
+   "b": "Hrasvaroma",
+   "words": "tasya putradvayaṃ jajñe jyeṣṭho 'ham",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "R 1,70.13",
+   "a": "Kuśadhvaja",
+   "rel": "son_of",
+   "b": "Hrasvaroma",
+   "words": "tasya putradvayaṃ jajñe anujo bhrātā mama vīraḥ kuśadhvajaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "R 1,70.13",
+   "a": "Kuśadhvaja",
+   "rel": "brother_of",
+   "b": "Janaka",
+   "words": "anujo bhrātā mama vīraḥ kuśadhvajaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,70.21",
+   "a": "Sītā",
+   "rel": "daughter_of",
+   "b": "Janaka",
+   "words": "mama sutāṃ sītāṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,70.21",
+   "a": "Sītā",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "sītāṃ rāmāya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,70.21",
+   "a": "Ūrmilā",
+   "rel": "wife_of",
+   "b": "Lakṣmaṇa",
+   "words": "ūrmilāṃ lakṣmaṇāya ca",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

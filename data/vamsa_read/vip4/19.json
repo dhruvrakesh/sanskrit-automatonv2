@@ -707,7 +707,7 @@
    "b": "Nīla",
    "words": "teṣāṃ pradhānaḥ kāṃpilyādhipatiḥsamaraḥ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.41",
@@ -1445,7 +1445,7 @@
    "b": "Bṛhadratha",
    "words": "bṛṃhadrathāccānyaḥ śakaladvayajanmā jarayā saṃdhito jarāsaṃdhanāmā",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,19.84",

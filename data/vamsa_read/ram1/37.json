@@ -1,0 +1,113 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 37,
+ "part": 0,
+ "refs": [
+  "R 1,37.1",
+  "R 1,37.2",
+  "R 1,37.3",
+  "R 1,37.4",
+  "R 1,37.5",
+  "R 1,37.6",
+  "R 1,37.7",
+  "R 1,37.8",
+  "R 1,37.9",
+  "R 1,37.10",
+  "R 1,37.11",
+  "R 1,37.12",
+  "R 1,37.13",
+  "R 1,37.14",
+  "R 1,37.15",
+  "R 1,37.16",
+  "R 1,37.17",
+  "R 1,37.18",
+  "R 1,37.19",
+  "R 1,37.20",
+  "R 1,37.21",
+  "R 1,37.22",
+  "R 1,37.23",
+  "R 1,37.24"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:06",
+ "reply": "{\"statements\":[{\"ref\":\"R 1,37.3\",\"a\":\"Keśinī\",\"rel\":\"daughter_of\",\"b\":\"Vaidarbha\",\"words\":\"vaidarbhaduhitā rāma keśinī nāma\",\"doubt\":false},{\"ref\":\"R 1,37.3\",\"a\":\"Keśinī\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"jyeṣṭhā sagarapatnī sā\",\"doubt\":false},{\"ref\":\"R 1,37.4\",\"a\":\"Sumati\",\"rel\":\"daughter_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemiduhitā\",\"doubt\":false},{\"ref\":\"R 1,37.4\",\"a\":\"Sumati\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dvitīyā sagarasyāsīt patnī sumatisaṃjñitā\",\"doubt\":false},{\"ref\":\"R 1,37.16\",\"a\":\"Asamañja\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"jyeṣṭhā putraṃ vyajāyata asamañja iti khyātaṃ keśinī\",\"doubt\":false},{\"ref\":\"R 1,37.16\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"keśinī sagarātmajam\",\"doubt\":false},{\"ref\":\"R 1,37.17\",\"a\":\"sixty thousand sons\",\"rel\":\"born_of\",\"b\":\"Sumati\",\"words\":\"sumatis tu naravyāghra garbhatumbaṃ vyajāyata ṣaṣṭiḥ putrasahasrāṇi\",\"doubt\":false},{\"ref\":\"R 1,37.19\",\"a\":\"sixty thousand sons\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"ṣaṣṭiḥ putrasahasrāṇi sagarasyābhavaṃs\",\"doubt\":false},{\"ref\":\"R 1,37.22\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"tasya putro 'ṃśumān nāma asamañjasya\",\"doubt\":false}]}\n\nCorrection: the entries naming \"sixty thousand sons\" are not persons named by the text, so they should be dropped.\n\n```json\n{\"statements\":[{\"ref\":\"R 1,37.3\",\"a\":\"Keśinī\",\"rel\":\"daughter_of\",\"b\":\"Vaidarbha\",\"words\":\"vaidarbhaduhitā rāma keśinī nāma\",\"doubt\":false},{\"ref\":\"R 1,37.3\",\"a\":\"Keśinī\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"jyeṣṭhā sagarapatnī sā\",\"doubt\":false},{\"ref\":\"R 1,37.4\",\"a\":\"Sumati\",\"rel\":\"daughter_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemiduhitā\",\"doubt\":false},{\"ref\":\"R 1,37.4\",\"a\":\"Sumati\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dvitīyā sagarasyāsīt patnī sumatisaṃjñitā\",\"doubt\":false},{\"ref\":\"R 1,37.16\",\"a\":\"Asamañja\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"putraṃ vyajāyata asamañja iti khyātaṃ keśinī\",\"doubt\":false},{\"ref\":\"R 1,37.16\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"keśinī sagarātmajam\",\"doubt\":false},{\"ref\":\"R 1,37.22\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"tasya putro 'ṃśumān nāma asamañjasya\",\"doubt\":false}]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.01789,
+ "tokens": {
+  "input": 2635,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1262,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,37.3",
+   "a": "Keśinī",
+   "rel": "daughter_of",
+   "b": "Vaidarbha",
+   "words": "vaidarbhaduhitā rāma keśinī nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,37.3",
+   "a": "Keśinī",
+   "rel": "wife_of",
+   "b": "Sagara",
+   "words": "jyeṣṭhā sagarapatnī sā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,37.4",
+   "a": "Sumati",
+   "rel": "daughter_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemiduhitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,37.4",
+   "a": "Sumati",
+   "rel": "wife_of",
+   "b": "Sagara",
+   "words": "dvitīyā sagarasyāsīt patnī sumatisaṃjñitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,37.16",
+   "a": "Asamañja",
+   "rel": "born_of",
+   "b": "Keśinī",
+   "words": "putraṃ vyajāyata asamañja iti khyātaṃ keśinī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,37.16",
+   "a": "Asamañja",
+   "rel": "son_of",
+   "b": "Sagara",
+   "words": "keśinī sagarātmajam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,37.22",
+   "a": "Aṃśumān",
+   "rel": "son_of",
+   "b": "Asamañja",
+   "words": "tasya putro 'ṃśumān nāma asamañjasya",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

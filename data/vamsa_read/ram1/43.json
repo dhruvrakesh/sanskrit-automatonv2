@@ -1,0 +1,64 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 43,
+ "part": 0,
+ "refs": [
+  "R 1,43.1",
+  "R 1,43.2",
+  "R 1,43.3",
+  "R 1,43.4",
+  "R 1,43.5",
+  "R 1,43.6",
+  "R 1,43.7",
+  "R 1,43.8",
+  "R 1,43.9",
+  "R 1,43.10",
+  "R 1,43.11",
+  "R 1,43.12",
+  "R 1,43.13",
+  "R 1,43.14",
+  "R 1,43.15",
+  "R 1,43.16",
+  "R 1,43.17",
+  "R 1,43.18",
+  "R 1,43.19",
+  "R 1,43.20"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:43",
+ "reply": "{\"statements\":[{\"ref\":\"R 1,43.3\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"ṣaṣṭiḥ putrasahasrāṇi sagarasya mahātmanaḥ\",\"doubt\":false},{\"ref\":\"R 1,43.5\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Bhagīratha\",\"words\":\"iyaṃ ca duhitā jyeṣṭhā tava gaṅgā bhaviṣyati\",\"doubt\":false},{\"ref\":\"R 1,43.11\",\"a\":\"Dilīpa\",\"rel\":\"father_of_placeholder\",\"b\":\"Bhagīratha\",\"words\":\"tava pitrātitejasā\",\"doubt\":true}]}\n\nCorrection, valid output only:\n\n{\"statements\":[{\"ref\":\"R 1,43.4\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"sagarasyātmajās\",\"doubt\":false},{\"ref\":\"R 1,43.5\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Bhagīratha\",\"words\":\"iyaṃ ca duhitā jyeṣṭhā tava gaṅgā bhaviṣyati\",\"doubt\":false},{\"ref\":\"R 1,43.11\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpena mahābhāga tava pitrātitejasā\",\"doubt\":false}]}\n\nFinal answer:\n\n{\"statements\":[{\"ref\":\"R 1,43.5\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Bhagīratha\",\"words\":\"iyaṃ ca duhitā jyeṣṭhā tava gaṅgā bhaviṣyati\",\"doubt\":false},{\"ref\":\"R 1,43.11\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpena mahābhāga tava pitrātitejasā\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01154,
+ "tokens": {
+  "input": 2391,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 676,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,43.5",
+   "a": "Gaṅgā",
+   "rel": "daughter_of",
+   "b": "Bhagīratha",
+   "words": "iyaṃ ca duhitā jyeṣṭhā tava gaṅgā bhaviṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,43.11",
+   "a": "Bhagīratha",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "dilīpena mahābhāga tava pitrātitejasā",
+   "doubt": false,
+   "check": "words"
+  }
+ ]
+}

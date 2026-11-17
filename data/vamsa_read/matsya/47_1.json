@@ -1,0 +1,370 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 47,
+ "part": 1,
+ "refs": [
+  "MatsP 47.1",
+  "MatsP 47.2",
+  "MatsP 47.3",
+  "MatsP 47.4",
+  "MatsP 47.5",
+  "MatsP 47.6",
+  "MatsP 47.7",
+  "MatsP 47.8",
+  "MatsP 47.9",
+  "MatsP 47.10",
+  "MatsP 47.11",
+  "MatsP 47.12",
+  "MatsP 47.13",
+  "MatsP 47.14",
+  "MatsP 47.15",
+  "MatsP 47.16",
+  "MatsP 47.17",
+  "MatsP 47.18",
+  "MatsP 47.19",
+  "MatsP 47.20",
+  "MatsP 47.21",
+  "MatsP 47.22",
+  "MatsP 47.23",
+  "MatsP 47.24",
+  "MatsP 47.25",
+  "MatsP 47.26",
+  "MatsP 47.27",
+  "MatsP 47.28",
+  "MatsP 47.29",
+  "MatsP 47.30",
+  "MatsP 47.31",
+  "MatsP 47.32",
+  "MatsP 47.33",
+  "MatsP 47.34",
+  "MatsP 47.35",
+  "MatsP 47.36",
+  "MatsP 47.37",
+  "MatsP 47.38",
+  "MatsP 47.39",
+  "MatsP 47.40",
+  "MatsP 47.41",
+  "MatsP 47.42",
+  "MatsP 47.43",
+  "MatsP 47.44",
+  "MatsP 47.45",
+  "MatsP 47.46",
+  "MatsP 47.47",
+  "MatsP 47.48",
+  "MatsP 47.49",
+  "MatsP 47.50",
+  "MatsP 47.51",
+  "MatsP 47.52",
+  "MatsP 47.53",
+  "MatsP 47.54",
+  "MatsP 47.55",
+  "MatsP 47.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:16:40",
+ "reply": "{\"statements\":[{\"ref\":\"MatsP 47.2\",\"a\":\"Kṛṣṇa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyāṃ vasudevasya\",\"doubt\":true},{\"ref\":\"MatsP 47.2\",\"a\":\"Kṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"devakyāṃ vasudevasya\",\"doubt\":true},{\"ref\":\"MatsP 47.4\",\"a\":\"Vasudeva\",\"rel\":\"other\",\"b\":\"Kaṃsa\",\"words\":\"mama putrā hatāstena jyeṣṭhāste bhīmavikramāḥ\",\"doubt\":true},{\"ref\":\"MatsP 47.15\",\"a\":\"Cārudeṣṇa\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"rukmiṇī janayāmāsa putrān\",\"doubt\":false},{\"ref\":\"MatsP 47.15\",\"a\":\"Pradyumna\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"rukmiṇī janayāmāsa putrān\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Sucāru\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"sucāruṃ bhadracāruṃ ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Bhadracāru\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"sucāruṃ bhadracāruṃ ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Sudeṣṇa\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"sudeṣṇaṃ bhadrameva ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Bhadra\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"sudeṣṇaṃ bhadrameva ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Paraśu\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"paraśuṃ cāruguptaṃ ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Cārugupta\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"paraśuṃ cāruguptaṃ ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Cārubhadra\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"cārubhadraṃ sucārukam\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Sucāruka\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"cārubhadraṃ sucārukam\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Cāruhāsa\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"cāruhāsaṃ kaniṣṭhaṃ ca\",\"doubt\":false},{\"ref\":\"MatsP 47.16\",\"a\":\"Cārumatī\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"kanyāṃ cārumatīṃ tathā\",\"doubt\":false},{\"ref\":\"MatsP 47.17\",\"a\":\"Bhānu\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ bhānur\",\"doubt\":false},{\"ref\":\"MatsP 47.17\",\"a\":\"Bhramara\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ\",\"doubt\":true},{\"ref\":\"MatsP 47.17\",\"a\":\"Rohita\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ\",\"doubt\":false},{\"ref\":\"MatsP 47.17\",\"a\":\"Dīptimān\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ\",\"doubt\":false},{\"ref\":\"MatsP 47.17\",\"a\":\"Tāmra\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ\",\"doubt\":false},{\"ref\":\"MatsP 47.17\",\"a\":\"Cakra\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ\",\"doubt\":true},{\"ref\":\"MatsP 47.17\",\"a\":\"Jalaṃdhama\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ\",\"doubt\":false},{\"ref\":\"MatsP 47.18\",\"a\":\"Sāmba\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"jāmbavatyāḥ suto jajñe sāmbaḥ\",\"doubt\":false},{\"ref\":\"MatsP 47.19\",\"a\":\"Mitravān\",\"rel\":\"born_of\",\"b\":\"Mitravindā\",\"words\":\"mitravānmitravindaśca mitravindā\",\"doubt\":true},{\"ref\":\"MatsP 47.19\",\"a\":\"Mitrabāhu\",\"rel\":\"born_of\",\"b\":\"Nāgnajitī\",\"words\":\"mitrabāhuḥ sunīthaśca nāgnajityāḥ prajā\",\"doubt\":false},{\"ref\":\"MatsP 47.19\",\"a\":\"Sunītha\",\"rel\":\"born_of\",\"b\":\"Nāgnajitī\",\"words\":\"mitrabāhuḥ sunīthaśca nāgnajityāḥ prajā\",\"doubt\":false},{\"ref\":\"MatsP 47.22\",\"a\":\"Vajra\",\"rel\":\"son_of\",\"b\":\"Upasaṅga\",\"words\":\"upasaṅgasya tu sutau vajraḥ\",\"doubt\":false},{\"ref\":\"MatsP 47.22\",\"a\":\"Saṃkṣipta\",\"rel\":\"son_of\",\"b\":\"Upasaṅga\",\"words\":\"upasaṅgasya tu sutau vajraḥ saṃkṣipta\",\"doubt\":false},{\"ref\":\"MatsP 47.22\",\"a\":\"Bhūrīndrasena\",\"rel\":\"son_of\",\"b\":\"Gaveṣaṇa\",\"words\":\"bhūrīndraseno bhūriśca gaveṣaṇasutāv ubhau\",\"doubt\":false},{\"ref\":\"MatsP 47.22\",\"a\":\"Bhūri\",\"rel\":\"son_of\",\"b\":\"Gaveṣaṇa\",\"words\":\"bhūriśca gaveṣaṇasutāv ubhau\",\"doubt\":false},{\"ref\":\"MatsP 47.23\",\"a\":\"Aniruddha\",\"rel\":\"son_of\",\"b\":\"Pradyumna\",\"words\":\"pradyumnasya tu dāyādo\",\"doubt\":false},{\"ref\":\"MatsP 47.23\",\"a\":\"Aniruddha\",\"rel\":\"born_of\",\"b\":\"Vaidarbhī\",\"words\":\"vaidarbhyāṃ buddhisattamaḥ aniruddho\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03437,
+ "tokens": {
+  "input": 5191,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2399,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 47.2",
+   "a": "Kṛṣṇa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyāṃ vasudevasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.2",
+   "a": "Kṛṣṇa",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "devakyāṃ vasudevasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.4",
+   "a": "Vasudeva",
+   "rel": "other",
+   "b": "Kaṃsa",
+   "words": "mama putrā hatāstena jyeṣṭhāste bhīmavikramāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.15",
+   "a": "Cārudeṣṇa",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "rukmiṇī janayāmāsa putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.15",
+   "a": "Pradyumna",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "rukmiṇī janayāmāsa putrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Sucāru",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "sucāruṃ bhadracāruṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Bhadracāru",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "sucāruṃ bhadracāruṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Sudeṣṇa",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "sudeṣṇaṃ bhadrameva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Bhadra",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "sudeṣṇaṃ bhadrameva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Paraśu",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "paraśuṃ cāruguptaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Cārugupta",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "paraśuṃ cāruguptaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Cārubhadra",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "cārubhadraṃ sucārukam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Sucāruka",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "cārubhadraṃ sucārukam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Cāruhāsa",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "cāruhāsaṃ kaniṣṭhaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.16",
+   "a": "Cārumatī",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "kanyāṃ cārumatīṃ tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Bhānu",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ bhānur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Bhramara",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Rohita",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Dīptimān",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Tāmra",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Cakra",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.17",
+   "a": "Jalaṃdhama",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.18",
+   "a": "Sāmba",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "jāmbavatyāḥ suto jajñe sāmbaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.19",
+   "a": "Mitravān",
+   "rel": "born_of",
+   "b": "Mitravindā",
+   "words": "mitravānmitravindaśca mitravindā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.19",
+   "a": "Mitrabāhu",
+   "rel": "born_of",
+   "b": "Nāgnajitī",
+   "words": "mitrabāhuḥ sunīthaśca nāgnajityāḥ prajā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.19",
+   "a": "Sunītha",
+   "rel": "born_of",
+   "b": "Nāgnajitī",
+   "words": "mitrabāhuḥ sunīthaśca nāgnajityāḥ prajā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.22",
+   "a": "Vajra",
+   "rel": "son_of",
+   "b": "Upasaṅga",
+   "words": "upasaṅgasya tu sutau vajraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.22",
+   "a": "Saṃkṣipta",
+   "rel": "son_of",
+   "b": "Upasaṅga",
+   "words": "upasaṅgasya tu sutau vajraḥ saṃkṣipta",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.22",
+   "a": "Bhūrīndrasena",
+   "rel": "son_of",
+   "b": "Gaveṣaṇa",
+   "words": "bhūrīndraseno bhūriśca gaveṣaṇasutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.22",
+   "a": "Bhūri",
+   "rel": "son_of",
+   "b": "Gaveṣaṇa",
+   "words": "bhūriśca gaveṣaṇasutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.23",
+   "a": "Aniruddha",
+   "rel": "son_of",
+   "b": "Pradyumna",
+   "words": "pradyumnasya tu dāyādo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 47.23",
+   "a": "Aniruddha",
+   "rel": "born_of",
+   "b": "Vaidarbhī",
+   "words": "vaidarbhyāṃ buddhisattamaḥ aniruddho",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -53,17 +53,17 @@
  ],
  "model": "claude-sonnet-5-5",
  "effort": "medium",
- "prompt_version": "vamsa-read-v1",
+ "prompt_version": "vamsa-read-v2",
  "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
- "at": "2026-11-16T18:13:07",
- "reply": "{\"statements\":[\n{\"ref\":\"HV 10.6\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Satyavrata's father\",\"words\":\"pitrā tu taṃ tadā rāṣṭrāt parityktaṃ priyaṃ sutam\",\"doubt\":true},\n{\"ref\":\"HV 10.21\",\"a\":\"Satyarathā\",\"rel\":\"wife_of\",\"b\":\"Triśaṅku\",\"words\":\"tasya satyarathā nāma patnī\",\"doubt\":false},\n{\"ref\":\"HV 10.21\",\"a\":\"Satyarathā\",\"rel\":\"descendant_of\",\"b\":\"Kekaya\",\"words\":\"kekayavaṃśajā\",\"doubt\":false},\n{\"ref\":\"HV 10.21\",\"a\":\"Hariścandra\",\"rel\":\"son_of\",\"b\":\"Satyarathā\",\"words\":\"kumāraṃ janayām āsa hariścandram\",\"doubt\":false},\n{\"ref\":\"HV 10.21\",\"a\":\"Hariścandra\",\"rel\":\"son_of\",\"b\":\"Triśaṅku\",\"words\":\"tasya satyarathā nāma patnī kekayavaṃśajā kumāraṃ janayām āsa hariścandram\",\"doubt\":false},\n{\"ref\":\"HV 10.23\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Hariścandra\",\"words\":\"hariścandrasya tu suto rohito nāma\",\"doubt\":false},\n{\"ref\":\"HV 10.23\",\"a\":\"Cañcu\",\"rel\":\"son_of\",\"b\":\"Harita\",\"words\":\"harito rohitasyātha cañcur hārīta ucyate\",\"doubt\":true},\n{\"ref\":\"HV 10.23\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Cañcu\",\"words\":\"vijayaś ca sudevaś ca cañcuputrau babhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.23\",\"a\":\"Sudeva\",\"rel\":\"son_of\",\"b\":\"Cañcu\",\"words\":\"vijayaś ca sudevaś ca cañcuputrau babhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.23\",\"a\":\"Vijaya\",\"rel\":\"brother_of\",\"b\":\"Sudeva\",\"words\":\"cañcuputrau babhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.23\",\"a\":\"Ruruka\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"rurukas tanayas tasya\",\"doubt\":true},\n{\"ref\":\"HV 10.23\",\"a\":\"Vṛka\",\"rel\":\"son_of\",\"b\":\"Rohita\",\"words\":\"rohitasya vṛkaḥ putro\",\"doubt\":false},\n{\"ref\":\"HV 10.23\",\"a\":\"Bāhu\",\"rel\":\"son_of\",\"b\":\"Vṛka\",\"words\":\"vṛkād bāhus tu jajñivān\",\"doubt\":false},\n{\"ref\":\"HV 10.25\",\"a\":\"Sagara\",\"rel\":\"son_of\",\"b\":\"Bāhu\",\"words\":\"sagaras tu suto bāhor jajñe\",\"doubt\":false},\n{\"ref\":\"HV 10.33\",\"a\":\"Bāhu's wife\",\"rel\":\"wife_of\",\"b\":\"Bāhu\",\"words\":\"tatpatny anumariṣyatī\",\"doubt\":true},\n{\"ref\":\"HV 10.33\",\"a\":\"Bāhu's wife\",\"rel\":\"descendant_of\",\"b\":\"Yādava\",\"words\":\"patnī tu yādavī tasya\",\"doubt\":true}\n]}",
+ "at": "2026-11-17T09:52:44",
+ "reply": "{\"statements\":[{\"ref\":\"HV 10.6\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Satyavrata's father\",\"words\":\"pitrā tu taṃ tadā rāṣṭrāt parityktaṃ priyaṃ sutam\",\"doubt\":false},{\"ref\":\"HV 10.21\",\"a\":\"Satyarathā\",\"rel\":\"wife_of\",\"b\":\"Triśaṅku\",\"words\":\"tasya satyarathā nāma patnī kekayavaṃśajā\",\"doubt\":true},{\"ref\":\"HV 10.21\",\"a\":\"Hariścandra\",\"rel\":\"born_of\",\"b\":\"Satyarathā\",\"words\":\"patnī kekayavaṃśajā kumāraṃ janayām āsa hariścandram\",\"doubt\":false},{\"ref\":\"HV 10.21\",\"a\":\"Hariścandra\",\"rel\":\"son_of\",\"b\":\"Triśaṅku\",\"words\":\"tasya satyarathā nāma patnī kekayavaṃśajā kumāraṃ janayām āsa hariścandram\",\"doubt\":true},{\"ref\":\"HV 10.22\",\"a\":\"Hariścandra\",\"rel\":\"descendant_of\",\"b\":\"Triśaṅku\",\"words\":\"hariścandras traiśaṅkava iti smṛtaḥ\",\"doubt\":false},{\"ref\":\"HV 10.23\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Hariścandra\",\"words\":\"hariścandrasya tu suto rohito nāma viśrutaḥ\",\"doubt\":false},{\"ref\":\"HV 10.23\",\"a\":\"Cañcu\",\"rel\":\"son_of\",\"b\":\"Harita\",\"words\":\"harito rohitasyātha cañcur hārīta ucyate\",\"doubt\":true},{\"ref\":\"HV 10.23\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Cañcu\",\"words\":\"vijayaś ca sudevaś ca cañcuputrau babhūvatuḥ\",\"doubt\":false},{\"ref\":\"HV 10.23\",\"a\":\"Sudeva\",\"rel\":\"son_of\",\"b\":\"Cañcu\",\"words\":\"vijayaś ca sudevaś ca cañcuputrau babhūvatuḥ\",\"doubt\":false},{\"ref\":\"HV 10.23\",\"a\":\"Viruka\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"rurukas tanayas tasya\",\"doubt\":true},{\"ref\":\"HV 10.23\",\"a\":\"Vṛka\",\"rel\":\"son_of\",\"b\":\"Rohita\",\"words\":\"rohitasya vṛkaḥ putro\",\"doubt\":false},{\"ref\":\"HV 10.23\",\"a\":\"Bāhu\",\"rel\":\"son_of\",\"b\":\"Vṛka\",\"words\":\"vṛkād bāhus tu jajñivān\",\"doubt\":false},{\"ref\":\"HV 10.25\",\"a\":\"Sagara\",\"rel\":\"son_of\",\"b\":\"Bāhu\",\"words\":\"sagaras tu suto bāhor jajñe\",\"doubt\":false},{\"ref\":\"HV 10.33\",\"a\":\"Bāhu\",\"rel\":\"wife_of\",\"b\":\"Yādavī\",\"words\":\"patnī tu yādavī tasya sagarbhā\",\"doubt\":true}]}",
  "stop": "end_turn",
- "cost_usd": 0.02111,
+ "cost_usd": 0.02064,
  "tokens": {
-  "input": 4798,
+  "input": 5069,
   "cache_write": 0,
   "cache_read": 0,
-  "output": 1151,
+  "output": 1050,
   "thinking": 0
  },
  "statements": [
@@ -73,7 +73,7 @@
    "rel": "son_of",
    "b": "Satyavrata's father",
    "words": "pitrā tu taṃ tadā rāṣṭrāt parityktaṃ priyaṃ sutam",
-   "doubt": true,
+   "doubt": false,
    "check": "verified"
   },
   {
@@ -81,25 +81,16 @@
    "a": "Satyarathā",
    "rel": "wife_of",
    "b": "Triśaṅku",
-   "words": "tasya satyarathā nāma patnī",
-   "doubt": false,
-   "check": "words"
-  },
-  {
-   "ref": "HV 10.21",
-   "a": "Satyarathā",
-   "rel": "descendant_of",
-   "b": "Kekaya",
-   "words": "kekayavaṃśajā",
-   "doubt": false,
+   "words": "tasya satyarathā nāma patnī kekayavaṃśajā",
+   "doubt": true,
    "check": "verified"
   },
   {
    "ref": "HV 10.21",
    "a": "Hariścandra",
-   "rel": "son_of",
+   "rel": "born_of",
    "b": "Satyarathā",
-   "words": "kumāraṃ janayām āsa hariścandram",
+   "words": "patnī kekayavaṃśajā kumāraṃ janayām āsa hariścandram",
    "doubt": false,
    "check": "verified"
   },
@@ -109,6 +100,15 @@
    "rel": "son_of",
    "b": "Triśaṅku",
    "words": "tasya satyarathā nāma patnī kekayavaṃśajā kumāraṃ janayām āsa hariścandram",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 10.22",
+   "a": "Hariścandra",
+   "rel": "descendant_of",
+   "b": "Triśaṅku",
+   "words": "hariścandras traiśaṅkava iti smṛtaḥ",
    "doubt": false,
    "check": "words"
   },
@@ -117,7 +117,7 @@
    "a": "Rohita",
    "rel": "son_of",
    "b": "Hariścandra",
-   "words": "hariścandrasya tu suto rohito nāma",
+   "words": "hariścandrasya tu suto rohito nāma viśrutaḥ",
    "doubt": false,
    "check": "verified"
   },
@@ -150,21 +150,12 @@
   },
   {
    "ref": "HV 10.23",
-   "a": "Vijaya",
-   "rel": "brother_of",
-   "b": "Sudeva",
-   "words": "cañcuputrau babhūvatuḥ",
-   "doubt": false,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.23",
-   "a": "Ruruka",
+   "a": "Viruka",
    "rel": "son_of",
    "b": "Vijaya",
    "words": "rurukas tanayas tasya",
    "doubt": true,
-   "check": "verified"
+   "check": "words"
   },
   {
    "ref": "HV 10.23",
@@ -195,21 +186,12 @@
   },
   {
    "ref": "HV 10.33",
-   "a": "Bāhu's wife",
+   "a": "Bāhu",
    "rel": "wife_of",
-   "b": "Bāhu",
-   "words": "tatpatny anumariṣyatī",
+   "b": "Yādavī",
+   "words": "patnī tu yādavī tasya sagarbhā",
    "doubt": true,
-   "check": "words"
-  },
-  {
-   "ref": "HV 10.33",
-   "a": "Bāhu's wife",
-   "rel": "descendant_of",
-   "b": "Yādava",
-   "words": "patnī tu yādavī tasya",
-   "doubt": true,
-   "check": "words"
+   "check": "verified"
   }
  ]
 }

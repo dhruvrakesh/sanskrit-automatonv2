@@ -12,124 +12,117 @@
    {
     "name": "Janamejaya",
     "ref": "MBh 1,90.11",
-    "words": "tasyām asya jajñe janamejayo nāma"
+    "words": "pūror bhāryā kausalyā nāma tasyām asya jajñe janamejayo"
    },
    {
     "name": "Prācinvān",
     "ref": "MBh 1,90.12",
-    "words": "tasyām asya jajñe prācinvān"
+    "words": "janamejayaḥ khalv anantāṃ nāmopayeme mādhavīm tasyām asya jajñe prācinvān"
    },
    {
     "name": "Saṃyāti",
     "ref": "MBh 1,90.13",
-    "words": "tasyām asya jajñe saṃyātiḥ"
+    "words": "prācinvān khalv aśmakīm upayeme tasyām asya jajñe saṃyātiḥ"
    },
    {
     "name": "Ahaṃpāti",
     "ref": "MBh 1,90.14",
-    "words": "tasyām asya jajñe ahaṃpātiḥ"
+    "words": "saṃyātiḥ khalu dṛṣadvato duhitaraṃ varāṅgīṃ nāmopayeme tasyām asya jajñe ahaṃpātiḥ"
    },
    {
     "name": "Sārvabhauma",
     "ref": "MBh 1,90.15",
-    "words": "tasyām asya jajñe sārvabhaumaḥ"
+    "words": "ahaṃpātis tu khalu kṛtavīryaduhitaram upayeme bhānumatīṃ nāma tasyām asya jajñe sārvabhaumaḥ"
    },
    {
     "name": "Jayatsena",
     "ref": "MBh 1,90.16",
-    "words": "tasyām asya jajñe jayatsenaḥ"
+    "words": "sārvabhaumaḥ khalu jitvājahāra kaikeyīṃ sunandāṃ nāma tasyām asya jajñe jayatsenaḥ"
    },
    {
     "name": "Arācīna",
     "ref": "MBh 1,90.17",
-    "words": "tasyām asya jajñe arācīnaḥ"
+    "words": "jayatsenaḥ khalu vaidarbhīm upayeme suṣuvāṃ nāma tasyām asya jajñe arācīnaḥ"
    },
    {
     "name": "Mahābhauma",
     "ref": "MBh 1,90.18",
-    "words": "tasyām asya jajñe mahābhaumaḥ"
+    "words": "arācīno 'pi vaidarbhīm evāparām upayeme maryādāṃ nāma tasyām asya jajñe mahābhaumaḥ"
    },
    {
     "name": "Ayutanāyin",
     "ref": "MBh 1,90.19",
-    "words": "tasyām asya jajñe ayutanāyī"
+    "words": "mahābhaumaḥ khalu prāsenajitīm upayeme suyajñāṃ nāma tasyām asya jajñe ayutanāyī"
    },
    {
     "name": "Akrodhana",
     "ref": "MBh 1,90.20",
-    "words": "tasyām asya jajñe akrodhanaḥ"
+    "words": "ayutanāyī khalu pṛthuśravaso duhitaram upayeme bhāsāṃ nāma tasyām asya jajñe akrodhanaḥ"
    },
    {
     "name": "Devātithi",
     "ref": "MBh 1,90.21",
-    "words": "tasyām asya jajñe devātithiḥ"
+    "words": "akrodhanaḥ khalu kāliṅgīṃ karaṇḍuṃ nāmopayeme tasyām asya jajñe devātithiḥ"
    },
    {
     "name": "Ṛca",
     "ref": "MBh 1,90.22",
-    "words": "tasyām asya jajñe ṛcaḥ"
+    "words": "devātithiḥ khalu vaidehīm upayeme maryādāṃ nāma tasyām asya jajñe ṛcaḥ"
    },
    {
     "name": "Ṛkṣa",
     "ref": "MBh 1,90.23",
-    "words": "putram ajanayad ṛkṣam"
+    "words": "ṛcaḥ khalv āṅgeyīm upayeme sudevāṃ nāma tasyāṃ putram ajanayad ṛkṣam"
    },
    {
     "name": "Matināra",
     "ref": "MBh 1,90.24",
-    "words": "putraṃ matināraṃ nāmotpādayām āsa"
+    "words": "ṛkṣaḥ khalu takṣakaduhitaram upayeme jvālāṃ nāma tasyāṃ putraṃ matināraṃ nāmotpādayām āsa"
    },
    {
     "name": "Taṃsu",
     "ref": "MBh 1,90.26",
-    "words": "tasyāṃ putram ajanayat taṃsuṃ"
+    "words": "taṃ bhartāraṃ varayām āsa tasyāṃ putram ajanayat taṃsuṃ nāma"
    },
    {
     "name": "Ilina",
     "ref": "MBh 1,90.28",
     "words": "ilinaṃ janayām āsa kālindyāṃ taṃsur ātmajam"
-   }
-  ],
-  [
-   {
-    "name": "Rathaṃtarī",
-    "ref": null,
-    "words": null
    },
    {
     "name": "Duḥṣanta",
     "ref": "MBh 1,90.29",
-    "words": "rathaṃtaryāṃ duḥṣantādyān pañca putrān"
+    "words": "ilinas tu rathaṃtaryāṃ duḥṣantādyān pañca putrān ajanayat"
    },
    {
     "name": "Bharata",
     "ref": "MBh 1,90.30",
-    "words": "tasyām asya jajñe bharataḥ"
+    "words": "duḥṣantaḥ khalu viśvāmitraduhitaraṃ śakuntalāṃ nāmopayeme tasyām asya jajñe bharataḥ"
    },
    {
     "name": "Bhumanyu",
     "ref": "MBh 1,90.34",
-    "words": "tasyām asya jajñe bhumanyuḥ"
+    "words": "bharataḥ khalu kāśeyīm upayeme sārvasenīṃ sunandāṃ nāma tasyām asya jajñe bhumanyuḥ"
    },
    {
     "name": "Suhotra",
     "ref": "MBh 1,90.35",
-    "words": "tasyām asya jajñe suhotraḥ"
+    "words": "bhumanyuḥ khalu dāśārhīm upayeme jayāṃ nāma tasyām asya jajñe suhotraḥ"
    },
    {
     "name": "Hastin",
     "ref": "MBh 1,90.36",
-    "words": "tasyām asya jajñe hastī"
+    "words": "suhotraḥ khalv ikṣvākukanyām upayeme suvarṇāṃ nāma tasyām asya jajñe hastī"
    },
    {
     "name": "Vikuṇṭhana",
     "ref": "MBh 1,90.37",
-    "words": "tasyām asya jajñe vikuṇṭhanaḥ"
+    "words": "hastī khalu traigartīm upayeme yaśodharāṃ nāma tasyām asya jajñe vikuṇṭhanaḥ"
    },
    {
     "name": "Ajamīḍha",
     "ref": "MBh 1,90.38",
-    "words": "tasyām asya jajñe 'jamīḍhaḥ"
+    "words": "vikuṇṭhanaḥ khalu dāśārhīm upayeme sudevāṃ nāma tasyām asya jajñe 'jamīḍhaḥ"
    }
   ],
   [
@@ -141,54 +134,69 @@
    {
     "name": "Kuru",
     "ref": "MBh 1,90.40",
-    "words": "tasyām asya jajñe kuruḥ"
+    "words": "saṃvaraṇaḥ khalu vaivasvatīṃ tapatīṃ nāmopayeme tasyām asya jajñe kuruḥ"
    },
    {
     "name": "Viḍūratha",
     "ref": "MBh 1,90.41",
-    "words": "tasyām asya jajñe viḍūrathaḥ"
+    "words": "kuruḥ khalu dāśārhīm upayeme śubhāṅgīṃ nāma tasyām asya jajñe viḍūrathaḥ"
    },
    {
     "name": "Arugvān",
     "ref": "MBh 1,90.42",
-    "words": "tasyām asya jajñe 'rugvān"
+    "words": "viḍūrathas tu māgadhīm upayeme saṃpriyāṃ nāma tasyām asya jajñe 'rugvān"
    },
    {
     "name": "Parikṣit",
     "ref": "MBh 1,90.43",
-    "words": "tasyām asya jajñe parikṣit"
+    "words": "arugvān khalu māgadhīm upayeme 'mṛtāṃ nāma tasyām asya jajñe parikṣit"
    },
    {
-    "name": "Bhīmasena",
-    "ref": "MBh 1,90.44",
-    "words": "tasyām asya jajñe bhīmasenaḥ"
+    "name": "Janamejaya",
+    "ref": "MBh 1,90.93",
+    "words": "tasyām asya janamejayaḥ"
    },
    {
-    "name": "Paryaśravas",
-    "ref": "MBh 1,90.45",
-    "words": "tasyām asya jajñe paryaśravāḥ"
+    "name": "Śatānīka",
+    "ref": "MBh 1,90.94",
+    "words": "janamejayāt tu vapuṣṭamāyāṃ dvau putrau śatānīkaḥ"
+   },
+   {
+    "name": "Aśvamedhadatta",
+    "ref": "MBh 1,90.95",
+    "words": "tasyām asya jajñe putro 'śvamedhadattaḥ"
    }
   ],
   [
    {
-    "name": "Parāśara",
+    "name": "Pratīpa",
     "ref": null,
     "words": null
    },
    {
-    "name": "Dvaipāyana",
+    "name": "Śaṃtanu",
+    "ref": "MBh 1,90.46",
+    "words": "putrān utpādayām āsa devāpiṃ śaṃtanuṃ"
+   },
+   {
+    "name": "Vicitravīrya",
     "ref": "MBh 1,90.52",
-    "words": "kānīno garbhaḥ parāśarād dvaipāyanaḥ"
+    "words": "śaṃtanor dvau putrau babhūvatuḥ citrāṅgado vicitravīryaś ca"
    },
    {
-    "name": "Dhṛtarāṣṭra",
-    "ref": "MBh 1,90.60",
-    "words": "trīn putrān utpādayām āsa dhṛtarāṣṭraṃ"
+    "name": "Pāṇḍu",
+    "ref": "MBh 1,90.59",
+    "words": "sādhv apatyaṃ tasyotpādayeti sa param ity uktvā trīn putrān utpādayām āsa dhṛtarāṣṭraṃ pāṇḍuṃ"
    },
    {
-    "name": "Duryodhana",
-    "ref": "MBh 1,90.62",
-    "words": "dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano"
+    "name": "Yudhiṣṭhira",
+    "ref": "MBh 1,90.69",
+    "words": "sā tatra putrān utpādayām āsa dharmād yudhiṣṭhiraṃ"
+   },
+   {
+    "name": "Prativindhya",
+    "ref": "MBh 1,90.82",
+    "words": "prativindhyaṃ yudhiṣṭhiraḥ"
    }
   ],
   [
@@ -215,120 +223,19 @@
   ],
   [
    {
-    "name": "Kālindī",
+    "name": "Aditi",
     "ref": null,
     "words": null
    },
-   {
-    "name": "Ilina",
-    "ref": "MBh 1,90.28",
-    "words": "ilinaṃ janayām āsa kālindyāṃ"
-   },
-   {
-    "name": "Duḥṣanta",
-    "ref": "MBh 1,90.29",
-    "words": "ilinas tu rathaṃtaryāṃ duḥṣantādyān pañca putrān ajanayat"
-   }
-  ],
-  [
-   {
-    "name": "Pratīpa",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Śaṃtanu",
-    "ref": "MBh 1,90.46",
-    "words": "putrān utpādayām āsa devāpiṃ śaṃtanuṃ"
-   },
-   {
-    "name": "Devavrata",
-    "ref": "MBh 1,90.50",
-    "words": "tasyām asya jajñe devavrataḥ"
-   }
-  ],
-  [
-   {
-    "name": "Arjuna",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Śrutakīrti",
-    "ref": "MBh 1,90.82",
-    "words": "śrutakīrtim arjunaḥ"
-   }
-  ],
-  [
-   {
-    "name": "Hiḍimbā",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Ghaṭotkaca",
-    "ref": "MBh 1,90.88",
-    "words": "hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ nāma putraṃ"
-   }
-  ],
-  [
-   {
-    "name": "Nakula",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Śatānīka",
-    "ref": "MBh 1,90.82",
-    "words": "śatānīkaṃ nakulaḥ"
-   }
-  ],
-  [
-   {
-    "name": "Sahadeva",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Śrutakarman",
-    "ref": "MBh 1,90.82",
-    "words": "śrutakarmāṇaṃ sahadeva"
-   }
-  ],
-  [
-   {
-    "name": "Vapuṣṭamā",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Śatānīka",
-    "ref": "MBh 1,90.94",
-    "words": "vapuṣṭamāyāṃ dvau putrau śatānīkaḥ"
-   }
-  ],
-  [
    {
     "name": "Vivasvān",
-    "ref": null,
-    "words": null
+    "ref": "MBh 1,90.7",
+    "words": "aditer vivasvān"
    },
    {
     "name": "Manu",
     "ref": "MBh 1,90.7",
     "words": "vivasvato manuḥ"
-   }
-  ],
-  [
-   {
-    "name": "Yudhiṣṭhira",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Prativindhya",
-    "ref": "MBh 1,90.82",
-    "words": "prativindhyaṃ yudhiṣṭhiraḥ"
    }
   ]
  ]

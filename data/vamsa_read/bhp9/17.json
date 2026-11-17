@@ -95,13 +95,15 @@
    "check": "unsupported"
   },
   {
-   "ref": "BhP 9.17.3",
+   "ref": "BhP 9.17.2",
    "a": "Kāśya",
    "rel": "son_of",
    "b": "Suhotra",
    "words": "suhotrasyātmajāstrayaḥ kāśyaḥ",
    "doubt": false,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.17.3",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.17.3",

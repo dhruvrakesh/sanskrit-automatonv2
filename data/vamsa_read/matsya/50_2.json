@@ -1,0 +1,329 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 50,
+ "part": 2,
+ "refs": [
+  "MatsP 50.57",
+  "MatsP 50.58",
+  "MatsP 50.59",
+  "MatsP 50.60",
+  "MatsP 50.61",
+  "MatsP 50.62",
+  "MatsP 50.63",
+  "MatsP 50.64",
+  "MatsP 50.65",
+  "MatsP 50.66",
+  "MatsP 50.67",
+  "MatsP 50.68",
+  "MatsP 50.69",
+  "MatsP 50.70",
+  "MatsP 50.71",
+  "MatsP 50.72",
+  "MatsP 50.73",
+  "MatsP 50.74",
+  "MatsP 50.75",
+  "MatsP 50.76",
+  "MatsP 50.77",
+  "MatsP 50.78",
+  "MatsP 50.79",
+  "MatsP 50.80",
+  "MatsP 50.81",
+  "MatsP 50.82",
+  "MatsP 50.83",
+  "MatsP 50.84",
+  "MatsP 50.85",
+  "MatsP 50.86",
+  "MatsP 50.87",
+  "MatsP 50.88",
+  "MatsP 50.89"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:19:02",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 50.57\",\"a\":\"Parīkṣit\",\"rel\":\"son_of\",\"b\":\"Abhimanyu\",\"words\":\"abhimanyoḥ parīkṣittu putraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.57\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Parīkṣit\",\"words\":\"janamejayaḥ parīkṣitaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.63\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Parīkṣit\",\"words\":\"parīkṣitaḥ suto 'sau vai pauravo janamejayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.65\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayācchatānīkas tasmājjajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 50.65\",\"a\":\"Śatānīka\",\"rel\":\"succeeded\",\"b\":\"Janamejaya\",\"words\":\"śatānīkaṃ putraṃ rājye 'bhiṣiktavān\",\"doubt\":false},\n{\"ref\":\"MatsP 50.66\",\"a\":\"Adhisomakṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Śatānīka\",\"words\":\"śatānīkasya vīryavān jajñe 'dhisomakṛṣṇākhyaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.78\",\"a\":\"Vivakṣu\",\"rel\":\"son_of\",\"b\":\"Adhisomakṛṣṇa\",\"words\":\"adhisomakṛṣṇaputrastu vivakṣurbhavitā nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.79\",\"a\":\"Bhūri\",\"rel\":\"son_of\",\"b\":\"Vivakṣu\",\"words\":\"bhaviṣyāṣṭau sutāstasya\",\"doubt\":true},\n{\"ref\":\"MatsP 50.80\",\"a\":\"Bhūri\",\"rel\":\"son_of\",\"b\":\"Vivakṣu\",\"words\":\"bhūrirjyeṣṭhaḥ sutastasya\",\"doubt\":true},\n{\"ref\":\"MatsP 50.80\",\"a\":\"Citraratha\",\"rel\":\"son_of\",\"b\":\"Vivakṣu\",\"words\":\"tasya citrarathaḥ smṛtaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 50.80\",\"a\":\"Śucidrava\",\"rel\":\"son_of\",\"b\":\"Citraratha\",\"words\":\"śucidravaścitrarathād\",\"doubt\":false},\n{\"ref\":\"MatsP 50.80\",\"a\":\"Vṛṣṇimat\",\"rel\":\"son_of\",\"b\":\"Śucidrava\",\"words\":\"vṛṣṇimāṃśca śucidravāt\",\"doubt\":false},\n{\"ref\":\"MatsP 50.81\",\"a\":\"Suṣeṇa\",\"rel\":\"son_of\",\"b\":\"Vṛṣṇimat\",\"words\":\"vṛṣṇimataḥ suṣeṇaśca bhaviṣyati\",\"doubt\":false},\n{\"ref\":\"MatsP 50.81\",\"a\":\"Sunītha\",\"rel\":\"son_of\",\"b\":\"Suṣeṇa\",\"words\":\"tasmātsuṣeṇādbhavitā sunītho nāma pārthivaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.82\",\"a\":\"Nṛcakṣu\",\"rel\":\"son_of\",\"b\":\"Sunītha\",\"words\":\"nṛpātsunīthādbhavitā nṛcakṣuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.82\",\"a\":\"Sukhīvala\",\"rel\":\"son_of\",\"b\":\"Nṛcakṣu\",\"words\":\"nṛcakṣuṣastu dāyādo bhavitā vai sukhīvalaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.83\",\"a\":\"Pariṣṇava\",\"rel\":\"son_of\",\"b\":\"Sukhīvala\",\"words\":\"sukhīvalasutaścāpi bhāvī rājā pariṣṇavaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.83\",\"a\":\"Sutapas\",\"rel\":\"son_of\",\"b\":\"Pariṣṇava\",\"words\":\"pariṣṇavasutaścāpi bhavitā sutapā nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.84\",\"a\":\"Medhāvin\",\"rel\":\"son_of\",\"b\":\"Sutapas\",\"words\":\"medhāvī tasya dāyādo\",\"doubt\":false},\n{\"ref\":\"MatsP 50.84\",\"a\":\"Puraṃjaya\",\"rel\":\"son_of\",\"b\":\"Medhāvin\",\"words\":\"medhāvinaḥ sutaścāpi bhaviṣyati puraṃjayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.85\",\"a\":\"Urva\",\"rel\":\"son_of\",\"b\":\"Puraṃjaya\",\"words\":\"urvo bhāvyaḥ sutastasya\",\"doubt\":false},\n{\"ref\":\"MatsP 50.85\",\"a\":\"Tigmātman\",\"rel\":\"son_of\",\"b\":\"Urva\",\"words\":\"tigmātmā tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.85\",\"a\":\"Bṛhadratha\",\"rel\":\"son_of\",\"b\":\"Tigmātman\",\"words\":\"tigmādbṛhadratho bhāvyo\",\"doubt\":false},\n{\"ref\":\"MatsP 50.85\",\"a\":\"Vasudāman\",\"rel\":\"son_of\",\"b\":\"Bṛhadratha\",\"words\":\"vasudāmā bṛhadrathāt\",\"doubt\":false},\n{\"ref\":\"MatsP 50.86\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Vasudāman\",\"words\":\"vasudāmnaḥ śatānīko bhaviṣyo\",\"doubt\":true},\n{\"ref\":\"MatsP 50.86\",\"a\":\"Udayana\",\"rel\":\"son_of\",\"b\":\"Śatānīka\",\"words\":\"bhaviṣyodayanastataḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 50.86\",\"a\":\"Vahīnara\",\"rel\":\"son_of\",\"b\":\"Udayana\",\"words\":\"bhaviṣyate codayanād vīge rājā vahīnaraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 50.87\",\"a\":\"Daṇḍapāṇi\",\"rel\":\"son_of\",\"b\":\"Vahīnara\",\"words\":\"vahīnarātmajaścaiva daṇḍapāṇirbhaviṣyati\",\"doubt\":false},\n{\"ref\":\"MatsP 50.87\",\"a\":\"Niramitra\",\"rel\":\"son_of\",\"b\":\"Daṇḍapāṇi\",\"words\":\"daṇḍapāṇerniramitro\",\"doubt\":false},\n{\"ref\":\"MatsP 50.87\",\"a\":\"Kṣemaka\",\"rel\":\"son_of\",\"b\":\"Niramitra\",\"words\":\"niramitrāttu kṣemakaḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03109,
+ "tokens": {
+  "input": 3636,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2382,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 50.57",
+   "a": "Parīkṣit",
+   "rel": "son_of",
+   "b": "Abhimanyu",
+   "words": "abhimanyoḥ parīkṣittu putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.57",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Parīkṣit",
+   "words": "janamejayaḥ parīkṣitaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.63",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Parīkṣit",
+   "words": "parīkṣitaḥ suto 'sau vai pauravo janamejayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.65",
+   "a": "Śatānīka",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayācchatānīkas tasmājjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.65",
+   "a": "Śatānīka",
+   "rel": "succeeded",
+   "b": "Janamejaya",
+   "words": "śatānīkaṃ putraṃ rājye 'bhiṣiktavān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.66",
+   "a": "Adhisomakṛṣṇa",
+   "rel": "son_of",
+   "b": "Śatānīka",
+   "words": "śatānīkasya vīryavān jajñe 'dhisomakṛṣṇākhyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.78",
+   "a": "Vivakṣu",
+   "rel": "son_of",
+   "b": "Adhisomakṛṣṇa",
+   "words": "adhisomakṛṣṇaputrastu vivakṣurbhavitā nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.79",
+   "a": "Bhūri",
+   "rel": "son_of",
+   "b": "Vivakṣu",
+   "words": "bhaviṣyāṣṭau sutāstasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.80",
+   "a": "Bhūri",
+   "rel": "son_of",
+   "b": "Vivakṣu",
+   "words": "bhūrirjyeṣṭhaḥ sutastasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.80",
+   "a": "Citraratha",
+   "rel": "son_of",
+   "b": "Vivakṣu",
+   "words": "tasya citrarathaḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.80",
+   "a": "Śucidrava",
+   "rel": "son_of",
+   "b": "Citraratha",
+   "words": "śucidravaścitrarathād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.80",
+   "a": "Vṛṣṇimat",
+   "rel": "son_of",
+   "b": "Śucidrava",
+   "words": "vṛṣṇimāṃśca śucidravāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.81",
+   "a": "Suṣeṇa",
+   "rel": "son_of",
+   "b": "Vṛṣṇimat",
+   "words": "vṛṣṇimataḥ suṣeṇaśca bhaviṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.81",
+   "a": "Sunītha",
+   "rel": "son_of",
+   "b": "Suṣeṇa",
+   "words": "tasmātsuṣeṇādbhavitā sunītho nāma pārthivaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.82",
+   "a": "Nṛcakṣu",
+   "rel": "son_of",
+   "b": "Sunītha",
+   "words": "nṛpātsunīthādbhavitā nṛcakṣuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.82",
+   "a": "Sukhīvala",
+   "rel": "son_of",
+   "b": "Nṛcakṣu",
+   "words": "nṛcakṣuṣastu dāyādo bhavitā vai sukhīvalaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.83",
+   "a": "Pariṣṇava",
+   "rel": "son_of",
+   "b": "Sukhīvala",
+   "words": "sukhīvalasutaścāpi bhāvī rājā pariṣṇavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.83",
+   "a": "Sutapas",
+   "rel": "son_of",
+   "b": "Pariṣṇava",
+   "words": "pariṣṇavasutaścāpi bhavitā sutapā nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.84",
+   "a": "Medhāvin",
+   "rel": "son_of",
+   "b": "Sutapas",
+   "words": "medhāvī tasya dāyādo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.84",
+   "a": "Puraṃjaya",
+   "rel": "son_of",
+   "b": "Medhāvin",
+   "words": "medhāvinaḥ sutaścāpi bhaviṣyati puraṃjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.85",
+   "a": "Urva",
+   "rel": "son_of",
+   "b": "Puraṃjaya",
+   "words": "urvo bhāvyaḥ sutastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.85",
+   "a": "Tigmātman",
+   "rel": "son_of",
+   "b": "Urva",
+   "words": "tigmātmā tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.85",
+   "a": "Bṛhadratha",
+   "rel": "son_of",
+   "b": "Tigmātman",
+   "words": "tigmādbṛhadratho bhāvyo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.85",
+   "a": "Vasudāman",
+   "rel": "son_of",
+   "b": "Bṛhadratha",
+   "words": "vasudāmā bṛhadrathāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.86",
+   "a": "Śatānīka",
+   "rel": "son_of",
+   "b": "Vasudāman",
+   "words": "vasudāmnaḥ śatānīko bhaviṣyo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.86",
+   "a": "Udayana",
+   "rel": "son_of",
+   "b": "Śatānīka",
+   "words": "bhaviṣyodayanastataḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 50.86",
+   "a": "Vahīnara",
+   "rel": "son_of",
+   "b": "Udayana",
+   "words": "bhaviṣyate codayanād vīge rājā vahīnaraḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 50.87",
+   "a": "Daṇḍapāṇi",
+   "rel": "son_of",
+   "b": "Vahīnara",
+   "words": "vahīnarātmajaścaiva daṇḍapāṇirbhaviṣyati",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.87",
+   "a": "Niramitra",
+   "rel": "son_of",
+   "b": "Daṇḍapāṇi",
+   "words": "daṇḍapāṇerniramitro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 50.87",
+   "a": "Kṣemaka",
+   "rel": "son_of",
+   "b": "Niramitra",
+   "words": "niramitrāttu kṣemakaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

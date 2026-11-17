@@ -43,17 +43,17 @@
  ],
  "model": "claude-sonnet-5-5",
  "effort": "medium",
- "prompt_version": "vamsa-read-v1",
+ "prompt_version": "vamsa-read-v2",
  "source": "mbh_01_u.htm; GRETIL's copy of the Bhandarkar Oriental Research Institute's electronic text (1999), for reference only (data entry: Muneo Tokunaga, John Smith)",
- "at": "2026-11-15T17:55:27",
- "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Duryodhana\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Duḥśāsana\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Vikarṇa\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano vikarṇaś\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Citrasena\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano vikarṇaś citrasena\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.63\",\"a\":\"Kuntī\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍos tu dve bhārye babhūvatuḥ kuntī mādrī\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.63\",\"a\":\"Mādrī\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍos tu dve bhārye babhūvatuḥ kuntī mādrī\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"son_of\",\"b\":\"Kuntī\",\"words\":\"sā tatra putrān utpādayām āsa dharmād yudhiṣṭhiraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Bhīmasena\",\"rel\":\"son_of\",\"b\":\"Kuntī\",\"words\":\"mārutād bhīmasenaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Arjuna\",\"rel\":\"son_of\",\"b\":\"Kuntī\",\"words\":\"śakrād arjunam\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Nakula\",\"rel\":\"son_of\",\"b\":\"Mādrī\",\"words\":\"mādryām aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Mādrī\",\"words\":\"mādryām aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Prativindhya\",\"rel\":\"son_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"prativindhyaṃ yudhiṣṭhiraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Sutasoma\",\"rel\":\"son_of\",\"b\":\"Bhīmasena\",\"words\":\"sutasomaṃ vṛkodaraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Śrutakīrti\",\"rel\":\"son_of\",\"b\":\"Arjuna\",\"words\":\"śrutakīrtim arjunaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Nakula\",\"words\":\"śatānīkaṃ nakulaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Śrutakarman\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"śrutakarmāṇaṃ sahadeva\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Devikā\",\"rel\":\"daughter_of\",\"b\":\"Govāsana\",\"words\":\"govāsanasya śaibyasya devikāṃ nāma kanyāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Devikā\",\"rel\":\"wife_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"yudhiṣṭhiras tu govāsanasya śaibyasya devikāṃ nāma kanyāṃ svayaṃvare lebhe\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Yaudheya\",\"rel\":\"son_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"tasyāṃ putraṃ janayām āsa yaudheyaṃ nāma\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.84\",\"a\":\"Baladharā\",\"rel\":\"wife_of\",\"b\":\"Bhīmasena\",\"words\":\"bhīmaseno 'pi kāśyāṃ baladharāṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.84\",\"a\":\"Sarvaga\",\"rel\":\"son_of\",\"b\":\"Bhīmasena\",\"words\":\"tasyāṃ putraṃ sarvagaṃ nāmotpādayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Subhadrā\",\"rel\":\"sister_of\",\"b\":\"Vāsudeva\",\"words\":\"bhaginīṃ vāsudevasya subhadrāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Subhadrā\",\"rel\":\"wife_of\",\"b\":\"Arjuna\",\"words\":\"arjunaḥ khalu dvāravatīṃ gatvā bhaginīṃ vāsudevasya subhadrāṃ nāma bhāryām udavahat\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Abhimanyu\",\"rel\":\"son_of\",\"b\":\"Arjuna\",\"words\":\"tasyāṃ putram abhimanyuṃ nāma janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.86\",\"a\":\"Kareṇuvatī\",\"rel\":\"wife_of\",\"b\":\"Nakula\",\"words\":\"nakulas tu caidyāṃ kareṇuvatīṃ nāma bhāryām udavahat\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.86\",\"a\":\"Niramitra\",\"rel\":\"son_of\",\"b\":\"Nakula\",\"words\":\"tasyāṃ putraṃ niramitraṃ nāmājanayat\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.87\",\"a\":\"Vijayā\",\"rel\":\"wife_of\",\"b\":\"Sahadeva\",\"words\":\"sahadevo 'pi mādrīm eva svayaṃvare vijayāṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.87\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"tasyāṃ putram ajanayat suhotraṃ nāma\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.88\",\"a\":\"Ghaṭotkaca\",\"rel\":\"son_of\",\"b\":\"Bhīmasena\",\"words\":\"bhīmasenas tu pūrvam eva hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ nāma putraṃ janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.88\",\"a\":\"Ghaṭotkaca\",\"rel\":\"son_of\",\"b\":\"Hiḍimbā\",\"words\":\"hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ nāma putraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.81\",\"a\":\"Draupadī\",\"rel\":\"wife_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"draupadīṃ bhāryām avindan\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.90\",\"a\":\"Uttarā\",\"rel\":\"daughter_of\",\"b\":\"Virāṭa\",\"words\":\"virāṭasya duhitaram uttarāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.90\",\"a\":\"Uttarā\",\"rel\":\"wife_of\",\"b\":\"Abhimanyu\",\"words\":\"uttarāṃ nāmābhimanyur upayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.92\",\"a\":\"Parikṣit\",\"rel\":\"son_of\",\"b\":\"Abhimanyu\",\"words\":\"tasyām asya parāsur garbho 'jāyata\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.93\",\"a\":\"Mādravatī\",\"rel\":\"wife_of\",\"b\":\"Parikṣit\",\"words\":\"parikṣit tu khalu mādravatīṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.93\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Parikṣit\",\"words\":\"tasyām asya janamejayaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayāt tu vapuṣṭamāyāṃ dvau putrau śatānīkaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śaṅku\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayāt tu vapuṣṭamāyāṃ dvau putrau śatānīkaḥ śaṅkuś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Vapuṣṭamā\",\"words\":\"vapuṣṭamāyāṃ dvau putrau śatānīkaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śaṅku\",\"rel\":\"son_of\",\"b\":\"Vapuṣṭamā\",\"words\":\"vapuṣṭamāyāṃ dvau putrau śatānīkaḥ śaṅkuś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.95\",\"a\":\"Vaidehī\",\"rel\":\"wife_of\",\"b\":\"Śatānīka\",\"words\":\"śatānīkas tu khalu vaidehīm upayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.95\",\"a\":\"Aśvamedhadatta\",\"rel\":\"son_of\",\"b\":\"Śatānīka\",\"words\":\"tasyām asya jajñe putro 'śvamedhadattaḥ\",\"doubt\":false}\n]}",
+ "at": "2026-11-17T09:58:49",
+ "reply": "{\"statements\":[\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Duryodhana\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"teṣāṃ dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Duḥśāsana\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Vikarṇa\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano vikarṇaś\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.62\",\"a\":\"Citrasena\",\"rel\":\"son_of\",\"b\":\"Dhṛtarāṣṭra\",\"words\":\"dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano vikarṇaś citrasena\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.63\",\"a\":\"Kuntī\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍos tu dve bhārye babhūvatuḥ kuntī mādrī\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.63\",\"a\":\"Mādrī\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍos tu dve bhārye babhūvatuḥ kuntī mādrī\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"sā tatra putrān utpādayām āsa dharmād yudhiṣṭhiraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"born_of\",\"b\":\"Kuntī\",\"words\":\"sā tatra putrān utpādayām āsa dharmād yudhiṣṭhiraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"begotten_by\",\"b\":\"Dharma\",\"words\":\"dharmād yudhiṣṭhiraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Bhīmasena\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"mārutād bhīmasenaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Bhīmasena\",\"rel\":\"born_of\",\"b\":\"Kuntī\",\"words\":\"sā tatra putrān utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Bhīmasena\",\"rel\":\"begotten_by\",\"b\":\"Māruta\",\"words\":\"mārutād bhīmasenaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Arjuna\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"śakrād arjunam\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Arjuna\",\"rel\":\"born_of\",\"b\":\"Kuntī\",\"words\":\"sā tatra putrān utpādayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.69\",\"a\":\"Arjuna\",\"rel\":\"begotten_by\",\"b\":\"Śakra\",\"words\":\"śakrād arjunam\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Nakula\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"mādryām aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Nakula\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādryām aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Nakula\",\"rel\":\"begotten_by\",\"b\":\"Aśvin\",\"words\":\"aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"mādryām aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Sahadeva\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādryām aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.72\",\"a\":\"Sahadeva\",\"rel\":\"begotten_by\",\"b\":\"Aśvin\",\"words\":\"aśvibhyāṃ nakulasahadevāv utpāditau\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.81\",\"a\":\"Draupadī\",\"rel\":\"wife_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"draupadīṃ bhāryām avindan\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Prativindhya\",\"rel\":\"son_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"prativindhyaṃ yudhiṣṭhiraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Sutasoma\",\"rel\":\"son_of\",\"b\":\"Bhīmasena\",\"words\":\"sutasomaṃ vṛkodaraḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Śrutakīrti\",\"rel\":\"son_of\",\"b\":\"Arjuna\",\"words\":\"śrutakīrtim arjunaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Nakula\",\"words\":\"śatānīkaṃ nakulaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.82\",\"a\":\"Śrutakarman\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"śrutakarmāṇaṃ sahadeva\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Devikā\",\"rel\":\"daughter_of\",\"b\":\"Govāsana\",\"words\":\"govāsanasya śaibyasya devikāṃ nāma kanyāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Devikā\",\"rel\":\"wife_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"yudhiṣṭhiras tu govāsanasya śaibyasya devikāṃ nāma kanyāṃ svayaṃvare lebhe\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Yaudheya\",\"rel\":\"son_of\",\"b\":\"Yudhiṣṭhira\",\"words\":\"tasyāṃ putraṃ janayām āsa yaudheyaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.83\",\"a\":\"Yaudheya\",\"rel\":\"born_of\",\"b\":\"Devikā\",\"words\":\"tasyāṃ putraṃ janayām āsa yaudheyaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.84\",\"a\":\"Baladharā\",\"rel\":\"wife_of\",\"b\":\"Bhīmasena\",\"words\":\"bhīmaseno 'pi kāśyāṃ baladharāṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.84\",\"a\":\"Sarvaga\",\"rel\":\"son_of\",\"b\":\"Bhīmasena\",\"words\":\"tasyāṃ putraṃ sarvagaṃ nāmotpādayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.84\",\"a\":\"Sarvaga\",\"rel\":\"born_of\",\"b\":\"Baladharā\",\"words\":\"tasyāṃ putraṃ sarvagaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Subhadrā\",\"rel\":\"sister_of\",\"b\":\"Vāsudeva\",\"words\":\"bhaginīṃ vāsudevasya subhadrāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Subhadrā\",\"rel\":\"wife_of\",\"b\":\"Arjuna\",\"words\":\"subhadrāṃ nāma bhāryām udavahat\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Abhimanyu\",\"rel\":\"son_of\",\"b\":\"Arjuna\",\"words\":\"tasyāṃ putram abhimanyuṃ nāma janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.85\",\"a\":\"Abhimanyu\",\"rel\":\"born_of\",\"b\":\"Subhadrā\",\"words\":\"tasyāṃ putram abhimanyuṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.86\",\"a\":\"Kareṇuvatī\",\"rel\":\"wife_of\",\"b\":\"Nakula\",\"words\":\"nakulas tu caidyāṃ kareṇuvatīṃ nāma bhāryām udavahat\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.86\",\"a\":\"Niramitra\",\"rel\":\"son_of\",\"b\":\"Nakula\",\"words\":\"tasyāṃ putraṃ niramitraṃ nāmājanayat\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.86\",\"a\":\"Niramitra\",\"rel\":\"born_of\",\"b\":\"Kareṇuvatī\",\"words\":\"tasyāṃ putraṃ niramitraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.87\",\"a\":\"Vijayā\",\"rel\":\"wife_of\",\"b\":\"Sahadeva\",\"words\":\"sahadevo 'pi mādrīm eva svayaṃvare vijayāṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.87\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"tasyāṃ putram ajanayat suhotraṃ nāma\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.87\",\"a\":\"Suhotra\",\"rel\":\"born_of\",\"b\":\"Vijayā\",\"words\":\"tasyāṃ putram ajanayat suhotraṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.88\",\"a\":\"Ghaṭotkaca\",\"rel\":\"son_of\",\"b\":\"Bhīmasena\",\"words\":\"bhīmasenas tu pūrvam eva hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ nāma putraṃ janayām āsa\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.88\",\"a\":\"Ghaṭotkaca\",\"rel\":\"born_of\",\"b\":\"Hiḍimbā\",\"words\":\"hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.90\",\"a\":\"Uttarā\",\"rel\":\"daughter_of\",\"b\":\"Virāṭa\",\"words\":\"virāṭasya duhitaram uttarāṃ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.90\",\"a\":\"Uttarā\",\"rel\":\"wife_of\",\"b\":\"Abhimanyu\",\"words\":\"uttarāṃ nāmābhimanyur upayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.92\",\"a\":\"Parikṣit\",\"rel\":\"son_of\",\"b\":\"Abhimanyu\",\"words\":\"tasyām asya parāsur garbho 'jāyata\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.92\",\"a\":\"Parikṣit\",\"rel\":\"born_of\",\"b\":\"Uttarā\",\"words\":\"tasyām asya parāsur garbho 'jāyata\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.93\",\"a\":\"Mādravatī\",\"rel\":\"wife_of\",\"b\":\"Parikṣit\",\"words\":\"parikṣit tu khalu mādravatīṃ nāmopayeme\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.93\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Parikṣit\",\"words\":\"tasyām asya janamejayaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.93\",\"a\":\"Janamejaya\",\"rel\":\"born_of\",\"b\":\"Mādravatī\",\"words\":\"tasyām asya janamejayaḥ\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śatānīka\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayāt tu vapuṣṭamāyāṃ dvau putrau śatānīkaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śatānīka\",\"rel\":\"born_of\",\"b\":\"Vapuṣṭamā\",\"words\":\"vapuṣṭamāyāṃ dvau putrau śatānīkaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śaṅku\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayāt tu vapuṣṭamāyāṃ dvau putrau śatānīkaḥ śaṅkuś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.94\",\"a\":\"Śaṅku\",\"rel\":\"born_of\",\"b\":\"Vapuṣṭamā\",\"words\":\"vapuṣṭamāyāṃ dvau putrau śatānīkaḥ śaṅkuś ca\",\"doubt\":false},\n{\"ref\":\"MBh 1,90.95\",\"a\":\"Vaidehī\",\"rel\":\"wife_of\",\"b\":\"Śatānīka\",\"words\":\"śatānīkas tu khalu vaidehīm upayeme\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.95\",\"a\":\"Aśvamedhadatta\",\"rel\":\"son_of\",\"b\":\"Śatānīka\",\"words\":\"tasyām asya jajñe putro 'śvamedhadattaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.95\",\"a\":\"Aśvamedhadatta\",\"rel\":\"born_of\",\"b\":\"Vaidehī\",\"words\":\"tasyām asya jajñe putro 'śvamedhadattaḥ\",\"doubt\":true},\n{\"ref\":\"MBh 1,90.96\",\"a\":\"Pūru\",\"rel\":\"line_of\",\"b\":\"Pūru\",\"words\":\"eṣa pūror vaṃśas\",\"doubt\":true}\n]}",
  "stop": "end_turn",
- "cost_usd": 0.04311,
+ "cost_usd": 0.0577,
  "tokens": {
-  "input": 3032,
+  "input": 3303,
   "cache_write": 0,
   "cache_read": 0,
-  "output": 3705,
+  "output": 5109,
   "thinking": 0
  },
  "statements": [
@@ -62,7 +62,7 @@
    "a": "Duryodhana",
    "rel": "son_of",
    "b": "Dhṛtarāṣṭra",
-   "words": "dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano",
+   "words": "teṣāṃ dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano",
    "doubt": false,
    "check": "verified"
   },
@@ -90,7 +90,7 @@
    "rel": "son_of",
    "b": "Dhṛtarāṣṭra",
    "words": "dhṛtarāṣṭrasya putrāṇāṃ catvāraḥ pradhānā babhūvur duryodhano duḥśāsano vikarṇaś citrasena",
-   "doubt": false,
+   "doubt": true,
    "check": "verified"
   },
   {
@@ -115,6 +115,15 @@
    "ref": "MBh 1,90.69",
    "a": "Yudhiṣṭhira",
    "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "sā tatra putrān utpādayām āsa dharmād yudhiṣṭhiraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.69",
+   "a": "Yudhiṣṭhira",
+   "rel": "born_of",
    "b": "Kuntī",
    "words": "sā tatra putrān utpādayām āsa dharmād yudhiṣṭhiraṃ",
    "doubt": false,
@@ -122,9 +131,36 @@
   },
   {
    "ref": "MBh 1,90.69",
+   "a": "Yudhiṣṭhira",
+   "rel": "begotten_by",
+   "b": "Dharma",
+   "words": "dharmād yudhiṣṭhiraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.69",
    "a": "Bhīmasena",
    "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "mārutād bhīmasenaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.69",
+   "a": "Bhīmasena",
+   "rel": "born_of",
    "b": "Kuntī",
+   "words": "sā tatra putrān utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.69",
+   "a": "Bhīmasena",
+   "rel": "begotten_by",
+   "b": "Māruta",
    "words": "mārutād bhīmasenaṃ",
    "doubt": false,
    "check": "verified"
@@ -133,7 +169,25 @@
    "ref": "MBh 1,90.69",
    "a": "Arjuna",
    "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "śakrād arjunam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.69",
+   "a": "Arjuna",
+   "rel": "born_of",
    "b": "Kuntī",
+   "words": "sā tatra putrān utpādayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.69",
+   "a": "Arjuna",
+   "rel": "begotten_by",
+   "b": "Śakra",
    "words": "śakrād arjunam",
    "doubt": false,
    "check": "verified"
@@ -142,6 +196,42 @@
    "ref": "MBh 1,90.72",
    "a": "Nakula",
    "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "mādryām aśvibhyāṃ nakulasahadevāv utpāditau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.72",
+   "a": "Nakula",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādryām aśvibhyāṃ nakulasahadevāv utpāditau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.72",
+   "a": "Nakula",
+   "rel": "begotten_by",
+   "b": "Aśvin",
+   "words": "aśvibhyāṃ nakulasahadevāv utpāditau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.72",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "mādryām aśvibhyāṃ nakulasahadevāv utpāditau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.72",
+   "a": "Sahadeva",
+   "rel": "born_of",
    "b": "Mādrī",
    "words": "mādryām aśvibhyāṃ nakulasahadevāv utpāditau",
    "doubt": false,
@@ -150,9 +240,18 @@
   {
    "ref": "MBh 1,90.72",
    "a": "Sahadeva",
-   "rel": "son_of",
-   "b": "Mādrī",
-   "words": "mādryām aśvibhyāṃ nakulasahadevāv utpāditau",
+   "rel": "begotten_by",
+   "b": "Aśvin",
+   "words": "aśvibhyāṃ nakulasahadevāv utpāditau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.81",
+   "a": "Draupadī",
+   "rel": "wife_of",
+   "b": "Yudhiṣṭhira",
+   "words": "draupadīṃ bhāryām avindan",
    "doubt": false,
    "check": "verified"
   },
@@ -224,7 +323,16 @@
    "a": "Yaudheya",
    "rel": "son_of",
    "b": "Yudhiṣṭhira",
-   "words": "tasyāṃ putraṃ janayām āsa yaudheyaṃ nāma",
+   "words": "tasyāṃ putraṃ janayām āsa yaudheyaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.83",
+   "a": "Yaudheya",
+   "rel": "born_of",
+   "b": "Devikā",
+   "words": "tasyāṃ putraṃ janayām āsa yaudheyaṃ",
    "doubt": false,
    "check": "verified"
   },
@@ -247,6 +355,15 @@
    "check": "verified"
   },
   {
+   "ref": "MBh 1,90.84",
+   "a": "Sarvaga",
+   "rel": "born_of",
+   "b": "Baladharā",
+   "words": "tasyāṃ putraṃ sarvagaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
    "ref": "MBh 1,90.85",
    "a": "Subhadrā",
    "rel": "sister_of",
@@ -260,7 +377,7 @@
    "a": "Subhadrā",
    "rel": "wife_of",
    "b": "Arjuna",
-   "words": "arjunaḥ khalu dvāravatīṃ gatvā bhaginīṃ vāsudevasya subhadrāṃ nāma bhāryām udavahat",
+   "words": "subhadrāṃ nāma bhāryām udavahat",
    "doubt": false,
    "check": "verified"
   },
@@ -270,6 +387,15 @@
    "rel": "son_of",
    "b": "Arjuna",
    "words": "tasyāṃ putram abhimanyuṃ nāma janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.85",
+   "a": "Abhimanyu",
+   "rel": "born_of",
+   "b": "Subhadrā",
+   "words": "tasyāṃ putram abhimanyuṃ",
    "doubt": false,
    "check": "verified"
   },
@@ -292,6 +418,15 @@
    "check": "verified"
   },
   {
+   "ref": "MBh 1,90.86",
+   "a": "Niramitra",
+   "rel": "born_of",
+   "b": "Kareṇuvatī",
+   "words": "tasyāṃ putraṃ niramitraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
    "ref": "MBh 1,90.87",
    "a": "Vijayā",
    "rel": "wife_of",
@@ -310,6 +445,15 @@
    "check": "verified"
   },
   {
+   "ref": "MBh 1,90.87",
+   "a": "Suhotra",
+   "rel": "born_of",
+   "b": "Vijayā",
+   "words": "tasyāṃ putram ajanayat suhotraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
    "ref": "MBh 1,90.88",
    "a": "Ghaṭotkaca",
    "rel": "son_of",
@@ -321,19 +465,10 @@
   {
    "ref": "MBh 1,90.88",
    "a": "Ghaṭotkaca",
-   "rel": "son_of",
+   "rel": "born_of",
    "b": "Hiḍimbā",
-   "words": "hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ nāma putraṃ",
+   "words": "hiḍimbāyāṃ rākṣasyāṃ ghaṭotkacaṃ",
    "doubt": false,
-   "check": "verified"
-  },
-  {
-   "ref": "MBh 1,90.81",
-   "a": "Draupadī",
-   "rel": "wife_of",
-   "b": "Yudhiṣṭhira",
-   "words": "draupadīṃ bhāryām avindan",
-   "doubt": true,
    "check": "verified"
   },
   {
@@ -355,13 +490,26 @@
    "check": "verified"
   },
   {
-   "ref": "MBh 1,90.92",
+   "ref": "MBh 1,90.90",
    "a": "Parikṣit",
    "rel": "son_of",
    "b": "Abhimanyu",
    "words": "tasyām asya parāsur garbho 'jāyata",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "MBh 1,90.92",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "MBh 1,90.90",
+   "a": "Parikṣit",
+   "rel": "born_of",
+   "b": "Uttarā",
+   "words": "tasyām asya parāsur garbho 'jāyata",
+   "doubt": true,
+   "ref_cited": "MBh 1,90.92",
+   "ref_from": "words",
+   "check": "words"
   },
   {
    "ref": "MBh 1,90.93",
@@ -382,12 +530,30 @@
    "check": "verified"
   },
   {
+   "ref": "MBh 1,90.93",
+   "a": "Janamejaya",
+   "rel": "born_of",
+   "b": "Mādravatī",
+   "words": "tasyām asya janamejayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
    "ref": "MBh 1,90.94",
    "a": "Śatānīka",
    "rel": "son_of",
    "b": "Janamejaya",
    "words": "janamejayāt tu vapuṣṭamāyāṃ dvau putrau śatānīkaḥ",
-   "doubt": false,
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.94",
+   "a": "Śatānīka",
+   "rel": "born_of",
+   "b": "Vapuṣṭamā",
+   "words": "vapuṣṭamāyāṃ dvau putrau śatānīkaḥ",
+   "doubt": true,
    "check": "verified"
   },
   {
@@ -401,17 +567,8 @@
   },
   {
    "ref": "MBh 1,90.94",
-   "a": "Śatānīka",
-   "rel": "son_of",
-   "b": "Vapuṣṭamā",
-   "words": "vapuṣṭamāyāṃ dvau putrau śatānīkaḥ",
-   "doubt": false,
-   "check": "verified"
-  },
-  {
-   "ref": "MBh 1,90.94",
    "a": "Śaṅku",
-   "rel": "son_of",
+   "rel": "born_of",
    "b": "Vapuṣṭamā",
    "words": "vapuṣṭamāyāṃ dvau putrau śatānīkaḥ śaṅkuś ca",
    "doubt": false,
@@ -423,7 +580,7 @@
    "rel": "wife_of",
    "b": "Śatānīka",
    "words": "śatānīkas tu khalu vaidehīm upayeme",
-   "doubt": false,
+   "doubt": true,
    "check": "verified"
   },
   {
@@ -432,8 +589,26 @@
    "rel": "son_of",
    "b": "Śatānīka",
    "words": "tasyām asya jajñe putro 'śvamedhadattaḥ",
-   "doubt": false,
-   "check": "words"
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.95",
+   "a": "Aśvamedhadatta",
+   "rel": "born_of",
+   "b": "Vaidehī",
+   "words": "tasyām asya jajñe putro 'śvamedhadattaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MBh 1,90.96",
+   "a": "Pūru",
+   "rel": "line_of",
+   "b": "Pūru",
+   "words": "eṣa pūror vaṃśas",
+   "doubt": true,
+   "check": "verified"
   }
  ]
 }

@@ -1,0 +1,337 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 5,
+ "part": 0,
+ "refs": [
+  "MatsP 5.1",
+  "MatsP 5.2",
+  "MatsP 5.3",
+  "MatsP 5.4",
+  "MatsP 5.5",
+  "MatsP 5.6",
+  "MatsP 5.7",
+  "MatsP 5.8",
+  "MatsP 5.9",
+  "MatsP 5.10",
+  "MatsP 5.11",
+  "MatsP 5.12",
+  "MatsP 5.13",
+  "MatsP 5.14",
+  "MatsP 5.15",
+  "MatsP 5.16",
+  "MatsP 5.17",
+  "MatsP 5.18",
+  "MatsP 5.19",
+  "MatsP 5.20",
+  "MatsP 5.21",
+  "MatsP 5.22",
+  "MatsP 5.23",
+  "MatsP 5.24",
+  "MatsP 5.25",
+  "MatsP 5.26",
+  "MatsP 5.27",
+  "MatsP 5.28",
+  "MatsP 5.29",
+  "MatsP 5.30",
+  "MatsP 5.31",
+  "MatsP 5.32"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:12:51",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 5.4\",\"a\":\"Pāñcajanī\",\"rel\":\"wife_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣaḥ putrasahasrāṇi pāñcajanyāmajījanat\",\"doubt\":false},\n{\"ref\":\"MatsP 5.4\",\"a\":\"Haryaśva\",\"rel\":\"born_of\",\"b\":\"Pāñcajanī\",\"words\":\"putrasahasrāṇi pāñcajanyāmajījanat\",\"doubt\":true},\n{\"ref\":\"MatsP 5.5\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"haryaśvān dakṣaputrān\",\"doubt\":false},\n{\"ref\":\"MatsP 5.8\",\"a\":\"Śabala\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"vairiṇyāmeva putrāṇāṃ sahasramasṛjat\",\"doubt\":true},\n{\"ref\":\"MatsP 5.8\",\"a\":\"Śabala\",\"rel\":\"born_of\",\"b\":\"Vairiṇī\",\"words\":\"vairiṇyāmeva putrāṇāṃ sahasramasṛjat\",\"doubt\":true},\n{\"ref\":\"MatsP 5.12\",\"a\":\"Dakṣa\",\"rel\":\"begotten_by\",\"b\":\"Dakṣa\",\"words\":\"ṣaṣṭiṃ kanyāḥ prajāpatiḥ vairiṇyāṃ janayāmāsa\",\"doubt\":true},\n{\"ref\":\"MatsP 5.17\",\"a\":\"Viśvedevas\",\"rel\":\"born_of\",\"b\":\"Viśvā\",\"words\":\"viśve devāstu viśvāyāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 5.17\",\"a\":\"Sādhyas\",\"rel\":\"born_of\",\"b\":\"Sādhyā\",\"words\":\"sādhyā sādhyānajījanat\",\"doubt\":false},\n{\"ref\":\"MatsP 5.17\",\"a\":\"Marutvanta\",\"rel\":\"born_of\",\"b\":\"Marutvatī\",\"words\":\"marutvatyāṃ marutvanto\",\"doubt\":false},\n{\"ref\":\"MatsP 5.17\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Vasu\",\"words\":\"vasos tu vasavastathā\",\"doubt\":true},\n{\"ref\":\"MatsP 5.18\",\"a\":\"Bhānu\",\"rel\":\"son_of\",\"b\":\"Bhānu\",\"words\":\"bhānostu bhānavastadvan\",\"doubt\":true},\n{\"ref\":\"MatsP 5.18\",\"a\":\"Muhūrtaka\",\"rel\":\"born_of\",\"b\":\"Muhūrtā\",\"words\":\"muhūrtāyāṃ muhūrtakāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 5.18\",\"a\":\"Ghoṣa\",\"rel\":\"born_of\",\"b\":\"Lambā\",\"words\":\"lambāyāṃ ghoṣanāmāno\",\"doubt\":false},\n{\"ref\":\"MatsP 5.18\",\"a\":\"Nāgavīthī\",\"rel\":\"born_of\",\"b\":\"Yāmī\",\"words\":\"nāgavīthī tu yāmijā\",\"doubt\":false},\n{\"ref\":\"MatsP 5.19\",\"a\":\"Saṃkalpa\",\"rel\":\"born_of\",\"b\":\"Saṃkalpā\",\"words\":\"saṃkalpāyāstu saṃkalpo\",\"doubt\":false},\n{\"ref\":\"MatsP 5.22\",\"a\":\"Śānta\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putrāś catvāraḥ śānto\",\"doubt\":false},\n{\"ref\":\"MatsP 5.22\",\"a\":\"Daṇḍa\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putrāś catvāraḥ śānto vai daṇḍa\",\"doubt\":false},\n{\"ref\":\"MatsP 5.22\",\"a\":\"Śāmba\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putrāś catvāraḥ śāmbo\",\"doubt\":false},\n{\"ref\":\"MatsP 5.22\",\"a\":\"Maṇivaktra\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putrāś catvāraḥ maṇivaktraśca\",\"doubt\":false},\n{\"ref\":\"MatsP 5.23\",\"a\":\"Kāla\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvasya kālaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 5.23\",\"a\":\"Varcas\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"varcāḥ somādajāyata\",\"doubt\":false},\n{\"ref\":\"MatsP 5.23\",\"a\":\"Draviṇa\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"draviṇo havyavāhaśca dharaputrāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 5.23\",\"a\":\"Havyavāha\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"draviṇo havyavāhaśca dharaputrāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 5.24\",\"a\":\"Prāṇa\",\"rel\":\"born_of\",\"b\":\"Kalyāṇinī\",\"words\":\"kalyāṇinyāṃ tataḥ prāṇo\",\"doubt\":false},\n{\"ref\":\"MatsP 5.24\",\"a\":\"Manoharā\",\"rel\":\"daughter_of\",\"b\":\"Hari\",\"words\":\"hareḥ sutā\",\"doubt\":false},\n{\"ref\":\"MatsP 5.25\",\"a\":\"Manojava\",\"rel\":\"born_of\",\"b\":\"Śivā\",\"words\":\"śivā manojavaṃ putram\",\"doubt\":false},\n{\"ref\":\"MatsP 5.26\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"agniputraḥ kumāraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 5.26\",\"a\":\"Śākha\",\"rel\":\"brother_of\",\"b\":\"Kumāra\",\"words\":\"tasya śākho viśākhaśca naigameyaś ca pṛṣṭhajāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 5.27\",\"a\":\"Kārttikeya\",\"rel\":\"born_of\",\"b\":\"Kṛttikā\",\"words\":\"apatyaṃ kṛttikānāṃ tu kārttikeyas\",\"doubt\":false},\n{\"ref\":\"MatsP 5.27\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pratyūṣa\",\"words\":\"pratyūṣasa ṛṣiḥ putro vibhur nāmnātha devalaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 5.27\",\"a\":\"Viśvakarman\",\"rel\":\"son_of\",\"b\":\"Prabhāsa\",\"words\":\"viśvakarmā prabhāsasya putraḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02987,
+ "tokens": {
+  "input": 3400,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2307,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 5.4",
+   "a": "Pāñcajanī",
+   "rel": "wife_of",
+   "b": "Dakṣa",
+   "words": "dakṣaḥ putrasahasrāṇi pāñcajanyāmajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.4",
+   "a": "Haryaśva",
+   "rel": "born_of",
+   "b": "Pāñcajanī",
+   "words": "putrasahasrāṇi pāñcajanyāmajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.5",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "haryaśvān dakṣaputrān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.8",
+   "a": "Śabala",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "vairiṇyāmeva putrāṇāṃ sahasramasṛjat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.8",
+   "a": "Śabala",
+   "rel": "born_of",
+   "b": "Vairiṇī",
+   "words": "vairiṇyāmeva putrāṇāṃ sahasramasṛjat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.12",
+   "a": "Dakṣa",
+   "rel": "begotten_by",
+   "b": "Dakṣa",
+   "words": "ṣaṣṭiṃ kanyāḥ prajāpatiḥ vairiṇyāṃ janayāmāsa",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.17",
+   "a": "Viśvedevas",
+   "rel": "born_of",
+   "b": "Viśvā",
+   "words": "viśve devāstu viśvāyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.17",
+   "a": "Sādhyas",
+   "rel": "born_of",
+   "b": "Sādhyā",
+   "words": "sādhyā sādhyānajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.17",
+   "a": "Marutvanta",
+   "rel": "born_of",
+   "b": "Marutvatī",
+   "words": "marutvatyāṃ marutvanto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.17",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Vasu",
+   "words": "vasos tu vasavastathā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.18",
+   "a": "Bhānu",
+   "rel": "son_of",
+   "b": "Bhānu",
+   "words": "bhānostu bhānavastadvan",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.18",
+   "a": "Muhūrtaka",
+   "rel": "born_of",
+   "b": "Muhūrtā",
+   "words": "muhūrtāyāṃ muhūrtakāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.18",
+   "a": "Ghoṣa",
+   "rel": "born_of",
+   "b": "Lambā",
+   "words": "lambāyāṃ ghoṣanāmāno",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.18",
+   "a": "Nāgavīthī",
+   "rel": "born_of",
+   "b": "Yāmī",
+   "words": "nāgavīthī tu yāmijā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.19",
+   "a": "Saṃkalpa",
+   "rel": "born_of",
+   "b": "Saṃkalpā",
+   "words": "saṃkalpāyāstu saṃkalpo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.22",
+   "a": "Śānta",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putrāś catvāraḥ śānto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.22",
+   "a": "Daṇḍa",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putrāś catvāraḥ śānto vai daṇḍa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.22",
+   "a": "Śāmba",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putrāś catvāraḥ śāmbo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 5.22",
+   "a": "Maṇivaktra",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putrāś catvāraḥ maṇivaktraśca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 5.23",
+   "a": "Kāla",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvasya kālaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.23",
+   "a": "Varcas",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "varcāḥ somādajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.23",
+   "a": "Draviṇa",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "draviṇo havyavāhaśca dharaputrāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.23",
+   "a": "Havyavāha",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "draviṇo havyavāhaśca dharaputrāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.24",
+   "a": "Prāṇa",
+   "rel": "born_of",
+   "b": "Kalyāṇinī",
+   "words": "kalyāṇinyāṃ tataḥ prāṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.24",
+   "a": "Manoharā",
+   "rel": "daughter_of",
+   "b": "Hari",
+   "words": "hareḥ sutā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.25",
+   "a": "Manojava",
+   "rel": "born_of",
+   "b": "Śivā",
+   "words": "śivā manojavaṃ putram",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.26",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "agniputraḥ kumāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.26",
+   "a": "Śākha",
+   "rel": "brother_of",
+   "b": "Kumāra",
+   "words": "tasya śākho viśākhaśca naigameyaś ca pṛṣṭhajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.27",
+   "a": "Kārttikeya",
+   "rel": "born_of",
+   "b": "Kṛttikā",
+   "words": "apatyaṃ kṛttikānāṃ tu kārttikeyas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.27",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pratyūṣa",
+   "words": "pratyūṣasa ṛṣiḥ putro vibhur nāmnātha devalaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 5.27",
+   "a": "Viśvakarman",
+   "rel": "son_of",
+   "b": "Prabhāsa",
+   "words": "viśvakarmā prabhāsasya putraḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

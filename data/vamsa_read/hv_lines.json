@@ -5,14 +5,176 @@
  "lines": [
   [
    {
-    "name": "Trasadaśva",
+    "name": "Kakṣeyu",
     "ref": null,
     "words": null
    },
    {
+    "name": "Sabhānara",
+    "ref": "HV 23.15",
+    "words": "kakṣeyutanayās tv āsaṃs traya"
+   },
+   {
+    "name": "Kālānala",
+    "ref": "HV 23.16",
+    "words": "sabhānarasya putras tu vidvān kālānalo"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "HV 23.16",
+    "words": "kālānalasya dharmajñaḥ sṛñjayo nāma vai sutaḥ"
+   },
+   {
+    "name": "Puraṃjaya",
+    "ref": "HV 23.17",
+    "words": "sṛñjayasyābhavat putro vīro rājā puraṃjayaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "HV 23.17",
+    "words": "puraṃjayasuto 'bhavat"
+   },
+   {
+    "name": "Mahāsāla",
+    "ref": "HV 23.18",
+    "words": "janamejayasya rājarṣer mahāsālo 'bhavat sutaḥ"
+   },
+   {
+    "name": "Mahāmanas",
+    "ref": "HV 23.19",
+    "words": "mahāmanā nāma suto mahāsālasya"
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "HV 23.20",
+    "words": "mahāmanās tu putrau dvau janayām āsa"
+   },
+   {
+    "name": "Uṣadratha",
+    "ref": "HV 23.26",
+    "words": "titikṣur abhavad rājā pūrvasyāṃ diśi bhārata uṣadratho"
+   },
+   {
+    "name": "Phena",
+    "ref": "HV 23.26",
+    "words": "tasya phenaḥ suto 'bhavat"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "HV 23.27",
+    "words": "phenāt tu sutapā jajñe"
+   },
+   {
+    "name": "Bali",
+    "ref": "HV 23.27",
+    "words": "jajñe sutapasaḥ sutaḥ balir"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "HV 23.29",
+    "words": "aṅgaḥ prathamato jajñe"
+   },
+   {
+    "name": "Dadhivāhana",
+    "ref": "HV 23.33",
+    "words": "aṅgaputro mahān āsīd rājendro dadhivāhanaḥ"
+   },
+   {
+    "name": "Diviratha",
+    "ref": "HV 23.33",
+    "words": "dadhivāhanaputras tu rājā divirathas"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "HV 23.34",
+    "words": "putro divirathasyāsīt"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "HV 23.34",
+    "words": "tasya citrarathaḥ sutaḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "HV 23.36",
+    "words": "citrarathasyāpi putro daśaratho 'bhavat"
+   },
+   {
+    "name": "Caturaṅga",
+    "ref": "HV 23.37",
+    "words": "tasya dāśarathir vīraś caturaṅgo"
+   },
+   {
+    "name": "Pṛthulākṣa",
+    "ref": "HV 23.38",
+    "words": "caturaṅgasya putras tu pṛthulākṣa"
+   },
+   {
+    "name": "Campa",
+    "ref": "HV 23.38",
+    "words": "pṛthulākṣasuto rājā campo"
+   },
+   {
+    "name": "Haryaṅga",
+    "ref": "HV 23.39",
+    "words": "haryaṅgo 'sya suto 'bhavat"
+   },
+   {
+    "name": "Karṇa",
+    "ref": "HV 23.40",
+    "words": "haryaṅgasya sutaḥ karṇo"
+   },
+   {
+    "name": "Vṛṣasena",
+    "ref": "HV 23.41",
+    "words": "karṇasya vṛṣasenas"
+   },
+   {
+    "name": "Vṛṣa",
+    "ref": "HV 23.41",
+    "words": "vṛṣas tasyātmajaḥ smṛtaḥ"
+   },
+   {
+    "name": "Madhu",
+    "ref": "HV 23.161",
+    "words": "vṛṣo vaṃśadharas tatra tasya putro 'bhavan madhuḥ"
+   },
+   {
+    "name": "Vṛṣaṇa",
+    "ref": "HV 23.161",
+    "words": "madhoḥ putraśataṃ tv āsīd vṛṣaṇas tasya vaṃśabhāk"
+   }
+  ],
+  [
+   {
+    "name": "Purukutsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Trasaddasyu",
+    "ref": "HV 9.86",
+    "words": "purukutsasutas tv āsīt trasaddasyur"
+   },
+   {
+    "name": "Saṃbhūta",
+    "ref": "HV 9.86",
+    "words": "saṃbhūtas tasya cātmajaḥ"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "HV 9.87",
+    "words": "saṃbhūtasyāparaḥ putro anaraṇyo"
+   },
+   {
+    "name": "Trasadaśva",
+    "ref": "HV 9.87",
+    "words": "trasadaśvo naras tasya"
+   },
+   {
     "name": "Haryaśva",
     "ref": "HV 9.87",
-    "words": "trasadaśvo naras tasya haryaśvas tasya cātmajaḥ"
+    "words": "haryaśvas tasya cātmajaḥ"
    },
    {
     "name": "Sumanas",
@@ -27,7 +189,7 @@
    {
     "name": "Nala",
     "ref": "HV 10.78",
-    "words": "sudhanvanaḥ sutaś caiva tatojajñe nalo"
+    "words": "sudhanvanaḥ sutaś caiva tatojajñe nalo nṛpa"
    },
    {
     "name": "Uktha",
@@ -37,7 +199,7 @@
    {
     "name": "Vajranābha",
     "ref": "HV 10.78",
-    "words": "vajranābhaḥ sutas tasya ukthasya"
+    "words": "vajranābhaḥ sutas tasya ukthasya ca mahātmanaḥ"
    },
    {
     "name": "Śaṅkha",
@@ -57,12 +219,7 @@
    {
     "name": "Hiraṇyanābha",
     "ref": "HV 10.78",
-    "words": "hiraṇyanābhaḥ kauśalyo"
-   },
-   {
-    "name": "Brahmiṣṭha",
-    "ref": "HV 10.78",
-    "words": "brahmiṣṭhas tasya cātmajaḥ"
+    "words": "hiraṇyanābhaḥ kauśalyo brahmiṣṭhas tasya cātmajaḥ"
    },
    {
     "name": "Puṣpa",
@@ -87,7 +244,7 @@
    {
     "name": "Śīghra",
     "ref": "HV 10.78",
-    "words": "agnivarṇasya śīghras"
+    "words": "agnivarṇasya śīghras tu"
    },
    {
     "name": "Maru",
@@ -110,14 +267,243 @@
     "words": "susaṃdhes tu suto marṣaḥ"
    },
    {
-    "name": "Sahasrat",
+    "name": "Sahasrāt",
     "ref": "HV 10.78",
     "words": "sahasrān nāma nāmataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pūru",
+    "ref": null,
+    "words": null
    },
    {
-    "name": "Viśrutavat",
-    "ref": "HV 10.78",
-    "words": "āsīt sahasrataḥ putro rājā viśrutavān"
+    "name": "Pravīra",
+    "ref": "HV 23.4",
+    "words": "pūroḥ pravīraḥ putro 'bhūt"
+   },
+   {
+    "name": "Manasyu",
+    "ref": "HV 23.4",
+    "words": "manasyus tasya cātmajaḥ"
+   },
+   {
+    "name": "Abhayada",
+    "ref": "HV 23.4",
+    "words": "manasyor abhavat sutaḥ"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "HV 23.5",
+    "words": "abhayadasyāsīt sudhanvā"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "HV 23.110",
+    "words": "sudhanvanas tu dāyādaḥ suhotro"
+   },
+   {
+    "name": "Bṛhat",
+    "ref": "HV 23.73",
+    "words": "suhotrasya bṛhat putro"
+   },
+   {
+    "name": "Ajamīḍha",
+    "ref": "HV 23.73",
+    "words": "bṛhatas tanayās trayaḥ ajamīḍho"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "HV 23.106",
+    "words": "ajamīḍhaḥ sameyivān ṛkṣaṃ sā janayām āsa"
+   },
+   {
+    "name": "Saṃvaraṇa",
+    "ref": "HV 23.107",
+    "words": "ṛkṣāt saṃvaraṇo jajñe"
+   },
+   {
+    "name": "Kuru",
+    "ref": "HV 23.107",
+    "words": "kuruḥ saṃvaraṇāt"
+   },
+   {
+    "name": "Parīkṣit",
+    "ref": "HV 23.109",
+    "words": "parīkṣic ca mahābāhuḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "HV 23.110",
+    "words": "parīkṣitas tu tanayo dhārmiko janamejayaḥ"
+   },
+   {
+    "name": "Suratha",
+    "ref": "HV 23.111",
+    "words": "janamejayasya putrau tu suratho"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "HV 23.111",
+    "words": "surathasya tu vikrāntaḥ putro jajñe vidūrathaḥ"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "HV 23.112",
+    "words": "vidūrathasya dāyāda ṛkṣa"
+   },
+   {
+    "name": "Bhīmasena",
+    "ref": "HV 23.114",
+    "words": "ṛkṣasya tu dvitīyasya bhīmaseno 'bhavat sutaḥ"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "HV 23.114",
+    "words": "pratīpo bhīmasenasya"
+   },
+   {
+    "name": "Śāṃtanu",
+    "ref": "HV 23.114",
+    "words": "pratīpasya tu śāṃtanuḥ"
+   },
+   {
+    "name": "Vicitravīrya",
+    "ref": "HV 23.119",
+    "words": "śāṃtanor dayitaṃ putraṃ"
+   },
+   {
+    "name": "Pāṇḍu",
+    "ref": "HV 23.120",
+    "words": "kṣetre vaicitravīryake dhṛtarāṣṭraṃ ca pāṇḍuṃ"
+   },
+   {
+    "name": "Dhanaṃjaya",
+    "ref": "HV 23.121",
+    "words": "pāṇḍor dhanaṃjayaḥ putraḥ"
+   },
+   {
+    "name": "Saubhadra",
+    "ref": "HV 23.121",
+    "words": "saubhadras tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Uṣata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śineyu",
+    "ref": "HV 26.7",
+    "words": "śineyur abhavat putra uṣataḥ"
+   },
+   {
+    "name": "Marutta",
+    "ref": "HV 26.7",
+    "words": "maruttas tasya tanayo"
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "HV 26.8",
+    "words": "marutto 'labhata jyeṣṭhaṃ sutaṃ kambalabarhiṣam"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "HV 26.9",
+    "words": "babhūva rukmakavacaḥ śataprasavataḥ sutaḥ"
+   },
+   {
+    "name": "Jyāmagha",
+    "ref": "HV 26.11",
+    "words": "jyāmaghaḥ"
+   },
+   {
+    "name": "Vidarbha",
+    "ref": "HV 26.17",
+    "words": "yas te janiṣyate putras tasya bhāryeti"
+   },
+   {
+    "name": "Bhīma",
+    "ref": "HV 26.20",
+    "words": "bhīmo vidarbhasya sutaḥ"
+   },
+   {
+    "name": "Kunti",
+    "ref": "HV 26.20",
+    "words": "kuntis tasyātmajo 'bhavat"
+   },
+   {
+    "name": "Dhṛṣṭa",
+    "ref": "HV 26.20",
+    "words": "kunter dhṛṣṭaḥ suto jajñe"
+   },
+   {
+    "name": "Daśārha",
+    "ref": "HV 26.21",
+    "words": "daśārhaś ca"
+   },
+   {
+    "name": "Vyoman",
+    "ref": "HV 26.22",
+    "words": "daśārhasya suto vyomā"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "HV 26.22",
+    "words": "vidvāñ jīmūta ucyate"
+   },
+   {
+    "name": "Vṛkati",
+    "ref": "HV 26.22",
+    "words": "jīmūtaputro vṛkatis"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "HV 26.22",
+    "words": "tasya bhīmarathaḥ sutaḥ"
+   },
+   {
+    "name": "Navaratha",
+    "ref": "HV 26.23",
+    "words": "bhīmarathasyāsīt putro navarathas"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "HV 26.23",
+    "words": "tasya cāsīd daśarathaḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "HV 26.23",
+    "words": "śakunis tasya cātmajaḥ"
+   },
+   {
+    "name": "Karambha",
+    "ref": "HV 26.24",
+    "words": "tasmāt karambhaḥ"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "HV 26.24",
+    "words": "kārambhir devarāto"
+   },
+   {
+    "name": "Devakṣatra",
+    "ref": "HV 26.24",
+    "words": "devakṣatro 'bhavat tasya"
+   },
+   {
+    "name": "Madhu",
+    "ref": "HV 26.25",
+    "words": "devakṣatrasya nandanaḥ madhūnāṃ vaṃśakṛd rājā madhur"
+   },
+   {
+    "name": "Purutvān",
+    "ref": "HV 26.26",
+    "words": "madhor jajñe tu vaidarbhyāṃ purutvān"
    }
   ],
   [
@@ -142,19 +528,9 @@
     "words": "anaraṇyasuto nighno"
    },
    {
-    "name": "Anamitra",
-    "ref": "HV 10.72",
-    "words": "nighnaputrau babhūvatuḥ anamitro"
-   },
-   {
-    "name": "Dilīpa",
-    "ref": "HV 10.73",
-    "words": "anamitras tu dharmātmā vidvān duliduho 'bhavat dilīpas tasya tanayo"
-   },
-   {
     "name": "Raghu",
-    "ref": "HV 10.73",
-    "words": "raghur nāmnābhavat sutaḥ"
+    "ref": "HV 10.72",
+    "words": "nighnaputrau babhūvatuḥ anamitro raghuś caiva"
    },
    {
     "name": "Aja",
@@ -217,83 +593,323 @@
     "words": "ahīnagur nāma devānīkātmajaḥ"
    },
    {
-    "name": "Sahasvān",
+    "name": "Sahasvant",
     "ref": "HV 10.77",
     "words": "ahīnagos tu dāyādaḥ sahasvān"
    }
   ],
   [
    {
-    "name": "Vasiṣṭha",
+    "name": "Kṛtayajña",
     "ref": null,
     "words": null
    },
    {
-    "name": "Aśmaka",
-    "ref": "HV 10.71",
-    "words": "vasiṣṭhas tumahātejāḥ kṣetre kalmāṣapādake aśmakaṃ janayām āsa"
+    "name": "Vasu Caidyoparicara",
+    "ref": "HV 23.110",
+    "words": "janayām āsa putram indrasakhaṃ nṛpaḥ"
    },
    {
-    "name": "Mūlaka",
-    "ref": "HV 10.71",
-    "words": "mūlakastatsuto 'bhavat"
+    "name": "Bṛhadratha",
+    "ref": "HV 23.110",
+    "words": "caidyoparicarāj jajñe girikā sapta mānavān"
    },
    {
-    "name": "Śataratha",
-    "ref": "HV 10.71",
-    "words": "mūlakasyāpi dharmātmā rājā śataratho 'bhavat"
+    "name": "Kuśāgra",
+    "ref": "HV 23.110",
+    "words": "bṛhadrathasya dāyādaḥ kuśāgro"
    },
    {
-    "name": "Elabila",
-    "ref": "HV 10.71",
-    "words": "tasmāc chatarathāj jajñe rājā elabilo"
+    "name": "Ṛṣabha",
+    "ref": "HV 23.110",
+    "words": "kuśāgrasyātmajo vidvān ṛṣabho"
    },
    {
-    "name": "Vṛddhaśarman",
-    "ref": "HV 10.71",
-    "words": "āsīd ailabilaḥ śrīmān vṛddhaśarmā"
+    "name": "Satyahita",
+    "ref": "HV 23.110",
+    "words": "dāyādas tasya vikrānto rājā satyahitaḥ"
    },
    {
-    "name": "Dala",
-    "ref": "HV 10.71",
-    "words": "dalas tasyātmajaś cāpi"
+    "name": "Ūrja",
+    "ref": "HV 23.110",
+    "words": "tasya putraḥ sa dharmātmā nāmnā ūrjas"
    },
    {
-    "name": "Śala",
-    "ref": "HV 10.71",
-    "words": "tato jajñe śalo nṛpaḥ"
+    "name": "Saṃbhava",
+    "ref": "HV 23.110",
+    "words": "ūrjasya saṃbhavaḥ putro"
    },
    {
-    "name": "Ūrṇa",
-    "ref": "HV 10.71",
-    "words": "śalaputro babhūva"
+    "name": "Jarāsaṃdha",
+    "ref": "HV 23.110",
+    "words": "yasya jajñe sa vīryavān"
    },
    {
-    "name": "Viśvasaha",
-    "ref": "HV 10.71",
-    "words": "putro viśvasahas tasya"
+    "name": "Sahadeva",
+    "ref": "HV 23.110",
+    "words": "jarāsaṃdhasya putro vai sahadevaḥ"
    },
    {
-    "name": "Rajas",
-    "ref": "HV 10.71",
-    "words": "rajo nāma sutas tasya"
+    "name": "Udāyi",
+    "ref": "HV 23.110",
+    "words": "sahadevātmajaḥ śrīmān udāyiḥ"
    },
    {
-    "name": "Śṛṅkhala",
-    "ref": "HV 10.71",
-    "words": "śṛṅkhalas tasya cātmajaḥ"
+    "name": "Śrutadharma",
+    "ref": "HV 23.110",
+    "words": "udāyir janayām āsa putraṃ"
    }
   ],
   [
    {
-    "name": "Anenas",
+    "name": "Alarka",
     "ref": null,
     "words": null
    },
    {
+    "name": "Kṣema",
+    "ref": "HV 23.69",
+    "words": "alarkasya tu dāyādaḥ kṣemo"
+   },
+   {
+    "name": "Ketumat",
+    "ref": "HV 23.69",
+    "words": "kṣemasya ketumān putro"
+   },
+   {
+    "name": "Varṣaketu",
+    "ref": "HV 23.69",
+    "words": "varṣaketus tato 'bhavat"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "HV 23.70",
+    "words": "varṣaketos tu dāyādo vibhur"
+   },
+   {
+    "name": "Ānarta",
+    "ref": "HV 23.70",
+    "words": "ānartas tu vibhoḥ putraḥ"
+   },
+   {
+    "name": "Sukumāra",
+    "ref": "HV 23.70",
+    "words": "sukumāras tato 'bhavat"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "HV 23.71",
+    "words": "sukumārasya putras tu satyaketur"
+   },
+   {
+    "name": "Karantu",
+    "ref": "HV 23.71",
+    "words": "suto 'bhavan mahātejā rājā paramadhārmikaḥ karantur nāma"
+   },
+   {
+    "name": "Bhārga",
+    "ref": "HV 23.71",
+    "words": "tasya putrau babhūvatuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Andhaka",
+    "ref": "HV 27.2",
+    "words": "andhakaṃ ca mahābāhuṃ"
+   },
+   {
+    "name": "Kukura",
+    "ref": "HV 27.16",
+    "words": "andhakāt kāśyaduhitā caturo 'labhatātmajān kukuraṃ"
+   },
+   {
+    "name": "Dhṛṣṇu",
+    "ref": "HV 27.17",
+    "words": "kukurasya suto dhṛṣṇur"
+   },
+   {
+    "name": "Kapotaromā",
+    "ref": "HV 27.17",
+    "words": "dhṛṣṇos tu tanayas tathā kapotaromā"
+   },
+   {
+    "name": "Taittiri",
+    "ref": "HV 27.17",
+    "words": "tasyātha taittiris tanayo 'bhavat"
+   },
+   {
+    "name": "Punarvasu",
+    "ref": "HV 27.17",
+    "words": "jajñe punar vasus tasmād"
+   },
+   {
+    "name": "Abhijit",
+    "ref": "HV 27.17",
+    "words": "abhijit tu punar vasoḥ"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "HV 27.18",
+    "words": "putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva"
+   },
+   {
+    "name": "Devaka",
+    "ref": "HV 27.25",
+    "words": "āhukasya tu kāśyāyāṃ dvau putrau saṃbabhūvatuḥ devakaś cograsenaś ca"
+   }
+  ],
+  [
+   {
+    "name": "Aṅga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vena",
+    "ref": "HV 2.19",
+    "words": "aṅgāt sunīthāpatyaṃ vai venam"
+   },
+   {
     "name": "Pṛthu",
-    "ref": "HV 9.44",
-    "words": "kakutsthasya pṛthur ānenasaḥ smṛtaḥ"
+    "ref": "HV 2.22",
+    "words": "pṛthur vainyas"
+   },
+   {
+    "name": "Antardhāna",
+    "ref": "HV 2.27",
+    "words": "pṛthuputrau tu dharmajñau jajñāte 'ntardhipālinau"
+   },
+   {
+    "name": "Havirdhāna",
+    "ref": "HV 2.27",
+    "words": "śikhaṇḍinī havirdhānam antardhānād vyājāyata"
+   },
+   {
+    "name": "Prācīnabarhis",
+    "ref": "HV 2.28",
+    "words": "havirdhānāt ṣaḍāgneyī dhiṣaṇājanayat sutān prācīnabarhiṣaṃ"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "HV 2.32",
+    "words": "daśa prācīnabarhiṣaḥ putrān vai janayām āsa"
+   },
+   {
+    "name": "Dakṣa",
+    "ref": "HV 2.45",
+    "words": "daśabhyas tu pracetobhyo māriṣāyāṃ prajāpatiḥ dakṣo jajñe"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "HV 3.15",
+    "words": "dakṣasya putrā haryaśvā"
+   }
+  ],
+  [
+   {
+    "name": "Kāśya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kāśaya",
+    "ref": "HV 23.55",
+    "words": "kāśyasya kāśayo rājan putro"
+   },
+   {
+    "name": "Dīrghatapas",
+    "ref": "HV 23.55",
+    "words": "putro dīrghatapās"
+   },
+   {
+    "name": "Dhanvantari",
+    "ref": "HV 23.56",
+    "words": "dīrghatapaso vidvān dhanvaṃtariḥ sutaḥ"
+   },
+   {
+    "name": "Ketumat",
+    "ref": "HV 23.56",
+    "words": "dhanvaṃtares tu tanayaḥ ketumān"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "HV 23.57",
+    "words": "ketumataḥ putro vīro bhīmarathaḥ"
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "HV 23.57",
+    "words": "suto bhīmarathasyāsīd divodāsaḥ"
+   },
+   {
+    "name": "Pratardana",
+    "ref": "HV 23.62",
+    "words": "divodāsasya putras tu vīro rājā pratardanaḥ"
+   },
+   {
+    "name": "Vatsa",
+    "ref": "HV 23.62",
+    "words": "pratardanasya putrau dvau vatso bhārgava"
+   }
+  ],
+  [
+   {
+    "name": "Manu Vaivasvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "HV 9.1",
+    "words": "manor vaivasvatasyāsan putrā vai nava"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "HV 9.21",
+    "words": "nābhāgasya tu bhārata ambarīṣo 'bhavat putraḥ"
+   },
+   {
+    "name": "Sindhudvīpa",
+    "ref": "HV 10.68",
+    "words": "sindhudvīpapitābhavat"
+   },
+   {
+    "name": "Ayutājit",
+    "ref": "HV 10.68",
+    "words": "ayutājit tu dāyādaḥ sindhudvīpasya"
+   },
+   {
+    "name": "Ṛtaparṇa",
+    "ref": "HV 10.69",
+    "words": "ayutājitsutas tv āsīd ṛtaparṇo"
+   },
+   {
+    "name": "Ārtaparṇi",
+    "ref": "HV 10.70",
+    "words": "ṛtaparṇasutas tv āsīd ārtaparṇir"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "HV 10.70",
+    "words": "sudāsas tasya tanayo"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "HV 10.70",
+    "words": "sudāsasya sutas tv āsīt saudāso"
+   }
+  ],
+  [
+   {
+    "name": "Pṛthu",
+    "ref": null,
+    "words": null
    },
    {
     "name": "Viṣṭarāśva",
@@ -328,130 +944,19 @@
   ],
   [
    {
-    "name": "Nābhāga",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Ambarīṣa",
-    "ref": "HV 9.21",
-    "words": "nābhāgasya tu bhārata ambarīṣo 'bhavat putraḥ"
-   },
-   {
-    "name": "Sindhudvīpa",
-    "ref": "HV 10.68",
-    "words": "ambarīṣas tu nābhāgiḥ sindhudvīpapitābhavat"
-   },
-   {
-    "name": "Ayutājit",
-    "ref": "HV 10.68",
-    "words": "ayutājit tu dāyādaḥ sindhudvīpasya"
-   },
-   {
-    "name": "Ṛtaparṇa",
-    "ref": "HV 10.69",
-    "words": "ayutājitsutas tv āsīd ṛtaparṇo"
-   },
-   {
-    "name": "Ārtaparṇi",
-    "ref": "HV 10.70",
-    "words": "ṛtaparṇasutas tv āsīd ārtaparṇir"
-   },
-   {
-    "name": "Sudāsa",
-    "ref": "HV 10.70",
-    "words": "sudāsas tasya tanayo"
-   },
-   {
-    "name": "Saudāsa",
-    "ref": "HV 10.70",
-    "words": "sudāsasya sutas tv āsīt saudāso"
-   }
-  ],
-  [
-   {
-    "name": "Satyarathā",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Hariścandra",
-    "ref": "HV 10.21",
-    "words": "kumāraṃ janayām āsa hariścandram"
-   },
-   {
-    "name": "Rohita",
-    "ref": "HV 10.23",
-    "words": "hariścandrasya tu suto rohito nāma"
-   },
-   {
-    "name": "Vṛka",
-    "ref": "HV 10.23",
-    "words": "rohitasya vṛkaḥ putro"
-   },
-   {
-    "name": "Bāhu",
-    "ref": "HV 10.23",
-    "words": "vṛkād bāhus tu jajñivān"
-   },
-   {
     "name": "Sagara",
-    "ref": "HV 10.25",
-    "words": "sagaras tu suto bāhor jajñe"
+    "ref": null,
+    "words": null
    },
    {
     "name": "Asamañja",
     "ref": "HV 10.58",
-    "words": "keśiny asūta sagarād asamañjasamātmajam"
+    "words": "sagarād asamañjasamātmajam"
    },
    {
-    "name": "Aṃśumān",
+    "name": "Aṃśumant",
     "ref": "HV 10.64",
     "words": "asamañja iti prāhus tasya putro'ṃśumān abhūt"
-   }
-  ],
-  [
-   {
-    "name": "Dṛḍhāśva",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Haryaśva",
-    "ref": "HV 9.79",
-    "words": "dhaundhumārir dṛḍhāśvas tu haryaśvas tasya cātmajaḥ"
-   },
-   {
-    "name": "Nikumbha",
-    "ref": "HV 9.79",
-    "words": "haryaśvasya nikumbho 'bhūt"
-   },
-   {
-    "name": "Saṃhatāśva",
-    "ref": "HV 9.80",
-    "words": "saṃhatāśvo nikumbhasya suto"
-   },
-   {
-    "name": "Kṛśāśva",
-    "ref": "HV 9.80",
-    "words": "akṛśāśvaḥ kṛśāśvaś ca saṃhatāśvasutau"
-   },
-   {
-    "name": "Prasenajit",
-    "ref": "HV 9.81",
-    "words": "putraś cāpi prasenajit"
-   }
-  ],
-  [
-   {
-    "name": "Pañcajana",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Aṃśumān",
-    "ref": "HV 10.64",
-    "words": "sutaḥ pañcajanasyāsīd aṃśumān"
    },
    {
     "name": "Dilīpa",
@@ -476,29 +981,639 @@
   ],
   [
    {
-    "name": "Purukutsa",
+    "name": "Ajamīḍha",
     "ref": null,
     "words": null
    },
    {
-    "name": "Trasaddasyu",
-    "ref": "HV 9.86",
-    "words": "purukutsasutas tv āsīt trasaddasyur"
+    "name": "Bṛhadiṣu",
+    "ref": "HV 15.15",
+    "words": "ajamīḍhasya dhūminyāṃ jajñe bṛhadiṣur"
    },
    {
-    "name": "Saṃbhūta",
-    "ref": "HV 9.86",
-    "words": "saṃbhūtas tasya cātmajaḥ"
+    "name": "Bṛhaddharma",
+    "ref": "HV 15.15",
+    "words": "āsīd bṛhadiṣoḥ putro bṛhaddharmeti"
    },
    {
-    "name": "Sudhanvan",
-    "ref": "HV 9.87",
-    "words": "saṃbhūtasya tu dāyādaḥ sudhanvā"
+    "name": "Satyajit",
+    "ref": "HV 15.16",
+    "words": "satyajit tasya tanayo"
    },
    {
-    "name": "Viṣṇuvṛddhi",
-    "ref": "HV 9.87",
-    "words": "sudhanvanaḥ sutaś cāpi viṣṇuvṛddhir"
+    "name": "Viśvajit",
+    "ref": "HV 15.16",
+    "words": "viśvajit tasya cātmajaḥ"
+   },
+   {
+    "name": "Senajit",
+    "ref": "HV 15.16",
+    "words": "putro viśvajitaś cāpi senajit"
+   }
+  ],
+  [
+   {
+    "name": "Bhadraratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bṛhatkarman",
+    "ref": "HV 23.40",
+    "words": "putro bhadrarathasyāsīd bṛhatkarmā"
+   },
+   {
+    "name": "Bṛhaddarbha",
+    "ref": "HV 23.40",
+    "words": "bṛhaddarbhaḥ sutas tasya"
+   },
+   {
+    "name": "Bṛhanmanas",
+    "ref": "HV 23.40",
+    "words": "yasmāj jajñe bṛhanmanāḥ"
+   },
+   {
+    "name": "Jayadratha",
+    "ref": "HV 23.40",
+    "words": "bṛhanmanās tu rājendro janayām āsa vai sutam nāmnā jayadrathaṃ"
+   },
+   {
+    "name": "Dṛḍharatha",
+    "ref": "HV 23.40",
+    "words": "yasmād dṛḍharatho nṛpaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dṛḍhāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "HV 9.79",
+    "words": "dhaundhumārir dṛḍhāśvas tu haryaśvas tasya cātmajaḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "HV 9.79",
+    "words": "haryaśvasya nikumbho 'bhūt"
+   },
+   {
+    "name": "Saṃhatāśva",
+    "ref": "HV 9.80",
+    "words": "saṃhatāśvo nikumbhasya suto"
+   },
+   {
+    "name": "Akṛśāśva",
+    "ref": "HV 9.80",
+    "words": "akṛśāśvaḥ kṛśāśvaś ca saṃhatāśvasutau"
+   },
+   {
+    "name": "Prasenajit",
+    "ref": "HV 9.81",
+    "words": "putraś cāpi prasenajit"
+   }
+  ],
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hiraṇyakaśipu",
+    "ref": "HV 3.58",
+    "words": "dityāḥ putradvayaṃ jajñe kaśyapād"
+   },
+   {
+    "name": "Prahrāda",
+    "ref": "HV 3.59",
+    "words": "hiraṇyakaśipoḥ putrāś catvāraḥ"
+   },
+   {
+    "name": "Virocana",
+    "ref": "HV 3.60",
+    "words": "prāhrādir"
+   },
+   {
+    "name": "Bali",
+    "ref": "HV 3.60",
+    "words": "balir jajñe virocanāt"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "HV 3.61",
+    "words": "baleḥ putraśataṃ tv āsīd bāṇajyeṣṭhaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Mahiṣmat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhadraśreṇya",
+    "ref": "HV 23.137",
+    "words": "āsīn mahiṣmataḥ putro bhadraśreṇyaḥ"
+   },
+   {
+    "name": "Durdama",
+    "ref": "HV 23.137",
+    "words": "bhadraśreṇyasya dāyādo durdamo"
+   },
+   {
+    "name": "Kanaka",
+    "ref": "HV 23.137",
+    "words": "durdamasya suto dhīmān kanako"
+   },
+   {
+    "name": "Kṛtavīrya",
+    "ref": "HV 23.137",
+    "words": "kanakasya tu dāyādāś catvāro"
+   },
+   {
+    "name": "Arjuna",
+    "ref": "HV 23.137",
+    "words": "kṛtavīryāt tathārjunaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Turvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vahni",
+    "ref": "HV 23.123",
+    "words": "turvasos tu suto vahnir"
+   },
+   {
+    "name": "Gobhānu",
+    "ref": "HV 23.123",
+    "words": "vahner gobhānur ātmajaḥ"
+   },
+   {
+    "name": "Triśānu",
+    "ref": "HV 23.123",
+    "words": "gobhānos tu suto rājā triśānur"
+   },
+   {
+    "name": "Karaṃdhama",
+    "ref": "HV 23.124",
+    "words": "karaṃdhamas tu triśānor"
+   },
+   {
+    "name": "Marutta",
+    "ref": "HV 23.124",
+    "words": "maruttas tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pradyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aniruddha",
+    "ref": "HV 98.19",
+    "words": "pradyumnasya suto yas tu vaidarbhyāṃ"
+   },
+   {
+    "name": "Vajra",
+    "ref": "HV 98.24",
+    "words": "tasyāṃ vajro 'niruddhasya"
+   },
+   {
+    "name": "Prativāha",
+    "ref": "HV 98.25",
+    "words": "vajrāj jajñe prativahaḥ"
+   },
+   {
+    "name": "Sucāru",
+    "ref": "HV 98.25",
+    "words": "sucārus tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satyaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yuyudhāna",
+    "ref": "HV 24.24",
+    "words": "satyakas tasmād yuyudhānas"
+   },
+   {
+    "name": "Asaṅga",
+    "ref": "HV 24.25",
+    "words": "asaṅgo yuyudhānasya"
+   },
+   {
+    "name": "Bhūmi",
+    "ref": "HV 24.25",
+    "words": "bhūmis tasyābhavatsutaḥ"
+   },
+   {
+    "name": "Yugaṃdhara",
+    "ref": "HV 24.25",
+    "words": "bhūmer yugaṃdharaḥ putra"
+   }
+  ],
+  [
+   {
+    "name": "Svāhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ruṣadgu",
+    "ref": "HV 26.2",
+    "words": "svāhiputro 'bhavad rājā ruṣadguḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "HV 26.3",
+    "words": "citrarathas tasya putraḥ"
+   },
+   {
+    "name": "Śaśabindu",
+    "ref": "HV 26.4",
+    "words": "āsīc caitrarathir vīro"
+   },
+   {
+    "name": "Pṛthuśravas",
+    "ref": "HV 26.5",
+    "words": "rājāsīc chāśabindujaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Taṃsu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suraugha",
+    "ref": "HV 23.46",
+    "words": "taṃsoḥ suraugho rājarṣir"
+   },
+   {
+    "name": "Duḥṣanta",
+    "ref": "HV 23.47",
+    "words": "suraughataḥ tataś cotpādayām āsa caturaḥ purunandanān duḥṣantam"
+   },
+   {
+    "name": "Śarutthāma",
+    "ref": "HV 23.128",
+    "words": "duḥṣantasya tu dāyādaḥ śarutthāmaḥ"
+   },
+   {
+    "name": "Ākrīḍa",
+    "ref": "HV 23.128",
+    "words": "śarutthāmād athākrīḍaś"
+   }
+  ],
+  [
+   {
+    "name": "Triśaṅku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "HV 10.21",
+    "words": "tasya satyarathā nāma patnī kekayavaṃśajā kumāraṃ janayām āsa hariścandram"
+   },
+   {
+    "name": "Rohita",
+    "ref": "HV 10.23",
+    "words": "hariścandrasya tu suto rohito nāma viśrutaḥ"
+   },
+   {
+    "name": "Vṛka",
+    "ref": "HV 10.23",
+    "words": "rohitasya vṛkaḥ putro"
+   },
+   {
+    "name": "Bāhu",
+    "ref": "HV 10.23",
+    "words": "vṛkād bāhus tu jajñivān"
+   }
+  ],
+  [
+   {
+    "name": "Vijaya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "HV 23.41",
+    "words": "vijayasya dhṛtiḥ putras"
+   },
+   {
+    "name": "Dhṛtavrata",
+    "ref": "HV 23.41",
+    "words": "tasya putro dhṛtavrataḥ"
+   },
+   {
+    "name": "Satyakarman",
+    "ref": "HV 23.41",
+    "words": "dhṛtavratasya putras tu satyakarmā"
+   },
+   {
+    "name": "Adhiratha",
+    "ref": "HV 23.41",
+    "words": "satyakarmasutaś cāpi sūtas tv adhirathas"
+   }
+  ],
+  [
+   {
+    "name": "Śliṣṭi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Prācīnagarbha",
+    "ref": "HV 2.14",
+    "words": "śliṣṭer ādhatta succhāyā pañca putrān"
+   },
+   {
+    "name": "Udāradhī",
+    "ref": "HV 2.14",
+    "words": "suṣuve nṛpa nāmnodāradhiyaṃ putram"
+   },
+   {
+    "name": "Divaṃjaya",
+    "ref": "HV 2.14",
+    "words": "udāradhīḥ sutaṃ bhadrā+ +janayad vai divaṃjayam"
+   },
+   {
+    "name": "Ripuṃjaya",
+    "ref": "HV 2.14",
+    "words": "ripuṃ ripuṃjayaṃ jajñe varāṅgī sā divaṃjayāt"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śini",
+    "ref": "HV 98.25",
+    "words": "anamitrāc chinir jajñe"
+   },
+   {
+    "name": "Satyaka",
+    "ref": "HV 98.26",
+    "words": "śines tu satyavāg jajñe satyakaś ca"
+   },
+   {
+    "name": "Śūra",
+    "ref": "HV 98.26",
+    "words": "satyakasyātmajaḥ śūro"
+   }
+  ],
+  [
+   {
+    "name": "Devamīḍhuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śūra",
+    "ref": "HV 24.14",
+    "words": "śūraṃ vai devamīḍhuṣam"
+   },
+   {
+    "name": "Vasudeva",
+    "ref": "HV 24.14",
+    "words": "mahiṣyāṃ jajñire śūrād bhojyāyāṃ puruṣā daśa vasudevo"
+   },
+   {
+    "name": "Vāsudeva",
+    "ref": "HV 24.28",
+    "words": "vasudevasya vai putro vāsudevaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Babhrusena",
+    "ref": "HV 23.130",
+    "words": "druhyos tu tanayo rājan babhrusenaś"
+   },
+   {
+    "name": "Aṅgārasetu",
+    "ref": "HV 23.130",
+    "words": "aṅgārasetus tatputro"
+   },
+   {
+    "name": "Gāndhāra",
+    "ref": "HV 23.132",
+    "words": "aṅgārasya tu dāyādo gāndhāro"
+   }
+  ],
+  [
+   {
+    "name": "Rucira",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pṛthuṣeṇa",
+    "ref": "HV 15.18",
+    "words": "rucirasya tu dāyādaḥ pṛthuṣeṇo"
+   },
+   {
+    "name": "Pāra",
+    "ref": "HV 15.18",
+    "words": "pṛthuṣeṇasya pāras"
+   },
+   {
+    "name": "Nīpa",
+    "ref": "HV 15.19",
+    "words": "pārasya tanayaḥ śrīmān nīpo"
+   }
+  ],
+  [
+   {
+    "name": "Vṛṣṇi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śvaphalka",
+    "ref": "HV 24.3",
+    "words": "jajñāte tanayau vṛṣṇeḥ śvaphalkaś citrakas tathā"
+   },
+   {
+    "name": "Akrūra",
+    "ref": "HV 24.8",
+    "words": "akrūraḥ suṣuve tasmāc chvaphalkād"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "HV 24.11",
+    "words": "akrūrāt kāśikanyāyāṃ satyaketur ajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Yadu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahasrada",
+    "ref": "HV 23.134",
+    "words": "babhūvus tu yadoḥ putrāḥ pañca"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "HV 23.135",
+    "words": "sahasradasya dāyādās traya"
+   },
+   {
+    "name": "Haya",
+    "ref": "HV 23.135",
+    "words": "śatajitaḥ sutāḥ khyātāḥ hayaś"
+   }
+  ],
+  [
+   {
+    "name": "Yudhājit",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pṛśni",
+    "ref": "HV 28.36",
+    "words": "pṛśniḥ putro yudhājitaḥ"
+   },
+   {
+    "name": "Śvaphalka",
+    "ref": "HV 28.36",
+    "words": "jajñāte tanayau pṛśneḥ śvaphalkaś citrakas tathā"
+   },
+   {
+    "name": "Śrutavān",
+    "ref": "HV 28.38",
+    "words": "tasyāṃ jajñe tadā vīraḥ śrutavān"
+   }
+  ],
+  [
+   {
+    "name": "Agni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kumāra",
+    "ref": "HV 3.36",
+    "words": "agniputraḥ kumāras"
+   },
+   {
+    "name": "Śākha",
+    "ref": "HV 3.36",
+    "words": "tasya śākho viśākhaś ca"
+   }
+  ],
+  [
+   {
+    "name": "Apratiratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṇva",
+    "ref": "HV 23.45",
+    "words": "putro 'pratirathasyāsīt kaṇvaḥ"
+   },
+   {
+    "name": "Medhātithi",
+    "ref": "HV 23.45",
+    "words": "medhātithiḥ sutas tasya"
+   }
+  ],
+  [
+   {
+    "name": "Bhuvamanyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Gārgya",
+    "ref": "HV 23.53",
+    "words": "gārgyaś ca vīryavān"
+   },
+   {
+    "name": "Śibi",
+    "ref": "HV 23.53",
+    "words": "dāyādā api gārgyasya śibir"
+   }
+  ],
+  [
+   {
+    "name": "Bṛhatkṣatra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suhotra",
+    "ref": "HV 15.15",
+    "words": "bṛhatkṣatrasya dāyādaḥ suhotro nāma"
+   },
+   {
+    "name": "Hastin",
+    "ref": "HV 15.15",
+    "words": "suhotrasyāpi dāyādo hastī"
+   }
+  ],
+  [
+   {
+    "name": "Dhṛta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Duduha",
+    "ref": "HV 23.133",
+    "words": "dhṛtāt tu duduho jajñe"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "HV 23.133",
+    "words": "pracetās tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Duliduha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "HV 10.73",
+    "words": "duliduho 'bhavat dilīpas tasya tanayo"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "HV 10.73",
+    "words": "dīrghabāhur dilīpasya raghur nāmnābhavat sutaḥ"
    }
   ],
   [
@@ -516,33 +1631,74 @@
     "name": "Vijaya",
     "ref": "HV 10.23",
     "words": "vijayaś ca sudevaś ca cañcuputrau babhūvatuḥ"
-   },
-   {
-    "name": "Ruruka",
-    "ref": "HV 10.23",
-    "words": "rurukas tanayas tasya"
    }
   ],
   [
    {
-    "name": "Śaryāti",
+    "name": "Kārtavīrya",
     "ref": null,
     "words": null
    },
    {
-    "name": "Ānarta",
-    "ref": "HV 9.22",
-    "words": "śaryāter mithunaṃ cāsīd ānarto nāma viśrutaḥ putraḥ"
+    "name": "Jayadhvaja",
+    "ref": "HV 23.157",
+    "words": "kārtavīryasya tanayā"
    },
    {
-    "name": "Reva",
-    "ref": "HV 9.23",
-    "words": "ānartasya tu dāyādo revo"
+    "name": "Tālajaṅgha",
+    "ref": "HV 23.158",
+    "words": "jayadhvajasya putras tu tālajaṅgho"
+   }
+  ],
+  [
+   {
+    "name": "Nara",
+    "ref": null,
+    "words": null
    },
    {
-    "name": "Raivata Kakudmin",
-    "ref": "HV 9.24",
-    "words": "revasya raivataḥ putraḥ kakudmī"
+    "name": "Sāṃkṛti",
+    "ref": "HV 23.53",
+    "words": "narasya sāṃkṛtiḥ putras"
+   },
+   {
+    "name": "Varavī",
+    "ref": "HV 23.53",
+    "words": "tasya putrau mahābalau varavī rantidevaś ca"
+   }
+  ],
+  [
+   {
+    "name": "Pratyūṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devala",
+    "ref": "HV 3.37",
+    "words": "pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam"
+   },
+   {
+    "name": "Devala's sons",
+    "ref": "HV 3.37",
+    "words": "dvau putrau devalasyāpi"
+   }
+  ],
+  [
+   {
+    "name": "Ripu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cākṣuṣa",
+    "ref": "HV 2.15",
+    "words": "ripor ādhatta bṛhatī cākṣuṣam"
+   },
+   {
+    "name": "Manu",
+    "ref": "HV 2.15",
+    "words": "puṣkariṇyāṃ vairaṇyāṃ cākṣuṣo manum"
    }
   ],
   [
@@ -564,6 +1720,146 @@
   ],
   [
    {
+    "name": "Uttānapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhruva",
+    "ref": "HV 2.9",
+    "words": "dhruvaṃ ca kīrtimantaṃ cāpy ayasmantam ayaspatim uttānapādo 'janayat"
+   },
+   {
+    "name": "Kāla",
+    "ref": "HV 3.33",
+    "words": "dhruvasya putro bhagavān kālo"
+   }
+  ],
+  [
+   {
+    "name": "Vairāja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vīra",
+    "ref": "HV 2.5",
+    "words": "vairājāt puruṣād vīraṃ śatarūpā vyajāta"
+   },
+   {
+    "name": "Priyavrata",
+    "ref": "HV 2.5",
+    "words": "priyavratottānapādau vīrāt"
+   }
+  ],
+  [
+   {
+    "name": "Śaradvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śatānanda",
+    "ref": "HV 23.100",
+    "words": "śaradvatasya dāyādam ahalyā saṃprasūyata śatānandam"
+   },
+   {
+    "name": "Satyadhṛti",
+    "ref": "HV 23.100",
+    "words": "tasyāpi sumahāyaśāḥ putraḥ satyadhṛtir"
+   }
+  ],
+  [
+   {
+    "name": "Ṛcīka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jamadagni",
+    "ref": "HV 23.85",
+    "words": "ṛcīkāj jamadagnis tu satyavatyām ajāyata"
+   },
+   {
+    "name": "Rāma",
+    "ref": "HV 23.153",
+    "words": "rāmo nāmamahābāhur jāmadagnyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Abhimanyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parīkṣit",
+    "ref": "HV 23.121",
+    "words": "abhimanyoḥ parīkṣit tu"
+   }
+  ],
+  [
+   {
+    "name": "Akrūra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sudeva",
+    "ref": "HV 28.42",
+    "words": "akrūreṇaugrasenyāṃ tu sugātryāṃ kurunandana sudevaś"
+   }
+  ],
+  [
+   {
+    "name": "Anila",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purojava",
+    "ref": "HV 3.35",
+    "words": "dvau putrāv anilasya"
+   }
+  ],
+  [
+   {
+    "name": "Anu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dharma",
+    "ref": "HV 23.133",
+    "words": "anos tu putro dharmo 'bhūd"
+   }
+  ],
+  [
+   {
+    "name": "Anāyuṣā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Surata",
+    "ref": "HV 3.91",
+    "words": "anāyuṣāyāḥ putrās tu pañcāśat"
+   }
+  ],
+  [
+   {
+    "name": "Ariṣṭanemi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dharma",
+    "ref": "HV 28.44",
+    "words": "ariṣṭanemes tu sutā dharmo"
+   }
+  ],
+  [
+   {
     "name": "Ayodhya",
     "ref": null,
     "words": null
@@ -576,14 +1872,146 @@
   ],
   [
    {
-    "name": "Iḍā",
+    "name": "Aṇuha",
     "ref": null,
     "words": null
    },
    {
-    "name": "Purūravas",
-    "ref": "HV 9.14",
-    "words": "tasyāṃ jajñe purūravāḥ"
+    "name": "Brahmadatta",
+    "ref": "HV 15.4",
+    "words": "aṇuhāt pārthivaśreṣṭhāt"
+   }
+  ],
+  [
+   {
+    "name": "Baladeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Niśaṭha",
+    "ref": "HV 98.20",
+    "words": "revatyāṃ baladevasya jajñāte niśaṭholmukau"
+   }
+  ],
+  [
+   {
+    "name": "Bhaṅgakāra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sabhākṣa",
+    "ref": "HV 28.35",
+    "words": "sabhākṣo bhaṅgakārāt tu"
+   }
+  ],
+  [
+   {
+    "name": "Bṛhaspati",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bharadvāja",
+    "ref": "HV 23.51",
+    "words": "bṛhaspater aṅgirasaḥ putro"
+   }
+  ],
+  [
+   {
+    "name": "Devaśravas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Paṇḍita",
+    "ref": "HV 24.26",
+    "words": "paṇḍitaṃ nāma rājendra lebhe devaśravāḥsutam"
+   }
+  ],
+  [
+   {
+    "name": "Devānta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "HV 28.7",
+    "words": "devāntasyābhavat putro vidvān kambalabarhiṣaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dhara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Draviṇa",
+    "ref": "HV 3.34",
+    "words": "dharasya putro draviṇo"
+   }
+  ],
+  [
+   {
+    "name": "Dharmanetra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kānta",
+    "ref": "HV 23.136",
+    "words": "dharmanetrasya kāntas"
+   }
+  ],
+  [
+   {
+    "name": "Drupada",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "HV 23.103",
+    "words": "drupadād dhṛṣṭaketuś ca tatsutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kanavaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tantrija",
+    "ref": "HV 24.32",
+    "words": "tantrijas tantripālaś ca sutau kanavakasya"
+   }
+  ],
+  [
+   {
+    "name": "Kroṣṭu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vṛjinīvān",
+    "ref": "HV 26.1",
+    "words": "kroṣṭor evābhavat putro vṛjinīvān"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sanatkumāra",
+    "ref": "HV 99.3",
+    "words": "kṛṣṇasya sutaṃ śiśuṃ"
    }
   ],
   [
@@ -600,26 +2028,98 @@
   ],
   [
    {
-    "name": "Nariṣyanta",
+    "name": "Mahāvīrya",
     "ref": null,
     "words": null
    },
    {
-    "name": "Dama",
-    "ref": "HV 9.22",
-    "words": "nariṣyantasya dāyādo rājā daṇḍadharo damaḥ"
+    "name": "Purukṣaya",
+    "ref": "HV 23.53",
+    "words": "mahāvīryasutaś cāsīd dhīmān nāmnā purukṣayaḥ"
    }
   ],
   [
    {
-    "name": "Prāṃśu",
+    "name": "Parameṣṭhin",
     "ref": null,
     "words": null
    },
    {
-    "name": "Prajāpati",
-    "ref": "HV 9.22",
-    "words": "prāṃśor eko 'bhavat putraḥ prajāpatir iti śrutaḥ"
+    "name": "Nārada",
+    "ref": "HV 3.13",
+    "words": "sa tasyāṃ nārado jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Prabhākara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "HV 23.9",
+    "words": "rudrāyāṃ janayām āsa somaṃ putraṃ"
+   }
+  ],
+  [
+   {
+    "name": "Prabhāsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvakarman",
+    "ref": "HV 3.39",
+    "words": "prabhāsasya tu bhāryā sā"
+   }
+  ],
+  [
+   {
+    "name": "Pārtha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Abhimanyu",
+    "ref": "HV 25.5",
+    "words": "pārthād abhimanyur ajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Pṛṣata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Drupada",
+    "ref": "HV 15.62",
+    "words": "drupadasya pitā"
+   }
+  ],
+  [
+   {
+    "name": "Reva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Raivata",
+    "ref": "HV 9.24",
+    "words": "revasya raivataḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Rāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Niśaṭha",
+    "ref": "HV 25.4",
+    "words": "rāmāc ca niśaṭho jajñe revatyāṃ dayitaḥ sutaḥ"
    }
   ],
   [
@@ -636,26 +2136,170 @@
   ],
   [
    {
-    "name": "Sudyumna",
+    "name": "Sutahotṛ",
     "ref": null,
     "words": null
    },
    {
-    "name": "Utkala",
-    "ref": "HV 9.15",
-    "words": "sudyumnasya tu dāyādās trayaḥ"
+    "name": "Kapila",
+    "ref": "HV 23.54",
+    "words": "kapilaṃ ca mahātmānaṃ sutahotuḥ sutadvayam"
    }
   ],
   [
    {
-    "name": "Vikukṣi",
+    "name": "Sāhañja",
     "ref": null,
     "words": null
    },
    {
-    "name": "Śakuni",
-    "ref": "HV 9.40",
-    "words": "śakunipramukhās tasya putrāḥ"
+    "name": "Mahiṣmān",
+    "ref": "HV 23.137",
+    "words": "sāhañjasya tu dāyādo mahiṣmān"
+   }
+  ],
+  [
+   {
+    "name": "Sāmba",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Supārśva",
+    "ref": "HV 98.24",
+    "words": "kāśyā supārśvaṃ tanayaṃ lebhe sāmbāt"
+   }
+  ],
+  [
+   {
+    "name": "Tvaṣṭṛ",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvarūpa",
+    "ref": "HV 3.42",
+    "words": "tvaṣṭuś caivātmajaḥ śrīmān viśvarūpo"
+   }
+  ],
+  [
+   {
+    "name": "Varuṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vasiṣṭha",
+    "ref": "HV 23.151",
+    "words": "yaṃ lebhe varuṇaḥ putraṃ purā bhāsvantam uttamam vasiṣṭhaṃ nāma"
+   }
+  ],
+  [
+   {
+    "name": "Varīdāsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nārada",
+    "ref": "HV 23.148",
+    "words": "varīdāsātmajo vidvān"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jara",
+    "ref": "HV 98.23",
+    "words": "turyāṃ samabhavad vīro vasudevān mahābalaḥ jarā nāma"
+   }
+  ],
+  [
+   {
+    "name": "Viṣvaksena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cārudeṣṇa",
+    "ref": "HV 24.29",
+    "words": "gaṇḍūṣāya tv aputrāya viṣvakseno dadau sutam cārudeṣṇaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Vāsudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pauṇḍra",
+    "ref": "HV 98.21",
+    "words": "pauṇḍraś ca kapilaś caiva vāsudevasya tau sutau"
+   }
+  ],
+  [
+   {
+    "name": "Vṛṣabha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Puṣpavān",
+    "ref": "HV 23.110",
+    "words": "vṛṣabhasya tudāyādaḥ puṣpavān"
+   }
+  ],
+  [
+   {
+    "name": "Yavana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālayavana",
+    "ref": "HV 25.12",
+    "words": "yavanasya mahārāja sa kālayavano 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Āpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vaitaṇḍya",
+    "ref": "HV 3.33",
+    "words": "āpasya putro vaitaṇḍyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śamīka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ajātaśatru",
+    "ref": "HV 24.33",
+    "words": "ajātaśatruḥ śatrūṇāṃ jajñe tasya vināśanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śyāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sumitra",
+    "ref": "HV 24.33",
+    "words": "śyāmaputraḥ sumitras"
    }
   ]
  ]

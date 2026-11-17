@@ -1,0 +1,141 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 3,
+ "part": 3,
+ "refs": [
+  "HV 3.88",
+  "HV 3.89",
+  "HV 3.90",
+  "HV 3.91",
+  "HV 3.92",
+  "HV 3.93",
+  "HV 3.94",
+  "HV 3.95",
+  "HV 3.96",
+  "HV 3.97",
+  "HV 3.98",
+  "HV 3.99",
+  "HV 3.100",
+  "HV 3.101",
+  "HV 3.102",
+  "HV 3.103",
+  "HV 3.104",
+  "HV 3.105",
+  "HV 3.106",
+  "HV 3.107",
+  "HV 3.108",
+  "HV 3.109",
+  "HV 3.110",
+  "HV 3.111",
+  "HV 3.112"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:00:23",
+ "reply": "{\"statements\":[{\"ref\":\"HV 3.91\",\"a\":\"Surata\",\"rel\":\"son_of\",\"b\":\"Anāyuṣā\",\"words\":\"anāyuṣāyāḥ putrās tu pañcāśat\",\"doubt\":true},{\"ref\":\"HV 3.91\",\"a\":\"Guṇavṛtta\",\"rel\":\"son_of\",\"b\":\"Anāyuṣā\",\"words\":\"anāyuṣāyāḥ putrās tu pañcāśat\",\"doubt\":true},{\"ref\":\"HV 3.91\",\"a\":\"Vikṣara\",\"rel\":\"son_of\",\"b\":\"Anāyuṣā\",\"words\":\"anāyuṣāyāḥ putrās tu pañcāśat\",\"doubt\":true},{\"ref\":\"HV 3.91\",\"a\":\"Nṛpa\",\"rel\":\"son_of\",\"b\":\"Anāyuṣā\",\"words\":\"anāyuṣāyāḥ putrās tu pañcāśat\",\"doubt\":true},{\"ref\":\"HV 3.93\",\"a\":\"Gandharvas\",\"rel\":\"born_of\",\"b\":\"Ariṣṭā\",\"words\":\"ariṣṭā tu mahāsattvān gandharvān\",\"doubt\":false},{\"ref\":\"HV 3.97\",\"a\":\"Diti\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"toṣayām āsa kaśyapam\",\"doubt\":false},{\"ref\":\"HV 3.100\",\"a\":\"Diti\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"mārīcas tām abhāṣata\",\"doubt\":true},{\"ref\":\"HV 3.102\",\"a\":\"Diti\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"abhihito bhartā tayā devyā\",\"doubt\":false},{\"ref\":\"HV 3.108\",\"a\":\"Marut\",\"rel\":\"son_of\",\"b\":\"Diti\",\"words\":\"mamaiva putras tvaṃ deva\",\"doubt\":true},{\"ref\":\"HV 3.108\",\"a\":\"Indra\",\"rel\":\"son_of\",\"b\":\"Diti\",\"words\":\"mamaiva putras tvaṃ deva\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01497,
+ "tokens": {
+  "input": 3989,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 699,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 3.91",
+   "a": "Surata",
+   "rel": "son_of",
+   "b": "Anāyuṣā",
+   "words": "anāyuṣāyāḥ putrās tu pañcāśat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.91",
+   "a": "Guṇavṛtta",
+   "rel": "son_of",
+   "b": "Anāyuṣā",
+   "words": "anāyuṣāyāḥ putrās tu pañcāśat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.91",
+   "a": "Vikṣara",
+   "rel": "son_of",
+   "b": "Anāyuṣā",
+   "words": "anāyuṣāyāḥ putrās tu pañcāśat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.91",
+   "a": "Nṛpa",
+   "rel": "son_of",
+   "b": "Anāyuṣā",
+   "words": "anāyuṣāyāḥ putrās tu pañcāśat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.93",
+   "a": "Gandharvas",
+   "rel": "born_of",
+   "b": "Ariṣṭā",
+   "words": "ariṣṭā tu mahāsattvān gandharvān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.97",
+   "a": "Diti",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "toṣayām āsa kaśyapam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.100",
+   "a": "Diti",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "mārīcas tām abhāṣata",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "HV 3.102",
+   "a": "Diti",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "abhihito bhartā tayā devyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.108",
+   "a": "Marut",
+   "rel": "son_of",
+   "b": "Diti",
+   "words": "mamaiva putras tvaṃ deva",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.108",
+   "a": "Indra",
+   "rel": "son_of",
+   "b": "Diti",
+   "words": "mamaiva putras tvaṃ deva",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

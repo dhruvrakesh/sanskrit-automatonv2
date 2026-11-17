@@ -1,0 +1,259 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 25,
+ "part": 0,
+ "refs": [
+  "HV 25.1",
+  "HV 25.2",
+  "HV 25.3",
+  "HV 25.4",
+  "HV 25.5",
+  "HV 25.6",
+  "HV 25.7",
+  "HV 25.8",
+  "HV 25.9",
+  "HV 25.10",
+  "HV 25.11",
+  "HV 25.12",
+  "HV 25.13",
+  "HV 25.14",
+  "HV 25.15",
+  "HV 25.16",
+  "HV 25.17"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:09:12",
+ "reply": "{\"statements\":[{\"ref\":\"HV 25.1\",\"a\":\"Rohiṇī\",\"rel\":\"daughter_of\",\"b\":\"Bāhlika\",\"words\":\"bāhlikasyātmajā\",\"doubt\":false},{\"ref\":\"HV 25.1\",\"a\":\"Rohiṇī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"jyeṣṭhā patnī mahārāja dayitānakadundubheḥ\",\"doubt\":false},{\"ref\":\"HV 25.4\",\"a\":\"Śauri\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"vasudevāc ca devakyāṃ jajñe śaurir\",\"doubt\":true},{\"ref\":\"HV 25.4\",\"a\":\"Śauri\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāc ca devakyāṃ jajñe śaurir\",\"doubt\":true},{\"ref\":\"HV 25.4\",\"a\":\"Niśaṭha\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"rāmāc ca niśaṭho jajñe revatyāṃ dayitaḥ sutaḥ\",\"doubt\":false},{\"ref\":\"HV 25.4\",\"a\":\"Niśaṭha\",\"rel\":\"born_of\",\"b\":\"Revatī\",\"words\":\"niśaṭho jajñe revatyāṃ\",\"doubt\":false},{\"ref\":\"HV 25.5\",\"a\":\"Abhimanyu\",\"rel\":\"born_of\",\"b\":\"Subhadrā\",\"words\":\"subhadrāyāṃ rathī pārthād abhimanyur ajāyata\",\"doubt\":false},{\"ref\":\"HV 25.5\",\"a\":\"Abhimanyu\",\"rel\":\"son_of\",\"b\":\"Pārtha\",\"words\":\"pārthād abhimanyur ajāyata\",\"doubt\":false},{\"ref\":\"HV 25.5\",\"a\":\"Satyaketu\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūrāt kāśikanyāyāṃ satyaketur ajāyata\",\"doubt\":false},{\"ref\":\"HV 25.5\",\"a\":\"Satyaketu\",\"rel\":\"born_of\",\"b\":\"Kāśikanyā\",\"words\":\"kāśikanyāyāṃ satyaketur ajāyata\",\"doubt\":true},{\"ref\":\"HV 25.7\",\"a\":\"Bhoja\",\"rel\":\"born_of\",\"b\":\"Śāntidevā\",\"words\":\"bhojaś ca vijayaś caiva śāntidevāsutāv ubhau\",\"doubt\":false},{\"ref\":\"HV 25.7\",\"a\":\"Vijaya\",\"rel\":\"born_of\",\"b\":\"Śāntidevā\",\"words\":\"bhojaś ca vijayaś caiva śāntidevāsutāv ubhau\",\"doubt\":false},{\"ref\":\"HV 25.7\",\"a\":\"Vṛkadeva\",\"rel\":\"born_of\",\"b\":\"Sunāmā\",\"words\":\"vṛkadevaḥ sunāmāyāṃ\",\"doubt\":false},{\"ref\":\"HV 25.7\",\"a\":\"Gada\",\"rel\":\"born_of\",\"b\":\"Sunāmā\",\"words\":\"gadaś cāsyāḥ sutāv ubhau\",\"doubt\":false},{\"ref\":\"HV 25.7\",\"a\":\"Agāvaha\",\"rel\":\"born_of\",\"b\":\"Vṛkadevī\",\"words\":\"agāvahaṃ mahātmānaṃ vṛkadevī vyajāyata\",\"doubt\":false},{\"ref\":\"HV 25.8\",\"a\":\"Pauṇḍra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"pauṇḍraś ca kapilaś caiva vasudevasutāv ubhau\",\"doubt\":false},{\"ref\":\"HV 25.8\",\"a\":\"Kapila\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"pauṇḍraś ca kapilaś caiva vasudevasutāv ubhau\",\"doubt\":false},{\"ref\":\"HV 25.8\",\"a\":\"Pauṇḍra\",\"rel\":\"born_of\",\"b\":\"Sutanū\",\"words\":\"pauṇḍraś ca sutanūsutaḥ\",\"doubt\":false},{\"ref\":\"HV 25.8\",\"a\":\"Sutanū\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sutanū ca narāvī ca śaurer āstāṃ parigrahaḥ\",\"doubt\":false},{\"ref\":\"HV 25.8\",\"a\":\"Narāvī\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sutanū ca narāvī ca śaurer āstāṃ parigrahaḥ\",\"doubt\":false},{\"ref\":\"HV 25.8\",\"a\":\"Jarā\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevān mahābalaḥ jarā nāma\",\"doubt\":true},{\"ref\":\"HV 25.11\",\"a\":\"Kālayavana\",\"rel\":\"son_of\",\"b\":\"Gārgya\",\"words\":\"gargyabhāryāyāṃ sa kālayavano nāma jajñe\",\"doubt\":true},{\"ref\":\"HV 25.11\",\"a\":\"Kālayavana\",\"rel\":\"born_of\",\"b\":\"Gārgyabhāryā\",\"words\":\"mānuṣyāṃ gargyabhāryāyāṃ\",\"doubt\":false},{\"ref\":\"HV 25.12\",\"a\":\"Kālayavana\",\"rel\":\"son_of\",\"b\":\"Yavana\",\"words\":\"yavanasya mahārāja sa kālayavano 'bhavat\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02418,
+ "tokens": {
+  "input": 2976,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1823,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 25.1",
+   "a": "Rohiṇī",
+   "rel": "daughter_of",
+   "b": "Bāhlika",
+   "words": "bāhlikasyātmajā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.1",
+   "a": "Rohiṇī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "jyeṣṭhā patnī mahārāja dayitānakadundubheḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.4",
+   "a": "Śauri",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "vasudevāc ca devakyāṃ jajñe śaurir",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.4",
+   "a": "Śauri",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāc ca devakyāṃ jajñe śaurir",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.4",
+   "a": "Niśaṭha",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "rāmāc ca niśaṭho jajñe revatyāṃ dayitaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.4",
+   "a": "Niśaṭha",
+   "rel": "born_of",
+   "b": "Revatī",
+   "words": "niśaṭho jajñe revatyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.5",
+   "a": "Abhimanyu",
+   "rel": "born_of",
+   "b": "Subhadrā",
+   "words": "subhadrāyāṃ rathī pārthād abhimanyur ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.5",
+   "a": "Abhimanyu",
+   "rel": "son_of",
+   "b": "Pārtha",
+   "words": "pārthād abhimanyur ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.5",
+   "a": "Satyaketu",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūrāt kāśikanyāyāṃ satyaketur ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.5",
+   "a": "Satyaketu",
+   "rel": "born_of",
+   "b": "Kāśikanyā",
+   "words": "kāśikanyāyāṃ satyaketur ajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.7",
+   "a": "Bhoja",
+   "rel": "born_of",
+   "b": "Śāntidevā",
+   "words": "bhojaś ca vijayaś caiva śāntidevāsutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.7",
+   "a": "Vijaya",
+   "rel": "born_of",
+   "b": "Śāntidevā",
+   "words": "bhojaś ca vijayaś caiva śāntidevāsutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.7",
+   "a": "Vṛkadeva",
+   "rel": "born_of",
+   "b": "Sunāmā",
+   "words": "vṛkadevaḥ sunāmāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.7",
+   "a": "Gada",
+   "rel": "born_of",
+   "b": "Sunāmā",
+   "words": "gadaś cāsyāḥ sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.7",
+   "a": "Agāvaha",
+   "rel": "born_of",
+   "b": "Vṛkadevī",
+   "words": "agāvahaṃ mahātmānaṃ vṛkadevī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.8",
+   "a": "Pauṇḍra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "pauṇḍraś ca kapilaś caiva vasudevasutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.8",
+   "a": "Kapila",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "pauṇḍraś ca kapilaś caiva vasudevasutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.8",
+   "a": "Pauṇḍra",
+   "rel": "born_of",
+   "b": "Sutanū",
+   "words": "pauṇḍraś ca sutanūsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.8",
+   "a": "Sutanū",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sutanū ca narāvī ca śaurer āstāṃ parigrahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.8",
+   "a": "Narāvī",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sutanū ca narāvī ca śaurer āstāṃ parigrahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.8",
+   "a": "Jarā",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevān mahābalaḥ jarā nāma",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.11",
+   "a": "Kālayavana",
+   "rel": "son_of",
+   "b": "Gārgya",
+   "words": "gargyabhāryāyāṃ sa kālayavano nāma jajñe",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 25.11",
+   "a": "Kālayavana",
+   "rel": "born_of",
+   "b": "Gārgyabhāryā",
+   "words": "mānuṣyāṃ gargyabhāryāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 25.12",
+   "a": "Kālayavana",
+   "rel": "son_of",
+   "b": "Yavana",
+   "words": "yavanasya mahārāja sa kālayavano 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

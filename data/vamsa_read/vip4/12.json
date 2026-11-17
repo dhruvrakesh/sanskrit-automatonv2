@@ -293,13 +293,15 @@
    "check": "words"
   },
   {
-   "ref": "ViP 4,12.37",
+   "ref": "ViP 4,12.36",
    "a": "Vidarbha",
    "rel": "wife_of",
    "b": "Vidarbha",
    "words": "sa ca tāṃ snuṣāmupayeme",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "ViP 4,12.37",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.37",
@@ -308,7 +310,7 @@
    "b": "Vidarbha",
    "words": "tasyāṃ cāsaukrathakaiśikasaṃjñau putrāvajanayat",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.37",
@@ -317,7 +319,7 @@
    "b": "Vidarbha",
    "words": "tasyāṃ cāsaukrathakaiśikasaṃjñau putrāvajanayat",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,12.38",

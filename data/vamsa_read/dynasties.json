@@ -1,19 +1,19 @@
 {
  "mark": "VAMSA_JOIN_2026_11_11",
- "at": "2026-11-12T09:39:01",
+ "at": "2026-11-17T09:51:00",
  "works": {
   "vip4": {
    "title": "Visnupurana, book 4",
    "text": "vi",
    "counts": {
     "persons": 715,
-    "father": 493,
-    "name": 35,
+    "father": 494,
+    "name": 34,
     "none": 187,
-    "joined": 1,
-    "agrees": 493,
-    "differs": 33,
-    "new": 2,
+    "joined": 2,
+    "agrees": 494,
+    "differs": 31,
+    "new": 3,
     "absent": 187
    },
    "source": "sa_viSNupurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
@@ -1344,6 +1344,620 @@
     },
     {
      "n": 5,
+     "label": "Janaka (after Kṛti)",
+     "length": 25,
+     "steps": [
+      {
+       "name": "Kurujit",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": null,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Ariṣṭanemi",
+       "father": "Kurujit",
+       "ref": "ViP 4,5.31",
+       "words": "tato 'riṣṭanemiḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Śrutāyu",
+       "father": "Ariṣṭanemi",
+       "ref": "ViP 4,5.31",
+       "words": "tasmācchutāyuḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Supārśva",
+       "father": "Śrutāyu",
+       "ref": "ViP 4,5.31",
+       "words": "śrutāyuṣaḥ supārśvāḥ",
+       "entry": 32737,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32737",
+       "index_head": "Supārśva (VI)"
+      },
+      {
+       "name": "Sṛṃjaya",
+       "father": "Supārśva",
+       "ref": "ViP 4,5.31",
+       "words": "tasmātsṛṃjayaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Kṣemāvin",
+       "father": "Sṛṃjaya",
+       "ref": "ViP 4,5.31",
+       "words": "tataḥ kṣemāvī",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Anenas",
+       "father": "Kṣemāvin",
+       "ref": "ViP 4,5.31",
+       "words": "kṣemāvino 'nenāḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Bhaumaratha",
+       "father": "Anenas",
+       "ref": "ViP 4,5.31",
+       "words": "tasmādbhaumarathaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Satyaratha",
+       "father": "Bhaumaratha",
+       "ref": "ViP 4,5.31",
+       "words": "tasya satyarathaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Upagu",
+       "father": "Satyaratha",
+       "ref": "ViP 4,5.31",
+       "words": "tasmādupaguḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Upagupta",
+       "father": "Upagu",
+       "ref": "ViP 4,5.31",
+       "words": "upagor upaguptaḥ",
+       "entry": 18309,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:18309",
+       "index_head": "Upagupta"
+      },
+      {
+       "name": "Svāgata",
+       "father": "Upagupta",
+       "ref": "ViP 4,5.31",
+       "words": "tatputraḥ svāgataḥ",
+       "entry": 33565,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:33565",
+       "index_head": "Svāgata"
+      },
+      {
+       "name": "Svānanda",
+       "father": "Svāgata",
+       "ref": "ViP 4,5.31",
+       "words": "tasya ca svānandaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Suvarcas",
+       "father": "Svānanda",
+       "ref": "ViP 4,5.31",
+       "words": "tasmācca suvarcāḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Supārśva",
+       "father": "Suvarcas",
+       "ref": "ViP 4,5.31",
+       "words": "tasya supārśvaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Subhāṣa",
+       "father": "Supārśva",
+       "ref": "ViP 4,5.31",
+       "words": "tasyāpisubhāṣaḥ",
+       "entry": 32800,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:32800",
+       "index_head": "Subhāṣa"
+      },
+      {
+       "name": "Suśruta",
+       "father": "Subhāṣa",
+       "ref": "ViP 4,5.31",
+       "words": "suśrutaḥ",
+       "entry": 33068,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33068",
+       "index_head": "Suśruta (I)"
+      },
+      {
+       "name": "Jaya",
+       "father": "Suśruta",
+       "ref": "ViP 4,5.31",
+       "words": "tasmāsuśrutājjayaḥ",
+       "entry": 21487,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:21487",
+       "index_head": "Jaya (IV)"
+      },
+      {
+       "name": "Vijaya",
+       "father": "Jaya",
+       "ref": "ViP 4,5.31",
+       "words": "tasya putro vijayaḥ",
+       "entry": 29228,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29228",
+       "index_head": "Vijaya (IV)"
+      },
+      {
+       "name": "Ṛta",
+       "father": "Vijaya",
+       "ref": "ViP 4,5.31",
+       "words": "vijayasya ṛtaḥ",
+       "entry": 18575,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:18575",
+       "index_head": "Ṛta (II)"
+      },
+      {
+       "name": "Sunaya",
+       "father": "Ṛta",
+       "ref": "ViP 4,5.31",
+       "words": "ṛtātsunayaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Vītahavya",
+       "father": "Sunaya",
+       "ref": "ViP 4,5.31",
+       "words": "sunayādvītahavyaḥ",
+       "entry": 29836,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29836",
+       "index_head": "Vītahavya (I)"
+      },
+      {
+       "name": "Dhṛti",
+       "father": "Vītahavya",
+       "ref": "ViP 4,5.31",
+       "words": "tasmāddhūtiḥ",
+       "entry": 23196,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23196",
+       "index_head": "Dhṛti (I)"
+      },
+      {
+       "name": "Bahulāśva",
+       "father": "Dhṛti",
+       "ref": "ViP 4,5.31",
+       "words": "dhṛtervabahulāsvaḥ",
+       "entry": 25456,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:25456",
+       "index_head": "Bahulāśva"
+      },
+      {
+       "name": "Kṛti",
+       "father": "Bahulāśva",
+       "ref": "ViP 4,5.31",
+       "words": "tasya putraḥ kṛtiḥ",
+       "entry": 19930,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19930",
+       "index_head": "Kṛti (I)"
+      }
+     ]
+    },
+    {
+     "n": 6,
+     "label": "",
+     "length": 25,
+     "steps": [
+      {
+       "name": "Kṣatravṛddha",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 20310,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:20310",
+       "index_head": "Kṣatravṛddha"
+      },
+      {
+       "name": "Suhotra",
+       "father": "Kṣatravṛddha",
+       "ref": "ViP 4,8.4",
+       "words": "kṣatravṛddhātsuhotraḥ putro 'bhavat",
+       "entry": 33101,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:33101",
+       "index_head": "Suhotra (I)"
+      },
+      {
+       "name": "Kāśya",
+       "father": "Suhotra",
+       "ref": "ViP 4,8.5",
+       "words": "kāśyapakāśagṛtsamadāstrayastasya putrā babhūvuḥ",
+       "entry": 19482,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19482",
+       "index_head": "Kāśya (I)"
+      },
+      {
+       "name": "Kāśeya",
+       "father": "Kāśya",
+       "ref": "ViP 4,8.7",
+       "words": "kāśyasya kāśeyaḥ",
+       "entry": 19477,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:19477",
+       "index_head": "Kāśeya"
+      },
+      {
+       "name": "Rāṣṭra",
+       "father": "Kāśeya",
+       "ref": "ViP 4,8.7",
+       "words": "tasmādrāṣṭraḥ",
+       "entry": 28106,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:28106",
+       "index_head": "Rāṣṭra"
+      },
+      {
+       "name": "Dīrghatapas",
+       "father": "Rāṣṭra",
+       "ref": "ViP 4,8.7",
+       "words": "rāṣṭrasya dīrghatapāḥ putro 'bhavat",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Dhanvantari",
+       "father": "Dīrghatapas",
+       "ref": "ViP 4,8.8",
+       "words": "dhanvantaristu dīrghatapasaḥ putro 'bhavat",
+       "entry": 22987,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22987",
+       "index_head": "Dhanvantari (I)"
+      },
+      {
+       "name": "Ketumat",
+       "father": "Dhanvantari",
+       "ref": "ViP 4,8.11",
+       "words": "tasya ca dhanvantareḥ patraḥ ketumān",
+       "entry": 20046,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:20046",
+       "index_head": "Ketumat (II)"
+      },
+      {
+       "name": "Bhīmaratha",
+       "father": "Ketumat",
+       "ref": "ViP 4,8.11",
+       "words": "ketumato bhīmarathaḥ",
+       "entry": 26132,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:26132",
+       "index_head": "Bhīmaratha (I)"
+      },
+      {
+       "name": "Divodāsa",
+       "father": "Bhīmaratha",
+       "ref": "ViP 4,8.11",
+       "words": "tasyāpi divodāsaḥ",
+       "entry": 22475,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22475",
+       "index_head": "Divodāsa (I)"
+      },
+      {
+       "name": "Pratardana",
+       "father": "Divodāsa",
+       "ref": "ViP 4,8.11",
+       "words": "tasyāpi pratardanaḥ",
+       "entry": 24969,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24969",
+       "index_head": "Pratardana (II)"
+      },
+      {
+       "name": "Vatsa",
+       "father": "Pratardana",
+       "ref": "ViP 4,8.13",
+       "words": "tena ca prītimatātmaputro vatsavatsetyabhihito vatso 'bhavat",
+       "entry": 28613,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:28613",
+       "index_head": "Vatsa (V)"
+      },
+      {
+       "name": "Alarka",
+       "father": "Vatsa",
+       "ref": "ViP 4,8.16",
+       "words": "vatsasya putro 'larkanāmābhavat",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Sannati",
+       "father": "Alarka",
+       "ref": "ViP 4,8.18",
+       "words": "tasyāpyalarkasya sannatināmābhavadātmaja",
+       "entry": 31804,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:31804",
+       "index_head": "Sannati (I)"
+      },
+      {
+       "name": "Sunītha",
+       "father": "Sannati",
+       "ref": "ViP 4,8.19",
+       "words": "sannateḥ sunīthaḥ",
+       "entry": 32686,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32686",
+       "index_head": "Sunītha (I)"
+      },
+      {
+       "name": "Suketu",
+       "father": "Sunītha",
+       "ref": "ViP 4,8.19",
+       "words": "tasyāpi suketuḥ",
+       "entry": 32471,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32471",
+       "index_head": "Suketu (VII)"
+      },
+      {
+       "name": "Dharmaketu",
+       "father": "Suketu",
+       "ref": "ViP 4,8.19",
+       "words": "tasmācca dharmaketurjajñe",
+       "entry": 23020,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23020",
+       "index_head": "Dharmaketu"
+      },
+      {
+       "name": "Satyaketu",
+       "father": "Dharmaketu",
+       "ref": "ViP 4,8.20",
+       "words": "tataś ca satyaketuḥ",
+       "entry": 31650,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:31650",
+       "index_head": "Satyaketu (I)"
+      },
+      {
+       "name": "Vibhu",
+       "father": "Satyaketu",
+       "ref": "ViP 4,8.20",
+       "words": "tasmādvibhuḥ",
+       "entry": 29483,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29483",
+       "index_head": "Vibhu (XII)"
+      },
+      {
+       "name": "Suvibhu",
+       "father": "Vibhu",
+       "ref": "ViP 4,8.20",
+       "words": "tattayaḥsuvibhuḥ",
+       "entry": 33035,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33035",
+       "index_head": "Suvibhu"
+      },
+      {
+       "name": "Sukumāra",
+       "father": "Suvibhu",
+       "ref": "ViP 4,8.20",
+       "words": "tataś ca sukumāraḥ",
+       "entry": 32450,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32450",
+       "index_head": "Sukumāra (III)"
+      },
+      {
+       "name": "Dṛṣṭaketu",
+       "father": "Sukumāra",
+       "ref": "ViP 4,8.20",
+       "words": "tasyāpi dṛṣṭaketuḥ",
+       "entry": 22639,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22639",
+       "index_head": "Dṛṣṭaketu (II)"
+      },
+      {
+       "name": "Vītihotra",
+       "father": "Dṛṣṭaketu",
+       "ref": "ViP 4,8.20",
+       "words": "tataś ca vītihotraḥ",
+       "entry": 29846,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29846",
+       "index_head": "Vītihotra (VI)"
+      },
+      {
+       "name": "Bhārga",
+       "father": "Vītihotra",
+       "ref": "ViP 4,8.20",
+       "words": "tasmādbhārgaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Bhārgabhūmi",
+       "father": "Bhārga",
+       "ref": "ViP 4,8.20",
+       "words": "bhārgasya bhārgabhūmiḥ",
+       "entry": 26069,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:26069",
+       "index_head": "Bhārgabhūmi"
+      }
+     ]
+    },
+    {
+     "n": 7,
      "label": "",
      "length": 21,
      "steps": [
@@ -1602,521 +2216,75 @@
      ]
     },
     {
-     "n": 6,
-     "label": "",
-     "length": 20,
-     "steps": [
-      {
-       "name": "Aśmaka",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 17459,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:17459",
-       "index_head": "Aśmaka"
-      },
-      {
-       "name": "Mūlaka",
-       "father": "Aśmaka",
-       "ref": "ViP 4,4.73",
-       "words": "aśmasya mūlako nāma putro 'bhavat",
-       "entry": 27396,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:27396",
-       "index_head": "Mūlaka"
-      },
-      {
-       "name": "Daśaratha",
-       "father": "Mūlaka",
-       "ref": "ViP 4,4.75",
-       "words": "mūlakāddaśarathaḥ",
-       "entry": 22370,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22370",
-       "index_head": "Daśaratha (I)"
-      },
-      {
-       "name": "Ilivila",
-       "father": "Daśaratha",
-       "ref": "ViP 4,4.75",
-       "words": "tasmādilivilaḥ",
-       "entry": 18085,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:18085",
-       "index_head": "Ilivila"
-      },
-      {
-       "name": "Viśvasaha",
-       "father": "Ilivila",
-       "ref": "ViP 4,4.75",
-       "words": "tataś ca viśvasahaḥ",
-       "entry": 29718,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29718",
-       "index_head": "Viśvasaha (I)"
-      },
-      {
-       "name": "Khaṭvāṅga",
-       "father": "Viśvasaha",
-       "ref": "ViP 4,4.76",
-       "words": "tasmācca khaṭvāṅgaḥ",
-       "entry": 20393,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:20393",
-       "index_head": "Khaṭvāṅga (I)"
-      },
-      {
-       "name": "Dīrghabāhu",
-       "father": "Khaṭvāṅga",
-       "ref": "ViP 4,4.83",
-       "words": "khaṭvāṅgāddīrghabāhuḥ putro 'bhavat",
-       "entry": 22525,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22525",
-       "index_head": "Dīrghabāhu (I)"
-      },
-      {
-       "name": "Raghu",
-       "father": "Dīrghabāhu",
-       "ref": "ViP 4,4.84",
-       "words": "tato raghurabhavat",
-       "entry": 27871,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:27871",
-       "index_head": "Raghu (I)"
-      },
-      {
-       "name": "Aja",
-       "father": "Raghu",
-       "ref": "ViP 4,4.85",
-       "words": "tasmādapyajaḥ",
-       "entry": 16672,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:16672",
-       "index_head": "Aja (IV)"
-      },
-      {
-       "name": "Daśaratha",
-       "father": "Aja",
-       "ref": "ViP 4,4.86",
-       "words": "ajāddaśarathaḥ",
-       "entry": 22371,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22371",
-       "index_head": "Daśaratha (II)"
-      },
-      {
-       "name": "Rāma",
-       "father": "Daśaratha",
-       "ref": "ViP 4,4.99",
-       "words": "daśarathiḥ",
-       "entry": 28090,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:28090",
-       "index_head": "Rāma (II)"
-      },
-      {
-       "name": "Kuśa",
-       "father": "Rāma",
-       "ref": "ViP 4,4.104",
-       "words": "rāmasya kuśalavo dvau putrau",
-       "entry": 19777,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19777",
-       "index_head": "Kuśa (I)"
-      },
-      {
-       "name": "Atithi",
-       "father": "Kuśa",
-       "ref": "ViP 4,4.105",
-       "words": "kuśasyātithiḥ",
-       "entry": 16765,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:16765",
-       "index_head": "Atithi (I)"
-      },
-      {
-       "name": "Niṣadha",
-       "father": "Atithi",
-       "ref": "ViP 4,4.105",
-       "words": "atitherapi niṣadhaḥ putro 'bhūt",
-       "entry": 23734,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23734",
-       "index_head": "Niṣadha (I)"
-      },
-      {
-       "name": "Anala",
-       "father": "Niṣadha",
-       "ref": "ViP 4,4.106",
-       "words": "niṣadhasyāpyanalaḥ",
-       "entry": 16880,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:16880",
-       "index_head": "Anala (V)"
-      },
-      {
-       "name": "Nabhas",
-       "father": "Anala",
-       "ref": "ViP 4,4.106",
-       "words": "tasmādapi nabhaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Puṇḍarīka",
-       "father": "Nabhas",
-       "ref": "ViP 4,4.106",
-       "words": "nabhasaḥ puṇḍarīkastattanayaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Kṣemadhanvan",
-       "father": "Puṇḍarīka",
-       "ref": "ViP 4,4.106",
-       "words": "puṇḍarīkastattanayaḥ kṣemadhanvā",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Devānīka",
-       "father": "Kṣemadhanvan",
-       "ref": "ViP 4,4.106",
-       "words": "tasya ca devānīkaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Ahīnaka",
-       "father": "Devānīka",
-       "ref": "ViP 4,4.106",
-       "words": "tasyāpyahīnako",
-       "entry": 17593,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17593",
-       "index_head": "Ahīnak(g)a"
-      }
-     ]
-    },
-    {
-     "n": 7,
-     "label": "Janaka (after Kṛti)",
-     "length": 18,
-     "steps": [
-      {
-       "name": "Bhaumaratha",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Satyaratha",
-       "father": "Bhaumaratha",
-       "ref": "ViP 4,5.31",
-       "words": "tasya satyarathaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Upagu",
-       "father": "Satyaratha",
-       "ref": "ViP 4,5.31",
-       "words": "tasmādupaguḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Upagupta",
-       "father": "Upagu",
-       "ref": "ViP 4,5.31",
-       "words": "upagor upaguptaḥ",
-       "entry": 18309,
-       "how": "name",
-       "index": "differs",
-       "joined": "chapter",
-       "person": "pui:18309",
-       "index_head": "Upagupta"
-      },
-      {
-       "name": "Svāgata",
-       "father": "Upagupta",
-       "ref": "ViP 4,5.31",
-       "words": "tatputraḥ svāgataḥ",
-       "entry": 33565,
-       "how": "name",
-       "index": "differs",
-       "joined": "chapter",
-       "person": "pui:33565",
-       "index_head": "Svāgata"
-      },
-      {
-       "name": "Svānanda",
-       "father": "Svāgata",
-       "ref": "ViP 4,5.31",
-       "words": "tasya ca svānandaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Suvarcas",
-       "father": "Svānanda",
-       "ref": "ViP 4,5.31",
-       "words": "tasmācca suvarcāḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Supārśva",
-       "father": "Suvarcas",
-       "ref": "ViP 4,5.31",
-       "words": "tasya supārśvaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Subhāṣa",
-       "father": "Supārśva",
-       "ref": "ViP 4,5.31",
-       "words": "tasyāpisubhāṣaḥ",
-       "entry": 32800,
-       "how": "name",
-       "index": "differs",
-       "joined": "chapter",
-       "person": "pui:32800",
-       "index_head": "Subhāṣa"
-      },
-      {
-       "name": "Suśruta",
-       "father": "Subhāṣa",
-       "ref": "ViP 4,5.31",
-       "words": "suśrutaḥ",
-       "entry": 33068,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:33068",
-       "index_head": "Suśruta (I)"
-      },
-      {
-       "name": "Jaya",
-       "father": "Suśruta",
-       "ref": "ViP 4,5.31",
-       "words": "tasmāsuśrutājjayaḥ",
-       "entry": 21487,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:21487",
-       "index_head": "Jaya (IV)"
-      },
-      {
-       "name": "Vijaya",
-       "father": "Jaya",
-       "ref": "ViP 4,5.31",
-       "words": "tasya putro vijayaḥ",
-       "entry": 29228,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29228",
-       "index_head": "Vijaya (IV)"
-      },
-      {
-       "name": "Ṛta",
-       "father": "Vijaya",
-       "ref": "ViP 4,5.31",
-       "words": "vijayasya ṛtaḥ",
-       "entry": 18575,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:18575",
-       "index_head": "Ṛta (II)"
-      },
-      {
-       "name": "Sunaya",
-       "father": "Ṛta",
-       "ref": "ViP 4,5.31",
-       "words": "ṛtātsunayaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vītahavya",
-       "father": "Sunaya",
-       "ref": "ViP 4,5.31",
-       "words": "sunayādvītahavyaḥ",
-       "entry": 29836,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29836",
-       "index_head": "Vītahavya (I)"
-      },
-      {
-       "name": "Dhṛti",
-       "father": "Vītahavya",
-       "ref": "ViP 4,5.31",
-       "words": "tasmāddhūtiḥ",
-       "entry": 23196,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23196",
-       "index_head": "Dhṛti (I)"
-      },
-      {
-       "name": "Bahulāśva",
-       "father": "Dhṛti",
-       "ref": "ViP 4,5.31",
-       "words": "dhṛtervabahulāsvaḥ",
-       "entry": 25456,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:25456",
-       "index_head": "Bahulāśva"
-      },
-      {
-       "name": "Kṛti",
-       "father": "Bahulāśva",
-       "ref": "ViP 4,5.31",
-       "words": "tasya putraḥ kṛtiḥ",
-       "entry": 19930,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19930",
-       "index_head": "Kṛti (I)"
-      }
-     ]
-    },
-    {
      "n": 8,
      "label": "",
-     "length": 18,
+     "length": 19,
      "steps": [
       {
        "name": "Kuru",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": -20485,
+       "entry": 19737,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:-20485",
-       "index_head": "Kuru"
+       "person": "pui:19737",
+       "index_head": "Kuru (II)"
       },
       {
-       "name": "Jahnu",
+       "name": "Parīkṣit",
        "father": "Kuru",
        "ref": "ViP 4,19.78",
-       "words": "jahnu",
-       "entry": 21593,
+       "words": "parīkṣitpramukhāḥ kuroḥ babhūvuḥ",
+       "entry": 24121,
        "how": "father",
        "index": "agrees",
        "joined": "",
-       "person": "pui:21593",
-       "index_head": "Jahnu"
+       "person": "pui:24121",
+       "index_head": "Parīkṣit (II)"
       },
       {
-       "name": "Suratha",
-       "father": "Jahnu",
-       "ref": "ViP 4,20.2",
-       "words": "jahnostu surathonāmātmajo babhūva",
-       "entry": 32911,
+       "name": "Janamejaya",
+       "father": "Parīkṣit",
+       "ref": "ViP 4,20.1",
+       "words": "parīkṣitaś ca janamejayaśrutasenograsenabhīmasenāścātvāraḥ putrāḥ",
+       "entry": 21434,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32911",
-       "index_head": "Suratha (II)"
+       "person": "pui:21434",
+       "index_head": "Janamejaya (I)"
       },
       {
-       "name": "Vidūratha",
-       "father": "Suratha",
-       "ref": "ViP 4,20.3",
-       "words": "tasyāpi vidūrathaḥ",
+       "name": "Śatānīka",
+       "father": "Janamejaya",
+       "ref": "ViP 4,21.3",
+       "words": "janamejayasyāpi śatānīko bhaviṣyati",
+       "entry": 30547,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:30547",
+       "index_head": "Śatānīka (II)"
+      },
+      {
+       "name": "Aśvamedhadatta",
+       "father": "Śatānīka",
+       "ref": "ViP 4,21.5",
+       "words": "śatānīkādaśvamedhadatto bhavitā",
+       "entry": 17497,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17497",
+       "index_head": "Aśvamedhadatta"
+      },
+      {
+       "name": "Adhisīmakṛṣṇa",
+       "father": "Aśvamedhadatta",
+       "ref": "ViP 4,21.6",
+       "words": "tasmādapyacadhisīmakṛṣṇaḥ",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -2125,82 +2293,22 @@
        "index_head": null
       },
       {
-       "name": "Sārvabhauma",
-       "father": "Vidūratha",
-       "ref": "ViP 4,20.4",
-       "words": "tasmātsārvabhomaḥ",
-       "entry": 32305,
+       "name": "Nicaknu",
+       "father": "Adhisīmakṛṣṇa",
+       "ref": "ViP 4,21.7",
+       "words": "adhisīmakṛṣṇānnicaknuḥ",
+       "entry": 23606,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32305",
-       "index_head": "Sārvabhauma (II)"
+       "person": "pui:23606",
+       "index_head": "Nicaknu"
       },
       {
-       "name": "Jayatsena",
-       "father": "Sārvabhauma",
-       "ref": "ViP 4,20.4",
-       "words": "sārvabhaumājjayatsenaḥ",
-       "entry": 21509,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:21509",
-       "index_head": "Jayatsena (II)"
-      },
-      {
-       "name": "Ārādhita",
-       "father": "Jayatsena",
-       "ref": "ViP 4,20.4",
-       "words": "tasmādārādhitaḥ",
-       "entry": 17852,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17852",
-       "index_head": "Ārādhita"
-      },
-      {
-       "name": "Ayutāyu",
-       "father": "Ārādhita",
-       "ref": "ViP 4,20.4",
-       "words": "tataścāyutāyuḥ",
-       "entry": 17833,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17833",
-       "index_head": "Āyutāyu"
-      },
-      {
-       "name": "Akrodhana",
-       "father": "Ayutāyu",
-       "ref": "ViP 4,20.4",
-       "words": "ayutāyorakrodhanaḥ",
-       "entry": 16505,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:16505",
-       "index_head": "Akrodhana (II)"
-      },
-      {
-       "name": "Devātithi",
-       "father": "Akrodhana",
-       "ref": "ViP 4,20.5",
-       "words": "tasmāddevātithiḥ",
-       "entry": 22788,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22788",
-       "index_head": "Devātithi (II)"
-      },
-      {
-       "name": "Ṛkṣa",
-       "father": "Devātithi",
-       "ref": "ViP 4,20.6",
-       "words": "tataś ca ṛkṣo 'nyobhavat",
+       "name": "Uṣma",
+       "father": "Nicaknu",
+       "ref": "ViP 4,21.9",
+       "words": "tasyā pyuṣmaḥ putro bhavitā",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -2209,34 +2317,34 @@
        "index_head": null
       },
       {
-       "name": "Bhīmasena",
-       "father": "Ṛkṣa",
-       "ref": "ViP 4,20.7",
-       "words": "ṛkṣādbhīmasenaḥ",
-       "entry": 26146,
+       "name": "Vicitraratha",
+       "father": "Uṣma",
+       "ref": "ViP 4,21.10",
+       "words": "uṣṇādvicitrarathaḥ",
+       "entry": 29221,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:29221",
+       "index_head": "Vicitraratha"
+      },
+      {
+       "name": "Śuciratha",
+       "father": "Vicitraratha",
+       "ref": "ViP 4,21.11",
+       "words": "tataḥ śucirathaḥ",
+       "entry": 32519,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:26146",
-       "index_head": "Bhīmasena (VII)"
+       "person": "pui:32519",
+       "index_head": "Suciratha"
       },
       {
-       "name": "Dilīpa",
-       "father": "Bhīmasena",
-       "ref": "ViP 4,20.7",
-       "words": "tataś ca dilīpaḥ",
-       "entry": 22454,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22454",
-       "index_head": "Dilīpa (VI)"
-      },
-      {
-       "name": "Pratīpa",
-       "father": "Dilīpa",
-       "ref": "ViP 4,20.8",
-       "words": "dilīpāt pratīpaḥ",
+       "name": "Vṛṣṇimat",
+       "father": "Śuciratha",
+       "ref": "ViP 4,21.12",
+       "words": "tasmādvṛṣṇimāṃs",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -2245,10 +2353,10 @@
        "index_head": null
       },
       {
-       "name": "Śantanu",
-       "father": "Pratīpa",
-       "ref": "ViP 4,20.9",
-       "words": "tasyāpi devāpiśantanubāhlīkasaṃjñāstrayaḥ putrā babhūvuḥ",
+       "name": "Suṣeṇa",
+       "father": "Vṛṣṇimat",
+       "ref": "ViP 4,21.12",
+       "words": "tataḥsuṣeṇaḥ",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -2257,40 +2365,88 @@
        "index_head": null
       },
       {
-       "name": "Vicitravīrya",
-       "father": "Śantanu",
-       "ref": "ViP 4,20.34",
-       "words": "citrāṅgadavicitravīryau dvau putrāvutpādayāmāsa śantanuḥ",
-       "entry": 29223,
+       "name": "Sunītha",
+       "father": "Suṣeṇa",
+       "ref": "ViP 4,21.12",
+       "words": "tasyāpi sunīthaḥ",
+       "entry": 32687,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:29223",
-       "index_head": "Vicitravīrya"
+       "person": "pui:32687",
+       "index_head": "Sunītha (II)"
       },
       {
-       "name": "Dhṛtarāṣṭra",
-       "father": "Vicitravīrya",
-       "ref": "ViP 4,20.38",
-       "words": "vicitravīryakṣetre dhṛtarāṣṭrapāṇḍu",
-       "entry": 23190,
+       "name": "Nṛpacakṣu",
+       "father": "Sunītha",
+       "ref": "ViP 4,21.12",
+       "words": "sunīthānnṛpacakṣuḥ",
+       "entry": 23812,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:23190",
-       "index_head": "Dhṛtarāṣṭra (V)"
+       "person": "pui:23812",
+       "index_head": "Nṛpacakṣu"
       },
       {
-       "name": "Duryodhana",
-       "father": "Dhṛtarāṣṭra",
-       "ref": "ViP 4,20.39",
-       "words": "gāndhāryāṃ duryodhanaduḥ śāsanapradhānaṃ putraśatamutpādayāmāsa",
-       "entry": 22584,
+       "name": "Sukhibala",
+       "father": "Nṛpacakṣu",
+       "ref": "ViP 4,21.12",
+       "words": "tasmādapi sukhibalaḥ",
+       "entry": 32489,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:22584",
-       "index_head": "Duryodhana"
+       "person": "pui:32489",
+       "index_head": "Sukhībala"
+      },
+      {
+       "name": "Pāriplava",
+       "father": "Sukhibala",
+       "ref": "ViP 4,21.12",
+       "words": "tasya ca pāriplavaḥ",
+       "entry": 24280,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24280",
+       "index_head": "Pāriplava"
+      },
+      {
+       "name": "Sunaya",
+       "father": "Pāriplava",
+       "ref": "ViP 4,21.12",
+       "words": "tataś ca sunayaḥ",
+       "entry": 32669,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32669",
+       "index_head": "Sunaya (I)"
+      },
+      {
+       "name": "Medhāvin",
+       "father": "Sunaya",
+       "ref": "ViP 4,21.12",
+       "words": "tasyāpi medhāvī",
+       "entry": 27520,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:27520",
+       "index_head": "Medhāvin (I)"
+      },
+      {
+       "name": "Ripuñjaya",
+       "father": "Medhāvin",
+       "ref": "ViP 4,21.13",
+       "words": "medhāvino ripuñjayaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
       }
      ]
     },
@@ -3105,175 +3261,151 @@
     {
      "n": 13,
      "label": "",
-     "length": 14,
+     "length": 12,
      "steps": [
       {
-       "name": "Vatsa",
+       "name": "Aśmaka",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": null,
+       "entry": 17459,
        "how": "",
        "index": "",
        "joined": "",
-       "person": null,
-       "index_head": null
+       "person": "pui:17459",
+       "index_head": "Aśmaka"
       },
       {
-       "name": "Alarka",
-       "father": "Vatsa",
-       "ref": "ViP 4,8.16",
-       "words": "vatsasya putro 'larkanāmābhavat",
-       "entry": null,
-       "how": "",
-       "index": "absent",
+       "name": "Mūlaka",
+       "father": "Aśmaka",
+       "ref": "ViP 4,4.73",
+       "words": "aśmasya mūlako nāma putro 'bhavat",
+       "entry": 27396,
+       "how": "father",
+       "index": "agrees",
        "joined": "",
-       "person": null,
-       "index_head": null
+       "person": "pui:27396",
+       "index_head": "Mūlaka"
       },
       {
-       "name": "Sannati",
-       "father": "Alarka",
-       "ref": "ViP 4,8.18",
-       "words": "tasyāpyalarkasya sannatināmābhavadātmaja",
-       "entry": 31804,
+       "name": "Daśaratha",
+       "father": "Mūlaka",
+       "ref": "ViP 4,4.75",
+       "words": "mūlakāddaśarathaḥ",
+       "entry": 22370,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:31804",
-       "index_head": "Sannati (I)"
+       "person": "pui:22370",
+       "index_head": "Daśaratha (I)"
       },
       {
-       "name": "Sunītha",
-       "father": "Sannati",
-       "ref": "ViP 4,8.19",
-       "words": "sannateḥ sunīthaḥ",
-       "entry": 32686,
+       "name": "Ilivila",
+       "father": "Daśaratha",
+       "ref": "ViP 4,4.75",
+       "words": "tasmādilivilaḥ",
+       "entry": 18085,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32686",
-       "index_head": "Sunītha (I)"
+       "person": "pui:18085",
+       "index_head": "Ilivila"
       },
       {
-       "name": "Suketu",
-       "father": "Sunītha",
-       "ref": "ViP 4,8.19",
-       "words": "tasyāpi suketuḥ",
-       "entry": 32471,
+       "name": "Viśvasaha",
+       "father": "Ilivila",
+       "ref": "ViP 4,4.75",
+       "words": "tataś ca viśvasahaḥ",
+       "entry": 29718,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32471",
-       "index_head": "Suketu (VII)"
+       "person": "pui:29718",
+       "index_head": "Viśvasaha (I)"
       },
       {
-       "name": "Dharmaketu",
-       "father": "Suketu",
-       "ref": "ViP 4,8.19",
-       "words": "tasmācca dharmaketurjajñe",
-       "entry": 23020,
+       "name": "Khaṭvāṅga",
+       "father": "Viśvasaha",
+       "ref": "ViP 4,4.76",
+       "words": "tasmācca khaṭvāṅgaḥ",
+       "entry": 20393,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:23020",
-       "index_head": "Dharmaketu"
+       "person": "pui:20393",
+       "index_head": "Khaṭvāṅga (I)"
       },
       {
-       "name": "Satyaketu",
-       "father": "Dharmaketu",
-       "ref": "ViP 4,8.20",
-       "words": "tataś ca satyaketuḥ",
-       "entry": 31650,
+       "name": "Dīrghabāhu",
+       "father": "Khaṭvāṅga",
+       "ref": "ViP 4,4.83",
+       "words": "khaṭvāṅgāddīrghabāhuḥ putro 'bhavat",
+       "entry": 22525,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:31650",
-       "index_head": "Satyaketu (I)"
+       "person": "pui:22525",
+       "index_head": "Dīrghabāhu (I)"
       },
       {
-       "name": "Vibhu",
-       "father": "Satyaketu",
-       "ref": "ViP 4,8.20",
-       "words": "tasmādvibhuḥ",
-       "entry": 29483,
+       "name": "Raghu",
+       "father": "Dīrghabāhu",
+       "ref": "ViP 4,4.84",
+       "words": "tato raghurabhavat",
+       "entry": 27871,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:29483",
-       "index_head": "Vibhu (XII)"
+       "person": "pui:27871",
+       "index_head": "Raghu (I)"
       },
       {
-       "name": "Suvibhu",
-       "father": "Vibhu",
-       "ref": "ViP 4,8.20",
-       "words": "tattayaḥsuvibhuḥ",
-       "entry": 33035,
+       "name": "Aja",
+       "father": "Raghu",
+       "ref": "ViP 4,4.85",
+       "words": "tasmādapyajaḥ",
+       "entry": 16672,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:33035",
-       "index_head": "Suvibhu"
+       "person": "pui:16672",
+       "index_head": "Aja (IV)"
       },
       {
-       "name": "Sukumāra",
-       "father": "Suvibhu",
-       "ref": "ViP 4,8.20",
-       "words": "tataś ca sukumāraḥ",
-       "entry": 32450,
+       "name": "Daśaratha",
+       "father": "Aja",
+       "ref": "ViP 4,4.86",
+       "words": "ajāddaśarathaḥ",
+       "entry": 22371,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32450",
-       "index_head": "Sukumāra (III)"
+       "person": "pui:22371",
+       "index_head": "Daśaratha (II)"
       },
       {
-       "name": "Dṛṣṭaketu",
-       "father": "Sukumāra",
-       "ref": "ViP 4,8.20",
-       "words": "tasyāpi dṛṣṭaketuḥ",
-       "entry": 22639,
+       "name": "Lakṣmaṇa",
+       "father": "Daśaratha",
+       "ref": "ViP 4,4.87",
+       "words": "rāmalakṣmaṇabharataśatrughnarūpeṇa caturdhā putratvamāyāsīt",
+       "entry": 28342,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:22639",
-       "index_head": "Dṛṣṭaketu (II)"
+       "person": "pui:28342",
+       "index_head": "Lakṣmaṇa (I)"
       },
       {
-       "name": "Vītihotra",
-       "father": "Dṛṣṭaketu",
-       "ref": "ViP 4,8.20",
-       "words": "tataś ca vītihotraḥ",
-       "entry": 29846,
+       "name": "Aṅgada",
+       "father": "Lakṣmaṇa",
+       "ref": "ViP 4,4.104",
+       "words": "lakṣmaṇasyāṅgadacandraketū",
+       "entry": 16618,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:29846",
-       "index_head": "Vītihotra (VI)"
-      },
-      {
-       "name": "Bhārga",
-       "father": "Vītihotra",
-       "ref": "ViP 4,8.20",
-       "words": "tasmādbhārgaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Bhārgabhūmi",
-       "father": "Bhārga",
-       "ref": "ViP 4,8.20",
-       "words": "bhārgasya bhārgabhūmiḥ",
-       "entry": 26069,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:26069",
-       "index_head": "Bhārgabhūmi"
+       "person": "pui:16618",
+       "index_head": "Aṅgada (I)"
       }
      ]
     },
@@ -3431,296 +3563,6 @@
     {
      "n": 15,
      "label": "",
-     "length": 12,
-     "steps": [
-      {
-       "name": "Uṣma",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vicitraratha",
-       "father": "Uṣma",
-       "ref": "ViP 4,21.10",
-       "words": "uṣṇādvicitrarathaḥ",
-       "entry": 29221,
-       "how": "name",
-       "index": "differs",
-       "joined": "",
-       "person": "pui:29221",
-       "index_head": "Vicitraratha"
-      },
-      {
-       "name": "Śuciratha",
-       "father": "Vicitraratha",
-       "ref": "ViP 4,21.11",
-       "words": "tataḥ śucirathaḥ",
-       "entry": 32519,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32519",
-       "index_head": "Suciratha"
-      },
-      {
-       "name": "Vṛṣṇimat",
-       "father": "Śuciratha",
-       "ref": "ViP 4,21.12",
-       "words": "tasmādvṛṣṇimāṃs",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Suṣeṇa",
-       "father": "Vṛṣṇimat",
-       "ref": "ViP 4,21.12",
-       "words": "tataḥsuṣeṇaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Sunītha",
-       "father": "Suṣeṇa",
-       "ref": "ViP 4,21.12",
-       "words": "tasyāpi sunīthaḥ",
-       "entry": 32687,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32687",
-       "index_head": "Sunītha (II)"
-      },
-      {
-       "name": "Nṛpacakṣu",
-       "father": "Sunītha",
-       "ref": "ViP 4,21.12",
-       "words": "sunīthānnṛpacakṣuḥ",
-       "entry": 23812,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23812",
-       "index_head": "Nṛpacakṣu"
-      },
-      {
-       "name": "Sukhibala",
-       "father": "Nṛpacakṣu",
-       "ref": "ViP 4,21.12",
-       "words": "tasmādapi sukhibalaḥ",
-       "entry": 32489,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32489",
-       "index_head": "Sukhībala"
-      },
-      {
-       "name": "Pāriplava",
-       "father": "Sukhibala",
-       "ref": "ViP 4,21.12",
-       "words": "tasya ca pāriplavaḥ",
-       "entry": 24280,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24280",
-       "index_head": "Pāriplava"
-      },
-      {
-       "name": "Sunaya",
-       "father": "Pāriplava",
-       "ref": "ViP 4,21.12",
-       "words": "tataś ca sunayaḥ",
-       "entry": 32669,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32669",
-       "index_head": "Sunaya (I)"
-      },
-      {
-       "name": "Medhāvin",
-       "father": "Sunaya",
-       "ref": "ViP 4,21.12",
-       "words": "tasyāpi medhāvī",
-       "entry": 27520,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:27520",
-       "index_head": "Medhāvin (I)"
-      },
-      {
-       "name": "Ripuñjaya",
-       "father": "Medhāvin",
-       "ref": "ViP 4,21.13",
-       "words": "medhāvino ripuñjayaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 16,
-     "label": "",
-     "length": 11,
-     "steps": [
-      {
-       "name": "Kṣatravṛddha",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 20310,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:20310",
-       "index_head": "Kṣatravṛddha"
-      },
-      {
-       "name": "Suhotra",
-       "father": "Kṣatravṛddha",
-       "ref": "ViP 4,8.4",
-       "words": "kṣatravṛddhātsuhotraḥ putro 'bhavat",
-       "entry": 33101,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:33101",
-       "index_head": "Suhotra (I)"
-      },
-      {
-       "name": "Kāśya",
-       "father": "Suhotra",
-       "ref": "ViP 4,8.5",
-       "words": "kāśyapakāśagṛtsamadāstrayastasya putrā babhūvuḥ",
-       "entry": 19482,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19482",
-       "index_head": "Kāśya (I)"
-      },
-      {
-       "name": "Kāśeya",
-       "father": "Kāśya",
-       "ref": "ViP 4,8.7",
-       "words": "kāśyasya kāśeyaḥ",
-       "entry": 19477,
-       "how": "name",
-       "index": "differs",
-       "joined": "chapter",
-       "person": "pui:19477",
-       "index_head": "Kāśeya"
-      },
-      {
-       "name": "Rāṣṭra",
-       "father": "Kāśeya",
-       "ref": "ViP 4,8.7",
-       "words": "tasmādrāṣṭraḥ",
-       "entry": 28106,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:28106",
-       "index_head": "Rāṣṭra"
-      },
-      {
-       "name": "Dīrghatapas",
-       "father": "Rāṣṭra",
-       "ref": "ViP 4,8.7",
-       "words": "rāṣṭrasya dīrghatapāḥ putro 'bhavat",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Dhanvantari",
-       "father": "Dīrghatapas",
-       "ref": "ViP 4,8.8",
-       "words": "dhanvantaristu dīrghatapasaḥ putro 'bhavat",
-       "entry": 22987,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22987",
-       "index_head": "Dhanvantari (I)"
-      },
-      {
-       "name": "Ketumat",
-       "father": "Dhanvantari",
-       "ref": "ViP 4,8.11",
-       "words": "tasya ca dhanvantareḥ patraḥ ketumān",
-       "entry": 20046,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:20046",
-       "index_head": "Ketumat (II)"
-      },
-      {
-       "name": "Bhīmaratha",
-       "father": "Ketumat",
-       "ref": "ViP 4,8.11",
-       "words": "ketumato bhīmarathaḥ",
-       "entry": 26132,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:26132",
-       "index_head": "Bhīmaratha (I)"
-      },
-      {
-       "name": "Divodāsa",
-       "father": "Bhīmaratha",
-       "ref": "ViP 4,8.11",
-       "words": "tasyāpi divodāsaḥ",
-       "entry": 22475,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22475",
-       "index_head": "Divodāsa (I)"
-      },
-      {
-       "name": "Pratardana",
-       "father": "Divodāsa",
-       "ref": "ViP 4,8.11",
-       "words": "tasyāpi pratardanaḥ",
-       "entry": 24969,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24969",
-       "index_head": "Pratardana (II)"
-      }
-     ]
-    },
-    {
-     "n": 17,
-     "label": "",
      "length": 11,
      "steps": [
       {
@@ -3858,7 +3700,7 @@
      ]
     },
     {
-     "n": 18,
+     "n": 16,
      "label": "",
      "length": 10,
      "steps": [
@@ -3985,7 +3827,7 @@
      ]
     },
     {
-     "n": 19,
+     "n": 17,
      "label": "",
      "length": 9,
      "steps": [
@@ -4100,7 +3942,122 @@
      ]
     },
     {
-     "n": 20,
+     "n": 18,
+     "label": "",
+     "length": 9,
+     "steps": [
+      {
+       "name": "Kuśa",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 19777,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:19777",
+       "index_head": "Kuśa (I)"
+      },
+      {
+       "name": "Atithi",
+       "father": "Kuśa",
+       "ref": "ViP 4,4.105",
+       "words": "kuśasyātithiḥ",
+       "entry": 16765,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:16765",
+       "index_head": "Atithi (I)"
+      },
+      {
+       "name": "Niṣadha",
+       "father": "Atithi",
+       "ref": "ViP 4,4.105",
+       "words": "atitherapi niṣadhaḥ putro 'bhūt",
+       "entry": 23734,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23734",
+       "index_head": "Niṣadha (I)"
+      },
+      {
+       "name": "Anala",
+       "father": "Niṣadha",
+       "ref": "ViP 4,4.106",
+       "words": "niṣadhasyāpyanalaḥ",
+       "entry": 16880,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:16880",
+       "index_head": "Anala (V)"
+      },
+      {
+       "name": "Nabhas",
+       "father": "Anala",
+       "ref": "ViP 4,4.106",
+       "words": "tasmādapi nabhaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Puṇḍarīka",
+       "father": "Nabhas",
+       "ref": "ViP 4,4.106",
+       "words": "nabhasaḥ puṇḍarīkastattanayaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Kṣemadhanvan",
+       "father": "Puṇḍarīka",
+       "ref": "ViP 4,4.106",
+       "words": "puṇḍarīkastattanayaḥ kṣemadhanvā",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Devānīka",
+       "father": "Kṣemadhanvan",
+       "ref": "ViP 4,4.106",
+       "words": "tasya ca devānīkaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Ahīnaka",
+       "father": "Devānīka",
+       "ref": "ViP 4,4.106",
+       "words": "tasyāpyahīnako",
+       "entry": 17593,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17593",
+       "index_head": "Ahīnak(g)a"
+      }
+     ]
+    },
+    {
+     "n": 19,
      "label": "",
      "length": 9,
      "steps": [
@@ -4215,7 +4172,7 @@
      ]
     },
     {
-     "n": 21,
+     "n": 20,
      "label": "",
      "length": 9,
      "steps": [
@@ -4330,7 +4287,213 @@
      ]
     },
     {
+     "n": 21,
+     "label": "",
+     "length": 8,
+     "steps": [
+      {
+       "name": "Durvasu",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": null,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Vahni",
+       "father": "Durvasu",
+       "ref": "ViP 4,16.3",
+       "words": "durvasorvahnirātmajaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Bhārga",
+       "father": "Vahni",
+       "ref": "ViP 4,16.3",
+       "words": "bahnerbhārgaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Bhānu",
+       "father": "Bhārga",
+       "ref": "ViP 4,16.3",
+       "words": "bhārgādbhānuḥ",
+       "entry": 26037,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:26037",
+       "index_head": "Bhānu (IX)"
+      },
+      {
+       "name": "Trayīsānu",
+       "father": "Bhānu",
+       "ref": "ViP 4,16.3",
+       "words": "tataś ca trayīsānuḥ",
+       "entry": 22072,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22072",
+       "index_head": "Trayīsānu"
+      },
+      {
+       "name": "Karandama",
+       "father": "Trayīsānu",
+       "ref": "ViP 4,16.3",
+       "words": "tasmācca karandamaḥ",
+       "entry": 19041,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19041",
+       "index_head": "Karandama"
+      },
+      {
+       "name": "Marutta",
+       "father": "Karandama",
+       "ref": "ViP 4,16.3",
+       "words": "tasyāpi maruttaḥ",
+       "entry": 26725,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:26725",
+       "index_head": "Marutta (II)"
+      },
+      {
+       "name": "Duṣyanta",
+       "father": "Marutta",
+       "ref": "ViP 4,16.5",
+       "words": "pauravaṃ duṣyantaṃ putramakalpayat",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      }
+     ]
+    },
+    {
      "n": 22,
+     "label": "",
+     "length": 8,
+     "steps": [
+      {
+       "name": "Kuvalāyāśva",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": -18185,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:-18185",
+       "index_head": "Kuvalayāśva (Dhundumāra)"
+      },
+      {
+       "name": "Dṛḍhāśva",
+       "father": "Kuvalāyāśva",
+       "ref": "ViP 4,2.41",
+       "words": "tasya ca tanayāsptamastā eva",
+       "entry": 22628,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:22628",
+       "index_head": "Dṛḍhāśva (II)"
+      },
+      {
+       "name": "Haryaśva",
+       "father": "Dṛḍhāśva",
+       "ref": "ViP 4,2.43",
+       "words": "vṛḍhāśvāddharyaśvaḥ",
+       "entry": 33732,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33732",
+       "index_head": "Haryaśva (I)"
+      },
+      {
+       "name": "Nikumbha",
+       "father": "Haryaśva",
+       "ref": "ViP 4,2.44",
+       "words": "tasmācca nikuṃbhaḥ",
+       "entry": 23589,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23589",
+       "index_head": "Nikumbha (I)"
+      },
+      {
+       "name": "Amitāśva",
+       "father": "Nikumbha",
+       "ref": "ViP 4,2.45",
+       "words": "nikuṃbhasyāmitāśvaḥ",
+       "entry": 17159,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17159",
+       "index_head": "Amitāśva"
+      },
+      {
+       "name": "Kṛśāśva",
+       "father": "Amitāśva",
+       "ref": "ViP 4,2.46",
+       "words": "tataś ca kṛśāśvaḥ",
+       "entry": 19984,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19984",
+       "index_head": "Kṛśāśva (VIII)"
+      },
+      {
+       "name": "Prasenajit",
+       "father": "Kṛśāśva",
+       "ref": "ViP 4,2.47",
+       "words": "tasmācca prasenajit",
+       "entry": 25165,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:25165",
+       "index_head": "Prasenajit (IV)"
+      },
+      {
+       "name": "Yuvanāśva",
+       "father": "Prasenajit",
+       "ref": "ViP 4,2.48",
+       "words": "prasenajito yuvanāśvobhavat",
+       "entry": 27804,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:27804",
+       "index_head": "Yuvanāśva (II)"
+      }
+     ]
+    },
+    {
+     "n": 23,
      "label": "",
      "length": 8,
      "steps": [
@@ -4433,189 +4596,7 @@
      ]
     },
     {
-     "n": 23,
-     "label": "",
-     "length": 7,
-     "steps": [
-      {
-       "name": "Durvasu",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vahni",
-       "father": "Durvasu",
-       "ref": "ViP 4,16.3",
-       "words": "durvasorvahnirātmajaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Bhārga",
-       "father": "Vahni",
-       "ref": "ViP 4,16.3",
-       "words": "bahnerbhārgaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Bhānu",
-       "father": "Bhārga",
-       "ref": "ViP 4,16.3",
-       "words": "bhārgādbhānuḥ",
-       "entry": 26037,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:26037",
-       "index_head": "Bhānu (IX)"
-      },
-      {
-       "name": "Trayīsānu",
-       "father": "Bhānu",
-       "ref": "ViP 4,16.3",
-       "words": "tataś ca trayīsānuḥ",
-       "entry": 22072,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22072",
-       "index_head": "Trayīsānu"
-      },
-      {
-       "name": "Karandama",
-       "father": "Trayīsānu",
-       "ref": "ViP 4,16.3",
-       "words": "tasmācca karandamaḥ",
-       "entry": 19041,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19041",
-       "index_head": "Karandama"
-      },
-      {
-       "name": "Marutta",
-       "father": "Karandama",
-       "ref": "ViP 4,16.3",
-       "words": "tasyāpi maruttaḥ",
-       "entry": 26725,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:26725",
-       "index_head": "Marutta (II)"
-      }
-     ]
-    },
-    {
      "n": 24,
-     "label": "",
-     "length": 7,
-     "steps": [
-      {
-       "name": "Dṛḍhāśva",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 22628,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:22628",
-       "index_head": "Dṛḍhāśva (II)"
-      },
-      {
-       "name": "Haryaśva",
-       "father": "Dṛḍhāśva",
-       "ref": "ViP 4,2.43",
-       "words": "vṛḍhāśvāddharyaśvaḥ",
-       "entry": 33732,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:33732",
-       "index_head": "Haryaśva (I)"
-      },
-      {
-       "name": "Nikumbha",
-       "father": "Haryaśva",
-       "ref": "ViP 4,2.44",
-       "words": "tasmācca nikuṃbhaḥ",
-       "entry": 23589,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23589",
-       "index_head": "Nikumbha (I)"
-      },
-      {
-       "name": "Amitāśva",
-       "father": "Nikumbha",
-       "ref": "ViP 4,2.45",
-       "words": "nikuṃbhasyāmitāśvaḥ",
-       "entry": 17159,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17159",
-       "index_head": "Amitāśva"
-      },
-      {
-       "name": "Kṛśāśva",
-       "father": "Amitāśva",
-       "ref": "ViP 4,2.46",
-       "words": "tataś ca kṛśāśvaḥ",
-       "entry": 19984,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19984",
-       "index_head": "Kṛśāśva (VIII)"
-      },
-      {
-       "name": "Prasenajit",
-       "father": "Kṛśāśva",
-       "ref": "ViP 4,2.47",
-       "words": "tasmācca prasenajit",
-       "entry": 25165,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:25165",
-       "index_head": "Prasenajit (IV)"
-      },
-      {
-       "name": "Yuvanāśva",
-       "father": "Prasenajit",
-       "ref": "ViP 4,2.48",
-       "words": "prasenajito yuvanāśvobhavat",
-       "entry": 27804,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:27804",
-       "index_head": "Yuvanāśva (II)"
-      }
-     ]
-    },
-    {
-     "n": 25,
      "label": "",
      "length": 7,
      "steps": [
@@ -4706,7 +4687,7 @@
      ]
     },
     {
-     "n": 26,
+     "n": 25,
      "label": "",
      "length": 7,
      "steps": [
@@ -4797,7 +4778,7 @@
      ]
     },
     {
-     "n": 27,
+     "n": 26,
      "label": "",
      "length": 7,
      "steps": [
@@ -4888,7 +4869,7 @@
      ]
     },
     {
-     "n": 28,
+     "n": 27,
      "label": "Yādava (after Yadu)",
      "length": 7,
      "steps": [
@@ -4979,7 +4960,7 @@
      ]
     },
     {
-     "n": 29,
+     "n": 28,
      "label": "",
      "length": 7,
      "steps": [
@@ -5070,7 +5051,7 @@
      ]
     },
     {
-     "n": 30,
+     "n": 29,
      "label": "the line of Vṛṣṇi",
      "length": 6,
      "steps": [
@@ -5149,7 +5130,7 @@
      ]
     },
     {
-     "n": 31,
+     "n": 30,
      "label": "",
      "length": 6,
      "steps": [
@@ -5228,7 +5209,7 @@
      ]
     },
     {
-     "n": 32,
+     "n": 31,
      "label": "",
      "length": 6,
      "steps": [
@@ -5307,86 +5288,7 @@
      ]
     },
     {
-     "n": 33,
-     "label": "",
-     "length": 6,
-     "steps": [
-      {
-       "name": "Samara",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 31868,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:31868",
-       "index_head": "Samara (III)"
-      },
-      {
-       "name": "Supāra",
-       "father": "Samara",
-       "ref": "ViP 4,19.41",
-       "words": "pārasupāra",
-       "entry": 32729,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:32729",
-       "index_head": "Supāra"
-      },
-      {
-       "name": "Pṛthu",
-       "father": "Supāra",
-       "ref": "ViP 4,19.42",
-       "words": "supārātpṛthuḥ",
-       "entry": 24781,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24781",
-       "index_head": "Pṛthu (XIX)"
-      },
-      {
-       "name": "Sukṛti",
-       "father": "Pṛthu",
-       "ref": "ViP 4,19.42",
-       "words": "pṛthoḥsukṛteḥ",
-       "entry": 32462,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32462",
-       "index_head": "Sukṛti (III)"
-      },
-      {
-       "name": "Vibhrāja",
-       "father": "Sukṛti",
-       "ref": "ViP 4,19.42",
-       "words": "sukṛtervibhrājaḥ",
-       "entry": 29497,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29497",
-       "index_head": "Vibhrāja (II)"
-      },
-      {
-       "name": "Aṇuha",
-       "father": "Vibhrāja",
-       "ref": "ViP 4,19.43",
-       "words": "tasmāccāṇuhaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 34,
+     "n": 32,
      "label": "",
      "length": 6,
      "steps": [
@@ -5465,7 +5367,7 @@
      ]
     },
     {
-     "n": 35,
+     "n": 33,
      "label": "",
      "length": 6,
      "steps": [
@@ -5544,7 +5446,7 @@
      ]
     },
     {
-     "n": 36,
+     "n": 34,
      "label": "",
      "length": 5,
      "steps": [
@@ -5611,7 +5513,7 @@
      ]
     },
     {
-     "n": 37,
+     "n": 35,
      "label": "",
      "length": 5,
      "steps": [
@@ -5678,7 +5580,7 @@
      ]
     },
     {
-     "n": 38,
+     "n": 36,
      "label": "",
      "length": 5,
      "steps": [
@@ -5745,7 +5647,7 @@
      ]
     },
     {
-     "n": 39,
+     "n": 37,
      "label": "",
      "length": 5,
      "steps": [
@@ -5812,7 +5714,7 @@
      ]
     },
     {
-     "n": 40,
+     "n": 38,
      "label": "",
      "length": 4,
      "steps": [
@@ -5867,7 +5769,7 @@
      ]
     },
     {
-     "n": 41,
+     "n": 39,
      "label": "",
      "length": 4,
      "steps": [
@@ -5922,62 +5824,62 @@
      ]
     },
     {
-     "n": 42,
+     "n": 40,
      "label": "",
      "length": 4,
      "steps": [
       {
-       "name": "Jarāsaṃdha",
+       "name": "Soma",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": null,
+       "entry": -23489,
        "how": "",
        "index": "",
        "joined": "",
-       "person": null,
-       "index_head": null
+       "person": "pui:-23489",
+       "index_head": "Soma"
       },
       {
-       "name": "Sahadeva",
-       "father": "Jarāsaṃdha",
-       "ref": "ViP 4,19.84",
-       "words": "tasmātsahadevaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
+       "name": "Budha",
+       "father": "Soma",
+       "ref": "ViP 4,1.11",
+       "words": "somamūnorbudhasya",
+       "entry": 25555,
+       "how": "father",
+       "index": "agrees",
        "joined": "",
-       "person": null,
-       "index_head": null
+       "person": "pui:25555",
+       "index_head": "Budha (IV)"
       },
       {
-       "name": "Somapa",
-       "father": "Sahadeva",
-       "ref": "ViP 4,19.84",
-       "words": "sahadevātsomapaḥ",
-       "entry": 33267,
+       "name": "Purūravas",
+       "father": "Budha",
+       "ref": "ViP 4,1.12",
+       "words": "budhaḥ purūravasamātmajamutpādayāmāsa",
+       "entry": 24572,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:33267",
-       "index_head": "Somapa (II)"
+       "person": "pui:24572",
+       "index_head": "Purūravas (I)"
       },
       {
-       "name": "Śrutiśravas",
-       "father": "Somapa",
-       "ref": "ViP 4,19.84",
-       "words": "tataś ca śrutiśravāḥ",
-       "entry": 31466,
+       "name": "Āyu",
+       "father": "Purūravas",
+       "ref": "ViP 4,8.1",
+       "words": "purūravaso jyeṣṭhaḥ putro yastvāyurnāmā",
+       "entry": 17826,
        "how": "father",
        "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:31466",
-       "index_head": "Śrutiśravas"
+       "joined": "index",
+       "person": "pui:17826",
+       "index_head": "Āyu (III)"
       }
      ]
     },
     {
-     "n": 43,
+     "n": 41,
      "label": "",
      "length": 4,
      "steps": [
@@ -6032,62 +5934,7 @@
      ]
     },
     {
-     "n": 44,
-     "label": "",
-     "length": 4,
-     "steps": [
-      {
-       "name": "Śrutāyu",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": -12011,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:-12011",
-       "index_head": "Śrutāyu"
-      },
-      {
-       "name": "Supārśva",
-       "father": "Śrutāyu",
-       "ref": "ViP 4,5.31",
-       "words": "śrutāyuṣaḥ supārśvāḥ",
-       "entry": 32737,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:32737",
-       "index_head": "Supārśva (VI)"
-      },
-      {
-       "name": "Sṛṃjaya",
-       "father": "Supārśva",
-       "ref": "ViP 4,5.31",
-       "words": "tasmātsṛṃjayaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Kṣemāvin",
-       "father": "Sṛṃjaya",
-       "ref": "ViP 4,5.31",
-       "words": "tataḥ kṣemāvī",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 45,
+     "n": 42,
      "label": "",
      "length": 3,
      "steps": [
@@ -6130,50 +5977,7 @@
      ]
     },
     {
-     "n": 46,
-     "label": "",
-     "length": 3,
-     "steps": [
-      {
-       "name": "Gāndinī",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Akrūra",
-       "father": "Gāndinī",
-       "ref": "ViP 4,13.126",
-       "words": "tasyāmayamakrūraḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Devavān",
-       "father": "Akrūra",
-       "ref": "ViP 4,14.10",
-       "words": "devavānupadevaścākrūraputrau",
-       "entry": 22758,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:22758",
-       "index_head": "Devavān (II)"
-      }
-     ]
-    },
-    {
-     "n": 47,
+     "n": 43,
      "label": "",
      "length": 3,
      "steps": [
@@ -6216,7 +6020,7 @@
      ]
     },
     {
-     "n": 48,
+     "n": 44,
      "label": "",
      "length": 3,
      "steps": [
@@ -6259,50 +6063,7 @@
      ]
     },
     {
-     "n": 49,
-     "label": "",
-     "length": 3,
-     "steps": [
-      {
-       "name": "Soma",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": -23489,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:-23489",
-       "index_head": "Soma"
-      },
-      {
-       "name": "Budha",
-       "father": "Soma",
-       "ref": "ViP 4,1.11",
-       "words": "somamūnorbudhasya",
-       "entry": 25555,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:25555",
-       "index_head": "Budha (IV)"
-      },
-      {
-       "name": "Purūravas",
-       "father": "Budha",
-       "ref": "ViP 4,1.12",
-       "words": "budhaḥ purūravasamātmajamutpādayāmāsa",
-       "entry": 24572,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24572",
-       "index_head": "Purūravas (I)"
-      }
-     ]
-    },
-    {
-     "n": 50,
+     "n": 45,
      "label": "",
      "length": 3,
      "steps": [
@@ -6345,7 +6106,7 @@
      ]
     },
     {
-     "n": 51,
+     "n": 46,
      "label": "",
      "length": 3,
      "steps": [
@@ -6388,7 +6149,7 @@
      ]
     },
     {
-     "n": 52,
+     "n": 47,
      "label": "",
      "length": 3,
      "steps": [
@@ -6431,7 +6192,7 @@
      ]
     },
     {
-     "n": 53,
+     "n": 48,
      "label": "",
      "length": 3,
      "steps": [
@@ -6474,7 +6235,7 @@
      ]
     },
     {
-     "n": 54,
+     "n": 49,
      "label": "",
      "length": 3,
      "steps": [
@@ -6522,15 +6283,15 @@
    "title": "Bhagavatapurana, book 9",
    "text": "bh",
    "counts": {
-    "persons": 716,
-    "father": 481,
-    "name": 25,
-    "none": 210,
-    "joined": 4,
-    "agrees": 481,
-    "differs": 20,
+    "persons": 750,
+    "father": 511,
+    "name": 28,
+    "none": 211,
+    "joined": 3,
+    "agrees": 511,
+    "differs": 23,
     "new": 5,
-    "absent": 210
+    "absent": 211
    },
    "source": "sa_bhAgavatapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Ulrich Stiehl)",
    "lines": [
@@ -7952,6 +7713,452 @@
     {
      "n": 6,
      "label": "",
+     "length": 18,
+     "steps": [
+      {
+       "name": "Vṛṣṭimān",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": null,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Suṣeṇa",
+       "father": "Vṛṣṭimān",
+       "ref": "BhP 9.22.41",
+       "words": "tasya suṣeṇo",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Sunītha",
+       "father": "Suṣeṇa",
+       "ref": "BhP 9.22.41",
+       "words": "sunīthastasya bhavitā",
+       "entry": 32687,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32687",
+       "index_head": "Sunītha (II)"
+      },
+      {
+       "name": "Nṛcakṣus",
+       "father": "Sunītha",
+       "ref": "BhP 9.22.41",
+       "words": "nṛcakṣuryat",
+       "entry": 23809,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23809",
+       "index_head": "Nṛcakṣus"
+      },
+      {
+       "name": "Sukhīnala",
+       "father": "Nṛcakṣus",
+       "ref": "BhP 9.22.41",
+       "words": "nṛcakṣuryat sukhīnalaḥ",
+       "entry": 32488,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32488",
+       "index_head": "Sukhīnala"
+      },
+      {
+       "name": "Pariplava",
+       "father": "Sukhīnala",
+       "ref": "BhP 9.22.42",
+       "words": "pariplavaḥ sutastasmān",
+       "entry": 24105,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24105",
+       "index_head": "Pariplava"
+      },
+      {
+       "name": "Sunaya",
+       "father": "Pariplava",
+       "ref": "BhP 9.22.42",
+       "words": "medhāvī sunayātmajaḥ",
+       "entry": 32669,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32669",
+       "index_head": "Sunaya (I)"
+      },
+      {
+       "name": "Medhāvin",
+       "father": "Sunaya",
+       "ref": "BhP 9.22.42",
+       "words": "medhāvī sunayātmajaḥ",
+       "entry": 27520,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:27520",
+       "index_head": "Medhāvin (I)"
+      },
+      {
+       "name": "Nṛpañjaya",
+       "father": "Medhāvin",
+       "ref": "BhP 9.22.42",
+       "words": "nṛpañjayastato",
+       "entry": 23813,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23813",
+       "index_head": "Nṛpañjaya (I)"
+      },
+      {
+       "name": "Dūrva",
+       "father": "Nṛpañjaya",
+       "ref": "BhP 9.22.42",
+       "words": "dūrvastimis",
+       "entry": 22607,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22607",
+       "index_head": "Dūrva (II)"
+      },
+      {
+       "name": "Timi",
+       "father": "Dūrva",
+       "ref": "BhP 9.22.42",
+       "words": "tasmāj janiṣyati",
+       "entry": 21951,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:21951",
+       "index_head": "Timi (II)"
+      },
+      {
+       "name": "Bṛhadratha",
+       "father": "Timi",
+       "ref": "BhP 9.22.43",
+       "words": "timerbṛhadrathas",
+       "entry": 25653,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:25653",
+       "index_head": "Bṛhadratha (III)"
+      },
+      {
+       "name": "Śatānīka",
+       "father": "Bṛhadratha",
+       "ref": "BhP 9.22.43",
+       "words": "tasmāc chatānīkaḥ",
+       "entry": 30551,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:30551",
+       "index_head": "Śatānīka (VI)"
+      },
+      {
+       "name": "Durdamana",
+       "father": "Śatānīka",
+       "ref": "BhP 9.22.43",
+       "words": "śatānīkāddurdamanas",
+       "entry": 22562,
+       "how": "name",
+       "index": "new",
+       "joined": "chapter",
+       "person": "pui:22562",
+       "index_head": "Durdamana"
+      },
+      {
+       "name": "Mahīnara",
+       "father": "Durdamana",
+       "ref": "BhP 9.22.43",
+       "words": "tasyāpatyaṃ mahīnaraḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Daṇḍapāṇi",
+       "father": "Mahīnara",
+       "ref": "BhP 9.22.44",
+       "words": "daṇḍapāṇir",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Nimi",
+       "father": "Daṇḍapāṇi",
+       "ref": "BhP 9.22.44",
+       "words": "nimistasya",
+       "entry": 23634,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23634",
+       "index_head": "Nimi (II)"
+      },
+      {
+       "name": "Kṣemaka",
+       "father": "Nimi",
+       "ref": "BhP 9.22.44",
+       "words": "nimistasya kṣemako bhavitā yataḥ",
+       "entry": 20371,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:20371",
+       "index_head": "Kṣemaka (I)"
+      }
+     ]
+    },
+    {
+     "n": 7,
+     "label": "",
+     "length": 18,
+     "steps": [
+      {
+       "name": "Ṛkṣa",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 18543,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:18543",
+       "index_head": "Ṛkṣa (II)"
+      },
+      {
+       "name": "Saṃvaraṇa",
+       "father": "Ṛkṣa",
+       "ref": "BhP 9.22.3",
+       "words": "ṛkṣaḥ saṃvaraṇastataḥ",
+       "entry": 31968,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:31968",
+       "index_head": "Saṃvaraṇa"
+      },
+      {
+       "name": "Kuru",
+       "father": "Saṃvaraṇa",
+       "ref": "BhP 9.22.4",
+       "words": "tapatyāṃ sūryakanyāyāṃ kurukṣetrapatiḥ kuruḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Parīkṣi",
+       "father": "Kuru",
+       "ref": "BhP 9.22.4",
+       "words": "parīkṣiḥ sudhanurjahnurniṣadhaśca kuroḥ sutāḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Suratha",
+       "father": "Parīkṣi",
+       "ref": "BhP 9.22.9",
+       "words": "parīkṣiranapatyo 'bhūt suratho nāma jāhnavaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Vidūratha",
+       "father": "Suratha",
+       "ref": "BhP 9.22.10",
+       "words": "tato vidūrathaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Sārvabhauma",
+       "father": "Vidūratha",
+       "ref": "BhP 9.22.10",
+       "words": "vidūrathastasmāt sārvabhaumaḥ",
+       "entry": 32305,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32305",
+       "index_head": "Sārvabhauma (II)"
+      },
+      {
+       "name": "Jayasena",
+       "father": "Sārvabhauma",
+       "ref": "BhP 9.22.10",
+       "words": "jayasenastattanayo",
+       "entry": 21539,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:21539",
+       "index_head": "Jayasena (II)"
+      },
+      {
+       "name": "Rādhika",
+       "father": "Jayasena",
+       "ref": "BhP 9.22.10",
+       "words": "rādhiko 'to",
+       "entry": 28088,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:28088",
+       "index_head": "Rādhika"
+      },
+      {
+       "name": "Ayutāyu",
+       "father": "Rādhika",
+       "ref": "BhP 9.22.10",
+       "words": "rādhiko 'to 'yutāyv abhūt",
+       "entry": 17833,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:17833",
+       "index_head": "Āyutāyu"
+      },
+      {
+       "name": "Akrodhana",
+       "father": "Ayutāyu",
+       "ref": "BhP 9.22.11",
+       "words": "tataścākrodhanaḥ",
+       "entry": 16505,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:16505",
+       "index_head": "Akrodhana (II)"
+      },
+      {
+       "name": "Devātithi",
+       "father": "Akrodhana",
+       "ref": "BhP 9.22.11",
+       "words": "akrodhanastasmāddevātithiḥ",
+       "entry": 22788,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22788",
+       "index_head": "Devātithi (II)"
+      },
+      {
+       "name": "Ṛkṣa",
+       "father": "Devātithi",
+       "ref": "BhP 9.22.11",
+       "words": "ṛkṣastasya",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Dilīpa",
+       "father": "Ṛkṣa",
+       "ref": "BhP 9.22.11",
+       "words": "ṛkṣastasya dilīpo 'bhūt",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Pratīpa",
+       "father": "Dilīpa",
+       "ref": "BhP 9.22.11",
+       "words": "pratīpastasya cātmajaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Bāhlīka",
+       "father": "Pratīpa",
+       "ref": "BhP 9.22.12",
+       "words": "bāhlīka iti cātmajāḥ",
+       "entry": 25518,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:25518",
+       "index_head": "Bāhlīka (I)"
+      },
+      {
+       "name": "Somadatta",
+       "father": "Bāhlīka",
+       "ref": "BhP 9.22.18",
+       "words": "bāhlīkāt somadatto 'bhūt",
+       "entry": 33262,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33262",
+       "index_head": "Somadatta (II)"
+      },
+      {
+       "name": "Bhūri",
+       "father": "Somadatta",
+       "ref": "BhP 9.22.18",
+       "words": "bhūrirbhūriśravāstataḥ",
+       "entry": 26232,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:26232",
+       "index_head": "Bhūri (I)"
+      }
+     ]
+    },
+    {
+     "n": 8,
+     "label": "",
      "length": 17,
      "steps": [
       {
@@ -8161,7 +8368,429 @@
      ]
     },
     {
-     "n": 7,
+     "n": 9,
+     "label": "",
+     "length": 17,
+     "steps": [
+      {
+       "name": "Kuśa",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 19777,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:19777",
+       "index_head": "Kuśa (I)"
+      },
+      {
+       "name": "Atithi",
+       "father": "Kuśa",
+       "ref": "BhP 9.12.1",
+       "words": "kuśasya cātithistasmān",
+       "entry": 16765,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:16765",
+       "index_head": "Atithi (I)"
+      },
+      {
+       "name": "Niṣadha",
+       "father": "Atithi",
+       "ref": "BhP 9.12.1",
+       "words": "niṣadhastatsuto",
+       "entry": 23734,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23734",
+       "index_head": "Niṣadha (I)"
+      },
+      {
+       "name": "Nabhas",
+       "father": "Niṣadha",
+       "ref": "BhP 9.12.1",
+       "words": "niṣadhastatsuto nabhaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Puṇḍarīka",
+       "father": "Nabhas",
+       "ref": "BhP 9.12.1",
+       "words": "puṇḍarīko 'tha tatputraḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Kṣemadhanvan",
+       "father": "Puṇḍarīka",
+       "ref": "BhP 9.12.1",
+       "words": "tatputraḥ kṣemadhanvābhavat tataḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Devānīka",
+       "father": "Kṣemadhanvan",
+       "ref": "BhP 9.12.2",
+       "words": "devānīkastato",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Anīha",
+       "father": "Devānīka",
+       "ref": "BhP 9.12.2",
+       "words": "tato 'nīhaḥ",
+       "entry": 16904,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:16904",
+       "index_head": "Anīha"
+      },
+      {
+       "name": "Pāriyātra",
+       "father": "Anīha",
+       "ref": "BhP 9.12.2",
+       "words": "pāriyātro 'tha tatsutaḥ",
+       "entry": 24283,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24283",
+       "index_head": "Pāriyātra (II)"
+      },
+      {
+       "name": "Balasthala",
+       "father": "Pāriyātra",
+       "ref": "BhP 9.12.2",
+       "words": "tato balasthalaḥ",
+       "entry": 25403,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:25403",
+       "index_head": "Balasthala"
+      },
+      {
+       "name": "Vajranābha",
+       "father": "Balasthala",
+       "ref": "BhP 9.12.2",
+       "words": "tasmādvajranābho",
+       "entry": 28578,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:28578",
+       "index_head": "Vajranābha (I)"
+      },
+      {
+       "name": "Sagaṇa",
+       "father": "Vajranābha",
+       "ref": "BhP 9.12.3",
+       "words": "sagaṇastatsutaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Vidhṛti",
+       "father": "Sagaṇa",
+       "ref": "BhP 9.12.3",
+       "words": "tasmādvidhṛtiścābhavat sutaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Hiraṇyanābha",
+       "father": "Vidhṛti",
+       "ref": "BhP 9.12.3",
+       "words": "tato hiraṇyanābho 'bhūt",
+       "entry": 33869,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33869",
+       "index_head": "Hiraṇyanābha (I)"
+      },
+      {
+       "name": "Puṣpa",
+       "father": "Hiraṇyanābha",
+       "ref": "BhP 9.12.5",
+       "words": "puṣpo hiraṇyanābhasya",
+       "entry": 24651,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24651",
+       "index_head": "Puṣpa"
+      },
+      {
+       "name": "Dhruvasandhi",
+       "father": "Puṣpa",
+       "ref": "BhP 9.12.5",
+       "words": "dhruvasandhistato 'bhavat",
+       "entry": 23272,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23272",
+       "index_head": "Dhruvasandhi"
+      },
+      {
+       "name": "Sudarśana",
+       "father": "Dhruvasandhi",
+       "ref": "BhP 9.12.5",
+       "words": "sudarśano 'tha",
+       "entry": 32581,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32581",
+       "index_head": "Sudarśana (IV)"
+      }
+     ]
+    },
+    {
+     "n": 10,
+     "label": "",
+     "length": 17,
+     "steps": [
+      {
+       "name": "Manu",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 26580,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:26580",
+       "index_head": "Manu (XIV)"
+      },
+      {
+       "name": "Ikṣvāku",
+       "father": "Manu",
+       "ref": "BhP 9.6.4",
+       "words": "manorjajñe ikṣvākurghrāṇataḥ sutaḥ",
+       "entry": 17973,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:17973",
+       "index_head": "Ikṣvāku"
+      },
+      {
+       "name": "Vikukṣi",
+       "father": "Ikṣvāku",
+       "ref": "BhP 9.6.4",
+       "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ",
+       "entry": 29184,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29184",
+       "index_head": "Vikukṣi"
+      },
+      {
+       "name": "Purañjaya",
+       "father": "Vikukṣi",
+       "ref": "BhP 9.6.12",
+       "words": "purañjayastasya suta",
+       "entry": 24501,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24501",
+       "index_head": "Purañjaya (I)"
+      },
+      {
+       "name": "Anenas",
+       "father": "Purañjaya",
+       "ref": "BhP 9.6.20",
+       "words": "purañjayasya putro 'bhūdanenāḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Pṛthu",
+       "father": "Anenas",
+       "ref": "BhP 9.6.20",
+       "words": "anenāstatsutaḥ pṛthuḥ",
+       "entry": 24765,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24765",
+       "index_head": "Pṛthu (III)"
+      },
+      {
+       "name": "Viśvagandhi",
+       "father": "Pṛthu",
+       "ref": "BhP 9.6.20",
+       "words": "viśvagandhistataḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Candra",
+       "father": "Viśvagandhi",
+       "ref": "BhP 9.6.20",
+       "words": "tataścandro",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Yuvanāśva",
+       "father": "Candra",
+       "ref": "BhP 9.6.20",
+       "words": "yuvanāśvastu tatsutaḥ",
+       "entry": 27803,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:27803",
+       "index_head": "Yuvanāśva (I)"
+      },
+      {
+       "name": "Śrāvasta",
+       "father": "Yuvanāśva",
+       "ref": "BhP 9.6.21",
+       "words": "śrāvastastatsuto",
+       "entry": 31369,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:31369",
+       "index_head": "Śrāvasta"
+      },
+      {
+       "name": "Bṛhadaśva",
+       "father": "Śrāvasta",
+       "ref": "BhP 9.6.21",
+       "words": "bṛhadaśvastu śrāvastiḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Kuvalayāśvaka",
+       "father": "Bṛhadaśva",
+       "ref": "BhP 9.6.21",
+       "words": "tataḥ kuvalayāśvakaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Dṛḍhāśva",
+       "father": "Kuvalayāśvaka",
+       "ref": "BhP 9.6.23",
+       "words": "tatsutāste",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Haryaśva",
+       "father": "Dṛḍhāśva",
+       "ref": "BhP 9.6.24",
+       "words": "dṛḍhāśvaputro haryaśvo",
+       "entry": 33732,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33732",
+       "index_head": "Haryaśva (I)"
+      },
+      {
+       "name": "Nikumbha",
+       "father": "Haryaśva",
+       "ref": "BhP 9.6.24",
+       "words": "nikumbhastatsutaḥ",
+       "entry": 23589,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23589",
+       "index_head": "Nikumbha (I)"
+      },
+      {
+       "name": "Bahulāśva",
+       "father": "Nikumbha",
+       "ref": "BhP 9.6.25",
+       "words": "bahulāśvo nikumbhasya",
+       "entry": 25456,
+       "how": "name",
+       "index": "differs",
+       "joined": "chapter",
+       "person": "pui:25456",
+       "index_head": "Bahulāśva"
+      },
+      {
+       "name": "Kṛśāśva",
+       "father": "Bahulāśva",
+       "ref": "BhP 9.6.25",
+       "words": "kṛśāśvo 'thāsya",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      }
+     ]
+    },
+    {
+     "n": 11,
      "label": "",
      "length": 16,
      "steps": [
@@ -8360,7 +8989,7 @@
      ]
     },
     {
-     "n": 8,
+     "n": 12,
      "label": "the line of Vṛṣṇi",
      "length": 15,
      "steps": [
@@ -8547,194 +9176,7 @@
      ]
     },
     {
-     "n": 9,
-     "label": "Haihaya (after Arjuna)",
-     "length": 15,
-     "steps": [
-      {
-       "name": "Śarmiṣṭhā",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": -17929,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:-17929",
-       "index_head": "Sarmiṣṭhā"
-      },
-      {
-       "name": "Druhyu",
-       "father": "Śarmiṣṭhā",
-       "ref": "BhP 9.18.33",
-       "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī",
-       "entry": 22892,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:22892",
-       "index_head": "Druhyu"
-      },
-      {
-       "name": "Babhru",
-       "father": "Druhyu",
-       "ref": "BhP 9.23.14",
-       "words": "druhyośca tanayo babhruḥ",
-       "entry": 25350,
-       "how": "father",
-       "index": "agrees",
-       "joined": "index",
-       "person": "pui:25350",
-       "index_head": "Babhru (I)"
-      },
-      {
-       "name": "Setu",
-       "father": "Babhru",
-       "ref": "BhP 9.23.14",
-       "words": "setustasyātmajastataḥ",
-       "entry": 33194,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:33194",
-       "index_head": "Setu (I)"
-      },
-      {
-       "name": "Ārabdha",
-       "father": "Setu",
-       "ref": "BhP 9.23.15",
-       "words": "ārabdhastasya",
-       "entry": 17849,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17849",
-       "index_head": "Ārabdha"
-      },
-      {
-       "name": "Gāndhāra",
-       "father": "Ārabdha",
-       "ref": "BhP 9.23.15",
-       "words": "gāndhārastasya",
-       "entry": 20634,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:20634",
-       "index_head": "Gāndhāra (I)"
-      },
-      {
-       "name": "Dharma",
-       "father": "Gāndhāra",
-       "ref": "BhP 9.23.15",
-       "words": "tasya dharmaḥ",
-       "entry": 23007,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23007",
-       "index_head": "Dharma (VII)"
-      },
-      {
-       "name": "Netra",
-       "father": "Dharma",
-       "ref": "BhP 9.23.22",
-       "words": "netraḥ",
-       "entry": 23820,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23820",
-       "index_head": "Netra"
-      },
-      {
-       "name": "Kunti",
-       "father": "Netra",
-       "ref": "BhP 9.23.22",
-       "words": "netraḥ kunteḥ pitā",
-       "entry": 19624,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19624",
-       "index_head": "Kunti (I)"
-      },
-      {
-       "name": "Sohañji",
-       "father": "Kunti",
-       "ref": "BhP 9.23.22",
-       "words": "sohañjirabhavat kunteḥ",
-       "entry": 33296,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:33296",
-       "index_head": "Sohāñji"
-      },
-      {
-       "name": "Mahiṣmān",
-       "father": "Sohañji",
-       "ref": "BhP 9.23.22",
-       "words": "mahiṣmān",
-       "entry": 27230,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:27230",
-       "index_head": "Māhiṣmān"
-      },
-      {
-       "name": "Bhadrasena",
-       "father": "Mahiṣmān",
-       "ref": "BhP 9.23.22",
-       "words": "bhadrasenakaḥ",
-       "entry": 25912,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:25912",
-       "index_head": "Bhadrasena(ka) (IV)"
-      },
-      {
-       "name": "Dhanaka",
-       "father": "Bhadrasena",
-       "ref": "BhP 9.23.23",
-       "words": "dhanakaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Kṛtavīrya",
-       "father": "Dhanaka",
-       "ref": "BhP 9.23.23",
-       "words": "dhanakaḥ kṛtavīryasūḥ",
-       "entry": 19921,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19921",
-       "index_head": "Kṛtavīrya (I)"
-      },
-      {
-       "name": "Arjuna",
-       "father": "Kṛtavīrya",
-       "ref": "BhP 9.23.24",
-       "words": "arjunaḥ kṛtavīryasya",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 10,
+     "n": 13,
      "label": "",
      "length": 14,
      "steps": [
@@ -8909,135 +9351,147 @@
      ]
     },
     {
-     "n": 11,
-     "label": "",
+     "n": 14,
+     "label": "Haihaya (after Arjuna)",
      "length": 14,
      "steps": [
       {
-       "name": "Sukhīnala",
+       "name": "Druhyu",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": 32488,
+       "entry": 22892,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:32488",
-       "index_head": "Sukhīnala"
+       "person": "pui:22892",
+       "index_head": "Druhyu"
       },
       {
-       "name": "Pariplava",
-       "father": "Sukhīnala",
-       "ref": "BhP 9.22.42",
-       "words": "pariplavaḥ sutastasmān",
-       "entry": 24105,
+       "name": "Babhru",
+       "father": "Druhyu",
+       "ref": "BhP 9.23.14",
+       "words": "druhyośca tanayo babhruḥ",
+       "entry": 25350,
        "how": "father",
        "index": "agrees",
        "joined": "",
-       "person": "pui:24105",
-       "index_head": "Pariplava"
+       "person": "pui:25350",
+       "index_head": "Babhru (I)"
       },
       {
-       "name": "Sunaya",
-       "father": "Pariplava",
-       "ref": "BhP 9.22.42",
-       "words": "medhāvī sunayātmajaḥ",
-       "entry": 32669,
+       "name": "Setu",
+       "father": "Babhru",
+       "ref": "BhP 9.23.14",
+       "words": "setustasyātmajastataḥ",
+       "entry": 33194,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32669",
-       "index_head": "Sunaya (I)"
+       "person": "pui:33194",
+       "index_head": "Setu (I)"
       },
       {
-       "name": "Medhāvin",
-       "father": "Sunaya",
-       "ref": "BhP 9.22.42",
-       "words": "medhāvī sunayātmajaḥ",
-       "entry": 27520,
+       "name": "Ārabdha",
+       "father": "Setu",
+       "ref": "BhP 9.23.15",
+       "words": "ārabdhastasya",
+       "entry": 17849,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:27520",
-       "index_head": "Medhāvin (I)"
+       "person": "pui:17849",
+       "index_head": "Ārabdha"
       },
       {
-       "name": "Nṛpañjaya",
-       "father": "Medhāvin",
-       "ref": "BhP 9.22.42",
-       "words": "nṛpañjayastato",
-       "entry": 23813,
+       "name": "Gāndhāra",
+       "father": "Ārabdha",
+       "ref": "BhP 9.23.15",
+       "words": "gāndhārastasya",
+       "entry": 20634,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:23813",
-       "index_head": "Nṛpañjaya (I)"
+       "person": "pui:20634",
+       "index_head": "Gāndhāra (I)"
       },
       {
-       "name": "Dūrva",
-       "father": "Nṛpañjaya",
-       "ref": "BhP 9.22.42",
-       "words": "dūrvastimis",
-       "entry": 22607,
+       "name": "Dharma",
+       "father": "Gāndhāra",
+       "ref": "BhP 9.23.15",
+       "words": "tasya dharmaḥ",
+       "entry": 23007,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:22607",
-       "index_head": "Dūrva (II)"
+       "person": "pui:23007",
+       "index_head": "Dharma (VII)"
       },
       {
-       "name": "Timi",
-       "father": "Dūrva",
-       "ref": "BhP 9.22.42",
-       "words": "tasmāj janiṣyati",
-       "entry": 21951,
+       "name": "Netra",
+       "father": "Dharma",
+       "ref": "BhP 9.23.22",
+       "words": "netraḥ",
+       "entry": 23820,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:21951",
-       "index_head": "Timi (II)"
+       "person": "pui:23820",
+       "index_head": "Netra"
       },
       {
-       "name": "Bṛhadratha",
-       "father": "Timi",
-       "ref": "BhP 9.22.43",
-       "words": "timerbṛhadrathas",
-       "entry": 25653,
+       "name": "Kunti",
+       "father": "Netra",
+       "ref": "BhP 9.23.22",
+       "words": "netraḥ kunteḥ pitā",
+       "entry": 19624,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:25653",
-       "index_head": "Bṛhadratha (III)"
+       "person": "pui:19624",
+       "index_head": "Kunti (I)"
       },
       {
-       "name": "Śatānīka",
-       "father": "Bṛhadratha",
-       "ref": "BhP 9.22.43",
-       "words": "tasmāc chatānīkaḥ",
-       "entry": 30551,
+       "name": "Sohañji",
+       "father": "Kunti",
+       "ref": "BhP 9.23.22",
+       "words": "sohañjirabhavat kunteḥ",
+       "entry": 33296,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:30551",
-       "index_head": "Śatānīka (VI)"
+       "person": "pui:33296",
+       "index_head": "Sohāñji"
       },
       {
-       "name": "Durdamana",
-       "father": "Śatānīka",
-       "ref": "BhP 9.22.43",
-       "words": "śatānīkāddurdamanas",
-       "entry": 22562,
-       "how": "name",
-       "index": "new",
+       "name": "Mahiṣmān",
+       "father": "Sohañji",
+       "ref": "BhP 9.23.22",
+       "words": "mahiṣmān",
+       "entry": 27230,
+       "how": "father",
+       "index": "agrees",
        "joined": "chapter",
-       "person": "pui:22562",
-       "index_head": "Durdamana"
+       "person": "pui:27230",
+       "index_head": "Māhiṣmān"
       },
       {
-       "name": "Mahīnara",
-       "father": "Durdamana",
-       "ref": "BhP 9.22.43",
-       "words": "tasyāpatyaṃ mahīnaraḥ",
+       "name": "Bhadrasena",
+       "father": "Mahiṣmān",
+       "ref": "BhP 9.23.22",
+       "words": "bhadrasenakaḥ",
+       "entry": 25912,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:25912",
+       "index_head": "Bhadrasena(ka) (IV)"
+      },
+      {
+       "name": "Dhanaka",
+       "father": "Bhadrasena",
+       "ref": "BhP 9.23.23",
+       "words": "dhanakaḥ",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -9046,45 +9500,196 @@
        "index_head": null
       },
       {
-       "name": "Daṇḍapāṇi",
-       "father": "Mahīnara",
-       "ref": "BhP 9.22.44",
-       "words": "daṇḍapāṇir",
+       "name": "Kṛtavīrya",
+       "father": "Dhanaka",
+       "ref": "BhP 9.23.23",
+       "words": "dhanakaḥ kṛtavīryasūḥ",
+       "entry": 19921,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19921",
+       "index_head": "Kṛtavīrya (I)"
+      },
+      {
+       "name": "Arjuna",
+       "father": "Kṛtavīrya",
+       "ref": "BhP 9.23.24",
+       "words": "arjunaḥ kṛtavīryasya",
        "entry": null,
        "how": "",
        "index": "absent",
        "joined": "chapter",
        "person": null,
        "index_head": null
-      },
-      {
-       "name": "Nimi",
-       "father": "Daṇḍapāṇi",
-       "ref": "BhP 9.22.44",
-       "words": "nimistasya",
-       "entry": 23634,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23634",
-       "index_head": "Nimi (II)"
-      },
-      {
-       "name": "Kṣemaka",
-       "father": "Nimi",
-       "ref": "BhP 9.22.44",
-       "words": "nimistasya kṣemako bhavitā yataḥ",
-       "entry": 20371,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:20371",
-       "index_head": "Kṣemaka (I)"
       }
      ]
     },
     {
-     "n": 12,
+     "n": 15,
+     "label": "",
+     "length": 13,
+     "steps": [
+      {
+       "name": "Aila",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": null,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Vijaya",
+       "father": "Aila",
+       "ref": "BhP 9.15.1",
+       "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Bhīma",
+       "father": "Vijaya",
+       "ref": "BhP 9.15.3",
+       "words": "bhīmastu vijayasyātha",
+       "entry": 26116,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:26116",
+       "index_head": "Bhīma"
+      },
+      {
+       "name": "Kāñcana",
+       "father": "Bhīma",
+       "ref": "BhP 9.15.3",
+       "words": "kāñcano hotrakastataḥ",
+       "entry": 19235,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19235",
+       "index_head": "Kāñcana (I)"
+      },
+      {
+       "name": "Hotraka",
+       "father": "Kāñcana",
+       "ref": "BhP 9.15.3",
+       "words": "kāñcano hotrakastataḥ",
+       "entry": 33973,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33973",
+       "index_head": "Hotraka"
+      },
+      {
+       "name": "Jahnu",
+       "father": "Hotraka",
+       "ref": "BhP 9.15.3",
+       "words": "tasya jahnuḥ suto",
+       "entry": 21457,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:21457",
+       "index_head": "Jahnu (I)"
+      },
+      {
+       "name": "Pura",
+       "father": "Jahnu",
+       "ref": "BhP 9.15.3",
+       "words": "jahnostu purustasyātha",
+       "entry": 24496,
+       "how": "name",
+       "index": "new",
+       "joined": "chapter",
+       "person": "pui:24496",
+       "index_head": "Pura"
+      },
+      {
+       "name": "Balāka",
+       "father": "Pura",
+       "ref": "BhP 9.15.3",
+       "words": "balākaścātmajo",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Ajaka",
+       "father": "Balāka",
+       "ref": "BhP 9.15.3",
+       "words": "balākaścātmajo 'jakaḥ",
+       "entry": 16685,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:16685",
+       "index_head": "Ajaka (I)"
+      },
+      {
+       "name": "Kuśa",
+       "father": "Ajaka",
+       "ref": "BhP 9.15.4",
+       "words": "tataḥ kuśaḥ",
+       "entry": 19778,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:19778",
+       "index_head": "Kuśa (II)"
+      },
+      {
+       "name": "Kuśāmbu",
+       "father": "Kuśa",
+       "ref": "BhP 9.15.4",
+       "words": "kuśasyāpi kuśāmbustanayo",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      },
+      {
+       "name": "Gādhi",
+       "father": "Kuśāmbu",
+       "ref": "BhP 9.15.4",
+       "words": "gādhirāsīt kuśāmbujaḥ",
+       "entry": 20622,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:20622",
+       "index_head": "Gādhi"
+      },
+      {
+       "name": "Viśvāmitra",
+       "father": "Gādhi",
+       "ref": "BhP 9.16.28",
+       "words": "gādherabhūn mahātejāḥ",
+       "entry": 29735,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29735",
+       "index_head": "Viśvāmitra (II)"
+      }
+     ]
+    },
+    {
+     "n": 16,
      "label": "",
      "length": 13,
      "steps": [
@@ -9247,75 +9852,147 @@
      ]
     },
     {
-     "n": 13,
+     "n": 17,
      "label": "",
-     "length": 12,
+     "length": 13,
      "steps": [
       {
-       "name": "Kuśa",
+       "name": "Romapāda",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": 19779,
+       "entry": -13795,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:19779",
-       "index_head": "Kuśa (III)"
+       "person": "pui:-13795",
+       "index_head": "R(L)omapāda"
       },
       {
-       "name": "Prati",
-       "father": "Kuśa",
-       "ref": "BhP 9.17.16",
-       "words": "kuśāt pratiḥ kṣātravṛddhāt",
-       "entry": 24974,
+       "name": "Caturaṅga",
+       "father": "Romapāda",
+       "ref": "BhP 9.23.10",
+       "words": "caturaṅgo romapādāt",
+       "entry": 21053,
        "how": "father",
        "index": "agrees",
        "joined": "",
-       "person": "pui:24974",
-       "index_head": "Prati"
+       "person": "pui:21053",
+       "index_head": "Caturaṅga"
       },
       {
-       "name": "Sañjaya",
-       "father": "Prati",
-       "ref": "BhP 9.17.16",
-       "words": "pratiḥ kṣātravṛddhāt sañjayaḥ",
-       "entry": 31614,
+       "name": "Pṛthulākṣa",
+       "father": "Caturaṅga",
+       "ref": "BhP 9.23.10",
+       "words": "pṛthulākṣastu tatsutaḥ",
+       "entry": 24800,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:31614",
-       "index_head": "Sañjaya (III)"
+       "person": "pui:24800",
+       "index_head": "Pṛthulākṣa"
       },
       {
-       "name": "Jaya",
-       "father": "Sañjaya",
-       "ref": "BhP 9.17.16",
-       "words": "sañjayastatsuto jayaḥ",
-       "entry": 21490,
+       "name": "Bṛhadratha",
+       "father": "Pṛthulākṣa",
+       "ref": "BhP 9.23.11",
+       "words": "bṛhadratho bṛhatkarmā bṛhadbhānuśca tatsutāḥ",
+       "entry": 25654,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:21490",
-       "index_head": "Jaya (VII)"
+       "person": "pui:25654",
+       "index_head": "Bṛhadratha (IV)"
       },
       {
-       "name": "Kṛta",
-       "father": "Jaya",
-       "ref": "BhP 9.17.17",
-       "words": "tataḥ kṛtaḥ",
-       "entry": 19887,
+       "name": "Bṛhanmanas",
+       "father": "Bṛhadratha",
+       "ref": "BhP 9.23.11",
+       "words": "ādyādbṛhanmanāstasmāt",
+       "entry": 25677,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:19887",
-       "index_head": "Kṛta (I)"
+       "person": "pui:25677",
+       "index_head": "Bṛhanmanas (I)"
       },
       {
-       "name": "Haryabala",
-       "father": "Kṛta",
-       "ref": "BhP 9.17.17",
-       "words": "kṛtasyāpi jajñe haryabalo",
+       "name": "Jayadratha",
+       "father": "Bṛhanmanas",
+       "ref": "BhP 9.23.11",
+       "words": "bṛhanmanāstasmāj jayadrathaḥ",
+       "entry": 21514,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:21514",
+       "index_head": "Jayadratha (II)"
+      },
+      {
+       "name": "Vijaya",
+       "father": "Jayadratha",
+       "ref": "BhP 9.23.12",
+       "words": "vijayastasya sambhūtyāṃ",
+       "entry": 29230,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:29230",
+       "index_head": "Vijaya (VI)"
+      },
+      {
+       "name": "Dhṛti",
+       "father": "Vijaya",
+       "ref": "BhP 9.23.12",
+       "words": "tato dhṛtirajāyata",
+       "entry": 23197,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23197",
+       "index_head": "Dhṛti (II)"
+      },
+      {
+       "name": "Dhṛtavrata",
+       "father": "Dhṛti",
+       "ref": "BhP 9.23.12",
+       "words": "tato dhṛtavratastasya",
+       "entry": 23193,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23193",
+       "index_head": "Dhṛtavrata (I)"
+      },
+      {
+       "name": "Satkarman",
+       "father": "Dhṛtavrata",
+       "ref": "BhP 9.23.12",
+       "words": "tasya satkarmā",
+       "entry": 31625,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:31625",
+       "index_head": "Satkarman"
+      },
+      {
+       "name": "Adhiratha",
+       "father": "Satkarman",
+       "ref": "BhP 9.23.12",
+       "words": "adhirathastataḥ",
+       "entry": 16824,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:16824",
+       "index_head": "Adhiratha"
+      },
+      {
+       "name": "Karṇa",
+       "father": "Adhiratha",
+       "ref": "BhP 9.23.13",
+       "words": "anapatyo 'karot sutam",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -9324,264 +10001,53 @@
        "index_head": null
       },
       {
-       "name": "Sahadeva",
-       "father": "Haryabala",
-       "ref": "BhP 9.17.17",
-       "words": "sahadevastato",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Hīna",
-       "father": "Sahadeva",
-       "ref": "BhP 9.17.17",
-       "words": "sahadevastato hīno",
-       "entry": 33899,
+       "name": "Vṛṣasena",
+       "father": "Karṇa",
+       "ref": "BhP 9.23.14",
+       "words": "vṛṣasenaḥ sutastasya karṇasya",
+       "entry": 29993,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:33899",
-       "index_head": "Hīna"
-      },
-      {
-       "name": "Jayasena",
-       "father": "Hīna",
-       "ref": "BhP 9.17.17",
-       "words": "jayasenastu tatsutaḥ",
-       "entry": 21538,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:21538",
-       "index_head": "Jayasena (I)"
-      },
-      {
-       "name": "Saṅkṛti",
-       "father": "Jayasena",
-       "ref": "BhP 9.17.18",
-       "words": "saṅkṛtistasya",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Jaya",
-       "father": "Saṅkṛti",
-       "ref": "BhP 9.17.18",
-       "words": "saṅkṛtistasya ca jayaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Kṣatradharman",
-       "father": "Jaya",
-       "ref": "BhP 9.17.18",
-       "words": "jayaḥ kṣatradharmā",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
+       "person": "pui:29993",
+       "index_head": "Vṛṣasena (I)"
       }
      ]
     },
     {
-     "n": 14,
-     "label": "",
-     "length": 12,
-     "steps": [
-      {
-       "name": "Manu",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 26580,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:26580",
-       "index_head": "Manu (XIV)"
-      },
-      {
-       "name": "Ikṣvāku",
-       "father": "Manu",
-       "ref": "BhP 9.6.4",
-       "words": "manorjajñe ikṣvākurghrāṇataḥ sutaḥ",
-       "entry": 17973,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:17973",
-       "index_head": "Ikṣvāku"
-      },
-      {
-       "name": "Vikukṣi",
-       "father": "Ikṣvāku",
-       "ref": "BhP 9.6.4",
-       "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ",
-       "entry": 29184,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29184",
-       "index_head": "Vikukṣi"
-      },
-      {
-       "name": "Purañjaya",
-       "father": "Vikukṣi",
-       "ref": "BhP 9.6.12",
-       "words": "purañjayastasya suta",
-       "entry": 24501,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24501",
-       "index_head": "Purañjaya (I)"
-      },
-      {
-       "name": "Anenas",
-       "father": "Purañjaya",
-       "ref": "BhP 9.6.20",
-       "words": "purañjayasya putro 'bhūdanenāḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Pṛthu",
-       "father": "Anenas",
-       "ref": "BhP 9.6.20",
-       "words": "anenāstatsutaḥ pṛthuḥ",
-       "entry": 24765,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24765",
-       "index_head": "Pṛthu (III)"
-      },
-      {
-       "name": "Viśvagandhi",
-       "father": "Pṛthu",
-       "ref": "BhP 9.6.20",
-       "words": "viśvagandhistataḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Candra",
-       "father": "Viśvagandhi",
-       "ref": "BhP 9.6.20",
-       "words": "tataścandro",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Yuvanāśva",
-       "father": "Candra",
-       "ref": "BhP 9.6.20",
-       "words": "yuvanāśvastu tatsutaḥ",
-       "entry": 27803,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:27803",
-       "index_head": "Yuvanāśva (I)"
-      },
-      {
-       "name": "Śrāvasta",
-       "father": "Yuvanāśva",
-       "ref": "BhP 9.6.21",
-       "words": "śrāvastastatsuto",
-       "entry": 31369,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:31369",
-       "index_head": "Śrāvasta"
-      },
-      {
-       "name": "Bṛhadaśva",
-       "father": "Śrāvasta",
-       "ref": "BhP 9.6.21",
-       "words": "bṛhadaśvastu śrāvastiḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Kuvalayāśvaka",
-       "father": "Bṛhadaśva",
-       "ref": "BhP 9.6.21",
-       "words": "tataḥ kuvalayāśvakaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 15,
+     "n": 18,
      "label": "",
      "length": 11,
      "steps": [
       {
-       "name": "Akrodhana",
+       "name": "Keśinī",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": 16505,
+       "entry": null,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:16505",
-       "index_head": "Akrodhana (II)"
+       "person": null,
+       "index_head": null
       },
       {
-       "name": "Devātithi",
-       "father": "Akrodhana",
-       "ref": "BhP 9.22.11",
-       "words": "akrodhanastasmāddevātithiḥ",
-       "entry": 22788,
-       "how": "father",
-       "index": "agrees",
+       "name": "Asamañjasa",
+       "father": "Keśinī",
+       "ref": "BhP 9.8.15",
+       "words": "sa keśinyā nṛpātmajaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
        "joined": "",
-       "person": "pui:22788",
-       "index_head": "Devātithi (II)"
+       "person": null,
+       "index_head": null
       },
       {
-       "name": "Ṛkṣa",
-       "father": "Devātithi",
-       "ref": "BhP 9.22.11",
-       "words": "ṛkṣastasya",
+       "name": "Aṃśumān",
+       "father": "Asamañjasa",
+       "ref": "BhP 9.8.15",
+       "words": "tasya putro 'ṃśumān nāma",
        "entry": null,
        "how": "",
        "index": "absent",
@@ -9590,105 +10056,105 @@
        "index_head": null
       },
       {
-       "name": "Saṃvaraṇa",
-       "father": "Ṛkṣa",
-       "ref": "BhP 9.22.3",
-       "words": "ṛkṣaḥ saṃvaraṇastataḥ",
-       "entry": 31968,
+       "name": "Dilīpa",
+       "father": "Aṃśumān",
+       "ref": "BhP 9.9.2",
+       "words": "dilīpastatsutaḥ",
+       "entry": 22450,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:31968",
-       "index_head": "Saṃvaraṇa"
+       "person": "pui:22450",
+       "index_head": "Dilīpa (II)"
       },
       {
-       "name": "Kuru",
-       "father": "Saṃvaraṇa",
-       "ref": "BhP 9.22.4",
-       "words": "tapatyāṃ sūryakanyāyāṃ kurukṣetrapatiḥ kuruḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Parīkṣi",
-       "father": "Kuru",
-       "ref": "BhP 9.22.4",
-       "words": "parīkṣiḥ sudhanurjahnurniṣadhaśca kuroḥ sutāḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Suratha",
-       "father": "Parīkṣi",
-       "ref": "BhP 9.22.9",
-       "words": "parīkṣiranapatyo 'bhūt suratho nāma jāhnavaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vidūratha",
-       "father": "Suratha",
-       "ref": "BhP 9.22.10",
-       "words": "tato vidūrathaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Sārvabhauma",
-       "father": "Vidūratha",
-       "ref": "BhP 9.22.10",
-       "words": "vidūrathastasmāt sārvabhaumaḥ",
-       "entry": 32305,
+       "name": "Bhagīratha",
+       "father": "Dilīpa",
+       "ref": "BhP 9.9.2",
+       "words": "bhagīrathastasya sutaḥ",
+       "entry": 25844,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:32305",
-       "index_head": "Sārvabhauma (II)"
+       "person": "pui:25844",
+       "index_head": "Bhagīratha"
       },
       {
-       "name": "Jayasena",
-       "father": "Sārvabhauma",
-       "ref": "BhP 9.22.10",
-       "words": "jayasenastattanayo",
-       "entry": 21539,
+       "name": "Śruta",
+       "father": "Bhagīratha",
+       "ref": "BhP 9.9.16",
+       "words": "śruto bhagīrathāj jajñe",
+       "entry": 31418,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:21539",
-       "index_head": "Jayasena (II)"
+       "person": "pui:31418",
+       "index_head": "Śruta (I)"
       },
       {
-       "name": "Rādhika",
-       "father": "Jayasena",
-       "ref": "BhP 9.22.10",
-       "words": "rādhiko 'to",
-       "entry": 28088,
+       "name": "Nābha",
+       "father": "Śruta",
+       "ref": "BhP 9.9.16",
+       "words": "tasya nābho 'paro 'bhavat",
+       "entry": 23522,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:28088",
-       "index_head": "Rādhika"
+       "person": "pui:23522",
+       "index_head": "Nābha (I)"
+      },
+      {
+       "name": "Sindhudvīpa",
+       "father": "Nābha",
+       "ref": "BhP 9.9.16",
+       "words": "sindhudvīpastatastasmāt",
+       "entry": 32394,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32394",
+       "index_head": "Sindhudvīpa (I)"
+      },
+      {
+       "name": "Ayutāyus",
+       "father": "Sindhudvīpa",
+       "ref": "BhP 9.9.16",
+       "words": "tasmādayutāyustato 'bhavat",
+       "entry": 17241,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17241",
+       "index_head": "Ayutāyus (I)"
+      },
+      {
+       "name": "Ṛtūparṇa",
+       "father": "Ayutāyus",
+       "ref": "BhP 9.9.17",
+       "words": "ṛtūparṇo",
+       "entry": 18611,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:18611",
+       "index_head": "Ṛtuparṇa"
+      },
+      {
+       "name": "Sarvakāma",
+       "father": "Ṛtūparṇa",
+       "ref": "BhP 9.9.17",
+       "words": "sarvakāmastu tatsutam",
+       "entry": 32043,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32043",
+       "index_head": "Sarvakāma (I)"
       }
      ]
     },
     {
-     "n": 16,
+     "n": 19,
      "label": "Mādhava (after Madhu)",
      "length": 11,
      "steps": [
@@ -9827,7 +10293,7 @@
      ]
     },
     {
-     "n": 17,
+     "n": 20,
      "label": "",
      "length": 10,
      "steps": [
@@ -9954,7 +10420,134 @@
      ]
     },
     {
-     "n": 18,
+     "n": 21,
+     "label": "Haihaya (after Arjuna)",
+     "length": 10,
+     "steps": [
+      {
+       "name": "Arjuna",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 17336,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:17336",
+       "index_head": "Arjuna (III)"
+      },
+      {
+       "name": "Abhimanyu",
+       "father": "Arjuna",
+       "ref": "BhP 9.22.33",
+       "words": "tava tātaḥ subhadrāyāmabhimanyurajāyata",
+       "entry": 17114,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:17114",
+       "index_head": "Abhimanyu (I)"
+      },
+      {
+       "name": "Parīkṣit",
+       "father": "Abhimanyu",
+       "ref": "BhP 9.22.33",
+       "words": "uttarāyāṃ tato bhavān",
+       "entry": 24120,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24120",
+       "index_head": "Parīkṣit (I)"
+      },
+      {
+       "name": "Janamejaya",
+       "father": "Parīkṣit",
+       "ref": "BhP 9.22.35",
+       "words": "taveme tanayāstāta janamejayapūrvakāḥ",
+       "entry": 21434,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:21434",
+       "index_head": "Janamejaya (I)"
+      },
+      {
+       "name": "Śatānīka",
+       "father": "Janamejaya",
+       "ref": "BhP 9.22.38",
+       "words": "tasya putraḥ śatānīko",
+       "entry": 30547,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:30547",
+       "index_head": "Śatānīka (II)"
+      },
+      {
+       "name": "Sahasrānīka",
+       "father": "Śatānīka",
+       "ref": "BhP 9.22.39",
+       "words": "sahasrānīkastatputras",
+       "entry": 32189,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:32189",
+       "index_head": "Sahasrānīka"
+      },
+      {
+       "name": "Aśvamedhaja",
+       "father": "Sahasrānīka",
+       "ref": "BhP 9.22.39",
+       "words": "tataścaivāśvamedhajaḥ",
+       "entry": 17496,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17496",
+       "index_head": "Aśvamedhaja"
+      },
+      {
+       "name": "Asīmakṛṣṇa",
+       "father": "Aśvamedhaja",
+       "ref": "BhP 9.22.39",
+       "words": "asīmakṛṣṇastasyāpi",
+       "entry": 17562,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17562",
+       "index_head": "Asīmakṛṣṇa"
+      },
+      {
+       "name": "Nemicakra",
+       "father": "Asīmakṛṣṇa",
+       "ref": "BhP 9.22.39",
+       "words": "nemicakrastu tatsutaḥ",
+       "entry": 23829,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23829",
+       "index_head": "Nemicakra"
+      },
+      {
+       "name": "Citraratha",
+       "father": "Nemicakra",
+       "ref": "BhP 9.22.40",
+       "words": "uktastataścitrarathaḥ",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      }
+     ]
+    },
+    {
+     "n": 22,
      "label": "Yādava (after Yadu)",
      "length": 10,
      "steps": [
@@ -10081,133 +10674,30 @@
      ]
     },
     {
-     "n": 19,
+     "n": 23,
      "label": "",
-     "length": 9,
+     "length": 10,
      "steps": [
       {
-       "name": "Aṃśumān",
+       "name": "Suhotra",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": -8595,
+       "entry": 33101,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:-8595",
-       "index_head": "Aṃśuman"
+       "person": "pui:33101",
+       "index_head": "Suhotra (I)"
       },
-      {
-       "name": "Dilīpa",
-       "father": "Aṃśumān",
-       "ref": "BhP 9.9.2",
-       "words": "dilīpastatsutaḥ",
-       "entry": 22450,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:22450",
-       "index_head": "Dilīpa (II)"
-      },
-      {
-       "name": "Bhagīratha",
-       "father": "Dilīpa",
-       "ref": "BhP 9.9.2",
-       "words": "bhagīrathastasya sutaḥ",
-       "entry": 25844,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:25844",
-       "index_head": "Bhagīratha"
-      },
-      {
-       "name": "Śruta",
-       "father": "Bhagīratha",
-       "ref": "BhP 9.9.16",
-       "words": "śruto bhagīrathāj jajñe",
-       "entry": 31418,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:31418",
-       "index_head": "Śruta (I)"
-      },
-      {
-       "name": "Nābha",
-       "father": "Śruta",
-       "ref": "BhP 9.9.16",
-       "words": "tasya nābho 'paro 'bhavat",
-       "entry": 23522,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23522",
-       "index_head": "Nābha (I)"
-      },
-      {
-       "name": "Sindhudvīpa",
-       "father": "Nābha",
-       "ref": "BhP 9.9.16",
-       "words": "sindhudvīpastatastasmāt",
-       "entry": 32394,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32394",
-       "index_head": "Sindhudvīpa (I)"
-      },
-      {
-       "name": "Ayutāyus",
-       "father": "Sindhudvīpa",
-       "ref": "BhP 9.9.16",
-       "words": "tasmādayutāyustato 'bhavat",
-       "entry": 17241,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17241",
-       "index_head": "Ayutāyus (I)"
-      },
-      {
-       "name": "Ṛtūparṇa",
-       "father": "Ayutāyus",
-       "ref": "BhP 9.9.17",
-       "words": "ṛtūparṇo",
-       "entry": 18611,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:18611",
-       "index_head": "Ṛtuparṇa"
-      },
-      {
-       "name": "Sarvakāma",
-       "father": "Ṛtūparṇa",
-       "ref": "BhP 9.9.17",
-       "words": "sarvakāmastu tatsutam",
-       "entry": 32043,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32043",
-       "index_head": "Sarvakāma (I)"
-      }
-     ]
-    },
-    {
-     "n": 20,
-     "label": "",
-     "length": 9,
-     "steps": [
       {
        "name": "Kāśya",
-       "father": "",
-       "ref": null,
-       "words": null,
+       "father": "Suhotra",
+       "ref": "BhP 9.17.2",
+       "words": "suhotrasyātmajāstrayaḥ kāśyaḥ",
        "entry": 19482,
-       "how": "",
-       "index": "",
+       "how": "father",
+       "index": "agrees",
        "joined": "",
        "person": "pui:19482",
        "index_head": "Kāśya (I)"
@@ -10220,7 +10710,7 @@
        "entry": 19468,
        "how": "father",
        "index": "agrees",
-       "joined": "",
+       "joined": "chapter",
        "person": "pui:19468",
        "index_head": "Kāśī"
       },
@@ -10311,340 +10801,43 @@
      ]
     },
     {
-     "n": 21,
-     "label": "",
-     "length": 9,
-     "steps": [
-      {
-       "name": "Pāriyātra",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 24283,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:24283",
-       "index_head": "Pāriyātra (II)"
-      },
-      {
-       "name": "Balasthala",
-       "father": "Pāriyātra",
-       "ref": "BhP 9.12.2",
-       "words": "tato balasthalaḥ",
-       "entry": 25403,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:25403",
-       "index_head": "Balasthala"
-      },
-      {
-       "name": "Vajranābha",
-       "father": "Balasthala",
-       "ref": "BhP 9.12.2",
-       "words": "tasmādvajranābho",
-       "entry": 28578,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:28578",
-       "index_head": "Vajranābha (I)"
-      },
-      {
-       "name": "Sagaṇa",
-       "father": "Vajranābha",
-       "ref": "BhP 9.12.3",
-       "words": "sagaṇastatsutaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vidhṛti",
-       "father": "Sagaṇa",
-       "ref": "BhP 9.12.3",
-       "words": "tasmādvidhṛtiścābhavat sutaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Hiraṇyanābha",
-       "father": "Vidhṛti",
-       "ref": "BhP 9.12.3",
-       "words": "tato hiraṇyanābho 'bhūt",
-       "entry": 33869,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:33869",
-       "index_head": "Hiraṇyanābha (I)"
-      },
-      {
-       "name": "Puṣpa",
-       "father": "Hiraṇyanābha",
-       "ref": "BhP 9.12.5",
-       "words": "puṣpo hiraṇyanābhasya",
-       "entry": 24651,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24651",
-       "index_head": "Puṣpa"
-      },
-      {
-       "name": "Dhruvasandhi",
-       "father": "Puṣpa",
-       "ref": "BhP 9.12.5",
-       "words": "dhruvasandhistato 'bhavat",
-       "entry": 23272,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23272",
-       "index_head": "Dhruvasandhi"
-      },
-      {
-       "name": "Sudarśana",
-       "father": "Dhruvasandhi",
-       "ref": "BhP 9.12.5",
-       "words": "sudarśano 'tha",
-       "entry": 32581,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32581",
-       "index_head": "Sudarśana (IV)"
-      }
-     ]
-    },
-    {
-     "n": 22,
-     "label": "",
-     "length": 8,
-     "steps": [
-      {
-       "name": "Aila",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vijaya",
-       "father": "Aila",
-       "ref": "BhP 9.15.1",
-       "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Bhīma",
-       "father": "Vijaya",
-       "ref": "BhP 9.15.3",
-       "words": "bhīmastu vijayasyātha",
-       "entry": 26116,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:26116",
-       "index_head": "Bhīma"
-      },
-      {
-       "name": "Kāñcana",
-       "father": "Bhīma",
-       "ref": "BhP 9.15.3",
-       "words": "kāñcano hotrakastataḥ",
-       "entry": 19235,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:19235",
-       "index_head": "Kāñcana (I)"
-      },
-      {
-       "name": "Hotraka",
-       "father": "Kāñcana",
-       "ref": "BhP 9.15.3",
-       "words": "kāñcano hotrakastataḥ",
-       "entry": 33973,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:33973",
-       "index_head": "Hotraka"
-      },
-      {
-       "name": "Jahnu",
-       "father": "Hotraka",
-       "ref": "BhP 9.15.3",
-       "words": "tasya jahnuḥ suto",
-       "entry": 21457,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:21457",
-       "index_head": "Jahnu (I)"
-      },
-      {
-       "name": "Pura",
-       "father": "Jahnu",
-       "ref": "BhP 9.15.3",
-       "words": "jahnostu purustasyātha",
-       "entry": 24496,
-       "how": "name",
-       "index": "new",
-       "joined": "chapter",
-       "person": "pui:24496",
-       "index_head": "Pura"
-      },
-      {
-       "name": "Balāka",
-       "father": "Pura",
-       "ref": "BhP 9.15.3",
-       "words": "balākaścātmajo",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 23,
-     "label": "",
-     "length": 8,
-     "steps": [
-      {
-       "name": "Pāṇḍu",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Nakula",
-       "father": "Pāṇḍu",
-       "ref": "BhP 9.22.28",
-       "words": "nakulaḥ sahadevaśca mādryāṃ",
-       "entry": 23281,
-       "how": "name",
-       "index": "differs",
-       "joined": "",
-       "person": "pui:23281",
-       "index_head": "Nakula"
-      },
-      {
-       "name": "Śatānīka",
-       "father": "Nakula",
-       "ref": "BhP 9.22.29",
-       "words": "śatānīkastu nākuliḥ",
-       "entry": 30546,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:30546",
-       "index_head": "Śatānīka (I)"
-      },
-      {
-       "name": "Sahasrānīka",
-       "father": "Śatānīka",
-       "ref": "BhP 9.22.39",
-       "words": "sahasrānīkastatputras",
-       "entry": 32189,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32189",
-       "index_head": "Sahasrānīka"
-      },
-      {
-       "name": "Aśvamedhaja",
-       "father": "Sahasrānīka",
-       "ref": "BhP 9.22.39",
-       "words": "tataścaivāśvamedhajaḥ",
-       "entry": 17496,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17496",
-       "index_head": "Aśvamedhaja"
-      },
-      {
-       "name": "Asīmakṛṣṇa",
-       "father": "Aśvamedhaja",
-       "ref": "BhP 9.22.39",
-       "words": "asīmakṛṣṇastasyāpi",
-       "entry": 17562,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:17562",
-       "index_head": "Asīmakṛṣṇa"
-      },
-      {
-       "name": "Nemicakra",
-       "father": "Asīmakṛṣṇa",
-       "ref": "BhP 9.22.39",
-       "words": "nemicakrastu tatsutaḥ",
-       "entry": 23829,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23829",
-       "index_head": "Nemicakra"
-      },
-      {
-       "name": "Citraratha",
-       "father": "Nemicakra",
-       "ref": "BhP 9.22.40",
-       "words": "uktastataścitrarathaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
      "n": 24,
      "label": "",
-     "length": 8,
+     "length": 10,
      "steps": [
       {
-       "name": "Rohita",
+       "name": "Triśaṅku",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": 28305,
+       "entry": -19221,
        "how": "",
        "index": "",
        "joined": "",
+       "person": "pui:-19221",
+       "index_head": "Triśaṅku"
+      },
+      {
+       "name": "Hariścandra",
+       "father": "Triśaṅku",
+       "ref": "BhP 9.7.7",
+       "words": "traiśaṅkavo hariścandro",
+       "entry": 33722,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:33722",
+       "index_head": "Hariścandra"
+      },
+      {
+       "name": "Rohita",
+       "father": "Hariścandra",
+       "ref": "BhP 9.7.9",
+       "words": "putro jātastu rohitaḥ",
+       "entry": 28305,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
        "person": "pui:28305",
        "index_head": "Rohita (I)"
       },
@@ -10656,7 +10849,7 @@
        "entry": 33695,
        "how": "father",
        "index": "agrees",
-       "joined": "",
+       "joined": "chapter",
        "person": "pui:33695",
        "index_head": "Harita (I)"
       },
@@ -10736,109 +10929,6 @@
     },
     {
      "n": 25,
-     "label": "",
-     "length": 8,
-     "steps": [
-      {
-       "name": "Sambhūti",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vijaya",
-       "father": "Sambhūti",
-       "ref": "BhP 9.23.12",
-       "words": "vijayastasya sambhūtyāṃ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Dhṛti",
-       "father": "Vijaya",
-       "ref": "BhP 9.23.12",
-       "words": "tato dhṛtirajāyata",
-       "entry": 23197,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23197",
-       "index_head": "Dhṛti (II)"
-      },
-      {
-       "name": "Dhṛtavrata",
-       "father": "Dhṛti",
-       "ref": "BhP 9.23.12",
-       "words": "tato dhṛtavratastasya",
-       "entry": 23193,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23193",
-       "index_head": "Dhṛtavrata (I)"
-      },
-      {
-       "name": "Satkarman",
-       "father": "Dhṛtavrata",
-       "ref": "BhP 9.23.12",
-       "words": "tasya satkarmā",
-       "entry": 31625,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:31625",
-       "index_head": "Satkarman"
-      },
-      {
-       "name": "Adhiratha",
-       "father": "Satkarman",
-       "ref": "BhP 9.23.12",
-       "words": "adhirathastataḥ",
-       "entry": 16824,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:16824",
-       "index_head": "Adhiratha"
-      },
-      {
-       "name": "Karṇa",
-       "father": "Adhiratha",
-       "ref": "BhP 9.23.13",
-       "words": "anapatyo 'karot sutam",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Vṛṣasena",
-       "father": "Karṇa",
-       "ref": "BhP 9.23.14",
-       "words": "vṛṣasenaḥ sutastasya karṇasya",
-       "entry": 29993,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29993",
-       "index_head": "Vṛṣasena (I)"
-      }
-     ]
-    },
-    {
-     "n": 26,
      "label": "",
      "length": 8,
      "steps": [
@@ -10941,7 +11031,7 @@
      ]
     },
     {
-     "n": 27,
+     "n": 26,
      "label": "",
      "length": 7,
      "steps": [
@@ -11018,112 +11108,21 @@
        "index_head": "Devaka (I)"
       },
       {
-       "name": "Upadeva",
+       "name": "Devavān",
        "father": "Devaka",
-       "ref": "BhP 9.24.22",
-       "words": "devavān upadevaśca sudevo",
-       "entry": null,
-       "how": "",
-       "index": "absent",
+       "ref": "BhP 9.24.21",
+       "words": "catvāro devakātmajāḥ devavān upadevaśca",
+       "entry": 22759,
+       "how": "father",
+       "index": "agrees",
        "joined": "chapter",
-       "person": null,
-       "index_head": null
+       "person": "pui:22759",
+       "index_head": "Devavān (III)"
       }
      ]
     },
     {
-     "n": 28,
-     "label": "",
-     "length": 7,
-     "steps": [
-      {
-       "name": "Romapāda",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": -13795,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:-13795",
-       "index_head": "R(L)omapāda"
-      },
-      {
-       "name": "Caturaṅga",
-       "father": "Romapāda",
-       "ref": "BhP 9.23.10",
-       "words": "caturaṅgo romapādāt",
-       "entry": 21053,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:21053",
-       "index_head": "Caturaṅga"
-      },
-      {
-       "name": "Pṛthulākṣa",
-       "father": "Caturaṅga",
-       "ref": "BhP 9.23.10",
-       "words": "pṛthulākṣastu tatsutaḥ",
-       "entry": 24800,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24800",
-       "index_head": "Pṛthulākṣa"
-      },
-      {
-       "name": "Bṛhadratha",
-       "father": "Pṛthulākṣa",
-       "ref": "BhP 9.23.11",
-       "words": "bṛhadratho bṛhatkarmā bṛhadbhānuśca tatsutāḥ",
-       "entry": 25654,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:25654",
-       "index_head": "Bṛhadratha (IV)"
-      },
-      {
-       "name": "Bṛhanmanas",
-       "father": "Bṛhadratha",
-       "ref": "BhP 9.23.11",
-       "words": "ādyādbṛhanmanāstasmāt",
-       "entry": 25677,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:25677",
-       "index_head": "Bṛhanmanas (I)"
-      },
-      {
-       "name": "Jayadratha",
-       "father": "Bṛhanmanas",
-       "ref": "BhP 9.23.11",
-       "words": "bṛhanmanāstasmāj jayadrathaḥ",
-       "entry": 21514,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:21514",
-       "index_head": "Jayadratha (II)"
-      },
-      {
-       "name": "Vijaya",
-       "father": "Jayadratha",
-       "ref": "BhP 9.23.12",
-       "words": "vijayastasya sambhūtyāṃ",
-       "entry": 29230,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:29230",
-       "index_head": "Vijaya (VI)"
-      }
-     ]
-    },
-    {
-     "n": 29,
+     "n": 27,
      "label": "",
      "length": 7,
      "steps": [
@@ -11214,7 +11213,7 @@
      ]
     },
     {
-     "n": 30,
+     "n": 28,
      "label": "",
      "length": 7,
      "steps": [
@@ -11305,7 +11304,7 @@
      ]
     },
     {
-     "n": 31,
+     "n": 29,
      "label": "",
      "length": 6,
      "steps": [
@@ -11384,7 +11383,7 @@
      ]
     },
     {
-     "n": 32,
+     "n": 30,
      "label": "",
      "length": 6,
      "steps": [
@@ -11463,74 +11462,153 @@
      ]
     },
     {
-     "n": 33,
+     "n": 31,
      "label": "",
-     "length": 5,
+     "length": 6,
      "steps": [
       {
-       "name": "Dṛḍhāśva",
+       "name": "Svāhita",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": 22628,
+       "entry": null,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:22628",
-       "index_head": "Dṛḍhāśva (II)"
+       "person": null,
+       "index_head": null
       },
       {
-       "name": "Haryaśva",
-       "father": "Dṛḍhāśva",
-       "ref": "BhP 9.6.24",
-       "words": "dṛḍhāśvaputro haryaśvo",
-       "entry": 33732,
-       "how": "father",
-       "index": "agrees",
+       "name": "Viṣadgu",
+       "father": "Svāhita",
+       "ref": "BhP 9.23.31",
+       "words": "viṣadgurvai",
+       "entry": null,
+       "how": "",
+       "index": "absent",
        "joined": "",
-       "person": "pui:33732",
-       "index_head": "Haryaśva (I)"
+       "person": null,
+       "index_head": null
       },
       {
-       "name": "Nikumbha",
-       "father": "Haryaśva",
-       "ref": "BhP 9.6.24",
-       "words": "nikumbhastatsutaḥ",
-       "entry": 23589,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23589",
-       "index_head": "Nikumbha (I)"
-      },
-      {
-       "name": "Bahulāśva",
-       "father": "Nikumbha",
-       "ref": "BhP 9.6.25",
-       "words": "bahulāśvo nikumbhasya",
-       "entry": 25456,
-       "how": "name",
-       "index": "differs",
-       "joined": "chapter",
-       "person": "pui:25456",
-       "index_head": "Bahulāśva"
-      },
-      {
-       "name": "Kṛśāśva",
-       "father": "Bahulāśva",
-       "ref": "BhP 9.6.25",
-       "words": "kṛśāśvo 'thāsya",
+       "name": "Citraratha",
+       "father": "Viṣadgu",
+       "ref": "BhP 9.23.31",
+       "words": "tasya citrarathastataḥ",
        "entry": null,
        "how": "",
        "index": "absent",
        "joined": "chapter",
        "person": null,
        "index_head": null
+      },
+      {
+       "name": "Śaśabindu",
+       "father": "Citraratha",
+       "ref": "BhP 9.23.31",
+       "words": "śaśabindurmahāyogī",
+       "entry": 30694,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:30694",
+       "index_head": "Śaśabindu"
+      },
+      {
+       "name": "Pṛthuśravas",
+       "father": "Śaśabindu",
+       "ref": "BhP 9.23.33",
+       "words": "teṣāṃ tu ṣaṭ pradhānānāṃ pṛthuśravasa ātmajaḥ",
+       "entry": 24802,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24802",
+       "index_head": "Pṛthuśravas (I)"
+      },
+      {
+       "name": "Dharma",
+       "father": "Pṛthuśravas",
+       "ref": "BhP 9.23.33",
+       "words": "pṛthuśravasa ātmajaḥ dharmo nāma",
+       "entry": 23009,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:23009",
+       "index_head": "Dharma (IX)"
       }
      ]
     },
     {
-     "n": 34,
+     "n": 32,
+     "label": "",
+     "length": 5,
+     "steps": [
+      {
+       "name": "Anaraṇya",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 16871,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:16871",
+       "index_head": "Anaraṇya (I)"
+      },
+      {
+       "name": "Haryaśva",
+       "father": "Anaraṇya",
+       "ref": "BhP 9.7.4",
+       "words": "haryaśvastatsutaḥ",
+       "entry": 33733,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:33733",
+       "index_head": "Haryaśva (II)"
+      },
+      {
+       "name": "Aruṇa",
+       "father": "Haryaśva",
+       "ref": "BhP 9.7.4",
+       "words": "tasmāt prāruṇo",
+       "entry": 17292,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:17292",
+       "index_head": "Aruṇa (III)"
+      },
+      {
+       "name": "Tribandhana",
+       "father": "Aruṇa",
+       "ref": "BhP 9.7.4",
+       "words": "prāruṇo 'tha tribandhanaḥ",
+       "entry": 22140,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:22140",
+       "index_head": "Tribandhana"
+      },
+      {
+       "name": "Satyavrata",
+       "father": "Tribandhana",
+       "ref": "BhP 9.7.5",
+       "words": "tasya satyavrataḥ putraḥ",
+       "entry": 31693,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:31693",
+       "index_head": "Satyavrata (II)"
+      }
+     ]
+    },
+    {
+     "n": 33,
      "label": "",
      "length": 5,
      "steps": [
@@ -11597,7 +11675,7 @@
      ]
     },
     {
-     "n": 35,
+     "n": 34,
      "label": "",
      "length": 5,
      "steps": [
@@ -11664,7 +11742,7 @@
      ]
     },
     {
-     "n": 36,
+     "n": 35,
      "label": "",
      "length": 5,
      "steps": [
@@ -11731,7 +11809,7 @@
      ]
     },
     {
-     "n": 37,
+     "n": 36,
      "label": "",
      "length": 4,
      "steps": [
@@ -11786,227 +11864,62 @@
      ]
     },
     {
+     "n": 37,
+     "label": "",
+     "length": 4,
+     "steps": [
+      {
+       "name": "Māndhātṛ",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": -14957,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:-14957",
+       "index_head": "Māndhātṛ"
+      },
+      {
+       "name": "Ambarīṣa",
+       "father": "Māndhātṛ",
+       "ref": "BhP 9.7.1",
+       "words": "māndhātuḥ putrapravaro yo 'mbarīṣaḥ",
+       "entry": 17193,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:17193",
+       "index_head": "Aṃbarīṣa (II)"
+      },
+      {
+       "name": "Yauvanāśva",
+       "father": "Ambarīṣa",
+       "ref": "BhP 9.7.1",
+       "words": "yauvanāśvastu tatsutaḥ",
+       "entry": 27848,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:27848",
+       "index_head": "Yauvanāśva (I)"
+      },
+      {
+       "name": "Hārīta",
+       "father": "Yauvanāśva",
+       "ref": "BhP 9.7.1",
+       "words": "hārītastasya putro 'bhūt",
+       "entry": null,
+       "how": "",
+       "index": "absent",
+       "joined": "chapter",
+       "person": null,
+       "index_head": null
+      }
+     ]
+    },
+    {
      "n": 38,
-     "label": "",
-     "length": 4,
-     "steps": [
-      {
-       "name": "Sabhānara",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": 31848,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": "pui:31848",
-       "index_head": "Sabhānar(l)a"
-      },
-      {
-       "name": "Kālanara",
-       "father": "Sabhānara",
-       "ref": "BhP 9.23.1",
-       "words": "sabhānarāt kālanaraḥ",
-       "entry": 19393,
-       "how": "father",
-       "index": "agrees",
-       "joined": "",
-       "person": "pui:19393",
-       "index_head": "Kālanar(l)a"
-      },
-      {
-       "name": "Sṛñjaya",
-       "father": "Kālanara",
-       "ref": "BhP 9.23.1",
-       "words": "sṛñjayastatsutastataḥ",
-       "entry": 33175,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:33175",
-       "index_head": "Sṛñjaya (II)"
-      },
-      {
-       "name": "Vṛṣa",
-       "father": "Sṛñjaya",
-       "ref": "BhP 9.24.42",
-       "words": "sṛñjayo rāṣṭrapālyāṃ ca vṛṣadurmarṣaṇādikān",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 39,
-     "label": "",
-     "length": 4,
-     "steps": [
-      {
-       "name": "Subhadrā",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Abhimanyu",
-       "father": "Subhadrā",
-       "ref": "BhP 9.22.33",
-       "words": "subhadrāyāmabhimanyurajāyata",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Parīkṣit",
-       "father": "Abhimanyu",
-       "ref": "BhP 9.22.33",
-       "words": "uttarāyāṃ tato bhavān",
-       "entry": 24120,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:24120",
-       "index_head": "Parīkṣit (I)"
-      },
-      {
-       "name": "Janamejaya",
-       "father": "Parīkṣit",
-       "ref": "BhP 9.22.35",
-       "words": "taveme tanayāstāta janamejayapūrvakāḥ",
-       "entry": 21434,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:21434",
-       "index_head": "Janamejaya (I)"
-      }
-     ]
-    },
-    {
-     "n": 40,
-     "label": "",
-     "length": 4,
-     "steps": [
-      {
-       "name": "Svāhita",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Viṣadgu",
-       "father": "Svāhita",
-       "ref": "BhP 9.23.31",
-       "words": "viṣadgurvai",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Citraratha",
-       "father": "Viṣadgu",
-       "ref": "BhP 9.23.31",
-       "words": "tasya citrarathastataḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Śaśabindu",
-       "father": "Citraratha",
-       "ref": "BhP 9.23.31",
-       "words": "śaśabindurmahāyogī",
-       "entry": 30694,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:30694",
-       "index_head": "Śaśabindu"
-      }
-     ]
-    },
-    {
-     "n": 41,
-     "label": "",
-     "length": 4,
-     "steps": [
-      {
-       "name": "Vṛṣṭimān",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Suṣeṇa",
-       "father": "Vṛṣṭimān",
-       "ref": "BhP 9.22.41",
-       "words": "tasya suṣeṇo",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Sunītha",
-       "father": "Suṣeṇa",
-       "ref": "BhP 9.22.41",
-       "words": "sunīthastasya bhavitā",
-       "entry": 32687,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:32687",
-       "index_head": "Sunītha (II)"
-      },
-      {
-       "name": "Nṛcakṣus",
-       "father": "Sunītha",
-       "ref": "BhP 9.22.41",
-       "words": "nṛcakṣuryat",
-       "entry": 23809,
-       "how": "father",
-       "index": "agrees",
-       "joined": "chapter",
-       "person": "pui:23809",
-       "index_head": "Nṛcakṣus"
-      }
-     ]
-    },
-    {
-     "n": 42,
      "label": "",
      "length": 4,
      "steps": [
@@ -12061,50 +11974,50 @@
      ]
     },
     {
-     "n": 43,
-     "label": "Maudgalya (after Mudgala)",
+     "n": 39,
+     "label": "",
      "length": 3,
      "steps": [
       {
-       "name": "Bharmyāśva",
+       "name": "Apratiratha",
        "father": "",
        "ref": null,
        "words": null,
-       "entry": 25978,
+       "entry": 17087,
        "how": "",
        "index": "",
        "joined": "",
-       "person": "pui:25978",
-       "index_head": "Bharmyāśva"
+       "person": "pui:17087",
+       "index_head": "Apratiratha"
       },
       {
-       "name": "Mudgala",
-       "father": "Bharmyāśva",
-       "ref": "BhP 9.21.31",
-       "words": "pañcāsan mudgalādayaḥ",
-       "entry": 27346,
+       "name": "Kaṇva",
+       "father": "Apratiratha",
+       "ref": "BhP 9.20.6",
+       "words": "kaṇvo 'pratirathātmajaḥ",
+       "entry": 18878,
        "how": "father",
        "index": "agrees",
        "joined": "",
-       "person": "pui:27346",
-       "index_head": "Mudgala (I)"
+       "person": "pui:18878",
+       "index_head": "Kaṇva (I)"
       },
       {
-       "name": "Divodāsa",
-       "father": "Mudgala",
-       "ref": "BhP 9.21.34",
-       "words": "mithunaṃ mudgalādbhārmyāddivodāsaḥ pumān abhūt",
-       "entry": 22476,
+       "name": "Medhātithi",
+       "father": "Kaṇva",
+       "ref": "BhP 9.20.7",
+       "words": "tasya medhātithiḥ",
+       "entry": 27512,
        "how": "father",
        "index": "agrees",
        "joined": "chapter",
-       "person": "pui:22476",
-       "index_head": "Divodāsa (II)"
+       "person": "pui:27512",
+       "index_head": "Medhātithi (III)"
       }
      ]
     },
     {
-     "n": 44,
+     "n": 40,
      "label": "",
      "length": 3,
      "steps": [
@@ -12147,7 +12060,7 @@
      ]
     },
     {
-     "n": 45,
+     "n": 41,
      "label": "",
      "length": 3,
      "steps": [
@@ -12190,7 +12103,7 @@
      ]
     },
     {
-     "n": 46,
+     "n": 42,
      "label": "",
      "length": 3,
      "steps": [
@@ -12233,7 +12146,7 @@
      ]
     },
     {
-     "n": 47,
+     "n": 43,
      "label": "",
      "length": 3,
      "steps": [
@@ -12276,7 +12189,93 @@
      ]
     },
     {
-     "n": 48,
+     "n": 44,
+     "label": "",
+     "length": 3,
+     "steps": [
+      {
+       "name": "Pāṇḍu",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": -21513,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:-21513",
+       "index_head": "Pāṇḍu"
+      },
+      {
+       "name": "Yudhiṣṭhira",
+       "father": "Pāṇḍu",
+       "ref": "BhP 9.22.27",
+       "words": "pāṇḍoḥ kuntyāṃ mahārathāḥ jātā dharmānilendrebhyo yudhiṣṭhiramukhāstrayaḥ",
+       "entry": 27797,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:27797",
+       "index_head": "Yudhiṣṭhira"
+      },
+      {
+       "name": "Prativindhya",
+       "father": "Yudhiṣṭhira",
+       "ref": "BhP 9.22.29",
+       "words": "yudhiṣṭhirāt prativindhyaḥ",
+       "entry": 24999,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:24999",
+       "index_head": "Prativindhya"
+      }
+     ]
+    },
+    {
+     "n": 45,
+     "label": "",
+     "length": 3,
+     "steps": [
+      {
+       "name": "Sabhānara",
+       "father": "",
+       "ref": null,
+       "words": null,
+       "entry": 31848,
+       "how": "",
+       "index": "",
+       "joined": "",
+       "person": "pui:31848",
+       "index_head": "Sabhānar(l)a"
+      },
+      {
+       "name": "Kālanara",
+       "father": "Sabhānara",
+       "ref": "BhP 9.23.1",
+       "words": "sabhānarāt kālanaraḥ",
+       "entry": 19393,
+       "how": "father",
+       "index": "agrees",
+       "joined": "",
+       "person": "pui:19393",
+       "index_head": "Kālanar(l)a"
+      },
+      {
+       "name": "Sṛñjaya",
+       "father": "Kālanara",
+       "ref": "BhP 9.23.1",
+       "words": "sṛñjayastatsutastataḥ",
+       "entry": 33175,
+       "how": "father",
+       "index": "agrees",
+       "joined": "chapter",
+       "person": "pui:33175",
+       "index_head": "Sṛñjaya (II)"
+      }
+     ]
+    },
+    {
+     "n": 46,
      "label": "",
      "length": 3,
      "steps": [
@@ -12319,50 +12318,7 @@
      ]
     },
     {
-     "n": 49,
-     "label": "",
-     "length": 3,
-     "steps": [
-      {
-       "name": "Ugrasena",
-       "father": "",
-       "ref": null,
-       "words": null,
-       "entry": null,
-       "how": "",
-       "index": "",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Kaṅka",
-       "father": "Ugrasena",
-       "ref": "BhP 9.24.24",
-       "words": "kaṅkaḥ śaṅkuḥ ... augrasenayaḥ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "",
-       "person": null,
-       "index_head": null
-      },
-      {
-       "name": "Baka",
-       "father": "Kaṅka",
-       "ref": "BhP 9.24.41",
-       "words": "bakaḥ kaṅkāt tu kaṅkāyāṃ",
-       "entry": null,
-       "how": "",
-       "index": "absent",
-       "joined": "chapter",
-       "person": null,
-       "index_head": null
-      }
-     ]
-    },
-    {
-     "n": 50,
+     "n": 47,
      "label": "Yādava (after Yadu)",
      "length": 3,
      "steps": [

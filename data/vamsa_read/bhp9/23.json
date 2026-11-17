@@ -656,13 +656,15 @@
    "check": "unsupported"
   },
   {
-   "ref": "BhP 9.23.18",
+   "ref": "BhP 9.23.17",
    "a": "Duṣmanta",
    "rel": "other",
    "b": "Maruta",
    "words": "putraṃ pauravamanvabhūt duṣmantaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.23.18",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.18",
@@ -1022,16 +1024,18 @@
    "b": "Śaśabindu",
    "words": "teṣāṃ tu ṣaṭ pradhānānāṃ pṛthuśravasa ātmajaḥ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
-   "ref": "BhP 9.23.34",
+   "ref": "BhP 9.23.33",
    "a": "Dharma",
    "rel": "son_of",
    "b": "Pṛthuśravas",
    "words": "pṛthuśravasa ātmajaḥ dharmo nāma",
    "doubt": false,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.23.34",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.34",
@@ -1052,13 +1056,15 @@
    "check": "words"
   },
   {
-   "ref": "BhP 9.23.35",
+   "ref": "BhP 9.23.34",
    "a": "Purujit",
    "rel": "son_of",
    "b": "Rucaka",
    "words": "rucakastasya pañcāsannātmajāḥ",
    "doubt": false,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.23.35",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.23.35",

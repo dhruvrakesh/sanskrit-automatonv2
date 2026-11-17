@@ -1,0 +1,544 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 24,
+ "part": 1,
+ "refs": [
+  "MatsP 24.1",
+  "MatsP 24.2",
+  "MatsP 24.3",
+  "MatsP 24.4",
+  "MatsP 24.5",
+  "MatsP 24.6",
+  "MatsP 24.7",
+  "MatsP 24.8",
+  "MatsP 24.9",
+  "MatsP 24.10",
+  "MatsP 24.11",
+  "MatsP 24.12",
+  "MatsP 24.13",
+  "MatsP 24.14",
+  "MatsP 24.15",
+  "MatsP 24.16",
+  "MatsP 24.17",
+  "MatsP 24.18",
+  "MatsP 24.19",
+  "MatsP 24.20",
+  "MatsP 24.21",
+  "MatsP 24.22",
+  "MatsP 24.23",
+  "MatsP 24.24",
+  "MatsP 24.25",
+  "MatsP 24.26",
+  "MatsP 24.27",
+  "MatsP 24.28",
+  "MatsP 24.29",
+  "MatsP 24.30",
+  "MatsP 24.31",
+  "MatsP 24.32",
+  "MatsP 24.33",
+  "MatsP 24.34",
+  "MatsP 24.35",
+  "MatsP 24.36",
+  "MatsP 24.37",
+  "MatsP 24.38",
+  "MatsP 24.39",
+  "MatsP 24.40",
+  "MatsP 24.41",
+  "MatsP 24.42",
+  "MatsP 24.43",
+  "MatsP 24.44",
+  "MatsP 24.45",
+  "MatsP 24.46",
+  "MatsP 24.47",
+  "MatsP 24.48",
+  "MatsP 24.49",
+  "MatsP 24.50",
+  "MatsP 24.51",
+  "MatsP 24.52",
+  "MatsP 24.53",
+  "MatsP 24.54",
+  "MatsP 24.55",
+  "MatsP 24.56",
+  "MatsP 24.57",
+  "MatsP 24.58"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:14:17",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 24.3\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"rājñaḥ somasya putratvād rājaputro budhaḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.2\",\"a\":\"Budha\",\"rel\":\"born_of\",\"b\":\"Tārā\",\"words\":\"tārodarādviniṣkrāntaḥ kumāraścandrasaṃnibhaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.9\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"budhaḥ putramajījanat\",\"doubt\":false},\n{\"ref\":\"MatsP 24.9\",\"a\":\"Purūravas\",\"rel\":\"born_of\",\"b\":\"Ilā\",\"words\":\"ilodare ca dharmiṣṭhaṃ budhaḥ putramajījanat\",\"doubt\":false},\n{\"ref\":\"MatsP 24.12\",\"a\":\"Urvaśī\",\"rel\":\"wife_of\",\"b\":\"Purūravas\",\"words\":\"urvaśī yasya patnītvam agamad\",\"doubt\":false},\n{\"ref\":\"MatsP 24.24\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"budhaputreṇa\",\"doubt\":false},\n{\"ref\":\"MatsP 24.32\",\"a\":\"Urvaśī\",\"rel\":\"wife_of\",\"b\":\"Purūravas\",\"words\":\"tatastamurvaśī gatvā bhartāramakarocciram\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Āyus\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"urvaśī budhasūnutaḥ ajījanatsutānaṣṭau\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Āyus\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"urvaśī budhasūnutaḥ ajījanatsutānaṣṭau\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Dṛḍhāyus\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"āyur dṛḍhāyur\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Dṛḍhāyus\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"āyur dṛḍhāyur\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Aśvāyus\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"aśvāyur\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Aśvāyus\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"aśvāyur\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Dhanāyus\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"dhanāyur\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Dhanāyus\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"dhanāyur\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Dhṛtimat\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"dhṛtimānvasuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Dhṛtimat\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"dhṛtimānvasuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"dhṛtimānvasuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.33\",\"a\":\"Vasu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"dhṛtimānvasuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.34\",\"a\":\"Śucividya\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"śucividyaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.34\",\"a\":\"Śucividya\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"śucividyaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.34\",\"a\":\"Śatāyus\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"śatāyuśca\",\"doubt\":false},\n{\"ref\":\"MatsP 24.34\",\"a\":\"Śatāyus\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"śatāyuśca\",\"doubt\":false},\n{\"ref\":\"MatsP 24.34\",\"a\":\"Nahuṣa\",\"rel\":\"son_of\",\"b\":\"Āyus\",\"words\":\"āyuṣo nahuṣaḥ putrau\",\"doubt\":false},\n{\"ref\":\"MatsP 24.34\",\"a\":\"Vṛddhaśarman\",\"rel\":\"son_of\",\"b\":\"Āyus\",\"words\":\"āyuṣo nahuṣaḥ putrau vṛddhaśarmā\",\"doubt\":false},\n{\"ref\":\"MatsP 24.35\",\"a\":\"Raji\",\"rel\":\"son_of\",\"b\":\"Āyus\",\"words\":\"rajirdambho vipāpmā ca vīrāḥ pañca\",\"doubt\":true},\n{\"ref\":\"MatsP 24.35\",\"a\":\"Rajiputras\",\"rel\":\"descendant_of\",\"b\":\"Raji\",\"words\":\"rajeḥ putraśataṃ jajñe\",\"doubt\":true},\n{\"ref\":\"MatsP 24.42\",\"a\":\"Indra\",\"rel\":\"son_of\",\"b\":\"Raji\",\"words\":\"putratvamagamattuṣṭas tasyendraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.49\",\"a\":\"Yati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya pravakṣyāmi putrānsaptaiva\",\"doubt\":false},\n{\"ref\":\"MatsP 24.50\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya putrān yatiryayātiḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.50\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"saṃyātir\",\"doubt\":false},\n{\"ref\":\"MatsP 24.50\",\"a\":\"Udbhava\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"udbhavaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.50\",\"a\":\"Pāci\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"pācireva\",\"doubt\":false},\n{\"ref\":\"MatsP 24.50\",\"a\":\"Śaryāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"śaryātir\",\"doubt\":false},\n{\"ref\":\"MatsP 24.50\",\"a\":\"Meghajāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"meghajātiśca\",\"doubt\":false},\n{\"ref\":\"MatsP 24.52\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"śarmiṣṭhā tasya bhāryābhūd\",\"doubt\":false},\n{\"ref\":\"MatsP 24.52\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"duhitā vṛṣaparvaṇaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.52\",\"a\":\"Devayānī\",\"rel\":\"daughter_of\",\"b\":\"Bhārgava\",\"words\":\"bhārgavasyātmajā tadvad devayānī\",\"doubt\":false},\n{\"ref\":\"MatsP 24.52\",\"a\":\"Devayānī\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"tadvad devayānī ca suvratā\",\"doubt\":false},\n{\"ref\":\"MatsP 24.53\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yayāteḥ pañca dāyādās\",\"doubt\":false},\n{\"ref\":\"MatsP 24.53\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"devayānī yaduṃ putraṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 24.53\",\"a\":\"Turvasu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yayāteḥ pañca dāyādās\",\"doubt\":false},\n{\"ref\":\"MatsP 24.53\",\"a\":\"Turvasu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"turvasuṃ cāpyajījanat\",\"doubt\":false},\n{\"ref\":\"MatsP 24.54\",\"a\":\"Druhyu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yayāteḥ pañca dāyādās\",\"doubt\":false},\n{\"ref\":\"MatsP 24.54\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyumanuṃ pūruṃ śarmiṣṭhājanayatsutān\",\"doubt\":false},\n{\"ref\":\"MatsP 24.54\",\"a\":\"Anu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yayāteḥ pañca dāyādās\",\"doubt\":false},\n{\"ref\":\"MatsP 24.54\",\"a\":\"Anu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyumanuṃ pūruṃ śarmiṣṭhājanayatsutān\",\"doubt\":false},\n{\"ref\":\"MatsP 24.54\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yayāteḥ pañca dāyādās\",\"doubt\":false},\n{\"ref\":\"MatsP 24.54\",\"a\":\"Pūru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"pūruṃ śarmiṣṭhājanayatsutān\",\"doubt\":false},\n{\"ref\":\"MatsP 24.55\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātirnāhuṣaścāsīd\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04511,
+ "tokens": {
+  "input": 5106,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3490,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 24.3",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "rājñaḥ somasya putratvād rājaputro budhaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.2",
+   "a": "Budha",
+   "rel": "born_of",
+   "b": "Tārā",
+   "words": "tārodarādviniṣkrāntaḥ kumāraścandrasaṃnibhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.9",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "budhaḥ putramajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.9",
+   "a": "Purūravas",
+   "rel": "born_of",
+   "b": "Ilā",
+   "words": "ilodare ca dharmiṣṭhaṃ budhaḥ putramajījanat",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 24.12",
+   "a": "Urvaśī",
+   "rel": "wife_of",
+   "b": "Purūravas",
+   "words": "urvaśī yasya patnītvam agamad",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.24",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "budhaputreṇa",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 24.32",
+   "a": "Urvaśī",
+   "rel": "wife_of",
+   "b": "Purūravas",
+   "words": "tatastamurvaśī gatvā bhartāramakarocciram",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.32",
+   "a": "Āyus",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "urvaśī budhasūnutaḥ ajījanatsutānaṣṭau",
+   "doubt": false,
+   "ref_cited": "MatsP 24.33",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.32",
+   "a": "Āyus",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "urvaśī budhasūnutaḥ ajījanatsutānaṣṭau",
+   "doubt": false,
+   "ref_cited": "MatsP 24.33",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Dṛḍhāyus",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "āyur dṛḍhāyur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Dṛḍhāyus",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "āyur dṛḍhāyur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Aśvāyus",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "aśvāyur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Aśvāyus",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "aśvāyur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Dhanāyus",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "dhanāyur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Dhanāyus",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "dhanāyur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Dhṛtimat",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "dhṛtimānvasuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Dhṛtimat",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "dhṛtimānvasuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "dhṛtimānvasuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.33",
+   "a": "Vasu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "dhṛtimānvasuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.34",
+   "a": "Śucividya",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "śucividyaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 24.34",
+   "a": "Śucividya",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "śucividyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.34",
+   "a": "Śatāyus",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "śatāyuśca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 24.34",
+   "a": "Śatāyus",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "śatāyuśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.34",
+   "a": "Nahuṣa",
+   "rel": "son_of",
+   "b": "Āyus",
+   "words": "āyuṣo nahuṣaḥ putrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.34",
+   "a": "Vṛddhaśarman",
+   "rel": "son_of",
+   "b": "Āyus",
+   "words": "āyuṣo nahuṣaḥ putrau vṛddhaśarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.35",
+   "a": "Raji",
+   "rel": "son_of",
+   "b": "Āyus",
+   "words": "rajirdambho vipāpmā ca vīrāḥ pañca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.35",
+   "a": "Rajiputras",
+   "rel": "descendant_of",
+   "b": "Raji",
+   "words": "rajeḥ putraśataṃ jajñe",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 24.42",
+   "a": "Indra",
+   "rel": "son_of",
+   "b": "Raji",
+   "words": "putratvamagamattuṣṭas tasyendraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.49",
+   "a": "Yati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya pravakṣyāmi putrānsaptaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.50",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya putrān yatiryayātiḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 24.50",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "saṃyātir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.50",
+   "a": "Udbhava",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "udbhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.50",
+   "a": "Pāci",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "pācireva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.50",
+   "a": "Śaryāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "śaryātir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.50",
+   "a": "Meghajāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "meghajātiśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.52",
+   "a": "Śarmiṣṭhā",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "śarmiṣṭhā tasya bhāryābhūd",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.52",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "duhitā vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.52",
+   "a": "Devayānī",
+   "rel": "daughter_of",
+   "b": "Bhārgava",
+   "words": "bhārgavasyātmajā tadvad devayānī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.52",
+   "a": "Devayānī",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "tadvad devayānī ca suvratā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yayāteḥ pañca dāyādās",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "devayānī yaduṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Turvasu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yayāteḥ pañca dāyādās",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Turvasu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "turvasuṃ cāpyajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Druhyu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yayāteḥ pañca dāyādās",
+   "doubt": false,
+   "ref_cited": "MatsP 24.54",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.54",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyumanuṃ pūruṃ śarmiṣṭhājanayatsutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Anu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yayāteḥ pañca dāyādās",
+   "doubt": false,
+   "ref_cited": "MatsP 24.54",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.54",
+   "a": "Anu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyumanuṃ pūruṃ śarmiṣṭhājanayatsutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.53",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yayāteḥ pañca dāyādās",
+   "doubt": false,
+   "ref_cited": "MatsP 24.54",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.54",
+   "a": "Pūru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "pūruṃ śarmiṣṭhājanayatsutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.55",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātirnāhuṣaścāsīd",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

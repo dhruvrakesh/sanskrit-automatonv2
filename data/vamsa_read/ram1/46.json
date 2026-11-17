@@ -1,0 +1,156 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 46,
+ "part": 0,
+ "refs": [
+  "R 1,46.1",
+  "R 1,46.2",
+  "R 1,46.3",
+  "R 1,46.4",
+  "R 1,46.5",
+  "R 1,46.6",
+  "R 1,46.7",
+  "R 1,46.8",
+  "R 1,46.9",
+  "R 1,46.10",
+  "R 1,46.11",
+  "R 1,46.12",
+  "R 1,46.13",
+  "R 1,46.14",
+  "R 1,46.15",
+  "R 1,46.16",
+  "R 1,46.17",
+  "R 1,46.18",
+  "R 1,46.19",
+  "R 1,46.20",
+  "R 1,46.21",
+  "R 1,46.22"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:56",
+ "reply": "{\"statements\": [\n{\"ref\":\"R 1,46.4\",\"a\":\"Marut\",\"rel\":\"son_of\",\"b\":\"Diti\",\"words\":\"mamātmajāḥ\",\"doubt\":true},\n{\"ref\":\"R 1,46.11\",\"a\":\"Viśāla\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākos tu naravyāghra putraḥ\",\"doubt\":false},\n{\"ref\":\"R 1,46.11\",\"a\":\"Viśāla\",\"rel\":\"born_of\",\"b\":\"Alambuṣā\",\"words\":\"alambuṣāyām utpanno viśāla\",\"doubt\":false},\n{\"ref\":\"R 1,46.13\",\"a\":\"Hemacandra\",\"rel\":\"son_of\",\"b\":\"Viśāla\",\"words\":\"viśālasya suto rāma hemacandro\",\"doubt\":false},\n{\"ref\":\"R 1,46.13\",\"a\":\"Sucandra\",\"rel\":\"succeeded\",\"b\":\"Hemacandra\",\"words\":\"sucandra iti vikhyāto hemacandrād anantaraḥ\",\"doubt\":false},\n{\"ref\":\"R 1,46.14\",\"a\":\"Dhūmrāśva\",\"rel\":\"son_of\",\"b\":\"Sucandra\",\"words\":\"sucandratanayo rāma dhūmrāśva\",\"doubt\":false},\n{\"ref\":\"R 1,46.14\",\"a\":\"Sṛñjaya\",\"rel\":\"son_of\",\"b\":\"Dhūmrāśva\",\"words\":\"dhūmrāśvatanayaś cāpi sṛñjayaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,46.15\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Sṛñjaya\",\"words\":\"sṛñjayasya sutaḥ śrīmān sahadevaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,46.15\",\"a\":\"Kuśāśva\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"kuśāśvaḥ sahadevasya putraḥ\",\"doubt\":false},\n{\"ref\":\"R 1,46.16\",\"a\":\"Somadatta\",\"rel\":\"son_of\",\"b\":\"Kuśāśva\",\"words\":\"kuśāśvasya mahātejāḥ somadattaḥ\",\"doubt\":false},\n{\"ref\":\"R 1,46.16\",\"a\":\"Kākutstha\",\"rel\":\"son_of\",\"b\":\"Somadatta\",\"words\":\"somadattasya putras tu kākutstha\",\"doubt\":false},\n{\"ref\":\"R 1,46.17\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Kākutstha\",\"words\":\"tasya putro mahātejāḥ saṃpraty eṣa purīm imām āvasaty amaraprakhyaḥ sumatir nāma\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01415,
+ "tokens": {
+  "input": 2504,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 914,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,46.4",
+   "a": "Marut",
+   "rel": "son_of",
+   "b": "Diti",
+   "words": "mamātmajāḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "R 1,46.11",
+   "a": "Viśāla",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākos tu naravyāghra putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.11",
+   "a": "Viśāla",
+   "rel": "born_of",
+   "b": "Alambuṣā",
+   "words": "alambuṣāyām utpanno viśāla",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.13",
+   "a": "Hemacandra",
+   "rel": "son_of",
+   "b": "Viśāla",
+   "words": "viśālasya suto rāma hemacandro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.13",
+   "a": "Sucandra",
+   "rel": "succeeded",
+   "b": "Hemacandra",
+   "words": "sucandra iti vikhyāto hemacandrād anantaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.14",
+   "a": "Dhūmrāśva",
+   "rel": "son_of",
+   "b": "Sucandra",
+   "words": "sucandratanayo rāma dhūmrāśva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.14",
+   "a": "Sṛñjaya",
+   "rel": "son_of",
+   "b": "Dhūmrāśva",
+   "words": "dhūmrāśvatanayaś cāpi sṛñjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.15",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Sṛñjaya",
+   "words": "sṛñjayasya sutaḥ śrīmān sahadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.15",
+   "a": "Kuśāśva",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "kuśāśvaḥ sahadevasya putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.16",
+   "a": "Somadatta",
+   "rel": "son_of",
+   "b": "Kuśāśva",
+   "words": "kuśāśvasya mahātejāḥ somadattaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.16",
+   "a": "Kākutstha",
+   "rel": "son_of",
+   "b": "Somadatta",
+   "words": "somadattasya putras tu kākutstha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,46.17",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Kākutstha",
+   "words": "tasya putro mahātejāḥ saṃpraty eṣa purīm imām āvasaty amaraprakhyaḥ sumatir nāma",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

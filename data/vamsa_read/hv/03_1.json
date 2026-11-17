@@ -1,0 +1,434 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 3,
+ "part": 1,
+ "refs": [
+  "HV 3.1",
+  "HV 3.2",
+  "HV 3.3",
+  "HV 3.4",
+  "HV 3.5",
+  "HV 3.6",
+  "HV 3.7",
+  "HV 3.8",
+  "HV 3.9",
+  "HV 3.10",
+  "HV 3.11",
+  "HV 3.12",
+  "HV 3.13",
+  "HV 3.14",
+  "HV 3.15",
+  "HV 3.16",
+  "HV 3.17",
+  "HV 3.18",
+  "HV 3.19",
+  "HV 3.20",
+  "HV 3.21",
+  "HV 3.22",
+  "HV 3.23",
+  "HV 3.24",
+  "HV 3.25",
+  "HV 3.26",
+  "HV 3.27",
+  "HV 3.28",
+  "HV 3.29",
+  "HV 3.30",
+  "HV 3.31",
+  "HV 3.32",
+  "HV 3.33",
+  "HV 3.34",
+  "HV 3.35",
+  "HV 3.36",
+  "HV 3.37",
+  "HV 3.38",
+  "HV 3.39",
+  "HV 3.40",
+  "HV 3.41",
+  "HV 3.42",
+  "HV 3.43",
+  "HV 3.44",
+  "HV 3.45",
+  "HV 3.46"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T09:59:46",
+ "reply": "{\"statements\":[\n{\"ref\":\"HV 3.5\",\"a\":\"Asiknī\",\"rel\":\"wife_of\",\"b\":\"Dakṣa\",\"words\":\"asiknīm āvahat patnīṃ\",\"doubt\":false},\n{\"ref\":\"HV 3.5\",\"a\":\"Asiknī\",\"rel\":\"daughter_of\",\"b\":\"Vīraṇa\",\"words\":\"vīraṇasya prajāpateḥ sutāṃ\",\"doubt\":false},\n{\"ref\":\"HV 3.6\",\"a\":\"Dakṣa\",\"rel\":\"begotten_by\",\"b\":\"Dakṣa\",\"words\":\"putrasahasrāṇi vairaṇyāṃ pañca\",\"doubt\":true},\n{\"ref\":\"HV 3.18\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣasya putrā haryaśvā\",\"doubt\":false},\n{\"ref\":\"HV 3.15\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣasya putrā haryaśvā\",\"doubt\":false},\n{\"ref\":\"HV 3.18\",\"a\":\"Śabalāśva\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"vairaṇyām eva putrāṇāṃ sahasram asṛjat\",\"doubt\":false},\n{\"ref\":\"HV 3.8\",\"a\":\"Nārada\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"yaṃ kaśyapaḥ sutavaraṃ parameṣṭhī vyajījanat\",\"doubt\":true},\n{\"ref\":\"HV 3.8\",\"a\":\"Nārada\",\"rel\":\"born_of\",\"b\":\"Dakṣa's daughter\",\"words\":\"dakṣasya vai duhitari\",\"doubt\":true},\n{\"ref\":\"HV 3.9\",\"a\":\"Nārada\",\"rel\":\"born_of\",\"b\":\"Asiknī\",\"words\":\"asiknyām atha vairaṇyāṃ bhūyo\",\"doubt\":false},\n{\"ref\":\"HV 3.13\",\"a\":\"Nārada\",\"rel\":\"son_of\",\"b\":\"Parameṣṭhin\",\"words\":\"sa tasyāṃ nārado jajñe\",\"doubt\":true},\n{\"ref\":\"HV 3.24\",\"a\":\"Dharma\",\"rel\":\"wife_of\",\"b\":\"Dakṣa\",\"words\":\"dadau sa daśa dharmāya\",\"doubt\":true},\n{\"ref\":\"HV 3.27\",\"a\":\"Viśvedevas\",\"rel\":\"born_of\",\"b\":\"Viśvā\",\"words\":\"viśvedevās tu viśvāyāḥ\",\"doubt\":false},\n{\"ref\":\"HV 3.27\",\"a\":\"Sādhya\",\"rel\":\"born_of\",\"b\":\"Sādhyā\",\"words\":\"sādhyā sādhyān vyajāyata\",\"doubt\":false},\n{\"ref\":\"HV 3.27\",\"a\":\"Marutvant\",\"rel\":\"born_of\",\"b\":\"Marutvatī\",\"words\":\"marutvatyāṃ marutvanto\",\"doubt\":false},\n{\"ref\":\"HV 3.27\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Vasu\",\"words\":\"vasos tu vasavaḥ smṛtāḥ\",\"doubt\":true},\n{\"ref\":\"HV 3.28\",\"a\":\"Bhānu\",\"rel\":\"son_of\",\"b\":\"Bhānu\",\"words\":\"bhānos tu bhānavas\",\"doubt\":true},\n{\"ref\":\"HV 3.28\",\"a\":\"Ghoṣa\",\"rel\":\"born_of\",\"b\":\"Lambā\",\"words\":\"lambāyāś caiva ghoṣo\",\"doubt\":false},\n{\"ref\":\"HV 3.28\",\"a\":\"Nāgavīthī\",\"rel\":\"born_of\",\"b\":\"Jāmī\",\"words\":\"nāgavīthī ca jāmijā\",\"doubt\":false},\n{\"ref\":\"HV 3.29\",\"a\":\"Saṃkalpa\",\"rel\":\"born_of\",\"b\":\"Saṃkalpā\",\"words\":\"saṃkalpāyās tu sarvātmā jajñe saṃkalpa\",\"doubt\":false},\n{\"ref\":\"HV 3.30\",\"a\":\"Vṛṣalambā\",\"rel\":\"born_of\",\"b\":\"Nāgavīthī\",\"words\":\"nāgavīthyāś ca jāminyā vṛṣalambā vyajāyata\",\"doubt\":true},\n{\"ref\":\"HV 3.33\",\"a\":\"Vaitaṇḍya\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putro vaitaṇḍyaḥ\",\"doubt\":false},\n{\"ref\":\"HV 3.33\",\"a\":\"Śrama\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putro vaitaṇḍyaḥ śramaḥ śānto\",\"doubt\":false},\n{\"ref\":\"HV 3.33\",\"a\":\"Kāla\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvasya putro bhagavān kālo\",\"doubt\":false},\n{\"ref\":\"HV 3.34\",\"a\":\"Varcas\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somasya bhagavān varcā\",\"doubt\":false},\n{\"ref\":\"HV 3.34\",\"a\":\"Draviṇa\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"dharasya putro draviṇo\",\"doubt\":false},\n{\"ref\":\"HV 3.34\",\"a\":\"Śiśira\",\"rel\":\"born_of\",\"b\":\"Manoharā\",\"words\":\"manoharāyāḥ śiśiraḥ\",\"doubt\":false},\n{\"ref\":\"HV 3.35\",\"a\":\"Śivā\",\"rel\":\"wife_of\",\"b\":\"Anila\",\"words\":\"anilasya śivā bhāryā\",\"doubt\":false},\n{\"ref\":\"HV 3.35\",\"a\":\"Purojava\",\"rel\":\"born_of\",\"b\":\"Śivā\",\"words\":\"yasyāḥ putraḥ purojavaḥ\",\"doubt\":false},\n{\"ref\":\"HV 3.35\",\"a\":\"Purojava\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāv anilasya\",\"doubt\":false},\n{\"ref\":\"HV 3.35\",\"a\":\"Avijñātagati\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāv anilasya\",\"doubt\":false},\n{\"ref\":\"HV 3.36\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"agniputraḥ kumāras\",\"doubt\":false},\n{\"ref\":\"HV 3.36\",\"a\":\"Śākha\",\"rel\":\"son_of\",\"b\":\"Kumāra\",\"words\":\"tasya śākho viśākhaś ca\",\"doubt\":true},\n{\"ref\":\"HV 3.36\",\"a\":\"Kārttikeya\",\"rel\":\"born_of\",\"b\":\"Kṛttikā\",\"words\":\"apatyaṃ kṛttikānāṃ sa kārttikeya\",\"doubt\":false},\n{\"ref\":\"HV 3.37\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pratyūṣa\",\"words\":\"pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam\",\"doubt\":false},\n{\"ref\":\"HV 3.37\",\"a\":\"Devala's sons\",\"rel\":\"son_of\",\"b\":\"Devala\",\"words\":\"dvau putrau devalasyāpi\",\"doubt\":true},\n{\"ref\":\"HV 3.38\",\"a\":\"Varastrī\",\"rel\":\"sister_of\",\"b\":\"Bṛhaspati\",\"words\":\"bṛhaspates tu bhaginī varastrī\",\"doubt\":false},\n{\"ref\":\"HV 3.39\",\"a\":\"Viśvakarman\",\"rel\":\"born_of\",\"b\":\"Prabhāsa's wife\",\"words\":\"tasyāṃ jajñe prajāpatiḥ\",\"doubt\":true},\n{\"ref\":\"HV 3.39\",\"a\":\"Viśvakarman\",\"rel\":\"son_of\",\"b\":\"Prabhāsa\",\"words\":\"prabhāsasya tu bhāryā sā\",\"doubt\":true},\n{\"ref\":\"HV 3.42\",\"a\":\"Rudra\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"surabhiḥ kaśyapād rudrān ekādaśa vinirmame\",\"doubt\":true},\n{\"ref\":\"HV 3.42\",\"a\":\"Viśvarūpa\",\"rel\":\"son_of\",\"b\":\"Tvaṣṭṛ\",\"words\":\"tvaṣṭuś caivātmajaḥ śrīmān viśvarūpo\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03853,
+ "tokens": {
+  "input": 5189,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2815,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 3.5",
+   "a": "Asiknī",
+   "rel": "wife_of",
+   "b": "Dakṣa",
+   "words": "asiknīm āvahat patnīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.5",
+   "a": "Asiknī",
+   "rel": "daughter_of",
+   "b": "Vīraṇa",
+   "words": "vīraṇasya prajāpateḥ sutāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.6",
+   "a": "Dakṣa",
+   "rel": "begotten_by",
+   "b": "Dakṣa",
+   "words": "putrasahasrāṇi vairaṇyāṃ pañca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.15",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣasya putrā haryaśvā",
+   "doubt": false,
+   "ref_cited": "HV 3.18",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.15",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣasya putrā haryaśvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.18",
+   "a": "Śabalāśva",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "vairaṇyām eva putrāṇāṃ sahasram asṛjat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.8",
+   "a": "Nārada",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "yaṃ kaśyapaḥ sutavaraṃ parameṣṭhī vyajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.8",
+   "a": "Nārada",
+   "rel": "born_of",
+   "b": "Dakṣa's daughter",
+   "words": "dakṣasya vai duhitari",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.9",
+   "a": "Nārada",
+   "rel": "born_of",
+   "b": "Asiknī",
+   "words": "asiknyām atha vairaṇyāṃ bhūyo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.13",
+   "a": "Nārada",
+   "rel": "son_of",
+   "b": "Parameṣṭhin",
+   "words": "sa tasyāṃ nārado jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.24",
+   "a": "Dharma",
+   "rel": "wife_of",
+   "b": "Dakṣa",
+   "words": "dadau sa daśa dharmāya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.27",
+   "a": "Viśvedevas",
+   "rel": "born_of",
+   "b": "Viśvā",
+   "words": "viśvedevās tu viśvāyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.27",
+   "a": "Sādhya",
+   "rel": "born_of",
+   "b": "Sādhyā",
+   "words": "sādhyā sādhyān vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.27",
+   "a": "Marutvant",
+   "rel": "born_of",
+   "b": "Marutvatī",
+   "words": "marutvatyāṃ marutvanto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.27",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Vasu",
+   "words": "vasos tu vasavaḥ smṛtāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.28",
+   "a": "Bhānu",
+   "rel": "son_of",
+   "b": "Bhānu",
+   "words": "bhānos tu bhānavas",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.28",
+   "a": "Ghoṣa",
+   "rel": "born_of",
+   "b": "Lambā",
+   "words": "lambāyāś caiva ghoṣo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.28",
+   "a": "Nāgavīthī",
+   "rel": "born_of",
+   "b": "Jāmī",
+   "words": "nāgavīthī ca jāmijā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.29",
+   "a": "Saṃkalpa",
+   "rel": "born_of",
+   "b": "Saṃkalpā",
+   "words": "saṃkalpāyās tu sarvātmā jajñe saṃkalpa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.30",
+   "a": "Vṛṣalambā",
+   "rel": "born_of",
+   "b": "Nāgavīthī",
+   "words": "nāgavīthyāś ca jāminyā vṛṣalambā vyajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.33",
+   "a": "Vaitaṇḍya",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putro vaitaṇḍyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.33",
+   "a": "Śrama",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putro vaitaṇḍyaḥ śramaḥ śānto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.33",
+   "a": "Kāla",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvasya putro bhagavān kālo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.34",
+   "a": "Varcas",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somasya bhagavān varcā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.34",
+   "a": "Draviṇa",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "dharasya putro draviṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.34",
+   "a": "Śiśira",
+   "rel": "born_of",
+   "b": "Manoharā",
+   "words": "manoharāyāḥ śiśiraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.35",
+   "a": "Śivā",
+   "rel": "wife_of",
+   "b": "Anila",
+   "words": "anilasya śivā bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.35",
+   "a": "Purojava",
+   "rel": "born_of",
+   "b": "Śivā",
+   "words": "yasyāḥ putraḥ purojavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.35",
+   "a": "Purojava",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāv anilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.35",
+   "a": "Avijñātagati",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāv anilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.36",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "agniputraḥ kumāras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.36",
+   "a": "Śākha",
+   "rel": "son_of",
+   "b": "Kumāra",
+   "words": "tasya śākho viśākhaś ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.36",
+   "a": "Kārttikeya",
+   "rel": "born_of",
+   "b": "Kṛttikā",
+   "words": "apatyaṃ kṛttikānāṃ sa kārttikeya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.37",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pratyūṣa",
+   "words": "pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.37",
+   "a": "Devala's sons",
+   "rel": "son_of",
+   "b": "Devala",
+   "words": "dvau putrau devalasyāpi",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.38",
+   "a": "Varastrī",
+   "rel": "sister_of",
+   "b": "Bṛhaspati",
+   "words": "bṛhaspates tu bhaginī varastrī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.39",
+   "a": "Viśvakarman",
+   "rel": "born_of",
+   "b": "Prabhāsa's wife",
+   "words": "tasyāṃ jajñe prajāpatiḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.39",
+   "a": "Viśvakarman",
+   "rel": "son_of",
+   "b": "Prabhāsa",
+   "words": "prabhāsasya tu bhāryā sā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.42",
+   "a": "Rudra",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "surabhiḥ kaśyapād rudrān ekādaśa vinirmame",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 3.42",
+   "a": "Viśvarūpa",
+   "rel": "son_of",
+   "b": "Tvaṣṭṛ",
+   "words": "tvaṣṭuś caivātmajaḥ śrīmān viśvarūpo",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

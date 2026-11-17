@@ -1,0 +1,47 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 23,
+ "part": 6,
+ "refs": [
+  "HV 23.166",
+  "HV 23.167",
+  "HV 23.168"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:08:39",
+ "reply": "Only the 23.167–168 verses touch on kinship.\n\n23.167: \"kroṣṭos tu śṛṇu ... vaṃśam ... yador vaṃśadharasya\" says Kroṣṭu is the one who carries Yadu's line, which I read as Kroṣṭu being a descendant of Yadu. The text does not say \"son\", so I use descendant_of and flag it as uncertain.\n\n23.168: \"yasyānvavāyajo viṣṇur harir vṛṣṇikulaprabhuḥ\" says Viṣṇu (Hari), lord of the Vṛṣṇi clan, was born in the lineage of the person \"yasya\" refers to. That person is Kroṣṭu, so Viṣṇu is a descendant of Kroṣṭu. The pronoun's referent is a little unclear, so I flag it too.\n\n```json\n{\"statements\":[\n{\"ref\":\"HV 23.167\",\"a\":\"Kroṣṭu\",\"rel\":\"descendant_of\",\"b\":\"Yadu\",\"words\":\"yador vaṃśadharasyeha\",\"doubt\":true},\n{\"ref\":\"HV 23.168\",\"a\":\"Viṣṇu\",\"rel\":\"descendant_of\",\"b\":\"Kroṣṭu\",\"words\":\"yasyānvavāyajo viṣṇur harir\",\"doubt\":true}\n]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.00687,
+ "tokens": {
+  "input": 1240,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 439,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 23.167",
+   "a": "Kroṣṭu",
+   "rel": "descendant_of",
+   "b": "Yadu",
+   "words": "yador vaṃśadharasyeha",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.168",
+   "a": "Viṣṇu",
+   "rel": "descendant_of",
+   "b": "Kroṣṭu",
+   "words": "yasyānvavāyajo viṣṇur harir",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

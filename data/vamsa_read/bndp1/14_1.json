@@ -1,0 +1,407 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp1",
+ "title": "Brahmandapurana, book 1",
+ "chapter": 14,
+ "part": 1,
+ "refs": [
+  "BndP 1,14.1",
+  "BndP 1,14.2",
+  "BndP 1,14.3",
+  "BndP 1,14.4",
+  "BndP 1,14.5",
+  "BndP 1,14.6",
+  "BndP 1,14.7",
+  "BndP 1,14.8",
+  "BndP 1,14.9",
+  "BndP 1,14.10",
+  "BndP 1,14.11",
+  "BndP 1,14.12",
+  "BndP 1,14.13",
+  "BndP 1,14.14",
+  "BndP 1,14.15",
+  "BndP 1,14.16",
+  "BndP 1,14.17",
+  "BndP 1,14.18",
+  "BndP 1,14.19",
+  "BndP 1,14.20",
+  "BndP 1,14.21",
+  "BndP 1,14.22",
+  "BndP 1,14.23",
+  "BndP 1,14.24",
+  "BndP 1,14.25",
+  "BndP 1,14.26",
+  "BndP 1,14.27",
+  "BndP 1,14.28",
+  "BndP 1,14.29",
+  "BndP 1,14.30",
+  "BndP 1,14.31",
+  "BndP 1,14.32",
+  "BndP 1,14.33",
+  "BndP 1,14.34",
+  "BndP 1,14.35",
+  "BndP 1,14.36",
+  "BndP 1,14.37",
+  "BndP 1,14.38",
+  "BndP 1,14.39",
+  "BndP 1,14.40",
+  "BndP 1,14.41",
+  "BndP 1,14.42",
+  "BndP 1,14.43",
+  "BndP 1,14.44",
+  "BndP 1,14.45",
+  "BndP 1,14.46",
+  "BndP 1,14.47",
+  "BndP 1,14.48",
+  "BndP 1,14.49",
+  "BndP 1,14.50",
+  "BndP 1,14.51",
+  "BndP 1,14.52",
+  "BndP 1,14.53",
+  "BndP 1,14.54",
+  "BndP 1,14.55"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:22:09",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 1,14.4\",\"a\":\"Priyavrata\",\"rel\":\"descendant_of\",\"b\":\"Manu Svāyambhuva\",\"words\":\"manoḥ svāyaṃbhūvasyāsan daśa pautrāstu\",\"doubt\":true},{\"ref\":\"BndP 1,14.9\",\"a\":\"Āgnīdhra\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"āgnīdhraścāgnibā huśca medhā medhātithirvasuḥ\",\"doubt\":true},{\"ref\":\"BndP 1,14.14\",\"a\":\"Mahāvīta\",\"rel\":\"son_of\",\"b\":\"Savana\",\"words\":\"puṣkare savanasyātha mahāvītaḥ suto 'bhavat\",\"doubt\":false},{\"ref\":\"BndP 1,14.16\",\"a\":\"Dhātaki\",\"rel\":\"brother_of\",\"b\":\"Mahāvīta\",\"words\":\"dhātakiścāpi dvāvetau putrau\",\"doubt\":true},{\"ref\":\"BndP 1,14.22\",\"a\":\"Kuśala\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"putro dyutimatastu vai kuśalo\",\"doubt\":false},{\"ref\":\"BndP 1,14.22\",\"a\":\"Manonuga\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"putro dyutimatastu vai kuśalo manonugaschoṣṇaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.22\",\"a\":\"Uṣṇa\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"putro dyutimatastu vai kuśalo manonugaschoṣṇaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.22\",\"a\":\"Pāvana\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"pāvanaścāndhakārakaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.22\",\"a\":\"Andhakāraka\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"pāvanaścāndhakārakaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.23\",\"a\":\"Muni\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"muniśca dundubhiścaiva sutā dyutimatastu vai\",\"doubt\":false},{\"ref\":\"BndP 1,14.23\",\"a\":\"Dundubhi\",\"rel\":\"son_of\",\"b\":\"Dyutimat\",\"words\":\"muniśca dundubhiścaiva sutā dyutimatastu vai\",\"doubt\":false},{\"ref\":\"BndP 1,14.31\",\"a\":\"Śveta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"sutāste ca vapuṣmataḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.32\",\"a\":\"Harita\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"śvetaśca haritaścaiva\",\"doubt\":false},{\"ref\":\"BndP 1,14.32\",\"a\":\"Jīmūta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"jīmūto rohitastathā\",\"doubt\":false},{\"ref\":\"BndP 1,14.32\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"jīmūto rohitastathā\",\"doubt\":false},{\"ref\":\"BndP 1,14.32\",\"a\":\"Vaidyuta\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"vaidyuto mānasaścāpi\",\"doubt\":false},{\"ref\":\"BndP 1,14.32\",\"a\":\"Mānasa\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"vaidyuto mānasaścāpi\",\"doubt\":false},{\"ref\":\"BndP 1,14.32\",\"a\":\"Suprabha\",\"rel\":\"son_of\",\"b\":\"Vapuṣmat\",\"words\":\"suprabhaḥ saptamastathā\",\"doubt\":false},{\"ref\":\"BndP 1,14.35\",\"a\":\"Śāntabhaya\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sapta medhātithe putrāḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.36\",\"a\":\"Śiśira\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"dvitīyaḥ śiśiraḥ smṛtaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.36\",\"a\":\"Sukhodaya\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"sukhodayastṛtīyastu\",\"doubt\":false},{\"ref\":\"BndP 1,14.36\",\"a\":\"Nanda\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"caturtho nanda ucyate\",\"doubt\":false},{\"ref\":\"BndP 1,14.37\",\"a\":\"Śiva\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"śivastu pecamasteṣāṃ\",\"doubt\":false},{\"ref\":\"BndP 1,14.37\",\"a\":\"Kṣemaka\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"kṣemakaḥ ṣaṣṭha ucyate\",\"doubt\":false},{\"ref\":\"BndP 1,14.37\",\"a\":\"Dhruva\",\"rel\":\"son_of\",\"b\":\"Medhātithi\",\"words\":\"dhruvastu saptamo jñeyaḥ putrā medhātitheḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.44\",\"a\":\"Āgnīdhra\",\"rel\":\"son_of\",\"b\":\"Priyavrata\",\"words\":\"āgnīdhraṃ jyeṣṭhadāyādaṃ priyavrato\",\"doubt\":false},{\"ref\":\"BndP 1,14.45\",\"a\":\"Nābhi\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"tasya putrā babhūvurhi prajāpatisamā nava jyeṣṭho nābhiriti\",\"doubt\":false},{\"ref\":\"BndP 1,14.45\",\"a\":\"Kiṃpuruṣa\",\"rel\":\"brother_of\",\"b\":\"Nābhi\",\"words\":\"tasya kiṃpuruṣo 'nujaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.45\",\"a\":\"Kiṃpuruṣa\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"tasya putrā babhūvurhi\",\"doubt\":false},{\"ref\":\"BndP 1,14.46\",\"a\":\"Harivarṣa\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"harivarṣastṛtīyastu\",\"doubt\":false},{\"ref\":\"BndP 1,14.46\",\"a\":\"Ilāvṛta\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"caturtho 'bhūdilāvṛtaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.46\",\"a\":\"Ramya\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"ramyastu pañcamaḥ putro\",\"doubt\":false},{\"ref\":\"BndP 1,14.46\",\"a\":\"Hiraṇvat\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"hiraṇvān ṣaṣṭha ucyate\",\"doubt\":false},{\"ref\":\"BndP 1,14.47\",\"a\":\"Kuru\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"kurustu saptamasteṣāṃ\",\"doubt\":false},{\"ref\":\"BndP 1,14.47\",\"a\":\"Bhadrāśva\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"bhadrāśvaścāṣṭamaḥ smṛtaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.47\",\"a\":\"Ketumāla\",\"rel\":\"son_of\",\"b\":\"Āgnīdhra\",\"words\":\"navamaḥ ketumālaśca\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03771,
+ "tokens": {
+  "input": 5328,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2705,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 1,14.4",
+   "a": "Priyavrata",
+   "rel": "descendant_of",
+   "b": "Manu Svāyambhuva",
+   "words": "manoḥ svāyaṃbhūvasyāsan daśa pautrāstu",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,14.9",
+   "a": "Āgnīdhra",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "āgnīdhraścāgnibā huśca medhā medhātithirvasuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.14",
+   "a": "Mahāvīta",
+   "rel": "son_of",
+   "b": "Savana",
+   "words": "puṣkare savanasyātha mahāvītaḥ suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.15",
+   "a": "Dhātaki",
+   "rel": "brother_of",
+   "b": "Mahāvīta",
+   "words": "dhātakiścāpi dvāvetau putrau",
+   "doubt": true,
+   "ref_cited": "BndP 1,14.16",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.22",
+   "a": "Kuśala",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "putro dyutimatastu vai kuśalo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.22",
+   "a": "Manonuga",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "putro dyutimatastu vai kuśalo manonugaschoṣṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.22",
+   "a": "Uṣṇa",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "putro dyutimatastu vai kuśalo manonugaschoṣṇaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,14.22",
+   "a": "Pāvana",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "pāvanaścāndhakārakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.22",
+   "a": "Andhakāraka",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "pāvanaścāndhakārakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.23",
+   "a": "Muni",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "muniśca dundubhiścaiva sutā dyutimatastu vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.23",
+   "a": "Dundubhi",
+   "rel": "son_of",
+   "b": "Dyutimat",
+   "words": "muniśca dundubhiścaiva sutā dyutimatastu vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.31",
+   "a": "Śveta",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "sutāste ca vapuṣmataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.32",
+   "a": "Harita",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "śvetaśca haritaścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.32",
+   "a": "Jīmūta",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "jīmūto rohitastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.32",
+   "a": "Rohita",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "jīmūto rohitastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.32",
+   "a": "Vaidyuta",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "vaidyuto mānasaścāpi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.32",
+   "a": "Mānasa",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "vaidyuto mānasaścāpi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.32",
+   "a": "Suprabha",
+   "rel": "son_of",
+   "b": "Vapuṣmat",
+   "words": "suprabhaḥ saptamastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.35",
+   "a": "Śāntabhaya",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sapta medhātithe putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.36",
+   "a": "Śiśira",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "dvitīyaḥ śiśiraḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.36",
+   "a": "Sukhodaya",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "sukhodayastṛtīyastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.36",
+   "a": "Nanda",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "caturtho nanda ucyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.37",
+   "a": "Śiva",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "śivastu pecamasteṣāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.37",
+   "a": "Kṣemaka",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "kṣemakaḥ ṣaṣṭha ucyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.37",
+   "a": "Dhruva",
+   "rel": "son_of",
+   "b": "Medhātithi",
+   "words": "dhruvastu saptamo jñeyaḥ putrā medhātitheḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.44",
+   "a": "Āgnīdhra",
+   "rel": "son_of",
+   "b": "Priyavrata",
+   "words": "āgnīdhraṃ jyeṣṭhadāyādaṃ priyavrato",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 1,14.45",
+   "a": "Nābhi",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "tasya putrā babhūvurhi prajāpatisamā nava jyeṣṭho nābhiriti",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.45",
+   "a": "Kiṃpuruṣa",
+   "rel": "brother_of",
+   "b": "Nābhi",
+   "words": "tasya kiṃpuruṣo 'nujaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.45",
+   "a": "Kiṃpuruṣa",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "tasya putrā babhūvurhi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.46",
+   "a": "Harivarṣa",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "harivarṣastṛtīyastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.46",
+   "a": "Ilāvṛta",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "caturtho 'bhūdilāvṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.46",
+   "a": "Ramya",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "ramyastu pañcamaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.46",
+   "a": "Hiraṇvat",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "hiraṇvān ṣaṣṭha ucyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.47",
+   "a": "Kuru",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "kurustu saptamasteṣāṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,14.47",
+   "a": "Bhadrāśva",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "bhadrāśvaścāṣṭamaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,14.47",
+   "a": "Ketumāla",
+   "rel": "son_of",
+   "b": "Āgnīdhra",
+   "words": "navamaḥ ketumālaśca",
+   "doubt": false,
+   "check": "words"
+  }
+ ]
+}

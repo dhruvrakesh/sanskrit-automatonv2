@@ -1,0 +1,509 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 1,
+ "part": 2,
+ "refs": [
+  "BndP 2,1.55",
+  "BndP 2,1.56",
+  "BndP 2,1.57",
+  "BndP 2,1.58",
+  "BndP 2,1.59",
+  "BndP 2,1.60",
+  "BndP 2,1.61",
+  "BndP 2,1.62",
+  "BndP 2,1.63",
+  "BndP 2,1.64",
+  "BndP 2,1.65",
+  "BndP 2,1.66",
+  "BndP 2,1.67",
+  "BndP 2,1.68",
+  "BndP 2,1.69",
+  "BndP 2,1.70",
+  "BndP 2,1.71",
+  "BndP 2,1.72",
+  "BndP 2,1.73",
+  "BndP 2,1.74",
+  "BndP 2,1.75",
+  "BndP 2,1.76",
+  "BndP 2,1.77",
+  "BndP 2,1.78",
+  "BndP 2,1.79",
+  "BndP 2,1.80",
+  "BndP 2,1.81",
+  "BndP 2,1.82",
+  "BndP 2,1.83",
+  "BndP 2,1.84",
+  "BndP 2,1.85",
+  "BndP 2,1.86",
+  "BndP 2,1.87",
+  "BndP 2,1.88",
+  "BndP 2,1.89",
+  "BndP 2,1.90",
+  "BndP 2,1.91",
+  "BndP 2,1.92",
+  "BndP 2,1.93",
+  "BndP 2,1.94",
+  "BndP 2,1.95",
+  "BndP 2,1.96",
+  "BndP 2,1.97",
+  "BndP 2,1.98",
+  "BndP 2,1.99",
+  "BndP 2,1.100",
+  "BndP 2,1.101",
+  "BndP 2,1.102",
+  "BndP 2,1.103",
+  "BndP 2,1.104",
+  "BndP 2,1.105",
+  "BndP 2,1.106",
+  "BndP 2,1.107",
+  "BndP 2,1.108",
+  "BndP 2,1.109",
+  "BndP 2,1.110",
+  "BndP 2,1.111"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:22:45",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,1.75\",\"a\":\"Paulomī\",\"rel\":\"daughter_of\",\"b\":\"Puloman\",\"words\":\"pulomnaścava paulomī duhitā\",\"doubt\":false},{\"ref\":\"BndP 2,1.74\",\"a\":\"Divyā\",\"rel\":\"daughter_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipo kanyā divyā\",\"doubt\":false},{\"ref\":\"BndP 2,1.74\",\"a\":\"Divyā\",\"rel\":\"wife_of\",\"b\":\"Bhṛgu\",\"words\":\"bhārye bhṛgorapratime\",\"doubt\":false},{\"ref\":\"BndP 2,1.75\",\"a\":\"Paulomī\",\"rel\":\"wife_of\",\"b\":\"Bhṛgu\",\"words\":\"bhārye bhṛgorapratime\",\"doubt\":false},{\"ref\":\"BndP 2,1.75\",\"a\":\"Śukra\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgostvajanayaddivyā putraṃ\",\"doubt\":false},{\"ref\":\"BndP 2,1.75\",\"a\":\"Śukra\",\"rel\":\"born_of\",\"b\":\"Divyā\",\"words\":\"bhṛgostvajanayaddivyā putraṃ\",\"doubt\":false},{\"ref\":\"BndP 2,1.77\",\"a\":\"Gau\",\"rel\":\"wife_of\",\"b\":\"Śukra\",\"words\":\"śukrasya bhāryā gaurnāma\",\"doubt\":false},{\"ref\":\"BndP 2,1.78\",\"a\":\"Tvaṣṭā\",\"rel\":\"son_of\",\"b\":\"Śukra\",\"words\":\"śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.77\",\"a\":\"Tvaṣṭā\",\"rel\":\"born_of\",\"b\":\"Gau\",\"words\":\"gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.78\",\"a\":\"Varatrī\",\"rel\":\"son_of\",\"b\":\"Śukra\",\"words\":\"śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.77\",\"a\":\"Varatrī\",\"rel\":\"born_of\",\"b\":\"Gau\",\"words\":\"gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.78\",\"a\":\"Śaṇḍa\",\"rel\":\"son_of\",\"b\":\"Śukra\",\"words\":\"śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.77\",\"a\":\"Śaṇḍa\",\"rel\":\"born_of\",\"b\":\"Gau\",\"words\":\"gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.78\",\"a\":\"Marka\",\"rel\":\"son_of\",\"b\":\"Śukra\",\"words\":\"śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.77\",\"a\":\"Marka\",\"rel\":\"born_of\",\"b\":\"Gau\",\"words\":\"gaurnāma vijajñe caturaḥ sutān\",\"doubt\":false},{\"ref\":\"BndP 2,1.79\",\"a\":\"Rajata\",\"rel\":\"son_of\",\"b\":\"Varatrin\",\"words\":\"varatriṇaḥ sutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,1.79\",\"a\":\"Pṛthuraśmi\",\"rel\":\"son_of\",\"b\":\"Varatrin\",\"words\":\"varatriṇaḥ sutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,1.79\",\"a\":\"Bṛhaṅgiras\",\"rel\":\"son_of\",\"b\":\"Varatrin\",\"words\":\"varatriṇaḥ sutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,1.86\",\"a\":\"Devayānī\",\"rel\":\"daughter_of\",\"b\":\"Śukra\",\"words\":\"devayānī tu śukrasya duhitābhavat\",\"doubt\":false},{\"ref\":\"BndP 2,1.86\",\"a\":\"Devayānī\",\"rel\":\"born_of\",\"b\":\"Jayantī\",\"words\":\"jayantyāṃ devayānī\",\"doubt\":false},{\"ref\":\"BndP 2,1.86\",\"a\":\"Triśiras\",\"rel\":\"son_of\",\"b\":\"Tvaṣṭā\",\"words\":\"triśirā viśvarūpastu tvaṣṭuḥ putro\",\"doubt\":false},{\"ref\":\"BndP 2,1.87\",\"a\":\"Triśiras\",\"rel\":\"born_of\",\"b\":\"Yaśodharā\",\"words\":\"yaśodharāyāmutpanno vairocanyāṃ\",\"doubt\":false},{\"ref\":\"BndP 2,1.87\",\"a\":\"Viśvakarman\",\"rel\":\"brother_of\",\"b\":\"Triśiras\",\"words\":\"viśvarūpānujaścaiva viśvakarmā\",\"doubt\":false},{\"ref\":\"BndP 2,1.88\",\"a\":\"Bhṛgu\",\"rel\":\"line_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgostu bhṛgavo devā jajñire dvādaśātmajāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,1.88\",\"a\":\"Divyā\",\"rel\":\"sister_of\",\"b\":\"Śukra\",\"words\":\"divyānusuṣuve kanyā kāvyasyaivānujā\",\"doubt\":true},{\"ref\":\"BndP 2,1.91\",\"a\":\"Cyavana\",\"rel\":\"born_of\",\"b\":\"Pulomī\",\"words\":\"paulomyajanayatputraṃ\",\"doubt\":true},{\"ref\":\"BndP 2,1.93\",\"a\":\"Āpravāna\",\"rel\":\"son_of\",\"b\":\"Cyavana\",\"words\":\"janayāmāsa putrau dvau sukanyāyāṃ\",\"doubt\":true},{\"ref\":\"BndP 2,1.93\",\"a\":\"Āpravāna\",\"rel\":\"born_of\",\"b\":\"Sukanyā\",\"words\":\"janayāmāsa putrau dvau sukanyāyāṃ\",\"doubt\":true},{\"ref\":\"BndP 2,1.93\",\"a\":\"Dadhīca\",\"rel\":\"son_of\",\"b\":\"Cyavana\",\"words\":\"janayāmāsa putrau dvau sukanyāyāṃ\",\"doubt\":true},{\"ref\":\"BndP 2,1.93\",\"a\":\"Dadhīca\",\"rel\":\"born_of\",\"b\":\"Sukanyā\",\"words\":\"janayāmāsa putrau dvau sukanyāyāṃ\",\"doubt\":true},{\"ref\":\"BndP 2,1.94\",\"a\":\"Sārasvata\",\"rel\":\"son_of\",\"b\":\"Dadhīca\",\"words\":\"sārasvataḥ sarasvatyāṃ dadhīcasyodapadyata\",\"doubt\":false},{\"ref\":\"BndP 2,1.94\",\"a\":\"Sārasvata\",\"rel\":\"born_of\",\"b\":\"Sarasvatī\",\"words\":\"sārasvataḥ sarasvatyāṃ\",\"doubt\":false},{\"ref\":\"BndP 2,1.94\",\"a\":\"Ṛcī\",\"rel\":\"wife_of\",\"b\":\"Āpravāna\",\"words\":\"ṛcī patnī mahābhāgā apravānasya\",\"doubt\":false},{\"ref\":\"BndP 2,1.95\",\"a\":\"Aurva\",\"rel\":\"born_of\",\"b\":\"Ṛcī\",\"words\":\"tasyāmaurva ṛṣirjajñe\",\"doubt\":false},{\"ref\":\"BndP 2,1.95\",\"a\":\"Ṛcīka\",\"rel\":\"son_of\",\"b\":\"Aurva\",\"words\":\"aurvasyāsīdṛcīkastu\",\"doubt\":false},{\"ref\":\"BndP 2,1.96\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Ṛcīka\",\"words\":\"jamadagnirṛcīkasya satyavatyāmajāyata\",\"doubt\":false},{\"ref\":\"BndP 2,1.96\",\"a\":\"Jamadagni\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"satyavatyāmajāyata\",\"doubt\":false},{\"ref\":\"BndP 2,1.97\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"reṇukājamadagneśca\",\"doubt\":false},{\"ref\":\"BndP 2,1.98\",\"a\":\"Rāma\",\"rel\":\"born_of\",\"b\":\"Reṇukā\",\"words\":\"reṇukā\",\"doubt\":false},{\"ref\":\"BndP 2,1.103\",\"a\":\"Surūpā\",\"rel\":\"wife_of\",\"b\":\"Atharvan\",\"words\":\"tisro bhāryā hyatharvaṇaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,1.103\",\"a\":\"Mārīcī\",\"rel\":\"wife_of\",\"b\":\"Atharvan\",\"words\":\"tisro bhāryā hyatharvaṇaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,1.104\",\"a\":\"Bṛhaspati\",\"rel\":\"born_of\",\"b\":\"Surūpā\",\"words\":\"bṛhaspatiṃ surūpāyāṃ\",\"doubt\":false},{\"ref\":\"BndP 2,1.105\",\"a\":\"Dhṛṣṇi\",\"rel\":\"born_of\",\"b\":\"Pathyā\",\"words\":\"dhṛṣṇiḥ putrastu pathyāyāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,1.107\",\"a\":\"Sudhanvan\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṇi\",\"words\":\"dhṛṣṇeḥ putraḥ sudhanvā\",\"doubt\":false},{\"ref\":\"BndP 2,1.107\",\"a\":\"Ṛṣabha\",\"rel\":\"son_of\",\"b\":\"Sudhanvan\",\"words\":\"ṛṣabhaśca sudhanvanaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,1.108\",\"a\":\"Bharadvāja\",\"rel\":\"son_of\",\"b\":\"Bṛhaspati\",\"words\":\"bṛhaspaterbharadvājo viśrutaḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04471,
+ "tokens": {
+  "input": 5340,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3403,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,1.75",
+   "a": "Paulomī",
+   "rel": "daughter_of",
+   "b": "Puloman",
+   "words": "pulomnaścava paulomī duhitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.74",
+   "a": "Divyā",
+   "rel": "daughter_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipo kanyā divyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.74",
+   "a": "Divyā",
+   "rel": "wife_of",
+   "b": "Bhṛgu",
+   "words": "bhārye bhṛgorapratime",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.74",
+   "a": "Paulomī",
+   "rel": "wife_of",
+   "b": "Bhṛgu",
+   "words": "bhārye bhṛgorapratime",
+   "doubt": false,
+   "ref_cited": "BndP 2,1.75",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.75",
+   "a": "Śukra",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgostvajanayaddivyā putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.75",
+   "a": "Śukra",
+   "rel": "born_of",
+   "b": "Divyā",
+   "words": "bhṛgostvajanayaddivyā putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Gau",
+   "rel": "wife_of",
+   "b": "Śukra",
+   "words": "śukrasya bhāryā gaurnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Tvaṣṭā",
+   "rel": "son_of",
+   "b": "Śukra",
+   "words": "śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "ref_cited": "BndP 2,1.78",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Tvaṣṭā",
+   "rel": "born_of",
+   "b": "Gau",
+   "words": "gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Varatrī",
+   "rel": "son_of",
+   "b": "Śukra",
+   "words": "śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "ref_cited": "BndP 2,1.78",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Varatrī",
+   "rel": "born_of",
+   "b": "Gau",
+   "words": "gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Śaṇḍa",
+   "rel": "son_of",
+   "b": "Śukra",
+   "words": "śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "ref_cited": "BndP 2,1.78",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Śaṇḍa",
+   "rel": "born_of",
+   "b": "Gau",
+   "words": "gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Marka",
+   "rel": "son_of",
+   "b": "Śukra",
+   "words": "śukrasya bhāryā gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "ref_cited": "BndP 2,1.78",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,1.77",
+   "a": "Marka",
+   "rel": "born_of",
+   "b": "Gau",
+   "words": "gaurnāma vijajñe caturaḥ sutān",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,1.79",
+   "a": "Rajata",
+   "rel": "son_of",
+   "b": "Varatrin",
+   "words": "varatriṇaḥ sutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.79",
+   "a": "Pṛthuraśmi",
+   "rel": "son_of",
+   "b": "Varatrin",
+   "words": "varatriṇaḥ sutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.79",
+   "a": "Bṛhaṅgiras",
+   "rel": "son_of",
+   "b": "Varatrin",
+   "words": "varatriṇaḥ sutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.86",
+   "a": "Devayānī",
+   "rel": "daughter_of",
+   "b": "Śukra",
+   "words": "devayānī tu śukrasya duhitābhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.86",
+   "a": "Devayānī",
+   "rel": "born_of",
+   "b": "Jayantī",
+   "words": "jayantyāṃ devayānī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.86",
+   "a": "Triśiras",
+   "rel": "son_of",
+   "b": "Tvaṣṭā",
+   "words": "triśirā viśvarūpastu tvaṣṭuḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.87",
+   "a": "Triśiras",
+   "rel": "born_of",
+   "b": "Yaśodharā",
+   "words": "yaśodharāyāmutpanno vairocanyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.87",
+   "a": "Viśvakarman",
+   "rel": "brother_of",
+   "b": "Triśiras",
+   "words": "viśvarūpānujaścaiva viśvakarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.88",
+   "a": "Bhṛgu",
+   "rel": "line_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgostu bhṛgavo devā jajñire dvādaśātmajāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.88",
+   "a": "Divyā",
+   "rel": "sister_of",
+   "b": "Śukra",
+   "words": "divyānusuṣuve kanyā kāvyasyaivānujā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.91",
+   "a": "Cyavana",
+   "rel": "born_of",
+   "b": "Pulomī",
+   "words": "paulomyajanayatputraṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,1.93",
+   "a": "Āpravāna",
+   "rel": "son_of",
+   "b": "Cyavana",
+   "words": "janayāmāsa putrau dvau sukanyāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.93",
+   "a": "Āpravāna",
+   "rel": "born_of",
+   "b": "Sukanyā",
+   "words": "janayāmāsa putrau dvau sukanyāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.93",
+   "a": "Dadhīca",
+   "rel": "son_of",
+   "b": "Cyavana",
+   "words": "janayāmāsa putrau dvau sukanyāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.93",
+   "a": "Dadhīca",
+   "rel": "born_of",
+   "b": "Sukanyā",
+   "words": "janayāmāsa putrau dvau sukanyāyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.94",
+   "a": "Sārasvata",
+   "rel": "son_of",
+   "b": "Dadhīca",
+   "words": "sārasvataḥ sarasvatyāṃ dadhīcasyodapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.94",
+   "a": "Sārasvata",
+   "rel": "born_of",
+   "b": "Sarasvatī",
+   "words": "sārasvataḥ sarasvatyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.94",
+   "a": "Ṛcī",
+   "rel": "wife_of",
+   "b": "Āpravāna",
+   "words": "ṛcī patnī mahābhāgā apravānasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.95",
+   "a": "Aurva",
+   "rel": "born_of",
+   "b": "Ṛcī",
+   "words": "tasyāmaurva ṛṣirjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.95",
+   "a": "Ṛcīka",
+   "rel": "son_of",
+   "b": "Aurva",
+   "words": "aurvasyāsīdṛcīkastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.96",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Ṛcīka",
+   "words": "jamadagnirṛcīkasya satyavatyāmajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.96",
+   "a": "Jamadagni",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "satyavatyāmajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.97",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "reṇukājamadagneśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.97",
+   "a": "Rāma",
+   "rel": "born_of",
+   "b": "Reṇukā",
+   "words": "reṇukā",
+   "doubt": false,
+   "ref_cited": "BndP 2,1.98",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.103",
+   "a": "Surūpā",
+   "rel": "wife_of",
+   "b": "Atharvan",
+   "words": "tisro bhāryā hyatharvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.103",
+   "a": "Mārīcī",
+   "rel": "wife_of",
+   "b": "Atharvan",
+   "words": "tisro bhāryā hyatharvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.104",
+   "a": "Bṛhaspati",
+   "rel": "born_of",
+   "b": "Surūpā",
+   "words": "bṛhaspatiṃ surūpāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.105",
+   "a": "Dhṛṣṇi",
+   "rel": "born_of",
+   "b": "Pathyā",
+   "words": "dhṛṣṇiḥ putrastu pathyāyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.107",
+   "a": "Sudhanvan",
+   "rel": "son_of",
+   "b": "Dhṛṣṇi",
+   "words": "dhṛṣṇeḥ putraḥ sudhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.107",
+   "a": "Ṛṣabha",
+   "rel": "son_of",
+   "b": "Sudhanvan",
+   "words": "ṛṣabhaśca sudhanvanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.108",
+   "a": "Bharadvāja",
+   "rel": "son_of",
+   "b": "Bṛhaspati",
+   "words": "bṛhaspaterbharadvājo viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

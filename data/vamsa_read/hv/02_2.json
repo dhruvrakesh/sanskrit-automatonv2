@@ -1,0 +1,29 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 2,
+ "part": 2,
+ "refs": [
+  "HV 2.53",
+  "HV 2.54",
+  "HV 2.55",
+  "HV 2.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T09:59:45",
+ "reply": "{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00255,
+ "tokens": {
+  "input": 1229,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 9,
+  "thinking": 0
+ },
+ "statements": []
+}

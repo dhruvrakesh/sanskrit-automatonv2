@@ -1,0 +1,60 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 15,
+ "part": 2,
+ "refs": [
+  "HV 15.44",
+  "HV 15.45",
+  "HV 15.46",
+  "HV 15.47",
+  "HV 15.48",
+  "HV 15.49",
+  "HV 15.50",
+  "HV 15.51",
+  "HV 15.52",
+  "HV 15.53",
+  "HV 15.54",
+  "HV 15.55",
+  "HV 15.56",
+  "HV 15.57",
+  "HV 15.58",
+  "HV 15.59",
+  "HV 15.60",
+  "HV 15.61",
+  "HV 15.62",
+  "HV 15.63",
+  "HV 15.64",
+  "HV 15.65",
+  "HV 15.66",
+  "HV 15.67",
+  "HV 15.68"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:06:41",
+ "reply": "Only verse 15.62 and 15.63 contain kinship statements.\n\n15.62: \"drupadasya pitā\" (Pṛṣata) obtained Āhicchatra, his father's own kingdom (pitryaṃ). The verse says Pṛṣata came from Kāmpilya, and that he is the father of Drupada: \"drupadasya pitā\". The subject, Pṛṣata, is named in 15.61 (pṛṣataḥ). So Pṛṣata is the father of Drupada, so Drupada is son_of Pṛṣata.\n\n15.63: \"tato 'bhūd drupado rājā\" says Drupada became king afterwards. This suggests succession to Pṛṣata, but the verse does not name him there, and the sense is only that Drupada became king after that. I leave it out as inference.\n\n15.65: the \"vaṃśa\" of Drupada, Brahmadatta and Ugrāyudha is said to be told, which is only narration and gives no relation.\n\n<br>\n\n```json\n{\"statements\": [{\"ref\": \"HV 15.62\", \"a\": \"Drupada\", \"rel\": \"son_of\", \"b\": \"Pṛṣata\", \"words\": \"drupadasya pitā\", \"doubt\": false}]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.00959,
+ "tokens": {
+  "input": 2779,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 403,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 15.62",
+   "a": "Drupada",
+   "rel": "son_of",
+   "b": "Pṛṣata",
+   "words": "drupadasya pitā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

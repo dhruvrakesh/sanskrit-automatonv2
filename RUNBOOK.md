@@ -2934,3 +2934,18 @@ docs\ASKS_2026-10-22.md, section 28. From the automaton's root, in PowerShell:
 7. The corner lock: `Get-Content data\corner_worker.lock`; `Get-Process -Id 40108 -ErrorAction SilentlyContinue`. No
    such process: the lock frees itself at 00:28, or rename it (`Rename-Item data\corner_worker.lock
    corner_worker.lock.stale_20261116`).
+
+## 17 Nov: is it done? G6b again; the site's schema (DOCS116_2026_11_16)
+
+docs\ASKS_2026-10-22.md, section 29. From the automaton's root, in PowerShell:
+
+1. The patch: `python scripts\patch_docs116_2026_11_16.py --check`, then without; `python -m unittest
+   tests.test_docs116_2026_11_16 tests.test_docs115_2026_11_16`; release.ps1 with COMMIT_MSG_docs116_20261117.txt
+   (the dry run, then -Apply once).
+2. G6b, the rest (about $4.82): `python scripts\vamsa_read.py --work g6` (the plan), then `python scripts\vamsa_read.py
+   --work g6 --yes --max-usd 8`; when it stops on a dropped connection, the same command again; then
+   `python scripts\vamsa_read.py --work g6 --report`.
+3. The day's spend: `python scripts\claude_engine.py --credit`.
+4. Each text the queue translated, read only: `python scripts\text_path.py --doc siddhanta_shiromani` and the same for
+   Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V, sama_veda_sama_veda and AkashBhairavaKalpam.
+5. The site's schema: docs\cloud\SITE_SCHEMA_2026-11-17.md; its two read-only queries check it again.

@@ -48,7 +48,7 @@
    "b": "Sītā",
    "words": "yamau sā suṣuve sutau kuśo lava iti khyātau",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.11.11",
@@ -57,7 +57,7 @@
    "b": "Sītā",
    "words": "yamau sā suṣuve sutau kuśo lava iti khyātau",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.11.11",
@@ -132,13 +132,15 @@
    "check": "verified"
   },
   {
-   "ref": "BhP 9.11.9",
+   "ref": "BhP 9.11.8",
    "a": "Sītā",
    "rel": "wife_of",
    "b": "Rāma",
    "words": "bhāryāmuddiśya kasyacit",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.11.9",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.11.15",

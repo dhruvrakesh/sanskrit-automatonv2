@@ -186,7 +186,7 @@
    "b": "Nandī",
    "words": "tataś ca śiśunābhaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "ViP 4,24.10",
@@ -393,7 +393,7 @@
    "b": "Gomatiputra",
    "words": "gomatiputrastatputro 'limān",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   }
  ]
 }

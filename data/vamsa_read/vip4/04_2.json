@@ -81,13 +81,15 @@
    "check": "verified"
   },
   {
-   "ref": "ViP 4,4.72",
+   "ref": "ViP 4,4.71",
    "a": "Aśmaka",
    "rel": "son_of",
    "b": "Madayantī",
    "words": "putraścājāyata tasya cāśmaka ityeva nāmābhavat",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "ViP 4,4.72",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "ViP 4,4.73",

@@ -56,7 +56,7 @@
    "b": "Māndhātṛ",
    "words": "māndhātuḥ putrapravaro yo 'mbarīṣaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.1",
@@ -65,7 +65,7 @@
    "b": "Ambarīṣa",
    "words": "yauvanāśvastu tatsutaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.1",
@@ -83,7 +83,7 @@
    "b": "Anaraṇya",
    "words": "haryaśvastatsutaḥ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.4",
@@ -128,7 +128,7 @@
    "b": "Triśaṅku",
    "words": "traiśaṅkavo hariścandro",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.9",
@@ -137,7 +137,7 @@
    "b": "Hariścandra",
    "words": "putro jātastu rohitaḥ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.7.20",

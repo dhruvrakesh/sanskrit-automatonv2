@@ -1,0 +1,422 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 45,
+ "part": 0,
+ "refs": [
+  "MatsP 45.1",
+  "MatsP 45.2",
+  "MatsP 45.3",
+  "MatsP 45.4",
+  "MatsP 45.5",
+  "MatsP 45.6",
+  "MatsP 45.7",
+  "MatsP 45.8",
+  "MatsP 45.9",
+  "MatsP 45.10",
+  "MatsP 45.11",
+  "MatsP 45.12",
+  "MatsP 45.13",
+  "MatsP 45.14",
+  "MatsP 45.15",
+  "MatsP 45.16",
+  "MatsP 45.17",
+  "MatsP 45.18",
+  "MatsP 45.19",
+  "MatsP 45.20",
+  "MatsP 45.21",
+  "MatsP 45.22",
+  "MatsP 45.23",
+  "MatsP 45.24",
+  "MatsP 45.25",
+  "MatsP 45.26",
+  "MatsP 45.27",
+  "MatsP 45.28",
+  "MatsP 45.29",
+  "MatsP 45.30",
+  "MatsP 45.31",
+  "MatsP 45.32",
+  "MatsP 45.33",
+  "MatsP 45.34"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:15:52",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 45.1\",\"a\":\"Gāndhārī\",\"rel\":\"wife_of\",\"b\":\"Vṛṣṇi\",\"words\":\"vṛṣṇibhārye babhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.1\",\"a\":\"Mādrī\",\"rel\":\"wife_of\",\"b\":\"Vṛṣṇi\",\"words\":\"vṛṣṇibhārye babhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.1\",\"a\":\"Sumitra\",\"rel\":\"born_of\",\"b\":\"Gāndhārī\",\"words\":\"gāndhārī janayāmāsa sumitraṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.2\",\"a\":\"Yudhājit\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādrī yudhājitaṃ putraṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.2\",\"a\":\"Devamīḍhuṣa\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādrī yudhājitaṃ putraṃ tato vai devamīḍhuṣam\",\"doubt\":false},\n{\"ref\":\"MatsP 45.2\",\"a\":\"Anamitra\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"devamīḍhuṣam anamitraṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.2\",\"a\":\"Śibi\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"anamitraṃ śibiṃ caiva\",\"doubt\":false},\n{\"ref\":\"MatsP 45.3\",\"a\":\"Nighna\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrasuto nighno\",\"doubt\":false},\n{\"ref\":\"MatsP 45.3\",\"a\":\"Prasena\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnasyāpi tu dvau sutau prasenaśca\",\"doubt\":false},\n{\"ref\":\"MatsP 45.3\",\"a\":\"Śaktisena\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnasyāpi tu dvau sutau prasenaśca mahāvīryaḥ śaktisenaśca\",\"doubt\":false},\n{\"ref\":\"MatsP 45.19\",\"a\":\"Bhaṅgakāra\",\"rel\":\"son_of\",\"b\":\"Satrājit\",\"words\":\"tāsūtpannāḥ sutāstasya śatamekaṃ tu viśrutāḥ khyātimanto mahāvīryā bhaṅgakārastu pūrvajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.19\",\"a\":\"Satrājit\",\"rel\":\"wife_of\",\"b\":\"Kaikeya\",\"words\":\"kaikeyasya sutā bhāryā daśa satrājitaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 45.20\",\"a\":\"Satyabhāmā\",\"rel\":\"daughter_of\",\"b\":\"Bhaṅgakāra\",\"words\":\"bhaṅgakārāttu pūrvajāt suṣuve sukumārīstu tisraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.20\",\"a\":\"Satyabhāmā\",\"rel\":\"born_of\",\"b\":\"Vratavatī\",\"words\":\"vratavatī tasmād bhaṅgakārāttu pūrvajāt suṣuve\",\"doubt\":false},\n{\"ref\":\"MatsP 45.21\",\"a\":\"Vratinī\",\"rel\":\"daughter_of\",\"b\":\"Bhaṅgakāra\",\"words\":\"vratinī ca dṛḍhavratā tathā padmāvatī caiva\",\"doubt\":false},\n{\"ref\":\"MatsP 45.21\",\"a\":\"Padmāvatī\",\"rel\":\"daughter_of\",\"b\":\"Bhaṅgakāra\",\"words\":\"padmāvatī caiva tāśca kṛṣṇāya so 'dadāt\",\"doubt\":false},\n{\"ref\":\"MatsP 45.22\",\"a\":\"Śini\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrācchinirjajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 45.22\",\"a\":\"Satyaka\",\"rel\":\"son_of\",\"b\":\"Śini\",\"words\":\"satyakastasya putraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.22\",\"a\":\"Sātyaki\",\"rel\":\"son_of\",\"b\":\"Satyaka\",\"words\":\"sātyakistasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.23\",\"a\":\"Yuyudhāna\",\"rel\":\"son_of\",\"b\":\"Satyavān\",\"words\":\"satyavānyuyudhānastu\",\"doubt\":true},\n{\"ref\":\"MatsP 45.23\",\"a\":\"Yuyudhāna\",\"rel\":\"descendant_of\",\"b\":\"Śini\",\"words\":\"śinernaptā\",\"doubt\":false},\n{\"ref\":\"MatsP 45.23\",\"a\":\"Asaṅga\",\"rel\":\"son_of\",\"b\":\"Yuyudhāna\",\"words\":\"asaṅgo yuyudhānasya\",\"doubt\":true},\n{\"ref\":\"MatsP 45.23\",\"a\":\"Dyumni\",\"rel\":\"son_of\",\"b\":\"Asaṅga\",\"words\":\"dyumnistasyātmajo 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 45.24\",\"a\":\"Yugaṃdhara\",\"rel\":\"son_of\",\"b\":\"Dyumni\",\"words\":\"dyumneryugaṃdharaḥ putra\",\"doubt\":false},\n{\"ref\":\"MatsP 45.25\",\"a\":\"Yudhājit\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrasya saṃjajñe pṛthvyāṃ vīro yudhājitaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.25\",\"a\":\"Vṛṣabha\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anyau tu tanayau vīrau vṛṣabhaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.25\",\"a\":\"Kṣatra\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"vṛṣabhaḥ kṣatra eva ca\",\"doubt\":false},\n{\"ref\":\"MatsP 45.26\",\"a\":\"Vṛṣabha\",\"rel\":\"wife_of\",\"b\":\"Kāśirāja\",\"words\":\"kāśirājasya sutāṃ bhāryāmavindata\",\"doubt\":true},\n{\"ref\":\"MatsP 45.26\",\"a\":\"Jayanta\",\"rel\":\"son_of\",\"b\":\"Vṛṣabha\",\"words\":\"jayantastu jayantyāṃ tu putraḥ samabhavat\",\"doubt\":true},\n{\"ref\":\"MatsP 45.26\",\"a\":\"Jayanta\",\"rel\":\"born_of\",\"b\":\"Jayantī\",\"words\":\"jayantyāṃ tu putraḥ samabhavacchubhaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 45.27\",\"a\":\"Sadāyajña\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūraḥ suṣuve tasmāt sadāyajño\",\"doubt\":true},\n{\"ref\":\"MatsP 45.28\",\"a\":\"Ratnā\",\"rel\":\"daughter_of\",\"b\":\"Śaibya\",\"words\":\"ratnā kanyā ca śaibyasya\",\"doubt\":false},\n{\"ref\":\"MatsP 45.28\",\"a\":\"Ratnā\",\"rel\":\"wife_of\",\"b\":\"Akrūra\",\"words\":\"akrūrastāmavāptavān\",\"doubt\":false},\n{\"ref\":\"MatsP 45.30\",\"a\":\"Upalambha\",\"rel\":\"born_of\",\"b\":\"Ratnā\",\"words\":\"ratnāyāṃ jajñire ca te\",\"doubt\":false},\n{\"ref\":\"MatsP 45.30\",\"a\":\"Upalambha\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"putrānutpādayāmāsa ekādaśa mahābalān\",\"doubt\":false},\n{\"ref\":\"MatsP 45.31\",\"a\":\"Devavān\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūrād ugrasenāyāṃ sutau dvau\",\"doubt\":false},\n{\"ref\":\"MatsP 45.31\",\"a\":\"Devavān\",\"rel\":\"born_of\",\"b\":\"Ugrasenā\",\"words\":\"akrūrād ugrasenāyāṃ sutau dvau\",\"doubt\":false},\n{\"ref\":\"MatsP 45.31\",\"a\":\"Upadeva\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūrād ugrasenāyāṃ sutau dvau\",\"doubt\":false},\n{\"ref\":\"MatsP 45.31\",\"a\":\"Upadeva\",\"rel\":\"born_of\",\"b\":\"Ugrasenā\",\"words\":\"akrūrād ugrasenāyāṃ sutau dvau\",\"doubt\":false},\n{\"ref\":\"MatsP 45.32\",\"a\":\"Pṛthu\",\"rel\":\"born_of\",\"b\":\"Aśvinī\",\"words\":\"aśvinyāṃ ca tataḥ putrāḥ pṛthur\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03796,
+ "tokens": {
+  "input": 3612,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3074,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 45.1",
+   "a": "Gāndhārī",
+   "rel": "wife_of",
+   "b": "Vṛṣṇi",
+   "words": "vṛṣṇibhārye babhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.1",
+   "a": "Mādrī",
+   "rel": "wife_of",
+   "b": "Vṛṣṇi",
+   "words": "vṛṣṇibhārye babhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.1",
+   "a": "Sumitra",
+   "rel": "born_of",
+   "b": "Gāndhārī",
+   "words": "gāndhārī janayāmāsa sumitraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.2",
+   "a": "Yudhājit",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādrī yudhājitaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.2",
+   "a": "Devamīḍhuṣa",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādrī yudhājitaṃ putraṃ tato vai devamīḍhuṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.2",
+   "a": "Anamitra",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "devamīḍhuṣam anamitraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.2",
+   "a": "Śibi",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "anamitraṃ śibiṃ caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.3",
+   "a": "Nighna",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrasuto nighno",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.3",
+   "a": "Prasena",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnasyāpi tu dvau sutau prasenaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.3",
+   "a": "Śaktisena",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnasyāpi tu dvau sutau prasenaśca mahāvīryaḥ śaktisenaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.19",
+   "a": "Bhaṅgakāra",
+   "rel": "son_of",
+   "b": "Satrājit",
+   "words": "tāsūtpannāḥ sutāstasya śatamekaṃ tu viśrutāḥ khyātimanto mahāvīryā bhaṅgakārastu pūrvajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.19",
+   "a": "Satrājit",
+   "rel": "wife_of",
+   "b": "Kaikeya",
+   "words": "kaikeyasya sutā bhāryā daśa satrājitaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.20",
+   "a": "Satyabhāmā",
+   "rel": "daughter_of",
+   "b": "Bhaṅgakāra",
+   "words": "bhaṅgakārāttu pūrvajāt suṣuve sukumārīstu tisraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.20",
+   "a": "Satyabhāmā",
+   "rel": "born_of",
+   "b": "Vratavatī",
+   "words": "vratavatī tasmād bhaṅgakārāttu pūrvajāt suṣuve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.21",
+   "a": "Vratinī",
+   "rel": "daughter_of",
+   "b": "Bhaṅgakāra",
+   "words": "vratinī ca dṛḍhavratā tathā padmāvatī caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.21",
+   "a": "Padmāvatī",
+   "rel": "daughter_of",
+   "b": "Bhaṅgakāra",
+   "words": "padmāvatī caiva tāśca kṛṣṇāya so 'dadāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.22",
+   "a": "Śini",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrācchinirjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.22",
+   "a": "Satyaka",
+   "rel": "son_of",
+   "b": "Śini",
+   "words": "satyakastasya putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.22",
+   "a": "Sātyaki",
+   "rel": "son_of",
+   "b": "Satyaka",
+   "words": "sātyakistasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.23",
+   "a": "Yuyudhāna",
+   "rel": "son_of",
+   "b": "Satyavān",
+   "words": "satyavānyuyudhānastu",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.23",
+   "a": "Yuyudhāna",
+   "rel": "descendant_of",
+   "b": "Śini",
+   "words": "śinernaptā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.23",
+   "a": "Asaṅga",
+   "rel": "son_of",
+   "b": "Yuyudhāna",
+   "words": "asaṅgo yuyudhānasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.23",
+   "a": "Dyumni",
+   "rel": "son_of",
+   "b": "Asaṅga",
+   "words": "dyumnistasyātmajo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.24",
+   "a": "Yugaṃdhara",
+   "rel": "son_of",
+   "b": "Dyumni",
+   "words": "dyumneryugaṃdharaḥ putra",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.25",
+   "a": "Yudhājit",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrasya saṃjajñe pṛthvyāṃ vīro yudhājitaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.25",
+   "a": "Vṛṣabha",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anyau tu tanayau vīrau vṛṣabhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.25",
+   "a": "Kṣatra",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "vṛṣabhaḥ kṣatra eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.26",
+   "a": "Vṛṣabha",
+   "rel": "wife_of",
+   "b": "Kāśirāja",
+   "words": "kāśirājasya sutāṃ bhāryāmavindata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.26",
+   "a": "Jayanta",
+   "rel": "son_of",
+   "b": "Vṛṣabha",
+   "words": "jayantastu jayantyāṃ tu putraḥ samabhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.26",
+   "a": "Jayanta",
+   "rel": "born_of",
+   "b": "Jayantī",
+   "words": "jayantyāṃ tu putraḥ samabhavacchubhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.27",
+   "a": "Sadāyajña",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūraḥ suṣuve tasmāt sadāyajño",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.28",
+   "a": "Ratnā",
+   "rel": "daughter_of",
+   "b": "Śaibya",
+   "words": "ratnā kanyā ca śaibyasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.28",
+   "a": "Ratnā",
+   "rel": "wife_of",
+   "b": "Akrūra",
+   "words": "akrūrastāmavāptavān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.30",
+   "a": "Upalambha",
+   "rel": "born_of",
+   "b": "Ratnā",
+   "words": "ratnāyāṃ jajñire ca te",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.28",
+   "a": "Upalambha",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "putrānutpādayāmāsa ekādaśa mahābalān",
+   "doubt": false,
+   "ref_cited": "MatsP 45.30",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.31",
+   "a": "Devavān",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūrād ugrasenāyāṃ sutau dvau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.31",
+   "a": "Devavān",
+   "rel": "born_of",
+   "b": "Ugrasenā",
+   "words": "akrūrād ugrasenāyāṃ sutau dvau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.31",
+   "a": "Upadeva",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūrād ugrasenāyāṃ sutau dvau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.31",
+   "a": "Upadeva",
+   "rel": "born_of",
+   "b": "Ugrasenā",
+   "words": "akrūrād ugrasenāyāṃ sutau dvau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 45.32",
+   "a": "Pṛthu",
+   "rel": "born_of",
+   "b": "Aśvinī",
+   "words": "aśvinyāṃ ca tataḥ putrāḥ pṛthur",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

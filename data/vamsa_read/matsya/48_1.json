@@ -1,0 +1,633 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 48,
+ "part": 1,
+ "refs": [
+  "MatsP 48.1",
+  "MatsP 48.2",
+  "MatsP 48.3",
+  "MatsP 48.4",
+  "MatsP 48.5",
+  "MatsP 48.6",
+  "MatsP 48.7",
+  "MatsP 48.8",
+  "MatsP 48.9",
+  "MatsP 48.10",
+  "MatsP 48.11",
+  "MatsP 48.12",
+  "MatsP 48.13",
+  "MatsP 48.14",
+  "MatsP 48.15",
+  "MatsP 48.16",
+  "MatsP 48.17",
+  "MatsP 48.18",
+  "MatsP 48.19",
+  "MatsP 48.20",
+  "MatsP 48.21",
+  "MatsP 48.22",
+  "MatsP 48.23",
+  "MatsP 48.24",
+  "MatsP 48.25",
+  "MatsP 48.26",
+  "MatsP 48.27",
+  "MatsP 48.28",
+  "MatsP 48.29",
+  "MatsP 48.30",
+  "MatsP 48.31",
+  "MatsP 48.32",
+  "MatsP 48.33",
+  "MatsP 48.34",
+  "MatsP 48.35",
+  "MatsP 48.36",
+  "MatsP 48.37",
+  "MatsP 48.38",
+  "MatsP 48.39",
+  "MatsP 48.40",
+  "MatsP 48.41",
+  "MatsP 48.42",
+  "MatsP 48.43",
+  "MatsP 48.44",
+  "MatsP 48.45",
+  "MatsP 48.46",
+  "MatsP 48.47",
+  "MatsP 48.48",
+  "MatsP 48.49",
+  "MatsP 48.50",
+  "MatsP 48.51",
+  "MatsP 48.52",
+  "MatsP 48.53",
+  "MatsP 48.54",
+  "MatsP 48.55",
+  "MatsP 48.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:17:16",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 48.1\",\"a\":\"Gobhānu\",\"rel\":\"son_of\",\"b\":\"Turvasu\",\"words\":\"turvasostu suto garbho gobhānustasya cātmajaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 48.1\",\"a\":\"Trisāri\",\"rel\":\"son_of\",\"b\":\"Gobhānu\",\"words\":\"gobhānostu suto vīras trisāriraparājitaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.2\",\"a\":\"Karaṃdhama\",\"rel\":\"son_of\",\"b\":\"Trisāri\",\"words\":\"karaṃdhamastu traisārir\",\"doubt\":false},\n{\"ref\":\"MatsP 48.2\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Karaṃdhama\",\"words\":\"bharatastasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.2\",\"a\":\"Akalmaṣa\",\"rel\":\"son_of\",\"b\":\"Duṣyanta\",\"words\":\"tasya putro hy akalmaṣaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 48.4\",\"a\":\"Varūtha\",\"rel\":\"son_of\",\"b\":\"Duṣyanta\",\"words\":\"duṣyantasya tu dāyādo varūtho nāma pārthivaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.4\",\"a\":\"Aṇḍīra\",\"rel\":\"son_of\",\"b\":\"Varūtha\",\"words\":\"varūthāttu tathāṇḍīraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.4\",\"a\":\"Saṃdhāna\",\"rel\":\"son_of\",\"b\":\"Aṇḍīra\",\"words\":\"saṃdhānastasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.6\",\"a\":\"Setu\",\"rel\":\"son_of\",\"b\":\"Druhyu\",\"words\":\"druhyostu tanayau śūrau setuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.6\",\"a\":\"Ketu\",\"rel\":\"son_of\",\"b\":\"Druhyu\",\"words\":\"druhyostu tanayau śūrau setuḥ ketustathaiva ca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.6\",\"a\":\"Ketu\",\"rel\":\"brother_of\",\"b\":\"Setu\",\"words\":\"setuḥ ketustathaiva ca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.6\",\"a\":\"Śaradvān\",\"rel\":\"son_of\",\"b\":\"Setu\",\"words\":\"setuputraḥ śaradvāṃstu\",\"doubt\":false},\n{\"ref\":\"MatsP 48.6\",\"a\":\"Gandhāra\",\"rel\":\"son_of\",\"b\":\"Śaradvān\",\"words\":\"gandhārastasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.8\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Gandhāra\",\"words\":\"gandhāraputro dharmastu\",\"doubt\":false},\n{\"ref\":\"MatsP 48.8\",\"a\":\"Ghṛta\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"ghṛtastasyātmajo 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 48.8\",\"a\":\"Viduṣa\",\"rel\":\"son_of\",\"b\":\"Ghṛta\",\"words\":\"ghṛtācca viduṣo jajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 48.8\",\"a\":\"Pracetas\",\"rel\":\"son_of\",\"b\":\"Viduṣa\",\"words\":\"pracetāstasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.10\",\"a\":\"Sabhānara\",\"rel\":\"son_of\",\"b\":\"Anu\",\"words\":\"anoścaiva sutā vīrās trayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.10\",\"a\":\"Cākṣuṣa\",\"rel\":\"son_of\",\"b\":\"Anu\",\"words\":\"anoścaiva sutā vīrās trayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.10\",\"a\":\"Parameṣu\",\"rel\":\"son_of\",\"b\":\"Anu\",\"words\":\"anoścaiva sutā vīrās trayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.11\",\"a\":\"Kolāhala\",\"rel\":\"son_of\",\"b\":\"Sabhānara\",\"words\":\"sabhānarasya putrastu vidvānkolāhalo\",\"doubt\":false},\n{\"ref\":\"MatsP 48.11\",\"a\":\"Saṃjaya\",\"rel\":\"son_of\",\"b\":\"Kolāhala\",\"words\":\"kolāhalasya dharmātmā saṃjayo\",\"doubt\":false},\n{\"ref\":\"MatsP 48.12\",\"a\":\"Puraṃjaya\",\"rel\":\"son_of\",\"b\":\"Saṃjaya\",\"words\":\"saṃjayasyābhavatputro vīro nāma puraṃjayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.12\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Puraṃjaya\",\"words\":\"janamejayo mahārāja puraṃjayasuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 48.13\",\"a\":\"Mahāśāla\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayasya rājarṣer mahāśālo 'bhavatsutaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.14\",\"a\":\"Mahāmanas\",\"rel\":\"son_of\",\"b\":\"Mahāśāla\",\"words\":\"mahāmanāḥ sutastasya mahāśālasya\",\"doubt\":false},\n{\"ref\":\"MatsP 48.15\",\"a\":\"Uśīnara\",\"rel\":\"son_of\",\"b\":\"Mahāmanas\",\"words\":\"mahāmanāstu dvau putrau janayāmāsa\",\"doubt\":false},\n{\"ref\":\"MatsP 48.15\",\"a\":\"Titikṣu\",\"rel\":\"son_of\",\"b\":\"Mahāmanas\",\"words\":\"mahāmanāstu dvau putrau janayāmāsa\",\"doubt\":false},\n{\"ref\":\"MatsP 48.15\",\"a\":\"Titikṣu\",\"rel\":\"brother_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnaraṃ ca dharmajñaṃ titikṣuṃ caiva tāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 48.16\",\"a\":\"Bhṛśā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyastu pañca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.16\",\"a\":\"Kṛśā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyastu pañca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.16\",\"a\":\"Navā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyastu pañca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.16\",\"a\":\"Darśā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyastu pañca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.16\",\"a\":\"Dṛṣadvatī\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyastu pañca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.18\",\"a\":\"Nṛga\",\"rel\":\"born_of\",\"b\":\"Bhṛśā\",\"words\":\"bhṛśāyāstu nṛgaḥ putro\",\"doubt\":false},\n{\"ref\":\"MatsP 48.18\",\"a\":\"Nava\",\"rel\":\"born_of\",\"b\":\"Navā\",\"words\":\"navāyā nava eva ca\",\"doubt\":false},\n{\"ref\":\"MatsP 48.18\",\"a\":\"Kṛśa\",\"rel\":\"born_of\",\"b\":\"Kṛśā\",\"words\":\"kṛśāyāstu kṛśo jajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 48.18\",\"a\":\"Suvrata\",\"rel\":\"born_of\",\"b\":\"Darśā\",\"words\":\"darśāyāḥ suvrato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 48.18\",\"a\":\"Śibi Auśīnara\",\"rel\":\"born_of\",\"b\":\"Dṛṣadvatī\",\"words\":\"dṛṣadvatyāḥ sutaścāpi śibir auśīnaro\",\"doubt\":false},\n{\"ref\":\"MatsP 48.17\",\"a\":\"Nṛga\",\"rel\":\"son_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya putrāstu tāsu jātāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.17\",\"a\":\"Nava\",\"rel\":\"son_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya putrāstu tāsu jātāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.17\",\"a\":\"Kṛśa\",\"rel\":\"son_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya putrāstu tāsu jātāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.17\",\"a\":\"Suvrata\",\"rel\":\"son_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya putrāstu tāsu jātāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.18\",\"a\":\"Śibi Auśīnara\",\"rel\":\"son_of\",\"b\":\"Uśīnara\",\"words\":\"śibir auśīnaro nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.19\",\"a\":\"Pṛthudarbha\",\"rel\":\"son_of\",\"b\":\"Śibi Auśīnara\",\"words\":\"śibestu śibayaḥ putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"MatsP 48.19\",\"a\":\"Suvīra\",\"rel\":\"son_of\",\"b\":\"Śibi Auśīnara\",\"words\":\"śibestu śibayaḥ putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"MatsP 48.19\",\"a\":\"Kekaya\",\"rel\":\"son_of\",\"b\":\"Śibi Auśīnara\",\"words\":\"śibestu śibayaḥ putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"MatsP 48.19\",\"a\":\"Bhadraka\",\"rel\":\"son_of\",\"b\":\"Śibi Auśīnara\",\"words\":\"śibestu śibayaḥ putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"MatsP 48.22\",\"a\":\"Bṛhadratha\",\"rel\":\"son_of\",\"b\":\"Titikṣu\",\"words\":\"bṛhadrathaḥ sutastasya\",\"doubt\":false},\n{\"ref\":\"MatsP 48.22\",\"a\":\"Sena\",\"rel\":\"son_of\",\"b\":\"Bṛhadratha\",\"words\":\"tasya seno 'bhavatsutaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.23\",\"a\":\"Sutapas\",\"rel\":\"son_of\",\"b\":\"Sena\",\"words\":\"senasya sutapā jajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 48.23\",\"a\":\"Bali\",\"rel\":\"son_of\",\"b\":\"Sutapas\",\"words\":\"sutapastanayo baliḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.25\",\"a\":\"Aṅga\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"aṅgaṃ sa janayāmāsa\",\"doubt\":true},\n{\"ref\":\"MatsP 48.25\",\"a\":\"Vaṅga\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"vaṅgaṃ suhmaṃ tathaiva ca\",\"doubt\":true},\n{\"ref\":\"MatsP 48.25\",\"a\":\"Suhma\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"vaṅgaṃ suhmaṃ tathaiva ca\",\"doubt\":true},\n{\"ref\":\"MatsP 48.25\",\"a\":\"Puṇḍra\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"puṇḍraṃ kaliṅgaṃ ca\",\"doubt\":true},\n{\"ref\":\"MatsP 48.25\",\"a\":\"Kaliṅga\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"puṇḍraṃ kaliṅgaṃ ca\",\"doubt\":true},\n{\"ref\":\"MatsP 48.33\",\"a\":\"Bṛhaspati\",\"rel\":\"brother_of\",\"b\":\"Uśija\",\"words\":\"uśijasya yavīyānvai\",\"doubt\":false},\n{\"ref\":\"MatsP 48.32\",\"a\":\"Mamatā\",\"rel\":\"wife_of\",\"b\":\"Uśija\",\"words\":\"patnī vai mamatā nāma babhūvāsya\",\"doubt\":false},\n{\"ref\":\"MatsP 48.40\",\"a\":\"Dīrghatamas\",\"rel\":\"son_of\",\"b\":\"Uśija\",\"words\":\"putraṃ jyeṣṭhasya vai bhrātur garbhasthaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 48.53\",\"a\":\"Dīrghatamas\",\"rel\":\"brother_of\",\"b\":\"Bṛhaspati\",\"words\":\"tasya bhrātā pitṛvyo yaś cakāra\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05517,
+ "tokens": {
+  "input": 5158,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4485,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 48.1",
+   "a": "Gobhānu",
+   "rel": "son_of",
+   "b": "Turvasu",
+   "words": "turvasostu suto garbho gobhānustasya cātmajaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.1",
+   "a": "Trisāri",
+   "rel": "son_of",
+   "b": "Gobhānu",
+   "words": "gobhānostu suto vīras trisāriraparājitaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.2",
+   "a": "Karaṃdhama",
+   "rel": "son_of",
+   "b": "Trisāri",
+   "words": "karaṃdhamastu traisārir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.2",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Karaṃdhama",
+   "words": "bharatastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.2",
+   "a": "Akalmaṣa",
+   "rel": "son_of",
+   "b": "Duṣyanta",
+   "words": "tasya putro hy akalmaṣaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.4",
+   "a": "Varūtha",
+   "rel": "son_of",
+   "b": "Duṣyanta",
+   "words": "duṣyantasya tu dāyādo varūtho nāma pārthivaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.4",
+   "a": "Aṇḍīra",
+   "rel": "son_of",
+   "b": "Varūtha",
+   "words": "varūthāttu tathāṇḍīraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.4",
+   "a": "Saṃdhāna",
+   "rel": "son_of",
+   "b": "Aṇḍīra",
+   "words": "saṃdhānastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.6",
+   "a": "Setu",
+   "rel": "son_of",
+   "b": "Druhyu",
+   "words": "druhyostu tanayau śūrau setuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.6",
+   "a": "Ketu",
+   "rel": "son_of",
+   "b": "Druhyu",
+   "words": "druhyostu tanayau śūrau setuḥ ketustathaiva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.6",
+   "a": "Ketu",
+   "rel": "brother_of",
+   "b": "Setu",
+   "words": "setuḥ ketustathaiva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.6",
+   "a": "Śaradvān",
+   "rel": "son_of",
+   "b": "Setu",
+   "words": "setuputraḥ śaradvāṃstu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.6",
+   "a": "Gandhāra",
+   "rel": "son_of",
+   "b": "Śaradvān",
+   "words": "gandhārastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.8",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Gandhāra",
+   "words": "gandhāraputro dharmastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.8",
+   "a": "Ghṛta",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "ghṛtastasyātmajo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.8",
+   "a": "Viduṣa",
+   "rel": "son_of",
+   "b": "Ghṛta",
+   "words": "ghṛtācca viduṣo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.8",
+   "a": "Pracetas",
+   "rel": "son_of",
+   "b": "Viduṣa",
+   "words": "pracetāstasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.10",
+   "a": "Sabhānara",
+   "rel": "son_of",
+   "b": "Anu",
+   "words": "anoścaiva sutā vīrās trayaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 48.10",
+   "a": "Cākṣuṣa",
+   "rel": "son_of",
+   "b": "Anu",
+   "words": "anoścaiva sutā vīrās trayaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 48.10",
+   "a": "Parameṣu",
+   "rel": "son_of",
+   "b": "Anu",
+   "words": "anoścaiva sutā vīrās trayaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 48.11",
+   "a": "Kolāhala",
+   "rel": "son_of",
+   "b": "Sabhānara",
+   "words": "sabhānarasya putrastu vidvānkolāhalo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.11",
+   "a": "Saṃjaya",
+   "rel": "son_of",
+   "b": "Kolāhala",
+   "words": "kolāhalasya dharmātmā saṃjayo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.12",
+   "a": "Puraṃjaya",
+   "rel": "son_of",
+   "b": "Saṃjaya",
+   "words": "saṃjayasyābhavatputro vīro nāma puraṃjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.12",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Puraṃjaya",
+   "words": "janamejayo mahārāja puraṃjayasuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.13",
+   "a": "Mahāśāla",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayasya rājarṣer mahāśālo 'bhavatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.14",
+   "a": "Mahāmanas",
+   "rel": "son_of",
+   "b": "Mahāśāla",
+   "words": "mahāmanāḥ sutastasya mahāśālasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.15",
+   "a": "Uśīnara",
+   "rel": "son_of",
+   "b": "Mahāmanas",
+   "words": "mahāmanāstu dvau putrau janayāmāsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.15",
+   "a": "Titikṣu",
+   "rel": "son_of",
+   "b": "Mahāmanas",
+   "words": "mahāmanāstu dvau putrau janayāmāsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.15",
+   "a": "Titikṣu",
+   "rel": "brother_of",
+   "b": "Uśīnara",
+   "words": "uśīnaraṃ ca dharmajñaṃ titikṣuṃ caiva tāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.16",
+   "a": "Bhṛśā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyastu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.16",
+   "a": "Kṛśā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyastu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.16",
+   "a": "Navā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyastu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.16",
+   "a": "Darśā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyastu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.16",
+   "a": "Dṛṣadvatī",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyastu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.18",
+   "a": "Nṛga",
+   "rel": "born_of",
+   "b": "Bhṛśā",
+   "words": "bhṛśāyāstu nṛgaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.18",
+   "a": "Nava",
+   "rel": "born_of",
+   "b": "Navā",
+   "words": "navāyā nava eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.18",
+   "a": "Kṛśa",
+   "rel": "born_of",
+   "b": "Kṛśā",
+   "words": "kṛśāyāstu kṛśo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.18",
+   "a": "Suvrata",
+   "rel": "born_of",
+   "b": "Darśā",
+   "words": "darśāyāḥ suvrato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.18",
+   "a": "Śibi Auśīnara",
+   "rel": "born_of",
+   "b": "Dṛṣadvatī",
+   "words": "dṛṣadvatyāḥ sutaścāpi śibir auśīnaro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.17",
+   "a": "Nṛga",
+   "rel": "son_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya putrāstu tāsu jātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.17",
+   "a": "Nava",
+   "rel": "son_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya putrāstu tāsu jātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.17",
+   "a": "Kṛśa",
+   "rel": "son_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya putrāstu tāsu jātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.17",
+   "a": "Suvrata",
+   "rel": "son_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya putrāstu tāsu jātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.18",
+   "a": "Śibi Auśīnara",
+   "rel": "son_of",
+   "b": "Uśīnara",
+   "words": "śibir auśīnaro nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.19",
+   "a": "Pṛthudarbha",
+   "rel": "son_of",
+   "b": "Śibi Auśīnara",
+   "words": "śibestu śibayaḥ putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.19",
+   "a": "Suvīra",
+   "rel": "son_of",
+   "b": "Śibi Auśīnara",
+   "words": "śibestu śibayaḥ putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.19",
+   "a": "Kekaya",
+   "rel": "son_of",
+   "b": "Śibi Auśīnara",
+   "words": "śibestu śibayaḥ putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.19",
+   "a": "Bhadraka",
+   "rel": "son_of",
+   "b": "Śibi Auśīnara",
+   "words": "śibestu śibayaḥ putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.22",
+   "a": "Bṛhadratha",
+   "rel": "son_of",
+   "b": "Titikṣu",
+   "words": "bṛhadrathaḥ sutastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.22",
+   "a": "Sena",
+   "rel": "son_of",
+   "b": "Bṛhadratha",
+   "words": "tasya seno 'bhavatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.23",
+   "a": "Sutapas",
+   "rel": "son_of",
+   "b": "Sena",
+   "words": "senasya sutapā jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.23",
+   "a": "Bali",
+   "rel": "son_of",
+   "b": "Sutapas",
+   "words": "sutapastanayo baliḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.25",
+   "a": "Aṅga",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "aṅgaṃ sa janayāmāsa",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.25",
+   "a": "Vaṅga",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "vaṅgaṃ suhmaṃ tathaiva ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.25",
+   "a": "Suhma",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "vaṅgaṃ suhmaṃ tathaiva ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.25",
+   "a": "Puṇḍra",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "puṇḍraṃ kaliṅgaṃ ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.25",
+   "a": "Kaliṅga",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "puṇḍraṃ kaliṅgaṃ ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.33",
+   "a": "Bṛhaspati",
+   "rel": "brother_of",
+   "b": "Uśija",
+   "words": "uśijasya yavīyānvai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.32",
+   "a": "Mamatā",
+   "rel": "wife_of",
+   "b": "Uśija",
+   "words": "patnī vai mamatā nāma babhūvāsya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 48.40",
+   "a": "Dīrghatamas",
+   "rel": "son_of",
+   "b": "Uśija",
+   "words": "putraṃ jyeṣṭhasya vai bhrātur garbhasthaṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 48.44",
+   "a": "Dīrghatamas",
+   "rel": "brother_of",
+   "b": "Bṛhaspati",
+   "words": "tasya bhrātā pitṛvyo yaś cakāra",
+   "doubt": true,
+   "ref_cited": "MatsP 48.53",
+   "ref_from": "words",
+   "check": "verified"
+  }
+ ]
+}

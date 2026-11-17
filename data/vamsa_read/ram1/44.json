@@ -1,0 +1,80 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 44,
+ "part": 0,
+ "refs": [
+  "R 1,44.1",
+  "R 1,44.2",
+  "R 1,44.3",
+  "R 1,44.4",
+  "R 1,44.5",
+  "R 1,44.6",
+  "R 1,44.7",
+  "R 1,44.8",
+  "R 1,44.9",
+  "R 1,44.10",
+  "R 1,44.11",
+  "R 1,44.12",
+  "R 1,44.13",
+  "R 1,44.14",
+  "R 1,44.15",
+  "R 1,44.16",
+  "R 1,44.17",
+  "R 1,44.18",
+  "R 1,44.19",
+  "R 1,44.20",
+  "R 1,44.21",
+  "R 1,44.22",
+  "R 1,44.23",
+  "R 1,44.24",
+  "R 1,44.25",
+  "R 1,44.26",
+  "R 1,44.27"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:50",
+ "reply": "{\"statements\": [\n{\"ref\":\"R 1,44.14\",\"a\":\"Diti\",\"rel\":\"other\",\"b\":\"Aditi\",\"words\":\"diteḥ putrā mahābalāḥ aditeś ca\",\"doubt\":true},\n{\"ref\":\"R 1,44.21\",\"a\":\"Vāruṇī\",\"rel\":\"daughter_of\",\"b\":\"Varuṇa\",\"words\":\"varuṇasya tataḥ kanyā vāruṇī\",\"doubt\":false},\n{\"ref\":\"R 1,44.22\",\"a\":\"Vāruṇī\",\"rel\":\"daughter_of\",\"b\":\"Varuṇa\",\"words\":\"tāṃ rāma jagṛhur varuṇātmajām\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00839,
+ "tokens": {
+  "input": 3027,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 234,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,44.14",
+   "a": "Diti",
+   "rel": "other",
+   "b": "Aditi",
+   "words": "diteḥ putrā mahābalāḥ aditeś ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,44.21",
+   "a": "Vāruṇī",
+   "rel": "daughter_of",
+   "b": "Varuṇa",
+   "words": "varuṇasya tataḥ kanyā vāruṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,44.22",
+   "a": "Vāruṇī",
+   "rel": "daughter_of",
+   "b": "Varuṇa",
+   "words": "tāṃ rāma jagṛhur varuṇātmajām",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

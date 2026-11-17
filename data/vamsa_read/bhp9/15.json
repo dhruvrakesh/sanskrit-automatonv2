@@ -151,7 +151,7 @@
    "b": "Jaya",
    "words": "jayasya tanayo 'mitaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.15.3",
@@ -214,7 +214,7 @@
    "b": "Balāka",
    "words": "balākaścātmajo 'jakaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.15.4",
@@ -223,7 +223,7 @@
    "b": "Ajaka",
    "words": "tataḥ kuśaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.15.4",
@@ -286,7 +286,7 @@
    "b": "Ṛcīka",
    "words": "upayeme varānanām",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.15.10",
@@ -367,7 +367,7 @@
    "b": "Arjuna",
    "words": "hate pitari tatputrā",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.15.37",

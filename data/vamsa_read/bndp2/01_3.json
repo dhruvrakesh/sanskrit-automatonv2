@@ -1,0 +1,58 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 1,
+ "part": 3,
+ "refs": [
+  "BndP 2,1.112",
+  "BndP 2,1.113",
+  "BndP 2,1.114",
+  "BndP 2,1.115",
+  "BndP 2,1.116",
+  "BndP 2,1.117",
+  "BndP 2,1.118",
+  "BndP 2,1.119",
+  "BndP 2,1.120",
+  "BndP 2,1.121",
+  "BndP 2,1.122",
+  "BndP 2,1.123",
+  "BndP 2,1.124",
+  "BndP 2,1.125"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:23:04",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,1.117\",\"a\":\"Ariṣṭanemi\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"putramapratimaṃ nāmnāriṣṭanemiṃ prajāpatim / putraṃ marīcistapasi\",\"doubt\":false},{\"ref\":\"BndP 2,1.123\",\"a\":\"Dakṣa\",\"rel\":\"son_of\",\"b\":\"Pracetas\",\"words\":\"prācetaso dakṣaḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00578,
+ "tokens": {
+  "input": 2012,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 176,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,1.117",
+   "a": "Ariṣṭanemi",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "putramapratimaṃ nāmnāriṣṭanemiṃ prajāpatim / putraṃ marīcistapasi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,1.123",
+   "a": "Dakṣa",
+   "rel": "son_of",
+   "b": "Pracetas",
+   "words": "prācetaso dakṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

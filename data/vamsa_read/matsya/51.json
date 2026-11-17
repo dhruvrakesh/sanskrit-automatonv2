@@ -1,0 +1,262 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 51,
+ "part": 0,
+ "refs": [
+  "MatsP 51.1",
+  "MatsP 51.2",
+  "MatsP 51.3",
+  "MatsP 51.4",
+  "MatsP 51.5",
+  "MatsP 51.6",
+  "MatsP 51.7",
+  "MatsP 51.8",
+  "MatsP 51.9",
+  "MatsP 51.10",
+  "MatsP 51.11",
+  "MatsP 51.12",
+  "MatsP 51.13",
+  "MatsP 51.14",
+  "MatsP 51.15",
+  "MatsP 51.16",
+  "MatsP 51.17",
+  "MatsP 51.18",
+  "MatsP 51.19",
+  "MatsP 51.20",
+  "MatsP 51.21",
+  "MatsP 51.22",
+  "MatsP 51.23",
+  "MatsP 51.24",
+  "MatsP 51.25",
+  "MatsP 51.26",
+  "MatsP 51.27",
+  "MatsP 51.28",
+  "MatsP 51.29",
+  "MatsP 51.30",
+  "MatsP 51.31",
+  "MatsP 51.32",
+  "MatsP 51.33",
+  "MatsP 51.34",
+  "MatsP 51.35",
+  "MatsP 51.36",
+  "MatsP 51.37",
+  "MatsP 51.38",
+  "MatsP 51.39",
+  "MatsP 51.40",
+  "MatsP 51.41",
+  "MatsP 51.42",
+  "MatsP 51.43",
+  "MatsP 51.44",
+  "MatsP 51.45",
+  "MatsP 51.46",
+  "MatsP 51.47"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:19:14",
+ "reply": "{\"statements\":[{\"ref\":\"MatsP 51.2\",\"a\":\"Agni\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"brahmaṇo mānasaḥ putras\",\"doubt\":true},{\"ref\":\"MatsP 51.3\",\"a\":\"Vaidyuta\",\"rel\":\"son_of\",\"b\":\"Pāvaka\",\"words\":\"vaidyutaḥ pāvakātmajaḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.4\",\"a\":\"Havyavāha\",\"rel\":\"son_of\",\"b\":\"Pavamāna\",\"words\":\"pavamānātmajo hy agnir havyavāhaḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.5\",\"a\":\"Havyavāha\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"havyavāho 'gniḥ prathamo brahmaṇaḥ sutaḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.8\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Brahmaudanāgni\",\"words\":\"brahmaudanāgnis tatputro bharato\",\"doubt\":true},{\"ref\":\"MatsP 51.9\",\"a\":\"Puṣkarodadhi\",\"rel\":\"son_of\",\"b\":\"Atharvan\",\"words\":\"'tharvaṇaḥ putro mathitaḥ puṣkarodadhiḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.10\",\"a\":\"Atharvan\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgoḥ prajāyatātharvā\",\"doubt\":true},{\"ref\":\"MatsP 51.12\",\"a\":\"Sabhya\",\"rel\":\"son_of\",\"b\":\"Gārhapatya\",\"words\":\"sabhyāvasathyau ca saṃśatyās tau sutāvubhau\",\"doubt\":true},{\"ref\":\"MatsP 51.12\",\"a\":\"Āvasathya\",\"rel\":\"son_of\",\"b\":\"Gārhapatya\",\"words\":\"sabhyāvasathyau ca saṃśatyās tau sutāvubhau\",\"doubt\":true},{\"ref\":\"MatsP 51.19\",\"a\":\"Samrāj\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"samrāḍagnisuto\",\"doubt\":true},{\"ref\":\"MatsP 51.24\",\"a\":\"Barhiṣa\",\"rel\":\"son_of\",\"b\":\"Hautriya\",\"words\":\"hautriyasya suto hyagnir barhiṣo\",\"doubt\":true},{\"ref\":\"MatsP 51.25\",\"a\":\"Viśvavedas\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"suto hyagner viśvavedā\",\"doubt\":true},{\"ref\":\"MatsP 51.28\",\"a\":\"Jaṭhara\",\"rel\":\"son_of\",\"b\":\"Hṛdaya\",\"words\":\"hṛdayasya suto hyagner jaṭhare\",\"doubt\":true},{\"ref\":\"MatsP 51.29\",\"a\":\"Saṃvartaka\",\"rel\":\"son_of\",\"b\":\"Manyumat\",\"words\":\"agnermanyumataḥ putro ghoraḥ saṃvartakaḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.30\",\"a\":\"Saharakṣa\",\"rel\":\"son_of\",\"b\":\"Samudravāsin\",\"words\":\"samudravāsinaḥ putraḥ saharakṣo\",\"doubt\":true},{\"ref\":\"MatsP 51.31\",\"a\":\"Kravyādagni\",\"rel\":\"son_of\",\"b\":\"Saharakṣa\",\"words\":\"kravyādagniḥ sutastasya\",\"doubt\":true},{\"ref\":\"MatsP 51.34\",\"a\":\"Mahimat\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyuṣo mahimānputro\",\"doubt\":true},{\"ref\":\"MatsP 51.34\",\"a\":\"Dahana\",\"rel\":\"son_of\",\"b\":\"Mahimat\",\"words\":\"dahanastu tataḥ sutaḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.35\",\"a\":\"Adbhuta\",\"rel\":\"son_of\",\"b\":\"Dahana\",\"words\":\"putro 'sya sahito hyagnir adbhutaḥ\",\"doubt\":true},{\"ref\":\"MatsP 51.36\",\"a\":\"Devāṃśa\",\"rel\":\"son_of\",\"b\":\"Adbhuta\",\"words\":\"adbhutasya suto vīro devāṃśastu\",\"doubt\":true},{\"ref\":\"MatsP 51.37\",\"a\":\"Mahākavi\",\"rel\":\"son_of\",\"b\":\"Vividhāgni\",\"words\":\"vividhāgnistatastasya tasya putro mahākaviḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02485,
+ "tokens": {
+  "input": 4678,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1549,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 51.2",
+   "a": "Agni",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "brahmaṇo mānasaḥ putras",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.3",
+   "a": "Vaidyuta",
+   "rel": "son_of",
+   "b": "Pāvaka",
+   "words": "vaidyutaḥ pāvakātmajaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.4",
+   "a": "Havyavāha",
+   "rel": "son_of",
+   "b": "Pavamāna",
+   "words": "pavamānātmajo hy agnir havyavāhaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.5",
+   "a": "Havyavāha",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "havyavāho 'gniḥ prathamo brahmaṇaḥ sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.8",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Brahmaudanāgni",
+   "words": "brahmaudanāgnis tatputro bharato",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.9",
+   "a": "Puṣkarodadhi",
+   "rel": "son_of",
+   "b": "Atharvan",
+   "words": "'tharvaṇaḥ putro mathitaḥ puṣkarodadhiḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.10",
+   "a": "Atharvan",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgoḥ prajāyatātharvā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.12",
+   "a": "Sabhya",
+   "rel": "son_of",
+   "b": "Gārhapatya",
+   "words": "sabhyāvasathyau ca saṃśatyās tau sutāvubhau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.12",
+   "a": "Āvasathya",
+   "rel": "son_of",
+   "b": "Gārhapatya",
+   "words": "sabhyāvasathyau ca saṃśatyās tau sutāvubhau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.19",
+   "a": "Samrāj",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "samrāḍagnisuto",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.24",
+   "a": "Barhiṣa",
+   "rel": "son_of",
+   "b": "Hautriya",
+   "words": "hautriyasya suto hyagnir barhiṣo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.25",
+   "a": "Viśvavedas",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "suto hyagner viśvavedā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.28",
+   "a": "Jaṭhara",
+   "rel": "son_of",
+   "b": "Hṛdaya",
+   "words": "hṛdayasya suto hyagner jaṭhare",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.29",
+   "a": "Saṃvartaka",
+   "rel": "son_of",
+   "b": "Manyumat",
+   "words": "agnermanyumataḥ putro ghoraḥ saṃvartakaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.30",
+   "a": "Saharakṣa",
+   "rel": "son_of",
+   "b": "Samudravāsin",
+   "words": "samudravāsinaḥ putraḥ saharakṣo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.31",
+   "a": "Kravyādagni",
+   "rel": "son_of",
+   "b": "Saharakṣa",
+   "words": "kravyādagniḥ sutastasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.34",
+   "a": "Mahimat",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyuṣo mahimānputro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.34",
+   "a": "Dahana",
+   "rel": "son_of",
+   "b": "Mahimat",
+   "words": "dahanastu tataḥ sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.35",
+   "a": "Adbhuta",
+   "rel": "son_of",
+   "b": "Dahana",
+   "words": "putro 'sya sahito hyagnir adbhutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.36",
+   "a": "Devāṃśa",
+   "rel": "son_of",
+   "b": "Adbhuta",
+   "words": "adbhutasya suto vīro devāṃśastu",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 51.37",
+   "a": "Mahākavi",
+   "rel": "son_of",
+   "b": "Vividhāgni",
+   "words": "vividhāgnistatastasya tasya putro mahākaviḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

@@ -590,6 +590,190 @@
   ],
   [
    {
+    "name": "Vṛṣṭimān",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suṣeṇa",
+    "ref": "BhP 9.22.41",
+    "words": "tasya suṣeṇo"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "BhP 9.22.41",
+    "words": "sunīthastasya bhavitā"
+   },
+   {
+    "name": "Nṛcakṣus",
+    "ref": "BhP 9.22.41",
+    "words": "nṛcakṣuryat"
+   },
+   {
+    "name": "Sukhīnala",
+    "ref": "BhP 9.22.41",
+    "words": "nṛcakṣuryat sukhīnalaḥ"
+   },
+   {
+    "name": "Pariplava",
+    "ref": "BhP 9.22.42",
+    "words": "pariplavaḥ sutastasmān"
+   },
+   {
+    "name": "Sunaya",
+    "ref": "BhP 9.22.42",
+    "words": "medhāvī sunayātmajaḥ"
+   },
+   {
+    "name": "Medhāvin",
+    "ref": "BhP 9.22.42",
+    "words": "medhāvī sunayātmajaḥ"
+   },
+   {
+    "name": "Nṛpañjaya",
+    "ref": "BhP 9.22.42",
+    "words": "nṛpañjayastato"
+   },
+   {
+    "name": "Dūrva",
+    "ref": "BhP 9.22.42",
+    "words": "dūrvastimis"
+   },
+   {
+    "name": "Timi",
+    "ref": "BhP 9.22.42",
+    "words": "tasmāj janiṣyati"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "BhP 9.22.43",
+    "words": "timerbṛhadrathas"
+   },
+   {
+    "name": "Śatānīka",
+    "ref": "BhP 9.22.43",
+    "words": "tasmāc chatānīkaḥ"
+   },
+   {
+    "name": "Durdamana",
+    "ref": "BhP 9.22.43",
+    "words": "śatānīkāddurdamanas"
+   },
+   {
+    "name": "Mahīnara",
+    "ref": "BhP 9.22.43",
+    "words": "tasyāpatyaṃ mahīnaraḥ"
+   },
+   {
+    "name": "Daṇḍapāṇi",
+    "ref": "BhP 9.22.44",
+    "words": "daṇḍapāṇir"
+   },
+   {
+    "name": "Nimi",
+    "ref": "BhP 9.22.44",
+    "words": "nimistasya"
+   },
+   {
+    "name": "Kṣemaka",
+    "ref": "BhP 9.22.44",
+    "words": "nimistasya kṣemako bhavitā yataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ṛkṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Saṃvaraṇa",
+    "ref": "BhP 9.22.3",
+    "words": "ṛkṣaḥ saṃvaraṇastataḥ"
+   },
+   {
+    "name": "Kuru",
+    "ref": "BhP 9.22.4",
+    "words": "tapatyāṃ sūryakanyāyāṃ kurukṣetrapatiḥ kuruḥ"
+   },
+   {
+    "name": "Parīkṣi",
+    "ref": "BhP 9.22.4",
+    "words": "parīkṣiḥ sudhanurjahnurniṣadhaśca kuroḥ sutāḥ"
+   },
+   {
+    "name": "Suratha",
+    "ref": "BhP 9.22.9",
+    "words": "parīkṣiranapatyo 'bhūt suratho nāma jāhnavaḥ"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "BhP 9.22.10",
+    "words": "tato vidūrathaḥ"
+   },
+   {
+    "name": "Sārvabhauma",
+    "ref": "BhP 9.22.10",
+    "words": "vidūrathastasmāt sārvabhaumaḥ"
+   },
+   {
+    "name": "Jayasena",
+    "ref": "BhP 9.22.10",
+    "words": "jayasenastattanayo"
+   },
+   {
+    "name": "Rādhika",
+    "ref": "BhP 9.22.10",
+    "words": "rādhiko 'to"
+   },
+   {
+    "name": "Ayutāyu",
+    "ref": "BhP 9.22.10",
+    "words": "rādhiko 'to 'yutāyv abhūt"
+   },
+   {
+    "name": "Akrodhana",
+    "ref": "BhP 9.22.11",
+    "words": "tataścākrodhanaḥ"
+   },
+   {
+    "name": "Devātithi",
+    "ref": "BhP 9.22.11",
+    "words": "akrodhanastasmāddevātithiḥ"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "BhP 9.22.11",
+    "words": "ṛkṣastasya"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "BhP 9.22.11",
+    "words": "ṛkṣastasya dilīpo 'bhūt"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "BhP 9.22.11",
+    "words": "pratīpastasya cātmajaḥ"
+   },
+   {
+    "name": "Bāhlīka",
+    "ref": "BhP 9.22.12",
+    "words": "bāhlīka iti cātmajāḥ"
+   },
+   {
+    "name": "Somadatta",
+    "ref": "BhP 9.22.18",
+    "words": "bāhlīkāt somadatto 'bhūt"
+   },
+   {
+    "name": "Bhūri",
+    "ref": "BhP 9.22.18",
+    "words": "bhūrirbhūriśravāstataḥ"
+   }
+  ],
+  [
+   {
     "name": "Divāka",
     "ref": null,
     "words": null
@@ -673,6 +857,180 @@
     "name": "Sañjaya",
     "ref": "BhP 9.12.13",
     "words": "sañjayo bhavitā tataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kuśa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Atithi",
+    "ref": "BhP 9.12.1",
+    "words": "kuśasya cātithistasmān"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "BhP 9.12.1",
+    "words": "niṣadhastatsuto"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "BhP 9.12.1",
+    "words": "niṣadhastatsuto nabhaḥ"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "BhP 9.12.1",
+    "words": "puṇḍarīko 'tha tatputraḥ"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "BhP 9.12.1",
+    "words": "tatputraḥ kṣemadhanvābhavat tataḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "BhP 9.12.2",
+    "words": "devānīkastato"
+   },
+   {
+    "name": "Anīha",
+    "ref": "BhP 9.12.2",
+    "words": "tato 'nīhaḥ"
+   },
+   {
+    "name": "Pāriyātra",
+    "ref": "BhP 9.12.2",
+    "words": "pāriyātro 'tha tatsutaḥ"
+   },
+   {
+    "name": "Balasthala",
+    "ref": "BhP 9.12.2",
+    "words": "tato balasthalaḥ"
+   },
+   {
+    "name": "Vajranābha",
+    "ref": "BhP 9.12.2",
+    "words": "tasmādvajranābho"
+   },
+   {
+    "name": "Sagaṇa",
+    "ref": "BhP 9.12.3",
+    "words": "sagaṇastatsutaḥ"
+   },
+   {
+    "name": "Vidhṛti",
+    "ref": "BhP 9.12.3",
+    "words": "tasmādvidhṛtiścābhavat sutaḥ"
+   },
+   {
+    "name": "Hiraṇyanābha",
+    "ref": "BhP 9.12.3",
+    "words": "tato hiraṇyanābho 'bhūt"
+   },
+   {
+    "name": "Puṣpa",
+    "ref": "BhP 9.12.5",
+    "words": "puṣpo hiraṇyanābhasya"
+   },
+   {
+    "name": "Dhruvasandhi",
+    "ref": "BhP 9.12.5",
+    "words": "dhruvasandhistato 'bhavat"
+   },
+   {
+    "name": "Sudarśana",
+    "ref": "BhP 9.12.5",
+    "words": "sudarśano 'tha"
+   }
+  ],
+  [
+   {
+    "name": "Manu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "BhP 9.6.4",
+    "words": "manorjajñe ikṣvākurghrāṇataḥ sutaḥ"
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "BhP 9.6.4",
+    "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ"
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "BhP 9.6.12",
+    "words": "purañjayastasya suta"
+   },
+   {
+    "name": "Anenas",
+    "ref": "BhP 9.6.20",
+    "words": "purañjayasya putro 'bhūdanenāḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "BhP 9.6.20",
+    "words": "anenāstatsutaḥ pṛthuḥ"
+   },
+   {
+    "name": "Viśvagandhi",
+    "ref": "BhP 9.6.20",
+    "words": "viśvagandhistataḥ"
+   },
+   {
+    "name": "Candra",
+    "ref": "BhP 9.6.20",
+    "words": "tataścandro"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "BhP 9.6.20",
+    "words": "yuvanāśvastu tatsutaḥ"
+   },
+   {
+    "name": "Śrāvasta",
+    "ref": "BhP 9.6.21",
+    "words": "śrāvastastatsuto"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "BhP 9.6.21",
+    "words": "bṛhadaśvastu śrāvastiḥ"
+   },
+   {
+    "name": "Kuvalayāśvaka",
+    "ref": "BhP 9.6.21",
+    "words": "tataḥ kuvalayāśvakaḥ"
+   },
+   {
+    "name": "Dṛḍhāśva",
+    "ref": "BhP 9.6.23",
+    "words": "tatsutāste"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "BhP 9.6.24",
+    "words": "dṛḍhāśvaputro haryaśvo"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "BhP 9.6.24",
+    "words": "nikumbhastatsutaḥ"
+   },
+   {
+    "name": "Bahulāśva",
+    "ref": "BhP 9.6.25",
+    "words": "bahulāśvo nikumbhasya"
+   },
+   {
+    "name": "Kṛśāśva",
+    "ref": "BhP 9.6.25",
+    "words": "kṛśāśvo 'thāsya"
    }
   ],
   [
@@ -980,74 +1338,69 @@
   ],
   [
    {
-    "name": "Sukhīnala",
+    "name": "Aila",
     "ref": null,
     "words": null
    },
    {
-    "name": "Pariplava",
-    "ref": "BhP 9.22.42",
-    "words": "pariplavaḥ sutastasmān"
+    "name": "Vijaya",
+    "ref": "BhP 9.15.1",
+    "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā"
    },
    {
-    "name": "Sunaya",
-    "ref": "BhP 9.22.42",
-    "words": "medhāvī sunayātmajaḥ"
+    "name": "Bhīma",
+    "ref": "BhP 9.15.3",
+    "words": "bhīmastu vijayasyātha"
    },
    {
-    "name": "Medhāvin",
-    "ref": "BhP 9.22.42",
-    "words": "medhāvī sunayātmajaḥ"
+    "name": "Kāñcana",
+    "ref": "BhP 9.15.3",
+    "words": "kāñcano hotrakastataḥ"
    },
    {
-    "name": "Nṛpañjaya",
-    "ref": "BhP 9.22.42",
-    "words": "nṛpañjayastato"
+    "name": "Hotraka",
+    "ref": "BhP 9.15.3",
+    "words": "kāñcano hotrakastataḥ"
    },
    {
-    "name": "Dūrva",
-    "ref": "BhP 9.22.42",
-    "words": "dūrvastimis"
+    "name": "Jahnu",
+    "ref": "BhP 9.15.3",
+    "words": "tasya jahnuḥ suto"
    },
    {
-    "name": "Timi",
-    "ref": "BhP 9.22.42",
-    "words": "tasmāj janiṣyati"
+    "name": "Pura",
+    "ref": "BhP 9.15.3",
+    "words": "jahnostu purustasyātha"
    },
    {
-    "name": "Bṛhadratha",
-    "ref": "BhP 9.22.43",
-    "words": "timerbṛhadrathas"
+    "name": "Balāka",
+    "ref": "BhP 9.15.3",
+    "words": "balākaścātmajo"
    },
    {
-    "name": "Śatānīka",
-    "ref": "BhP 9.22.43",
-    "words": "tasmāc chatānīkaḥ"
+    "name": "Ajaka",
+    "ref": "BhP 9.15.3",
+    "words": "balākaścātmajo 'jakaḥ"
    },
    {
-    "name": "Durdamana",
-    "ref": "BhP 9.22.43",
-    "words": "śatānīkāddurdamanas"
+    "name": "Kuśa",
+    "ref": "BhP 9.15.4",
+    "words": "tataḥ kuśaḥ"
    },
    {
-    "name": "Mahīnara",
-    "ref": "BhP 9.22.43",
-    "words": "tasyāpatyaṃ mahīnaraḥ"
+    "name": "Kuśāmbu",
+    "ref": "BhP 9.15.4",
+    "words": "kuśasyāpi kuśāmbustanayo"
    },
    {
-    "name": "Daṇḍapāṇi",
-    "ref": "BhP 9.22.44",
-    "words": "daṇḍapāṇir"
+    "name": "Gādhi",
+    "ref": "BhP 9.15.4",
+    "words": "gādhirāsīt kuśāmbujaḥ"
    },
    {
-    "name": "Nimi",
-    "ref": "BhP 9.22.44",
-    "words": "nimistasya"
-   },
-   {
-    "name": "Kṣemaka",
-    "ref": "BhP 9.22.44",
-    "words": "nimistasya kṣemako bhavitā yataḥ"
+    "name": "Viśvāmitra",
+    "ref": "BhP 9.16.28",
+    "words": "gādherabhūn mahātejāḥ"
    }
   ],
   [
@@ -1119,183 +1472,126 @@
   ],
   [
    {
-    "name": "Kuśa",
+    "name": "Romapāda",
     "ref": null,
     "words": null
    },
    {
-    "name": "Prati",
-    "ref": "BhP 9.17.16",
-    "words": "kuśāt pratiḥ kṣātravṛddhāt"
+    "name": "Caturaṅga",
+    "ref": "BhP 9.23.10",
+    "words": "caturaṅgo romapādāt"
    },
    {
-    "name": "Sañjaya",
-    "ref": "BhP 9.17.16",
-    "words": "pratiḥ kṣātravṛddhāt sañjayaḥ"
+    "name": "Pṛthulākṣa",
+    "ref": "BhP 9.23.10",
+    "words": "pṛthulākṣastu tatsutaḥ"
    },
    {
-    "name": "Jaya",
-    "ref": "BhP 9.17.16",
-    "words": "sañjayastatsuto jayaḥ"
+    "name": "Bṛhadratha",
+    "ref": "BhP 9.23.11",
+    "words": "bṛhadratho bṛhatkarmā bṛhadbhānuśca tatsutāḥ"
    },
    {
-    "name": "Kṛta",
-    "ref": "BhP 9.17.17",
-    "words": "tataḥ kṛtaḥ"
+    "name": "Bṛhanmanas",
+    "ref": "BhP 9.23.11",
+    "words": "ādyādbṛhanmanāstasmāt"
    },
    {
-    "name": "Haryabala",
-    "ref": "BhP 9.17.17",
-    "words": "kṛtasyāpi jajñe haryabalo"
+    "name": "Jayadratha",
+    "ref": "BhP 9.23.11",
+    "words": "bṛhanmanāstasmāj jayadrathaḥ"
    },
    {
-    "name": "Sahadeva",
-    "ref": "BhP 9.17.17",
-    "words": "sahadevastato"
+    "name": "Vijaya",
+    "ref": "BhP 9.23.12",
+    "words": "vijayastasya sambhūtyāṃ"
    },
    {
-    "name": "Hīna",
-    "ref": "BhP 9.17.17",
-    "words": "sahadevastato hīno"
+    "name": "Dhṛti",
+    "ref": "BhP 9.23.12",
+    "words": "tato dhṛtirajāyata"
    },
    {
-    "name": "Jayasena",
-    "ref": "BhP 9.17.17",
-    "words": "jayasenastu tatsutaḥ"
+    "name": "Dhṛtavrata",
+    "ref": "BhP 9.23.12",
+    "words": "tato dhṛtavratastasya"
    },
    {
-    "name": "Saṅkṛti",
-    "ref": "BhP 9.17.18",
-    "words": "saṅkṛtistasya"
+    "name": "Satkarman",
+    "ref": "BhP 9.23.12",
+    "words": "tasya satkarmā"
    },
    {
-    "name": "Jaya",
-    "ref": "BhP 9.17.18",
-    "words": "saṅkṛtistasya ca jayaḥ"
+    "name": "Adhiratha",
+    "ref": "BhP 9.23.12",
+    "words": "adhirathastataḥ"
    },
    {
-    "name": "Kṣatradharman",
-    "ref": "BhP 9.17.18",
-    "words": "jayaḥ kṣatradharmā"
+    "name": "Karṇa",
+    "ref": "BhP 9.23.13",
+    "words": "anapatyo 'karot sutam"
+   },
+   {
+    "name": "Vṛṣasena",
+    "ref": "BhP 9.23.14",
+    "words": "vṛṣasenaḥ sutastasya karṇasya"
    }
   ],
   [
    {
-    "name": "Manu",
+    "name": "Keśinī",
     "ref": null,
     "words": null
    },
    {
-    "name": "Ikṣvāku",
-    "ref": "BhP 9.6.4",
-    "words": "manorjajñe ikṣvākurghrāṇataḥ sutaḥ"
+    "name": "Asamañjasa",
+    "ref": "BhP 9.8.15",
+    "words": "sa keśinyā nṛpātmajaḥ"
    },
    {
-    "name": "Vikukṣi",
-    "ref": "BhP 9.6.4",
-    "words": "tasya putraśatajyeṣṭhā vikukṣinimidaṇḍakāḥ"
+    "name": "Aṃśumān",
+    "ref": "BhP 9.8.15",
+    "words": "tasya putro 'ṃśumān nāma"
    },
    {
-    "name": "Purañjaya",
-    "ref": "BhP 9.6.12",
-    "words": "purañjayastasya suta"
+    "name": "Dilīpa",
+    "ref": "BhP 9.9.2",
+    "words": "dilīpastatsutaḥ"
    },
    {
-    "name": "Anenas",
-    "ref": "BhP 9.6.20",
-    "words": "purañjayasya putro 'bhūdanenāḥ"
+    "name": "Bhagīratha",
+    "ref": "BhP 9.9.2",
+    "words": "bhagīrathastasya sutaḥ"
    },
    {
-    "name": "Pṛthu",
-    "ref": "BhP 9.6.20",
-    "words": "anenāstatsutaḥ pṛthuḥ"
+    "name": "Śruta",
+    "ref": "BhP 9.9.16",
+    "words": "śruto bhagīrathāj jajñe"
    },
    {
-    "name": "Viśvagandhi",
-    "ref": "BhP 9.6.20",
-    "words": "viśvagandhistataḥ"
+    "name": "Nābha",
+    "ref": "BhP 9.9.16",
+    "words": "tasya nābho 'paro 'bhavat"
    },
    {
-    "name": "Candra",
-    "ref": "BhP 9.6.20",
-    "words": "tataścandro"
+    "name": "Sindhudvīpa",
+    "ref": "BhP 9.9.16",
+    "words": "sindhudvīpastatastasmāt"
    },
    {
-    "name": "Yuvanāśva",
-    "ref": "BhP 9.6.20",
-    "words": "yuvanāśvastu tatsutaḥ"
+    "name": "Ayutāyus",
+    "ref": "BhP 9.9.16",
+    "words": "tasmādayutāyustato 'bhavat"
    },
    {
-    "name": "Śrāvasta",
-    "ref": "BhP 9.6.21",
-    "words": "śrāvastastatsuto"
+    "name": "Ṛtūparṇa",
+    "ref": "BhP 9.9.17",
+    "words": "ṛtūparṇo"
    },
    {
-    "name": "Bṛhadaśva",
-    "ref": "BhP 9.6.21",
-    "words": "bṛhadaśvastu śrāvastiḥ"
-   },
-   {
-    "name": "Kuvalayāśvaka",
-    "ref": "BhP 9.6.21",
-    "words": "tataḥ kuvalayāśvakaḥ"
-   }
-  ],
-  [
-   {
-    "name": "Akrodhana",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Devātithi",
-    "ref": "BhP 9.22.11",
-    "words": "akrodhanastasmāddevātithiḥ"
-   },
-   {
-    "name": "Ṛkṣa",
-    "ref": "BhP 9.22.11",
-    "words": "ṛkṣastasya"
-   },
-   {
-    "name": "Saṃvaraṇa",
-    "ref": "BhP 9.22.3",
-    "words": "ṛkṣaḥ saṃvaraṇastataḥ"
-   },
-   {
-    "name": "Kuru",
-    "ref": "BhP 9.22.4",
-    "words": "tapatyāṃ sūryakanyāyāṃ kurukṣetrapatiḥ kuruḥ"
-   },
-   {
-    "name": "Parīkṣi",
-    "ref": "BhP 9.22.4",
-    "words": "parīkṣiḥ sudhanurjahnurniṣadhaśca kuroḥ sutāḥ"
-   },
-   {
-    "name": "Suratha",
-    "ref": "BhP 9.22.9",
-    "words": "parīkṣiranapatyo 'bhūt suratho nāma jāhnavaḥ"
-   },
-   {
-    "name": "Vidūratha",
-    "ref": "BhP 9.22.10",
-    "words": "tato vidūrathaḥ"
-   },
-   {
-    "name": "Sārvabhauma",
-    "ref": "BhP 9.22.10",
-    "words": "vidūrathastasmāt sārvabhaumaḥ"
-   },
-   {
-    "name": "Jayasena",
-    "ref": "BhP 9.22.10",
-    "words": "jayasenastattanayo"
-   },
-   {
-    "name": "Rādhika",
-    "ref": "BhP 9.22.10",
-    "words": "rādhiko 'to"
+    "name": "Sarvakāma",
+    "ref": "BhP 9.9.17",
+    "words": "sarvakāmastu tatsutam"
    }
   ],
   [
@@ -1409,56 +1705,66 @@
   ],
   [
    {
-    "name": "Aṃśumān",
+    "name": "Arjuna",
     "ref": null,
     "words": null
    },
    {
-    "name": "Dilīpa",
-    "ref": "BhP 9.9.2",
-    "words": "dilīpastatsutaḥ"
+    "name": "Abhimanyu",
+    "ref": "BhP 9.22.33",
+    "words": "tava tātaḥ subhadrāyāmabhimanyurajāyata"
    },
    {
-    "name": "Bhagīratha",
-    "ref": "BhP 9.9.2",
-    "words": "bhagīrathastasya sutaḥ"
+    "name": "Parīkṣit",
+    "ref": "BhP 9.22.33",
+    "words": "uttarāyāṃ tato bhavān"
    },
    {
-    "name": "Śruta",
-    "ref": "BhP 9.9.16",
-    "words": "śruto bhagīrathāj jajñe"
+    "name": "Janamejaya",
+    "ref": "BhP 9.22.35",
+    "words": "taveme tanayāstāta janamejayapūrvakāḥ"
    },
    {
-    "name": "Nābha",
-    "ref": "BhP 9.9.16",
-    "words": "tasya nābho 'paro 'bhavat"
+    "name": "Śatānīka",
+    "ref": "BhP 9.22.38",
+    "words": "tasya putraḥ śatānīko"
    },
    {
-    "name": "Sindhudvīpa",
-    "ref": "BhP 9.9.16",
-    "words": "sindhudvīpastatastasmāt"
+    "name": "Sahasrānīka",
+    "ref": "BhP 9.22.39",
+    "words": "sahasrānīkastatputras"
    },
    {
-    "name": "Ayutāyus",
-    "ref": "BhP 9.9.16",
-    "words": "tasmādayutāyustato 'bhavat"
+    "name": "Aśvamedhaja",
+    "ref": "BhP 9.22.39",
+    "words": "tataścaivāśvamedhajaḥ"
    },
    {
-    "name": "Ṛtūparṇa",
-    "ref": "BhP 9.9.17",
-    "words": "ṛtūparṇo"
+    "name": "Asīmakṛṣṇa",
+    "ref": "BhP 9.22.39",
+    "words": "asīmakṛṣṇastasyāpi"
    },
    {
-    "name": "Sarvakāma",
-    "ref": "BhP 9.9.17",
-    "words": "sarvakāmastu tatsutam"
+    "name": "Nemicakra",
+    "ref": "BhP 9.22.39",
+    "words": "nemicakrastu tatsutaḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "BhP 9.22.40",
+    "words": "uktastataścitrarathaḥ"
    }
   ],
   [
    {
-    "name": "Kāśya",
+    "name": "Suhotra",
     "ref": null,
     "words": null
+   },
+   {
+    "name": "Kāśya",
+    "ref": "BhP 9.17.2",
+    "words": "suhotrasyātmajāstrayaḥ kāśyaḥ"
    },
    {
     "name": "Kāśi",
@@ -1503,140 +1809,19 @@
   ],
   [
    {
-    "name": "Pāriyātra",
+    "name": "Triśaṅku",
     "ref": null,
     "words": null
    },
    {
-    "name": "Balasthala",
-    "ref": "BhP 9.12.2",
-    "words": "tato balasthalaḥ"
+    "name": "Hariścandra",
+    "ref": "BhP 9.7.7",
+    "words": "traiśaṅkavo hariścandro"
    },
-   {
-    "name": "Vajranābha",
-    "ref": "BhP 9.12.2",
-    "words": "tasmādvajranābho"
-   },
-   {
-    "name": "Sagaṇa",
-    "ref": "BhP 9.12.3",
-    "words": "sagaṇastatsutaḥ"
-   },
-   {
-    "name": "Vidhṛti",
-    "ref": "BhP 9.12.3",
-    "words": "tasmādvidhṛtiścābhavat sutaḥ"
-   },
-   {
-    "name": "Hiraṇyanābha",
-    "ref": "BhP 9.12.3",
-    "words": "tato hiraṇyanābho 'bhūt"
-   },
-   {
-    "name": "Puṣpa",
-    "ref": "BhP 9.12.5",
-    "words": "puṣpo hiraṇyanābhasya"
-   },
-   {
-    "name": "Dhruvasandhi",
-    "ref": "BhP 9.12.5",
-    "words": "dhruvasandhistato 'bhavat"
-   },
-   {
-    "name": "Sudarśana",
-    "ref": "BhP 9.12.5",
-    "words": "sudarśano 'tha"
-   }
-  ],
-  [
-   {
-    "name": "Aila",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Vijaya",
-    "ref": "BhP 9.15.1",
-    "words": "ailasya corvaśīgarbhāt ṣaḍ āsannātmajā"
-   },
-   {
-    "name": "Bhīma",
-    "ref": "BhP 9.15.3",
-    "words": "bhīmastu vijayasyātha"
-   },
-   {
-    "name": "Kāñcana",
-    "ref": "BhP 9.15.3",
-    "words": "kāñcano hotrakastataḥ"
-   },
-   {
-    "name": "Hotraka",
-    "ref": "BhP 9.15.3",
-    "words": "kāñcano hotrakastataḥ"
-   },
-   {
-    "name": "Jahnu",
-    "ref": "BhP 9.15.3",
-    "words": "tasya jahnuḥ suto"
-   },
-   {
-    "name": "Pura",
-    "ref": "BhP 9.15.3",
-    "words": "jahnostu purustasyātha"
-   },
-   {
-    "name": "Balāka",
-    "ref": "BhP 9.15.3",
-    "words": "balākaścātmajo"
-   }
-  ],
-  [
-   {
-    "name": "Pāṇḍu",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Nakula",
-    "ref": "BhP 9.22.28",
-    "words": "nakulaḥ sahadevaśca mādryāṃ"
-   },
-   {
-    "name": "Śatānīka",
-    "ref": "BhP 9.22.29",
-    "words": "śatānīkastu nākuliḥ"
-   },
-   {
-    "name": "Sahasrānīka",
-    "ref": "BhP 9.22.39",
-    "words": "sahasrānīkastatputras"
-   },
-   {
-    "name": "Aśvamedhaja",
-    "ref": "BhP 9.22.39",
-    "words": "tataścaivāśvamedhajaḥ"
-   },
-   {
-    "name": "Asīmakṛṣṇa",
-    "ref": "BhP 9.22.39",
-    "words": "asīmakṛṣṇastasyāpi"
-   },
-   {
-    "name": "Nemicakra",
-    "ref": "BhP 9.22.39",
-    "words": "nemicakrastu tatsutaḥ"
-   },
-   {
-    "name": "Citraratha",
-    "ref": "BhP 9.22.40",
-    "words": "uktastataścitrarathaḥ"
-   }
-  ],
-  [
    {
     "name": "Rohita",
-    "ref": null,
-    "words": null
+    "ref": "BhP 9.7.9",
+    "words": "putro jātastu rohitaḥ"
    },
    {
     "name": "Harita",
@@ -1672,48 +1857,6 @@
     "name": "Bāhuka",
     "ref": "BhP 9.8.2",
     "words": "vṛkastasyāpi bāhukaḥ"
-   }
-  ],
-  [
-   {
-    "name": "Sambhūti",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Vijaya",
-    "ref": "BhP 9.23.12",
-    "words": "vijayastasya sambhūtyāṃ"
-   },
-   {
-    "name": "Dhṛti",
-    "ref": "BhP 9.23.12",
-    "words": "tato dhṛtirajāyata"
-   },
-   {
-    "name": "Dhṛtavrata",
-    "ref": "BhP 9.23.12",
-    "words": "tato dhṛtavratastasya"
-   },
-   {
-    "name": "Satkarman",
-    "ref": "BhP 9.23.12",
-    "words": "tasya satkarmā"
-   },
-   {
-    "name": "Adhiratha",
-    "ref": "BhP 9.23.12",
-    "words": "adhirathastataḥ"
-   },
-   {
-    "name": "Karṇa",
-    "ref": "BhP 9.23.13",
-    "words": "anapatyo 'karot sutam"
-   },
-   {
-    "name": "Vṛṣasena",
-    "ref": "BhP 9.23.14",
-    "words": "vṛṣasenaḥ sutastasya karṇasya"
    }
   ],
   [
@@ -1790,46 +1933,9 @@
     "words": "āhukātmajau devakaścograsenaśca"
    },
    {
-    "name": "Upadeva",
-    "ref": "BhP 9.24.22",
-    "words": "devavān upadevaśca sudevo"
-   }
-  ],
-  [
-   {
-    "name": "Romapāda",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Caturaṅga",
-    "ref": "BhP 9.23.10",
-    "words": "caturaṅgo romapādāt"
-   },
-   {
-    "name": "Pṛthulākṣa",
-    "ref": "BhP 9.23.10",
-    "words": "pṛthulākṣastu tatsutaḥ"
-   },
-   {
-    "name": "Bṛhadratha",
-    "ref": "BhP 9.23.11",
-    "words": "bṛhadratho bṛhatkarmā bṛhadbhānuśca tatsutāḥ"
-   },
-   {
-    "name": "Bṛhanmanas",
-    "ref": "BhP 9.23.11",
-    "words": "ādyādbṛhanmanāstasmāt"
-   },
-   {
-    "name": "Jayadratha",
-    "ref": "BhP 9.23.11",
-    "words": "bṛhanmanāstasmāj jayadrathaḥ"
-   },
-   {
-    "name": "Vijaya",
-    "ref": "BhP 9.23.12",
-    "words": "vijayastasya sambhūtyāṃ"
+    "name": "Devavān",
+    "ref": "BhP 9.24.21",
+    "words": "catvāro devakātmajāḥ devavān upadevaśca"
    }
   ],
   [
@@ -1972,29 +2078,61 @@
   ],
   [
    {
-    "name": "Dṛḍhāśva",
+    "name": "Svāhita",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viṣadgu",
+    "ref": "BhP 9.23.31",
+    "words": "viṣadgurvai"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "BhP 9.23.31",
+    "words": "tasya citrarathastataḥ"
+   },
+   {
+    "name": "Śaśabindu",
+    "ref": "BhP 9.23.31",
+    "words": "śaśabindurmahāyogī"
+   },
+   {
+    "name": "Pṛthuśravas",
+    "ref": "BhP 9.23.33",
+    "words": "teṣāṃ tu ṣaṭ pradhānānāṃ pṛthuśravasa ātmajaḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "BhP 9.23.33",
+    "words": "pṛthuśravasa ātmajaḥ dharmo nāma"
+   }
+  ],
+  [
+   {
+    "name": "Anaraṇya",
     "ref": null,
     "words": null
    },
    {
     "name": "Haryaśva",
-    "ref": "BhP 9.6.24",
-    "words": "dṛḍhāśvaputro haryaśvo"
+    "ref": "BhP 9.7.4",
+    "words": "haryaśvastatsutaḥ"
    },
    {
-    "name": "Nikumbha",
-    "ref": "BhP 9.6.24",
-    "words": "nikumbhastatsutaḥ"
+    "name": "Aruṇa",
+    "ref": "BhP 9.7.4",
+    "words": "tasmāt prāruṇo"
    },
    {
-    "name": "Bahulāśva",
-    "ref": "BhP 9.6.25",
-    "words": "bahulāśvo nikumbhasya"
+    "name": "Tribandhana",
+    "ref": "BhP 9.7.4",
+    "words": "prāruṇo 'tha tribandhanaḥ"
    },
    {
-    "name": "Kṛśāśva",
-    "ref": "BhP 9.6.25",
-    "words": "kṛśāśvo 'thāsya"
+    "name": "Satyavrata",
+    "ref": "BhP 9.7.5",
+    "words": "tasya satyavrataḥ putraḥ"
    }
   ],
   [
@@ -2124,90 +2262,24 @@
   ],
   [
    {
-    "name": "Sabhānara",
+    "name": "Māndhātṛ",
     "ref": null,
     "words": null
    },
    {
-    "name": "Kālanara",
-    "ref": "BhP 9.23.1",
-    "words": "sabhānarāt kālanaraḥ"
+    "name": "Ambarīṣa",
+    "ref": "BhP 9.7.1",
+    "words": "māndhātuḥ putrapravaro yo 'mbarīṣaḥ"
    },
    {
-    "name": "Sṛñjaya",
-    "ref": "BhP 9.23.1",
-    "words": "sṛñjayastatsutastataḥ"
+    "name": "Yauvanāśva",
+    "ref": "BhP 9.7.1",
+    "words": "yauvanāśvastu tatsutaḥ"
    },
    {
-    "name": "Vṛṣa",
-    "ref": "BhP 9.24.42",
-    "words": "sṛñjayo rāṣṭrapālyāṃ ca vṛṣadurmarṣaṇādikān"
-   }
-  ],
-  [
-   {
-    "name": "Subhadrā",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Abhimanyu",
-    "ref": "BhP 9.22.33",
-    "words": "subhadrāyāmabhimanyurajāyata"
-   },
-   {
-    "name": "Parīkṣit",
-    "ref": "BhP 9.22.33",
-    "words": "uttarāyāṃ tato bhavān"
-   },
-   {
-    "name": "Janamejaya",
-    "ref": "BhP 9.22.35",
-    "words": "taveme tanayāstāta janamejayapūrvakāḥ"
-   }
-  ],
-  [
-   {
-    "name": "Svāhita",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Viṣadgu",
-    "ref": "BhP 9.23.31",
-    "words": "viṣadgurvai"
-   },
-   {
-    "name": "Citraratha",
-    "ref": "BhP 9.23.31",
-    "words": "tasya citrarathastataḥ"
-   },
-   {
-    "name": "Śaśabindu",
-    "ref": "BhP 9.23.31",
-    "words": "śaśabindurmahāyogī"
-   }
-  ],
-  [
-   {
-    "name": "Vṛṣṭimān",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Suṣeṇa",
-    "ref": "BhP 9.22.41",
-    "words": "tasya suṣeṇo"
-   },
-   {
-    "name": "Sunītha",
-    "ref": "BhP 9.22.41",
-    "words": "sunīthastasya bhavitā"
-   },
-   {
-    "name": "Nṛcakṣus",
-    "ref": "BhP 9.22.41",
-    "words": "nṛcakṣuryat"
+    "name": "Hārīta",
+    "ref": "BhP 9.7.1",
+    "words": "hārītastasya putro 'bhūt"
    }
   ],
   [
@@ -2256,19 +2328,19 @@
   ],
   [
    {
-    "name": "Bharmyāśva",
+    "name": "Apratiratha",
     "ref": null,
     "words": null
    },
    {
-    "name": "Mudgala",
-    "ref": "BhP 9.21.31",
-    "words": "pañcāsan mudgalādayaḥ"
+    "name": "Kaṇva",
+    "ref": "BhP 9.20.6",
+    "words": "kaṇvo 'pratirathātmajaḥ"
    },
    {
-    "name": "Divodāsa",
-    "ref": "BhP 9.21.34",
-    "words": "mithunaṃ mudgalādbhārmyāddivodāsaḥ pumān abhūt"
+    "name": "Medhātithi",
+    "ref": "BhP 9.20.7",
+    "words": "tasya medhātithiḥ"
    }
   ],
   [
@@ -2358,6 +2430,40 @@
   ],
   [
    {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yudhiṣṭhira",
+    "ref": "BhP 9.22.27",
+    "words": "pāṇḍoḥ kuntyāṃ mahārathāḥ jātā dharmānilendrebhyo yudhiṣṭhiramukhāstrayaḥ"
+   },
+   {
+    "name": "Prativindhya",
+    "ref": "BhP 9.22.29",
+    "words": "yudhiṣṭhirāt prativindhyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sabhānara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālanara",
+    "ref": "BhP 9.23.1",
+    "words": "sabhānarāt kālanaraḥ"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "BhP 9.23.1",
+    "words": "sṛñjayastatsutastataḥ"
+   }
+  ],
+  [
+   {
     "name": "Soma",
     "ref": null,
     "words": null
@@ -2392,23 +2498,6 @@
   ],
   [
    {
-    "name": "Ugrasena",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Kaṅka",
-    "ref": "BhP 9.24.24",
-    "words": "kaṅkaḥ śaṅkuḥ ... augrasenayaḥ"
-   },
-   {
-    "name": "Baka",
-    "ref": "BhP 9.24.41",
-    "words": "bakaḥ kaṅkāt tu kaṅkāyāṃ"
-   }
-  ],
-  [
-   {
     "name": "Ajīgarta",
     "ref": null,
     "words": null
@@ -2417,18 +2506,6 @@
     "name": "Śunaḥśepha",
     "ref": "BhP 9.7.20",
     "words": "ajīgartādakrīṇān madhyamaṃ sutam"
-   }
-  ],
-  [
-   {
-    "name": "Arjuna",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Śrutakīrti",
-    "ref": "BhP 9.22.29",
-    "words": "arjunāc chrutakīrtis"
    }
   ],
   [
@@ -2457,18 +2534,6 @@
   ],
   [
    {
-    "name": "Devayānī",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Yadu",
-    "ref": "BhP 9.18.33",
-    "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata"
-   }
-  ],
-  [
-   {
     "name": "Devāvṛdha",
     "ref": null,
     "words": null
@@ -2489,18 +2554,6 @@
     "name": "Śatānanda",
     "ref": "BhP 9.21.34",
     "words": "śatānandastu gautamāt"
-   }
-  ],
-  [
-   {
-    "name": "Gaṅgā",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Bhīṣma",
-    "ref": "BhP 9.22.19",
-    "words": "gaṅgāyāṃ bhīṣma"
    }
   ],
   [
@@ -2529,30 +2582,6 @@
   ],
   [
    {
-    "name": "Kaṇva",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Medhātithi",
-    "ref": "BhP 9.20.7",
-    "words": "tasya medhātithiḥ"
-   }
-  ],
-  [
-   {
-    "name": "Keśinī",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Asamañjasa",
-    "ref": "BhP 9.8.15",
-    "words": "sa keśinyā nṛpātmajaḥ"
-   }
-  ],
-  [
-   {
     "name": "Madhu",
     "ref": null,
     "words": null
@@ -2577,14 +2606,14 @@
   ],
   [
    {
-    "name": "Mamatā",
+    "name": "Manu Vaivasvata",
     "ref": null,
     "words": null
    },
    {
-    "name": "Bharadvāja",
-    "ref": "BhP 9.20.38",
-    "words": "mūḍhe bhara dvājamimaṃ"
+    "name": "Sudyumna",
+    "ref": "BhP 9.2.1",
+    "words": "sudyumne manurvaivasvataḥ sute"
    }
   ],
   [
@@ -2618,9 +2647,9 @@
     "words": null
    },
    {
-    "name": "Rukma",
-    "ref": "BhP 9.23.35",
-    "words": "purujidrukmarukmeṣu"
+    "name": "Purujit",
+    "ref": "BhP 9.23.34",
+    "words": "rucakastasya pañcāsannātmajāḥ"
    }
   ],
   [
@@ -2649,6 +2678,18 @@
   ],
   [
    {
+    "name": "Sudyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Gaya",
+    "ref": "BhP 9.1.41",
+    "words": "tasyotkalo gayo rājan vimalaśca trayaḥ sutāḥ"
+   }
+  ],
+  [
+   {
     "name": "Tribhānu",
     "ref": null,
     "words": null
@@ -2673,6 +2714,18 @@
   ],
   [
    {
+    "name": "Ugrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṃsa",
+    "ref": "BhP 9.24.24",
+    "words": "kaṃsaḥ sunāmā ... augrasenayaḥ"
+   }
+  ],
+  [
+   {
     "name": "Viśravas",
     "ref": null,
     "words": null
@@ -2681,54 +2734,6 @@
     "name": "Dhanada",
     "ref": "BhP 9.2.32",
     "words": "utpādayāmāsa viśravā dhanadaṃ sutam"
-   }
-  ],
-  [
-   {
-    "name": "Yauvanāśva",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Hārīta",
-    "ref": "BhP 9.7.1",
-    "words": "hārītastasya putro 'bhūt"
-   }
-  ],
-  [
-   {
-    "name": "Śamīka",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Sumitra",
-    "ref": "BhP 9.24.44",
-    "words": "sumitrārjunapālādīn samīkāt"
-   }
-  ],
-  [
-   {
-    "name": "Śarmiṣṭhā",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Druhyu",
-    "ref": "BhP 9.18.33",
-    "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī"
-   }
-  ],
-  [
-   {
-    "name": "Śyāmaka",
-    "ref": null,
-    "words": null
-   },
-   {
-    "name": "Harikeśa",
-    "ref": "BhP 9.24.42",
-    "words": "harikeśahiraṇyākṣau śūrabhūmyāṃ ca śyāmakaḥ"
    }
   ]
  ]

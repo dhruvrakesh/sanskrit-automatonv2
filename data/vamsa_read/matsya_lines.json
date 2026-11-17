@@ -1,0 +1,2203 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "lines": [
+  [
+   {
+    "name": "Asamañjasa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṃśumat",
+    "ref": "MatsP 12.43",
+    "words": "asamañjasastu tanayo yo 'ṃśumānnāma"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "MatsP 12.44",
+    "words": "tasya putro dilīpas"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "MatsP 12.44",
+    "words": "dilīpāttu bhagīrathaḥ"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "MatsP 12.45",
+    "words": "bhagīrathasya tanayo nābhāga"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "MatsP 12.20",
+    "words": "nābhāgasyāmbarīṣastu"
+   },
+   {
+    "name": "Sindhudvīpa",
+    "ref": "MatsP 12.45",
+    "words": "sindhudvīpas tato 'bhavat"
+   },
+   {
+    "name": "Āyutāyus",
+    "ref": "MatsP 12.46",
+    "words": "tasyāyutāyuḥ putro 'bhūd"
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "MatsP 12.46",
+    "words": "ṛtuparṇastato 'bhavat"
+   },
+   {
+    "name": "Kalmāṣapāda",
+    "ref": "MatsP 12.46",
+    "words": "tasya kalmāṣapādastu"
+   },
+   {
+    "name": "Sarvakarman",
+    "ref": "MatsP 12.46",
+    "words": "sarvakarmā tataḥ smṛtaḥ"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "MatsP 12.47",
+    "words": "tasyānaraṇyaḥ putro 'bhūn"
+   },
+   {
+    "name": "Nighna",
+    "ref": "MatsP 12.47",
+    "words": "nighnastasya suto 'bhavat"
+   },
+   {
+    "name": "Raghu",
+    "ref": "MatsP 12.47",
+    "words": "nighnaputrāv ubhau jātāv anamitraraghū"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "MatsP 12.48",
+    "words": "raghor abhūddilīpastu"
+   },
+   {
+    "name": "Ajaka",
+    "ref": "MatsP 12.48",
+    "words": "dilīpādajakastathā"
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "MatsP 12.49",
+    "words": "dīrghabāhurajājjātaś"
+   },
+   {
+    "name": "Ajapāla",
+    "ref": "MatsP 12.49",
+    "words": "cājapālastato nṛpaḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "MatsP 12.49",
+    "words": "tasmāddaśaratho jātas"
+   },
+   {
+    "name": "Rāma",
+    "ref": "MatsP 12.49",
+    "words": "tasya putracatuṣṭayam nārāyaṇātmakāḥ sarve rāmasteṣvagrajo 'bhavat"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "MatsP 12.51",
+    "words": "tasya putrau kuśalavāv"
+   },
+   {
+    "name": "Atithi",
+    "ref": "MatsP 12.52",
+    "words": "atithistu kuśājjajñe"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "MatsP 12.52",
+    "words": "niṣadhastasya cātmajaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "MatsP 12.52",
+    "words": "nalastu naiṣadhastasmān"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "MatsP 12.52",
+    "words": "nabhāstasmādajāyata"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "MatsP 12.53",
+    "words": "nabhasaḥ puṇḍarīko 'bhūt"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "MatsP 12.53",
+    "words": "kṣemadhanvā tataḥ smṛtaḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "MatsP 12.53",
+    "words": "tasya putro 'bhavadvīro devānīkaḥ"
+   },
+   {
+    "name": "Ahīnagu",
+    "ref": "MatsP 12.54",
+    "words": "ahīnagustasya sutaḥ"
+   },
+   {
+    "name": "Sahasrāśva",
+    "ref": "MatsP 12.54",
+    "words": "sahasrāśvastataḥ paraḥ"
+   },
+   {
+    "name": "Candrāvaloka",
+    "ref": "MatsP 12.54",
+    "words": "tataścandrāvalokastu"
+   },
+   {
+    "name": "Tārāpīḍa",
+    "ref": "MatsP 12.54",
+    "words": "tārāpīḍastato 'bhavat"
+   },
+   {
+    "name": "Candragiri",
+    "ref": "MatsP 12.55",
+    "words": "tasyātmajaś candragirir"
+   },
+   {
+    "name": "Bhānu",
+    "ref": "MatsP 12.55",
+    "words": "bhānuś candrastato 'bhavat"
+   },
+   {
+    "name": "Śrutāyus",
+    "ref": "MatsP 12.55",
+    "words": "śrutāyur abhavattasmād"
+   }
+  ],
+  [
+   {
+    "name": "Sabhānara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kolāhala",
+    "ref": "MatsP 48.11",
+    "words": "sabhānarasya putrastu vidvānkolāhalo"
+   },
+   {
+    "name": "Saṃjaya",
+    "ref": "MatsP 48.11",
+    "words": "kolāhalasya dharmātmā saṃjayo"
+   },
+   {
+    "name": "Puraṃjaya",
+    "ref": "MatsP 48.12",
+    "words": "saṃjayasyābhavatputro vīro nāma puraṃjayaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "MatsP 48.12",
+    "words": "janamejayo mahārāja puraṃjayasuto 'bhavat"
+   },
+   {
+    "name": "Mahāśāla",
+    "ref": "MatsP 48.13",
+    "words": "janamejayasya rājarṣer mahāśālo 'bhavatsutaḥ"
+   },
+   {
+    "name": "Mahāmanas",
+    "ref": "MatsP 48.14",
+    "words": "mahāmanāḥ sutastasya mahāśālasya"
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "MatsP 48.15",
+    "words": "mahāmanāstu dvau putrau janayāmāsa"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "MatsP 48.22",
+    "words": "bṛhadrathaḥ sutastasya"
+   },
+   {
+    "name": "Sena",
+    "ref": "MatsP 48.22",
+    "words": "tasya seno 'bhavatsutaḥ"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "MatsP 48.23",
+    "words": "senasya sutapā jajñe"
+   },
+   {
+    "name": "Bali",
+    "ref": "MatsP 48.23",
+    "words": "sutapastanayo baliḥ"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "MatsP 48.25",
+    "words": "aṅgaṃ sa janayāmāsa"
+   },
+   {
+    "name": "Dadhivāhana",
+    "ref": "MatsP 48.91",
+    "words": "aṅgasya tu dāyādo rājāsīddadhivāhanaḥ"
+   },
+   {
+    "name": "Diviratha",
+    "ref": "MatsP 48.92",
+    "words": "dadhivāhanaputrastu rājā divirathaḥ"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "MatsP 48.92",
+    "words": "divirathāpatyaṃ vidvāndharmaratho nṛpaḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "MatsP 48.94",
+    "words": "dharmarathasyābhūt putraścitrarathaḥ"
+   },
+   {
+    "name": "Satyaratha",
+    "ref": "MatsP 48.94",
+    "words": "tasya satyarathaḥ putraḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "MatsP 48.94",
+    "words": "tasmāddaśarathaḥ kila"
+   },
+   {
+    "name": "Caturaṅga",
+    "ref": "MatsP 48.95",
+    "words": "atha dāśarathir vīraś caturaṅgo"
+   },
+   {
+    "name": "Pṛthulākṣa",
+    "ref": "MatsP 48.96",
+    "words": "caturaṅgasya putrastu pṛthulākṣa"
+   },
+   {
+    "name": "Campa",
+    "ref": "MatsP 48.97",
+    "words": "pṛthulākṣasutaścāpi campanāmā"
+   },
+   {
+    "name": "Haryaṅga",
+    "ref": "MatsP 48.98",
+    "words": "haryaṅgo 'sya suto 'bhavat"
+   },
+   {
+    "name": "Bhadraratha",
+    "ref": "MatsP 48.99",
+    "words": "haryaṅgasya tu dāyādo jāto bhadrarathaḥ"
+   },
+   {
+    "name": "Bṛhatkarmā",
+    "ref": "MatsP 48.100",
+    "words": "bhadrarathasyāsīd bṛhatkarmā"
+   },
+   {
+    "name": "Bṛhadbhānu",
+    "ref": "MatsP 48.100",
+    "words": "bṛhadbhānuḥ sutastasya"
+   },
+   {
+    "name": "Jayadratha",
+    "ref": "MatsP 48.101",
+    "words": "bṛhadbhānustu rājendro janayāmāsa vai sutam nāmnā jayadrathaṃ"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "MatsP 48.101",
+    "words": "tasmādbṛhadratho nṛpaḥ"
+   },
+   {
+    "name": "Viśvajit",
+    "ref": "MatsP 48.102",
+    "words": "āsīdbṛhadrathāccaiva viśvajit"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "MatsP 48.102",
+    "words": "dāyādastasya cāṅgo vai"
+   },
+   {
+    "name": "Karṇa",
+    "ref": "MatsP 48.102",
+    "words": "tasmātkarṇo 'bhavannṛpaḥ"
+   },
+   {
+    "name": "Vṛṣasena",
+    "ref": "MatsP 48.103",
+    "words": "karṇasya vṛṣasenaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kakutstha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suyodhana",
+    "ref": "MatsP 12.28",
+    "words": "kakutstho nāmnābhūt tatsutastu suyodhanaḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "MatsP 12.29",
+    "words": "tasya putraḥ pṛthurnāma"
+   },
+   {
+    "name": "Viśvaga",
+    "ref": "MatsP 12.29",
+    "words": "viśvagaścapṛthoḥ sutaḥ"
+   },
+   {
+    "name": "Indu",
+    "ref": "MatsP 12.29",
+    "words": "industasya ca putro"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "MatsP 12.29",
+    "words": "yuvanāśvastato 'bhavat"
+   },
+   {
+    "name": "Śrāvasta",
+    "ref": "MatsP 12.30",
+    "words": "śrāvastaśca mahātejā"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "MatsP 12.31",
+    "words": "śrāvastādbṛhadaśvo 'bhūt"
+   },
+   {
+    "name": "Kuvalāśva",
+    "ref": "MatsP 12.31",
+    "words": "kuvalāśvas tato 'bhavat"
+   },
+   {
+    "name": "Dṛḍhāśva",
+    "ref": "MatsP 12.32",
+    "words": "tasya putrās trayo jātā dṛḍhāśvo"
+   },
+   {
+    "name": "Pramoda",
+    "ref": "MatsP 12.33",
+    "words": "dṛḍhāśvasya pramodaśca"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "MatsP 12.33",
+    "words": "haryaśvastasya cātmajaḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "MatsP 12.33",
+    "words": "haryaśvasya nikumbho 'bhūt"
+   },
+   {
+    "name": "Saṃhatāśva",
+    "ref": "MatsP 12.33",
+    "words": "saṃhatāśvas tato 'bhavat"
+   },
+   {
+    "name": "Raṇāśva",
+    "ref": "MatsP 12.34",
+    "words": "akṛtāśvo raṇāśvaśca saṃhatāśvasutāv ubhau"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "MatsP 12.34",
+    "words": "yuvanāśvo raṇāśvasya"
+   },
+   {
+    "name": "Māndhātṛ",
+    "ref": "MatsP 12.34",
+    "words": "māndhātā ca tato 'bhavat"
+   },
+   {
+    "name": "Purukutsa",
+    "ref": "MatsP 12.35",
+    "words": "māndhātuḥ purukutso 'bhūd"
+   },
+   {
+    "name": "Vasuda",
+    "ref": "MatsP 12.36",
+    "words": "purukutsasya putro 'bhūd vasudo"
+   },
+   {
+    "name": "Sambhūti",
+    "ref": "MatsP 12.36",
+    "words": "sambhūtistasya putro 'bhūt"
+   },
+   {
+    "name": "Tridhanvan",
+    "ref": "MatsP 12.36",
+    "words": "tridhanvā ca tato 'bhavat"
+   },
+   {
+    "name": "Trayyāruṇa",
+    "ref": "MatsP 12.37",
+    "words": "tridhanvanaḥ suto jātas trayyāruṇa"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "MatsP 12.37",
+    "words": "tasmātsatyavrato nāma"
+   },
+   {
+    "name": "Satyaratha",
+    "ref": "MatsP 12.37",
+    "words": "tasmātsatyarathaḥ smṛtaḥ"
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "MatsP 12.38",
+    "words": "tasya putro hariścandro"
+   },
+   {
+    "name": "Rohita",
+    "ref": "MatsP 12.38",
+    "words": "hariścandrācca rohitaḥ"
+   },
+   {
+    "name": "Vṛka",
+    "ref": "MatsP 12.38",
+    "words": "rohitācca vṛko jāto"
+   },
+   {
+    "name": "Bāhu",
+    "ref": "MatsP 12.38",
+    "words": "vṛkādbāhurajāyata"
+   },
+   {
+    "name": "Sagara",
+    "ref": "MatsP 12.39",
+    "words": "sagarastasya putro 'bhūd"
+   }
+  ],
+  [
+   {
+    "name": "Abhimanyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parīkṣit",
+    "ref": "MatsP 50.57",
+    "words": "abhimanyoḥ parīkṣittu putraḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "MatsP 50.57",
+    "words": "janamejayaḥ parīkṣitaḥ putraḥ"
+   },
+   {
+    "name": "Śatānīka",
+    "ref": "MatsP 50.65",
+    "words": "janamejayācchatānīkas tasmājjajñe"
+   },
+   {
+    "name": "Adhisomakṛṣṇa",
+    "ref": "MatsP 50.66",
+    "words": "śatānīkasya vīryavān jajñe 'dhisomakṛṣṇākhyaḥ"
+   },
+   {
+    "name": "Vivakṣu",
+    "ref": "MatsP 50.78",
+    "words": "adhisomakṛṣṇaputrastu vivakṣurbhavitā nṛpaḥ"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "MatsP 50.80",
+    "words": "tasya citrarathaḥ smṛtaḥ"
+   },
+   {
+    "name": "Śucidrava",
+    "ref": "MatsP 50.80",
+    "words": "śucidravaścitrarathād"
+   },
+   {
+    "name": "Vṛṣṇimat",
+    "ref": "MatsP 50.80",
+    "words": "vṛṣṇimāṃśca śucidravāt"
+   },
+   {
+    "name": "Suṣeṇa",
+    "ref": "MatsP 50.81",
+    "words": "vṛṣṇimataḥ suṣeṇaśca bhaviṣyati"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "MatsP 50.81",
+    "words": "tasmātsuṣeṇādbhavitā sunītho nāma pārthivaḥ"
+   },
+   {
+    "name": "Nṛcakṣu",
+    "ref": "MatsP 50.82",
+    "words": "nṛpātsunīthādbhavitā nṛcakṣuḥ"
+   },
+   {
+    "name": "Sukhīvala",
+    "ref": "MatsP 50.82",
+    "words": "nṛcakṣuṣastu dāyādo bhavitā vai sukhīvalaḥ"
+   },
+   {
+    "name": "Pariṣṇava",
+    "ref": "MatsP 50.83",
+    "words": "sukhīvalasutaścāpi bhāvī rājā pariṣṇavaḥ"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "MatsP 50.83",
+    "words": "pariṣṇavasutaścāpi bhavitā sutapā nṛpaḥ"
+   },
+   {
+    "name": "Medhāvin",
+    "ref": "MatsP 50.84",
+    "words": "medhāvī tasya dāyādo"
+   },
+   {
+    "name": "Puraṃjaya",
+    "ref": "MatsP 50.84",
+    "words": "medhāvinaḥ sutaścāpi bhaviṣyati puraṃjayaḥ"
+   },
+   {
+    "name": "Urva",
+    "ref": "MatsP 50.85",
+    "words": "urvo bhāvyaḥ sutastasya"
+   },
+   {
+    "name": "Tigmātman",
+    "ref": "MatsP 50.85",
+    "words": "tigmātmā tasya cātmajaḥ"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "MatsP 50.85",
+    "words": "tigmādbṛhadratho bhāvyo"
+   },
+   {
+    "name": "Vasudāman",
+    "ref": "MatsP 50.85",
+    "words": "vasudāmā bṛhadrathāt"
+   },
+   {
+    "name": "Śatānīka",
+    "ref": "MatsP 50.86",
+    "words": "vasudāmnaḥ śatānīko bhaviṣyo"
+   }
+  ],
+  [
+   {
+    "name": "Ajamīḍha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "MatsP 50.19",
+    "words": "ajamīḍhaḥ samīyivān ṛkṣaṃ sā janayāmāsa"
+   },
+   {
+    "name": "Saṃvaraṇa",
+    "ref": "MatsP 50.20",
+    "words": "ṛkṣātsaṃvaraṇo jajñe"
+   },
+   {
+    "name": "Kuru",
+    "ref": "MatsP 50.20",
+    "words": "kuruḥ saṃvaraṇāt"
+   },
+   {
+    "name": "Jahnu",
+    "ref": "MatsP 50.23",
+    "words": "kurostu dayitāḥ putrāḥ sudhanvā jahnureva ca"
+   },
+   {
+    "name": "Suratha",
+    "ref": "MatsP 50.34",
+    "words": "jahnustvajanayatputraṃ surathaṃ"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "MatsP 50.35",
+    "words": "surathasya tu dāyādo vīro rājā vidūrathaḥ"
+   },
+   {
+    "name": "Sārvabhauma",
+    "ref": "MatsP 50.35",
+    "words": "vidūrathasutaścāpi sārvabhauma"
+   },
+   {
+    "name": "Jayatsena",
+    "ref": "MatsP 50.36",
+    "words": "sārvabhaumājjayatseno"
+   },
+   {
+    "name": "Rucira",
+    "ref": "MatsP 50.36",
+    "words": "rucirastasya cātmajaḥ"
+   },
+   {
+    "name": "Bhauma",
+    "ref": "MatsP 50.36",
+    "words": "rucirāttu tato bhaumas"
+   },
+   {
+    "name": "Tvaritāyu",
+    "ref": "MatsP 50.36",
+    "words": "tvaritāyustato 'bhavat"
+   },
+   {
+    "name": "Akrodhana",
+    "ref": "MatsP 50.37",
+    "words": "akrodhanas tv āyusutas"
+   },
+   {
+    "name": "Devātithi",
+    "ref": "MatsP 50.37",
+    "words": "tasmāddevātithiḥ smṛtaḥ"
+   },
+   {
+    "name": "Dakṣa",
+    "ref": "MatsP 50.37",
+    "words": "devātithestu dāyādo dakṣa"
+   },
+   {
+    "name": "Bhīmasena",
+    "ref": "MatsP 50.38",
+    "words": "bhīmasenastato dakṣād"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "MatsP 50.38",
+    "words": "dilīpas tasya cātmajaḥ"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "MatsP 50.38",
+    "words": "dilīpasya pratīpastu"
+   },
+   {
+    "name": "Śaṃtanu",
+    "ref": "MatsP 50.38",
+    "words": "tasya putrās trayaḥ smṛtāḥ"
+   },
+   {
+    "name": "Vicitravīrya",
+    "ref": "MatsP 50.46",
+    "words": "śaṃtanordayitaṃ putraṃ"
+   },
+   {
+    "name": "Dhṛtarāṣṭra",
+    "ref": "MatsP 50.46",
+    "words": "kṣetre vaicitraviryake dhṛtarāṣṭraṃ ca"
+   },
+   {
+    "name": "Duryodhana",
+    "ref": "MatsP 50.47",
+    "words": "dhṛtarāṣṭrastu gāndhāryāṃ putrānajanayacchatam"
+   }
+  ],
+  [
+   {
+    "name": "Vidarbha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kratha",
+    "ref": "MatsP 44.38",
+    "words": "kratho vidarbhaputrastu"
+   },
+   {
+    "name": "Kunti",
+    "ref": "MatsP 44.38",
+    "words": "kuntis tasyātmajo 'bhavat"
+   },
+   {
+    "name": "Dhṛṣṭa",
+    "ref": "MatsP 44.39",
+    "words": "kunterdhṛṣṭaḥ suto jajñe"
+   },
+   {
+    "name": "Nirvṛti",
+    "ref": "MatsP 44.39",
+    "words": "dhṛṣṭasya putro dharmātmā nirvṛtiḥ"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "MatsP 44.40",
+    "words": "nirvṛteḥ putro nāmnā sa tu vidūrathaḥ"
+   },
+   {
+    "name": "Daśārha",
+    "ref": "MatsP 44.40",
+    "words": "daśārhastasya vai putro"
+   },
+   {
+    "name": "Vyoman",
+    "ref": "MatsP 44.40",
+    "words": "vyomastasya ca vai smṛtaḥ"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "MatsP 44.40",
+    "words": "vyomāttu putro jīmūta ucyate"
+   },
+   {
+    "name": "Vimala",
+    "ref": "MatsP 44.41",
+    "words": "jīmūtaputro vimalas"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "MatsP 44.41",
+    "words": "tasya bhīmarathaḥ sutaḥ"
+   },
+   {
+    "name": "Navaratha",
+    "ref": "MatsP 44.41",
+    "words": "suto bhīmarathasyāsīt smṛto navarathaḥ"
+   },
+   {
+    "name": "Dṛḍharatha",
+    "ref": "MatsP 44.42",
+    "words": "tasya cāsīd dṛḍharathaḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "MatsP 44.42",
+    "words": "śakunistasya cātmajaḥ"
+   },
+   {
+    "name": "Karambha",
+    "ref": "MatsP 44.42",
+    "words": "tasmātkarambhaḥ"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "MatsP 44.42",
+    "words": "kārambhir devarāto babhūva"
+   },
+   {
+    "name": "Devakṣatra",
+    "ref": "MatsP 44.43",
+    "words": "devakṣatro 'bhavadrājā daivarātir"
+   }
+  ],
+  [
+   {
+    "name": "Pūru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "MatsP 49.1",
+    "words": "pūroḥ putro mahātejā rājā sa janamejayaḥ"
+   },
+   {
+    "name": "Prācītvat",
+    "ref": "MatsP 49.1",
+    "words": "prācītvataḥ sutastasya"
+   },
+   {
+    "name": "Manasyu",
+    "ref": "MatsP 49.2",
+    "words": "prācītvatasya tanayo manasyuśca"
+   },
+   {
+    "name": "Pītāyudha",
+    "ref": "MatsP 49.2",
+    "words": "manasyorabhavatsutaḥ"
+   },
+   {
+    "name": "Dhundhu",
+    "ref": "MatsP 49.3",
+    "words": "dāyādastasya cāpyāsīd dhundhurnāma"
+   },
+   {
+    "name": "Bahuvidha",
+    "ref": "MatsP 49.3",
+    "words": "dhundhorbahuvidhaḥ putraḥ"
+   },
+   {
+    "name": "Sampāti",
+    "ref": "MatsP 49.3",
+    "words": "sampātistasya cātmajaḥ"
+   },
+   {
+    "name": "Raṃhavarcā",
+    "ref": "MatsP 49.4",
+    "words": "sampātestu raṃhavarcā"
+   },
+   {
+    "name": "Bhadrāśva",
+    "ref": "MatsP 49.4",
+    "words": "bhadrāśvastasya cātmajaḥ"
+   },
+   {
+    "name": "Auceyu",
+    "ref": "MatsP 49.4",
+    "words": "bhadrāśvasya dhṛtāyāṃ tu daśāpsarasi sūnavaḥ"
+   },
+   {
+    "name": "Antināra",
+    "ref": "MatsP 49.7",
+    "words": "tasyāṃ sa janayāmāsa antināraṃ"
+   },
+   {
+    "name": "Amūrtarayas",
+    "ref": "MatsP 49.7",
+    "words": "antināro manasvinyāṃ putrāñjajñe"
+   }
+  ],
+  [
+   {
+    "name": "Yadu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahasrajit",
+    "ref": "MatsP 43.6",
+    "words": "yadoḥ putrā babhūvurhi pañca"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "MatsP 43.7",
+    "words": "sahasrajestu dāyādaḥ śatajirnāma pārthivaḥ"
+   },
+   {
+    "name": "Haihaya",
+    "ref": "MatsP 43.8",
+    "words": "śatajerapi dāyādās trayaḥ"
+   },
+   {
+    "name": "Dharmanetra",
+    "ref": "MatsP 43.9",
+    "words": "haihayasya tu dāyādo dharmanetraḥ"
+   },
+   {
+    "name": "Kunti",
+    "ref": "MatsP 43.9",
+    "words": "dharmanetrasya kuntistu"
+   },
+   {
+    "name": "Saṃhata",
+    "ref": "MatsP 43.9",
+    "words": "saṃhatastasya cātmajaḥ"
+   },
+   {
+    "name": "Mahiṣmat",
+    "ref": "MatsP 43.10",
+    "words": "saṃhatasya tu dāyādo mahiṣmān"
+   },
+   {
+    "name": "Rudraśreṇya",
+    "ref": "MatsP 43.10",
+    "words": "mahiṣmataḥ putro rudraśreṇyaḥ"
+   },
+   {
+    "name": "Durdama",
+    "ref": "MatsP 43.11",
+    "words": "rudraśreṇyasya putro 'bhūd durdamo"
+   },
+   {
+    "name": "Kanaka",
+    "ref": "MatsP 43.12",
+    "words": "durdamasya suto dhīmān kanako"
+   },
+   {
+    "name": "Kṛtavīrya",
+    "ref": "MatsP 43.12",
+    "words": "kanakasya tu dāyādāś catvāro"
+   },
+   {
+    "name": "Arjuna",
+    "ref": "MatsP 43.13",
+    "words": "kṛtavīryāttato 'rjunaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kukura",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vṛṣṇi",
+    "ref": "MatsP 44.62",
+    "words": "kukurasya suto vṛṣṇir"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "MatsP 44.62",
+    "words": "vṛṣṇestu tanayo dhṛtiḥ"
+   },
+   {
+    "name": "Kapotaromā",
+    "ref": "MatsP 44.62",
+    "words": "kapotaromā tasyātha"
+   },
+   {
+    "name": "Taittiri",
+    "ref": "MatsP 44.62",
+    "words": "taittiristasya cātmajaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "MatsP 44.63",
+    "words": "tasyāsīttanujaḥ sarpo vidvānputro nalaḥ"
+   },
+   {
+    "name": "Daradundubhi",
+    "ref": "MatsP 44.63",
+    "words": "nandano daradundubhiḥ"
+   },
+   {
+    "name": "Punarvasu",
+    "ref": "MatsP 44.64",
+    "words": "abhijātaḥ punarvasuḥ"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "MatsP 44.66",
+    "words": "tasyāsīt putramithunaṃ babhūvāvijitaṃ kila āhukaścāhukī"
+   },
+   {
+    "name": "Devaka",
+    "ref": "MatsP 44.70",
+    "words": "āhukātkāśyaduhitā dvau putrau samasūyata"
+   },
+   {
+    "name": "Devavān",
+    "ref": "MatsP 44.71",
+    "words": "devakasya sutā vīrā jajñire"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Setu",
+    "ref": "MatsP 48.6",
+    "words": "druhyostu tanayau śūrau setuḥ"
+   },
+   {
+    "name": "Śaradvān",
+    "ref": "MatsP 48.6",
+    "words": "setuputraḥ śaradvāṃstu"
+   },
+   {
+    "name": "Gandhāra",
+    "ref": "MatsP 48.6",
+    "words": "gandhārastasya cātmajaḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "MatsP 48.8",
+    "words": "gandhāraputro dharmastu"
+   },
+   {
+    "name": "Ghṛta",
+    "ref": "MatsP 48.8",
+    "words": "ghṛtastasyātmajo 'bhavat"
+   },
+   {
+    "name": "Viduṣa",
+    "ref": "MatsP 48.8",
+    "words": "ghṛtācca viduṣo jajñe"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "MatsP 48.8",
+    "words": "pracetāstasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Aṇuha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Brahmadatta",
+    "ref": "MatsP 49.57",
+    "words": "aṇuhasya tu dāyādo brahmadatto"
+   },
+   {
+    "name": "Yugadatta",
+    "ref": "MatsP 49.58",
+    "words": "yugadattaḥ sutastasya"
+   },
+   {
+    "name": "Viṣvaksena",
+    "ref": "MatsP 49.58",
+    "words": "yugadattaḥ sutastasya viṣvakseno"
+   },
+   {
+    "name": "Udaksena",
+    "ref": "MatsP 49.59",
+    "words": "viṣvaksenasya putrastu udakseno babhūva"
+   },
+   {
+    "name": "Bhallāṭa",
+    "ref": "MatsP 49.59",
+    "words": "bhallāṭastasya putrastu"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "MatsP 49.59",
+    "words": "tasyāsījjanamejayaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Puṇyavat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Puṇya",
+    "ref": "MatsP 50.30",
+    "words": "puṇyaḥ puṇyavataścaiva"
+   },
+   {
+    "name": "Satyadhṛti",
+    "ref": "MatsP 50.30",
+    "words": "rājā satyadhṛtistataḥ"
+   },
+   {
+    "name": "Dhanus",
+    "ref": "MatsP 50.30",
+    "words": "dāyādastasya dhanuṣas"
+   },
+   {
+    "name": "Sarva",
+    "ref": "MatsP 50.30",
+    "words": "tasmātsarvaśca jajñivān"
+   },
+   {
+    "name": "Sambhava",
+    "ref": "MatsP 50.31",
+    "words": "sarvasya sambhavaḥ putras"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "MatsP 50.31",
+    "words": "tasmādrājā bṛhadrathaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Budha",
+    "ref": "MatsP 24.3",
+    "words": "rājñaḥ somasya putratvād rājaputro budhaḥ smṛtaḥ"
+   },
+   {
+    "name": "Purūravas",
+    "ref": "MatsP 24.9",
+    "words": "budhaḥ putramajījanat"
+   },
+   {
+    "name": "Āyus",
+    "ref": "MatsP 24.32",
+    "words": "urvaśī budhasūnutaḥ ajījanatsutānaṣṭau"
+   },
+   {
+    "name": "Nahuṣa",
+    "ref": "MatsP 24.34",
+    "words": "āyuṣo nahuṣaḥ putrau"
+   },
+   {
+    "name": "Yayāti",
+    "ref": "MatsP 24.55",
+    "words": "yayātirnāhuṣaścāsīd"
+   },
+   {
+    "name": "Yadu",
+    "ref": "MatsP 24.53",
+    "words": "yayāteḥ pañca dāyādās"
+   }
+  ],
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hiraṇyakaśipu",
+    "ref": "MatsP 6.7",
+    "words": "ditiḥ putradvayaṃ lebhe kaśyapād"
+   },
+   {
+    "name": "Prahlāda",
+    "ref": "MatsP 6.8",
+    "words": "hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam"
+   },
+   {
+    "name": "Virocana",
+    "ref": "MatsP 6.9",
+    "words": "prahlādaputra āyuṣmān"
+   },
+   {
+    "name": "Bali",
+    "ref": "MatsP 6.10",
+    "words": "sa baliṃ putramāptavān"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "MatsP 6.10",
+    "words": "baleḥ putraśataṃ tv āsīd bāṇajyeṣṭhaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Mahāpaurava",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Rukmaratha",
+    "ref": "MatsP 49.73",
+    "words": "mahāpauravaputrastu rājā rukmarathaḥ"
+   },
+   {
+    "name": "Supārśva",
+    "ref": "MatsP 49.73",
+    "words": "rukmarathasyāsīt supārśvo"
+   },
+   {
+    "name": "Sumati",
+    "ref": "MatsP 49.74",
+    "words": "supārśvatanayaścāpi sumatir"
+   },
+   {
+    "name": "Saṃnatimān",
+    "ref": "MatsP 49.74",
+    "words": "sumaterapi dharmātmā rājā saṃnatimānapi"
+   },
+   {
+    "name": "Kṛta",
+    "ref": "MatsP 49.75",
+    "words": "tasyāsītsaṃnatimataḥ kṛto nāma suto"
+   }
+  ],
+  [
+   {
+    "name": "Uśanas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "MatsP 44.24",
+    "words": "titikṣurabhavatputra auśanaḥ"
+   },
+   {
+    "name": "Marutta",
+    "ref": "MatsP 44.24",
+    "words": "maruttastasya tanayo"
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "MatsP 44.25",
+    "words": "āsīnmaruttatanayau vīraḥ kambalabarhiṣaḥ"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "MatsP 44.25",
+    "words": "putrastu rukmakavaco vidvānkambalabarhiṣaḥ"
+   },
+   {
+    "name": "Rukmeṣu",
+    "ref": "MatsP 44.28",
+    "words": "jajñire pañca putrāstu mahāvīryā dhanurbhṛtaḥ rukmeṣuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Mudgala",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Indrasena",
+    "ref": "MatsP 50.6",
+    "words": "mudgalasya suto jajñe"
+   },
+   {
+    "name": "Vindhyāśva",
+    "ref": "MatsP 50.6",
+    "words": "indrasenaḥ sutastasya vindhyāśvastasya cātmajaḥ"
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "MatsP 50.7",
+    "words": "vindhyāśvānmithunaṃ jajñe"
+   },
+   {
+    "name": "Mitrayu",
+    "ref": "MatsP 50.13",
+    "words": "divodāsasya dāyādo dharmiṣṭho mitrayurnṛpaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satyavān",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yuyudhāna",
+    "ref": "MatsP 45.23",
+    "words": "satyavānyuyudhānastu"
+   },
+   {
+    "name": "Asaṅga",
+    "ref": "MatsP 45.23",
+    "words": "asaṅgo yuyudhānasya"
+   },
+   {
+    "name": "Dyumni",
+    "ref": "MatsP 45.23",
+    "words": "dyumnistasyātmajo 'bhavat"
+   },
+   {
+    "name": "Yugaṃdhara",
+    "ref": "MatsP 45.24",
+    "words": "dyumneryugaṃdharaḥ putra"
+   }
+  ],
+  [
+   {
+    "name": "Turvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Gobhānu",
+    "ref": "MatsP 48.1",
+    "words": "turvasostu suto garbho gobhānustasya cātmajaḥ"
+   },
+   {
+    "name": "Trisāri",
+    "ref": "MatsP 48.1",
+    "words": "gobhānostu suto vīras trisāriraparājitaḥ"
+   },
+   {
+    "name": "Karaṃdhama",
+    "ref": "MatsP 48.2",
+    "words": "karaṃdhamastu traisārir"
+   },
+   {
+    "name": "Bharata",
+    "ref": "MatsP 48.2",
+    "words": "bharatastasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Ugrāyudha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṣema",
+    "ref": "MatsP 49.78",
+    "words": "ugrāyudhasya dāyādaḥ kṣemo"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "MatsP 49.79",
+    "words": "kṣemātsunīthaḥ saṃjajñe"
+   },
+   {
+    "name": "Nṛpaṃjaya",
+    "ref": "MatsP 49.79",
+    "words": "sunīthasya nṛpaṃjayaḥ"
+   },
+   {
+    "name": "Viratha",
+    "ref": "MatsP 49.79",
+    "words": "nṛpaṃjayācca viratha"
+   }
+  ],
+  [
+   {
+    "name": "Āyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahimat",
+    "ref": "MatsP 51.34",
+    "words": "āyuṣo mahimānputro"
+   },
+   {
+    "name": "Dahana",
+    "ref": "MatsP 51.34",
+    "words": "dahanastu tataḥ sutaḥ"
+   },
+   {
+    "name": "Adbhuta",
+    "ref": "MatsP 51.35",
+    "words": "putro 'sya sahito hyagnir adbhutaḥ"
+   },
+   {
+    "name": "Devāṃśa",
+    "ref": "MatsP 51.36",
+    "words": "adbhutasya suto vīro devāṃśastu"
+   }
+  ],
+  [
+   {
+    "name": "Īḍhuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śūra",
+    "ref": "MatsP 46.1",
+    "words": "khyātamadbhutamīḍhuṣam"
+   },
+   {
+    "name": "Anādhṛṣṭi",
+    "ref": "MatsP 46.3",
+    "words": "anādhṛṣṭiḥ śiniścaiva"
+   },
+   {
+    "name": "Śatrughna",
+    "ref": "MatsP 46.24",
+    "words": "anādhṛṣṭeryaśasvinī nidhūtasattvaṃ śatrughnaṃ"
+   },
+   {
+    "name": "Śrāddha",
+    "ref": "MatsP 46.24",
+    "words": "śrāddhastasmādajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Śamī",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "MatsP 44.80",
+    "words": "śamiputraḥ pratikṣatraḥ"
+   },
+   {
+    "name": "Pratikṣetra",
+    "ref": "MatsP 44.80",
+    "words": "pratikṣatrasya cātmajaḥ pratikṣetraḥ suto"
+   },
+   {
+    "name": "Bhoja",
+    "ref": "MatsP 44.80",
+    "words": "pratikṣetraḥ suto bhojo"
+   },
+   {
+    "name": "Hṛdīka",
+    "ref": "MatsP 44.80",
+    "words": "hṛdīkastasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śini",
+    "ref": "MatsP 45.22",
+    "words": "anamitrācchinirjajñe"
+   },
+   {
+    "name": "Satyaka",
+    "ref": "MatsP 45.22",
+    "words": "satyakastasya putraḥ"
+   },
+   {
+    "name": "Sātyaki",
+    "ref": "MatsP 45.22",
+    "words": "sātyakistasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bhajamāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "MatsP 44.77",
+    "words": "bhajamānasya putro 'tha rathimukhyo vidūrathaḥ"
+   },
+   {
+    "name": "Rājādhideva",
+    "ref": "MatsP 44.77",
+    "words": "vidūrathasuto 'bhavat"
+   },
+   {
+    "name": "Śoṇāśva",
+    "ref": "MatsP 44.78",
+    "words": "rājādhidevasya sutau jajñāte"
+   }
+  ],
+  [
+   {
+    "name": "Devārha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "MatsP 44.83",
+    "words": "devārhasya suto vidvāñ jajñe kambalabarhiṣaḥ"
+   },
+   {
+    "name": "Asāmañja",
+    "ref": "MatsP 44.83",
+    "words": "asāmañjāḥ sutastasya"
+   },
+   {
+    "name": "Tamojāta",
+    "ref": "MatsP 44.83",
+    "words": "tamojātasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Duṣyanta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Varūtha",
+    "ref": "MatsP 48.4",
+    "words": "duṣyantasya tu dāyādo varūtho nāma pārthivaḥ"
+   },
+   {
+    "name": "Aṇḍīra",
+    "ref": "MatsP 48.4",
+    "words": "varūthāttu tathāṇḍīraḥ"
+   },
+   {
+    "name": "Saṃdhāna",
+    "ref": "MatsP 48.4",
+    "words": "saṃdhānastasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vahīnara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Daṇḍapāṇi",
+    "ref": "MatsP 50.87",
+    "words": "vahīnarātmajaścaiva daṇḍapāṇirbhaviṣyati"
+   },
+   {
+    "name": "Niramitra",
+    "ref": "MatsP 50.87",
+    "words": "daṇḍapāṇerniramitro"
+   },
+   {
+    "name": "Kṣemaka",
+    "ref": "MatsP 50.87",
+    "words": "niramitrāttu kṣemakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaryāti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ānarta",
+    "ref": "MatsP 12.21",
+    "words": "ānarto nāma śaryāteḥ"
+   },
+   {
+    "name": "Rocamāna",
+    "ref": "MatsP 12.22",
+    "words": "ānartasyābhavatputro rocamānaḥ"
+   },
+   {
+    "name": "Revata",
+    "ref": "MatsP 12.23",
+    "words": "rocamānasya putro 'bhūd revo raivata"
+   }
+  ],
+  [
+   {
+    "name": "Aruṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sampāti",
+    "ref": "MatsP 6.35",
+    "words": "aruṇasya sutāv ubhau"
+   },
+   {
+    "name": "Babhru",
+    "ref": "MatsP 6.35",
+    "words": "sampātiputro babhruśca"
+   }
+  ],
+  [
+   {
+    "name": "Bhṛgu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Atharvan",
+    "ref": "MatsP 51.10",
+    "words": "bhṛgoḥ prajāyatātharvā"
+   },
+   {
+    "name": "Puṣkarodadhi",
+    "ref": "MatsP 51.9",
+    "words": "'tharvaṇaḥ putro mathitaḥ puṣkarodadhiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Brahmā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Agni",
+    "ref": "MatsP 51.2",
+    "words": "brahmaṇo mānasaḥ putras"
+   },
+   {
+    "name": "Samrāj",
+    "ref": "MatsP 51.19",
+    "words": "samrāḍagnisuto"
+   }
+  ],
+  [
+   {
+    "name": "Jarāsaṃdha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "MatsP 50.33",
+    "words": "jarāsaṃdhasya putrastu sahadevaḥ"
+   },
+   {
+    "name": "Somavit",
+    "ref": "MatsP 50.33",
+    "words": "sahadevātmajaḥ śrīmān somavit"
+   }
+  ],
+  [
+   {
+    "name": "Maitreya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Caidyavara",
+    "ref": "MatsP 50.14",
+    "words": "caidyavaro nāma maitreyasya sutaḥ"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "MatsP 50.15",
+    "words": "caidyavarādvidvān sudāsastasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Purudvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jantu",
+    "ref": "MatsP 44.45",
+    "words": "janturjajñe 'tha vaidarbhyāṃ bhadrasenyāṃ purudvataḥ"
+   },
+   {
+    "name": "Sātvata",
+    "ref": "MatsP 44.45",
+    "words": "jantostasyāmajāyata sātvataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nakula",
+    "ref": "MatsP 50.49",
+    "words": "pāṇḍorarthe 'bhijajñire"
+   },
+   {
+    "name": "Śatānīka",
+    "ref": "MatsP 50.53",
+    "words": "nakulācca śatānīkaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Samudravāsin",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Saharakṣa",
+    "ref": "MatsP 51.30",
+    "words": "samudravāsinaḥ putraḥ saharakṣo"
+   },
+   {
+    "name": "Kravyādagni",
+    "ref": "MatsP 51.31",
+    "words": "kravyādagniḥ sutastasya"
+   }
+  ],
+  [
+   {
+    "name": "Vītihotra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ānarta",
+    "ref": "MatsP 43.49",
+    "words": "vītihotrasutaścāpi ānarto nāma"
+   },
+   {
+    "name": "Durjeya",
+    "ref": "MatsP 43.49",
+    "words": "durjeyastasya putrastu"
+   }
+  ],
+  [
+   {
+    "name": "Śaradvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śatānanda",
+    "ref": "MatsP 50.8",
+    "words": "śaradvatastu dāyādam ahalyā samprasūyata śatānandam"
+   },
+   {
+    "name": "Satyadhṛti",
+    "ref": "MatsP 50.8",
+    "words": "tasyāpi sumahātapāḥ sutaḥ satyadhṛtirnāma"
+   }
+  ],
+  [
+   {
+    "name": "Agni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kumāra",
+    "ref": "MatsP 5.26",
+    "words": "agniputraḥ kumāraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Akrūra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sadāyajña",
+    "ref": "MatsP 45.27",
+    "words": "akrūraḥ suṣuve tasmāt sadāyajño"
+   }
+  ],
+  [
+   {
+    "name": "Brahmaudanāgni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bharata",
+    "ref": "MatsP 51.8",
+    "words": "brahmaudanāgnis tatputro bharato"
+   }
+  ],
+  [
+   {
+    "name": "Caidya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sunītha",
+    "ref": "MatsP 46.6",
+    "words": "śrutaśravasi caidyasya sunīthaḥ samapadyata"
+   }
+  ],
+  [
+   {
+    "name": "Dakṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "MatsP 5.5",
+    "words": "haryaśvān dakṣaputrān"
+   }
+  ],
+  [
+   {
+    "name": "Devabhāga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uddhava",
+    "ref": "MatsP 46.23",
+    "words": "devabhāgasutaścāpi nāmnāsāv uddhavaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Devāvṛdha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Babhru",
+    "ref": "MatsP 44.56",
+    "words": "babhruṃ devāvṛdhānnṛpāt"
+   }
+  ],
+  [
+   {
+    "name": "Dhanaṃjaya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śrutakīrti",
+    "ref": "MatsP 50.52",
+    "words": "chrutakīrtiṃ dhanaṃjayāt"
+   }
+  ],
+  [
+   {
+    "name": "Dhara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Draviṇa",
+    "ref": "MatsP 5.23",
+    "words": "draviṇo havyavāhaśca dharaputrāv ubhau"
+   }
+  ],
+  [
+   {
+    "name": "Dhruva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kāla",
+    "ref": "MatsP 5.23",
+    "words": "dhruvasya kālaḥ putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dhṛṣṭa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhṛtaketu",
+    "ref": "MatsP 12.20",
+    "words": "dhṛṣṭasya ca sutatrayam dhṛtaketuś"
+   }
+  ],
+  [
+   {
+    "name": "Gaveṣaṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhūrīndrasena",
+    "ref": "MatsP 47.22",
+    "words": "bhūrīndraseno bhūriśca gaveṣaṇasutāv ubhau"
+   }
+  ],
+  [
+   {
+    "name": "Gārhapatya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sabhya",
+    "ref": "MatsP 51.12",
+    "words": "sabhyāvasathyau ca saṃśatyās tau sutāvubhau"
+   }
+  ],
+  [
+   {
+    "name": "Hautriya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Barhiṣa",
+    "ref": "MatsP 51.24",
+    "words": "hautriyasya suto hyagnir barhiṣo"
+   }
+  ],
+  [
+   {
+    "name": "Hṛdaya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jaṭhara",
+    "ref": "MatsP 51.28",
+    "words": "hṛdayasya suto hyagner jaṭhare"
+   }
+  ],
+  [
+   {
+    "name": "Ikṣvāku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "MatsP 12.26",
+    "words": "ikṣvākoḥ putratām āpa vikukṣir"
+   }
+  ],
+  [
+   {
+    "name": "Jayadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "MatsP 43.47",
+    "words": "jayadhvajasya putrastu tālajaṅgho mahābalaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kaiśika",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cidi",
+    "ref": "MatsP 44.38",
+    "words": "kaiśikasya cidiḥ putras"
+   }
+  ],
+  [
+   {
+    "name": "Kākṣīvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kauṣmāṇḍa",
+    "ref": "MatsP 48.88",
+    "words": "kauṣmāṇḍā gautamāścaiva smṛtāḥ kākṣīvataḥ sutāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṛta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sugrīva",
+    "ref": "MatsP 46.5",
+    "words": "kṛtasya tu śrutādevī sugrīvaṃ suṣuve sutam"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sucandra",
+    "ref": "MatsP 46.25",
+    "words": "kṛṣṇastuṣṭaḥ sutaṃ dadau sucandraṃ"
+   }
+  ],
+  [
+   {
+    "name": "Manyumat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Saṃvartaka",
+    "ref": "MatsP 51.29",
+    "words": "agnermanyumataḥ putro ghoraḥ saṃvartakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Mārīca",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Paulomā",
+    "ref": "MatsP 6.24",
+    "words": "paulomānkālakeyāṃśca mārīco 'janayat"
+   }
+  ],
+  [
+   {
+    "name": "Nandana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tantipāla",
+    "ref": "MatsP 46.27",
+    "words": "tantipālaśca tantiśca nandanasya sutāv ubhau"
+   }
+  ],
+  [
+   {
+    "name": "Parāśara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vedavyāsa",
+    "ref": "MatsP 47.245",
+    "words": "parāśarāt vedavyāsastathā jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Pavamāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Havyavāha",
+    "ref": "MatsP 51.4",
+    "words": "pavamānātmajo hy agnir havyavāhaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Prabhāsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvakarman",
+    "ref": "MatsP 5.27",
+    "words": "viśvakarmā prabhāsasya putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pradyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aniruddha",
+    "ref": "MatsP 47.23",
+    "words": "pradyumnasya tu dāyādo"
+   }
+  ],
+  [
+   {
+    "name": "Pratyūṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devala",
+    "ref": "MatsP 5.27",
+    "words": "pratyūṣasa ṛṣiḥ putro vibhur nāmnātha devalaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pāvaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vaidyuta",
+    "ref": "MatsP 51.3",
+    "words": "vaidyutaḥ pāvakātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pṛthuśravas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suyajña",
+    "ref": "MatsP 44.22",
+    "words": "antarasya suyajñasya suyajñastanayo 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Somaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jantu",
+    "ref": "MatsP 50.16",
+    "words": "somakasya suto jantur"
+   }
+  ],
+  [
+   {
+    "name": "Upasaṅga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vajra",
+    "ref": "MatsP 47.22",
+    "words": "upasaṅgasya tu sutau vajraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vividhāgni",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahākavi",
+    "ref": "MatsP 51.37",
+    "words": "vividhāgnistatastasya tasya putro mahākaviḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vīrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nala",
+    "ref": "MatsP 12.56",
+    "words": "vīrasenasutastadvan naiṣadhaśca"
+   }
+  ],
+  [
+   {
+    "name": "Yudhiṣṭhira",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Prativindhya",
+    "ref": "MatsP 50.51",
+    "words": "prativindhyaṃ yudhiṣṭhirāt"
+   }
+  ],
+  [
+   {
+    "name": "Ānakadundubhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Rāma",
+    "ref": "MatsP 46.11",
+    "words": "bhāryā hy ānakadundubheḥ lebhe jyeṣṭhaṃ sutaṃ rāmaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Āpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śānta",
+    "ref": "MatsP 5.22",
+    "words": "āpasya putrāś catvāraḥ śānto"
+   }
+  ],
+  [
+   {
+    "name": "Śauri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suṣeṇa",
+    "ref": "MatsP 46.13",
+    "words": "devakyāṃ jajñire śaureḥ suṣeṇaḥ"
+   }
+  ]
+ ]
+}

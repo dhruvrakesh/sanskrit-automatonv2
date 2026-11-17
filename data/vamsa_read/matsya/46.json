@@ -1,0 +1,745 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 46,
+ "part": 0,
+ "refs": [
+  "MatsP 46.1",
+  "MatsP 46.2",
+  "MatsP 46.3",
+  "MatsP 46.4",
+  "MatsP 46.5",
+  "MatsP 46.6",
+  "MatsP 46.7",
+  "MatsP 46.8",
+  "MatsP 46.9",
+  "MatsP 46.10",
+  "MatsP 46.11",
+  "MatsP 46.12",
+  "MatsP 46.13",
+  "MatsP 46.14",
+  "MatsP 46.15",
+  "MatsP 46.16",
+  "MatsP 46.17",
+  "MatsP 46.18",
+  "MatsP 46.19",
+  "MatsP 46.20",
+  "MatsP 46.21",
+  "MatsP 46.22",
+  "MatsP 46.23",
+  "MatsP 46.24",
+  "MatsP 46.25",
+  "MatsP 46.26",
+  "MatsP 46.27",
+  "MatsP 46.28",
+  "MatsP 46.29"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:16:08",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 46.1\",\"a\":\"Śūra\",\"rel\":\"born_of\",\"b\":\"Aikṣvākī\",\"words\":\"aikṣvākī suṣuve śūraṃ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.1\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Īḍhuṣa\",\"words\":\"khyātamadbhutamīḍhuṣam\",\"doubt\":true},\n{\"ref\":\"MatsP 46.1\",\"a\":\"Vasudeva\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"jajñire śūrād bhojāyāṃ putrakā daśa\",\"doubt\":true},\n{\"ref\":\"MatsP 46.1\",\"a\":\"Vasudeva\",\"rel\":\"born_of\",\"b\":\"Bhojā\",\"words\":\"śūrād bhojāyāṃ putrakā daśa\",\"doubt\":true},\n{\"ref\":\"MatsP 46.2\",\"a\":\"Devamārga\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"devamārgastato jajñe\",\"doubt\":true},\n{\"ref\":\"MatsP 46.2\",\"a\":\"Devaśravas\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"tato devaśravāḥ punaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Anādhṛṣṭi\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"anādhṛṣṭiḥ śiniścaiva\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Śini\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"anādhṛṣṭiḥ śiniścaiva\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Nanda\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"nandaścaiva sasṛñjayaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Sṛñjaya\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"nandaścaiva sasṛñjayaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Śyāma\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"śyāmaḥ śamīkaḥ saṃyūpaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Śamīka\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"śyāmaḥ śamīkaḥ saṃyūpaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.3\",\"a\":\"Saṃyūpa\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"śyāmaḥ śamīkaḥ saṃyūpaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.5\",\"a\":\"Sugrīva\",\"rel\":\"son_of\",\"b\":\"Kṛta\",\"words\":\"kṛtasya tu śrutādevī sugrīvaṃ suṣuve sutam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.5\",\"a\":\"Sugrīva\",\"rel\":\"born_of\",\"b\":\"Śrutādevī\",\"words\":\"śrutādevī sugrīvaṃ suṣuve sutam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.5\",\"a\":\"Śrutādevī\",\"rel\":\"wife_of\",\"b\":\"Kṛta\",\"words\":\"kṛtasya tu śrutādevī\",\"doubt\":true},\n{\"ref\":\"MatsP 46.6\",\"a\":\"Sunītha\",\"rel\":\"son_of\",\"b\":\"Caidya\",\"words\":\"śrutaśravasi caidyasya sunīthaḥ samapadyata\",\"doubt\":true},\n{\"ref\":\"MatsP 46.6\",\"a\":\"Sunītha\",\"rel\":\"born_of\",\"b\":\"Śrutaśravas\",\"words\":\"śrutaśravasi caidyasya sunīthaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.7\",\"a\":\"Kuntī\",\"rel\":\"daughter_of\",\"b\":\"Kuntibhoja\",\"words\":\"kuntibhoje sutāṃ dadau\",\"doubt\":true},\n{\"ref\":\"MatsP 46.7\",\"a\":\"Kuntī\",\"rel\":\"sister_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevasvasā pṛthā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.8\",\"a\":\"Kuntī\",\"rel\":\"wife_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍorbhāryā hy aninditā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.9\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"begotten_by\",\"b\":\"Dharma\",\"words\":\"dharmādyudhiṣṭhiro jajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 46.9\",\"a\":\"Yudhiṣṭhira\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍorarthena sā jajñe devaputrān\",\"doubt\":true},\n{\"ref\":\"MatsP 46.9\",\"a\":\"Vṛkodara\",\"rel\":\"begotten_by\",\"b\":\"Vāyu\",\"words\":\"vāyorjajñe vṛkāderaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.9\",\"a\":\"Vṛkodara\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍorarthena sā jajñe devaputrān\",\"doubt\":true},\n{\"ref\":\"MatsP 46.9\",\"a\":\"Dhanaṃjaya\",\"rel\":\"begotten_by\",\"b\":\"Indra\",\"words\":\"indrāddhanaṃjayaś caiva\",\"doubt\":false},\n{\"ref\":\"MatsP 46.9\",\"a\":\"Dhanaṃjaya\",\"rel\":\"son_of\",\"b\":\"Pāṇḍu\",\"words\":\"pāṇḍorarthena sā jajñe devaputrān\",\"doubt\":true},\n{\"ref\":\"MatsP 46.10\",\"a\":\"Nakula\",\"rel\":\"born_of\",\"b\":\"Mādravatī\",\"words\":\"mādravatyāṃ tu janitāv\",\"doubt\":false},\n{\"ref\":\"MatsP 46.10\",\"a\":\"Sahadeva\",\"rel\":\"born_of\",\"b\":\"Mādravatī\",\"words\":\"mādravatyāṃ tu janitāv\",\"doubt\":false},\n{\"ref\":\"MatsP 46.10\",\"a\":\"Nakula\",\"rel\":\"begotten_by\",\"b\":\"Aśvins\",\"words\":\"aśvibhyābhiti śuśruma\",\"doubt\":false},\n{\"ref\":\"MatsP 46.10\",\"a\":\"Sahadeva\",\"rel\":\"begotten_by\",\"b\":\"Aśvins\",\"words\":\"aśvibhyābhiti śuśruma\",\"doubt\":false},\n{\"ref\":\"MatsP 46.11\",\"a\":\"Rohiṇī\",\"rel\":\"wife_of\",\"b\":\"Ānakadundubhi\",\"words\":\"bhāryā hy ānakadundubheḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.11\",\"a\":\"Rāma\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"lebhe jyeṣṭhaṃ sutaṃ rāmaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.11\",\"a\":\"Sāraṇa\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"sāraṇaṃ ca sutaṃ priyam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.11\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"bhāryā hy ānakadundubheḥ lebhe jyeṣṭhaṃ sutaṃ rāmaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.11\",\"a\":\"Sāraṇa\",\"rel\":\"son_of\",\"b\":\"Ānakadundubhi\",\"words\":\"sāraṇaṃ ca sutaṃ priyam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.12\",\"a\":\"Durdama\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ jajñire tadā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.12\",\"a\":\"Damana\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ jajñire tadā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.12\",\"a\":\"Subhru\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ jajñire tadā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.12\",\"a\":\"Piṇḍāraka\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ jajñire tadā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.12\",\"a\":\"Mahāhanu\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇyāṃ jajñire tadā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.13\",\"a\":\"Suṣeṇa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyāṃ jajñire śaureḥ suṣeṇaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.13\",\"a\":\"Suṣeṇa\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"devakyāṃ jajñire śaureḥ suṣeṇaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.13\",\"a\":\"Kīrtimat\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyāṃ jajñire śaureḥ suṣeṇaḥ kīrtimānapi\",\"doubt\":false},\n{\"ref\":\"MatsP 46.13\",\"a\":\"Kīrtimat\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"jajñire śaureḥ suṣeṇaḥ kīrtimānapi\",\"doubt\":false},\n{\"ref\":\"MatsP 46.15\",\"a\":\"Subhadrā\",\"rel\":\"sister_of\",\"b\":\"Kṛṣṇa\",\"words\":\"anujā tv abhavatkṛṣṇā subhadrā\",\"doubt\":true},\n{\"ref\":\"MatsP 46.16\",\"a\":\"Sahadeva\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"sahadevastu tāmrāyāṃ jajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 46.16\",\"a\":\"Upāsaṅgadhara\",\"rel\":\"born_of\",\"b\":\"Devarakṣitā\",\"words\":\"upāsaṅgadharaṃ lebhe tanayaṃ devarakṣitā\",\"doubt\":false},\n{\"ref\":\"MatsP 46.17\",\"a\":\"Vijaya\",\"rel\":\"born_of\",\"b\":\"Upadevī\",\"words\":\"upadevyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MatsP 46.17\",\"a\":\"Rocamāna\",\"rel\":\"born_of\",\"b\":\"Upadevī\",\"words\":\"upadevyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MatsP 46.17\",\"a\":\"Vardhamāna\",\"rel\":\"born_of\",\"b\":\"Upadevī\",\"words\":\"upadevyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MatsP 46.17\",\"a\":\"Devala\",\"rel\":\"born_of\",\"b\":\"Upadevī\",\"words\":\"upadevyāṃ prajajñire\",\"doubt\":false},\n{\"ref\":\"MatsP 46.18\",\"a\":\"Avagāha\",\"rel\":\"born_of\",\"b\":\"Vṛkadevī\",\"words\":\"vṛkadevyāmajāyata\",\"doubt\":false},\n{\"ref\":\"MatsP 46.18\",\"a\":\"Nandaka\",\"rel\":\"born_of\",\"b\":\"Vṛkadevī\",\"words\":\"vṛkadevyāṃ svayaṃ jajñe nandako\",\"doubt\":false},\n{\"ref\":\"MatsP 46.19\",\"a\":\"Madana\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"saptamaṃ devakīputraṃ madanaṃ suṣuve\",\"doubt\":true},\n{\"ref\":\"MatsP 46.20\",\"a\":\"Kauśika\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"vaiśyāyāmadadhācchauriḥ putraṃ kauśikamagrajam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.20\",\"a\":\"Kauśika\",\"rel\":\"born_of\",\"b\":\"Vaiśyā\",\"words\":\"vaiśyāyāmadadhācchauriḥ putraṃ kauśikam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.21\",\"a\":\"Sutanū\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sutanū ratharājī ca śaurerāstāṃ parigrahau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.21\",\"a\":\"Ratharājī\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sutanū ratharājī ca śaurerāstāṃ parigrahau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.21\",\"a\":\"Puṇḍra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"puṇḍraśca kapilaścaiva vasudevātmajau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.21\",\"a\":\"Kapila\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"puṇḍraśca kapilaścaiva vasudevātmajau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.23\",\"a\":\"Uddhava\",\"rel\":\"son_of\",\"b\":\"Devabhāga\",\"words\":\"devabhāgasutaścāpi nāmnāsāv uddhavaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 46.23\",\"a\":\"Paṇḍita\",\"rel\":\"son_of\",\"b\":\"Devaśravas\",\"words\":\"paṇḍitaṃ prathamaṃ prāhur devaśravaḥsamudbhavam\",\"doubt\":false},\n{\"ref\":\"MatsP 46.24\",\"a\":\"Śatrughna\",\"rel\":\"born_of\",\"b\":\"Aikṣvākī\",\"words\":\"aikṣvākyalabhatāpatyam anādhṛṣṭeryaśasvinī nidhūtasattvaṃ śatrughnaṃ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.24\",\"a\":\"Śatrughna\",\"rel\":\"son_of\",\"b\":\"Anādhṛṣṭi\",\"words\":\"anādhṛṣṭeryaśasvinī nidhūtasattvaṃ śatrughnaṃ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.24\",\"a\":\"Śrāddha\",\"rel\":\"son_of\",\"b\":\"Śatrughna\",\"words\":\"śrāddhastasmādajāyata\",\"doubt\":true},\n{\"ref\":\"MatsP 46.25\",\"a\":\"Sucandra\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"kṛṣṇastuṣṭaḥ sutaṃ dadau sucandraṃ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.25\",\"a\":\"Sucandra\",\"rel\":\"begotten_by\",\"b\":\"Kṛṣṇa\",\"words\":\"kṛṣṇastuṣṭaḥ sutaṃ dadau sucandraṃ\",\"doubt\":true},\n{\"ref\":\"MatsP 46.26\",\"a\":\"Cārudeṣṇa\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"jāmbavatyāḥ sutāv etau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.26\",\"a\":\"Sāmba\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"jāmbavatyāḥ sutāv etau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.27\",\"a\":\"Tantipāla\",\"rel\":\"son_of\",\"b\":\"Nandana\",\"words\":\"tantipālaśca tantiśca nandanasya sutāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.27\",\"a\":\"Tanti\",\"rel\":\"son_of\",\"b\":\"Nandana\",\"words\":\"tantipālaśca tantiśca nandanasya sutāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 46.27\",\"a\":\"Virāja\",\"rel\":\"son_of\",\"b\":\"Śamīka\",\"words\":\"śamīkaputrāś catvāro\",\"doubt\":false},\n{\"ref\":\"MatsP 46.27\",\"a\":\"Dhanu\",\"rel\":\"son_of\",\"b\":\"Śamīka\",\"words\":\"śamīkaputrāś catvāro\",\"doubt\":false},\n{\"ref\":\"MatsP 46.27\",\"a\":\"Śyāma\",\"rel\":\"son_of\",\"b\":\"Śamīka\",\"words\":\"śamīkaputrāś catvāro\",\"doubt\":true},\n{\"ref\":\"MatsP 46.27\",\"a\":\"Sṛñjaya\",\"rel\":\"son_of\",\"b\":\"Śamīka\",\"words\":\"śamīkaputrāś catvāro\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.06428,
+ "tokens": {
+  "input": 3207,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 5787,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 46.1",
+   "a": "Śūra",
+   "rel": "born_of",
+   "b": "Aikṣvākī",
+   "words": "aikṣvākī suṣuve śūraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.1",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Īḍhuṣa",
+   "words": "khyātamadbhutamīḍhuṣam",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.1",
+   "a": "Vasudeva",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "jajñire śūrād bhojāyāṃ putrakā daśa",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.1",
+   "a": "Vasudeva",
+   "rel": "born_of",
+   "b": "Bhojā",
+   "words": "śūrād bhojāyāṃ putrakā daśa",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.2",
+   "a": "Devamārga",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "devamārgastato jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.2",
+   "a": "Devaśravas",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "tato devaśravāḥ punaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Anādhṛṣṭi",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "anādhṛṣṭiḥ śiniścaiva",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Śini",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "anādhṛṣṭiḥ śiniścaiva",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Nanda",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "nandaścaiva sasṛñjayaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Sṛñjaya",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "nandaścaiva sasṛñjayaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Śyāma",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "śyāmaḥ śamīkaḥ saṃyūpaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Śamīka",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "śyāmaḥ śamīkaḥ saṃyūpaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.3",
+   "a": "Saṃyūpa",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "śyāmaḥ śamīkaḥ saṃyūpaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.5",
+   "a": "Sugrīva",
+   "rel": "son_of",
+   "b": "Kṛta",
+   "words": "kṛtasya tu śrutādevī sugrīvaṃ suṣuve sutam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.5",
+   "a": "Sugrīva",
+   "rel": "born_of",
+   "b": "Śrutādevī",
+   "words": "śrutādevī sugrīvaṃ suṣuve sutam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.5",
+   "a": "Śrutādevī",
+   "rel": "wife_of",
+   "b": "Kṛta",
+   "words": "kṛtasya tu śrutādevī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.6",
+   "a": "Sunītha",
+   "rel": "son_of",
+   "b": "Caidya",
+   "words": "śrutaśravasi caidyasya sunīthaḥ samapadyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.6",
+   "a": "Sunītha",
+   "rel": "born_of",
+   "b": "Śrutaśravas",
+   "words": "śrutaśravasi caidyasya sunīthaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.7",
+   "a": "Kuntī",
+   "rel": "daughter_of",
+   "b": "Kuntibhoja",
+   "words": "kuntibhoje sutāṃ dadau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.7",
+   "a": "Kuntī",
+   "rel": "sister_of",
+   "b": "Vasudeva",
+   "words": "vasudevasvasā pṛthā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.8",
+   "a": "Kuntī",
+   "rel": "wife_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍorbhāryā hy aninditā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.9",
+   "a": "Yudhiṣṭhira",
+   "rel": "begotten_by",
+   "b": "Dharma",
+   "words": "dharmādyudhiṣṭhiro jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.8",
+   "a": "Yudhiṣṭhira",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍorarthena sā jajñe devaputrān",
+   "doubt": true,
+   "ref_cited": "MatsP 46.9",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.9",
+   "a": "Vṛkodara",
+   "rel": "begotten_by",
+   "b": "Vāyu",
+   "words": "vāyorjajñe vṛkāderaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 46.8",
+   "a": "Vṛkodara",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍorarthena sā jajñe devaputrān",
+   "doubt": true,
+   "ref_cited": "MatsP 46.9",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 46.9",
+   "a": "Dhanaṃjaya",
+   "rel": "begotten_by",
+   "b": "Indra",
+   "words": "indrāddhanaṃjayaś caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.8",
+   "a": "Dhanaṃjaya",
+   "rel": "son_of",
+   "b": "Pāṇḍu",
+   "words": "pāṇḍorarthena sā jajñe devaputrān",
+   "doubt": true,
+   "ref_cited": "MatsP 46.9",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.10",
+   "a": "Nakula",
+   "rel": "born_of",
+   "b": "Mādravatī",
+   "words": "mādravatyāṃ tu janitāv",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.10",
+   "a": "Sahadeva",
+   "rel": "born_of",
+   "b": "Mādravatī",
+   "words": "mādravatyāṃ tu janitāv",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.10",
+   "a": "Nakula",
+   "rel": "begotten_by",
+   "b": "Aśvins",
+   "words": "aśvibhyābhiti śuśruma",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 46.10",
+   "a": "Sahadeva",
+   "rel": "begotten_by",
+   "b": "Aśvins",
+   "words": "aśvibhyābhiti śuśruma",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 46.11",
+   "a": "Rohiṇī",
+   "rel": "wife_of",
+   "b": "Ānakadundubhi",
+   "words": "bhāryā hy ānakadundubheḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.11",
+   "a": "Rāma",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "lebhe jyeṣṭhaṃ sutaṃ rāmaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.11",
+   "a": "Sāraṇa",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "sāraṇaṃ ca sutaṃ priyam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.11",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "bhāryā hy ānakadundubheḥ lebhe jyeṣṭhaṃ sutaṃ rāmaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.11",
+   "a": "Sāraṇa",
+   "rel": "son_of",
+   "b": "Ānakadundubhi",
+   "words": "sāraṇaṃ ca sutaṃ priyam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.12",
+   "a": "Durdama",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ jajñire tadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.12",
+   "a": "Damana",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ jajñire tadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.12",
+   "a": "Subhru",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ jajñire tadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.12",
+   "a": "Piṇḍāraka",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ jajñire tadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.12",
+   "a": "Mahāhanu",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇyāṃ jajñire tadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.13",
+   "a": "Suṣeṇa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyāṃ jajñire śaureḥ suṣeṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.13",
+   "a": "Suṣeṇa",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "devakyāṃ jajñire śaureḥ suṣeṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.13",
+   "a": "Kīrtimat",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyāṃ jajñire śaureḥ suṣeṇaḥ kīrtimānapi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.13",
+   "a": "Kīrtimat",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "jajñire śaureḥ suṣeṇaḥ kīrtimānapi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.15",
+   "a": "Subhadrā",
+   "rel": "sister_of",
+   "b": "Kṛṣṇa",
+   "words": "anujā tv abhavatkṛṣṇā subhadrā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.16",
+   "a": "Sahadeva",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "sahadevastu tāmrāyāṃ jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.16",
+   "a": "Upāsaṅgadhara",
+   "rel": "born_of",
+   "b": "Devarakṣitā",
+   "words": "upāsaṅgadharaṃ lebhe tanayaṃ devarakṣitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.17",
+   "a": "Vijaya",
+   "rel": "born_of",
+   "b": "Upadevī",
+   "words": "upadevyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.17",
+   "a": "Rocamāna",
+   "rel": "born_of",
+   "b": "Upadevī",
+   "words": "upadevyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.17",
+   "a": "Vardhamāna",
+   "rel": "born_of",
+   "b": "Upadevī",
+   "words": "upadevyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.17",
+   "a": "Devala",
+   "rel": "born_of",
+   "b": "Upadevī",
+   "words": "upadevyāṃ prajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.18",
+   "a": "Avagāha",
+   "rel": "born_of",
+   "b": "Vṛkadevī",
+   "words": "vṛkadevyāmajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.18",
+   "a": "Nandaka",
+   "rel": "born_of",
+   "b": "Vṛkadevī",
+   "words": "vṛkadevyāṃ svayaṃ jajñe nandako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.19",
+   "a": "Madana",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "saptamaṃ devakīputraṃ madanaṃ suṣuve",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.20",
+   "a": "Kauśika",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "vaiśyāyāmadadhācchauriḥ putraṃ kauśikamagrajam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.20",
+   "a": "Kauśika",
+   "rel": "born_of",
+   "b": "Vaiśyā",
+   "words": "vaiśyāyāmadadhācchauriḥ putraṃ kauśikam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.21",
+   "a": "Sutanū",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sutanū ratharājī ca śaurerāstāṃ parigrahau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.21",
+   "a": "Ratharājī",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sutanū ratharājī ca śaurerāstāṃ parigrahau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.21",
+   "a": "Puṇḍra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "puṇḍraśca kapilaścaiva vasudevātmajau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.21",
+   "a": "Kapila",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "puṇḍraśca kapilaścaiva vasudevātmajau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.23",
+   "a": "Uddhava",
+   "rel": "son_of",
+   "b": "Devabhāga",
+   "words": "devabhāgasutaścāpi nāmnāsāv uddhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.23",
+   "a": "Paṇḍita",
+   "rel": "son_of",
+   "b": "Devaśravas",
+   "words": "paṇḍitaṃ prathamaṃ prāhur devaśravaḥsamudbhavam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.24",
+   "a": "Śatrughna",
+   "rel": "born_of",
+   "b": "Aikṣvākī",
+   "words": "aikṣvākyalabhatāpatyam anādhṛṣṭeryaśasvinī nidhūtasattvaṃ śatrughnaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.24",
+   "a": "Śatrughna",
+   "rel": "son_of",
+   "b": "Anādhṛṣṭi",
+   "words": "anādhṛṣṭeryaśasvinī nidhūtasattvaṃ śatrughnaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.24",
+   "a": "Śrāddha",
+   "rel": "son_of",
+   "b": "Śatrughna",
+   "words": "śrāddhastasmādajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.25",
+   "a": "Sucandra",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "kṛṣṇastuṣṭaḥ sutaṃ dadau sucandraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.25",
+   "a": "Sucandra",
+   "rel": "begotten_by",
+   "b": "Kṛṣṇa",
+   "words": "kṛṣṇastuṣṭaḥ sutaṃ dadau sucandraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.26",
+   "a": "Cārudeṣṇa",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "jāmbavatyāḥ sutāv etau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.26",
+   "a": "Sāmba",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "jāmbavatyāḥ sutāv etau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.27",
+   "a": "Tantipāla",
+   "rel": "son_of",
+   "b": "Nandana",
+   "words": "tantipālaśca tantiśca nandanasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.27",
+   "a": "Tanti",
+   "rel": "son_of",
+   "b": "Nandana",
+   "words": "tantipālaśca tantiśca nandanasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.27",
+   "a": "Virāja",
+   "rel": "son_of",
+   "b": "Śamīka",
+   "words": "śamīkaputrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.27",
+   "a": "Dhanu",
+   "rel": "son_of",
+   "b": "Śamīka",
+   "words": "śamīkaputrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.27",
+   "a": "Śyāma",
+   "rel": "son_of",
+   "b": "Śamīka",
+   "words": "śamīkaputrāś catvāro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 46.27",
+   "a": "Sṛñjaya",
+   "rel": "son_of",
+   "b": "Śamīka",
+   "words": "śamīkaputrāś catvāro",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

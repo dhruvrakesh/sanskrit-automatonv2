@@ -65,7 +65,7 @@
    "b": "Manu Vaivasvata",
    "words": "sudyumne manurvaivasvataḥ sute",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.2.2",
@@ -74,7 +74,7 @@
    "b": "Manu Vaivasvata",
    "words": "ikṣvākupūrvajān putrān lebhe",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.2.3",
@@ -83,7 +83,7 @@
    "b": "Manu Vaivasvata",
    "words": "pṛṣadhrastu manoḥ putro",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.2.16",
@@ -101,7 +101,7 @@
    "b": "Manu Vaivasvata",
    "words": "karūṣān mānavādāsan",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.2.17",
@@ -479,7 +479,7 @@
    "b": "Tṛṇabindu",
    "words": "taṃ bheje 'lambuṣā devī",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.2.32",

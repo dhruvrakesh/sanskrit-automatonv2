@@ -1,0 +1,380 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 6,
+ "part": 0,
+ "refs": [
+  "BndP 2,6.1",
+  "BndP 2,6.2",
+  "BndP 2,6.3",
+  "BndP 2,6.4",
+  "BndP 2,6.5",
+  "BndP 2,6.6",
+  "BndP 2,6.7",
+  "BndP 2,6.8",
+  "BndP 2,6.9",
+  "BndP 2,6.10",
+  "BndP 2,6.11",
+  "BndP 2,6.12",
+  "BndP 2,6.13",
+  "BndP 2,6.14",
+  "BndP 2,6.15",
+  "BndP 2,6.16",
+  "BndP 2,6.17",
+  "BndP 2,6.18",
+  "BndP 2,6.19",
+  "BndP 2,6.20",
+  "BndP 2,6.21",
+  "BndP 2,6.22",
+  "BndP 2,6.23",
+  "BndP 2,6.24",
+  "BndP 2,6.25",
+  "BndP 2,6.26",
+  "BndP 2,6.27",
+  "BndP 2,6.28",
+  "BndP 2,6.29",
+  "BndP 2,6.30",
+  "BndP 2,6.31",
+  "BndP 2,6.32",
+  "BndP 2,6.33",
+  "BndP 2,6.34",
+  "BndP 2,6.35",
+  "BndP 2,6.36",
+  "BndP 2,6.37",
+  "BndP 2,6.38",
+  "BndP 2,6.39"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:24:06",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,6.13\",\"a\":\"Dānava\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"putrā danorvaṃśapradhānāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,6.18\",\"a\":\"Saiṃhikeya\",\"rel\":\"born_of\",\"b\":\"Siṃhikā\",\"words\":\"siṃhikāyāmathotpannā\",\"doubt\":true},{\"ref\":\"BndP 2,6.18\",\"a\":\"Saiṃhikeya\",\"rel\":\"son_of\",\"b\":\"Vipracitti\",\"words\":\"vipracitteḥ sutā ime\",\"doubt\":true},{\"ref\":\"BndP 2,6.20\",\"a\":\"Rāhu\",\"rel\":\"brother_of\",\"b\":\"Śala\",\"words\":\"rāhurjyeṣṭhastu teṣāṃ\",\"doubt\":true},{\"ref\":\"BndP 2,6.23\",\"a\":\"Prabhā\",\"rel\":\"daughter_of\",\"b\":\"Svarbhānu\",\"words\":\"svarbhānostu prabhā kanyā\",\"doubt\":false},{\"ref\":\"BndP 2,6.23\",\"a\":\"Śacī\",\"rel\":\"daughter_of\",\"b\":\"Pulomā\",\"words\":\"pulomnastu śacī sutā\",\"doubt\":false},{\"ref\":\"BndP 2,6.23\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"śarmiṣṭhā vṛṣaparvaṇaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.24\",\"a\":\"Pulomā\",\"rel\":\"daughter_of\",\"b\":\"Vaiśvānara\",\"words\":\"vaiśvānarasute ubhe\",\"doubt\":false},{\"ref\":\"BndP 2,6.24\",\"a\":\"Kālikā\",\"rel\":\"daughter_of\",\"b\":\"Vaiśvānara\",\"words\":\"vaiśvānarasute ubhe\",\"doubt\":false},{\"ref\":\"BndP 2,6.24\",\"a\":\"Nahuṣa\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"prabhāyāṃ nahuṣaḥ putro\",\"doubt\":false},{\"ref\":\"BndP 2,6.24\",\"a\":\"Jayanta\",\"rel\":\"born_of\",\"b\":\"Śacī\",\"words\":\"jayantastu śacīsutaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.25\",\"a\":\"Puru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"puruṃ jajñe 'tha śarmiṣṭhā\",\"doubt\":false},{\"ref\":\"BndP 2,6.26\",\"a\":\"Pulomā\",\"rel\":\"wife_of\",\"b\":\"Mārīca\",\"words\":\"mārīcasya parigrahaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,6.26\",\"a\":\"Kālakā\",\"rel\":\"wife_of\",\"b\":\"Mārīca\",\"words\":\"mārīcasya parigrahaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,6.28\",\"a\":\"Māyāvin\",\"rel\":\"born_of\",\"b\":\"Raṃbhā\",\"words\":\"mayasya jātā raṃbhāyāṃ putrāḥ ṣaṭ\",\"doubt\":false},{\"ref\":\"BndP 2,6.28\",\"a\":\"Māyāvin\",\"rel\":\"son_of\",\"b\":\"Maya\",\"words\":\"mayasya jātā raṃbhāyāṃ putrāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.29\",\"a\":\"Dundubhi\",\"rel\":\"son_of\",\"b\":\"Maya\",\"words\":\"māyāvī dundubhiścaiva\",\"doubt\":false},{\"ref\":\"BndP 2,6.29\",\"a\":\"Mahiṣa\",\"rel\":\"son_of\",\"b\":\"Maya\",\"words\":\"putraśca mahiṣastathā\",\"doubt\":false},{\"ref\":\"BndP 2,6.29\",\"a\":\"Kālika\",\"rel\":\"son_of\",\"b\":\"Maya\",\"words\":\"kālikaścājakarṇaś\",\"doubt\":false},{\"ref\":\"BndP 2,6.29\",\"a\":\"Ajakarṇa\",\"rel\":\"son_of\",\"b\":\"Maya\",\"words\":\"kālikaścājakarṇaś\",\"doubt\":false},{\"ref\":\"BndP 2,6.29\",\"a\":\"Mandodarī\",\"rel\":\"daughter_of\",\"b\":\"Maya\",\"words\":\"kanyā mandodarī\",\"doubt\":false},{\"ref\":\"BndP 2,6.30\",\"a\":\"Araru\",\"rel\":\"son_of\",\"b\":\"Anāyuṣā\",\"words\":\"anāyuṣāyāḥ putrāste\",\"doubt\":true},{\"ref\":\"BndP 2,6.31\",\"a\":\"Dhundhu\",\"rel\":\"son_of\",\"b\":\"Araru\",\"words\":\"ararostanayaḥ krūro dhundhur\",\"doubt\":false},{\"ref\":\"BndP 2,6.32\",\"a\":\"Nikuṃbha\",\"rel\":\"son_of\",\"b\":\"Bala\",\"words\":\"balaputrau\",\"doubt\":false},{\"ref\":\"BndP 2,6.32\",\"a\":\"Cakravarman\",\"rel\":\"son_of\",\"b\":\"Bala\",\"words\":\"balaputrau\",\"doubt\":false},{\"ref\":\"BndP 2,6.33\",\"a\":\"Kālaka\",\"rel\":\"son_of\",\"b\":\"Vijara\",\"words\":\"vijarasyāpi putrau dvau kālakaśca kharaśca\",\"doubt\":false},{\"ref\":\"BndP 2,6.33\",\"a\":\"Khara\",\"rel\":\"son_of\",\"b\":\"Vijara\",\"words\":\"vijarasyāpi putrau dvau kālakaśca kharaśca\",\"doubt\":false},{\"ref\":\"BndP 2,6.34\",\"a\":\"Śrāddhāda\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"vṛṣasya tu punaḥ putrāścatvāraḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.34\",\"a\":\"Yajñahan\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"vṛṣasya tu punaḥ putrāścatvāraḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.34\",\"a\":\"Brahmahan\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"vṛṣasya tu punaḥ putrāścatvāraḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.34\",\"a\":\"Paśuhan\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"vṛṣasya tu punaḥ putrāścatvāraḥ\",\"doubt\":false},{\"ref\":\"BndP 2,6.38\",\"a\":\"Siddha\",\"rel\":\"born_of\",\"b\":\"Krodhā\",\"words\":\"krodhā tvapratimānputrān jajñe\",\"doubt\":false},{\"ref\":\"BndP 2,6.38\",\"a\":\"Pūrṇa\",\"rel\":\"born_of\",\"b\":\"Krodhā\",\"words\":\"krodhā tvapratimānputrān jajñe\",\"doubt\":false},{\"ref\":\"BndP 2,6.38\",\"a\":\"Vahvī\",\"rel\":\"born_of\",\"b\":\"Krodhā\",\"words\":\"krodhā tvapratimānputrān jajñe\",\"doubt\":true},{\"ref\":\"BndP 2,6.38\",\"a\":\"Pūrṇāśa\",\"rel\":\"born_of\",\"b\":\"Krodhā\",\"words\":\"krodhā tvapratimānputrān jajñe\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03259,
+ "tokens": {
+  "input": 3842,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2491,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,6.13",
+   "a": "Dānava",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "putrā danorvaṃśapradhānāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.18",
+   "a": "Saiṃhikeya",
+   "rel": "born_of",
+   "b": "Siṃhikā",
+   "words": "siṃhikāyāmathotpannā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.18",
+   "a": "Saiṃhikeya",
+   "rel": "son_of",
+   "b": "Vipracitti",
+   "words": "vipracitteḥ sutā ime",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.20",
+   "a": "Rāhu",
+   "rel": "brother_of",
+   "b": "Śala",
+   "words": "rāhurjyeṣṭhastu teṣāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.23",
+   "a": "Prabhā",
+   "rel": "daughter_of",
+   "b": "Svarbhānu",
+   "words": "svarbhānostu prabhā kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.23",
+   "a": "Śacī",
+   "rel": "daughter_of",
+   "b": "Pulomā",
+   "words": "pulomnastu śacī sutā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.23",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "śarmiṣṭhā vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.24",
+   "a": "Pulomā",
+   "rel": "daughter_of",
+   "b": "Vaiśvānara",
+   "words": "vaiśvānarasute ubhe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.24",
+   "a": "Kālikā",
+   "rel": "daughter_of",
+   "b": "Vaiśvānara",
+   "words": "vaiśvānarasute ubhe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.24",
+   "a": "Nahuṣa",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "prabhāyāṃ nahuṣaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.24",
+   "a": "Jayanta",
+   "rel": "born_of",
+   "b": "Śacī",
+   "words": "jayantastu śacīsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.25",
+   "a": "Puru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "puruṃ jajñe 'tha śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.26",
+   "a": "Pulomā",
+   "rel": "wife_of",
+   "b": "Mārīca",
+   "words": "mārīcasya parigrahaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.26",
+   "a": "Kālakā",
+   "rel": "wife_of",
+   "b": "Mārīca",
+   "words": "mārīcasya parigrahaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.28",
+   "a": "Māyāvin",
+   "rel": "born_of",
+   "b": "Raṃbhā",
+   "words": "mayasya jātā raṃbhāyāṃ putrāḥ ṣaṭ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.28",
+   "a": "Māyāvin",
+   "rel": "son_of",
+   "b": "Maya",
+   "words": "mayasya jātā raṃbhāyāṃ putrāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.29",
+   "a": "Dundubhi",
+   "rel": "son_of",
+   "b": "Maya",
+   "words": "māyāvī dundubhiścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.29",
+   "a": "Mahiṣa",
+   "rel": "son_of",
+   "b": "Maya",
+   "words": "putraśca mahiṣastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.29",
+   "a": "Kālika",
+   "rel": "son_of",
+   "b": "Maya",
+   "words": "kālikaścājakarṇaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.29",
+   "a": "Ajakarṇa",
+   "rel": "son_of",
+   "b": "Maya",
+   "words": "kālikaścājakarṇaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.29",
+   "a": "Mandodarī",
+   "rel": "daughter_of",
+   "b": "Maya",
+   "words": "kanyā mandodarī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.30",
+   "a": "Araru",
+   "rel": "son_of",
+   "b": "Anāyuṣā",
+   "words": "anāyuṣāyāḥ putrāste",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.31",
+   "a": "Dhundhu",
+   "rel": "son_of",
+   "b": "Araru",
+   "words": "ararostanayaḥ krūro dhundhur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.32",
+   "a": "Nikuṃbha",
+   "rel": "son_of",
+   "b": "Bala",
+   "words": "balaputrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.32",
+   "a": "Cakravarman",
+   "rel": "son_of",
+   "b": "Bala",
+   "words": "balaputrau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.33",
+   "a": "Kālaka",
+   "rel": "son_of",
+   "b": "Vijara",
+   "words": "vijarasyāpi putrau dvau kālakaśca kharaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.33",
+   "a": "Khara",
+   "rel": "son_of",
+   "b": "Vijara",
+   "words": "vijarasyāpi putrau dvau kālakaśca kharaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.34",
+   "a": "Śrāddhāda",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "vṛṣasya tu punaḥ putrāścatvāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.34",
+   "a": "Yajñahan",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "vṛṣasya tu punaḥ putrāścatvāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.34",
+   "a": "Brahmahan",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "vṛṣasya tu punaḥ putrāścatvāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.34",
+   "a": "Paśuhan",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "vṛṣasya tu punaḥ putrāścatvāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.38",
+   "a": "Siddha",
+   "rel": "born_of",
+   "b": "Krodhā",
+   "words": "krodhā tvapratimānputrān jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.38",
+   "a": "Pūrṇa",
+   "rel": "born_of",
+   "b": "Krodhā",
+   "words": "krodhā tvapratimānputrān jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.38",
+   "a": "Vahvī",
+   "rel": "born_of",
+   "b": "Krodhā",
+   "words": "krodhā tvapratimānputrān jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,6.38",
+   "a": "Pūrṇāśa",
+   "rel": "born_of",
+   "b": "Krodhā",
+   "words": "krodhā tvapratimānputrān jajñe",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

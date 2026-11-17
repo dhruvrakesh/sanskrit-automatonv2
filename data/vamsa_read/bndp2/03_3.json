@@ -1,0 +1,89 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 3,
+ "part": 3,
+ "refs": [
+  "BndP 2,3.114",
+  "BndP 2,3.115",
+  "BndP 2,3.116",
+  "BndP 2,3.117",
+  "BndP 2,3.118",
+  "BndP 2,3.119",
+  "BndP 2,3.120",
+  "BndP 2,3.121",
+  "BndP 2,3.122",
+  "BndP 2,3.123",
+  "BndP 2,3.124",
+  "BndP 2,3.125",
+  "BndP 2,3.126",
+  "BndP 2,3.127",
+  "BndP 2,3.128",
+  "BndP 2,3.129",
+  "BndP 2,3.130",
+  "BndP 2,3.131"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:23:43",
+ "reply": "{\"statements\": [{\"ref\": \"BndP 2,3.114\", \"a\": \"Ajita\", \"rel\": \"born_of\", \"b\": \"Tuṣitā\", \"words\": \"tuṣitāyāṃ samutpanno hyajitaḥ\", \"doubt\": false}, {\"ref\": \"BndP 2,3.115\", \"a\": \"Satya\", \"rel\": \"born_of\", \"b\": \"Satyā\", \"words\": \"satyāyāmabhavatsatyaḥ\", \"doubt\": false}, {\"ref\": \"BndP 2,3.116\", \"a\": \"Hari\", \"rel\": \"born_of\", \"b\": \"Hariṇī\", \"words\": \"hariṇyāṃ haribhiḥ sārddhaṃ harireva babhūva\", \"doubt\": false}, {\"ref\": \"BndP 2,3.117\", \"a\": \"Viṣṇu\", \"rel\": \"born_of\", \"b\": \"Aditi\", \"words\": \"marīcātkaśyapādviṣṇuradityāṃ saṃbabhūva\", \"doubt\": false}, {\"ref\": \"BndP 2,3.117\", \"a\": \"Viṣṇu\", \"rel\": \"son_of\", \"b\": \"Kaśyapa\", \"words\": \"marīcātkaśyapādviṣṇuradityāṃ saṃbabhūva\", \"doubt\": false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0088,
+ "tokens": {
+  "input": 2234,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 433,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,3.114",
+   "a": "Ajita",
+   "rel": "born_of",
+   "b": "Tuṣitā",
+   "words": "tuṣitāyāṃ samutpanno hyajitaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.115",
+   "a": "Satya",
+   "rel": "born_of",
+   "b": "Satyā",
+   "words": "satyāyāmabhavatsatyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.116",
+   "a": "Hari",
+   "rel": "born_of",
+   "b": "Hariṇī",
+   "words": "hariṇyāṃ haribhiḥ sārddhaṃ harireva babhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.117",
+   "a": "Viṣṇu",
+   "rel": "born_of",
+   "b": "Aditi",
+   "words": "marīcātkaśyapādviṣṇuradityāṃ saṃbabhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.117",
+   "a": "Viṣṇu",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "marīcātkaśyapādviṣṇuradityāṃ saṃbabhūva",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

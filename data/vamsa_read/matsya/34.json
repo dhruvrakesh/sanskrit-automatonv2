@@ -1,0 +1,201 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 34,
+ "part": 0,
+ "refs": [
+  "MatsP 34.1",
+  "MatsP 34.2",
+  "MatsP 34.3",
+  "MatsP 34.4",
+  "MatsP 34.5",
+  "MatsP 34.6",
+  "MatsP 34.7",
+  "MatsP 34.8",
+  "MatsP 34.9",
+  "MatsP 34.10",
+  "MatsP 34.11",
+  "MatsP 34.12",
+  "MatsP 34.13",
+  "MatsP 34.14",
+  "MatsP 34.15",
+  "MatsP 34.16",
+  "MatsP 34.17",
+  "MatsP 34.18",
+  "MatsP 34.19",
+  "MatsP 34.20",
+  "MatsP 34.21",
+  "MatsP 34.22",
+  "MatsP 34.23",
+  "MatsP 34.24",
+  "MatsP 34.25",
+  "MatsP 34.26",
+  "MatsP 34.27",
+  "MatsP 34.28",
+  "MatsP 34.29",
+  "MatsP 34.30",
+  "MatsP 34.31"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:14:41",
+ "reply": "{\"statements\":[{\"ref\":\"MatsP 34.2\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātirnahuṣātmajaḥ\",\"doubt\":false},{\"ref\":\"MatsP 34.14\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātirnāhuṣastadā\",\"doubt\":false},{\"ref\":\"MatsP 34.16\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"devayānyāḥ sutaṃ\",\"doubt\":true},{\"ref\":\"MatsP 34.17\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"jyeṣṭho yadustava sutas\",\"doubt\":false},{\"ref\":\"MatsP 34.17\",\"a\":\"Turvasu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"turvasustadanantaram\",\"doubt\":true},{\"ref\":\"MatsP 34.17\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"śarmiṣṭhāyāḥ suto druhyus\",\"doubt\":false},{\"ref\":\"MatsP 34.17\",\"a\":\"Druhyu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"śarmiṣṭhāyāḥ suto druhyus\",\"doubt\":true},{\"ref\":\"MatsP 34.17\",\"a\":\"Anu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tathānuḥ pūrureva ca\",\"doubt\":true},{\"ref\":\"MatsP 34.17\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"tathānuḥ pūrureva ca\",\"doubt\":true},{\"ref\":\"MatsP 34.9\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pūruṃ putramuvāca ha\",\"doubt\":false},{\"ref\":\"MatsP 34.28\",\"a\":\"Pūru\",\"rel\":\"succeeded\",\"b\":\"Yayāti\",\"words\":\"abhiṣicya tataḥ pūruṃ rājye\",\"doubt\":false},{\"ref\":\"MatsP 34.30\",\"a\":\"Yādava\",\"rel\":\"line_of\",\"b\":\"Yadu\",\"words\":\"yadostu yādavā jātāḥ\",\"doubt\":false},{\"ref\":\"MatsP 34.30\",\"a\":\"Yavana\",\"rel\":\"descendant_of\",\"b\":\"Turvasu\",\"words\":\"turvasoryavanāḥ sutāḥ\",\"doubt\":false},{\"ref\":\"MatsP 34.30\",\"a\":\"Bhoja\",\"rel\":\"descendant_of\",\"b\":\"Druhyu\",\"words\":\"druhyoścaiva sutā bhojā\",\"doubt\":false},{\"ref\":\"MatsP 34.30\",\"a\":\"Mleccha\",\"rel\":\"descendant_of\",\"b\":\"Anu\",\"words\":\"anostu mlecchajātayaḥ\",\"doubt\":false},{\"ref\":\"MatsP 34.31\",\"a\":\"Paurava\",\"rel\":\"line_of\",\"b\":\"Pūru\",\"words\":\"pūrostu pauravo vaṃśo\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01718,
+ "tokens": {
+  "input": 3208,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1076,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 34.2",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātirnahuṣātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.14",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātirnāhuṣastadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.16",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "devayānyāḥ sutaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.17",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "jyeṣṭho yadustava sutas",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.17",
+   "a": "Turvasu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "turvasustadanantaram",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.17",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "śarmiṣṭhāyāḥ suto druhyus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.17",
+   "a": "Druhyu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "śarmiṣṭhāyāḥ suto druhyus",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.17",
+   "a": "Anu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tathānuḥ pūrureva ca",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.17",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "tathānuḥ pūrureva ca",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.9",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pūruṃ putramuvāca ha",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.28",
+   "a": "Pūru",
+   "rel": "succeeded",
+   "b": "Yayāti",
+   "words": "abhiṣicya tataḥ pūruṃ rājye",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.30",
+   "a": "Yādava",
+   "rel": "line_of",
+   "b": "Yadu",
+   "words": "yadostu yādavā jātāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.30",
+   "a": "Yavana",
+   "rel": "descendant_of",
+   "b": "Turvasu",
+   "words": "turvasoryavanāḥ sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.30",
+   "a": "Bhoja",
+   "rel": "descendant_of",
+   "b": "Druhyu",
+   "words": "druhyoścaiva sutā bhojā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 34.30",
+   "a": "Mleccha",
+   "rel": "descendant_of",
+   "b": "Anu",
+   "words": "anostu mlecchajātayaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 34.31",
+   "a": "Paurava",
+   "rel": "line_of",
+   "b": "Pūru",
+   "words": "pūrostu pauravo vaṃśo",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

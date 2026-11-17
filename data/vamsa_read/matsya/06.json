@@ -1,0 +1,535 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 6,
+ "part": 0,
+ "refs": [
+  "MatsP 6.1",
+  "MatsP 6.2",
+  "MatsP 6.3",
+  "MatsP 6.4",
+  "MatsP 6.5",
+  "MatsP 6.6",
+  "MatsP 6.7",
+  "MatsP 6.8",
+  "MatsP 6.9",
+  "MatsP 6.10",
+  "MatsP 6.11",
+  "MatsP 6.12",
+  "MatsP 6.13",
+  "MatsP 6.14",
+  "MatsP 6.15",
+  "MatsP 6.16",
+  "MatsP 6.17",
+  "MatsP 6.18",
+  "MatsP 6.19",
+  "MatsP 6.20",
+  "MatsP 6.21",
+  "MatsP 6.22",
+  "MatsP 6.23",
+  "MatsP 6.24",
+  "MatsP 6.25",
+  "MatsP 6.26",
+  "MatsP 6.27",
+  "MatsP 6.28",
+  "MatsP 6.29",
+  "MatsP 6.30",
+  "MatsP 6.31",
+  "MatsP 6.32",
+  "MatsP 6.33",
+  "MatsP 6.34",
+  "MatsP 6.35",
+  "MatsP 6.36",
+  "MatsP 6.37",
+  "MatsP 6.38",
+  "MatsP 6.39",
+  "MatsP 6.40",
+  "MatsP 6.41",
+  "MatsP 6.42",
+  "MatsP 6.43",
+  "MatsP 6.44",
+  "MatsP 6.45",
+  "MatsP 6.46",
+  "MatsP 6.47"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:13:14",
+ "reply": "{\"statements\":[{\"ref\":\"MatsP 6.5\",\"a\":\"Āditya\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"mārīcātkaśyapādāpa putrānaditiruttamān\",\"doubt\":true},{\"ref\":\"MatsP 6.5\",\"a\":\"Āditya\",\"rel\":\"born_of\",\"b\":\"Aditi\",\"words\":\"mārīcātkaśyapādāpa putrānaditiruttamān\",\"doubt\":true},{\"ref\":\"MatsP 6.7\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"ditiḥ putradvayaṃ lebhe kaśyapād\",\"doubt\":false},{\"ref\":\"MatsP 6.7\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"ditiḥ putradvayaṃ lebhe kaśyapād\",\"doubt\":false},{\"ref\":\"MatsP 6.8\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"ditiḥ putradvayaṃ lebhe kaśyapād\",\"doubt\":false},{\"ref\":\"MatsP 6.8\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"ditiḥ putradvayaṃ lebhe kaśyapād\",\"doubt\":false},{\"ref\":\"MatsP 6.9\",\"a\":\"Prahlāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam\",\"doubt\":false},{\"ref\":\"MatsP 6.9\",\"a\":\"Anuhlāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam\",\"doubt\":false},{\"ref\":\"MatsP 6.9\",\"a\":\"Saṃhlāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam\",\"doubt\":false},{\"ref\":\"MatsP 6.9\",\"a\":\"Hlāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam\",\"doubt\":false},{\"ref\":\"MatsP 6.9\",\"a\":\"Virocana\",\"rel\":\"son_of\",\"b\":\"Prahlāda\",\"words\":\"prahlādaputra āyuṣmān\",\"doubt\":true},{\"ref\":\"MatsP 6.10\",\"a\":\"Bali\",\"rel\":\"son_of\",\"b\":\"Virocana\",\"words\":\"sa baliṃ putramāptavān\",\"doubt\":false},{\"ref\":\"MatsP 6.10\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"baleḥ putraśataṃ tv āsīd bāṇajyeṣṭhaṃ\",\"doubt\":false},{\"ref\":\"MatsP 6.14\",\"a\":\"Ulūka\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasya putro 'bhūd ulūkaḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.14\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasya putro 'bhūd ulūkaḥ śakunistathā\",\"doubt\":false},{\"ref\":\"MatsP 6.14\",\"a\":\"Bhūtasaṃtāpana\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasya putro 'bhūd ulūkaḥ śakunistathā bhūtasaṃtāpanaś caiva\",\"doubt\":false},{\"ref\":\"MatsP 6.14\",\"a\":\"Mahānābha\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"mahānābhastathaiva ca\",\"doubt\":false},{\"ref\":\"MatsP 6.16\",\"a\":\"Vipracitti\",\"rel\":\"born_of\",\"b\":\"Danu\",\"words\":\"danuḥ putraśataṃ lebhe kaśyapād\",\"doubt\":true},{\"ref\":\"MatsP 6.16\",\"a\":\"Vipracitti\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"danuḥ putraśataṃ lebhe kaśyapād\",\"doubt\":true},{\"ref\":\"MatsP 6.20\",\"a\":\"Svarbhānu\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"evamādyā danoḥ sutāḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.20\",\"a\":\"Vṛṣaparvan\",\"rel\":\"son_of\",\"b\":\"Danu\",\"words\":\"evamādyā danoḥ sutāḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.21\",\"a\":\"Prabhā\",\"rel\":\"daughter_of\",\"b\":\"Svarbhānu\",\"words\":\"svarbhānostu prabhā kanyā\",\"doubt\":false},{\"ref\":\"MatsP 6.21\",\"a\":\"Śacī\",\"rel\":\"daughter_of\",\"b\":\"Puloman\",\"words\":\"śacī caiva pulomajā\",\"doubt\":false},{\"ref\":\"MatsP 6.22\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"śarmiṣṭhā sundarī caiva candrā ca vṛṣaparvaṇaḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.22\",\"a\":\"Sundarī\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"śarmiṣṭhā sundarī caiva candrā ca vṛṣaparvaṇaḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.22\",\"a\":\"Candrā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"śarmiṣṭhā sundarī caiva candrā ca vṛṣaparvaṇaḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.22\",\"a\":\"Pulomā\",\"rel\":\"daughter_of\",\"b\":\"Vaiśvānara\",\"words\":\"pulomā kālakā caiva vaiśvānarasute hi te\",\"doubt\":false},{\"ref\":\"MatsP 6.22\",\"a\":\"Kālakā\",\"rel\":\"daughter_of\",\"b\":\"Vaiśvānara\",\"words\":\"pulomā kālakā caiva vaiśvānarasute hi te\",\"doubt\":false},{\"ref\":\"MatsP 6.23\",\"a\":\"Pulomā\",\"rel\":\"wife_of\",\"b\":\"Mārīca\",\"words\":\"mārīcasya parigrahe\",\"doubt\":true},{\"ref\":\"MatsP 6.23\",\"a\":\"Kālakā\",\"rel\":\"wife_of\",\"b\":\"Mārīca\",\"words\":\"mārīcasya parigrahe\",\"doubt\":true},{\"ref\":\"MatsP 6.24\",\"a\":\"Paulomā\",\"rel\":\"son_of\",\"b\":\"Mārīca\",\"words\":\"paulomānkālakeyāṃśca mārīco 'janayat\",\"doubt\":false},{\"ref\":\"MatsP 6.24\",\"a\":\"Kālakeya\",\"rel\":\"son_of\",\"b\":\"Mārīca\",\"words\":\"paulomānkālakeyāṃśca mārīco 'janayat\",\"doubt\":false},{\"ref\":\"MatsP 6.25\",\"a\":\"Saiṃhikeya\",\"rel\":\"son_of\",\"b\":\"Vipracitti\",\"words\":\"vipracittiḥ saiṃhikeyān siṃhikāyām ajījanat\",\"doubt\":false},{\"ref\":\"MatsP 6.25\",\"a\":\"Saiṃhikeya\",\"rel\":\"born_of\",\"b\":\"Siṃhikā\",\"words\":\"saiṃhikeyān siṃhikāyām ajījanat\",\"doubt\":false},{\"ref\":\"MatsP 6.26\",\"a\":\"Vyaṃsa\",\"rel\":\"son_of\",\"b\":\"Siṃhikā\",\"words\":\"hiraṇyakaśiporye vai bhāgineyās trayodaśa vyaṃsaḥ\",\"doubt\":true},{\"ref\":\"MatsP 6.30\",\"a\":\"Śukī\",\"rel\":\"daughter_of\",\"b\":\"Mārīca\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā mārīcabījataḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.30\",\"a\":\"Śukī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā\",\"doubt\":false},{\"ref\":\"MatsP 6.30\",\"a\":\"Śyenī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā\",\"doubt\":false},{\"ref\":\"MatsP 6.30\",\"a\":\"Bhāsī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā\",\"doubt\":false},{\"ref\":\"MatsP 6.30\",\"a\":\"Sugrīvī\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā\",\"doubt\":false},{\"ref\":\"MatsP 6.30\",\"a\":\"Gṛdhrikā\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā\",\"doubt\":false},{\"ref\":\"MatsP 6.30\",\"a\":\"Śuci\",\"rel\":\"born_of\",\"b\":\"Tāmrā\",\"words\":\"ṣaṭkanyā janayāmāsa tāmrā\",\"doubt\":false},{\"ref\":\"MatsP 6.35\",\"a\":\"Sampāti\",\"rel\":\"son_of\",\"b\":\"Aruṇa\",\"words\":\"aruṇasya sutāv ubhau\",\"doubt\":false},{\"ref\":\"MatsP 6.35\",\"a\":\"Jaṭāyu\",\"rel\":\"son_of\",\"b\":\"Aruṇa\",\"words\":\"aruṇasya sutāv ubhau\",\"doubt\":false},{\"ref\":\"MatsP 6.35\",\"a\":\"Babhru\",\"rel\":\"son_of\",\"b\":\"Sampāti\",\"words\":\"sampātiputro babhruśca\",\"doubt\":false},{\"ref\":\"MatsP 6.35\",\"a\":\"Śīghraga\",\"rel\":\"son_of\",\"b\":\"Sampāti\",\"words\":\"babhruśca śīghragaścāpi\",\"doubt\":true},{\"ref\":\"MatsP 6.36\",\"a\":\"Karṇikāra\",\"rel\":\"son_of\",\"b\":\"Jaṭāyu\",\"words\":\"jaṭāyuṣaḥ karṇikāraḥ\",\"doubt\":false},{\"ref\":\"MatsP 6.36\",\"a\":\"Śatagāmin\",\"rel\":\"son_of\",\"b\":\"Jaṭāyu\",\"words\":\"jaṭāyuṣaḥ karṇikāraḥ śatagāmī ca\",\"doubt\":false},{\"ref\":\"MatsP 6.47\",\"a\":\"Marut\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"ekonapañcāśan marutaḥ kaśyapādditiḥ janayāmāsa\",\"doubt\":false},{\"ref\":\"MatsP 6.47\",\"a\":\"Marut\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"ekonapañcāśan marutaḥ kaśyapādditiḥ janayāmāsa\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04801,
+ "tokens": {
+  "input": 4321,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3937,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 6.5",
+   "a": "Āditya",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "mārīcātkaśyapādāpa putrānaditiruttamān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.5",
+   "a": "Āditya",
+   "rel": "born_of",
+   "b": "Aditi",
+   "words": "mārīcātkaśyapādāpa putrānaditiruttamān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.7",
+   "a": "Hiraṇyakaśipu",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "ditiḥ putradvayaṃ lebhe kaśyapād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.7",
+   "a": "Hiraṇyakaśipu",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "ditiḥ putradvayaṃ lebhe kaśyapād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.7",
+   "a": "Hiraṇyākṣa",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "ditiḥ putradvayaṃ lebhe kaśyapād",
+   "doubt": false,
+   "ref_cited": "MatsP 6.8",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.7",
+   "a": "Hiraṇyākṣa",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "ditiḥ putradvayaṃ lebhe kaśyapād",
+   "doubt": false,
+   "ref_cited": "MatsP 6.8",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.8",
+   "a": "Prahlāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam",
+   "doubt": false,
+   "ref_cited": "MatsP 6.9",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.8",
+   "a": "Anuhlāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam",
+   "doubt": false,
+   "ref_cited": "MatsP 6.9",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.8",
+   "a": "Saṃhlāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam",
+   "doubt": false,
+   "ref_cited": "MatsP 6.9",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.8",
+   "a": "Hlāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipostadvaj jātaṃ putracatuṣṭayam",
+   "doubt": false,
+   "ref_cited": "MatsP 6.9",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.9",
+   "a": "Virocana",
+   "rel": "son_of",
+   "b": "Prahlāda",
+   "words": "prahlādaputra āyuṣmān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.10",
+   "a": "Bali",
+   "rel": "son_of",
+   "b": "Virocana",
+   "words": "sa baliṃ putramāptavān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.10",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "baleḥ putraśataṃ tv āsīd bāṇajyeṣṭhaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.14",
+   "a": "Ulūka",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasya putro 'bhūd ulūkaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.14",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasya putro 'bhūd ulūkaḥ śakunistathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.14",
+   "a": "Bhūtasaṃtāpana",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasya putro 'bhūd ulūkaḥ śakunistathā bhūtasaṃtāpanaś caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.14",
+   "a": "Mahānābha",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "mahānābhastathaiva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.16",
+   "a": "Vipracitti",
+   "rel": "born_of",
+   "b": "Danu",
+   "words": "danuḥ putraśataṃ lebhe kaśyapād",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.16",
+   "a": "Vipracitti",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "danuḥ putraśataṃ lebhe kaśyapād",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.20",
+   "a": "Svarbhānu",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "evamādyā danoḥ sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.20",
+   "a": "Vṛṣaparvan",
+   "rel": "son_of",
+   "b": "Danu",
+   "words": "evamādyā danoḥ sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.21",
+   "a": "Prabhā",
+   "rel": "daughter_of",
+   "b": "Svarbhānu",
+   "words": "svarbhānostu prabhā kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.21",
+   "a": "Śacī",
+   "rel": "daughter_of",
+   "b": "Puloman",
+   "words": "śacī caiva pulomajā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.22",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "śarmiṣṭhā sundarī caiva candrā ca vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.22",
+   "a": "Sundarī",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "śarmiṣṭhā sundarī caiva candrā ca vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.22",
+   "a": "Candrā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "śarmiṣṭhā sundarī caiva candrā ca vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.22",
+   "a": "Pulomā",
+   "rel": "daughter_of",
+   "b": "Vaiśvānara",
+   "words": "pulomā kālakā caiva vaiśvānarasute hi te",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.22",
+   "a": "Kālakā",
+   "rel": "daughter_of",
+   "b": "Vaiśvānara",
+   "words": "pulomā kālakā caiva vaiśvānarasute hi te",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.23",
+   "a": "Pulomā",
+   "rel": "wife_of",
+   "b": "Mārīca",
+   "words": "mārīcasya parigrahe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.23",
+   "a": "Kālakā",
+   "rel": "wife_of",
+   "b": "Mārīca",
+   "words": "mārīcasya parigrahe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.24",
+   "a": "Paulomā",
+   "rel": "son_of",
+   "b": "Mārīca",
+   "words": "paulomānkālakeyāṃśca mārīco 'janayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.24",
+   "a": "Kālakeya",
+   "rel": "son_of",
+   "b": "Mārīca",
+   "words": "paulomānkālakeyāṃśca mārīco 'janayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.25",
+   "a": "Saiṃhikeya",
+   "rel": "son_of",
+   "b": "Vipracitti",
+   "words": "vipracittiḥ saiṃhikeyān siṃhikāyām ajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.25",
+   "a": "Saiṃhikeya",
+   "rel": "born_of",
+   "b": "Siṃhikā",
+   "words": "saiṃhikeyān siṃhikāyām ajījanat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.26",
+   "a": "Vyaṃsa",
+   "rel": "son_of",
+   "b": "Siṃhikā",
+   "words": "hiraṇyakaśiporye vai bhāgineyās trayodaśa vyaṃsaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Śukī",
+   "rel": "daughter_of",
+   "b": "Mārīca",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā mārīcabījataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Śukī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Śyenī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Bhāsī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Sugrīvī",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Gṛdhrikā",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.30",
+   "a": "Śuci",
+   "rel": "born_of",
+   "b": "Tāmrā",
+   "words": "ṣaṭkanyā janayāmāsa tāmrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.35",
+   "a": "Sampāti",
+   "rel": "son_of",
+   "b": "Aruṇa",
+   "words": "aruṇasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.35",
+   "a": "Jaṭāyu",
+   "rel": "son_of",
+   "b": "Aruṇa",
+   "words": "aruṇasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.35",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Sampāti",
+   "words": "sampātiputro babhruśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.35",
+   "a": "Śīghraga",
+   "rel": "son_of",
+   "b": "Sampāti",
+   "words": "babhruśca śīghragaścāpi",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.36",
+   "a": "Karṇikāra",
+   "rel": "son_of",
+   "b": "Jaṭāyu",
+   "words": "jaṭāyuṣaḥ karṇikāraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.36",
+   "a": "Śatagāmin",
+   "rel": "son_of",
+   "b": "Jaṭāyu",
+   "words": "jaṭāyuṣaḥ karṇikāraḥ śatagāmī ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.47",
+   "a": "Marut",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "ekonapañcāśan marutaḥ kaśyapādditiḥ janayāmāsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 6.47",
+   "a": "Marut",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "ekonapañcāśan marutaḥ kaśyapādditiḥ janayāmāsa",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

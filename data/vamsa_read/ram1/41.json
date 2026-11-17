@@ -1,0 +1,122 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 41,
+ "part": 0,
+ "refs": [
+  "R 1,41.1",
+  "R 1,41.2",
+  "R 1,41.3",
+  "R 1,41.4",
+  "R 1,41.5",
+  "R 1,41.6",
+  "R 1,41.7",
+  "R 1,41.8",
+  "R 1,41.9",
+  "R 1,41.10",
+  "R 1,41.11",
+  "R 1,41.12",
+  "R 1,41.13",
+  "R 1,41.14",
+  "R 1,41.15",
+  "R 1,41.16",
+  "R 1,41.17",
+  "R 1,41.18",
+  "R 1,41.19",
+  "R 1,41.20",
+  "R 1,41.21",
+  "R 1,41.22",
+  "R 1,41.23",
+  "R 1,41.24"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:32",
+ "reply": "{\"statements\":[{\"ref\":\"R 1,41.1\",\"a\":\"Aṃśumant\",\"rel\":\"succeeded\",\"b\":\"Sagara\",\"words\":\"kāladharmaṃ gate rāma sagare prakṛtījanāḥ rājānaṃ rocayām āsur aṃśumantam\",\"doubt\":false},{\"ref\":\"R 1,41.2\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumant\",\"words\":\"tasya putro mahān āsīd dilīpa iti viśrutaḥ\",\"doubt\":false},{\"ref\":\"R 1,41.3\",\"a\":\"Dilīpa\",\"rel\":\"succeeded\",\"b\":\"Aṃśumant\",\"words\":\"tasmin rājyaṃ samāveśya dilīpe\",\"doubt\":false},{\"ref\":\"R 1,41.7\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"putro bhagīratho nāma jajñe\",\"doubt\":false},{\"ref\":\"R 1,41.10\",\"a\":\"Bhagīratha\",\"rel\":\"succeeded\",\"b\":\"Dilīpa\",\"words\":\"rājye bhagīrathaṃ putram abhiṣicya\",\"doubt\":false},{\"ref\":\"R 1,41.17\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"sagarasyātmajāḥ sarve\",\"doubt\":false},{\"ref\":\"R 1,41.18\",\"a\":\"Bhagīratha\",\"rel\":\"descendant_of\",\"b\":\"Sagara\",\"words\":\"sarve me prapitāmahāḥ\",\"doubt\":true},{\"ref\":\"R 1,41.22\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Himavant\",\"words\":\"jyeṣṭhā himavataḥ sutā\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01133,
+ "tokens": {
+  "input": 2620,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 609,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,41.1",
+   "a": "Aṃśumant",
+   "rel": "succeeded",
+   "b": "Sagara",
+   "words": "kāladharmaṃ gate rāma sagare prakṛtījanāḥ rājānaṃ rocayām āsur aṃśumantam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.2",
+   "a": "Dilīpa",
+   "rel": "son_of",
+   "b": "Aṃśumant",
+   "words": "tasya putro mahān āsīd dilīpa iti viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.3",
+   "a": "Dilīpa",
+   "rel": "succeeded",
+   "b": "Aṃśumant",
+   "words": "tasmin rājyaṃ samāveśya dilīpe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.7",
+   "a": "Bhagīratha",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "putro bhagīratho nāma jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.10",
+   "a": "Bhagīratha",
+   "rel": "succeeded",
+   "b": "Dilīpa",
+   "words": "rājye bhagīrathaṃ putram abhiṣicya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.17",
+   "a": "Sagara",
+   "rel": "other",
+   "b": "Sagara",
+   "words": "sagarasyātmajāḥ sarve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.18",
+   "a": "Bhagīratha",
+   "rel": "descendant_of",
+   "b": "Sagara",
+   "words": "sarve me prapitāmahāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,41.22",
+   "a": "Gaṅgā",
+   "rel": "daughter_of",
+   "b": "Himavant",
+   "words": "jyeṣṭhā himavataḥ sutā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

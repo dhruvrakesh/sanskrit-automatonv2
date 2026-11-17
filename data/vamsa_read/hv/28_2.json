@@ -1,0 +1,280 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 28,
+ "part": 2,
+ "refs": [
+  "HV 28.35",
+  "HV 28.36",
+  "HV 28.37",
+  "HV 28.38",
+  "HV 28.39",
+  "HV 28.40",
+  "HV 28.41",
+  "HV 28.42",
+  "HV 28.43",
+  "HV 28.44",
+  "HV 28.45"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:10:24",
+ "reply": "{\"statements\":[\n{\"ref\":\"HV 28.35\",\"a\":\"Sabhākṣa\",\"rel\":\"son_of\",\"b\":\"Bhaṅgakāra\",\"words\":\"sabhākṣo bhaṅgakārāt tu\",\"doubt\":true},\n{\"ref\":\"HV 28.35\",\"a\":\"Nāreya\",\"rel\":\"son_of\",\"b\":\"Bhaṅgakāra\",\"words\":\"bhaṅgakārāt tu nāreyaś ca\",\"doubt\":true},\n{\"ref\":\"HV 28.36\",\"a\":\"Pṛśni\",\"rel\":\"son_of\",\"b\":\"Yudhājit\",\"words\":\"pṛśniḥ putro yudhājitaḥ\",\"doubt\":false},\n{\"ref\":\"HV 28.36\",\"a\":\"Śvaphalka\",\"rel\":\"son_of\",\"b\":\"Pṛśni\",\"words\":\"jajñāte tanayau pṛśneḥ śvaphalkaś citrakas tathā\",\"doubt\":false},\n{\"ref\":\"HV 28.36\",\"a\":\"Citraka\",\"rel\":\"son_of\",\"b\":\"Pṛśni\",\"words\":\"jajñāte tanayau pṛśneḥ śvaphalkaś citrakas tathā\",\"doubt\":false},\n{\"ref\":\"HV 28.37\",\"a\":\"Gāndī\",\"rel\":\"daughter_of\",\"b\":\"Kāśirāja\",\"words\":\"kāśirājasya sutāṃ bhāryām avindata gāṃdīm\",\"doubt\":false},\n{\"ref\":\"HV 28.37\",\"a\":\"Gāndī\",\"rel\":\"wife_of\",\"b\":\"Śvaphalka\",\"words\":\"śvaphalkaḥ kāśirājasya sutāṃ bhāryām avindata\",\"doubt\":false},\n{\"ref\":\"HV 28.38\",\"a\":\"Śrutavān\",\"rel\":\"born_of\",\"b\":\"Gāndī\",\"words\":\"tasyāṃ jajñe tadā vīraḥ śrutavān\",\"doubt\":false},\n{\"ref\":\"HV 28.38\",\"a\":\"Akrūra\",\"rel\":\"born_of\",\"b\":\"Gāndī\",\"words\":\"tasyāṃ jajñe tadā vīraḥ śrutavān iti bhārata akrūro\",\"doubt\":false},\n{\"ref\":\"HV 28.38\",\"a\":\"Śrutavān\",\"rel\":\"son_of\",\"b\":\"Śvaphalka\",\"words\":\"tasyāṃ jajñe tadā vīraḥ śrutavān\",\"doubt\":false},\n{\"ref\":\"HV 28.38\",\"a\":\"Akrūra\",\"rel\":\"son_of\",\"b\":\"Śvaphalka\",\"words\":\"akrūro 'tha mahābhāgo\",\"doubt\":false},\n{\"ref\":\"HV 28.42\",\"a\":\"Sudeva\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūreṇaugrasenyāṃ tu sugātryāṃ kurunandana sudevaś\",\"doubt\":false},\n{\"ref\":\"HV 28.42\",\"a\":\"Upadeva\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūreṇaugrasenyāṃ tu sugātryāṃ kurunandana sudevaś copadevaś ca jajñāte\",\"doubt\":false},\n{\"ref\":\"HV 28.42\",\"a\":\"Sudeva\",\"rel\":\"born_of\",\"b\":\"Ugrasenī\",\"words\":\"akrūreṇaugrasenyāṃ\",\"doubt\":false},\n{\"ref\":\"HV 28.42\",\"a\":\"Upadeva\",\"rel\":\"born_of\",\"b\":\"Ugrasenī\",\"words\":\"akrūreṇaugrasenyāṃ\",\"doubt\":false},\n{\"ref\":\"HV 28.43\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ pṛthur\",\"doubt\":false},\n{\"ref\":\"HV 28.43\",\"a\":\"Vipṛthu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ pṛthur vipṛthur eva ca\",\"doubt\":false},\n{\"ref\":\"HV 28.43\",\"a\":\"Aśvasena\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ aśvaseno\",\"doubt\":false},\n{\"ref\":\"HV 28.43\",\"a\":\"Aśvabāhu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ aśvabāhuś\",\"doubt\":false},\n{\"ref\":\"HV 28.43\",\"a\":\"Supārśvaka\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ supārśvakagaveṣaṇau\",\"doubt\":false},\n{\"ref\":\"HV 28.43\",\"a\":\"Gaveṣaṇa\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ supārśvakagaveṣaṇau\",\"doubt\":false},\n{\"ref\":\"HV 28.44\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemes tu sutā dharmo\",\"doubt\":false},\n{\"ref\":\"HV 28.44\",\"a\":\"Dharmabhṛt\",\"rel\":\"son_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemes tu sutā dharmo dharmabhṛd eva ca\",\"doubt\":false},\n{\"ref\":\"HV 28.44\",\"a\":\"Subāhu\",\"rel\":\"son_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemes tu sutā subāhur\",\"doubt\":true},\n{\"ref\":\"HV 28.44\",\"a\":\"Bahubāhu\",\"rel\":\"son_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemes tu sutā bahubāhuś ca\",\"doubt\":true},\n{\"ref\":\"HV 28.44\",\"a\":\"Śraviṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemes tu sutā śraviṣṭḥāśravaṇe striyau\",\"doubt\":true},\n{\"ref\":\"HV 28.44\",\"a\":\"Śravaṇā\",\"rel\":\"daughter_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemes tu sutā śraviṣṭḥāśravaṇe striyau\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02495,
+ "tokens": {
+  "input": 1705,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2154,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 28.35",
+   "a": "Sabhākṣa",
+   "rel": "son_of",
+   "b": "Bhaṅgakāra",
+   "words": "sabhākṣo bhaṅgakārāt tu",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.35",
+   "a": "Nāreya",
+   "rel": "son_of",
+   "b": "Bhaṅgakāra",
+   "words": "bhaṅgakārāt tu nāreyaś ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.36",
+   "a": "Pṛśni",
+   "rel": "son_of",
+   "b": "Yudhājit",
+   "words": "pṛśniḥ putro yudhājitaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.36",
+   "a": "Śvaphalka",
+   "rel": "son_of",
+   "b": "Pṛśni",
+   "words": "jajñāte tanayau pṛśneḥ śvaphalkaś citrakas tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.36",
+   "a": "Citraka",
+   "rel": "son_of",
+   "b": "Pṛśni",
+   "words": "jajñāte tanayau pṛśneḥ śvaphalkaś citrakas tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.37",
+   "a": "Gāndī",
+   "rel": "daughter_of",
+   "b": "Kāśirāja",
+   "words": "kāśirājasya sutāṃ bhāryām avindata gāṃdīm",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 28.37",
+   "a": "Gāndī",
+   "rel": "wife_of",
+   "b": "Śvaphalka",
+   "words": "śvaphalkaḥ kāśirājasya sutāṃ bhāryām avindata",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 28.38",
+   "a": "Śrutavān",
+   "rel": "born_of",
+   "b": "Gāndī",
+   "words": "tasyāṃ jajñe tadā vīraḥ śrutavān",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 28.38",
+   "a": "Akrūra",
+   "rel": "born_of",
+   "b": "Gāndī",
+   "words": "tasyāṃ jajñe tadā vīraḥ śrutavān iti bhārata akrūro",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 28.38",
+   "a": "Śrutavān",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "tasyāṃ jajñe tadā vīraḥ śrutavān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.38",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "akrūro 'tha mahābhāgo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.42",
+   "a": "Sudeva",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūreṇaugrasenyāṃ tu sugātryāṃ kurunandana sudevaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.42",
+   "a": "Upadeva",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūreṇaugrasenyāṃ tu sugātryāṃ kurunandana sudevaś copadevaś ca jajñāte",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 28.42",
+   "a": "Sudeva",
+   "rel": "born_of",
+   "b": "Ugrasenī",
+   "words": "akrūreṇaugrasenyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.42",
+   "a": "Upadeva",
+   "rel": "born_of",
+   "b": "Ugrasenī",
+   "words": "akrūreṇaugrasenyāṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 28.43",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ pṛthur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.43",
+   "a": "Vipṛthu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ pṛthur vipṛthur eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.43",
+   "a": "Aśvasena",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ aśvaseno",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.43",
+   "a": "Aśvabāhu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ aśvabāhuś",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.43",
+   "a": "Supārśvaka",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ supārśvakagaveṣaṇau",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.43",
+   "a": "Gaveṣaṇa",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ supārśvakagaveṣaṇau",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.44",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemes tu sutā dharmo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.44",
+   "a": "Dharmabhṛt",
+   "rel": "son_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemes tu sutā dharmo dharmabhṛd eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.44",
+   "a": "Subāhu",
+   "rel": "son_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemes tu sutā subāhur",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.44",
+   "a": "Bahubāhu",
+   "rel": "son_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemes tu sutā bahubāhuś ca",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.44",
+   "a": "Śraviṣṭhā",
+   "rel": "daughter_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemes tu sutā śraviṣṭḥāśravaṇe striyau",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.44",
+   "a": "Śravaṇā",
+   "rel": "daughter_of",
+   "b": "Ariṣṭanemi",
+   "words": "ariṣṭanemes tu sutā śraviṣṭḥāśravaṇe striyau",
+   "doubt": true,
+   "check": "unsupported"
+  }
+ ]
+}

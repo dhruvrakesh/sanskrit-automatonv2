@@ -40,17 +40,17 @@
  ],
  "model": "claude-sonnet-5-5",
  "effort": "medium",
- "prompt_version": "vamsa-read-v1",
+ "prompt_version": "vamsa-read-v2",
  "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
- "at": "2026-11-16T18:13:14",
- "reply": "{\"statements\":[\n{\"ref\":\"HV 10.47\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Sumati\",\"words\":\"sumatyās tanayā dṛptāḥ\",\"doubt\":true},\n{\"ref\":\"HV 10.50\",\"a\":\"Barhaketu\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"tasya vaṃśakarā nṛpā\",\"doubt\":true},\n{\"ref\":\"HV 10.50\",\"a\":\"Suketu\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"tasya vaṃśakarā nṛpā\",\"doubt\":true},\n{\"ref\":\"HV 10.50\",\"a\":\"Bhāradratha\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"tasya vaṃśakarā nṛpā\",\"doubt\":true},\n{\"ref\":\"HV 10.50\",\"a\":\"Śūra\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"tasya vaṃśakarā nṛpā\",\"doubt\":true},\n{\"ref\":\"HV 10.50\",\"a\":\"Pañcajana\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"tasya vaṃśakarā nṛpā\",\"doubt\":true},\n{\"ref\":\"HV 10.55\",\"a\":\"Keśinī\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dve bhārye sagarasyāstāṃ\",\"doubt\":false},\n{\"ref\":\"HV 10.55\",\"a\":\"Keśinī\",\"rel\":\"daughter_of\",\"b\":\"Vidarbha\",\"words\":\"jyeṣṭhāvidarbhaduhitā keśinī\",\"doubt\":false},\n{\"ref\":\"HV 10.55\",\"a\":\"Sumati\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dve bhārye sagarasyāstāṃ\",\"doubt\":true},\n{\"ref\":\"HV 10.55\",\"a\":\"Sumati\",\"rel\":\"daughter_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemiduhitā\",\"doubt\":true},\n{\"ref\":\"HV 10.58\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"keśiny asūta sagarād asamañjasamātmajam\",\"doubt\":false},\n{\"ref\":\"HV 10.58\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Keśinī\",\"words\":\"keśiny asūta sagarād asamañjasamātmajam\",\"doubt\":false},\n{\"ref\":\"HV 10.62\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"ṣaṣṭiḥ putrasahasrāṇi tasyaivam abhavan\",\"doubt\":true},\n{\"ref\":\"HV 10.64\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"asamañja iti prāhus tasya putro'ṃśumān abhūt\",\"doubt\":true},\n{\"ref\":\"HV 10.64\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Pañcajana\",\"words\":\"sutaḥ pañcajanasyāsīd aṃśumān\",\"doubt\":false},\n{\"ref\":\"HV 10.64\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumān\",\"words\":\"dilīpas tasya tanayaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.64\",\"a\":\"Khaṭvāṅga\",\"rel\":\"other\",\"b\":\"Dilīpa\",\"words\":\"dilīpas tasya tanayaḥ khaṭvāṅga iti viśrutaḥ\",\"doubt\":true},\n{\"ref\":\"HV 10.66\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpasya tu dāyādo mahārājo bhagīrathaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.66\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Bhagīratha\",\"words\":\"duhitṛtve tv akalpayat\",\"doubt\":false},\n{\"ref\":\"HV 10.67\",\"a\":\"Śruta\",\"rel\":\"son_of\",\"b\":\"Bhagīratha\",\"words\":\"bhagīrathasuto rājā śruta\",\"doubt\":false},\n{\"ref\":\"HV 10.67\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Śruta\",\"words\":\"nābhāgas tu śrutasyāsīt putraḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.68\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"ambarīṣas tu nābhāgiḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.68\",\"a\":\"Sindhudvīpa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"ambarīṣas tu nābhāgiḥ sindhudvīpapitābhavat\",\"doubt\":false},\n{\"ref\":\"HV 10.68\",\"a\":\"Ayutājit\",\"rel\":\"son_of\",\"b\":\"Sindhudvīpa\",\"words\":\"ayutājit tu dāyādaḥ sindhudvīpasya\",\"doubt\":false},\n{\"ref\":\"HV 10.69\",\"a\":\"Ṛtaparṇa\",\"rel\":\"son_of\",\"b\":\"Ayutājit\",\"words\":\"ayutājitsutas tv āsīd ṛtaparṇo\",\"doubt\":false},\n{\"ref\":\"HV 10.70\",\"a\":\"Ārtaparṇi\",\"rel\":\"son_of\",\"b\":\"Ṛtaparṇa\",\"words\":\"ṛtaparṇasutas tv āsīd ārtaparṇir\",\"doubt\":false},\n{\"ref\":\"HV 10.70\",\"a\":\"Sudāsa\",\"rel\":\"son_of\",\"b\":\"Ārtaparṇi\",\"words\":\"sudāsas tasya tanayo\",\"doubt\":false},\n{\"ref\":\"HV 10.70\",\"a\":\"Saudāsa\",\"rel\":\"son_of\",\"b\":\"Sudāsa\",\"words\":\"sudāsasya sutas tv āsīt saudāso\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Aśmaka\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"vasiṣṭhas tumahātejāḥ kṣetre kalmāṣapādake aśmakaṃ janayām āsa\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Kārūṣa\",\"rel\":\"son_of\",\"b\":\"Aśmaka\",\"words\":\"aśmakāc caiva kārūṣo\",\"doubt\":true},\n{\"ref\":\"HV 10.71\",\"a\":\"Mūlaka\",\"rel\":\"son_of\",\"b\":\"Aśmaka\",\"words\":\"mūlakastatsuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Śataratha\",\"rel\":\"son_of\",\"b\":\"Mūlaka\",\"words\":\"mūlakasyāpi dharmātmā rājā śataratho 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Elabila\",\"rel\":\"son_of\",\"b\":\"Śataratha\",\"words\":\"tasmāc chatarathāj jajñe rājā elabilo\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Vṛddhaśarman\",\"rel\":\"son_of\",\"b\":\"Elabila\",\"words\":\"āsīd ailabilaḥ śrīmān vṛddhaśarmā\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Dala\",\"rel\":\"son_of\",\"b\":\"Vṛddhaśarman\",\"words\":\"dalas tasyātmajaś cāpi\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Śala\",\"rel\":\"son_of\",\"b\":\"Dala\",\"words\":\"tato jajñe śalo nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Ūrṇa\",\"rel\":\"son_of\",\"b\":\"Śala\",\"words\":\"śalaputro babhūva\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Viśvasaha\",\"rel\":\"son_of\",\"b\":\"Ūrṇa\",\"words\":\"putro viśvasahas tasya\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Rajas\",\"rel\":\"son_of\",\"b\":\"Viśvasaha\",\"words\":\"rajo nāma sutas tasya\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Śṛṅkhala\",\"rel\":\"son_of\",\"b\":\"Rajas\",\"words\":\"śṛṅkhalas tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Sarvakarman\",\"rel\":\"son_of\",\"b\":\"Kalmāṣapāda\",\"words\":\"kalmāṣapādasya sutaḥ sarvakarmeti\",\"doubt\":false},\n{\"ref\":\"HV 10.71\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Sarvakarman\",\"words\":\"anaraṇyas tu putro 'bhūd viśrutaḥ sarvakarmaṇaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.72\",\"a\":\"Nighna\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"anaraṇyasuto nighno\",\"doubt\":false},\n{\"ref\":\"HV 10.72\",\"a\":\"Anamitra\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnaputrau babhūvatuḥ anamitro\",\"doubt\":false},\n{\"ref\":\"HV 10.72\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnaputrau babhūvatuḥ anamitro raghuś\",\"doubt\":false},\n{\"ref\":\"HV 10.72\",\"a\":\"Anamitra\",\"rel\":\"brother_of\",\"b\":\"Raghu\",\"words\":\"anamitro raghuś caiva\",\"doubt\":false},\n{\"ref\":\"HV 10.73\",\"a\":\"Stamba\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrasutaḥ stambaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.73\",\"a\":\"Śaṅkhaṇa\",\"rel\":\"son_of\",\"b\":\"Stamba\",\"words\":\"śaṅkhaṇas tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.73\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitras tu dharmātmā vidvān duliduho 'bhavat dilīpas tasya tanayo\",\"doubt\":true},\n{\"ref\":\"HV 10.73\",\"a\":\"Dilīpa\",\"rel\":\"other\",\"b\":\"Rāma\",\"words\":\"rāmasya prapitāmahaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.73\",\"a\":\"Dīrghabāhu\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dīrghabāhur dilīpasya\",\"doubt\":true},\n{\"ref\":\"HV 10.73\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"raghur nāmnābhavat sutaḥ\",\"doubt\":true},\n{\"ref\":\"HV 10.74\",\"a\":\"Aja\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"ajas tu rāghuto jajñe\",\"doubt\":false},\n{\"ref\":\"HV 10.74\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Aja\",\"words\":\"daśaratho 'py ajāt\",\"doubt\":false},\n{\"ref\":\"HV 10.74\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"rāmo daśarathāj jajñe\",\"doubt\":false},\n{\"ref\":\"HV 10.75\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"rāmasya tanayo jajñe kuśa\",\"doubt\":false},\n{\"ref\":\"HV 10.75\",\"a\":\"Atithi\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"atithis tu kuśāj jajñe\",\"doubt\":false},\n{\"ref\":\"HV 10.75\",\"a\":\"Niṣadha\",\"rel\":\"son_of\",\"b\":\"Atithi\",\"words\":\"niṣadhas tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.76\",\"a\":\"Nala\",\"rel\":\"son_of\",\"b\":\"Niṣadha\",\"words\":\"niṣadhasya nalaḥ putro\",\"doubt\":false},\n{\"ref\":\"HV 10.76\",\"a\":\"Nabhas\",\"rel\":\"son_of\",\"b\":\"Nala\",\"words\":\"nabhaḥ putro nalasya\",\"doubt\":false},\n{\"ref\":\"HV 10.76\",\"a\":\"Puṇḍarīka\",\"rel\":\"son_of\",\"b\":\"Nabhas\",\"words\":\"nabhasaḥ puṇḍarīkas\",\"doubt\":false},\n{\"ref\":\"HV 10.76\",\"a\":\"Kṣemadhanvan\",\"rel\":\"son_of\",\"b\":\"Puṇḍarīka\",\"words\":\"puṇḍarīkas tu kṣemadhanvā tataḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.77\",\"a\":\"Devānīka\",\"rel\":\"son_of\",\"b\":\"Kṣemadhanvan\",\"words\":\"kṣemadhanvasutas tv āsīd devānīkaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.77\",\"a\":\"Ahīnagu\",\"rel\":\"son_of\",\"b\":\"Devānīka\",\"words\":\"ahīnagur nāma devānīkātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 10.77\",\"a\":\"Sahasvān\",\"rel\":\"son_of\",\"b\":\"Ahīnagu\",\"words\":\"ahīnagos tu dāyādaḥ sahasvān\",\"doubt\":false}\n]}",
+ "at": "2026-11-17T09:52:51",
+ "reply": "{\"statements\":[{\"ref\":\"HV 10.47\",\"a\":\"Sagara\",\"rel\":\"other\",\"b\":\"Sumati\",\"words\":\"sumatyās tanayā dṛptāḥ pitur ādeśakāriṇaḥ\",\"doubt\":true},{\"ref\":\"HV 10.50\",\"a\":\"Barhaketu\",\"rel\":\"other\",\"b\":\"Sagara\",\"words\":\"tasya vaṃśakarā nṛpā\",\"doubt\":true},{\"ref\":\"HV 10.55\",\"a\":\"Keśinī\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dve bhārye sagarasyāstāṃ\",\"doubt\":false},{\"ref\":\"HV 10.55\",\"a\":\"Keśinī\",\"rel\":\"daughter_of\",\"b\":\"Vidarbha\",\"words\":\"vidarbhaduhitā keśinī nāma\",\"doubt\":false},{\"ref\":\"HV 10.55\",\"a\":\"Sagara's younger wife\",\"rel\":\"daughter_of\",\"b\":\"Ariṣṭanemi\",\"words\":\"ariṣṭanemiduhitā\",\"doubt\":true},{\"ref\":\"HV 10.58\",\"a\":\"Asamañja\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"keśiny asūta sagarād asamañjasamātmajam\",\"doubt\":false},{\"ref\":\"HV 10.58\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"sagarād asamañjasamātmajam\",\"doubt\":false},{\"ref\":\"HV 10.64\",\"a\":\"Aṃśumant\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"asamañja iti prāhus tasya putro'ṃśumān abhūt\",\"doubt\":false},{\"ref\":\"HV 10.64\",\"a\":\"Aṃśumant\",\"rel\":\"son_of\",\"b\":\"Pañcajana\",\"words\":\"sutaḥ pañcajanasyāsīd aṃśumān\",\"doubt\":false},{\"ref\":\"HV 10.64\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumant\",\"words\":\"dilīpas tasya tanayaḥ\",\"doubt\":false},{\"ref\":\"HV 10.64\",\"a\":\"Khaṭvāṅga\",\"rel\":\"other\",\"b\":\"Dilīpa\",\"words\":\"dilīpas tasya tanayaḥ khaṭvāṅga iti viśrutaḥ\",\"doubt\":true},{\"ref\":\"HV 10.66\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpasya tu dāyādo mahārājo bhagīrathaḥ\",\"doubt\":false},{\"ref\":\"HV 10.67\",\"a\":\"Śruta\",\"rel\":\"son_of\",\"b\":\"Bhagīratha\",\"words\":\"bhagīrathasuto rājā śruta\",\"doubt\":false},{\"ref\":\"HV 10.67\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Śruta\",\"words\":\"nābhāgas tu śrutasyāsīt putraḥ\",\"doubt\":false},{\"ref\":\"HV 10.68\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"ambarīṣas tu nābhāgiḥ\",\"doubt\":false},{\"ref\":\"HV 10.68\",\"a\":\"Sindhudvīpa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"sindhudvīpapitābhavat\",\"doubt\":true},{\"ref\":\"HV 10.68\",\"a\":\"Ayutājit\",\"rel\":\"son_of\",\"b\":\"Sindhudvīpa\",\"words\":\"ayutājit tu dāyādaḥ sindhudvīpasya\",\"doubt\":false},{\"ref\":\"HV 10.69\",\"a\":\"Ṛtaparṇa\",\"rel\":\"son_of\",\"b\":\"Ayutājit\",\"words\":\"ayutājitsutas tv āsīd ṛtaparṇo\",\"doubt\":false},{\"ref\":\"HV 10.70\",\"a\":\"Ārtaparṇi\",\"rel\":\"son_of\",\"b\":\"Ṛtaparṇa\",\"words\":\"ṛtaparṇasutas tv āsīd ārtaparṇir\",\"doubt\":false},{\"ref\":\"HV 10.70\",\"a\":\"Sudāsa\",\"rel\":\"son_of\",\"b\":\"Ārtaparṇi\",\"words\":\"sudāsas tasya tanayo\",\"doubt\":false},{\"ref\":\"HV 10.70\",\"a\":\"Saudāsa\",\"rel\":\"son_of\",\"b\":\"Sudāsa\",\"words\":\"sudāsasya sutas tv āsīt saudāso\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Aśmaka\",\"rel\":\"begotten_by\",\"b\":\"Vasiṣṭha\",\"words\":\"vasiṣṭhas tumahātejāḥ kṣetre kalmāṣapādake aśmakaṃ janayām āsa\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Aśmaka\",\"rel\":\"son_of\",\"b\":\"Kalmāṣapāda\",\"words\":\"kṣetre kalmāṣapādake aśmakaṃ janayām āsa\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Mūlaka\",\"rel\":\"son_of\",\"b\":\"Aśmaka\",\"words\":\"mūlakastatsuto 'bhavat\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Śataratha\",\"rel\":\"son_of\",\"b\":\"Mūlaka\",\"words\":\"mūlakasyāpi dharmātmā rājā śataratho 'bhavat\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Elabila\",\"rel\":\"son_of\",\"b\":\"Śataratha\",\"words\":\"tasmāc chatarathāj jajñe rājā elabilo\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Vṛddhaśarma\",\"rel\":\"son_of\",\"b\":\"Elabila\",\"words\":\"āsīd ailabilaḥ śrīmān vṛddhaśarmā\",\"doubt\":true},{\"ref\":\"HV 10.71\",\"a\":\"Dala\",\"rel\":\"son_of\",\"b\":\"Vṛddhaśarma\",\"words\":\"dalas tasyātmajaś cāpi\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Śala\",\"rel\":\"son_of\",\"b\":\"Dala\",\"words\":\"tato jajñe śalo nṛpaḥ\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Ūrṇa\",\"rel\":\"son_of\",\"b\":\"Śala\",\"words\":\"ūrṇo nāma sa dharmātmā śalaputro babhūva\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Viśvasaha\",\"rel\":\"son_of\",\"b\":\"Ūrṇa\",\"words\":\"putro viśvasahas tasya\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Raja\",\"rel\":\"son_of\",\"b\":\"Viśvasaha\",\"words\":\"rajo nāma sutas tasya\",\"doubt\":true},{\"ref\":\"HV 10.71\",\"a\":\"Śṛṅkhala\",\"rel\":\"son_of\",\"b\":\"Raja\",\"words\":\"śṛṅkhalas tasya cātmajaḥ\",\"doubt\":true},{\"ref\":\"HV 10.71\",\"a\":\"Sarvakarman\",\"rel\":\"son_of\",\"b\":\"Kalmāṣapāda\",\"words\":\"kalmāṣapādasya sutaḥ sarvakarmeti\",\"doubt\":false},{\"ref\":\"HV 10.71\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Sarvakarman\",\"words\":\"anaraṇyas tu putro 'bhūd viśrutaḥ sarvakarmaṇaḥ\",\"doubt\":false},{\"ref\":\"HV 10.72\",\"a\":\"Nighna\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"anaraṇyasuto nighno\",\"doubt\":false},{\"ref\":\"HV 10.72\",\"a\":\"Anamitra\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnaputrau babhūvatuḥ anamitro raghuś caiva\",\"doubt\":false},{\"ref\":\"HV 10.72\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnaputrau babhūvatuḥ anamitro raghuś caiva\",\"doubt\":false},{\"ref\":\"HV 10.72\",\"a\":\"Anamitra\",\"rel\":\"brother_of\",\"b\":\"Raghu\",\"words\":\"anamitro raghuś caiva\",\"doubt\":false},{\"ref\":\"HV 10.73\",\"a\":\"Stamba\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrasutaḥ stambaḥ\",\"doubt\":false},{\"ref\":\"HV 10.73\",\"a\":\"Śaṅkhaṇa\",\"rel\":\"son_of\",\"b\":\"Stamba\",\"words\":\"śaṅkhaṇas tasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"HV 10.73\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Duliduha\",\"words\":\"duliduho 'bhavat dilīpas tasya tanayo\",\"doubt\":true},{\"ref\":\"HV 10.73\",\"a\":\"Dilīpa\",\"rel\":\"descendant_of\",\"b\":\"Rāma\",\"words\":\"rāmasya prapitāmahaḥ\",\"doubt\":true},{\"ref\":\"HV 10.73\",\"a\":\"Dīrghabāhu\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dīrghabāhur dilīpasya raghur nāmnābhavat sutaḥ\",\"doubt\":true},{\"ref\":\"HV 10.74\",\"a\":\"Aja\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"ajas tu rāghuto jajñe\",\"doubt\":false},{\"ref\":\"HV 10.74\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Aja\",\"words\":\"daśaratho 'py ajāt\",\"doubt\":false},{\"ref\":\"HV 10.74\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"rāmo daśarathāj jajñe\",\"doubt\":false},{\"ref\":\"HV 10.75\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"rāmasya tanayo jajñe kuśa\",\"doubt\":false},{\"ref\":\"HV 10.75\",\"a\":\"Atithi\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"atithis tu kuśāj jajñe\",\"doubt\":false},{\"ref\":\"HV 10.75\",\"a\":\"Niṣadha\",\"rel\":\"son_of\",\"b\":\"Atithi\",\"words\":\"niṣadhas tasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"HV 10.76\",\"a\":\"Nala\",\"rel\":\"son_of\",\"b\":\"Niṣadha\",\"words\":\"niṣadhasya nalaḥ putro\",\"doubt\":false},{\"ref\":\"HV 10.76\",\"a\":\"Nabhas\",\"rel\":\"son_of\",\"b\":\"Nala\",\"words\":\"nabhaḥ putro nalasya\",\"doubt\":false},{\"ref\":\"HV 10.76\",\"a\":\"Puṇḍarīka\",\"rel\":\"son_of\",\"b\":\"Nabhas\",\"words\":\"nabhasaḥ puṇḍarīkas\",\"doubt\":false},{\"ref\":\"HV 10.76\",\"a\":\"Kṣemadhanvan\",\"rel\":\"son_of\",\"b\":\"Puṇḍarīka\",\"words\":\"puṇḍarīkas tu kṣemadhanvā tataḥ smṛtaḥ\",\"doubt\":false},{\"ref\":\"HV 10.77\",\"a\":\"Devānīka\",\"rel\":\"son_of\",\"b\":\"Kṣemadhanvan\",\"words\":\"kṣemadhanvasutas tv āsīd devānīkaḥ\",\"doubt\":false},{\"ref\":\"HV 10.77\",\"a\":\"Ahīnagu\",\"rel\":\"son_of\",\"b\":\"Devānīka\",\"words\":\"ahīnagur nāma devānīkātmajaḥ\",\"doubt\":false},{\"ref\":\"HV 10.77\",\"a\":\"Sahasvant\",\"rel\":\"son_of\",\"b\":\"Ahīnagu\",\"words\":\"ahīnagos tu dāyādaḥ sahasvān\",\"doubt\":false}]}",
  "stop": "end_turn",
- "cost_usd": 0.05593,
+ "cost_usd": 0.05093,
  "tokens": {
-  "input": 4725,
+  "input": 4996,
   "cache_write": 0,
   "cache_read": 0,
-  "output": 4648,
+  "output": 4094,
   "thinking": 0
  },
  "statements": [
@@ -59,49 +59,13 @@
    "a": "Sagara",
    "rel": "other",
    "b": "Sumati",
-   "words": "sumatyās tanayā dṛptāḥ",
+   "words": "sumatyās tanayā dṛptāḥ pitur ādeśakāriṇaḥ",
    "doubt": true,
    "check": "words"
   },
   {
    "ref": "HV 10.50",
    "a": "Barhaketu",
-   "rel": "other",
-   "b": "Sagara",
-   "words": "tasya vaṃśakarā nṛpā",
-   "doubt": true,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.50",
-   "a": "Suketu",
-   "rel": "other",
-   "b": "Sagara",
-   "words": "tasya vaṃśakarā nṛpā",
-   "doubt": true,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.50",
-   "a": "Bhāradratha",
-   "rel": "other",
-   "b": "Sagara",
-   "words": "tasya vaṃśakarā nṛpā",
-   "doubt": true,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.50",
-   "a": "Śūra",
-   "rel": "other",
-   "b": "Sagara",
-   "words": "tasya vaṃśakarā nṛpā",
-   "doubt": true,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.50",
-   "a": "Pañcajana",
    "rel": "other",
    "b": "Sagara",
    "words": "tasya vaṃśakarā nṛpā",
@@ -122,67 +86,49 @@
    "a": "Keśinī",
    "rel": "daughter_of",
    "b": "Vidarbha",
-   "words": "jyeṣṭhāvidarbhaduhitā keśinī",
+   "words": "vidarbhaduhitā keśinī nāma",
    "doubt": false,
    "check": "verified"
   },
   {
    "ref": "HV 10.55",
-   "a": "Sumati",
-   "rel": "wife_of",
-   "b": "Sagara",
-   "words": "dve bhārye sagarasyāstāṃ",
-   "doubt": true,
-   "check": "words"
-  },
-  {
-   "ref": "HV 10.55",
-   "a": "Sumati",
+   "a": "Sagara's younger wife",
    "rel": "daughter_of",
    "b": "Ariṣṭanemi",
    "words": "ariṣṭanemiduhitā",
    "doubt": true,
-   "check": "words"
-  },
-  {
-   "ref": "HV 10.58",
-   "a": "Asamañja",
-   "rel": "son_of",
-   "b": "Sagara",
-   "words": "keśiny asūta sagarād asamañjasamātmajam",
-   "doubt": false,
    "check": "verified"
   },
   {
    "ref": "HV 10.58",
    "a": "Asamañja",
-   "rel": "son_of",
+   "rel": "born_of",
    "b": "Keśinī",
    "words": "keśiny asūta sagarād asamañjasamātmajam",
    "doubt": false,
    "check": "verified"
   },
   {
-   "ref": "HV 10.62",
-   "a": "Sagara",
-   "rel": "other",
+   "ref": "HV 10.58",
+   "a": "Asamañja",
+   "rel": "son_of",
    "b": "Sagara",
-   "words": "ṣaṣṭiḥ putrasahasrāṇi tasyaivam abhavan",
-   "doubt": true,
+   "words": "sagarād asamañjasamātmajam",
+   "doubt": false,
    "check": "verified"
   },
   {
    "ref": "HV 10.64",
-   "a": "Aṃśumān",
+   "a": "Aṃśumant",
    "rel": "son_of",
    "b": "Asamañja",
    "words": "asamañja iti prāhus tasya putro'ṃśumān abhūt",
-   "doubt": true,
+   "doubt": false,
    "check": "verified"
   },
   {
    "ref": "HV 10.64",
-   "a": "Aṃśumān",
+   "a": "Aṃśumant",
    "rel": "son_of",
    "b": "Pañcajana",
    "words": "sutaḥ pañcajanasyāsīd aṃśumān",
@@ -193,7 +139,7 @@
    "ref": "HV 10.64",
    "a": "Dilīpa",
    "rel": "son_of",
-   "b": "Aṃśumān",
+   "b": "Aṃśumant",
    "words": "dilīpas tasya tanayaḥ",
    "doubt": false,
    "check": "verified"
@@ -213,15 +159,6 @@
    "rel": "son_of",
    "b": "Dilīpa",
    "words": "dilīpasya tu dāyādo mahārājo bhagīrathaḥ",
-   "doubt": false,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.66",
-   "a": "Gaṅgā",
-   "rel": "daughter_of",
-   "b": "Bhagīratha",
-   "words": "duhitṛtve tv akalpayat",
    "doubt": false,
    "check": "verified"
   },
@@ -257,8 +194,8 @@
    "a": "Sindhudvīpa",
    "rel": "son_of",
    "b": "Ambarīṣa",
-   "words": "ambarīṣas tu nābhāgiḥ sindhudvīpapitābhavat",
-   "doubt": false,
+   "words": "sindhudvīpapitābhavat",
+   "doubt": true,
    "check": "verified"
   },
   {
@@ -309,7 +246,7 @@
   {
    "ref": "HV 10.71",
    "a": "Aśmaka",
-   "rel": "son_of",
+   "rel": "begotten_by",
    "b": "Vasiṣṭha",
    "words": "vasiṣṭhas tumahātejāḥ kṣetre kalmāṣapādake aśmakaṃ janayām āsa",
    "doubt": false,
@@ -317,11 +254,11 @@
   },
   {
    "ref": "HV 10.71",
-   "a": "Kārūṣa",
+   "a": "Aśmaka",
    "rel": "son_of",
-   "b": "Aśmaka",
-   "words": "aśmakāc caiva kārūṣo",
-   "doubt": true,
+   "b": "Kalmāṣapāda",
+   "words": "kṣetre kalmāṣapādake aśmakaṃ janayām āsa",
+   "doubt": false,
    "check": "verified"
   },
   {
@@ -353,18 +290,18 @@
   },
   {
    "ref": "HV 10.71",
-   "a": "Vṛddhaśarman",
+   "a": "Vṛddhaśarma",
    "rel": "son_of",
    "b": "Elabila",
    "words": "āsīd ailabilaḥ śrīmān vṛddhaśarmā",
-   "doubt": false,
+   "doubt": true,
    "check": "verified"
   },
   {
    "ref": "HV 10.71",
    "a": "Dala",
    "rel": "son_of",
-   "b": "Vṛddhaśarman",
+   "b": "Vṛddhaśarma",
    "words": "dalas tasyātmajaś cāpi",
    "doubt": false,
    "check": "verified"
@@ -383,7 +320,7 @@
    "a": "Ūrṇa",
    "rel": "son_of",
    "b": "Śala",
-   "words": "śalaputro babhūva",
+   "words": "ūrṇo nāma sa dharmātmā śalaputro babhūva",
    "doubt": false,
    "check": "verified"
   },
@@ -398,20 +335,20 @@
   },
   {
    "ref": "HV 10.71",
-   "a": "Rajas",
+   "a": "Raja",
    "rel": "son_of",
    "b": "Viśvasaha",
    "words": "rajo nāma sutas tasya",
-   "doubt": false,
+   "doubt": true,
    "check": "verified"
   },
   {
    "ref": "HV 10.71",
    "a": "Śṛṅkhala",
    "rel": "son_of",
-   "b": "Rajas",
+   "b": "Raja",
    "words": "śṛṅkhalas tasya cātmajaḥ",
-   "doubt": false,
+   "doubt": true,
    "check": "verified"
   },
   {
@@ -446,7 +383,7 @@
    "a": "Anamitra",
    "rel": "son_of",
    "b": "Nighna",
-   "words": "nighnaputrau babhūvatuḥ anamitro",
+   "words": "nighnaputrau babhūvatuḥ anamitro raghuś caiva",
    "doubt": false,
    "check": "verified"
   },
@@ -455,7 +392,7 @@
    "a": "Raghu",
    "rel": "son_of",
    "b": "Nighna",
-   "words": "nighnaputrau babhūvatuḥ anamitro raghuś",
+   "words": "nighnaputrau babhūvatuḥ anamitro raghuś caiva",
    "doubt": false,
    "check": "verified"
   },
@@ -490,18 +427,18 @@
    "ref": "HV 10.73",
    "a": "Dilīpa",
    "rel": "son_of",
-   "b": "Anamitra",
-   "words": "anamitras tu dharmātmā vidvān duliduho 'bhavat dilīpas tasya tanayo",
+   "b": "Duliduha",
+   "words": "duliduho 'bhavat dilīpas tasya tanayo",
    "doubt": true,
    "check": "verified"
   },
   {
    "ref": "HV 10.73",
    "a": "Dilīpa",
-   "rel": "other",
+   "rel": "descendant_of",
    "b": "Rāma",
    "words": "rāmasya prapitāmahaḥ",
-   "doubt": false,
+   "doubt": true,
    "check": "verified"
   },
   {
@@ -509,16 +446,7 @@
    "a": "Dīrghabāhu",
    "rel": "son_of",
    "b": "Dilīpa",
-   "words": "dīrghabāhur dilīpasya",
-   "doubt": true,
-   "check": "verified"
-  },
-  {
-   "ref": "HV 10.73",
-   "a": "Raghu",
-   "rel": "son_of",
-   "b": "Dilīpa",
-   "words": "raghur nāmnābhavat sutaḥ",
+   "words": "dīrghabāhur dilīpasya raghur nāmnābhavat sutaḥ",
    "doubt": true,
    "check": "verified"
   },
@@ -632,7 +560,7 @@
   },
   {
    "ref": "HV 10.77",
-   "a": "Sahasvān",
+   "a": "Sahasvant",
    "rel": "son_of",
    "b": "Ahīnagu",
    "words": "ahīnagos tu dāyādaḥ sahasvān",

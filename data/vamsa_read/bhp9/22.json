@@ -366,7 +366,7 @@
    "b": "Rādhika",
    "words": "rādhiko 'to 'yutāyv abhūt",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.11",
@@ -375,7 +375,7 @@
    "b": "Ayutāyu",
    "words": "tataścākrodhanaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.11",
@@ -852,7 +852,7 @@
    "b": "Janamejaya",
    "words": "tasya putraḥ śatānīko",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.39",
@@ -945,13 +945,15 @@
    "check": "verified"
   },
   {
-   "ref": "BhP 9.22.42",
+   "ref": "BhP 9.22.41",
    "a": "Sukhīnala",
    "rel": "son_of",
    "b": "Nṛcakṣus",
    "words": "nṛcakṣuryat sukhīnalaḥ",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.22.42",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.22.42",

@@ -1,0 +1,316 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp1",
+ "title": "Brahmandapurana, book 1",
+ "chapter": 14,
+ "part": 2,
+ "refs": [
+  "BndP 1,14.56",
+  "BndP 1,14.57",
+  "BndP 1,14.58",
+  "BndP 1,14.59",
+  "BndP 1,14.60",
+  "BndP 1,14.61",
+  "BndP 1,14.62",
+  "BndP 1,14.63",
+  "BndP 1,14.64",
+  "BndP 1,14.65",
+  "BndP 1,14.66",
+  "BndP 1,14.67",
+  "BndP 1,14.68",
+  "BndP 1,14.69",
+  "BndP 1,14.70",
+  "BndP 1,14.71",
+  "BndP 1,14.72",
+  "BndP 1,14.73",
+  "BndP 1,14.74",
+  "BndP 1,14.75"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:22:23",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 1,14.59\",\"a\":\"Ṛṣabha\",\"rel\":\"son_of\",\"b\":\"Nābhi\",\"words\":\"nābhistvaja nayatputraṃ merudevyāṃ mahādyutim\",\"doubt\":false},{\"ref\":\"BndP 1,14.59\",\"a\":\"Ṛṣabha\",\"rel\":\"born_of\",\"b\":\"Merudevī\",\"words\":\"nābhistvaja nayatputraṃ merudevyāṃ mahādyutim\",\"doubt\":false},{\"ref\":\"BndP 1,14.60\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Ṛṣabha\",\"words\":\"ṛṣabhādbharato jajñe vīraḥ putraśatāgrajaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.62\",\"a\":\"Bhārata\",\"rel\":\"line_of\",\"b\":\"Bharata\",\"words\":\"tasmāttu bhārataṃ varṣaṃ tasya nāmnā\",\"doubt\":true},{\"ref\":\"BndP 1,14.62\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"bharatasyātmajo vidvānsumatirnāma dhārmikaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.63\",\"a\":\"Sumati\",\"rel\":\"succeeded\",\"b\":\"Bharata\",\"words\":\"babhūva tasmin rājye taṃbharatastvabhyaṣecayat\",\"doubt\":true},{\"ref\":\"BndP 1,14.64\",\"a\":\"Tejas\",\"rel\":\"son_of\",\"b\":\"Sumati\",\"words\":\"tejasastatsutaścāpi\",\"doubt\":true},{\"ref\":\"BndP 1,14.64\",\"a\":\"Indradyumna\",\"rel\":\"son_of\",\"b\":\"Tejas\",\"words\":\"tejasasyātmajo vidvānindradyumna iti smṛtaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.65\",\"a\":\"Parameṣṭhin\",\"rel\":\"son_of\",\"b\":\"Indradyumna\",\"words\":\"parameṣṭhī sutaścāpi nidhane tasya cāpyabhūt\",\"doubt\":true},{\"ref\":\"BndP 1,14.66\",\"a\":\"Pratihartṛ\",\"rel\":\"son_of\",\"b\":\"Parameṣṭhin\",\"words\":\"pratiharteti vikhyāto jajñe tasyāpi dhīmataḥ\",\"doubt\":true},{\"ref\":\"BndP 1,14.65\",\"a\":\"Pratīhāra\",\"rel\":\"line_of\",\"b\":\"Pratihartṛ\",\"words\":\"pratīhāraḥ kulaṃ tasya nāmnā jajñe tadanvayaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,14.66\",\"a\":\"Unnetṛ\",\"rel\":\"son_of\",\"b\":\"Pratihartṛ\",\"words\":\"unnetā pratihartustu\",\"doubt\":false},{\"ref\":\"BndP 1,14.66\",\"a\":\"Bhūman\",\"rel\":\"son_of\",\"b\":\"Pratihartṛ\",\"words\":\"bhūmā tasya sutaḥ smṛtaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,14.67\",\"a\":\"Udgītha\",\"rel\":\"son_of\",\"b\":\"Bhūman\",\"words\":\"udgīthastasya putro 'bhūt\",\"doubt\":false},{\"ref\":\"BndP 1,14.67\",\"a\":\"Prastāvi\",\"rel\":\"son_of\",\"b\":\"Udgītha\",\"words\":\"prastāviścāpi tatsutaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.67\",\"a\":\"Vibhu\",\"rel\":\"son_of\",\"b\":\"Prastāvi\",\"words\":\"prastāvestu vibhuḥ putraḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.67\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Vibhu\",\"words\":\"pṛthustasya suto 'bhavat\",\"doubt\":false},{\"ref\":\"BndP 1,14.68\",\"a\":\"Nakta\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"pṛthoścāpi suto nakto\",\"doubt\":false},{\"ref\":\"BndP 1,14.68\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Nakta\",\"words\":\"naktasyāpi gayaḥ sutaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.68\",\"a\":\"Nara\",\"rel\":\"son_of\",\"b\":\"Gaya\",\"words\":\"gayasyāpi naraḥ putro\",\"doubt\":false},{\"ref\":\"BndP 1,14.68\",\"a\":\"Virāṭ\",\"rel\":\"son_of\",\"b\":\"Nara\",\"words\":\"narasyāpi suto virāṭ\",\"doubt\":false},{\"ref\":\"BndP 1,14.69\",\"a\":\"Mahāvīrya\",\"rel\":\"son_of\",\"b\":\"Virāṭ\",\"words\":\"virāṭsuto mahāvīryo\",\"doubt\":false},{\"ref\":\"BndP 1,14.69\",\"a\":\"Dhīmat\",\"rel\":\"son_of\",\"b\":\"Mahāvīrya\",\"words\":\"dhīmāṃstasya suto 'bhavat\",\"doubt\":false},{\"ref\":\"BndP 1,14.69\",\"a\":\"Mahat\",\"rel\":\"son_of\",\"b\":\"Dhīmat\",\"words\":\"dhīmataśca mahānputro\",\"doubt\":false},{\"ref\":\"BndP 1,14.69\",\"a\":\"Bhauvana\",\"rel\":\"son_of\",\"b\":\"Mahat\",\"words\":\"mahataścāpi bhauvanaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.70\",\"a\":\"Tvaṣṭṛ\",\"rel\":\"son_of\",\"b\":\"Bhauvana\",\"words\":\"bhauvanasya satastvaṣṭā\",\"doubt\":false},{\"ref\":\"BndP 1,14.70\",\"a\":\"Virajas\",\"rel\":\"son_of\",\"b\":\"Tvaṣṭṛ\",\"words\":\"virajāstasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.70\",\"a\":\"Rajā\",\"rel\":\"son_of\",\"b\":\"Virajas\",\"words\":\"rajā virajasaḥ putraḥ\",\"doubt\":false},{\"ref\":\"BndP 1,14.70\",\"a\":\"Śatajit\",\"rel\":\"son_of\",\"b\":\"Rajas\",\"words\":\"śatajidrajasastathā\",\"doubt\":true},{\"ref\":\"BndP 1,14.71\",\"a\":\"Śatajit\",\"rel\":\"other\",\"b\":\"Rajas\",\"words\":\"tasya putraśataṃ tvāsīdrājānaḥ sarva eva tu\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02731,
+ "tokens": {
+  "input": 2550,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2221,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 1,14.59",
+   "a": "Ṛṣabha",
+   "rel": "son_of",
+   "b": "Nābhi",
+   "words": "nābhistvaja nayatputraṃ merudevyāṃ mahādyutim",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.59",
+   "a": "Ṛṣabha",
+   "rel": "born_of",
+   "b": "Merudevī",
+   "words": "nābhistvaja nayatputraṃ merudevyāṃ mahādyutim",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.60",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Ṛṣabha",
+   "words": "ṛṣabhādbharato jajñe vīraḥ putraśatāgrajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.62",
+   "a": "Bhārata",
+   "rel": "line_of",
+   "b": "Bharata",
+   "words": "tasmāttu bhārataṃ varṣaṃ tasya nāmnā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.62",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "bharatasyātmajo vidvānsumatirnāma dhārmikaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.63",
+   "a": "Sumati",
+   "rel": "succeeded",
+   "b": "Bharata",
+   "words": "babhūva tasmin rājye taṃbharatastvabhyaṣecayat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.64",
+   "a": "Tejas",
+   "rel": "son_of",
+   "b": "Sumati",
+   "words": "tejasastatsutaścāpi",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.64",
+   "a": "Indradyumna",
+   "rel": "son_of",
+   "b": "Tejas",
+   "words": "tejasasyātmajo vidvānindradyumna iti smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.65",
+   "a": "Parameṣṭhin",
+   "rel": "son_of",
+   "b": "Indradyumna",
+   "words": "parameṣṭhī sutaścāpi nidhane tasya cāpyabhūt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.66",
+   "a": "Pratihartṛ",
+   "rel": "son_of",
+   "b": "Parameṣṭhin",
+   "words": "pratiharteti vikhyāto jajñe tasyāpi dhīmataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.65",
+   "a": "Pratīhāra",
+   "rel": "line_of",
+   "b": "Pratihartṛ",
+   "words": "pratīhāraḥ kulaṃ tasya nāmnā jajñe tadanvayaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.66",
+   "a": "Unnetṛ",
+   "rel": "son_of",
+   "b": "Pratihartṛ",
+   "words": "unnetā pratihartustu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.66",
+   "a": "Bhūman",
+   "rel": "son_of",
+   "b": "Pratihartṛ",
+   "words": "bhūmā tasya sutaḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.67",
+   "a": "Udgītha",
+   "rel": "son_of",
+   "b": "Bhūman",
+   "words": "udgīthastasya putro 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.67",
+   "a": "Prastāvi",
+   "rel": "son_of",
+   "b": "Udgītha",
+   "words": "prastāviścāpi tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.67",
+   "a": "Vibhu",
+   "rel": "son_of",
+   "b": "Prastāvi",
+   "words": "prastāvestu vibhuḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.67",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Vibhu",
+   "words": "pṛthustasya suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.68",
+   "a": "Nakta",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "pṛthoścāpi suto nakto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.68",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Nakta",
+   "words": "naktasyāpi gayaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.68",
+   "a": "Nara",
+   "rel": "son_of",
+   "b": "Gaya",
+   "words": "gayasyāpi naraḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.68",
+   "a": "Virāṭ",
+   "rel": "son_of",
+   "b": "Nara",
+   "words": "narasyāpi suto virāṭ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.69",
+   "a": "Mahāvīrya",
+   "rel": "son_of",
+   "b": "Virāṭ",
+   "words": "virāṭsuto mahāvīryo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.69",
+   "a": "Dhīmat",
+   "rel": "son_of",
+   "b": "Mahāvīrya",
+   "words": "dhīmāṃstasya suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.69",
+   "a": "Mahat",
+   "rel": "son_of",
+   "b": "Dhīmat",
+   "words": "dhīmataśca mahānputro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.69",
+   "a": "Bhauvana",
+   "rel": "son_of",
+   "b": "Mahat",
+   "words": "mahataścāpi bhauvanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.70",
+   "a": "Tvaṣṭṛ",
+   "rel": "son_of",
+   "b": "Bhauvana",
+   "words": "bhauvanasya satastvaṣṭā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.70",
+   "a": "Virajas",
+   "rel": "son_of",
+   "b": "Tvaṣṭṛ",
+   "words": "virajāstasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.70",
+   "a": "Rajā",
+   "rel": "son_of",
+   "b": "Virajas",
+   "words": "rajā virajasaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.70",
+   "a": "Śatajit",
+   "rel": "son_of",
+   "b": "Rajas",
+   "words": "śatajidrajasastathā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,14.71",
+   "a": "Śatajit",
+   "rel": "other",
+   "b": "Rajas",
+   "words": "tasya putraśataṃ tvāsīdrājānaḥ sarva eva tu",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

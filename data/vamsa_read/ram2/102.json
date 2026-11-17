@@ -1,0 +1,435 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram2",
+ "title": "Ramayana, book 2 (Ayodhyakanda)",
+ "chapter": 102,
+ "part": 0,
+ "refs": [
+  "R 2,102.1",
+  "R 2,102.2",
+  "R 2,102.3",
+  "R 2,102.4",
+  "R 2,102.5",
+  "R 2,102.6",
+  "R 2,102.7",
+  "R 2,102.8",
+  "R 2,102.9",
+  "R 2,102.10",
+  "R 2,102.11",
+  "R 2,102.12",
+  "R 2,102.13",
+  "R 2,102.14",
+  "R 2,102.15",
+  "R 2,102.16",
+  "R 2,102.17",
+  "R 2,102.18",
+  "R 2,102.19",
+  "R 2,102.20",
+  "R 2,102.21",
+  "R 2,102.22",
+  "R 2,102.23",
+  "R 2,102.24",
+  "R 2,102.25",
+  "R 2,102.26",
+  "R 2,102.27",
+  "R 2,102.28",
+  "R 2,102.29",
+  "R 2,102.30",
+  "R 2,102.31"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:12:32",
+ "reply": "{\"statements\":[\n{\"ref\":\"R 2,102.4\",\"a\":\"Marīci\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"tasmān marīciḥ saṃjajñe\",\"doubt\":false},\n{\"ref\":\"R 2,102.4\",\"a\":\"Kaśyapa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"marīceḥ kaśyapaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.5\",\"a\":\"Manu Vaivasvata\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"vivasvān kaśyapāj jajñe manur vaivasvataḥ\",\"doubt\":true},\n{\"ref\":\"R 2,102.5\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"ikṣvākus tu manoḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.7\",\"a\":\"Kukṣi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākos tu sutaḥ śrīmān kukṣir\",\"doubt\":false},\n{\"ref\":\"R 2,102.7\",\"a\":\"Vikukṣi\",\"rel\":\"son_of\",\"b\":\"Kukṣi\",\"words\":\"kukṣer athātmajo vīro vikukṣir udapadyata\",\"doubt\":false},\n{\"ref\":\"R 2,102.8\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Vikukṣi\",\"words\":\"vikukṣes tu mahātejā bāṇaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.8\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Bāṇa\",\"words\":\"bāṇasya tu mahābāhur anaraṇyo\",\"doubt\":false},\n{\"ref\":\"R 2,102.10\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"anaraṇyān mahābāhuḥ pṛthū rājā babhūva\",\"doubt\":false},\n{\"ref\":\"R 2,102.10\",\"a\":\"Triśaṅku\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"tasmāt pṛthor mahārājas triśaṅkur udapadyata\",\"doubt\":false},\n{\"ref\":\"R 2,102.11\",\"a\":\"Dhundhumāra\",\"rel\":\"son_of\",\"b\":\"Triśaṅku\",\"words\":\"triśaṅkor abhavat sūnur dhundhumāro\",\"doubt\":false},\n{\"ref\":\"R 2,102.11\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Dhundhumāra\",\"words\":\"dhundhumārān mahātejā yuvanāśvo vyajāyata\",\"doubt\":false},\n{\"ref\":\"R 2,102.12\",\"a\":\"Māndhātā\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"yuvanāśva sutaḥ śrīmān māndhātā samapadyata\",\"doubt\":false},\n{\"ref\":\"R 2,102.12\",\"a\":\"Susaṃdhi\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"māndhātus tu mahātejāḥ susaṃdhir udapadyata\",\"doubt\":false},\n{\"ref\":\"R 2,102.13\",\"a\":\"Dhruvasaṃdhi\",\"rel\":\"son_of\",\"b\":\"Susaṃdhi\",\"words\":\"susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit\",\"doubt\":false},\n{\"ref\":\"R 2,102.13\",\"a\":\"Prasenajit\",\"rel\":\"son_of\",\"b\":\"Susaṃdhi\",\"words\":\"susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit\",\"doubt\":false},\n{\"ref\":\"R 2,102.13\",\"a\":\"Dhruvasaṃdhi\",\"rel\":\"brother_of\",\"b\":\"Prasenajit\",\"words\":\"putrau dvau dhruvasaṃdhiḥ prasenajit\",\"doubt\":false},\n{\"ref\":\"R 2,102.13\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Dhruvasaṃdhi\",\"words\":\"yaśasvī dhruvasaṃdhes tu bharato\",\"doubt\":false},\n{\"ref\":\"R 2,102.14\",\"a\":\"Asita\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"bharatāt tu mahābāhor asito nāma jāyata\",\"doubt\":false},\n{\"ref\":\"R 2,102.20\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"asamañjas tu putro 'bhūt sagarasyeti\",\"doubt\":false},\n{\"ref\":\"R 2,102.21\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"aṃśumān iti putro 'bhūd asamañjasya\",\"doubt\":false},\n{\"ref\":\"R 2,102.21\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumān\",\"words\":\"dilīpo 'ṃśumataḥ putro\",\"doubt\":false},\n{\"ref\":\"R 2,102.21\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpasya bhagīrathaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.22\",\"a\":\"Kakutstha\",\"rel\":\"son_of\",\"b\":\"Bhagīratha\",\"words\":\"bhagīrathāt kakutsthas\",\"doubt\":false},\n{\"ref\":\"R 2,102.22\",\"a\":\"Kākutsthas\",\"rel\":\"line_of\",\"b\":\"Kakutstha\",\"words\":\"kākutsthā yena tu smṛtāḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.22\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Kakutstha\",\"words\":\"kakutsthasya tu putro 'bhūd raghur\",\"doubt\":false},\n{\"ref\":\"R 2,102.22\",\"a\":\"Rāghavas\",\"rel\":\"line_of\",\"b\":\"Raghu\",\"words\":\"raghur yena tu rāghavaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.23\",\"a\":\"Kalmāṣapāda\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"raghos tu putras tejasvī pravṛddhaḥ puruṣādakaḥ kalmāṣapādaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.24\",\"a\":\"Śaṅkhaṇa\",\"rel\":\"son_of\",\"b\":\"Kalmāṣapāda\",\"words\":\"kalmāṣapādaputro 'bhūc chaṅkhaṇas\",\"doubt\":false},\n{\"ref\":\"R 2,102.25\",\"a\":\"Sudarśana\",\"rel\":\"son_of\",\"b\":\"Śaṅkhaṇa\",\"words\":\"śaṅkhaṇasya tu putro 'bhūc chūraḥ śrīmān sudarśanaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.25\",\"a\":\"Agnivarṇa\",\"rel\":\"son_of\",\"b\":\"Sudarśana\",\"words\":\"sudarśanasyāgnivarṇa\",\"doubt\":false},\n{\"ref\":\"R 2,102.25\",\"a\":\"Śīghraga\",\"rel\":\"son_of\",\"b\":\"Agnivarṇa\",\"words\":\"agnivarṣasya śīghragaḥ\",\"doubt\":true},\n{\"ref\":\"R 2,102.26\",\"a\":\"Maru\",\"rel\":\"son_of\",\"b\":\"Śīghraga\",\"words\":\"śīghragasya maruḥ putro\",\"doubt\":false},\n{\"ref\":\"R 2,102.26\",\"a\":\"Praśuśruka\",\"rel\":\"son_of\",\"b\":\"Maru\",\"words\":\"maroḥ putraḥ praśuśrukaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.26\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Praśuśruka\",\"words\":\"praśuśrukasya putro 'bhūd ambarīṣo\",\"doubt\":false},\n{\"ref\":\"R 2,102.27\",\"a\":\"Nahuṣa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"ambarīṣasya putro 'bhūn nahuṣaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.27\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya ca nābhāgaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.28\",\"a\":\"Aja\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasya sutāv ubhau\",\"doubt\":false},\n{\"ref\":\"R 2,102.28\",\"a\":\"Suvrata\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasya sutāv ubhau\",\"doubt\":false},\n{\"ref\":\"R 2,102.28\",\"a\":\"Aja\",\"rel\":\"brother_of\",\"b\":\"Suvrata\",\"words\":\"ajaś ca suvrataś caiva nābhāgasya sutāv ubhau\",\"doubt\":false},\n{\"ref\":\"R 2,102.28\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Aja\",\"words\":\"ajasya caiva dharmātmā rājā daśarathaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"R 2,102.29\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tasya jyeṣṭho 'si dāyādo rāma\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03929,
+ "tokens": {
+  "input": 3346,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3260,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 2,102.4",
+   "a": "Marīci",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "tasmān marīciḥ saṃjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.4",
+   "a": "Kaśyapa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "marīceḥ kaśyapaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.5",
+   "a": "Manu Vaivasvata",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "vivasvān kaśyapāj jajñe manur vaivasvataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.5",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "ikṣvākus tu manoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.7",
+   "a": "Kukṣi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākos tu sutaḥ śrīmān kukṣir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.7",
+   "a": "Vikukṣi",
+   "rel": "son_of",
+   "b": "Kukṣi",
+   "words": "kukṣer athātmajo vīro vikukṣir udapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.8",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Vikukṣi",
+   "words": "vikukṣes tu mahātejā bāṇaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.8",
+   "a": "Anaraṇya",
+   "rel": "son_of",
+   "b": "Bāṇa",
+   "words": "bāṇasya tu mahābāhur anaraṇyo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.10",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Anaraṇya",
+   "words": "anaraṇyān mahābāhuḥ pṛthū rājā babhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.10",
+   "a": "Triśaṅku",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "tasmāt pṛthor mahārājas triśaṅkur udapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.11",
+   "a": "Dhundhumāra",
+   "rel": "son_of",
+   "b": "Triśaṅku",
+   "words": "triśaṅkor abhavat sūnur dhundhumāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.11",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Dhundhumāra",
+   "words": "dhundhumārān mahātejā yuvanāśvo vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.12",
+   "a": "Māndhātā",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "yuvanāśva sutaḥ śrīmān māndhātā samapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.12",
+   "a": "Susaṃdhi",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "māndhātus tu mahātejāḥ susaṃdhir udapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.13",
+   "a": "Dhruvasaṃdhi",
+   "rel": "son_of",
+   "b": "Susaṃdhi",
+   "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.13",
+   "a": "Prasenajit",
+   "rel": "son_of",
+   "b": "Susaṃdhi",
+   "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.13",
+   "a": "Dhruvasaṃdhi",
+   "rel": "brother_of",
+   "b": "Prasenajit",
+   "words": "putrau dvau dhruvasaṃdhiḥ prasenajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.13",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Dhruvasaṃdhi",
+   "words": "yaśasvī dhruvasaṃdhes tu bharato",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.14",
+   "a": "Asita",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "bharatāt tu mahābāhor asito nāma jāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.20",
+   "a": "Asamañja",
+   "rel": "son_of",
+   "b": "Sagara",
+   "words": "asamañjas tu putro 'bhūt sagarasyeti",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.21",
+   "a": "Aṃśumān",
+   "rel": "son_of",
+   "b": "Asamañja",
+   "words": "aṃśumān iti putro 'bhūd asamañjasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.21",
+   "a": "Dilīpa",
+   "rel": "son_of",
+   "b": "Aṃśumān",
+   "words": "dilīpo 'ṃśumataḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.21",
+   "a": "Bhagīratha",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "dilīpasya bhagīrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.22",
+   "a": "Kakutstha",
+   "rel": "son_of",
+   "b": "Bhagīratha",
+   "words": "bhagīrathāt kakutsthas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.22",
+   "a": "Kākutsthas",
+   "rel": "line_of",
+   "b": "Kakutstha",
+   "words": "kākutsthā yena tu smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.22",
+   "a": "Raghu",
+   "rel": "son_of",
+   "b": "Kakutstha",
+   "words": "kakutsthasya tu putro 'bhūd raghur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.22",
+   "a": "Rāghavas",
+   "rel": "line_of",
+   "b": "Raghu",
+   "words": "raghur yena tu rāghavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.23",
+   "a": "Kalmāṣapāda",
+   "rel": "son_of",
+   "b": "Raghu",
+   "words": "raghos tu putras tejasvī pravṛddhaḥ puruṣādakaḥ kalmāṣapādaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.24",
+   "a": "Śaṅkhaṇa",
+   "rel": "son_of",
+   "b": "Kalmāṣapāda",
+   "words": "kalmāṣapādaputro 'bhūc chaṅkhaṇas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.25",
+   "a": "Sudarśana",
+   "rel": "son_of",
+   "b": "Śaṅkhaṇa",
+   "words": "śaṅkhaṇasya tu putro 'bhūc chūraḥ śrīmān sudarśanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.25",
+   "a": "Agnivarṇa",
+   "rel": "son_of",
+   "b": "Sudarśana",
+   "words": "sudarśanasyāgnivarṇa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.25",
+   "a": "Śīghraga",
+   "rel": "son_of",
+   "b": "Agnivarṇa",
+   "words": "agnivarṣasya śīghragaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.26",
+   "a": "Maru",
+   "rel": "son_of",
+   "b": "Śīghraga",
+   "words": "śīghragasya maruḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.26",
+   "a": "Praśuśruka",
+   "rel": "son_of",
+   "b": "Maru",
+   "words": "maroḥ putraḥ praśuśrukaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.26",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Praśuśruka",
+   "words": "praśuśrukasya putro 'bhūd ambarīṣo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.27",
+   "a": "Nahuṣa",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "ambarīṣasya putro 'bhūn nahuṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.27",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya ca nābhāgaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.28",
+   "a": "Aja",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.28",
+   "a": "Suvrata",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.28",
+   "a": "Aja",
+   "rel": "brother_of",
+   "b": "Suvrata",
+   "words": "ajaś ca suvrataś caiva nābhāgasya sutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.28",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Aja",
+   "words": "ajasya caiva dharmātmā rājā daśarathaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 2,102.29",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tasya jyeṣṭho 'si dāyādo rāma",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

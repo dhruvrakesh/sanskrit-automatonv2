@@ -1,0 +1,349 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 61,
+ "part": 0,
+ "refs": [
+  "BndP 2,61.1",
+  "BndP 2,61.2",
+  "BndP 2,61.3",
+  "BndP 2,61.4",
+  "BndP 2,61.5",
+  "BndP 2,61.6",
+  "BndP 2,61.7",
+  "BndP 2,61.8",
+  "BndP 2,61.9",
+  "BndP 2,61.10",
+  "BndP 2,61.11",
+  "BndP 2,61.12",
+  "BndP 2,61.13",
+  "BndP 2,61.14",
+  "BndP 2,61.15",
+  "BndP 2,61.16",
+  "BndP 2,61.17",
+  "BndP 2,61.18",
+  "BndP 2,61.19",
+  "BndP 2,61.20",
+  "BndP 2,61.21",
+  "BndP 2,61.22",
+  "BndP 2,61.23",
+  "BndP 2,61.24",
+  "BndP 2,61.25",
+  "BndP 2,61.26",
+  "BndP 2,61.27",
+  "BndP 2,61.28",
+  "BndP 2,61.29",
+  "BndP 2,61.30",
+  "BndP 2,61.31",
+  "BndP 2,61.32",
+  "BndP 2,61.33",
+  "BndP 2,61.34",
+  "BndP 2,61.35",
+  "BndP 2,61.36",
+  "BndP 2,61.37",
+  "BndP 2,61.38",
+  "BndP 2,61.39",
+  "BndP 2,61.40",
+  "BndP 2,61.41",
+  "BndP 2,61.42",
+  "BndP 2,61.43",
+  "BndP 2,61.44",
+  "BndP 2,61.45",
+  "BndP 2,61.46",
+  "BndP 2,61.47",
+  "BndP 2,61.48",
+  "BndP 2,61.49",
+  "BndP 2,61.50",
+  "BndP 2,61.51",
+  "BndP 2,61.52",
+  "BndP 2,61.53"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:24:20",
+ "reply": "{\"statements\":[\n{\"ref\":\"BndP 2,61.3\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Diṣṭa\",\"words\":\"nābhāgo diṣṭaputraḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.3\",\"a\":\"Bhalandana\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgo diṣṭaputrastu vidvānāsīdbhalandanaḥ\",\"doubt\":true},\n{\"ref\":\"BndP 2,61.4\",\"a\":\"Prāṃśu\",\"rel\":\"son_of\",\"b\":\"Bhalandana\",\"words\":\"bhalandanasya putro 'bhūtprāṃśurnāma\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.4\",\"a\":\"Prāṃśu\",\"rel\":\"son_of\",\"b\":\"Bhalandana\",\"words\":\"prāṃśoreko 'bhavatputraḥ\",\"doubt\":true},\n{\"ref\":\"BndP 2,61.8\",\"a\":\"Dama\",\"rel\":\"son_of\",\"b\":\"Nariṣyanta\",\"words\":\"nariṣyantasya dāyādo rājā daṇḍadharo damaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.8\",\"a\":\"Rāṣṭravarddhana\",\"rel\":\"son_of\",\"b\":\"Dama\",\"words\":\"tasya putrastu vijñāto rājāsīdrāṣṭravarddhanaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.9\",\"a\":\"Sudhṛti\",\"rel\":\"son_of\",\"b\":\"Rāṣṭravarddhana\",\"words\":\"sudhṛtistasya putraḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.9\",\"a\":\"Nara\",\"rel\":\"son_of\",\"b\":\"Sudhṛti\",\"words\":\"naraḥ sudhṛtitaḥ punaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.9\",\"a\":\"Bandhumān\",\"rel\":\"son_of\",\"b\":\"Kevala\",\"words\":\"kevalasya putrastu bandhumānkevalātmajaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.10\",\"a\":\"Vegavān\",\"rel\":\"son_of\",\"b\":\"Bandhumān\",\"words\":\"bandhumataḥ putro dharmātmā vegavān\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.10\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Vegavān\",\"words\":\"budho vegavataḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.10\",\"a\":\"Tṛṇabindu\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"tṛṇabindurbudhātmajaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.11\",\"a\":\"Iḍaviḍā\",\"rel\":\"daughter_of\",\"b\":\"Tṛṇabindu\",\"words\":\"kanyā tu tasyeḍaviḍā\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.11\",\"a\":\"Iḍaviḍā\",\"rel\":\"other\",\"b\":\"Viśravas\",\"words\":\"mātā viśravaso hi sā\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.12\",\"a\":\"Viśāla\",\"rel\":\"son_of\",\"b\":\"Tṛṇabindu\",\"words\":\"putro yo 'sya viśālo 'bhūt\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.13\",\"a\":\"Hemacandra\",\"rel\":\"son_of\",\"b\":\"Viśāla\",\"words\":\"viśālasya suto rājā hemacandro\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.13\",\"a\":\"Sucandra\",\"rel\":\"succeeded\",\"b\":\"Hemacandra\",\"words\":\"sucandra iti vikhyāto hemacandrādanantaraḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.14\",\"a\":\"Dhūmrāśva\",\"rel\":\"son_of\",\"b\":\"Sucandra\",\"words\":\"sucandratanayo rājā dhūmrāśva\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.14\",\"a\":\"Sṛṃjaya\",\"rel\":\"son_of\",\"b\":\"Dhūmrāśva\",\"words\":\"dhūmrāśvatanayo vidvānsṛṃjayaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.15\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Sṛñjaya\",\"words\":\"sṛñjayasya sutaḥ śrīmānsahadevaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.15\",\"a\":\"Kṛśāśva\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"kṛśāśvaḥ sahadevasya putraḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.16\",\"a\":\"Somadatta\",\"rel\":\"son_of\",\"b\":\"Kṛśāśva\",\"words\":\"kṛśāśvasya mahātejā somadattaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.16\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Somadatta\",\"words\":\"somadattasya rājarṣeḥ suto 'bhūjjanamejayaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.17\",\"a\":\"Pramati\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayātmajaścaiva pramatirnāma\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.18\",\"a\":\"Ānartta\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"śaryātermithunaṃ tvāsīdānartto nāma viśrutaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.19\",\"a\":\"Sukanyā\",\"rel\":\"daughter_of\",\"b\":\"Śaryāti\",\"words\":\"putraḥ sukanyā kanyā ca\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.18\",\"a\":\"Ānartta\",\"rel\":\"brother_of\",\"b\":\"Sukanyā\",\"words\":\"śaryātermithunaṃ tvāsīdānartto\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.19\",\"a\":\"Sukanyā\",\"rel\":\"wife_of\",\"b\":\"Cyavana\",\"words\":\"bhāryā yā cyavanasya ca\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.19\",\"a\":\"Reva\",\"rel\":\"son_of\",\"b\":\"Ānartta\",\"words\":\"ānarttasya tu dāyādo revo nāma\",\"doubt\":false},\n{\"ref\":\"BndP 2,61.20\",\"a\":\"Raivata Kakudmī\",\"rel\":\"son_of\",\"b\":\"Reva\",\"words\":\"revasya raivataḥ putraḥ kakudmī\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03304,
+ "tokens": {
+  "input": 4929,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2318,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,61.3",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Diṣṭa",
+   "words": "nābhāgo diṣṭaputraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.3",
+   "a": "Bhalandana",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgo diṣṭaputrastu vidvānāsīdbhalandanaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.4",
+   "a": "Prāṃśu",
+   "rel": "son_of",
+   "b": "Bhalandana",
+   "words": "bhalandanasya putro 'bhūtprāṃśurnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.4",
+   "a": "Prāṃśu",
+   "rel": "son_of",
+   "b": "Bhalandana",
+   "words": "prāṃśoreko 'bhavatputraḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.8",
+   "a": "Dama",
+   "rel": "son_of",
+   "b": "Nariṣyanta",
+   "words": "nariṣyantasya dāyādo rājā daṇḍadharo damaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.8",
+   "a": "Rāṣṭravarddhana",
+   "rel": "son_of",
+   "b": "Dama",
+   "words": "tasya putrastu vijñāto rājāsīdrāṣṭravarddhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.9",
+   "a": "Sudhṛti",
+   "rel": "son_of",
+   "b": "Rāṣṭravarddhana",
+   "words": "sudhṛtistasya putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.9",
+   "a": "Nara",
+   "rel": "son_of",
+   "b": "Sudhṛti",
+   "words": "naraḥ sudhṛtitaḥ punaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.9",
+   "a": "Bandhumān",
+   "rel": "son_of",
+   "b": "Kevala",
+   "words": "kevalasya putrastu bandhumānkevalātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.10",
+   "a": "Vegavān",
+   "rel": "son_of",
+   "b": "Bandhumān",
+   "words": "bandhumataḥ putro dharmātmā vegavān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.10",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Vegavān",
+   "words": "budho vegavataḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.10",
+   "a": "Tṛṇabindu",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "tṛṇabindurbudhātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.11",
+   "a": "Iḍaviḍā",
+   "rel": "daughter_of",
+   "b": "Tṛṇabindu",
+   "words": "kanyā tu tasyeḍaviḍā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,61.11",
+   "a": "Iḍaviḍā",
+   "rel": "other",
+   "b": "Viśravas",
+   "words": "mātā viśravaso hi sā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,61.12",
+   "a": "Viśāla",
+   "rel": "son_of",
+   "b": "Tṛṇabindu",
+   "words": "putro yo 'sya viśālo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.13",
+   "a": "Hemacandra",
+   "rel": "son_of",
+   "b": "Viśāla",
+   "words": "viśālasya suto rājā hemacandro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.13",
+   "a": "Sucandra",
+   "rel": "succeeded",
+   "b": "Hemacandra",
+   "words": "sucandra iti vikhyāto hemacandrādanantaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.14",
+   "a": "Dhūmrāśva",
+   "rel": "son_of",
+   "b": "Sucandra",
+   "words": "sucandratanayo rājā dhūmrāśva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.14",
+   "a": "Sṛṃjaya",
+   "rel": "son_of",
+   "b": "Dhūmrāśva",
+   "words": "dhūmrāśvatanayo vidvānsṛṃjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.15",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Sṛñjaya",
+   "words": "sṛñjayasya sutaḥ śrīmānsahadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.15",
+   "a": "Kṛśāśva",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "kṛśāśvaḥ sahadevasya putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.16",
+   "a": "Somadatta",
+   "rel": "son_of",
+   "b": "Kṛśāśva",
+   "words": "kṛśāśvasya mahātejā somadattaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.16",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Somadatta",
+   "words": "somadattasya rājarṣeḥ suto 'bhūjjanamejayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.17",
+   "a": "Pramati",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayātmajaścaiva pramatirnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.18",
+   "a": "Ānartta",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "śaryātermithunaṃ tvāsīdānartto nāma viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.19",
+   "a": "Sukanyā",
+   "rel": "daughter_of",
+   "b": "Śaryāti",
+   "words": "putraḥ sukanyā kanyā ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.18",
+   "a": "Ānartta",
+   "rel": "brother_of",
+   "b": "Sukanyā",
+   "words": "śaryātermithunaṃ tvāsīdānartto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.19",
+   "a": "Sukanyā",
+   "rel": "wife_of",
+   "b": "Cyavana",
+   "words": "bhāryā yā cyavanasya ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.19",
+   "a": "Reva",
+   "rel": "son_of",
+   "b": "Ānartta",
+   "words": "ānarttasya tu dāyādo revo nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,61.20",
+   "a": "Raivata Kakudmī",
+   "rel": "son_of",
+   "b": "Reva",
+   "words": "revasya raivataḥ putraḥ kakudmī",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

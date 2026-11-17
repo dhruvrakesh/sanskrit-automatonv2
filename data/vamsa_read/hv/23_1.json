@@ -1,0 +1,633 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 23,
+ "part": 1,
+ "refs": [
+  "HV 23.1",
+  "HV 23.2",
+  "HV 23.3",
+  "HV 23.4",
+  "HV 23.5",
+  "HV 23.6",
+  "HV 23.7",
+  "HV 23.8",
+  "HV 23.9",
+  "HV 23.10",
+  "HV 23.11",
+  "HV 23.12",
+  "HV 23.13",
+  "HV 23.14",
+  "HV 23.15",
+  "HV 23.16",
+  "HV 23.17",
+  "HV 23.18",
+  "HV 23.19",
+  "HV 23.20",
+  "HV 23.21",
+  "HV 23.22",
+  "HV 23.23",
+  "HV 23.24",
+  "HV 23.25",
+  "HV 23.26",
+  "HV 23.27",
+  "HV 23.28",
+  "HV 23.29",
+  "HV 23.30",
+  "HV 23.31",
+  "HV 23.32",
+  "HV 23.33",
+  "HV 23.34",
+  "HV 23.35",
+  "HV 23.36",
+  "HV 23.37",
+  "HV 23.38",
+  "HV 23.39",
+  "HV 23.40"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:06:44",
+ "reply": "{\"statements\":[\n{\"ref\":\"HV 23.4\",\"a\":\"Pravīra\",\"rel\":\"son_of\",\"b\":\"Pūru\",\"words\":\"pūroḥ pravīraḥ putro 'bhūt\",\"doubt\":false},\n{\"ref\":\"HV 23.4\",\"a\":\"Manasyu\",\"rel\":\"son_of\",\"b\":\"Pravīra\",\"words\":\"manasyus tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.4\",\"a\":\"Abhayada\",\"rel\":\"son_of\",\"b\":\"Manasyu\",\"words\":\"manasyor abhavat sutaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.5\",\"a\":\"Sudhanvan\",\"rel\":\"son_of\",\"b\":\"Abhayada\",\"words\":\"abhayadasyāsīt sudhanvā\",\"doubt\":false},\n{\"ref\":\"HV 23.5\",\"a\":\"Subāhu\",\"rel\":\"son_of\",\"b\":\"Sudhanvan\",\"words\":\"sudhanvanaḥ subāhus\",\"doubt\":false},\n{\"ref\":\"HV 23.5\",\"a\":\"Raudrāśva\",\"rel\":\"son_of\",\"b\":\"Subāhu\",\"words\":\"raudrāśvas tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.9\",\"a\":\"Soma\",\"rel\":\"son_of\",\"b\":\"Prabhākara\",\"words\":\"rudrāyāṃ janayām āsa somaṃ putraṃ\",\"doubt\":false},\n{\"ref\":\"HV 23.9\",\"a\":\"Soma\",\"rel\":\"born_of\",\"b\":\"Rudrā\",\"words\":\"rudrāyāṃ janayām āsa somaṃ putraṃ\",\"doubt\":false},\n{\"ref\":\"HV 23.15\",\"a\":\"Sabhānara\",\"rel\":\"son_of\",\"b\":\"Kakṣeyu\",\"words\":\"kakṣeyutanayās tv āsaṃs traya\",\"doubt\":false},\n{\"ref\":\"HV 23.15\",\"a\":\"Cākṣuṣa\",\"rel\":\"son_of\",\"b\":\"Kakṣeyu\",\"words\":\"kakṣeyutanayās tv āsaṃs traya\",\"doubt\":false},\n{\"ref\":\"HV 23.15\",\"a\":\"Paramekṣu\",\"rel\":\"son_of\",\"b\":\"Kakṣeyu\",\"words\":\"kakṣeyutanayās tv āsaṃs traya\",\"doubt\":false},\n{\"ref\":\"HV 23.16\",\"a\":\"Kālānala\",\"rel\":\"son_of\",\"b\":\"Sabhānara\",\"words\":\"sabhānarasya putras tu vidvān kālānalo\",\"doubt\":false},\n{\"ref\":\"HV 23.16\",\"a\":\"Sṛñjaya\",\"rel\":\"son_of\",\"b\":\"Kālānala\",\"words\":\"kālānalasya dharmajñaḥ sṛñjayo nāma vai sutaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.17\",\"a\":\"Puraṃjaya\",\"rel\":\"son_of\",\"b\":\"Sṛñjaya\",\"words\":\"sṛñjayasyābhavat putro vīro rājā puraṃjayaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.17\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Puraṃjaya\",\"words\":\"puraṃjayasuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 23.18\",\"a\":\"Mahāsāla\",\"rel\":\"son_of\",\"b\":\"Janamejaya\",\"words\":\"janamejayasya rājarṣer mahāsālo 'bhavat sutaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.19\",\"a\":\"Mahāmanas\",\"rel\":\"son_of\",\"b\":\"Mahāsāla\",\"words\":\"mahāmanā nāma suto mahāsālasya\",\"doubt\":false},\n{\"ref\":\"HV 23.20\",\"a\":\"Uśīnara\",\"rel\":\"son_of\",\"b\":\"Mahāmanas\",\"words\":\"mahāmanās tu putrau dvau janayām āsa\",\"doubt\":false},\n{\"ref\":\"HV 23.20\",\"a\":\"Titikṣu\",\"rel\":\"son_of\",\"b\":\"Mahāmanas\",\"words\":\"mahāmanās tu putrau dvau janayām āsa\",\"doubt\":false},\n{\"ref\":\"HV 23.21\",\"a\":\"Nṛgā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyas tu pañca\",\"doubt\":false},\n{\"ref\":\"HV 23.21\",\"a\":\"Kṛmī\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyas tu pañca\",\"doubt\":false},\n{\"ref\":\"HV 23.21\",\"a\":\"Navā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyas tu pañca\",\"doubt\":false},\n{\"ref\":\"HV 23.21\",\"a\":\"Darvā\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyas tu pañca\",\"doubt\":false},\n{\"ref\":\"HV 23.21\",\"a\":\"Dṛṣadvatī\",\"rel\":\"wife_of\",\"b\":\"Uśīnara\",\"words\":\"uśīnarasya patnyas tu pañca\",\"doubt\":false},\n{\"ref\":\"HV 23.23\",\"a\":\"Nṛga\",\"rel\":\"born_of\",\"b\":\"Nṛgā\",\"words\":\"nṛgāyās tu nṛgaḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.23\",\"a\":\"Kṛmi\",\"rel\":\"born_of\",\"b\":\"Kṛmī\",\"words\":\"kṛmyāḥ kṛmir ajāyata\",\"doubt\":false},\n{\"ref\":\"HV 23.23\",\"a\":\"Nava\",\"rel\":\"born_of\",\"b\":\"Navā\",\"words\":\"navāyās tu navaḥ putro\",\"doubt\":false},\n{\"ref\":\"HV 23.23\",\"a\":\"Suvrata\",\"rel\":\"born_of\",\"b\":\"Darvā\",\"words\":\"darvāyāḥ suvrato 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 23.24\",\"a\":\"Śibi\",\"rel\":\"born_of\",\"b\":\"Dṛṣadvatī\",\"words\":\"dṛṣadvatyās tu saṃjajñe śibir auśīnaro\",\"doubt\":false},\n{\"ref\":\"HV 23.24\",\"a\":\"Śibi\",\"rel\":\"son_of\",\"b\":\"Uśīnara\",\"words\":\"śibir auśīnaro\",\"doubt\":false},\n{\"ref\":\"HV 23.26\",\"a\":\"Vṛṣadarbha\",\"rel\":\"son_of\",\"b\":\"Śibi\",\"words\":\"śibeś ca putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"HV 23.26\",\"a\":\"Suvīra\",\"rel\":\"son_of\",\"b\":\"Śibi\",\"words\":\"śibeś ca putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"HV 23.26\",\"a\":\"Kaikeya\",\"rel\":\"son_of\",\"b\":\"Śibi\",\"words\":\"śibeś ca putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"HV 23.26\",\"a\":\"Madraka\",\"rel\":\"son_of\",\"b\":\"Śibi\",\"words\":\"śibeś ca putrāś catvāro\",\"doubt\":false},\n{\"ref\":\"HV 23.26\",\"a\":\"Uṣadratha\",\"rel\":\"son_of\",\"b\":\"Titikṣu\",\"words\":\"titikṣur abhavad rājā pūrvasyāṃ diśi bhārata uṣadratho\",\"doubt\":true},\n{\"ref\":\"HV 23.26\",\"a\":\"Phena\",\"rel\":\"son_of\",\"b\":\"Uṣadratha\",\"words\":\"tasya phenaḥ suto 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 23.27\",\"a\":\"Sutapas\",\"rel\":\"son_of\",\"b\":\"Phena\",\"words\":\"phenāt tu sutapā jajñe\",\"doubt\":false},\n{\"ref\":\"HV 23.27\",\"a\":\"Bali\",\"rel\":\"son_of\",\"b\":\"Sutapas\",\"words\":\"jajñe sutapasaḥ sutaḥ balir\",\"doubt\":false},\n{\"ref\":\"HV 23.29\",\"a\":\"Aṅga\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"aṅgaḥ prathamato jajñe\",\"doubt\":false},\n{\"ref\":\"HV 23.29\",\"a\":\"Vaṅga\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"vaṅgaḥ suhmas tathaiva ca\",\"doubt\":false},\n{\"ref\":\"HV 23.29\",\"a\":\"Suhma\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"vaṅgaḥ suhmas tathaiva ca\",\"doubt\":false},\n{\"ref\":\"HV 23.29\",\"a\":\"Puṇḍra\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"puṇḍraḥ kaliṅgaś ca\",\"doubt\":false},\n{\"ref\":\"HV 23.29\",\"a\":\"Kaliṅga\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"puṇḍraḥ kaliṅgaś ca\",\"doubt\":false},\n{\"ref\":\"HV 23.29\",\"a\":\"Bāleya\",\"rel\":\"line_of\",\"b\":\"Bali\",\"words\":\"bāleyaṃ kṣatram ucyate\",\"doubt\":false},\n{\"ref\":\"HV 23.31\",\"a\":\"Aṅga\",\"rel\":\"begotten_by\",\"b\":\"Bali\",\"words\":\"tasya te tanayāḥ sarve kṣetrajā\",\"doubt\":true},\n{\"ref\":\"HV 23.31\",\"a\":\"Aṅga\",\"rel\":\"born_of\",\"b\":\"Sudeṣṇā\",\"words\":\"sudeṣṇāyāṃ mahaujasaḥ\",\"doubt\":true},\n{\"ref\":\"HV 23.33\",\"a\":\"Dadhivāhana\",\"rel\":\"son_of\",\"b\":\"Aṅga\",\"words\":\"aṅgaputro mahān āsīd rājendro dadhivāhanaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.33\",\"a\":\"Diviratha\",\"rel\":\"son_of\",\"b\":\"Dadhivāhana\",\"words\":\"dadhivāhanaputras tu rājā divirathas\",\"doubt\":false},\n{\"ref\":\"HV 23.34\",\"a\":\"Dharmaratha\",\"rel\":\"son_of\",\"b\":\"Diviratha\",\"words\":\"putro divirathasyāsīt\",\"doubt\":false},\n{\"ref\":\"HV 23.34\",\"a\":\"Citraratha\",\"rel\":\"son_of\",\"b\":\"Dharmaratha\",\"words\":\"tasya citrarathaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.36\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Citraratha\",\"words\":\"citrarathasyāpi putro daśaratho 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 23.36\",\"a\":\"Śāntā\",\"rel\":\"daughter_of\",\"b\":\"Lomapāda\",\"words\":\"lomapāda iti khyāto yasya śāntā sutābhavat\",\"doubt\":true},\n{\"ref\":\"HV 23.37\",\"a\":\"Caturaṅga\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tasya dāśarathir vīraś caturaṅgo\",\"doubt\":true},\n{\"ref\":\"HV 23.38\",\"a\":\"Pṛthulākṣa\",\"rel\":\"son_of\",\"b\":\"Caturaṅga\",\"words\":\"caturaṅgasya putras tu pṛthulākṣa\",\"doubt\":false},\n{\"ref\":\"HV 23.38\",\"a\":\"Campa\",\"rel\":\"son_of\",\"b\":\"Pṛthulākṣa\",\"words\":\"pṛthulākṣasuto rājā campo\",\"doubt\":false},\n{\"ref\":\"HV 23.39\",\"a\":\"Haryaṅga\",\"rel\":\"son_of\",\"b\":\"Campa\",\"words\":\"haryaṅgo 'sya suto 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Karṇa\",\"rel\":\"son_of\",\"b\":\"Haryaṅga\",\"words\":\"haryaṅgasya sutaḥ karṇo\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Vikarṇa\",\"rel\":\"son_of\",\"b\":\"Karṇa\",\"words\":\"vikarṇas tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Bṛhatkarman\",\"rel\":\"son_of\",\"b\":\"Bhadraratha\",\"words\":\"putro bhadrarathasyāsīd bṛhatkarmā\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Bṛhaddarbha\",\"rel\":\"son_of\",\"b\":\"Bṛhatkarman\",\"words\":\"bṛhaddarbhaḥ sutas tasya\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Bṛhanmanas\",\"rel\":\"son_of\",\"b\":\"Bṛhaddarbha\",\"words\":\"yasmāj jajñe bṛhanmanāḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Jayadratha\",\"rel\":\"son_of\",\"b\":\"Bṛhanmanas\",\"words\":\"bṛhanmanās tu rājendro janayām āsa vai sutam nāmnā jayadrathaṃ\",\"doubt\":false},\n{\"ref\":\"HV 23.40\",\"a\":\"Dṛḍharatha\",\"rel\":\"son_of\",\"b\":\"Jayadratha\",\"words\":\"yasmād dṛḍharatho nṛpaḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05475,
+ "tokens": {
+  "input": 4797,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4516,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 23.4",
+   "a": "Pravīra",
+   "rel": "son_of",
+   "b": "Pūru",
+   "words": "pūroḥ pravīraḥ putro 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.4",
+   "a": "Manasyu",
+   "rel": "son_of",
+   "b": "Pravīra",
+   "words": "manasyus tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.4",
+   "a": "Abhayada",
+   "rel": "son_of",
+   "b": "Manasyu",
+   "words": "manasyor abhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.5",
+   "a": "Sudhanvan",
+   "rel": "son_of",
+   "b": "Abhayada",
+   "words": "abhayadasyāsīt sudhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.5",
+   "a": "Subāhu",
+   "rel": "son_of",
+   "b": "Sudhanvan",
+   "words": "sudhanvanaḥ subāhus",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.5",
+   "a": "Raudrāśva",
+   "rel": "son_of",
+   "b": "Subāhu",
+   "words": "raudrāśvas tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.9",
+   "a": "Soma",
+   "rel": "son_of",
+   "b": "Prabhākara",
+   "words": "rudrāyāṃ janayām āsa somaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.9",
+   "a": "Soma",
+   "rel": "born_of",
+   "b": "Rudrā",
+   "words": "rudrāyāṃ janayām āsa somaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.15",
+   "a": "Sabhānara",
+   "rel": "son_of",
+   "b": "Kakṣeyu",
+   "words": "kakṣeyutanayās tv āsaṃs traya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.15",
+   "a": "Cākṣuṣa",
+   "rel": "son_of",
+   "b": "Kakṣeyu",
+   "words": "kakṣeyutanayās tv āsaṃs traya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.15",
+   "a": "Paramekṣu",
+   "rel": "son_of",
+   "b": "Kakṣeyu",
+   "words": "kakṣeyutanayās tv āsaṃs traya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.16",
+   "a": "Kālānala",
+   "rel": "son_of",
+   "b": "Sabhānara",
+   "words": "sabhānarasya putras tu vidvān kālānalo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.16",
+   "a": "Sṛñjaya",
+   "rel": "son_of",
+   "b": "Kālānala",
+   "words": "kālānalasya dharmajñaḥ sṛñjayo nāma vai sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.17",
+   "a": "Puraṃjaya",
+   "rel": "son_of",
+   "b": "Sṛñjaya",
+   "words": "sṛñjayasyābhavat putro vīro rājā puraṃjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.17",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Puraṃjaya",
+   "words": "puraṃjayasuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.18",
+   "a": "Mahāsāla",
+   "rel": "son_of",
+   "b": "Janamejaya",
+   "words": "janamejayasya rājarṣer mahāsālo 'bhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.19",
+   "a": "Mahāmanas",
+   "rel": "son_of",
+   "b": "Mahāsāla",
+   "words": "mahāmanā nāma suto mahāsālasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.20",
+   "a": "Uśīnara",
+   "rel": "son_of",
+   "b": "Mahāmanas",
+   "words": "mahāmanās tu putrau dvau janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.20",
+   "a": "Titikṣu",
+   "rel": "son_of",
+   "b": "Mahāmanas",
+   "words": "mahāmanās tu putrau dvau janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.21",
+   "a": "Nṛgā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyas tu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.21",
+   "a": "Kṛmī",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyas tu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.21",
+   "a": "Navā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyas tu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.21",
+   "a": "Darvā",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyas tu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.21",
+   "a": "Dṛṣadvatī",
+   "rel": "wife_of",
+   "b": "Uśīnara",
+   "words": "uśīnarasya patnyas tu pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.23",
+   "a": "Nṛga",
+   "rel": "born_of",
+   "b": "Nṛgā",
+   "words": "nṛgāyās tu nṛgaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.23",
+   "a": "Kṛmi",
+   "rel": "born_of",
+   "b": "Kṛmī",
+   "words": "kṛmyāḥ kṛmir ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.23",
+   "a": "Nava",
+   "rel": "born_of",
+   "b": "Navā",
+   "words": "navāyās tu navaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.23",
+   "a": "Suvrata",
+   "rel": "born_of",
+   "b": "Darvā",
+   "words": "darvāyāḥ suvrato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.24",
+   "a": "Śibi",
+   "rel": "born_of",
+   "b": "Dṛṣadvatī",
+   "words": "dṛṣadvatyās tu saṃjajñe śibir auśīnaro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.24",
+   "a": "Śibi",
+   "rel": "son_of",
+   "b": "Uśīnara",
+   "words": "śibir auśīnaro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.26",
+   "a": "Vṛṣadarbha",
+   "rel": "son_of",
+   "b": "Śibi",
+   "words": "śibeś ca putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.26",
+   "a": "Suvīra",
+   "rel": "son_of",
+   "b": "Śibi",
+   "words": "śibeś ca putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.26",
+   "a": "Kaikeya",
+   "rel": "son_of",
+   "b": "Śibi",
+   "words": "śibeś ca putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.26",
+   "a": "Madraka",
+   "rel": "son_of",
+   "b": "Śibi",
+   "words": "śibeś ca putrāś catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.26",
+   "a": "Uṣadratha",
+   "rel": "son_of",
+   "b": "Titikṣu",
+   "words": "titikṣur abhavad rājā pūrvasyāṃ diśi bhārata uṣadratho",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.26",
+   "a": "Phena",
+   "rel": "son_of",
+   "b": "Uṣadratha",
+   "words": "tasya phenaḥ suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.27",
+   "a": "Sutapas",
+   "rel": "son_of",
+   "b": "Phena",
+   "words": "phenāt tu sutapā jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.27",
+   "a": "Bali",
+   "rel": "son_of",
+   "b": "Sutapas",
+   "words": "jajñe sutapasaḥ sutaḥ balir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.29",
+   "a": "Aṅga",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "aṅgaḥ prathamato jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.29",
+   "a": "Vaṅga",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "vaṅgaḥ suhmas tathaiva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.29",
+   "a": "Suhma",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "vaṅgaḥ suhmas tathaiva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.29",
+   "a": "Puṇḍra",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "puṇḍraḥ kaliṅgaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.29",
+   "a": "Kaliṅga",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "puṇḍraḥ kaliṅgaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.29",
+   "a": "Bāleya",
+   "rel": "line_of",
+   "b": "Bali",
+   "words": "bāleyaṃ kṣatram ucyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.31",
+   "a": "Aṅga",
+   "rel": "begotten_by",
+   "b": "Bali",
+   "words": "tasya te tanayāḥ sarve kṣetrajā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.31",
+   "a": "Aṅga",
+   "rel": "born_of",
+   "b": "Sudeṣṇā",
+   "words": "sudeṣṇāyāṃ mahaujasaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.33",
+   "a": "Dadhivāhana",
+   "rel": "son_of",
+   "b": "Aṅga",
+   "words": "aṅgaputro mahān āsīd rājendro dadhivāhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.33",
+   "a": "Diviratha",
+   "rel": "son_of",
+   "b": "Dadhivāhana",
+   "words": "dadhivāhanaputras tu rājā divirathas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.34",
+   "a": "Dharmaratha",
+   "rel": "son_of",
+   "b": "Diviratha",
+   "words": "putro divirathasyāsīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.34",
+   "a": "Citraratha",
+   "rel": "son_of",
+   "b": "Dharmaratha",
+   "words": "tasya citrarathaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.36",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Citraratha",
+   "words": "citrarathasyāpi putro daśaratho 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.36",
+   "a": "Śāntā",
+   "rel": "daughter_of",
+   "b": "Lomapāda",
+   "words": "lomapāda iti khyāto yasya śāntā sutābhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.37",
+   "a": "Caturaṅga",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tasya dāśarathir vīraś caturaṅgo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.38",
+   "a": "Pṛthulākṣa",
+   "rel": "son_of",
+   "b": "Caturaṅga",
+   "words": "caturaṅgasya putras tu pṛthulākṣa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.38",
+   "a": "Campa",
+   "rel": "son_of",
+   "b": "Pṛthulākṣa",
+   "words": "pṛthulākṣasuto rājā campo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.39",
+   "a": "Haryaṅga",
+   "rel": "son_of",
+   "b": "Campa",
+   "words": "haryaṅgo 'sya suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Karṇa",
+   "rel": "son_of",
+   "b": "Haryaṅga",
+   "words": "haryaṅgasya sutaḥ karṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Vikarṇa",
+   "rel": "son_of",
+   "b": "Karṇa",
+   "words": "vikarṇas tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Bṛhatkarman",
+   "rel": "son_of",
+   "b": "Bhadraratha",
+   "words": "putro bhadrarathasyāsīd bṛhatkarmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Bṛhaddarbha",
+   "rel": "son_of",
+   "b": "Bṛhatkarman",
+   "words": "bṛhaddarbhaḥ sutas tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Bṛhanmanas",
+   "rel": "son_of",
+   "b": "Bṛhaddarbha",
+   "words": "yasmāj jajñe bṛhanmanāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Jayadratha",
+   "rel": "son_of",
+   "b": "Bṛhanmanas",
+   "words": "bṛhanmanās tu rājendro janayām āsa vai sutam nāmnā jayadrathaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.40",
+   "a": "Dṛḍharatha",
+   "rel": "son_of",
+   "b": "Jayadratha",
+   "words": "yasmād dṛḍharatho nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

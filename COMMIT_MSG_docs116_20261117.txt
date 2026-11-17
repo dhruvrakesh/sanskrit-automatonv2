@@ -1,0 +1,13 @@
+Is it done? What ran on 17 Nov and what is left; the site's schema traced to docs\cloud (DOCS116_2026_11_16)
+
+- ASKS section 29: the release 12d9d0c; the dashboard started again; the trial read with the second prompt (Arjuna
+  son_of Pandu, begotten_by Sakra; Pandu son_of Vicitravirya, begotten_by Dvaipayana); G6b 91 of 248 parts, 3,392 of
+  9,029 verses, $2.90, stopped by a dropped connection at bndp2 63_2; the 18 failed jobs of 15 Nov done again; the
+  site's genealogies equal the desk's (index_sync and the SQL); the corner lock freed; 148.0 GB of old pre-step
+  backups listed. STATE section 51; RUNBOOK 17 Nov.
+- docs\cloud\SITE_SCHEMA_2026-11-17.md (I2): the site's 26 tables of the schema corpus and 48 functions
+  public.corpus_*, each traced to the docs\cloud file that made it, both ways; two read-only queries to check again.
+- tests: test_docs116_2026_11_16.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgtk

@@ -1,0 +1,375 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 28,
+ "part": 1,
+ "refs": [
+  "HV 28.1",
+  "HV 28.2",
+  "HV 28.3",
+  "HV 28.4",
+  "HV 28.5",
+  "HV 28.6",
+  "HV 28.7",
+  "HV 28.8",
+  "HV 28.9",
+  "HV 28.10",
+  "HV 28.11",
+  "HV 28.12",
+  "HV 28.13",
+  "HV 28.14",
+  "HV 28.15",
+  "HV 28.16",
+  "HV 28.17",
+  "HV 28.18",
+  "HV 28.19",
+  "HV 28.20",
+  "HV 28.21",
+  "HV 28.22",
+  "HV 28.23",
+  "HV 28.24",
+  "HV 28.25",
+  "HV 28.26",
+  "HV 28.27",
+  "HV 28.28",
+  "HV 28.29",
+  "HV 28.30",
+  "HV 28.31",
+  "HV 28.32",
+  "HV 28.33",
+  "HV 28.34"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:10:10",
+ "reply": "{\"statements\":[{\"ref\":\"HV 28.1\",\"a\":\"Vidūratha\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānasya putro 'tha rathamukhyo vidūrathaḥ\",\"doubt\":false},{\"ref\":\"HV 28.1\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevaḥ śūras tu vidūrathasuto 'bhavat\",\"doubt\":true},{\"ref\":\"HV 28.1\",\"a\":\"Rājādhideva\",\"rel\":\"son_of\",\"b\":\"Vidūratha\",\"words\":\"rājādhidevaḥ śūras tu vidūrathasuto 'bhavat\",\"doubt\":false},{\"ref\":\"HV 28.2\",\"a\":\"Datta\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},{\"ref\":\"HV 28.2\",\"a\":\"Atidatta\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},{\"ref\":\"HV 28.2\",\"a\":\"Śoṇāśva\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},{\"ref\":\"HV 28.2\",\"a\":\"Śvetavāhana\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},{\"ref\":\"HV 28.3\",\"a\":\"Śamī\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"śamī ca daṇḍaśarmā ca\",\"doubt\":false},{\"ref\":\"HV 28.3\",\"a\":\"Daṇḍaśarman\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"śamī ca daṇḍaśarmā ca\",\"doubt\":false},{\"ref\":\"HV 28.3\",\"a\":\"Dattaśatru\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"dattaśatruś ca śatrujit\",\"doubt\":false},{\"ref\":\"HV 28.3\",\"a\":\"Śatrujit\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"dattaśatruś ca śatrujit\",\"doubt\":false},{\"ref\":\"HV 28.3\",\"a\":\"Śravaṇā\",\"rel\":\"sister_of\",\"b\":\"Śraviṣṭhā\",\"words\":\"śravaṇā ca śraviṣṭhā ca svasārau\",\"doubt\":false},{\"ref\":\"HV 28.4\",\"a\":\"Pratikṣatra\",\"rel\":\"son_of\",\"b\":\"Śamī\",\"words\":\"śamīputraḥ pratikṣatraḥ\",\"doubt\":false},{\"ref\":\"HV 28.4\",\"a\":\"Svayaṃbhoja\",\"rel\":\"son_of\",\"b\":\"Pratikṣatra\",\"words\":\"pratikṣatrasya cātmajaḥ svayaṃbhojaḥ\",\"doubt\":false},{\"ref\":\"HV 28.4\",\"a\":\"Hṛdika\",\"rel\":\"son_of\",\"b\":\"Svayaṃbhoja\",\"words\":\"svayaṃbhojād dhṛdikaḥ saṃbabhūva\",\"doubt\":false},{\"ref\":\"HV 28.5\",\"a\":\"Kṛtavarman\",\"rel\":\"son_of\",\"b\":\"Hṛdika\",\"words\":\"tasya putrā babhūvur hi kṛtavarmāgrajas teṣām\",\"doubt\":false},{\"ref\":\"HV 28.5\",\"a\":\"Śatadhanvan\",\"rel\":\"son_of\",\"b\":\"Hṛdika\",\"words\":\"tasya putrā babhūvur hi śatadhanvā tu madhyamaḥ\",\"doubt\":false},{\"ref\":\"HV 28.7\",\"a\":\"Kambalabarhiṣa\",\"rel\":\"son_of\",\"b\":\"Devānta\",\"words\":\"devāntasyābhavat putro vidvān kambalabarhiṣaḥ\",\"doubt\":false},{\"ref\":\"HV 28.9\",\"a\":\"Sumitra\",\"rel\":\"son_of\",\"b\":\"Kroṣṭu\",\"words\":\"kroṣṭor bhārye babhūvatuḥ gāndhārī janayām āsa sumitraṃ\",\"doubt\":false},{\"ref\":\"HV 28.9\",\"a\":\"Gāndhārī\",\"rel\":\"wife_of\",\"b\":\"Kroṣṭu\",\"words\":\"gāndhārī caiva mādrī ca kroṣṭor bhārye\",\"doubt\":false},{\"ref\":\"HV 28.9\",\"a\":\"Mādrī\",\"rel\":\"wife_of\",\"b\":\"Kroṣṭu\",\"words\":\"gāndhārī caiva mādrī ca kroṣṭor bhārye\",\"doubt\":false},{\"ref\":\"HV 28.9\",\"a\":\"Sumitra\",\"rel\":\"born_of\",\"b\":\"Gāndhārī\",\"words\":\"gāndhārī janayām āsa sumitraṃ\",\"doubt\":false},{\"ref\":\"HV 28.10\",\"a\":\"Yudhājit\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādrī yudhājitaṃ putraṃ\",\"doubt\":false},{\"ref\":\"HV 28.10\",\"a\":\"Devamīḍhuṣa\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādrī yudhājitaṃ putraṃ tato vai devamīḍhuṣam\",\"doubt\":true},{\"ref\":\"HV 28.10\",\"a\":\"Anamitra\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"anamitram amitrāṇāṃ jetāraṃ\",\"doubt\":true},{\"ref\":\"HV 28.11\",\"a\":\"Nighna\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrasuto nighno\",\"doubt\":false},{\"ref\":\"HV 28.11\",\"a\":\"Prasena\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnasya dvau babhūvatuḥ prasenaś\",\"doubt\":false},{\"ref\":\"HV 28.11\",\"a\":\"Satrājit\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnasya dvau babhūvatuḥ prasenaś cātha satrājit\",\"doubt\":false},{\"ref\":\"HV 28.13\",\"a\":\"Prasenajit\",\"rel\":\"brother_of\",\"b\":\"Satrājit\",\"words\":\"dadau bhrātre narapatiḥ premṇā satrājid\",\"doubt\":true},{\"ref\":\"HV 28.23\",\"a\":\"Jāmbavat\",\"rel\":\"son_of\",\"b\":\"Jāmbavat\",\"words\":\"sutaṃ jāmbavato\",\"doubt\":true},{\"ref\":\"HV 28.28\",\"a\":\"Jāmbavatī\",\"rel\":\"daughter_of\",\"b\":\"Jāmbavat\",\"words\":\"jāmbavatīṃ kanyām ṛkṣarājasya\",\"doubt\":true},{\"ref\":\"HV 28.34\",\"a\":\"Satyabhāmā\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"satyabhāmottamā strīṇāṃ\",\"doubt\":false},{\"ref\":\"HV 28.34\",\"a\":\"Vratinī\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"vratinī ca dṛḍhavratā\",\"doubt\":false},{\"ref\":\"HV 28.34\",\"a\":\"Dṛḍhavratā\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"dṛḍhavratā tathā padmāvatī caiva bhāryāḥ kṛṣṇasya\",\"doubt\":false},{\"ref\":\"HV 28.34\",\"a\":\"Padmāvatī\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"padmāvatī caiva bhāryāḥ kṛṣṇasya\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03658,
+ "tokens": {
+  "input": 5057,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2647,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 28.1",
+   "a": "Vidūratha",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānasya putro 'tha rathamukhyo vidūrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.1",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevaḥ śūras tu vidūrathasuto 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.1",
+   "a": "Rājādhideva",
+   "rel": "son_of",
+   "b": "Vidūratha",
+   "words": "rājādhidevaḥ śūras tu vidūrathasuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.2",
+   "a": "Datta",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.2",
+   "a": "Atidatta",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.2",
+   "a": "Śoṇāśva",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.2",
+   "a": "Śvetavāhana",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.3",
+   "a": "Śamī",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "śamī ca daṇḍaśarmā ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.3",
+   "a": "Daṇḍaśarman",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "śamī ca daṇḍaśarmā ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.3",
+   "a": "Dattaśatru",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "dattaśatruś ca śatrujit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.3",
+   "a": "Śatrujit",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "dattaśatruś ca śatrujit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.3",
+   "a": "Śravaṇā",
+   "rel": "sister_of",
+   "b": "Śraviṣṭhā",
+   "words": "śravaṇā ca śraviṣṭhā ca svasārau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.4",
+   "a": "Pratikṣatra",
+   "rel": "son_of",
+   "b": "Śamī",
+   "words": "śamīputraḥ pratikṣatraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.4",
+   "a": "Svayaṃbhoja",
+   "rel": "son_of",
+   "b": "Pratikṣatra",
+   "words": "pratikṣatrasya cātmajaḥ svayaṃbhojaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.4",
+   "a": "Hṛdika",
+   "rel": "son_of",
+   "b": "Svayaṃbhoja",
+   "words": "svayaṃbhojād dhṛdikaḥ saṃbabhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.5",
+   "a": "Kṛtavarman",
+   "rel": "son_of",
+   "b": "Hṛdika",
+   "words": "tasya putrā babhūvur hi kṛtavarmāgrajas teṣām",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.5",
+   "a": "Śatadhanvan",
+   "rel": "son_of",
+   "b": "Hṛdika",
+   "words": "tasya putrā babhūvur hi śatadhanvā tu madhyamaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 28.7",
+   "a": "Kambalabarhiṣa",
+   "rel": "son_of",
+   "b": "Devānta",
+   "words": "devāntasyābhavat putro vidvān kambalabarhiṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.9",
+   "a": "Sumitra",
+   "rel": "son_of",
+   "b": "Kroṣṭu",
+   "words": "kroṣṭor bhārye babhūvatuḥ gāndhārī janayām āsa sumitraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.9",
+   "a": "Gāndhārī",
+   "rel": "wife_of",
+   "b": "Kroṣṭu",
+   "words": "gāndhārī caiva mādrī ca kroṣṭor bhārye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.9",
+   "a": "Mādrī",
+   "rel": "wife_of",
+   "b": "Kroṣṭu",
+   "words": "gāndhārī caiva mādrī ca kroṣṭor bhārye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.9",
+   "a": "Sumitra",
+   "rel": "born_of",
+   "b": "Gāndhārī",
+   "words": "gāndhārī janayām āsa sumitraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.10",
+   "a": "Yudhājit",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādrī yudhājitaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.10",
+   "a": "Devamīḍhuṣa",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādrī yudhājitaṃ putraṃ tato vai devamīḍhuṣam",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.10",
+   "a": "Anamitra",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "anamitram amitrāṇāṃ jetāraṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.11",
+   "a": "Nighna",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrasuto nighno",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.11",
+   "a": "Prasena",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnasya dvau babhūvatuḥ prasenaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.11",
+   "a": "Satrājit",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnasya dvau babhūvatuḥ prasenaś cātha satrājit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.13",
+   "a": "Prasenajit",
+   "rel": "brother_of",
+   "b": "Satrājit",
+   "words": "dadau bhrātre narapatiḥ premṇā satrājid",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.23",
+   "a": "Jāmbavat",
+   "rel": "son_of",
+   "b": "Jāmbavat",
+   "words": "sutaṃ jāmbavato",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.28",
+   "a": "Jāmbavatī",
+   "rel": "daughter_of",
+   "b": "Jāmbavat",
+   "words": "jāmbavatīṃ kanyām ṛkṣarājasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.34",
+   "a": "Satyabhāmā",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "satyabhāmottamā strīṇāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.34",
+   "a": "Vratinī",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "vratinī ca dṛḍhavratā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.34",
+   "a": "Dṛḍhavratā",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "dṛḍhavratā tathā padmāvatī caiva bhāryāḥ kṛṣṇasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 28.34",
+   "a": "Padmāvatī",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "padmāvatī caiva bhāryāḥ kṛṣṇasya",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

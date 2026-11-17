@@ -1,0 +1,189 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 23,
+ "part": 5,
+ "refs": [
+  "HV 23.147",
+  "HV 23.148",
+  "HV 23.149",
+  "HV 23.150",
+  "HV 23.151",
+  "HV 23.152",
+  "HV 23.153",
+  "HV 23.154",
+  "HV 23.155",
+  "HV 23.156",
+  "HV 23.157",
+  "HV 23.158",
+  "HV 23.159",
+  "HV 23.160",
+  "HV 23.161",
+  "HV 23.162",
+  "HV 23.163",
+  "HV 23.164",
+  "HV 23.165"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:08:31",
+ "reply": "{\"statements\": [\n{\"ref\":\"HV 23.148\",\"a\":\"Nārada\",\"rel\":\"son_of\",\"b\":\"Varīdāsa\",\"words\":\"varīdāsātmajo vidvān\",\"doubt\":true},\n{\"ref\":\"HV 23.151\",\"a\":\"Vasiṣṭha\",\"rel\":\"son_of\",\"b\":\"Varuṇa\",\"words\":\"yaṃ lebhe varuṇaḥ putraṃ purā bhāsvantam uttamam vasiṣṭhaṃ nāma\",\"doubt\":false},\n{\"ref\":\"HV 23.151\",\"a\":\"Āpava\",\"rel\":\"son_of\",\"b\":\"Varuṇa\",\"words\":\"varuṇasyātmajasya vai\",\"doubt\":false},\n{\"ref\":\"HV 23.153\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"rāmo nāmamahābāhur jāmadagnyaḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.157\",\"a\":\"Śūrasena\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},\n{\"ref\":\"HV 23.157\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},\n{\"ref\":\"HV 23.157\",\"a\":\"Dhṛṣṭokta\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},\n{\"ref\":\"HV 23.157\",\"a\":\"Kṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},\n{\"ref\":\"HV 23.157\",\"a\":\"Jayadhvaja\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},\n{\"ref\":\"HV 23.158\",\"a\":\"Tālajaṅgha\",\"rel\":\"son_of\",\"b\":\"Jayadhvaja\",\"words\":\"jayadhvajasya putras tu tālajaṅgho\",\"doubt\":false},\n{\"ref\":\"HV 23.158\",\"a\":\"Tālajaṅgha\",\"rel\":\"line_of\",\"b\":\"Tālajaṅgha\",\"words\":\"tasya putrāḥ śatākhyās tu tālajaṅghā iti śrutāḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.161\",\"a\":\"Madhu\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"vṛṣo vaṃśadharas tatra tasya putro 'bhavan madhuḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.161\",\"a\":\"Vṛṣaṇa\",\"rel\":\"son_of\",\"b\":\"Madhu\",\"words\":\"madhoḥ putraśataṃ tv āsīd vṛṣaṇas tasya vaṃśabhāk\",\"doubt\":false},\n{\"ref\":\"HV 23.162\",\"a\":\"Vṛṣṇi\",\"rel\":\"line_of\",\"b\":\"Vṛṣaṇa\",\"words\":\"vṛṣaṇād vṛṣṇayaḥ sarve\",\"doubt\":false},\n{\"ref\":\"HV 23.162\",\"a\":\"Mādhava\",\"rel\":\"line_of\",\"b\":\"Madhu\",\"words\":\"madhos tu mādhavāḥ smṛtāḥ\",\"doubt\":false},\n{\"ref\":\"HV 23.162\",\"a\":\"Yādava\",\"rel\":\"line_of\",\"b\":\"Yadu\",\"words\":\"yādavā yadunā cāgre nirucyante\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02226,
+ "tokens": {
+  "input": 5027,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1221,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 23.148",
+   "a": "Nārada",
+   "rel": "son_of",
+   "b": "Varīdāsa",
+   "words": "varīdāsātmajo vidvān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.151",
+   "a": "Vasiṣṭha",
+   "rel": "son_of",
+   "b": "Varuṇa",
+   "words": "yaṃ lebhe varuṇaḥ putraṃ purā bhāsvantam uttamam vasiṣṭhaṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.151",
+   "a": "Āpava",
+   "rel": "son_of",
+   "b": "Varuṇa",
+   "words": "varuṇasyātmajasya vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.153",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "rāmo nāmamahābāhur jāmadagnyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.157",
+   "a": "Śūrasena",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.157",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.157",
+   "a": "Dhṛṣṭokta",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.157",
+   "a": "Kṛṣṇa",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.157",
+   "a": "Jayadhvaja",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.158",
+   "a": "Tālajaṅgha",
+   "rel": "son_of",
+   "b": "Jayadhvaja",
+   "words": "jayadhvajasya putras tu tālajaṅgho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.158",
+   "a": "Tālajaṅgha",
+   "rel": "line_of",
+   "b": "Tālajaṅgha",
+   "words": "tasya putrāḥ śatākhyās tu tālajaṅghā iti śrutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.161",
+   "a": "Madhu",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "vṛṣo vaṃśadharas tatra tasya putro 'bhavan madhuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.161",
+   "a": "Vṛṣaṇa",
+   "rel": "son_of",
+   "b": "Madhu",
+   "words": "madhoḥ putraśataṃ tv āsīd vṛṣaṇas tasya vaṃśabhāk",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.162",
+   "a": "Vṛṣṇi",
+   "rel": "line_of",
+   "b": "Vṛṣaṇa",
+   "words": "vṛṣaṇād vṛṣṇayaḥ sarve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.162",
+   "a": "Mādhava",
+   "rel": "line_of",
+   "b": "Madhu",
+   "words": "madhos tu mādhavāḥ smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 23.162",
+   "a": "Yādava",
+   "rel": "line_of",
+   "b": "Yadu",
+   "words": "yādavā yadunā cāgre nirucyante",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

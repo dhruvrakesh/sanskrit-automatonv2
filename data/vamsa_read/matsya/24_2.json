@@ -1,0 +1,84 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 24,
+ "part": 2,
+ "refs": [
+  "MatsP 24.59",
+  "MatsP 24.60",
+  "MatsP 24.61",
+  "MatsP 24.62",
+  "MatsP 24.63",
+  "MatsP 24.64",
+  "MatsP 24.65",
+  "MatsP 24.66",
+  "MatsP 24.67",
+  "MatsP 24.68",
+  "MatsP 24.69",
+  "MatsP 24.70",
+  "MatsP 24.71"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:14:37",
+ "reply": "{\"statements\":[{\"ref\":\"MatsP 24.60\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"taṃ putro devayāneyaḥ pūrvajo yadurabravīt\",\"doubt\":true},{\"ref\":\"MatsP 24.60\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"putro devayāneyaḥ pūrvajo yadur\",\"doubt\":false},{\"ref\":\"MatsP 24.68\",\"a\":\"Pūru\",\"rel\":\"succeeded\",\"b\":\"Yayāti\",\"words\":\"yayāteścātha vayasā rājyaṃ pūrurakārayat\",\"doubt\":false},{\"ref\":\"MatsP 24.69\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pūruṃ putramuvāca ha tvayā dāyādavān asmi tvaṃ me vaṃśakaraḥ sutaḥ\",\"doubt\":false},{\"ref\":\"MatsP 24.70\",\"a\":\"Pauravas\",\"rel\":\"line_of\",\"b\":\"Pūru\",\"words\":\"pauravo vaṃśa ityeṣa khyātiṃ loke gamiṣyati\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00792,
+ "tokens": {
+  "input": 1870,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 418,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 24.60",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "taṃ putro devayāneyaḥ pūrvajo yadurabravīt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.60",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "putro devayāneyaḥ pūrvajo yadur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.68",
+   "a": "Pūru",
+   "rel": "succeeded",
+   "b": "Yayāti",
+   "words": "yayāteścātha vayasā rājyaṃ pūrurakārayat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.69",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pūruṃ putramuvāca ha tvayā dāyādavān asmi tvaṃ me vaṃśakaraḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 24.70",
+   "a": "Pauravas",
+   "rel": "line_of",
+   "b": "Pūru",
+   "words": "pauravo vaṃśa ityeṣa khyātiṃ loke gamiṣyati",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

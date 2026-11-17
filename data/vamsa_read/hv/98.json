@@ -1,0 +1,442 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 98,
+ "part": 0,
+ "refs": [
+  "HV 98.1",
+  "HV 98.2",
+  "HV 98.3",
+  "HV 98.4",
+  "HV 98.5",
+  "HV 98.6",
+  "HV 98.7",
+  "HV 98.8",
+  "HV 98.9",
+  "HV 98.10",
+  "HV 98.11",
+  "HV 98.12",
+  "HV 98.13",
+  "HV 98.14",
+  "HV 98.15",
+  "HV 98.16",
+  "HV 98.17",
+  "HV 98.18",
+  "HV 98.19",
+  "HV 98.20",
+  "HV 98.21",
+  "HV 98.22",
+  "HV 98.23",
+  "HV 98.24",
+  "HV 98.25",
+  "HV 98.26",
+  "HV 98.27"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:10:35",
+ "reply": "{\"statements\":[\n{\"ref\":\"HV 98.5\",\"a\":\"Pradyumna\",\"rel\":\"born_of\",\"b\":\"Rukmiṇī\",\"words\":\"raukmiṇeyān imāñ śṛṇu pradyumnaḥ prathamo\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Bhānu\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ bhānur\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Bhimaratha\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"jajñire satyabhāmāyāṃ bhānur bhimarathaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Kṣupa\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"bhimarathaḥ kṣupaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Rohita\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"rohito dīptimāṃś caiva\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Dīptimān\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"rohito dīptimāṃś caiva\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Tāmrajākṣa\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"tāmrajākṣo jalāntakaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.7\",\"a\":\"Jalāntaka\",\"rel\":\"born_of\",\"b\":\"Satyabhāmā\",\"words\":\"tāmrajākṣo jalāntakaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.8\",\"a\":\"Sāmba\",\"rel\":\"born_of\",\"b\":\"Jāmbavatī\",\"words\":\"jāmbavatyāḥ suto jajñe sāmbaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.9\",\"a\":\"Bhadrakāra\",\"rel\":\"born_of\",\"b\":\"Nagnajitī\",\"words\":\"nagnajityāḥ prajāḥ śṛṇu bhadrakāro\",\"doubt\":false},\n{\"ref\":\"HV 98.9\",\"a\":\"Bhadravinda\",\"rel\":\"born_of\",\"b\":\"Nagnajitī\",\"words\":\"nagnajityāḥ prajāḥ śṛṇu bhadravindaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.9\",\"a\":\"Bhadravatī\",\"rel\":\"daughter_of\",\"b\":\"Nagnajitī\",\"words\":\"kanyā bhadravatī tathā\",\"doubt\":true},\n{\"ref\":\"HV 98.10\",\"a\":\"Saṃgrāmajit\",\"rel\":\"born_of\",\"b\":\"Sudattā\",\"words\":\"sudattāyās tu śaibyāyāḥ saṃgrāmajid ajāyata\",\"doubt\":false},\n{\"ref\":\"HV 98.10\",\"a\":\"Satyajit\",\"rel\":\"born_of\",\"b\":\"Sudattā\",\"words\":\"satyajit senajic caiva\",\"doubt\":false},\n{\"ref\":\"HV 98.13\",\"a\":\"Aśruta\",\"rel\":\"born_of\",\"b\":\"Kālindī\",\"words\":\"aśrutaś ca suto jajñe kālindyāḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.19\",\"a\":\"Aniruddha\",\"rel\":\"son_of\",\"b\":\"Pradyumna\",\"words\":\"pradyumnasya suto yas tu vaidarbhyāṃ\",\"doubt\":false},\n{\"ref\":\"HV 98.19\",\"a\":\"Aniruddha\",\"rel\":\"born_of\",\"b\":\"Vaidarbhī\",\"words\":\"vaidarbhyāṃ rājasattamaḥ aniruddho\",\"doubt\":false},\n{\"ref\":\"HV 98.20\",\"a\":\"Niśaṭha\",\"rel\":\"born_of\",\"b\":\"Revatī\",\"words\":\"revatyāṃ baladevasya jajñāte niśaṭholmukau\",\"doubt\":false},\n{\"ref\":\"HV 98.20\",\"a\":\"Niśaṭha\",\"rel\":\"son_of\",\"b\":\"Baladeva\",\"words\":\"revatyāṃ baladevasya jajñāte niśaṭholmukau\",\"doubt\":false},\n{\"ref\":\"HV 98.20\",\"a\":\"Ulmuka\",\"rel\":\"son_of\",\"b\":\"Baladeva\",\"words\":\"baladevasya jajñāte niśaṭholmukau\",\"doubt\":false},\n{\"ref\":\"HV 98.20\",\"a\":\"Ulmuka\",\"rel\":\"born_of\",\"b\":\"Revatī\",\"words\":\"revatyāṃ baladevasya jajñāte niśaṭholmukau\",\"doubt\":false},\n{\"ref\":\"HV 98.20\",\"a\":\"Niśaṭha\",\"rel\":\"brother_of\",\"b\":\"Ulmuka\",\"words\":\"niśaṭholmukau bhrātarau\",\"doubt\":false},\n{\"ref\":\"HV 98.21\",\"a\":\"Pauṇḍra\",\"rel\":\"son_of\",\"b\":\"Vāsudeva\",\"words\":\"pauṇḍraś ca kapilaś caiva vāsudevasya tau sutau\",\"doubt\":false},\n{\"ref\":\"HV 98.21\",\"a\":\"Kapila\",\"rel\":\"son_of\",\"b\":\"Vāsudeva\",\"words\":\"kapilaś caiva vāsudevasya tau sutau\",\"doubt\":false},\n{\"ref\":\"HV 98.21\",\"a\":\"Sutanu\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sutanuś ca narācī ca śaurer āstāṃ parigrahaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.21\",\"a\":\"Narācī\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"narācī ca śaurer āstāṃ parigrahaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.22\",\"a\":\"Kapila\",\"rel\":\"born_of\",\"b\":\"Narācī\",\"words\":\"narācyāṃ kapilo jajñe\",\"doubt\":false},\n{\"ref\":\"HV 98.22\",\"a\":\"Pauṇḍra\",\"rel\":\"born_of\",\"b\":\"Sutanu\",\"words\":\"pauṇḍraś ca sutanoḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.23\",\"a\":\"Jara\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"turyāṃ samabhavad vīro vasudevān mahābalaḥ jarā nāma\",\"doubt\":false},\n{\"ref\":\"HV 98.24\",\"a\":\"Supārśva\",\"rel\":\"son_of\",\"b\":\"Sāmba\",\"words\":\"kāśyā supārśvaṃ tanayaṃ lebhe sāmbāt\",\"doubt\":false},\n{\"ref\":\"HV 98.24\",\"a\":\"Rukmavatī\",\"rel\":\"wife_of\",\"b\":\"Aniruddha\",\"words\":\"aniruddhasya vaidarbhyā bhāryā rukmavatī\",\"doubt\":false},\n{\"ref\":\"HV 98.24\",\"a\":\"Vajra\",\"rel\":\"son_of\",\"b\":\"Aniruddha\",\"words\":\"tasyāṃ vajro 'niruddhasya\",\"doubt\":false},\n{\"ref\":\"HV 98.24\",\"a\":\"Vajra\",\"rel\":\"born_of\",\"b\":\"Rukmavatī\",\"words\":\"tasyāṃ vajro 'niruddhasya\",\"doubt\":false},\n{\"ref\":\"HV 98.25\",\"a\":\"Prativāha\",\"rel\":\"son_of\",\"b\":\"Vajra\",\"words\":\"vajrāj jajñe prativahaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.25\",\"a\":\"Sucāru\",\"rel\":\"son_of\",\"b\":\"Prativāha\",\"words\":\"sucārus tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.25\",\"a\":\"Śini\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrāc chinir jajñe\",\"doubt\":false},\n{\"ref\":\"HV 98.26\",\"a\":\"Satyavāc\",\"rel\":\"son_of\",\"b\":\"Śini\",\"words\":\"śines tu satyavāg jajñe\",\"doubt\":false},\n{\"ref\":\"HV 98.26\",\"a\":\"Satyaka\",\"rel\":\"son_of\",\"b\":\"Śini\",\"words\":\"śines tu satyavāg jajñe satyakaś ca\",\"doubt\":false},\n{\"ref\":\"HV 98.26\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Satyaka\",\"words\":\"satyakasyātmajaḥ śūro\",\"doubt\":true},\n{\"ref\":\"HV 98.26\",\"a\":\"Yuyudhāna\",\"rel\":\"son_of\",\"b\":\"Satyaka\",\"words\":\"satyakasyātmajaḥ śūro yuyudhānas tv ajāyata\",\"doubt\":true},\n{\"ref\":\"HV 98.27\",\"a\":\"Asaṅga\",\"rel\":\"son_of\",\"b\":\"Yuyudhāna\",\"words\":\"asaṅgo yuyudhānasya\",\"doubt\":false},\n{\"ref\":\"HV 98.27\",\"a\":\"Bhūmi\",\"rel\":\"son_of\",\"b\":\"Asaṅga\",\"words\":\"bhūmis tasyābhavat sutaḥ\",\"doubt\":false},\n{\"ref\":\"HV 98.27\",\"a\":\"Yugaṃdhara\",\"rel\":\"son_of\",\"b\":\"Bhūmi\",\"words\":\"bhūmer yugaṃdharaḥ putra\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03833,
+ "tokens": {
+  "input": 3314,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3170,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 98.4",
+   "a": "Pradyumna",
+   "rel": "born_of",
+   "b": "Rukmiṇī",
+   "words": "raukmiṇeyān imāñ śṛṇu pradyumnaḥ prathamo",
+   "doubt": false,
+   "ref_cited": "HV 98.5",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Bhānu",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ bhānur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Bhimaratha",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "jajñire satyabhāmāyāṃ bhānur bhimarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Kṣupa",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "bhimarathaḥ kṣupaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Rohita",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "rohito dīptimāṃś caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Dīptimān",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "rohito dīptimāṃś caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Tāmrajākṣa",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "tāmrajākṣo jalāntakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.7",
+   "a": "Jalāntaka",
+   "rel": "born_of",
+   "b": "Satyabhāmā",
+   "words": "tāmrajākṣo jalāntakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.8",
+   "a": "Sāmba",
+   "rel": "born_of",
+   "b": "Jāmbavatī",
+   "words": "jāmbavatyāḥ suto jajñe sāmbaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.9",
+   "a": "Bhadrakāra",
+   "rel": "born_of",
+   "b": "Nagnajitī",
+   "words": "nagnajityāḥ prajāḥ śṛṇu bhadrakāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.9",
+   "a": "Bhadravinda",
+   "rel": "born_of",
+   "b": "Nagnajitī",
+   "words": "nagnajityāḥ prajāḥ śṛṇu bhadravindaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 98.9",
+   "a": "Bhadravatī",
+   "rel": "daughter_of",
+   "b": "Nagnajitī",
+   "words": "kanyā bhadravatī tathā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.10",
+   "a": "Saṃgrāmajit",
+   "rel": "born_of",
+   "b": "Sudattā",
+   "words": "sudattāyās tu śaibyāyāḥ saṃgrāmajid ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.10",
+   "a": "Satyajit",
+   "rel": "born_of",
+   "b": "Sudattā",
+   "words": "satyajit senajic caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.13",
+   "a": "Aśruta",
+   "rel": "born_of",
+   "b": "Kālindī",
+   "words": "aśrutaś ca suto jajñe kālindyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.19",
+   "a": "Aniruddha",
+   "rel": "son_of",
+   "b": "Pradyumna",
+   "words": "pradyumnasya suto yas tu vaidarbhyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.19",
+   "a": "Aniruddha",
+   "rel": "born_of",
+   "b": "Vaidarbhī",
+   "words": "vaidarbhyāṃ rājasattamaḥ aniruddho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.20",
+   "a": "Niśaṭha",
+   "rel": "born_of",
+   "b": "Revatī",
+   "words": "revatyāṃ baladevasya jajñāte niśaṭholmukau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.20",
+   "a": "Niśaṭha",
+   "rel": "son_of",
+   "b": "Baladeva",
+   "words": "revatyāṃ baladevasya jajñāte niśaṭholmukau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.20",
+   "a": "Ulmuka",
+   "rel": "son_of",
+   "b": "Baladeva",
+   "words": "baladevasya jajñāte niśaṭholmukau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 98.20",
+   "a": "Ulmuka",
+   "rel": "born_of",
+   "b": "Revatī",
+   "words": "revatyāṃ baladevasya jajñāte niśaṭholmukau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 98.20",
+   "a": "Niśaṭha",
+   "rel": "brother_of",
+   "b": "Ulmuka",
+   "words": "niśaṭholmukau bhrātarau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 98.21",
+   "a": "Pauṇḍra",
+   "rel": "son_of",
+   "b": "Vāsudeva",
+   "words": "pauṇḍraś ca kapilaś caiva vāsudevasya tau sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.21",
+   "a": "Kapila",
+   "rel": "son_of",
+   "b": "Vāsudeva",
+   "words": "kapilaś caiva vāsudevasya tau sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.21",
+   "a": "Sutanu",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sutanuś ca narācī ca śaurer āstāṃ parigrahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.21",
+   "a": "Narācī",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "narācī ca śaurer āstāṃ parigrahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.22",
+   "a": "Kapila",
+   "rel": "born_of",
+   "b": "Narācī",
+   "words": "narācyāṃ kapilo jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.22",
+   "a": "Pauṇḍra",
+   "rel": "born_of",
+   "b": "Sutanu",
+   "words": "pauṇḍraś ca sutanoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.23",
+   "a": "Jara",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "turyāṃ samabhavad vīro vasudevān mahābalaḥ jarā nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.24",
+   "a": "Supārśva",
+   "rel": "son_of",
+   "b": "Sāmba",
+   "words": "kāśyā supārśvaṃ tanayaṃ lebhe sāmbāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.24",
+   "a": "Rukmavatī",
+   "rel": "wife_of",
+   "b": "Aniruddha",
+   "words": "aniruddhasya vaidarbhyā bhāryā rukmavatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.24",
+   "a": "Vajra",
+   "rel": "son_of",
+   "b": "Aniruddha",
+   "words": "tasyāṃ vajro 'niruddhasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.24",
+   "a": "Vajra",
+   "rel": "born_of",
+   "b": "Rukmavatī",
+   "words": "tasyāṃ vajro 'niruddhasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.25",
+   "a": "Prativāha",
+   "rel": "son_of",
+   "b": "Vajra",
+   "words": "vajrāj jajñe prativahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.25",
+   "a": "Sucāru",
+   "rel": "son_of",
+   "b": "Prativāha",
+   "words": "sucārus tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.25",
+   "a": "Śini",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrāc chinir jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.26",
+   "a": "Satyavāc",
+   "rel": "son_of",
+   "b": "Śini",
+   "words": "śines tu satyavāg jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.26",
+   "a": "Satyaka",
+   "rel": "son_of",
+   "b": "Śini",
+   "words": "śines tu satyavāg jajñe satyakaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.26",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Satyaka",
+   "words": "satyakasyātmajaḥ śūro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.26",
+   "a": "Yuyudhāna",
+   "rel": "son_of",
+   "b": "Satyaka",
+   "words": "satyakasyātmajaḥ śūro yuyudhānas tv ajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.27",
+   "a": "Asaṅga",
+   "rel": "son_of",
+   "b": "Yuyudhāna",
+   "words": "asaṅgo yuyudhānasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.27",
+   "a": "Bhūmi",
+   "rel": "son_of",
+   "b": "Asaṅga",
+   "words": "bhūmis tasyābhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 98.27",
+   "a": "Yugaṃdhara",
+   "rel": "son_of",
+   "b": "Bhūmi",
+   "words": "bhūmer yugaṃdharaḥ putra",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

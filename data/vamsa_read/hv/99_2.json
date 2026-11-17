@@ -1,0 +1,59 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 99,
+ "part": 2,
+ "refs": [
+  "HV 99.44",
+  "HV 99.45",
+  "HV 99.46",
+  "HV 99.47",
+  "HV 99.48",
+  "HV 99.49"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:11:02",
+ "reply": "{\"statements\":[{\"ref\":\"HV 99.45\",\"a\":\"Māyāvatī\",\"rel\":\"wife_of\",\"b\":\"Pradyumna\",\"words\":\"bhāryā vai tanayasya te māyāvatīti vikhyātā\",\"doubt\":true},{\"ref\":\"HV 99.46\",\"a\":\"Ratī\",\"rel\":\"wife_of\",\"b\":\"Kāma\",\"words\":\"kāmapatnī hi kanyaiṣā kāmakāmā ratiḥ\",\"doubt\":false},{\"ref\":\"HV 99.48\",\"a\":\"Māyāvatī\",\"rel\":\"wife_of\",\"b\":\"Pradyumna\",\"words\":\"patny eṣā mama putrasya snuṣā tava varāṅganā\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00532,
+ "tokens": {
+  "input": 1436,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 245,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 99.45",
+   "a": "Māyāvatī",
+   "rel": "wife_of",
+   "b": "Pradyumna",
+   "words": "bhāryā vai tanayasya te māyāvatīti vikhyātā",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "HV 99.46",
+   "a": "Ratī",
+   "rel": "wife_of",
+   "b": "Kāma",
+   "words": "kāmapatnī hi kanyaiṣā kāmakāmā ratiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 99.48",
+   "a": "Māyāvatī",
+   "rel": "wife_of",
+   "b": "Pradyumna",
+   "words": "patny eṣā mama putrasya snuṣā tava varāṅganā",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
+}

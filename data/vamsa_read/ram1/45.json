@@ -1,0 +1,57 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 45,
+ "part": 0,
+ "refs": [
+  "R 1,45.1",
+  "R 1,45.2",
+  "R 1,45.3",
+  "R 1,45.4",
+  "R 1,45.5",
+  "R 1,45.6",
+  "R 1,45.7",
+  "R 1,45.8",
+  "R 1,45.9",
+  "R 1,45.10",
+  "R 1,45.11",
+  "R 1,45.12",
+  "R 1,45.13",
+  "R 1,45.14",
+  "R 1,45.15",
+  "R 1,45.16",
+  "R 1,45.17",
+  "R 1,45.18",
+  "R 1,45.19",
+  "R 1,45.20",
+  "R 1,45.21",
+  "R 1,45.22"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:11:53",
+ "reply": "{\"statements\": [{\"ref\": \"R 1,45.1\", \"a\": \"Diti\", \"rel\": \"wife_of\", \"b\": \"Mārīca Kāśyapa\", \"words\": \"mārīcaṃ kāśyapaṃ rāma bhartāram\", \"doubt\": false}, {\"ref\": \"R 1,45.2\", \"a\": \"Diti's sons\", \"rel\": \"son_of\", \"b\": \"Mārīca Kāśyapa\", \"words\": \"tava putrair mahābalaiḥ\", \"doubt\": true}]}\n\nCorrection: the second item names no individual, so it should not stand. The only statement that meets the rules is the first one.\n\n{\"statements\": [{\"ref\": \"R 1,45.1\", \"a\": \"Diti\", \"rel\": \"wife_of\", \"b\": \"Mārīca Kāśyapa\", \"words\": \"mārīcaṃ kāśyapaṃ rāma bhartāram\", \"doubt\": false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00797,
+ "tokens": {
+  "input": 2463,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 304,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,45.1",
+   "a": "Diti",
+   "rel": "wife_of",
+   "b": "Mārīca Kāśyapa",
+   "words": "mārīcaṃ kāśyapaṃ rāma bhartāram",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

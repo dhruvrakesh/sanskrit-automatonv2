@@ -1,0 +1,360 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp1",
+ "title": "Brahmandapurana, book 1",
+ "chapter": 9,
+ "part": 2,
+ "refs": [
+  "BndP 1,9.56",
+  "BndP 1,9.57",
+  "BndP 1,9.58",
+  "BndP 1,9.59",
+  "BndP 1,9.60",
+  "BndP 1,9.61",
+  "BndP 1,9.62",
+  "BndP 1,9.63",
+  "BndP 1,9.64",
+  "BndP 1,9.65",
+  "BndP 1,9.66",
+  "BndP 1,9.67",
+  "BndP 1,9.68",
+  "BndP 1,9.69",
+  "BndP 1,9.70",
+  "BndP 1,9.71",
+  "BndP 1,9.72",
+  "BndP 1,9.73",
+  "BndP 1,9.74",
+  "BndP 1,9.75",
+  "BndP 1,9.76",
+  "BndP 1,9.77",
+  "BndP 1,9.78",
+  "BndP 1,9.79",
+  "BndP 1,9.80",
+  "BndP 1,9.81",
+  "BndP 1,9.82",
+  "BndP 1,9.83",
+  "BndP 1,9.84",
+  "BndP 1,9.85",
+  "BndP 1,9.86",
+  "BndP 1,9.87",
+  "BndP 1,9.88",
+  "BndP 1,9.89",
+  "BndP 1,9.90",
+  "BndP 1,9.91",
+  "BndP 1,9.92"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:19:41",
+ "reply": "{\"statements\": [\n{\"ref\":\"BndP 1,9.56\",\"a\":\"Santati\",\"rel\":\"wife_of\",\"b\":\"Kratu\",\"doubt\":false,\"words\":\"kratave saṃtatiṃ nāma\"},\n{\"ref\":\"BndP 1,9.56\",\"a\":\"Anasūyā\",\"rel\":\"wife_of\",\"b\":\"Atri\",\"doubt\":false,\"words\":\"anasūyāṃ tathātraye\"},\n{\"ref\":\"BndP 1,9.56\",\"a\":\"Ūrjā\",\"rel\":\"wife_of\",\"b\":\"Vasiṣṭha\",\"doubt\":false,\"words\":\"ūrjāṃ dadau vasiṣṭhāya\"},\n{\"ref\":\"BndP 1,9.56\",\"a\":\"Svāhā\",\"rel\":\"wife_of\",\"b\":\"Agni\",\"doubt\":false,\"words\":\"svāhāṃ caivāgnaye dadau\"},\n{\"ref\":\"BndP 1,9.57\",\"a\":\"Svadhā\",\"rel\":\"wife_of\",\"b\":\"Pitṛ\",\"doubt\":true,\"words\":\"svadhāṃ caiva pitṛbhyastu\"},\n{\"ref\":\"BndP 1,9.58\",\"a\":\"Kāma\",\"rel\":\"born_of\",\"b\":\"Śraddhā\",\"doubt\":false,\"words\":\"śraddhā kāmaṃ prajajñe\"},\n{\"ref\":\"BndP 1,9.58\",\"a\":\"Darpa\",\"rel\":\"born_of\",\"b\":\"Lakṣmī\",\"doubt\":false,\"words\":\"darpo lakṣmī sutaḥ smṛtaḥ\"},\n{\"ref\":\"BndP 1,9.59\",\"a\":\"Niyama\",\"rel\":\"born_of\",\"b\":\"Dhṛti\",\"doubt\":false,\"words\":\"dhṛtyāstu niyamaḥ putraḥ\"},\n{\"ref\":\"BndP 1,9.59\",\"a\":\"Santoṣa\",\"rel\":\"born_of\",\"b\":\"Tuṣṭi\",\"doubt\":false,\"words\":\"tuṣṭyāḥ saṃtoṣa ucyate\"},\n{\"ref\":\"BndP 1,9.59\",\"a\":\"Lābha\",\"rel\":\"born_of\",\"b\":\"Puṣṭi\",\"doubt\":false,\"words\":\"puṣṭyā lābhaḥ sutaḥ\"},\n{\"ref\":\"BndP 1,9.59\",\"a\":\"Śruta\",\"rel\":\"born_of\",\"b\":\"Medhā\",\"doubt\":false,\"words\":\"medhāputraḥ śrutaḥ\"},\n{\"ref\":\"BndP 1,9.60\",\"a\":\"Dama\",\"rel\":\"born_of\",\"b\":\"Kriyā\",\"doubt\":false,\"words\":\"kriyāyāstanayau proktau damaśca\"},\n{\"ref\":\"BndP 1,9.60\",\"a\":\"Śama\",\"rel\":\"born_of\",\"b\":\"Kriyā\",\"doubt\":false,\"words\":\"kriyāyāstanayau proktau damaśca śama eva ca\"},\n{\"ref\":\"BndP 1,9.60\",\"a\":\"Bodha\",\"rel\":\"born_of\",\"b\":\"Buddhi\",\"doubt\":false,\"words\":\"buddherbodhaḥ sutaḥ\"},\n{\"ref\":\"BndP 1,9.60\",\"a\":\"Apramāda\",\"rel\":\"born_of\",\"b\":\"Buddhi\",\"doubt\":false,\"words\":\"apramādaśca tāvubhau\"},\n{\"ref\":\"BndP 1,9.61\",\"a\":\"Vinaya\",\"rel\":\"born_of\",\"b\":\"Lajjā\",\"doubt\":false,\"words\":\"lajjāyā vinayaḥ putraḥ\"},\n{\"ref\":\"BndP 1,9.61\",\"a\":\"Vyavasāya\",\"rel\":\"son_of\",\"b\":\"Vasu\",\"doubt\":true,\"words\":\"vyavasāyo vasoḥ sutaḥ\"},\n{\"ref\":\"BndP 1,9.61\",\"a\":\"Kṣema\",\"rel\":\"born_of\",\"b\":\"Śānti\",\"doubt\":false,\"words\":\"kṣemaḥ śānteḥ sutaḥ\"},\n{\"ref\":\"BndP 1,9.61\",\"a\":\"Sukha\",\"rel\":\"born_of\",\"b\":\"Siddhi\",\"doubt\":false,\"words\":\"sukhaṃ siddhervyajāyata\"},\n{\"ref\":\"BndP 1,9.62\",\"a\":\"Yaśas\",\"rel\":\"born_of\",\"b\":\"Kīrti\",\"doubt\":false,\"words\":\"yaśaḥ kīrteḥ sutaḥ\"},\n{\"ref\":\"BndP 1,9.62\",\"a\":\"Harṣa\",\"rel\":\"son_of\",\"b\":\"Kāma\",\"doubt\":false,\"words\":\"kāmasya tu suto harṣo\"},\n{\"ref\":\"BndP 1,9.62\",\"a\":\"Harṣa\",\"rel\":\"born_of\",\"b\":\"Siddhi\",\"doubt\":false,\"words\":\"devyāṃ siddhyāṃ vyajāyata\"},\n{\"ref\":\"BndP 1,9.63\",\"a\":\"Hiṃsā\",\"rel\":\"born_of\",\"b\":\"Adharma\",\"doubt\":false,\"words\":\"jajñe hiṃsā tvadharmādvai\"},\n{\"ref\":\"BndP 1,9.64\",\"a\":\"Bhaya\",\"rel\":\"born_of\",\"b\":\"Nikṛti\",\"doubt\":true,\"words\":\"nikṛtyanṛtayorjajña bhayaṃ\"},\n{\"ref\":\"BndP 1,9.64\",\"a\":\"Naraka\",\"rel\":\"born_of\",\"b\":\"Nikṛti\",\"doubt\":true,\"words\":\"bhayaṃ naraka eva ca\"},\n{\"ref\":\"BndP 1,9.65\",\"a\":\"Mṛtyu\",\"rel\":\"born_of\",\"b\":\"Māyā\",\"doubt\":true,\"words\":\"mayājjajñe 'tha vai māyā mṛtyuṃ\"},\n{\"ref\":\"BndP 1,9.65\",\"a\":\"Duḥkha\",\"rel\":\"born_of\",\"b\":\"Vedanā\",\"doubt\":false,\"words\":\"vedanāyāṃ tataścāpi jejña duḥkhaṃ\"},\n{\"ref\":\"BndP 1,9.66\",\"a\":\"Vyādhi\",\"rel\":\"son_of\",\"b\":\"Mṛtyu\",\"doubt\":false,\"words\":\"mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire\"},\n{\"ref\":\"BndP 1,9.66\",\"a\":\"Jarā\",\"rel\":\"son_of\",\"b\":\"Mṛtyu\",\"doubt\":false,\"words\":\"mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire\"},\n{\"ref\":\"BndP 1,9.66\",\"a\":\"Śoka\",\"rel\":\"son_of\",\"b\":\"Mṛtyu\",\"doubt\":false,\"words\":\"mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire\"},\n{\"ref\":\"BndP 1,9.66\",\"a\":\"Krodha\",\"rel\":\"son_of\",\"b\":\"Mṛtyu\",\"doubt\":false,\"words\":\"mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire\"},\n{\"ref\":\"BndP 1,9.66\",\"a\":\"Asūyā\",\"rel\":\"son_of\",\"b\":\"Mṛtyu\",\"doubt\":false,\"words\":\"mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire\"},\n{\"ref\":\"BndP 1,9.68\",\"a\":\"Nīlalohita\",\"rel\":\"other\",\"b\":\"Brahmā\",\"doubt\":true,\"words\":\"brahmaṇā nīlalohitaḥ\"}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03288,
+ "tokens": {
+  "input": 3883,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2511,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 1,9.56",
+   "a": "Santati",
+   "rel": "wife_of",
+   "b": "Kratu",
+   "words": "kratave saṃtatiṃ nāma",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,9.56",
+   "a": "Anasūyā",
+   "rel": "wife_of",
+   "b": "Atri",
+   "words": "anasūyāṃ tathātraye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.56",
+   "a": "Ūrjā",
+   "rel": "wife_of",
+   "b": "Vasiṣṭha",
+   "words": "ūrjāṃ dadau vasiṣṭhāya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.56",
+   "a": "Svāhā",
+   "rel": "wife_of",
+   "b": "Agni",
+   "words": "svāhāṃ caivāgnaye dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.57",
+   "a": "Svadhā",
+   "rel": "wife_of",
+   "b": "Pitṛ",
+   "words": "svadhāṃ caiva pitṛbhyastu",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.58",
+   "a": "Kāma",
+   "rel": "born_of",
+   "b": "Śraddhā",
+   "words": "śraddhā kāmaṃ prajajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.58",
+   "a": "Darpa",
+   "rel": "born_of",
+   "b": "Lakṣmī",
+   "words": "darpo lakṣmī sutaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.59",
+   "a": "Niyama",
+   "rel": "born_of",
+   "b": "Dhṛti",
+   "words": "dhṛtyāstu niyamaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.59",
+   "a": "Santoṣa",
+   "rel": "born_of",
+   "b": "Tuṣṭi",
+   "words": "tuṣṭyāḥ saṃtoṣa ucyate",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,9.59",
+   "a": "Lābha",
+   "rel": "born_of",
+   "b": "Puṣṭi",
+   "words": "puṣṭyā lābhaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.59",
+   "a": "Śruta",
+   "rel": "born_of",
+   "b": "Medhā",
+   "words": "medhāputraḥ śrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.60",
+   "a": "Dama",
+   "rel": "born_of",
+   "b": "Kriyā",
+   "words": "kriyāyāstanayau proktau damaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.60",
+   "a": "Śama",
+   "rel": "born_of",
+   "b": "Kriyā",
+   "words": "kriyāyāstanayau proktau damaśca śama eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.60",
+   "a": "Bodha",
+   "rel": "born_of",
+   "b": "Buddhi",
+   "words": "buddherbodhaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.60",
+   "a": "Apramāda",
+   "rel": "born_of",
+   "b": "Buddhi",
+   "words": "apramādaśca tāvubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.61",
+   "a": "Vinaya",
+   "rel": "born_of",
+   "b": "Lajjā",
+   "words": "lajjāyā vinayaḥ putraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 1,9.61",
+   "a": "Vyavasāya",
+   "rel": "son_of",
+   "b": "Vasu",
+   "words": "vyavasāyo vasoḥ sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.61",
+   "a": "Kṣema",
+   "rel": "born_of",
+   "b": "Śānti",
+   "words": "kṣemaḥ śānteḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.61",
+   "a": "Sukha",
+   "rel": "born_of",
+   "b": "Siddhi",
+   "words": "sukhaṃ siddhervyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.62",
+   "a": "Yaśas",
+   "rel": "born_of",
+   "b": "Kīrti",
+   "words": "yaśaḥ kīrteḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.62",
+   "a": "Harṣa",
+   "rel": "son_of",
+   "b": "Kāma",
+   "words": "kāmasya tu suto harṣo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.62",
+   "a": "Harṣa",
+   "rel": "born_of",
+   "b": "Siddhi",
+   "words": "devyāṃ siddhyāṃ vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.63",
+   "a": "Hiṃsā",
+   "rel": "born_of",
+   "b": "Adharma",
+   "words": "jajñe hiṃsā tvadharmādvai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.64",
+   "a": "Bhaya",
+   "rel": "born_of",
+   "b": "Nikṛti",
+   "words": "nikṛtyanṛtayorjajña bhayaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.64",
+   "a": "Naraka",
+   "rel": "born_of",
+   "b": "Nikṛti",
+   "words": "bhayaṃ naraka eva ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.65",
+   "a": "Mṛtyu",
+   "rel": "born_of",
+   "b": "Māyā",
+   "words": "mayājjajñe 'tha vai māyā mṛtyuṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.65",
+   "a": "Duḥkha",
+   "rel": "born_of",
+   "b": "Vedanā",
+   "words": "vedanāyāṃ tataścāpi jejña duḥkhaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.66",
+   "a": "Vyādhi",
+   "rel": "son_of",
+   "b": "Mṛtyu",
+   "words": "mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.66",
+   "a": "Jarā",
+   "rel": "son_of",
+   "b": "Mṛtyu",
+   "words": "mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.66",
+   "a": "Śoka",
+   "rel": "son_of",
+   "b": "Mṛtyu",
+   "words": "mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.66",
+   "a": "Krodha",
+   "rel": "son_of",
+   "b": "Mṛtyu",
+   "words": "mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.66",
+   "a": "Asūyā",
+   "rel": "son_of",
+   "b": "Mṛtyu",
+   "words": "mṛtyorvyādhirjarāśokakrodhāsūyā vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,9.68",
+   "a": "Nīlalohita",
+   "rel": "other",
+   "b": "Brahmā",
+   "words": "brahmaṇā nīlalohitaḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

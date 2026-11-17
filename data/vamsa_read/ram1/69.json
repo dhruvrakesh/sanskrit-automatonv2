@@ -1,0 +1,436 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "chapter": 69,
+ "part": 0,
+ "refs": [
+  "R 1,69.1",
+  "R 1,69.2",
+  "R 1,69.3",
+  "R 1,69.4",
+  "R 1,69.5",
+  "R 1,69.6",
+  "R 1,69.7",
+  "R 1,69.8",
+  "R 1,69.9",
+  "R 1,69.10",
+  "R 1,69.11",
+  "R 1,69.12",
+  "R 1,69.13",
+  "R 1,69.14",
+  "R 1,69.15",
+  "R 1,69.16",
+  "R 1,69.17",
+  "R 1,69.18",
+  "R 1,69.19",
+  "R 1,69.20",
+  "R 1,69.21",
+  "R 1,69.22",
+  "R 1,69.23",
+  "R 1,69.24",
+  "R 1,69.25",
+  "R 1,69.26",
+  "R 1,69.27",
+  "R 1,69.28",
+  "R 1,69.29",
+  "R 1,69.30",
+  "R 1,69.31",
+  "R 1,69.32"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_rAmAyaNa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Muneo Tokunaga, John Smith)",
+ "at": "2026-11-17T10:12:01",
+ "reply": "{\"statements\":[{\"ref\":\"R 1,69.2\",\"a\":\"Kuśadhvaja\",\"rel\":\"brother_of\",\"b\":\"Janaka\",\"words\":\"bhrātā mama mahātejā yavīyān\",\"doubt\":false},{\"ref\":\"R 1,69.17\",\"a\":\"Marīci\",\"rel\":\"born_of\",\"b\":\"Brahmā\",\"words\":\"tasmān marīciḥ saṃjajñe\",\"doubt\":true},{\"ref\":\"R 1,69.17\",\"a\":\"Kaśyapa\",\"rel\":\"son_of\",\"b\":\"Marīci\",\"words\":\"marīceḥ kaśyapaḥ sutaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.18\",\"a\":\"Vivasvān\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"vivasvān kaśyapāj jajñe\",\"doubt\":false},{\"ref\":\"R 1,69.18\",\"a\":\"Manu Vaivasvata\",\"rel\":\"son_of\",\"b\":\"Vivasvān\",\"words\":\"vivasvān kaśyapāj jajñe manur vaivaisvataḥ\",\"doubt\":true},{\"ref\":\"R 1,69.18\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"ikṣvākus tu manoḥ sutaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.19\",\"a\":\"Vikukṣi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākos tu sutaḥ śrīmān vikukṣir udapadyata\",\"doubt\":false},{\"ref\":\"R 1,69.20\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Vikukṣi\",\"words\":\"vikukṣes tu mahātejā bāṇaḥ putraḥ\",\"doubt\":false},{\"ref\":\"R 1,69.20\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Bāṇa\",\"words\":\"bāṇasya tu mahātejā anaraṇyaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.21\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"anaraṇyāt pṛthur jajñe\",\"doubt\":false},{\"ref\":\"R 1,69.21\",\"a\":\"Triśaṅku\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"triśaṅkus tu pṛthoḥ sutaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.21\",\"a\":\"Dhundhumāra\",\"rel\":\"son_of\",\"b\":\"Triśaṅku\",\"words\":\"triśaṅkor abhavat putro dhundhumāro\",\"doubt\":false},{\"ref\":\"R 1,69.22\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Dhundhumāra\",\"words\":\"dhundhumārān mahātejā yuvanāśvo\",\"doubt\":false},{\"ref\":\"R 1,69.22\",\"a\":\"Māndhātā\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"yuvanāśvasutaḥ śrīmān māndhātā\",\"doubt\":false},{\"ref\":\"R 1,69.23\",\"a\":\"Susaṃdhi\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"māndhātus tu sutaḥ śrīmān susaṃdhir\",\"doubt\":false},{\"ref\":\"R 1,69.23\",\"a\":\"Dhruvasaṃdhi\",\"rel\":\"son_of\",\"b\":\"Susaṃdhi\",\"words\":\"susaṃdher api putrau dvau dhruvasaṃdhiḥ\",\"doubt\":false},{\"ref\":\"R 1,69.23\",\"a\":\"Prasenajit\",\"rel\":\"son_of\",\"b\":\"Susaṃdhi\",\"words\":\"susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit\",\"doubt\":false},{\"ref\":\"R 1,69.24\",\"a\":\"Bharata\",\"rel\":\"son_of\",\"b\":\"Dhruvasaṃdhi\",\"words\":\"dhruvasaṃdhes tu bharato nāma\",\"doubt\":false},{\"ref\":\"R 1,69.24\",\"a\":\"Asita\",\"rel\":\"son_of\",\"b\":\"Bharata\",\"words\":\"bharatāt tu mahātejā asito nāma jāyata\",\"doubt\":false},{\"ref\":\"R 1,69.25\",\"a\":\"Sagara\",\"rel\":\"begotten_by\",\"b\":\"Asita\",\"words\":\"saha tena gareṇaiva jātaḥ sa sagaro 'bhavat\",\"doubt\":true},{\"ref\":\"R 1,69.25\",\"a\":\"Asamañja\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"sagarasyāsamañjas\",\"doubt\":false},{\"ref\":\"R 1,69.25\",\"a\":\"Aṃśumān\",\"rel\":\"son_of\",\"b\":\"Asamañja\",\"words\":\"asamañjād athāṃśumān\",\"doubt\":false},{\"ref\":\"R 1,69.26\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumān\",\"words\":\"dilīpo 'ṃśumataḥ putro\",\"doubt\":false},{\"ref\":\"R 1,69.26\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpasya bhagīrathaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.26\",\"a\":\"Kakutstha\",\"rel\":\"son_of\",\"b\":\"Bhagīratha\",\"words\":\"bhagīrathāt kakutsthaś ca\",\"doubt\":false},{\"ref\":\"R 1,69.26\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Kakutstha\",\"words\":\"kakutsthasya raghus tathā\",\"doubt\":false},{\"ref\":\"R 1,69.27\",\"a\":\"Pravṛddha\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"raghos tu putras tejasvī pravṛddhaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.27\",\"a\":\"Śaṅkhaṇa\",\"rel\":\"son_of\",\"b\":\"Pravṛddha\",\"words\":\"tasmāj jātas tu śaṅkhaṇaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.28\",\"a\":\"Sudarśana\",\"rel\":\"son_of\",\"b\":\"Śaṅkhaṇa\",\"words\":\"sudarśanaḥ śaṅkhaṇasya\",\"doubt\":false},{\"ref\":\"R 1,69.28\",\"a\":\"Agnivarṇa\",\"rel\":\"son_of\",\"b\":\"Sudarśana\",\"words\":\"agnivarṇaḥ sudarśanāt\",\"doubt\":false},{\"ref\":\"R 1,69.28\",\"a\":\"Śīghraga\",\"rel\":\"son_of\",\"b\":\"Agnivarṇa\",\"words\":\"śīghragas tv agnivarṇasya\",\"doubt\":false},{\"ref\":\"R 1,69.28\",\"a\":\"Maru\",\"rel\":\"son_of\",\"b\":\"Śīghraga\",\"words\":\"śīghragasya maruḥ sutaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.29\",\"a\":\"Praśuśruka\",\"rel\":\"son_of\",\"b\":\"Maru\",\"words\":\"maroḥ praśuśrukas tv āsīd\",\"doubt\":false},{\"ref\":\"R 1,69.29\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Praśuśruka\",\"words\":\"ambarīṣaḥ praśuśrukāt\",\"doubt\":false},{\"ref\":\"R 1,69.29\",\"a\":\"Nahuṣa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"ambarīṣasya putro 'bhūn nahuṣaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya yayātis\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"nābhāgas tu yayātijaḥ\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Aja\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasya babhūvāja\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Aja\",\"words\":\"ajād daśaratho 'bhavat\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"daśarathāj jātau bhrātarau rāmalakṣmaṇau\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Lakṣmaṇa\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"daśarathāj jātau bhrātarau rāmalakṣmaṇau\",\"doubt\":false},{\"ref\":\"R 1,69.30\",\"a\":\"Rāma\",\"rel\":\"brother_of\",\"b\":\"Lakṣmaṇa\",\"words\":\"bhrātarau rāmalakṣmaṇau\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03744,
+ "tokens": {
+  "input": 3313,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3081,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "R 1,69.2",
+   "a": "Kuśadhvaja",
+   "rel": "brother_of",
+   "b": "Janaka",
+   "words": "bhrātā mama mahātejā yavīyān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.17",
+   "a": "Marīci",
+   "rel": "born_of",
+   "b": "Brahmā",
+   "words": "tasmān marīciḥ saṃjajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.17",
+   "a": "Kaśyapa",
+   "rel": "son_of",
+   "b": "Marīci",
+   "words": "marīceḥ kaśyapaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.18",
+   "a": "Vivasvān",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "vivasvān kaśyapāj jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.18",
+   "a": "Manu Vaivasvata",
+   "rel": "son_of",
+   "b": "Vivasvān",
+   "words": "vivasvān kaśyapāj jajñe manur vaivaisvataḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.18",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "ikṣvākus tu manoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.19",
+   "a": "Vikukṣi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākos tu sutaḥ śrīmān vikukṣir udapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.20",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Vikukṣi",
+   "words": "vikukṣes tu mahātejā bāṇaḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.20",
+   "a": "Anaraṇya",
+   "rel": "son_of",
+   "b": "Bāṇa",
+   "words": "bāṇasya tu mahātejā anaraṇyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.21",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Anaraṇya",
+   "words": "anaraṇyāt pṛthur jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.21",
+   "a": "Triśaṅku",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "triśaṅkus tu pṛthoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.21",
+   "a": "Dhundhumāra",
+   "rel": "son_of",
+   "b": "Triśaṅku",
+   "words": "triśaṅkor abhavat putro dhundhumāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.22",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Dhundhumāra",
+   "words": "dhundhumārān mahātejā yuvanāśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.22",
+   "a": "Māndhātā",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "yuvanāśvasutaḥ śrīmān māndhātā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.23",
+   "a": "Susaṃdhi",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "māndhātus tu sutaḥ śrīmān susaṃdhir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.23",
+   "a": "Dhruvasaṃdhi",
+   "rel": "son_of",
+   "b": "Susaṃdhi",
+   "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.23",
+   "a": "Prasenajit",
+   "rel": "son_of",
+   "b": "Susaṃdhi",
+   "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.24",
+   "a": "Bharata",
+   "rel": "son_of",
+   "b": "Dhruvasaṃdhi",
+   "words": "dhruvasaṃdhes tu bharato nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.24",
+   "a": "Asita",
+   "rel": "son_of",
+   "b": "Bharata",
+   "words": "bharatāt tu mahātejā asito nāma jāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.25",
+   "a": "Sagara",
+   "rel": "begotten_by",
+   "b": "Asita",
+   "words": "saha tena gareṇaiva jātaḥ sa sagaro 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.25",
+   "a": "Asamañja",
+   "rel": "son_of",
+   "b": "Sagara",
+   "words": "sagarasyāsamañjas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.25",
+   "a": "Aṃśumān",
+   "rel": "son_of",
+   "b": "Asamañja",
+   "words": "asamañjād athāṃśumān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.26",
+   "a": "Dilīpa",
+   "rel": "son_of",
+   "b": "Aṃśumān",
+   "words": "dilīpo 'ṃśumataḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.26",
+   "a": "Bhagīratha",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "dilīpasya bhagīrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.26",
+   "a": "Kakutstha",
+   "rel": "son_of",
+   "b": "Bhagīratha",
+   "words": "bhagīrathāt kakutsthaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.26",
+   "a": "Raghu",
+   "rel": "son_of",
+   "b": "Kakutstha",
+   "words": "kakutsthasya raghus tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.27",
+   "a": "Pravṛddha",
+   "rel": "son_of",
+   "b": "Raghu",
+   "words": "raghos tu putras tejasvī pravṛddhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.27",
+   "a": "Śaṅkhaṇa",
+   "rel": "son_of",
+   "b": "Pravṛddha",
+   "words": "tasmāj jātas tu śaṅkhaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.28",
+   "a": "Sudarśana",
+   "rel": "son_of",
+   "b": "Śaṅkhaṇa",
+   "words": "sudarśanaḥ śaṅkhaṇasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.28",
+   "a": "Agnivarṇa",
+   "rel": "son_of",
+   "b": "Sudarśana",
+   "words": "agnivarṇaḥ sudarśanāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.28",
+   "a": "Śīghraga",
+   "rel": "son_of",
+   "b": "Agnivarṇa",
+   "words": "śīghragas tv agnivarṇasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.28",
+   "a": "Maru",
+   "rel": "son_of",
+   "b": "Śīghraga",
+   "words": "śīghragasya maruḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.29",
+   "a": "Praśuśruka",
+   "rel": "son_of",
+   "b": "Maru",
+   "words": "maroḥ praśuśrukas tv āsīd",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.29",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Praśuśruka",
+   "words": "ambarīṣaḥ praśuśrukāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.29",
+   "a": "Nahuṣa",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "ambarīṣasya putro 'bhūn nahuṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya yayātis",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "nābhāgas tu yayātijaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Aja",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasya babhūvāja",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Aja",
+   "words": "ajād daśaratho 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "daśarathāj jātau bhrātarau rāmalakṣmaṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Lakṣmaṇa",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "daśarathāj jātau bhrātarau rāmalakṣmaṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "R 1,69.30",
+   "a": "Rāma",
+   "rel": "brother_of",
+   "b": "Lakṣmaṇa",
+   "words": "bhrātarau rāmalakṣmaṇau",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

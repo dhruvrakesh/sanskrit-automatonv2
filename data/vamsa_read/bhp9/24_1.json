@@ -636,7 +636,7 @@
    "b": "Śvaphalka",
    "words": "kṣetropekṣo 'rimardanaḥ",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.17",
@@ -645,7 +645,7 @@
    "b": "Śvaphalka",
    "words": "śatrughno gandhamādaśca",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.17",
@@ -654,7 +654,7 @@
    "b": "Śvaphalka",
    "words": "śatrughno gandhamādaśca",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.17",
@@ -663,7 +663,7 @@
    "b": "Śvaphalka",
    "words": "pratibāhuśca dvādaśa",
    "doubt": false,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.17",
@@ -810,13 +810,15 @@
    "check": "words"
   },
   {
-   "ref": "BhP 9.24.22",
+   "ref": "BhP 9.24.21",
    "a": "Devavān",
    "rel": "son_of",
    "b": "Devaka",
    "words": "catvāro devakātmajāḥ devavān upadevaśca",
    "doubt": false,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.24.22",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.22",
@@ -1149,7 +1151,7 @@
    "b": "Śūra",
    "words": "sṛñjayaṃ śyāmakaṃ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.29",
@@ -1158,7 +1160,7 @@
    "b": "Śūra",
    "words": "sṛñjayaṃ śyāmakaṃ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.29",
@@ -1167,7 +1169,7 @@
    "b": "Śūra",
    "words": "kaṅkaṃ śamīkaṃ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.29",
@@ -1176,7 +1178,7 @@
    "b": "Śūra",
    "words": "kaṅkaṃ śamīkaṃ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.29",
@@ -1185,7 +1187,7 @@
    "b": "Śūra",
    "words": "vatsakaṃ vṛkam",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.29",
@@ -1194,7 +1196,7 @@
    "b": "Śūra",
    "words": "vatsakaṃ vṛkam",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   },
   {
    "ref": "BhP 9.24.31",
@@ -1752,7 +1754,7 @@
    "b": "Devakī",
    "words": "aṣṭamastu tayorāsīt svayameva hariḥ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   }
  ]
 }

@@ -1,0 +1,294 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 15,
+ "part": 1,
+ "refs": [
+  "HV 15.1",
+  "HV 15.2",
+  "HV 15.3",
+  "HV 15.4",
+  "HV 15.5",
+  "HV 15.6",
+  "HV 15.7",
+  "HV 15.8",
+  "HV 15.9",
+  "HV 15.10",
+  "HV 15.11",
+  "HV 15.12",
+  "HV 15.13",
+  "HV 15.14",
+  "HV 15.15",
+  "HV 15.16",
+  "HV 15.17",
+  "HV 15.18",
+  "HV 15.19",
+  "HV 15.20",
+  "HV 15.21",
+  "HV 15.22",
+  "HV 15.23",
+  "HV 15.24",
+  "HV 15.25",
+  "HV 15.26",
+  "HV 15.27",
+  "HV 15.28",
+  "HV 15.29",
+  "HV 15.30",
+  "HV 15.31",
+  "HV 15.32",
+  "HV 15.33",
+  "HV 15.34",
+  "HV 15.35",
+  "HV 15.36",
+  "HV 15.37",
+  "HV 15.38",
+  "HV 15.39",
+  "HV 15.40",
+  "HV 15.41",
+  "HV 15.42",
+  "HV 15.43"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:06:30",
+ "reply": "{\"statements\":[\n{\"ref\":\"HV 15.3\",\"a\":\"Brahmadatta\",\"rel\":\"descendant_of\",\"b\":\"Kauśika\",\"words\":\"kauśikātmajān brahmadatto 'bhavad rājā yas teṣāṃ saptamo dvijaḥ\",\"doubt\":true},\n{\"ref\":\"HV 15.4\",\"a\":\"Kṛtvī\",\"rel\":\"daughter_of\",\"b\":\"Śuka\",\"words\":\"śukasya kanyā kṛtvī\",\"doubt\":false},\n{\"ref\":\"HV 15.4\",\"a\":\"Brahmadatta\",\"rel\":\"born_of\",\"b\":\"Kṛtvī\",\"words\":\"kṛtvī taṃ janayām āsa pārthivam\",\"doubt\":false},\n{\"ref\":\"HV 15.4\",\"a\":\"Brahmadatta\",\"rel\":\"son_of\",\"b\":\"Aṇuha\",\"words\":\"aṇuhāt pārthivaśreṣṭhāt\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Bṛhatkṣatra\",\"words\":\"bṛhatkṣatrasya dāyādaḥ suhotro nāma\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Hastin\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"suhotrasyāpi dāyādo hastī\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Ajamīḍha\",\"rel\":\"son_of\",\"b\":\"Hastin\",\"words\":\"hastinaś cāpi dāyādās trayaḥ ajamīḍho\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Dvimīḍha\",\"rel\":\"son_of\",\"b\":\"Hastin\",\"words\":\"hastinaś cāpi dāyādās trayaḥ dvimīḍhaś\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Puramīḍha\",\"rel\":\"son_of\",\"b\":\"Hastin\",\"words\":\"hastinaś cāpi dāyādās trayaḥ puramīḍhas\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Bṛhadiṣu\",\"rel\":\"son_of\",\"b\":\"Ajamīḍha\",\"words\":\"ajamīḍhasya dhūminyāṃ jajñe bṛhadiṣur\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Bṛhadiṣu\",\"rel\":\"born_of\",\"b\":\"Dhūminī\",\"words\":\"ajamīḍhasya dhūminyāṃ jajñe bṛhadiṣur\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Bṛhaddhanu\",\"rel\":\"son_of\",\"b\":\"Bṛhadiṣu\",\"words\":\"bṛhaddhanur bṛhadiṣoḥ putras\",\"doubt\":false},\n{\"ref\":\"HV 15.15\",\"a\":\"Bṛhaddharma\",\"rel\":\"son_of\",\"b\":\"Bṛhadiṣu\",\"words\":\"āsīd bṛhadiṣoḥ putro bṛhaddharmeti\",\"doubt\":false},\n{\"ref\":\"HV 15.16\",\"a\":\"Satyajit\",\"rel\":\"son_of\",\"b\":\"Bṛhaddharma\",\"words\":\"satyajit tasya tanayo\",\"doubt\":false},\n{\"ref\":\"HV 15.16\",\"a\":\"Viśvajit\",\"rel\":\"son_of\",\"b\":\"Satyajit\",\"words\":\"viśvajit tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 15.16\",\"a\":\"Senajit\",\"rel\":\"son_of\",\"b\":\"Viśvajit\",\"words\":\"putro viśvajitaś cāpi senajit\",\"doubt\":false},\n{\"ref\":\"HV 15.17\",\"a\":\"Rucira\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"putrāḥ senajitaś cāsaṃś catvāro ruciraḥ\",\"doubt\":false},\n{\"ref\":\"HV 15.17\",\"a\":\"Śvetakāśya\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"putrāḥ senajitaś cāsaṃś catvāro śvetakāśyaś\",\"doubt\":false},\n{\"ref\":\"HV 15.17\",\"a\":\"Mahimnāra\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"putrāḥ senajitaś cāsaṃś catvāro mahimnāras\",\"doubt\":false},\n{\"ref\":\"HV 15.17\",\"a\":\"Vatsa\",\"rel\":\"son_of\",\"b\":\"Senajit\",\"words\":\"putrāḥ senajitaś cāsaṃś catvāro vatsaś\",\"doubt\":false},\n{\"ref\":\"HV 15.18\",\"a\":\"Pṛthuṣeṇa\",\"rel\":\"son_of\",\"b\":\"Rucira\",\"words\":\"rucirasya tu dāyādaḥ pṛthuṣeṇo\",\"doubt\":false},\n{\"ref\":\"HV 15.18\",\"a\":\"Pāra\",\"rel\":\"son_of\",\"b\":\"Pṛthuṣeṇa\",\"words\":\"pṛthuṣeṇasya pāras\",\"doubt\":false},\n{\"ref\":\"HV 15.19\",\"a\":\"Nīpa\",\"rel\":\"son_of\",\"b\":\"Pāra\",\"words\":\"pārasya tanayaḥ śrīmān nīpo\",\"doubt\":false},\n{\"ref\":\"HV 15.19\",\"a\":\"Nīpa\",\"rel\":\"line_of\",\"b\":\"Nīpa\",\"words\":\"nīpā iti samākhyātā\",\"doubt\":false},\n{\"ref\":\"HV 15.21\",\"a\":\"Samara\",\"rel\":\"father_placeholder\",\"b\":\"\",\"words\":\"\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02919,
+ "tokens": {
+  "input": 5096,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1900,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 15.3",
+   "a": "Brahmadatta",
+   "rel": "descendant_of",
+   "b": "Kauśika",
+   "words": "kauśikātmajān brahmadatto 'bhavad rājā yas teṣāṃ saptamo dvijaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.4",
+   "a": "Kṛtvī",
+   "rel": "daughter_of",
+   "b": "Śuka",
+   "words": "śukasya kanyā kṛtvī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.4",
+   "a": "Brahmadatta",
+   "rel": "born_of",
+   "b": "Kṛtvī",
+   "words": "kṛtvī taṃ janayām āsa pārthivam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.4",
+   "a": "Brahmadatta",
+   "rel": "son_of",
+   "b": "Aṇuha",
+   "words": "aṇuhāt pārthivaśreṣṭhāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Suhotra",
+   "rel": "son_of",
+   "b": "Bṛhatkṣatra",
+   "words": "bṛhatkṣatrasya dāyādaḥ suhotro nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Hastin",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "suhotrasyāpi dāyādo hastī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Ajamīḍha",
+   "rel": "son_of",
+   "b": "Hastin",
+   "words": "hastinaś cāpi dāyādās trayaḥ ajamīḍho",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Dvimīḍha",
+   "rel": "son_of",
+   "b": "Hastin",
+   "words": "hastinaś cāpi dāyādās trayaḥ dvimīḍhaś",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Puramīḍha",
+   "rel": "son_of",
+   "b": "Hastin",
+   "words": "hastinaś cāpi dāyādās trayaḥ puramīḍhas",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Bṛhadiṣu",
+   "rel": "son_of",
+   "b": "Ajamīḍha",
+   "words": "ajamīḍhasya dhūminyāṃ jajñe bṛhadiṣur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Bṛhadiṣu",
+   "rel": "born_of",
+   "b": "Dhūminī",
+   "words": "ajamīḍhasya dhūminyāṃ jajñe bṛhadiṣur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Bṛhaddhanu",
+   "rel": "son_of",
+   "b": "Bṛhadiṣu",
+   "words": "bṛhaddhanur bṛhadiṣoḥ putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.15",
+   "a": "Bṛhaddharma",
+   "rel": "son_of",
+   "b": "Bṛhadiṣu",
+   "words": "āsīd bṛhadiṣoḥ putro bṛhaddharmeti",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.16",
+   "a": "Satyajit",
+   "rel": "son_of",
+   "b": "Bṛhaddharma",
+   "words": "satyajit tasya tanayo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.16",
+   "a": "Viśvajit",
+   "rel": "son_of",
+   "b": "Satyajit",
+   "words": "viśvajit tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.16",
+   "a": "Senajit",
+   "rel": "son_of",
+   "b": "Viśvajit",
+   "words": "putro viśvajitaś cāpi senajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.17",
+   "a": "Rucira",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "putrāḥ senajitaś cāsaṃś catvāro ruciraḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.17",
+   "a": "Śvetakāśya",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "putrāḥ senajitaś cāsaṃś catvāro śvetakāśyaś",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.17",
+   "a": "Mahimnāra",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "putrāḥ senajitaś cāsaṃś catvāro mahimnāras",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.17",
+   "a": "Vatsa",
+   "rel": "son_of",
+   "b": "Senajit",
+   "words": "putrāḥ senajitaś cāsaṃś catvāro vatsaś",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 15.18",
+   "a": "Pṛthuṣeṇa",
+   "rel": "son_of",
+   "b": "Rucira",
+   "words": "rucirasya tu dāyādaḥ pṛthuṣeṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.18",
+   "a": "Pāra",
+   "rel": "son_of",
+   "b": "Pṛthuṣeṇa",
+   "words": "pṛthuṣeṇasya pāras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.19",
+   "a": "Nīpa",
+   "rel": "son_of",
+   "b": "Pāra",
+   "words": "pārasya tanayaḥ śrīmān nīpo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.19",
+   "a": "Nīpa",
+   "rel": "line_of",
+   "b": "Nīpa",
+   "words": "nīpā iti samākhyātā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 15.21",
+   "a": "Samara",
+   "rel": "father_placeholder",
+   "b": "",
+   "words": "",
+   "doubt": false,
+   "check": "bad"
+  }
+ ]
+}

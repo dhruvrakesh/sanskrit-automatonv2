@@ -1,0 +1,256 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 49,
+ "part": 2,
+ "refs": [
+  "MatsP 49.57",
+  "MatsP 49.58",
+  "MatsP 49.59",
+  "MatsP 49.60",
+  "MatsP 49.61",
+  "MatsP 49.62",
+  "MatsP 49.63",
+  "MatsP 49.64",
+  "MatsP 49.65",
+  "MatsP 49.66",
+  "MatsP 49.67",
+  "MatsP 49.68",
+  "MatsP 49.69",
+  "MatsP 49.70",
+  "MatsP 49.71",
+  "MatsP 49.72",
+  "MatsP 49.73",
+  "MatsP 49.74",
+  "MatsP 49.75",
+  "MatsP 49.76",
+  "MatsP 49.77",
+  "MatsP 49.78",
+  "MatsP 49.79"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:18:13",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 49.57\",\"a\":\"Brahmadatta\",\"rel\":\"son_of\",\"b\":\"Aṇuha\",\"words\":\"aṇuhasya tu dāyādo brahmadatto\",\"doubt\":false},\n{\"ref\":\"MatsP 49.58\",\"a\":\"Yugadatta\",\"rel\":\"son_of\",\"b\":\"Brahmadatta\",\"words\":\"yugadattaḥ sutastasya\",\"doubt\":true},\n{\"ref\":\"MatsP 49.58\",\"a\":\"Viṣvaksena\",\"rel\":\"son_of\",\"b\":\"Yugadatta\",\"words\":\"yugadattaḥ sutastasya viṣvakseno\",\"doubt\":true},\n{\"ref\":\"MatsP 49.59\",\"a\":\"Udaksena\",\"rel\":\"son_of\",\"b\":\"Viṣvaksena\",\"words\":\"viṣvaksenasya putrastu udakseno babhūva\",\"doubt\":false},\n{\"ref\":\"MatsP 49.59\",\"a\":\"Bhallāṭa\",\"rel\":\"son_of\",\"b\":\"Udaksena\",\"words\":\"bhallāṭastasya putrastu\",\"doubt\":false},\n{\"ref\":\"MatsP 49.59\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Bhallāṭa\",\"words\":\"tasyāsījjanamejayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.70\",\"a\":\"Yavīnara\",\"rel\":\"son_of\",\"b\":\"Ajamīḍha\",\"words\":\"ajamīḍhasya dhūminyāṃ vidvāñjajñe yavīnaraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.70\",\"a\":\"Yavīnara\",\"rel\":\"born_of\",\"b\":\"Dhūminī\",\"words\":\"ajamīḍhasya dhūminyāṃ vidvāñjajñe yavīnaraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.70\",\"a\":\"Dhṛtimān\",\"rel\":\"son_of\",\"b\":\"Yavīnara\",\"words\":\"dhṛtimāṃstasya putrastu\",\"doubt\":false},\n{\"ref\":\"MatsP 49.70\",\"a\":\"Satyadhṛti\",\"rel\":\"son_of\",\"b\":\"Dhṛtimān\",\"words\":\"tasya satyadhṛtiḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.70\",\"a\":\"Dṛḍhanemi\",\"rel\":\"son_of\",\"b\":\"Satyadhṛti\",\"words\":\"satyadhṛteḥ putro dṛḍhanemiḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.71\",\"a\":\"Sudharmā\",\"rel\":\"son_of\",\"b\":\"Dṛḍhanemi\",\"words\":\"dṛḍhanemisutaścāpi sudharmā\",\"doubt\":false},\n{\"ref\":\"MatsP 49.71\",\"a\":\"Sārvabhauma\",\"rel\":\"son_of\",\"b\":\"Sudharmā\",\"words\":\"sudharmatanayaḥ sārvabhaumaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.72\",\"a\":\"Mahāpauravanandana\",\"rel\":\"descendant_of\",\"b\":\"Sārvabhauma\",\"words\":\"tasyānvavāye mahati mahāpauravanandanaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 49.73\",\"a\":\"Rukmaratha\",\"rel\":\"son_of\",\"b\":\"Mahāpaurava\",\"words\":\"mahāpauravaputrastu rājā rukmarathaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.73\",\"a\":\"Supārśva\",\"rel\":\"son_of\",\"b\":\"Rukmaratha\",\"words\":\"rukmarathasyāsīt supārśvo\",\"doubt\":false},\n{\"ref\":\"MatsP 49.74\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Supārśva\",\"words\":\"supārśvatanayaścāpi sumatir\",\"doubt\":false},\n{\"ref\":\"MatsP 49.74\",\"a\":\"Saṃnatimān\",\"rel\":\"son_of\",\"b\":\"Sumati\",\"words\":\"sumaterapi dharmātmā rājā saṃnatimānapi\",\"doubt\":false},\n{\"ref\":\"MatsP 49.75\",\"a\":\"Kṛta\",\"rel\":\"son_of\",\"b\":\"Saṃnatimān\",\"words\":\"tasyāsītsaṃnatimataḥ kṛto nāma suto\",\"doubt\":false},\n{\"ref\":\"MatsP 49.78\",\"a\":\"Kṣema\",\"rel\":\"son_of\",\"b\":\"Ugrāyudha\",\"words\":\"ugrāyudhasya dāyādaḥ kṣemo\",\"doubt\":false},\n{\"ref\":\"MatsP 49.79\",\"a\":\"Sunītha\",\"rel\":\"son_of\",\"b\":\"Kṣema\",\"words\":\"kṣemātsunīthaḥ saṃjajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 49.79\",\"a\":\"Nṛpaṃjaya\",\"rel\":\"son_of\",\"b\":\"Sunītha\",\"words\":\"sunīthasya nṛpaṃjayaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 49.79\",\"a\":\"Viratha\",\"rel\":\"son_of\",\"b\":\"Nṛpaṃjaya\",\"words\":\"nṛpaṃjayācca viratha\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02308,
+ "tokens": {
+  "input": 2651,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1778,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 49.57",
+   "a": "Brahmadatta",
+   "rel": "son_of",
+   "b": "Aṇuha",
+   "words": "aṇuhasya tu dāyādo brahmadatto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.58",
+   "a": "Yugadatta",
+   "rel": "son_of",
+   "b": "Brahmadatta",
+   "words": "yugadattaḥ sutastasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.58",
+   "a": "Viṣvaksena",
+   "rel": "son_of",
+   "b": "Yugadatta",
+   "words": "yugadattaḥ sutastasya viṣvakseno",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.59",
+   "a": "Udaksena",
+   "rel": "son_of",
+   "b": "Viṣvaksena",
+   "words": "viṣvaksenasya putrastu udakseno babhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.59",
+   "a": "Bhallāṭa",
+   "rel": "son_of",
+   "b": "Udaksena",
+   "words": "bhallāṭastasya putrastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.59",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Bhallāṭa",
+   "words": "tasyāsījjanamejayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.70",
+   "a": "Yavīnara",
+   "rel": "son_of",
+   "b": "Ajamīḍha",
+   "words": "ajamīḍhasya dhūminyāṃ vidvāñjajñe yavīnaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.70",
+   "a": "Yavīnara",
+   "rel": "born_of",
+   "b": "Dhūminī",
+   "words": "ajamīḍhasya dhūminyāṃ vidvāñjajñe yavīnaraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.70",
+   "a": "Dhṛtimān",
+   "rel": "son_of",
+   "b": "Yavīnara",
+   "words": "dhṛtimāṃstasya putrastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.70",
+   "a": "Satyadhṛti",
+   "rel": "son_of",
+   "b": "Dhṛtimān",
+   "words": "tasya satyadhṛtiḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.70",
+   "a": "Dṛḍhanemi",
+   "rel": "son_of",
+   "b": "Satyadhṛti",
+   "words": "satyadhṛteḥ putro dṛḍhanemiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.71",
+   "a": "Sudharmā",
+   "rel": "son_of",
+   "b": "Dṛḍhanemi",
+   "words": "dṛḍhanemisutaścāpi sudharmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.71",
+   "a": "Sārvabhauma",
+   "rel": "son_of",
+   "b": "Sudharmā",
+   "words": "sudharmatanayaḥ sārvabhaumaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.72",
+   "a": "Mahāpauravanandana",
+   "rel": "descendant_of",
+   "b": "Sārvabhauma",
+   "words": "tasyānvavāye mahati mahāpauravanandanaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.73",
+   "a": "Rukmaratha",
+   "rel": "son_of",
+   "b": "Mahāpaurava",
+   "words": "mahāpauravaputrastu rājā rukmarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.73",
+   "a": "Supārśva",
+   "rel": "son_of",
+   "b": "Rukmaratha",
+   "words": "rukmarathasyāsīt supārśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.74",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Supārśva",
+   "words": "supārśvatanayaścāpi sumatir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.74",
+   "a": "Saṃnatimān",
+   "rel": "son_of",
+   "b": "Sumati",
+   "words": "sumaterapi dharmātmā rājā saṃnatimānapi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.75",
+   "a": "Kṛta",
+   "rel": "son_of",
+   "b": "Saṃnatimān",
+   "words": "tasyāsītsaṃnatimataḥ kṛto nāma suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.78",
+   "a": "Kṣema",
+   "rel": "son_of",
+   "b": "Ugrāyudha",
+   "words": "ugrāyudhasya dāyādaḥ kṣemo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.79",
+   "a": "Sunītha",
+   "rel": "son_of",
+   "b": "Kṣema",
+   "words": "kṣemātsunīthaḥ saṃjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.79",
+   "a": "Nṛpaṃjaya",
+   "rel": "son_of",
+   "b": "Sunītha",
+   "words": "sunīthasya nṛpaṃjayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 49.79",
+   "a": "Viratha",
+   "rel": "son_of",
+   "b": "Nṛpaṃjaya",
+   "words": "nṛpaṃjayācca viratha",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

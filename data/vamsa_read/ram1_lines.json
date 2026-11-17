@@ -1,0 +1,395 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "ram1",
+ "title": "Ramayana, book 1 (Balakanda)",
+ "lines": [
+  [
+   {
+    "name": "Udāvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nandivardhana",
+    "ref": "R 1,70.5",
+    "words": "udāvasos tu dharmātmā jāto vai nandivardhanaḥ"
+   },
+   {
+    "name": "Suketu",
+    "ref": "R 1,70.5",
+    "words": "nandivardhana putras tu suketur nāma"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "R 1,70.6",
+    "words": "suketor api dharmātmā devarāto"
+   },
+   {
+    "name": "Bṛhadratha",
+    "ref": "R 1,70.6",
+    "words": "devarātasya rājarṣer bṛhadratha iti śrutaḥ"
+   },
+   {
+    "name": "Mahāvīra",
+    "ref": "R 1,70.7",
+    "words": "bṛhadrathasya śūro 'bhūn mahāvīraḥ"
+   },
+   {
+    "name": "Sudhṛti",
+    "ref": "R 1,70.7",
+    "words": "mahāvīrasya dhṛtimān sudhṛtiḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "R 1,70.8",
+    "words": "sudhṛter api dharmātmā dhṛṣṭaketuḥ"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "R 1,70.8",
+    "words": "dhṛṣṭaketos tu rājarṣer haryaśva iti viśrutaḥ"
+   },
+   {
+    "name": "Maru",
+    "ref": "R 1,70.9",
+    "words": "haryaśvasya maruḥ putro"
+   },
+   {
+    "name": "Pratīndhaka",
+    "ref": "R 1,70.9",
+    "words": "maroḥ putraḥ pratīndhakaḥ"
+   },
+   {
+    "name": "Kīrtiratha",
+    "ref": "R 1,70.9",
+    "words": "pratīndhakasya dharmātmā rājā kīrtirathaḥ sutaḥ"
+   },
+   {
+    "name": "Devamīḍha",
+    "ref": "R 1,70.10",
+    "words": "putraḥ kīrtirathasyāpi devamīḍha"
+   },
+   {
+    "name": "Vibudha",
+    "ref": "R 1,70.10",
+    "words": "devamīḍhasya vibudho"
+   },
+   {
+    "name": "Mahīdhraka",
+    "ref": "R 1,70.10",
+    "words": "vibudhasya mahīdhrakaḥ"
+   },
+   {
+    "name": "Kīrtirāta",
+    "ref": "R 1,70.11",
+    "words": "mahīdhrakasuto rājā kīrtirāto"
+   },
+   {
+    "name": "Mahāroma",
+    "ref": "R 1,70.11",
+    "words": "kīrtirātasya rājarṣer mahāromā vyajāyata"
+   },
+   {
+    "name": "Svarṇaroma",
+    "ref": "R 1,70.12",
+    "words": "mahāroṃṇas tu dharmātmā svarṇaromā vyajāyata"
+   },
+   {
+    "name": "Hrasvaroma",
+    "ref": "R 1,70.12",
+    "words": "svarṇaroṃṇas tu rājarṣer hrasvaromā vyajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Bhagīratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kakutstha",
+    "ref": "R 1,69.26",
+    "words": "bhagīrathāt kakutsthaś ca"
+   },
+   {
+    "name": "Raghu",
+    "ref": "R 1,69.26",
+    "words": "kakutsthasya raghus tathā"
+   },
+   {
+    "name": "Pravṛddha",
+    "ref": "R 1,69.27",
+    "words": "raghos tu putras tejasvī pravṛddhaḥ"
+   },
+   {
+    "name": "Śaṅkhaṇa",
+    "ref": "R 1,69.27",
+    "words": "tasmāj jātas tu śaṅkhaṇaḥ"
+   },
+   {
+    "name": "Sudarśana",
+    "ref": "R 1,69.28",
+    "words": "sudarśanaḥ śaṅkhaṇasya"
+   },
+   {
+    "name": "Agnivarṇa",
+    "ref": "R 1,69.28",
+    "words": "agnivarṇaḥ sudarśanāt"
+   },
+   {
+    "name": "Śīghraga",
+    "ref": "R 1,69.28",
+    "words": "śīghragas tv agnivarṇasya"
+   },
+   {
+    "name": "Maru",
+    "ref": "R 1,69.28",
+    "words": "śīghragasya maruḥ sutaḥ"
+   },
+   {
+    "name": "Praśuśruka",
+    "ref": "R 1,69.29",
+    "words": "maroḥ praśuśrukas tv āsīd"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "R 1,69.29",
+    "words": "ambarīṣaḥ praśuśrukāt"
+   },
+   {
+    "name": "Nahuṣa",
+    "ref": "R 1,69.29",
+    "words": "ambarīṣasya putro 'bhūn nahuṣaḥ"
+   },
+   {
+    "name": "Yayāti",
+    "ref": "R 1,69.30",
+    "words": "nahuṣasya yayātis"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "R 1,69.30",
+    "words": "nābhāgas tu yayātijaḥ"
+   },
+   {
+    "name": "Aja",
+    "ref": "R 1,69.30",
+    "words": "nābhāgasya babhūvāja"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "R 1,69.30",
+    "words": "ajād daśaratho 'bhavat"
+   },
+   {
+    "name": "Rāma",
+    "ref": "R 1,69.30",
+    "words": "daśarathāj jātau bhrātarau rāmalakṣmaṇau"
+   }
+  ],
+  [
+   {
+    "name": "Marīci",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaśyapa",
+    "ref": "R 1,69.17",
+    "words": "marīceḥ kaśyapaḥ sutaḥ"
+   },
+   {
+    "name": "Vivasvān",
+    "ref": "R 1,69.18",
+    "words": "vivasvān kaśyapāj jajñe"
+   },
+   {
+    "name": "Manu Vaivasvata",
+    "ref": "R 1,69.18",
+    "words": "vivasvān kaśyapāj jajñe manur vaivaisvataḥ"
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "R 1,69.18",
+    "words": "ikṣvākus tu manoḥ sutaḥ"
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "R 1,69.19",
+    "words": "ikṣvākos tu sutaḥ śrīmān vikukṣir udapadyata"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "R 1,69.20",
+    "words": "vikukṣes tu mahātejā bāṇaḥ putraḥ"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "R 1,69.20",
+    "words": "bāṇasya tu mahātejā anaraṇyaḥ"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "R 1,69.21",
+    "words": "anaraṇyāt pṛthur jajñe"
+   },
+   {
+    "name": "Triśaṅku",
+    "ref": "R 1,69.21",
+    "words": "triśaṅkus tu pṛthoḥ sutaḥ"
+   },
+   {
+    "name": "Dhundhumāra",
+    "ref": "R 1,69.21",
+    "words": "triśaṅkor abhavat putro dhundhumāro"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "R 1,69.22",
+    "words": "dhundhumārān mahātejā yuvanāśvo"
+   },
+   {
+    "name": "Māndhātā",
+    "ref": "R 1,69.22",
+    "words": "yuvanāśvasutaḥ śrīmān māndhātā"
+   },
+   {
+    "name": "Susaṃdhi",
+    "ref": "R 1,69.23",
+    "words": "māndhātus tu sutaḥ śrīmān susaṃdhir"
+   },
+   {
+    "name": "Dhruvasaṃdhi",
+    "ref": "R 1,69.23",
+    "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ"
+   },
+   {
+    "name": "Bharata",
+    "ref": "R 1,69.24",
+    "words": "dhruvasaṃdhes tu bharato nāma"
+   },
+   {
+    "name": "Asita",
+    "ref": "R 1,69.24",
+    "words": "bharatāt tu mahātejā asito nāma jāyata"
+   }
+  ],
+  [
+   {
+    "name": "Sucandra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhūmrāśva",
+    "ref": "R 1,46.14",
+    "words": "sucandratanayo rāma dhūmrāśva"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "R 1,46.14",
+    "words": "dhūmrāśvatanayaś cāpi sṛñjayaḥ"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "R 1,46.15",
+    "words": "sṛñjayasya sutaḥ śrīmān sahadevaḥ"
+   },
+   {
+    "name": "Kuśāśva",
+    "ref": "R 1,46.15",
+    "words": "kuśāśvaḥ sahadevasya putraḥ"
+   },
+   {
+    "name": "Somadatta",
+    "ref": "R 1,46.16",
+    "words": "kuśāśvasya mahātejāḥ somadattaḥ"
+   },
+   {
+    "name": "Kākutstha",
+    "ref": "R 1,46.16",
+    "words": "somadattasya putras tu kākutstha"
+   },
+   {
+    "name": "Sumati",
+    "ref": "R 1,46.17",
+    "words": "tasya putro mahātejāḥ saṃpraty eṣa purīm imām āvasaty amaraprakhyaḥ sumatir nāma"
+   }
+  ],
+  [
+   {
+    "name": "Aṃśumant",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "R 1,41.2",
+    "words": "tasya putro mahān āsīd dilīpa iti viśrutaḥ"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "R 1,41.7",
+    "words": "putro bhagīratho nāma jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Ikṣvāku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśāla",
+    "ref": "R 1,46.11",
+    "words": "ikṣvākos tu naravyāghra putraḥ"
+   },
+   {
+    "name": "Hemacandra",
+    "ref": "R 1,46.13",
+    "words": "viśālasya suto rāma hemacandro"
+   }
+  ],
+  [
+   {
+    "name": "Sagara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Asamañja",
+    "ref": "R 1,37.16",
+    "words": "keśinī sagarātmajam"
+   },
+   {
+    "name": "Aṃśumān",
+    "ref": "R 1,37.22",
+    "words": "tasya putro 'ṃśumān nāma asamañjasya"
+   }
+  ],
+  [
+   {
+    "name": "Aṃśumān",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "R 1,69.26",
+    "words": "dilīpo 'ṃśumataḥ putro"
+   }
+  ],
+  [
+   {
+    "name": "Nimi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mithi",
+    "ref": "R 1,70.4",
+    "words": "tasya putro mithir nāma"
+   }
+  ]
+ ]
+}

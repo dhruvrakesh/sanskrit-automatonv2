@@ -1,0 +1,139 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 2,
+ "part": 0,
+ "refs": [
+  "BndP 2,2.1",
+  "BndP 2,2.2",
+  "BndP 2,2.3",
+  "BndP 2,2.4",
+  "BndP 2,2.5",
+  "BndP 2,2.6",
+  "BndP 2,2.7",
+  "BndP 2,2.8",
+  "BndP 2,2.9",
+  "BndP 2,2.10",
+  "BndP 2,2.11",
+  "BndP 2,2.12",
+  "BndP 2,2.13",
+  "BndP 2,2.14",
+  "BndP 2,2.15",
+  "BndP 2,2.16",
+  "BndP 2,2.17",
+  "BndP 2,2.18",
+  "BndP 2,2.19",
+  "BndP 2,2.20",
+  "BndP 2,2.21",
+  "BndP 2,2.22",
+  "BndP 2,2.23",
+  "BndP 2,2.24",
+  "BndP 2,2.25",
+  "BndP 2,2.26",
+  "BndP 2,2.27",
+  "BndP 2,2.28",
+  "BndP 2,2.29",
+  "BndP 2,2.30",
+  "BndP 2,2.31",
+  "BndP 2,2.32"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:23:07",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,2.5\",\"a\":\"Asiknī\",\"rel\":\"wife_of\",\"b\":\"Dakṣa\",\"words\":\"asikrīmāvahadbhāryāṃ vīraṇasya prajāpateḥ\",\"doubt\":false},{\"ref\":\"BndP 2,2.5\",\"a\":\"Asiknī\",\"rel\":\"daughter_of\",\"b\":\"Vīraṇa\",\"words\":\"asikrīmāvahadbhāryāṃ vīraṇasya prajāpateḥ\",\"doubt\":true},{\"ref\":\"BndP 2,2.11\",\"a\":\"Dakṣa\",\"rel\":\"begotten_by\",\"b\":\"Dakṣa\",\"words\":\"putrasahasraṃ sa vairaṇyāmamitaujasam\",\"doubt\":true},{\"ref\":\"BndP 2,2.11\",\"a\":\"Haryaśva\",\"rel\":\"born_of\",\"b\":\"Asiknī\",\"words\":\"putrasahasraṃ sa vairaṇyāmamitaujasam / asiknyāṃ janayāmāsa\",\"doubt\":true},{\"ref\":\"BndP 2,2.12\",\"a\":\"Nārada\",\"rel\":\"son_of\",\"b\":\"Brahmā\",\"words\":\"nārado brahmaṇaḥ sutaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,2.20\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣaputrāśca haryaśvā\",\"doubt\":false},{\"ref\":\"BndP 2,2.23\",\"a\":\"Śabalāśva\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"vairaṇyāmeva putrāṇāṃ sahasramasṛjatprabhuḥ\",\"doubt\":true},{\"ref\":\"BndP 2,2.25\",\"a\":\"Śabalāśva\",\"rel\":\"brother_of\",\"b\":\"Haryaśva\",\"words\":\"bhrātṝṇāṃ padavīṃ caiva gantavyā\",\"doubt\":true},{\"ref\":\"BndP 2,2.30\",\"a\":\"Dakṣa's sixty daughters\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"ṣaṣṭiṃ dakṣo 'sṛjatkanyā vairaṇyāmeva viśrutāḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01497,
+ "tokens": {
+  "input": 3584,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 780,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,2.5",
+   "a": "Asiknī",
+   "rel": "wife_of",
+   "b": "Dakṣa",
+   "words": "asikrīmāvahadbhāryāṃ vīraṇasya prajāpateḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,2.5",
+   "a": "Asiknī",
+   "rel": "daughter_of",
+   "b": "Vīraṇa",
+   "words": "asikrīmāvahadbhāryāṃ vīraṇasya prajāpateḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,2.11",
+   "a": "Dakṣa",
+   "rel": "begotten_by",
+   "b": "Dakṣa",
+   "words": "putrasahasraṃ sa vairaṇyāmamitaujasam",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,2.11",
+   "a": "Haryaśva",
+   "rel": "born_of",
+   "b": "Asiknī",
+   "words": "putrasahasraṃ sa vairaṇyāmamitaujasam / asiknyāṃ janayāmāsa",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,2.12",
+   "a": "Nārada",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "nārado brahmaṇaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,2.20",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣaputrāśca haryaśvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,2.23",
+   "a": "Śabalāśva",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "vairaṇyāmeva putrāṇāṃ sahasramasṛjatprabhuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,2.25",
+   "a": "Śabalāśva",
+   "rel": "brother_of",
+   "b": "Haryaśva",
+   "words": "bhrātṝṇāṃ padavīṃ caiva gantavyā",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,2.30",
+   "a": "Dakṣa's sixty daughters",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "ṣaṣṭiṃ dakṣo 'sṛjatkanyā vairaṇyāmeva viśrutāḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

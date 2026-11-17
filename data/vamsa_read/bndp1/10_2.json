@@ -1,0 +1,248 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp1",
+ "title": "Brahmandapurana, book 1",
+ "chapter": 10,
+ "part": 2,
+ "refs": [
+  "BndP 1,10.56",
+  "BndP 1,10.57",
+  "BndP 1,10.58",
+  "BndP 1,10.59",
+  "BndP 1,10.60",
+  "BndP 1,10.61",
+  "BndP 1,10.62",
+  "BndP 1,10.63",
+  "BndP 1,10.64",
+  "BndP 1,10.65",
+  "BndP 1,10.66",
+  "BndP 1,10.67",
+  "BndP 1,10.68",
+  "BndP 1,10.69",
+  "BndP 1,10.70",
+  "BndP 1,10.71",
+  "BndP 1,10.72",
+  "BndP 1,10.73",
+  "BndP 1,10.74",
+  "BndP 1,10.75",
+  "BndP 1,10.76",
+  "BndP 1,10.77",
+  "BndP 1,10.78",
+  "BndP 1,10.79",
+  "BndP 1,10.80",
+  "BndP 1,10.81",
+  "BndP 1,10.82",
+  "BndP 1,10.83",
+  "BndP 1,10.84",
+  "BndP 1,10.85",
+  "BndP 1,10.86",
+  "BndP 1,10.87",
+  "BndP 1,10.88"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:19:59",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 1,10.76\",\"a\":\"Suvarcalā\",\"rel\":\"wife_of\",\"b\":\"Rudra\",\"words\":\"patnī suvarccalā tasyāḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.76\",\"a\":\"Śanaiścara\",\"rel\":\"son_of\",\"b\":\"Rudra\",\"words\":\"putraścāsya śanaiścaraḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.76\",\"a\":\"Śanaiścara\",\"rel\":\"born_of\",\"b\":\"Suvarcalā\",\"words\":\"tasyāḥ putraścāsya śanaiścaraḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.77\",\"a\":\"Dhātrī\",\"rel\":\"wife_of\",\"b\":\"Bhava\",\"words\":\"tasyā dhātrī smṛtā patnī\",\"doubt\":true},{\"ref\":\"BndP 1,10.77\",\"a\":\"Uśanas\",\"rel\":\"son_of\",\"b\":\"Bhava\",\"words\":\"putraśca uśanā smṛtaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.77\",\"a\":\"Uśanas\",\"rel\":\"born_of\",\"b\":\"Dhātrī\",\"words\":\"dhātrī smṛtā patnī putraśca uśanā\",\"doubt\":true},{\"ref\":\"BndP 1,10.78\",\"a\":\"Vikeśī\",\"rel\":\"wife_of\",\"b\":\"Śarva\",\"words\":\"tasyāḥ patnī vikeśī\",\"doubt\":true},{\"ref\":\"BndP 1,10.78\",\"a\":\"Aṅgāraka\",\"rel\":\"son_of\",\"b\":\"Śarva\",\"words\":\"putro 'syāṅgārakaḥ smṛtaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.78\",\"a\":\"Aṅgāraka\",\"rel\":\"born_of\",\"b\":\"Vikeśī\",\"words\":\"patnī vikeśī tu putro 'syāṅgārakaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.79\",\"a\":\"Śivā\",\"rel\":\"wife_of\",\"b\":\"Īśāna\",\"words\":\"tasyāḥ patnī śivā nāma\",\"doubt\":true},{\"ref\":\"BndP 1,10.79\",\"a\":\"Manojava\",\"rel\":\"son_of\",\"b\":\"Īśāna\",\"words\":\"putraścāsyā manojavaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.79\",\"a\":\"Manojava\",\"rel\":\"born_of\",\"b\":\"Śivā\",\"words\":\"patnī śivā nāma putraścāsyā manojavaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.81\",\"a\":\"Svāhā\",\"rel\":\"wife_of\",\"b\":\"Paśupati\",\"words\":\"tasyāḥ patnī smṛtā svāhā\",\"doubt\":true},{\"ref\":\"BndP 1,10.81\",\"a\":\"Skanda\",\"rel\":\"son_of\",\"b\":\"Paśupati\",\"words\":\"skandastasyāḥ sutaḥ smṛtaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.81\",\"a\":\"Skanda\",\"rel\":\"born_of\",\"b\":\"Svāhā\",\"words\":\"patnī smṛtā svāhā skandastasyāḥ sutaḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.83\",\"a\":\"Dīkṣā\",\"rel\":\"wife_of\",\"b\":\"Dīkṣita Brāhmaṇa\",\"words\":\"dīkṣā patnī smṛtā tasyāḥ\",\"doubt\":true},{\"ref\":\"BndP 1,10.83\",\"a\":\"Saṃtāna\",\"rel\":\"son_of\",\"b\":\"Dīkṣita Brāhmaṇa\",\"words\":\"saṃtānaḥ putra ucyate\",\"doubt\":true},{\"ref\":\"BndP 1,10.83\",\"a\":\"Saṃtāna\",\"rel\":\"born_of\",\"b\":\"Dīkṣā\",\"words\":\"dīkṣā patnī smṛtā tasyāḥ saṃtānaḥ putra\",\"doubt\":true},{\"ref\":\"BndP 1,10.84\",\"a\":\"Rohiṇī\",\"rel\":\"wife_of\",\"b\":\"Candramas\",\"words\":\"tasya vai rohiṇī patnī\",\"doubt\":false},{\"ref\":\"BndP 1,10.84\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Candramas\",\"words\":\"putrastasya budhaḥ smṛtaḥ\",\"doubt\":false},{\"ref\":\"BndP 1,10.84\",\"a\":\"Budha\",\"rel\":\"born_of\",\"b\":\"Rohiṇī\",\"words\":\"rohiṇī patnī putrastasya budhaḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02256,
+ "tokens": {
+  "input": 3491,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1558,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 1,10.76",
+   "a": "Suvarcalā",
+   "rel": "wife_of",
+   "b": "Rudra",
+   "words": "patnī suvarccalā tasyāḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,10.76",
+   "a": "Śanaiścara",
+   "rel": "son_of",
+   "b": "Rudra",
+   "words": "putraścāsya śanaiścaraḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 1,10.76",
+   "a": "Śanaiścara",
+   "rel": "born_of",
+   "b": "Suvarcalā",
+   "words": "tasyāḥ putraścāsya śanaiścaraḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.77",
+   "a": "Dhātrī",
+   "rel": "wife_of",
+   "b": "Bhava",
+   "words": "tasyā dhātrī smṛtā patnī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.77",
+   "a": "Uśanas",
+   "rel": "son_of",
+   "b": "Bhava",
+   "words": "putraśca uśanā smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.77",
+   "a": "Uśanas",
+   "rel": "born_of",
+   "b": "Dhātrī",
+   "words": "dhātrī smṛtā patnī putraśca uśanā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.78",
+   "a": "Vikeśī",
+   "rel": "wife_of",
+   "b": "Śarva",
+   "words": "tasyāḥ patnī vikeśī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.78",
+   "a": "Aṅgāraka",
+   "rel": "son_of",
+   "b": "Śarva",
+   "words": "putro 'syāṅgārakaḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.78",
+   "a": "Aṅgāraka",
+   "rel": "born_of",
+   "b": "Vikeśī",
+   "words": "patnī vikeśī tu putro 'syāṅgārakaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.79",
+   "a": "Śivā",
+   "rel": "wife_of",
+   "b": "Īśāna",
+   "words": "tasyāḥ patnī śivā nāma",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.79",
+   "a": "Manojava",
+   "rel": "son_of",
+   "b": "Īśāna",
+   "words": "putraścāsyā manojavaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.79",
+   "a": "Manojava",
+   "rel": "born_of",
+   "b": "Śivā",
+   "words": "patnī śivā nāma putraścāsyā manojavaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.81",
+   "a": "Svāhā",
+   "rel": "wife_of",
+   "b": "Paśupati",
+   "words": "tasyāḥ patnī smṛtā svāhā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.81",
+   "a": "Skanda",
+   "rel": "son_of",
+   "b": "Paśupati",
+   "words": "skandastasyāḥ sutaḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.81",
+   "a": "Skanda",
+   "rel": "born_of",
+   "b": "Svāhā",
+   "words": "patnī smṛtā svāhā skandastasyāḥ sutaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.83",
+   "a": "Dīkṣā",
+   "rel": "wife_of",
+   "b": "Dīkṣita Brāhmaṇa",
+   "words": "dīkṣā patnī smṛtā tasyāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.83",
+   "a": "Saṃtāna",
+   "rel": "son_of",
+   "b": "Dīkṣita Brāhmaṇa",
+   "words": "saṃtānaḥ putra ucyate",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.83",
+   "a": "Saṃtāna",
+   "rel": "born_of",
+   "b": "Dīkṣā",
+   "words": "dīkṣā patnī smṛtā tasyāḥ saṃtānaḥ putra",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.84",
+   "a": "Rohiṇī",
+   "rel": "wife_of",
+   "b": "Candramas",
+   "words": "tasya vai rohiṇī patnī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.84",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Candramas",
+   "words": "putrastasya budhaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 1,10.84",
+   "a": "Budha",
+   "rel": "born_of",
+   "b": "Rohiṇī",
+   "words": "rohiṇī patnī putrastasya budhaḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

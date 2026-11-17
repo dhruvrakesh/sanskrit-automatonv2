@@ -1,0 +1,399 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 5,
+ "part": 1,
+ "refs": [
+  "BndP 2,5.1",
+  "BndP 2,5.2",
+  "BndP 2,5.3",
+  "BndP 2,5.4",
+  "BndP 2,5.5",
+  "BndP 2,5.6",
+  "BndP 2,5.7",
+  "BndP 2,5.8",
+  "BndP 2,5.9",
+  "BndP 2,5.10",
+  "BndP 2,5.11",
+  "BndP 2,5.12",
+  "BndP 2,5.13",
+  "BndP 2,5.14",
+  "BndP 2,5.15",
+  "BndP 2,5.16",
+  "BndP 2,5.17",
+  "BndP 2,5.18",
+  "BndP 2,5.19",
+  "BndP 2,5.20",
+  "BndP 2,5.21",
+  "BndP 2,5.22",
+  "BndP 2,5.23",
+  "BndP 2,5.24",
+  "BndP 2,5.25",
+  "BndP 2,5.26",
+  "BndP 2,5.27",
+  "BndP 2,5.28",
+  "BndP 2,5.29",
+  "BndP 2,5.30",
+  "BndP 2,5.31",
+  "BndP 2,5.32",
+  "BndP 2,5.33",
+  "BndP 2,5.34",
+  "BndP 2,5.35",
+  "BndP 2,5.36",
+  "BndP 2,5.37",
+  "BndP 2,5.38",
+  "BndP 2,5.39",
+  "BndP 2,5.40",
+  "BndP 2,5.41",
+  "BndP 2,5.42",
+  "BndP 2,5.43",
+  "BndP 2,5.44",
+  "BndP 2,5.45",
+  "BndP 2,5.46",
+  "BndP 2,5.47",
+  "BndP 2,5.48",
+  "BndP 2,5.49",
+  "BndP 2,5.50",
+  "BndP 2,5.51",
+  "BndP 2,5.52",
+  "BndP 2,5.53",
+  "BndP 2,5.54",
+  "BndP 2,5.55",
+  "BndP 2,5.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:23:49",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,5.3\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"diteḥ putradvayaṃ jajñe\",\"doubt\":true},{\"ref\":\"BndP 2,5.3\",\"a\":\"Hiraṇyakaśipu\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"kaśyapasyātmajau tau\",\"doubt\":true},{\"ref\":\"BndP 2,5.3\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"born_of\",\"b\":\"Diti\",\"words\":\"diteḥ putradvayaṃ jajñe\",\"doubt\":true},{\"ref\":\"BndP 2,5.3\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"kaśyapasyātmajau tau\",\"doubt\":true},{\"ref\":\"BndP 2,5.12\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"brother_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakṣo 'nujastasya\",\"doubt\":false},{\"ref\":\"BndP 2,5.12\",\"a\":\"Siṃhikā\",\"rel\":\"sister_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"siṃhikā tasya cānujā\",\"doubt\":false},{\"ref\":\"BndP 2,5.13\",\"a\":\"Siṃhikā\",\"rel\":\"born_of\",\"b\":\"Rāhu\",\"words\":\"rāhoḥ sā jananī devī\",\"doubt\":true},{\"ref\":\"BndP 2,5.13\",\"a\":\"Siṃhikā\",\"rel\":\"wife_of\",\"b\":\"Vipracitti\",\"words\":\"vipra citteḥ parigrahaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,5.30\",\"a\":\"Śambara\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasutāḥ pañca\",\"doubt\":false},{\"ref\":\"BndP 2,5.30\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasutāḥ pañca\",\"doubt\":false},{\"ref\":\"BndP 2,5.30\",\"a\":\"Kālanābha\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyākṣasutāḥ pañca\",\"doubt\":false},{\"ref\":\"BndP 2,5.31\",\"a\":\"Mahānābha\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyakṣasutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,5.31\",\"a\":\"Saṃtāpana\",\"rel\":\"son_of\",\"b\":\"Hiraṇyākṣa\",\"words\":\"hiraṇyakṣasutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,5.33\",\"a\":\"Prahlāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipoḥ putrāścatvāraḥ prahlādaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,5.33\",\"a\":\"Anuhrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"hiraṇyakaśipoḥ putrāścatvāraḥ anuhnā dastathāparaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,5.34\",\"a\":\"Saṃhrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"saṃhrādaścaiva hrādaśca\",\"doubt\":false},{\"ref\":\"BndP 2,5.34\",\"a\":\"Hrāda\",\"rel\":\"son_of\",\"b\":\"Hiraṇyakaśipu\",\"words\":\"saṃhrādaścaiva hrādaśca\",\"doubt\":false},{\"ref\":\"BndP 2,5.34\",\"a\":\"Sunda\",\"rel\":\"son_of\",\"b\":\"Hrāda\",\"words\":\"hrādaputau babhūvatuḥ\",\"doubt\":false},{\"ref\":\"BndP 2,5.34\",\"a\":\"Nisunda\",\"rel\":\"son_of\",\"b\":\"Hrāda\",\"words\":\"hrādaputau babhūvatuḥ\",\"doubt\":false},{\"ref\":\"BndP 2,5.35\",\"a\":\"Mārīca\",\"rel\":\"son_of\",\"b\":\"Sunda\",\"words\":\"mārīcaḥ sundaputrastu\",\"doubt\":false},{\"ref\":\"BndP 2,5.35\",\"a\":\"Mārīca\",\"rel\":\"born_of\",\"b\":\"Tāḍakā\",\"words\":\"tāḍakāyāmajāyata\",\"doubt\":false},{\"ref\":\"BndP 2,5.39\",\"a\":\"Brahmajit\",\"rel\":\"son_of\",\"b\":\"Kālanemi\",\"words\":\"kālanemisutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,5.39\",\"a\":\"Kratujit\",\"rel\":\"son_of\",\"b\":\"Kālanemi\",\"words\":\"kālanemisutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,5.39\",\"a\":\"Devāntaka\",\"rel\":\"son_of\",\"b\":\"Kālanemi\",\"words\":\"kālanemisutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,5.39\",\"a\":\"Narāntaka\",\"rel\":\"son_of\",\"b\":\"Kālanemi\",\"words\":\"kālanemisutā hyete\",\"doubt\":false},{\"ref\":\"BndP 2,5.40\",\"a\":\"Rājāja\",\"rel\":\"son_of\",\"b\":\"Śambhu\",\"words\":\"śaṃbhoḥ putrau prakīrttitau\",\"doubt\":false},{\"ref\":\"BndP 2,5.40\",\"a\":\"Goma\",\"rel\":\"son_of\",\"b\":\"Śambhu\",\"words\":\"śaṃbhoḥ putrau prakīrttitau\",\"doubt\":false},{\"ref\":\"BndP 2,5.41\",\"a\":\"Bali\",\"rel\":\"son_of\",\"b\":\"Virocana\",\"words\":\"virojanasya putraśca balirekaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,5.42\",\"a\":\"Bāṇa\",\"rel\":\"son_of\",\"b\":\"Bali\",\"words\":\"baleḥ putraśataṃ jajñe\",\"doubt\":true},{\"ref\":\"BndP 2,5.43\",\"a\":\"Śakunī\",\"rel\":\"daughter_of\",\"b\":\"Bali\",\"words\":\"kanye dve tu baleḥ smṛte\",\"doubt\":false},{\"ref\":\"BndP 2,5.43\",\"a\":\"Pūtanā\",\"rel\":\"daughter_of\",\"b\":\"Bali\",\"words\":\"kanye dve tu baleḥ smṛte\",\"doubt\":false},{\"ref\":\"BndP 2,5.44\",\"a\":\"Bāleya\",\"rel\":\"line_of\",\"b\":\"Bali\",\"words\":\"bāleyā nāma vikhyātā\",\"doubt\":false},{\"ref\":\"BndP 2,5.45\",\"a\":\"Indradhanvā\",\"rel\":\"son_of\",\"b\":\"Bāṇa\",\"words\":\"bāṇasya caindradhanvā\",\"doubt\":false},{\"ref\":\"BndP 2,5.45\",\"a\":\"Indradhanvā\",\"rel\":\"born_of\",\"b\":\"Lohinī\",\"words\":\"lohinyāmudapadyata\",\"doubt\":false},{\"ref\":\"BndP 2,5.48\",\"a\":\"Diti\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"kaṇyapaṃ devī bharttāraṃ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03558,
+ "tokens": {
+  "input": 5140,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2530,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,5.3",
+   "a": "Hiraṇyakaśipu",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "diteḥ putradvayaṃ jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.3",
+   "a": "Hiraṇyakaśipu",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "kaśyapasyātmajau tau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.3",
+   "a": "Hiraṇyākṣa",
+   "rel": "born_of",
+   "b": "Diti",
+   "words": "diteḥ putradvayaṃ jajñe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.3",
+   "a": "Hiraṇyākṣa",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "kaśyapasyātmajau tau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.12",
+   "a": "Hiraṇyākṣa",
+   "rel": "brother_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakṣo 'nujastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.12",
+   "a": "Siṃhikā",
+   "rel": "sister_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "siṃhikā tasya cānujā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.13",
+   "a": "Siṃhikā",
+   "rel": "born_of",
+   "b": "Rāhu",
+   "words": "rāhoḥ sā jananī devī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.13",
+   "a": "Siṃhikā",
+   "rel": "wife_of",
+   "b": "Vipracitti",
+   "words": "vipra citteḥ parigrahaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.30",
+   "a": "Śambara",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasutāḥ pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.30",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasutāḥ pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.30",
+   "a": "Kālanābha",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyākṣasutāḥ pañca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.31",
+   "a": "Mahānābha",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyakṣasutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.31",
+   "a": "Saṃtāpana",
+   "rel": "son_of",
+   "b": "Hiraṇyākṣa",
+   "words": "hiraṇyakṣasutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.33",
+   "a": "Prahlāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipoḥ putrāścatvāraḥ prahlādaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 2,5.33",
+   "a": "Anuhrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "hiraṇyakaśipoḥ putrāścatvāraḥ anuhnā dastathāparaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 2,5.34",
+   "a": "Saṃhrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "saṃhrādaścaiva hrādaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.34",
+   "a": "Hrāda",
+   "rel": "son_of",
+   "b": "Hiraṇyakaśipu",
+   "words": "saṃhrādaścaiva hrādaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.34",
+   "a": "Sunda",
+   "rel": "son_of",
+   "b": "Hrāda",
+   "words": "hrādaputau babhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.34",
+   "a": "Nisunda",
+   "rel": "son_of",
+   "b": "Hrāda",
+   "words": "hrādaputau babhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.35",
+   "a": "Mārīca",
+   "rel": "son_of",
+   "b": "Sunda",
+   "words": "mārīcaḥ sundaputrastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.35",
+   "a": "Mārīca",
+   "rel": "born_of",
+   "b": "Tāḍakā",
+   "words": "tāḍakāyāmajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.39",
+   "a": "Brahmajit",
+   "rel": "son_of",
+   "b": "Kālanemi",
+   "words": "kālanemisutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.39",
+   "a": "Kratujit",
+   "rel": "son_of",
+   "b": "Kālanemi",
+   "words": "kālanemisutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.39",
+   "a": "Devāntaka",
+   "rel": "son_of",
+   "b": "Kālanemi",
+   "words": "kālanemisutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.39",
+   "a": "Narāntaka",
+   "rel": "son_of",
+   "b": "Kālanemi",
+   "words": "kālanemisutā hyete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.40",
+   "a": "Rājāja",
+   "rel": "son_of",
+   "b": "Śambhu",
+   "words": "śaṃbhoḥ putrau prakīrttitau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.40",
+   "a": "Goma",
+   "rel": "son_of",
+   "b": "Śambhu",
+   "words": "śaṃbhoḥ putrau prakīrttitau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.41",
+   "a": "Bali",
+   "rel": "son_of",
+   "b": "Virocana",
+   "words": "virojanasya putraśca balirekaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,5.41",
+   "a": "Bāṇa",
+   "rel": "son_of",
+   "b": "Bali",
+   "words": "baleḥ putraśataṃ jajñe",
+   "doubt": true,
+   "ref_cited": "BndP 2,5.42",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.43",
+   "a": "Śakunī",
+   "rel": "daughter_of",
+   "b": "Bali",
+   "words": "kanye dve tu baleḥ smṛte",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.43",
+   "a": "Pūtanā",
+   "rel": "daughter_of",
+   "b": "Bali",
+   "words": "kanye dve tu baleḥ smṛte",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.44",
+   "a": "Bāleya",
+   "rel": "line_of",
+   "b": "Bali",
+   "words": "bāleyā nāma vikhyātā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.45",
+   "a": "Indradhanvā",
+   "rel": "son_of",
+   "b": "Bāṇa",
+   "words": "bāṇasya caindradhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.45",
+   "a": "Indradhanvā",
+   "rel": "born_of",
+   "b": "Lohinī",
+   "words": "lohinyāmudapadyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,5.48",
+   "a": "Diti",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "kaṇyapaṃ devī bharttāraṃ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

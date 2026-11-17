@@ -1,0 +1,507 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 3,
+ "part": 1,
+ "refs": [
+  "BndP 2,3.1",
+  "BndP 2,3.2",
+  "BndP 2,3.3",
+  "BndP 2,3.4",
+  "BndP 2,3.5",
+  "BndP 2,3.6",
+  "BndP 2,3.7",
+  "BndP 2,3.8",
+  "BndP 2,3.9",
+  "BndP 2,3.10",
+  "BndP 2,3.11",
+  "BndP 2,3.12",
+  "BndP 2,3.13",
+  "BndP 2,3.14",
+  "BndP 2,3.15",
+  "BndP 2,3.16",
+  "BndP 2,3.17",
+  "BndP 2,3.18",
+  "BndP 2,3.19",
+  "BndP 2,3.20",
+  "BndP 2,3.21",
+  "BndP 2,3.22",
+  "BndP 2,3.23",
+  "BndP 2,3.24",
+  "BndP 2,3.25",
+  "BndP 2,3.26",
+  "BndP 2,3.27",
+  "BndP 2,3.28",
+  "BndP 2,3.29",
+  "BndP 2,3.30",
+  "BndP 2,3.31",
+  "BndP 2,3.32",
+  "BndP 2,3.33",
+  "BndP 2,3.34",
+  "BndP 2,3.35",
+  "BndP 2,3.36",
+  "BndP 2,3.37",
+  "BndP 2,3.38",
+  "BndP 2,3.39",
+  "BndP 2,3.40",
+  "BndP 2,3.41",
+  "BndP 2,3.42",
+  "BndP 2,3.43",
+  "BndP 2,3.44",
+  "BndP 2,3.45",
+  "BndP 2,3.46",
+  "BndP 2,3.47",
+  "BndP 2,3.48",
+  "BndP 2,3.49",
+  "BndP 2,3.50",
+  "BndP 2,3.51",
+  "BndP 2,3.52",
+  "BndP 2,3.53",
+  "BndP 2,3.54",
+  "BndP 2,3.55",
+  "BndP 2,3.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T10:23:12",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,3.3\",\"a\":\"Arundhatī\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Vasu\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Jāmī\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Lambā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Bhānu\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Marutvatī\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Saṃkalpā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Muhūrtā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Sādhyā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.3\",\"a\":\"Viśvā\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau\",\"doubt\":false},{\"ref\":\"BndP 2,3.4\",\"a\":\"Sādhya\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"sādhyāputrāstu dharmasya sādhyā dvādaśajajñire\",\"doubt\":false},{\"ref\":\"BndP 2,3.4\",\"a\":\"Sādhya\",\"rel\":\"born_of\",\"b\":\"Sādhyā\",\"words\":\"sādhyāputrāstu dharmasya sādhyā dvādaśajajñire\",\"doubt\":false},{\"ref\":\"BndP 2,3.21\",\"a\":\"Dhara\",\"rel\":\"son_of\",\"b\":\"Vasu\",\"words\":\"vasostu vasavaḥ putrāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.22\",\"a\":\"Draviṇa\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"dharasya putro draviṇo\",\"doubt\":false},{\"ref\":\"BndP 2,3.22\",\"a\":\"Hutahavya\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"dharasya putro draviṇo hutahavyo\",\"doubt\":false},{\"ref\":\"BndP 2,3.22\",\"a\":\"Rajas\",\"rel\":\"son_of\",\"b\":\"Dhara\",\"words\":\"hutahavyo rajas tathā\",\"doubt\":false},{\"ref\":\"BndP 2,3.22\",\"a\":\"Kāla\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvaputro 'bhavattāta kālo\",\"doubt\":false},{\"ref\":\"BndP 2,3.23\",\"a\":\"Varcas\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somasya bhagavānvarcā\",\"doubt\":false},{\"ref\":\"BndP 2,3.23\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"budhaśca grahabaudhanaḥ pañca candramasaḥ sutāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.23\",\"a\":\"Dharormī\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"dharormī kalilaścaiva pañca candramasaḥ sutāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.23\",\"a\":\"Kalila\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"kalilaścaiva pañca candramasaḥ sutāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.24\",\"a\":\"Vaitaṇḍya\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyasya putro vaitaṇḍyaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,3.24\",\"a\":\"Śama\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"vaitaṇḍyaḥ śamaḥ śāntastathaiva ca\",\"doubt\":true},{\"ref\":\"BndP 2,3.24\",\"a\":\"Śānta\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"śamaḥ śāntastathaiva ca\",\"doubt\":true},{\"ref\":\"BndP 2,3.25\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Agni\",\"words\":\"agneḥ putraṃ kumāraṃ\",\"doubt\":false},{\"ref\":\"BndP 2,3.25\",\"a\":\"Kumāra\",\"rel\":\"born_of\",\"b\":\"Svāhā\",\"words\":\"svāhā jajñe\",\"doubt\":false},{\"ref\":\"BndP 2,3.25\",\"a\":\"Śākha\",\"rel\":\"son_of\",\"b\":\"Kumāra\",\"words\":\"tasya śākho viśākhaśca naigameyaśca\",\"doubt\":true},{\"ref\":\"BndP 2,3.25\",\"a\":\"Viśākha\",\"rel\":\"son_of\",\"b\":\"Kumāra\",\"words\":\"tasya śākho viśākhaśca\",\"doubt\":true},{\"ref\":\"BndP 2,3.25\",\"a\":\"Naigameya\",\"rel\":\"son_of\",\"b\":\"Kumāra\",\"words\":\"viśākhaśca naigameyaśca\",\"doubt\":true},{\"ref\":\"BndP 2,3.26\",\"a\":\"Śivā\",\"rel\":\"wife_of\",\"b\":\"Anila\",\"words\":\"anilasya śivā bhāryā\",\"doubt\":false},{\"ref\":\"BndP 2,3.26\",\"a\":\"Manojava\",\"rel\":\"born_of\",\"b\":\"Śivā\",\"words\":\"tasyāḥ putro manojavaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,3.26\",\"a\":\"Manojava\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāvanilasya\",\"doubt\":false},{\"ref\":\"BndP 2,3.26\",\"a\":\"Avijñātagati\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"avijñāna gatiścaiva dvau putrāvanilasya\",\"doubt\":false},{\"ref\":\"BndP 2,3.27\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pratyūṣa\",\"words\":\"pratyūṣasya viduḥ putramṛṣiṃ nāmnātha devalam\",\"doubt\":false},{\"ref\":\"BndP 2,3.28\",\"a\":\"Bhuvanā\",\"rel\":\"sister_of\",\"b\":\"Bṛhaspati\",\"words\":\"bṛhaspateśtu bhaginī bhuvanā\",\"doubt\":false},{\"ref\":\"BndP 2,3.29\",\"a\":\"Prabhāsa's wife\",\"rel\":\"wife_of\",\"b\":\"Prabhāsa\",\"words\":\"prabhāsasya tu bhāryā sā\",\"doubt\":true},{\"ref\":\"BndP 2,3.29\",\"a\":\"Viśvakarman\",\"rel\":\"born_of\",\"b\":\"Prabhāsa's wife\",\"words\":\"viśvakarmā sutastasyāḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.30\",\"a\":\"Viśvedeva\",\"rel\":\"born_of\",\"b\":\"Viśvā\",\"words\":\"viśvedevāstu viśvāyā jajñire\",\"doubt\":false},{\"ref\":\"BndP 2,3.31\",\"a\":\"Viśvedeva\",\"rel\":\"son_of\",\"b\":\"Dharma\",\"words\":\"dharmaputrāḥ surā ete viśvāyāṃ jajñire\",\"doubt\":false},{\"ref\":\"BndP 2,3.32\",\"a\":\"Marutvant\",\"rel\":\"born_of\",\"b\":\"Marutvatī\",\"words\":\"marutvatyāṃ marutvanto\",\"doubt\":false},{\"ref\":\"BndP 2,3.32\",\"a\":\"Ghoṣa\",\"rel\":\"born_of\",\"b\":\"Lambā\",\"words\":\"ghoṣalaṃbā hyajāyata\",\"doubt\":true},{\"ref\":\"BndP 2,3.33\",\"a\":\"Saṃkalpa\",\"rel\":\"born_of\",\"b\":\"Saṃkalpā\",\"words\":\"saṃkalpāyāṃ tu saṃjajñe vidvānsaṃkalpa\",\"doubt\":false},{\"ref\":\"BndP 2,3.53\",\"a\":\"Nakṣatra\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"aṣṭāviśati yāḥ kanyā dakṣaḥ somāya tā dadau\",\"doubt\":true},{\"ref\":\"BndP 2,3.53\",\"a\":\"Nakṣatra\",\"rel\":\"wife_of\",\"b\":\"Soma\",\"words\":\"dakṣaḥ somāya tā dadau\",\"doubt\":true},{\"ref\":\"BndP 2,3.55\",\"a\":\"Aditi\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"kanyāḥ pratijagrāha kaśyapaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.55\",\"a\":\"Diti\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"kanyāḥ pratijagrāha kaśyapaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,3.55\",\"a\":\"Danu\",\"rel\":\"wife_of\",\"b\":\"Kaśyapa\",\"words\":\"kanyāḥ pratijagrāha kaśyapaḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04545,
+ "tokens": {
+  "input": 5152,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3515,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Arundhatī",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Vasu",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Jāmī",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Lambā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Bhānu",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Marutvatī",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Saṃkalpā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Muhūrtā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Sādhyā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.3",
+   "a": "Viśvā",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dharmasya patnyo daśa tā dakṣaḥ prācetaso dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.4",
+   "a": "Sādhya",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "sādhyāputrāstu dharmasya sādhyā dvādaśajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.4",
+   "a": "Sādhya",
+   "rel": "born_of",
+   "b": "Sādhyā",
+   "words": "sādhyāputrāstu dharmasya sādhyā dvādaśajajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.20",
+   "a": "Dhara",
+   "rel": "son_of",
+   "b": "Vasu",
+   "words": "vasostu vasavaḥ putrāḥ",
+   "doubt": true,
+   "ref_cited": "BndP 2,3.21",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.22",
+   "a": "Draviṇa",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "dharasya putro draviṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.22",
+   "a": "Hutahavya",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "dharasya putro draviṇo hutahavyo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.22",
+   "a": "Rajas",
+   "rel": "son_of",
+   "b": "Dhara",
+   "words": "hutahavyo rajas tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.22",
+   "a": "Kāla",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvaputro 'bhavattāta kālo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.23",
+   "a": "Varcas",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somasya bhagavānvarcā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.23",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "budhaśca grahabaudhanaḥ pañca candramasaḥ sutāḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 2,3.23",
+   "a": "Dharormī",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "dharormī kalilaścaiva pañca candramasaḥ sutāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.23",
+   "a": "Kalila",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "kalilaścaiva pañca candramasaḥ sutāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.24",
+   "a": "Vaitaṇḍya",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyasya putro vaitaṇḍyaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,3.24",
+   "a": "Śama",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "vaitaṇḍyaḥ śamaḥ śāntastathaiva ca",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,3.24",
+   "a": "Śānta",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "śamaḥ śāntastathaiva ca",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,3.25",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Agni",
+   "words": "agneḥ putraṃ kumāraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.25",
+   "a": "Kumāra",
+   "rel": "born_of",
+   "b": "Svāhā",
+   "words": "svāhā jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.25",
+   "a": "Śākha",
+   "rel": "son_of",
+   "b": "Kumāra",
+   "words": "tasya śākho viśākhaśca naigameyaśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.25",
+   "a": "Viśākha",
+   "rel": "son_of",
+   "b": "Kumāra",
+   "words": "tasya śākho viśākhaśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.25",
+   "a": "Naigameya",
+   "rel": "son_of",
+   "b": "Kumāra",
+   "words": "viśākhaśca naigameyaśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.26",
+   "a": "Śivā",
+   "rel": "wife_of",
+   "b": "Anila",
+   "words": "anilasya śivā bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.26",
+   "a": "Manojava",
+   "rel": "born_of",
+   "b": "Śivā",
+   "words": "tasyāḥ putro manojavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.26",
+   "a": "Manojava",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāvanilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.26",
+   "a": "Avijñātagati",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "avijñāna gatiścaiva dvau putrāvanilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.27",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pratyūṣa",
+   "words": "pratyūṣasya viduḥ putramṛṣiṃ nāmnātha devalam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.28",
+   "a": "Bhuvanā",
+   "rel": "sister_of",
+   "b": "Bṛhaspati",
+   "words": "bṛhaspateśtu bhaginī bhuvanā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.29",
+   "a": "Prabhāsa's wife",
+   "rel": "wife_of",
+   "b": "Prabhāsa",
+   "words": "prabhāsasya tu bhāryā sā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.29",
+   "a": "Viśvakarman",
+   "rel": "born_of",
+   "b": "Prabhāsa's wife",
+   "words": "viśvakarmā sutastasyāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.30",
+   "a": "Viśvedeva",
+   "rel": "born_of",
+   "b": "Viśvā",
+   "words": "viśvedevāstu viśvāyā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.31",
+   "a": "Viśvedeva",
+   "rel": "son_of",
+   "b": "Dharma",
+   "words": "dharmaputrāḥ surā ete viśvāyāṃ jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.32",
+   "a": "Marutvant",
+   "rel": "born_of",
+   "b": "Marutvatī",
+   "words": "marutvatyāṃ marutvanto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.32",
+   "a": "Ghoṣa",
+   "rel": "born_of",
+   "b": "Lambā",
+   "words": "ghoṣalaṃbā hyajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.33",
+   "a": "Saṃkalpa",
+   "rel": "born_of",
+   "b": "Saṃkalpā",
+   "words": "saṃkalpāyāṃ tu saṃjajñe vidvānsaṃkalpa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.53",
+   "a": "Nakṣatra",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "aṣṭāviśati yāḥ kanyā dakṣaḥ somāya tā dadau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.53",
+   "a": "Nakṣatra",
+   "rel": "wife_of",
+   "b": "Soma",
+   "words": "dakṣaḥ somāya tā dadau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.55",
+   "a": "Aditi",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "kanyāḥ pratijagrāha kaśyapaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.55",
+   "a": "Diti",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "kanyāḥ pratijagrāha kaśyapaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,3.55",
+   "a": "Danu",
+   "rel": "wife_of",
+   "b": "Kaśyapa",
+   "words": "kanyāḥ pratijagrāha kaśyapaḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

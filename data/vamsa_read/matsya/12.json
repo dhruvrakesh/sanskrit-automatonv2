@@ -1,0 +1,953 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 12,
+ "part": 0,
+ "refs": [
+  "MatsP 12.1",
+  "MatsP 12.2",
+  "MatsP 12.3",
+  "MatsP 12.4",
+  "MatsP 12.5",
+  "MatsP 12.6",
+  "MatsP 12.7",
+  "MatsP 12.8",
+  "MatsP 12.9",
+  "MatsP 12.10",
+  "MatsP 12.11",
+  "MatsP 12.12",
+  "MatsP 12.13",
+  "MatsP 12.14",
+  "MatsP 12.15",
+  "MatsP 12.16",
+  "MatsP 12.17",
+  "MatsP 12.18",
+  "MatsP 12.19",
+  "MatsP 12.20",
+  "MatsP 12.21",
+  "MatsP 12.22",
+  "MatsP 12.23",
+  "MatsP 12.24",
+  "MatsP 12.25",
+  "MatsP 12.26",
+  "MatsP 12.27",
+  "MatsP 12.28",
+  "MatsP 12.29",
+  "MatsP 12.30",
+  "MatsP 12.31",
+  "MatsP 12.32",
+  "MatsP 12.33",
+  "MatsP 12.34",
+  "MatsP 12.35",
+  "MatsP 12.36",
+  "MatsP 12.37",
+  "MatsP 12.38",
+  "MatsP 12.39",
+  "MatsP 12.40",
+  "MatsP 12.41",
+  "MatsP 12.42",
+  "MatsP 12.43",
+  "MatsP 12.44",
+  "MatsP 12.45",
+  "MatsP 12.46",
+  "MatsP 12.47",
+  "MatsP 12.48",
+  "MatsP 12.49",
+  "MatsP 12.50",
+  "MatsP 12.51",
+  "MatsP 12.52",
+  "MatsP 12.53",
+  "MatsP 12.54",
+  "MatsP 12.55",
+  "MatsP 12.56",
+  "MatsP 12.57"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:13:40",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 12.14\",\"a\":\"Ila\",\"rel\":\"other\",\"b\":\"Manu Vaivasvata\",\"words\":\"ilo 'bhūnmanunandanaḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 12.15\",\"a\":\"Purūravas\",\"rel\":\"line_of\",\"b\":\"Soma\",\"words\":\"somārkavaṃśayor ādāv\",\"doubt\":true},\n{\"ref\":\"MatsP 12.17\",\"a\":\"Utkala\",\"rel\":\"brother_of\",\"b\":\"Gaya\",\"words\":\"utkalo vai gahas tadvad\",\"doubt\":true},\n{\"ref\":\"MatsP 12.17\",\"a\":\"Haritāśva\",\"rel\":\"brother_of\",\"b\":\"Gaya\",\"words\":\"dharitāśvaś ca vīryavān\",\"doubt\":true},\n{\"ref\":\"MatsP 12.18\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Ila\",\"words\":\"abhiṣicyātha sa purūravasaṃ sutam\",\"doubt\":true},\n{\"ref\":\"MatsP 12.19\",\"a\":\"Ikṣvāku\",\"rel\":\"succeeded\",\"b\":\"Ila\",\"words\":\"ikṣvākurjyeṣṭhadāyādo madhyadeśamavāptavān\",\"doubt\":true},\n{\"ref\":\"MatsP 12.20\",\"a\":\"Śuci\",\"rel\":\"son_of\",\"b\":\"Nariṣyanta\",\"words\":\"nariṣyantasya putro 'bhūc chuco\",\"doubt\":false},\n{\"ref\":\"MatsP 12.20\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasyāmbarīṣastu\",\"doubt\":false},\n{\"ref\":\"MatsP 12.21\",\"a\":\"Dhṛtaketu\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṭa\",\"words\":\"dhṛṣṭasya ca sutatrayam dhṛtaketuś\",\"doubt\":true},\n{\"ref\":\"MatsP 12.21\",\"a\":\"Citranātha\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṭa\",\"words\":\"dhṛṣṭasya ca sutatrayam citranātho\",\"doubt\":true},\n{\"ref\":\"MatsP 12.21\",\"a\":\"Raṇadhṛṣṭa\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṭa\",\"words\":\"dhṛṣṭasya ca sutatrayam raṇadhṛṣṭaś\",\"doubt\":true},\n{\"ref\":\"MatsP 12.21\",\"a\":\"Ānarta\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"ānarto nāma śaryāteḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.21\",\"a\":\"Sukanyā\",\"rel\":\"daughter_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāteḥ sukanyā caiva dārikā\",\"doubt\":false},\n{\"ref\":\"MatsP 12.22\",\"a\":\"Rocamāna\",\"rel\":\"son_of\",\"b\":\"Ānarta\",\"words\":\"ānartasyābhavatputro rocamānaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.23\",\"a\":\"Revata\",\"rel\":\"son_of\",\"b\":\"Rocamāna\",\"words\":\"rocamānasya putro 'bhūd revo raivata\",\"doubt\":false},\n{\"ref\":\"MatsP 12.24\",\"a\":\"Revatī\",\"rel\":\"daughter_of\",\"b\":\"Revata\",\"words\":\"revatī tasya sā kanyā\",\"doubt\":false},\n{\"ref\":\"MatsP 12.24\",\"a\":\"Revatī\",\"rel\":\"wife_of\",\"b\":\"Rāma\",\"words\":\"bhāryā rāmasya viśrutā\",\"doubt\":false},\n{\"ref\":\"MatsP 12.26\",\"a\":\"Vikukṣi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākoḥ putratām āpa vikukṣir\",\"doubt\":false},\n{\"ref\":\"MatsP 12.28\",\"a\":\"Suyodhana\",\"rel\":\"son_of\",\"b\":\"Kakutstha\",\"words\":\"kakutstho nāmnābhūt tatsutastu suyodhanaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.29\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Suyodhana\",\"words\":\"tasya putraḥ pṛthurnāma\",\"doubt\":false},\n{\"ref\":\"MatsP 12.29\",\"a\":\"Viśvaga\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"viśvagaścapṛthoḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.29\",\"a\":\"Indu\",\"rel\":\"son_of\",\"b\":\"Viśvaga\",\"words\":\"industasya ca putro\",\"doubt\":true},\n{\"ref\":\"MatsP 12.29\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Indu\",\"words\":\"yuvanāśvastato 'bhavat\",\"doubt\":true},\n{\"ref\":\"MatsP 12.30\",\"a\":\"Śrāvasta\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"śrāvastaśca mahātejā\",\"doubt\":true},\n{\"ref\":\"MatsP 12.30\",\"a\":\"Vatsaka\",\"rel\":\"son_of\",\"b\":\"Śrāvasta\",\"words\":\"vatsakastatsuto 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.31\",\"a\":\"Bṛhadaśva\",\"rel\":\"son_of\",\"b\":\"Śrāvasta\",\"words\":\"śrāvastādbṛhadaśvo 'bhūt\",\"doubt\":false},\n{\"ref\":\"MatsP 12.31\",\"a\":\"Kuvalāśva\",\"rel\":\"son_of\",\"b\":\"Bṛhadaśva\",\"words\":\"kuvalāśvas tato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.32\",\"a\":\"Dṛḍhāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"tasya putrās trayo jātā dṛḍhāśvo\",\"doubt\":false},\n{\"ref\":\"MatsP 12.32\",\"a\":\"Daṇḍa\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"daṇḍa eva ca\",\"doubt\":false},\n{\"ref\":\"MatsP 12.32\",\"a\":\"Kapilāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"kapilāśvaśca vikhyāto\",\"doubt\":false},\n{\"ref\":\"MatsP 12.33\",\"a\":\"Pramoda\",\"rel\":\"son_of\",\"b\":\"Dṛḍhāśva\",\"words\":\"dṛḍhāśvasya pramodaśca\",\"doubt\":false},\n{\"ref\":\"MatsP 12.33\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Pramoda\",\"words\":\"haryaśvastasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.33\",\"a\":\"Nikumbha\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"haryaśvasya nikumbho 'bhūt\",\"doubt\":false},\n{\"ref\":\"MatsP 12.33\",\"a\":\"Saṃhatāśva\",\"rel\":\"son_of\",\"b\":\"Nikumbha\",\"words\":\"saṃhatāśvas tato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.34\",\"a\":\"Akṛtāśva\",\"rel\":\"son_of\",\"b\":\"Saṃhatāśva\",\"words\":\"akṛtāśvo raṇāśvaśca saṃhatāśvasutāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 12.34\",\"a\":\"Raṇāśva\",\"rel\":\"son_of\",\"b\":\"Saṃhatāśva\",\"words\":\"akṛtāśvo raṇāśvaśca saṃhatāśvasutāv ubhau\",\"doubt\":false},\n{\"ref\":\"MatsP 12.34\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Raṇāśva\",\"words\":\"yuvanāśvo raṇāśvasya\",\"doubt\":false},\n{\"ref\":\"MatsP 12.34\",\"a\":\"Māndhātṛ\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"māndhātā ca tato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.35\",\"a\":\"Purukutsa\",\"rel\":\"son_of\",\"b\":\"Māndhātṛ\",\"words\":\"māndhātuḥ purukutso 'bhūd\",\"doubt\":false},\n{\"ref\":\"MatsP 12.35\",\"a\":\"Dharmasena\",\"rel\":\"son_of\",\"b\":\"Māndhātṛ\",\"words\":\"dharmasenaśca pārthivaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.35\",\"a\":\"Mucukunda\",\"rel\":\"son_of\",\"b\":\"Māndhātṛ\",\"words\":\"mucukundaśca vikhyātaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.35\",\"a\":\"Śatruji\",\"rel\":\"son_of\",\"b\":\"Māndhātṛ\",\"words\":\"śatrujicca pratāpavān\",\"doubt\":false},\n{\"ref\":\"MatsP 12.36\",\"a\":\"Vasuda\",\"rel\":\"son_of\",\"b\":\"Purukutsa\",\"words\":\"purukutsasya putro 'bhūd vasudo\",\"doubt\":false},\n{\"ref\":\"MatsP 12.36\",\"a\":\"Sambhūti\",\"rel\":\"son_of\",\"b\":\"Vasuda\",\"words\":\"sambhūtistasya putro 'bhūt\",\"doubt\":false},\n{\"ref\":\"MatsP 12.36\",\"a\":\"Tridhanvan\",\"rel\":\"son_of\",\"b\":\"Sambhūti\",\"words\":\"tridhanvā ca tato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.37\",\"a\":\"Trayyāruṇa\",\"rel\":\"son_of\",\"b\":\"Tridhanvan\",\"words\":\"tridhanvanaḥ suto jātas trayyāruṇa\",\"doubt\":false},\n{\"ref\":\"MatsP 12.37\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Trayyāruṇa\",\"words\":\"tasmātsatyavrato nāma\",\"doubt\":false},\n{\"ref\":\"MatsP 12.37\",\"a\":\"Satyaratha\",\"rel\":\"son_of\",\"b\":\"Satyavrata\",\"words\":\"tasmātsatyarathaḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.38\",\"a\":\"Hariścandra\",\"rel\":\"son_of\",\"b\":\"Satyaratha\",\"words\":\"tasya putro hariścandro\",\"doubt\":false},\n{\"ref\":\"MatsP 12.38\",\"a\":\"Rohita\",\"rel\":\"son_of\",\"b\":\"Hariścandra\",\"words\":\"hariścandrācca rohitaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.38\",\"a\":\"Vṛka\",\"rel\":\"son_of\",\"b\":\"Rohita\",\"words\":\"rohitācca vṛko jāto\",\"doubt\":false},\n{\"ref\":\"MatsP 12.38\",\"a\":\"Bāhu\",\"rel\":\"son_of\",\"b\":\"Vṛka\",\"words\":\"vṛkādbāhurajāyata\",\"doubt\":false},\n{\"ref\":\"MatsP 12.39\",\"a\":\"Sagara\",\"rel\":\"son_of\",\"b\":\"Bāhu\",\"words\":\"sagarastasya putro 'bhūd\",\"doubt\":false},\n{\"ref\":\"MatsP 12.39\",\"a\":\"Prabhā\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"dve bhārye sagarasyāpi prabhā\",\"doubt\":false},\n{\"ref\":\"MatsP 12.39\",\"a\":\"Bhānumatī\",\"rel\":\"wife_of\",\"b\":\"Sagara\",\"words\":\"prabhā bhānumatī tathā\",\"doubt\":false},\n{\"ref\":\"MatsP 12.42\",\"a\":\"Asamañjasa\",\"rel\":\"born_of\",\"b\":\"Bhānumatī\",\"words\":\"ekaṃ bhānumatī putram agṛhṇādasamañjasam\",\"doubt\":false},\n{\"ref\":\"MatsP 12.42\",\"a\":\"Asamañjasa\",\"rel\":\"son_of\",\"b\":\"Sagara\",\"words\":\"agṛhṇādasamañjasam\",\"doubt\":true},\n{\"ref\":\"MatsP 12.43\",\"a\":\"Aṃśumat\",\"rel\":\"son_of\",\"b\":\"Asamañjasa\",\"words\":\"asamañjasastu tanayo yo 'ṃśumānnāma\",\"doubt\":false},\n{\"ref\":\"MatsP 12.44\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Aṃśumat\",\"words\":\"tasya putro dilīpas\",\"doubt\":false},\n{\"ref\":\"MatsP 12.44\",\"a\":\"Bhagīratha\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpāttu bhagīrathaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.45\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Bhagīratha\",\"words\":\"bhagīrathasya tanayo nābhāga\",\"doubt\":false},\n{\"ref\":\"MatsP 12.45\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasyāmbarīṣo 'bhūt\",\"doubt\":false},\n{\"ref\":\"MatsP 12.45\",\"a\":\"Sindhudvīpa\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"sindhudvīpas tato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.46\",\"a\":\"Āyutāyus\",\"rel\":\"son_of\",\"b\":\"Sindhudvīpa\",\"words\":\"tasyāyutāyuḥ putro 'bhūd\",\"doubt\":false},\n{\"ref\":\"MatsP 12.46\",\"a\":\"Ṛtuparṇa\",\"rel\":\"son_of\",\"b\":\"Āyutāyus\",\"words\":\"ṛtuparṇastato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.46\",\"a\":\"Kalmāṣapāda\",\"rel\":\"son_of\",\"b\":\"Ṛtuparṇa\",\"words\":\"tasya kalmāṣapādastu\",\"doubt\":false},\n{\"ref\":\"MatsP 12.46\",\"a\":\"Sarvakarman\",\"rel\":\"son_of\",\"b\":\"Kalmāṣapāda\",\"words\":\"sarvakarmā tataḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.47\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Sarvakarman\",\"words\":\"tasyānaraṇyaḥ putro 'bhūn\",\"doubt\":false},\n{\"ref\":\"MatsP 12.47\",\"a\":\"Nighna\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"nighnastasya suto 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.47\",\"a\":\"Anamitra\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnaputrāv ubhau jātāv anamitraraghū\",\"doubt\":false},\n{\"ref\":\"MatsP 12.47\",\"a\":\"Raghu\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnaputrāv ubhau jātāv anamitraraghū\",\"doubt\":false},\n{\"ref\":\"MatsP 12.47\",\"a\":\"Anamitra\",\"rel\":\"brother_of\",\"b\":\"Raghu\",\"words\":\"anamitraraghū nṛpau\",\"doubt\":false},\n{\"ref\":\"MatsP 12.48\",\"a\":\"Dilīpa\",\"rel\":\"son_of\",\"b\":\"Raghu\",\"words\":\"raghor abhūddilīpastu\",\"doubt\":false},\n{\"ref\":\"MatsP 12.48\",\"a\":\"Ajaka\",\"rel\":\"son_of\",\"b\":\"Dilīpa\",\"words\":\"dilīpādajakastathā\",\"doubt\":false},\n{\"ref\":\"MatsP 12.49\",\"a\":\"Dīrghabāhu\",\"rel\":\"son_of\",\"b\":\"Ajaka\",\"words\":\"dīrghabāhurajājjātaś\",\"doubt\":false},\n{\"ref\":\"MatsP 12.49\",\"a\":\"Ajapāla\",\"rel\":\"son_of\",\"b\":\"Dīrghabāhu\",\"words\":\"cājapālastato nṛpaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.49\",\"a\":\"Daśaratha\",\"rel\":\"son_of\",\"b\":\"Ajapāla\",\"words\":\"tasmāddaśaratho jātas\",\"doubt\":false},\n{\"ref\":\"MatsP 12.50\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Daśaratha\",\"words\":\"tasya putracatuṣṭayam nārāyaṇātmakāḥ sarve rāmasteṣvagrajo 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.51\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"tasya putrau kuśalavāv\",\"doubt\":true},\n{\"ref\":\"MatsP 12.51\",\"a\":\"Lava\",\"rel\":\"son_of\",\"b\":\"Rāma\",\"words\":\"tasya putrau kuśalavāv\",\"doubt\":true},\n{\"ref\":\"MatsP 12.51\",\"a\":\"Kuśa\",\"rel\":\"brother_of\",\"b\":\"Lava\",\"words\":\"kuśalavāv\",\"doubt\":false},\n{\"ref\":\"MatsP 12.52\",\"a\":\"Atithi\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"atithistu kuśājjajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 12.52\",\"a\":\"Niṣadha\",\"rel\":\"son_of\",\"b\":\"Atithi\",\"words\":\"niṣadhastasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.52\",\"a\":\"Nala\",\"rel\":\"son_of\",\"b\":\"Niṣadha\",\"words\":\"nalastu naiṣadhastasmān\",\"doubt\":false},\n{\"ref\":\"MatsP 12.52\",\"a\":\"Nabhas\",\"rel\":\"son_of\",\"b\":\"Nala\",\"words\":\"nabhāstasmādajāyata\",\"doubt\":false},\n{\"ref\":\"MatsP 12.53\",\"a\":\"Puṇḍarīka\",\"rel\":\"son_of\",\"b\":\"Nabhas\",\"words\":\"nabhasaḥ puṇḍarīko 'bhūt\",\"doubt\":false},\n{\"ref\":\"MatsP 12.53\",\"a\":\"Kṣemadhanvan\",\"rel\":\"son_of\",\"b\":\"Puṇḍarīka\",\"words\":\"kṣemadhanvā tataḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.53\",\"a\":\"Devānīka\",\"rel\":\"son_of\",\"b\":\"Kṣemadhanvan\",\"words\":\"tasya putro 'bhavadvīro devānīkaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.54\",\"a\":\"Ahīnagu\",\"rel\":\"son_of\",\"b\":\"Devānīka\",\"words\":\"ahīnagustasya sutaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.54\",\"a\":\"Sahasrāśva\",\"rel\":\"son_of\",\"b\":\"Ahīnagu\",\"words\":\"sahasrāśvastataḥ paraḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 12.54\",\"a\":\"Candrāvaloka\",\"rel\":\"son_of\",\"b\":\"Sahasrāśva\",\"words\":\"tataścandrāvalokastu\",\"doubt\":false},\n{\"ref\":\"MatsP 12.54\",\"a\":\"Tārāpīḍa\",\"rel\":\"son_of\",\"b\":\"Candrāvaloka\",\"words\":\"tārāpīḍastato 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 12.55\",\"a\":\"Candragiri\",\"rel\":\"son_of\",\"b\":\"Tārāpīḍa\",\"words\":\"tasyātmajaś candragirir\",\"doubt\":false},\n{\"ref\":\"MatsP 12.55\",\"a\":\"Bhānu\",\"rel\":\"son_of\",\"b\":\"Candragiri\",\"words\":\"bhānuś candrastato 'bhavat\",\"doubt\":true},\n{\"ref\":\"MatsP 12.55\",\"a\":\"Śrutāyus\",\"rel\":\"son_of\",\"b\":\"Bhānu\",\"words\":\"śrutāyur abhavattasmād\",\"doubt\":true},\n{\"ref\":\"MatsP 12.56\",\"a\":\"Nala\",\"rel\":\"son_of\",\"b\":\"Vīrasena\",\"words\":\"vīrasenasutastadvan naiṣadhaśca\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.07944,
+ "tokens": {
+  "input": 5058,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 6932,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 12.14",
+   "a": "Ila",
+   "rel": "other",
+   "b": "Manu Vaivasvata",
+   "words": "ilo 'bhūnmanunandanaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.14",
+   "a": "Purūravas",
+   "rel": "line_of",
+   "b": "Soma",
+   "words": "somārkavaṃśayor ādāv",
+   "doubt": true,
+   "ref_cited": "MatsP 12.15",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.17",
+   "a": "Utkala",
+   "rel": "brother_of",
+   "b": "Gaya",
+   "words": "utkalo vai gahas tadvad",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.17",
+   "a": "Haritāśva",
+   "rel": "brother_of",
+   "b": "Gaya",
+   "words": "dharitāśvaś ca vīryavān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.18",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Ila",
+   "words": "abhiṣicyātha sa purūravasaṃ sutam",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 12.19",
+   "a": "Ikṣvāku",
+   "rel": "succeeded",
+   "b": "Ila",
+   "words": "ikṣvākurjyeṣṭhadāyādo madhyadeśamavāptavān",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 12.20",
+   "a": "Śuci",
+   "rel": "son_of",
+   "b": "Nariṣyanta",
+   "words": "nariṣyantasya putro 'bhūc chuco",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 12.20",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasyāmbarīṣastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.20",
+   "a": "Dhṛtaketu",
+   "rel": "son_of",
+   "b": "Dhṛṣṭa",
+   "words": "dhṛṣṭasya ca sutatrayam dhṛtaketuś",
+   "doubt": true,
+   "ref_cited": "MatsP 12.21",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.21",
+   "a": "Citranātha",
+   "rel": "son_of",
+   "b": "Dhṛṣṭa",
+   "words": "dhṛṣṭasya ca sutatrayam citranātho",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 12.21",
+   "a": "Raṇadhṛṣṭa",
+   "rel": "son_of",
+   "b": "Dhṛṣṭa",
+   "words": "dhṛṣṭasya ca sutatrayam raṇadhṛṣṭaś",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 12.21",
+   "a": "Ānarta",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "ānarto nāma śaryāteḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.21",
+   "a": "Sukanyā",
+   "rel": "daughter_of",
+   "b": "Śaryāti",
+   "words": "śaryāteḥ sukanyā caiva dārikā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.22",
+   "a": "Rocamāna",
+   "rel": "son_of",
+   "b": "Ānarta",
+   "words": "ānartasyābhavatputro rocamānaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.23",
+   "a": "Revata",
+   "rel": "son_of",
+   "b": "Rocamāna",
+   "words": "rocamānasya putro 'bhūd revo raivata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.24",
+   "a": "Revatī",
+   "rel": "daughter_of",
+   "b": "Revata",
+   "words": "revatī tasya sā kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.24",
+   "a": "Revatī",
+   "rel": "wife_of",
+   "b": "Rāma",
+   "words": "bhāryā rāmasya viśrutā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.26",
+   "a": "Vikukṣi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākoḥ putratām āpa vikukṣir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.28",
+   "a": "Suyodhana",
+   "rel": "son_of",
+   "b": "Kakutstha",
+   "words": "kakutstho nāmnābhūt tatsutastu suyodhanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.29",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Suyodhana",
+   "words": "tasya putraḥ pṛthurnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.29",
+   "a": "Viśvaga",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "viśvagaścapṛthoḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.29",
+   "a": "Indu",
+   "rel": "son_of",
+   "b": "Viśvaga",
+   "words": "industasya ca putro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.29",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Indu",
+   "words": "yuvanāśvastato 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.30",
+   "a": "Śrāvasta",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "śrāvastaśca mahātejā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.30",
+   "a": "Vatsaka",
+   "rel": "son_of",
+   "b": "Śrāvasta",
+   "words": "vatsakastatsuto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.31",
+   "a": "Bṛhadaśva",
+   "rel": "son_of",
+   "b": "Śrāvasta",
+   "words": "śrāvastādbṛhadaśvo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.31",
+   "a": "Kuvalāśva",
+   "rel": "son_of",
+   "b": "Bṛhadaśva",
+   "words": "kuvalāśvas tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.32",
+   "a": "Dṛḍhāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "tasya putrās trayo jātā dṛḍhāśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.32",
+   "a": "Daṇḍa",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "daṇḍa eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.32",
+   "a": "Kapilāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "kapilāśvaśca vikhyāto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.33",
+   "a": "Pramoda",
+   "rel": "son_of",
+   "b": "Dṛḍhāśva",
+   "words": "dṛḍhāśvasya pramodaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.33",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Pramoda",
+   "words": "haryaśvastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.33",
+   "a": "Nikumbha",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "haryaśvasya nikumbho 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.33",
+   "a": "Saṃhatāśva",
+   "rel": "son_of",
+   "b": "Nikumbha",
+   "words": "saṃhatāśvas tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.34",
+   "a": "Akṛtāśva",
+   "rel": "son_of",
+   "b": "Saṃhatāśva",
+   "words": "akṛtāśvo raṇāśvaśca saṃhatāśvasutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.34",
+   "a": "Raṇāśva",
+   "rel": "son_of",
+   "b": "Saṃhatāśva",
+   "words": "akṛtāśvo raṇāśvaśca saṃhatāśvasutāv ubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.34",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Raṇāśva",
+   "words": "yuvanāśvo raṇāśvasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.34",
+   "a": "Māndhātṛ",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "māndhātā ca tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.35",
+   "a": "Purukutsa",
+   "rel": "son_of",
+   "b": "Māndhātṛ",
+   "words": "māndhātuḥ purukutso 'bhūd",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.35",
+   "a": "Dharmasena",
+   "rel": "son_of",
+   "b": "Māndhātṛ",
+   "words": "dharmasenaśca pārthivaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.35",
+   "a": "Mucukunda",
+   "rel": "son_of",
+   "b": "Māndhātṛ",
+   "words": "mucukundaśca vikhyātaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.35",
+   "a": "Śatruji",
+   "rel": "son_of",
+   "b": "Māndhātṛ",
+   "words": "śatrujicca pratāpavān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.36",
+   "a": "Vasuda",
+   "rel": "son_of",
+   "b": "Purukutsa",
+   "words": "purukutsasya putro 'bhūd vasudo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.36",
+   "a": "Sambhūti",
+   "rel": "son_of",
+   "b": "Vasuda",
+   "words": "sambhūtistasya putro 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.36",
+   "a": "Tridhanvan",
+   "rel": "son_of",
+   "b": "Sambhūti",
+   "words": "tridhanvā ca tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.37",
+   "a": "Trayyāruṇa",
+   "rel": "son_of",
+   "b": "Tridhanvan",
+   "words": "tridhanvanaḥ suto jātas trayyāruṇa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.37",
+   "a": "Satyavrata",
+   "rel": "son_of",
+   "b": "Trayyāruṇa",
+   "words": "tasmātsatyavrato nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.37",
+   "a": "Satyaratha",
+   "rel": "son_of",
+   "b": "Satyavrata",
+   "words": "tasmātsatyarathaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.38",
+   "a": "Hariścandra",
+   "rel": "son_of",
+   "b": "Satyaratha",
+   "words": "tasya putro hariścandro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.38",
+   "a": "Rohita",
+   "rel": "son_of",
+   "b": "Hariścandra",
+   "words": "hariścandrācca rohitaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.38",
+   "a": "Vṛka",
+   "rel": "son_of",
+   "b": "Rohita",
+   "words": "rohitācca vṛko jāto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.38",
+   "a": "Bāhu",
+   "rel": "son_of",
+   "b": "Vṛka",
+   "words": "vṛkādbāhurajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.39",
+   "a": "Sagara",
+   "rel": "son_of",
+   "b": "Bāhu",
+   "words": "sagarastasya putro 'bhūd",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.39",
+   "a": "Prabhā",
+   "rel": "wife_of",
+   "b": "Sagara",
+   "words": "dve bhārye sagarasyāpi prabhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.39",
+   "a": "Bhānumatī",
+   "rel": "wife_of",
+   "b": "Sagara",
+   "words": "prabhā bhānumatī tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.42",
+   "a": "Asamañjasa",
+   "rel": "born_of",
+   "b": "Bhānumatī",
+   "words": "ekaṃ bhānumatī putram agṛhṇādasamañjasam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.42",
+   "a": "Asamañjasa",
+   "rel": "son_of",
+   "b": "Sagara",
+   "words": "agṛhṇādasamañjasam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 12.43",
+   "a": "Aṃśumat",
+   "rel": "son_of",
+   "b": "Asamañjasa",
+   "words": "asamañjasastu tanayo yo 'ṃśumānnāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.44",
+   "a": "Dilīpa",
+   "rel": "son_of",
+   "b": "Aṃśumat",
+   "words": "tasya putro dilīpas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.44",
+   "a": "Bhagīratha",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "dilīpāttu bhagīrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.45",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Bhagīratha",
+   "words": "bhagīrathasya tanayo nābhāga",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.45",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasyāmbarīṣo 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.45",
+   "a": "Sindhudvīpa",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "sindhudvīpas tato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.46",
+   "a": "Āyutāyus",
+   "rel": "son_of",
+   "b": "Sindhudvīpa",
+   "words": "tasyāyutāyuḥ putro 'bhūd",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.46",
+   "a": "Ṛtuparṇa",
+   "rel": "son_of",
+   "b": "Āyutāyus",
+   "words": "ṛtuparṇastato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.46",
+   "a": "Kalmāṣapāda",
+   "rel": "son_of",
+   "b": "Ṛtuparṇa",
+   "words": "tasya kalmāṣapādastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.46",
+   "a": "Sarvakarman",
+   "rel": "son_of",
+   "b": "Kalmāṣapāda",
+   "words": "sarvakarmā tataḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.47",
+   "a": "Anaraṇya",
+   "rel": "son_of",
+   "b": "Sarvakarman",
+   "words": "tasyānaraṇyaḥ putro 'bhūn",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.47",
+   "a": "Nighna",
+   "rel": "son_of",
+   "b": "Anaraṇya",
+   "words": "nighnastasya suto 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.47",
+   "a": "Anamitra",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnaputrāv ubhau jātāv anamitraraghū",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.47",
+   "a": "Raghu",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnaputrāv ubhau jātāv anamitraraghū",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.47",
+   "a": "Anamitra",
+   "rel": "brother_of",
+   "b": "Raghu",
+   "words": "anamitraraghū nṛpau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.48",
+   "a": "Dilīpa",
+   "rel": "son_of",
+   "b": "Raghu",
+   "words": "raghor abhūddilīpastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.48",
+   "a": "Ajaka",
+   "rel": "son_of",
+   "b": "Dilīpa",
+   "words": "dilīpādajakastathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.49",
+   "a": "Dīrghabāhu",
+   "rel": "son_of",
+   "b": "Ajaka",
+   "words": "dīrghabāhurajājjātaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.49",
+   "a": "Ajapāla",
+   "rel": "son_of",
+   "b": "Dīrghabāhu",
+   "words": "cājapālastato nṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.49",
+   "a": "Daśaratha",
+   "rel": "son_of",
+   "b": "Ajapāla",
+   "words": "tasmāddaśaratho jātas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.49",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Daśaratha",
+   "words": "tasya putracatuṣṭayam nārāyaṇātmakāḥ sarve rāmasteṣvagrajo 'bhavat",
+   "doubt": false,
+   "ref_cited": "MatsP 12.50",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.51",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "tasya putrau kuśalavāv",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.51",
+   "a": "Lava",
+   "rel": "son_of",
+   "b": "Rāma",
+   "words": "tasya putrau kuśalavāv",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.51",
+   "a": "Kuśa",
+   "rel": "brother_of",
+   "b": "Lava",
+   "words": "kuśalavāv",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.52",
+   "a": "Atithi",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "atithistu kuśājjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.52",
+   "a": "Niṣadha",
+   "rel": "son_of",
+   "b": "Atithi",
+   "words": "niṣadhastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.52",
+   "a": "Nala",
+   "rel": "son_of",
+   "b": "Niṣadha",
+   "words": "nalastu naiṣadhastasmān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.52",
+   "a": "Nabhas",
+   "rel": "son_of",
+   "b": "Nala",
+   "words": "nabhāstasmādajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.53",
+   "a": "Puṇḍarīka",
+   "rel": "son_of",
+   "b": "Nabhas",
+   "words": "nabhasaḥ puṇḍarīko 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.53",
+   "a": "Kṣemadhanvan",
+   "rel": "son_of",
+   "b": "Puṇḍarīka",
+   "words": "kṣemadhanvā tataḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.53",
+   "a": "Devānīka",
+   "rel": "son_of",
+   "b": "Kṣemadhanvan",
+   "words": "tasya putro 'bhavadvīro devānīkaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.54",
+   "a": "Ahīnagu",
+   "rel": "son_of",
+   "b": "Devānīka",
+   "words": "ahīnagustasya sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.54",
+   "a": "Sahasrāśva",
+   "rel": "son_of",
+   "b": "Ahīnagu",
+   "words": "sahasrāśvastataḥ paraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.54",
+   "a": "Candrāvaloka",
+   "rel": "son_of",
+   "b": "Sahasrāśva",
+   "words": "tataścandrāvalokastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.54",
+   "a": "Tārāpīḍa",
+   "rel": "son_of",
+   "b": "Candrāvaloka",
+   "words": "tārāpīḍastato 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.55",
+   "a": "Candragiri",
+   "rel": "son_of",
+   "b": "Tārāpīḍa",
+   "words": "tasyātmajaś candragirir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.55",
+   "a": "Bhānu",
+   "rel": "son_of",
+   "b": "Candragiri",
+   "words": "bhānuś candrastato 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.55",
+   "a": "Śrutāyus",
+   "rel": "son_of",
+   "b": "Bhānu",
+   "words": "śrutāyur abhavattasmād",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 12.56",
+   "a": "Nala",
+   "rel": "son_of",
+   "b": "Vīrasena",
+   "words": "vīrasenasutastadvan naiṣadhaśca",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

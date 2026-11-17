@@ -1,0 +1,577 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "matsya",
+ "title": "Matsyapurana",
+ "chapter": 44,
+ "part": 1,
+ "refs": [
+  "MatsP 44.1",
+  "MatsP 44.2",
+  "MatsP 44.3",
+  "MatsP 44.4",
+  "MatsP 44.5",
+  "MatsP 44.6",
+  "MatsP 44.7",
+  "MatsP 44.8",
+  "MatsP 44.9",
+  "MatsP 44.10",
+  "MatsP 44.11",
+  "MatsP 44.12",
+  "MatsP 44.13",
+  "MatsP 44.14",
+  "MatsP 44.15",
+  "MatsP 44.16",
+  "MatsP 44.17",
+  "MatsP 44.18",
+  "MatsP 44.19",
+  "MatsP 44.20",
+  "MatsP 44.21",
+  "MatsP 44.22",
+  "MatsP 44.23",
+  "MatsP 44.24",
+  "MatsP 44.25",
+  "MatsP 44.26",
+  "MatsP 44.27",
+  "MatsP 44.28",
+  "MatsP 44.29",
+  "MatsP 44.30",
+  "MatsP 44.31",
+  "MatsP 44.32",
+  "MatsP 44.33",
+  "MatsP 44.34",
+  "MatsP 44.35",
+  "MatsP 44.36",
+  "MatsP 44.37",
+  "MatsP 44.38",
+  "MatsP 44.39",
+  "MatsP 44.40",
+  "MatsP 44.41",
+  "MatsP 44.42",
+  "MatsP 44.43",
+  "MatsP 44.44",
+  "MatsP 44.45",
+  "MatsP 44.46",
+  "MatsP 44.47",
+  "MatsP 44.48",
+  "MatsP 44.49",
+  "MatsP 44.50",
+  "MatsP 44.51",
+  "MatsP 44.52",
+  "MatsP 44.53",
+  "MatsP 44.54",
+  "MatsP 44.55",
+  "MatsP 44.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_matsyapurANa1-176.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Oliver Hellwig)",
+ "at": "2026-11-17T10:15:00",
+ "reply": "{\"statements\":[\n{\"ref\":\"MatsP 44.15\",\"a\":\"Vṛjinīvat\",\"rel\":\"son_of\",\"b\":\"Kroṣṭu\",\"words\":\"kroṣṭorevābhavatputro vṛjinīvānmahārathaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.16\",\"a\":\"Svāha\",\"rel\":\"son_of\",\"b\":\"Vṛjinīvat\",\"words\":\"vṛjinīvataśca putro 'bhūt svāho nāma\",\"doubt\":false},\n{\"ref\":\"MatsP 44.16\",\"a\":\"Ruṣaṅgu\",\"rel\":\"son_of\",\"b\":\"Svāha\",\"words\":\"svāhaputro 'bhavad rājan ruṣaṅguḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.17\",\"a\":\"Citraratha\",\"rel\":\"son_of\",\"b\":\"Ruṣaṅgu\",\"words\":\"citraścitrarathaścāsya putraḥ\",\"doubt\":true},\n{\"ref\":\"MatsP 44.18\",\"a\":\"Śaśabindu\",\"rel\":\"son_of\",\"b\":\"Citraratha\",\"words\":\"atha caitrarathivīro jajñe vipuladakṣiṇaḥ śaśabinduriti khyātaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.22\",\"a\":\"Suyajña\",\"rel\":\"son_of\",\"b\":\"Pṛthuśravas\",\"words\":\"antarasya suyajñasya suyajñastanayo 'bhavat\",\"doubt\":true},\n{\"ref\":\"MatsP 44.24\",\"a\":\"Titikṣu\",\"rel\":\"son_of\",\"b\":\"Uśanas\",\"words\":\"titikṣurabhavatputra auśanaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.24\",\"a\":\"Marutta\",\"rel\":\"son_of\",\"b\":\"Titikṣu\",\"words\":\"maruttastasya tanayo\",\"doubt\":false},\n{\"ref\":\"MatsP 44.25\",\"a\":\"Kambalabarhiṣa\",\"rel\":\"son_of\",\"b\":\"Marutta\",\"words\":\"āsīnmaruttatanayau vīraḥ kambalabarhiṣaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.25\",\"a\":\"Rukmakavaca\",\"rel\":\"son_of\",\"b\":\"Kambalabarhiṣa\",\"words\":\"putrastu rukmakavaco vidvānkambalabarhiṣaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.28\",\"a\":\"Rukmeṣu\",\"rel\":\"son_of\",\"b\":\"Rukmakavaca\",\"words\":\"jajñire pañca putrāstu mahāvīryā dhanurbhṛtaḥ rukmeṣuḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.28\",\"a\":\"Pṛthurukma\",\"rel\":\"son_of\",\"b\":\"Rukmakavaca\",\"words\":\"pṛthurukmaśca\",\"doubt\":false},\n{\"ref\":\"MatsP 44.28\",\"a\":\"Jyāmagha\",\"rel\":\"son_of\",\"b\":\"Rukmakavaca\",\"words\":\"jyāmaghaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.28\",\"a\":\"Parigha\",\"rel\":\"son_of\",\"b\":\"Rukmakavaca\",\"words\":\"parigho\",\"doubt\":false},\n{\"ref\":\"MatsP 44.28\",\"a\":\"Hari\",\"rel\":\"son_of\",\"b\":\"Rukmakavaca\",\"words\":\"hariḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.32\",\"a\":\"Caitrā\",\"rel\":\"wife_of\",\"b\":\"Jyāmagha\",\"words\":\"jyāmaghasyābhavadbhāryā caitrā\",\"doubt\":false},\n{\"ref\":\"MatsP 44.36\",\"a\":\"Vidarbha\",\"rel\":\"son_of\",\"b\":\"Jyāmagha\",\"words\":\"putraṃ vidarbhaṃ subhagā caitrā\",\"doubt\":false},\n{\"ref\":\"MatsP 44.36\",\"a\":\"Vidarbha\",\"rel\":\"born_of\",\"b\":\"Caitrā\",\"words\":\"putraṃ vidarbhaṃ subhagā caitrā\",\"doubt\":false},\n{\"ref\":\"MatsP 44.36\",\"a\":\"Kratha\",\"rel\":\"son_of\",\"b\":\"Jyāmagha\",\"words\":\"snuṣāyāṃ krathakaiśikau\",\"doubt\":false},\n{\"ref\":\"MatsP 44.36\",\"a\":\"Kaiśika\",\"rel\":\"son_of\",\"b\":\"Jyāmagha\",\"words\":\"snuṣāyāṃ krathakaiśikau\",\"doubt\":false},\n{\"ref\":\"MatsP 44.38\",\"a\":\"Cidi\",\"rel\":\"son_of\",\"b\":\"Kaiśika\",\"words\":\"kaiśikasya cidiḥ putras\",\"doubt\":false},\n{\"ref\":\"MatsP 44.38\",\"a\":\"Caidya\",\"rel\":\"line_of\",\"b\":\"Cidi\",\"words\":\"tasmāccaidyā nṛpāḥ smṛtāḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.38\",\"a\":\"Kratha\",\"rel\":\"son_of\",\"b\":\"Vidarbha\",\"words\":\"kratho vidarbhaputrastu\",\"doubt\":false},\n{\"ref\":\"MatsP 44.38\",\"a\":\"Kunti\",\"rel\":\"son_of\",\"b\":\"Kratha\",\"words\":\"kuntis tasyātmajo 'bhavat\",\"doubt\":false},\n{\"ref\":\"MatsP 44.39\",\"a\":\"Dhṛṣṭa\",\"rel\":\"son_of\",\"b\":\"Kunti\",\"words\":\"kunterdhṛṣṭaḥ suto jajñe\",\"doubt\":false},\n{\"ref\":\"MatsP 44.39\",\"a\":\"Nirvṛti\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṭa\",\"words\":\"dhṛṣṭasya putro dharmātmā nirvṛtiḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.40\",\"a\":\"Vidūratha\",\"rel\":\"son_of\",\"b\":\"Nirvṛti\",\"words\":\"nirvṛteḥ putro nāmnā sa tu vidūrathaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.40\",\"a\":\"Daśārha\",\"rel\":\"son_of\",\"b\":\"Vidūratha\",\"words\":\"daśārhastasya vai putro\",\"doubt\":false},\n{\"ref\":\"MatsP 44.40\",\"a\":\"Vyoman\",\"rel\":\"son_of\",\"b\":\"Daśārha\",\"words\":\"vyomastasya ca vai smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.40\",\"a\":\"Jīmūta\",\"rel\":\"son_of\",\"b\":\"Vyoman\",\"words\":\"vyomāttu putro jīmūta ucyate\",\"doubt\":false},\n{\"ref\":\"MatsP 44.41\",\"a\":\"Vimala\",\"rel\":\"son_of\",\"b\":\"Jīmūta\",\"words\":\"jīmūtaputro vimalas\",\"doubt\":false},\n{\"ref\":\"MatsP 44.41\",\"a\":\"Bhīmaratha\",\"rel\":\"son_of\",\"b\":\"Vimala\",\"words\":\"tasya bhīmarathaḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.41\",\"a\":\"Navaratha\",\"rel\":\"son_of\",\"b\":\"Bhīmaratha\",\"words\":\"suto bhīmarathasyāsīt smṛto navarathaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.42\",\"a\":\"Dṛḍharatha\",\"rel\":\"son_of\",\"b\":\"Navaratha\",\"words\":\"tasya cāsīd dṛḍharathaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.42\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Dṛḍharatha\",\"words\":\"śakunistasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.42\",\"a\":\"Karambha\",\"rel\":\"son_of\",\"b\":\"Śakuni\",\"words\":\"tasmātkarambhaḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.42\",\"a\":\"Devarāta\",\"rel\":\"son_of\",\"b\":\"Karambha\",\"words\":\"kārambhir devarāto babhūva\",\"doubt\":false},\n{\"ref\":\"MatsP 44.43\",\"a\":\"Devakṣatra\",\"rel\":\"son_of\",\"b\":\"Devarāta\",\"words\":\"devakṣatro 'bhavadrājā daivarātir\",\"doubt\":false},\n{\"ref\":\"MatsP 44.45\",\"a\":\"Jantu\",\"rel\":\"son_of\",\"b\":\"Purudvat\",\"words\":\"janturjajñe 'tha vaidarbhyāṃ bhadrasenyāṃ purudvataḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.45\",\"a\":\"Jantu\",\"rel\":\"born_of\",\"b\":\"Bhadrasenī\",\"words\":\"vaidarbhyāṃ bhadrasenyāṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.45\",\"a\":\"Aikṣvākī\",\"rel\":\"wife_of\",\"b\":\"Jantu\",\"words\":\"aikṣvākī cābhavadbhāryā jantos\",\"doubt\":false},\n{\"ref\":\"MatsP 44.45\",\"a\":\"Sātvata\",\"rel\":\"son_of\",\"b\":\"Jantu\",\"words\":\"jantostasyāmajāyata sātvataḥ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.45\",\"a\":\"Sātvata\",\"rel\":\"born_of\",\"b\":\"Aikṣvākī\",\"words\":\"aikṣvākī cābhavadbhāryā jantostasyāmajāyata\",\"doubt\":false},\n{\"ref\":\"MatsP 44.47\",\"a\":\"Bhajin\",\"rel\":\"born_of\",\"b\":\"Kauśalyā\",\"words\":\"kauśalyā suṣuve sutān bhajinaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.47\",\"a\":\"Bhajamāna\",\"rel\":\"born_of\",\"b\":\"Kauśalyā\",\"words\":\"bhajamānaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.47\",\"a\":\"Devāvṛdha\",\"rel\":\"born_of\",\"b\":\"Kauśalyā\",\"words\":\"devāvṛdhaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.48\",\"a\":\"Andhaka\",\"rel\":\"born_of\",\"b\":\"Kauśalyā\",\"words\":\"andhakaṃ ca mahābhojaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.48\",\"a\":\"Mahābhoja\",\"rel\":\"born_of\",\"b\":\"Kauśalyā\",\"words\":\"mahābhojaṃ\",\"doubt\":false},\n{\"ref\":\"MatsP 44.48\",\"a\":\"Vṛṣṇi\",\"rel\":\"born_of\",\"b\":\"Kauśalyā\",\"words\":\"vṛṣṇiṃ ca yadunandanam\",\"doubt\":false},\n{\"ref\":\"MatsP 44.50\",\"a\":\"Nimi\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"te bāhyakāyāṃ sṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"MatsP 44.50\",\"a\":\"Kṛmila\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"kṛmilaṃ caiva bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"MatsP 44.50\",\"a\":\"Vṛṣṇi\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"vṛṣṇiṃ parapuraṃjayam te bhajamānād vijajñire\",\"doubt\":true},\n{\"ref\":\"MatsP 44.50\",\"a\":\"Nimi\",\"rel\":\"born_of\",\"b\":\"Sṛñjayī\",\"words\":\"bāhyakāyāṃ sṛñjayyāṃ\",\"doubt\":true},\n{\"ref\":\"MatsP 44.50\",\"a\":\"Bāhyakā\",\"rel\":\"sister_of\",\"b\":\"Sṛñjayī\",\"words\":\"bhārye bhaginyau dve\",\"doubt\":true},\n{\"ref\":\"MatsP 44.56\",\"a\":\"Babhru\",\"rel\":\"son_of\",\"b\":\"Devāvṛdha\",\"words\":\"babhruṃ devāvṛdhānnṛpāt\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05168,
+ "tokens": {
+  "input": 5219,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4124,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "MatsP 44.15",
+   "a": "Vṛjinīvat",
+   "rel": "son_of",
+   "b": "Kroṣṭu",
+   "words": "kroṣṭorevābhavatputro vṛjinīvānmahārathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.16",
+   "a": "Svāha",
+   "rel": "son_of",
+   "b": "Vṛjinīvat",
+   "words": "vṛjinīvataśca putro 'bhūt svāho nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.16",
+   "a": "Ruṣaṅgu",
+   "rel": "son_of",
+   "b": "Svāha",
+   "words": "svāhaputro 'bhavad rājan ruṣaṅguḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.17",
+   "a": "Citraratha",
+   "rel": "son_of",
+   "b": "Ruṣaṅgu",
+   "words": "citraścitrarathaścāsya putraḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.18",
+   "a": "Śaśabindu",
+   "rel": "son_of",
+   "b": "Citraratha",
+   "words": "atha caitrarathivīro jajñe vipuladakṣiṇaḥ śaśabinduriti khyātaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.22",
+   "a": "Suyajña",
+   "rel": "son_of",
+   "b": "Pṛthuśravas",
+   "words": "antarasya suyajñasya suyajñastanayo 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.24",
+   "a": "Titikṣu",
+   "rel": "son_of",
+   "b": "Uśanas",
+   "words": "titikṣurabhavatputra auśanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.24",
+   "a": "Marutta",
+   "rel": "son_of",
+   "b": "Titikṣu",
+   "words": "maruttastasya tanayo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.25",
+   "a": "Kambalabarhiṣa",
+   "rel": "son_of",
+   "b": "Marutta",
+   "words": "āsīnmaruttatanayau vīraḥ kambalabarhiṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.25",
+   "a": "Rukmakavaca",
+   "rel": "son_of",
+   "b": "Kambalabarhiṣa",
+   "words": "putrastu rukmakavaco vidvānkambalabarhiṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.28",
+   "a": "Rukmeṣu",
+   "rel": "son_of",
+   "b": "Rukmakavaca",
+   "words": "jajñire pañca putrāstu mahāvīryā dhanurbhṛtaḥ rukmeṣuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.28",
+   "a": "Pṛthurukma",
+   "rel": "son_of",
+   "b": "Rukmakavaca",
+   "words": "pṛthurukmaśca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.28",
+   "a": "Jyāmagha",
+   "rel": "son_of",
+   "b": "Rukmakavaca",
+   "words": "jyāmaghaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.28",
+   "a": "Parigha",
+   "rel": "son_of",
+   "b": "Rukmakavaca",
+   "words": "parigho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.28",
+   "a": "Hari",
+   "rel": "son_of",
+   "b": "Rukmakavaca",
+   "words": "hariḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.32",
+   "a": "Caitrā",
+   "rel": "wife_of",
+   "b": "Jyāmagha",
+   "words": "jyāmaghasyābhavadbhāryā caitrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.36",
+   "a": "Vidarbha",
+   "rel": "son_of",
+   "b": "Jyāmagha",
+   "words": "putraṃ vidarbhaṃ subhagā caitrā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 44.36",
+   "a": "Vidarbha",
+   "rel": "born_of",
+   "b": "Caitrā",
+   "words": "putraṃ vidarbhaṃ subhagā caitrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.36",
+   "a": "Kratha",
+   "rel": "son_of",
+   "b": "Jyāmagha",
+   "words": "snuṣāyāṃ krathakaiśikau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 44.36",
+   "a": "Kaiśika",
+   "rel": "son_of",
+   "b": "Jyāmagha",
+   "words": "snuṣāyāṃ krathakaiśikau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "MatsP 44.38",
+   "a": "Cidi",
+   "rel": "son_of",
+   "b": "Kaiśika",
+   "words": "kaiśikasya cidiḥ putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.38",
+   "a": "Caidya",
+   "rel": "line_of",
+   "b": "Cidi",
+   "words": "tasmāccaidyā nṛpāḥ smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.38",
+   "a": "Kratha",
+   "rel": "son_of",
+   "b": "Vidarbha",
+   "words": "kratho vidarbhaputrastu",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.38",
+   "a": "Kunti",
+   "rel": "son_of",
+   "b": "Kratha",
+   "words": "kuntis tasyātmajo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.39",
+   "a": "Dhṛṣṭa",
+   "rel": "son_of",
+   "b": "Kunti",
+   "words": "kunterdhṛṣṭaḥ suto jajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.39",
+   "a": "Nirvṛti",
+   "rel": "son_of",
+   "b": "Dhṛṣṭa",
+   "words": "dhṛṣṭasya putro dharmātmā nirvṛtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.40",
+   "a": "Vidūratha",
+   "rel": "son_of",
+   "b": "Nirvṛti",
+   "words": "nirvṛteḥ putro nāmnā sa tu vidūrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.40",
+   "a": "Daśārha",
+   "rel": "son_of",
+   "b": "Vidūratha",
+   "words": "daśārhastasya vai putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.40",
+   "a": "Vyoman",
+   "rel": "son_of",
+   "b": "Daśārha",
+   "words": "vyomastasya ca vai smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.40",
+   "a": "Jīmūta",
+   "rel": "son_of",
+   "b": "Vyoman",
+   "words": "vyomāttu putro jīmūta ucyate",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.41",
+   "a": "Vimala",
+   "rel": "son_of",
+   "b": "Jīmūta",
+   "words": "jīmūtaputro vimalas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.41",
+   "a": "Bhīmaratha",
+   "rel": "son_of",
+   "b": "Vimala",
+   "words": "tasya bhīmarathaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.41",
+   "a": "Navaratha",
+   "rel": "son_of",
+   "b": "Bhīmaratha",
+   "words": "suto bhīmarathasyāsīt smṛto navarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.42",
+   "a": "Dṛḍharatha",
+   "rel": "son_of",
+   "b": "Navaratha",
+   "words": "tasya cāsīd dṛḍharathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.42",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Dṛḍharatha",
+   "words": "śakunistasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.42",
+   "a": "Karambha",
+   "rel": "son_of",
+   "b": "Śakuni",
+   "words": "tasmātkarambhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.42",
+   "a": "Devarāta",
+   "rel": "son_of",
+   "b": "Karambha",
+   "words": "kārambhir devarāto babhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.43",
+   "a": "Devakṣatra",
+   "rel": "son_of",
+   "b": "Devarāta",
+   "words": "devakṣatro 'bhavadrājā daivarātir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.45",
+   "a": "Jantu",
+   "rel": "son_of",
+   "b": "Purudvat",
+   "words": "janturjajñe 'tha vaidarbhyāṃ bhadrasenyāṃ purudvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.45",
+   "a": "Jantu",
+   "rel": "born_of",
+   "b": "Bhadrasenī",
+   "words": "vaidarbhyāṃ bhadrasenyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.45",
+   "a": "Aikṣvākī",
+   "rel": "wife_of",
+   "b": "Jantu",
+   "words": "aikṣvākī cābhavadbhāryā jantos",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.45",
+   "a": "Sātvata",
+   "rel": "son_of",
+   "b": "Jantu",
+   "words": "jantostasyāmajāyata sātvataḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.45",
+   "a": "Sātvata",
+   "rel": "born_of",
+   "b": "Aikṣvākī",
+   "words": "aikṣvākī cābhavadbhāryā jantostasyāmajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.47",
+   "a": "Bhajin",
+   "rel": "born_of",
+   "b": "Kauśalyā",
+   "words": "kauśalyā suṣuve sutān bhajinaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.47",
+   "a": "Bhajamāna",
+   "rel": "born_of",
+   "b": "Kauśalyā",
+   "words": "bhajamānaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.47",
+   "a": "Devāvṛdha",
+   "rel": "born_of",
+   "b": "Kauśalyā",
+   "words": "devāvṛdhaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.48",
+   "a": "Andhaka",
+   "rel": "born_of",
+   "b": "Kauśalyā",
+   "words": "andhakaṃ ca mahābhojaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.48",
+   "a": "Mahābhoja",
+   "rel": "born_of",
+   "b": "Kauśalyā",
+   "words": "mahābhojaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.48",
+   "a": "Vṛṣṇi",
+   "rel": "born_of",
+   "b": "Kauśalyā",
+   "words": "vṛṣṇiṃ ca yadunandanam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.50",
+   "a": "Nimi",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "te bāhyakāyāṃ sṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.50",
+   "a": "Kṛmila",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "kṛmilaṃ caiva bhajamānād vijajñire",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 44.50",
+   "a": "Vṛṣṇi",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "vṛṣṇiṃ parapuraṃjayam te bhajamānād vijajñire",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "MatsP 44.50",
+   "a": "Nimi",
+   "rel": "born_of",
+   "b": "Sṛñjayī",
+   "words": "bāhyakāyāṃ sṛñjayyāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.50",
+   "a": "Bāhyakā",
+   "rel": "sister_of",
+   "b": "Sṛñjayī",
+   "words": "bhārye bhaginyau dve",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "MatsP 44.56",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Devāvṛdha",
+   "words": "babhruṃ devāvṛdhānnṛpāt",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

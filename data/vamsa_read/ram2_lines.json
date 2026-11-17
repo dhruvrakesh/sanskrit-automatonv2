@@ -1,0 +1,201 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "ram2",
+ "title": "Ramayana, book 2 (Ayodhyakanda)",
+ "lines": [
+  [
+   {
+    "name": "Sagara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Asamañja",
+    "ref": "R 2,102.20",
+    "words": "asamañjas tu putro 'bhūt sagarasyeti"
+   },
+   {
+    "name": "Aṃśumān",
+    "ref": "R 2,102.21",
+    "words": "aṃśumān iti putro 'bhūd asamañjasya"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "R 2,102.21",
+    "words": "dilīpo 'ṃśumataḥ putro"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "R 2,102.21",
+    "words": "dilīpasya bhagīrathaḥ"
+   },
+   {
+    "name": "Kakutstha",
+    "ref": "R 2,102.22",
+    "words": "bhagīrathāt kakutsthas"
+   },
+   {
+    "name": "Raghu",
+    "ref": "R 2,102.22",
+    "words": "kakutsthasya tu putro 'bhūd raghur"
+   },
+   {
+    "name": "Kalmāṣapāda",
+    "ref": "R 2,102.23",
+    "words": "raghos tu putras tejasvī pravṛddhaḥ puruṣādakaḥ kalmāṣapādaḥ"
+   },
+   {
+    "name": "Śaṅkhaṇa",
+    "ref": "R 2,102.24",
+    "words": "kalmāṣapādaputro 'bhūc chaṅkhaṇas"
+   },
+   {
+    "name": "Sudarśana",
+    "ref": "R 2,102.25",
+    "words": "śaṅkhaṇasya tu putro 'bhūc chūraḥ śrīmān sudarśanaḥ"
+   },
+   {
+    "name": "Agnivarṇa",
+    "ref": "R 2,102.25",
+    "words": "sudarśanasyāgnivarṇa"
+   },
+   {
+    "name": "Śīghraga",
+    "ref": "R 2,102.25",
+    "words": "agnivarṣasya śīghragaḥ"
+   },
+   {
+    "name": "Maru",
+    "ref": "R 2,102.26",
+    "words": "śīghragasya maruḥ putro"
+   },
+   {
+    "name": "Praśuśruka",
+    "ref": "R 2,102.26",
+    "words": "maroḥ putraḥ praśuśrukaḥ"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "R 2,102.26",
+    "words": "praśuśrukasya putro 'bhūd ambarīṣo"
+   },
+   {
+    "name": "Nahuṣa",
+    "ref": "R 2,102.27",
+    "words": "ambarīṣasya putro 'bhūn nahuṣaḥ"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "R 2,102.27",
+    "words": "nahuṣasya ca nābhāgaḥ putraḥ"
+   },
+   {
+    "name": "Aja",
+    "ref": "R 2,102.28",
+    "words": "nābhāgasya sutāv ubhau"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "R 2,102.28",
+    "words": "ajasya caiva dharmātmā rājā daśarathaḥ sutaḥ"
+   },
+   {
+    "name": "Rāma",
+    "ref": "R 2,102.29",
+    "words": "tasya jyeṣṭho 'si dāyādo rāma"
+   }
+  ],
+  [
+   {
+    "name": "Brahmā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Marīci",
+    "ref": "R 2,102.4",
+    "words": "tasmān marīciḥ saṃjajñe"
+   },
+   {
+    "name": "Kaśyapa",
+    "ref": "R 2,102.4",
+    "words": "marīceḥ kaśyapaḥ sutaḥ"
+   },
+   {
+    "name": "Manu Vaivasvata",
+    "ref": "R 2,102.5",
+    "words": "vivasvān kaśyapāj jajñe manur vaivasvataḥ"
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "R 2,102.5",
+    "words": "ikṣvākus tu manoḥ sutaḥ"
+   },
+   {
+    "name": "Kukṣi",
+    "ref": "R 2,102.7",
+    "words": "ikṣvākos tu sutaḥ śrīmān kukṣir"
+   },
+   {
+    "name": "Vikukṣi",
+    "ref": "R 2,102.7",
+    "words": "kukṣer athātmajo vīro vikukṣir udapadyata"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "R 2,102.8",
+    "words": "vikukṣes tu mahātejā bāṇaḥ putraḥ"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "R 2,102.8",
+    "words": "bāṇasya tu mahābāhur anaraṇyo"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "R 2,102.10",
+    "words": "anaraṇyān mahābāhuḥ pṛthū rājā babhūva"
+   },
+   {
+    "name": "Triśaṅku",
+    "ref": "R 2,102.10",
+    "words": "tasmāt pṛthor mahārājas triśaṅkur udapadyata"
+   },
+   {
+    "name": "Dhundhumāra",
+    "ref": "R 2,102.11",
+    "words": "triśaṅkor abhavat sūnur dhundhumāro"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "R 2,102.11",
+    "words": "dhundhumārān mahātejā yuvanāśvo vyajāyata"
+   },
+   {
+    "name": "Māndhātā",
+    "ref": "R 2,102.12",
+    "words": "yuvanāśva sutaḥ śrīmān māndhātā samapadyata"
+   },
+   {
+    "name": "Susaṃdhi",
+    "ref": "R 2,102.12",
+    "words": "māndhātus tu mahātejāḥ susaṃdhir udapadyata"
+   },
+   {
+    "name": "Dhruvasaṃdhi",
+    "ref": "R 2,102.13",
+    "words": "susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit"
+   },
+   {
+    "name": "Bharata",
+    "ref": "R 2,102.13",
+    "words": "yaśasvī dhruvasaṃdhes tu bharato"
+   },
+   {
+    "name": "Asita",
+    "ref": "R 2,102.14",
+    "words": "bharatāt tu mahābāhor asito nāma jāyata"
+   }
+  ]
+ ]
+}

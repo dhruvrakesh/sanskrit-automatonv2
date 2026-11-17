@@ -1,0 +1,799 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "hv",
+ "title": "Harivamsa (Vaidya's constituted text)",
+ "chapter": 27,
+ "part": 0,
+ "refs": [
+  "HV 27.1",
+  "HV 27.2",
+  "HV 27.3",
+  "HV 27.4",
+  "HV 27.5",
+  "HV 27.6",
+  "HV 27.7",
+  "HV 27.8",
+  "HV 27.9",
+  "HV 27.10",
+  "HV 27.11",
+  "HV 27.12",
+  "HV 27.13",
+  "HV 27.14",
+  "HV 27.15",
+  "HV 27.16",
+  "HV 27.17",
+  "HV 27.18",
+  "HV 27.19",
+  "HV 27.20",
+  "HV 27.21",
+  "HV 27.22",
+  "HV 27.23",
+  "HV 27.24",
+  "HV 27.25",
+  "HV 27.26",
+  "HV 27.27",
+  "HV 27.28",
+  "HV 27.29",
+  "HV 27.30",
+  "HV 27.31"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_harivaMza.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Atul Agarwala, J. Wayne Bass and others)",
+ "at": "2026-11-17T10:09:40",
+ "reply": "{\"statements\":[\n{\"ref\":\"HV 27.1\",\"a\":\"Bhajina\",\"rel\":\"son_of\",\"b\":\"Satvata\",\"words\":\"satvataḥ sattvasaṃpannān kausalyā suṣuve sutān bhajinaṃ\",\"doubt\":false},\n{\"ref\":\"HV 27.1\",\"a\":\"Bhajina\",\"rel\":\"born_of\",\"b\":\"Kausalyā\",\"words\":\"kausalyā suṣuve sutān bhajinaṃ\",\"doubt\":false},\n{\"ref\":\"HV 27.1\",\"a\":\"Bhajamāna\",\"rel\":\"son_of\",\"b\":\"Satvata\",\"words\":\"satvataḥ sattvasaṃpannān kausalyā suṣuve sutān bhajinaṃ bhajamānaṃ ca\",\"doubt\":false},\n{\"ref\":\"HV 27.1\",\"a\":\"Bhajamāna\",\"rel\":\"born_of\",\"b\":\"Kausalyā\",\"words\":\"kausalyā suṣuve sutān bhajinaṃ bhajamānaṃ ca\",\"doubt\":false},\n{\"ref\":\"HV 27.1\",\"a\":\"Devāvṛdha\",\"rel\":\"son_of\",\"b\":\"Satvata\",\"words\":\"satvataḥ sattvasaṃpannān kausalyā suṣuve sutān\",\"doubt\":false},\n{\"ref\":\"HV 27.1\",\"a\":\"Devāvṛdha\",\"rel\":\"born_of\",\"b\":\"Kausalyā\",\"words\":\"kausalyā suṣuve sutān\",\"doubt\":false},\n{\"ref\":\"HV 27.2\",\"a\":\"Andhaka\",\"rel\":\"son_of\",\"b\":\"Satvata\",\"words\":\"andhakaṃ ca mahābāhuṃ\",\"doubt\":false},\n{\"ref\":\"HV 27.2\",\"a\":\"Andhaka\",\"rel\":\"born_of\",\"b\":\"Kausalyā\",\"words\":\"andhakaṃ ca mahābāhuṃ\",\"doubt\":false},\n{\"ref\":\"HV 27.2\",\"a\":\"Vṛṣṇi\",\"rel\":\"son_of\",\"b\":\"Satvata\",\"words\":\"vṛṣṇiṃ ca yadunandanam\",\"doubt\":false},\n{\"ref\":\"HV 27.2\",\"a\":\"Vṛṣṇi\",\"rel\":\"born_of\",\"b\":\"Kausalyā\",\"words\":\"vṛṣṇiṃ ca yadunandanam\",\"doubt\":false},\n{\"ref\":\"HV 27.3\",\"a\":\"Bāhyakā\",\"rel\":\"wife_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānasya sṛñjayyau bāhyakā copabāhyakā āstāṃ bhārye\",\"doubt\":false},\n{\"ref\":\"HV 27.3\",\"a\":\"Upabāhyakā\",\"rel\":\"wife_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānasya sṛñjayyau bāhyakā copabāhyakā āstāṃ bhārye\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Nimi\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Nimi\",\"rel\":\"born_of\",\"b\":\"Bāhyakā\",\"words\":\"bāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Kramaṇa\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Kramaṇa\",\"rel\":\"born_of\",\"b\":\"Bāhyakā\",\"words\":\"bāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Viṣṇu\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Viṣṇu\",\"rel\":\"born_of\",\"b\":\"Bāhyakā\",\"words\":\"bāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Śūra\",\"rel\":\"born_of\",\"b\":\"Bāhyakā\",\"words\":\"bāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Puraṃjaya\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.4\",\"a\":\"Puraṃjaya\",\"rel\":\"born_of\",\"b\":\"Bāhyakā\",\"words\":\"bāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Āyutājit\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Āyutājit\",\"rel\":\"born_of\",\"b\":\"Upabāhyakā\",\"words\":\"upabāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Sahasrājit\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Sahasrājit\",\"rel\":\"born_of\",\"b\":\"Upabāhyakā\",\"words\":\"upabāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Śatājit\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Śatājit\",\"rel\":\"born_of\",\"b\":\"Upabāhyakā\",\"words\":\"upabāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Dāsaka\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.5\",\"a\":\"Dāsaka\",\"rel\":\"born_of\",\"b\":\"Upabāhyakā\",\"words\":\"upabāhyakasṛñjayyāṃ bhajamānād vijajñire\",\"doubt\":false},\n{\"ref\":\"HV 27.11\",\"a\":\"Babhru\",\"rel\":\"son_of\",\"b\":\"Devāvṛdha\",\"words\":\"putraṃ sarvaguṇopetaṃ babhruṃ devāvṛdhān nṛpāt\",\"doubt\":false},\n{\"ref\":\"HV 27.11\",\"a\":\"Babhru\",\"rel\":\"born_of\",\"b\":\"Parṇāśā\",\"words\":\"suṣuve saritāṃ varā putraṃ\",\"doubt\":false},\n{\"ref\":\"HV 27.16\",\"a\":\"Kukura\",\"rel\":\"son_of\",\"b\":\"Andhaka\",\"words\":\"andhakāt kāśyaduhitā caturo 'labhatātmajān kukuraṃ\",\"doubt\":false},\n{\"ref\":\"HV 27.16\",\"a\":\"Bhajamāna\",\"rel\":\"son_of\",\"b\":\"Andhaka\",\"words\":\"andhakāt kāśyaduhitā caturo 'labhatātmajān kukuraṃ bhajamānaṃ ca\",\"doubt\":true},\n{\"ref\":\"HV 27.16\",\"a\":\"Śami\",\"rel\":\"son_of\",\"b\":\"Andhaka\",\"words\":\"śamiṃ kambalabarhiṣam\",\"doubt\":false},\n{\"ref\":\"HV 27.16\",\"a\":\"Kambalabarhiṣa\",\"rel\":\"son_of\",\"b\":\"Andhaka\",\"words\":\"śamiṃ kambalabarhiṣam\",\"doubt\":false},\n{\"ref\":\"HV 27.17\",\"a\":\"Dhṛṣṇu\",\"rel\":\"son_of\",\"b\":\"Kukura\",\"words\":\"kukurasya suto dhṛṣṇur\",\"doubt\":false},\n{\"ref\":\"HV 27.17\",\"a\":\"Kapotaromā\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṇu\",\"words\":\"dhṛṣṇos tu tanayas tathā kapotaromā\",\"doubt\":false},\n{\"ref\":\"HV 27.17\",\"a\":\"Taittiri\",\"rel\":\"son_of\",\"b\":\"Kapotaromā\",\"words\":\"tasyātha taittiris tanayo 'bhavat\",\"doubt\":false},\n{\"ref\":\"HV 27.17\",\"a\":\"Punarvasu\",\"rel\":\"son_of\",\"b\":\"Taittiri\",\"words\":\"jajñe punar vasus tasmād\",\"doubt\":false},\n{\"ref\":\"HV 27.17\",\"a\":\"Abhijit\",\"rel\":\"son_of\",\"b\":\"Punarvasu\",\"words\":\"abhijit tu punar vasoḥ\",\"doubt\":false},\n{\"ref\":\"HV 27.18\",\"a\":\"Āhuka\",\"rel\":\"son_of\",\"b\":\"Abhijit\",\"words\":\"putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva\",\"doubt\":false},\n{\"ref\":\"HV 27.18\",\"a\":\"Āhukī\",\"rel\":\"daughter_of\",\"b\":\"Abhijit\",\"words\":\"putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva\",\"doubt\":false},\n{\"ref\":\"HV 27.18\",\"a\":\"Āhukī\",\"rel\":\"sister_of\",\"b\":\"Āhuka\",\"words\":\"putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva\",\"doubt\":false},\n{\"ref\":\"HV 27.24\",\"a\":\"Āhukī\",\"rel\":\"sister_of\",\"b\":\"Āhuka\",\"words\":\"āhukīṃ cāpy avantibhyaḥ svasāraṃ dadur andhakāḥ\",\"doubt\":true},\n{\"ref\":\"HV 27.25\",\"a\":\"Devaka\",\"rel\":\"son_of\",\"b\":\"Āhuka\",\"words\":\"āhukasya tu kāśyāyāṃ dvau putrau saṃbabhūvatuḥ devakaś cograsenaś ca\",\"doubt\":false},\n{\"ref\":\"HV 27.25\",\"a\":\"Devaka\",\"rel\":\"born_of\",\"b\":\"Kāśyā\",\"words\":\"kāśyāyāṃ dvau putrau saṃbabhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"HV 27.25\",\"a\":\"Ugrasena\",\"rel\":\"son_of\",\"b\":\"Āhuka\",\"words\":\"āhukasya tu kāśyāyāṃ dvau putrau saṃbabhūvatuḥ devakaś cograsenaś ca\",\"doubt\":false},\n{\"ref\":\"HV 27.25\",\"a\":\"Ugrasena\",\"rel\":\"born_of\",\"b\":\"Kāśyā\",\"words\":\"kāśyāyāṃ dvau putrau saṃbabhūvatuḥ\",\"doubt\":false},\n{\"ref\":\"HV 27.26\",\"a\":\"Devavān\",\"rel\":\"son_of\",\"b\":\"Devaka\",\"words\":\"devakasyābhavan putrāś catvāraḥ devavān\",\"doubt\":false},\n{\"ref\":\"HV 27.26\",\"a\":\"Upadeva\",\"rel\":\"son_of\",\"b\":\"Devaka\",\"words\":\"devakasyābhavan putrāś catvāraḥ upadevaś ca\",\"doubt\":false},\n{\"ref\":\"HV 27.26\",\"a\":\"Sudeva\",\"rel\":\"son_of\",\"b\":\"Devaka\",\"words\":\"devakasyābhavan putrāś catvāraḥ sudevo\",\"doubt\":false},\n{\"ref\":\"HV 27.26\",\"a\":\"Devarakṣita\",\"rel\":\"son_of\",\"b\":\"Devaka\",\"words\":\"devakasyābhavan putrāś catvāraḥ devarakṣitaḥ\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Devakī\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"kumāryaḥ sapta cāpyāsan vasudevāya tā dadau devakī\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Devakī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau devakī\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Śāntidevā\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"vasudevāya tā dadau śāntidevā\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Śāntidevā\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau śāntidevā\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Sudevā\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"vasudevāya tā dadau sudevā\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Sudevā\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau sudevā\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Devarakṣitā\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"vasudevāya tā dadau devarakṣitā\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Devarakṣitā\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau devarakṣitā\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Vṛkadevī\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"vasudevāya tā dadau vṛkadevy\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Vṛkadevī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau vṛkadevy\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Upadevī\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"vasudevāya tā dadau upadevī\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Upadevī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau upadevī\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Sunāmnī\",\"rel\":\"daughter_of\",\"b\":\"Devaka\",\"words\":\"sunāmnī caiva saptamī\",\"doubt\":false},\n{\"ref\":\"HV 27.27\",\"a\":\"Sunāmnī\",\"rel\":\"wife_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāya tā dadau sunāmnī\",\"doubt\":false},\n{\"ref\":\"HV 27.28\",\"a\":\"Kaṃsa\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās teṣāṃ kaṃsas tu pūrvajaḥ\",\"doubt\":false},\n{\"ref\":\"HV 27.28\",\"a\":\"Nyagrodha\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās nyagrodhaś ca\",\"doubt\":false},\n{\"ref\":\"HV 27.28\",\"a\":\"Sunāmā\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās sunāmā ca\",\"doubt\":false},\n{\"ref\":\"HV 27.28\",\"a\":\"Kaṅka\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās kaṅkuśaṅkusubhūmayaḥ\",\"doubt\":true},\n{\"ref\":\"HV 27.28\",\"a\":\"Śaṅku\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās kaṅkuśaṅkusubhūmayaḥ\",\"doubt\":true},\n{\"ref\":\"HV 27.28\",\"a\":\"Subhūmi\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās kaṅkuśaṅkusubhūmayaḥ\",\"doubt\":true},\n{\"ref\":\"HV 27.28\",\"a\":\"Rāṣṭrapāla\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās rāṣṭrapālo\",\"doubt\":false},\n{\"ref\":\"HV 27.28\",\"a\":\"Sutanu\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās sutanur\",\"doubt\":false},\n{\"ref\":\"HV 27.28\",\"a\":\"Anādhṛṣṭi\",\"rel\":\"son_of\",\"b\":\"Ugrasena\",\"words\":\"navograsenasya sutās anādhṛṣṭiś ca puṣṭimān\",\"doubt\":false},\n{\"ref\":\"HV 27.29\",\"a\":\"Kaṃsā\",\"rel\":\"sister_of\",\"b\":\"Kaṃsa\",\"words\":\"eṣāṃ svasāraḥ pañcāsan kaṃsā kaṃsavatī\",\"doubt\":false},\n{\"ref\":\"HV 27.29\",\"a\":\"Kaṃsavatī\",\"rel\":\"sister_of\",\"b\":\"Kaṃsa\",\"words\":\"eṣāṃ svasāraḥ pañcāsan kaṃsā kaṃsavatī\",\"doubt\":false},\n{\"ref\":\"HV 27.29\",\"a\":\"Sutanū\",\"rel\":\"sister_of\",\"b\":\"Kaṃsa\",\"words\":\"eṣāṃ svasāraḥ pañcāsan sutanū\",\"doubt\":false},\n{\"ref\":\"HV 27.29\",\"a\":\"Rāṣṭrapālī\",\"rel\":\"sister_of\",\"b\":\"Kaṃsa\",\"words\":\"eṣāṃ svasāraḥ pañcāsan rāṣṭrapālī\",\"doubt\":false},\n{\"ref\":\"HV 27.29\",\"a\":\"Kaṅkā\",\"rel\":\"sister_of\",\"b\":\"Kaṃsa\",\"words\":\"eṣāṃ svasāraḥ pañcāsan kaṅkā\",\"doubt\":false},\n{\"ref\":\"HV 27.30\",\"a\":\"Ugrasena\",\"rel\":\"descendant_of\",\"b\":\"Kukura\",\"words\":\"ugrasenaḥ sahāpatyo vyākhyātaḥ kukurodbhavaḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.06957,
+ "tokens": {
+  "input": 3324,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 6292,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "HV 27.1",
+   "a": "Bhajina",
+   "rel": "son_of",
+   "b": "Satvata",
+   "words": "satvataḥ sattvasaṃpannān kausalyā suṣuve sutān bhajinaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.1",
+   "a": "Bhajina",
+   "rel": "born_of",
+   "b": "Kausalyā",
+   "words": "kausalyā suṣuve sutān bhajinaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.1",
+   "a": "Bhajamāna",
+   "rel": "son_of",
+   "b": "Satvata",
+   "words": "satvataḥ sattvasaṃpannān kausalyā suṣuve sutān bhajinaṃ bhajamānaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.1",
+   "a": "Bhajamāna",
+   "rel": "born_of",
+   "b": "Kausalyā",
+   "words": "kausalyā suṣuve sutān bhajinaṃ bhajamānaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.1",
+   "a": "Devāvṛdha",
+   "rel": "son_of",
+   "b": "Satvata",
+   "words": "satvataḥ sattvasaṃpannān kausalyā suṣuve sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.1",
+   "a": "Devāvṛdha",
+   "rel": "born_of",
+   "b": "Kausalyā",
+   "words": "kausalyā suṣuve sutān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.2",
+   "a": "Andhaka",
+   "rel": "son_of",
+   "b": "Satvata",
+   "words": "andhakaṃ ca mahābāhuṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.2",
+   "a": "Andhaka",
+   "rel": "born_of",
+   "b": "Kausalyā",
+   "words": "andhakaṃ ca mahābāhuṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.2",
+   "a": "Vṛṣṇi",
+   "rel": "son_of",
+   "b": "Satvata",
+   "words": "vṛṣṇiṃ ca yadunandanam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.2",
+   "a": "Vṛṣṇi",
+   "rel": "born_of",
+   "b": "Kausalyā",
+   "words": "vṛṣṇiṃ ca yadunandanam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.3",
+   "a": "Bāhyakā",
+   "rel": "wife_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānasya sṛñjayyau bāhyakā copabāhyakā āstāṃ bhārye",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.3",
+   "a": "Upabāhyakā",
+   "rel": "wife_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānasya sṛñjayyau bāhyakā copabāhyakā āstāṃ bhārye",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Nimi",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Nimi",
+   "rel": "born_of",
+   "b": "Bāhyakā",
+   "words": "bāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Kramaṇa",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Kramaṇa",
+   "rel": "born_of",
+   "b": "Bāhyakā",
+   "words": "bāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Viṣṇu",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Viṣṇu",
+   "rel": "born_of",
+   "b": "Bāhyakā",
+   "words": "bāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Śūra",
+   "rel": "born_of",
+   "b": "Bāhyakā",
+   "words": "bāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Puraṃjaya",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.4",
+   "a": "Puraṃjaya",
+   "rel": "born_of",
+   "b": "Bāhyakā",
+   "words": "bāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Āyutājit",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Āyutājit",
+   "rel": "born_of",
+   "b": "Upabāhyakā",
+   "words": "upabāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Sahasrājit",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Sahasrājit",
+   "rel": "born_of",
+   "b": "Upabāhyakā",
+   "words": "upabāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Śatājit",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Śatājit",
+   "rel": "born_of",
+   "b": "Upabāhyakā",
+   "words": "upabāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Dāsaka",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.5",
+   "a": "Dāsaka",
+   "rel": "born_of",
+   "b": "Upabāhyakā",
+   "words": "upabāhyakasṛñjayyāṃ bhajamānād vijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.11",
+   "a": "Babhru",
+   "rel": "son_of",
+   "b": "Devāvṛdha",
+   "words": "putraṃ sarvaguṇopetaṃ babhruṃ devāvṛdhān nṛpāt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.11",
+   "a": "Babhru",
+   "rel": "born_of",
+   "b": "Parṇāśā",
+   "words": "suṣuve saritāṃ varā putraṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.16",
+   "a": "Kukura",
+   "rel": "son_of",
+   "b": "Andhaka",
+   "words": "andhakāt kāśyaduhitā caturo 'labhatātmajān kukuraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.16",
+   "a": "Bhajamāna",
+   "rel": "son_of",
+   "b": "Andhaka",
+   "words": "andhakāt kāśyaduhitā caturo 'labhatātmajān kukuraṃ bhajamānaṃ ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.16",
+   "a": "Śami",
+   "rel": "son_of",
+   "b": "Andhaka",
+   "words": "śamiṃ kambalabarhiṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.16",
+   "a": "Kambalabarhiṣa",
+   "rel": "son_of",
+   "b": "Andhaka",
+   "words": "śamiṃ kambalabarhiṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.17",
+   "a": "Dhṛṣṇu",
+   "rel": "son_of",
+   "b": "Kukura",
+   "words": "kukurasya suto dhṛṣṇur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.17",
+   "a": "Kapotaromā",
+   "rel": "son_of",
+   "b": "Dhṛṣṇu",
+   "words": "dhṛṣṇos tu tanayas tathā kapotaromā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.17",
+   "a": "Taittiri",
+   "rel": "son_of",
+   "b": "Kapotaromā",
+   "words": "tasyātha taittiris tanayo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.17",
+   "a": "Punarvasu",
+   "rel": "son_of",
+   "b": "Taittiri",
+   "words": "jajñe punar vasus tasmād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.17",
+   "a": "Abhijit",
+   "rel": "son_of",
+   "b": "Punarvasu",
+   "words": "abhijit tu punar vasoḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.18",
+   "a": "Āhuka",
+   "rel": "son_of",
+   "b": "Abhijit",
+   "words": "putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.18",
+   "a": "Āhukī",
+   "rel": "daughter_of",
+   "b": "Abhijit",
+   "words": "putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.18",
+   "a": "Āhukī",
+   "rel": "sister_of",
+   "b": "Āhuka",
+   "words": "putramithunaṃ babhūvābhijitaḥ kila āhukaś cāhukī caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.24",
+   "a": "Āhukī",
+   "rel": "sister_of",
+   "b": "Āhuka",
+   "words": "āhukīṃ cāpy avantibhyaḥ svasāraṃ dadur andhakāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.25",
+   "a": "Devaka",
+   "rel": "son_of",
+   "b": "Āhuka",
+   "words": "āhukasya tu kāśyāyāṃ dvau putrau saṃbabhūvatuḥ devakaś cograsenaś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.25",
+   "a": "Devaka",
+   "rel": "born_of",
+   "b": "Kāśyā",
+   "words": "kāśyāyāṃ dvau putrau saṃbabhūvatuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.25",
+   "a": "Ugrasena",
+   "rel": "son_of",
+   "b": "Āhuka",
+   "words": "āhukasya tu kāśyāyāṃ dvau putrau saṃbabhūvatuḥ devakaś cograsenaś ca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.25",
+   "a": "Ugrasena",
+   "rel": "born_of",
+   "b": "Kāśyā",
+   "words": "kāśyāyāṃ dvau putrau saṃbabhūvatuḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.26",
+   "a": "Devavān",
+   "rel": "son_of",
+   "b": "Devaka",
+   "words": "devakasyābhavan putrāś catvāraḥ devavān",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.26",
+   "a": "Upadeva",
+   "rel": "son_of",
+   "b": "Devaka",
+   "words": "devakasyābhavan putrāś catvāraḥ upadevaś ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.26",
+   "a": "Sudeva",
+   "rel": "son_of",
+   "b": "Devaka",
+   "words": "devakasyābhavan putrāś catvāraḥ sudevo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.26",
+   "a": "Devarakṣita",
+   "rel": "son_of",
+   "b": "Devaka",
+   "words": "devakasyābhavan putrāś catvāraḥ devarakṣitaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.26",
+   "a": "Devakī",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "kumāryaḥ sapta cāpyāsan vasudevāya tā dadau devakī",
+   "doubt": false,
+   "ref_cited": "HV 27.27",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.26",
+   "a": "Devakī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau devakī",
+   "doubt": false,
+   "ref_cited": "HV 27.27",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Śāntidevā",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "vasudevāya tā dadau śāntidevā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Śāntidevā",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau śāntidevā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Sudevā",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "vasudevāya tā dadau sudevā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Sudevā",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau sudevā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Devarakṣitā",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "vasudevāya tā dadau devarakṣitā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Devarakṣitā",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau devarakṣitā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Vṛkadevī",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "vasudevāya tā dadau vṛkadevy",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Vṛkadevī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau vṛkadevy",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Upadevī",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "vasudevāya tā dadau upadevī",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Upadevī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau upadevī",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Sunāmnī",
+   "rel": "daughter_of",
+   "b": "Devaka",
+   "words": "sunāmnī caiva saptamī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.27",
+   "a": "Sunāmnī",
+   "rel": "wife_of",
+   "b": "Vasudeva",
+   "words": "vasudevāya tā dadau sunāmnī",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Kaṃsa",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās teṣāṃ kaṃsas tu pūrvajaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Nyagrodha",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās nyagrodhaś ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Sunāmā",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās sunāmā ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Kaṅka",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās kaṅkuśaṅkusubhūmayaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Śaṅku",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās kaṅkuśaṅkusubhūmayaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Subhūmi",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās kaṅkuśaṅkusubhūmayaḥ",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Rāṣṭrapāla",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās rāṣṭrapālo",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Sutanu",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās sutanur",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.28",
+   "a": "Anādhṛṣṭi",
+   "rel": "son_of",
+   "b": "Ugrasena",
+   "words": "navograsenasya sutās anādhṛṣṭiś ca puṣṭimān",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.29",
+   "a": "Kaṃsā",
+   "rel": "sister_of",
+   "b": "Kaṃsa",
+   "words": "eṣāṃ svasāraḥ pañcāsan kaṃsā kaṃsavatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.29",
+   "a": "Kaṃsavatī",
+   "rel": "sister_of",
+   "b": "Kaṃsa",
+   "words": "eṣāṃ svasāraḥ pañcāsan kaṃsā kaṃsavatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "HV 27.29",
+   "a": "Sutanū",
+   "rel": "sister_of",
+   "b": "Kaṃsa",
+   "words": "eṣāṃ svasāraḥ pañcāsan sutanū",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.29",
+   "a": "Rāṣṭrapālī",
+   "rel": "sister_of",
+   "b": "Kaṃsa",
+   "words": "eṣāṃ svasāraḥ pañcāsan rāṣṭrapālī",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.29",
+   "a": "Kaṅkā",
+   "rel": "sister_of",
+   "b": "Kaṃsa",
+   "words": "eṣāṃ svasāraḥ pañcāsan kaṅkā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "HV 27.30",
+   "a": "Ugrasena",
+   "rel": "descendant_of",
+   "b": "Kukura",
+   "words": "ugrasenaḥ sahāpatyo vyākhyātaḥ kukurodbhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

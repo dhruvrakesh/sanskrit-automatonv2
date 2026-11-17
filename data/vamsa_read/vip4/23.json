@@ -36,13 +36,15 @@
  },
  "statements": [
   {
-   "ref": "ViP 4,23.2",
+   "ref": "ViP 4,23.1",
    "a": "Jarāsaṃdha",
    "rel": "other",
    "b": "Bārhadratha",
    "words": "bārhadrathānāṃ",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "ViP 4,23.2",
+   "ref_from": "words",
+   "check": "words"
   },
   {
    "ref": "ViP 4,23.3",

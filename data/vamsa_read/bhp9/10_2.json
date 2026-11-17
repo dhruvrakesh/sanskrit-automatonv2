@@ -46,13 +46,15 @@
  },
  "statements": [
   {
-   "ref": "BhP 9.10.35",
+   "ref": "BhP 9.10.34",
    "a": "Bharata",
    "rel": "brother_of",
    "b": "Rāma",
    "words": "bhrātaraṃ valkalāmbaram",
    "doubt": true,
-   "check": "unsupported"
+   "ref_cited": "BhP 9.10.35",
+   "ref_from": "words",
+   "check": "verified"
   },
   {
    "ref": "BhP 9.10.36",
@@ -88,7 +90,7 @@
    "b": "Rāma",
    "words": "bhartuḥ sītāharan manaḥ",
    "doubt": true,
-   "check": "words"
+   "check": "verified"
   }
  ]
 }
