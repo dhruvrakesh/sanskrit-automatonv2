@@ -1,0 +1,388 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 66,
+ "part": 1,
+ "refs": [
+  "BndP 2,66.1",
+  "BndP 2,66.2",
+  "BndP 2,66.3",
+  "BndP 2,66.4",
+  "BndP 2,66.5",
+  "BndP 2,66.6",
+  "BndP 2,66.7",
+  "BndP 2,66.8",
+  "BndP 2,66.9",
+  "BndP 2,66.10",
+  "BndP 2,66.11",
+  "BndP 2,66.12",
+  "BndP 2,66.13",
+  "BndP 2,66.14",
+  "BndP 2,66.15",
+  "BndP 2,66.16",
+  "BndP 2,66.17",
+  "BndP 2,66.18",
+  "BndP 2,66.19",
+  "BndP 2,66.20",
+  "BndP 2,66.21",
+  "BndP 2,66.22",
+  "BndP 2,66.23",
+  "BndP 2,66.24",
+  "BndP 2,66.25",
+  "BndP 2,66.26",
+  "BndP 2,66.27",
+  "BndP 2,66.28",
+  "BndP 2,66.29",
+  "BndP 2,66.30",
+  "BndP 2,66.31",
+  "BndP 2,66.32",
+  "BndP 2,66.33",
+  "BndP 2,66.34",
+  "BndP 2,66.35",
+  "BndP 2,66.36",
+  "BndP 2,66.37",
+  "BndP 2,66.38",
+  "BndP 2,66.39",
+  "BndP 2,66.40",
+  "BndP 2,66.41",
+  "BndP 2,66.42",
+  "BndP 2,66.43",
+  "BndP 2,66.44",
+  "BndP 2,66.45",
+  "BndP 2,66.46",
+  "BndP 2,66.47",
+  "BndP 2,66.48",
+  "BndP 2,66.49",
+  "BndP 2,66.50",
+  "BndP 2,66.51",
+  "BndP 2,66.52",
+  "BndP 2,66.53",
+  "BndP 2,66.54",
+  "BndP 2,66.55",
+  "BndP 2,66.56"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:00:21",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,66.1\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somasya tu budhaḥ putro\",\"doubt\":false},{\"ref\":\"BndP 2,66.1\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"budhasya tu purūravāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.22\",\"a\":\"Āyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"tasya putrā babhūvurhi ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,66.22\",\"a\":\"Dhīmān\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"tasya putrā babhūvurhi ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,66.22\",\"a\":\"Amāvasu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"tasya putrā babhūvurhi ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Viśvāvasu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"viśvāvasuḥ śratāyuśca ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Śratāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"viśvāvasuḥ śratāyuśca ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Ghṛtāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"viśvāvasuḥ śratāyuśca ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.22\",\"a\":\"Āyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Viśvāvasu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Śratāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Ghṛtāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"ghṛtāyuścovarśīsutāḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.23\",\"a\":\"Bhīma\",\"rel\":\"son_of\",\"b\":\"Amāvasu\",\"words\":\"amāva sostu vai jāte bhīmo rājā\",\"doubt\":false},{\"ref\":\"BndP 2,66.24\",\"a\":\"Kāñcanaprabha\",\"rel\":\"son_of\",\"b\":\"Bhīma\",\"words\":\"bhīmasya dāyādo rājāsītkāñcanaprabhaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.24\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Kāñcanaprabha\",\"words\":\"kāñcanasyāpi suhotro 'bhūnmahābala\",\"doubt\":false},{\"ref\":\"BndP 2,66.25\",\"a\":\"Jahnu\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"suhotrasyābhavajjahnuḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.25\",\"a\":\"Jahnu\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"keśinīgarbhasaṃbhavaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.28\",\"a\":\"Kāverī\",\"rel\":\"descendant_of\",\"b\":\"Yauvanāśva\",\"words\":\"yauvanāśvasya pautrīṃ tu kāverīṃ\",\"doubt\":false},{\"ref\":\"BndP 2,66.28\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Jahnu\",\"words\":\"duhitṛtvena jāhnavīm\",\"doubt\":false},{\"ref\":\"BndP 2,66.29\",\"a\":\"Kāverī\",\"rel\":\"wife_of\",\"b\":\"Jahnu\",\"words\":\"jahnubhāryāmaninditām\",\"doubt\":false},{\"ref\":\"BndP 2,66.30\",\"a\":\"Sunaha\",\"rel\":\"son_of\",\"b\":\"Jahnu\",\"words\":\"jahnustu dayitaṃ putraṃ sunahaṃ nāma\",\"doubt\":false},{\"ref\":\"BndP 2,66.30\",\"a\":\"Sunaha\",\"rel\":\"born_of\",\"b\":\"Kāverī\",\"words\":\"kāveryāṃ janayāmāsa\",\"doubt\":false},{\"ref\":\"BndP 2,66.30\",\"a\":\"Ajaka\",\"rel\":\"son_of\",\"b\":\"Sunaha\",\"words\":\"ajakastasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.31\",\"a\":\"Balākāśva\",\"rel\":\"son_of\",\"b\":\"Ajaka\",\"words\":\"ajakasya tu dāyādo balākāśvo\",\"doubt\":false},{\"ref\":\"BndP 2,66.32\",\"a\":\"Kuśāmba\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvuśca catvāro\",\"doubt\":false},{\"ref\":\"BndP 2,66.32\",\"a\":\"Kuśanābha\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvuśca catvāro\",\"doubt\":false},{\"ref\":\"BndP 2,66.32\",\"a\":\"Amūrtarayas\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvuśca catvāro\",\"doubt\":true},{\"ref\":\"BndP 2,66.32\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvuśca catvāro\",\"doubt\":true},{\"ref\":\"BndP 2,66.35\",\"a\":\"Gādhi\",\"rel\":\"son_of\",\"b\":\"Kuśika\",\"words\":\"putratvaṃ kalpayāmāsa svayameva purandaraḥ gādhirnāmābhavatputraḥ kauśikaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.35\",\"a\":\"Gādhi\",\"rel\":\"begotten_by\",\"b\":\"Indra\",\"words\":\"putratvaṃ kalpayāmāsa svayameva purandaraḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.36\",\"a\":\"Satyavatī\",\"rel\":\"daughter_of\",\"b\":\"Gādhi\",\"words\":\"gādhestasyāmajāyata pūrvaṃ kanyā\",\"doubt\":false},{\"ref\":\"BndP 2,66.37\",\"a\":\"Satyavatī\",\"rel\":\"wife_of\",\"b\":\"Ṛcīka\",\"words\":\"tāṃ gādhiḥ putrakāmāya ṛcīkāya dadau\",\"doubt\":false},{\"ref\":\"BndP 2,66.56\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Ṛcīka\",\"words\":\"satyavatī putraṃ janayāmāsa bhārgavam\",\"doubt\":true},{\"ref\":\"BndP 2,66.56\",\"a\":\"Jamadagni\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"satyavatī putraṃ janayāmāsa bhārgavam\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03617,
+ "tokens": {
+  "input": 5148,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2587,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,66.1",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somasya tu budhaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.1",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "budhasya tu purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.22",
+   "a": "Āyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "tasya putrā babhūvurhi ṣaḍ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.22",
+   "a": "Dhīmān",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "tasya putrā babhūvurhi ṣaḍ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.22",
+   "a": "Amāvasu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "tasya putrā babhūvurhi ṣaḍ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Viśvāvasu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "viśvāvasuḥ śratāyuśca ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Śratāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "viśvāvasuḥ śratāyuśca ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Ghṛtāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "viśvāvasuḥ śratāyuśca ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.22",
+   "a": "Āyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Viśvāvasu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Śratāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Ghṛtāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "ghṛtāyuścovarśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.23",
+   "a": "Bhīma",
+   "rel": "son_of",
+   "b": "Amāvasu",
+   "words": "amāva sostu vai jāte bhīmo rājā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.24",
+   "a": "Kāñcanaprabha",
+   "rel": "son_of",
+   "b": "Bhīma",
+   "words": "bhīmasya dāyādo rājāsītkāñcanaprabhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.24",
+   "a": "Suhotra",
+   "rel": "son_of",
+   "b": "Kāñcanaprabha",
+   "words": "kāñcanasyāpi suhotro 'bhūnmahābala",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.25",
+   "a": "Jahnu",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "suhotrasyābhavajjahnuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.25",
+   "a": "Jahnu",
+   "rel": "born_of",
+   "b": "Keśinī",
+   "words": "keśinīgarbhasaṃbhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.28",
+   "a": "Kāverī",
+   "rel": "descendant_of",
+   "b": "Yauvanāśva",
+   "words": "yauvanāśvasya pautrīṃ tu kāverīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.28",
+   "a": "Gaṅgā",
+   "rel": "daughter_of",
+   "b": "Jahnu",
+   "words": "duhitṛtvena jāhnavīm",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.29",
+   "a": "Kāverī",
+   "rel": "wife_of",
+   "b": "Jahnu",
+   "words": "jahnubhāryāmaninditām",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.30",
+   "a": "Sunaha",
+   "rel": "son_of",
+   "b": "Jahnu",
+   "words": "jahnustu dayitaṃ putraṃ sunahaṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.30",
+   "a": "Sunaha",
+   "rel": "born_of",
+   "b": "Kāverī",
+   "words": "kāveryāṃ janayāmāsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.30",
+   "a": "Ajaka",
+   "rel": "son_of",
+   "b": "Sunaha",
+   "words": "ajakastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.31",
+   "a": "Balākāśva",
+   "rel": "son_of",
+   "b": "Ajaka",
+   "words": "ajakasya tu dāyādo balākāśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.32",
+   "a": "Kuśāmba",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvuśca catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.32",
+   "a": "Kuśanābha",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvuśca catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.32",
+   "a": "Amūrtarayas",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvuśca catvāro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.32",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvuśca catvāro",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.35",
+   "a": "Gādhi",
+   "rel": "son_of",
+   "b": "Kuśika",
+   "words": "putratvaṃ kalpayāmāsa svayameva purandaraḥ gādhirnāmābhavatputraḥ kauśikaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.35",
+   "a": "Gādhi",
+   "rel": "begotten_by",
+   "b": "Indra",
+   "words": "putratvaṃ kalpayāmāsa svayameva purandaraḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.36",
+   "a": "Satyavatī",
+   "rel": "daughter_of",
+   "b": "Gādhi",
+   "words": "gādhestasyāmajāyata pūrvaṃ kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.37",
+   "a": "Satyavatī",
+   "rel": "wife_of",
+   "b": "Ṛcīka",
+   "words": "tāṃ gādhiḥ putrakāmāya ṛcīkāya dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.56",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Ṛcīka",
+   "words": "satyavatī putraṃ janayāmāsa bhārgavam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,66.56",
+   "a": "Jamadagni",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "satyavatī putraṃ janayāmāsa bhārgavam",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 73,
+ "part": 3,
+ "refs": [
+  "BndP 2,73.112",
+  "BndP 2,73.113",
+  "BndP 2,73.114",
+  "BndP 2,73.115",
+  "BndP 2,73.116",
+  "BndP 2,73.117",
+  "BndP 2,73.118",
+  "BndP 2,73.119",
+  "BndP 2,73.120",
+  "BndP 2,73.121",
+  "BndP 2,73.122",
+  "BndP 2,73.123",
+  "BndP 2,73.124",
+  "BndP 2,73.125",
+  "BndP 2,73.126"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:03:43",
+ "reply": "{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00425,
+ "tokens": {
+  "input": 2080,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 9,
+  "thinking": 0
+ },
+ "statements": []
+}

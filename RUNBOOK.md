@@ -2949,3 +2949,22 @@ docs\ASKS_2026-10-22.md, section 29. From the automaton's root, in PowerShell:
 4. Each text the queue translated, read only: `python scripts\text_path.py --doc siddhanta_shiromani` and the same for
    Ganita_Yukti_Bhasa_of_Jyesthadeva_Sarma_K_V, sama_veda_sama_veda and AkashBhairavaKalpam.
 5. The site's schema: docs\cloud\SITE_SCHEMA_2026-11-17.md; its two read-only queries check it again.
+
+## 17 Nov, night: G6c, the dynasties across the works; I1, the site off the Lovable gateway (DOCS117_2026_11_17)
+
+docs\ASKS_2026-10-22.md, section 30. From the automaton's root, in PowerShell:
+
+1. The patch: `python scripts\patch_docs117_2026_11_17.py --check`, then without; `python -m unittest
+   tests.test_vamsa_align_2026_11_17 tests.test_srangam_ai_gateway_off_2026_11_17 tests.test_docs117_2026_11_17
+   tests.test_docs116_2026_11_16`; release.ps1 with COMMIT_MSG_g6c_i1_20261117.txt (the dry run, then -Apply once).
+2. G6c, free: `python scripts\vamsa_align.py --list` (writes nothing), then `python scripts\vamsa_align.py` (writes
+   exports\vamsa_align.md, one CSV a dynasty, data\vamsa_read\aligned.json); one dynasty on screen: `python
+   scripts\vamsa_align.py --anchor Kuru`; any founder: `python scripts\vamsa_align.py --anchor Bharata --father
+   Dusyanta`.
+3. G6b, the rest (about $2.95): `python scripts\vamsa_read.py --work g6 --yes --max-usd 8`; when it stops on a dropped
+   connection, the same command again; then `python scripts\vamsa_read.py --work g6 --report` and step 2 again.
+4. I1, in D:\srangam-42267: `git pull`; `python "D:\Sanksrit Automatons\sanskrit-automatonv2\scripts\
+   patch_srangam_ai_gateway_off_2026_11_17.py" --check`, then without; `npm run typecheck`; `npx vitest run`; `npm
+   run build`; commit and push; Publish in Lovable; ask Lovable's chat to deploy detect-duplicate-articles and
+   suggest-tag-categories. Then, in the Lovable Cloud SQL editor, srangam_ai_usage shows their calls by provider.
+5. The credit: `python scripts\claude_engine.py --credit`.

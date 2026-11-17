@@ -1,0 +1,135 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 10,
+ "part": 2,
+ "refs": [
+  "BrP 10.59",
+  "BrP 10.60",
+  "BrP 10.61",
+  "BrP 10.62",
+  "BrP 10.63",
+  "BrP 10.64",
+  "BrP 10.65",
+  "BrP 10.66",
+  "BrP 10.67",
+  "BrP 10.68"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:06:39",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 10.59\",\"a\":\"Hiraṇyākṣa\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"śālāvatyāṃ hiraṇyākṣo\",\"doubt\":true},\n{\"ref\":\"BrP 10.60\",\"a\":\"Madhucchandas\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya te sutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.60\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya te sutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.60\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya te sutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.60\",\"a\":\"Aṣṭaka\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya te sutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.60\",\"a\":\"Kacchapa\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya te sutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.60\",\"a\":\"Hārita\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya te sutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.65\",\"a\":\"Śunaḥśepha\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya putras tu śunaḥśepho 'bhavat\",\"doubt\":false},\n{\"ref\":\"BrP 10.67\",\"a\":\"Aṣṭaka\",\"rel\":\"born_of\",\"b\":\"Dṛṣadvatī\",\"words\":\"dṛṣadvatīsutaś cāpi vaiśvāmitras tathāṣṭakaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.67\",\"a\":\"Aṣṭaka\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"vaiśvāmitras tathāṣṭakaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.68\",\"a\":\"Lauhi\",\"rel\":\"son_of\",\"b\":\"Aṣṭaka\",\"words\":\"aṣṭakasya suto lauhiḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0118,
+ "tokens": {
+  "input": 1681,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 844,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 10.59",
+   "a": "Hiraṇyākṣa",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "śālāvatyāṃ hiraṇyākṣo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.60",
+   "a": "Madhucchandas",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya te sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.60",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya te sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.60",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya te sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.60",
+   "a": "Aṣṭaka",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya te sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.60",
+   "a": "Kacchapa",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya te sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.60",
+   "a": "Hārita",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya te sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.65",
+   "a": "Śunaḥśepha",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya putras tu śunaḥśepho 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.67",
+   "a": "Aṣṭaka",
+   "rel": "born_of",
+   "b": "Dṛṣadvatī",
+   "words": "dṛṣadvatīsutaś cāpi vaiśvāmitras tathāṣṭakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.67",
+   "a": "Aṣṭaka",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "vaiśvāmitras tathāṣṭakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.68",
+   "a": "Lauhi",
+   "rel": "son_of",
+   "b": "Aṣṭaka",
+   "words": "aṣṭakasya suto lauhiḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

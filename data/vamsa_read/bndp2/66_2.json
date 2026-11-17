@@ -1,0 +1,168 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 66,
+ "part": 2,
+ "refs": [
+  "BndP 2,66.57",
+  "BndP 2,66.59",
+  "BndP 2,66.60",
+  "BndP 2,66.61",
+  "BndP 2,66.62",
+  "BndP 2,66.63",
+  "BndP 2,66.64",
+  "BndP 2,66.65",
+  "BndP 2,66.66",
+  "BndP 2,66.67",
+  "BndP 2,66.68",
+  "BndP 2,66.69",
+  "BndP 2,66.70",
+  "BndP 2,66.71",
+  "BndP 2,66.72",
+  "BndP 2,66.74",
+  "BndP 2,66.75",
+  "BndP 2,66.76",
+  "BndP 2,66.77",
+  "BndP 2,66.78",
+  "BndP 2,66.79",
+  "BndP 2,66.80",
+  "BndP 2,66.81",
+  "BndP 2,66.82",
+  "BndP 2,66.83",
+  "BndP 2,66.84",
+  "BndP 2,66.85",
+  "BndP 2,66.86",
+  "BndP 2,66.87",
+  "BndP 2,66.88",
+  "BndP 2,66.89",
+  "BndP 2,66.90"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:00:35",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,66.57\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgoścaruviparyāse\",\"doubt\":true},{\"ref\":\"BndP 2,66.59\",\"a\":\"Viśvāmitra\",\"rel\":\"son_of\",\"b\":\"Gādhi\",\"words\":\"viśvāmitraṃ tu dāyādaṃ gādhiḥ kuśikanandanaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.60\",\"a\":\"Reṇuka\",\"rel\":\"descendant_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākuvaṃśaprabhavo reṇuko nāma pārthivaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.61\",\"a\":\"Reṇukā\",\"rel\":\"daughter_of\",\"b\":\"Reṇuka\",\"words\":\"tasya kanyā mahābhāgā kamalī nāma reṇukā\",\"doubt\":false},{\"ref\":\"BndP 2,66.62\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"ārcīko janayāmāma jamadagniḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.62\",\"a\":\"Rāma\",\"rel\":\"born_of\",\"b\":\"Reṇukā\",\"words\":\"reṇukāyāṃ kamalyāṃ\",\"doubt\":false},{\"ref\":\"BndP 2,66.66\",\"a\":\"Śunaḥśepha\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya putrastu śunaḥśepho 'bhavanmuniḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.68\",\"a\":\"Madhucchandas\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya putrāṇāṃ śunaḥśepho 'grajaḥ smṛtaḥ madhucchandādayaścaiva\",\"doubt\":false},{\"ref\":\"BndP 2,66.69\",\"a\":\"Kacchapa\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"kacchapaḥ pūraṇaścaiva viśvāmitrasutāstu vai\",\"doubt\":false},{\"ref\":\"BndP 2,66.69\",\"a\":\"Pūraṇa\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"kacchapaḥ pūraṇaścaiva viśvāmitrasutāstu vai\",\"doubt\":false},{\"ref\":\"BndP 2,66.75\",\"a\":\"Aṣṭaka\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"sutaścāpi viśvāmitrāttathāṣṭakaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,66.75\",\"a\":\"Lauhi\",\"rel\":\"son_of\",\"b\":\"Aṣṭaka\",\"words\":\"aṣṭakasya suto lauhiḥ\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01732,
+ "tokens": {
+  "input": 3542,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1024,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,66.57",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgoścaruviparyāse",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.59",
+   "a": "Viśvāmitra",
+   "rel": "son_of",
+   "b": "Gādhi",
+   "words": "viśvāmitraṃ tu dāyādaṃ gādhiḥ kuśikanandanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.60",
+   "a": "Reṇuka",
+   "rel": "descendant_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākuvaṃśaprabhavo reṇuko nāma pārthivaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.61",
+   "a": "Reṇukā",
+   "rel": "daughter_of",
+   "b": "Reṇuka",
+   "words": "tasya kanyā mahābhāgā kamalī nāma reṇukā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.62",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "ārcīko janayāmāma jamadagniḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.61",
+   "a": "Rāma",
+   "rel": "born_of",
+   "b": "Reṇukā",
+   "words": "reṇukāyāṃ kamalyāṃ",
+   "doubt": false,
+   "ref_cited": "BndP 2,66.62",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.66",
+   "a": "Śunaḥśepha",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya putrastu śunaḥśepho 'bhavanmuniḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.68",
+   "a": "Madhucchandas",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya putrāṇāṃ śunaḥśepho 'grajaḥ smṛtaḥ madhucchandādayaścaiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.69",
+   "a": "Kacchapa",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "kacchapaḥ pūraṇaścaiva viśvāmitrasutāstu vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.69",
+   "a": "Pūraṇa",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "kacchapaḥ pūraṇaścaiva viśvāmitrasutāstu vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.75",
+   "a": "Aṣṭaka",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "sutaścāpi viśvāmitrāttathāṣṭakaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,66.75",
+   "a": "Lauhi",
+   "rel": "son_of",
+   "b": "Aṣṭaka",
+   "words": "aṣṭakasya suto lauhiḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

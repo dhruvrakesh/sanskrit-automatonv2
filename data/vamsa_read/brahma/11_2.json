@@ -1,0 +1,84 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 11,
+ "part": 2,
+ "refs": [
+  "BrP 11.58",
+  "BrP 11.59",
+  "BrP 11.60",
+  "BrP 11.61"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:07:02",
+ "reply": "{\"statements\":[{\"ref\":\"BrP 11.58\",\"a\":\"Ānarta\",\"rel\":\"son_of\",\"b\":\"Vibhu\",\"words\":\"ānartas tu vibhoḥ putraḥ\",\"doubt\":true},{\"ref\":\"BrP 11.58\",\"a\":\"Sukumāra\",\"rel\":\"son_of\",\"b\":\"Ānarta\",\"words\":\"sukumāraś ca tatsutaḥ\",\"doubt\":false},{\"ref\":\"BrP 11.58\",\"a\":\"Dhṛṣṭaketu\",\"rel\":\"son_of\",\"b\":\"Sukumāra\",\"words\":\"sukumārasya putras tu dhṛṣṭaketuḥ\",\"doubt\":false},{\"ref\":\"BrP 11.59\",\"a\":\"Veṇuhotra\",\"rel\":\"son_of\",\"b\":\"Dhṛṣṭaketu\",\"words\":\"dhṛṣṭaketos tu dāyādo veṇuhotraḥ\",\"doubt\":false},{\"ref\":\"BrP 11.59\",\"a\":\"Bhārga\",\"rel\":\"son_of\",\"b\":\"Veṇuhotra\",\"words\":\"veṇuhotrasutaś cāpi bhārgo nāma\",\"doubt\":false},{\"ref\":\"BrP 11.60\",\"a\":\"Bhārgabhūmi\",\"rel\":\"son_of\",\"b\":\"Vatsabhūmi\",\"words\":\"bhārgabhūmis tu bhārgajaḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.00718,
+ "tokens": {
+  "input": 1240,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 470,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 11.58",
+   "a": "Ānarta",
+   "rel": "son_of",
+   "b": "Vibhu",
+   "words": "ānartas tu vibhoḥ putraḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.58",
+   "a": "Sukumāra",
+   "rel": "son_of",
+   "b": "Ānarta",
+   "words": "sukumāraś ca tatsutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.58",
+   "a": "Dhṛṣṭaketu",
+   "rel": "son_of",
+   "b": "Sukumāra",
+   "words": "sukumārasya putras tu dhṛṣṭaketuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.59",
+   "a": "Veṇuhotra",
+   "rel": "son_of",
+   "b": "Dhṛṣṭaketu",
+   "words": "dhṛṣṭaketos tu dāyādo veṇuhotraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.59",
+   "a": "Bhārga",
+   "rel": "son_of",
+   "b": "Veṇuhotra",
+   "words": "veṇuhotrasutaś cāpi bhārgo nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.60",
+   "a": "Bhārgabhūmi",
+   "rel": "son_of",
+   "b": "Vatsabhūmi",
+   "words": "bhārgabhūmis tu bhārgajaḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

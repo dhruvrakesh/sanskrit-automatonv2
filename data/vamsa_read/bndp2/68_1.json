@@ -1,0 +1,396 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 68,
+ "part": 1,
+ "refs": [
+  "BndP 2,68.1",
+  "BndP 2,68.2",
+  "BndP 2,68.3",
+  "BndP 2,68.4",
+  "BndP 2,68.5",
+  "BndP 2,68.6",
+  "BndP 2,68.7",
+  "BndP 2,68.8",
+  "BndP 2,68.9",
+  "BndP 2,68.10",
+  "BndP 2,68.11",
+  "BndP 2,68.12",
+  "BndP 2,68.13",
+  "BndP 2,68.14",
+  "BndP 2,68.15",
+  "BndP 2,68.16",
+  "BndP 2,68.17",
+  "BndP 2,68.18",
+  "BndP 2,68.19",
+  "BndP 2,68.20",
+  "BndP 2,68.21",
+  "BndP 2,68.22",
+  "BndP 2,68.23",
+  "BndP 2,68.24",
+  "BndP 2,68.25",
+  "BndP 2,68.26",
+  "BndP 2,68.27",
+  "BndP 2,68.28",
+  "BndP 2,68.29",
+  "BndP 2,68.30",
+  "BndP 2,68.31",
+  "BndP 2,68.32",
+  "BndP 2,68.33",
+  "BndP 2,68.34",
+  "BndP 2,68.35",
+  "BndP 2,68.36",
+  "BndP 2,68.37",
+  "BndP 2,68.38",
+  "BndP 2,68.39",
+  "BndP 2,68.40",
+  "BndP 2,68.41",
+  "BndP 2,68.42",
+  "BndP 2,68.43",
+  "BndP 2,68.44",
+  "BndP 2,68.45",
+  "BndP 2,68.46",
+  "BndP 2,68.47",
+  "BndP 2,68.48",
+  "BndP 2,68.49",
+  "BndP 2,68.50",
+  "BndP 2,68.51",
+  "BndP 2,68.52",
+  "BndP 2,68.53",
+  "BndP 2,68.54",
+  "BndP 2,68.55"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:00:59",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,68.7\",\"a\":\"Kṣatradharman\",\"rel\":\"son_of\",\"b\":\"Anenas\",\"words\":\"anenasaḥ suto jātaḥ kṣatradharmaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.7\",\"a\":\"Pratipakṣa\",\"rel\":\"son_of\",\"b\":\"Kṣatradharman\",\"words\":\"kṣatradharmasuto jātaḥ pratipakṣo\",\"doubt\":false},{\"ref\":\"BndP 2,68.8\",\"a\":\"Sṛṃjaya\",\"rel\":\"son_of\",\"b\":\"Pratipakṣa\",\"words\":\"pratipakṣasutaścāpi sṛṃjayo nāma viśrutaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.8\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Sṛṃjaya\",\"words\":\"sṛṃjayasya jayaḥ putro\",\"doubt\":false},{\"ref\":\"BndP 2,68.8\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"vijayastasya jajñivān\",\"doubt\":true},{\"ref\":\"BndP 2,68.9\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"vijayasya jayaḥ putrastasya\",\"doubt\":false},{\"ref\":\"BndP 2,68.9\",\"a\":\"Haryaśvaka\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"tasya haryaśvakaḥ smṛtaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,68.9\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Haryaśvaka\",\"words\":\"iryaśvasya suto rājā sahadevaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.10\",\"a\":\"Ahīna\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"sahadevasya dharmātmā ahīna iti viśrutaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.10\",\"a\":\"Cayatsena\",\"rel\":\"son_of\",\"b\":\"Ahīna\",\"words\":\"ahīnasya cayatsenastasya\",\"doubt\":false},{\"ref\":\"BndP 2,68.10\",\"a\":\"Saṃkṛti\",\"rel\":\"son_of\",\"b\":\"Cayatsena\",\"words\":\"tasya putro 'tha saṃkṛtiḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.11\",\"a\":\"Kṛtadharman\",\"rel\":\"son_of\",\"b\":\"Saṃkṛti\",\"words\":\"saṃkṛterapi dharmātmā kṛtadharmā\",\"doubt\":false},{\"ref\":\"BndP 2,68.12\",\"a\":\"Yati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,68.12\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,68.12\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,68.12\",\"a\":\"Āyati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,68.12\",\"a\":\"Viyati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,68.12\",\"a\":\"Kṛti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},{\"ref\":\"BndP 2,68.13\",\"a\":\"Gā\",\"rel\":\"daughter_of\",\"b\":\"Kākutstha\",\"words\":\"kākutsthakanyāṃ gāṃ nāma\",\"doubt\":false},{\"ref\":\"BndP 2,68.13\",\"a\":\"Gā\",\"rel\":\"wife_of\",\"b\":\"Yati\",\"words\":\"lebhe patnīṃ yatistadā\",\"doubt\":false},{\"ref\":\"BndP 2,68.15\",\"a\":\"Devayānī\",\"rel\":\"daughter_of\",\"b\":\"Uśanas\",\"words\":\"devayānīmuśanasaḥ sutāṃ\",\"doubt\":false},{\"ref\":\"BndP 2,68.15\",\"a\":\"Devayānī\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"bhāryāmavāpa\",\"doubt\":false},{\"ref\":\"BndP 2,68.15\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"tanayāṃ vṛṣaparvaṇaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.15\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"bhāryāmavāpa ha śarmiṣṭhāmāsurīṃ\",\"doubt\":true},{\"ref\":\"BndP 2,68.16\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayāno vyajāyata\",\"doubt\":false},{\"ref\":\"BndP 2,68.16\",\"a\":\"Turvasu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayāno vyajāyata\",\"doubt\":false},{\"ref\":\"BndP 2,68.16\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī\",\"doubt\":false},{\"ref\":\"BndP 2,68.16\",\"a\":\"Anu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī\",\"doubt\":false},{\"ref\":\"BndP 2,68.16\",\"a\":\"Pūru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī\",\"doubt\":false},{\"ref\":\"BndP 2,68.29\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātirnahuṣātmajaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.29\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"putraṃ śreṣṭaṃ variṣṭhaṃ ca yadumityabravīdvacaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.30\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"māṃ tāta\",\"doubt\":true},{\"ref\":\"BndP 2,68.45\",\"a\":\"Turvasu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yayātiḥ sutamātmanaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,68.46\",\"a\":\"Druhyu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"śarmiṣṭhāyāḥ sutaṃ druhyumidaṃ vacanamabravīt\",\"doubt\":false},{\"ref\":\"BndP 2,68.46\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"śarmiṣṭhāyāḥ sutaṃ druhyum\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03791,
+ "tokens": {
+  "input": 5176,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2756,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,68.7",
+   "a": "Kṣatradharman",
+   "rel": "son_of",
+   "b": "Anenas",
+   "words": "anenasaḥ suto jātaḥ kṣatradharmaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.7",
+   "a": "Pratipakṣa",
+   "rel": "son_of",
+   "b": "Kṣatradharman",
+   "words": "kṣatradharmasuto jātaḥ pratipakṣo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.8",
+   "a": "Sṛṃjaya",
+   "rel": "son_of",
+   "b": "Pratipakṣa",
+   "words": "pratipakṣasutaścāpi sṛṃjayo nāma viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.8",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Sṛṃjaya",
+   "words": "sṛṃjayasya jayaḥ putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.8",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "vijayastasya jajñivān",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.9",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "vijayasya jayaḥ putrastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.9",
+   "a": "Haryaśvaka",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "tasya haryaśvakaḥ smṛtaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.9",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Haryaśvaka",
+   "words": "iryaśvasya suto rājā sahadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.10",
+   "a": "Ahīna",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "sahadevasya dharmātmā ahīna iti viśrutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.10",
+   "a": "Cayatsena",
+   "rel": "son_of",
+   "b": "Ahīna",
+   "words": "ahīnasya cayatsenastasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.10",
+   "a": "Saṃkṛti",
+   "rel": "son_of",
+   "b": "Cayatsena",
+   "words": "tasya putro 'tha saṃkṛtiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.11",
+   "a": "Kṛtadharman",
+   "rel": "son_of",
+   "b": "Saṃkṛti",
+   "words": "saṃkṛterapi dharmātmā kṛtadharmā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.12",
+   "a": "Yati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.12",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.12",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.12",
+   "a": "Āyati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.12",
+   "a": "Viyati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.12",
+   "a": "Kṛti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.13",
+   "a": "Gā",
+   "rel": "daughter_of",
+   "b": "Kākutstha",
+   "words": "kākutsthakanyāṃ gāṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.13",
+   "a": "Gā",
+   "rel": "wife_of",
+   "b": "Yati",
+   "words": "lebhe patnīṃ yatistadā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.15",
+   "a": "Devayānī",
+   "rel": "daughter_of",
+   "b": "Uśanas",
+   "words": "devayānīmuśanasaḥ sutāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.15",
+   "a": "Devayānī",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "bhāryāmavāpa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.15",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "tanayāṃ vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.15",
+   "a": "Śarmiṣṭhā",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "bhāryāmavāpa ha śarmiṣṭhāmāsurīṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.16",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayāno vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.16",
+   "a": "Turvasu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayāno vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.16",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.16",
+   "a": "Anu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.16",
+   "a": "Pūru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyuṃ cānuṃ ca pūruṃ ca śarmiṣṭhā vārṣaparvaṇī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.29",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātirnahuṣātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.29",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "putraṃ śreṣṭaṃ variṣṭhaṃ ca yadumityabravīdvacaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.30",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "māṃ tāta",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.45",
+   "a": "Turvasu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yayātiḥ sutamātmanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.46",
+   "a": "Druhyu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "śarmiṣṭhāyāḥ sutaṃ druhyumidaṃ vacanamabravīt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,68.46",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "śarmiṣṭhāyāḥ sutaṃ druhyum",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

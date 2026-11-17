@@ -1,0 +1,498 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 7,
+ "part": 1,
+ "refs": [
+  "BrP 7.1",
+  "BrP 7.2",
+  "BrP 7.3",
+  "BrP 7.4",
+  "BrP 7.5",
+  "BrP 7.6",
+  "BrP 7.7",
+  "BrP 7.8",
+  "BrP 7.9",
+  "BrP 7.10",
+  "BrP 7.11",
+  "BrP 7.12",
+  "BrP 7.13",
+  "BrP 7.14",
+  "BrP 7.15",
+  "BrP 7.16",
+  "BrP 7.17",
+  "BrP 7.18",
+  "BrP 7.19",
+  "BrP 7.20",
+  "BrP 7.21",
+  "BrP 7.22",
+  "BrP 7.23",
+  "BrP 7.24",
+  "BrP 7.25",
+  "BrP 7.26",
+  "BrP 7.27",
+  "BrP 7.28",
+  "BrP 7.29",
+  "BrP 7.30",
+  "BrP 7.31",
+  "BrP 7.32",
+  "BrP 7.33",
+  "BrP 7.34",
+  "BrP 7.35",
+  "BrP 7.36",
+  "BrP 7.37",
+  "BrP 7.38",
+  "BrP 7.39",
+  "BrP 7.40",
+  "BrP 7.41",
+  "BrP 7.42",
+  "BrP 7.43",
+  "BrP 7.44",
+  "BrP 7.45",
+  "BrP 7.46",
+  "BrP 7.47",
+  "BrP 7.48",
+  "BrP 7.49",
+  "BrP 7.50",
+  "BrP 7.51",
+  "BrP 7.52",
+  "BrP 7.53",
+  "BrP 7.54",
+  "BrP 7.55",
+  "BrP 7.56",
+  "BrP 7.57",
+  "BrP 7.58"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:05:21",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 7.1\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},\n{\"ref\":\"BrP 7.1\",\"a\":\"Nābhāga\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},\n{\"ref\":\"BrP 7.1\",\"a\":\"Dhṛṣṭa\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},\n{\"ref\":\"BrP 7.1\",\"a\":\"Śaryāti\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaivasvatasyāsan putrā vai nava\",\"doubt\":false},\n{\"ref\":\"BrP 7.2\",\"a\":\"Nariṣyanta\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"nariṣyantaś ca ṣaṣṭho vai\",\"doubt\":false},\n{\"ref\":\"BrP 7.2\",\"a\":\"Prāṃśu\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"prāṃśū riṣṭaś ca saptamaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.2\",\"a\":\"Riṣṭa\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"prāṃśū riṣṭaś ca saptamaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.2\",\"a\":\"Karūṣa\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"karūṣaś ca pṛṣadhraś ca navaite\",\"doubt\":false},\n{\"ref\":\"BrP 7.2\",\"a\":\"Pṛṣadhra\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"karūṣaś ca pṛṣadhraś ca navaite\",\"doubt\":false},\n{\"ref\":\"BrP 7.14\",\"a\":\"Sudyumna\",\"rel\":\"line_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"manor vaṃśakaraḥ putras tvam eva ca bhaviṣyasi sudyumna\",\"doubt\":true},\n{\"ref\":\"BrP 7.16\",\"a\":\"Purūravas\",\"rel\":\"begotten_by\",\"b\":\"Budha\",\"words\":\"budhād viprās tasyāṃ jajñe purūravāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.16\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"somaputrād budhād viprās tasyāṃ jajñe purūravāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.16\",\"a\":\"Purūravas\",\"rel\":\"born_of\",\"b\":\"Ilā\",\"words\":\"tasyāṃ jajñe purūravāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.16\",\"a\":\"Budha\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somaputrād budhād\",\"doubt\":false},\n{\"ref\":\"BrP 7.17\",\"a\":\"Utkala\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnasya tu dāyādās trayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.17\",\"a\":\"Gaya\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnasya tu dāyādās trayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.17\",\"a\":\"Vinatāśva\",\"rel\":\"son_of\",\"b\":\"Sudyumna\",\"words\":\"sudyumnasya tu dāyādās trayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.20\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"ikṣvākur jyeṣṭhadāyādo\",\"doubt\":true},\n{\"ref\":\"BrP 7.24\",\"a\":\"Śaka\",\"rel\":\"son_of\",\"b\":\"Nariṣyanta\",\"words\":\"nāriṣyantāḥ śakāḥ putrā\",\"doubt\":true},\n{\"ref\":\"BrP 7.24\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Nābhāga\",\"words\":\"nābhāgasya tu bho dvijāḥ ambarīṣo 'bhavat putraḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.25\",\"a\":\"Dhārṣṭaka\",\"rel\":\"line_of\",\"b\":\"Dhṛṣṭa\",\"words\":\"dhṛṣṭasya dhārṣṭakaṃ kṣatraṃ\",\"doubt\":false},\n{\"ref\":\"BrP 7.25\",\"a\":\"Kārūṣa\",\"rel\":\"line_of\",\"b\":\"Karūṣa\",\"words\":\"karūṣasya ca kārūṣāḥ kṣatriyā\",\"doubt\":false},\n{\"ref\":\"BrP 7.26\",\"a\":\"Prajāpati\",\"rel\":\"son_of\",\"b\":\"Prāṃśu\",\"words\":\"prāṃśor eko 'bhavat putraḥ prajāpatir\",\"doubt\":false},\n{\"ref\":\"BrP 7.27\",\"a\":\"Yama\",\"rel\":\"son_of\",\"b\":\"Nariṣyanta\",\"words\":\"nariṣyantasya dāyādo rājā daṇḍadharo yamaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 7.27\",\"a\":\"Ānarta\",\"rel\":\"son_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāter mithunaṃ tv āsīd ānarto nāma\",\"doubt\":false},\n{\"ref\":\"BrP 7.28\",\"a\":\"Sukanyā\",\"rel\":\"daughter_of\",\"b\":\"Śaryāti\",\"words\":\"śaryāter mithunaṃ putraḥ kanyā sukanyā ca\",\"doubt\":false},\n{\"ref\":\"BrP 7.28\",\"a\":\"Sukanyā\",\"rel\":\"wife_of\",\"b\":\"Cyavana\",\"words\":\"yā patnī cyavanasya\",\"doubt\":false},\n{\"ref\":\"BrP 7.28\",\"a\":\"Raiva\",\"rel\":\"son_of\",\"b\":\"Ānarta\",\"words\":\"ānartasya tu dāyādo raivo nāma\",\"doubt\":false},\n{\"ref\":\"BrP 7.29\",\"a\":\"Raivata\",\"rel\":\"son_of\",\"b\":\"Raiva\",\"words\":\"raivasya raivataḥ putraḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.29\",\"a\":\"Kakudmin\",\"rel\":\"son_of\",\"b\":\"Raivata\",\"words\":\"raivataḥ putraḥ kakudmī nāma\",\"doubt\":true},\n{\"ref\":\"BrP 7.30\",\"a\":\"Kakudmin\",\"rel\":\"son_of\",\"b\":\"Raivata\",\"words\":\"jyeṣṭhaḥ putraḥ sa tasyāsīd\",\"doubt\":true},\n{\"ref\":\"BrP 7.40\",\"a\":\"Śaryāta\",\"rel\":\"descendant_of\",\"b\":\"Kakudmin\",\"words\":\"teṣāṃ hy ete muniśreṣṭhāḥ śaryātā iti viśrutāḥ\",\"doubt\":true},\n{\"ref\":\"BrP 7.44\",\"a\":\"Ikṣvāku\",\"rel\":\"son_of\",\"b\":\"Manu Vaivasvata\",\"words\":\"kṣuvatas tu manor viprā ikṣvākur abhavat sutaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.45\",\"a\":\"Vikukṣi\",\"rel\":\"son_of\",\"b\":\"Ikṣvāku\",\"words\":\"tasya putraśataṃ tv āsīd ikṣvākor teṣāṃ vikukṣir jyeṣṭhas\",\"doubt\":false},\n{\"ref\":\"BrP 7.46\",\"a\":\"Śakuni\",\"rel\":\"son_of\",\"b\":\"Vikukṣi\",\"words\":\"śakunipramukhās tasya putrāḥ pañcaśataṃ\",\"doubt\":true},\n{\"ref\":\"BrP 7.51\",\"a\":\"Śaśāda\",\"rel\":\"succeeded\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākau saṃsthite viprāḥ śaśādas tu nṛpo 'bhavat\",\"doubt\":false},\n{\"ref\":\"BrP 7.51\",\"a\":\"Kakutstha\",\"rel\":\"son_of\",\"b\":\"Śaśāda\",\"words\":\"śaśādasya tu dāyādaḥ kakutstho\",\"doubt\":false},\n{\"ref\":\"BrP 7.52\",\"a\":\"Anenas\",\"rel\":\"son_of\",\"b\":\"Kakutstha\",\"words\":\"anenās tu kakutsthasya\",\"doubt\":true},\n{\"ref\":\"BrP 7.52\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Anenas\",\"words\":\"pṛthuś cānenasaḥ smṛtaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 7.52\",\"a\":\"Viṣṭarāśva\",\"rel\":\"son_of\",\"b\":\"Pṛthu\",\"words\":\"viṣṭarāśvaḥ pṛthoḥ putras\",\"doubt\":false},\n{\"ref\":\"BrP 7.52\",\"a\":\"Ārdra\",\"rel\":\"son_of\",\"b\":\"Viṣṭarāśva\",\"words\":\"tasmād ārdras tv ajāyata\",\"doubt\":false},\n{\"ref\":\"BrP 7.53\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Ārdra\",\"words\":\"ārdras tu yuvanāśvas\",\"doubt\":true},\n{\"ref\":\"BrP 7.53\",\"a\":\"Śrāvasta\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"śrāvastas tatsuto\",\"doubt\":true},\n{\"ref\":\"BrP 7.54\",\"a\":\"Bṛhadaśva\",\"rel\":\"son_of\",\"b\":\"Śrāvasta\",\"words\":\"śrāvastasya tu dāyādo bṛhadaśvo\",\"doubt\":false},\n{\"ref\":\"BrP 7.54\",\"a\":\"Kuvalāśva\",\"rel\":\"son_of\",\"b\":\"Bṛhadaśva\",\"words\":\"kuvalāśvaḥ sutas tasya\",\"doubt\":false},\n{\"ref\":\"BrP 7.58\",\"a\":\"Kuvalāśva\",\"rel\":\"succeeded\",\"b\":\"Bṛhadaśva\",\"words\":\"kuvalāśvaṃ pitā rājye bṛhadaśvo nyayojayat\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04627,
+ "tokens": {
+  "input": 5206,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3586,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 7.1",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.1",
+   "a": "Nābhāga",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.1",
+   "a": "Dhṛṣṭa",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.1",
+   "a": "Śaryāti",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaivasvatasyāsan putrā vai nava",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.2",
+   "a": "Nariṣyanta",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "nariṣyantaś ca ṣaṣṭho vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.2",
+   "a": "Prāṃśu",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "prāṃśū riṣṭaś ca saptamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.2",
+   "a": "Riṣṭa",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "prāṃśū riṣṭaś ca saptamaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.2",
+   "a": "Karūṣa",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "karūṣaś ca pṛṣadhraś ca navaite",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.2",
+   "a": "Pṛṣadhra",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "karūṣaś ca pṛṣadhraś ca navaite",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.14",
+   "a": "Sudyumna",
+   "rel": "line_of",
+   "b": "Manu Vaivasvata",
+   "words": "manor vaṃśakaraḥ putras tvam eva ca bhaviṣyasi sudyumna",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.16",
+   "a": "Purūravas",
+   "rel": "begotten_by",
+   "b": "Budha",
+   "words": "budhād viprās tasyāṃ jajñe purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.16",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "somaputrād budhād viprās tasyāṃ jajñe purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.16",
+   "a": "Purūravas",
+   "rel": "born_of",
+   "b": "Ilā",
+   "words": "tasyāṃ jajñe purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.16",
+   "a": "Budha",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somaputrād budhād",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.17",
+   "a": "Utkala",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnasya tu dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.17",
+   "a": "Gaya",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnasya tu dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.17",
+   "a": "Vinatāśva",
+   "rel": "son_of",
+   "b": "Sudyumna",
+   "words": "sudyumnasya tu dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.20",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "ikṣvākur jyeṣṭhadāyādo",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.24",
+   "a": "Śaka",
+   "rel": "son_of",
+   "b": "Nariṣyanta",
+   "words": "nāriṣyantāḥ śakāḥ putrā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.24",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Nābhāga",
+   "words": "nābhāgasya tu bho dvijāḥ ambarīṣo 'bhavat putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.25",
+   "a": "Dhārṣṭaka",
+   "rel": "line_of",
+   "b": "Dhṛṣṭa",
+   "words": "dhṛṣṭasya dhārṣṭakaṃ kṣatraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.25",
+   "a": "Kārūṣa",
+   "rel": "line_of",
+   "b": "Karūṣa",
+   "words": "karūṣasya ca kārūṣāḥ kṣatriyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.26",
+   "a": "Prajāpati",
+   "rel": "son_of",
+   "b": "Prāṃśu",
+   "words": "prāṃśor eko 'bhavat putraḥ prajāpatir",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.27",
+   "a": "Yama",
+   "rel": "son_of",
+   "b": "Nariṣyanta",
+   "words": "nariṣyantasya dāyādo rājā daṇḍadharo yamaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.27",
+   "a": "Ānarta",
+   "rel": "son_of",
+   "b": "Śaryāti",
+   "words": "śaryāter mithunaṃ tv āsīd ānarto nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.28",
+   "a": "Sukanyā",
+   "rel": "daughter_of",
+   "b": "Śaryāti",
+   "words": "śaryāter mithunaṃ putraḥ kanyā sukanyā ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 7.28",
+   "a": "Sukanyā",
+   "rel": "wife_of",
+   "b": "Cyavana",
+   "words": "yā patnī cyavanasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.28",
+   "a": "Raiva",
+   "rel": "son_of",
+   "b": "Ānarta",
+   "words": "ānartasya tu dāyādo raivo nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.29",
+   "a": "Raivata",
+   "rel": "son_of",
+   "b": "Raiva",
+   "words": "raivasya raivataḥ putraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.29",
+   "a": "Kakudmin",
+   "rel": "son_of",
+   "b": "Raivata",
+   "words": "raivataḥ putraḥ kakudmī nāma",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.30",
+   "a": "Kakudmin",
+   "rel": "son_of",
+   "b": "Raivata",
+   "words": "jyeṣṭhaḥ putraḥ sa tasyāsīd",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.40",
+   "a": "Śaryāta",
+   "rel": "descendant_of",
+   "b": "Kakudmin",
+   "words": "teṣāṃ hy ete muniśreṣṭhāḥ śaryātā iti viśrutāḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 7.44",
+   "a": "Ikṣvāku",
+   "rel": "son_of",
+   "b": "Manu Vaivasvata",
+   "words": "kṣuvatas tu manor viprā ikṣvākur abhavat sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.45",
+   "a": "Vikukṣi",
+   "rel": "son_of",
+   "b": "Ikṣvāku",
+   "words": "tasya putraśataṃ tv āsīd ikṣvākor teṣāṃ vikukṣir jyeṣṭhas",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 7.46",
+   "a": "Śakuni",
+   "rel": "son_of",
+   "b": "Vikukṣi",
+   "words": "śakunipramukhās tasya putrāḥ pañcaśataṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.51",
+   "a": "Śaśāda",
+   "rel": "succeeded",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākau saṃsthite viprāḥ śaśādas tu nṛpo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.51",
+   "a": "Kakutstha",
+   "rel": "son_of",
+   "b": "Śaśāda",
+   "words": "śaśādasya tu dāyādaḥ kakutstho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.52",
+   "a": "Anenas",
+   "rel": "son_of",
+   "b": "Kakutstha",
+   "words": "anenās tu kakutsthasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.52",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Anenas",
+   "words": "pṛthuś cānenasaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.52",
+   "a": "Viṣṭarāśva",
+   "rel": "son_of",
+   "b": "Pṛthu",
+   "words": "viṣṭarāśvaḥ pṛthoḥ putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.52",
+   "a": "Ārdra",
+   "rel": "son_of",
+   "b": "Viṣṭarāśva",
+   "words": "tasmād ārdras tv ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.53",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Ārdra",
+   "words": "ārdras tu yuvanāśvas",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.53",
+   "a": "Śrāvasta",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "śrāvastas tatsuto",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.54",
+   "a": "Bṛhadaśva",
+   "rel": "son_of",
+   "b": "Śrāvasta",
+   "words": "śrāvastasya tu dāyādo bṛhadaśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.54",
+   "a": "Kuvalāśva",
+   "rel": "son_of",
+   "b": "Bṛhadaśva",
+   "words": "kuvalāśvaḥ sutas tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.58",
+   "a": "Kuvalāśva",
+   "rel": "succeeded",
+   "b": "Bṛhadaśva",
+   "words": "kuvalāśvaṃ pitā rājye bṛhadaśvo nyayojayat",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

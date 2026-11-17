@@ -66,6 +66,359 @@
  "effort": "medium",
  "prompt_version": "vamsa-read-v2",
  "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
- "at": "2026-11-17T10:24:49",
- "error": "ReadError: [WinError 10054] An existing connection was forcibly closed by the remote host"
+ "at": "2026-11-17T20:59:12",
+ "reply": "{\"statements\":[{\"ref\":\"BndP 2,63.62\",\"a\":\"Dṛḍhāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"tasya putrāstrayaḥ śiṣṭā dṛḍhāśvo jyeṣṭha ucyate\",\"doubt\":true},{\"ref\":\"BndP 2,63.63\",\"a\":\"Bhadrāśva\",\"rel\":\"brother_of\",\"b\":\"Dṛḍhāśva\",\"words\":\"bhadrāśvaḥ kapilāśvaśca kanīyāṃsau tu tau smṛtau\",\"doubt\":false},{\"ref\":\"BndP 2,63.63\",\"a\":\"Kapilāśva\",\"rel\":\"brother_of\",\"b\":\"Dṛḍhāśva\",\"words\":\"bhadrāśvaḥ kapilāśvaśca kanīyāṃsau tu tau smṛtau\",\"doubt\":false},{\"ref\":\"BndP 2,63.63\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dṛḍhāśva\",\"words\":\"dhaindhumārirdṛḍhāśvaśca haryaśvastasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.64\",\"a\":\"Nikuṃbha\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"haryaśvasya nikuṃbho 'bhūt\",\"doubt\":false},{\"ref\":\"BndP 2,63.64\",\"a\":\"Saṃhatāśva\",\"rel\":\"son_of\",\"b\":\"Nikuṃbha\",\"words\":\"saṃhatāśvo nikuṃbhasya suto\",\"doubt\":false},{\"ref\":\"BndP 2,63.65\",\"a\":\"Kṛśāśva\",\"rel\":\"son_of\",\"b\":\"Saṃhatāśva\",\"words\":\"kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau\",\"doubt\":false},{\"ref\":\"BndP 2,63.65\",\"a\":\"Akṛtāśva\",\"rel\":\"son_of\",\"b\":\"Saṃhatāśva\",\"words\":\"kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau\",\"doubt\":false},{\"ref\":\"BndP 2,63.65\",\"a\":\"Akṛtāśva\",\"rel\":\"brother_of\",\"b\":\"Kṛśāśva\",\"words\":\"kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau\",\"doubt\":false},{\"ref\":\"BndP 2,63.65\",\"a\":\"Dṛṣadvatī\",\"rel\":\"wife_of\",\"b\":\"Kṛśāśva\",\"words\":\"tasya patnī haimavatī satī mātā dṛṣadvatī\",\"doubt\":true},{\"ref\":\"BndP 2,63.66\",\"a\":\"Prasenajit\",\"rel\":\"son_of\",\"b\":\"Kṛśāśva\",\"words\":\"putraścāsya prasenajit\",\"doubt\":true},{\"ref\":\"BndP 2,63.66\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Prasenajit\",\"words\":\"yuvanāśvasutastasya\",\"doubt\":true},{\"ref\":\"BndP 2,63.67\",\"a\":\"Gaurī\",\"rel\":\"wife_of\",\"b\":\"Yuvanāśva\",\"words\":\"tasya patnī pativratā\",\"doubt\":false},{\"ref\":\"BndP 2,63.68\",\"a\":\"Māndhātā\",\"rel\":\"born_of\",\"b\":\"Gaurī\",\"words\":\"tasyāstu gaurikaḥ putraścakravartī babhūva ha\",\"doubt\":false},{\"ref\":\"BndP 2,63.68\",\"a\":\"Māndhātā\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"māndhātā yauvanāśvo\",\"doubt\":false},{\"ref\":\"BndP 2,63.70\",\"a\":\"Caitrarathī\",\"rel\":\"wife_of\",\"b\":\"Māndhātā\",\"words\":\"tasya caitrarathī bhāryā\",\"doubt\":false},{\"ref\":\"BndP 2,63.70\",\"a\":\"Caitrarathī\",\"rel\":\"daughter_of\",\"b\":\"Śaśabindu\",\"words\":\"śaśabindoḥ sutābhavat\",\"doubt\":false},{\"ref\":\"BndP 2,63.72\",\"a\":\"Purukutsa\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"utpādayāmāsa māndhātā trīnsutan purukutsam\",\"doubt\":false},{\"ref\":\"BndP 2,63.72\",\"a\":\"Purukutsa\",\"rel\":\"born_of\",\"b\":\"Bindumatī\",\"words\":\"tasyāmutpādayāmāsa māndhātā trīnsutan\",\"doubt\":false},{\"ref\":\"BndP 2,63.72\",\"a\":\"Ambarīṣa\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"purukutsamaṃbarīṣaṃ\",\"doubt\":false},{\"ref\":\"BndP 2,63.72\",\"a\":\"Ambarīṣa\",\"rel\":\"born_of\",\"b\":\"Bindumatī\",\"words\":\"tasyāmutpādayāmāsa māndhātā trīnsutan\",\"doubt\":false},{\"ref\":\"BndP 2,63.72\",\"a\":\"Mucukunda\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"mucukundaṃ ca viśrutam\",\"doubt\":false},{\"ref\":\"BndP 2,63.72\",\"a\":\"Mucukunda\",\"rel\":\"born_of\",\"b\":\"Bindumatī\",\"words\":\"tasyāmutpādayāmāsa māndhātā trīnsutan\",\"doubt\":false},{\"ref\":\"BndP 2,63.73\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Ambarīṣa\",\"words\":\"aṃbarīṣasya dāyādo yuvanāśvo 'paraḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.73\",\"a\":\"Saṃbhūta\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"saṃbhūtastasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.73\",\"a\":\"Saṃbhūta\",\"rel\":\"born_of\",\"b\":\"Narmadā\",\"words\":\"narmadāyāṃ samutpannaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,63.74\",\"a\":\"Anaraṇya\",\"rel\":\"son_of\",\"b\":\"Saṃbhūta\",\"words\":\"saṃbhūtasyātmajaḥ putro ṅyanaraṇyaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.75\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Anaraṇya\",\"words\":\"anaraṇyasya haryaśvastasya cātmajaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.75\",\"a\":\"Sumati\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"haryaśvāttu dṛṣadvatyāṃ jajñe ca sumatirnṛpaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.75\",\"a\":\"Sumati\",\"rel\":\"born_of\",\"b\":\"Dṛṣadvatī\",\"words\":\"haryaśvāttu dṛṣadvatyāṃ jajñe ca sumatirnṛpaḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.76\",\"a\":\"Tridhanvā\",\"rel\":\"son_of\",\"b\":\"Sumati\",\"words\":\"tasya putro 'bhavadrājā tridhanvā\",\"doubt\":false},{\"ref\":\"BndP 2,63.76\",\"a\":\"Trayyāruṇi\",\"rel\":\"son_of\",\"b\":\"Tridhanvā\",\"words\":\"tridhanvanaścāpi vidvāṃstrayyāruṇiḥ\",\"doubt\":false},{\"ref\":\"BndP 2,63.77\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Trayyāruṇi\",\"words\":\"tasya satyavrato nāma kumāro\",\"doubt\":false},{\"ref\":\"BndP 2,63.77\",\"a\":\"Satyavrata\",\"rel\":\"wife_of\",\"b\":\"Vidarbha\",\"words\":\"bhāryā vidarbhasya\",\"doubt\":true},{\"ref\":\"BndP 2,63.86\",\"a\":\"Viśvāmitra\",\"rel\":\"wife_of\",\"b\":\"Viśvāmitra\",\"words\":\"tasya patnī\",\"doubt\":true},{\"ref\":\"BndP 2,63.87\",\"a\":\"Gālava\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"maharṣiputraṃ\",\"doubt\":true},{\"ref\":\"BndP 2,63.108\",\"a\":\"Triśaṅku\",\"rel\":\"other\",\"b\":\"Satyavrata\",\"words\":\"triśaṅkuriti hovāca triśaṅkustena sa smṛtaḥ\",\"doubt\":true},{\"ref\":\"BndP 2,63.111\",\"a\":\"Satyavrata\",\"rel\":\"succeeded\",\"b\":\"Trayyāruṇi\",\"words\":\"abhiṣicya rājye pitrye yojayāmāsa taṃ muniḥ\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04113,
+ "tokens": {
+  "input": 5231,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3067,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,63.62",
+   "a": "Dṛḍhāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "tasya putrāstrayaḥ śiṣṭā dṛḍhāśvo jyeṣṭha ucyate",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,63.63",
+   "a": "Bhadrāśva",
+   "rel": "brother_of",
+   "b": "Dṛḍhāśva",
+   "words": "bhadrāśvaḥ kapilāśvaśca kanīyāṃsau tu tau smṛtau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.63",
+   "a": "Kapilāśva",
+   "rel": "brother_of",
+   "b": "Dṛḍhāśva",
+   "words": "bhadrāśvaḥ kapilāśvaśca kanīyāṃsau tu tau smṛtau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.63",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dṛḍhāśva",
+   "words": "dhaindhumārirdṛḍhāśvaśca haryaśvastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.64",
+   "a": "Nikuṃbha",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "haryaśvasya nikuṃbho 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.64",
+   "a": "Saṃhatāśva",
+   "rel": "son_of",
+   "b": "Nikuṃbha",
+   "words": "saṃhatāśvo nikuṃbhasya suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.65",
+   "a": "Kṛśāśva",
+   "rel": "son_of",
+   "b": "Saṃhatāśva",
+   "words": "kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.65",
+   "a": "Akṛtāśva",
+   "rel": "son_of",
+   "b": "Saṃhatāśva",
+   "words": "kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.65",
+   "a": "Akṛtāśva",
+   "rel": "brother_of",
+   "b": "Kṛśāśva",
+   "words": "kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.65",
+   "a": "Dṛṣadvatī",
+   "rel": "wife_of",
+   "b": "Kṛśāśva",
+   "words": "tasya patnī haimavatī satī mātā dṛṣadvatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.66",
+   "a": "Prasenajit",
+   "rel": "son_of",
+   "b": "Kṛśāśva",
+   "words": "putraścāsya prasenajit",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.66",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Prasenajit",
+   "words": "yuvanāśvasutastasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.67",
+   "a": "Gaurī",
+   "rel": "wife_of",
+   "b": "Yuvanāśva",
+   "words": "tasya patnī pativratā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.68",
+   "a": "Māndhātā",
+   "rel": "born_of",
+   "b": "Gaurī",
+   "words": "tasyāstu gaurikaḥ putraścakravartī babhūva ha",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.68",
+   "a": "Māndhātā",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "māndhātā yauvanāśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.70",
+   "a": "Caitrarathī",
+   "rel": "wife_of",
+   "b": "Māndhātā",
+   "words": "tasya caitrarathī bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.70",
+   "a": "Caitrarathī",
+   "rel": "daughter_of",
+   "b": "Śaśabindu",
+   "words": "śaśabindoḥ sutābhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.72",
+   "a": "Purukutsa",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "utpādayāmāsa māndhātā trīnsutan purukutsam",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 2,63.72",
+   "a": "Purukutsa",
+   "rel": "born_of",
+   "b": "Bindumatī",
+   "words": "tasyāmutpādayāmāsa māndhātā trīnsutan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.72",
+   "a": "Ambarīṣa",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "purukutsamaṃbarīṣaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.72",
+   "a": "Ambarīṣa",
+   "rel": "born_of",
+   "b": "Bindumatī",
+   "words": "tasyāmutpādayāmāsa māndhātā trīnsutan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.72",
+   "a": "Mucukunda",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "mucukundaṃ ca viśrutam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.72",
+   "a": "Mucukunda",
+   "rel": "born_of",
+   "b": "Bindumatī",
+   "words": "tasyāmutpādayāmāsa māndhātā trīnsutan",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.73",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Ambarīṣa",
+   "words": "aṃbarīṣasya dāyādo yuvanāśvo 'paraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.73",
+   "a": "Saṃbhūta",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "saṃbhūtastasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.73",
+   "a": "Saṃbhūta",
+   "rel": "born_of",
+   "b": "Narmadā",
+   "words": "narmadāyāṃ samutpannaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.74",
+   "a": "Anaraṇya",
+   "rel": "son_of",
+   "b": "Saṃbhūta",
+   "words": "saṃbhūtasyātmajaḥ putro ṅyanaraṇyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.75",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Anaraṇya",
+   "words": "anaraṇyasya haryaśvastasya cātmajaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BndP 2,63.75",
+   "a": "Sumati",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "haryaśvāttu dṛṣadvatyāṃ jajñe ca sumatirnṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.75",
+   "a": "Sumati",
+   "rel": "born_of",
+   "b": "Dṛṣadvatī",
+   "words": "haryaśvāttu dṛṣadvatyāṃ jajñe ca sumatirnṛpaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.76",
+   "a": "Tridhanvā",
+   "rel": "son_of",
+   "b": "Sumati",
+   "words": "tasya putro 'bhavadrājā tridhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.76",
+   "a": "Trayyāruṇi",
+   "rel": "son_of",
+   "b": "Tridhanvā",
+   "words": "tridhanvanaścāpi vidvāṃstrayyāruṇiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.77",
+   "a": "Satyavrata",
+   "rel": "son_of",
+   "b": "Trayyāruṇi",
+   "words": "tasya satyavrato nāma kumāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.77",
+   "a": "Satyavrata",
+   "rel": "wife_of",
+   "b": "Vidarbha",
+   "words": "bhāryā vidarbhasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.86",
+   "a": "Viśvāmitra",
+   "rel": "wife_of",
+   "b": "Viśvāmitra",
+   "words": "tasya patnī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,63.87",
+   "a": "Gālava",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "maharṣiputraṃ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,63.108",
+   "a": "Triśaṅku",
+   "rel": "other",
+   "b": "Satyavrata",
+   "words": "triśaṅkuriti hovāca triśaṅkustena sa smṛtaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,63.111",
+   "a": "Satyavrata",
+   "rel": "succeeded",
+   "b": "Trayyāruṇi",
+   "words": "abhiṣicya rājye pitrye yojayāmāsa taṃ muniḥ",
+   "doubt": true,
+   "check": "words"
+  }
+ ]
 }

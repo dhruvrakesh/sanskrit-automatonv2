@@ -1,0 +1,537 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 11,
+ "part": 1,
+ "refs": [
+  "BrP 11.1",
+  "BrP 11.2",
+  "BrP 11.3",
+  "BrP 11.4",
+  "BrP 11.5",
+  "BrP 11.6",
+  "BrP 11.7",
+  "BrP 11.8",
+  "BrP 11.9",
+  "BrP 11.10",
+  "BrP 11.11",
+  "BrP 11.12",
+  "BrP 11.13",
+  "BrP 11.14",
+  "BrP 11.15",
+  "BrP 11.16",
+  "BrP 11.17",
+  "BrP 11.18",
+  "BrP 11.19",
+  "BrP 11.20",
+  "BrP 11.21",
+  "BrP 11.22",
+  "BrP 11.23",
+  "BrP 11.24",
+  "BrP 11.25",
+  "BrP 11.26",
+  "BrP 11.27",
+  "BrP 11.28",
+  "BrP 11.29",
+  "BrP 11.30",
+  "BrP 11.31",
+  "BrP 11.32",
+  "BrP 11.33",
+  "BrP 11.34",
+  "BrP 11.35",
+  "BrP 11.36",
+  "BrP 11.37",
+  "BrP 11.38",
+  "BrP 11.39",
+  "BrP 11.40",
+  "BrP 11.41",
+  "BrP 11.42",
+  "BrP 11.43",
+  "BrP 11.44",
+  "BrP 11.45",
+  "BrP 11.46",
+  "BrP 11.47",
+  "BrP 11.48",
+  "BrP 11.49",
+  "BrP 11.50",
+  "BrP 11.51",
+  "BrP 11.52",
+  "BrP 11.53",
+  "BrP 11.54",
+  "BrP 11.55",
+  "BrP 11.56",
+  "BrP 11.57"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:06:44",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 11.1\",\"a\":\"Nahuṣa\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyoḥ putrāś ca te pañca\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Vṛddhaśarman\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyoḥ putrāś ca te pañca\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Rambha\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyoḥ putrāś ca te pañca\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Raji\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyoḥ putrāś ca te pañca\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Anenas\",\"rel\":\"son_of\",\"b\":\"Āyu\",\"words\":\"āyoḥ putrāś ca te pañca\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Nahuṣa\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"prabhāyāṃ jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Vṛddhaśarman\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"prabhāyāṃ jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Rambha\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"prabhāyāṃ jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Raji\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"prabhāyāṃ jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Anenas\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"prabhāyāṃ jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 11.1\",\"a\":\"Prabhā\",\"rel\":\"daughter_of\",\"b\":\"Svarbhānu\",\"words\":\"svarbhānutanayāyāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 11.9\",\"a\":\"Raji\",\"rel\":\"descendant_of\",\"b\":\"Svarbhānu\",\"words\":\"svarbhānudauhitraḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.27\",\"a\":\"Pratikṣatra\",\"rel\":\"son_of\",\"b\":\"Anenas\",\"words\":\"anenasaḥ suto rājā pratikṣatro\",\"doubt\":false},\n{\"ref\":\"BrP 11.28\",\"a\":\"Sañjaya\",\"rel\":\"son_of\",\"b\":\"Pratikṣatra\",\"words\":\"pratikṣatrasutaś cāsīt saṃjayo\",\"doubt\":false},\n{\"ref\":\"BrP 11.28\",\"a\":\"Jaya\",\"rel\":\"son_of\",\"b\":\"Sañjaya\",\"words\":\"saṃjayasya jayaḥ putro\",\"doubt\":false},\n{\"ref\":\"BrP 11.28\",\"a\":\"Vijaya\",\"rel\":\"son_of\",\"b\":\"Jaya\",\"words\":\"vijayas tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.29\",\"a\":\"Kṛti\",\"rel\":\"son_of\",\"b\":\"Vijaya\",\"words\":\"vijayasya kṛtiḥ putras\",\"doubt\":false},\n{\"ref\":\"BrP 11.29\",\"a\":\"Haryatvata\",\"rel\":\"son_of\",\"b\":\"Kṛti\",\"words\":\"tasya haryatvataḥ sutaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.29\",\"a\":\"Sahadeva\",\"rel\":\"son_of\",\"b\":\"Haryatvata\",\"words\":\"haryatvatasuto rājā sahadevaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.30\",\"a\":\"Nadīna\",\"rel\":\"son_of\",\"b\":\"Sahadeva\",\"words\":\"sahadevasya dharmātmā nadīna\",\"doubt\":false},\n{\"ref\":\"BrP 11.30\",\"a\":\"Jayatsena\",\"rel\":\"son_of\",\"b\":\"Nadīna\",\"words\":\"nadīnasya jayatseno\",\"doubt\":false},\n{\"ref\":\"BrP 11.30\",\"a\":\"Saṅkṛti\",\"rel\":\"son_of\",\"b\":\"Jayatsena\",\"words\":\"jayatsenasya saṃkṛtiḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.31\",\"a\":\"Kṣatravṛddha\",\"rel\":\"son_of\",\"b\":\"Saṅkṛti\",\"words\":\"saṃkṛter api dharmātmā kṣatravṛddho\",\"doubt\":false},\n{\"ref\":\"BrP 11.32\",\"a\":\"Sunahotra\",\"rel\":\"son_of\",\"b\":\"Kṣatravṛddha\",\"words\":\"kṣatravṛddhātmajas tatra sunahotro\",\"doubt\":false},\n{\"ref\":\"BrP 11.32\",\"a\":\"Kāśa\",\"rel\":\"son_of\",\"b\":\"Sunahotra\",\"words\":\"sunahotrasya dāyādās trayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.33\",\"a\":\"Śala\",\"rel\":\"son_of\",\"b\":\"Sunahotra\",\"words\":\"sunahotrasya dāyādās trayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.33\",\"a\":\"Gṛtsamada\",\"rel\":\"son_of\",\"b\":\"Sunahotra\",\"words\":\"sunahotrasya dāyādās trayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.33\",\"a\":\"Śunaka\",\"rel\":\"son_of\",\"b\":\"Gṛtsamada\",\"words\":\"putro gṛtsamadasyāpi śunako\",\"doubt\":false},\n{\"ref\":\"BrP 11.34\",\"a\":\"Ārṣṭiṣeṇa\",\"rel\":\"son_of\",\"b\":\"Śala\",\"words\":\"śalātmaja ārṣṭiseṇas\",\"doubt\":false},\n{\"ref\":\"BrP 11.34\",\"a\":\"Kāśyapa\",\"rel\":\"son_of\",\"b\":\"Ārṣṭiṣeṇa\",\"words\":\"tanayas tasya kāśyapaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 11.35\",\"a\":\"Kāśipa\",\"rel\":\"son_of\",\"b\":\"Kāśa\",\"words\":\"kāśasya kāśipo rājā putro\",\"doubt\":false},\n{\"ref\":\"BrP 11.35\",\"a\":\"Dīrghatapas\",\"rel\":\"son_of\",\"b\":\"Kāśa\",\"words\":\"putro dīrghatapās\",\"doubt\":true},\n{\"ref\":\"BrP 11.35\",\"a\":\"Dhanvantari\",\"rel\":\"son_of\",\"b\":\"Dīrghatapas\",\"words\":\"dhanus tu dīrghatapaso vidvān dhanvantaris\",\"doubt\":false},\n{\"ref\":\"BrP 11.39\",\"a\":\"Ketumān\",\"rel\":\"son_of\",\"b\":\"Dhanvantari\",\"words\":\"dhanvantares tu tanayaḥ ketumān\",\"doubt\":false},\n{\"ref\":\"BrP 11.39\",\"a\":\"Bhīmaratha\",\"rel\":\"son_of\",\"b\":\"Ketumān\",\"words\":\"ketumataḥ putro vīro bhīmarathaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.40\",\"a\":\"Divodāsa\",\"rel\":\"son_of\",\"b\":\"Bhīmaratha\",\"words\":\"putro bhīmarathasyāpi divodāsaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.46\",\"a\":\"Durdama\",\"rel\":\"son_of\",\"b\":\"Bhadraśreṇya\",\"words\":\"bhadraśreṇyasya putras tu durdamo\",\"doubt\":false},\n{\"ref\":\"BrP 11.49\",\"a\":\"Pratardana\",\"rel\":\"son_of\",\"b\":\"Divodāsa\",\"words\":\"divodāsād dṛṣadvatyāṃ vīro jajñe pratardanaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.49\",\"a\":\"Pratardana\",\"rel\":\"born_of\",\"b\":\"Dṛṣadvatī\",\"words\":\"dṛṣadvatyāṃ vīro jajñe pratardanaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.50\",\"a\":\"Vatsa\",\"rel\":\"son_of\",\"b\":\"Pratardana\",\"words\":\"pratardanasya putrau dvau vatsabhargau\",\"doubt\":false},\n{\"ref\":\"BrP 11.50\",\"a\":\"Bharga\",\"rel\":\"son_of\",\"b\":\"Pratardana\",\"words\":\"pratardanasya putrau dvau vatsabhargau\",\"doubt\":false},\n{\"ref\":\"BrP 11.50\",\"a\":\"Alarka\",\"rel\":\"son_of\",\"b\":\"Vatsa\",\"words\":\"vatsaputro hy alarkas\",\"doubt\":false},\n{\"ref\":\"BrP 11.50\",\"a\":\"Saṃnati\",\"rel\":\"son_of\",\"b\":\"Alarka\",\"words\":\"saṃnatis tasya cātmajaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 11.55\",\"a\":\"Sunītha\",\"rel\":\"son_of\",\"b\":\"Saṃnati\",\"words\":\"saṃnater api dāyādaḥ sunīthο\",\"doubt\":false},\n{\"ref\":\"BrP 11.55\",\"a\":\"Kṣema\",\"rel\":\"son_of\",\"b\":\"Sunītha\",\"words\":\"sunīthasya tu dāyādaḥ kṣemo\",\"doubt\":false},\n{\"ref\":\"BrP 11.56\",\"a\":\"Ketumān\",\"rel\":\"son_of\",\"b\":\"Kṣema\",\"words\":\"kṣemasya ketumān putraḥ\",\"doubt\":true},\n{\"ref\":\"BrP 11.56\",\"a\":\"Suketu\",\"rel\":\"son_of\",\"b\":\"Ketumān\",\"words\":\"suketus tasya cātmajaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 11.56\",\"a\":\"Dharmaketu\",\"rel\":\"son_of\",\"b\":\"Suketu\",\"words\":\"suketos tanayaś cāpi dharmaketur\",\"doubt\":false},\n{\"ref\":\"BrP 11.57\",\"a\":\"Satyaketu\",\"rel\":\"son_of\",\"b\":\"Dharmaketu\",\"words\":\"dharmaketos tu dāyādaḥ satyaketur\",\"doubt\":false},\n{\"ref\":\"BrP 11.57\",\"a\":\"Vibhu\",\"rel\":\"son_of\",\"b\":\"Satyaketu\",\"words\":\"satyaketusutaś cāpi vibhur\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04541,
+ "tokens": {
+  "input": 5099,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3521,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 11.1",
+   "a": "Nahuṣa",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyoḥ putrāś ca te pañca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Vṛddhaśarman",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyoḥ putrāś ca te pañca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Rambha",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyoḥ putrāś ca te pañca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Raji",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyoḥ putrāś ca te pañca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Anenas",
+   "rel": "son_of",
+   "b": "Āyu",
+   "words": "āyoḥ putrāś ca te pañca",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Nahuṣa",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "prabhāyāṃ jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Vṛddhaśarman",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "prabhāyāṃ jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Rambha",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "prabhāyāṃ jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Raji",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "prabhāyāṃ jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Anenas",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "prabhāyāṃ jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.1",
+   "a": "Prabhā",
+   "rel": "daughter_of",
+   "b": "Svarbhānu",
+   "words": "svarbhānutanayāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.9",
+   "a": "Raji",
+   "rel": "descendant_of",
+   "b": "Svarbhānu",
+   "words": "svarbhānudauhitraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.27",
+   "a": "Pratikṣatra",
+   "rel": "son_of",
+   "b": "Anenas",
+   "words": "anenasaḥ suto rājā pratikṣatro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.28",
+   "a": "Sañjaya",
+   "rel": "son_of",
+   "b": "Pratikṣatra",
+   "words": "pratikṣatrasutaś cāsīt saṃjayo",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.28",
+   "a": "Jaya",
+   "rel": "son_of",
+   "b": "Sañjaya",
+   "words": "saṃjayasya jayaḥ putro",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.28",
+   "a": "Vijaya",
+   "rel": "son_of",
+   "b": "Jaya",
+   "words": "vijayas tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.29",
+   "a": "Kṛti",
+   "rel": "son_of",
+   "b": "Vijaya",
+   "words": "vijayasya kṛtiḥ putras",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.29",
+   "a": "Haryatvata",
+   "rel": "son_of",
+   "b": "Kṛti",
+   "words": "tasya haryatvataḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.29",
+   "a": "Sahadeva",
+   "rel": "son_of",
+   "b": "Haryatvata",
+   "words": "haryatvatasuto rājā sahadevaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.30",
+   "a": "Nadīna",
+   "rel": "son_of",
+   "b": "Sahadeva",
+   "words": "sahadevasya dharmātmā nadīna",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.30",
+   "a": "Jayatsena",
+   "rel": "son_of",
+   "b": "Nadīna",
+   "words": "nadīnasya jayatseno",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.30",
+   "a": "Saṅkṛti",
+   "rel": "son_of",
+   "b": "Jayatsena",
+   "words": "jayatsenasya saṃkṛtiḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.31",
+   "a": "Kṣatravṛddha",
+   "rel": "son_of",
+   "b": "Saṅkṛti",
+   "words": "saṃkṛter api dharmātmā kṣatravṛddho",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 11.32",
+   "a": "Sunahotra",
+   "rel": "son_of",
+   "b": "Kṣatravṛddha",
+   "words": "kṣatravṛddhātmajas tatra sunahotro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.32",
+   "a": "Kāśa",
+   "rel": "son_of",
+   "b": "Sunahotra",
+   "words": "sunahotrasya dāyādās trayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.32",
+   "a": "Śala",
+   "rel": "son_of",
+   "b": "Sunahotra",
+   "words": "sunahotrasya dāyādās trayaḥ",
+   "doubt": false,
+   "ref_cited": "BrP 11.33",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.32",
+   "a": "Gṛtsamada",
+   "rel": "son_of",
+   "b": "Sunahotra",
+   "words": "sunahotrasya dāyādās trayaḥ",
+   "doubt": false,
+   "ref_cited": "BrP 11.33",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.33",
+   "a": "Śunaka",
+   "rel": "son_of",
+   "b": "Gṛtsamada",
+   "words": "putro gṛtsamadasyāpi śunako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.34",
+   "a": "Ārṣṭiṣeṇa",
+   "rel": "son_of",
+   "b": "Śala",
+   "words": "śalātmaja ārṣṭiseṇas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.34",
+   "a": "Kāśyapa",
+   "rel": "son_of",
+   "b": "Ārṣṭiṣeṇa",
+   "words": "tanayas tasya kāśyapaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.35",
+   "a": "Kāśipa",
+   "rel": "son_of",
+   "b": "Kāśa",
+   "words": "kāśasya kāśipo rājā putro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.35",
+   "a": "Dīrghatapas",
+   "rel": "son_of",
+   "b": "Kāśa",
+   "words": "putro dīrghatapās",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.35",
+   "a": "Dhanvantari",
+   "rel": "son_of",
+   "b": "Dīrghatapas",
+   "words": "dhanus tu dīrghatapaso vidvān dhanvantaris",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.39",
+   "a": "Ketumān",
+   "rel": "son_of",
+   "b": "Dhanvantari",
+   "words": "dhanvantares tu tanayaḥ ketumān",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.39",
+   "a": "Bhīmaratha",
+   "rel": "son_of",
+   "b": "Ketumān",
+   "words": "ketumataḥ putro vīro bhīmarathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.40",
+   "a": "Divodāsa",
+   "rel": "son_of",
+   "b": "Bhīmaratha",
+   "words": "putro bhīmarathasyāpi divodāsaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.46",
+   "a": "Durdama",
+   "rel": "son_of",
+   "b": "Bhadraśreṇya",
+   "words": "bhadraśreṇyasya putras tu durdamo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.49",
+   "a": "Pratardana",
+   "rel": "son_of",
+   "b": "Divodāsa",
+   "words": "divodāsād dṛṣadvatyāṃ vīro jajñe pratardanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.49",
+   "a": "Pratardana",
+   "rel": "born_of",
+   "b": "Dṛṣadvatī",
+   "words": "dṛṣadvatyāṃ vīro jajñe pratardanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.50",
+   "a": "Vatsa",
+   "rel": "son_of",
+   "b": "Pratardana",
+   "words": "pratardanasya putrau dvau vatsabhargau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.50",
+   "a": "Bharga",
+   "rel": "son_of",
+   "b": "Pratardana",
+   "words": "pratardanasya putrau dvau vatsabhargau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.50",
+   "a": "Alarka",
+   "rel": "son_of",
+   "b": "Vatsa",
+   "words": "vatsaputro hy alarkas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.50",
+   "a": "Saṃnati",
+   "rel": "son_of",
+   "b": "Alarka",
+   "words": "saṃnatis tasya cātmajaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.55",
+   "a": "Sunītha",
+   "rel": "son_of",
+   "b": "Saṃnati",
+   "words": "saṃnater api dāyādaḥ sunīthο",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.55",
+   "a": "Kṣema",
+   "rel": "son_of",
+   "b": "Sunītha",
+   "words": "sunīthasya tu dāyādaḥ kṣemo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.56",
+   "a": "Ketumān",
+   "rel": "son_of",
+   "b": "Kṣema",
+   "words": "kṣemasya ketumān putraḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.56",
+   "a": "Suketu",
+   "rel": "son_of",
+   "b": "Ketumān",
+   "words": "suketus tasya cātmajaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.56",
+   "a": "Dharmaketu",
+   "rel": "son_of",
+   "b": "Suketu",
+   "words": "suketos tanayaś cāpi dharmaketur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.57",
+   "a": "Satyaketu",
+   "rel": "son_of",
+   "b": "Dharmaketu",
+   "words": "dharmaketos tu dāyādaḥ satyaketur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 11.57",
+   "a": "Vibhu",
+   "rel": "son_of",
+   "b": "Satyaketu",
+   "words": "satyaketusutaś cāpi vibhur",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

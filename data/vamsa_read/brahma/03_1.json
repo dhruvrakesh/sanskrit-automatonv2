@@ -1,0 +1,479 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 3,
+ "part": 1,
+ "refs": [
+  "BrP 3.1",
+  "BrP 3.2",
+  "BrP 3.3",
+  "BrP 3.4",
+  "BrP 3.5",
+  "BrP 3.6",
+  "BrP 3.7",
+  "BrP 3.8",
+  "BrP 3.9",
+  "BrP 3.10",
+  "BrP 3.11",
+  "BrP 3.12",
+  "BrP 3.13",
+  "BrP 3.14",
+  "BrP 3.15",
+  "BrP 3.16",
+  "BrP 3.17",
+  "BrP 3.18",
+  "BrP 3.19",
+  "BrP 3.20",
+  "BrP 3.21",
+  "BrP 3.22",
+  "BrP 3.23",
+  "BrP 3.24",
+  "BrP 3.25",
+  "BrP 3.26",
+  "BrP 3.27",
+  "BrP 3.28",
+  "BrP 3.29",
+  "BrP 3.30",
+  "BrP 3.31",
+  "BrP 3.32",
+  "BrP 3.33",
+  "BrP 3.34",
+  "BrP 3.35",
+  "BrP 3.36",
+  "BrP 3.37",
+  "BrP 3.38",
+  "BrP 3.39",
+  "BrP 3.40",
+  "BrP 3.41",
+  "BrP 3.42",
+  "BrP 3.43",
+  "BrP 3.44",
+  "BrP 3.45",
+  "BrP 3.46",
+  "BrP 3.47",
+  "BrP 3.48",
+  "BrP 3.49",
+  "BrP 3.50",
+  "BrP 3.51",
+  "BrP 3.52",
+  "BrP 3.53",
+  "BrP 3.54",
+  "BrP 3.55",
+  "BrP 3.56",
+  "BrP 3.57"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:04:40",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 3.5\",\"a\":\"Asiknī\",\"rel\":\"wife_of\",\"b\":\"Dakṣa\",\"words\":\"asiknīm āvahat patnīṃ\",\"doubt\":false},\n{\"ref\":\"BrP 3.5\",\"a\":\"Asiknī\",\"rel\":\"daughter_of\",\"b\":\"Vīraṇa\",\"words\":\"vīraṇasya prajāpateḥ sutāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 3.7\",\"a\":\"Haryaśvas\",\"rel\":\"born_of\",\"b\":\"Asiknī\",\"words\":\"putrasahasrāṇi vairaṇyāṃ pañca asiknyāṃ janayām āsa\",\"doubt\":true},\n{\"ref\":\"BrP 3.7\",\"a\":\"Haryaśvas\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣa eva prajāpatiḥ\",\"doubt\":true},\n{\"ref\":\"BrP 3.9\",\"a\":\"Nārada\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"yaṃ kaśyapaḥ sutavaraṃ parameṣṭhī vyajījanat\",\"doubt\":true},\n{\"ref\":\"BrP 3.9\",\"a\":\"Nārada\",\"rel\":\"born_of\",\"b\":\"Dakṣa's daughter\",\"words\":\"dakṣasya vai duhitari\",\"doubt\":true},\n{\"ref\":\"BrP 3.11\",\"a\":\"Haryaśvas\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣasya vai putrā haryaśvā\",\"doubt\":false},\n{\"ref\":\"BrP 3.14\",\"a\":\"Nārada\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"tava putro bhaved iti\",\"doubt\":true},\n{\"ref\":\"BrP 3.14\",\"a\":\"Nārada\",\"rel\":\"begotten_by\",\"b\":\"Kaśyapa\",\"words\":\"sa tasyāṃ nārado jajñe\",\"doubt\":true},\n{\"ref\":\"BrP 3.16\",\"a\":\"Haryaśvas\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣasya putrā haryaśvā\",\"doubt\":false},\n{\"ref\":\"BrP 3.20\",\"a\":\"Śabalāśvas\",\"rel\":\"son_of\",\"b\":\"Dakṣa\",\"words\":\"dakṣaḥ prācetasaḥ vairaṇyām putrāṇāṃ sahasram asṛjat\",\"doubt\":false},\n{\"ref\":\"BrP 3.20\",\"a\":\"Śabalāśvas\",\"rel\":\"born_of\",\"b\":\"Asiknī\",\"words\":\"vairaṇyām atha putrāṇāṃ sahasram asṛjat\",\"doubt\":true},\n{\"ref\":\"BrP 3.22\",\"a\":\"Śabalāśvas\",\"rel\":\"brother_of\",\"b\":\"Haryaśvas\",\"words\":\"bhrātṝṇāṃ padavīṃ\",\"doubt\":false},\n{\"ref\":\"BrP 3.25\",\"a\":\"Dakṣa's sixty daughters\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"ṣaṣṭiṃ tato 'sṛjat kanyā vairaṇyām\",\"doubt\":true},\n{\"ref\":\"BrP 3.27\",\"a\":\"Dakṣa's ten daughters\",\"rel\":\"wife_of\",\"b\":\"Dharma\",\"words\":\"dadau sa daśa dharmāya\",\"doubt\":true},\n{\"ref\":\"BrP 3.30\",\"a\":\"Viśvedevas\",\"rel\":\"born_of\",\"b\":\"Viśvā\",\"words\":\"viśvedevās tu viśvāyāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 3.30\",\"a\":\"Sādhyas\",\"rel\":\"born_of\",\"b\":\"Sādhyā\",\"words\":\"sādhyā sādhyān vyajāyata\",\"doubt\":false},\n{\"ref\":\"BrP 3.31\",\"a\":\"Marutvanta\",\"rel\":\"born_of\",\"b\":\"Marutvatī\",\"words\":\"marutvatyāṃ marutvanto\",\"doubt\":false},\n{\"ref\":\"BrP 3.31\",\"a\":\"Vasu\",\"rel\":\"son_of\",\"b\":\"Vasu\",\"words\":\"vasos tu vasavaḥ sutāḥ\",\"doubt\":true},\n{\"ref\":\"BrP 3.31\",\"a\":\"Bhānavas\",\"rel\":\"son_of\",\"b\":\"Bhānu\",\"words\":\"bhānos tu bhānavaḥ putrā\",\"doubt\":false},\n{\"ref\":\"BrP 3.32\",\"a\":\"Ghoṣa\",\"rel\":\"born_of\",\"b\":\"Lambā\",\"words\":\"lambāyāś caiva ghoṣo\",\"doubt\":false},\n{\"ref\":\"BrP 3.33\",\"a\":\"Saṃkalpa\",\"rel\":\"born_of\",\"b\":\"Saṃkalpā\",\"words\":\"saṃkalpāyās tu viśvātmā jajñe saṃkalpa\",\"doubt\":false},\n{\"ref\":\"BrP 3.33\",\"a\":\"Vṛṣala\",\"rel\":\"born_of\",\"b\":\"Yāminī\",\"words\":\"nāgavīthyāṃ ca yāminyāṃ vṛṣalaś ca vyajāyata\",\"doubt\":true},\n{\"ref\":\"BrP 3.37\",\"a\":\"Vaitaṇḍya\",\"rel\":\"son_of\",\"b\":\"Āpa\",\"words\":\"āpasya putro vaitaṇḍyaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 3.37\",\"a\":\"Kāla\",\"rel\":\"son_of\",\"b\":\"Dhruva\",\"words\":\"dhruvasya putro bhagavān kālo\",\"doubt\":false},\n{\"ref\":\"BrP 3.38\",\"a\":\"Varcas\",\"rel\":\"son_of\",\"b\":\"Soma\",\"words\":\"somasya bhagavān varcā\",\"doubt\":false},\n{\"ref\":\"BrP 3.38\",\"a\":\"Draviṇa\",\"rel\":\"son_of\",\"b\":\"Dhava\",\"words\":\"dhavasya putro draviṇo\",\"doubt\":false},\n{\"ref\":\"BrP 3.38\",\"a\":\"Śiśira\",\"rel\":\"born_of\",\"b\":\"Manoharā\",\"words\":\"manoharāyāḥ śiśiraḥ\",\"doubt\":false},\n{\"ref\":\"BrP 3.39\",\"a\":\"Śivā\",\"rel\":\"wife_of\",\"b\":\"Anila\",\"words\":\"anilasya śivā bhāryā\",\"doubt\":false},\n{\"ref\":\"BrP 3.39\",\"a\":\"Manojava\",\"rel\":\"born_of\",\"b\":\"Śivā\",\"words\":\"tasyāḥ putro manojavaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 3.39\",\"a\":\"Manojava\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāv anilasya\",\"doubt\":false},\n{\"ref\":\"BrP 3.39\",\"a\":\"Avijñātagati\",\"rel\":\"son_of\",\"b\":\"Anila\",\"words\":\"dvau putrāv anilasya\",\"doubt\":false},\n{\"ref\":\"BrP 3.40\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Anala\",\"words\":\"agniputraḥ kumāras\",\"doubt\":true},\n{\"ref\":\"BrP 3.41\",\"a\":\"Kārttikeya\",\"rel\":\"born_of\",\"b\":\"Kṛttikā\",\"words\":\"apatyaṃ kṛttikānāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 3.41\",\"a\":\"Devala\",\"rel\":\"son_of\",\"b\":\"Pratyūṣa\",\"words\":\"pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam\",\"doubt\":false},\n{\"ref\":\"BrP 3.42\",\"a\":\"Devala's two sons\",\"rel\":\"son_of\",\"b\":\"Devala\",\"words\":\"dvau putrau devalasyāpi\",\"doubt\":true},\n{\"ref\":\"BrP 3.42\",\"a\":\"Varastrī\",\"rel\":\"sister_of\",\"b\":\"Bṛhaspati\",\"words\":\"bṛhaspates tu bhaginī varastrī\",\"doubt\":false},\n{\"ref\":\"BrP 3.43\",\"a\":\"Varastrī\",\"rel\":\"wife_of\",\"b\":\"Prabhāsa\",\"words\":\"prabhāsasya tu sā bhāryā\",\"doubt\":false},\n{\"ref\":\"BrP 3.44\",\"a\":\"Viśvakarman\",\"rel\":\"born_of\",\"b\":\"Varastrī\",\"words\":\"yasyāṃ jajñe prajāpatiḥ\",\"doubt\":false},\n{\"ref\":\"BrP 3.46\",\"a\":\"Rudras\",\"rel\":\"begotten_by\",\"b\":\"Kaśyapa\",\"words\":\"surabhī kaśyapād rudrān ekādaśa vinirmame\",\"doubt\":true},\n{\"ref\":\"BrP 3.46\",\"a\":\"Rudras\",\"rel\":\"born_of\",\"b\":\"Surabhi\",\"words\":\"surabhī kaśyapād rudrān ekādaśa vinirmame\",\"doubt\":true},\n{\"ref\":\"BrP 3.56\",\"a\":\"Tuṣitas\",\"rel\":\"born_of\",\"b\":\"Aditi\",\"words\":\"adityā dakṣakanyayā\",\"doubt\":false},\n{\"ref\":\"BrP 3.56\",\"a\":\"Tuṣitas\",\"rel\":\"son_of\",\"b\":\"Kaśyapa\",\"words\":\"mārīcāt kaśyapāj jātās\",\"doubt\":false},\n{\"ref\":\"BrP 3.56\",\"a\":\"Aditi\",\"rel\":\"daughter_of\",\"b\":\"Dakṣa\",\"words\":\"adityā dakṣakanyayā\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04209,
+ "tokens": {
+  "input": 5194,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3170,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 3.5",
+   "a": "Asiknī",
+   "rel": "wife_of",
+   "b": "Dakṣa",
+   "words": "asiknīm āvahat patnīṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.5",
+   "a": "Asiknī",
+   "rel": "daughter_of",
+   "b": "Vīraṇa",
+   "words": "vīraṇasya prajāpateḥ sutāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.7",
+   "a": "Haryaśvas",
+   "rel": "born_of",
+   "b": "Asiknī",
+   "words": "putrasahasrāṇi vairaṇyāṃ pañca asiknyāṃ janayām āsa",
+   "doubt": true,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 3.7",
+   "a": "Haryaśvas",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣa eva prajāpatiḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.9",
+   "a": "Nārada",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "yaṃ kaśyapaḥ sutavaraṃ parameṣṭhī vyajījanat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.9",
+   "a": "Nārada",
+   "rel": "born_of",
+   "b": "Dakṣa's daughter",
+   "words": "dakṣasya vai duhitari",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.11",
+   "a": "Haryaśvas",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣasya vai putrā haryaśvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.14",
+   "a": "Nārada",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "tava putro bhaved iti",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.14",
+   "a": "Nārada",
+   "rel": "begotten_by",
+   "b": "Kaśyapa",
+   "words": "sa tasyāṃ nārado jajñe",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.16",
+   "a": "Haryaśvas",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣasya putrā haryaśvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.20",
+   "a": "Śabalāśvas",
+   "rel": "son_of",
+   "b": "Dakṣa",
+   "words": "dakṣaḥ prācetasaḥ vairaṇyām putrāṇāṃ sahasram asṛjat",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 3.20",
+   "a": "Śabalāśvas",
+   "rel": "born_of",
+   "b": "Asiknī",
+   "words": "vairaṇyām atha putrāṇāṃ sahasram asṛjat",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.22",
+   "a": "Śabalāśvas",
+   "rel": "brother_of",
+   "b": "Haryaśvas",
+   "words": "bhrātṝṇāṃ padavīṃ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.25",
+   "a": "Dakṣa's sixty daughters",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "ṣaṣṭiṃ tato 'sṛjat kanyā vairaṇyām",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.27",
+   "a": "Dakṣa's ten daughters",
+   "rel": "wife_of",
+   "b": "Dharma",
+   "words": "dadau sa daśa dharmāya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.30",
+   "a": "Viśvedevas",
+   "rel": "born_of",
+   "b": "Viśvā",
+   "words": "viśvedevās tu viśvāyāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.30",
+   "a": "Sādhyas",
+   "rel": "born_of",
+   "b": "Sādhyā",
+   "words": "sādhyā sādhyān vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.31",
+   "a": "Marutvanta",
+   "rel": "born_of",
+   "b": "Marutvatī",
+   "words": "marutvatyāṃ marutvanto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.31",
+   "a": "Vasu",
+   "rel": "son_of",
+   "b": "Vasu",
+   "words": "vasos tu vasavaḥ sutāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.31",
+   "a": "Bhānavas",
+   "rel": "son_of",
+   "b": "Bhānu",
+   "words": "bhānos tu bhānavaḥ putrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.32",
+   "a": "Ghoṣa",
+   "rel": "born_of",
+   "b": "Lambā",
+   "words": "lambāyāś caiva ghoṣo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.33",
+   "a": "Saṃkalpa",
+   "rel": "born_of",
+   "b": "Saṃkalpā",
+   "words": "saṃkalpāyās tu viśvātmā jajñe saṃkalpa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.33",
+   "a": "Vṛṣala",
+   "rel": "born_of",
+   "b": "Yāminī",
+   "words": "nāgavīthyāṃ ca yāminyāṃ vṛṣalaś ca vyajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.37",
+   "a": "Vaitaṇḍya",
+   "rel": "son_of",
+   "b": "Āpa",
+   "words": "āpasya putro vaitaṇḍyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.37",
+   "a": "Kāla",
+   "rel": "son_of",
+   "b": "Dhruva",
+   "words": "dhruvasya putro bhagavān kālo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.38",
+   "a": "Varcas",
+   "rel": "son_of",
+   "b": "Soma",
+   "words": "somasya bhagavān varcā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.38",
+   "a": "Draviṇa",
+   "rel": "son_of",
+   "b": "Dhava",
+   "words": "dhavasya putro draviṇo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.38",
+   "a": "Śiśira",
+   "rel": "born_of",
+   "b": "Manoharā",
+   "words": "manoharāyāḥ śiśiraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.39",
+   "a": "Śivā",
+   "rel": "wife_of",
+   "b": "Anila",
+   "words": "anilasya śivā bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.39",
+   "a": "Manojava",
+   "rel": "born_of",
+   "b": "Śivā",
+   "words": "tasyāḥ putro manojavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.39",
+   "a": "Manojava",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāv anilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.39",
+   "a": "Avijñātagati",
+   "rel": "son_of",
+   "b": "Anila",
+   "words": "dvau putrāv anilasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.40",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Anala",
+   "words": "agniputraḥ kumāras",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.41",
+   "a": "Kārttikeya",
+   "rel": "born_of",
+   "b": "Kṛttikā",
+   "words": "apatyaṃ kṛttikānāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.41",
+   "a": "Devala",
+   "rel": "son_of",
+   "b": "Pratyūṣa",
+   "words": "pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.42",
+   "a": "Devala's two sons",
+   "rel": "son_of",
+   "b": "Devala",
+   "words": "dvau putrau devalasyāpi",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.42",
+   "a": "Varastrī",
+   "rel": "sister_of",
+   "b": "Bṛhaspati",
+   "words": "bṛhaspates tu bhaginī varastrī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.43",
+   "a": "Varastrī",
+   "rel": "wife_of",
+   "b": "Prabhāsa",
+   "words": "prabhāsasya tu sā bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.44",
+   "a": "Viśvakarman",
+   "rel": "born_of",
+   "b": "Varastrī",
+   "words": "yasyāṃ jajñe prajāpatiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.46",
+   "a": "Rudras",
+   "rel": "begotten_by",
+   "b": "Kaśyapa",
+   "words": "surabhī kaśyapād rudrān ekādaśa vinirmame",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.46",
+   "a": "Rudras",
+   "rel": "born_of",
+   "b": "Surabhi",
+   "words": "surabhī kaśyapād rudrān ekādaśa vinirmame",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 3.56",
+   "a": "Tuṣitas",
+   "rel": "born_of",
+   "b": "Aditi",
+   "words": "adityā dakṣakanyayā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.56",
+   "a": "Tuṣitas",
+   "rel": "son_of",
+   "b": "Kaśyapa",
+   "words": "mārīcāt kaśyapāj jātās",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 3.56",
+   "a": "Aditi",
+   "rel": "daughter_of",
+   "b": "Dakṣa",
+   "words": "adityā dakṣakanyayā",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

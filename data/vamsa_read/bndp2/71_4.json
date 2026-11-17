@@ -1,0 +1,785 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "bndp2",
+ "title": "Brahmandapurana, book 2",
+ "chapter": 71,
+ "part": 4,
+ "refs": [
+  "BndP 2,71.170",
+  "BndP 2,71.171",
+  "BndP 2,71.172",
+  "BndP 2,71.173",
+  "BndP 2,71.174",
+  "BndP 2,71.175",
+  "BndP 2,71.176",
+  "BndP 2,71.177",
+  "BndP 2,71.178",
+  "BndP 2,71.179",
+  "BndP 2,71.180",
+  "BndP 2,71.181",
+  "BndP 2,71.182",
+  "BndP 2,71.183",
+  "BndP 2,71.184",
+  "BndP 2,71.185",
+  "BndP 2,71.186",
+  "BndP 2,71.187",
+  "BndP 2,71.188",
+  "BndP 2,71.189",
+  "BndP 2,71.190",
+  "BndP 2,71.191",
+  "BndP 2,71.192",
+  "BndP 2,71.193",
+  "BndP 2,71.194",
+  "BndP 2,71.195",
+  "BndP 2,71.196",
+  "BndP 2,71.197",
+  "BndP 2,71.198",
+  "BndP 2,71.199",
+  "BndP 2,71.200",
+  "BndP 2,71.201",
+  "BndP 2,71.202",
+  "BndP 2,71.203",
+  "BndP 2,71.204",
+  "BndP 2,71.205",
+  "BndP 2,71.206",
+  "BndP 2,71.207",
+  "BndP 2,71.208",
+  "BndP 2,71.209",
+  "BndP 2,71.210",
+  "BndP 2,71.211",
+  "BndP 2,71.212",
+  "BndP 2,71.213",
+  "BndP 2,71.214",
+  "BndP 2,71.215",
+  "BndP 2,71.216",
+  "BndP 2,71.217",
+  "BndP 2,71.218",
+  "BndP 2,71.219",
+  "BndP 2,71.220",
+  "BndP 2,71.221",
+  "BndP 2,71.222",
+  "BndP 2,71.223",
+  "BndP 2,71.224"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmANDapurANa.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:02:42",
+ "reply": "{\"statements\": [\n{\"ref\":\"BndP 2,71.170\",\"a\":\"Bhadrabāhu\",\"rel\":\"son_of\",\"b\":\"Śaṭha\",\"words\":\"śaṭhātmajāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.170\",\"a\":\"Bhadraratha\",\"rel\":\"son_of\",\"b\":\"Śaṭha\",\"words\":\"śaṭhātmajāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.170\",\"a\":\"Bhadrakalpa\",\"rel\":\"son_of\",\"b\":\"Śaṭha\",\"words\":\"śaṭhātmajāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.170\",\"a\":\"Supārśvaka\",\"rel\":\"son_of\",\"b\":\"Śaṭha\",\"words\":\"śaṭhātmajāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.170\",\"a\":\"Kīrttimān\",\"rel\":\"son_of\",\"b\":\"Śaṭha\",\"words\":\"śaṭhātmajāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.170\",\"a\":\"Rohitāśva\",\"rel\":\"son_of\",\"b\":\"Śaṭha\",\"words\":\"śaṭhātmajāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Nanda\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Upananda\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Mitra\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Kukṣimitra\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Bala\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Citra\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Upacitra\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Kṛtaka\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Tuṣṭi\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Puṣṭiratha\",\"rel\":\"born_of\",\"b\":\"Madirā\",\"words\":\"madirāyāḥ sutā ete\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Nanda\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Upananda\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Mitra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Kukṣimitra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Bala\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Citra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Upacitra\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Kṛtaka\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Tuṣṭi\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.172\",\"a\":\"Puṣṭiratha\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevāddhijajñire\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.173\",\"a\":\"Upabiṃba\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāputrā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.173\",\"a\":\"Biṃba\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāputrā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.173\",\"a\":\"Sattvadanta\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāputrā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.173\",\"a\":\"Mahaujas\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāputrā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.174\",\"a\":\"Kauśika\",\"rel\":\"born_of\",\"b\":\"Vaiśālī\",\"words\":\"vaiśālyāmadadhācchauriḥ putraṃ kauśikam\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.174\",\"a\":\"Kauśika\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"vaiśālyāmadadhācchauriḥ putraṃ kauśikam\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.174\",\"a\":\"Suṣeṇa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyāṃ jajñire saureḥ suṣeṇaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.174\",\"a\":\"Suṣeṇa\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"devakyāṃ jajñire saureḥ suṣeṇaḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.174\",\"a\":\"Kīrttimān\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"devakyāṃ jajñire saureḥ suṣeṇaḥ kīrttimānapi\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.174\",\"a\":\"Kīrttimān\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"jajñire saureḥ suṣeṇaḥ kīrttimānapi\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.175\",\"a\":\"Udarṣi\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"udarṣirbhadrasenaśca\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.175\",\"a\":\"Bhadrasena\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"udarṣirbhadrasenaśca\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.175\",\"a\":\"Ṛjudāya\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"ṛjudāyaśca pañcamaḥ\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.175\",\"a\":\"Bhadradeva\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"ṣaṣṭho hi bhadradevaśca\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.177\",\"a\":\"Subhadrā\",\"rel\":\"sister_of\",\"b\":\"Kṛṣṇa\",\"words\":\"anujātābhavakṛṣṇātsubhadrā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.178\",\"a\":\"Abhimanyu\",\"rel\":\"born_of\",\"b\":\"Subhadrā\",\"words\":\"subhadrāyāṃ rathī pārthādabhimanyurajāyata\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.178\",\"a\":\"Abhimanyu\",\"rel\":\"son_of\",\"b\":\"Pārtha\",\"words\":\"pārthādabhimanyurajāyata\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.179\",\"a\":\"Pūrva\",\"rel\":\"born_of\",\"b\":\"Sahadevā\",\"words\":\"pūrvādyāḥ sahadevāyāṃ śūrādvai jajñire sutāḥ\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.179\",\"a\":\"Pūrva\",\"rel\":\"son_of\",\"b\":\"Śūra\",\"words\":\"śūrādvai jajñire sutāḥ\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.180\",\"a\":\"Janastambha\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"janastambaṃ śaurerjajñe\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.180\",\"a\":\"Āgāvaha\",\"rel\":\"born_of\",\"b\":\"Vṛkadevī\",\"words\":\"āgāvaho mahātmā ca vṛkadevyā majāyata\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.181\",\"a\":\"Mandaka\",\"rel\":\"born_of\",\"b\":\"Śrīdevī\",\"words\":\"śrīdevāyāṃ svayaṃ jajñe mandako\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.181\",\"a\":\"Upāsaṅga\",\"rel\":\"born_of\",\"b\":\"Devarakṣitā\",\"words\":\"upāsaṃgaṃ vasuṃ cāpi tanayau devarakṣitā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.181\",\"a\":\"Vasu\",\"rel\":\"born_of\",\"b\":\"Devarakṣitā\",\"words\":\"upāsaṃgaṃ vasuṃ cāpi tanayau devarakṣitā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.183\",\"a\":\"Vijaya\",\"rel\":\"born_of\",\"b\":\"Śiśirāvatī\",\"words\":\"etānmahātmanaḥ putrānsuṣāva śiśirāvatī\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.183\",\"a\":\"Rocana\",\"rel\":\"born_of\",\"b\":\"Śiśirāvatī\",\"words\":\"etānmahātmanaḥ putrānsuṣāva śiśirāvatī\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.183\",\"a\":\"Varddhamāna\",\"rel\":\"born_of\",\"b\":\"Śiśirāvatī\",\"words\":\"etānmahātmanaḥ putrānsuṣāva śiśirāvatī\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.183\",\"a\":\"Devala\",\"rel\":\"born_of\",\"b\":\"Śiśirāvatī\",\"words\":\"etānmahātmanaḥ putrānsuṣāva śiśirāvatī\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.183\",\"a\":\"Sunāman\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"saptamī devakī putraṃ sunāmānamasūyata\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.185\",\"a\":\"Kauśika\",\"rel\":\"born_of\",\"b\":\"Vaiśyā\",\"words\":\"vaiśyāyāmadadhācchauriḥ putraṃ kauśikamavyayam\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.185\",\"a\":\"Kauśika\",\"rel\":\"son_of\",\"b\":\"Śauri\",\"words\":\"vaiśyāyāmadadhācchauriḥ putraṃ kauśikamavyayam\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.185\",\"a\":\"Sugandhī\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sugandhī vanarājī ca śaurerāstāṃ parigrahau\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.185\",\"a\":\"Vanarājī\",\"rel\":\"wife_of\",\"b\":\"Śauri\",\"words\":\"sugandhī vanarājī ca śaurerāstāṃ parigrahau\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.186\",\"a\":\"Puṇḍra\",\"rel\":\"born_of\",\"b\":\"Sugandhī\",\"words\":\"sugandhyāścātmajau tu tau\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.186\",\"a\":\"Kapila\",\"rel\":\"born_of\",\"b\":\"Sugandhī\",\"words\":\"sugandhyāścātmajau tu tau\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.187\",\"a\":\"Jarā\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"vasudevātmajo\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.189\",\"a\":\"Śrāddhadeva\",\"rel\":\"born_of\",\"b\":\"Aśmakī\",\"words\":\"aśmakyāṃ labhate putram\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.189\",\"a\":\"Śrāddhadeva\",\"rel\":\"son_of\",\"b\":\"Anādhṛṣṭi\",\"words\":\"aśmakyāṃ labhate putramanādhṛṣṭiḥ\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.191\",\"a\":\"Cārudeṣṇa\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"gaṇḍūṣāyānapatyāya kṛṣṇastuṣṭo 'dadātsutau\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.191\",\"a\":\"Sāmba\",\"rel\":\"son_of\",\"b\":\"Kṛṣṇa\",\"words\":\"gaṇḍūṣāyānapatyāya kṛṣṇastuṣṭo 'dadātsutau\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.192\",\"a\":\"Ranti\",\"rel\":\"son_of\",\"b\":\"Nandana\",\"words\":\"dvau putrau nandanasya\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.192\",\"a\":\"Rantipāla\",\"rel\":\"son_of\",\"b\":\"Nandana\",\"words\":\"dvau putrau nandanasya\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.193\",\"a\":\"Saumi\",\"rel\":\"son_of\",\"b\":\"Vṛka\",\"words\":\"vṛkāya vai tvaputrāya vasudevaḥ\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.193\",\"a\":\"Dhanu\",\"rel\":\"son_of\",\"b\":\"Sṛṃjaya\",\"words\":\"sṛṃjayasya dhanuścaiva virajāśca sutāvimau\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.193\",\"a\":\"Virajā\",\"rel\":\"son_of\",\"b\":\"Sṛṃjaya\",\"words\":\"sṛṃjayasya dhanuścaiva virajāśca sutāvimau\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.212\",\"a\":\"Kṛṣṇa\",\"rel\":\"son_of\",\"b\":\"Vasudeva\",\"words\":\"pitā tvenaṃ nandagopagṛhaṃ nayat\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.213\",\"a\":\"Yaśodā\",\"rel\":\"wife_of\",\"b\":\"Nandagopa\",\"words\":\"yaśodā nandagopasya patnī\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.214\",\"a\":\"Kanyā\",\"rel\":\"born_of\",\"b\":\"Yaśodā\",\"words\":\"kanyā yaśodāyāṃ vyajāyata\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.217\",\"a\":\"Kṛṣṇa\",\"rel\":\"born_of\",\"b\":\"Devakī\",\"words\":\"ayaṃ sa garbhā devakyā\",\"doubt\":false},\n{\"ref\":\"BndP 2,71.218\",\"a\":\"Kaṃsa\",\"rel\":\"brother_of\",\"b\":\"Devakī\",\"words\":\"svasustu tanayaṃ kaṃso\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.220\",\"a\":\"Kanyā\",\"rel\":\"daughter_of\",\"b\":\"Nandagopa\",\"words\":\"kanyā sā vavṛdhe\",\"doubt\":true},\n{\"ref\":\"BndP 2,71.224\",\"a\":\"Kaṃsa\",\"rel\":\"other\",\"b\":\"Ānakadundubhi\",\"words\":\"putrānānakadundubheḥ\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.06782,
+ "tokens": {
+  "input": 5202,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 5742,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BndP 2,71.170",
+   "a": "Bhadrabāhu",
+   "rel": "son_of",
+   "b": "Śaṭha",
+   "words": "śaṭhātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.170",
+   "a": "Bhadraratha",
+   "rel": "son_of",
+   "b": "Śaṭha",
+   "words": "śaṭhātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.170",
+   "a": "Bhadrakalpa",
+   "rel": "son_of",
+   "b": "Śaṭha",
+   "words": "śaṭhātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.170",
+   "a": "Supārśvaka",
+   "rel": "son_of",
+   "b": "Śaṭha",
+   "words": "śaṭhātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.170",
+   "a": "Kīrttimān",
+   "rel": "son_of",
+   "b": "Śaṭha",
+   "words": "śaṭhātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.170",
+   "a": "Rohitāśva",
+   "rel": "son_of",
+   "b": "Śaṭha",
+   "words": "śaṭhātmajāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Nanda",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Upananda",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Mitra",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Kukṣimitra",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Bala",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Citra",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Upacitra",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Kṛtaka",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Tuṣṭi",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Puṣṭiratha",
+   "rel": "born_of",
+   "b": "Madirā",
+   "words": "madirāyāḥ sutā ete",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Nanda",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Upananda",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Mitra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Kukṣimitra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Bala",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Citra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Upacitra",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Kṛtaka",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Tuṣṭi",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.172",
+   "a": "Puṣṭiratha",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevāddhijajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.173",
+   "a": "Upabiṃba",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāputrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.173",
+   "a": "Biṃba",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāputrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.173",
+   "a": "Sattvadanta",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāputrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.173",
+   "a": "Mahaujas",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāputrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.174",
+   "a": "Kauśika",
+   "rel": "born_of",
+   "b": "Vaiśālī",
+   "words": "vaiśālyāmadadhācchauriḥ putraṃ kauśikam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.174",
+   "a": "Kauśika",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "vaiśālyāmadadhācchauriḥ putraṃ kauśikam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.174",
+   "a": "Suṣeṇa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyāṃ jajñire saureḥ suṣeṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.174",
+   "a": "Suṣeṇa",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "devakyāṃ jajñire saureḥ suṣeṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.174",
+   "a": "Kīrttimān",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "devakyāṃ jajñire saureḥ suṣeṇaḥ kīrttimānapi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.174",
+   "a": "Kīrttimān",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "jajñire saureḥ suṣeṇaḥ kīrttimānapi",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.175",
+   "a": "Udarṣi",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "udarṣirbhadrasenaśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.175",
+   "a": "Bhadrasena",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "udarṣirbhadrasenaśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.175",
+   "a": "Ṛjudāya",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "ṛjudāyaśca pañcamaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.175",
+   "a": "Bhadradeva",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "ṣaṣṭho hi bhadradevaśca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.177",
+   "a": "Subhadrā",
+   "rel": "sister_of",
+   "b": "Kṛṣṇa",
+   "words": "anujātābhavakṛṣṇātsubhadrā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.178",
+   "a": "Abhimanyu",
+   "rel": "born_of",
+   "b": "Subhadrā",
+   "words": "subhadrāyāṃ rathī pārthādabhimanyurajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.178",
+   "a": "Abhimanyu",
+   "rel": "son_of",
+   "b": "Pārtha",
+   "words": "pārthādabhimanyurajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.179",
+   "a": "Pūrva",
+   "rel": "born_of",
+   "b": "Sahadevā",
+   "words": "pūrvādyāḥ sahadevāyāṃ śūrādvai jajñire sutāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.179",
+   "a": "Pūrva",
+   "rel": "son_of",
+   "b": "Śūra",
+   "words": "śūrādvai jajñire sutāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.180",
+   "a": "Janastambha",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "janastambaṃ śaurerjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.180",
+   "a": "Āgāvaha",
+   "rel": "born_of",
+   "b": "Vṛkadevī",
+   "words": "āgāvaho mahātmā ca vṛkadevyā majāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.181",
+   "a": "Mandaka",
+   "rel": "born_of",
+   "b": "Śrīdevī",
+   "words": "śrīdevāyāṃ svayaṃ jajñe mandako",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.181",
+   "a": "Upāsaṅga",
+   "rel": "born_of",
+   "b": "Devarakṣitā",
+   "words": "upāsaṃgaṃ vasuṃ cāpi tanayau devarakṣitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.181",
+   "a": "Vasu",
+   "rel": "born_of",
+   "b": "Devarakṣitā",
+   "words": "upāsaṃgaṃ vasuṃ cāpi tanayau devarakṣitā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.183",
+   "a": "Vijaya",
+   "rel": "born_of",
+   "b": "Śiśirāvatī",
+   "words": "etānmahātmanaḥ putrānsuṣāva śiśirāvatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.183",
+   "a": "Rocana",
+   "rel": "born_of",
+   "b": "Śiśirāvatī",
+   "words": "etānmahātmanaḥ putrānsuṣāva śiśirāvatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.183",
+   "a": "Varddhamāna",
+   "rel": "born_of",
+   "b": "Śiśirāvatī",
+   "words": "etānmahātmanaḥ putrānsuṣāva śiśirāvatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.183",
+   "a": "Devala",
+   "rel": "born_of",
+   "b": "Śiśirāvatī",
+   "words": "etānmahātmanaḥ putrānsuṣāva śiśirāvatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.183",
+   "a": "Sunāman",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "saptamī devakī putraṃ sunāmānamasūyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.185",
+   "a": "Kauśika",
+   "rel": "born_of",
+   "b": "Vaiśyā",
+   "words": "vaiśyāyāmadadhācchauriḥ putraṃ kauśikamavyayam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.185",
+   "a": "Kauśika",
+   "rel": "son_of",
+   "b": "Śauri",
+   "words": "vaiśyāyāmadadhācchauriḥ putraṃ kauśikamavyayam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.185",
+   "a": "Sugandhī",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sugandhī vanarājī ca śaurerāstāṃ parigrahau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.185",
+   "a": "Vanarājī",
+   "rel": "wife_of",
+   "b": "Śauri",
+   "words": "sugandhī vanarājī ca śaurerāstāṃ parigrahau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.186",
+   "a": "Puṇḍra",
+   "rel": "born_of",
+   "b": "Sugandhī",
+   "words": "sugandhyāścātmajau tu tau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.186",
+   "a": "Kapila",
+   "rel": "born_of",
+   "b": "Sugandhī",
+   "words": "sugandhyāścātmajau tu tau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.187",
+   "a": "Jarā",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "vasudevātmajo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.189",
+   "a": "Śrāddhadeva",
+   "rel": "born_of",
+   "b": "Aśmakī",
+   "words": "aśmakyāṃ labhate putram",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.189",
+   "a": "Śrāddhadeva",
+   "rel": "son_of",
+   "b": "Anādhṛṣṭi",
+   "words": "aśmakyāṃ labhate putramanādhṛṣṭiḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.191",
+   "a": "Cārudeṣṇa",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "gaṇḍūṣāyānapatyāya kṛṣṇastuṣṭo 'dadātsutau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.191",
+   "a": "Sāmba",
+   "rel": "son_of",
+   "b": "Kṛṣṇa",
+   "words": "gaṇḍūṣāyānapatyāya kṛṣṇastuṣṭo 'dadātsutau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.192",
+   "a": "Ranti",
+   "rel": "son_of",
+   "b": "Nandana",
+   "words": "dvau putrau nandanasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.192",
+   "a": "Rantipāla",
+   "rel": "son_of",
+   "b": "Nandana",
+   "words": "dvau putrau nandanasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.192",
+   "a": "Saumi",
+   "rel": "son_of",
+   "b": "Vṛka",
+   "words": "vṛkāya vai tvaputrāya vasudevaḥ",
+   "doubt": true,
+   "ref_cited": "BndP 2,71.193",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.193",
+   "a": "Dhanu",
+   "rel": "son_of",
+   "b": "Sṛṃjaya",
+   "words": "sṛṃjayasya dhanuścaiva virajāśca sutāvimau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.193",
+   "a": "Virajā",
+   "rel": "son_of",
+   "b": "Sṛṃjaya",
+   "words": "sṛṃjayasya dhanuścaiva virajāśca sutāvimau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.212",
+   "a": "Kṛṣṇa",
+   "rel": "son_of",
+   "b": "Vasudeva",
+   "words": "pitā tvenaṃ nandagopagṛhaṃ nayat",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.213",
+   "a": "Yaśodā",
+   "rel": "wife_of",
+   "b": "Nandagopa",
+   "words": "yaśodā nandagopasya patnī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.214",
+   "a": "Kanyā",
+   "rel": "born_of",
+   "b": "Yaśodā",
+   "words": "kanyā yaśodāyāṃ vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.217",
+   "a": "Kṛṣṇa",
+   "rel": "born_of",
+   "b": "Devakī",
+   "words": "ayaṃ sa garbhā devakyā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.218",
+   "a": "Kaṃsa",
+   "rel": "brother_of",
+   "b": "Devakī",
+   "words": "svasustu tanayaṃ kaṃso",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BndP 2,71.220",
+   "a": "Kanyā",
+   "rel": "daughter_of",
+   "b": "Nandagopa",
+   "words": "kanyā sā vavṛdhe",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BndP 2,71.224",
+   "a": "Kaṃsa",
+   "rel": "other",
+   "b": "Ānakadundubhi",
+   "words": "putrānānakadundubheḥ",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

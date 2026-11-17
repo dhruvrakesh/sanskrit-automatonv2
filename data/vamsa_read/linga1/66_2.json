@@ -1,0 +1,312 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "chapter": 66,
+ "part": 2,
+ "refs": [
+  "LiP 1,66.59",
+  "LiP 1,66.60",
+  "LiP 1,66.61",
+  "LiP 1,66.62",
+  "LiP 1,66.63",
+  "LiP 1,66.64",
+  "LiP 1,66.65",
+  "LiP 1,66.66",
+  "LiP 1,66.67",
+  "LiP 1,66.68",
+  "LiP 1,66.69",
+  "LiP 1,66.70",
+  "LiP 1,66.71",
+  "LiP 1,66.72",
+  "LiP 1,66.73",
+  "LiP 1,66.74",
+  "LiP 1,66.75",
+  "LiP 1,66.76",
+  "LiP 1,66.77",
+  "LiP 1,66.78",
+  "LiP 1,66.79",
+  "LiP 1,66.80",
+  "LiP 1,66.81",
+  "LiP 1,66.82",
+  "LiP 1,66.83"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_liGgapurANa1-108.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:41:29",
+ "reply": "{\"statements\":[\n{\"ref\":\"LiP 1,66.59\",\"a\":\"Āyus\",\"rel\":\"other\",\"b\":\"Āyus\",\"words\":\"āyuṣastanayā vīrāḥ pañcaivāsan\",\"doubt\":true},\n{\"ref\":\"LiP 1,66.59\",\"a\":\"Nahuṣa\",\"rel\":\"descendant_of\",\"b\":\"Āyus\",\"words\":\"āyuṣastanayā vīrāḥ pañcaivāsanmahaujasaḥ\",\"doubt\":true},\n{\"ref\":\"LiP 1,66.59\",\"a\":\"Nahuṣa\",\"rel\":\"born_of\",\"b\":\"Prabhā\",\"words\":\"svarbhānutanayāyāṃ te prabhāyāṃ jajñire nṛpāḥ\",\"doubt\":true},\n{\"ref\":\"LiP 1,66.59\",\"a\":\"Prabhā\",\"rel\":\"daughter_of\",\"b\":\"Svarbhānu\",\"words\":\"svarbhānutanayāyāṃ te prabhāyāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.61\",\"a\":\"Yati\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.61\",\"a\":\"Yayāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.61\",\"a\":\"Saṃyāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.61\",\"a\":\"Āyāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.61\",\"a\":\"Andhaka\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.62\",\"a\":\"Vijāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"vijātiśceti ṣaḍime\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.60\",\"a\":\"Yati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.60\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.60\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.60\",\"a\":\"Āyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.60\",\"a\":\"Andhaka\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.60\",\"a\":\"Vijāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.64\",\"a\":\"Devayānī\",\"rel\":\"daughter_of\",\"b\":\"Uśanas\",\"words\":\"devayānīmuśanasaḥ sutāṃ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.64\",\"a\":\"Devayānī\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"sutāṃ bhāryāmavāpa saḥ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.64\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"śarmiṣṭhāmāsurīṃ caiva\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.64\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"tanayāṃ vṛṣaparvaṇaḥ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.65\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayānī vyajāyata\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.65\",\"a\":\"Turvasu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayānī vyajāyata\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.66\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyaṃ cānuṃ ca pūruṃ ca śarmiṣṭhā\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.66\",\"a\":\"Anu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyaṃ cānuṃ ca pūruṃ ca śarmiṣṭhā\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.66\",\"a\":\"Pūru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyaṃ cānuṃ ca pūruṃ ca śarmiṣṭhā\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.80\",\"a\":\"Pūru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"abhyaṣiñcatpuruṃ putraṃ yayātirnāhuṣaḥ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.80\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"yayātirnāhuṣaḥ\",\"doubt\":false},\n{\"ref\":\"LiP 1,66.82\",\"a\":\"Yayāti\",\"rel\":\"descendant_of\",\"b\":\"Śukra\",\"words\":\"śukrasya naptāraṃ devayānyāḥ sutaṃ\",\"doubt\":true},\n{\"ref\":\"LiP 1,66.82\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"jyeṣṭhaṃ yadumatikramya\",\"doubt\":true}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0291,
+ "tokens": {
+  "input": 2834,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2343,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "LiP 1,66.59",
+   "a": "Āyus",
+   "rel": "other",
+   "b": "Āyus",
+   "words": "āyuṣastanayā vīrāḥ pañcaivāsan",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.59",
+   "a": "Nahuṣa",
+   "rel": "descendant_of",
+   "b": "Āyus",
+   "words": "āyuṣastanayā vīrāḥ pañcaivāsanmahaujasaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.59",
+   "a": "Nahuṣa",
+   "rel": "born_of",
+   "b": "Prabhā",
+   "words": "svarbhānutanayāyāṃ te prabhāyāṃ jajñire nṛpāḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.59",
+   "a": "Prabhā",
+   "rel": "daughter_of",
+   "b": "Svarbhānu",
+   "words": "svarbhānutanayāyāṃ te prabhāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.61",
+   "a": "Yati",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.61",
+   "a": "Yayāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.61",
+   "a": "Saṃyāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.61",
+   "a": "Āyāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.61",
+   "a": "Andhaka",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.62",
+   "a": "Vijāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "vijātiśceti ṣaḍime",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.60",
+   "a": "Yati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.60",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.60",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.60",
+   "a": "Āyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.60",
+   "a": "Andhaka",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.60",
+   "a": "Vijāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,66.64",
+   "a": "Devayānī",
+   "rel": "daughter_of",
+   "b": "Uśanas",
+   "words": "devayānīmuśanasaḥ sutāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.64",
+   "a": "Devayānī",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "sutāṃ bhāryāmavāpa saḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.64",
+   "a": "Śarmiṣṭhā",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "śarmiṣṭhāmāsurīṃ caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.64",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "tanayāṃ vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.65",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.65",
+   "a": "Turvasu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.66",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyaṃ cānuṃ ca pūruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.66",
+   "a": "Anu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyaṃ cānuṃ ca pūruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.66",
+   "a": "Pūru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyaṃ cānuṃ ca pūruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.80",
+   "a": "Pūru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "abhyaṣiñcatpuruṃ putraṃ yayātirnāhuṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.80",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "yayātirnāhuṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.82",
+   "a": "Yayāti",
+   "rel": "descendant_of",
+   "b": "Śukra",
+   "words": "śukrasya naptāraṃ devayānyāḥ sutaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,66.82",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "jyeṣṭhaṃ yadumatikramya",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

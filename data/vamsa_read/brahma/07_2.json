@@ -1,0 +1,338 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 7,
+ "part": 2,
+ "refs": [
+  "BrP 7.59",
+  "BrP 7.60",
+  "BrP 7.61",
+  "BrP 7.62",
+  "BrP 7.63",
+  "BrP 7.64",
+  "BrP 7.65",
+  "BrP 7.66",
+  "BrP 7.67",
+  "BrP 7.68",
+  "BrP 7.69",
+  "BrP 7.70",
+  "BrP 7.71",
+  "BrP 7.72",
+  "BrP 7.73",
+  "BrP 7.74",
+  "BrP 7.75",
+  "BrP 7.76",
+  "BrP 7.77",
+  "BrP 7.78",
+  "BrP 7.79",
+  "BrP 7.80",
+  "BrP 7.81",
+  "BrP 7.82",
+  "BrP 7.83",
+  "BrP 7.84",
+  "BrP 7.85",
+  "BrP 7.86",
+  "BrP 7.87",
+  "BrP 7.88",
+  "BrP 7.89",
+  "BrP 7.90",
+  "BrP 7.91",
+  "BrP 7.92",
+  "BrP 7.93",
+  "BrP 7.94",
+  "BrP 7.95",
+  "BrP 7.96",
+  "BrP 7.97",
+  "BrP 7.98",
+  "BrP 7.99",
+  "BrP 7.100",
+  "BrP 7.101",
+  "BrP 7.102",
+  "BrP 7.103",
+  "BrP 7.104",
+  "BrP 7.105",
+  "BrP 7.106",
+  "BrP 7.107",
+  "BrP 7.108",
+  "BrP 7.109"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:05:40",
+ "reply": "{\"statements\":[{\"ref\":\"BrP 7.63\",\"a\":\"Dhundhu\",\"rel\":\"son_of\",\"b\":\"Madhu\",\"words\":\"rākṣasasya madhoḥ putro dhundhur nāma\",\"doubt\":false},{\"ref\":\"BrP 7.71\",\"a\":\"Kuvalāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva's father (the king)\",\"words\":\"kuvalāśvaṃ sutaṃ prādāt\",\"doubt\":true},{\"ref\":\"BrP 7.87\",\"a\":\"Dṛḍhāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"tasya putrās trayaḥ śiṣṭā dṛḍhāśvo jyeṣṭha ucyate\",\"doubt\":true},{\"ref\":\"BrP 7.87\",\"a\":\"Candrāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"candrāśvakapilāśvau tu kanīyāṃsau kumārakau\",\"doubt\":true},{\"ref\":\"BrP 7.87\",\"a\":\"Kapilāśva\",\"rel\":\"son_of\",\"b\":\"Kuvalāśva\",\"words\":\"candrāśvakapilāśvau tu kanīyāṃsau kumārakau\",\"doubt\":true},{\"ref\":\"BrP 7.88\",\"a\":\"Haryaśva\",\"rel\":\"son_of\",\"b\":\"Dṛḍhāśva\",\"words\":\"dhaundhumārer dṛḍhāśvasya haryaśvaś cātmajaḥ smṛtaḥ\",\"doubt\":false},{\"ref\":\"BrP 7.88\",\"a\":\"Nikumbha\",\"rel\":\"son_of\",\"b\":\"Haryaśva\",\"words\":\"haryaśvasya nikumbho 'bhūt\",\"doubt\":false},{\"ref\":\"BrP 7.89\",\"a\":\"Saṃhatāśva\",\"rel\":\"son_of\",\"b\":\"Nikumbha\",\"words\":\"saṃhatāśvo nikumbhasya suto\",\"doubt\":false},{\"ref\":\"BrP 7.89\",\"a\":\"Akṛśāśva\",\"rel\":\"son_of\",\"b\":\"Saṃhatāśva\",\"words\":\"akṛśāśvakṛśāśvau tu saṃhatāśvasutau\",\"doubt\":false},{\"ref\":\"BrP 7.89\",\"a\":\"Kṛśāśva\",\"rel\":\"son_of\",\"b\":\"Saṃhatāśva\",\"words\":\"akṛśāśvakṛśāśvau tu saṃhatāśvasutau\",\"doubt\":false},{\"ref\":\"BrP 7.89\",\"a\":\"Akṛśāśva\",\"rel\":\"brother_of\",\"b\":\"Kṛśāśva\",\"words\":\"akṛśāśvakṛśāśvau tu saṃhatāśvasutau\",\"doubt\":false},{\"ref\":\"BrP 7.90\",\"a\":\"Dṛṣadvatī\",\"rel\":\"daughter_of\",\"b\":\"Akṛśāśva\",\"words\":\"tasya haimavatī kanyā satāṃ matā dṛṣadvatī\",\"doubt\":true},{\"ref\":\"BrP 7.90\",\"a\":\"Prasenajit\",\"rel\":\"son_of\",\"b\":\"Akṛśāśva\",\"words\":\"putraś cāsyāḥ prasenajit\",\"doubt\":true},{\"ref\":\"BrP 7.90\",\"a\":\"Prasenajit\",\"rel\":\"born_of\",\"b\":\"Dṛṣadvatī\",\"words\":\"putraś cāsyāḥ prasenajit\",\"doubt\":false},{\"ref\":\"BrP 7.91\",\"a\":\"Gaurī\",\"rel\":\"wife_of\",\"b\":\"Prasenajit\",\"words\":\"lebhe prasenajid bhāryāṃ gaurīṃ\",\"doubt\":false},{\"ref\":\"BrP 7.92\",\"a\":\"Yuvanāśva\",\"rel\":\"son_of\",\"b\":\"Prasenajit\",\"words\":\"tasya putro mahān āsīd yuvanāśvo narādhipaḥ\",\"doubt\":false},{\"ref\":\"BrP 7.92\",\"a\":\"Māndhātā\",\"rel\":\"son_of\",\"b\":\"Yuvanāśva\",\"words\":\"māndhātā yuvanāśvasya trilokavijayī sutaḥ\",\"doubt\":false},{\"ref\":\"BrP 7.93\",\"a\":\"Bindumatī\",\"rel\":\"wife_of\",\"b\":\"Māndhātā\",\"words\":\"tasya caitrarathī bhāryā\",\"doubt\":false},{\"ref\":\"BrP 7.93\",\"a\":\"Bindumatī\",\"rel\":\"daughter_of\",\"b\":\"Śaśabindu\",\"words\":\"śaśabindoḥ sutābhavat sādhvī bindumatī\",\"doubt\":false},{\"ref\":\"BrP 7.95\",\"a\":\"Purukutsa\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"utpādayām āsa māndhātā dvau sutau purukutsaṃ ca\",\"doubt\":false},{\"ref\":\"BrP 7.95\",\"a\":\"Mucukunda\",\"rel\":\"son_of\",\"b\":\"Māndhātā\",\"words\":\"mucukundaṃ ca pārthivam\",\"doubt\":false},{\"ref\":\"BrP 7.94\",\"a\":\"Purukutsa\",\"rel\":\"born_of\",\"b\":\"Bindumatī\",\"words\":\"tasyām utpādayām āsa māndhātā dvau sutau\",\"doubt\":false},{\"ref\":\"BrP 7.94\",\"a\":\"Mucukunda\",\"rel\":\"born_of\",\"b\":\"Bindumatī\",\"words\":\"tasyām utpādayām āsa māndhātā dvau sutau\",\"doubt\":false},{\"ref\":\"BrP 7.95\",\"a\":\"Trasadasyu\",\"rel\":\"son_of\",\"b\":\"Purukutsa\",\"words\":\"purukutsasutas tv āsīt trasadasyur mahīpatiḥ\",\"doubt\":false},{\"ref\":\"BrP 7.96\",\"a\":\"Saṃbhūta\",\"rel\":\"son_of\",\"b\":\"Trasadasyu\",\"words\":\"narmadāyām athotpannaḥ saṃbhūtas tasya cātmajaḥ\",\"doubt\":true},{\"ref\":\"BrP 7.96\",\"a\":\"Saṃbhūta\",\"rel\":\"born_of\",\"b\":\"Narmadā\",\"words\":\"narmadāyām athotpannaḥ saṃbhūtas\",\"doubt\":false},{\"ref\":\"BrP 7.96\",\"a\":\"Tridhanvan\",\"rel\":\"son_of\",\"b\":\"Saṃbhūta\",\"words\":\"saṃbhūtasya tu dāyādas tridhanvā\",\"doubt\":false},{\"ref\":\"BrP 7.97\",\"a\":\"Trayyāruṇa\",\"rel\":\"son_of\",\"b\":\"Tridhanvan\",\"words\":\"rājñas tridhanvanas tv āsīd vidvāṃs trayyāruṇaḥ\",\"doubt\":false},{\"ref\":\"BrP 7.97\",\"a\":\"Satyavrata\",\"rel\":\"son_of\",\"b\":\"Trayyāruṇa\",\"words\":\"tasya satyavrato nāma kumāro 'bhūn\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03253,
+ "tokens": {
+  "input": 4624,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2328,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 7.63",
+   "a": "Dhundhu",
+   "rel": "son_of",
+   "b": "Madhu",
+   "words": "rākṣasasya madhoḥ putro dhundhur nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.71",
+   "a": "Kuvalāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva's father (the king)",
+   "words": "kuvalāśvaṃ sutaṃ prādāt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.87",
+   "a": "Dṛḍhāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "tasya putrās trayaḥ śiṣṭā dṛḍhāśvo jyeṣṭha ucyate",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 7.87",
+   "a": "Candrāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "candrāśvakapilāśvau tu kanīyāṃsau kumārakau",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 7.87",
+   "a": "Kapilāśva",
+   "rel": "son_of",
+   "b": "Kuvalāśva",
+   "words": "candrāśvakapilāśvau tu kanīyāṃsau kumārakau",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 7.88",
+   "a": "Haryaśva",
+   "rel": "son_of",
+   "b": "Dṛḍhāśva",
+   "words": "dhaundhumārer dṛḍhāśvasya haryaśvaś cātmajaḥ smṛtaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.88",
+   "a": "Nikumbha",
+   "rel": "son_of",
+   "b": "Haryaśva",
+   "words": "haryaśvasya nikumbho 'bhūt",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.89",
+   "a": "Saṃhatāśva",
+   "rel": "son_of",
+   "b": "Nikumbha",
+   "words": "saṃhatāśvo nikumbhasya suto",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.89",
+   "a": "Akṛśāśva",
+   "rel": "son_of",
+   "b": "Saṃhatāśva",
+   "words": "akṛśāśvakṛśāśvau tu saṃhatāśvasutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.89",
+   "a": "Kṛśāśva",
+   "rel": "son_of",
+   "b": "Saṃhatāśva",
+   "words": "akṛśāśvakṛśāśvau tu saṃhatāśvasutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.89",
+   "a": "Akṛśāśva",
+   "rel": "brother_of",
+   "b": "Kṛśāśva",
+   "words": "akṛśāśvakṛśāśvau tu saṃhatāśvasutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.90",
+   "a": "Dṛṣadvatī",
+   "rel": "daughter_of",
+   "b": "Akṛśāśva",
+   "words": "tasya haimavatī kanyā satāṃ matā dṛṣadvatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.90",
+   "a": "Prasenajit",
+   "rel": "son_of",
+   "b": "Akṛśāśva",
+   "words": "putraś cāsyāḥ prasenajit",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.90",
+   "a": "Prasenajit",
+   "rel": "born_of",
+   "b": "Dṛṣadvatī",
+   "words": "putraś cāsyāḥ prasenajit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.91",
+   "a": "Gaurī",
+   "rel": "wife_of",
+   "b": "Prasenajit",
+   "words": "lebhe prasenajid bhāryāṃ gaurīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.92",
+   "a": "Yuvanāśva",
+   "rel": "son_of",
+   "b": "Prasenajit",
+   "words": "tasya putro mahān āsīd yuvanāśvo narādhipaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.92",
+   "a": "Māndhātā",
+   "rel": "son_of",
+   "b": "Yuvanāśva",
+   "words": "māndhātā yuvanāśvasya trilokavijayī sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.93",
+   "a": "Bindumatī",
+   "rel": "wife_of",
+   "b": "Māndhātā",
+   "words": "tasya caitrarathī bhāryā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.93",
+   "a": "Bindumatī",
+   "rel": "daughter_of",
+   "b": "Śaśabindu",
+   "words": "śaśabindoḥ sutābhavat sādhvī bindumatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.95",
+   "a": "Purukutsa",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "utpādayām āsa māndhātā dvau sutau purukutsaṃ ca",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 7.95",
+   "a": "Mucukunda",
+   "rel": "son_of",
+   "b": "Māndhātā",
+   "words": "mucukundaṃ ca pārthivam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.94",
+   "a": "Purukutsa",
+   "rel": "born_of",
+   "b": "Bindumatī",
+   "words": "tasyām utpādayām āsa māndhātā dvau sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.94",
+   "a": "Mucukunda",
+   "rel": "born_of",
+   "b": "Bindumatī",
+   "words": "tasyām utpādayām āsa māndhātā dvau sutau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.95",
+   "a": "Trasadasyu",
+   "rel": "son_of",
+   "b": "Purukutsa",
+   "words": "purukutsasutas tv āsīt trasadasyur mahīpatiḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.96",
+   "a": "Saṃbhūta",
+   "rel": "son_of",
+   "b": "Trasadasyu",
+   "words": "narmadāyām athotpannaḥ saṃbhūtas tasya cātmajaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.96",
+   "a": "Saṃbhūta",
+   "rel": "born_of",
+   "b": "Narmadā",
+   "words": "narmadāyām athotpannaḥ saṃbhūtas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.96",
+   "a": "Tridhanvan",
+   "rel": "son_of",
+   "b": "Saṃbhūta",
+   "words": "saṃbhūtasya tu dāyādas tridhanvā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.97",
+   "a": "Trayyāruṇa",
+   "rel": "son_of",
+   "b": "Tridhanvan",
+   "words": "rājñas tridhanvanas tv āsīd vidvāṃs trayyāruṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 7.97",
+   "a": "Satyavrata",
+   "rel": "son_of",
+   "b": "Trayyāruṇa",
+   "words": "tasya satyavrato nāma kumāro 'bhūn",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

@@ -1,0 +1,586 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 10,
+ "part": 1,
+ "refs": [
+  "BrP 10.1",
+  "BrP 10.2",
+  "BrP 10.3",
+  "BrP 10.4",
+  "BrP 10.5",
+  "BrP 10.6",
+  "BrP 10.7",
+  "BrP 10.8",
+  "BrP 10.9",
+  "BrP 10.10",
+  "BrP 10.11",
+  "BrP 10.12",
+  "BrP 10.13",
+  "BrP 10.14",
+  "BrP 10.15",
+  "BrP 10.16",
+  "BrP 10.17",
+  "BrP 10.18",
+  "BrP 10.19",
+  "BrP 10.20",
+  "BrP 10.21",
+  "BrP 10.22",
+  "BrP 10.23",
+  "BrP 10.24",
+  "BrP 10.25",
+  "BrP 10.26",
+  "BrP 10.27",
+  "BrP 10.28",
+  "BrP 10.29",
+  "BrP 10.30",
+  "BrP 10.31",
+  "BrP 10.32",
+  "BrP 10.33",
+  "BrP 10.34",
+  "BrP 10.35",
+  "BrP 10.36",
+  "BrP 10.37",
+  "BrP 10.38",
+  "BrP 10.39",
+  "BrP 10.40",
+  "BrP 10.41",
+  "BrP 10.42",
+  "BrP 10.43",
+  "BrP 10.44",
+  "BrP 10.45",
+  "BrP 10.46",
+  "BrP 10.47",
+  "BrP 10.48",
+  "BrP 10.49",
+  "BrP 10.50",
+  "BrP 10.51",
+  "BrP 10.52",
+  "BrP 10.53",
+  "BrP 10.54",
+  "BrP 10.55",
+  "BrP 10.56",
+  "BrP 10.57",
+  "BrP 10.58"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:06:20",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 10.1\",\"a\":\"Purūravas\",\"rel\":\"son_of\",\"b\":\"Budha\",\"words\":\"budhasya tu muniśreṣṭhā vidvān putraḥ purūravāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.10\",\"a\":\"Purūravas\",\"rel\":\"other\",\"b\":\"Aila\",\"words\":\"ailas tu narasattamaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 10.11\",\"a\":\"Āyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā babhūvus te sapta\",\"doubt\":true},\n{\"ref\":\"BrP 10.11\",\"a\":\"Amāvasu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā babhūvus te sapta\",\"doubt\":true},\n{\"ref\":\"BrP 10.12\",\"a\":\"Viśvāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā\",\"doubt\":true},\n{\"ref\":\"BrP 10.12\",\"a\":\"Śrutāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā\",\"doubt\":true},\n{\"ref\":\"BrP 10.12\",\"a\":\"Dṛḍhāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā\",\"doubt\":true},\n{\"ref\":\"BrP 10.12\",\"a\":\"Vanāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā\",\"doubt\":true},\n{\"ref\":\"BrP 10.12\",\"a\":\"Bahvāyu\",\"rel\":\"son_of\",\"b\":\"Purūravas\",\"words\":\"ailaputrā\",\"doubt\":true},\n{\"ref\":\"BrP 10.12\",\"a\":\"Āyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.12\",\"a\":\"Amāvasu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.12\",\"a\":\"Viśvāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.12\",\"a\":\"Śrutāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.12\",\"a\":\"Dṛḍhāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.12\",\"a\":\"Vanāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.12\",\"a\":\"Bahvāyu\",\"rel\":\"born_of\",\"b\":\"Urvaśī\",\"words\":\"corvaśīsutāḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.13\",\"a\":\"Bhīma\",\"rel\":\"son_of\",\"b\":\"Amāvasu\",\"words\":\"amāvasos tu dāyādo bhīmo\",\"doubt\":false},\n{\"ref\":\"BrP 10.13\",\"a\":\"Kāñcanaprabha\",\"rel\":\"son_of\",\"b\":\"Bhīma\",\"words\":\"bhīmasya dāyādo rājāsīt kāñcanaprabhaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.14\",\"a\":\"Suhotra\",\"rel\":\"son_of\",\"b\":\"Kāñcana\",\"words\":\"kāñcanasyāpi suhotro 'bhūn\",\"doubt\":true},\n{\"ref\":\"BrP 10.14\",\"a\":\"Jahnu\",\"rel\":\"son_of\",\"b\":\"Suhotra\",\"words\":\"suhotrasyābhavaj jahnuḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.14\",\"a\":\"Jahnu\",\"rel\":\"born_of\",\"b\":\"Keśinī\",\"words\":\"keśinyā garbhasaṃbhavaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.19\",\"a\":\"Gaṅgā\",\"rel\":\"daughter_of\",\"b\":\"Jahnu\",\"words\":\"duhitṛtvena jāhnavīm\",\"doubt\":false},\n{\"ref\":\"BrP 10.19\",\"a\":\"Kāverī\",\"rel\":\"daughter_of\",\"b\":\"Yuvanāśva\",\"words\":\"yuvanāśvasya putrīṃ tu kāverīṃ\",\"doubt\":false},\n{\"ref\":\"BrP 10.19\",\"a\":\"Kāverī\",\"rel\":\"wife_of\",\"b\":\"Jahnu\",\"words\":\"kāverīṃ jahnur āvahat\",\"doubt\":false},\n{\"ref\":\"BrP 10.21\",\"a\":\"Sunadya\",\"rel\":\"son_of\",\"b\":\"Jahnu\",\"words\":\"jahnus tu dayitaṃ putraṃ sunadyaṃ nāma\",\"doubt\":false},\n{\"ref\":\"BrP 10.21\",\"a\":\"Sunadya\",\"rel\":\"born_of\",\"b\":\"Kāverī\",\"words\":\"kāveryāṃ janayām āsa\",\"doubt\":false},\n{\"ref\":\"BrP 10.21\",\"a\":\"Ajaka\",\"rel\":\"son_of\",\"b\":\"Sunadya\",\"words\":\"ajakas tasya cātmajaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 10.22\",\"a\":\"Balākāśva\",\"rel\":\"son_of\",\"b\":\"Ajaka\",\"words\":\"ajakasya tu dāyādo balākāśvo\",\"doubt\":false},\n{\"ref\":\"BrP 10.22\",\"a\":\"Kuśa\",\"rel\":\"son_of\",\"b\":\"Balākāśva\",\"words\":\"kuśas tasyātmajo 'bhavat\",\"doubt\":false},\n{\"ref\":\"BrP 10.23\",\"a\":\"Kuśika\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvur hi catvāro\",\"doubt\":false},\n{\"ref\":\"BrP 10.23\",\"a\":\"Kuśanābha\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvur hi catvāro\",\"doubt\":false},\n{\"ref\":\"BrP 10.23\",\"a\":\"Kuśāmba\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvur hi catvāro\",\"doubt\":false},\n{\"ref\":\"BrP 10.23\",\"a\":\"Mūrtimat\",\"rel\":\"son_of\",\"b\":\"Kuśa\",\"words\":\"kuśaputrā babhūvur hi catvāro\",\"doubt\":false},\n{\"ref\":\"BrP 10.27\",\"a\":\"Gādhi\",\"rel\":\"son_of\",\"b\":\"Kuśika\",\"words\":\"sa gādhir abhavad rājā maghavān kauśikaḥ svayam\",\"doubt\":true},\n{\"ref\":\"BrP 10.27\",\"a\":\"Gādhi\",\"rel\":\"other\",\"b\":\"Indra\",\"words\":\"maghavān kauśikaḥ svayam\",\"doubt\":true},\n{\"ref\":\"BrP 10.28\",\"a\":\"Satyavatī\",\"rel\":\"daughter_of\",\"b\":\"Gādhi\",\"words\":\"gādheḥ kanyā mahābhāgā nāmnā satyavatī\",\"doubt\":false},\n{\"ref\":\"BrP 10.28\",\"a\":\"Satyavatī\",\"rel\":\"born_of\",\"b\":\"Paurā\",\"words\":\"paurā yasyābhavad bhāryā gādhis tasyām ajāyata\",\"doubt\":true},\n{\"ref\":\"BrP 10.28\",\"a\":\"Paurā\",\"rel\":\"wife_of\",\"b\":\"Gādhi\",\"words\":\"paurā yasyābhavad bhāryā\",\"doubt\":true},\n{\"ref\":\"BrP 10.29\",\"a\":\"Satyavatī\",\"rel\":\"wife_of\",\"b\":\"Ṛcīka\",\"words\":\"tāṃ gādhiḥ kāvyaputrāya ṛcīkāya dadau\",\"doubt\":false},\n{\"ref\":\"BrP 10.29\",\"a\":\"Ṛcīka\",\"rel\":\"son_of\",\"b\":\"Kāvya\",\"words\":\"kāvyaputrāya ṛcīkāya\",\"doubt\":false},\n{\"ref\":\"BrP 10.29\",\"a\":\"Ṛcīka\",\"rel\":\"descendant_of\",\"b\":\"Bhṛgu\",\"words\":\"bhārgavo bhṛgunandanaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.48\",\"a\":\"Jamadagni\",\"rel\":\"son_of\",\"b\":\"Ṛcīka\",\"words\":\"tataḥ satyavatī putraṃ janayām āsa bhārgavam\",\"doubt\":false},\n{\"ref\":\"BrP 10.48\",\"a\":\"Jamadagni\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"satyavatī putraṃ janayām āsa\",\"doubt\":false},\n{\"ref\":\"BrP 10.49\",\"a\":\"Jamadagni\",\"rel\":\"descendant_of\",\"b\":\"Bhṛgu\",\"words\":\"bhṛgor jagatyāṃ vaṃśe 'smiñ jamadagnir ajāyata\",\"doubt\":false},\n{\"ref\":\"BrP 10.50\",\"a\":\"Reṇu\",\"rel\":\"descendant_of\",\"b\":\"Ikṣvāku\",\"words\":\"ikṣvākuvaṃśaprabhavo reṇur nāma narādhipaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.51\",\"a\":\"Reṇukā\",\"rel\":\"daughter_of\",\"b\":\"Reṇu\",\"words\":\"tasya kanyā mahābhāgā kāmalī nāma reṇukā\",\"doubt\":false},\n{\"ref\":\"BrP 10.52\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Ṛcīka\",\"words\":\"ārcīko janayām āsa jāmadagnyaṃ\",\"doubt\":true},\n{\"ref\":\"BrP 10.52\",\"a\":\"Rāma\",\"rel\":\"born_of\",\"b\":\"Reṇukā\",\"words\":\"reṇukāyāṃ tu kāmalyāṃ\",\"doubt\":true},\n{\"ref\":\"BrP 10.53\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"jāmadagnyaṃ\",\"doubt\":false},\n{\"ref\":\"BrP 10.54\",\"a\":\"Jamadagni\",\"rel\":\"born_of\",\"b\":\"Satyavatī\",\"words\":\"satyavatyāṃ mahāyaśāḥ jamadagnis tapovīryāj jajñe\",\"doubt\":false},\n{\"ref\":\"BrP 10.54\",\"a\":\"Śunaḥśepha\",\"rel\":\"brother_of\",\"b\":\"Jamadagni\",\"words\":\"madhyamaś ca śunaḥśephaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 10.55\",\"a\":\"Viśvāmitra\",\"rel\":\"son_of\",\"b\":\"Gādhi\",\"words\":\"viśvāmitraṃ tu dāyādaṃ gādhiḥ kuśikanandanaḥ janayām āsa putraṃ\",\"doubt\":false},\n{\"ref\":\"BrP 10.57\",\"a\":\"Devarāta\",\"rel\":\"son_of\",\"b\":\"Viśvāmitra\",\"words\":\"viśvāmitrasya ca sutā devarātādayaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 10.58\",\"a\":\"Kātyāyana\",\"rel\":\"line_of\",\"b\":\"Kati\",\"words\":\"katiś caiva yasmāt kātyāyanāḥ smṛtāḥ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04925,
+ "tokens": {
+  "input": 5155,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3894,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 10.1",
+   "a": "Purūravas",
+   "rel": "son_of",
+   "b": "Budha",
+   "words": "budhasya tu muniśreṣṭhā vidvān putraḥ purūravāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.10",
+   "a": "Purūravas",
+   "rel": "other",
+   "b": "Aila",
+   "words": "ailas tu narasattamaḥ",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Āyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā babhūvus te sapta",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Amāvasu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā babhūvus te sapta",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Viśvāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā",
+   "doubt": true,
+   "ref_cited": "BrP 10.12",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Śrutāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā",
+   "doubt": true,
+   "ref_cited": "BrP 10.12",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Dṛḍhāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā",
+   "doubt": true,
+   "ref_cited": "BrP 10.12",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Vanāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā",
+   "doubt": true,
+   "ref_cited": "BrP 10.12",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.11",
+   "a": "Bahvāyu",
+   "rel": "son_of",
+   "b": "Purūravas",
+   "words": "ailaputrā",
+   "doubt": true,
+   "ref_cited": "BrP 10.12",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Āyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Amāvasu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Viśvāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Śrutāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Dṛḍhāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Vanāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.12",
+   "a": "Bahvāyu",
+   "rel": "born_of",
+   "b": "Urvaśī",
+   "words": "corvaśīsutāḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.13",
+   "a": "Bhīma",
+   "rel": "son_of",
+   "b": "Amāvasu",
+   "words": "amāvasos tu dāyādo bhīmo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.13",
+   "a": "Kāñcanaprabha",
+   "rel": "son_of",
+   "b": "Bhīma",
+   "words": "bhīmasya dāyādo rājāsīt kāñcanaprabhaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.14",
+   "a": "Suhotra",
+   "rel": "son_of",
+   "b": "Kāñcana",
+   "words": "kāñcanasyāpi suhotro 'bhūn",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.14",
+   "a": "Jahnu",
+   "rel": "son_of",
+   "b": "Suhotra",
+   "words": "suhotrasyābhavaj jahnuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.14",
+   "a": "Jahnu",
+   "rel": "born_of",
+   "b": "Keśinī",
+   "words": "keśinyā garbhasaṃbhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.19",
+   "a": "Gaṅgā",
+   "rel": "daughter_of",
+   "b": "Jahnu",
+   "words": "duhitṛtvena jāhnavīm",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.19",
+   "a": "Kāverī",
+   "rel": "daughter_of",
+   "b": "Yuvanāśva",
+   "words": "yuvanāśvasya putrīṃ tu kāverīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.19",
+   "a": "Kāverī",
+   "rel": "wife_of",
+   "b": "Jahnu",
+   "words": "kāverīṃ jahnur āvahat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.21",
+   "a": "Sunadya",
+   "rel": "son_of",
+   "b": "Jahnu",
+   "words": "jahnus tu dayitaṃ putraṃ sunadyaṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.21",
+   "a": "Sunadya",
+   "rel": "born_of",
+   "b": "Kāverī",
+   "words": "kāveryāṃ janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.21",
+   "a": "Ajaka",
+   "rel": "son_of",
+   "b": "Sunadya",
+   "words": "ajakas tasya cātmajaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.22",
+   "a": "Balākāśva",
+   "rel": "son_of",
+   "b": "Ajaka",
+   "words": "ajakasya tu dāyādo balākāśvo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.22",
+   "a": "Kuśa",
+   "rel": "son_of",
+   "b": "Balākāśva",
+   "words": "kuśas tasyātmajo 'bhavat",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.23",
+   "a": "Kuśika",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvur hi catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.23",
+   "a": "Kuśanābha",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvur hi catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.23",
+   "a": "Kuśāmba",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvur hi catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.23",
+   "a": "Mūrtimat",
+   "rel": "son_of",
+   "b": "Kuśa",
+   "words": "kuśaputrā babhūvur hi catvāro",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.27",
+   "a": "Gādhi",
+   "rel": "son_of",
+   "b": "Kuśika",
+   "words": "sa gādhir abhavad rājā maghavān kauśikaḥ svayam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.27",
+   "a": "Gādhi",
+   "rel": "other",
+   "b": "Indra",
+   "words": "maghavān kauśikaḥ svayam",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.28",
+   "a": "Satyavatī",
+   "rel": "daughter_of",
+   "b": "Gādhi",
+   "words": "gādheḥ kanyā mahābhāgā nāmnā satyavatī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.28",
+   "a": "Satyavatī",
+   "rel": "born_of",
+   "b": "Paurā",
+   "words": "paurā yasyābhavad bhāryā gādhis tasyām ajāyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.28",
+   "a": "Paurā",
+   "rel": "wife_of",
+   "b": "Gādhi",
+   "words": "paurā yasyābhavad bhāryā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.29",
+   "a": "Satyavatī",
+   "rel": "wife_of",
+   "b": "Ṛcīka",
+   "words": "tāṃ gādhiḥ kāvyaputrāya ṛcīkāya dadau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.29",
+   "a": "Ṛcīka",
+   "rel": "son_of",
+   "b": "Kāvya",
+   "words": "kāvyaputrāya ṛcīkāya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.29",
+   "a": "Ṛcīka",
+   "rel": "descendant_of",
+   "b": "Bhṛgu",
+   "words": "bhārgavo bhṛgunandanaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.48",
+   "a": "Jamadagni",
+   "rel": "son_of",
+   "b": "Ṛcīka",
+   "words": "tataḥ satyavatī putraṃ janayām āsa bhārgavam",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.48",
+   "a": "Jamadagni",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "satyavatī putraṃ janayām āsa",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.49",
+   "a": "Jamadagni",
+   "rel": "descendant_of",
+   "b": "Bhṛgu",
+   "words": "bhṛgor jagatyāṃ vaṃśe 'smiñ jamadagnir ajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.50",
+   "a": "Reṇu",
+   "rel": "descendant_of",
+   "b": "Ikṣvāku",
+   "words": "ikṣvākuvaṃśaprabhavo reṇur nāma narādhipaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.51",
+   "a": "Reṇukā",
+   "rel": "daughter_of",
+   "b": "Reṇu",
+   "words": "tasya kanyā mahābhāgā kāmalī nāma reṇukā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.52",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Ṛcīka",
+   "words": "ārcīko janayām āsa jāmadagnyaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.51",
+   "a": "Rāma",
+   "rel": "born_of",
+   "b": "Reṇukā",
+   "words": "reṇukāyāṃ tu kāmalyāṃ",
+   "doubt": true,
+   "ref_cited": "BrP 10.52",
+   "ref_from": "words",
+   "check": "words"
+  },
+  {
+   "ref": "BrP 10.52",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "jāmadagnyaṃ",
+   "doubt": false,
+   "ref_cited": "BrP 10.53",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.53",
+   "a": "Jamadagni",
+   "rel": "born_of",
+   "b": "Satyavatī",
+   "words": "satyavatyāṃ mahāyaśāḥ jamadagnis tapovīryāj jajñe",
+   "doubt": false,
+   "ref_cited": "BrP 10.54",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.54",
+   "a": "Śunaḥśepha",
+   "rel": "brother_of",
+   "b": "Jamadagni",
+   "words": "madhyamaś ca śunaḥśephaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.55",
+   "a": "Viśvāmitra",
+   "rel": "son_of",
+   "b": "Gādhi",
+   "words": "viśvāmitraṃ tu dāyādaṃ gādhiḥ kuśikanandanaḥ janayām āsa putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.57",
+   "a": "Devarāta",
+   "rel": "son_of",
+   "b": "Viśvāmitra",
+   "words": "viśvāmitrasya ca sutā devarātādayaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 10.58",
+   "a": "Kātyāyana",
+   "rel": "line_of",
+   "b": "Kati",
+   "words": "katiś caiva yasmāt kātyāyanāḥ smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

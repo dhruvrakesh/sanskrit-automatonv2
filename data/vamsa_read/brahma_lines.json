@@ -1,0 +1,2057 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "lines": [
+  [
+   {
+    "name": "Kṣatravṛddha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sunahotra",
+    "ref": "BrP 11.32",
+    "words": "kṣatravṛddhātmajas tatra sunahotro"
+   },
+   {
+    "name": "Kāśa",
+    "ref": "BrP 11.32",
+    "words": "sunahotrasya dāyādās trayaḥ"
+   },
+   {
+    "name": "Dīrghatapas",
+    "ref": "BrP 11.35",
+    "words": "putro dīrghatapās"
+   },
+   {
+    "name": "Dhanvantari",
+    "ref": "BrP 11.35",
+    "words": "dhanus tu dīrghatapaso vidvān dhanvantaris"
+   },
+   {
+    "name": "Ketumān",
+    "ref": "BrP 11.39",
+    "words": "dhanvantares tu tanayaḥ ketumān"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "BrP 11.39",
+    "words": "ketumataḥ putro vīro bhīmarathaḥ"
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "BrP 11.40",
+    "words": "putro bhīmarathasyāpi divodāsaḥ"
+   },
+   {
+    "name": "Pratardana",
+    "ref": "BrP 11.49",
+    "words": "divodāsād dṛṣadvatyāṃ vīro jajñe pratardanaḥ"
+   },
+   {
+    "name": "Vatsa",
+    "ref": "BrP 11.50",
+    "words": "pratardanasya putrau dvau vatsabhargau"
+   },
+   {
+    "name": "Alarka",
+    "ref": "BrP 11.50",
+    "words": "vatsaputro hy alarkas"
+   },
+   {
+    "name": "Saṃnati",
+    "ref": "BrP 11.50",
+    "words": "saṃnatis tasya cātmajaḥ"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "BrP 11.55",
+    "words": "saṃnater api dāyādaḥ sunīthο"
+   },
+   {
+    "name": "Kṣema",
+    "ref": "BrP 11.55",
+    "words": "sunīthasya tu dāyādaḥ kṣemo"
+   },
+   {
+    "name": "Ketumān",
+    "ref": "BrP 11.56",
+    "words": "kṣemasya ketumān putraḥ"
+   },
+   {
+    "name": "Suketu",
+    "ref": "BrP 11.56",
+    "words": "suketus tasya cātmajaḥ"
+   },
+   {
+    "name": "Dharmaketu",
+    "ref": "BrP 11.56",
+    "words": "suketos tanayaś cāpi dharmaketur"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "BrP 11.57",
+    "words": "dharmaketos tu dāyādaḥ satyaketur"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "BrP 11.57",
+    "words": "satyaketusutaś cāpi vibhur"
+   },
+   {
+    "name": "Ānarta",
+    "ref": "BrP 11.58",
+    "words": "ānartas tu vibhoḥ putraḥ"
+   },
+   {
+    "name": "Sukumāra",
+    "ref": "BrP 11.58",
+    "words": "sukumāraś ca tatsutaḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "BrP 11.58",
+    "words": "sukumārasya putras tu dhṛṣṭaketuḥ"
+   },
+   {
+    "name": "Veṇuhotra",
+    "ref": "BrP 11.59",
+    "words": "dhṛṣṭaketos tu dāyādo veṇuhotraḥ"
+   },
+   {
+    "name": "Bhārga",
+    "ref": "BrP 11.59",
+    "words": "veṇuhotrasutaś cāpi bhārgo nāma"
+   }
+  ],
+  [
+   {
+    "name": "Suyajña",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uṣata",
+    "ref": "BrP 15.6",
+    "words": "suyajñatanayo 'bhavat uṣato"
+   },
+   {
+    "name": "Śineyu",
+    "ref": "BrP 15.7",
+    "words": "śineyur abhavat putra uṣataḥ"
+   },
+   {
+    "name": "Maruta",
+    "ref": "BrP 15.7",
+    "words": "marutas tasya tanayo"
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "BrP 15.8",
+    "words": "maruto 'labhata jyeṣṭhaṃ sutaṃ kambalabarhiṣam"
+   },
+   {
+    "name": "Rukmakavaca",
+    "ref": "BrP 15.9",
+    "words": "kambalabarhiṣaḥ babhūva rukmakavacaḥ śataprasavataḥ sutaḥ"
+   },
+   {
+    "name": "Jyāmagha",
+    "ref": "BrP 15.12",
+    "words": "jyāmaghaḥ"
+   },
+   {
+    "name": "Vidarbha",
+    "ref": "BrP 15.20",
+    "words": "putraṃ vidarbhaṃ subhāgā śaibyā"
+   },
+   {
+    "name": "Bhīma",
+    "ref": "BrP 15.22",
+    "words": "bhīmo vidarbhasya sutaḥ"
+   },
+   {
+    "name": "Kunti",
+    "ref": "BrP 15.22",
+    "words": "kuntis tasyātmajo 'bhavat"
+   },
+   {
+    "name": "Dhṛṣṭa",
+    "ref": "BrP 15.22",
+    "words": "kunter dhṛṣṭaḥ suto jajñe"
+   },
+   {
+    "name": "Daśārha",
+    "ref": "BrP 15.23",
+    "words": "dhṛṣṭasya jajñire śūrās trayaḥ"
+   },
+   {
+    "name": "Vyoman",
+    "ref": "BrP 15.24",
+    "words": "daśārhasya suto vyomā"
+   },
+   {
+    "name": "Jīmūta",
+    "ref": "BrP 15.24",
+    "words": "vyomno jīmūta"
+   },
+   {
+    "name": "Vikṛti",
+    "ref": "BrP 15.24",
+    "words": "jīmūtaputro vikṛtis"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "BrP 15.24",
+    "words": "tasya bhīmarathaḥ smṛtaḥ"
+   },
+   {
+    "name": "Navaratha",
+    "ref": "BrP 15.25",
+    "words": "bhīmarathasyāsīt putro navarathas"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "BrP 15.25",
+    "words": "tasya cāsīd daśarathaḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "BrP 15.25",
+    "words": "śakunis tasya cātmajaḥ"
+   },
+   {
+    "name": "Karambha",
+    "ref": "BrP 15.26",
+    "words": "tasmāt karambhaḥ"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "BrP 15.26",
+    "words": "kārambhir devarāto"
+   },
+   {
+    "name": "Devakṣatra",
+    "ref": "BrP 15.26",
+    "words": "devakṣatro 'bhavat tasya"
+   },
+   {
+    "name": "Madhu",
+    "ref": "BrP 15.27",
+    "words": "devakṣatrasya nandanaḥ"
+   },
+   {
+    "name": "Purudvān",
+    "ref": "BrP 15.28",
+    "words": "madhor jajñe 'tha vaidarbhyāṃ purudvān"
+   }
+  ],
+  [
+   {
+    "name": "Dīrghabāhu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Raghu",
+    "ref": "BrP 8.85",
+    "words": "dīrghabāhur dilīpasya raghur nāmnā suto 'bhavat"
+   },
+   {
+    "name": "Aja",
+    "ref": "BrP 8.86",
+    "words": "ajas tu rāghavo jajñe"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "BrP 8.86",
+    "words": "daśaratho 'py ajāt"
+   },
+   {
+    "name": "Rāma",
+    "ref": "BrP 8.87",
+    "words": "rāmo daśarathāj jajñe"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "BrP 8.87",
+    "words": "rāmasya tanayo jajñe kuśa"
+   },
+   {
+    "name": "Atithi",
+    "ref": "BrP 8.88",
+    "words": "atithis tu kuśāj jajñe"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "BrP 8.88",
+    "words": "atithes tv abhavat putro niṣadho"
+   },
+   {
+    "name": "Nala",
+    "ref": "BrP 8.89",
+    "words": "niṣadhasya nalaḥ putro"
+   },
+   {
+    "name": "Nabhas",
+    "ref": "BrP 8.89",
+    "words": "nabhaḥ putro nalasya"
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "BrP 8.89",
+    "words": "nabhasya puṇḍarīkas"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "BrP 8.89",
+    "words": "kṣemadhanvā tataḥ smṛtaḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "BrP 8.90",
+    "words": "kṣemadhanvasutas tv āsīd devānīkaḥ"
+   },
+   {
+    "name": "Ahīnagu",
+    "ref": "BrP 8.90",
+    "words": "ahīnagur nāma devānīkātmajaḥ"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "BrP 8.91",
+    "words": "ahīnagos tu dāyādaḥ sudhanvā"
+   },
+   {
+    "name": "Śala",
+    "ref": "BrP 8.91",
+    "words": "sudhanvanaḥ sutaś cāpi tato jajñe śalo"
+   },
+   {
+    "name": "Ukya",
+    "ref": "BrP 8.92",
+    "words": "ukyo nāma sa dharmātmā śalaputro"
+   },
+   {
+    "name": "Vajranābha",
+    "ref": "BrP 8.92",
+    "words": "vajranābhaḥ sutas tasya"
+   },
+   {
+    "name": "Nala",
+    "ref": "BrP 8.92",
+    "words": "nalas tasya mahātmanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Nahuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yayāti",
+    "ref": "BrP 12.1",
+    "words": "nahuṣasya tu dāyādāḥ ṣaḍ"
+   },
+   {
+    "name": "Puru",
+    "ref": "BrP 12.36",
+    "words": "pituḥ puruḥ"
+   },
+   {
+    "name": "Suvīra",
+    "ref": "BrP 13.3",
+    "words": "puroḥ putraḥ suvīro 'bhūt"
+   },
+   {
+    "name": "Manasyu",
+    "ref": "BrP 13.3",
+    "words": "manasyus tasya cātmajaḥ"
+   },
+   {
+    "name": "Abhayada",
+    "ref": "BrP 13.3",
+    "words": "abhayado nāma manasyor abhavat sutaḥ"
+   },
+   {
+    "name": "Sudhanvan",
+    "ref": "BrP 13.4",
+    "words": "abhayadasyāsīt sudhanvā nāma pārthivaḥ"
+   },
+   {
+    "name": "Raudrāśva",
+    "ref": "BrP 13.4",
+    "words": "raudrāśvas tasya cātmajaḥ"
+   },
+   {
+    "name": "Kakṣeyu",
+    "ref": "BrP 13.5",
+    "words": "kakṣeyusthaṇḍileyuś ca"
+   },
+   {
+    "name": "Sabhānara",
+    "ref": "BrP 13.14",
+    "words": "kakṣeyos tanayās tv āsaṃs traya eva mahārathāḥ sabhānaraś"
+   },
+   {
+    "name": "Kālānala",
+    "ref": "BrP 13.15",
+    "words": "sabhānarasya putras tu vidvān kālānalo nṛpaḥ"
+   },
+   {
+    "name": "Sṛñjaya",
+    "ref": "BrP 13.16",
+    "words": "kālānalasya dharmajñaḥ sṛñjayo nāma vai sutaḥ"
+   },
+   {
+    "name": "Puraṃjaya",
+    "ref": "BrP 13.16",
+    "words": "sṛñjayasyābhavat putro vīro rājā puraṃjayaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "BrP 13.17",
+    "words": "puraṃjayasuto 'bhavat"
+   },
+   {
+    "name": "Mahāśāla",
+    "ref": "BrP 13.17",
+    "words": "janamejayasya rājarṣer mahāśālo 'bhavat sutaḥ"
+   },
+   {
+    "name": "Mahāmanas",
+    "ref": "BrP 13.18",
+    "words": "mahāmanā nāma suto mahāśālasya"
+   }
+  ],
+  [
+   {
+    "name": "Lomapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Caturaṅga",
+    "ref": "BrP 13.41",
+    "words": "tasya dāśarathir vīraś caturaṅgo"
+   },
+   {
+    "name": "Pṛthulākṣa",
+    "ref": "BrP 13.42",
+    "words": "caturaṅgasya putras tu pṛthulākṣa"
+   },
+   {
+    "name": "Campa",
+    "ref": "BrP 13.42",
+    "words": "pṛthulākṣasuto rājā campo"
+   },
+   {
+    "name": "Haryaṅga",
+    "ref": "BrP 13.43",
+    "words": "haryaṅgo 'sya suto 'bhavat"
+   },
+   {
+    "name": "Bhadraratha",
+    "ref": "BrP 13.45",
+    "words": "haryaṅgasya sutas tatra rājā bhadrarathaḥ"
+   },
+   {
+    "name": "Bṛhatkarman",
+    "ref": "BrP 13.45",
+    "words": "putro bhadrarathasyāsīd bṛhatkarmā"
+   },
+   {
+    "name": "Bṛhaddarbha",
+    "ref": "BrP 13.46",
+    "words": "bṛhaddarbhaḥ sutas tasya"
+   },
+   {
+    "name": "Bṛhanmanas",
+    "ref": "BrP 13.46",
+    "words": "yasmāj jajñe bṛhanmanāḥ"
+   },
+   {
+    "name": "Jayadratha",
+    "ref": "BrP 13.46",
+    "words": "bṛhanmanās tu rājendro janayām āsa vai sutam nāmnā jayadrathaṃ"
+   },
+   {
+    "name": "Dṛḍharatha",
+    "ref": "BrP 13.47",
+    "words": "yasmād dṛḍharatho nṛpaḥ"
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "BrP 13.47",
+    "words": "dṛḍharathasyāpi viśvajij janamejayī"
+   },
+   {
+    "name": "Vaikarṇa",
+    "ref": "BrP 13.48",
+    "words": "dāyādas tasya vaikarṇo"
+   },
+   {
+    "name": "Vikarṇa",
+    "ref": "BrP 13.48",
+    "words": "vikarṇas tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bṛhaspati",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bharadvāja",
+    "ref": "BrP 13.59",
+    "words": "bṛhaspater aṅgirasaḥ putro vipro"
+   },
+   {
+    "name": "Vitatha",
+    "ref": "BrP 13.60",
+    "words": "vitatho nāma bharadvājāt suto 'bhavat"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "BrP 13.62",
+    "words": "sa cāpi vitathaḥ putrāñ janayām āsa pañca vai suhotraṃ"
+   },
+   {
+    "name": "Bṛhat",
+    "ref": "BrP 13.80",
+    "words": "suhotrasya bṛhat putro"
+   },
+   {
+    "name": "Ajamīḍha",
+    "ref": "BrP 13.80",
+    "words": "bṛhatas tanayās trayaḥ ajamīḍho"
+   },
+   {
+    "name": "Ṛkṣa",
+    "ref": "BrP 13.105",
+    "words": "ajamīḍhaḥ samīyivān ṛkṣaṃ saṃjanayām āsa"
+   },
+   {
+    "name": "Bhīmasena",
+    "ref": "BrP 13.113",
+    "words": "ṛkṣasya tu dvitīyasya bhīmaseno 'bhavat sutaḥ"
+   },
+   {
+    "name": "Pratīpa",
+    "ref": "BrP 13.114",
+    "words": "pratīpo bhīmasenāt"
+   },
+   {
+    "name": "Śāṃtanu",
+    "ref": "BrP 13.114",
+    "words": "pratīpasya tu śāṃtanuḥ"
+   },
+   {
+    "name": "Vicitravīrya",
+    "ref": "BrP 13.120",
+    "words": "śāṃtanor dayitaṃ putraṃ"
+   },
+   {
+    "name": "Dhṛtarāṣṭra",
+    "ref": "BrP 13.121",
+    "words": "kṣetre vaicitravīryake dhṛtarāṣṭraṃ"
+   },
+   {
+    "name": "Duryodhana",
+    "ref": "BrP 13.122",
+    "words": "dhṛtarāṣṭras tu gāndhāryāṃ putrān utpādayac chatam teṣāṃ duryodhanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śaśāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kakutstha",
+    "ref": "BrP 7.51",
+    "words": "śaśādasya tu dāyādaḥ kakutstho"
+   },
+   {
+    "name": "Anenas",
+    "ref": "BrP 7.52",
+    "words": "anenās tu kakutsthasya"
+   },
+   {
+    "name": "Pṛthu",
+    "ref": "BrP 7.52",
+    "words": "pṛthuś cānenasaḥ smṛtaḥ"
+   },
+   {
+    "name": "Viṣṭarāśva",
+    "ref": "BrP 7.52",
+    "words": "viṣṭarāśvaḥ pṛthoḥ putras"
+   },
+   {
+    "name": "Ārdra",
+    "ref": "BrP 7.52",
+    "words": "tasmād ārdras tv ajāyata"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "BrP 7.53",
+    "words": "ārdras tu yuvanāśvas"
+   },
+   {
+    "name": "Śrāvasta",
+    "ref": "BrP 7.53",
+    "words": "śrāvastas tatsuto"
+   },
+   {
+    "name": "Bṛhadaśva",
+    "ref": "BrP 7.54",
+    "words": "śrāvastasya tu dāyādo bṛhadaśvo"
+   },
+   {
+    "name": "Kuvalāśva",
+    "ref": "BrP 7.54",
+    "words": "kuvalāśvaḥ sutas tasya"
+   }
+  ],
+  [
+   {
+    "name": "Dṛḍhāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "BrP 7.88",
+    "words": "dhaundhumārer dṛḍhāśvasya haryaśvaś cātmajaḥ smṛtaḥ"
+   },
+   {
+    "name": "Nikumbha",
+    "ref": "BrP 7.88",
+    "words": "haryaśvasya nikumbho 'bhūt"
+   },
+   {
+    "name": "Saṃhatāśva",
+    "ref": "BrP 7.89",
+    "words": "saṃhatāśvo nikumbhasya suto"
+   },
+   {
+    "name": "Akṛśāśva",
+    "ref": "BrP 7.89",
+    "words": "akṛśāśvakṛśāśvau tu saṃhatāśvasutau"
+   },
+   {
+    "name": "Prasenajit",
+    "ref": "BrP 7.90",
+    "words": "putraś cāsyāḥ prasenajit"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "BrP 7.92",
+    "words": "tasya putro mahān āsīd yuvanāśvo narādhipaḥ"
+   },
+   {
+    "name": "Māndhātā",
+    "ref": "BrP 7.92",
+    "words": "māndhātā yuvanāśvasya trilokavijayī sutaḥ"
+   },
+   {
+    "name": "Mucukunda",
+    "ref": "BrP 7.95",
+    "words": "mucukundaṃ ca pārthivam"
+   }
+  ],
+  [
+   {
+    "name": "Gādhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśvāmitra",
+    "ref": "BrP 10.55",
+    "words": "viśvāmitraṃ tu dāyādaṃ gādhiḥ kuśikanandanaḥ janayām āsa putraṃ"
+   },
+   {
+    "name": "Jaya",
+    "ref": "BrP 10.60",
+    "words": "viśvāmitrasya te sutāḥ"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "BrP 11.28",
+    "words": "vijayas tasya cātmajaḥ"
+   },
+   {
+    "name": "Kṛti",
+    "ref": "BrP 11.29",
+    "words": "vijayasya kṛtiḥ putras"
+   },
+   {
+    "name": "Haryatvata",
+    "ref": "BrP 11.29",
+    "words": "tasya haryatvataḥ sutaḥ"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "BrP 11.29",
+    "words": "haryatvatasuto rājā sahadevaḥ"
+   },
+   {
+    "name": "Nadīna",
+    "ref": "BrP 11.30",
+    "words": "sahadevasya dharmātmā nadīna"
+   },
+   {
+    "name": "Jayatsena",
+    "ref": "BrP 11.30",
+    "words": "nadīnasya jayatseno"
+   }
+  ],
+  [
+   {
+    "name": "Manu Vaivasvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "BrP 7.1",
+    "words": "manor vaivasvatasyāsan putrā vai nava"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "BrP 7.24",
+    "words": "nābhāgasya tu bho dvijāḥ ambarīṣo 'bhavat putraḥ"
+   },
+   {
+    "name": "Sindhudvīpa",
+    "ref": "BrP 8.78",
+    "words": "sindhudvīpapitābhavat"
+   },
+   {
+    "name": "Ayutājit",
+    "ref": "BrP 8.79",
+    "words": "ayutājit tu dāyādaḥ sindhudvīpasya"
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "BrP 8.79",
+    "words": "ayutājitsutas tv āsīd ṛtuparṇo"
+   },
+   {
+    "name": "Ārtaparṇi",
+    "ref": "BrP 8.80",
+    "words": "ṛtuparṇasutas tv āsīd ārtaparṇir"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "BrP 8.81",
+    "words": "sudāsas tasya tanayo"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "BrP 8.81",
+    "words": "sudāsasya sutaḥ proktaḥ saudāso"
+   }
+  ],
+  [
+   {
+    "name": "Vṛka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bāhu",
+    "ref": "BrP 8.28",
+    "words": "vṛkād bāhus tu jajñivān"
+   },
+   {
+    "name": "Sagara",
+    "ref": "BrP 8.30",
+    "words": "sagaras tu suto bāhoḥ"
+   },
+   {
+    "name": "Pañcajana",
+    "ref": "BrP 8.73",
+    "words": "ekaḥ pañcajano nāma putro rājā babhūva"
+   },
+   {
+    "name": "Aṃśumān",
+    "ref": "BrP 8.73",
+    "words": "pañcajanasyāsīd aṃśumān nāma"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "BrP 8.74",
+    "words": "dilīpas tasya tanayaḥ"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "BrP 8.75",
+    "words": "dilīpasya tu dāyādo mahārājo bhagīrathaḥ"
+   },
+   {
+    "name": "Śruta",
+    "ref": "BrP 8.77",
+    "words": "bhagīrathasuto rājā śruta"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "BrP 8.78",
+    "words": "nābhāgas tu śrutasyāsīt putraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kāñcana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suhotra",
+    "ref": "BrP 10.14",
+    "words": "kāñcanasyāpi suhotro 'bhūn"
+   },
+   {
+    "name": "Jahnu",
+    "ref": "BrP 10.14",
+    "words": "suhotrasyābhavaj jahnuḥ"
+   },
+   {
+    "name": "Sunadya",
+    "ref": "BrP 10.21",
+    "words": "jahnus tu dayitaṃ putraṃ sunadyaṃ nāma"
+   },
+   {
+    "name": "Ajaka",
+    "ref": "BrP 10.21",
+    "words": "ajakas tasya cātmajaḥ"
+   },
+   {
+    "name": "Balākāśva",
+    "ref": "BrP 10.22",
+    "words": "ajakasya tu dāyādo balākāśvo"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "BrP 10.22",
+    "words": "kuśas tasyātmajo 'bhavat"
+   },
+   {
+    "name": "Kuśika",
+    "ref": "BrP 10.23",
+    "words": "kuśaputrā babhūvur hi catvāro"
+   }
+  ],
+  [
+   {
+    "name": "Satvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Andhaka",
+    "ref": "BrP 15.31",
+    "words": "andhakaṃ ca mahābāhuṃ"
+   },
+   {
+    "name": "Bhajamāna",
+    "ref": "BrP 15.46",
+    "words": "kukuraṃ bhajamānaṃ ca"
+   },
+   {
+    "name": "Rājādhideva",
+    "ref": "BrP 16.1",
+    "words": "bhajamānasya putro 'tha rathamukhyo vidūrathaḥ rājādhidevaḥ"
+   },
+   {
+    "name": "Śamī",
+    "ref": "BrP 16.3",
+    "words": "śamī ca daṇḍaśarmā ca"
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "BrP 16.4",
+    "words": "śamiputraḥ pratikṣatraḥ"
+   },
+   {
+    "name": "Svayaṃbhoja",
+    "ref": "BrP 16.4",
+    "words": "pratikṣatrasya cātmajaḥ svayaṃbhojaḥ"
+   },
+   {
+    "name": "Bhadika",
+    "ref": "BrP 16.4",
+    "words": "svayaṃbhojād bhadikaḥ saṃbabhūva"
+   }
+  ],
+  [
+   {
+    "name": "Kalmāṣapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sarvakarman",
+    "ref": "BrP 8.82",
+    "words": "kalmāṣapādasya sutaḥ sarvakarmeti"
+   },
+   {
+    "name": "Anaraṇya",
+    "ref": "BrP 8.83",
+    "words": "anaraṇyas tu putro 'bhūd viśrutaḥ sarvakarmaṇaḥ"
+   },
+   {
+    "name": "Nighna",
+    "ref": "BrP 8.83",
+    "words": "anaraṇyasuto nighno"
+   },
+   {
+    "name": "Anamitra",
+    "ref": "BrP 8.83",
+    "words": "nighnato dvau babhūvatuḥ"
+   },
+   {
+    "name": "Duliduha",
+    "ref": "BrP 8.84",
+    "words": "anamitrasuto rājā vidvān duliduho"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "BrP 8.85",
+    "words": "dilīpas tanayas tasya"
+   }
+  ],
+  [
+   {
+    "name": "Kapotaromā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tilira",
+    "ref": "BrP 15.47",
+    "words": "kapotaromā tasyātha tiliris tanayo 'bhavat"
+   },
+   {
+    "name": "Punarvasu",
+    "ref": "BrP 15.47",
+    "words": "jajñe punar vasus tasmād"
+   },
+   {
+    "name": "Abhijit",
+    "ref": "BrP 15.47",
+    "words": "abhijic ca punar vasoḥ"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "BrP 15.48",
+    "words": "putramithunaṃ babhūvābhijitaḥ kila āhukaḥ"
+   },
+   {
+    "name": "Devaka",
+    "ref": "BrP 15.55",
+    "words": "āhukasya tu kāśyāyāṃ dvau putrau saṃbabhūvatuḥ devakaś"
+   },
+   {
+    "name": "Upadeva",
+    "ref": "BrP 15.56",
+    "words": "upadevaś ca"
+   }
+  ],
+  [
+   {
+    "name": "Aṅga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dadhivāhana",
+    "ref": "BrP 13.37",
+    "words": "aṅgaputro mahān āsīd rājendro dadhivāhanaḥ"
+   },
+   {
+    "name": "Diviratha",
+    "ref": "BrP 13.37",
+    "words": "dadhivāhanaputras tu rājā diviratho 'bhavat"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "BrP 13.38",
+    "words": "putro divirathasyāsīc"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "BrP 13.38",
+    "words": "tasya citrarathaḥ sutaḥ"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "BrP 13.40",
+    "words": "citrarathasyāpi putro daśaratho 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Hariścandra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Rohita",
+    "ref": "BrP 8.26",
+    "words": "hariścandrasya putro 'bhūd rohito nāma"
+   },
+   {
+    "name": "Harita",
+    "ref": "BrP 8.26",
+    "words": "harito rohitasyātha"
+   },
+   {
+    "name": "Cañcu",
+    "ref": "BrP 8.26",
+    "words": "cañcur hārita ucyate"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "BrP 8.27",
+    "words": "cañcuputro babhūva"
+   },
+   {
+    "name": "Ruruka",
+    "ref": "BrP 8.28",
+    "words": "rurukas tanayas tasya"
+   }
+  ],
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hiraṇyakaśipu",
+    "ref": "BrP 3.64",
+    "words": "dityāḥ putradvayaṃ jajñe kaśyapād"
+   },
+   {
+    "name": "Prahrāda",
+    "ref": "BrP 3.66",
+    "words": "hiraṇyakaśipoḥ putrāś catvāraḥ"
+   },
+   {
+    "name": "Virocana",
+    "ref": "BrP 3.68",
+    "words": "virocanaś ca prāhrādir"
+   },
+   {
+    "name": "Bali",
+    "ref": "BrP 3.68",
+    "words": "balir jajñe virocanāt"
+   },
+   {
+    "name": "Bāṇa",
+    "ref": "BrP 3.69",
+    "words": "baleḥ putraśatam āsīd bāṇajyeṣṭham"
+   }
+  ],
+  [
+   {
+    "name": "Purukutsa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Trasadasyu",
+    "ref": "BrP 7.95",
+    "words": "purukutsasutas tv āsīt trasadasyur mahīpatiḥ"
+   },
+   {
+    "name": "Saṃbhūta",
+    "ref": "BrP 7.96",
+    "words": "narmadāyām athotpannaḥ saṃbhūtas tasya cātmajaḥ"
+   },
+   {
+    "name": "Tridhanvan",
+    "ref": "BrP 7.96",
+    "words": "saṃbhūtasya tu dāyādas tridhanvā"
+   },
+   {
+    "name": "Trayyāruṇa",
+    "ref": "BrP 7.97",
+    "words": "rājñas tridhanvanas tv āsīd vidvāṃs trayyāruṇaḥ"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "BrP 7.97",
+    "words": "tasya satyavrato nāma kumāro 'bhūn"
+   }
+  ],
+  [
+   {
+    "name": "Turvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vahni",
+    "ref": "BrP 13.142",
+    "words": "turvasos tu suto vahnir"
+   },
+   {
+    "name": "Gobhānu",
+    "ref": "BrP 13.142",
+    "words": "gobhānus tasya cātmajaḥ"
+   },
+   {
+    "name": "Aiśānu",
+    "ref": "BrP 13.142",
+    "words": "gobhānos tu suto rājā aiśānur"
+   },
+   {
+    "name": "Karaṃdhama",
+    "ref": "BrP 13.143",
+    "words": "karaṃdhamas tu aiśānor"
+   },
+   {
+    "name": "Marutta",
+    "ref": "BrP 13.143",
+    "words": "maruttas tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dharma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dyūta",
+    "ref": "BrP 13.152",
+    "words": "dyūtas tasyātmajo 'bhavat"
+   },
+   {
+    "name": "Vanaduha",
+    "ref": "BrP 13.152",
+    "words": "dyūtād vanaduho jajñe"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "BrP 13.152",
+    "words": "pracetās tasya cātmajaḥ"
+   },
+   {
+    "name": "Sucetas",
+    "ref": "BrP 13.153",
+    "words": "pracetasaḥ sucetās"
+   }
+  ],
+  [
+   {
+    "name": "Svāhi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uṣadgu",
+    "ref": "BrP 15.2",
+    "words": "svāhiputro 'bhavad rājā uṣadgur"
+   },
+   {
+    "name": "Citraratha",
+    "ref": "BrP 15.3",
+    "words": "jajñe citrarathas tasya putraḥ"
+   },
+   {
+    "name": "Śaśabindu",
+    "ref": "BrP 15.4",
+    "words": "āsīc caitrarathir vīro yajvā vipuladakṣiṇaḥ śaśabinduḥ"
+   },
+   {
+    "name": "Pṛthuśravas",
+    "ref": "BrP 15.5",
+    "words": "pṛthuśravāḥ pṛthuyaśā rājāsīc chāśibindavaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Uṣadratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Phena",
+    "ref": "BrP 13.28",
+    "words": "phenas tasya suto 'bhavat"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "BrP 13.28",
+    "words": "phenasya sutapā jajñe"
+   },
+   {
+    "name": "Bali",
+    "ref": "BrP 13.28",
+    "words": "tataḥ sutapaso baliḥ"
+   },
+   {
+    "name": "Vaṅga",
+    "ref": "BrP 13.30",
+    "words": "vaṅgaḥ suhmas tathaiva ca"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Babhrusetu",
+    "ref": "BrP 13.148",
+    "words": "druhyoś ca tanayo rājan babhrusetuś"
+   },
+   {
+    "name": "Aṅgārasetu",
+    "ref": "BrP 13.149",
+    "words": "aṅgārasetus tatputro"
+   },
+   {
+    "name": "Gāndhāra",
+    "ref": "BrP 13.150",
+    "words": "aṅgārasetor dāyādo gāndhāro nāma"
+   }
+  ],
+  [
+   {
+    "name": "Duṣyanta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Karūroma",
+    "ref": "BrP 13.147",
+    "words": "duṣyantasya tu dāyādaḥ karūromaḥ"
+   },
+   {
+    "name": "Āhrīda",
+    "ref": "BrP 13.147",
+    "words": "karūromād athāhrīdaś"
+   },
+   {
+    "name": "Pāṇḍya",
+    "ref": "BrP 13.147",
+    "words": "catvāras tasya cātmajāḥ pāṇḍyaś ca"
+   }
+  ],
+  [
+   {
+    "name": "Pārīkṣita",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Candrāpīḍa",
+    "ref": "BrP 13.124",
+    "words": "pārīkṣitasya kāśyāyāṃ dvau putrau"
+   },
+   {
+    "name": "Satyakarṇa",
+    "ref": "BrP 13.125",
+    "words": "candrāpīḍasya putrāṇāṃ śatam"
+   },
+   {
+    "name": "Śvetakarṇa",
+    "ref": "BrP 13.127",
+    "words": "satyakarṇasya dāyādaḥ śvetakarṇaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sahadeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Somaka",
+    "ref": "BrP 13.99",
+    "words": "sahadevasutaś cāpi somako"
+   },
+   {
+    "name": "Pṛṣata",
+    "ref": "BrP 13.101",
+    "words": "teṣāṃ yavīyān pṛṣato"
+   },
+   {
+    "name": "Drupada",
+    "ref": "BrP 13.101",
+    "words": "pṛṣato drupadasya pitā"
+   }
+  ],
+  [
+   {
+    "name": "Vṛṣṇi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śvaphalka",
+    "ref": "BrP 14.3",
+    "words": "jajñāte tanayau vṛṣṇeḥ śvaphalkaś"
+   },
+   {
+    "name": "Akrūra",
+    "ref": "BrP 14.8",
+    "words": "akrūraḥ suṣuve tasmāc chvaphalkād"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "BrP 14.43",
+    "words": "akrūrāt kāśikanyāyāṃ satyaketur ajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Amāvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhīma",
+    "ref": "BrP 10.13",
+    "words": "amāvasos tu dāyādo bhīmo"
+   },
+   {
+    "name": "Kāñcanaprabha",
+    "ref": "BrP 10.13",
+    "words": "bhīmasya dāyādo rājāsīt kāñcanaprabhaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nighna",
+    "ref": "BrP 16.11",
+    "words": "anamitrasuto nighno"
+   },
+   {
+    "name": "Prasena",
+    "ref": "BrP 16.11",
+    "words": "nighnato dvau babhūvatuḥ prasenaś"
+   }
+  ],
+  [
+   {
+    "name": "Balākāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuśika",
+    "ref": "BrP 13.89",
+    "words": "kuśikas tasya cātmajaḥ"
+   },
+   {
+    "name": "Gādhi",
+    "ref": "BrP 13.90",
+    "words": "kuśikas tu tapas tepe putram indrasamaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Devānta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "BrP 16.7",
+    "words": "devāntasyābhavat putro vidvān kambalabarhiṣaḥ"
+   },
+   {
+    "name": "Asamaujas",
+    "ref": "BrP 16.7",
+    "words": "asamaujāḥ sutas tasya"
+   }
+  ],
+  [
+   {
+    "name": "Kārtavīrya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jayadhvaja",
+    "ref": "BrP 13.201",
+    "words": "kārtavīryasya tanayā"
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "BrP 13.202",
+    "words": "jayadhvajasya putras tu tālajaṅgho"
+   }
+  ],
+  [
+   {
+    "name": "Kāvya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ṛcīka",
+    "ref": "BrP 10.29",
+    "words": "kāvyaputrāya ṛcīkāya"
+   },
+   {
+    "name": "Rāma",
+    "ref": "BrP 10.52",
+    "words": "ārcīko janayām āsa jāmadagnyaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Pratyūṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devala",
+    "ref": "BrP 3.41",
+    "words": "pratyūṣasya viduḥ putram ṛṣiṃ nāmnātha devalam"
+   },
+   {
+    "name": "Devala's two sons",
+    "ref": "BrP 3.42",
+    "words": "dvau putrau devalasyāpi"
+   }
+  ],
+  [
+   {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhanaṃjaya",
+    "ref": "BrP 13.123",
+    "words": "pāṇḍor dhanaṃjayaḥ putraḥ"
+   },
+   {
+    "name": "Saubhadra",
+    "ref": "BrP 13.123",
+    "words": "saubhadras tasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Soma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Budha",
+    "ref": "BrP 7.16",
+    "words": "somaputrād budhād"
+   },
+   {
+    "name": "Purūravas",
+    "ref": "BrP 7.16",
+    "words": "somaputrād budhād viprās tasyāṃ jajñe purūravāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Uśīnara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śibi",
+    "ref": "BrP 13.23",
+    "words": "śibir auśīnaro nṛpaḥ"
+   },
+   {
+    "name": "Vṛṣadarbha",
+    "ref": "BrP 13.25",
+    "words": "śibes tu śibayaḥ putrāś catvāro"
+   }
+  ],
+  [
+   {
+    "name": "Vṛṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Madhu",
+    "ref": "BrP 13.205",
+    "words": "vṛṣo vaṃśadharas tatra tasya putro 'bhavan madhuḥ"
+   },
+   {
+    "name": "Vṛṣaṇa",
+    "ref": "BrP 13.206",
+    "words": "madhoḥ putraśataṃ tv āsīd vṛṣaṇas tasya vaṃśakṛt"
+   }
+  ],
+  [
+   {
+    "name": "Abhimanyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parīkṣit",
+    "ref": "BrP 13.123",
+    "words": "abhimanyoḥ parīkṣit tu"
+   }
+  ],
+  [
+   {
+    "name": "Akrūra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vasudeva",
+    "ref": "BrP 16.55",
+    "words": "akrūreṇograsenāyāṃ sutau vai"
+   }
+  ],
+  [
+   {
+    "name": "Anenas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "BrP 11.27",
+    "words": "anenasaḥ suto rājā pratikṣatro"
+   }
+  ],
+  [
+   {
+    "name": "Anila",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Manojava",
+    "ref": "BrP 3.39",
+    "words": "dvau putrāv anilasya"
+   }
+  ],
+  [
+   {
+    "name": "Anādhṛṣṭi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nivṛttaśatru",
+    "ref": "BrP 14.26",
+    "words": "aśmakyaṃ prāptavān putram anādhṛṣṭir yaśasvinam"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "BrP 9.1",
+    "words": "pitā somasya bho viprā jajñe 'trir"
+   }
+  ],
+  [
+   {
+    "name": "Aṅgiras",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bṛhaspati",
+    "ref": "BrP 9.19",
+    "words": "vimatyāṅgirasaḥ sutam"
+   }
+  ],
+  [
+   {
+    "name": "Bhadraśreṇya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Durdama",
+    "ref": "BrP 11.46",
+    "words": "bhadraśreṇyasya putras tu durdamo"
+   }
+  ],
+  [
+   {
+    "name": "Bhānu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhānavas",
+    "ref": "BrP 3.31",
+    "words": "bhānos tu bhānavaḥ putrā"
+   }
+  ],
+  [
+   {
+    "name": "Bhīmaratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṣṭāratha",
+    "ref": "BrP 13.71",
+    "words": "aṣṭāratho nāma nṛpaḥ suto bhīmarathasya"
+   }
+  ],
+  [
+   {
+    "name": "Citraka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aśvagrīva",
+    "ref": "BrP 16.57",
+    "words": "aśvagrīvo 'śvabāhuś ca"
+   }
+  ],
+  [
+   {
+    "name": "Dakṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśvas",
+    "ref": "BrP 3.11",
+    "words": "dakṣasya vai putrā haryaśvā"
+   }
+  ],
+  [
+   {
+    "name": "Devabhāga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Uddhava",
+    "ref": "BrP 14.25",
+    "words": "uddhavo devabhāgasya mahābhāgaḥ suto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Devamīḍhuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śūra",
+    "ref": "BrP 14.14",
+    "words": "śūraṃ vai devamīḍhuṣam"
+   }
+  ],
+  [
+   {
+    "name": "Dhava",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Draviṇa",
+    "ref": "BrP 3.38",
+    "words": "dhavasya putro draviṇo"
+   }
+  ],
+  [
+   {
+    "name": "Dhruva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kāla",
+    "ref": "BrP 3.37",
+    "words": "dhruvasya putro bhagavān kālo"
+   }
+  ],
+  [
+   {
+    "name": "Durdama",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kanaka",
+    "ref": "BrP 13.158",
+    "words": "durdamasya suto dhīmān kanako"
+   }
+  ],
+  [
+   {
+    "name": "Gaṇḍūṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Cārudeṣṇa",
+    "ref": "BrP 14.29",
+    "words": "gaṇḍūṣāya hy aputrāya viṣvakseno dadau sutān cārudeṣṇaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Jāmbavat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kumāra",
+    "ref": "BrP 16.34",
+    "words": "kumāram ādāya sutaṃ jāmbavato"
+   }
+  ],
+  [
+   {
+    "name": "Kanavaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tantrija",
+    "ref": "BrP 14.32",
+    "words": "tantrijas tantripālaś ca sutau kanavakasya tau"
+   }
+  ],
+  [
+   {
+    "name": "Kroṣṭu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vṛjinīvān",
+    "ref": "BrP 15.1",
+    "words": "kroṣṭor athābhavat putro vṛjinīvān"
+   }
+  ],
+  [
+   {
+    "name": "Kuru",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Janamejaya",
+    "ref": "BrP 12.10",
+    "words": "kuroḥ putrasya rājendrarājñaḥ pārīkṣitasya"
+   }
+  ],
+  [
+   {
+    "name": "Kuvalāśva's father (the king)",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuvalāśva",
+    "ref": "BrP 7.71",
+    "words": "kuvalāśvaṃ sutaṃ prādāt"
+   }
+  ],
+  [
+   {
+    "name": "Kṛtavīrya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Arjuna",
+    "ref": "BrP 13.159",
+    "words": "kṛtavīryād athārjunaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṣemaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Varṣaketu",
+    "ref": "BrP 13.76",
+    "words": "kṣemakasya tu putro vai varṣaketus"
+   }
+  ],
+  [
+   {
+    "name": "Madhu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhundhu",
+    "ref": "BrP 7.63",
+    "words": "rākṣasasya madhoḥ putro dhundhur nāma"
+   }
+  ],
+  [
+   {
+    "name": "Mahiṣmat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhadraśreṇya",
+    "ref": "BrP 13.157",
+    "words": "mahiṣmataḥ putro bhadraśreṇyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Matināra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vasurodha",
+    "ref": "BrP 13.51",
+    "words": "matinārasutās tv āsaṃs trayaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Pratardana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhārgava",
+    "ref": "BrP 13.68",
+    "words": "vatso bhārgava eva ca"
+   }
+  ],
+  [
+   {
+    "name": "Pārtha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Abhimanyu",
+    "ref": "BrP 14.43",
+    "words": "subhadrāyāṃ rathī pārthād abhimanyur ajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Remaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ajapārśva",
+    "ref": "BrP 13.137",
+    "words": "remakasya tu bhāryā tam udvahat putrakāraṇāt"
+   }
+  ],
+  [
+   {
+    "name": "Rāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Niśaṭha",
+    "ref": "BrP 14.42",
+    "words": "rāmāc ca niśaṭho jajñe revatyāṃ"
+   }
+  ],
+  [
+   {
+    "name": "Satrājit",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhagaṃkāra",
+    "ref": "BrP 16.45",
+    "words": "satrājito daśa tv āsan bhāryās tāsāṃ śataṃ sutāḥ khyātimantas trayas teṣāṃ bhagaṃkāras"
+   }
+  ],
+  [
+   {
+    "name": "Satyaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yuyudhāna",
+    "ref": "BrP 14.25",
+    "words": "tasmād yuyudhānaś ca sātyakiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satyavrata's father",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "BrP 8.6",
+    "words": "pitrā hi taṃ tadā rāṣṭrāt tyajyamānaṃ priyaṃ sutam"
+   }
+  ],
+  [
+   {
+    "name": "Sudyumna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Utkala",
+    "ref": "BrP 7.17",
+    "words": "sudyumnasya tu dāyādās trayaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sukumāra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "BrP 13.77",
+    "words": "sukumārasya putras tu satyaketur"
+   }
+  ],
+  [
+   {
+    "name": "Taṃsu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dharmanetra",
+    "ref": "BrP 13.54",
+    "words": "taṃsoḥ suto 'tha rājarṣir dharmanetraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Varuṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vasiṣṭha",
+    "ref": "BrP 13.193",
+    "words": "yaṃ lebhe varuṇaḥ putraṃ purā bhāsvantam uttamam vasiṣṭhaṃ nāma"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śauri",
+    "ref": "BrP 14.42",
+    "words": "vasudevāc ca devakyāṃ jajñe śaurir"
+   }
+  ],
+  [
+   {
+    "name": "Vatsabhūmi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhārgabhūmi",
+    "ref": "BrP 11.60",
+    "words": "bhārgabhūmis tu bhārgajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vatsavān",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kauśika",
+    "ref": "BrP 14.28",
+    "words": "vatsavate tv aputrāya vasudevaḥ pratāpavān adbhir dadau sutaṃ vīraṃ śauriḥ kauśikam aurasam"
+   }
+  ],
+  [
+   {
+    "name": "Vikukṣi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śakuni",
+    "ref": "BrP 7.46",
+    "words": "śakunipramukhās tasya putrāḥ pañcaśataṃ"
+   }
+  ],
+  [
+   {
+    "name": "Yavana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālayavana",
+    "ref": "BrP 14.51",
+    "words": "aputrasya sa rājñas tu vavṛdhe 'ntaḥpure śiśuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Āpa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vaitaṇḍya",
+    "ref": "BrP 3.37",
+    "words": "āpasya putro vaitaṇḍyaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śyāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śamīka",
+    "ref": "BrP 14.33",
+    "words": "śyāmaputraḥ śamīkas tu"
+   }
+  ]
+ ]
+}

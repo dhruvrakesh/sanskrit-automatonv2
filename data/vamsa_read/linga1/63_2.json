@@ -1,0 +1,470 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "chapter": 63,
+ "part": 2,
+ "refs": [
+  "LiP 1,63.59",
+  "LiP 1,63.60",
+  "LiP 1,63.61",
+  "LiP 1,63.62",
+  "LiP 1,63.63",
+  "LiP 1,63.64",
+  "LiP 1,63.65",
+  "LiP 1,63.66",
+  "LiP 1,63.67",
+  "LiP 1,63.68",
+  "LiP 1,63.69",
+  "LiP 1,63.70",
+  "LiP 1,63.71",
+  "LiP 1,63.72",
+  "LiP 1,63.73",
+  "LiP 1,63.74",
+  "LiP 1,63.75",
+  "LiP 1,63.76",
+  "LiP 1,63.77",
+  "LiP 1,63.78",
+  "LiP 1,63.79",
+  "LiP 1,63.80",
+  "LiP 1,63.81",
+  "LiP 1,63.82",
+  "LiP 1,63.83",
+  "LiP 1,63.84",
+  "LiP 1,63.85",
+  "LiP 1,63.86",
+  "LiP 1,63.87",
+  "LiP 1,63.88",
+  "LiP 1,63.89",
+  "LiP 1,63.90",
+  "LiP 1,63.91",
+  "LiP 1,63.92",
+  "LiP 1,63.93",
+  "LiP 1,63.94",
+  "LiP 1,63.95"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_liGgapurANa1-108.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:10:46",
+ "reply": "{\"statements\":[{\"ref\":\"LiP 1,63.59\",\"a\":\"Viśravā\",\"rel\":\"other\",\"b\":\"Airavila\",\"words\":\"ṛṣir airavilo yasyāṃ viśravāḥ samapadyata\",\"doubt\":true},{\"ref\":\"LiP 1,63.60\",\"a\":\"Devavarṇinī\",\"rel\":\"daughter_of\",\"b\":\"Bṛhaspati\",\"words\":\"bṛhaspateḥ śubhā kanyā nāmnā vai devavarṇinī\",\"doubt\":false},{\"ref\":\"LiP 1,63.59\",\"a\":\"Devavarṇinī\",\"rel\":\"wife_of\",\"b\":\"Viśravā\",\"words\":\"tasya patnyaścatasraḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.59\",\"a\":\"Puṣpotkaṭā\",\"rel\":\"wife_of\",\"b\":\"Viśravā\",\"words\":\"tasya patnyaścatasraḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.59\",\"a\":\"Balākā\",\"rel\":\"wife_of\",\"b\":\"Viśravā\",\"words\":\"tasya patnyaścatasraḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.59\",\"a\":\"Kaikasī\",\"rel\":\"wife_of\",\"b\":\"Viśravā\",\"words\":\"tasya patnyaścatasraḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.60\",\"a\":\"Puṣpotkaṭā\",\"rel\":\"daughter_of\",\"b\":\"Mālyavat\",\"words\":\"sute mālyavataḥ smṛteḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.60\",\"a\":\"Balākā\",\"rel\":\"daughter_of\",\"b\":\"Mālyavat\",\"words\":\"sute mālyavataḥ smṛteḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.61\",\"a\":\"Kaikasī\",\"rel\":\"daughter_of\",\"b\":\"Mālin\",\"words\":\"kaikasī mālinaḥ kanyā\",\"doubt\":false},{\"ref\":\"LiP 1,63.61\",\"a\":\"Vaiśravaṇa\",\"rel\":\"born_of\",\"b\":\"Devavarṇinī\",\"words\":\"jyeṣṭhaṃ vaiśravaṇaṃ tasmāt suṣuve devavarṇinī\",\"doubt\":false},{\"ref\":\"LiP 1,63.61\",\"a\":\"Vaiśravaṇa\",\"rel\":\"son_of\",\"b\":\"Viśravā\",\"words\":\"jyeṣṭhaṃ vaiśravaṇaṃ tasmāt suṣuve devavarṇinī\",\"doubt\":false},{\"ref\":\"LiP 1,63.62\",\"a\":\"Rāvaṇa\",\"rel\":\"born_of\",\"b\":\"Kaikasī\",\"words\":\"kaikasī cāpyajanayad rāvaṇaṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.62\",\"a\":\"Kumbhakarṇa\",\"rel\":\"born_of\",\"b\":\"Kaikasī\",\"words\":\"kumbhakarṇaṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.62\",\"a\":\"Śūrpaṇakhā\",\"rel\":\"born_of\",\"b\":\"Kaikasī\",\"words\":\"śūrpaṇakhāṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.62\",\"a\":\"Vibhīṣaṇa\",\"rel\":\"born_of\",\"b\":\"Kaikasī\",\"words\":\"dhīmantaṃ ca vibhīṣaṇam\",\"doubt\":false},{\"ref\":\"LiP 1,63.63\",\"a\":\"Mahodara\",\"rel\":\"born_of\",\"b\":\"Puṣpotkaṭā\",\"words\":\"puṣpotkaṭā hyajanayat putrāṃstasmāt mahodaraṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.63\",\"a\":\"Prahasta\",\"rel\":\"born_of\",\"b\":\"Puṣpotkaṭā\",\"words\":\"prahastaṃ ca\",\"doubt\":false},{\"ref\":\"LiP 1,63.63\",\"a\":\"Mahāpārśva\",\"rel\":\"born_of\",\"b\":\"Puṣpotkaṭā\",\"words\":\"mahāpārśvaṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.63\",\"a\":\"Khara\",\"rel\":\"born_of\",\"b\":\"Puṣpotkaṭā\",\"words\":\"kharaṃ tathā\",\"doubt\":false},{\"ref\":\"LiP 1,63.64\",\"a\":\"Kumbhīnasī\",\"rel\":\"born_of\",\"b\":\"Puṣpotkaṭā\",\"words\":\"kumbhīnasīṃ tathā kanyāṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.64\",\"a\":\"Triśirā\",\"rel\":\"born_of\",\"b\":\"Balākā\",\"words\":\"balāyāḥ śṛṇuta prajāḥ triśirā\",\"doubt\":false},{\"ref\":\"LiP 1,63.64\",\"a\":\"Dūṣaṇa\",\"rel\":\"born_of\",\"b\":\"Balākā\",\"words\":\"dūṣaṇaścaiva\",\"doubt\":false},{\"ref\":\"LiP 1,63.64\",\"a\":\"Vidyujjihva\",\"rel\":\"born_of\",\"b\":\"Balākā\",\"words\":\"vidyujjihvaś ca rākṣasaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.65\",\"a\":\"Mālikā\",\"rel\":\"born_of\",\"b\":\"Balākā\",\"words\":\"kanyā vai mālikā cāpi balāyāḥ prasavaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.68\",\"a\":\"Atri\",\"rel\":\"other\",\"b\":\"Atri\",\"words\":\"atreḥ patnyo daśaivāsan\",\"doubt\":true},{\"ref\":\"LiP 1,63.69\",\"a\":\"Bhadrā\",\"rel\":\"daughter_of\",\"b\":\"Bhadrāśva\",\"words\":\"bhadrāśvasya ghṛtācyāṃ vai daśāpsarasi sūnavaḥ bhadrābhadrā\",\"doubt\":true},{\"ref\":\"LiP 1,63.71\",\"a\":\"Prabhākara\",\"rel\":\"husband_of\",\"b\":\"Atri\",\"words\":\"tāsāṃ bhartā prabhākaraḥ\",\"doubt\":true},{\"ref\":\"LiP 1,63.74\",\"a\":\"Soma\",\"rel\":\"born_of\",\"b\":\"Bhadrā\",\"words\":\"bhadrāyāṃ janayāmāsa somaṃ putraṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.74\",\"a\":\"Soma\",\"rel\":\"son_of\",\"b\":\"Atri\",\"words\":\"prabhuratrirmaharṣibhiḥ bhadrāyāṃ janayāmāsa somaṃ putraṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.76\",\"a\":\"Datta\",\"rel\":\"brother_of\",\"b\":\"Durvāsas\",\"words\":\"datto hyatrivaro jyeṣṭho durvāsāstasya cānujaḥ\",\"doubt\":false},{\"ref\":\"LiP 1,63.76\",\"a\":\"Amalā\",\"rel\":\"sister_of\",\"b\":\"Datta\",\"words\":\"yavīyasī svasā teṣām amalā\",\"doubt\":false},{\"ref\":\"LiP 1,63.83\",\"a\":\"Śakti\",\"rel\":\"son_of\",\"b\":\"Vasiṣṭha\",\"words\":\"arundhatyāṃ vasiṣṭhastu sutān utpādayacchatam jyāyaso 'janayacchakter\",\"doubt\":true},{\"ref\":\"LiP 1,63.83\",\"a\":\"Parāśara\",\"rel\":\"son_of\",\"b\":\"Śakti\",\"words\":\"adṛśyantī parāśaram\",\"doubt\":false},{\"ref\":\"LiP 1,63.83\",\"a\":\"Parāśara\",\"rel\":\"born_of\",\"b\":\"Adṛśyantī\",\"words\":\"adṛśyantī parāśaram\",\"doubt\":false},{\"ref\":\"LiP 1,63.84\",\"a\":\"Kṛṣṇa Dvaipāyana\",\"rel\":\"son_of\",\"b\":\"Parāśara\",\"words\":\"kālī parāśarājjajñe kṛṣṇadvaipāyanaṃ\",\"doubt\":false},{\"ref\":\"LiP 1,63.84\",\"a\":\"Kṛṣṇa Dvaipāyana\",\"rel\":\"born_of\",\"b\":\"Kālī\",\"words\":\"kālī parāśarājjajñe\",\"doubt\":false},{\"ref\":\"LiP 1,63.85\",\"a\":\"Śuka\",\"rel\":\"son_of\",\"b\":\"Dvaipāyana\",\"words\":\"dvaipāyano hyaraṇyāṃ vai śukam utpādayatsutam\",\"doubt\":false},{\"ref\":\"LiP 1,63.85\",\"a\":\"Śuka\",\"rel\":\"born_of\",\"b\":\"Araṇī\",\"words\":\"hyaraṇyāṃ vai śukam\",\"doubt\":false},{\"ref\":\"LiP 1,63.85\",\"a\":\"Upamanyu\",\"rel\":\"son_of\",\"b\":\"Dvaipāyana\",\"words\":\"upamanyuṃ ca pīvaryāṃ\",\"doubt\":true},{\"ref\":\"LiP 1,63.85\",\"a\":\"Upamanyu\",\"rel\":\"born_of\",\"b\":\"Pīvarī\",\"words\":\"upamanyuṃ ca pīvaryāṃ\",\"doubt\":true},{\"ref\":\"LiP 1,63.87\",\"a\":\"Kīrtimatī\",\"rel\":\"wife_of\",\"b\":\"Anuha\",\"words\":\"patnī sā tvanuhasya ca\",\"doubt\":false},{\"ref\":\"LiP 1,63.87\",\"a\":\"Kīrtimatī\",\"rel\":\"other\",\"b\":\"Brahmadatta\",\"words\":\"jananī brahmadattasya\",\"doubt\":false},{\"ref\":\"LiP 1,63.89\",\"a\":\"Indrapramiti\",\"rel\":\"born_of\",\"b\":\"Ghṛtācī\",\"words\":\"vasiṣṭhasya kapiñjalyo ghṛtācyāmudapadyata\",\"doubt\":true},{\"ref\":\"LiP 1,63.90\",\"a\":\"Bhadra\",\"rel\":\"other\",\"b\":\"Pṛthu\",\"words\":\"pṛthoḥ sutāyāṃ sambhūto bhadrastasyā bhavadvasuḥ\",\"doubt\":true},{\"ref\":\"LiP 1,63.91\",\"a\":\"Upamanyu\",\"rel\":\"son_of\",\"b\":\"Indrapramiti\",\"words\":\"upamanyuḥ sutastasya\",\"doubt\":true}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.04236,
+ "tokens": {
+  "input": 3733,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 3489,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "LiP 1,63.59",
+   "a": "Viśravā",
+   "rel": "other",
+   "b": "Airavila",
+   "words": "ṛṣir airavilo yasyāṃ viśravāḥ samapadyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.60",
+   "a": "Devavarṇinī",
+   "rel": "daughter_of",
+   "b": "Bṛhaspati",
+   "words": "bṛhaspateḥ śubhā kanyā nāmnā vai devavarṇinī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.59",
+   "a": "Devavarṇinī",
+   "rel": "wife_of",
+   "b": "Viśravā",
+   "words": "tasya patnyaścatasraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.59",
+   "a": "Puṣpotkaṭā",
+   "rel": "wife_of",
+   "b": "Viśravā",
+   "words": "tasya patnyaścatasraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.59",
+   "a": "Balākā",
+   "rel": "wife_of",
+   "b": "Viśravā",
+   "words": "tasya patnyaścatasraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.59",
+   "a": "Kaikasī",
+   "rel": "wife_of",
+   "b": "Viśravā",
+   "words": "tasya patnyaścatasraḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,63.60",
+   "a": "Puṣpotkaṭā",
+   "rel": "daughter_of",
+   "b": "Mālyavat",
+   "words": "sute mālyavataḥ smṛteḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.60",
+   "a": "Balākā",
+   "rel": "daughter_of",
+   "b": "Mālyavat",
+   "words": "sute mālyavataḥ smṛteḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.61",
+   "a": "Kaikasī",
+   "rel": "daughter_of",
+   "b": "Mālin",
+   "words": "kaikasī mālinaḥ kanyā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.61",
+   "a": "Vaiśravaṇa",
+   "rel": "born_of",
+   "b": "Devavarṇinī",
+   "words": "jyeṣṭhaṃ vaiśravaṇaṃ tasmāt suṣuve devavarṇinī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.61",
+   "a": "Vaiśravaṇa",
+   "rel": "son_of",
+   "b": "Viśravā",
+   "words": "jyeṣṭhaṃ vaiśravaṇaṃ tasmāt suṣuve devavarṇinī",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.62",
+   "a": "Rāvaṇa",
+   "rel": "born_of",
+   "b": "Kaikasī",
+   "words": "kaikasī cāpyajanayad rāvaṇaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.62",
+   "a": "Kumbhakarṇa",
+   "rel": "born_of",
+   "b": "Kaikasī",
+   "words": "kumbhakarṇaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.62",
+   "a": "Śūrpaṇakhā",
+   "rel": "born_of",
+   "b": "Kaikasī",
+   "words": "śūrpaṇakhāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.62",
+   "a": "Vibhīṣaṇa",
+   "rel": "born_of",
+   "b": "Kaikasī",
+   "words": "dhīmantaṃ ca vibhīṣaṇam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.63",
+   "a": "Mahodara",
+   "rel": "born_of",
+   "b": "Puṣpotkaṭā",
+   "words": "puṣpotkaṭā hyajanayat putrāṃstasmāt mahodaraṃ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "LiP 1,63.63",
+   "a": "Prahasta",
+   "rel": "born_of",
+   "b": "Puṣpotkaṭā",
+   "words": "prahastaṃ ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.63",
+   "a": "Mahāpārśva",
+   "rel": "born_of",
+   "b": "Puṣpotkaṭā",
+   "words": "mahāpārśvaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.63",
+   "a": "Khara",
+   "rel": "born_of",
+   "b": "Puṣpotkaṭā",
+   "words": "kharaṃ tathā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.64",
+   "a": "Kumbhīnasī",
+   "rel": "born_of",
+   "b": "Puṣpotkaṭā",
+   "words": "kumbhīnasīṃ tathā kanyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.64",
+   "a": "Triśirā",
+   "rel": "born_of",
+   "b": "Balākā",
+   "words": "balāyāḥ śṛṇuta prajāḥ triśirā",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,63.64",
+   "a": "Dūṣaṇa",
+   "rel": "born_of",
+   "b": "Balākā",
+   "words": "dūṣaṇaścaiva",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,63.64",
+   "a": "Vidyujjihva",
+   "rel": "born_of",
+   "b": "Balākā",
+   "words": "vidyujjihvaś ca rākṣasaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,63.65",
+   "a": "Mālikā",
+   "rel": "born_of",
+   "b": "Balākā",
+   "words": "kanyā vai mālikā cāpi balāyāḥ prasavaḥ",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "LiP 1,63.68",
+   "a": "Atri",
+   "rel": "other",
+   "b": "Atri",
+   "words": "atreḥ patnyo daśaivāsan",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.69",
+   "a": "Bhadrā",
+   "rel": "daughter_of",
+   "b": "Bhadrāśva",
+   "words": "bhadrāśvasya ghṛtācyāṃ vai daśāpsarasi sūnavaḥ bhadrābhadrā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.71",
+   "a": "Prabhākara",
+   "rel": "husband_of",
+   "b": "Atri",
+   "words": "tāsāṃ bhartā prabhākaraḥ",
+   "doubt": true,
+   "check": "bad"
+  },
+  {
+   "ref": "LiP 1,63.74",
+   "a": "Soma",
+   "rel": "born_of",
+   "b": "Bhadrā",
+   "words": "bhadrāyāṃ janayāmāsa somaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.73",
+   "a": "Soma",
+   "rel": "son_of",
+   "b": "Atri",
+   "words": "prabhuratrirmaharṣibhiḥ bhadrāyāṃ janayāmāsa somaṃ putraṃ",
+   "doubt": false,
+   "ref_cited": "LiP 1,63.74",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.76",
+   "a": "Datta",
+   "rel": "brother_of",
+   "b": "Durvāsas",
+   "words": "datto hyatrivaro jyeṣṭho durvāsāstasya cānujaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.76",
+   "a": "Amalā",
+   "rel": "sister_of",
+   "b": "Datta",
+   "words": "yavīyasī svasā teṣām amalā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.83",
+   "a": "Śakti",
+   "rel": "son_of",
+   "b": "Vasiṣṭha",
+   "words": "arundhatyāṃ vasiṣṭhastu sutān utpādayacchatam jyāyaso 'janayacchakter",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.83",
+   "a": "Parāśara",
+   "rel": "son_of",
+   "b": "Śakti",
+   "words": "adṛśyantī parāśaram",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.83",
+   "a": "Parāśara",
+   "rel": "born_of",
+   "b": "Adṛśyantī",
+   "words": "adṛśyantī parāśaram",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.84",
+   "a": "Kṛṣṇa Dvaipāyana",
+   "rel": "son_of",
+   "b": "Parāśara",
+   "words": "kālī parāśarājjajñe kṛṣṇadvaipāyanaṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.84",
+   "a": "Kṛṣṇa Dvaipāyana",
+   "rel": "born_of",
+   "b": "Kālī",
+   "words": "kālī parāśarājjajñe",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.85",
+   "a": "Śuka",
+   "rel": "son_of",
+   "b": "Dvaipāyana",
+   "words": "dvaipāyano hyaraṇyāṃ vai śukam utpādayatsutam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.85",
+   "a": "Śuka",
+   "rel": "born_of",
+   "b": "Araṇī",
+   "words": "hyaraṇyāṃ vai śukam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.85",
+   "a": "Upamanyu",
+   "rel": "son_of",
+   "b": "Dvaipāyana",
+   "words": "upamanyuṃ ca pīvaryāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.85",
+   "a": "Upamanyu",
+   "rel": "born_of",
+   "b": "Pīvarī",
+   "words": "upamanyuṃ ca pīvaryāṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.87",
+   "a": "Kīrtimatī",
+   "rel": "wife_of",
+   "b": "Anuha",
+   "words": "patnī sā tvanuhasya ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.87",
+   "a": "Kīrtimatī",
+   "rel": "other",
+   "b": "Brahmadatta",
+   "words": "jananī brahmadattasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.89",
+   "a": "Indrapramiti",
+   "rel": "born_of",
+   "b": "Ghṛtācī",
+   "words": "vasiṣṭhasya kapiñjalyo ghṛtācyāmudapadyata",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.90",
+   "a": "Bhadra",
+   "rel": "other",
+   "b": "Pṛthu",
+   "words": "pṛthoḥ sutāyāṃ sambhūto bhadrastasyā bhavadvasuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "LiP 1,63.91",
+   "a": "Upamanyu",
+   "rel": "son_of",
+   "b": "Indrapramiti",
+   "words": "upamanyuḥ sutastasya",
+   "doubt": true,
+   "check": "verified"
+  }
+ ]
+}

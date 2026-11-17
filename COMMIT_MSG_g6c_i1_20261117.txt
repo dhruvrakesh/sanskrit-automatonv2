@@ -1,0 +1,14 @@
+G6c: the dynasties across the works; I1: the site's last two AI calls off the Lovable gateway (VAMSA_ALIGN_2026_11_17, AI_GATEWAY_OFF_2026_11_17, DOCS117_2026_11_17)
+
+- scripts\vamsa_align.py (new, free, read-only of the readings): each dynasty by its founder and his father, its
+  line in every work that has it, the lines aligned generation by generation (agree, most, differ, one work) and each
+  two works' agreement; one person by two names within a work from the verified "other" statements. Writes
+  exports\vamsa_align.md, one CSV a dynasty, data\vamsa_read\aligned.json. tests: test_vamsa_align_2026_11_17.
+- docs\srangam\AI_GATEWAY_OFF_2026-11-17 and scripts\patch_srangam_ai_gateway_off_2026_11_17.py (the Srangam kit):
+  detect-duplicate-articles and suggest-tag-categories call _shared/ai-provider.ts (Gemini 2.5 Flash on the project's
+  key, then OpenAI gpt-4o-mini), logged in srangam_ai_usage; a vitest that no edge function names the gateway; Phase
+  AS, invariant 69. tests: test_srangam_ai_gateway_off_2026_11_17.
+- ASKS section 30 (done or not; G6d's design), STATE section 52, RUNBOOK 17 Nov, night. tests: test_docs117_2026_11_17.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

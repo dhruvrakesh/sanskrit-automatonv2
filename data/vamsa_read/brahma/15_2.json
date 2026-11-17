@@ -1,0 +1,84 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 15,
+ "part": 2,
+ "refs": [
+  "BrP 15.59",
+  "BrP 15.60",
+  "BrP 15.61",
+  "BrP 15.62"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:09:58",
+ "reply": "Reading the verses:\n\n15.59 lists names: Nyagrodha, Sunāmā, Kaṅka, Subhūṣaṇa, Rāṣṭrapāla, Sutanu, Anāvṛṣṭi. The verse itself states no relation between them. 15.60 says \"teṣām svasāraḥ pañcāsan\", so they had five sisters: Kaṃsā, Kaṃsavatī, Sutanū, Rāṣṭrapālī, Kaṅkā. The \"teṣām\" refers to the brothers named in 15.59 (and probably Kaṃsa earlier, but that is not named here). I will give each sister as sister_of the brothers; the brothers named in 15.59 number seven, and five sisters times seven brothers is 35 statements. That is too many and the reference is unclear, so I give the sisters as sister_of Nyagrodha, the first-named brother, with doubt true.\n\n15.61: Ugrasena is \"kukurodbhavaḥ\", born in the Kukura line. This is descendant_of Kukura, with the words \"kukurodbhavaḥ\". The line is \"kukurāṇām vaṃśam\", so the Kukuras are named after Kukura; I give line_of Kukura, since the text says \"kukurāṇām imaṃ vaṃśam\".\n\nI will record the sisters as sister_of Nyagrodha with doubt true, and Ugrasena as descendant_of Kukura.\n\n```json\n{\"statements\":[\n{\"ref\":\"BrP 15.60\",\"a\":\"Kaṃsā\",\"rel\":\"sister_of\",\"b\":\"Nyagrodha\",\"words\":\"teṣāṃ svasāraḥ pañcāsan kaṃsā\",\"doubt\":true},\n{\"ref\":\"BrP 15.60\",\"a\":\"Kaṃsavatī\",\"rel\":\"sister_of\",\"b\":\"Nyagrodha\",\"words\":\"svasāraḥ pañcāsan kaṃsā kaṃsavatī\",\"doubt\":true},\n{\"ref\":\"BrP 15.60\",\"a\":\"Sutanū\",\"rel\":\"sister_of\",\"b\":\"Nyagrodha\",\"words\":\"sutanū rāṣṭrapālī ca\",\"doubt\":true},\n{\"ref\":\"BrP 15.60\",\"a\":\"Rāṣṭrapālī\",\"rel\":\"sister_of\",\"b\":\"Nyagrodha\",\"words\":\"rāṣṭrapālī ca kaṅkā\",\"doubt\":true},\n{\"ref\":\"BrP 15.60\",\"a\":\"Kaṅkā\",\"rel\":\"sister_of\",\"b\":\"Nyagrodha\",\"words\":\"kaṅkā caiva varāṅganā\",\"doubt\":true},\n{\"ref\":\"BrP 15.61\",\"a\":\"Ugrasena\",\"rel\":\"descendant_of\",\"b\":\"Kukura\",\"words\":\"kukurodbhavaḥ\",\"doubt\":false}\n]}\n```",
+ "stop": "end_turn",
+ "cost_usd": 0.01188,
+ "tokens": {
+  "input": 1209,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 946,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 15.60",
+   "a": "Kaṃsā",
+   "rel": "sister_of",
+   "b": "Nyagrodha",
+   "words": "teṣāṃ svasāraḥ pañcāsan kaṃsā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 15.60",
+   "a": "Kaṃsavatī",
+   "rel": "sister_of",
+   "b": "Nyagrodha",
+   "words": "svasāraḥ pañcāsan kaṃsā kaṃsavatī",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 15.60",
+   "a": "Sutanū",
+   "rel": "sister_of",
+   "b": "Nyagrodha",
+   "words": "sutanū rāṣṭrapālī ca",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 15.60",
+   "a": "Rāṣṭrapālī",
+   "rel": "sister_of",
+   "b": "Nyagrodha",
+   "words": "rāṣṭrapālī ca kaṅkā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 15.60",
+   "a": "Kaṅkā",
+   "rel": "sister_of",
+   "b": "Nyagrodha",
+   "words": "kaṅkā caiva varāṅganā",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 15.61",
+   "a": "Ugrasena",
+   "rel": "descendant_of",
+   "b": "Kukura",
+   "words": "kukurodbhavaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

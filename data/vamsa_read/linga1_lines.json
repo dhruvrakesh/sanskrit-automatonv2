@@ -1,0 +1,130 @@
+{
+ "mark": "VAMSA_HEAL_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "lines": [
+  [
+   {
+    "name": "Kaśyapa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vatsara",
+    "ref": "LiP 1,63.50",
+    "words": "kaśyapasya mahātmanaḥ brahmayogātsutau"
+   },
+   {
+    "name": "Naidhruva",
+    "ref": "LiP 1,63.51",
+    "words": "vatsarānnaidhruvo jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Nariṣyanta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dama",
+    "ref": "LiP 1,63.56",
+    "words": "nariṣyantaḥ putra āsīd damaḥ"
+   },
+   {
+    "name": "Tṛṇabindu",
+    "ref": "LiP 1,63.57",
+    "words": "damasya tasya dāyādas tṛṇabinduriti"
+   }
+  ],
+  [
+   {
+    "name": "Śakti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Parāśara",
+    "ref": "LiP 1,63.83",
+    "words": "adṛśyantī parāśaram"
+   },
+   {
+    "name": "Kṛṣṇa Dvaipāyana",
+    "ref": "LiP 1,63.84",
+    "words": "kālī parāśarājjajñe kṛṣṇadvaipāyanaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "LiP 1,63.73",
+    "words": "prabhuratrirmaharṣibhiḥ bhadrāyāṃ janayāmāsa somaṃ putraṃ"
+   }
+  ],
+  [
+   {
+    "name": "Brahmā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pulastya",
+    "ref": "LiP 1,64.114",
+    "words": "pulastyo brahmaṇaḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Dakṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "LiP 1,63.5",
+    "words": "haryaśvān dakṣaputrān"
+   }
+  ],
+  [
+   {
+    "name": "Dvaipāyana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śuka",
+    "ref": "LiP 1,63.85",
+    "words": "dvaipāyano hyaraṇyāṃ vai śukam utpādayatsutam"
+   }
+  ],
+  [
+   {
+    "name": "Indrapramiti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Upamanyu",
+    "ref": "LiP 1,63.91",
+    "words": "upamanyuḥ sutastasya"
+   }
+  ],
+  [
+   {
+    "name": "Viśravā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vaiśravaṇa",
+    "ref": "LiP 1,63.61",
+    "words": "jyeṣṭhaṃ vaiśravaṇaṃ tasmāt suṣuve devavarṇinī"
+   }
+  ]
+ ]
+}

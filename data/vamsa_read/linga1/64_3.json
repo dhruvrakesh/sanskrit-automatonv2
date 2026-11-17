@@ -1,0 +1,46 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "linga1",
+ "title": "Lingapurana, book 1",
+ "chapter": 64,
+ "part": 3,
+ "refs": [
+  "LiP 1,64.113",
+  "LiP 1,64.114",
+  "LiP 1,64.115",
+  "LiP 1,64.116",
+  "LiP 1,64.117",
+  "LiP 1,64.118",
+  "LiP 1,64.119",
+  "LiP 1,64.120",
+  "LiP 1,64.121",
+  "LiP 1,64.122",
+  "LiP 1,64.123"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_liGgapurANa1-108.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: members of the Sansknet Project)",
+ "at": "2026-11-17T21:11:18",
+ "reply": "Only two verses state kinship:\n\n- [LiP 1,64.114] says Pulastya is the son of Brahmā (\"pulastyo brahmaṇaḥ sutaḥ\").\n- [LiP 1,64.123] says the account is of the Vāsiṣṭhas and of the son of Śakti (\"śaktisūnoś\"). The text does not name him in that verse, so I have not named him. Parāśara is the one addressed earlier, but linking him to Śakti would be an inference. I left that out. The \"Vāsiṣṭhas\" form is a clan name derived from Vasiṣṭha, but the verse does not say outright that the line is named after him, so I did not list a line_of statement.\n\n{\"statements\": [{\"ref\": \"LiP 1,64.114\", \"a\": \"Pulastya\", \"rel\": \"son_of\", \"b\": \"Brahmā\", \"words\": \"pulastyo brahmaṇaḥ sutaḥ\", \"doubt\": false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0067,
+ "tokens": {
+  "input": 1763,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 317,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "LiP 1,64.114",
+   "a": "Pulastya",
+   "rel": "son_of",
+   "b": "Brahmā",
+   "words": "pulastyo brahmaṇaḥ sutaḥ",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

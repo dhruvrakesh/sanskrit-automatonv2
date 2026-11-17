@@ -1,0 +1,340 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 12,
+ "part": 0,
+ "refs": [
+  "BrP 12.1",
+  "BrP 12.2",
+  "BrP 12.3",
+  "BrP 12.4",
+  "BrP 12.5",
+  "BrP 12.6",
+  "BrP 12.7",
+  "BrP 12.8",
+  "BrP 12.9",
+  "BrP 12.10",
+  "BrP 12.11",
+  "BrP 12.12",
+  "BrP 12.13",
+  "BrP 12.14",
+  "BrP 12.15",
+  "BrP 12.16",
+  "BrP 12.17",
+  "BrP 12.18",
+  "BrP 12.19",
+  "BrP 12.20",
+  "BrP 12.21",
+  "BrP 12.22",
+  "BrP 12.23",
+  "BrP 12.24",
+  "BrP 12.25",
+  "BrP 12.26",
+  "BrP 12.27",
+  "BrP 12.28",
+  "BrP 12.29",
+  "BrP 12.30",
+  "BrP 12.31",
+  "BrP 12.32",
+  "BrP 12.33",
+  "BrP 12.34",
+  "BrP 12.35",
+  "BrP 12.36",
+  "BrP 12.37",
+  "BrP 12.38",
+  "BrP 12.39",
+  "BrP 12.40",
+  "BrP 12.41",
+  "BrP 12.42",
+  "BrP 12.43",
+  "BrP 12.44",
+  "BrP 12.45",
+  "BrP 12.46",
+  "BrP 12.47",
+  "BrP 12.48",
+  "BrP 12.49",
+  "BrP 12.50",
+  "BrP 12.51"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:07:05",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 12.1\",\"a\":\"Yati\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Saṃyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Āyāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Pārśvaka\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nahuṣasya tu dāyādāḥ ṣaḍ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Yati\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Yayāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Saṃyāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Āyāti\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 12.1\",\"a\":\"Pārśvaka\",\"rel\":\"born_of\",\"b\":\"Virajā\",\"words\":\"utpannāḥ pitṛkanyāyāṃ virajāyāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 12.3\",\"a\":\"Gā\",\"rel\":\"daughter_of\",\"b\":\"Kakutstha\",\"words\":\"kakutsthakanyāṃ gāṃ nāma\",\"doubt\":false},\n{\"ref\":\"BrP 12.3\",\"a\":\"Gā\",\"rel\":\"wife_of\",\"b\":\"Yati\",\"words\":\"kakutsthakanyāṃ gāṃ nāma lebhe\",\"doubt\":true},\n{\"ref\":\"BrP 12.4\",\"a\":\"Devayānī\",\"rel\":\"daughter_of\",\"b\":\"Uśanas\",\"words\":\"devayānīm uśanasaḥ sutāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 12.4\",\"a\":\"Devayānī\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"bhāryām avāpa saḥ\",\"doubt\":false},\n{\"ref\":\"BrP 12.5\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Vṛṣaparvan\",\"words\":\"tanayāṃ vṛṣaparvaṇaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 12.5\",\"a\":\"Śarmiṣṭhā\",\"rel\":\"wife_of\",\"b\":\"Yayāti\",\"words\":\"śarmiṣṭhām āsurīṃ caiva\",\"doubt\":true},\n{\"ref\":\"BrP 12.5\",\"a\":\"Yadu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayānī vyajāyata\",\"doubt\":false},\n{\"ref\":\"BrP 12.5\",\"a\":\"Turvasu\",\"rel\":\"born_of\",\"b\":\"Devayānī\",\"words\":\"yaduṃ ca turvasuṃ caiva devayānī vyajāyata\",\"doubt\":false},\n{\"ref\":\"BrP 12.6\",\"a\":\"Druhyu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyaṃ cānuṃ ca puruṃ ca śarmiṣṭhā\",\"doubt\":false},\n{\"ref\":\"BrP 12.6\",\"a\":\"Anu\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyaṃ cānuṃ ca puruṃ ca śarmiṣṭhā\",\"doubt\":false},\n{\"ref\":\"BrP 12.6\",\"a\":\"Puru\",\"rel\":\"born_of\",\"b\":\"Śarmiṣṭhā\",\"words\":\"druhyaṃ cānuṃ ca puruṃ ca śarmiṣṭhā\",\"doubt\":false},\n{\"ref\":\"BrP 12.10\",\"a\":\"Janamejaya\",\"rel\":\"son_of\",\"b\":\"Kuru\",\"words\":\"kuroḥ putrasya rājendrarājñaḥ pārīkṣitasya\",\"doubt\":true},\n{\"ref\":\"BrP 12.10\",\"a\":\"Janamejaya\",\"rel\":\"descendant_of\",\"b\":\"Kuru\",\"words\":\"kauravāj janamejayāt\",\"doubt\":true},\n{\"ref\":\"BrP 12.24\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"yadum abravīt jarāṃ me pratigṛhṇīṣva putra\",\"doubt\":false},\n{\"ref\":\"BrP 12.18\",\"a\":\"Yadu\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"vibhajya pañcadhā rājyaṃ putrāṇāṃ nāhuṣas\",\"doubt\":false},\n{\"ref\":\"BrP 12.18\",\"a\":\"Yayāti\",\"rel\":\"son_of\",\"b\":\"Nahuṣa\",\"words\":\"nāhuṣas\",\"doubt\":false},\n{\"ref\":\"BrP 12.19\",\"a\":\"Yadu\",\"rel\":\"brother_of\",\"b\":\"Puru\",\"words\":\"yaduṃ jyeṣṭhaṃ\",\"doubt\":true},\n{\"ref\":\"BrP 12.36\",\"a\":\"Puru\",\"rel\":\"son_of\",\"b\":\"Yayāti\",\"words\":\"pituḥ puruḥ\",\"doubt\":false},\n{\"ref\":\"BrP 12.50\",\"a\":\"Yādavas\",\"rel\":\"line_of\",\"b\":\"Yadu\",\"words\":\"yados tu vaṃśaṃ\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03147,
+ "tokens": {
+  "input": 4679,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 2211,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 12.1",
+   "a": "Yati",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Saṃyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Āyāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Pārśvaka",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nahuṣasya tu dāyādāḥ ṣaḍ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Yati",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Yayāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Saṃyāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Āyāti",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.1",
+   "a": "Pārśvaka",
+   "rel": "born_of",
+   "b": "Virajā",
+   "words": "utpannāḥ pitṛkanyāyāṃ virajāyāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.3",
+   "a": "Gā",
+   "rel": "daughter_of",
+   "b": "Kakutstha",
+   "words": "kakutsthakanyāṃ gāṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.3",
+   "a": "Gā",
+   "rel": "wife_of",
+   "b": "Yati",
+   "words": "kakutsthakanyāṃ gāṃ nāma lebhe",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.4",
+   "a": "Devayānī",
+   "rel": "daughter_of",
+   "b": "Uśanas",
+   "words": "devayānīm uśanasaḥ sutāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.4",
+   "a": "Devayānī",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "bhāryām avāpa saḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.5",
+   "a": "Śarmiṣṭhā",
+   "rel": "daughter_of",
+   "b": "Vṛṣaparvan",
+   "words": "tanayāṃ vṛṣaparvaṇaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.5",
+   "a": "Śarmiṣṭhā",
+   "rel": "wife_of",
+   "b": "Yayāti",
+   "words": "śarmiṣṭhām āsurīṃ caiva",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.5",
+   "a": "Yadu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.5",
+   "a": "Turvasu",
+   "rel": "born_of",
+   "b": "Devayānī",
+   "words": "yaduṃ ca turvasuṃ caiva devayānī vyajāyata",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.6",
+   "a": "Druhyu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyaṃ cānuṃ ca puruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.6",
+   "a": "Anu",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyaṃ cānuṃ ca puruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.6",
+   "a": "Puru",
+   "rel": "born_of",
+   "b": "Śarmiṣṭhā",
+   "words": "druhyaṃ cānuṃ ca puruṃ ca śarmiṣṭhā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.10",
+   "a": "Janamejaya",
+   "rel": "son_of",
+   "b": "Kuru",
+   "words": "kuroḥ putrasya rājendrarājñaḥ pārīkṣitasya",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.9",
+   "a": "Janamejaya",
+   "rel": "descendant_of",
+   "b": "Kuru",
+   "words": "kauravāj janamejayāt",
+   "doubt": true,
+   "ref_cited": "BrP 12.10",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.24",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "yadum abravīt jarāṃ me pratigṛhṇīṣva putra",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.18",
+   "a": "Yadu",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "vibhajya pañcadhā rājyaṃ putrāṇāṃ nāhuṣas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.18",
+   "a": "Yayāti",
+   "rel": "son_of",
+   "b": "Nahuṣa",
+   "words": "nāhuṣas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.19",
+   "a": "Yadu",
+   "rel": "brother_of",
+   "b": "Puru",
+   "words": "yaduṃ jyeṣṭhaṃ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.36",
+   "a": "Puru",
+   "rel": "son_of",
+   "b": "Yayāti",
+   "words": "pituḥ puruḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 12.50",
+   "a": "Yādavas",
+   "rel": "line_of",
+   "b": "Yadu",
+   "words": "yados tu vaṃśaṃ",
+   "doubt": false,
+   "check": "words"
+  }
+ ]
+}

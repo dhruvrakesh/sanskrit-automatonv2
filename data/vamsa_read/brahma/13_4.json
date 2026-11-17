@@ -1,0 +1,192 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 13,
+ "part": 4,
+ "refs": [
+  "BrP 13.174",
+  "BrP 13.175",
+  "BrP 13.176",
+  "BrP 13.177",
+  "BrP 13.178",
+  "BrP 13.179",
+  "BrP 13.180",
+  "BrP 13.181",
+  "BrP 13.182",
+  "BrP 13.183",
+  "BrP 13.184",
+  "BrP 13.185",
+  "BrP 13.186",
+  "BrP 13.187",
+  "BrP 13.188",
+  "BrP 13.189",
+  "BrP 13.190",
+  "BrP 13.191",
+  "BrP 13.192",
+  "BrP 13.193",
+  "BrP 13.194",
+  "BrP 13.195",
+  "BrP 13.196",
+  "BrP 13.197",
+  "BrP 13.198",
+  "BrP 13.199",
+  "BrP 13.200",
+  "BrP 13.201",
+  "BrP 13.202",
+  "BrP 13.203",
+  "BrP 13.204",
+  "BrP 13.205",
+  "BrP 13.206",
+  "BrP 13.207",
+  "BrP 13.208",
+  "BrP 13.209",
+  "BrP 13.210",
+  "BrP 13.211",
+  "BrP 13.212",
+  "BrP 13.213"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:08:48",
+ "reply": "{\"statements\":[{\"ref\":\"BrP 13.193\",\"a\":\"Vasiṣṭha\",\"rel\":\"son_of\",\"b\":\"Varuṇa\",\"words\":\"yaṃ lebhe varuṇaḥ putraṃ purā bhāsvantam uttamam vasiṣṭhaṃ nāma\",\"doubt\":false},{\"ref\":\"BrP 13.196\",\"a\":\"Rāma\",\"rel\":\"son_of\",\"b\":\"Jamadagni\",\"words\":\"rāmo nāma mahābāhur jāmadagnyaḥ\",\"doubt\":false},{\"ref\":\"BrP 13.201\",\"a\":\"Śūrasena\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},{\"ref\":\"BrP 13.201\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},{\"ref\":\"BrP 13.201\",\"a\":\"Vṛṣaṇa\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},{\"ref\":\"BrP 13.201\",\"a\":\"Madhupadhvaja\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},{\"ref\":\"BrP 13.201\",\"a\":\"Jayadhvaja\",\"rel\":\"son_of\",\"b\":\"Kārtavīrya\",\"words\":\"kārtavīryasya tanayā\",\"doubt\":false},{\"ref\":\"BrP 13.202\",\"a\":\"Tālajaṅgha\",\"rel\":\"son_of\",\"b\":\"Jayadhvaja\",\"words\":\"jayadhvajasya putras tu tālajaṅgho\",\"doubt\":false},{\"ref\":\"BrP 13.202\",\"a\":\"Tālajaṅghā\",\"rel\":\"line_of\",\"b\":\"Tālajaṅgha\",\"words\":\"tasya putraśataṃ khyātās tālajaṅghā iti smṛtāḥ\",\"doubt\":false},{\"ref\":\"BrP 13.205\",\"a\":\"Madhu\",\"rel\":\"son_of\",\"b\":\"Vṛṣa\",\"words\":\"vṛṣo vaṃśadharas tatra tasya putro 'bhavan madhuḥ\",\"doubt\":false},{\"ref\":\"BrP 13.206\",\"a\":\"Vṛṣaṇa\",\"rel\":\"son_of\",\"b\":\"Madhu\",\"words\":\"madhoḥ putraśataṃ tv āsīd vṛṣaṇas tasya vaṃśakṛt\",\"doubt\":true},{\"ref\":\"BrP 13.206\",\"a\":\"Vṛṣṇi\",\"rel\":\"line_of\",\"b\":\"Vṛṣaṇa\",\"words\":\"vṛṣaṇād vṛṣṇayaḥ sarve\",\"doubt\":false},{\"ref\":\"BrP 13.206\",\"a\":\"Mādhava\",\"rel\":\"line_of\",\"b\":\"Madhu\",\"words\":\"madhos tu mādhavāḥ smṛtāḥ\",\"doubt\":false},{\"ref\":\"BrP 13.207\",\"a\":\"Yādava\",\"rel\":\"line_of\",\"b\":\"Yadu\",\"words\":\"yādavā yadunāmnā te nirucyante\",\"doubt\":false}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0188,
+ "tokens": {
+  "input": 3951,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1090,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 13.193",
+   "a": "Vasiṣṭha",
+   "rel": "son_of",
+   "b": "Varuṇa",
+   "words": "yaṃ lebhe varuṇaḥ putraṃ purā bhāsvantam uttamam vasiṣṭhaṃ nāma",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.196",
+   "a": "Rāma",
+   "rel": "son_of",
+   "b": "Jamadagni",
+   "words": "rāmo nāma mahābāhur jāmadagnyaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.201",
+   "a": "Śūrasena",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.201",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.201",
+   "a": "Vṛṣaṇa",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.201",
+   "a": "Madhupadhvaja",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.201",
+   "a": "Jayadhvaja",
+   "rel": "son_of",
+   "b": "Kārtavīrya",
+   "words": "kārtavīryasya tanayā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.202",
+   "a": "Tālajaṅgha",
+   "rel": "son_of",
+   "b": "Jayadhvaja",
+   "words": "jayadhvajasya putras tu tālajaṅgho",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.202",
+   "a": "Tālajaṅghā",
+   "rel": "line_of",
+   "b": "Tālajaṅgha",
+   "words": "tasya putraśataṃ khyātās tālajaṅghā iti smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.205",
+   "a": "Madhu",
+   "rel": "son_of",
+   "b": "Vṛṣa",
+   "words": "vṛṣo vaṃśadharas tatra tasya putro 'bhavan madhuḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.206",
+   "a": "Vṛṣaṇa",
+   "rel": "son_of",
+   "b": "Madhu",
+   "words": "madhoḥ putraśataṃ tv āsīd vṛṣaṇas tasya vaṃśakṛt",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.206",
+   "a": "Vṛṣṇi",
+   "rel": "line_of",
+   "b": "Vṛṣaṇa",
+   "words": "vṛṣaṇād vṛṣṇayaḥ sarve",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.206",
+   "a": "Mādhava",
+   "rel": "line_of",
+   "b": "Madhu",
+   "words": "madhos tu mādhavāḥ smṛtāḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 13.207",
+   "a": "Yādava",
+   "rel": "line_of",
+   "b": "Yadu",
+   "words": "yādavā yadunāmnā te nirucyante",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}

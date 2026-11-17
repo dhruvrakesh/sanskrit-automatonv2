@@ -1,0 +1,35 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 3,
+ "part": 3,
+ "refs": [
+  "BrP 3.117",
+  "BrP 3.118",
+  "BrP 3.119",
+  "BrP 3.120",
+  "BrP 3.121",
+  "BrP 3.122",
+  "BrP 3.123",
+  "BrP 3.124",
+  "BrP 3.125",
+  "BrP 3.126"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:05:13",
+ "reply": "The verses name only Diti, Indra (Pākaśāsana, Śakra, Maghavat) and the Maruts, and the kinship they state is thin.\n\n- BrP 3.119–3.121: Indra cut Diti's embryo into seven parts, and each part into seven more. The Maruts came from this. The text does not say outright that they are Diti's sons, and it names no father. The words \"maruto nāma te devā babhūvuḥ\" say only that the divine beings called Maruts came into being. That is origin, not a stated son or born-of relation, so I leave it out.\n- BrP 3.124: Hari gave kingdoms to the Prajāpatis, which is not succession or kinship.\n- BrP 3.125: the verse identifies Hari with several epithets, which gives no kinship.\n\nNo verse gives a son, daughter, wife, sibling or succession relation that can be stated from its words alone.\n\n{\"statements\": []}",
+ "stop": "end_turn",
+ "cost_usd": 0.00634,
+ "tokens": {
+  "input": 1656,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 303,
+  "thinking": 0
+ },
+ "statements": []
+}

@@ -5,6 +5,637 @@
  "lines": [
   [
    {
+    "name": "Kāśya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kāśipa",
+    "ref": "BndP 2,67.7",
+    "words": "kāśyasya kāśipo rājā putro"
+   },
+   {
+    "name": "Dīrghatapas",
+    "ref": "BndP 2,67.7",
+    "words": "kāśipo rājā putro dīrghatapāstathā"
+   },
+   {
+    "name": "Dhanva",
+    "ref": "BndP 2,67.7",
+    "words": "dhanvaśca dīrghatapaso"
+   },
+   {
+    "name": "Dhanvantari",
+    "ref": "BndP 2,67.7",
+    "words": "vidvāndhanvantarīstataḥ"
+   },
+   {
+    "name": "Ketumat",
+    "ref": "BndP 2,67.25",
+    "words": "dhanvantarisutaścāpi ketumāniti"
+   },
+   {
+    "name": "Bhīmaratha",
+    "ref": "BndP 2,67.25",
+    "words": "ketumataḥ putro jajñe bhīmaratho"
+   },
+   {
+    "name": "Divodāsa",
+    "ref": "BndP 2,67.26",
+    "words": "putro bhīmarathasyāpi jāto"
+   },
+   {
+    "name": "Pratardana",
+    "ref": "BndP 2,67.67",
+    "words": "divodāsāddṛṣadvatyāṃ vīro jajñe pratarddanaḥ"
+   },
+   {
+    "name": "Vatsa",
+    "ref": "BndP 2,67.69",
+    "words": "pratardanasya putrau dvau vatso gargaśca"
+   },
+   {
+    "name": "Alarka",
+    "ref": "BndP 2,67.69",
+    "words": "vatsaputro hyalarkastu"
+   },
+   {
+    "name": "Sannati",
+    "ref": "BndP 2,67.69",
+    "words": "sannatistasya cātmajaḥ"
+   },
+   {
+    "name": "Sunītha",
+    "ref": "BndP 2,67.73",
+    "words": "sannaterapi dāyādaḥ sunītho nāma dhārmikaḥ"
+   },
+   {
+    "name": "Kṣema",
+    "ref": "BndP 2,67.73",
+    "words": "sunīthasya tu dāyādaḥ kṣaimākhyo nāma dhārmikaḥ"
+   },
+   {
+    "name": "Ketumān",
+    "ref": "BndP 2,67.74",
+    "words": "kṣemasya ketumānputraḥ"
+   },
+   {
+    "name": "Suketu",
+    "ref": "BndP 2,67.74",
+    "words": "suketustasya cātmajaḥ"
+   },
+   {
+    "name": "Dharmaketu",
+    "ref": "BndP 2,67.74",
+    "words": "suketutanayaścāpi dharmaketuriti śrutaḥ"
+   },
+   {
+    "name": "Satyaketu",
+    "ref": "BndP 2,67.75",
+    "words": "dharmaketostu dāyādaḥ satyaketurmahārathaḥ"
+   },
+   {
+    "name": "Vibhu",
+    "ref": "BndP 2,67.75",
+    "words": "satyaketusutaścāpi vibhurnāma prajeśvaraḥ"
+   },
+   {
+    "name": "Suvibhu",
+    "ref": "BndP 2,67.76",
+    "words": "suvibhustu vibhoḥ putraḥ"
+   },
+   {
+    "name": "Sukumāra",
+    "ref": "BndP 2,67.76",
+    "words": "sukumārastataḥ smṛtaḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "BndP 2,67.76",
+    "words": "sukumārasya putrastu dhṛṣṭaketuḥ"
+   },
+   {
+    "name": "Veṇuhotra",
+    "ref": "BndP 2,67.77",
+    "words": "dhṛṣṭaketostu dāyādo veṇuhotraḥ"
+   },
+   {
+    "name": "Gārgya",
+    "ref": "BndP 2,67.77",
+    "words": "veṇuhotrasutaścāpi gārgyo vai nāma viśrutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Janaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Udāvasu",
+    "ref": "BndP 2,64.6",
+    "words": "janakāccā pyudāvasuḥ"
+   },
+   {
+    "name": "Nandivardhana",
+    "ref": "BndP 2,64.7",
+    "words": "udāvasostu dharmātmā jāto 'sau nandivarddhanaḥ"
+   },
+   {
+    "name": "Suketu",
+    "ref": "BndP 2,64.7",
+    "words": "nandivardhanataḥ śūraḥ suketurnāma"
+   },
+   {
+    "name": "Devarāta",
+    "ref": "BndP 2,64.8",
+    "words": "suketorapi dharmātmā devarāto"
+   },
+   {
+    "name": "Bṛhaduktha",
+    "ref": "BndP 2,64.8",
+    "words": "devarātasya dharmātmā bṛhaduktha"
+   },
+   {
+    "name": "Mahāvīrya",
+    "ref": "BndP 2,64.9",
+    "words": "bṛhadukthasya tanayo mahāvīryaḥ"
+   },
+   {
+    "name": "Sudhṛti",
+    "ref": "BndP 2,64.9",
+    "words": "mahāvīryasya dhṛtimān sudhṛti stasya cātmajaḥ"
+   },
+   {
+    "name": "Dhṛṣṭaketu",
+    "ref": "BndP 2,64.10",
+    "words": "sudhṛterapi dharmātmā dhṛṣṭaketuḥ"
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "BndP 2,64.10",
+    "words": "dhṛṣṭaketusutaścāpi haryaśvo"
+   },
+   {
+    "name": "Maru",
+    "ref": "BndP 2,64.11",
+    "words": "haryaśvasya maruḥ putro"
+   },
+   {
+    "name": "Pratiṃbaka",
+    "ref": "BndP 2,64.11",
+    "words": "maroḥ putraḥ pratiṃbakaḥ"
+   },
+   {
+    "name": "Kīrttiratha",
+    "ref": "BndP 2,64.11",
+    "words": "pratiṃbakasya dharmātmā rājā kīrttirathaḥ"
+   },
+   {
+    "name": "Devamīḍha",
+    "ref": "BndP 2,64.12",
+    "words": "putraḥ kīrttirathasyāpi devamīḍha"
+   },
+   {
+    "name": "Vibudha",
+    "ref": "BndP 2,64.12",
+    "words": "devamīḍhasya vibudho"
+   },
+   {
+    "name": "Mahādhṛti",
+    "ref": "BndP 2,64.12",
+    "words": "vibudhasya mahādhṛtiḥ"
+   },
+   {
+    "name": "Kīrtirāta",
+    "ref": "BndP 2,64.13",
+    "words": "mahādhṛtisuto rājā kīrttirātaḥ"
+   },
+   {
+    "name": "Mahāroma",
+    "ref": "BndP 2,64.13",
+    "words": "kīrtirātātmajo vidvān mahārometi"
+   },
+   {
+    "name": "Svarṇaroma",
+    "ref": "BndP 2,64.14",
+    "words": "mahāromṇastu vikhyātaḥ svarṇaromā vyajāyata"
+   },
+   {
+    "name": "Hrasvaroma",
+    "ref": "BndP 2,64.14",
+    "words": "svarṇaromātmajaścāpi hrasvaromābhavannṛpaḥ"
+   },
+   {
+    "name": "Sarid­dhvaja",
+    "ref": "BndP 2,64.15",
+    "words": "hrasvaromānmajo vidvān sariddhvaja"
+   }
+  ],
+  [
+   {
+    "name": "Nabhas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Puṇḍarīka",
+    "ref": "BndP 2,63.202",
+    "words": "nabhasaḥ puṇḍarīkastu"
+   },
+   {
+    "name": "Kṣemadhanvan",
+    "ref": "BndP 2,63.202",
+    "words": "puṇḍarīkastu kṣema dhanvā tataḥ smṛtaḥ"
+   },
+   {
+    "name": "Devānīka",
+    "ref": "BndP 2,63.203",
+    "words": "kṣemadhanvasuto rājā devānīkaḥ"
+   },
+   {
+    "name": "Ahīnagu",
+    "ref": "BndP 2,63.203",
+    "words": "āsīdahīnagurnāma devānīkātmajaḥ"
+   },
+   {
+    "name": "Pāriyātra",
+    "ref": "BndP 2,63.204",
+    "words": "ahīna gostu dāyādaḥ pāriyātro"
+   },
+   {
+    "name": "Dala",
+    "ref": "BndP 2,63.204",
+    "words": "dalastasyātmajaścāpi"
+   },
+   {
+    "name": "Bala",
+    "ref": "BndP 2,63.204",
+    "words": "tasmājjajñe balo nṛpaḥ"
+   },
+   {
+    "name": "Ulūka",
+    "ref": "BndP 2,63.205",
+    "words": "ulūko nāma dharmātmā balaputro babhūva"
+   },
+   {
+    "name": "Vajranābha",
+    "ref": "BndP 2,63.205",
+    "words": "vajranābhaḥ sutastasya"
+   },
+   {
+    "name": "Śaṅkhaṇa",
+    "ref": "BndP 2,63.205",
+    "words": "śaṅkhaṇastasya cātmajaḥ"
+   },
+   {
+    "name": "Vyuṣitāśva",
+    "ref": "BndP 2,63.206",
+    "words": "śaṅkhaṇasya suto vidvān vyuṣitāśva"
+   },
+   {
+    "name": "Viśvasaha",
+    "ref": "BndP 2,63.206",
+    "words": "vyuṣitāśvasutaścāpi rājā viśvasahaḥ"
+   },
+   {
+    "name": "Hiraṇyanābha",
+    "ref": "BndP 2,63.207",
+    "words": "hiraṇyanābhaḥ kauśalyo variṣṭhastatsuto 'bhavat"
+   },
+   {
+    "name": "Puṣpa",
+    "ref": "BndP 2,63.209",
+    "words": "puṣpastasya suto vidvān"
+   },
+   {
+    "name": "Dhruvasaṃdhi",
+    "ref": "BndP 2,63.209",
+    "words": "dhruvasaṃdhiśca tatsutaḥ"
+   },
+   {
+    "name": "Sudarśana",
+    "ref": "BndP 2,63.209",
+    "words": "sudarśanastasya suto"
+   },
+   {
+    "name": "Agnivarṇa",
+    "ref": "BndP 2,63.209",
+    "words": "hyagnivarmaḥ sudarśanāt"
+   },
+   {
+    "name": "Śīghra",
+    "ref": "BndP 2,63.210",
+    "words": "agnivarṇasya śīghrastu"
+   }
+  ],
+  [
+   {
+    "name": "Dṛḍhāśva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Haryaśva",
+    "ref": "BndP 2,63.63",
+    "words": "dhaindhumārirdṛḍhāśvaśca haryaśvastasya cātmajaḥ"
+   },
+   {
+    "name": "Nikuṃbha",
+    "ref": "BndP 2,63.64",
+    "words": "haryaśvasya nikuṃbho 'bhūt"
+   },
+   {
+    "name": "Saṃhatāśva",
+    "ref": "BndP 2,63.64",
+    "words": "saṃhatāśvo nikuṃbhasya suto"
+   },
+   {
+    "name": "Kṛśāśva",
+    "ref": "BndP 2,63.65",
+    "words": "kṛśāśvaścākṛtāśvaśca saṃhatāśvasutāvubhau"
+   },
+   {
+    "name": "Prasenajit",
+    "ref": "BndP 2,63.66",
+    "words": "putraścāsya prasenajit"
+   },
+   {
+    "name": "Yuvanāśva",
+    "ref": "BndP 2,63.66",
+    "words": "yuvanāśvasutastasya"
+   },
+   {
+    "name": "Māndhātā",
+    "ref": "BndP 2,63.68",
+    "words": "māndhātā yauvanāśvo"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "BndP 2,63.72",
+    "words": "purukutsamaṃbarīṣaṃ"
+   },
+   {
+    "name": "Siṃdhudvīpa",
+    "ref": "BndP 2,63.170",
+    "words": "siṃdhudvīpastato 'bhavat"
+   },
+   {
+    "name": "Ayutāyus",
+    "ref": "BndP 2,63.172",
+    "words": "ayutāyuḥ sutastasya siṃdhudvīpasya"
+   },
+   {
+    "name": "Ṛtuparṇa",
+    "ref": "BndP 2,63.173",
+    "words": "ayutāyostu dāyāda ṛtuparṇo"
+   },
+   {
+    "name": "Sarvakāma",
+    "ref": "BndP 2,63.175",
+    "words": "ṛtuparṇasya putro 'bhūtsarvakāmo"
+   },
+   {
+    "name": "Sudāsa",
+    "ref": "BndP 2,63.175",
+    "words": "sudāsastasya tanayo"
+   },
+   {
+    "name": "Saudāsa",
+    "ref": "BndP 2,63.176",
+    "words": "sudāsasya sutaḥ proktaḥ saudāso nāma"
+   }
+  ],
+  [
+   {
+    "name": "Kalmāṣapāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aśmaka",
+    "ref": "BndP 2,63.177",
+    "words": "kṣetre kalmāṣapādake aśmakaṃ janayāmāsa"
+   },
+   {
+    "name": "Mūlaka",
+    "ref": "BndP 2,63.178",
+    "words": "aśmakasyauraso yastu mūlakastatsuto 'bhavat"
+   },
+   {
+    "name": "Śataratha",
+    "ref": "BndP 2,63.180",
+    "words": "mūlakasyāpi dharmātmā rājā śatarathaḥ"
+   },
+   {
+    "name": "Iḍaviḍa",
+    "ref": "BndP 2,63.180",
+    "words": "tasmācchatarathājjajñe rājā tviḍaviḍo"
+   },
+   {
+    "name": "Kṛśaśarman",
+    "ref": "BndP 2,63.181",
+    "words": "āsīttvaiḍaviḍaḥ śrīmānkṛśaśarmā"
+   },
+   {
+    "name": "Dilīpa",
+    "ref": "BndP 2,63.182",
+    "words": "dilīpastasya putro 'bhūt"
+   },
+   {
+    "name": "Bhagīratha",
+    "ref": "BndP 2,63.166",
+    "words": "dilīpāttu mahātejā vīro jāto bhagīrathaḥ"
+   },
+   {
+    "name": "Śruta",
+    "ref": "BndP 2,63.169",
+    "words": "bhagīrathasutaścāpi śruto nāma babhūvaha"
+   },
+   {
+    "name": "Nābhāga",
+    "ref": "BndP 2,63.170",
+    "words": "nābhāgastasya dāyādo"
+   },
+   {
+    "name": "Ambarīṣa",
+    "ref": "BndP 2,63.6",
+    "words": "aṃbarīṣastu nābhāgiḥ"
+   },
+   {
+    "name": "Virūpa",
+    "ref": "BndP 2,63.6",
+    "words": "virūpastasya cātmajaḥ"
+   },
+   {
+    "name": "Pṛṣadaśva",
+    "ref": "BndP 2,63.6",
+    "words": "pṛṣadaśvo virūpasya tasya putro"
+   },
+   {
+    "name": "Rathītara",
+    "ref": "BndP 2,63.6",
+    "words": "tasya putro rathītaraḥ"
+   }
+  ],
+  [
+   {
+    "name": "Khaṭvāṅga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dīrghabāhu",
+    "ref": "BndP 2,63.183",
+    "words": "dīrghabāhuḥ sutastasya"
+   },
+   {
+    "name": "Raghu",
+    "ref": "BndP 2,63.183",
+    "words": "raghustasmādajāyata"
+   },
+   {
+    "name": "Aja",
+    "ref": "BndP 2,63.184",
+    "words": "ajaḥ putro raghoścāpi"
+   },
+   {
+    "name": "Daśaratha",
+    "ref": "BndP 2,63.184",
+    "words": "tasmājjajñe sa vīryavān rājā daśaratho nāma"
+   },
+   {
+    "name": "Rāma",
+    "ref": "BndP 2,63.185",
+    "words": "rāmo dāśarathirvīro"
+   },
+   {
+    "name": "Kuśa",
+    "ref": "BndP 2,63.198",
+    "words": "tasya putrau babhūvatuḥ kuśo lava iti khyāto"
+   },
+   {
+    "name": "Atithi",
+    "ref": "BndP 2,63.201",
+    "words": "kuśasya putro dharmātmā hyatithiḥ"
+   },
+   {
+    "name": "Niṣadha",
+    "ref": "BndP 2,63.201",
+    "words": "atitherapi vikhyāto niṣadho nāma pārthivaḥ"
+   },
+   {
+    "name": "Nala",
+    "ref": "BndP 2,63.202",
+    "words": "niṣadhasya nalaḥ putro"
+   },
+   {
+    "name": "Nābha",
+    "ref": "BndP 2,63.202",
+    "words": "nalasya tu nābhāḥ sutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Turvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vahni",
+    "ref": "BndP 2,74.1",
+    "words": "turvasostu suto vahniḥ"
+   },
+   {
+    "name": "Gobhānu",
+    "ref": "BndP 2,74.1",
+    "words": "vahnergobhānurātmajaḥ"
+   },
+   {
+    "name": "Strisānu",
+    "ref": "BndP 2,74.1",
+    "words": "gobhānostu suto vīra strisānurapājitaḥ"
+   },
+   {
+    "name": "Karandhama",
+    "ref": "BndP 2,74.2",
+    "words": "karandhamastu traisāno"
+   },
+   {
+    "name": "Marutta",
+    "ref": "BndP 2,74.2",
+    "words": "maruttastasya cātmajaḥ"
+   },
+   {
+    "name": "Duṣkanta",
+    "ref": "BndP 2,74.3",
+    "words": "duṣkantaṃ pauravaṃ cāpi sa vai putramakalpayat"
+   },
+   {
+    "name": "Sarūpya",
+    "ref": "BndP 2,74.5",
+    "words": "duṣkantasya tu dāyādaḥ sarūpyo nāma pārthivaḥ"
+   },
+   {
+    "name": "Āṇḍīra",
+    "ref": "BndP 2,74.5",
+    "words": "sarūpyāttu tathāṇḍīraścatvārastasya cātmajāḥ"
+   },
+   {
+    "name": "Pāṇḍya",
+    "ref": "BndP 2,74.6",
+    "words": "pāṇḍyaśca keralaścaiva colaḥ kulyastathaiva ca"
+   }
+  ],
+  [
+   {
+    "name": "Suśruta",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jaya",
+    "ref": "BndP 2,64.22",
+    "words": "suśrutasya jayaḥ putro"
+   },
+   {
+    "name": "Vijaya",
+    "ref": "BndP 2,64.22",
+    "words": "jayasya vijayaḥ sutaḥ"
+   },
+   {
+    "name": "Kratu",
+    "ref": "BndP 2,64.22",
+    "words": "vijayasya kratuḥ putra"
+   },
+   {
+    "name": "Sunaya",
+    "ref": "BndP 2,64.22",
+    "words": "kratośca sunayaḥ smataḥ"
+   },
+   {
+    "name": "Vītahavya",
+    "ref": "BndP 2,64.23",
+    "words": "sunayādvītahavyastu"
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "BndP 2,64.23",
+    "words": "vītahavyātmajo dhṛtiḥ"
+   },
+   {
+    "name": "Bahulāśva",
+    "ref": "BndP 2,64.23",
+    "words": "dhṛtestu bahulāśvo 'bhūt"
+   },
+   {
+    "name": "Kṛti",
+    "ref": "BndP 2,64.23",
+    "words": "bahulāśvasutaḥ kṛtiḥ"
+   }
+  ],
+  [
+   {
     "name": "Śaśāda",
     "ref": null,
     "words": null
@@ -52,6 +683,216 @@
   ],
   [
    {
+    "name": "Amāvasu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhīma",
+    "ref": "BndP 2,66.23",
+    "words": "amāva sostu vai jāte bhīmo rājā"
+   },
+   {
+    "name": "Kāñcanaprabha",
+    "ref": "BndP 2,66.24",
+    "words": "bhīmasya dāyādo rājāsītkāñcanaprabhaḥ"
+   },
+   {
+    "name": "Suhotra",
+    "ref": "BndP 2,66.24",
+    "words": "kāñcanasyāpi suhotro 'bhūnmahābala"
+   },
+   {
+    "name": "Jahnu",
+    "ref": "BndP 2,66.25",
+    "words": "suhotrasyābhavajjahnuḥ"
+   },
+   {
+    "name": "Sunaha",
+    "ref": "BndP 2,66.30",
+    "words": "jahnustu dayitaṃ putraṃ sunahaṃ nāma"
+   },
+   {
+    "name": "Ajaka",
+    "ref": "BndP 2,66.30",
+    "words": "ajakastasya cātmajaḥ"
+   },
+   {
+    "name": "Balākāśva",
+    "ref": "BndP 2,66.31",
+    "words": "ajakasya tu dāyādo balākāśvo"
+   }
+  ],
+  [
+   {
+    "name": "Bhānumān",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pradyumna",
+    "ref": "BndP 2,64.19",
+    "words": "tasya bhānumataḥ putraḥ pradyumnaśca"
+   },
+   {
+    "name": "Muni",
+    "ref": "BndP 2,64.20",
+    "words": "munistasya sutaścāpi"
+   },
+   {
+    "name": "Ūrjavaha",
+    "ref": "BndP 2,64.20",
+    "words": "tasmādūrjavahaḥ smṛtaḥ"
+   },
+   {
+    "name": "Sanadvāja",
+    "ref": "BndP 2,64.20",
+    "words": "ūrjavahātsanadvājaḥ"
+   },
+   {
+    "name": "Śakuni",
+    "ref": "BndP 2,64.20",
+    "words": "śakunistasya cātmajaḥ"
+   },
+   {
+    "name": "Svāgata",
+    "ref": "BndP 2,64.21",
+    "words": "svāgataḥ śakuneḥ putraḥ"
+   },
+   {
+    "name": "Suvarcas",
+    "ref": "BndP 2,64.21",
+    "words": "suvarcāstatsutaḥ smṛtaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Druhyu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Setu",
+    "ref": "BndP 2,74.7",
+    "words": "druhyośca tanayau vīrau babhruḥ setuśca"
+   },
+   {
+    "name": "Aruddha",
+    "ref": "BndP 2,74.7",
+    "words": "aruddhaḥ setuputraḥ"
+   },
+   {
+    "name": "Gāndhāra",
+    "ref": "BndP 2,74.9",
+    "words": "aruddhasya tu dāyādo gāndhāro nāma pārthivaḥ"
+   },
+   {
+    "name": "Dharma",
+    "ref": "BndP 2,74.10",
+    "words": "gāndhāraputro dharmastu"
+   },
+   {
+    "name": "Dhṛta",
+    "ref": "BndP 2,74.10",
+    "words": "dhṛtastasya suto 'bhavat"
+   },
+   {
+    "name": "Durdama",
+    "ref": "BndP 2,74.11",
+    "words": "dhṛtasya durdamo jajñe"
+   },
+   {
+    "name": "Pracetas",
+    "ref": "BndP 2,74.11",
+    "words": "pracetāstasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satyaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhajamāna",
+    "ref": "BndP 2,71.116",
+    "words": "satyakātkāśiduhitā lebhe yā caturaḥ sutān kukuraṃ bhajamānaṃ ca"
+   },
+   {
+    "name": "Vidūratha",
+    "ref": "BndP 2,71.136",
+    "words": "bhajamānasya putrastu rathimukhyo vidūrathaḥ"
+   },
+   {
+    "name": "Śūra",
+    "ref": "BndP 2,71.137",
+    "words": "śūraśca vidūrathasuto 'bhavat"
+   },
+   {
+    "name": "Śamī",
+    "ref": "BndP 2,71.137",
+    "words": "tasya śūrasya tu sutā jajñire"
+   },
+   {
+    "name": "Pratikṣatra",
+    "ref": "BndP 2,71.139",
+    "words": "śamīputraḥ pratikṣatraḥ"
+   },
+   {
+    "name": "Svayaṃbhoja",
+    "ref": "BndP 2,71.139",
+    "words": "pratikṣatrasya cātmajaḥ svayaṃbhojaḥ"
+   },
+   {
+    "name": "Hṛdika",
+    "ref": "BndP 2,71.139",
+    "words": "svayaṃbhojāddhṛdikaḥ saṃbabhūva"
+   }
+  ],
+  [
+   {
+    "name": "Vijaya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jaya",
+    "ref": "BndP 2,68.9",
+    "words": "vijayasya jayaḥ putrastasya"
+   },
+   {
+    "name": "Haryaśvaka",
+    "ref": "BndP 2,68.9",
+    "words": "tasya haryaśvakaḥ smṛtaḥ"
+   },
+   {
+    "name": "Sahadeva",
+    "ref": "BndP 2,68.9",
+    "words": "iryaśvasya suto rājā sahadevaḥ"
+   },
+   {
+    "name": "Ahīna",
+    "ref": "BndP 2,68.10",
+    "words": "sahadevasya dharmātmā ahīna iti viśrutaḥ"
+   },
+   {
+    "name": "Cayatsena",
+    "ref": "BndP 2,68.10",
+    "words": "ahīnasya cayatsenastasya"
+   },
+   {
+    "name": "Saṃkṛti",
+    "ref": "BndP 2,68.10",
+    "words": "tasya putro 'tha saṃkṛtiḥ"
+   },
+   {
+    "name": "Kṛtadharman",
+    "ref": "BndP 2,68.11",
+    "words": "saṃkṛterapi dharmātmā kṛtadharmā"
+   }
+  ],
+  [
+   {
     "name": "Kevala",
     "ref": null,
     "words": null
@@ -89,6 +930,75 @@
   ],
   [
    {
+    "name": "Yadu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sahasrajit",
+    "ref": "BndP 2,69.2",
+    "words": "yadoḥ putrā babhūvurhi pañca"
+   },
+   {
+    "name": "Śatajit",
+    "ref": "BndP 2,69.3",
+    "words": "sahasrajitsutaḥ śrīmāñchatajinnāma"
+   },
+   {
+    "name": "Haihaya",
+    "ref": "BndP 2,69.3",
+    "words": "śatajittanayāḥ khyātastrayaḥ"
+   },
+   {
+    "name": "Dharmanetra",
+    "ref": "BndP 2,69.4",
+    "words": "haihayasya tu dāyādo dharmanetra"
+   },
+   {
+    "name": "Kunti",
+    "ref": "BndP 2,69.5",
+    "words": "dharmanetrasya kuntistu"
+   },
+   {
+    "name": "Saṃkṣeya",
+    "ref": "BndP 2,69.5",
+    "words": "saṃkṣeyastasya cātmajaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Sāttvata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Andhaka",
+    "ref": "BndP 2,71.1",
+    "words": "sāttvatājjajñire putrāḥ"
+   },
+   {
+    "name": "Abhijit",
+    "ref": "BndP 2,71.119",
+    "words": "tasyābhijittataḥ putra"
+   },
+   {
+    "name": "Āhuka",
+    "ref": "BndP 2,71.121",
+    "words": "tasyātha putramithunaṃ babhūvābhijitaḥ kila āhukaścāhukī"
+   },
+   {
+    "name": "Devaka",
+    "ref": "BndP 2,71.128",
+    "words": "āhukātkāśyaduhiturdvai putrau saṃbabhūvatuḥ"
+   },
+   {
+    "name": "Devavān",
+    "ref": "BndP 2,71.129",
+    "words": "devakasya sutā vīrā jajñire"
+   }
+  ],
+  [
+   {
     "name": "Sṛñjaya",
     "ref": null,
     "words": null
@@ -117,6 +1027,65 @@
     "name": "Pramati",
     "ref": "BndP 2,61.17",
     "words": "janamejayātmajaścaiva pramatirnāma"
+   }
+  ],
+  [
+   {
+    "name": "Triśaṅku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hariścandra",
+    "ref": "BndP 2,63.115",
+    "words": "tasya satyaratā nāma bhāryā"
+   },
+   {
+    "name": "Rohita",
+    "ref": "BndP 2,63.117",
+    "words": "hariścandrasya tu suto rohito"
+   },
+   {
+    "name": "Harita",
+    "ref": "BndP 2,63.117",
+    "words": "harito rohitasyātha"
+   },
+   {
+    "name": "Cañcu",
+    "ref": "BndP 2,63.117",
+    "words": "harito rohitasyātha cañcurharīta ucyate"
+   },
+   {
+    "name": "Vinaya",
+    "ref": "BndP 2,63.118",
+    "words": "vinayaśca sudevaśca cañcuputrau babhūvatuḥ"
+   }
+  ],
+  [
+   {
+    "name": "Anenas",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kṣatradharman",
+    "ref": "BndP 2,68.7",
+    "words": "anenasaḥ suto jātaḥ kṣatradharmaḥ"
+   },
+   {
+    "name": "Pratipakṣa",
+    "ref": "BndP 2,68.7",
+    "words": "kṣatradharmasuto jātaḥ pratipakṣo"
+   },
+   {
+    "name": "Sṛṃjaya",
+    "ref": "BndP 2,68.8",
+    "words": "pratipakṣasutaścāpi sṛṃjayo nāma viśrutaḥ"
+   },
+   {
+    "name": "Jaya",
+    "ref": "BndP 2,68.8",
+    "words": "sṛṃjayasya jayaḥ putro"
    }
   ],
   [
@@ -202,29 +1171,105 @@
   ],
   [
    {
-    "name": "Nābhāga",
+    "name": "Ruruka",
     "ref": null,
     "words": null
    },
    {
-    "name": "Ambarīṣa",
-    "ref": "BndP 2,63.6",
-    "words": "aṃbarīṣastu nābhāgiḥ"
+    "name": "Vṛka",
+    "ref": "BndP 2,63.119",
+    "words": "rurukāttu vṛkaḥ putraḥ"
    },
    {
-    "name": "Virūpa",
-    "ref": "BndP 2,63.6",
-    "words": "virūpastasya cātmajaḥ"
+    "name": "Bāhu",
+    "ref": "BndP 2,63.119",
+    "words": "tasmādbāhurvijajñivān"
    },
    {
-    "name": "Pṛṣadaśva",
-    "ref": "BndP 2,63.6",
-    "words": "pṛṣadaśvo virūpasya tasya putro"
+    "name": "Sagara",
+    "ref": "BndP 2,63.121",
+    "words": "sagarastu suto bāhorjajñe"
    },
    {
-    "name": "Rathītara",
-    "ref": "BndP 2,63.6",
-    "words": "tasya putro rathītaraḥ"
+    "name": "Asamañja",
+    "ref": "BndP 2,63.160",
+    "words": "asamañja iti khyātaṃ kākutsthaṃ sagarātmajam"
+   }
+  ],
+  [
+   {
+    "name": "Uśadratha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Hema",
+    "ref": "BndP 2,74.25",
+    "words": "tasya hemaḥ suto 'bhavat"
+   },
+   {
+    "name": "Sutapas",
+    "ref": "BndP 2,74.25",
+    "words": "hemasya sutapā jajñe"
+   },
+   {
+    "name": "Bali",
+    "ref": "BndP 2,74.25",
+    "words": "sutaḥ sutapaso baliḥ"
+   },
+   {
+    "name": "Aṅga",
+    "ref": "BndP 2,74.27",
+    "words": "aṅgaṃ sa janayāmāsa"
+   }
+  ],
+  [
+   {
+    "name": "Śīghraka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Maru",
+    "ref": "BndP 2,63.210",
+    "words": "śīghrakasya maruḥ smṛtaḥ"
+   },
+   {
+    "name": "Prabhu",
+    "ref": "BndP 2,63.211",
+    "words": "prabhusuto maroḥ putraḥ"
+   },
+   {
+    "name": "Susaṃdhi",
+    "ref": "BndP 2,63.211",
+    "words": "susaṃdhistasya cātmajaḥ"
+   },
+   {
+    "name": "Marṣa",
+    "ref": "BndP 2,63.212",
+    "words": "susaṃdheśca tathā marṣaḥ sahasvānnāma"
+   }
+  ],
+  [
+   {
+    "name": "Atri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Soma",
+    "ref": "BndP 2,65.1",
+    "words": "pitā somasya vai viprā jajñe 'trirbhagavānṛṣiḥ"
+   },
+   {
+    "name": "Budha",
+    "ref": "BndP 2,65.44",
+    "words": "budha ityakaronnāma tasya putrasya dhīmataḥ"
+   },
+   {
+    "name": "Purūravas",
+    "ref": "BndP 2,65.45",
+    "words": "tasya putro mahātejā babhūvailaḥ purūravāḥ"
    }
   ],
   [
@@ -251,6 +1296,28 @@
   ],
   [
    {
+    "name": "Devamīḍhuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śūra",
+    "ref": "BndP 2,71.145",
+    "words": "aśmakyāṃ janayāmāsa śūraṃ vai deva mīḍhuṣam"
+   },
+   {
+    "name": "Vasudeva",
+    "ref": "BndP 2,71.145",
+    "words": "māriṣyāṃ jajñire śūrādbhojāyāṃ puruṣā daśa"
+   },
+   {
+    "name": "Nanda",
+    "ref": "BndP 2,71.172",
+    "words": "vasudevāddhijajñire"
+   }
+  ],
+  [
+   {
     "name": "Diṣṭa",
     "ref": null,
     "words": null
@@ -269,6 +1336,50 @@
     "name": "Prāṃśu",
     "ref": "BndP 2,61.4",
     "words": "bhalandanasya putro 'bhūtprāṃśurnāma"
+   }
+  ],
+  [
+   {
+    "name": "Manu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ikṣvāku",
+    "ref": "BndP 2,63.8",
+    "words": "kṣuvatastu manoḥ pūrvamikṣvākurabhiniḥsṛtaḥ"
+   },
+   {
+    "name": "Nimi",
+    "ref": "BndP 2,63.9",
+    "words": "nimirdaṇḍaśca te trayaḥ"
+   },
+   {
+    "name": "Mithi",
+    "ref": "BndP 2,64.4",
+    "words": "tasya putro mithirnāma"
+   }
+  ],
+  [
+   {
+    "name": "Sabhānara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kālānala",
+    "ref": "BndP 2,74.13",
+    "words": "sabhānarasya putrastu vidvānkālānalo nṛpaḥ"
+   },
+   {
+    "name": "Sṛṃjaya",
+    "ref": "BndP 2,74.14",
+    "words": "kālānalasya dharmātmā sṛṃjayo"
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "BndP 2,74.14",
+    "words": "sṛṃjayasyābhavatputro vīro nāmnā purañjayaḥ"
    }
   ],
   [
@@ -308,6 +1419,40 @@
     "name": "Śākha",
     "ref": "BndP 2,3.25",
     "words": "tasya śākho viśākhaśca naigameyaśca"
+   }
+  ],
+  [
+   {
+    "name": "Anamitra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nighna",
+    "ref": "BndP 2,71.20",
+    "words": "anamitrasuto nighno"
+   },
+   {
+    "name": "Prasena",
+    "ref": "BndP 2,71.20",
+    "words": "nighnasya dvau babhūvatuḥ prasenaśca"
+   }
+  ],
+  [
+   {
+    "name": "Anapāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Diviratha",
+    "ref": "BndP 2,74.103",
+    "words": "anapānasya putrastu rājā divirathaḥ"
+   },
+   {
+    "name": "Dharmaratha",
+    "ref": "BndP 2,74.103",
+    "words": "putro divirathasyāsīdvidvāndharmaratho nṛpaḥ"
    }
   ],
   [
@@ -380,6 +1525,23 @@
   ],
   [
    {
+    "name": "Devabāhu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kambalabarhiṣa",
+    "ref": "BndP 2,71.142",
+    "words": "devabāhossuto vidvāñjajñe kaṃbalabarhiṣaḥ"
+   },
+   {
+    "name": "Asamaujas",
+    "ref": "BndP 2,71.142",
+    "words": "asamaujāḥ sutastasya"
+   }
+  ],
+  [
+   {
     "name": "Dhṛṣṇi",
     "ref": null,
     "words": null
@@ -397,19 +1559,87 @@
   ],
   [
    {
-    "name": "Manu",
+    "name": "Durmada",
     "ref": null,
     "words": null
    },
    {
-    "name": "Ikṣvāku",
-    "ref": "BndP 2,63.8",
-    "words": "kṣuvatastu manoḥ pūrvamikṣvākurabhiniḥsṛtaḥ"
+    "name": "Kanaka",
+    "ref": "BndP 2,69.7",
+    "words": "durmadasyasuto dhīmānkanako"
    },
    {
-    "name": "Vikukṣi",
-    "ref": "BndP 2,63.9",
-    "words": "teṣāṃ śreṣṭho vikukṣistu"
+    "name": "Kṛtavīrya",
+    "ref": "BndP 2,69.8",
+    "words": "kanakasya tu dāyādāścatvāro"
+   }
+  ],
+  [
+   {
+    "name": "Gṛtsamada",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śunaka",
+    "ref": "BndP 2,67.4",
+    "words": "putro gṛtsamadasyāpi śunako"
+   },
+   {
+    "name": "Śaunaka",
+    "ref": "BndP 2,67.4",
+    "words": "śunako yasya śaunakaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kuśika",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Gādhi",
+    "ref": "BndP 2,66.35",
+    "words": "putratvaṃ kalpayāmāsa svayameva purandaraḥ gādhirnāmābhavatputraḥ kauśikaḥ"
+   },
+   {
+    "name": "Viśvāmitra",
+    "ref": "BndP 2,66.59",
+    "words": "viśvāmitraṃ tu dāyādaṃ gādhiḥ kuśikanandanaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Kṛṣṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śāntakarṇi",
+    "ref": "BndP 2,74.162",
+    "words": "tasya putrastu vai mahān"
+   },
+   {
+    "name": "Āpolava",
+    "ref": "BndP 2,74.163",
+    "words": "tasya putro bhaviṣyati"
+   }
+  ],
+  [
+   {
+    "name": "Mahāśāla",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahāmanas",
+    "ref": "BndP 2,74.15",
+    "words": "mahāmanāḥ sutastasya mahāśālasya"
+   },
+   {
+    "name": "Titikṣu",
+    "ref": "BndP 2,74.17",
+    "words": "titikṣuṃ caiva dhārmikam"
    }
   ],
   [
@@ -448,6 +1678,74 @@
   ],
   [
    {
+    "name": "Sahadeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Somāpi",
+    "ref": "BndP 2,74.110",
+    "words": "somāpistasya tanayo"
+   },
+   {
+    "name": "Śrutaśravas",
+    "ref": "BndP 2,74.111",
+    "words": "śrutaśravāḥ saptaṣaṣṭiḥ samāstasya suto 'bhavat"
+   }
+  ],
+  [
+   {
+    "name": "Sahasvat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viśrutavat",
+    "ref": "BndP 2,63.212",
+    "words": "āsītsahasvataḥ putro rājā viśrutavāniti"
+   },
+   {
+    "name": "Bṛhadbala",
+    "ref": "BndP 2,63.213",
+    "words": "tasyāsīdviśrutavataḥ putro rājā bṛhadbalaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Satrājit",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhaṅgakāra",
+    "ref": "BndP 2,71.54",
+    "words": "satrajito bhāryāstasyāyutaṃ sutāḥ khyātimantastrayasteṣāṃ bhaṅgakārastu pūrvajaḥ"
+   },
+   {
+    "name": "Śakraghna",
+    "ref": "BndP 2,71.87",
+    "words": "bhaṅgakārasya tanayau"
+   }
+  ],
+  [
+   {
+    "name": "Saṃjñeya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahiṣmān",
+    "ref": "BndP 2,69.5",
+    "words": "saṃjñeyasya tu dāyādo mahiṣmānnāma"
+   },
+   {
+    "name": "Bhadramena",
+    "ref": "BndP 2,69.6",
+    "words": "āsīnmahiṣmataḥ putro bhadramenaḥ"
+   }
+  ],
+  [
+   {
     "name": "Sucandra",
     "ref": null,
     "words": null
@@ -465,6 +1763,74 @@
   ],
   [
    {
+    "name": "Tridhanvā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Trayyāruṇi",
+    "ref": "BndP 2,63.76",
+    "words": "tridhanvanaścāpi vidvāṃstrayyāruṇiḥ"
+   },
+   {
+    "name": "Satyavrata",
+    "ref": "BndP 2,63.77",
+    "words": "tasya satyavrato nāma kumāro"
+   }
+  ],
+  [
+   {
+    "name": "Uśīnara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śibi",
+    "ref": "BndP 2,74.20",
+    "words": "śibirauśīnaro"
+   },
+   {
+    "name": "Suvīra",
+    "ref": "BndP 2,74.23",
+    "words": "vṛṣadarbhaḥ suvīrastu"
+   }
+  ],
+  [
+   {
+    "name": "Vītihotra",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ananta",
+    "ref": "BndP 2,69.53",
+    "words": "vītihotrasutaścāpi ananto nāma"
+   },
+   {
+    "name": "Durjaya",
+    "ref": "BndP 2,69.54",
+    "words": "durjayastasya putrastu"
+   }
+  ],
+  [
+   {
+    "name": "Yuyudhāna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhūti",
+    "ref": "BndP 2,71.101",
+    "words": "tasya bhūtiḥ suto 'bhavat"
+   },
+   {
+    "name": "Yugandhara",
+    "ref": "BndP 2,71.101",
+    "words": "bhūteryugandharaḥ putra"
+   }
+  ],
+  [
+   {
     "name": "Anila",
     "ref": null,
     "words": null
@@ -477,6 +1843,42 @@
   ],
   [
    {
+    "name": "Anādhṛṣṭi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śrāddhadeva",
+    "ref": "BndP 2,71.189",
+    "words": "aśmakyāṃ labhate putramanādhṛṣṭiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Aśoka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kulāla",
+    "ref": "BndP 2,74.146",
+    "words": "tasya putraḥ kulālastu"
+   }
+  ],
+  [
+   {
+    "name": "Aṣṭaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Lauhi",
+    "ref": "BndP 2,66.75",
+    "words": "aṣṭakasya suto lauhiḥ"
+   }
+  ],
+  [
+   {
     "name": "Bala",
     "ref": null,
     "words": null
@@ -485,6 +1887,54 @@
     "name": "Nikuṃbha",
     "ref": "BndP 2,6.32",
     "words": "balaputrau"
+   }
+  ],
+  [
+   {
+    "name": "Bhadrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Durmada",
+    "ref": "BndP 2,67.66",
+    "words": "bhadrasenasya putrastu durmado nāma nāmataḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bharata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Takṣa",
+    "ref": "BndP 2,63.190",
+    "words": "bharatasyātmajau vīrau takṣaḥ puṣkara eva ca"
+   }
+  ],
+  [
+   {
+    "name": "Bhāgavata",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Devabhūmi",
+    "ref": "BndP 2,74.155",
+    "words": "bhaviṣyati sutastasya devabhūmiḥ"
+   }
+  ],
+  [
+   {
+    "name": "Bhṛgu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Jamadagni",
+    "ref": "BndP 2,66.57",
+    "words": "bhṛgoścaruviparyāse"
    }
   ],
   [
@@ -509,6 +1959,30 @@
     "name": "Bharadvāja",
     "ref": "BndP 2,1.108",
     "words": "bṛhaspaterbharadvājo viśrutaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Damaghoṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śiśupāla",
+    "ref": "BndP 2,71.159",
+    "words": "damaghoṣasya rājarṣeḥ putro"
+   }
+  ],
+  [
+   {
+    "name": "Devavarman",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Śatadhanu",
+    "ref": "BndP 2,74.148",
+    "words": "śatadhanuścāpi tasya putro bhaviṣyati"
    }
   ],
   [
@@ -549,6 +2023,66 @@
   ],
   [
    {
+    "name": "Ikṣvāku",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suvarcā",
+    "ref": "BndP 2,74.251",
+    "words": "suvarcā nāma putrastu ikṣvākostu bhaviṣyati"
+   }
+  ],
+  [
+   {
+    "name": "Jayadhvaja",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Tālajaṅgha",
+    "ref": "BndP 2,69.51",
+    "words": "jayadhvajasya putrastu tālajaṅghaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Jāṃbavat",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kumāra",
+    "ref": "BndP 2,71.42",
+    "words": "kumāramādāya sutaṃ jāṃbavato"
+   }
+  ],
+  [
+   {
+    "name": "Kuśa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kuśāmba",
+    "ref": "BndP 2,66.32",
+    "words": "kuśaputrā babhūvuśca catvāro"
+   }
+  ],
+  [
+   {
+    "name": "Kuśāla",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bandhupālita",
+    "ref": "BndP 2,74.146",
+    "words": "kuśālasūnuraṣṭau ca bhoktā vai bandhupālitaḥ"
+   }
+  ],
+  [
+   {
     "name": "Kālanemi",
     "ref": null,
     "words": null
@@ -557,6 +2091,30 @@
     "name": "Brahmajit",
     "ref": "BndP 2,5.39",
     "words": "kālanemisutā hyete"
+   }
+  ],
+  [
+   {
+    "name": "Kṣatravṛddha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Sunahotra",
+    "ref": "BndP 2,67.3",
+    "words": "kṣatravṛddhātmajaścaiva sunahotro"
+   }
+  ],
+  [
+   {
+    "name": "Lakṣmaṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Aṅgada",
+    "ref": "BndP 2,63.188",
+    "words": "aṅgadaścandraketuśca lakṣmaṇasyātmajāvubhau"
    }
   ],
   [
@@ -573,6 +2131,30 @@
   ],
   [
    {
+    "name": "Mahānandi",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Mahāpadma",
+    "ref": "BndP 2,74.139",
+    "words": "mahānandisutaścāpi śūdrāyāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Majaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Nandivarddhana",
+    "ref": "BndP 2,74.126",
+    "words": "tatsuto nandivarddhanaḥ"
+   }
+  ],
+  [
+   {
     "name": "Maya",
     "ref": null,
     "words": null
@@ -581,6 +2163,18 @@
     "name": "Māyāvin",
     "ref": "BndP 2,6.28",
     "words": "mayasya jātā raṃbhāyāṃ putrāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Māḍyā",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yudhājit",
+    "ref": "BndP 2,71.102",
+    "words": "māḍyāḥ sutasya jajñe tu suto vṛṣṇiryudhājitaḥ"
    }
   ],
   [
@@ -597,6 +2191,66 @@
   ],
   [
    {
+    "name": "Nahuṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yati",
+    "ref": "BndP 2,68.12",
+    "words": "nahuṣasya tu dāyādāḥ ṣaḍ"
+   }
+  ],
+  [
+   {
+    "name": "Nandana",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ranti",
+    "ref": "BndP 2,71.192",
+    "words": "dvau putrau nandanasya"
+   }
+  ],
+  [
+   {
+    "name": "Nārāyaṇa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Suśarman",
+    "ref": "BndP 2,74.159",
+    "words": "suśarmā tatsutaścāpi"
+   }
+  ],
+  [
+   {
+    "name": "Parāśara",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Vedavyāsa",
+    "ref": "BndP 2,73.92",
+    "words": "parāśarāt vedavyāsastato jajñe"
+   }
+  ],
+  [
+   {
+    "name": "Prahlāda",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Virocana",
+    "ref": "BndP 2,72.79",
+    "words": "virocanastu prāhlādiḥ"
+   }
+  ],
+  [
+   {
     "name": "Pratyūṣa",
     "ref": null,
     "words": null
@@ -605,6 +2259,54 @@
     "name": "Devala",
     "ref": "BndP 2,3.27",
     "words": "pratyūṣasya viduḥ putramṛṣiṃ nāmnātha devalam"
+   }
+  ],
+  [
+   {
+    "name": "Pārtha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Abhimanyu",
+    "ref": "BndP 2,71.178",
+    "words": "pārthādabhimanyurajāyata"
+   }
+  ],
+  [
+   {
+    "name": "Pāṇḍu",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Yudhiṣṭhira",
+    "ref": "BndP 2,71.154",
+    "words": "dharmādyudhiṣṭiraṃ putraṃ"
+   }
+  ],
+  [
+   {
+    "name": "Raji",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Indra",
+    "ref": "BndP 2,67.92",
+    "words": "rajiputro 'hamityuktvā"
+   }
+  ],
+  [
+   {
+    "name": "Rāma",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Niśaṭha",
+    "ref": "BndP 2,71.166",
+    "words": "putrau rāmasya jajñāte vijñātau niśaṭholmukau"
    }
   ],
   [
@@ -621,6 +2323,42 @@
   ],
   [
    {
+    "name": "Sṛṃjaya",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhanu",
+    "ref": "BndP 2,71.193",
+    "words": "sṛṃjayasya dhanuścaiva virajāśca sutāvimau"
+   }
+  ],
+  [
+   {
+    "name": "Ugrasena",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kaṃsa",
+    "ref": "BndP 2,71.230",
+    "words": "ugrasenātmajaṃ kasaṃ"
+   }
+  ],
+  [
+   {
+    "name": "Uśija",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dīrghatamas",
+    "ref": "BndP 2,74.44",
+    "words": "uśijasya sutaṃ bhrāturgarbhasthaṃ"
+   }
+  ],
+  [
+   {
     "name": "Varatrin",
     "ref": null,
     "words": null
@@ -629,6 +2367,18 @@
     "name": "Rajata",
     "ref": "BndP 2,1.79",
     "words": "varatriṇaḥ sutā hyete"
+   }
+  ],
+  [
+   {
+    "name": "Vasudeva",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Viṣṇu",
+    "ref": "BndP 2,73.94",
+    "words": "devakyāṃ vasudevāttu jāto"
    }
   ],
   [
@@ -645,6 +2395,18 @@
   ],
   [
    {
+    "name": "Vindhyaśakti",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pravīra",
+    "ref": "BndP 2,74.184",
+    "words": "vindhyaśaktisutaścāpi pravīro nāma vīryavān"
+   }
+  ],
+  [
+   {
     "name": "Vipracitti",
     "ref": null,
     "words": null
@@ -653,6 +2415,30 @@
     "name": "Saiṃhikeya",
     "ref": "BndP 2,6.18",
     "words": "vipracitteḥ sutā ime"
+   }
+  ],
+  [
+   {
+    "name": "Vṛddhaśarman",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dantavakra",
+    "ref": "BndP 2,71.156",
+    "words": "tanayo vṛddhaśarmaṇaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Vṛka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Saumi",
+    "ref": "BndP 2,71.192",
+    "words": "vṛkāya vai tvaputrāya vasudevaḥ"
    }
   ],
   [
@@ -669,6 +2455,30 @@
   ],
   [
    {
+    "name": "Ārdraka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Dhṛti",
+    "ref": "BndP 2,71.124",
+    "words": "ārdrakasya dhṛtiḥ putra"
+   }
+  ],
+  [
+   {
+    "name": "Śala",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Ārṣṭiṣeṇa",
+    "ref": "BndP 2,67.6",
+    "words": "śalātmajo hyārṣṭiṣeṇaḥ"
+   }
+  ],
+  [
+   {
     "name": "Śambhu",
     "ref": null,
     "words": null
@@ -677,6 +2487,78 @@
     "name": "Rājāja",
     "ref": "BndP 2,5.40",
     "words": "śaṃbhoḥ putrau prakīrttitau"
+   }
+  ],
+  [
+   {
+    "name": "Śatrughna",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Subāhu",
+    "ref": "BndP 2,63.187",
+    "words": "subāhuḥ śūrase naśca śatrughnasya sutāvubhau"
+   }
+  ],
+  [
+   {
+    "name": "Śauri",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kauśika",
+    "ref": "BndP 2,71.174",
+    "words": "vaiśālyāmadadhācchauriḥ putraṃ kauśikam"
+   }
+  ],
+  [
+   {
+    "name": "Śaṭha",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Bhadrabāhu",
+    "ref": "BndP 2,71.170",
+    "words": "śaṭhātmajāḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śeṣa",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Purañjaya",
+    "ref": "BndP 2,74.180",
+    "words": "śeṣasya nāgarājasya putraḥ sura purañjayaḥ"
+   }
+  ],
+  [
+   {
+    "name": "Śiśunāga",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Kākavarṇa",
+    "ref": "BndP 2,74.129",
+    "words": "kākavarṇaḥ sutastasya"
+   }
+  ],
+  [
+   {
+    "name": "Śunaka",
+    "ref": null,
+    "words": null
+   },
+   {
+    "name": "Pradyoti",
+    "ref": "BndP 2,74.123",
+    "words": "śunakaḥ svāminaṃ hatvā putraṃ samabhiṣekṣyati"
    }
   ]
  ]

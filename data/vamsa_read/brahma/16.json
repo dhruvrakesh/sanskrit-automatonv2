@@ -1,0 +1,645 @@
+{
+ "mark": "VAMSA_READ_2026_11_11",
+ "work": "brahma",
+ "title": "Brahmapurana",
+ "chapter": 16,
+ "part": 0,
+ "refs": [
+  "BrP 16.1",
+  "BrP 16.2",
+  "BrP 16.3",
+  "BrP 16.4",
+  "BrP 16.5",
+  "BrP 16.6",
+  "BrP 16.7",
+  "BrP 16.8",
+  "BrP 16.9",
+  "BrP 16.10",
+  "BrP 16.11",
+  "BrP 16.12",
+  "BrP 16.13",
+  "BrP 16.14",
+  "BrP 16.15",
+  "BrP 16.16",
+  "BrP 16.17",
+  "BrP 16.18",
+  "BrP 16.19",
+  "BrP 16.20",
+  "BrP 16.21",
+  "BrP 16.22",
+  "BrP 16.23",
+  "BrP 16.24",
+  "BrP 16.25",
+  "BrP 16.26",
+  "BrP 16.27",
+  "BrP 16.28",
+  "BrP 16.29",
+  "BrP 16.30",
+  "BrP 16.31",
+  "BrP 16.32",
+  "BrP 16.33",
+  "BrP 16.34",
+  "BrP 16.35",
+  "BrP 16.36",
+  "BrP 16.37",
+  "BrP 16.38",
+  "BrP 16.39",
+  "BrP 16.40",
+  "BrP 16.41",
+  "BrP 16.42",
+  "BrP 16.43",
+  "BrP 16.44",
+  "BrP 16.45",
+  "BrP 16.46",
+  "BrP 16.47",
+  "BrP 16.48",
+  "BrP 16.49",
+  "BrP 16.50",
+  "BrP 16.51",
+  "BrP 16.52",
+  "BrP 16.53",
+  "BrP 16.54",
+  "BrP 16.55",
+  "BrP 16.56",
+  "BrP 16.57",
+  "BrP 16.58",
+  "BrP 16.59"
+ ],
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "prompt_version": "vamsa-read-v2",
+ "source": "sa_brahmapurANa-1-246.txt; GRETIL (gretil.sub.uni-goettingen.de), CC BY-NC-SA 4.0 (data entry: Peter Schreiner and Renate Soehnen-Thieme)",
+ "at": "2026-11-17T21:10:05",
+ "reply": "{\"statements\":[\n{\"ref\":\"BrP 16.1\",\"a\":\"Vidūratha\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānasya putro 'tha rathamukhyo vidūrathaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 16.1\",\"a\":\"Śūra\",\"rel\":\"son_of\",\"b\":\"Vidūratha\",\"words\":\"śūras tu vidūrathasuto 'bhavat\",\"doubt\":true},\n{\"ref\":\"BrP 16.1\",\"a\":\"Rājādhideva\",\"rel\":\"son_of\",\"b\":\"Bhajamāna\",\"words\":\"bhajamānasya putro 'tha rathamukhyo vidūrathaḥ rājādhidevaḥ\",\"doubt\":true},\n{\"ref\":\"BrP 16.2\",\"a\":\"Datta\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 16.2\",\"a\":\"Atidatta\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 16.2\",\"a\":\"Śoṇāśva\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 16.2\",\"a\":\"Śvetavāhana\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"rājādhidevasya sutā jajñire\",\"doubt\":false},\n{\"ref\":\"BrP 16.3\",\"a\":\"Śamī\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"śamī ca daṇḍaśarmā ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.3\",\"a\":\"Daṇḍaśarman\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"śamī ca daṇḍaśarmā ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.3\",\"a\":\"Dantaśatru\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"dantaśatruś ca śatrujit\",\"doubt\":false},\n{\"ref\":\"BrP 16.3\",\"a\":\"Śatrujit\",\"rel\":\"son_of\",\"b\":\"Rājādhideva\",\"words\":\"dantaśatruś ca śatrujit\",\"doubt\":false},\n{\"ref\":\"BrP 16.3\",\"a\":\"Śravaṇā\",\"rel\":\"sister_of\",\"b\":\"Śraviṣṭhā\",\"words\":\"śravaṇā ca śraviṣṭhā ca svasārau\",\"doubt\":false},\n{\"ref\":\"BrP 16.4\",\"a\":\"Pratikṣatra\",\"rel\":\"son_of\",\"b\":\"Śamī\",\"words\":\"śamiputraḥ pratikṣatraḥ\",\"doubt\":false},\n{\"ref\":\"BrP 16.4\",\"a\":\"Svayaṃbhoja\",\"rel\":\"son_of\",\"b\":\"Pratikṣatra\",\"words\":\"pratikṣatrasya cātmajaḥ svayaṃbhojaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 16.4\",\"a\":\"Bhadika\",\"rel\":\"son_of\",\"b\":\"Svayaṃbhoja\",\"words\":\"svayaṃbhojād bhadikaḥ saṃbabhūva\",\"doubt\":false},\n{\"ref\":\"BrP 16.5\",\"a\":\"Kṛtavarman\",\"rel\":\"son_of\",\"b\":\"Bhadika\",\"words\":\"tasya putrā babhūvur hi kṛtavarmāgrajas\",\"doubt\":false},\n{\"ref\":\"BrP 16.5\",\"a\":\"Śatadhanvan\",\"rel\":\"son_of\",\"b\":\"Bhadika\",\"words\":\"tasya putrā babhūvur hi śatadhanvā tu madhyamaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 16.7\",\"a\":\"Kambalabarhiṣa\",\"rel\":\"son_of\",\"b\":\"Devānta\",\"words\":\"devāntasyābhavat putro vidvān kambalabarhiṣaḥ\",\"doubt\":false},\n{\"ref\":\"BrP 16.7\",\"a\":\"Asamaujas\",\"rel\":\"son_of\",\"b\":\"Kambalabarhiṣa\",\"words\":\"asamaujāḥ sutas tasya\",\"doubt\":false},\n{\"ref\":\"BrP 16.9\",\"a\":\"Gāndhārī\",\"rel\":\"wife_of\",\"b\":\"Kroṣṭu\",\"words\":\"gāndhārī caiva mādrī ca kroṣṭubhārye babhūvatuḥ\",\"doubt\":true},\n{\"ref\":\"BrP 16.9\",\"a\":\"Mādrī\",\"rel\":\"wife_of\",\"b\":\"Kroṣṭu\",\"words\":\"gāndhārī caiva mādrī ca kroṣṭubhārye babhūvatuḥ\",\"doubt\":true},\n{\"ref\":\"BrP 16.9\",\"a\":\"Anamitra\",\"rel\":\"born_of\",\"b\":\"Gāndhārī\",\"words\":\"gāndhārī janayām āsa anamitraṃ\",\"doubt\":false},\n{\"ref\":\"BrP 16.10\",\"a\":\"Yudhājit\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādrī yudhājitaṃ putraṃ\",\"doubt\":false},\n{\"ref\":\"BrP 16.10\",\"a\":\"Devamīḍhuṣa\",\"rel\":\"born_of\",\"b\":\"Mādrī\",\"words\":\"mādrī yudhājitaṃ putraṃ tato vai devamīdhuṣam\",\"doubt\":false},\n{\"ref\":\"BrP 16.11\",\"a\":\"Nighna\",\"rel\":\"son_of\",\"b\":\"Anamitra\",\"words\":\"anamitrasuto nighno\",\"doubt\":false},\n{\"ref\":\"BrP 16.11\",\"a\":\"Prasena\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnato dvau babhūvatuḥ prasenaś\",\"doubt\":false},\n{\"ref\":\"BrP 16.11\",\"a\":\"Satrājit\",\"rel\":\"son_of\",\"b\":\"Nighna\",\"words\":\"nighnato dvau babhūvatuḥ satrājic\",\"doubt\":false},\n{\"ref\":\"BrP 16.23\",\"a\":\"Prasena\",\"rel\":\"brother_of\",\"b\":\"Satrājit\",\"words\":\"dadau bhrātre narapatiḥ premṇā satrājid\",\"doubt\":false},\n{\"ref\":\"BrP 16.34\",\"a\":\"Kumāra\",\"rel\":\"son_of\",\"b\":\"Jāmbavat\",\"words\":\"kumāram ādāya sutaṃ jāmbavato\",\"doubt\":false},\n{\"ref\":\"BrP 16.45\",\"a\":\"Satrājit\",\"rel\":\"other\",\"b\":\"Satrājit\",\"words\":\"satrājito daśa tv āsan bhāryās\",\"doubt\":true},\n{\"ref\":\"BrP 16.46\",\"a\":\"Bhagaṃkāra\",\"rel\":\"son_of\",\"b\":\"Satrājit\",\"words\":\"satrājito daśa tv āsan bhāryās tāsāṃ śataṃ sutāḥ khyātimantas trayas teṣāṃ bhagaṃkāras\",\"doubt\":false},\n{\"ref\":\"BrP 16.46\",\"a\":\"Vīra\",\"rel\":\"son_of\",\"b\":\"Satrājit\",\"words\":\"vīro vātapatiś caiva\",\"doubt\":false},\n{\"ref\":\"BrP 16.46\",\"a\":\"Vātapati\",\"rel\":\"son_of\",\"b\":\"Satrājit\",\"words\":\"vīro vātapatiś caiva\",\"doubt\":false},\n{\"ref\":\"BrP 16.46\",\"a\":\"Vasumedha\",\"rel\":\"son_of\",\"b\":\"Satrājit\",\"words\":\"vasumedhas tathaiva ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.47\",\"a\":\"Satyabhāmā\",\"rel\":\"daughter_of\",\"b\":\"Satrājit\",\"words\":\"kumāryaś cāpi tisro vai satyabhāmottamā\",\"doubt\":false},\n{\"ref\":\"BrP 16.47\",\"a\":\"Vratinī\",\"rel\":\"daughter_of\",\"b\":\"Satrājit\",\"words\":\"vratinī ca dṛḍhavratā\",\"doubt\":false},\n{\"ref\":\"BrP 16.47\",\"a\":\"Dṛḍhavratā\",\"rel\":\"daughter_of\",\"b\":\"Satrājit\",\"words\":\"vratinī ca dṛḍhavratā\",\"doubt\":false},\n{\"ref\":\"BrP 16.48\",\"a\":\"Prasvāpinī\",\"rel\":\"daughter_of\",\"b\":\"Satrājit\",\"words\":\"tathā prasvāpinī caiva\",\"doubt\":true},\n{\"ref\":\"BrP 16.48\",\"a\":\"Prasvāpinī\",\"rel\":\"wife_of\",\"b\":\"Kṛṣṇa\",\"words\":\"bhāryāṃ kṛṣṇāya tāṃ dadau\",\"doubt\":true},\n{\"ref\":\"BrP 16.50\",\"a\":\"Śvaphalka\",\"rel\":\"son_of\",\"b\":\"Vṛṣṇi\",\"words\":\"jajñāte tanayau vṛṣṇeḥ śvaphalkaś\",\"doubt\":false},\n{\"ref\":\"BrP 16.50\",\"a\":\"Citraka\",\"rel\":\"son_of\",\"b\":\"Vṛṣṇi\",\"words\":\"jajñāte tanayau vṛṣṇeḥ śvaphalkaś citrakas\",\"doubt\":false},\n{\"ref\":\"BrP 16.50\",\"a\":\"Gāndinī\",\"rel\":\"wife_of\",\"b\":\"Śvaphalka\",\"words\":\"śvaphalkaḥ kāśirājasya sutāṃ bhāryām avindata gāndinīṃ\",\"doubt\":false},\n{\"ref\":\"BrP 16.50\",\"a\":\"Gāndinī\",\"rel\":\"daughter_of\",\"b\":\"Kāśirāja\",\"words\":\"kāśirājasya sutāṃ\",\"doubt\":false},\n{\"ref\":\"BrP 16.51\",\"a\":\"Akrūra\",\"rel\":\"born_of\",\"b\":\"Gāndinī\",\"words\":\"tasyāṃ jajñe mahābāhuḥ\",\"doubt\":true},\n{\"ref\":\"BrP 16.51\",\"a\":\"Akrūra\",\"rel\":\"son_of\",\"b\":\"Śvaphalka\",\"words\":\"tasyāṃ jajñe mahābāhuḥ\",\"doubt\":true},\n{\"ref\":\"BrP 16.55\",\"a\":\"Vasudeva\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūreṇograsenāyāṃ sutau vai\",\"doubt\":false},\n{\"ref\":\"BrP 16.55\",\"a\":\"Upadeva\",\"rel\":\"son_of\",\"b\":\"Akrūra\",\"words\":\"akrūreṇograsenāyāṃ sutau vai\",\"doubt\":false},\n{\"ref\":\"BrP 16.55\",\"a\":\"Vasudeva\",\"rel\":\"born_of\",\"b\":\"Ugrasenā\",\"words\":\"akrūreṇograsenāyāṃ sutau\",\"doubt\":false},\n{\"ref\":\"BrP 16.55\",\"a\":\"Upadeva\",\"rel\":\"born_of\",\"b\":\"Ugrasenā\",\"words\":\"akrūreṇograsenāyāṃ sutau\",\"doubt\":false},\n{\"ref\":\"BrP 16.56\",\"a\":\"Pṛthu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"citrakasyābhavan putrāḥ pṛthur\",\"doubt\":false},\n{\"ref\":\"BrP 16.56\",\"a\":\"Vipṛthu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"pṛthur vipṛthur eva ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Aśvagrīva\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"aśvagrīvo 'śvabāhuś ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Aśvabāhu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"aśvagrīvo 'śvabāhuś ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Supārśvaka\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"supārśvakagaveṣaṇau\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Gaveṣaṇa\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"supārśvakagaveṣaṇau\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Ariṣṭanemi\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"ariṣṭanemiś ca sutā\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Dharma\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"sutā dharmo\",\"doubt\":false},\n{\"ref\":\"BrP 16.57\",\"a\":\"Dharmabhṛt\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"dharmabhṛd eva ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.58\",\"a\":\"Subāhu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"subāhur bahubāhuś ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.58\",\"a\":\"Bahubāhu\",\"rel\":\"son_of\",\"b\":\"Citraka\",\"words\":\"subāhur bahubāhuś ca\",\"doubt\":false},\n{\"ref\":\"BrP 16.58\",\"a\":\"Śraviṣṭhā\",\"rel\":\"daughter_of\",\"b\":\"Citraka\",\"words\":\"śraviṣṭhāśravaṇe striyau\",\"doubt\":false},\n{\"ref\":\"BrP 16.58\",\"a\":\"Śravaṇā\",\"rel\":\"daughter_of\",\"b\":\"Citraka\",\"words\":\"śraviṣṭhāśravaṇe striyau\",\"doubt\":false}\n]}",
+ "stop": "end_turn",
+ "cost_usd": 0.05641,
+ "tokens": {
+  "input": 5163,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 4608,
+  "thinking": 0
+ },
+ "statements": [
+  {
+   "ref": "BrP 16.1",
+   "a": "Vidūratha",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānasya putro 'tha rathamukhyo vidūrathaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.1",
+   "a": "Śūra",
+   "rel": "son_of",
+   "b": "Vidūratha",
+   "words": "śūras tu vidūrathasuto 'bhavat",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.1",
+   "a": "Rājādhideva",
+   "rel": "son_of",
+   "b": "Bhajamāna",
+   "words": "bhajamānasya putro 'tha rathamukhyo vidūrathaḥ rājādhidevaḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.2",
+   "a": "Datta",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.2",
+   "a": "Atidatta",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.2",
+   "a": "Śoṇāśva",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.2",
+   "a": "Śvetavāhana",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "rājādhidevasya sutā jajñire",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.3",
+   "a": "Śamī",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "śamī ca daṇḍaśarmā ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.3",
+   "a": "Daṇḍaśarman",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "śamī ca daṇḍaśarmā ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.3",
+   "a": "Dantaśatru",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "dantaśatruś ca śatrujit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.3",
+   "a": "Śatrujit",
+   "rel": "son_of",
+   "b": "Rājādhideva",
+   "words": "dantaśatruś ca śatrujit",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.3",
+   "a": "Śravaṇā",
+   "rel": "sister_of",
+   "b": "Śraviṣṭhā",
+   "words": "śravaṇā ca śraviṣṭhā ca svasārau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.4",
+   "a": "Pratikṣatra",
+   "rel": "son_of",
+   "b": "Śamī",
+   "words": "śamiputraḥ pratikṣatraḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.4",
+   "a": "Svayaṃbhoja",
+   "rel": "son_of",
+   "b": "Pratikṣatra",
+   "words": "pratikṣatrasya cātmajaḥ svayaṃbhojaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.4",
+   "a": "Bhadika",
+   "rel": "son_of",
+   "b": "Svayaṃbhoja",
+   "words": "svayaṃbhojād bhadikaḥ saṃbabhūva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.5",
+   "a": "Kṛtavarman",
+   "rel": "son_of",
+   "b": "Bhadika",
+   "words": "tasya putrā babhūvur hi kṛtavarmāgrajas",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 16.5",
+   "a": "Śatadhanvan",
+   "rel": "son_of",
+   "b": "Bhadika",
+   "words": "tasya putrā babhūvur hi śatadhanvā tu madhyamaḥ",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 16.7",
+   "a": "Kambalabarhiṣa",
+   "rel": "son_of",
+   "b": "Devānta",
+   "words": "devāntasyābhavat putro vidvān kambalabarhiṣaḥ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.7",
+   "a": "Asamaujas",
+   "rel": "son_of",
+   "b": "Kambalabarhiṣa",
+   "words": "asamaujāḥ sutas tasya",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.9",
+   "a": "Gāndhārī",
+   "rel": "wife_of",
+   "b": "Kroṣṭu",
+   "words": "gāndhārī caiva mādrī ca kroṣṭubhārye babhūvatuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.9",
+   "a": "Mādrī",
+   "rel": "wife_of",
+   "b": "Kroṣṭu",
+   "words": "gāndhārī caiva mādrī ca kroṣṭubhārye babhūvatuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.9",
+   "a": "Anamitra",
+   "rel": "born_of",
+   "b": "Gāndhārī",
+   "words": "gāndhārī janayām āsa anamitraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.10",
+   "a": "Yudhājit",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādrī yudhājitaṃ putraṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.10",
+   "a": "Devamīḍhuṣa",
+   "rel": "born_of",
+   "b": "Mādrī",
+   "words": "mādrī yudhājitaṃ putraṃ tato vai devamīdhuṣam",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.11",
+   "a": "Nighna",
+   "rel": "son_of",
+   "b": "Anamitra",
+   "words": "anamitrasuto nighno",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.11",
+   "a": "Prasena",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnato dvau babhūvatuḥ prasenaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.11",
+   "a": "Satrājit",
+   "rel": "son_of",
+   "b": "Nighna",
+   "words": "nighnato dvau babhūvatuḥ satrājic",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 16.23",
+   "a": "Prasena",
+   "rel": "brother_of",
+   "b": "Satrājit",
+   "words": "dadau bhrātre narapatiḥ premṇā satrājid",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.34",
+   "a": "Kumāra",
+   "rel": "son_of",
+   "b": "Jāmbavat",
+   "words": "kumāram ādāya sutaṃ jāmbavato",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.45",
+   "a": "Satrājit",
+   "rel": "other",
+   "b": "Satrājit",
+   "words": "satrājito daśa tv āsan bhāryās",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.45",
+   "a": "Bhagaṃkāra",
+   "rel": "son_of",
+   "b": "Satrājit",
+   "words": "satrājito daśa tv āsan bhāryās tāsāṃ śataṃ sutāḥ khyātimantas trayas teṣāṃ bhagaṃkāras",
+   "doubt": false,
+   "ref_cited": "BrP 16.46",
+   "ref_from": "words",
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.46",
+   "a": "Vīra",
+   "rel": "son_of",
+   "b": "Satrājit",
+   "words": "vīro vātapatiś caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.46",
+   "a": "Vātapati",
+   "rel": "son_of",
+   "b": "Satrājit",
+   "words": "vīro vātapatiś caiva",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.46",
+   "a": "Vasumedha",
+   "rel": "son_of",
+   "b": "Satrājit",
+   "words": "vasumedhas tathaiva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.47",
+   "a": "Satyabhāmā",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "kumāryaś cāpi tisro vai satyabhāmottamā",
+   "doubt": false,
+   "check": "unsupported"
+  },
+  {
+   "ref": "BrP 16.47",
+   "a": "Vratinī",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "vratinī ca dṛḍhavratā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.47",
+   "a": "Dṛḍhavratā",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "vratinī ca dṛḍhavratā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.48",
+   "a": "Prasvāpinī",
+   "rel": "daughter_of",
+   "b": "Satrājit",
+   "words": "tathā prasvāpinī caiva",
+   "doubt": true,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 16.48",
+   "a": "Prasvāpinī",
+   "rel": "wife_of",
+   "b": "Kṛṣṇa",
+   "words": "bhāryāṃ kṛṣṇāya tāṃ dadau",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.50",
+   "a": "Śvaphalka",
+   "rel": "son_of",
+   "b": "Vṛṣṇi",
+   "words": "jajñāte tanayau vṛṣṇeḥ śvaphalkaś",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.50",
+   "a": "Citraka",
+   "rel": "son_of",
+   "b": "Vṛṣṇi",
+   "words": "jajñāte tanayau vṛṣṇeḥ śvaphalkaś citrakas",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.50",
+   "a": "Gāndinī",
+   "rel": "wife_of",
+   "b": "Śvaphalka",
+   "words": "śvaphalkaḥ kāśirājasya sutāṃ bhāryām avindata gāndinīṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.50",
+   "a": "Gāndinī",
+   "rel": "daughter_of",
+   "b": "Kāśirāja",
+   "words": "kāśirājasya sutāṃ",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.51",
+   "a": "Akrūra",
+   "rel": "born_of",
+   "b": "Gāndinī",
+   "words": "tasyāṃ jajñe mahābāhuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.51",
+   "a": "Akrūra",
+   "rel": "son_of",
+   "b": "Śvaphalka",
+   "words": "tasyāṃ jajñe mahābāhuḥ",
+   "doubt": true,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.55",
+   "a": "Vasudeva",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūreṇograsenāyāṃ sutau vai",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.55",
+   "a": "Upadeva",
+   "rel": "son_of",
+   "b": "Akrūra",
+   "words": "akrūreṇograsenāyāṃ sutau vai",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 16.55",
+   "a": "Vasudeva",
+   "rel": "born_of",
+   "b": "Ugrasenā",
+   "words": "akrūreṇograsenāyāṃ sutau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 16.55",
+   "a": "Upadeva",
+   "rel": "born_of",
+   "b": "Ugrasenā",
+   "words": "akrūreṇograsenāyāṃ sutau",
+   "doubt": false,
+   "check": "words"
+  },
+  {
+   "ref": "BrP 16.56",
+   "a": "Pṛthu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "citrakasyābhavan putrāḥ pṛthur",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.56",
+   "a": "Vipṛthu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "pṛthur vipṛthur eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Aśvagrīva",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "aśvagrīvo 'śvabāhuś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Aśvabāhu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "aśvagrīvo 'śvabāhuś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Supārśvaka",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "supārśvakagaveṣaṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Gaveṣaṇa",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "supārśvakagaveṣaṇau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Ariṣṭanemi",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "ariṣṭanemiś ca sutā",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Dharma",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "sutā dharmo",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.57",
+   "a": "Dharmabhṛt",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "dharmabhṛd eva ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.58",
+   "a": "Subāhu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "subāhur bahubāhuś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.58",
+   "a": "Bahubāhu",
+   "rel": "son_of",
+   "b": "Citraka",
+   "words": "subāhur bahubāhuś ca",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.58",
+   "a": "Śraviṣṭhā",
+   "rel": "daughter_of",
+   "b": "Citraka",
+   "words": "śraviṣṭhāśravaṇe striyau",
+   "doubt": false,
+   "check": "verified"
+  },
+  {
+   "ref": "BrP 16.58",
+   "a": "Śravaṇā",
+   "rel": "daughter_of",
+   "b": "Citraka",
+   "words": "śraviṣṭhāśravaṇe striyau",
+   "doubt": false,
+   "check": "verified"
+  }
+ ]
+}
