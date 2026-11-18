@@ -202,3 +202,28 @@ This file predates the Phase-Q and Phase-HI work. Corrections:
   fed by `publish_srangam.py`.
 - **The genuine open item** is Q4 (sampled LLM-judge, `judge_sample.py` + `mt_reviews`) —
   semantic fidelity certification. Designed in `QUALITY_LOOP_DESIGN`, not yet built.
+
+## The genealogies' road (DOCS122_2026_11_18, 18 Nov 2026)
+
+How the lines of kings travel from the Sanskrit verses to the desk and to the site. Only the first step spends.
+
+| Step | Where | Reads | Writes | Cost |
+|---|---|---|---|---|
+| 1. Read | scripts\vamsa_read.py (G5a, G6a, G6b) | the genealogical chapters of 17 works on this PC (vip4, vipc4, bhp9, bhp12, hv, ram1, ram2, mbh1, matsya, brahma, bndp1, bndp2, linga1, kurma1, garuda1, agni, markp) | data\vamsa_read\<work>\*.json: kinship statements, each checked by machine against its verse (verified, words, unsupported, bad) | paid: Claude Sonnet (claude-sonnet-5-5), prompt vamsa-read-v1 for vip4, bhp9, bhp12 and v2 for the rest; 323 calls, $11.19 to 18 Nov; a run resumes where it stopped |
+| 2. Align | scripts\vamsa_align.py (G6c) | step 1 | exports\vamsa_align.md and .csv; data\vamsa_read\aligned.json | free |
+| 3. Register | scripts\vamsa_register.py (G6d; VAMSA_NAMES) | steps 1 and 2 | data\vamsa_read\register.json; exports\vamsa_register.csv and .md | free |
+| 4. Join | scripts\vamsa_join.py (G5b; VAMSA_SITE) | step 1; data\shelf\kin.db (the Purana Index, kin_index.py); data\context.db | data\vamsa_read\dynasties.json (vip4, bhp9, bhp12), dynasties_every.json (--work every) | free |
+| 5. Send | scripts\index_sync.py --dynasty-works every; nightly from scripts\corpus_mirror_task.ps1 | step 4 and the indexes (kin.db, vamsa.db, claims.db) | Srangam's nine corpus.index_* tables through the edge function corpus-index (the dynasties in corpus.index_dynasties, docs\cloud\C28); only rows whose row_hash changed | free |
+| 6. Show, site | public.corpus_reader_index_dynasties(p_work), behind corpus._reader_gate; /corpus/genealogies/dynasties asks for one work at a time (Srangam's DYNASTIES_WORKS_2026_11_18) | step 5 | nothing | free |
+| 6. Show, desk | /vamsa (scripts\vamsa.html; /api/vamsa through scripts\vamsa_view.py, read only) | kin.db, vamsa.db, context.db | nothing | free |
+
+The rules of the road:
+- The site shows what the desk last sent: on 18 Nov, 17 works and 517 rows. Every send carries --dynasty-works every
+  (the nightly task does since VAMSA_EVERY_2026_11_18); a send without it takes the 14 works of G6 off the site.
+- Who may read on the site: corpus_reader_allowed() (admins and super admins; corpus.reader_access's mode, "readers"
+  since 9 Oct: the listed readers and researchers). The public may not; changing that is the owner's decision.
+- What is shown is what the texts state, each step with its verse. A join of two works' persons is ours (one name, one
+  father and, where both give him, one grandfather); a second name only where a verse says it; names that differ are
+  shown side by side, never ruled on.
+- Not yet on the road: a dynasty and vamsa on each line, for a way in by Suryavamsa and Candravamsa (P2c); the 17 works
+  on the desk's /vamsa page (P3); a review list for the proposed names and the names kept apart (P4).

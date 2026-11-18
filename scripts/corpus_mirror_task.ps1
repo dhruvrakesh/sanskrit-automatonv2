@@ -37,7 +37,10 @@ $t1 = Get-Date
 $rcm = $LASTEXITCODE
 Log ("DONE - corpus media rc={0} {1:n0}s" -f $rcm, ((Get-Date) - $t1).TotalSeconds)
 $t2 = Get-Date
-& $py scripts\index_sync.py --apply --if-configured 2>&1 | ForEach-Object { "$_" } | Add-Content $log
+# VAMSA_EVERY_2026_11_18: the dynasties of every work read (index_sync.py --dynasty-works every), from the day the
+# site's Dynasties page loads one work at a time (Srangam's DYNASTIES_WORKS_2026_11_18); without it this run would
+# take the 14 works of G6 off the site again.
+& $py scripts\index_sync.py --apply --if-configured --dynasty-works every 2>&1 | ForEach-Object { "$_" } | Add-Content $log
 $rci = $LASTEXITCODE
 Log ("DONE - index genealogies rc={0} {1:n0}s" -f $rci, ((Get-Date) - $t2).TotalSeconds)
 if ($awake) { [void][SanskritAutomaton.Power]::SetThreadExecutionState([uint32]2147483648) }

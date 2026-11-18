@@ -1,0 +1,12 @@
+Every work on the site; the genealogies' road written down (DOCS122_2026_11_18)
+
+- ASKS section 34: d7c6eda9 released; Srangam 72e109b pushed and published (DYNASTIES_WORKS_2026_11_18; the live
+  chunks CorpusDynasties-D2CZ5603.js and indexSite-DKfqdnMs.js read); the task sends every work
+  (VAMSA_EVERY_2026_11_18); the send: 412 rows, 0 deleted, the site equal to the desk; the site: 17 works, 517 rows;
+  reader_access readers; the team's page brought up to date. STATE section 56; RUNBOOK 18 Nov, night.
+- ARCHITECTURE.md: "The genealogies' road" (P5): read, align, register, join, send, show; what each reads and writes,
+  what it costs; the rules.
+- tests: test_docs122_2026_11_18.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

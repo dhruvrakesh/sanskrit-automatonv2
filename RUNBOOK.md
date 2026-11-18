@@ -3014,3 +3014,12 @@ docs\ASKS_2026-10-22.md, section 33. In this order:
 3. Only when the published page shows the 17 texts' buttons: on the desk, `python scripts\patch_index_task_every_2026_11_18.py
    --check`, then without; `python scripts\index_sync.py --dynasty-works every` (the plan), then
    `python scripts\index_sync.py --dynasty-works every --apply`; the SQL of section 33 again (17 works, 517 rows).
+
+## 18 Nov, night: every work on the site; the road written down (DOCS122_2026_11_18)
+
+docs\ASKS_2026-10-22.md, section 34. From the automaton's root, in PowerShell:
+
+1. The patch: `python scripts\patch_docs122_2026_11_18.py --check`, then without; `python -m unittest
+   tests.test_docs122_2026_11_18`; release.ps1 with COMMIT_MSG_docs122_20261118.txt (the dry run, then -Apply once).
+2. The live build, after any later Publish: fetch https://srangam.nartiang.org/, its /assets/index-*.js, the CorpusDynasties chunk it names,
+   and look for "No dynasty of this text has been sent from the desk yet." (the probe in the chat of 18 Nov, night).
