@@ -48,3 +48,4 @@
 {"doc": "jyotish_surya_siddhanta__w_etext", "status": "released", "reason": "", "at": "2026-11-13T18:39:22", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}
 {"doc": "jyotish_surya_siddhanta", "status": "in_repair", "reason": "re-translating after the repair", "at": "2026-11-13T18:40:27", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11", "en_before": 54, "hi_before": 54, "backup": "D:\\backups\\context_pre_repair_jyotish_surya_siddhanta_20261113_183810.db"}
 {"doc": "smriti_17gautama_smriti", "status": "in_repair", "reason": "re-translating after the repair", "at": "2026-11-13T20:23:12", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11", "en_before": 85, "hi_before": 0, "backup": "D:\\backups\\context_pre_repair_smriti_17gautama_smriti_20261113_201956.db"}
+{"doc": "bodhyana", "status": "set_aside", "reason": "needs a better scan", "at": "2026-11-17T23:56:34", "by": "repair_text.py", "mark": "REPAIR_HEAL_2026_10_11"}

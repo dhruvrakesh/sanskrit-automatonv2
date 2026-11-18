@@ -2984,3 +2984,19 @@ docs\ASKS_2026-10-22.md, section 31. From the automaton's root, in PowerShell:
 4. I1: on the site's admin tag page, "suggest categories" once; then in the Lovable Cloud SQL editor the query of
    section 31's ledger row again: srangam_ai_usage by function_name, purpose, provider, model, ok.
 5. The credit: `python scripts\claude_engine.py --credit`.
+
+## 18 Nov: P1, the register healed; P2a, the site's road for every work (DOCS120_2026_11_18)
+
+docs\ASKS_2026-10-22.md, section 32. From the automaton's root, in PowerShell:
+
+1. The patches: `python scripts\patch_vamsa_names_2026_11_18.py --check`, then without;
+   `python scripts\patch_vamsa_site_2026_11_18.py --check`, then without; `python scripts\patch_docs120_2026_11_18.py
+   --check`, then without; `python -m unittest tests.test_vamsa_names_2026_11_18 tests.test_vamsa_site_2026_11_18
+   tests.test_docs120_2026_11_18 tests.test_vamsa_join_2026_11_11 tests.test_vamsa_register_2026_11_17`; release.ps1
+   with COMMIT_MSG_vamsanames_20261118.txt (the dry run, then -Apply once).
+2. Free: `python scripts\vamsa_register.py`, `python scripts\vamsa_register.py --name Bhishma`, then
+   `python scripts\vamsa_join.py --work every` (writes data\vamsa_read\dynasties_every.json and
+   exports\vamsa_dynasties_every.csv; G5a's files as before).
+3. Nothing sent: `python scripts\index_sync.py --dynasty-works every --dump exports\index_rows_every_20261118.json.gz`.
+   Do not run index_sync with --apply and --dynasty-works every until the Srangam kit of P2b is live.
+4. In the Lovable Cloud SQL editor, read only: the mode of corpus.reader_access and the count of corpus.readers.

@@ -55,6 +55,10 @@ MIN_LINE = 3         # a work's line of fewer persons is left out
 # The words that say a person was called by another name (folded: no diacritics): samjna, nama, ahuh, smrta, khyata,
 # ucyate, visruta, prathita.
 ALIAS_MARKS = ("samjn", "nama", "namn", "ahu", "smrt", "khyat", "ucyat", "visrut", "prathit")
+# VAMSA_NAMES_2026_11_18: words that say the second name is another person or a place, not a second name (a minister,
+# a daughter's marriage, a wife, a mother, a sister, a friend, a priest, a land, a city)
+NOT_ALIAS = ("amaty", "mantri", "duhit", "sambandh", "bharya", "patni", "matr", "bhagin", "sakh", "purohit",
+             "jangal", "desa", "nagar")
 # The founders of the dynasties the genealogical chapters tell, and their fathers (the solar and the lunar lines).
 ANCHORS = [
     ("solar", "Ik\u1e63v\u0101ku", "Manu", "the solar line (Aik\u1e63v\u0101kas) from Ik\u1e63v\u0101ku"),
@@ -121,24 +125,40 @@ def statements_of(out_dir, work: str) -> list:
     return [dict(s, chapter=r.get("chapter")) for r in VR.records(out_dir, work) for s in (r.get("statements") or [])]
 
 
-def aliases(statements: list) -> list:
-    """[(chapter, name, as)]: one person by two names, from the verified "other" statements whose words say he was
-    called so; the name kept is the one that is a son (has a father) in these statements, else the first."""
+def aliases_said(statements: list) -> list:
+    """[(chapter, keep, other, ref, words)]: one person by two names, from the verified "other" statements whose words
+    say he was called so; the name kept is the one that is a son (has a father) in these statements, else the first.
+    VAMSA_NAMES_2026_11_18: the second name must stand in the words; never a woman of these statements (a wife, a
+    daughter, a sister, a mother) nor words that make him another person or a place (NOT_ALIAS)."""
     import vamsa_read as VR
     sons = {VR.letters(s.get("a")) for s in statements if s.get("rel") == "son_of" and s.get("check") == "verified"}
+    said = [s for s in statements if s.get("check") in ("verified", "words")]
+    female = {VR.letters(s.get("a")) for s in said if s.get("rel") in ("wife_of", "daughter_of", "sister_of")}
+    female |= {VR.letters(s.get("b")) for s in said if s.get("rel") == "born_of"}
     out = []
     for s in statements:
         if s.get("rel") != "other" or s.get("check") != "verified":
             continue
         w = VR.folded(s.get("words"))
-        if not any(m in w for m in ALIAS_MARKS):
+        if any(m in w for m in NOT_ALIAS):
             continue
         a, b = str(s.get("a") or ""), str(s.get("b") or "")
         if not VR.letters(a) or not VR.letters(b) or same(a, b):
             continue
         keep, other = (b, a) if VR.letters(b) in sons and VR.letters(a) not in sons else (a, b)
-        out.append((chnum(s.get("chapter")), other, keep))
+        ko, kw = nkey(other), nkey(s.get("words"))
+        if not ko or ko[:5] not in kw or VR.letters(other) in female or VR.letters(keep) in female:
+            continue
+        rest = kw.replace(ko[:5], " ", 1)   # the word that says "called" stands apart from the name (not Samjna's own)
+        if not any(m in rest for m in ALIAS_MARKS):
+            continue
+        out.append((chnum(s.get("chapter")), keep, other, s.get("ref"), s.get("words")))
     return out
+
+
+def aliases(statements: list) -> list:
+    """[(chapter, name, as)]: aliases_said() as renamed() takes them."""
+    return [(ch, other, keep) for ch, keep, other, _r, _w in aliases_said(statements)]
 
 
 def renamed(statements: list) -> list:

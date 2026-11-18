@@ -242,7 +242,7 @@ def _best_scholar(stmts: dict, keys: list) -> str:
 
 
 def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_db: str = "",
-          vamsa_read_dir: str = "") -> dict:
+          vamsa_read_dir: str = "", dynasty_works: str = "all") -> dict:
     """{table: [row]}: the site's rows, from the stores the dashboard's Vamsa page reads; read-only. vamsa_read_dir:
     G5a's readings (data\\vamsa_read), for the dynasties (VAMSA_JOIN_2026_11_11); none given, none sent."""
     import relations_view as rv
@@ -385,7 +385,8 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_d
 
     # VAMSA_JOIN_2026_11_11: the dynasties, the Puranas' own lines joined to the index's persons (vamsa_join.py)
     if vamsa_read_dir and Path(vamsa_read_dir).exists():
-        out["dynasties"] = dynasty_rows(vamsa_read_dir, db, kin_db, g, {r["key"] for r in out["persons"]})
+        out["dynasties"] = dynasty_rows(vamsa_read_dir, db, kin_db, g, {r["key"] for r in out["persons"]},
+                                        dynasty_works)   # VAMSA_SITE_2026_11_18
     counts = {t: len(out[t]) for t in TABLES if t != "meta"}
     out["meta"].append(finish({"key": "run", "value": {"mark": MARK, "scheme": SCHEME, "counts": counts,
                                                        "checked": v["meta"].get("at", ""),
@@ -396,11 +397,12 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_d
 STEP_FIELDS = ("name", "father", "ref", "words", "person", "index_head", "how", "index", "joined")
 
 
-def dynasty_rows(vamsa_read_dir: str, db: str, kin_db: str, g: dict, persons: set) -> list:
+def dynasty_rows(vamsa_read_dir: str, db: str, kin_db: str, g: dict, persons: set, dynasty_works: str = "all") -> list:
     """VAMSA_JOIN_2026_11_11: one row a line ("<work>:<n>"), and one a work ("<work>:0", its counts); a step's person
     is linked ("page") only when the site has a page for it (a person with a line)."""
     import vamsa_join as vj
-    d = vj.dynasties(vamsa_read_dir, db, kin_db, graph=g)
+    # VAMSA_SITE_2026_11_18: "all" G5a's three (as before); "every" with G6's works read (--dynasty-works every)
+    d = vj.dynasties(vamsa_read_dir, db, kin_db, works=vj.works_for(dynasty_works, vamsa_read_dir) or None, graph=g)
     rows = []
     for wk, w in sorted(d.items()):
         rows.append(finish({"key": "%s:0" % wk, "work": wk, "n": 0, "title": w["title"], "text_code": w["text"],
@@ -654,6 +656,9 @@ def main(argv=None) -> int:
     ap.add_argument("--apply", action="store_true", help="send (else the plan)")
     ap.add_argument("--status", action="store_true", help="the counts here and there")
     ap.add_argument("--dump", default="", help="write the rows to this file (.json or .json.gz); nothing sent")
+    ap.add_argument("--dynasty-works", default="all", choices=("all", "every"),
+                    help="VAMSA_SITE_2026_11_18: the dynasties of G5a's three works (all, as before) or of every work "
+                         "read (every: with G6's); send every only once the site's page loads one work at a time")
     ap.add_argument("--if-configured", action="store_true",
                     help="the scheduled tick: exit 0 doing nothing until the secret, the stores, C21 and corpus-index "
                          "are all there")
@@ -680,7 +685,8 @@ def main(argv=None) -> int:
             say("refused: %s not found (%s)" % (what, p), how)
             return 0 if a.if_configured else 1
     t0 = time.time()
-    rows = build(db, kin, vam, immutable=a.immutable, claims_db=clm, vamsa_read_dir=vrd)
+    rows = build(db, kin, vam, immutable=a.immutable, claims_db=clm, vamsa_read_dir=vrd,
+                 dynasty_works=a.dynasty_works)
     sizes = {t: sum(len(json.dumps(r, ensure_ascii=False)) for r in rows[t]) for t in TABLES}
     print("built in %.1f s: %s" % (time.time() - t0, ", ".join("%s %d (%.1f MB)" % (t, len(rows[t]), sizes[t] / 1e6)
                                                                for t in TABLES)))

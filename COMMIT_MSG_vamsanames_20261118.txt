@@ -1,0 +1,14 @@
+P1: the register's second names healed; P2a: the site's road for the dynasties of every work, by default as before (VAMSA_NAMES_2026_11_18, VAMSA_SITE_2026_11_18, DOCS120_2026_11_18)
+
+- scripts\patch_vamsa_names_2026_11_18.py (vamsa_align.py, vamsa_register.py): a second name only where the verse
+  says it of him (not his minister, his mother, his wives' father, a land); each said once; --name in plain letters,
+  the exact name first; the father's entry only where most works agree. tests: test_vamsa_names_2026_11_18.
+- scripts\patch_vamsa_site_2026_11_18.py (vamsa_join.py, index_sync.py): a G6 work's title and source from
+  vamsa_read; vamsa_join --work all|g6|every|<a work>; index_sync --dynasty-works all|every, default all (unchanged).
+  Measured: all 106 rows, 218 kB; every 517 rows, 911 kB. Not to be sent with every before the site's page loads one
+  work at a time. tests: test_vamsa_site_2026_11_18.
+- ASKS section 32 (the page of 17 Nov held: not the enterprise way in part; the baselines; P1, P2a; the team's page),
+  STATE section 54, RUNBOOK 18 Nov. tests: test_docs120_2026_11_18.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

@@ -197,10 +197,21 @@ def dynasties(out_dir, db: str, kin_db: str, works=None, graph=None) -> dict:
                 s["person"] = "%s:%d" % (INDEX, s["entry"]) if s.get("entry") is not None else None
                 s["index_head"] = ix.head(s["entry"]) if s.get("entry") is not None else None
             lines.append({"n": n, "label": labels(st, ln), "length": len(ln), "steps": ln})
-        out[wk] = {"title": VR.WORKS[wk]["title"], "text": TEXT_OF.get(wk, ""), "counts": j["counts"],
-                   "source": "%s; %s (data entry: %s)" % (VR.WORKS[wk]["member"], VR.GRETIL, VR.WORKS[wk]["entry"]),
+        # VAMSA_SITE_2026_11_18: G6's works too (their title and source from vamsa_read; no index text code)
+        out[wk] = {"title": VR.work_of(wk)["title"], "text": TEXT_OF.get(wk, ""), "counts": j["counts"],
+                   "source": VR.source_of(wk),
                    "lines": lines}
     return out
+
+
+def works_for(name: str, out_dir) -> list:
+    """VAMSA_SITE_2026_11_18: which works' dynasties: "all" G5a's three (as before), "g6" the works of G6 read, "every"
+    both, or one work's code. Only the works read (a folder in out_dir) are given."""
+    import vamsa_read as VR
+    here = {p.name for p in Path(out_dir).iterdir() if p.is_dir()} if Path(out_dir).exists() else set()
+    g6 = [w for w in VR.G6_WORKS if w not in VR.WORKS]
+    want = {"all": list(VR.WORKS), "g6": g6, "every": list(VR.WORKS) + g6}.get(name, [name])
+    return [w for w in want if w in here and (w in VR.WORKS or w in VR.G6_WORKS)]
 
 
 def main(argv=None) -> int:
@@ -218,9 +229,10 @@ def main(argv=None) -> int:
         pass
     sys.path.insert(0, str(ROOT / "scripts"))
     import vamsa_read as VR
-    if a.work != "all" and a.work not in VR.WORKS:
-        print("REFUSE: --work is all or one of %s" % ", ".join(VR.WORKS)); print("VERDICT: nothing joined"); print("NEXT: ")
-        return 1
+    if a.work not in ("all", "g6", "every") and a.work not in VR.WORKS and a.work not in VR.G6_WORKS:
+        print("REFUSE: --work is all, g6, every or one of %s" % ", ".join(list(VR.WORKS) + [w for w in VR.G6_WORKS
+                                                                                         if w not in VR.WORKS]))
+        print("VERDICT: nothing joined"); print("NEXT: python scripts\\vamsa_join.py --work every"); return 1
     for p, what in ((a.db, "the database"), (a.kin_db, "the kinships (kin_index.py)")):
         if not Path(p).exists():
             print("REFUSE: %s not found (%s)" % (what, p)); print("VERDICT: nothing joined"); print("NEXT: ")
@@ -229,7 +241,7 @@ def main(argv=None) -> int:
         import relations_view as rv
         import index_sync
         rv.ro = index_sync.ro_immutable
-    d = dynasties(a.out, a.db, a.kin_db, None if a.work == "all" else [a.work])
+    d = dynasties(a.out, a.db, a.kin_db, None if a.work == "all" else (works_for(a.work, a.out) or ["-"]))
     if not d:
         print("VERDICT: nothing read yet: run vamsa_read.py first")
         print("NEXT: python scripts\\vamsa_read.py")
@@ -244,13 +256,14 @@ def main(argv=None) -> int:
         for ln in w["lines"][:5]:
             print("         a line of %d%s: %s" % (ln["length"], (" (%s)" % ln["label"]) if ln["label"] else "",
                                                   " > ".join(s["name"] for s in ln["steps"])))
-    p = Path(a.out) / "dynasties.json"
+    tail = "" if a.work == "all" else "_" + a.work   # VAMSA_SITE_2026_11_18: G5a's files as before
+    p = Path(a.out) / ("dynasties%s.json" % tail)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps({"mark": MARK, "at": datetime.datetime.now().isoformat(timespec="seconds"), "works": d},
                             ensure_ascii=False, indent=1), encoding="utf-8")
     ex = Path(a.exports)
     ex.mkdir(parents=True, exist_ok=True)
-    q = ex / "vamsa_dynasties.csv"
+    q = ex / ("vamsa_dynasties%s.csv" % tail)
     with open(q, "w", encoding="utf-8-sig", newline="") as f:
         wr = csv.writer(f)
         wr.writerow(["work", "line", "label", "step", "name", "father", "ref", "words", "index_person", "index_head",

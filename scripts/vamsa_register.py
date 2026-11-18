@@ -77,21 +77,8 @@ def promoted(statements: list) -> list:
 
 
 def said_aliases(statements: list) -> list:
-    """[(chapter, keep, other, ref, words)]: vamsa_align.aliases with the verse."""
-    VA, VR = _va(), _vr()
-    sons = {VR.letters(s.get("a")) for s in statements if s.get("rel") == "son_of" and s.get("check") == "verified"}
-    out = []
-    for s in statements:
-        if s.get("rel") != "other" or s.get("check") != "verified":
-            continue
-        if not any(m in VR.folded(s.get("words")) for m in VA.ALIAS_MARKS):
-            continue
-        a, b = str(s.get("a") or ""), str(s.get("b") or "")
-        if not VR.letters(a) or not VR.letters(b) or VA.same(a, b):
-            continue
-        keep, other = (b, a) if VR.letters(b) in sons and VR.letters(a) not in sons else (a, b)
-        out.append((VA.chnum(s.get("chapter")), keep, other, s.get("ref"), s.get("words")))
-    return out
+    """[(chapter, keep, other, ref, words)]: vamsa_align.aliases_said (VAMSA_NAMES_2026_11_18: the stricter rule)."""
+    return _va().aliases_said(statements)
 
 
 def nodes_of(work: str, statements: list) -> dict:
@@ -104,7 +91,7 @@ def nodes_of(work: str, statements: list) -> dict:
     al = said_aliases(statements)
     out = {}
     for k, p in ps.items():
-        aka = [{"name": o, "ref": r, "words": w} for ch, keep, o, r, w in al
+        aka = [{"name": o, "as": keep, "ref": r, "words": w} for ch, keep, o, r, w in al
                if VR.letters(keep) == VR.letters(p["name"]) and ch is not None and p.get("chapter") is not None
                and abs(VA.chnum(p["chapter"]) - ch) <= 1]
         def said(name):
@@ -293,14 +280,16 @@ def build(out_dir, works=None, dyn=None) -> dict:
             for nm in [nodes[i]["name"]] + [a["name"] for a in nodes[i]["aka"]]:
                 if not any(VA.same(nm, x) for x in allnames):
                     allnames.append(nm)
-            aka += [dict(a, work=nodes[i]["work"]) for a in nodes[i]["aka"]]
+            for a in nodes[i]["aka"]:   # VAMSA_NAMES_2026_11_18: each name said once
+                if not any(x["ref"] == a["ref"] and x["name"] == a["name"] for x in aka):
+                    aka.append(dict(a, work=nodes[i]["work"]))
         ws = []
         for i in mem:
             if nodes[i]["work"] not in ws:
                 ws.append(nodes[i]["work"])
         entries.append({"id": mem[0], "name": name, "names": allnames, "father": fat, "works": ws,
                         "persons": [dict({k: nodes[i][k] for k in ("work", "name", "father", "grand", "ref", "words",
-                                                                   "rests")}, node=i) for i in mem],
+                                                                   "rests", "up")}, node=i) for i in mem],
                         "aka": aka, "joins": [], "dynasties": sorted(set().union(*(where.get(i, set())
                                                                                         for i in mem)))})
     allj = [j for js in joins.values() for j in js]
@@ -310,6 +299,17 @@ def build(out_dir, works=None, dyn=None) -> dict:
             by_node[p["node"]] = e
     for j in allj:   # a join is filed under the root of its moment; each goes to its entry
         by_node[j["a"]]["joins"].append(j)
+    for e in entries:   # VAMSA_NAMES_2026_11_18: the father's entry and the sons' entries (through the works' lines)
+        ups = collections.Counter(by_node[p["up"]]["id"] for p in e["persons"] if p.get("up") in by_node)
+        top = ups.most_common(1)[0] if ups else None
+        # the father's entry only where more than half the works that give him agree; else the works part, said so
+        e["father_entry"] = top[0] if top and 2 * top[1] > sum(ups.values()) else None
+        e["father_entries"] = [[k, n] for k, n in ups.most_common()] if top and e["father_entry"] is None else []
+        e["sons"] = []
+    ids = {e["id"]: e for e in entries}
+    for e in entries:
+        if e["father_entry"] in ids and e["id"] not in ids[e["father_entry"]]["sons"]:
+            ids[e["father_entry"]]["sons"].append(e["id"])
     entries.sort(key=lambda e: (-len(e["works"]), VA.nkey(e["name"]), e["id"]))
     said = {tuple(sorted((VA.nkey(e["name"]), VA.nkey(a["name"])))) for e in entries for a in e["aka"]}
     for e in entries:
@@ -336,7 +336,8 @@ def build(out_dir, works=None, dyn=None) -> dict:
               "entries": len(entries), "in_two_works_or_more": sum(1 for e in entries if len(e["works"]) >= 2),
               "in_three_works_or_more": sum(1 for e in entries if len(e["works"]) >= 3),
               "joins": {h: c.get(h, 0) for h in HOW}, "homonyms_kept_apart": len(homs),
-              "two_names_said": sum(len(e["aka"]) for e in entries), "two_names_proposed": len(prop),
+              "two_names_said": len({(a["work"], a["ref"], a["name"]) for e in entries for a in e["aka"]}),
+              "two_names_proposed": len(prop),
               "rest_on_words": sum(1 for n in nodes.values() if n["rests"] == "words")}
     return {"mark": MARK, "at": datetime.datetime.now().isoformat(timespec="seconds"), "works": works,
             "counts": counts, "entries": entries, "homonyms": homs, "proposed": prop}
@@ -374,9 +375,14 @@ def write(reg: dict, out_dir, exports) -> list:
             h["name"], h["a"]["work"], h["a"]["father"], h["a"]["grand"] or "?", h["a"]["ref"], h["b"]["work"],
             h["b"]["father"], h["b"]["grand"] or "?", h["b"]["ref"], h["why"]))
     md += ["", "## Two names of one person, said in a verse", ""]
+    seen_aka = set()
     for e in reg["entries"]:
         for a in e["aka"]:
-            md.append("- %s is also %s (%s %s: %s)" % (e["name"], a["name"], a["work"], a["ref"], a["words"]))
+            if (a["work"], a["ref"], a["name"]) in seen_aka:
+                continue
+            seen_aka.add((a["work"], a["ref"], a["name"]))
+            md.append("- %s is also %s (%s %s: %s)" % (a.get("as") or e["name"], a["name"], a["work"], a["ref"],
+                                                       a["words"]))
     md += ["", "## Two names of one person, proposed (ours: one father and one son, two names)", ""]
     for p_ in reg["proposed"]:
         md.append("- %s (%s %s) and %s (%s %s): son of %s, father of %s (G6c %s, generation %d)" % (
@@ -395,9 +401,21 @@ def write(reg: dict, out_dir, exports) -> list:
     return [p, q, j]
 
 
+def qkey(name: str) -> str:
+    """VAMSA_NAMES_2026_11_18: a name as typed in plain letters meets it in IAST: Krishna, Krsna and Krsna are one;
+    Bhishma and Bhisma; Parikshit and Pariksit (sh, ch, double vowels and ri set aside on both sides)."""
+    k = _va().nkey(name)
+    for a, b in (("sh", "s"), ("ch", "c"), ("aa", "a"), ("ii", "i"), ("uu", "u"), ("ri", "r"), ("w", "v")):
+        k = k.replace(a, b)
+    return k
+
+
 def show(reg: dict, name: str) -> list:
+    """The entries of a name: those whose names meet it letter for letter (qkey); none, those near it (same())."""
     VA = _va()
-    return [e for e in reg["entries"] if any(VA.same(name, n) for n in e["names"])]
+    k = qkey(name)
+    got = [e for e in reg["entries"] if any(qkey(n) == k for n in e["names"])]
+    return got or [e for e in reg["entries"] if any(VA.same(name, n) for n in e["names"])]
 
 
 def main(argv=None) -> int:
