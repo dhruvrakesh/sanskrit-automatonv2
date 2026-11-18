@@ -3000,3 +3000,17 @@ docs\ASKS_2026-10-22.md, section 32. From the automaton's root, in PowerShell:
 3. Nothing sent: `python scripts\index_sync.py --dynasty-works every --dump exports\index_rows_every_20261118.json.gz`.
    Do not run index_sync with --apply and --dynasty-works every until the Srangam kit of P2b is live.
 4. In the Lovable Cloud SQL editor, read only: the mode of corpus.reader_access and the count of corpus.readers.
+
+## 18 Nov, evening: P2b, the site's page one work at a time; then every work sent (DOCS121_2026_11_18)
+
+docs\ASKS_2026-10-22.md, section 33. In this order:
+
+1. The desk (automaton root): `python scripts\patch_docs121_2026_11_18.py --check`, then without; `python -m unittest
+   tests.test_srangam_dynasties_works_2026_11_18 tests.test_index_task_every_2026_11_18 tests.test_docs121_2026_11_18`;
+   release.ps1 with COMMIT_MSG_dynworks_20261118.txt (the dry run, then -Apply once).
+2. Srangam (D:\srangam-42267): `git pull`; the kit's patch with --check, then without; `npm run typecheck`;
+   `npx vitest run src/__tests__/dynasties.test.tsx src/__tests__/dynasties-works.test.tsx`; `npx vitest run`;
+   `npm run build`; commit and push the five files; Publish in Lovable.
+3. Only when the published page shows the 17 texts' buttons: on the desk, `python scripts\patch_index_task_every_2026_11_18.py
+   --check`, then without; `python scripts\index_sync.py --dynasty-works every` (the plan), then
+   `python scripts\index_sync.py --dynasty-works every --apply`; the SQL of section 33 again (17 works, 517 rows).

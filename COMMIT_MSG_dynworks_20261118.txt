@@ -1,0 +1,11 @@
+P2b: the Srangam kit for the Dynasties page one work at a time; the scheduled task's last step for every work (DYNASTIES_WORKS_2026_11_18, VAMSA_EVERY_2026_11_18, DOCS121_2026_11_18)
+
+- docs\srangam\DYNASTIES_WORKS_2026-11-18 and scripts\patch_srangam_dynasties_works_2026_11_18.py (for the Srangam
+  repo): the Dynasties page asks for one work's lines at a time, names the 17 works, finds a name typed in plain
+  letters; Phase AT, invariant 70. tests: test_srangam_dynasties_works_2026_11_18.
+- scripts\patch_index_task_every_2026_11_18.py: corpus_mirror_task.ps1 sends the dynasties of every work read; to be
+  applied only after the kit is published. tests: test_index_task_every_2026_11_18.
+- ASKS section 33, STATE section 55, RUNBOOK 18 Nov, evening. tests: test_docs121_2026_11_18.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk
