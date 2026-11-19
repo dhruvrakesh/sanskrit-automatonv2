@@ -3023,3 +3023,19 @@ docs\ASKS_2026-10-22.md, section 34. From the automaton's root, in PowerShell:
    tests.test_docs122_2026_11_18`; release.ps1 with COMMIT_MSG_docs122_20261118.txt (the dry run, then -Apply once).
 2. The live build, after any later Publish: fetch https://srangam.nartiang.org/, its /assets/index-*.js, the CorpusDynasties chunk it names,
    and look for "No dynasty of this text has been sent from the desk yet." (the probe in the chat of 18 Nov, night).
+
+## 18 Nov, late night: the way in by vamsa (VAMSA_WAYIN_2026_11_18, DOCS123_2026_11_18)
+
+docs\ASKS_2026-10-22.md, section 35. In this order (each step's check before the next):
+
+1. The automaton, from its root: `python scripts\patch_vamsa_wayin_2026_11_18.py --check`, then without;
+   `python scripts\patch_docs123_2026_11_18.py --check`, then without; `python -m unittest
+   tests.test_vamsa_wayin_2026_11_18 tests.test_vamsa_site_2026_11_18 tests.test_vamsa_names_2026_11_18
+   tests.test_docs123_2026_11_18`; release.ps1 with COMMIT_MSG_vamsawayin_20261118.txt (the dry run, then -Apply once).
+2. The Lovable Cloud SQL editor: docs\cloud\C29_index_vamsas_2026-11-18.sql, B1 (expected true, true, false, false), the
+   change (one paste), A1 (true x5, 0, 517), A3 (false, true, false, false).
+3. Srangam, from D:\srangam-42267: the kit's patch (--check, then without); npm run typecheck; npx vitest run; npm run
+   build; commit and push; ask Lovable's chat to deploy supabase/functions/corpus-index as it is; Publish.
+4. The desk: `python scripts\index_sync.py --dynasty-works every` (the plan: vamsas here 10, there 0: 10 to send; the
+   dynasties 0), then with --apply ("equal the desk's (10 tables)"); then C29's A2.
+5. The live build: the probe of 18 Nov, night, and CorpusVamsas-*.js named in the index.

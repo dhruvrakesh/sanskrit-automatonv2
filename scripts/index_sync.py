@@ -45,6 +45,14 @@ joined to the Purana Index's persons (vamsa_join.py, G5b): the table dynasties (
 CC BY-NC-SA 4.0, as the verses the site shows already), its index person and what the index says of it; a row "<work>:0"
 a work's counts. Sent only when the site has the table (C28) and corpus-index takes it (the Srangam kit DYNASTIES),
 as the claims were; until then the rest goes as before and the plan says the dynasties wait.
+
+VAMSA_WAYIN_2026_11_18 (P2c): and the vamsas, a way in by Suryavamsa and Candravamsa across the works: the table vamsas
+(docs\\cloud\\C29_index_vamsas_2026-11-18.sql), one row a dynasty of G6c (data\\vamsa_read\\aligned.json, written by
+vamsa_align.py): its founder, its vamsa, the works that tell it and its generations, each with every work's name, verse
+and words, the line of that work's dynasties where the same person stands (so the site opens that line), Dikshitar's
+person in the Purana Index, and Raychaudhuri's claims on that person (only those the site carries already: C23's rule;
+B. C. Law's, in copyright, never). Sent only when the site has the table (C29) and corpus-index takes it (the Srangam
+kit VAMSA_WAYIN), as the dynasties were.
 """
 from __future__ import annotations
 
@@ -56,8 +64,10 @@ SCHEME = "i2"   # B2_SITE_2026_10_28: i2 adds the claims (GENEALOGY_HEAL_2026_11
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
-TABLES = ("texts", "persons", "steps", "statements", "claims", "lines", "verses", "dynasties", "meta")   # VAMSA_JOIN_2026_11_11: dynasties
-OPTIONAL = ("claims", "dynasties")   # sent only when the site has the table (C23, C28) and corpus-index takes it
+TABLES = ("texts", "persons", "steps", "statements", "claims", "lines", "verses", "dynasties", "vamsas",
+          "meta")   # VAMSA_JOIN_2026_11_11: dynasties; VAMSA_WAYIN_2026_11_18: vamsas; the run's row (meta) last
+OPTIONAL = ("claims", "dynasties", "vamsas")   # sent only when the site has the table (C23, C28, C29) and corpus-index takes it
+RAY_SHOWN = 3   # VAMSA_WAYIN_2026_11_18: a generation's claims of Raychaudhuri carried, at most (the count says how many)
 MAX_ROWS, MAX_BYTES, MAX_KEYS = 1000, 3 * 1024 * 1024, 5000
 INDEX_RIGHTS = ("the relations derived from the index, with the entry's own words: Cologne Digital Sanskrit "
                 "Dictionaries, CC BY-NC-SA 3.0 (https://creativecommons.org/licenses/by-nc-sa/3.0/)")
@@ -209,6 +219,30 @@ def _claims(claims_db: str, live, immutable: bool = False):
                 if rel in ki.CLASS and ck not in key_ix[ki.norm(rel, s, o)]:
                     key_ix[ki.norm(rel, s, o)].append(ck)
     return [finish(w) for _c, w in sorted(works.items())], rows, (key_ix, pair_ix)
+
+
+def _entity_claims(claims_db: str, on_site: set, immutable: bool = False) -> dict:
+    """VAMSA_WAYIN_2026_11_18: {entity id: [claim key]}: the claims the site carries (on_site: the public-domain works',
+    their quotation found, as _claims sends them) that name one of our entities, tied to it alone (one candidate), in
+    the book's order. A work in copyright (B. C. Law) has no claim on the site, so none here."""
+    if not claims_db or not on_site or not Path(claims_db).exists():
+        return {}
+    con = (ro_immutable(claims_db) if immutable else
+           sqlite3.connect(Path(claims_db).resolve().as_uri() + "?mode=ro", uri=True, timeout=10))
+    out = collections.defaultdict(list)
+    try:
+        have = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+        if not {"claims", "claim_links"} <= have:
+            return {}
+        for eid, work, page, n in con.execute(
+                "SELECT l.entity_id, c.work, c.pdf_page, c.n FROM claim_links l JOIN claims c ON c.id = l.claim_id "
+                "WHERE l.role IN ('subject', 'object') AND coalesce(l.cands, 0) = 1 ORDER BY c.work, c.pdf_page, c.n"):
+            k = "%s:%d:%d" % (work, page, n)
+            if k in on_site and k not in out[eid]:
+                out[eid].append(k)
+    finally:
+        con.close()
+    return dict(out)
 
 
 def scholar_view(r: dict, ix) -> list:
@@ -387,6 +421,10 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_d
     if vamsa_read_dir and Path(vamsa_read_dir).exists():
         out["dynasties"] = dynasty_rows(vamsa_read_dir, db, kin_db, g, {r["key"] for r in out["persons"]},
                                         dynasty_works)   # VAMSA_SITE_2026_11_18
+        # VAMSA_WAYIN_2026_11_18: G6c's dynasties across the works, by vamsa, each generation tied to the lines above
+        out["vamsas"] = vamsa_rows(vamsa_read_dir, out["dynasties"], g,
+                                   {r["key"]: r.get("canonical") for r in out["persons"]}, out["claims"], cix[1],
+                                   _entity_claims(claims_db, {c["key"] for c in out["claims"]}, immutable))
     counts = {t: len(out[t]) for t in TABLES if t != "meta"}
     out["meta"].append(finish({"key": "run", "value": {"mark": MARK, "scheme": SCHEME, "counts": counts,
                                                        "checked": v["meta"].get("at", ""),
@@ -418,6 +456,83 @@ def dynasty_rows(vamsa_read_dir: str, db: str, kin_db: str, g: dict, persons: se
                                 "text_code": w["text"], "label": ln["label"], "length": ln["length"], "steps": steps,
                                 "counts": {}, "source": w["source"]}))
     return rows
+
+
+def vamsa_rows(vamsa_read_dir: str, dyn_rows: list, g: dict, persons: dict, claims: list, pair_ix: dict,
+               ent_claims: dict) -> list:
+    """VAMSA_WAYIN_2026_11_18: one row a dynasty of G6c (aligned.json), for the way in by vamsa: its founder, vamsa, the
+    works that tell it, its generations. A work's name in a generation is matched to the step of the dynasties sent
+    (dyn_rows) with the same work, verse and name: its line ("line") and its Purana Index person ("pui": Dikshitar's;
+    "page" when the site has the person's page). persons: the site's persons, {key: canonical name or None}.
+    Raychaudhuri's claims, only those the site carries: "ray", the claims that name both this generation's person and
+    the one before (the father in the line), at most RAY_SHOWN ("ray_n" how many); "ray_name_n", how many of his claims
+    name this person's name (a name may be more than one person: the site sends the reader to the name's page,
+    "canonical"). [] when G6c has not been run (no aligned.json)."""
+    import vamsa_align as VA
+    p = Path(vamsa_read_dir) / "aligned.json"
+    if not p.exists():
+        return []
+    al = json.loads(p.read_text(encoding="utf-8"))
+    sent = {r["work"] for r in dyn_rows}
+    at = {}
+    for r in dyn_rows:
+        for s in r.get("steps") or []:
+            at.setdefault((r["work"], s.get("ref"), VA.nkey(s.get("name"))), (r["n"], s))
+    claim_of = {c["key"]: c for c in claims}
+    order = {a[0]: i for i, a in enumerate(VA.ANCHORS, 1)}
+    entity_of = g.get("entity_of") or {}
+
+    def entity(person):
+        src, _c, e = (person or "").partition(":")
+        return entity_of.get((src, int(e))) if e.lstrip("-").isdigit() else None
+
+    def said(k):
+        c = claim_of[k]
+        return {"key": k, "work": c["work"], "printed": c.get("printed") or "", "pdf_page": c["pdf_page"],
+                "claim": c["claim"]}
+    out = []
+    for dy in al.get("dynasties") or []:
+        gens, names, before = [], set(), None
+        for r in dy.get("rows") or []:
+            cells, pui = {}, collections.Counter()
+            for wk, c in sorted((r.get("cells") or {}).items()):
+                cell = {k: c.get(k) for k in ("name", "ref", "words") if c.get(k)}
+                hit = at.get((wk, c.get("ref"), VA.nkey(c.get("name")))) if wk in sent else None
+                if hit:
+                    cell["line"] = hit[0]
+                    if hit[1].get("person"):
+                        pui[(hit[1]["person"], hit[1].get("index_head") or "", hit[1].get("index") or "")] += 1
+                cells[wk] = cell
+                if c.get("name"):
+                    names.add(c["name"])
+            gen = {"gen": r.get("gen"), "status": r.get("status") or "", "name": r.get("name") or "", "cells": cells}
+            ent = None
+            if pui:
+                (person, head, idx), _n = sorted(pui.items(), key=lambda kv: (-kv[1], kv[0]))[0]
+                gen["pui"] = {"person": person, "head": head, "index": idx}
+                if person in persons:
+                    gen["pui"]["page"] = True
+                    if persons[person]:
+                        gen["canonical"] = persons[person]
+                ent = entity(person)
+            if ent is not None:
+                named = [k for k in (ent_claims.get(ent) or []) if k in claim_of]
+                if named:
+                    gen["ray_name_n"] = len(named)
+                if before is not None and before != ent:
+                    both = [k for k in pair_ix.get((min(ent, before), max(ent, before)), []) if k in claim_of]
+                    if both:
+                        gen["ray_n"] = len(both)
+                        gen["ray"] = [said(k) for k in both[:RAY_SHOWN]]
+            before = ent
+            gens.append(gen)
+        slug = dy.get("slug") or ""
+        out.append(finish({"key": slug, "vamsa": VA.vamsa_of(slug), "ord": order.get(slug, 99),
+                           "anchor": dy.get("anchor") or "", "father": dy.get("father") or "",
+                           "title": dy.get("title") or "", "works": list(dy.get("order") or []),
+                           "counts": dy.get("counts") or {}, "rows": gens, "names": sorted(names),
+                           "aligned_at": al.get("at") or ""}))
+    return out
 
 
 # ---- the sinks -------------------------------------------------------------------------------------------------------
@@ -712,6 +827,10 @@ def main(argv=None) -> int:
         wait.append("the dynasties wait (%d lines): paste docs\\cloud\\C28_index_dynasties_2026-11-11.sql (B1, the "
                     "change, A1), then the Srangam kit DYNASTIES (corpus-index deployed again), then python "
                     "scripts\\index_sync.py --apply" % sum(1 for r in rows.get("dynasties", []) if r.get("n")))
+    if "vamsas" in got.get("waiting", []):   # VAMSA_WAYIN_2026_11_18
+        wait.append("the vamsas wait (%d dynasties of G6c): paste docs\\cloud\\C29_index_vamsas_2026-11-18.sql (B1, the "
+                    "change, A1), then the Srangam kit VAMSA_WAYIN (corpus-index deployed again), then python "
+                    "scripts\\index_sync.py --dynasty-works every --apply" % len(rows.get("vamsas", [])))
     if "aliases" in got.get("features_waiting", []):   # GENEALOGY_HEAL_2026_11_10
         wait.append("the epithets wait (Kaunteya = Arjuna): paste docs\\cloud\\C26_index_aliases_2026-11-10.sql in one "
                     "paste, then python scripts\\index_sync.py --apply")

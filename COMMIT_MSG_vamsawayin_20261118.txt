@@ -1,0 +1,18 @@
+The way in by vamsa: Suryavamsa and Candravamsa across the works (VAMSA_WAYIN_2026_11_18, DOCS123_2026_11_18)
+
+- scripts/vamsa_align.py: vamsa_of(slug), the vamsa of each founder (solar and Videha: surya; Pururavas's line and
+  its branches: candra).
+- scripts/index_sync.py: the optional table vamsas, one row a dynasty of G6c (data/vamsa_read/aligned.json): each
+  work's name tied to its line of the dynasties sent, Dikshitar's person (Purana Index), Raychaudhuri's claims the
+  site carries already (C23's rule; B. C. Law's never); waits until the site has C29 and corpus-index takes it.
+- docs/cloud/C29_index_vamsas_2026-11-18.sql: corpus.index_vamsas, a door in front of C28's ingest and manifest,
+  public.corpus_reader_index_vamsas(p_key) behind the readers' gate; checks B1, A1 to A3; the rollback.
+- docs/srangam/VAMSA_WAYIN_2026-11-18 and scripts/patch_srangam_vamsa_wayin_2026_11_18.py: the Srangam kit (the page
+  /corpus/genealogies/vamsas; the Dynasties page opens ?work=&line=; corpus-index takes vamsas).
+- tests: test_vamsa_wayin_2026_11_18 (new); test_vamsa_site and test_vamsa_names: their replay compared no more once
+  this patch changes the file again.
+- DOCS123: ASKS section 35 (the evidence; the Claude credit's next uses), STATE 57, RUNBOOK "18 Nov, late night",
+  ARCHITECTURE.md's road; tests/test_docs123_2026_11_18.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgtk

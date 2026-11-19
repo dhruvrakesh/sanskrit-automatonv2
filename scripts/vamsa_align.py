@@ -74,6 +74,16 @@ ANCHORS = [
     ("kuru", "Kuru", "Sa\u1e43vara\u1e47a", "the Kurus from Kuru"),
     ("magadha", "B\u1e5bhadratha", "Vasu", "the B\u0101rhadrathas of Magadha from B\u1e5bhadratha son of Vasu"),
 ]
+# VAMSA_WAYIN_2026_11_18: the vamsa of each founder's line: the solar line and the Videhas (Nimi, son of Ikshvaku) are
+# of the Suryavamsa; Pururavas's line and every branch of it (Yayati's five sons and theirs) of the Candravamsa
+SURYA = ("solar", "videha")
+
+
+def vamsa_of(slug: str) -> str:
+    """"surya" or "candra" for a founder of ANCHORS; "" for any other."""
+    if slug in SURYA:
+        return "surya"
+    return "candra" if any(slug == a[0] for a in ANCHORS) else ""
 
 
 def nkey(name: str) -> str:

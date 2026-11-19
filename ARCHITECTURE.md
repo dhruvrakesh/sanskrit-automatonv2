@@ -213,8 +213,9 @@ How the lines of kings travel from the Sanskrit verses to the desk and to the si
 | 2. Align | scripts\vamsa_align.py (G6c) | step 1 | exports\vamsa_align.md and .csv; data\vamsa_read\aligned.json | free |
 | 3. Register | scripts\vamsa_register.py (G6d; VAMSA_NAMES) | steps 1 and 2 | data\vamsa_read\register.json; exports\vamsa_register.csv and .md | free |
 | 4. Join | scripts\vamsa_join.py (G5b; VAMSA_SITE) | step 1; data\shelf\kin.db (the Purana Index, kin_index.py); data\context.db | data\vamsa_read\dynasties.json (vip4, bhp9, bhp12), dynasties_every.json (--work every) | free |
-| 5. Send | scripts\index_sync.py --dynasty-works every; nightly from scripts\corpus_mirror_task.ps1 | step 4 and the indexes (kin.db, vamsa.db, claims.db) | Srangam's nine corpus.index_* tables through the edge function corpus-index (the dynasties in corpus.index_dynasties, docs\cloud\C28); only rows whose row_hash changed | free |
+| 5. Send | scripts\index_sync.py --dynasty-works every; nightly from scripts\corpus_mirror_task.ps1 | step 4 and the indexes (kin.db, vamsa.db, claims.db) | Srangam's corpus.index_* tables through the edge function corpus-index (the dynasties in corpus.index_dynasties, docs\cloud\C28; the vamsas in corpus.index_vamsas, C29); only rows whose row_hash changed | free |
 | 6. Show, site | public.corpus_reader_index_dynasties(p_work), behind corpus._reader_gate; /corpus/genealogies/dynasties asks for one work at a time (Srangam's DYNASTIES_WORKS_2026_11_18) | step 5 | nothing | free |
+| 6. Show, site, by vamsa | public.corpus_reader_index_vamsas(p_key) (C29), behind corpus._reader_gate: the list without generations, one dynasty with them; /corpus/genealogies/vamsas (Srangam's VAMSA_WAYIN_2026_11_18, DOCS123_2026_11_18) | step 5's vamsas: G6c's aligned.json (step 2), each name tied to its line of step 4, Dikshitar's person and Raychaudhuri's claims the site carries | nothing | free |
 | 6. Show, desk | /vamsa (scripts\vamsa.html; /api/vamsa through scripts\vamsa_view.py, read only) | kin.db, vamsa.db, context.db | nothing | free |
 
 The rules of the road:
@@ -225,5 +226,9 @@ The rules of the road:
 - What is shown is what the texts state, each step with its verse. A join of two works' persons is ours (one name, one
   father and, where both give him, one grandfather); a second name only where a verse says it; names that differ are
   shown side by side, never ruled on.
-- Not yet on the road: a dynasty and vamsa on each line, for a way in by Suryavamsa and Candravamsa (P2c); the 17 works
-  on the desk's /vamsa page (P3); a review list for the proposed names and the names kept apart (P4).
+- G6c's aligned.json is written by vamsa_align.py: run it after a new reading, before the send (DOCS123_2026_11_18).
+- A scholar's claim is shown only when the site carries it already (C23's rule: the public-domain works, the quotation
+  found on the page); B. C. Law's book (in copyright) never; what we find with it comes as our own findings (R1).
+- Not yet on the road: our findings on a dynasty (R1, with B. C. Law), Raychaudhuri beside each step of the per-work
+  page (P2d); the 17 works on the desk's /vamsa page (P3); a review list for the proposed names and the names kept
+  apart (P4).
