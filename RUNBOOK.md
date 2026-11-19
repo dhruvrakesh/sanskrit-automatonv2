@@ -3039,3 +3039,20 @@ docs\ASKS_2026-10-22.md, section 35. In this order (each step's check before the
 4. The desk: `python scripts\index_sync.py --dynasty-works every` (the plan: vamsas here 10, there 0: 10 to send; the
    dynasties 0), then with --apply ("equal the desk's (10 tables)"); then C29's A2.
 5. The live build: the probe of 18 Nov, night, and CorpusVamsas-*.js named in the index.
+
+## 19 Nov: the vamsas sent; R1's trial (VAMSA_FINDINGS_2026_11_19, DOCS124_2026_11_19)
+
+docs\ASKS_2026-10-22.md, section 36. In this order:
+
+1. Lovable's chat: "Deploy the edge function supabase/functions/corpus-index exactly as it is at commit cc32c10. Change
+   no file." Then, from the automaton's root: `python scripts\index_sync.py --dynasty-works every` (the plan: vamsas
+   here 10, there 0), then with --apply ("equal the desk's (10 tables)"); then C29's A2.
+2. The automaton: `python scripts\patch_docs124_2026_11_19.py --check`, then without; `python -m unittest
+   tests.test_vamsa_findings_2026_11_19 tests.test_docs124_2026_11_19`; release.ps1 with
+   COMMIT_MSG_vamsafindings_20261119.txt (the dry run, then -Apply once).
+3. R1: `python scripts\vamsa_findings.py` (the plan, free); `--show kuru` (the pack, free); `--dynasty kuru --yes` (the
+   trial, about $0.07); `--report`, then read exports\vamsa_findings.md; for each finding the report numbers, `--approve kuru:1`
+   or `--drop kuru:1` (its own number in place of 1).
+   Only after the trial reads well: `--dynasty all --yes` (about $0.60 more).
+4. Lovable's security view: C27's S3 (read-only); the spatial_ref_sys finding marked accepted with C27's reason; never
+   "Try to fix" or "Fix all" on it (a fix by DROP EXTENSION postgis CASCADE would drop two columns of ours).

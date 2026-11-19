@@ -205,7 +205,7 @@ This file predates the Phase-Q and Phase-HI work. Corrections:
 
 ## The genealogies' road (DOCS122_2026_11_18, 18 Nov 2026)
 
-How the lines of kings travel from the Sanskrit verses to the desk and to the site. Only the first step spends.
+How the lines of kings travel from the Sanskrit verses to the desk and to the site. Only the first step spends, and step 7 (our findings, DOCS124_2026_11_19) after it.
 
 | Step | Where | Reads | Writes | Cost |
 |---|---|---|---|---|
@@ -217,6 +217,7 @@ How the lines of kings travel from the Sanskrit verses to the desk and to the si
 | 6. Show, site | public.corpus_reader_index_dynasties(p_work), behind corpus._reader_gate; /corpus/genealogies/dynasties asks for one work at a time (Srangam's DYNASTIES_WORKS_2026_11_18) | step 5 | nothing | free |
 | 6. Show, site, by vamsa | public.corpus_reader_index_vamsas(p_key) (C29), behind corpus._reader_gate: the list without generations, one dynasty with them; /corpus/genealogies/vamsas (Srangam's VAMSA_WAYIN_2026_11_18, DOCS123_2026_11_18) | step 5's vamsas: G6c's aligned.json (step 2), each name tied to its line of step 4, Dikshitar's person and Raychaudhuri's claims the site carries | nothing | free |
 | 6. Show, desk | /vamsa (scripts\vamsa.html; /api/vamsa through scripts\vamsa_view.py, read only) | kin.db, vamsa.db, context.db | nothing | free |
+| 7. Our findings (R1) | scripts\vamsa_findings.py (VAMSA_FINDINGS_2026_11_19); a person approves each (--approve, --drop) | step 6's vamsas (generations, verses, Dikshitar, Raychaudhuri's claims on the site); B. C. Law's claims in claims.db, for the model only | data\vamsa_findings\<dynasty>.json (Law cited by id and page; a finding that shares 8 words with his pages withheld); exports\vamsa_findings.md (the review page, not in git) | paid: Claude Sonnet, about $0.07 a dynasty (estimate of 19 Nov) |
 
 The rules of the road:
 - The site shows what the desk last sent: on 18 Nov, 17 works and 517 rows. Every send carries --dynasty-works every
@@ -229,6 +230,6 @@ The rules of the road:
 - G6c's aligned.json is written by vamsa_align.py: run it after a new reading, before the send (DOCS123_2026_11_18).
 - A scholar's claim is shown only when the site carries it already (C23's rule: the public-domain works, the quotation
   found on the page); B. C. Law's book (in copyright) never; what we find with it comes as our own findings (R1).
-- Not yet on the road: our findings on a dynasty (R1, with B. C. Law), Raychaudhuri beside each step of the per-work
-  page (P2d); the 17 works on the desk's /vamsa page (P3); a review list for the proposed names and the names kept
-  apart (P4).
+- Not yet on the road: the approved findings on the vamsa page (C30, once a person has approved some), Raychaudhuri
+  beside each step of the per-work page (P2d); the 17 works on the desk's /vamsa page (P3); a review list for the
+  proposed names and the names kept apart (P4).

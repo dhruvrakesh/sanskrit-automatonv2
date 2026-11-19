@@ -1,0 +1,15 @@
+R1 on the dynasties: our findings, checked and approved by a person (VAMSA_FINDINGS_2026_11_19, DOCS124_2026_11_19)
+
+- scripts/vamsa_findings.py: a pack a dynasty of G6c (the generations and their verses, Dikshitar's person in the
+  Purana Index, Raychaudhuri's claims the site carries, B. C. Law's claims for the model only), one call of Claude
+  Sonnet (the credit; budget_ok before each; --max-usd), the machine's checks (every citation in the pack; a new link
+  of two kinds of source; a disagreement of two items; no run of 8 words of Law's pages), a person's --approve or
+  --drop; data/vamsa_findings/<dynasty>.json (Law cited by id and page; a finding sharing his words withheld);
+  exports/vamsa_findings.md (the review page, not in git).
+- tests: test_vamsa_findings_2026_11_19 (no API called).
+- DOCS124: ASKS section 36 (C29 pasted; cc32c10 published; the send waits for corpus-index; the credit; the roles;
+  Lovable's security scan against C27), STATE 58, RUNBOOK "19 Nov", ARCHITECTURE.md's road (step 7);
+  tests/test_docs124_2026_11_19.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgtk
