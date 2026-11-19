@@ -174,6 +174,37 @@ class TheRun(unittest.TestCase):
         self.assertIn("1 approved, 1 dropped, 2 refused", buf.getvalue())
 
 
+class TheV2(unittest.TestCase):
+    """VAMSA_FINDINGS_V2_2026_11_19: the texts' titles and second names in the pack; the warnings; the three rules."""
+    def test_titles_and_second_names(self):
+        inp = dict(INP, titles={"hv": "Harivamsa", "agni": "Agnipurana"},
+                   aliases={"hv": [(23, "Parikshit", "Pariksita", "HV 23.111", "yam ahuh pariksitam")],
+                            "agni": [(1, "Somebody", "Else", "AgP 1.1", "words")]})
+        p = F.pack_of(VAM, inp)
+        self.assertIn("a:hv:HV 23.111 Parikshit is also called Pariksita: yam ahuh pariksitam", p["text"])
+        self.assertEqual(p["ids"]["a:hv:HV 23.111"], {"kind": "text"})
+        self.assertNotIn("a:agni:AgP 1.1", p["ids"], "a second name of no one in this dynasty")
+        self.assertIn("THE TEXTS: hv = Harivamsa; agni = Agnipurana", p["text"])
+        self.assertNotIn("SECOND NAMES", F.pack_of(VAM, INP)["text"])
+
+    def test_warnings(self):
+        w = F.warnings({"text": "The Garuda and the Harivamsa make Kuru the son of Samvarana.", "cites": ["v:hv:HV 23.107"]})
+        self.assertEqual(w, ["names the garuda but cites none of its verses"])
+        self.assertEqual(F.warnings({"text": "The Brahmanda says so.", "cites": ["v:bndp2:BndP 2.3"]}), [])
+        self.assertEqual(F.warnings({"text": "The Brahmanda says so.", "cites": ["g:0"]}),
+                         ["names the brahmanda but cites none of its verses"])
+        self.assertEqual(F.warnings({"text": "The Visnu Purana, book 4, agrees.", "cites": ["a:vipc4:ViPc 4,20.3"]}), [])
+        fs = F.checked([{"kind": "agreement", "text": "The Garuda and the Harivamsa make Kuru the son of Samvarana.",
+                         "cites": ["v:hv:HV 23.107", "pi:10"]}], F.pack_of(VAM, INP)["ids"], set())
+        self.assertEqual((fs[0]["status"], len(fs[0]["warnings"])), ("proposed", 1), "a warning is not a refusal")
+
+    def test_the_rules(self):
+        self.assertEqual(F.PROMPT_VERSION, "vamsa-findings-v2")
+        for k in ("only when you cite at least one of its verses", 'never say that a scholar "only" or "never"',
+                  "the two names are one person"):
+            self.assertIn(k, F.SYSTEM, k)
+
+
 class TheGuards(unittest.TestCase):
     def test_refuses_without_the_alignment(self):
         with tempfile.TemporaryDirectory() as t:

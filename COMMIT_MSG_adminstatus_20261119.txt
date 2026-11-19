@@ -1,0 +1,16 @@
+R1 v2; the desk and the site for the super admin (A1); the admin pages' path (VAMSA_FINDINGS_V2_2026_11_19, ADMIN_STATUS_2026_11_19, DOCS125_2026_11_19)
+
+- scripts/vamsa_findings.py (patch_vamsa_findings_v2): each text's title and the second names the texts state in the
+  pack; three rules in the prompt (a text named only when one of its verses is cited; no "only" or "never" of a
+  scholar; a second name is one person); a warning on each finding that names a text it cites no verse of;
+  prompt vamsa-findings-v2. From the trial of 19 Nov (kuru, $0.038), read by hand.
+- docs/cloud/C30_admin_status_2026-11-19.sql: public.corpus_admin_status(), read-only, the super admin only: the
+  mirror, the genealogies sent, the desk's worker, who may read, the AI calls of 7 days.
+- docs/srangam/ADMIN_STATUS_2026-11-19 and scripts/patch_srangam_admin_status_2026_11_19.py: /admin/desk-site,
+  "Desk and site" (Phase AV, invariant 72).
+- docs/ADMIN_REWIRE_2026-11-19.md: the admin pages and the landing pages, what is there, what is missing, A1 to A5.
+- tests: test_vamsa_findings (v2), test_admin_status_2026_11_19, test_docs125_2026_11_19.
+- DOCS125: ASKS section 37, STATE 59, RUNBOOK "19 Nov, midday", ARCHITECTURE.md step 8.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

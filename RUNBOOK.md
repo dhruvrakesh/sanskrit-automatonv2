@@ -3056,3 +3056,19 @@ docs\ASKS_2026-10-22.md, section 36. In this order:
    Only after the trial reads well: `--dynasty all --yes` (about $0.60 more).
 4. Lovable's security view: C27's S3 (read-only); the spatial_ref_sys finding marked accepted with C27's reason; never
    "Try to fix" or "Fix all" on it (a fix by DROP EXTENSION postgis CASCADE would drop two columns of ours).
+
+## 19 Nov, midday: R1 v2; the desk and the site (VAMSA_FINDINGS_V2_2026_11_19, ADMIN_STATUS_2026_11_19, DOCS125_2026_11_19)
+
+docs\ASKS_2026-10-22.md, section 37. In this order:
+
+1. The automaton: `python scripts\patch_vamsa_findings_v2_2026_11_19.py --check`, then without; `python
+   scripts\patch_docs125_2026_11_19.py --check`, then without; `python -m unittest tests.test_vamsa_findings_2026_11_19
+   tests.test_admin_status_2026_11_19 tests.test_docs125_2026_11_19`; release.ps1 with COMMIT_MSG_adminstatus_20261119.txt
+   (the dry run, then -Apply once).
+2. R1 v2: `python scripts\vamsa_findings.py` (the plan: ten to read, kuru again under v2); `--dynasty all --yes` (about
+   $0.67); `--report`; read exports\vamsa_findings.md; for each finding the report numbers, `--approve kuru:1` or
+   `--drop kuru:1` (its own dynasty and number in place of kuru:1).
+3. The Lovable Cloud SQL editor: docs\cloud\C30_admin_status_2026-11-19.sql, B1 (true x6, false), the change (one
+   paste), A1 (true, false, true), A2.
+4. Srangam, from D:\srangam-42267: `git pull` first (Lovable committed after cc32c10); the kit's patch (--check, then
+   without); npm run typecheck; npx vitest run; npm run build; commit and push; Publish; open /admin/desk-site.

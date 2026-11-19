@@ -1,0 +1,832 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "kuru",
+ "prompt_version": "vamsa-findings-v1",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 21,
+  "raychaudhuri": 60,
+  "law": 40,
+  "chars": 19457,
+  "digest": "46b3b04422d4df3126418aeb4dfcfdbd"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:19737": {
+   "kind": "index"
+  },
+  "v:agni:AgP 277.26": {
+   "kind": "text"
+  },
+  "v:bhp9:BhP 9.22.4": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.106": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,140.25": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.107": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.20": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,89.42": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,19.16": {
+   "kind": "text"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:21593": {
+   "kind": "index"
+  },
+  "v:agni:AgP 277.27": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.109": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.23": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,19.78": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,19.17": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:21434": {
+   "kind": "index"
+  },
+  "v:agni:AgP 277.31": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.110": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "pi:32911": {
+   "kind": "index"
+  },
+  "v:agni:AgP 277.33": {
+   "kind": "text"
+  },
+  "v:bhp9:BhP 9.22.9": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,140.30": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.111": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.34": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.2": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,20.2": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "v:bhp9:BhP 9.22.10": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,140.31": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.35": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.41": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.3": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,20.3": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "pi:32305": {
+   "kind": "index"
+  },
+  "v:vip4:ViP 4,20.4": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "pi:21509": {
+   "kind": "index"
+  },
+  "v:matsya:MatsP 50.36": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:28166": {
+   "kind": "index"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "pi:17852": {
+   "kind": "index"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "pi:17833": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,140.32": {
+   "kind": "text"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "pi:16505": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.22.11": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.37": {
+   "kind": "text"
+  },
+  "g:11": {
+   "kind": "text"
+  },
+  "pi:22788": {
+   "kind": "index"
+  },
+  "v:mbh1:MBh 1,90.42": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.5": {
+   "kind": "text"
+  },
+  "g:12": {
+   "kind": "text"
+  },
+  "pi:22222": {
+   "kind": "index"
+  },
+  "v:brahma:BrP 13.108": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.112": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.43": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.6": {
+   "kind": "text"
+  },
+  "g:13": {
+   "kind": "text"
+  },
+  "pi:26146": {
+   "kind": "index"
+  },
+  "v:agni:AgP 277.34": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,140.33": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.114": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.38": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.44": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.7": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,20.4": {
+   "kind": "text"
+  },
+  "g:14": {
+   "kind": "text"
+  },
+  "pi:22454": {
+   "kind": "index"
+  },
+  "g:15": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.45": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.8": {
+   "kind": "text"
+  },
+  "g:16": {
+   "kind": "text"
+  },
+  "pi:30576": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.22.12": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.46": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.9": {
+   "kind": "text"
+  },
+  "g:17": {
+   "kind": "text"
+  },
+  "pi:29223": {
+   "kind": "index"
+  },
+  "v:agni:AgP 277.36": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.119": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.46": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.52": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.34": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,20.10": {
+   "kind": "text"
+  },
+  "g:18": {
+   "kind": "text"
+  },
+  "pi:24221": {
+   "kind": "index"
+  },
+  "v:hv:HV 23.120": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.59": {
+   "kind": "text"
+  },
+  "g:19": {
+   "kind": "text"
+  },
+  "pi:23190": {
+   "kind": "index"
+  },
+  "v:brahma:BrP 13.109": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.72": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.38": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,20.11": {
+   "kind": "text"
+  },
+  "g:20": {
+   "kind": "text"
+  },
+  "pi:22584": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.22.20": {
+   "kind": "text"
+  },
+  "v:hv:HV 24.22": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.47": {
+   "kind": "text"
+  },
+  "v:mbh1:MBh 1,90.82": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,20.39": {
+   "kind": "text"
+  },
+  "r:phai1923:14:4": {
+   "kind": "raychaudhuri",
+   "page": "i"
+  },
+  "r:phai1923:21:9": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:21:13": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:31:6": {
+   "kind": "raychaudhuri",
+   "page": "13"
+  },
+  "r:phai1923:278:19": {
+   "kind": "raychaudhuri",
+   "page": "260"
+  },
+  "r:phai1923:19:5": {
+   "kind": "raychaudhuri",
+   "page": "1"
+  },
+  "r:phai1923:19:6": {
+   "kind": "raychaudhuri",
+   "page": "1"
+  },
+  "r:phai1923:22:19": {
+   "kind": "raychaudhuri",
+   "page": "4"
+  },
+  "r:phai1923:23:7": {
+   "kind": "raychaudhuri",
+   "page": "5"
+  },
+  "r:phai1923:24:2": {
+   "kind": "raychaudhuri",
+   "page": "6"
+  },
+  "r:phai1923:24:9": {
+   "kind": "raychaudhuri",
+   "page": "6"
+  },
+  "r:phai1923:24:10": {
+   "kind": "raychaudhuri",
+   "page": "6"
+  },
+  "r:phai1923:25:8": {
+   "kind": "raychaudhuri",
+   "page": "7"
+  },
+  "r:phai1923:25:18": {
+   "kind": "raychaudhuri",
+   "page": "7"
+  },
+  "r:phai1923:32:13": {
+   "kind": "raychaudhuri",
+   "page": "14"
+  },
+  "r:phai1923:32:30": {
+   "kind": "raychaudhuri",
+   "page": "14"
+  },
+  "r:phai1923:32:31": {
+   "kind": "raychaudhuri",
+   "page": "14"
+  },
+  "r:phai1923:33:10": {
+   "kind": "raychaudhuri",
+   "page": "15"
+  },
+  "r:phai1923:33:11": {
+   "kind": "raychaudhuri",
+   "page": "15"
+  },
+  "r:phai1923:34:1": {
+   "kind": "raychaudhuri",
+   "page": "16"
+  },
+  "r:phai1923:34:3": {
+   "kind": "raychaudhuri",
+   "page": "16"
+  },
+  "r:phai1923:34:8": {
+   "kind": "raychaudhuri",
+   "page": "16"
+  },
+  "r:phai1923:47:18": {
+   "kind": "raychaudhuri",
+   "page": "29"
+  },
+  "r:phai1923:48:1": {
+   "kind": "raychaudhuri",
+   "page": "30"
+  },
+  "r:phai1923:49:7": {
+   "kind": "raychaudhuri",
+   "page": "31"
+  },
+  "r:phai1923:49:8": {
+   "kind": "raychaudhuri",
+   "page": "31"
+  },
+  "r:phai1923:49:9": {
+   "kind": "raychaudhuri",
+   "page": "31"
+  },
+  "r:phai1923:49:10": {
+   "kind": "raychaudhuri",
+   "page": "31"
+  },
+  "r:phai1923:50:26": {
+   "kind": "raychaudhuri",
+   "page": "32"
+  },
+  "r:phai1923:51:2": {
+   "kind": "raychaudhuri",
+   "page": "33"
+  },
+  "r:phai1923:51:4": {
+   "kind": "raychaudhuri",
+   "page": "33"
+  },
+  "r:phai1923:51:8": {
+   "kind": "raychaudhuri",
+   "page": "33"
+  },
+  "r:phai1923:52:1": {
+   "kind": "raychaudhuri",
+   "page": "34"
+  },
+  "r:phai1923:52:2": {
+   "kind": "raychaudhuri",
+   "page": "34"
+  },
+  "r:phai1923:52:13": {
+   "kind": "raychaudhuri",
+   "page": "34"
+  },
+  "r:phai1923:86:13": {
+   "kind": "raychaudhuri",
+   "page": "68"
+  },
+  "r:phai1923:86:14": {
+   "kind": "raychaudhuri",
+   "page": "68"
+  },
+  "r:phai1923:86:15": {
+   "kind": "raychaudhuri",
+   "page": "68"
+  },
+  "r:phai1923:86:17": {
+   "kind": "raychaudhuri",
+   "page": "68"
+  },
+  "r:phai1923:86:18": {
+   "kind": "raychaudhuri",
+   "page": "68"
+  },
+  "r:phai1923:87:5": {
+   "kind": "raychaudhuri",
+   "page": "69"
+  },
+  "r:phai1923:87:6": {
+   "kind": "raychaudhuri",
+   "page": "69"
+  },
+  "r:phai1923:87:9": {
+   "kind": "raychaudhuri",
+   "page": "69"
+  },
+  "r:phai1923:87:18": {
+   "kind": "raychaudhuri",
+   "page": "69"
+  },
+  "r:phai1923:87:19": {
+   "kind": "raychaudhuri",
+   "page": "69"
+  },
+  "r:phai1923:89:5": {
+   "kind": "raychaudhuri",
+   "page": "71"
+  },
+  "r:phai1923:97:2": {
+   "kind": "raychaudhuri",
+   "page": "79"
+  },
+  "r:phai1923:101:3": {
+   "kind": "raychaudhuri",
+   "page": "83"
+  },
+  "r:phai1923:329:16": {
+   "kind": "raychaudhuri",
+   "page": "311"
+  },
+  "r:phai1923:330:1": {
+   "kind": "raychaudhuri",
+   "page": "312"
+  },
+  "r:phai1923:15:14": {
+   "kind": "raychaudhuri",
+   "page": "ii"
+  },
+  "r:phai1923:15:15": {
+   "kind": "raychaudhuri",
+   "page": "ii"
+  },
+  "r:phai1923:20:4": {
+   "kind": "raychaudhuri",
+   "page": "2"
+  },
+  "r:phai1923:20:16": {
+   "kind": "raychaudhuri",
+   "page": "2"
+  },
+  "r:phai1923:21:1": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:21:2": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:21:4": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:21:6": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:21:7": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "r:phai1923:21:8": {
+   "kind": "raychaudhuri",
+   "page": "3"
+  },
+  "l:8044": {
+   "kind": "law",
+   "page": "97"
+  },
+  "l:8045": {
+   "kind": "law",
+   "page": "97"
+  },
+  "l:8046": {
+   "kind": "law",
+   "page": "97"
+  },
+  "l:8147": {
+   "kind": "law",
+   "page": "102"
+  },
+  "l:9475": {
+   "kind": "law",
+   "page": "177"
+  },
+  "l:9592": {
+   "kind": "law",
+   "page": "183"
+  },
+  "l:6924": {
+   "kind": "law",
+   "page": "38"
+  },
+  "l:6928": {
+   "kind": "law",
+   "page": "38"
+  },
+  "l:7984": {
+   "kind": "law",
+   "page": "95"
+  },
+  "l:8978": {
+   "kind": "law",
+   "page": "151"
+  },
+  "l:7897": {
+   "kind": "law",
+   "page": "90"
+  },
+  "l:7898": {
+   "kind": "law",
+   "page": "90"
+  },
+  "l:8165": {
+   "kind": "law",
+   "page": "103"
+  },
+  "l:8166": {
+   "kind": "law",
+   "page": "103"
+  },
+  "l:6415": {
+   "kind": "law",
+   "page": "6"
+  },
+  "l:6416": {
+   "kind": "law",
+   "page": "6"
+  },
+  "l:7064": {
+   "kind": "law",
+   "page": "46"
+  },
+  "l:8774": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8775": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8776": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8777": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8778": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8780": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8781": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8782": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8783": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8788": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8789": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8790": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8794": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8795": {
+   "kind": "law",
+   "page": "141"
+  },
+  "l:8806": {
+   "kind": "law",
+   "page": "142"
+  },
+  "l:6939": {
+   "kind": "law",
+   "page": "38"
+  },
+  "l:9576": {
+   "kind": "law",
+   "page": "182"
+  },
+  "l:9609": {
+   "kind": "law",
+   "page": "184"
+  },
+  "l:9612": {
+   "kind": "law",
+   "page": "185"
+  },
+  "l:9613": {
+   "kind": "law",
+   "page": "185"
+  },
+  "l:9616": {
+   "kind": "law",
+   "page": "185"
+  },
+  "l:9653": {
+   "kind": "law",
+   "page": "187"
+  },
+  "l:9654": {
+   "kind": "law",
+   "page": "187"
+  }
+ },
+ "at": "2026-11-19T11:55:52",
+ "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"The Puranic lists and B. C. Law agree that Kuru was the son of Saṃvaraṇa. Eight texts, including the Agni, Bhāgavata, Brahma, Garuda, Harivaṃśa, Matsya, Mahābhārata and Viṣṇu Purāṇa (Chapter 4 translation), say he was born of Saṃvaraṇa. Law adds that Kuru built Kurukṣetra, and the Bhāgavata calls him lord of Kurukṣetra.\",\"cites\":[\"g:0\",\"v:matsya:MatsP 50.20\",\"v:mbh1:MBh 1,89.42\",\"v:bhp9:BhP 9.22.4\",\"l:8044\",\"l:8045\"]},{\"kind\":\"disagreement\",\"text\":\"The texts name Kuru's sons differently. The Bhāgavata lists Parīkṣi, Sudhanus, Jahnu and Niṣadha, and the Matsya names Sudhanvan and Jahnu. The Agni and Harivaṃśa give Parikṣit alone for this generation, and the Garuda and Viṣṇu Purāṇas give Jahnu. Law mentions only Sudhanvan as Kuru's son.\",\"cites\":[\"g:1\",\"v:bhp9:BhP 9.22.4\",\"v:matsya:MatsP 50.23\",\"v:agni:AgP 277.27\",\"v:hv:HV 23.109\",\"v:vip4:ViP 4,19.78\",\"l:8147\"]},{\"kind\":\"disagreement\",\"text\":\"The line from Vidūratha's descendants through Ārādhita to Ayutāyu is not uniform. For the generation after Ārādhita the Bhāgavata reads Rādhika, the Garuda Avadhīta, and the Matsya reads Rucira and Bhauma, with only the Viṣṇu Purāṇa texts reading Ārādhita. For the generation after that, the Matsya has Tvaritāyu where the others have Ayutāyu. The Purana Index treats Ayutāyu as having a different father.\",\"cites\":[\"g:8\",\"g:9\",\"v:bhp9:BhP 9.22.10\",\"v:garuda1:GarP 1,140.31\",\"v:matsya:MatsP 50.36\",\"v:vip4:ViP 4,20.4\",\"pi:17833\"]},{\"kind\":\"disagreement\",\"text\":\"The Mahābhārata gives a different run of kings from the Purāṇas between Vidūratha and Bhīmasena. After Viḍūratha it has Arugvān, then Parikṣit, then Bhīmasena, then Paryaśravas, where the Purāṇas go through Devātithi, Ṛkṣa, Dilīpa and Pratīpa. Raychaudhuri's remark that the Viṣṇu Purāṇa lists Kuru princes down to the Pāṇḍus does not settle which line is right.\",\"cites\":[\"g:11\",\"g:12\",\"g:15\",\"v:mbh1:MBh 1,90.42\",\"v:mbh1:MBh 1,90.43\",\"v:mbh1:MBh 1,90.45\",\"v:vip4:ViP 4,20.5\",\"r:phai1923:22:19\"]},{\"kind\":\"open_question\",\"text\":\"Which Janamejaya does Raychaudhuri mean when he says Janamejaya had Bhīmasena, Śrutasena and Ugrasena as brothers, and that the Pāṇḍus were his ancestors? The Agni and Harivaṃśa place Janamejaya early, as Parikṣit's son, while the Pāṇḍu generation falls much later in the lists. Law's claim that Janamejaya was the son of Puru is a different tradition again.\",\"cites\":[\"g:2\",\"v:agni:AgP 277.31\",\"v:hv:HV 23.110\",\"r:phai1923:21:9\",\"r:phai1923:31:6\",\"l:6924\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.03825,
+ "tokens": {
+  "input": 12610,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1303,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "agreement",
+   "text": "The Puranic lists and B. C. Law agree that Kuru was the son of Saṃvaraṇa. Eight texts, including the Agni, Bhāgavata, Brahma, Garuda, Harivaṃśa, Matsya, Mahābhārata and Viṣṇu Purāṇa (Chapter 4 translation), say he was born of Saṃvaraṇa. Law adds that Kuru built Kurukṣetra, and the Bhāgavata calls him lord of Kurukṣetra.",
+   "cites": [
+    "g:0",
+    "v:matsya:MatsP 50.20",
+    "v:mbh1:MBh 1,89.42",
+    "v:bhp9:BhP 9.22.4",
+    "l:8044",
+    "l:8045"
+   ],
+   "problems": [],
+   "status": "proposed"
+  },
+  {
+   "n": 2,
+   "kind": "disagreement",
+   "text": "The texts name Kuru's sons differently. The Bhāgavata lists Parīkṣi, Sudhanus, Jahnu and Niṣadha, and the Matsya names Sudhanvan and Jahnu. The Agni and Harivaṃśa give Parikṣit alone for this generation, and the Garuda and Viṣṇu Purāṇas give Jahnu. Law mentions only Sudhanvan as Kuru's son.",
+   "cites": [
+    "g:1",
+    "v:bhp9:BhP 9.22.4",
+    "v:matsya:MatsP 50.23",
+    "v:agni:AgP 277.27",
+    "v:hv:HV 23.109",
+    "v:vip4:ViP 4,19.78",
+    "l:8147"
+   ],
+   "problems": [],
+   "status": "proposed"
+  },
+  {
+   "n": 3,
+   "kind": "disagreement",
+   "text": "The line from Vidūratha's descendants through Ārādhita to Ayutāyu is not uniform. For the generation after Ārādhita the Bhāgavata reads Rādhika, the Garuda Avadhīta, and the Matsya reads Rucira and Bhauma, with only the Viṣṇu Purāṇa texts reading Ārādhita. For the generation after that, the Matsya has Tvaritāyu where the others have Ayutāyu. The Purana Index treats Ayutāyu as having a different father.",
+   "cites": [
+    "g:8",
+    "g:9",
+    "v:bhp9:BhP 9.22.10",
+    "v:garuda1:GarP 1,140.31",
+    "v:matsya:MatsP 50.36",
+    "v:vip4:ViP 4,20.4",
+    "pi:17833"
+   ],
+   "problems": [],
+   "status": "proposed"
+  },
+  {
+   "n": 4,
+   "kind": "disagreement",
+   "text": "The Mahābhārata gives a different run of kings from the Purāṇas between Vidūratha and Bhīmasena. After Viḍūratha it has Arugvān, then Parikṣit, then Bhīmasena, then Paryaśravas, where the Purāṇas go through Devātithi, Ṛkṣa, Dilīpa and Pratīpa. Raychaudhuri's remark that the Viṣṇu Purāṇa lists Kuru princes down to the Pāṇḍus does not settle which line is right.",
+   "cites": [
+    "g:11",
+    "g:12",
+    "g:15",
+    "v:mbh1:MBh 1,90.42",
+    "v:mbh1:MBh 1,90.43",
+    "v:mbh1:MBh 1,90.45",
+    "v:vip4:ViP 4,20.5",
+    "r:phai1923:22:19"
+   ],
+   "problems": [],
+   "status": "proposed"
+  },
+  {
+   "n": 5,
+   "kind": "open_question",
+   "text": "Which Janamejaya does Raychaudhuri mean when he says Janamejaya had Bhīmasena, Śrutasena and Ugrasena as brothers, and that the Pāṇḍus were his ancestors? The Agni and Harivaṃśa place Janamejaya early, as Parikṣit's son, while the Pāṇḍu generation falls much later in the lists. Law's claim that Janamejaya was the son of Puru is a different tradition again.",
+   "cites": [
+    "g:2",
+    "v:agni:AgP 277.31",
+    "v:hv:HV 23.110",
+    "r:phai1923:21:9",
+    "r:phai1923:31:6",
+    "l:6924"
+   ],
+   "problems": [],
+   "status": "proposed"
+  }
+ ]
+}

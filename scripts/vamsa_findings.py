@@ -43,7 +43,7 @@ import argparse, collections, datetime, hashlib, json, os, re, sqlite3, sys, tim
 from pathlib import Path
 
 MARK = "VAMSA_FINDINGS_2026_11_19"
-PROMPT_VERSION = "vamsa-findings-v1"
+PROMPT_VERSION = "vamsa-findings-v2"   # VAMSA_FINDINGS_V2_2026_11_19: the texts' titles, their second names, three rules
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 MODEL = "claude-sonnet-5-5"
@@ -59,6 +59,15 @@ TEXT_MIN, TEXT_MAX = 40, 700
 TRIAL = "kuru"               # the trial's dynasty: the one with most of both scholars (18 Nov: Law 49, Raychaudhuri 172)
 SOURCE_KIND = {"g": "text", "v": "text", "pi": "index", "r": "raychaudhuri", "l": "law"}
 LAW_WORK, RAY_WORK = "law1926", "phai1923"
+# VAMSA_FINDINGS_V2_2026_11_19: a finding that names a text but cites none of its verses is shown with a warning (the
+# trial of 19 Nov named the Garuda and the Brahma without a verse of either); the names as a finding writes them, folded
+TEXT_NAMES = (
+    ("visnu", r"\bvisnu", ("vip4", "vipc4")), ("bhagavata", r"\bbhagavata", ("bhp9", "bhp12")),
+    ("matsya", r"\bmatsya", ("matsya",)), ("garuda", r"\bgaruda", ("garuda1",)), ("agni", r"\bagni\b", ("agni",)),
+    ("brahma", r"\bbrahma\b(?! ?nda)", ("brahma",)), ("brahmanda", r"\bbrahma ?nda", ("bndp1", "bndp2")),
+    ("harivamsa", r"\bharivamsa", ("hv",)), ("ramayana", r"\bramayana", ("ram1", "ram2")),
+    ("mahabharata", r"\bmahabharata|\badiparvan", ("mbh1",)), ("linga", r"\blinga", ("linga1",)),
+    ("kurma", r"\bkurma", ("kurma1",)), ("markandeya", r"\bmarkandeya", ("markp",)))
 LAW_CREDIT = "B. C. Law, Ancient Indian Tribes (Lahore, 1926)"
 RAY_CREDIT = "H. C. Raychaudhuri, Political History of Ancient India (Calcutta, 1923)"
 PI_CREDIT = "V. R. Ramachandra Dikshitar, The Purana Index (Madras, 1951-55)"
@@ -82,6 +91,9 @@ something no single source says alone:
 - open_question: what they leave unsettled, asked as a question.
 Cite every source a finding rests on by its id, and nothing that is not in the pack. Never copy Law's wording:
 paraphrase him (at most a few words in quotation marks). State no date, place or fact that the pack does not give.
+Name a text only by the title the pack gives it, and only when you cite at least one of its verses. The pack holds some
+of each scholar's claims, not all: never say that a scholar "only" or "never" says something. Where a text says that a
+king is also called by another name (a:WORK:REF), the two names are one person: that is not a difference between texts.
 
 Reply with JSON only, no prose before or after:
 {"findings": [{"kind": "agreement", "text": "...", "cites": ["g:3", "v:hv:HV 23.107", "r:phai1923:19:5"]}]}"""
@@ -147,7 +159,12 @@ def load_inputs(db: str, kin_db: str, claims_db: str, vamsa_read_dir: str, immut
     vam = ix.vamsa_rows(vamsa_read_dir, dyn, g, {}, claims, cix[1], ent)
     names = rv._names(db)["ents"]
     lby, lof = law_claims(claims_db, immutable)
-    return {"vamsas": vam, "entity_of": g.get("entity_of") or {},
+    import vamsa_align as VA
+    import vamsa_read as VR
+    here = VA.works_here(vamsa_read_dir)   # VAMSA_FINDINGS_V2_2026_11_19: the titles, the second names
+    aliases = {w: VA.aliases_said(VA.statements_of(vamsa_read_dir, w)) for w in here}
+    titles = {w: VR.work_of(w)["title"] for w in here}
+    return {"aliases": aliases, "titles": titles, "vamsas": vam, "entity_of": g.get("entity_of") or {},
             "canon": {e: v[0] for e, v in names.items()}, "claim_of": {c["key"]: c for c in claims},
             "ray_by_ent": ent, "law_by_ent": lby, "law_of": lof}
 
@@ -192,6 +209,24 @@ def pack_of(v: dict, inp: dict) -> dict:
             vid = "v:%s:%s" % (wk, cell["ref"])
             ids[vid] = {"kind": "text"}
             lines.append("  %s %s: %s" % (vid, cell.get("name") or "", (cell.get("words") or "")[:WORDS_MAX]))
+    # VAMSA_FINDINGS_V2_2026_11_19: the second names the texts themselves state (vamsa_align.aliases_said), for the
+    # names of this dynasty in that text only (MBh 1,90.45: Paryasravas, "whom they call Pratipa")
+    import vamsa_align as VA
+    said = []
+    for wk, al in sorted((inp.get("aliases") or {}).items()):
+        here = {VA.nkey(c.get("name")) for gen in v.get("rows") or [] for w2, c in (gen.get("cells") or {}).items()
+                if w2 == wk}
+        for _ch, keep, other, ref, wds in al:
+            if ref and (VA.nkey(keep) in here or VA.nkey(other) in here):
+                aid = "a:%s:%s" % (wk, ref)
+                if aid not in ids:
+                    ids[aid] = {"kind": "text"}
+                    said.append("%s %s is also called %s: %s" % (aid, keep, other, (wds or "")[:WORDS_MAX]))
+    if said:
+        lines += ["", "SECOND NAMES THE TEXTS STATE (one person, two names)"] + said
+    titles = inp.get("titles") or {}
+    if titles:
+        lines += ["", "THE TEXTS: " + "; ".join("%s = %s" % (w, titles[w]) for w in (v.get("works") or []) if w in titles)]
     canon = inp.get("canon") or {}
 
     def ranked(by_ent):
@@ -310,6 +345,18 @@ def withhold(rec: dict) -> dict:
     return rec
 
 
+def warnings(f: dict) -> list:
+    """VAMSA_FINDINGS_V2_2026_11_19: what a person should look at before approving: a text the finding names whose
+    verses it does not cite. Shown, never a refusal (a god Agni or Brahma is not the Purana of that name)."""
+    if not isinstance(f.get("text"), str):
+        return []
+    t = " ".join(words(f["text"]))
+    cited = {c.split(":")[1] for c in (f.get("cites") or []) if isinstance(c, str) and c.startswith(("v:", "a:"))
+             and c.count(":") >= 2}
+    return ["names the %s but cites none of its verses" % name for name, rx, works_ in TEXT_NAMES
+            if re.search(rx, t) and not cited & set(works_)]
+
+
 def checked(raw: list, ids: dict, law_grams: set, before=None) -> list:
     """The findings numbered, each with its problems and status; a person's decision on the same text is kept."""
     kept = {(b.get("text") or "").strip(): b for b in (before or []) if b.get("status") in ("approved", "dropped")}
@@ -317,7 +364,7 @@ def checked(raw: list, ids: dict, law_grams: set, before=None) -> list:
     for n, f in enumerate(raw, 1):
         p = problems(f, ids, law_grams)
         x = {"n": n, "kind": f.get("kind"), "text": (f.get("text") or "").strip(), "cites": f.get("cites") or [],
-             "problems": p, "status": "refused" if p else "proposed"}
+             "problems": p, "warnings": warnings(f), "status": "refused" if p else "proposed"}
         b = kept.get(x["text"])
         if b and not p:
             x["status"], x["reviewed_at"] = b["status"], b.get("reviewed_at")
@@ -453,8 +500,9 @@ def do_run(a, packs: list, law_grams: set, client=None, con=None) -> int:
             n_ok += 0 if rec.get("error") else 1
             n_prop += pr
             n_ref += len(fs) - pr
-            print("  [%d/%d] %s: %d finding(s), %d proposed, %d refused by the checks, $%.4f%s"
-                  % (i, len(todo), p["key"], len(fs), pr, len(fs) - pr, cost,
+            print("  [%d/%d] %s: %d finding(s), %d proposed (%d with a warning), %d refused by the checks, $%.4f%s"
+                  % (i, len(todo), p["key"], len(fs), pr, sum(1 for f in fs if f.get("warnings") and f["status"] != "refused"),
+                     len(fs) - pr, cost,
                      ("  (%s)" % rec["error"][:100]) if rec.get("error") else ""), flush=True)
         say("%d dynasty(ies) read, %d finding(s) proposed, %d refused; $%.3f spent of the Claude credit"
             % (n_ok, n_prop, n_ref, spent), "python scripts\\vamsa_findings.py --report")
@@ -525,6 +573,8 @@ def do_report(a, keys: list, inp=None) -> int:
                 lines.append("   - %s%s" % (c, resolve(c, d.get("ids") or {}, inp)))
             if f.get("problems"):
                 lines.append("   - checks: %s" % "; ".join(f["problems"]))
+            if f.get("warnings"):
+                lines.append("   - look before approving: %s" % "; ".join(f["warnings"]))
             lines.append("")
         print("  %-8s %s" % (key, ", ".join("%d %s" % (sum(1 for f in d.get("findings") or [] if f["status"] == s), s)
                                             for s in ("proposed", "approved", "dropped", "refused"))))
