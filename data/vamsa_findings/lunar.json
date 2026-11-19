@@ -1,0 +1,324 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "lunar",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 13,
+  "raychaudhuri": 12,
+  "law": 13,
+  "chars": 4845,
+  "digest": "afc2f3c5941acd42b6b75980d34ccebc"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:24572": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,138.4": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 24.9": {
+   "kind": "text"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:17826": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.17.1": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.3": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.1": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 24.32": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:23466": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,139.8": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.3": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 24.34": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "pi:27701": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.18.1": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.19": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.4": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 24.55": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "pi:27659": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.18.38": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 24.53": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.20": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.21": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.22": {
+   "kind": "text"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "g:11": {
+   "kind": "text"
+  },
+  "g:12": {
+   "kind": "text"
+  },
+  "r:phai1923:44:18": {
+   "kind": "raychaudhuri",
+   "page": "26"
+  },
+  "r:phai1923:59:12": {
+   "kind": "raychaudhuri",
+   "page": "41"
+  },
+  "r:phai1923:60:20": {
+   "kind": "raychaudhuri",
+   "page": "42"
+  },
+  "r:phai1923:60:21": {
+   "kind": "raychaudhuri",
+   "page": "42"
+  },
+  "r:phai1923:60:22": {
+   "kind": "raychaudhuri",
+   "page": "42"
+  },
+  "r:phai1923:89:24": {
+   "kind": "raychaudhuri",
+   "page": "71"
+  },
+  "r:phai1923:90:2": {
+   "kind": "raychaudhuri",
+   "page": "72"
+  },
+  "r:phai1923:90:3": {
+   "kind": "raychaudhuri",
+   "page": "72"
+  },
+  "r:phai1923:90:4": {
+   "kind": "raychaudhuri",
+   "page": "72"
+  },
+  "r:phai1923:90:5": {
+   "kind": "raychaudhuri",
+   "page": "72"
+  },
+  "r:phai1923:92:21": {
+   "kind": "raychaudhuri",
+   "page": "74"
+  },
+  "r:phai1923:92:22": {
+   "kind": "raychaudhuri",
+   "page": "74"
+  },
+  "l:6349": {
+   "kind": "law",
+   "page": "3"
+  },
+  "l:6369": {
+   "kind": "law",
+   "page": "4"
+  },
+  "l:6404": {
+   "kind": "law",
+   "page": "5"
+  },
+  "l:6405": {
+   "kind": "law",
+   "page": "5"
+  },
+  "l:9465": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9466": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9469": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9474": {
+   "kind": "law",
+   "page": "177"
+  },
+  "l:9509": {
+   "kind": "law",
+   "page": "179"
+  },
+  "l:9658": {
+   "kind": "law",
+   "page": "188"
+  },
+  "l:9659": {
+   "kind": "law",
+   "page": "188"
+  },
+  "l:9662": {
+   "kind": "law",
+   "page": "188"
+  },
+  "l:9712": {
+   "kind": "law",
+   "page": "191"
+  }
+ },
+ "at": "2026-11-19T12:52:12",
+ "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"Four Puranas (Garuda, Bhagavata, Kurma, Matsya) give the same early chain: Purūravas, then Āyu, Nahuṣa and Yayāti. The Purana Index also gives each of Āyu, Nahuṣa, Yayāti and Yadu the same father. Law independently says Āyu was Purūravas's son.\",\"cites\":[\"g:0\",\"g:1\",\"g:2\",\"g:3\",\"v:garuda1:GarP 1,139.8\",\"v:matsya:MatsP 24.34\",\"pi:17826\",\"pi:23466\",\"l:6349\"]},{\"kind\":\"agreement\",\"text\":\"Garuda and Matsya name Yadu among Yayāti's sons, and Bhagavata has Yayāti addressing Yadu as his eldest. Law lists Druhyu and Puru as other sons of Yayāti, and Raychaudhuri says Anu was his son. So Yadu belongs to a larger set of Yayāti's sons.\",\"cites\":[\"v:garuda1:GarP 1,139.19\",\"v:matsya:MatsP 24.53\",\"v:bhp9:BhP 9.18.38\",\"l:9465\",\"l:6369\",\"r:phai1923:44:18\"]},{\"kind\":\"new_link\",\"text\":\"After Yadu, only Garuda continues the line: Sahasrajit, Śatajit, Haihaya, Dharma, Dharmanetra, Kunti, Sāhañji, Mahiṣmān. Raychaudhuri and Law describe the later Yadu offshoots (Sātvatas, Bhojas) at Mathurā, and Law also gives Kroṣṭhu as Yadu's son. Garuda names Kroṣṭumanā among Yadu's sons, so the Kroṣṭhu of Law may be the same figure. The pack does not show how these tribes connect to the Garuda chain.\",\"cites\":[\"g:5\",\"g:12\",\"v:garuda1:GarP 1,139.20\",\"l:9662\",\"l:9658\",\"r:phai1923:60:20\"]},{\"kind\":\"disagreement\",\"text\":\"Law says the Bhojas descended from Yayāti, while he and Raychaudhuri also call them offshoots of the Yadu family. Yadu is himself Yayāti's son, so the two statements may be compatible. Even so, they locate the Bhojas at different points in the line.\",\"cites\":[\"l:9509\",\"l:9658\",\"r:phai1923:60:21\",\"v:matsya:MatsP 24.53\"]},{\"kind\":\"open_question\",\"text\":\"Is Kurma's Āyāti the same figure as Yayāti, and where does Kurma's list of Nahuṣa's heirs place him? Kurma's verse names the heirs only as Nahuṣa's descendants, while Bhagavata, Garuda and Matsya name Yayāti directly.\",\"cites\":[\"v:kurma1:KurmP 1,21.4\",\"v:bhp9:BhP 9.18.1\",\"v:garuda1:GarP 1,139.19\",\"v:matsya:MatsP 24.55\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01747,
+ "tokens": {
+  "input": 3636,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1020,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "agreement",
+   "text": "Four Puranas (Garuda, Bhagavata, Kurma, Matsya) give the same early chain: Purūravas, then Āyu, Nahuṣa and Yayāti. The Purana Index also gives each of Āyu, Nahuṣa, Yayāti and Yadu the same father. Law independently says Āyu was Purūravas's son.",
+   "cites": [
+    "g:0",
+    "g:1",
+    "g:2",
+    "g:3",
+    "v:garuda1:GarP 1,139.8",
+    "v:matsya:MatsP 24.34",
+    "pi:17826",
+    "pi:23466",
+    "l:6349"
+   ],
+   "problems": [],
+   "warnings": [
+    "names the bhagavata but cites none of its verses",
+    "names the kurma but cites none of its verses"
+   ],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 2,
+   "kind": "agreement",
+   "text": "Garuda and Matsya name Yadu among Yayāti's sons, and Bhagavata has Yayāti addressing Yadu as his eldest. Law lists Druhyu and Puru as other sons of Yayāti, and Raychaudhuri says Anu was his son. So Yadu belongs to a larger set of Yayāti's sons.",
+   "cites": [
+    "v:garuda1:GarP 1,139.19",
+    "v:matsya:MatsP 24.53",
+    "v:bhp9:BhP 9.18.38",
+    "l:9465",
+    "l:6369",
+    "r:phai1923:44:18"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "new_link",
+   "text": "After Yadu, only Garuda continues the line: Sahasrajit, Śatajit, Haihaya, Dharma, Dharmanetra, Kunti, Sāhañji, Mahiṣmān. Raychaudhuri and Law describe the later Yadu offshoots (Sātvatas, Bhojas) at Mathurā, and Law also gives Kroṣṭhu as Yadu's son. Garuda names Kroṣṭumanā among Yadu's sons, so the Kroṣṭhu of Law may be the same figure. The pack does not show how these tribes connect to the Garuda chain.",
+   "cites": [
+    "g:5",
+    "g:12",
+    "v:garuda1:GarP 1,139.20",
+    "l:9662",
+    "l:9658",
+    "r:phai1923:60:20"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 4,
+   "kind": "disagreement",
+   "text": "Law says the Bhojas descended from Yayāti, while he and Raychaudhuri also call them offshoots of the Yadu family. Yadu is himself Yayāti's son, so the two statements may be compatible. Even so, they locate the Bhojas at different points in the line.",
+   "cites": [
+    "l:9509",
+    "l:9658",
+    "r:phai1923:60:21",
+    "v:matsya:MatsP 24.53"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 5,
+   "kind": "open_question",
+   "text": "Is Kurma's Āyāti the same figure as Yayāti, and where does Kurma's list of Nahuṣa's heirs place him? Kurma's verse names the heirs only as Nahuṣa's descendants, while Bhagavata, Garuda and Matsya name Yayāti directly.",
+   "cites": [
+    "v:kurma1:KurmP 1,21.4",
+    "v:bhp9:BhP 9.18.1",
+    "v:garuda1:GarP 1,139.19",
+    "v:matsya:MatsP 24.55"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  }
+ ]
+}

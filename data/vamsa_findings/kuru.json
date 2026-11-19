@@ -1,15 +1,15 @@
 {
  "mark": "VAMSA_FINDINGS_2026_11_19",
  "dynasty": "kuru",
- "prompt_version": "vamsa-findings-v1",
+ "prompt_version": "vamsa-findings-v2",
  "model": "claude-sonnet-5-5",
  "effort": "medium",
  "pack": {
   "generations": 21,
   "raychaudhuri": 60,
   "law": 40,
-  "chars": 19457,
-  "digest": "46b3b04422d4df3126418aeb4dfcfdbd"
+  "chars": 19889,
+  "digest": "e8e53224499eb657f7349c0ab91da8f6"
  },
  "ids": {
   "g:0": {
@@ -334,6 +334,9 @@
    "kind": "text"
   },
   "v:vip4:ViP 4,20.39": {
+   "kind": "text"
+  },
+  "a:mbh1:MBh 1,90.45": {
    "kind": "text"
   },
   "r:phai1923:14:4": {
@@ -737,96 +740,112 @@
    "page": "187"
   }
  },
- "at": "2026-11-19T11:55:52",
- "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"The Puranic lists and B. C. Law agree that Kuru was the son of Saṃvaraṇa. Eight texts, including the Agni, Bhāgavata, Brahma, Garuda, Harivaṃśa, Matsya, Mahābhārata and Viṣṇu Purāṇa (Chapter 4 translation), say he was born of Saṃvaraṇa. Law adds that Kuru built Kurukṣetra, and the Bhāgavata calls him lord of Kurukṣetra.\",\"cites\":[\"g:0\",\"v:matsya:MatsP 50.20\",\"v:mbh1:MBh 1,89.42\",\"v:bhp9:BhP 9.22.4\",\"l:8044\",\"l:8045\"]},{\"kind\":\"disagreement\",\"text\":\"The texts name Kuru's sons differently. The Bhāgavata lists Parīkṣi, Sudhanus, Jahnu and Niṣadha, and the Matsya names Sudhanvan and Jahnu. The Agni and Harivaṃśa give Parikṣit alone for this generation, and the Garuda and Viṣṇu Purāṇas give Jahnu. Law mentions only Sudhanvan as Kuru's son.\",\"cites\":[\"g:1\",\"v:bhp9:BhP 9.22.4\",\"v:matsya:MatsP 50.23\",\"v:agni:AgP 277.27\",\"v:hv:HV 23.109\",\"v:vip4:ViP 4,19.78\",\"l:8147\"]},{\"kind\":\"disagreement\",\"text\":\"The line from Vidūratha's descendants through Ārādhita to Ayutāyu is not uniform. For the generation after Ārādhita the Bhāgavata reads Rādhika, the Garuda Avadhīta, and the Matsya reads Rucira and Bhauma, with only the Viṣṇu Purāṇa texts reading Ārādhita. For the generation after that, the Matsya has Tvaritāyu where the others have Ayutāyu. The Purana Index treats Ayutāyu as having a different father.\",\"cites\":[\"g:8\",\"g:9\",\"v:bhp9:BhP 9.22.10\",\"v:garuda1:GarP 1,140.31\",\"v:matsya:MatsP 50.36\",\"v:vip4:ViP 4,20.4\",\"pi:17833\"]},{\"kind\":\"disagreement\",\"text\":\"The Mahābhārata gives a different run of kings from the Purāṇas between Vidūratha and Bhīmasena. After Viḍūratha it has Arugvān, then Parikṣit, then Bhīmasena, then Paryaśravas, where the Purāṇas go through Devātithi, Ṛkṣa, Dilīpa and Pratīpa. Raychaudhuri's remark that the Viṣṇu Purāṇa lists Kuru princes down to the Pāṇḍus does not settle which line is right.\",\"cites\":[\"g:11\",\"g:12\",\"g:15\",\"v:mbh1:MBh 1,90.42\",\"v:mbh1:MBh 1,90.43\",\"v:mbh1:MBh 1,90.45\",\"v:vip4:ViP 4,20.5\",\"r:phai1923:22:19\"]},{\"kind\":\"open_question\",\"text\":\"Which Janamejaya does Raychaudhuri mean when he says Janamejaya had Bhīmasena, Śrutasena and Ugrasena as brothers, and that the Pāṇḍus were his ancestors? The Agni and Harivaṃśa place Janamejaya early, as Parikṣit's son, while the Pāṇḍu generation falls much later in the lists. Law's claim that Janamejaya was the son of Puru is a different tradition again.\",\"cites\":[\"g:2\",\"v:agni:AgP 277.31\",\"v:hv:HV 23.110\",\"r:phai1923:21:9\",\"r:phai1923:31:6\",\"l:6924\"]}]}",
+ "at": "2026-11-19T12:53:05",
+ "reply": "{\"findings\": [{\"kind\": \"agreement\", \"text\": \"The founder's line is told the same way by Law and by the Puranic texts. Law says Saṃvaraṇa had a son Kuru, and the Agni, Brahma, Garuda, Harivamsa, Matsya, Mahabharata and Visnu texts all derive Kuru from Saṃvaraṇa. The Bhagavata names his mother as the Sun's daughter Tapatī.\", \"cites\": [\"l:8044\", \"g:0\", \"v:agni:AgP 277.26\", \"v:mbh1:MBh 1,89.42\", \"v:bhp9:BhP 9.22.4\"]}, {\"kind\": \"disagreement\", \"text\": \"Kuru's sons are named differently. Law gives Sudhanvan as Kuru's son. The Matsya names Sudhanvan and Jahnu as Kuru's sons, and the Bhagavata lists Parīkṣit, Sudhanvan, Jahnu and others. The Agni and Harivamsa put Parikṣit directly after Kuru, and the Garuda and Visnu texts name Jahnu. So the heir after Kuru is Parikṣit in some texts and Jahnu in others.\", \"cites\": [\"l:8147\", \"g:1\", \"v:matsya:MatsP 50.23\", \"v:bhp9:BhP 9.22.4\", \"v:agni:AgP 277.27\", \"v:hv:HV 23.109\", \"v:vip4:ViP 4,19.78\"]}, {\"kind\": \"new_link\", \"text\": \"Raychaudhuri says Janamejaya was Parikṣit's son and calls Bhīmasena his brother. The Agni and Harivamsa verses make Janamejaya the son of Parikṣit in the Kuru line. In the same texts a Bhīmasena appears several generations later, as son of Ṛkṣa (II). The brother Bhīmasena in Raychaudhuri's claims is therefore probably a different man from the later Bhīmasena of the genealogy, and the machine-tied names may mix two persons.\", \"cites\": [\"r:phai1923:15:14\", \"r:phai1923:21:13\", \"v:agni:AgP 277.31\", \"v:hv:HV 23.110\", \"v:agni:AgP 277.34\"]}, {\"kind\": \"disagreement\", \"text\": \"The Mahabharata and the Puranas give Pratīpa's place in the line differently. The Mahabharata names Bhīmasena's son as Paryaśravas and says he is also called Pratīpa, so this is one person under two names. The Agni, Bhagavata, Garuda, Harivamsa, Matsya and Visnu texts name Pratīpa directly after Bhīmasena or Dilīpa. The Mahabharata thus puts Bhīmasena immediately before Pratīpa, while the Garuda, Bhagavata, Matsya and Visnu texts put Dilīpa between them.\", \"cites\": [\"a:mbh1:MBh 1,90.45\", \"v:mbh1:MBh 1,90.45\", \"v:garuda1:GarP 1,140.33\", \"v:vip4:ViP 4,20.8\", \"v:matsya:MatsP 50.38\"]}, {\"kind\": \"open_question\", \"text\": \"Where the genealogy reaches Pāṇḍu's sons and Dhṛtarāṣṭra's hundred sons, the texts name different children. Raychaudhuri says the Pāṇḍavas are shown as scions of the Kuru royal family. Which sons does each text put in the line, and how are those who appear under the same name in different texts to be matched?\", \"cites\": [\"g:19\", \"g:20\", \"r:phai1923:51:8\", \"v:mbh1:MBh 1,90.72\", \"v:hv:HV 24.22\", \"v:matsya:MatsP 50.47\"]}]}",
  "stop": "end_turn",
- "cost_usd": 0.03825,
+ "cost_usd": 0.03874,
  "tokens": {
-  "input": 12610,
+  "input": 12962,
   "cache_write": 0,
   "cache_read": 0,
-  "output": 1303,
+  "output": 1282,
   "thinking": 0
  },
  "findings": [
   {
    "n": 1,
    "kind": "agreement",
-   "text": "The Puranic lists and B. C. Law agree that Kuru was the son of Saṃvaraṇa. Eight texts, including the Agni, Bhāgavata, Brahma, Garuda, Harivaṃśa, Matsya, Mahābhārata and Viṣṇu Purāṇa (Chapter 4 translation), say he was born of Saṃvaraṇa. Law adds that Kuru built Kurukṣetra, and the Bhāgavata calls him lord of Kurukṣetra.",
+   "text": "The founder's line is told the same way by Law and by the Puranic texts. Law says Saṃvaraṇa had a son Kuru, and the Agni, Brahma, Garuda, Harivamsa, Matsya, Mahabharata and Visnu texts all derive Kuru from Saṃvaraṇa. The Bhagavata names his mother as the Sun's daughter Tapatī.",
    "cites": [
-    "g:0",
-    "v:matsya:MatsP 50.20",
-    "v:mbh1:MBh 1,89.42",
-    "v:bhp9:BhP 9.22.4",
     "l:8044",
-    "l:8045"
+    "g:0",
+    "v:agni:AgP 277.26",
+    "v:mbh1:MBh 1,89.42",
+    "v:bhp9:BhP 9.22.4"
    ],
    "problems": [],
-   "status": "proposed"
+   "warnings": [
+    "names the visnu but cites none of its verses",
+    "names the matsya but cites none of its verses",
+    "names the garuda but cites none of its verses",
+    "names the brahma but cites none of its verses",
+    "names the harivamsa but cites none of its verses"
+   ],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
   },
   {
    "n": 2,
    "kind": "disagreement",
-   "text": "The texts name Kuru's sons differently. The Bhāgavata lists Parīkṣi, Sudhanus, Jahnu and Niṣadha, and the Matsya names Sudhanvan and Jahnu. The Agni and Harivaṃśa give Parikṣit alone for this generation, and the Garuda and Viṣṇu Purāṇas give Jahnu. Law mentions only Sudhanvan as Kuru's son.",
+   "text": "Kuru's sons are named differently. Law gives Sudhanvan as Kuru's son. The Matsya names Sudhanvan and Jahnu as Kuru's sons, and the Bhagavata lists Parīkṣit, Sudhanvan, Jahnu and others. The Agni and Harivamsa put Parikṣit directly after Kuru, and the Garuda and Visnu texts name Jahnu. So the heir after Kuru is Parikṣit in some texts and Jahnu in others.",
    "cites": [
+    "l:8147",
     "g:1",
-    "v:bhp9:BhP 9.22.4",
     "v:matsya:MatsP 50.23",
+    "v:bhp9:BhP 9.22.4",
     "v:agni:AgP 277.27",
     "v:hv:HV 23.109",
-    "v:vip4:ViP 4,19.78",
-    "l:8147"
+    "v:vip4:ViP 4,19.78"
    ],
    "problems": [],
-   "status": "proposed"
+   "warnings": [
+    "names the garuda but cites none of its verses"
+   ],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
   },
   {
    "n": 3,
-   "kind": "disagreement",
-   "text": "The line from Vidūratha's descendants through Ārādhita to Ayutāyu is not uniform. For the generation after Ārādhita the Bhāgavata reads Rādhika, the Garuda Avadhīta, and the Matsya reads Rucira and Bhauma, with only the Viṣṇu Purāṇa texts reading Ārādhita. For the generation after that, the Matsya has Tvaritāyu where the others have Ayutāyu. The Purana Index treats Ayutāyu as having a different father.",
+   "kind": "new_link",
+   "text": "Raychaudhuri says Janamejaya was Parikṣit's son and calls Bhīmasena his brother. The Agni and Harivamsa verses make Janamejaya the son of Parikṣit in the Kuru line. In the same texts a Bhīmasena appears several generations later, as son of Ṛkṣa (II). The brother Bhīmasena in Raychaudhuri's claims is therefore probably a different man from the later Bhīmasena of the genealogy, and the machine-tied names may mix two persons.",
    "cites": [
-    "g:8",
-    "g:9",
-    "v:bhp9:BhP 9.22.10",
-    "v:garuda1:GarP 1,140.31",
-    "v:matsya:MatsP 50.36",
-    "v:vip4:ViP 4,20.4",
-    "pi:17833"
+    "r:phai1923:15:14",
+    "r:phai1923:21:13",
+    "v:agni:AgP 277.31",
+    "v:hv:HV 23.110",
+    "v:agni:AgP 277.34"
    ],
    "problems": [],
-   "status": "proposed"
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
   },
   {
    "n": 4,
    "kind": "disagreement",
-   "text": "The Mahābhārata gives a different run of kings from the Purāṇas between Vidūratha and Bhīmasena. After Viḍūratha it has Arugvān, then Parikṣit, then Bhīmasena, then Paryaśravas, where the Purāṇas go through Devātithi, Ṛkṣa, Dilīpa and Pratīpa. Raychaudhuri's remark that the Viṣṇu Purāṇa lists Kuru princes down to the Pāṇḍus does not settle which line is right.",
+   "text": "The Mahabharata and the Puranas give Pratīpa's place in the line differently. The Mahabharata names Bhīmasena's son as Paryaśravas and says he is also called Pratīpa, so this is one person under two names. The Agni, Bhagavata, Garuda, Harivamsa, Matsya and Visnu texts name Pratīpa directly after Bhīmasena or Dilīpa. The Mahabharata thus puts Bhīmasena immediately before Pratīpa, while the Garuda, Bhagavata, Matsya and Visnu texts put Dilīpa between them.",
    "cites": [
-    "g:11",
-    "g:12",
-    "g:15",
-    "v:mbh1:MBh 1,90.42",
-    "v:mbh1:MBh 1,90.43",
+    "a:mbh1:MBh 1,90.45",
     "v:mbh1:MBh 1,90.45",
-    "v:vip4:ViP 4,20.5",
-    "r:phai1923:22:19"
+    "v:garuda1:GarP 1,140.33",
+    "v:vip4:ViP 4,20.8",
+    "v:matsya:MatsP 50.38"
    ],
    "problems": [],
-   "status": "proposed"
+   "warnings": [
+    "names the bhagavata but cites none of its verses",
+    "names the agni but cites none of its verses",
+    "names the harivamsa but cites none of its verses"
+   ],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
   },
   {
    "n": 5,
    "kind": "open_question",
-   "text": "Which Janamejaya does Raychaudhuri mean when he says Janamejaya had Bhīmasena, Śrutasena and Ugrasena as brothers, and that the Pāṇḍus were his ancestors? The Agni and Harivaṃśa place Janamejaya early, as Parikṣit's son, while the Pāṇḍu generation falls much later in the lists. Law's claim that Janamejaya was the son of Puru is a different tradition again.",
+   "text": "Where the genealogy reaches Pāṇḍu's sons and Dhṛtarāṣṭra's hundred sons, the texts name different children. Raychaudhuri says the Pāṇḍavas are shown as scions of the Kuru royal family. Which sons does each text put in the line, and how are those who appear under the same name in different texts to be matched?",
    "cites": [
-    "g:2",
-    "v:agni:AgP 277.31",
-    "v:hv:HV 23.110",
-    "r:phai1923:21:9",
-    "r:phai1923:31:6",
-    "l:6924"
+    "g:19",
+    "g:20",
+    "r:phai1923:51:8",
+    "v:mbh1:MBh 1,90.72",
+    "v:hv:HV 24.22",
+    "v:matsya:MatsP 50.47"
    ],
    "problems": [],
-   "status": "proposed"
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
   }
  ]
 }

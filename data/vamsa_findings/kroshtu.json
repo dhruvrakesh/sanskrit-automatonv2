@@ -1,0 +1,452 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "kroshtu",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 39,
+  "raychaudhuri": 0,
+  "law": 3,
+  "chars": 7904,
+  "digest": "1945f4094a30c9bb81993bb82f68cdf2"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:20289": {
+   "kind": "index"
+  },
+  "v:agni:AgP 274.1": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.2": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.6": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,12.1": {
+   "kind": "text"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:29933": {
+   "kind": "index"
+  },
+  "v:agni:AgP 274.12": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,23.1": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.22": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 44.15": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:33569": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,139.26": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 44.16": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,12.2": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "v:agni:AgP 274.13": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.27": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,23.2": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.24": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 44.17": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "pi:30694": {
+   "kind": "index"
+  },
+  "v:matsya:MatsP 44.18": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,12.3": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "pi:24796": {
+   "kind": "index"
+  },
+  "v:kurma1:KurmP 1,23.3": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:24785": {
+   "kind": "index"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "pi:24787": {
+   "kind": "index"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "pi:24786": {
+   "kind": "index"
+  },
+  "v:kurma1:KurmP 1,23.4": {
+   "kind": "text"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "pi:24790": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.26": {
+   "kind": "text"
+  },
+  "g:11": {
+   "kind": "text"
+  },
+  "pi:24802": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,139.28": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.27": {
+   "kind": "text"
+  },
+  "g:12": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.29": {
+   "kind": "text"
+  },
+  "g:13": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,23.5": {
+   "kind": "text"
+  },
+  "g:14": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.28": {
+   "kind": "text"
+  },
+  "g:15": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.29": {
+   "kind": "text"
+  },
+  "g:16": {
+   "kind": "text"
+  },
+  "g:17": {
+   "kind": "text"
+  },
+  "pi:28141": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.30": {
+   "kind": "text"
+  },
+  "g:18": {
+   "kind": "text"
+  },
+  "pi:24062": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.32": {
+   "kind": "text"
+  },
+  "g:19": {
+   "kind": "text"
+  },
+  "pi:21682": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,139.30": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.33": {
+   "kind": "text"
+  },
+  "g:20": {
+   "kind": "text"
+  },
+  "pi:29296": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.38": {
+   "kind": "text"
+  },
+  "g:21": {
+   "kind": "text"
+  },
+  "pi:20248": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,139.31": {
+   "kind": "text"
+  },
+  "g:22": {
+   "kind": "text"
+  },
+  "pi:19625": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.41": {
+   "kind": "text"
+  },
+  "g:23": {
+   "kind": "text"
+  },
+  "g:24": {
+   "kind": "text"
+  },
+  "pi:27897": {
+   "kind": "index"
+  },
+  "g:25": {
+   "kind": "text"
+  },
+  "pi:23626": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.42": {
+   "kind": "text"
+  },
+  "g:26": {
+   "kind": "text"
+  },
+  "g:27": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.43": {
+   "kind": "text"
+  },
+  "g:28": {
+   "kind": "text"
+  },
+  "g:29": {
+   "kind": "text"
+  },
+  "pi:29192": {
+   "kind": "index"
+  },
+  "g:30": {
+   "kind": "text"
+  },
+  "pi:26133": {
+   "kind": "index"
+  },
+  "g:31": {
+   "kind": "text"
+  },
+  "pi:23459": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.44": {
+   "kind": "text"
+  },
+  "g:32": {
+   "kind": "text"
+  },
+  "pi:22615": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.45": {
+   "kind": "text"
+  },
+  "g:33": {
+   "kind": "text"
+  },
+  "pi:30376": {
+   "kind": "index"
+  },
+  "g:34": {
+   "kind": "text"
+  },
+  "pi:19056": {
+   "kind": "index"
+  },
+  "g:35": {
+   "kind": "text"
+  },
+  "pi:22736": {
+   "kind": "index"
+  },
+  "g:36": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.46": {
+   "kind": "text"
+  },
+  "g:37": {
+   "kind": "text"
+  },
+  "pi:22664": {
+   "kind": "index"
+  },
+  "g:38": {
+   "kind": "text"
+  },
+  "pi:26493": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.47": {
+   "kind": "text"
+  },
+  "l:6467": {
+   "kind": "law",
+   "page": "8"
+  },
+  "l:6516": {
+   "kind": "law",
+   "page": "9"
+  },
+  "l:6978": {
+   "kind": "law",
+   "page": "41"
+  }
+ },
+ "at": "2026-11-19T12:52:34",
+ "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"Six Puranas agree on the opening of the line. Kroṣṭu is a son of Yadu, and his son is Vṛjinīvat, though the Viṣṇupurāṇa spells the name Dhvajinīvān. The Index also gives Kroṣṭu and Vṛjinīvat the same fathers as the texts do.\",\"cites\":[\"g:0\",\"g:1\",\"v:vip4:ViP 4,12.1\",\"v:matsya:MatsP 44.15\",\"pi:20289\",\"pi:29933\"]},{\"kind\":\"disagreement\",\"text\":\"The third and fourth generations are named differently across the texts. Svāti appears in the Kūrma, Liṅga and Viṣṇu Purāṇas, Svāha in the Matsya and Agni, and Āhi in the Garuḍa. The next king is Kuśaṅku in the Liṅga, Uśadgu in the Kūrma, Uśaṅku in the Garuḍa, Ruṣadgu in the Agni, Ruṣaṅgu in the Matsya and Ruśaṅku in the Viṣṇu.\",\"cites\":[\"g:2\",\"g:3\",\"v:linga1:LiP 1,68.22\",\"v:garuda1:GarP 1,139.26\",\"v:agni:AgP 274.12\",\"v:kurma1:KurmP 1,23.1\",\"v:matsya:MatsP 44.16\"]},{\"kind\":\"disagreement\",\"text\":\"After Śaśabindu the sources split. The Kūrma gives a run of Pṛthu-names (Pṛthuyaśas, Pṛthukarman, Pṛthujaya, Pṛthukīrti, Pṛthudāna) before Pṛthuśravas. The Liṅga instead has Anantaka and then Yajña, and the Garuḍa goes straight to Pṛthuśravas. The Index lists several of these Pṛthu-names under other fathers, so the Kūrma's chain is not matched by the Index.\",\"cites\":[\"g:6\",\"g:7\",\"g:10\",\"g:11\",\"v:kurma1:KurmP 1,23.3\",\"v:linga1:LiP 1,68.26\",\"v:linga1:LiP 1,68.27\",\"v:garuda1:GarP 1,139.28\",\"pi:24785\",\"pi:24787\"]},{\"kind\":\"new_link\",\"text\":\"Law's Bhīmaratha, father of Divodāsa, may not be the Kroṣṭu-line Bhīmaratha. The Liṅga's Bhīmaratha is the son of Vikṛti and father of Navaratha, and nothing in the pack mentions Divodāsa for him. Law's Śakuni, head of Ikṣvāku's fifty sons, is likewise not obviously the Liṅga's Śakuni, who follows Dṛḍharatha. These look like same-name matches that need checking.\",\"cites\":[\"l:6516\",\"l:6467\",\"l:6978\",\"v:linga1:LiP 1,68.43\",\"v:linga1:LiP 1,68.45\",\"g:30\",\"g:33\"]},{\"kind\":\"open_question\",\"text\":\"Only the Liṅga carries the line through Jyāmagha, Vidarbha and Kratha down to Madhu. Do the other Purāṇas know the later kings, such as Daśārha through Devakṣatra, that the Index mostly ties to the same fathers?\",\"cites\":[\"g:26\",\"g:37\",\"g:38\",\"v:linga1:LiP 1,68.47\",\"pi:26493\",\"pi:22664\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.0234,
+ "tokens": {
+  "input": 5879,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1164,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "agreement",
+   "text": "Six Puranas agree on the opening of the line. Kroṣṭu is a son of Yadu, and his son is Vṛjinīvat, though the Viṣṇupurāṇa spells the name Dhvajinīvān. The Index also gives Kroṣṭu and Vṛjinīvat the same fathers as the texts do.",
+   "cites": [
+    "g:0",
+    "g:1",
+    "v:vip4:ViP 4,12.1",
+    "v:matsya:MatsP 44.15",
+    "pi:20289",
+    "pi:29933"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 2,
+   "kind": "disagreement",
+   "text": "The third and fourth generations are named differently across the texts. Svāti appears in the Kūrma, Liṅga and Viṣṇu Purāṇas, Svāha in the Matsya and Agni, and Āhi in the Garuḍa. The next king is Kuśaṅku in the Liṅga, Uśadgu in the Kūrma, Uśaṅku in the Garuḍa, Ruṣadgu in the Agni, Ruṣaṅgu in the Matsya and Ruśaṅku in the Viṣṇu.",
+   "cites": [
+    "g:2",
+    "g:3",
+    "v:linga1:LiP 1,68.22",
+    "v:garuda1:GarP 1,139.26",
+    "v:agni:AgP 274.12",
+    "v:kurma1:KurmP 1,23.1",
+    "v:matsya:MatsP 44.16"
+   ],
+   "problems": [],
+   "warnings": [
+    "names the visnu but cites none of its verses"
+   ],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "disagreement",
+   "text": "After Śaśabindu the sources split. The Kūrma gives a run of Pṛthu-names (Pṛthuyaśas, Pṛthukarman, Pṛthujaya, Pṛthukīrti, Pṛthudāna) before Pṛthuśravas. The Liṅga instead has Anantaka and then Yajña, and the Garuḍa goes straight to Pṛthuśravas. The Index lists several of these Pṛthu-names under other fathers, so the Kūrma's chain is not matched by the Index.",
+   "cites": [
+    "g:6",
+    "g:7",
+    "g:10",
+    "g:11",
+    "v:kurma1:KurmP 1,23.3",
+    "v:linga1:LiP 1,68.26",
+    "v:linga1:LiP 1,68.27",
+    "v:garuda1:GarP 1,139.28",
+    "pi:24785",
+    "pi:24787"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 4,
+   "kind": "new_link",
+   "text": "Law's Bhīmaratha, father of Divodāsa, may not be the Kroṣṭu-line Bhīmaratha. The Liṅga's Bhīmaratha is the son of Vikṛti and father of Navaratha, and nothing in the pack mentions Divodāsa for him. Law's Śakuni, head of Ikṣvāku's fifty sons, is likewise not obviously the Liṅga's Śakuni, who follows Dṛḍharatha. These look like same-name matches that need checking.",
+   "cites": [
+    "l:6516",
+    "l:6467",
+    "l:6978",
+    "v:linga1:LiP 1,68.43",
+    "v:linga1:LiP 1,68.45",
+    "g:30",
+    "g:33"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 5,
+   "kind": "open_question",
+   "text": "Only the Liṅga carries the line through Jyāmagha, Vidarbha and Kratha down to Madhu. Do the other Purāṇas know the later kings, such as Daśārha through Devakṣatra, that the Index mostly ties to the same fathers?",
+   "cites": [
+    "g:26",
+    "g:37",
+    "g:38",
+    "v:linga1:LiP 1,68.47",
+    "pi:26493",
+    "pi:22664"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  }
+ ]
+}

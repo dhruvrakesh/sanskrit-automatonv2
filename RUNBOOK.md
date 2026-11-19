@@ -3072,3 +3072,20 @@ docs\ASKS_2026-10-22.md, section 37. In this order:
    paste), A1 (true, false, true), A2.
 4. Srangam, from D:\srangam-42267: `git pull` first (Lovable committed after cc32c10); the kit's patch (--check, then
    without); npm run typecheck; npx vitest run; npm run build; commit and push; Publish; open /admin/desk-site.
+
+## 19 Nov, afternoon: our findings for the vamsa page (VAMSA_FINDINGS_SITE_2026_11_19, DOCS126_2026_11_19)
+
+docs\ASKS_2026-10-22.md, section 38. In this order:
+
+1. The automaton: `python scripts\patch_vamsa_findings_site_2026_11_19.py --check`, then without; `python
+   scripts\patch_docs126_2026_11_19.py --check`, then without; `python -m unittest
+   tests.test_vamsa_findings_site_2026_11_19 tests.test_vamsa_wayin_2026_11_18 tests.test_docs126_2026_11_19`;
+   release.ps1 with COMMIT_MSG_findingssite_20261119.txt (the dry run, then -Apply once).
+2. The Lovable Cloud SQL editor: docs\cloud\C31_vamsa_findings_2026-11-19.sql, B1 (true, true, false, false, false),
+   the change (one paste), A1 (true x5, 10, 0), A3 (false, true, false, false).
+3. Srangam, from D:\srangam-42267: git status and git pull --ff-only (each stopping at the first failure); the kit's
+   patch (--check, then without); npm run typecheck; npx vitest run src/__tests__/vamsa-findings.test.tsx
+   src/__tests__/vamsas.test.tsx; npm run build; commit and push; Publish.
+4. The desk: `python scripts\index_sync.py --dynasty-works every` (the plan: vamsas 9 to send), then with --apply;
+   C31's A2 (solar 4, lunar 1, haihaya 4, kroshtu 3, turvasu 1, druhyu 2, puru 2, kuru 2, magadha 1); open
+   /corpus/genealogies/vamsas signed in.

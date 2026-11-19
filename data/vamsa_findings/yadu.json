@@ -1,0 +1,367 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "yadu",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 14,
+  "raychaudhuri": 4,
+  "law": 5,
+  "chars": 8749,
+  "digest": "bd8d0229cae8bdfb2c69779ffa4dee99"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:-24919": {
+   "kind": "index"
+  },
+  "v:agni:AgP 273.22": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 12.24": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.19": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,10.8": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,10.6": {
+   "kind": "text"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:32170": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.23.20": {
+   "kind": "text"
+  },
+  "v:bndp2:BndP 2,69.2": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.20": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.11": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.2": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.6": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,11.5": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,11.3": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:30485": {
+   "kind": "index"
+  },
+  "v:agni:AgP 274.1": {
+   "kind": "text"
+  },
+  "v:bhp9:BhP 9.23.21": {
+   "kind": "text"
+  },
+  "v:bndp2:BndP 2,69.3": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.153": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.21": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.134": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.12": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.3": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.7": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,11.6": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "pi:33966": {
+   "kind": "index"
+  },
+  "v:agni:AgP 274.2": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.154": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.8": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,11.7": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.13": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.4": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,11.8": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "pi:23031": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,69.4": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.155": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.22": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,21.14": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.5": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.9": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "pi:19624": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,69.5": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.156": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:31904": {
+   "kind": "index"
+  },
+  "v:hv:HV 23.135": {
+   "kind": "text"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "pi:26989": {
+   "kind": "index"
+  },
+  "v:agni:AgP 274.3": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.6": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.10": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,11.9": {
+   "kind": "text"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "pi:25905": {
+   "kind": "index"
+  },
+  "v:vip4:ViP 4,11.10": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,11.4": {
+   "kind": "text"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "pi:22560": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.7": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.11": {
+   "kind": "text"
+  },
+  "g:11": {
+   "kind": "text"
+  },
+  "pi:22948": {
+   "kind": "index"
+  },
+  "v:matsya:MatsP 43.12": {
+   "kind": "text"
+  },
+  "g:12": {
+   "kind": "text"
+  },
+  "pi:19921": {
+   "kind": "index"
+  },
+  "v:agni:AgP 274.4": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,68.8": {
+   "kind": "text"
+  },
+  "g:13": {
+   "kind": "text"
+  },
+  "pi:33631": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,68.9": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 43.13": {
+   "kind": "text"
+  },
+  "r:phai1923:93:21": {
+   "kind": "raychaudhuri",
+   "page": "75"
+  },
+  "r:phai1923:93:23": {
+   "kind": "raychaudhuri",
+   "page": "75"
+  },
+  "r:phai1923:94:1": {
+   "kind": "raychaudhuri",
+   "page": "76"
+  },
+  "r:phai1923:94:2": {
+   "kind": "raychaudhuri",
+   "page": "76"
+  },
+  "l:6384": {
+   "kind": "law",
+   "page": "4"
+  },
+  "l:6385": {
+   "kind": "law",
+   "page": "4"
+  },
+  "l:7072": {
+   "kind": "law",
+   "page": "46"
+  },
+  "l:7079": {
+   "kind": "law",
+   "page": "46"
+  },
+  "l:9668": {
+   "kind": "law",
+   "page": "188"
+  }
+ },
+ "at": "2026-11-19T12:52:19",
+ "reply": "{\"findings\": [{\"kind\": \"disagreement\", \"text\": \"Raychaudhuri, citing the Matsya Purāṇa's list, names the five Haihaya branches as Vītihotras, Bhojas, Avantis, Kuṇḍikeras or Tuṇḍikeras, and Tālajaṅghas. Law's five families include Śāryāta and leave out the Tālajaṅghas, though Law elsewhere names the Tālajaṅghas as allies of the Haihayas.\", \"cites\": [\"r:phai1923:94:1\", \"r:phai1923:94:2\", \"l:9668\", \"l:7072\"]}, {\"kind\": \"agreement\", \"text\": \"The Purāṇas give Haihaya as one of three sons of Śatajit, a grandson of Yadu. Raychaudhuri says the Purāṇas style the first dynasty of Mahiṣmatī as Haihaya. The genealogies also reach a Mahiṣmat three generations after Haihaya, which fits the dynasty's seat.\", \"cites\": [\"v:vip4:ViP 4,11.7\", \"v:matsya:MatsP 43.8\", \"v:linga1:LiP 1,68.6\", \"r:phai1923:93:21\"]}, {\"kind\": \"disagreement\", \"text\": \"The Purāṇas do not agree on the line between Dharmanetra and Kārtavīrya Arjuna. Kunti's son is Sāhañja in the Brahma Purāṇa and Garuda Purāṇa, Saṃhata in the Matsya Purāṇa, Saṃhana in the Agni Purāṇa, and Saṃjaya in the Linga Purāṇa. The Harivaṃśa instead makes Haya a son of Śatajit in its Arjuna slot, and the Brahmāṇḍa Purāṇa gives Saṃkṣeya there.\", \"cites\": [\"v:brahma:BrP 13.156\", \"v:garuda1:GarP 1,139.22\", \"v:matsya:MatsP 43.9\", \"v:agni:AgP 274.2\", \"v:linga1:LiP 1,68.5\", \"v:hv:HV 23.135\", \"v:bndp2:BndP 2,69.5\"]}, {\"kind\": \"open_question\", \"text\": \"Law reports Haihaya victories over Divodāsa and over Vāhu, and a near-destruction by Sagara. Which kings of the Purāṇic Haihaya line, if any, do these episodes belong to, given that the genealogies name Kṛtavīrya and Arjuna but none of these opponents?\", \"cites\": [\"l:6385\", \"l:7072\", \"l:7079\", \"v:matsya:MatsP 43.13\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02202,
+ "tokens": {
+  "input": 6500,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 902,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "disagreement",
+   "text": "Raychaudhuri, citing the Matsya Purāṇa's list, names the five Haihaya branches as Vītihotras, Bhojas, Avantis, Kuṇḍikeras or Tuṇḍikeras, and Tālajaṅghas. Law's five families include Śāryāta and leave out the Tālajaṅghas, though Law elsewhere names the Tālajaṅghas as allies of the Haihayas.",
+   "cites": [
+    "r:phai1923:94:1",
+    "r:phai1923:94:2",
+    "l:9668",
+    "l:7072"
+   ],
+   "problems": [],
+   "warnings": [
+    "names the matsya but cites none of its verses"
+   ],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 2,
+   "kind": "agreement",
+   "text": "The Purāṇas give Haihaya as one of three sons of Śatajit, a grandson of Yadu. Raychaudhuri says the Purāṇas style the first dynasty of Mahiṣmatī as Haihaya. The genealogies also reach a Mahiṣmat three generations after Haihaya, which fits the dynasty's seat.",
+   "cites": [
+    "v:vip4:ViP 4,11.7",
+    "v:matsya:MatsP 43.8",
+    "v:linga1:LiP 1,68.6",
+    "r:phai1923:93:21"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "disagreement",
+   "text": "The Purāṇas do not agree on the line between Dharmanetra and Kārtavīrya Arjuna. Kunti's son is Sāhañja in the Brahma Purāṇa and Garuda Purāṇa, Saṃhata in the Matsya Purāṇa, Saṃhana in the Agni Purāṇa, and Saṃjaya in the Linga Purāṇa. The Harivaṃśa instead makes Haya a son of Śatajit in its Arjuna slot, and the Brahmāṇḍa Purāṇa gives Saṃkṣeya there.",
+   "cites": [
+    "v:brahma:BrP 13.156",
+    "v:garuda1:GarP 1,139.22",
+    "v:matsya:MatsP 43.9",
+    "v:agni:AgP 274.2",
+    "v:linga1:LiP 1,68.5",
+    "v:hv:HV 23.135",
+    "v:bndp2:BndP 2,69.5"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 4,
+   "kind": "open_question",
+   "text": "Law reports Haihaya victories over Divodāsa and over Vāhu, and a near-destruction by Sagara. Which kings of the Purāṇic Haihaya line, if any, do these episodes belong to, given that the genealogies name Kṛtavīrya and Arjuna but none of these opponents?",
+   "cites": [
+    "l:6385",
+    "l:7072",
+    "l:7079",
+    "v:matsya:MatsP 43.13"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  }
+ ]
+}

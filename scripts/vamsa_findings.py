@@ -583,7 +583,10 @@ def do_report(a, keys: list, inp=None) -> int:
     p.write_text("\n".join(lines) + "\n", encoding="utf-8")
     say("%d proposed, %d approved, %d dropped, %d refused; the review page: %s"
         % (tot["proposed"], tot["approved"], tot["dropped"], tot["refused"], p),
-        ("python scripts\\vamsa_findings.py --approve %s   (or --drop %s), once read" % (first, first)) if first else "")
+        ("python scripts\\vamsa_findings.py --approve %s   (or --drop %s), once read" % (first, first)) if first else
+        # VAMSA_FINDINGS_SITE_2026_11_19: all decided: the approved ones go to the vamsa page (C31 pasted first)
+        ("python scripts\\index_sync.py --dynasty-works every   (the plan: %d approved finding(s) for the site)"
+         % tot["approved"]) if tot["approved"] else "")
     return 0
 
 

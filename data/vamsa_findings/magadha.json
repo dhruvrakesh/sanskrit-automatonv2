@@ -1,0 +1,199 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "magadha",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 11,
+  "raychaudhuri": 0,
+  "law": 2,
+  "chars": 3239,
+  "digest": "96c7c37e5eff0a4d25972f419411a059"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,140.27": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.110": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 50.26": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,19.81": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,19.17": {
+   "kind": "text"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:19803": {
+   "kind": "index"
+  },
+  "v:matsya:MatsP 50.28": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,19.82": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:18633": {
+   "kind": "index"
+  },
+  "v:matsya:MatsP 50.29": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,140.28": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "pi:31703": {
+   "kind": "index"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:21562": {
+   "kind": "index"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "pi:18247": {
+   "kind": "index"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "pi:21423": {
+   "kind": "index"
+  },
+  "l:8061": {
+   "kind": "law",
+   "page": "98"
+  },
+  "l:8502": {
+   "kind": "law",
+   "page": "125"
+  }
+ },
+ "at": "2026-11-19T12:53:13",
+ "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"Law's statement that Kuśāgra was the father of Ṛṣabha matches the Puranic line. All five texts make Ṛṣabha (Vṛṣabha in Matsya and Viṣṇu 4) the son of Kuśāgra, and the Purana Index gives Ṛṣabha the same father.\",\"cites\":[\"l:8061\",\"g:2\",\"v:hv:HV 23.110\",\"v:matsya:MatsP 50.29\",\"v:vip4:ViP 4,19.82\",\"v:garuda1:GarP 1,140.27\",\"pi:18633\"]},{\"kind\":\"disagreement\",\"text\":\"The successor of Satyahita differs. Garuda and both Viṣṇu versions give Sudhanvan next, while the Harivamsa runs Satyahita, Ūrja, Saṃbhava, Jarāsaṃdha, Sahadeva, Udāyi. The Harivamsa's longer line is the only one in the pack that includes Jarāsaṃdha.\",\"cites\":[\"g:9\",\"g:5\",\"g:6\",\"g:7\",\"g:8\",\"v:garuda1:GarP 1,140.28\",\"v:vip4:ViP 4,19.82\",\"v:hv:HV 23.110\"]},{\"kind\":\"new_link\",\"text\":\"Law calls Jarāsaṃdha a king of Magadha. Within this Bārhadratha dynasty only the Harivamsa places him, as the son of Saṃbhava and father of Sahadeva. The Purana Index records him without a father, so Law's Magadhan king may correspond to this Harivamsa figure, though the name match alone does not prove it.\",\"cites\":[\"l:8502\",\"g:7\",\"v:hv:HV 23.110\",\"pi:21562\"]},{\"kind\":\"disagreement\",\"text\":\"The tenth generation is named differently by each text. The Harivamsa has Śrutadharma, born to Udāyi. Garuda has Jahru, Viṣṇu 4 has Jatu, and Pathak's Viṣṇu has Jantu, each after Sudhanvan. The Index's Jatu has the same father as in the pack.\",\"cites\":[\"g:10\",\"v:hv:HV 23.110\",\"v:garuda1:GarP 1,140.28\",\"v:vip4:ViP 4,19.82\",\"v:vipc4:ViPc 4,19.17\",\"pi:21423\"]},{\"kind\":\"open_question\",\"text\":\"Is the Harivamsa's Udāyi, son of Sahadeva, the same person as the Sudhanvan of the other texts? The desk aligns them as one generation, but the Index's Udayī has a different father.\",\"cites\":[\"g:9\",\"v:hv:HV 23.110\",\"v:vip4:ViP 4,19.82\",\"pi:18247\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01494,
+ "tokens": {
+  "input": 2895,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 915,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "agreement",
+   "text": "Law's statement that Kuśāgra was the father of Ṛṣabha matches the Puranic line. All five texts make Ṛṣabha (Vṛṣabha in Matsya and Viṣṇu 4) the son of Kuśāgra, and the Purana Index gives Ṛṣabha the same father.",
+   "cites": [
+    "l:8061",
+    "g:2",
+    "v:hv:HV 23.110",
+    "v:matsya:MatsP 50.29",
+    "v:vip4:ViP 4,19.82",
+    "v:garuda1:GarP 1,140.27",
+    "pi:18633"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 2,
+   "kind": "disagreement",
+   "text": "The successor of Satyahita differs. Garuda and both Viṣṇu versions give Sudhanvan next, while the Harivamsa runs Satyahita, Ūrja, Saṃbhava, Jarāsaṃdha, Sahadeva, Udāyi. The Harivamsa's longer line is the only one in the pack that includes Jarāsaṃdha.",
+   "cites": [
+    "g:9",
+    "g:5",
+    "g:6",
+    "g:7",
+    "g:8",
+    "v:garuda1:GarP 1,140.28",
+    "v:vip4:ViP 4,19.82",
+    "v:hv:HV 23.110"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "new_link",
+   "text": "Law calls Jarāsaṃdha a king of Magadha. Within this Bārhadratha dynasty only the Harivamsa places him, as the son of Saṃbhava and father of Sahadeva. The Purana Index records him without a father, so Law's Magadhan king may correspond to this Harivamsa figure, though the name match alone does not prove it.",
+   "cites": [
+    "l:8502",
+    "g:7",
+    "v:hv:HV 23.110",
+    "pi:21562"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:24"
+  },
+  {
+   "n": 4,
+   "kind": "disagreement",
+   "text": "The tenth generation is named differently by each text. The Harivamsa has Śrutadharma, born to Udāyi. Garuda has Jahru, Viṣṇu 4 has Jatu, and Pathak's Viṣṇu has Jantu, each after Sudhanvan. The Index's Jatu has the same father as in the pack.",
+   "cites": [
+    "g:10",
+    "v:hv:HV 23.110",
+    "v:garuda1:GarP 1,140.28",
+    "v:vip4:ViP 4,19.82",
+    "v:vipc4:ViPc 4,19.17",
+    "pi:21423"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:24"
+  },
+  {
+   "n": 5,
+   "kind": "open_question",
+   "text": "Is the Harivamsa's Udāyi, son of Sahadeva, the same person as the Sudhanvan of the other texts? The desk aligns them as one generation, but the Index's Udayī has a different father.",
+   "cites": [
+    "g:9",
+    "v:hv:HV 23.110",
+    "v:vip4:ViP 4,19.82",
+    "pi:18247"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:24"
+  }
+ ]
+}

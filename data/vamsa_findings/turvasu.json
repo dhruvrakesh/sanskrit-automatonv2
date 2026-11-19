@@ -1,0 +1,282 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "turvasu",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 14,
+  "raychaudhuri": 4,
+  "law": 6,
+  "chars": 4937,
+  "digest": "3708a2e22d35f9a57130a041ff25dc33"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:21999": {
+   "kind": "index"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:28669": {
+   "kind": "index"
+  },
+  "v:agni:AgP 276.1": {
+   "kind": "text"
+  },
+  "v:bndp2:BndP 2,74.1": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.142": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.123": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,16.2": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:20820": {
+   "kind": "index"
+  },
+  "v:matsya:MatsP 48.1": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "pi:22178": {
+   "kind": "index"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "v:bndp2:BndP 2,74.2": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.143": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.124": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 48.2": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "pi:26725": {
+   "kind": "index"
+  },
+  "v:agni:AgP 276.2": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "pi:22596": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,74.3": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:32020": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,74.5": {
+   "kind": "text"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "pi:17676": {
+   "kind": "index"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "v:agni:AgP 276.3": {
+   "kind": "text"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "pi:23007": {
+   "kind": "index"
+  },
+  "v:agni:AgP 276.4": {
+   "kind": "text"
+  },
+  "g:11": {
+   "kind": "text"
+  },
+  "pi:20961": {
+   "kind": "index"
+  },
+  "g:12": {
+   "kind": "text"
+  },
+  "v:agni:AgP 276.5": {
+   "kind": "text"
+  },
+  "g:13": {
+   "kind": "text"
+  },
+  "pi:24231": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,74.6": {
+   "kind": "text"
+  },
+  "r:phai1923:108:8": {
+   "kind": "raychaudhuri",
+   "page": "90"
+  },
+  "r:phai1923:97:2": {
+   "kind": "raychaudhuri",
+   "page": "79"
+  },
+  "r:phai1923:196:10": {
+   "kind": "raychaudhuri",
+   "page": "178"
+  },
+  "r:phai1923:197:7": {
+   "kind": "raychaudhuri",
+   "page": "179"
+  },
+  "l:6432": {
+   "kind": "law",
+   "page": "6"
+  },
+  "l:6433": {
+   "kind": "law",
+   "page": "6"
+  },
+  "l:6434": {
+   "kind": "law",
+   "page": "6"
+  },
+  "l:6454": {
+   "kind": "law",
+   "page": "7"
+  },
+  "l:6455": {
+   "kind": "law",
+   "page": "7"
+  },
+  "l:7701": {
+   "kind": "law",
+   "page": "80"
+  }
+ },
+ "at": "2026-11-19T12:52:42",
+ "reply": "{\"findings\":[{\"kind\":\"disagreement\",\"text\":\"The third generation after Gobhānu has a different name in each text. Agni gives Traiśāni, the Harivaṃśa Triśānu, the Brahmapurāṇa Aiśānu, the Brahmāṇḍa Strisānu and the Matsya Trisāri. The Viṣṇupurāṇa critical edition gives Traiśānu, and the Index lists the person as Trisānu with the same father. The sources agree on the position in the line but not on the spelling.\",\"cites\":[\"g:3\",\"v:agni:AgP 276.1\",\"v:hv:HV 23.123\",\"v:brahma:BrP 13.142\",\"v:bndp2:BndP 2,74.1\",\"v:matsya:MatsP 48.1\",\"v:vipc4:ViPc 4,16.2\",\"pi:22178\"]},{\"kind\":\"agreement\",\"text\":\"Agni, the Brahmāṇḍa, the Brahmapurāṇa, the Harivaṃśa and the Viṣṇupurāṇa all make Marutta the son of Karandhama, and the Index records a Marutta (II) with the same father. This stretch of the line is stable across the texts.\",\"cites\":[\"g:5\",\"v:agni:AgP 276.2\",\"v:bndp2:BndP 2,74.2\",\"v:brahma:BrP 13.143\",\"v:hv:HV 23.124\",\"v:vipc4:ViPc 4,16.2\",\"pi:26725\"]},{\"kind\":\"open_question\",\"text\":\"Raychaudhuri and Law both attach Marutta's consecration and his sacrifice with Saṃvartta to this Marutta. Is the Marutta of the Turvasu line the same king as the sacrificer they describe? The Index numbers this Marutta as II, which suggests there is more than one king of that name.\",\"cites\":[\"g:5\",\"pi:26725\",\"r:phai1923:108:8\",\"l:6432\",\"l:6434\"]},{\"kind\":\"disagreement\",\"text\":\"After Duṣmanta the texts diverge. Agni continues with Varūtha, then Gāṇḍīra, and on to Gāndhāra. The Brahmāṇḍa names Sarūpya, then Āṇḍīra, and ends with a list of Pāṇḍya, Kerala, Cola and Kulya. Agni instead gives Pracetas, and the Matsya gives Bharata, at the end of the line.\",\"cites\":[\"g:7\",\"g:8\",\"g:13\",\"v:agni:AgP 276.2\",\"v:bndp2:BndP 2,74.5\",\"v:bndp2:BndP 2,74.6\",\"v:agni:AgP 276.5\",\"v:matsya:MatsP 48.2\"]},{\"kind\":\"open_question\",\"text\":\"The Brahmāṇḍa and the Viṣṇupurāṇa describe Duṣmanta (Duṣkanta, Duṣyanta) as taking the Paurava as his son. Does this mean the Turvasu line was absorbed into the Pūru line? The Index has no father listed for Duṣkanta, and the pack does not settle the question.\",\"cites\":[\"g:6\",\"v:bndp2:BndP 2,74.3\",\"v:vipc4:ViPc 4,16.2\",\"pi:22596\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01807,
+ "tokens": {
+  "input": 3682,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1071,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "disagreement",
+   "text": "The third generation after Gobhānu has a different name in each text. Agni gives Traiśāni, the Harivaṃśa Triśānu, the Brahmapurāṇa Aiśānu, the Brahmāṇḍa Strisānu and the Matsya Trisāri. The Viṣṇupurāṇa critical edition gives Traiśānu, and the Index lists the person as Trisānu with the same father. The sources agree on the position in the line but not on the spelling.",
+   "cites": [
+    "g:3",
+    "v:agni:AgP 276.1",
+    "v:hv:HV 23.123",
+    "v:brahma:BrP 13.142",
+    "v:bndp2:BndP 2,74.1",
+    "v:matsya:MatsP 48.1",
+    "v:vipc4:ViPc 4,16.2",
+    "pi:22178"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 2,
+   "kind": "agreement",
+   "text": "Agni, the Brahmāṇḍa, the Brahmapurāṇa, the Harivaṃśa and the Viṣṇupurāṇa all make Marutta the son of Karandhama, and the Index records a Marutta (II) with the same father. This stretch of the line is stable across the texts.",
+   "cites": [
+    "g:5",
+    "v:agni:AgP 276.2",
+    "v:bndp2:BndP 2,74.2",
+    "v:brahma:BrP 13.143",
+    "v:hv:HV 23.124",
+    "v:vipc4:ViPc 4,16.2",
+    "pi:26725"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "open_question",
+   "text": "Raychaudhuri and Law both attach Marutta's consecration and his sacrifice with Saṃvartta to this Marutta. Is the Marutta of the Turvasu line the same king as the sacrificer they describe? The Index numbers this Marutta as II, which suggests there is more than one king of that name.",
+   "cites": [
+    "g:5",
+    "pi:26725",
+    "r:phai1923:108:8",
+    "l:6432",
+    "l:6434"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 4,
+   "kind": "disagreement",
+   "text": "After Duṣmanta the texts diverge. Agni continues with Varūtha, then Gāṇḍīra, and on to Gāndhāra. The Brahmāṇḍa names Sarūpya, then Āṇḍīra, and ends with a list of Pāṇḍya, Kerala, Cola and Kulya. Agni instead gives Pracetas, and the Matsya gives Bharata, at the end of the line.",
+   "cites": [
+    "g:7",
+    "g:8",
+    "g:13",
+    "v:agni:AgP 276.2",
+    "v:bndp2:BndP 2,74.5",
+    "v:bndp2:BndP 2,74.6",
+    "v:agni:AgP 276.5",
+    "v:matsya:MatsP 48.2"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 5,
+   "kind": "open_question",
+   "text": "The Brahmāṇḍa and the Viṣṇupurāṇa describe Duṣmanta (Duṣkanta, Duṣyanta) as taking the Paurava as his son. Does this mean the Turvasu line was absorbed into the Pūru line? The Index has no father listed for Duṣkanta, and the pack does not settle the question.",
+   "cites": [
+    "g:6",
+    "v:bndp2:BndP 2,74.3",
+    "v:vipc4:ViPc 4,16.2",
+    "pi:22596"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  }
+ ]
+}

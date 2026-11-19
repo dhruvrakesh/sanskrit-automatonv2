@@ -53,6 +53,14 @@ and words, the line of that work's dynasties where the same person stands (so th
 person in the Purana Index, and Raychaudhuri's claims on that person (only those the site carries already: C23's rule;
 B. C. Law's, in copyright, never). Sent only when the site has the table (C29) and corpus-index takes it (the Srangam
 kit VAMSA_WAYIN), as the dynasties were.
+
+VAMSA_FINDINGS_SITE_2026_11_19 (C31): and our findings on each dynasty (R1, scripts\\vamsa_findings.py), only those a
+person approved, each with its citations resolved for a reader from what the site carries: a generation, a verse (its
+name, its words, its line), a second name a text states, Dikshitar's person, Raychaudhuri's claim (only one the site
+carries: C23's rule) and B. C. Law's page, never his words (his book is in copyright and stays on the desk). A field
+"findings" of the vamsas' rows (data\\vamsa_findings\\<dynasty>.json, --findings), sent only once the site's
+manifest says it takes them ({"features": {"vamsa_findings": true}}: docs\\cloud\\C31_vamsa_findings_2026-11-19.sql);
+until then the rows go without it, their hashes as before.
 """
 from __future__ import annotations
 
@@ -68,6 +76,7 @@ TABLES = ("texts", "persons", "steps", "statements", "claims", "lines", "verses"
           "meta")   # VAMSA_JOIN_2026_11_11: dynasties; VAMSA_WAYIN_2026_11_18: vamsas; the run's row (meta) last
 OPTIONAL = ("claims", "dynasties", "vamsas")   # sent only when the site has the table (C23, C28, C29) and corpus-index takes it
 RAY_SHOWN = 3   # VAMSA_WAYIN_2026_11_18: a generation's claims of Raychaudhuri carried, at most (the count says how many)
+FINDINGS_FEATURE = "vamsa_findings"   # VAMSA_FINDINGS_SITE_2026_11_19: the manifest's word that the site takes them (C31)
 MAX_ROWS, MAX_BYTES, MAX_KEYS = 1000, 3 * 1024 * 1024, 5000
 INDEX_RIGHTS = ("the relations derived from the index, with the entry's own words: Cologne Digital Sanskrit "
                 "Dictionaries, CC BY-NC-SA 3.0 (https://creativecommons.org/licenses/by-nc-sa/3.0/)")
@@ -276,7 +285,7 @@ def _best_scholar(stmts: dict, keys: list) -> str:
 
 
 def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_db: str = "",
-          vamsa_read_dir: str = "", dynasty_works: str = "all") -> dict:
+          vamsa_read_dir: str = "", dynasty_works: str = "all", findings_dir: str = "") -> dict:
     """{table: [row]}: the site's rows, from the stores the dashboard's Vamsa page reads; read-only. vamsa_read_dir:
     G5a's readings (data\\vamsa_read), for the dynasties (VAMSA_JOIN_2026_11_11); none given, none sent."""
     import relations_view as rv
@@ -424,7 +433,8 @@ def build(db: str, kin_db: str, vamsa_db: str, immutable: bool = False, claims_d
         # VAMSA_WAYIN_2026_11_18: G6c's dynasties across the works, by vamsa, each generation tied to the lines above
         out["vamsas"] = vamsa_rows(vamsa_read_dir, out["dynasties"], g,
                                    {r["key"]: r.get("canonical") for r in out["persons"]}, out["claims"], cix[1],
-                                   _entity_claims(claims_db, {c["key"] for c in out["claims"]}, immutable))
+                                   _entity_claims(claims_db, {c["key"] for c in out["claims"]}, immutable),
+                                   findings_dir=findings_dir)   # VAMSA_FINDINGS_SITE_2026_11_19
     counts = {t: len(out[t]) for t in TABLES if t != "meta"}
     out["meta"].append(finish({"key": "run", "value": {"mark": MARK, "scheme": SCHEME, "counts": counts,
                                                        "checked": v["meta"].get("at", ""),
@@ -459,7 +469,7 @@ def dynasty_rows(vamsa_read_dir: str, db: str, kin_db: str, g: dict, persons: se
 
 
 def vamsa_rows(vamsa_read_dir: str, dyn_rows: list, g: dict, persons: dict, claims: list, pair_ix: dict,
-               ent_claims: dict) -> list:
+               ent_claims: dict, findings_dir: str = "") -> list:
     """VAMSA_WAYIN_2026_11_18: one row a dynasty of G6c (aligned.json), for the way in by vamsa: its founder, vamsa, the
     works that tell it, its generations. A work's name in a generation is matched to the step of the dynasties sent
     (dyn_rows) with the same work, verse and name: its line ("line") and its Purana Index person ("pui": Dikshitar's;
@@ -527,12 +537,117 @@ def vamsa_rows(vamsa_read_dir: str, dyn_rows: list, g: dict, persons: dict, clai
             before = ent
             gens.append(gen)
         slug = dy.get("slug") or ""
-        out.append(finish({"key": slug, "vamsa": VA.vamsa_of(slug), "ord": order.get(slug, 99),
-                           "anchor": dy.get("anchor") or "", "father": dy.get("father") or "",
-                           "title": dy.get("title") or "", "works": list(dy.get("order") or []),
-                           "counts": dy.get("counts") or {}, "rows": gens, "names": sorted(names),
-                           "aligned_at": al.get("at") or ""}))
+        row = {"key": slug, "vamsa": VA.vamsa_of(slug), "ord": order.get(slug, 99),
+               "anchor": dy.get("anchor") or "", "father": dy.get("father") or "",
+               "title": dy.get("title") or "", "works": list(dy.get("order") or []),
+               "counts": dy.get("counts") or {}, "rows": gens, "names": sorted(names),
+               "aligned_at": al.get("at") or ""}
+        found = findings_for(findings_dir, slug, gens, claim_of, vamsa_read_dir)   # VAMSA_FINDINGS_SITE_2026_11_19
+        if found:
+            row["findings"] = found
+        out.append(finish(row))
     return out
+
+
+def findings_for(findings_dir: str, slug: str, gens: list, claim_of: dict, vamsa_read_dir: str = "") -> list:
+    """VAMSA_FINDINGS_SITE_2026_11_19: a dynasty's findings a person approved (R1: <findings_dir>\\<slug>.json) as the
+    site shows them: the finding in our own words, and each citation resolved from what the site carries already:
+    "gen" a generation, "verse" a work's verse (its name, words and line), "second" a second name the text states,
+    "index" Dikshitar's person, "ray" Raychaudhuri's claim (only one the site carries), "law" B. C. Law's page and
+    nothing more (in copyright: his words never leave the desk). A citation that cannot be resolved here is left out,
+    never guessed; a finding not approved, or with a problem the checks found, is never sent. [] when there is none."""
+    if not findings_dir:
+        return []
+    p = Path(findings_dir) / ("%s.json" % slug)
+    if not slug or not p.exists():
+        return []
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    ids = d.get("ids") or {}
+    by_gen = {x.get("gen"): x for x in gens}
+    verse, pui, second = {}, {}, {}
+    for x in gens:
+        for wk, c in sorted((x.get("cells") or {}).items()):
+            if c.get("ref"):
+                verse.setdefault((wk, c["ref"]), (x.get("gen"), c))
+        person = (x.get("pui") or {}).get("person") or ""
+        if person:
+            pui.setdefault(person.split(":")[-1], x["pui"])
+    out = []
+    for f in d.get("findings") or []:
+        if f.get("status") != "approved" or f.get("problems") or not isinstance(f.get("text"), str):
+            continue
+        cites = []
+        for cid in f.get("cites") or []:
+            c = finding_cite(cid, ids, by_gen, verse, pui, claim_of, second, vamsa_read_dir)
+            if c and c not in cites:
+                cites.append(c)
+        out.append({"n": f.get("n"), "kind": f.get("kind") or "", "text": f["text"], "cites": cites,
+                    "model": d.get("model") or "", "prompt": d.get("prompt_version") or "",
+                    "read_at": d.get("at") or "", "approved_at": f.get("reviewed_at") or ""})
+    return out
+
+
+def finding_cite(cid, ids: dict, by_gen: dict, verse: dict, pui: dict, claim_of: dict, second: dict,
+                 vamsa_read_dir: str = ""):
+    """VAMSA_FINDINGS_SITE_2026_11_19: one citation of a finding (g:3, v:ram1:R 1,69.18, a:mbh1:MBh 1,90.45, pi:17973,
+    r:phai1923:67:20, l:6971) for a reader, or None."""
+    if not isinstance(cid, str):
+        return None
+    kind, _c, rest = cid.partition(":")
+    if kind == "g" and rest.lstrip("-").isdigit() and int(rest) in by_gen:
+        return {"t": "gen", "gen": int(rest), "name": by_gen[int(rest)].get("name") or ""}
+    if kind in ("v", "a"):
+        wk, _c, ref = rest.partition(":")
+        if not (wk and ref):
+            return None
+        if kind == "v":
+            c = {"t": "verse", "work": wk, "ref": ref}
+            hit = verse.get((wk, ref))
+            if hit:
+                c["gen"] = hit[0]
+                c.update({k: hit[1][k] for k in ("name", "words", "line") if hit[1].get(k)})
+            return c
+        if wk not in second:
+            second[wk] = said_names(vamsa_read_dir, wk)
+        c = {"t": "second", "work": wk, "ref": ref}
+        for keep, other, r2, wds in second[wk]:
+            if r2 == ref:
+                c.update({"name": keep, "other": other, "words": wds})
+                break
+        return c
+    if kind == "pi":
+        p = pui.get(rest)
+        if not p:
+            return None
+        c = {"t": "index", "person": p["person"], "head": p.get("head") or ""}
+        if p.get("page"):
+            c["page"] = True
+        return c
+    if kind == "r":
+        cl = claim_of.get(rest)
+        if not cl:
+            return None
+        return {"t": "ray", "key": rest, "printed": cl.get("printed") or "", "pdf_page": cl.get("pdf_page"),
+                "claim": cl.get("claim") or ""}
+    if kind == "l":
+        return {"t": "law", "page": str((ids.get(cid) or {}).get("page") or "")}   # the page only, never his words
+    return None
+
+
+def said_names(vamsa_read_dir: str, work: str) -> list:
+    """VAMSA_FINDINGS_SITE_2026_11_19: [(name, second name, ref, words)] the work's own statements of a second name
+    (vamsa_align.aliases_said, as R1's pack shows them)."""
+    if not vamsa_read_dir:
+        return []
+    try:
+        import vamsa_align as VA
+        return [(keep, other, ref, wds or "") for _ch, keep, other, ref, wds in
+                VA.aliases_said(VA.statements_of(vamsa_read_dir, work))]
+    except (OSError, ValueError, KeyError, TypeError):
+        return []
 
 
 # ---- the sinks -------------------------------------------------------------------------------------------------------
@@ -704,6 +819,15 @@ def without_aliases(rows: dict) -> dict:
     return out
 
 
+def without_findings(rows: dict) -> dict:
+    """VAMSA_FINDINGS_SITE_2026_11_19: the vamsas as a site without C31 stores them: no findings. Their hashes are then
+    the ones such a site keeps (C29's), so once C31 is pasted they differ and go again with the findings."""
+    out = dict(rows)
+    out["vamsas"] = [finish({k: v for k, v in r.items() if k not in ("findings", "row_hash")}) if "findings" in r else r
+                     for r in rows.get("vamsas", [])]
+    return out
+
+
 def sync(rows: dict, sink, apply: bool, log=print) -> dict:
     """Send what differs: a table whose digest the server has is left alone; else only the rows whose hash differs,
     and the keys the desk no longer has are deleted. The run's row (meta) goes last."""
@@ -714,6 +838,10 @@ def sync(rows: dict, sink, apply: bool, log=print) -> dict:
     if not (man.get("features") or {}).get("aliases"):
         rows = without_aliases(rows)   # GENEALOGY_HEAL_2026_11_10: C26 not pasted yet
         got["features_waiting"].append("aliases")
+    if not (man.get("features") or {}).get(FINDINGS_FEATURE):   # VAMSA_FINDINGS_SITE_2026_11_19: C31 not pasted yet
+        if any("findings" in r for r in rows.get("vamsas", [])):
+            got["features_waiting"].append(FINDINGS_FEATURE)
+        rows = without_findings(rows)
     for t in TABLES:
         if t in OPTIONAL and t not in man and not rows.get(t):
             got.setdefault("absent", []).append(t)   # VAMSA_JOIN_2026_11_11: nothing to send, no table there: nothing
@@ -774,6 +902,8 @@ def main(argv=None) -> int:
     ap.add_argument("--dynasty-works", default="all", choices=("all", "every"),
                     help="VAMSA_SITE_2026_11_18: the dynasties of G5a's three works (all, as before) or of every work "
                          "read (every: with G6's); send every only once the site's page loads one work at a time")
+    ap.add_argument("--findings", default="", help="VAMSA_FINDINGS_SITE_2026_11_19: R1's findings, the approved ones "
+                                                   "sent (default data\\vamsa_findings)")
     ap.add_argument("--if-configured", action="store_true",
                     help="the scheduled tick: exit 0 doing nothing until the secret, the stores, C21 and corpus-index "
                          "are all there")
@@ -788,6 +918,7 @@ def main(argv=None) -> int:
     vam = a.vamsa_db or str(ROOT / "data" / "shelf" / "vamsa.db")
     vrd = a.vamsa_read or str(ROOT / "data" / "vamsa_read")   # VAMSA_JOIN_2026_11_11
     clm = a.claims_db or str(ROOT / "data" / "shelf" / "claims.db")
+    fnd = a.findings or str(ROOT / "data" / "vamsa_findings")   # VAMSA_FINDINGS_SITE_2026_11_19
     print("index_sync.py  %s  %s" % (MARK, "APPLY" if a.apply else "PLAN (nothing sent)"))
     if a.if_configured and not a.dump and a.sink in ("auto", "edge"):
         import corpus_sync as cs
@@ -801,7 +932,7 @@ def main(argv=None) -> int:
             return 0 if a.if_configured else 1
     t0 = time.time()
     rows = build(db, kin, vam, immutable=a.immutable, claims_db=clm, vamsa_read_dir=vrd,
-                 dynasty_works=a.dynasty_works)
+                 dynasty_works=a.dynasty_works, findings_dir=fnd)
     sizes = {t: sum(len(json.dumps(r, ensure_ascii=False)) for r in rows[t]) for t in TABLES}
     print("built in %.1f s: %s" % (time.time() - t0, ", ".join("%s %d (%.1f MB)" % (t, len(rows[t]), sizes[t] / 1e6)
                                                                for t in TABLES)))
@@ -831,6 +962,10 @@ def main(argv=None) -> int:
         wait.append("the vamsas wait (%d dynasties of G6c): paste docs\\cloud\\C29_index_vamsas_2026-11-18.sql (B1, the "
                     "change, A1), then the Srangam kit VAMSA_WAYIN (corpus-index deployed again), then python "
                     "scripts\\index_sync.py --dynasty-works every --apply" % len(rows.get("vamsas", [])))
+    if FINDINGS_FEATURE in got.get("features_waiting", []):   # VAMSA_FINDINGS_SITE_2026_11_19
+        wait.append("our findings wait (%d approved): paste docs\\cloud\\C31_vamsa_findings_2026-11-19.sql (B1, the "
+                    "change, A1), then python scripts\\index_sync.py --dynasty-works every --apply"
+                    % sum(len(r.get("findings") or []) for r in rows.get("vamsas", [])))
     if "aliases" in got.get("features_waiting", []):   # GENEALOGY_HEAL_2026_11_10
         wait.append("the epithets wait (Kaunteya = Arjuna): paste docs\\cloud\\C26_index_aliases_2026-11-10.sql in one "
                     "paste, then python scripts\\index_sync.py --apply")

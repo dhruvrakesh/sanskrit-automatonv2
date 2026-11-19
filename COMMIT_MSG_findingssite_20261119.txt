@@ -1,0 +1,18 @@
+Our findings on the vamsa page: the approved findings sent with their sources; C31; the Srangam kit (VAMSA_FINDINGS_SITE_2026_11_19, DOCS126_2026_11_19)
+
+- scripts/index_sync.py (patch_vamsa_findings_site): the findings a person approved (data/vamsa_findings, R1) go with
+  their dynasty's row, each citation resolved from what the site carries: a generation, a verse with its words, a
+  second name a text states, Dikshitar's person, Raychaudhuri's claim, B. C. Law's page only (in copyright). Sent only
+  once the site's manifest says it takes them (C31); until then the rows go as before, their hashes unchanged.
+- scripts/vamsa_findings.py: --report's NEXT once every finding is decided.
+- tests/test_vamsa_wayin_2026_11_18.py: its replay compares only while no later patch is on top.
+- docs/cloud/C31_vamsa_findings_2026-11-19.sql: corpus.index_vamsas.findings; a door before C29's ingest; the
+  manifest's vamsa_findings; public.corpus_reader_index_vamsa_findings() for signed-in readers.
+- docs/srangam/VAMSA_FINDINGS_SITE_2026-11-19 and scripts/patch_srangam_vamsa_findings_site_2026_11_19.py: the vamsa
+  page's "Our findings" (Phase AW, invariant 73).
+- tests: test_vamsa_findings_site_2026_11_19, test_docs126_2026_11_19.
+- DOCS126: ASKS section 38 (the 49 findings reviewed: 20 approved, 29 dropped, with the reasons; why the Srangam push
+  was refused), STATE 60, RUNBOOK "19 Nov, afternoon", ARCHITECTURE.md step 9.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

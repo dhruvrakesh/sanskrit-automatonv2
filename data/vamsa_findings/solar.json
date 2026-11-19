@@ -1,0 +1,545 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "solar",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 14,
+  "raychaudhuri": 20,
+  "law": 33,
+  "chars": 11276,
+  "digest": "c00e3d59d5924eca60d8ab8061d7ac80"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:17973": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.6.4": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,19.4": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,65.17": {
+   "kind": "text"
+  },
+  "v:ram1:R 1,69.18": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.5": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,1.7": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,1.8": {
+   "kind": "text"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.7": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:29184": {
+   "kind": "index"
+  },
+  "v:kurma1:KurmP 1,19.10": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,65.31": {
+   "kind": "text"
+  },
+  "v:ram1:R 1,69.19": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,2.12": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,2.9": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "pi:18815": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.6.12": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,19.11": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,65.32": {
+   "kind": "text"
+  },
+  "v:ram1:R 1,69.20": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.8": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,2.20": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,2.14": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "pi:32903": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.6.20": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "pi:24773": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,65.33": {
+   "kind": "text"
+  },
+  "v:ram1:R 1,69.21": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.10": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:17865": {
+   "kind": "index"
+  },
+  "v:kurma1:KurmP 1,19.12": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.11": {
+   "kind": "text"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "pi:27803": {
+   "kind": "index"
+  },
+  "v:ram1:R 1,69.22": {
+   "kind": "text"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "pi:27131": {
+   "kind": "index"
+  },
+  "v:linga1:LiP 1,65.34": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.12": {
+   "kind": "text"
+  },
+  "g:10": {
+   "kind": "text"
+  },
+  "pi:28689": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.6.21": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,19.18": {
+   "kind": "text"
+  },
+  "v:ram1:R 1,69.23": {
+   "kind": "text"
+  },
+  "g:11": {
+   "kind": "text"
+  },
+  "v:kurma1:KurmP 1,19.19": {
+   "kind": "text"
+  },
+  "v:linga1:LiP 1,65.35": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.13": {
+   "kind": "text"
+  },
+  "g:12": {
+   "kind": "text"
+  },
+  "v:ram1:R 1,69.24": {
+   "kind": "text"
+  },
+  "g:13": {
+   "kind": "text"
+  },
+  "pi:19776": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.6.23": {
+   "kind": "text"
+  },
+  "v:ram2:R 2,102.14": {
+   "kind": "text"
+  },
+  "a:vip4:ViP 4,2.18": {
+   "kind": "text"
+  },
+  "a:vipc4:ViPc 4,2.12": {
+   "kind": "text"
+  },
+  "r:phai1923:38:1": {
+   "kind": "raychaudhuri",
+   "page": "20"
+  },
+  "r:phai1923:67:20": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:21": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:22": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:23": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:24": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:25": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:26": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:28": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:67:29": {
+   "kind": "raychaudhuri",
+   "page": "49"
+  },
+  "r:phai1923:68:3": {
+   "kind": "raychaudhuri",
+   "page": "50"
+  },
+  "r:phai1923:68:6": {
+   "kind": "raychaudhuri",
+   "page": "50"
+  },
+  "r:phai1923:70:3": {
+   "kind": "raychaudhuri",
+   "page": "52"
+  },
+  "r:phai1923:78:11": {
+   "kind": "raychaudhuri",
+   "page": "60"
+  },
+  "r:phai1923:78:13": {
+   "kind": "raychaudhuri",
+   "page": "60"
+  },
+  "r:phai1923:92:17": {
+   "kind": "raychaudhuri",
+   "page": "74"
+  },
+  "r:phai1923:92:18": {
+   "kind": "raychaudhuri",
+   "page": "74"
+  },
+  "r:phai1923:92:19": {
+   "kind": "raychaudhuri",
+   "page": "74"
+  },
+  "r:phai1923:92:20": {
+   "kind": "raychaudhuri",
+   "page": "74"
+  },
+  "r:phai1923:210:3": {
+   "kind": "raychaudhuri",
+   "page": "192"
+  },
+  "l:6904": {
+   "kind": "law",
+   "page": "36"
+  },
+  "l:6906": {
+   "kind": "law",
+   "page": "36"
+  },
+  "l:6907": {
+   "kind": "law",
+   "page": "36"
+  },
+  "l:6908": {
+   "kind": "law",
+   "page": "36"
+  },
+  "l:6909": {
+   "kind": "law",
+   "page": "36"
+  },
+  "l:6910": {
+   "kind": "law",
+   "page": "36"
+  },
+  "l:6957": {
+   "kind": "law",
+   "page": "40"
+  },
+  "l:6959": {
+   "kind": "law",
+   "page": "40"
+  },
+  "l:6970": {
+   "kind": "law",
+   "page": "40"
+  },
+  "l:6971": {
+   "kind": "law",
+   "page": "40"
+  },
+  "l:6973": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6974": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6975": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6976": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6977": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6979": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6980": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6982": {
+   "kind": "law",
+   "page": "41"
+  },
+  "l:6984": {
+   "kind": "law",
+   "page": "42"
+  },
+  "l:6991": {
+   "kind": "law",
+   "page": "42"
+  },
+  "l:6993": {
+   "kind": "law",
+   "page": "42"
+  },
+  "l:7174": {
+   "kind": "law",
+   "page": "51"
+  },
+  "l:7176": {
+   "kind": "law",
+   "page": "51"
+  },
+  "l:7177": {
+   "kind": "law",
+   "page": "51"
+  },
+  "l:7178": {
+   "kind": "law",
+   "page": "51"
+  },
+  "l:7192": {
+   "kind": "law",
+   "page": "52"
+  },
+  "l:7524": {
+   "kind": "law",
+   "page": "71"
+  },
+  "l:7899": {
+   "kind": "law",
+   "page": "90"
+  },
+  "l:6995": {
+   "kind": "law",
+   "page": "42"
+  },
+  "l:6996": {
+   "kind": "law",
+   "page": "42"
+  },
+  "l:7992": {
+   "kind": "law",
+   "page": "96"
+  },
+  "l:7993": {
+   "kind": "law",
+   "page": "96"
+  },
+  "l:7021": {
+   "kind": "law",
+   "page": "44"
+  }
+ },
+ "at": "2026-11-19T12:52:03",
+ "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"The seven texts agree that Ikṣvāku was a son of Manu, and the Index gives him the same father. Law likewise treats him as the great ancestor of the Kosala royal family, and Raychaudhuri says the Kosala house was held to descend from him.\",\"cites\":[\"g:0\",\"pi:17973\",\"v:ram1:R 1,69.18\",\"v:bhp9:BhP 9.6.4\",\"v:vip4:ViP 4,1.7\",\"l:6971\",\"r:phai1923:67:20\"]},{\"kind\":\"agreement\",\"text\":\"The Ramayana (both books), the Kurma, Linga and Vishnu Puranas, and the Bhagavata all name Vikukṣi as Ikṣvāku's son, and the Index gives the same father. Law also says Vikukṣi was Ikṣvāku's son and reigned after him. The Vishnu Purana adds that Vikukṣi was also called Śaśāda, so those two names are one man.\",\"cites\":[\"g:2\",\"pi:29184\",\"v:ram1:R 1,69.19\",\"v:kurma1:KurmP 1,19.10\",\"v:vip4:ViP 4,2.12\",\"a:vip4:ViP 4,2.18\",\"l:6991\",\"l:6993\"]},{\"kind\":\"disagreement\",\"text\":\"The heir after Vikukṣi is named differently. The Ramayana (both books) gives Bāṇa, the Bhagavata and Vishnu Purana give Purañjaya, and the Kurma and Linga give Kakutstha. Law reports that Kakutstha was a name won by Parāñjaya, borne on Indra's shoulders, which may link the Purañjaya and Kakutstha traditions. The Index lists Kakutstha as the same figure and gives him the same father.\",\"cites\":[\"g:3\",\"v:ram1:R 1,69.20\",\"v:bhp9:BhP 9.6.12\",\"v:vip4:ViP 4,2.20\",\"v:kurma1:KurmP 1,19.11\",\"v:linga1:LiP 1,65.32\",\"pi:18815\",\"l:6995\"]},{\"kind\":\"disagreement\",\"text\":\"After Pṛthu the lines diverge. The Ramayana has Triśaṅku then Dhundhumāra. The Bhagavata has Viśvagandhi then Candra. The Kurma and Linga have Viśvaka then Ārdraka. All the lists rejoin at Yuvanāśva, and the Index records Ārdraka without a father.\",\"cites\":[\"g:6\",\"g:7\",\"v:ram1:R 1,69.21\",\"v:bhp9:BhP 9.6.20\",\"v:kurma1:KurmP 1,19.11\",\"v:linga1:LiP 1,65.33\",\"g:8\",\"pi:17865\"]},{\"kind\":\"agreement\",\"text\":\"The Ramayana makes Māndhātā the son of Yuvanāśva, and Law says the same. The Index gives Māndhātā the same father.\",\"cites\":[\"g:9\",\"v:ram1:R 1,69.22\",\"v:ram2:R 2,102.12\",\"l:7021\",\"pi:27131\"]},{\"kind\":\"open_question\",\"text\":\"Who follows Māndhātā in the line? The Ramayana gives Susaṃdhi, the Linga gives Vaṃśaka, and the Bhagavata and Kurma give Śrāvasta. The Index gives Vaṃśaka another father. Law mentions Śrāvasta as sixth in descent from Kakutstha. Does that count agree with any one of these lists?\",\"cites\":[\"g:10\",\"v:ram1:R 1,69.23\",\"v:linga1:LiP 1,65.34\",\"v:bhp9:BhP 9.6.21\",\"v:kurma1:KurmP 1,19.18\",\"pi:28689\",\"l:6996\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.02816,
+ "tokens": {
+  "input": 7794,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 1257,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "agreement",
+   "text": "The seven texts agree that Ikṣvāku was a son of Manu, and the Index gives him the same father. Law likewise treats him as the great ancestor of the Kosala royal family, and Raychaudhuri says the Kosala house was held to descend from him.",
+   "cites": [
+    "g:0",
+    "pi:17973",
+    "v:ram1:R 1,69.18",
+    "v:bhp9:BhP 9.6.4",
+    "v:vip4:ViP 4,1.7",
+    "l:6971",
+    "r:phai1923:67:20"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T13:08:03"
+  },
+  {
+   "n": 2,
+   "kind": "agreement",
+   "text": "The Ramayana (both books), the Kurma, Linga and Vishnu Puranas, and the Bhagavata all name Vikukṣi as Ikṣvāku's son, and the Index gives the same father. Law also says Vikukṣi was Ikṣvāku's son and reigned after him. The Vishnu Purana adds that Vikukṣi was also called Śaśāda, so those two names are one man.",
+   "cites": [
+    "g:2",
+    "pi:29184",
+    "v:ram1:R 1,69.19",
+    "v:kurma1:KurmP 1,19.10",
+    "v:vip4:ViP 4,2.12",
+    "a:vip4:ViP 4,2.18",
+    "l:6991",
+    "l:6993"
+   ],
+   "problems": [],
+   "warnings": [
+    "names the bhagavata but cites none of its verses",
+    "names the linga but cites none of its verses"
+   ],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "disagreement",
+   "text": "The heir after Vikukṣi is named differently. The Ramayana (both books) gives Bāṇa, the Bhagavata and Vishnu Purana give Purañjaya, and the Kurma and Linga give Kakutstha. Law reports that Kakutstha was a name won by Parāñjaya, borne on Indra's shoulders, which may link the Purañjaya and Kakutstha traditions. The Index lists Kakutstha as the same figure and gives him the same father.",
+   "cites": [
+    "g:3",
+    "v:ram1:R 1,69.20",
+    "v:bhp9:BhP 9.6.12",
+    "v:vip4:ViP 4,2.20",
+    "v:kurma1:KurmP 1,19.11",
+    "v:linga1:LiP 1,65.32",
+    "pi:18815",
+    "l:6995"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 4,
+   "kind": "disagreement",
+   "text": "After Pṛthu the lines diverge. The Ramayana has Triśaṅku then Dhundhumāra. The Bhagavata has Viśvagandhi then Candra. The Kurma and Linga have Viśvaka then Ārdraka. All the lists rejoin at Yuvanāśva, and the Index records Ārdraka without a father.",
+   "cites": [
+    "g:6",
+    "g:7",
+    "v:ram1:R 1,69.21",
+    "v:bhp9:BhP 9.6.20",
+    "v:kurma1:KurmP 1,19.11",
+    "v:linga1:LiP 1,65.33",
+    "g:8",
+    "pi:17865"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 5,
+   "kind": "agreement",
+   "text": "The Ramayana makes Māndhātā the son of Yuvanāśva, and Law says the same. The Index gives Māndhātā the same father.",
+   "cites": [
+    "g:9",
+    "v:ram1:R 1,69.22",
+    "v:ram2:R 2,102.12",
+    "l:7021",
+    "pi:27131"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 6,
+   "kind": "open_question",
+   "text": "Who follows Māndhātā in the line? The Ramayana gives Susaṃdhi, the Linga gives Vaṃśaka, and the Bhagavata and Kurma give Śrāvasta. The Index gives Vaṃśaka another father. Law mentions Śrāvasta as sixth in descent from Kakutstha. Does that count agree with any one of these lists?",
+   "cites": [
+    "g:10",
+    "v:ram1:R 1,69.23",
+    "v:linga1:LiP 1,65.34",
+    "v:bhp9:BhP 9.6.21",
+    "v:kurma1:KurmP 1,19.18",
+    "pi:28689",
+    "l:6996"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  }
+ ]
+}

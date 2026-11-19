@@ -1,0 +1,284 @@
+{
+ "mark": "VAMSA_FINDINGS_2026_11_19",
+ "dynasty": "druhyu",
+ "prompt_version": "vamsa-findings-v2",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "pack": {
+  "generations": 10,
+  "raychaudhuri": 7,
+  "law": 9,
+  "chars": 5559,
+  "digest": "46909e3d48398ff681042997f6002e15"
+ },
+ "ids": {
+  "g:0": {
+   "kind": "text"
+  },
+  "pi:22892": {
+   "kind": "index"
+  },
+  "g:1": {
+   "kind": "text"
+  },
+  "pi:25350": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.23.14": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,17.1": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,17.1": {
+   "kind": "text"
+  },
+  "g:2": {
+   "kind": "text"
+  },
+  "pi:33194": {
+   "kind": "index"
+  },
+  "v:agni:AgP 276.4": {
+   "kind": "text"
+  },
+  "v:bndp2:BndP 2,74.7": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.148": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.66": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.130": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 48.6": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,17.2": {
+   "kind": "text"
+  },
+  "v:vipc4:ViPc 4,17.2": {
+   "kind": "text"
+  },
+  "g:3": {
+   "kind": "text"
+  },
+  "pi:17849": {
+   "kind": "index"
+  },
+  "v:bhp9:BhP 9.23.15": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.149": {
+   "kind": "text"
+  },
+  "g:4": {
+   "kind": "text"
+  },
+  "pi:20634": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,74.9": {
+   "kind": "text"
+  },
+  "v:brahma:BrP 13.150": {
+   "kind": "text"
+  },
+  "v:garuda1:GarP 1,139.67": {
+   "kind": "text"
+  },
+  "v:hv:HV 23.132": {
+   "kind": "text"
+  },
+  "g:5": {
+   "kind": "text"
+  },
+  "pi:23007": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,74.10": {
+   "kind": "text"
+  },
+  "v:matsya:MatsP 48.8": {
+   "kind": "text"
+  },
+  "g:6": {
+   "kind": "text"
+  },
+  "pi:23178": {
+   "kind": "index"
+  },
+  "g:7": {
+   "kind": "text"
+  },
+  "pi:20961": {
+   "kind": "index"
+  },
+  "g:8": {
+   "kind": "text"
+  },
+  "pi:22546": {
+   "kind": "index"
+  },
+  "v:bndp2:BndP 2,74.11": {
+   "kind": "text"
+  },
+  "g:9": {
+   "kind": "text"
+  },
+  "pi:24931": {
+   "kind": "index"
+  },
+  "v:garuda1:GarP 1,139.68": {
+   "kind": "text"
+  },
+  "v:vip4:ViP 4,17.3": {
+   "kind": "text"
+  },
+  "r:phai1923:94:8": {
+   "kind": "raychaudhuri",
+   "page": "76"
+  },
+  "r:phai1923:94:9": {
+   "kind": "raychaudhuri",
+   "page": "76"
+  },
+  "r:phai1923:94:10": {
+   "kind": "raychaudhuri",
+   "page": "76"
+  },
+  "r:phai1923:97:13": {
+   "kind": "raychaudhuri",
+   "page": "79"
+  },
+  "r:phai1923:97:2": {
+   "kind": "raychaudhuri",
+   "page": "79"
+  },
+  "r:phai1923:196:10": {
+   "kind": "raychaudhuri",
+   "page": "178"
+  },
+  "r:phai1923:197:7": {
+   "kind": "raychaudhuri",
+   "page": "179"
+  },
+  "l:9464": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9465": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9468": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9469": {
+   "kind": "law",
+   "page": "176"
+  },
+  "l:9471": {
+   "kind": "law",
+   "page": "177"
+  },
+  "l:9472": {
+   "kind": "law",
+   "page": "177"
+  },
+  "l:6454": {
+   "kind": "law",
+   "page": "7"
+  },
+  "l:6455": {
+   "kind": "law",
+   "page": "7"
+  },
+  "l:7701": {
+   "kind": "law",
+   "page": "80"
+  }
+ },
+ "at": "2026-11-19T12:52:50",
+ "reply": "{\"findings\":[{\"kind\":\"agreement\",\"text\":\"Raychaudhuri says the Purāṇas make the Gandhāra kings descendants of Druhyu. The texts' lists agree: the Druhyu line runs through Gāndhāra, who is the son or successor of the king called Aruddha, Āraddha or Aṅgārasetu in the different texts.\",\"cites\":[\"r:phai1923:94:8\",\"v:bndp2:BndP 2,74.9\",\"v:brahma:BrP 13.150\",\"v:garuda1:GarP 1,139.67\",\"v:bhp9:BhP 9.23.15\"]},{\"kind\":\"disagreement\",\"text\":\"Texts name the son of Babhru differently: Setu in the Bhāgavata, Viṣṇu and Matsya, but Babhrusetu in the Agni and Brahma, and Babhrusena in the Harivaṃśa. The next generation is also uncertain, with Ārabdha, Aruddha, Aṅgārasetu, Āraddha, Śaradvān and Āradvān all given as Setu's son.\",\"cites\":[\"v:bhp9:BhP 9.23.14\",\"v:agni:AgP 276.4\",\"v:brahma:BrP 13.148\",\"v:hv:HV 23.130\",\"v:bhp9:BhP 9.23.15\",\"v:bndp2:BndP 2,74.7\",\"v:matsya:MatsP 48.6\",\"v:vipc4:ViPc 4,17.2\"]},{\"kind\":\"disagreement\",\"text\":\"After Dharma and Dhṛta the line splits. The Bhāgavata has Dhṛta's son as Durmada, then Pracetas. The Brahmāṇḍa has Durdama, the Garuda has Ghṛta then Durgama, and the Matsya has Ghṛta then Viduṣa, each before Pracetas.\",\"cites\":[\"v:bhp9:BhP 9.23.15\",\"v:bndp2:BndP 2,74.11\",\"v:garuda1:GarP 1,139.67\",\"v:matsya:MatsP 48.8\"]},{\"kind\":\"open_question\",\"text\":\"Law reports the epic tracing the Bhojas to Druhyu, while Raychaudhuri links Druhyu's descendants to Gandhāra and a probable north-western home. Were the Bhojas and the Gāndhāra kings two branches of one Druhyu line, or two separate traditions about his descendants?\",\"cites\":[\"l:9464\",\"l:9471\",\"r:phai1923:94:8\",\"r:phai1923:94:10\"]}]}",
+ "stop": "end_turn",
+ "cost_usd": 0.01649,
+ "tokens": {
+  "input": 4033,
+  "cache_write": 0,
+  "cache_read": 0,
+  "output": 842,
+  "thinking": 0
+ },
+ "findings": [
+  {
+   "n": 1,
+   "kind": "agreement",
+   "text": "Raychaudhuri says the Purāṇas make the Gandhāra kings descendants of Druhyu. The texts' lists agree: the Druhyu line runs through Gāndhāra, who is the son or successor of the king called Aruddha, Āraddha or Aṅgārasetu in the different texts.",
+   "cites": [
+    "r:phai1923:94:8",
+    "v:bndp2:BndP 2,74.9",
+    "v:brahma:BrP 13.150",
+    "v:garuda1:GarP 1,139.67",
+    "v:bhp9:BhP 9.23.15"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 2,
+   "kind": "disagreement",
+   "text": "Texts name the son of Babhru differently: Setu in the Bhāgavata, Viṣṇu and Matsya, but Babhrusetu in the Agni and Brahma, and Babhrusena in the Harivaṃśa. The next generation is also uncertain, with Ārabdha, Aruddha, Aṅgārasetu, Āraddha, Śaradvān and Āradvān all given as Setu's son.",
+   "cites": [
+    "v:bhp9:BhP 9.23.14",
+    "v:agni:AgP 276.4",
+    "v:brahma:BrP 13.148",
+    "v:hv:HV 23.130",
+    "v:bhp9:BhP 9.23.15",
+    "v:bndp2:BndP 2,74.7",
+    "v:matsya:MatsP 48.6",
+    "v:vipc4:ViPc 4,17.2"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 3,
+   "kind": "disagreement",
+   "text": "After Dharma and Dhṛta the line splits. The Bhāgavata has Dhṛta's son as Durmada, then Pracetas. The Brahmāṇḍa has Durdama, the Garuda has Ghṛta then Durgama, and the Matsya has Ghṛta then Viduṣa, each before Pracetas.",
+   "cites": [
+    "v:bhp9:BhP 9.23.15",
+    "v:bndp2:BndP 2,74.11",
+    "v:garuda1:GarP 1,139.67",
+    "v:matsya:MatsP 48.8"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "dropped",
+   "reviewed_at": "2026-11-19T15:18:23"
+  },
+  {
+   "n": 4,
+   "kind": "open_question",
+   "text": "Law reports the epic tracing the Bhojas to Druhyu, while Raychaudhuri links Druhyu's descendants to Gandhāra and a probable north-western home. Were the Bhojas and the Gāndhāra kings two branches of one Druhyu line, or two separate traditions about his descendants?",
+   "cites": [
+    "l:9464",
+    "l:9471",
+    "r:phai1923:94:8",
+    "r:phai1923:94:10"
+   ],
+   "problems": [],
+   "warnings": [],
+   "status": "approved",
+   "reviewed_at": "2026-11-19T15:18:23"
+  }
+ ]
+}
