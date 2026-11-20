@@ -31,6 +31,13 @@ Usage (from the automaton/ root):
   python scripts/extract_entities.py --db data/context.db                  # full / resume
   python scripts/extract_entities.py --db data/context.db --doc MBh01      # one text
   python scripts/extract_entities.py --db data/context.db --refresh        # redo all
+  python scripts/extract_entities.py --db data/context.db --limit 1500 --per-day-usd 0.25   # the scheduled run
+
+ENTITY_ALLOWANCE_2026_11_20: --per-day-usd is a scheduled run's allowance (today's entity spend, the UTC day, as
+usage_log records it); --max-usd is this run's ceiling. Past either the run stops, says how many verses wait, about
+what they cost and the command that spends it, as repair_auto.py's allowance does. Why: on 17 to 19 Nov the 3-hourly
+maintenance run read 7,937 newly translated verses here for $12.13 of Gemini with nobody asking; only the budget cap
+stopped it. The budget cap (usage_meter.budget_ok) still applies to every run.
 """
 from __future__ import annotations
 import argparse
@@ -73,6 +80,36 @@ _SYSTEM = (
 
 def _now():
     return datetime.now(timezone.utc).isoformat()
+
+
+PER_VERSE_USD = 0.0015   # ENTITY_ALLOWANCE_2026_11_20: a verse's cost when usage_log has none (17-19 Nov: $0.00153)
+
+
+def _spent_since(con, since_iso: str) -> float:
+    """ENTITY_ALLOWANCE_2026_11_20: the entity extraction's recorded spend since an ISO time (usage_log keeps UTC)."""
+    try:
+        v = con.execute("SELECT COALESCE(SUM(cost_usd), 0) FROM usage_log WHERE kind = 'entities' AND ts >= ?",
+                        (since_iso,)).fetchone()[0]
+        return float(v or 0)
+    except sqlite3.Error:
+        return 0.0
+
+
+def _per_verse(con) -> float:
+    """ENTITY_ALLOWANCE_2026_11_20: what a verse has cost here, from usage_log."""
+    try:
+        v = con.execute("SELECT SUM(cost_usd) / NULLIF(SUM(passages), 0) FROM usage_log "
+                        "WHERE kind = 'entities' AND cost_usd > 0").fetchone()[0]
+        return float(v) if v else PER_VERSE_USD
+    except sqlite3.Error:
+        return PER_VERSE_USD
+
+
+def _ask(why: str, waiting: int, per_verse: float, db: str) -> str:
+    """ENTITY_ALLOWANCE_2026_11_20: what waits, about what it costs, and the one command that spends it."""
+    usd = max(0.01, round(waiting * per_verse + 0.005, 2))
+    return ("ASK (allowance): entity extraction waits: %s; %d verse(s) wait, about $%.2f; more: "
+            "python scripts\\extract_entities.py --db %s --limit %d --max-usd %.2f" % (why, waiting, usd, db, waiting, usd))
 
 
 def _ensure_schema(con):
@@ -313,6 +350,11 @@ def main():
     ap.add_argument("--retry-empty", action="store_true",
                     help="also re-process verses whose ents is '[]' (e.g. left empty by an "
                          "earlier JSON-parse failure) — recovers dropped verses")
+    ap.add_argument("--per-day-usd", type=float, default=None,
+                    help="ENTITY_ALLOWANCE_2026_11_20: a scheduled run's allowance: stop once today's entity spend "
+                         "(the UTC day) reaches it")
+    ap.add_argument("--max-usd", type=float, default=None,
+                    help="ENTITY_ALLOWANCE_2026_11_20: this run's ceiling in dollars")
     ap.add_argument("--debug-raw", action="store_true",
                     help="print the first 400 chars of each raw model reply — use this when a "
                          "run reports '+0 mentions' to see what the model actually returned")
@@ -352,6 +394,7 @@ def main():
             FROM passages p JOIN docs d ON d.id = p.doc_id
             WHERE {' AND '.join(where)}
             ORDER BY p.id""", params).fetchall()
+    waiting_all = len(rows)   # ENTITY_ALLOWANCE_2026_11_20: every verse that waits, before --limit
     if args.limit:
         rows = rows[: args.limit]
     total = len(rows)
@@ -360,6 +403,22 @@ def main():
         con.close()
         return
 
+    import datetime as _dt   # ENTITY_ALLOWANCE_2026_11_20
+    _utc = _dt.datetime.now(_dt.timezone.utc)
+    day0, run0 = _utc.strftime("%Y-%m-%dT00:00:00"), _utc.strftime("%Y-%m-%dT%H:%M:%S")
+    per_verse = _per_verse(con)
+
+    def _over():
+        if args.per_day_usd is not None and _spent_since(con, day0) >= args.per_day_usd:
+            return "today's allowance is spent ($%.2f of $%.2f)" % (_spent_since(con, day0), args.per_day_usd)
+        if args.max_usd is not None and _spent_since(con, run0) >= args.max_usd:
+            return "this run's ceiling is reached ($%.2f of $%.2f)" % (_spent_since(con, run0), args.max_usd)
+        return ""
+    why = _over()
+    if why:
+        print(_ask(why, waiting_all, per_verse, args.db))
+        con.close()
+        return
     print(f"Extracting entities from {total} verses with {model} (batch={args.batch})…")
     cur = con.cursor()
     done = ment_total = barren_total = 0
@@ -371,6 +430,10 @@ def main():
         chunk = rows[start : start + args.batch]     # already (pid, iast, tr)
         if not _budget_ok(con):
             print("  Stopping: the spend cap is reached. Raise it, then re-run to resume.")
+            break
+        why = _over()   # ENTITY_ALLOWANCE_2026_11_20
+        if why:
+            print("  Stopping. " + _ask(why, waiting_all - start, per_verse, args.db))
             break
         try:
             m, mm, bare = _extract_chunk(con, cur, genai, model, chunk,

@@ -1,0 +1,14 @@
+The scheduled entity extraction gets a daily allowance; C30 without a command made at run time (ENTITY_ALLOWANCE_2026_11_20, DOCS127_2026_11_20)
+
+- scripts/extract_entities.py (patch_entity_allowance): --per-day-usd (a scheduled run's allowance: today's entity
+  spend, the UTC day, from usage_log) and --max-usd (a run's ceiling); past either the run stops with "ASK
+  (allowance)": the verses that wait, about their cost, the command that reads them. Without the flags, as before.
+- scripts/maintenance_runner.ps1: step c passes --per-day-usd 0.25. On 17 to 19 Nov this step read 7,937 newly
+  translated verses for $12.13 of Gemini with nobody asking; only the budget cap stopped it.
+- docs/cloud/C30b_admin_status_static_2026-11-20.sql: public.corpus_admin_status() reads the ten index tables by name,
+  no EXECUTE (Lovable's scan of 19 Nov); the same answer and grants.
+- tests: test_entity_allowance_2026_11_20, test_docs127_2026_11_20.
+- DOCS127: ASKS section 39, STATE 61, RUNBOOK "20 Nov, morning".
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012GV6prdH83N35cbruZzgTk

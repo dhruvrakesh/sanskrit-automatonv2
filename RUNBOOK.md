@@ -3089,3 +3089,17 @@ docs\ASKS_2026-10-22.md, section 38. In this order:
 4. The desk: `python scripts\index_sync.py --dynasty-works every` (the plan: vamsas 9 to send), then with --apply;
    C31's A2 (solar 4, lunar 1, haihaya 4, kroshtu 3, turvasu 1, druhyu 2, puru 2, kuru 2, magadha 1); open
    /corpus/genealogies/vamsas signed in.
+
+## 20 Nov, morning: the Gemini spend's guard; C30b (ENTITY_ALLOWANCE_2026_11_20, DOCS127_2026_11_20)
+
+docs\ASKS_2026-10-22.md, section 39. In this order:
+
+1. The automaton: `python scripts\patch_entity_allowance_2026_11_20.py --check`, then without; `python
+   scripts\patch_docs127_2026_11_20.py --check`, then without; `python -m unittest tests.test_entity_allowance_2026_11_20
+   tests.test_docs127_2026_11_20`; release.ps1 with COMMIT_MSG_entityallow_20261120.txt (the dry run, then -Apply once).
+   The next maintenance run reads names for at most $0.25 a day; past it, maintenance_log.txt says "ASK (allowance)".
+2. `python scripts\set_budget.py` (the cap, the spend, the headroom); `--cap` only by your decision.
+3. The Lovable Cloud SQL editor: docs\cloud\C30b_admin_status_static_2026-11-20.sql, B1 (true, true, true), the change,
+   A1 (true, false, true, false, true); in Lovable's security view mark the C30 finding with its reason; leave
+   spatial_ref_sys as it is (C27).
+4. Publish Srangam (808246d); open /corpus/genealogies/vamsas (signed in) and /admin/desk-site (the super admin).

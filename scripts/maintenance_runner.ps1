@@ -113,7 +113,9 @@ try {
     # translation grows the corpus. To recover verses that were dropped by
     # an old JSON-parse failure, run --retry-empty BY HAND with a --limit.
     $tc = Get-Date
-    & $py scripts\extract_entities.py --db data\context.db --limit 1500 2>&1 | Add-Content $log
+    # ENTITY_ALLOWANCE_2026_11_20: at most $0.25 a day of Gemini here; past it the log says ASK (allowance) with what
+    # waits and the one command that reads it (17-19 Nov: 7,937 new verses read for $12.13 with nobody asking).
+    & $py scripts\extract_entities.py --db data\context.db --limit 1500 --per-day-usd 0.25 2>&1 | Add-Content $log
     Log ("STEP c entities     {0:n0}s" -f ((Get-Date) - $tc).TotalSeconds)
     if (Test-Writer "c") { exit 0 }   # ENTITY_LINKS_SCHED_2026_10_23
 
